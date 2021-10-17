@@ -1,0 +1,150 @@
+/* mobile view code start */
+/* first break point ========================================= */
+@media screen and (max-width: 1245px) {
+  /* header Section Start */
+  .headerSection {
+    padding: 1em 1em;
+  }
+  .egr-logo {
+    width: 130px;
+  }
+
+  .activeLink {
+    font-size: 13px;
+  }
+  .explore,
+  .docs,
+  .about,
+  .metrics {
+    font-size: 13px;
+  }
+
+  .getLoan {
+    font-size: 13px;
+  }
+
+  .connect {
+    font-size: 13px;
+  }
+  /* header Section end */
+}
+
+@media screen and (max-width: 1059px) {
+  .egr-logo {
+    margin-right: 30px;
+  }
+
+  .explore,
+  .docs,
+  .about,
+  .metrics {
+    font-size: 12px;
+  }
+  .docs,
+  .about {
+    margin-right: 35px;
+  }
+  .Line {
+    width: 67px;
+  }
+
+  .getLoan {
+    font-size: 12px;
+  }
+
+  .product {
+    font-size: 12px;
+  }
+  .company {
+    font-size: 12px;
+  }
+  .connect {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .headerButtons {
+    padding-left: 0;
+  }
+
+  .container.header {
+    max-width: 957px;
+  }
+}
+
+/* @media screen and (max-width: 950px) {
+  .explore,
+  .docs,
+  .about,
+  .metrics {
+    margin-right: 10px;
+  }
+} */
+
+@media screen and (max-width: 991px) {
+  .onMobile {
+    display: grid;
+    width: 10px !important;
+    padding: 0 !important;
+  }
+  .hideNow {
+    display: grid !important;
+    width: 10px !important;
+    padding: 0 !important;
+  }
+
+  #HideAgain {
+    width: 10px !important;
+    padding: 0 !important;
+  }
+  .egrLogo2Cont {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+  }
+
+  .egr-logo2 {
+    display: block;
+    width: 130px;
+  }
+
+  .headerLinks {
+    display: none;
+  }
+  .headerButtons {
+    display: none;
+  }
+
+  .headerSection {
+    padding: 9px 0em;
+    padding-top: 0.5em;
+  }
+  .on-mobile-navigators {
+    display: flex;
+    margin-top: 20px;
+  }
+
+  .show-header-links {
+    display: flex;
+  }
+}
+
+@media screen and (max-width: 645px) {
+  .headerSection {
+    padding: 9px 0em;
+    padding-top: 0.5em;
+  }
+}
+
+@media screen and (max-width: 463px) {
+  .hamburgerOpen {
+    width: 5%;
+  }
+  .egr-logo {
+    width: 100px;
+  }
+  .egr-logo2 {
+    width: 100px;
+  }
+}

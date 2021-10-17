@@ -1,38 +1,150 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Mulish", sans-serif;
+  text-decoration: none !important;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a {
+  text-decoration: none !important;
+  color: #229e54;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+li {
+  list-style: none;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.connect {
+  padding: 0 !important;
+}
+.btn-black.i {
+  padding: 1em 2em;
+  border: none;
+  background: none;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.image-wrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  float: left;
+  margin: 10px;
+}
+.image-wrapper button {
+  position: absolute;
+  border: none;
+  background-color: rgb(218, 7, 7);
+  color: rgb(99, 3, 3);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  line-height: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.heroBtn {
+  outline: none;
+  border: thin;
+}
+
+.image-wrapper .image {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+button:focus {
+  outline: unset !important;
+}
+
+.jss9 {
+  justify-content: flex-end !important;
+}
+
+.jss8 {
+  width: 100% !important;
+}
+.css-19kzrtu {
+  padding: 0 !important;
+  padding-top: 20px !important;
+}
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+  color: #229e54 !important ;
+  background: #effff5 !important;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+}
+
+.css-1aquho2-MuiTabs-indicator {
+  background-color: #229e54 !important;
+}
+
+.col-md-8 {
+  padding: 0 !important;
+}
+
+.uploadButton::-webkit-file-upload-button {
+  background-color: #229e54;
+  color: #fff;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.uploadButton::-webkit-file-upload-button:hover {
+  background-color: #e4a788;
+  color: #fff;
+  /* transform: translate3d(0, 5px, 0); */
+  transition: 0.3s ease-in-out;
+  box-shadow: 0px 4px 10px #d5d5d5;
+}
+
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+  width: 60% !important;
+}
+
+.MuiSelect-root {
+  width: 60% !important;
+}
+
+@media (min-width: 768px) {
+  .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 !important;
   }
-  to {
-    transform: rotate(360deg);
-  }
+}
+.css-1kty9di-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+  color: #229e54 !important;
+}
+
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: #229e54 !important;
+}
+/* 
+.uploadButton::before {
+  content: "Select some files";
+  display: inline-block;
+  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+  border: 1px solid #999;
+  border-radius: 3px;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  font-size: 10pt;
+}
+.uploadButton:hover::before {
+  border-color: black;
+}
+.uploadButton:active::before {
+  background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+} */
+
+.for-des span {
+  background: none !important;
+  padding: 0.5em;
 }

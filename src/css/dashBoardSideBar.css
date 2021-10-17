@@ -1,0 +1,122 @@
+.sidebar {
+  /* flex: 1; */
+  height: 100vh;
+  background-color: rgb(255, 255, 255);
+  position: sticky;
+  top: 0;
+  overflow-x: hidden;
+  width: 8%;
+  transition: 0.5s linear;
+}
+
+.sidebarWrapper {
+  color: #555;
+  width: 100%;
+  transition: 0.5s linear;
+  padding: 1em;
+  padding-top: 2em;
+  height: 100%;
+}
+
+.sidebarMenu {
+  width: 100%;
+  height: 100%;
+}
+.sidebarList {
+  width: 100%;
+  padding: 0%;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  grid-row-gap: 50px;
+  align-items: center;
+}
+a.link {
+  width: 100%;
+}
+.sidebarListItem {
+  font-weight: 700;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+.list-item-active {
+  position: relative;
+}
+
+.list-item-active::before {
+  content: "";
+  position: absolute;
+  height: 130%;
+  background: #e7fff0;
+  width: 147%;
+  z-index: -1;
+  top: -8px;
+  border-top-left-radius: 52px;
+  border-bottom-left-radius: 52px;
+}
+.sidebarIcon {
+  font-size: 50px !important;
+}
+.nav-item_link__yU0Vp {
+  display: flex;
+  position: relative;
+  text-decoration: none;
+}
+.nav-item_linkWrapper__1IVev {
+  width: 100%;
+  outline: none;
+  border: 0;
+}
+
+.nav-item_spacer__3_Yzq {
+  height: 10px;
+  border-radius: 30px 0 0 30px;
+  opacity: 0;
+}
+
+.nav-item_spacerInner__HJWlk {
+  height: 10px;
+  border-radius: 0 0 10px 0;
+}
+
+.nav-item_linkBody__2ilRo {
+  cursor: pointer;
+  height: 60px;
+  border-radius: 30px 0 0 30px;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-item_text__1Kr9k {
+  position: absolute;
+  font-size: 16px;
+  color: #ed1b6c;
+  left: calc(100% + 22px);
+  font-weight: 500;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  text-decoration: none;
+  transition: opacity 0.2s ease-out;
+}
+
+.nav-item_spacer__3_Yzq {
+  height: 10px;
+  border-radius: 30px 0 0 30px;
+  opacity: 0;
+}
+.nav-item_spacerInner__HJWlk {
+  height: 10px;
+  border-radius: 0 0 10px 0;
+}
