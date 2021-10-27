@@ -52,7 +52,7 @@ const Footer = () => {
   return (
     <div id="FooterId">
       <section className="footerSection">
-        <div className="container">
+        <div className="container-fluid">
           <div className="footerArea">
             <div className="footerCard1">
               <a href="#">

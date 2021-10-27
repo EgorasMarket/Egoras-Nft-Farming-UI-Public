@@ -1,4 +1,4 @@
-/* .DashBoardHeaderSection {
+.DashBoardHeaderSection {
   padding: 1em 1.5em;
   background-color: #fff;
   position: sticky;
@@ -7,9 +7,8 @@
   box-shadow: 0px 0px 15px #efefef;
 }
 
-hr {
-  width: 100%;
-}
+
+
 
 .DashboardHeaderArea {
   display: flex;
@@ -17,114 +16,22 @@ hr {
   justify-content: space-between;
 }
 
-.DashboardHeaderLinks {
+
+
+.dashboard-area {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-left: 650px;
+  justify-content: end;
 }
 
-.profileDropDown {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  background: #ffff;
-  width: 150px;
-  align-items: flex-start;
-  left: -98px;
-  padding: 1em;
-  border-radius: 10px;
-  top: 52px;
-  box-shadow: 0px 0px 10px #e0e0e0;
-  display: none;
-}
-.dropdownarea1 {
-  font-size: 14px;
-  margin-top: 10px;
-  color: #a2a2a2;
-}
-.dropdownarea1:hover {
-  color: #229e54;
-}
 
-.onlineSupport {
-  margin-right: 15px;
-  padding: 1.15em 2em;
-  border: solid;
-  border-color: #229e54;
-  color: #229e54;
-  border-width: 2px;
+
+
+button.logout-btn {
+  padding: 0.4em 2em;
+  border: none;
   border-radius: 50px;
-  cursor: pointer;
-  position: relative;
-  font-size: 12px;
-  transition: 0.3s ease-in-out;
-}
-.onlineSupport:hover {
-  border: #e4a788;
-  background: #e4a788;
-  color: #fff;
-  transform: translate3d(0, -5px, 0);
-  transition: 0.3s ease-in-out;
-  box-shadow: 0px 4px 10px #d5d5d5;
-}
-
-.bankCall {
-  padding: 1.15em 3em;
   background: #229e54;
   color: #ffff;
-  border-radius: 50px;
-  cursor: pointer;
-  position: relative;
-  font-size: 13px;
-  transition: 0.3s ease-in-out;
+  font-weight: 700;
+  box-shadow: 0px 5px 13px #cbcbcb;
 }
-.bankCall:hover {
-  border: #e4a788;
-  background: #e4a788;
-  color: #fff;
-  transform: translate3d(0, -5px, 0);
-  transition: 0.3s ease-in-out;
-  box-shadow: 0px 4px 10px #d5d5d5;
-}
-
-.DashboardHeaderImage {
-  cursor: pointer;
-}
-
-/* .topbar {
-  width: 100%;
-  height: 50px;
-  background-color: white;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-} */
-/* 
-.header-icons {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.topbarIconContainer {
-  position: relative;
-  cursor: pointer;
-  margin-left: 10px;
-  color: #555;
-}
-
-.topIconBadge {
-  width: 15px;
-  height: 15px;
-  position: absolute;
-  top: -5px;
-  right: 0px;
-  background-color: red;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-} */ 

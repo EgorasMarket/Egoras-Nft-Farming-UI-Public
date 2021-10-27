@@ -111,11 +111,13 @@
   position: absolute;
   background: #fff;
   padding: 1em;
-  left: -26px;
+  right: -4px;
+  left: -46px;
   box-shadow: 2px 1px 4px #d5d5d5;
   border-radius: 0px 0px 5px 5px;
-  display: none;
   transition: 1.5s linear;
+  top: 35px;
+  display: none;
 }
 .products-menu::before {
   content: "";
@@ -129,18 +131,24 @@
   border-bottom: 10px solid #ebebeb;
 }
 .menu2 {
-  left: 0;
+  top: 35px;
+  right: -5px;
+  left: -19px;
 }
-.product .css-i4bv87-MuiSvgIcon-root {
-  display: none;
+
+.rotate {
+  transform: rotate(180deg);
+  transition: 0.5s linear;
 }
-.company .css-i4bv87-MuiSvgIcon-root {
-  display: none;
+.ArrowDownIcon2,
+.ArrowDownIcon {
+  width: 9px;
+  margin-left: 5px;
+  transition: 0.5s linear;
+  display: inline-block;
+  height: 40px;
 }
-/* .ArrowUpIcon,
-.ArrowUpIcon2 {
-  display: none;
-} */
+
 .drop-borrow {
   font-size: 14px;
 }
@@ -170,12 +178,16 @@
 }
 .Line {
   position: absolute;
-  width: 84px;
+  width: 65px;
   height: 2.5px;
   background: #229e54;
   bottom: -9px;
-  left: -8px;
+  left: -10px;
   border-radius: 100px;
+}
+
+.exit-to-app {
+  font-size: 18px !important;
 }
 vl {
   width: 1px;

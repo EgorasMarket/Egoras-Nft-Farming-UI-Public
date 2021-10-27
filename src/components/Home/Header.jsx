@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 // import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
-import ArrowDropUpIcon from "@mui/icons-material/ArrowDropUp";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import CloseIcon from "@material-ui/icons/Close";
 import clsx from "clsx";
 import Drawer from "@material-ui/core/Drawer";
@@ -22,7 +21,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ListItem from "@material-ui/core/ListItem";
 
-// style
+// styles
 import "../../css/header.css";
 import "../../css/headerMobile.css";
 // import { Authenticate } from "../../../auth/Authenticate";
@@ -269,43 +268,43 @@ const Header = () => {
 
   // open dropdown menu
   const dropDownOpen1 = () => {
-    const dropUpIcon = document.getElementById("ArrowUpIcon");
+    // const dropUpIcon = document.getElementById("ArrowUpIcon");
     const dropDownIcon = document.getElementById("ArrowDownIcon");
     const dropMenu = document.getElementById("products-menu");
 
-    dropDownIcon.style.display = "none";
-    dropUpIcon.style.display = "inline-block";
+    dropDownIcon.classList.add("rotate");
+    // dropUpIcon.style.display = "inline-block";
 
     dropMenu.style.display = "block";
   };
   const dropDownClose1 = () => {
-    const dropUpIcon = document.getElementById("ArrowUpIcon");
+    // const dropUpIcon = document.getElementById("ArrowUpIcon");
     const dropDownIcon = document.getElementById("ArrowDownIcon");
     const dropMenu = document.getElementById("products-menu");
 
-    dropDownIcon.style.display = "inline-block";
-    dropUpIcon.style.display = "none";
+    dropDownIcon.classList.remove("rotate");
+    // dropUpIcon.style.display = "none";
 
     dropMenu.style.display = "none";
   };
   // open dropdown menu
   const dropDownOpen2 = () => {
-    const dropUpIcon = document.getElementById("ArrowUpIcon2");
+    // const dropUpIcon = document.getElementById("ArrowUpIcon2");
     const dropDownIcon = document.getElementById("ArrowDownIcon2");
     const dropMenu = document.getElementById("products-menu2");
 
-    dropDownIcon.style.display = "none";
-    dropUpIcon.style.display = "inline-block";
+    dropDownIcon.classList.add("rotate");
+    // dropUpIcon.style.display = "inline-block";
 
     dropMenu.style.display = "block";
   };
   const dropDownClose2 = () => {
-    const dropUpIcon = document.getElementById("ArrowUpIcon2");
+    // const dropUpIcon = document.getElementById("ArrowUpIcon2");
     const dropDownIcon = document.getElementById("ArrowDownIcon2");
     const dropMenu = document.getElementById("products-menu2");
 
-    dropDownIcon.style.display = "inline-block";
-    dropUpIcon.style.display = "none";
+    dropDownIcon.classList.remove("rotate");
+    // dropUpIcon.style.display = "none";
 
     dropMenu.style.display = "none";
   };
@@ -318,29 +317,20 @@ const Header = () => {
             <a href="/" className="egrLogo2Cont">
               <img src="/img/egoras-logo.svg" alt="..." className="egr-logo2" />
               <div className="on-mobile-navigators">
-                <ul className="headerLinks show-header-links">
-                  <a
-                    href="/"
-                    className={page1 === "/" ? "docs activeLink" : "about"}
-                    // onClick={clickMe1}
-                  >
-                    Borrower
-                    {page1 === "/" ? <span className="Line"></span> : null}
-                  </a>
-
-                  <a
-                    href="/validator"
+                {/* <ul className="headerLinks show-header-links"> */}
+                {/* <a
+                    href="/dashboard"
                     className={
                       page1 === "/validator" ? "docs activeLink" : "about"
                     }
                     // onClick={clickMe2}
                   >
-                    Validator
-                    {page1 === "/validator" ? (
+                    App
+                    {page1 === "/dashboard" ? (
                       <span className="Line"></span>
                     ) : null}
                   </a>
-                </ul>
+                </ul> */}
               </div>
             </a>
 
@@ -353,23 +343,14 @@ const Header = () => {
                   className="egr-logo"
                 />
               </a>
-              <a
-                href="/"
+              {/* <a
+                href="/dashboard"
                 className={page1 === "/" ? "docs activeLink" : "about"}
                 // onClick={clickMe1}
               >
-                Borrower
+                App <ExitToAppIcon className="exit-to-app" />
                 {page1 === "/" ? <span className="Line"></span> : null}
-              </a>
-
-              <a
-                href="/validator"
-                className={page1 === "/validator" ? "docs activeLink" : "about"}
-                // onClick={clickMe2}
-              >
-                Validator
-                {page1 === "/validator" ? <span className="Line"></span> : null}
-              </a>
+              </a> */}
             </ul>
 
             {/* <ul className="headerLinks2">
@@ -384,82 +365,10 @@ const Header = () => {
           </ul> */}
 
             <ul className="headerButtons">
-              <div
-                style={{ cursor: "pointer" }}
-                onMouseOver={dropDownOpen1}
-                onMouseOut={dropDownClose1}
-                className="product"
-                id="product"
-              >
-                Products
-                <ArrowDropDownIcon
-                  id="ArrowDownIcon"
-                  className="ArrowDownIcon"
-                />
-                <ArrowDropUpIcon id="ArrowUpIcon" className="ArrowUpIcon" />
-                <div className="products-menu " id="products-menu">
-                  <h6 className="drop-borrow">Borrower</h6>
-                  <a
-                    href="https://egoras.ng/appointment"
-                    className="drop-borrow-link"
-                  >
-                    Get loan
-                  </a>
-                  <hr />
-                  <h6 className="drop-borrow">Validator</h6>
-                  <a href="/explore_loans" className="drop-borrow-link">
-                    Explore loans
-                  </a>
-                </div>
-              </div>
-
-              <div
-                style={{ cursor: "pointer" }}
-                className="company"
-                id="company"
-                onMouseOver={dropDownOpen2}
-                onMouseOut={dropDownClose2}
-              >
-                Company
-                <ArrowDropDownIcon
-                  id="ArrowDownIcon2"
-                  className="ArrowDownIcon"
-                />
-                <ArrowDropUpIcon id="ArrowUpIcon2" className="ArrowUpIcon" />
-                <div className="products-menu menu2" id="products-menu2">
-                  <a href="/about" className="drop-borrow-link">
-                    About Us
-                  </a>
-                  <hr />
-                  <a
-                    href="https://t.me/egorasmarket"
-                    className="drop-borrow-link"
-                  >
-                    Blog
-                  </a>
-                </div>
-              </div>
-              {/* ===================================================
-              ===========================
-              ========================================== */}
-
-              <vl></vl>
-              <a href="https://t.me/egorasmarket" className="about">
-                Support
-              </a>
-              {/* <a href="/appointment" className="connect">
+              <a href="/dashboard" className="connect">
                 {" "}
-                Apply for loan
-              </a> */}
-              <a href="https://egoras.ng/appointment" className="getLoan">
-                {" "}
-                Get the loan
+                Launch App <ExitToAppIcon className="exit-to-app" />
               </a>
-
-              {/* <a href="#" className="connect">
-                <Authenticate />
-                <div className="connectHover"></div>
-              </a> */}
             </ul>
             {/* <img
               src="/img/hamburger-open.svg"
@@ -579,15 +488,6 @@ const Header = () => {
                     </a>
                   </ListItem>
                 </List>
-                {/* <Divider />
-                <List>
-                  <ListItem>
-                    {/* <a href="#" className="connect">
-                      <Authenticate />
-                      <div className="connectHover"></div>
-                //     </a> */}
-                {/* //   </ListItem>
-                // </List> */}
               </Drawer>
             </div>
           </div>
