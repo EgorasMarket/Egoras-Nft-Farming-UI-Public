@@ -14,6 +14,9 @@ const DashBoardDefaultPage = () => {
     let currentId = e.currentTarget.id;
     setActive(currentId);
   };
+  const changeBg1 = (e) => {
+    setPercentBtn("hundred_percent");
+  };
   const activeClass = (e) => {
     let currentId = e.currentTarget.id;
     setPercentBtn(currentId);
@@ -97,9 +100,13 @@ const DashBoardDefaultPage = () => {
                   <input
                     type="search"
                     name=""
+                    value="0.00"
                     id=""
                     className="withdraw-input-box"
                   />
+                  <button className="max-btn" onClick={changeBg1}>
+                    Max
+                  </button>
                 </div>
                 <div className="withdraw-input-section3">
                   <button
