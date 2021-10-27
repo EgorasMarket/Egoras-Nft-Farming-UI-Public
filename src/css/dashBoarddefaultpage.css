@@ -136,6 +136,9 @@ input.withdraw-input-box:hover {
   border-color: #229e54;
 }
 
+.not-safe-to-withdraw {
+  display: none;
+}
 .withdraw-input-section3 {
   display: flex;
   justify-content: end;
@@ -178,6 +181,10 @@ input.withdraw-input-box:hover {
   border: none;
   color: #fff;
   margin-top: 30px;
+}
+
+.not-withdraw-btn {
+  display: none;
 }
 
 .dashboard-area1-cont2 {

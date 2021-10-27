@@ -9,12 +9,10 @@ import "../../../css/dashBoarddefaultpage.css";
 const DashBoardDefaultPage = () => {
   const [active, setActive] = useState("supply");
   const [percentBtn, setPercentBtn] = useState("");
-  const [activeBtn, setActiveBtn] = useState("supply-btn");
 
   const changeBg = (e) => {
     let currentId = e.currentTarget.id;
     setActive(currentId);
-    setActiveBtn(currentId);
   };
   const activeClass = (e) => {
     let currentId = e.currentTarget.id;
@@ -53,7 +51,6 @@ const DashBoardDefaultPage = () => {
                       ? "supply-btn supply-btn-active"
                       : "supply-btn"
                   }
-                  // "supply-btn supply-btn-active"
                   id="supply"
                   onClick={changeBg}
                 >
@@ -76,7 +73,24 @@ const DashBoardDefaultPage = () => {
               {/* ========= */}
               <div className="dashboard-area1-heading-supply-withdraw-input">
                 <div className="withdraw-input-section1">
-                  <div className="safe-to-withdraw">Safe to Withdraw</div>
+                  <div
+                    className={
+                      active == "supply"
+                        ? "safe-to-withdraw"
+                        : "not-safe-to-withdraw"
+                    }
+                  >
+                    ETH Balance
+                  </div>
+                  <div
+                    className={
+                      active == "withdraw"
+                        ? "safe-to-withdraw"
+                        : "not-safe-to-withdraw"
+                    }
+                  >
+                    Safe to Withdraw
+                  </div>
                   <div className="safe-to-withdraw-figure">0.00</div>
                 </div>
                 <div className="withdraw-input-section2">
@@ -119,7 +133,6 @@ const DashBoardDefaultPage = () => {
                     }
                     id="sevenFive_percent"
                     onClick={activeClass}
-                    onchange={changeBg}
                   >
                     75%
                   </button>
@@ -131,7 +144,6 @@ const DashBoardDefaultPage = () => {
                     }
                     id="hundred_percent"
                     onClick={activeClass}
-                    onchange={changeBg}
                   >
                     100%
                   </button>
@@ -142,16 +154,16 @@ const DashBoardDefaultPage = () => {
               {/* ========= */}
               <div className="dashboard-area1-heading-supply-withdraw-btn">
                 <button
-                  className={activeBtn == "supply-btn" ? "withdraw-btn" : "not-withdraw-btn"}
-                  id="supply-btn"
-                  onchange={changeBg}
+                  className={
+                    active == "supply" ? "withdraw-btn" : "not-withdraw-btn"
+                  }
                 >
                   Supply
                 </button>
                 <button
-                  className="withdraw-btn"
-                  id="withdraw-btn"
-                  onchange={changeBg}
+                  className={
+                    active == "withdraw" ? "withdraw-btn" : "not-withdraw-btn"
+                  }
                 >
                   Withdraw
                 </button>
