@@ -134,12 +134,12 @@ const Header = () => {
         document.getElementById("Header").style.display = "none";
       });
     }
-    if (currentPage === "/dashboard/airtime") {
+    if (currentPage === "/dashboard/lending") {
       setshowHeader(() => {
         document.getElementById("Header").style.display = "none";
       });
     }
-    if (currentPage === "/dashboard/transaction") {
+    if (currentPage === "/dashboard/staking") {
       setshowHeader(() => {
         document.getElementById("Header").style.display = "none";
       });

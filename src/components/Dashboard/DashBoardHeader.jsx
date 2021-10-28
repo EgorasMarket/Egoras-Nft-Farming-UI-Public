@@ -30,6 +30,9 @@ const DashBoardHeader = () => {
       <section className="DashBoardHeaderSection">
         <div className="container-fluid">
           <div className="dashboard-area">
+            <a href="/" className="egrLogo2Cont3">
+              <img src="/img/egoras-logo.svg" alt="..." className="egr-logo3" />
+            </a>
             <button className="logout-btn">
               Log out <ExitToAppIcon />
             </button>

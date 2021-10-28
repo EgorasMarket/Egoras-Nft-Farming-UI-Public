@@ -36,10 +36,10 @@ const Footer = () => {
     if (FooterHide === "/dashboard/") {
       document.getElementById("FooterId").style.display = "none";
     }
-    if (FooterHide === "/dashboard/airtime") {
+    if (FooterHide === "/dashboard/lending") {
       document.getElementById("FooterId").style.display = "none";
     }
-    if (FooterHide === "/dashboard/transaction") {
+    if (FooterHide === "/dashboard/staking") {
       document.getElementById("FooterId").style.display = "none";
     }
     if (FooterHide === "/dashboard/egr-balance") {

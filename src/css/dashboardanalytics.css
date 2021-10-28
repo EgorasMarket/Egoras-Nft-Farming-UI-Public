@@ -5,6 +5,6 @@
   background: #f6fff9;
 }
 
-
-
-
+.no-bg {
+  background: none !important;
+}

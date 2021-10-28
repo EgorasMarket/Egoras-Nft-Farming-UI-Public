@@ -2,40 +2,82 @@ import React, { useState, useEffect } from "react";
 import HomeIcon from "@mui/icons-material/Home";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
-import CasinoIcon from "@mui/icons-material/Casino";
+import SecurityIcon from "@mui/icons-material/Security";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import ImportExportIcon from "@mui/icons-material/ImportExport";
+import DescriptionIcon from "@mui/icons-material/Description";
 import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
 import { Link } from "react-router-dom";
 
 import "../../css/dashBoardSideBar.css";
 
 const DashboardSideBarMenu = () => {
-  const [activeBg, setActiveBg] = useState("home");
+  const [activeBg, setActiveBg] = useState("market");
 
   const changeBg = (e) => {
     let currentId = e.currentTarget.id;
     setActiveBg(currentId);
   };
 
+  const linksActive = window.location.pathname;
+  useEffect(() => {
+    if (linksActive === "/dashboard/lending") {
+      setActiveBg("home");
+    }
+    if (linksActive === "/dashboard") {
+      setActiveBg("market");
+    }
+    if (linksActive === "/dashboard/transaction") {
+      setActiveBg("transaction");
+    }
+    if (linksActive === "/dashboard/governance") {
+      setActiveBg("governance");
+    }
+    if (linksActive === "/dashboard/swap") {
+      setActiveBg("swap");
+    }
+    if (linksActive === "/dashboard/whitepaper") {
+      setActiveBg("whitepaper");
+    }
+  });
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
         <div className="sidebarMenu">
           {/* <h3 className="sidebarTitle">Dashboard</h3> */}
           <ul className="sidebarList">
-            <a href="/">
-              {" "}
-              <img
-                src="/img/egoras-favicon.svg"
-                alt=""
-                style={{ width: "50px" }}
-              />
-            </a>
-
             {/* =================== */}
             {/* =================== */}
             {/* =================== */}
             {/* =================== */}
-            <a href="#" id="home" className="link" onClick={changeBg}>
+            <Link
+              to="/dashboard"
+              id="market"
+              className="link"
+              onClick={changeBg}
+            >
+              <li
+                className={
+                  activeBg == "market"
+                    ? "sidebarListItem list-item-active"
+                    : "sidebarListItem"
+                }
+              >
+                <BarChartIcon className="sidebarIcon" />
+                Markets
+              </li>
+            </Link>
+            {/* ===================== */}
+            {/* ===================== */}
+            {/* ===================== */}
+            {/* ===================== */}
+            {/* ===================== */}
+            <Link
+              to="/dashboard/lending"
+              id="home"
+              className="link"
+              onClick={changeBg}
+            >
               <li
                 className={
                   activeBg == "home"
@@ -45,33 +87,39 @@ const DashboardSideBarMenu = () => {
 
                 // "sidebarListItem list-item-active"
               >
-                <HomeIcon className="sidebarIcon" />
-                Home
+                <AttachMoneyIcon className="sidebarIcon" />
+                Lending
               </li>
-            </a>
+            </Link>
             {/* ===================== */}
             {/* ===================== */}
             {/* ===================== */}
             {/* ===================== */}
             {/* ===================== */}
-            <a href="#" id="staking" className="link" onClick={changeBg}>
+            {/* ===================== */}
+
+            <Link
+              to="/dashboard/transaction"
+              className="link"
+              id="transaction"
+              onClick={changeBg}
+            >
               <li
                 className={
-                  activeBg == "staking"
+                  activeBg == "transaction"
                     ? "sidebarListItem list-item-active"
                     : "sidebarListItem"
                 }
               >
-                <AttachMoneyIcon className="sidebarIcon" />
+                <ImportExportIcon className="sidebarIcon" />
                 Staking
               </li>
-            </a>
+            </Link>
             {/* ===================== */}
             {/* ===================== */}
             {/* ===================== */}
             {/* ===================== */}
-            {/* ===================== */}
-            <a href="#" className="link" id="governance" onClick={changeBg}>
+            <Link to="#" className="link" id="governance" onClick={changeBg}>
               <li
                 className={
                   activeBg == "governance"
@@ -82,30 +130,14 @@ const DashboardSideBarMenu = () => {
                 <HowToVoteIcon className="sidebarIcon" />
                 Governance
               </li>
-            </a>
+            </Link>
+
             {/* ===================== */}
             {/* ===================== */}
             {/* ===================== */}
             {/* ===================== */}
             {/* ===================== */}
-            <a href="#" className="link" id="pool" onClick={changeBg}>
-              <li
-                className={
-                  activeBg == "pool"
-                    ? "sidebarListItem list-item-active"
-                    : "sidebarListItem"
-                }
-              >
-                <CasinoIcon className="sidebarIcon" />
-                EGR Pool
-              </li>
-            </a>
-            {/* ===================== */}
-            {/* ===================== */}
-            {/* ===================== */}
-            {/* ===================== */}
-            {/* ===================== */}
-            <a href="#" className="link" id="swap" onClick={changeBg}>
+            <Link to="#" className="link" id="swap" onClick={changeBg}>
               <li
                 className={
                   activeBg == "swap"
@@ -116,7 +148,43 @@ const DashboardSideBarMenu = () => {
                 <SwapHorizontalCircleIcon className="sidebarIcon" />
                 Swap
               </li>
-            </a>
+            </Link>
+
+            {/* ===================== */}
+            {/* ===================== */}
+            {/* ===================== */}
+            {/* ===================== */}
+            {/* ===================== */}
+            <Link to="#" className="link" id="whitepaper" onClick={changeBg}>
+              <li
+                className={
+                  activeBg == "whitepaper"
+                    ? "sidebarListItem list-item-active"
+                    : "sidebarListItem"
+                }
+              >
+                <DescriptionIcon className="sidebarIcon" />
+                White Paper
+              </li>
+            </Link>
+
+            {/* ===================== */}
+            {/* ===================== */}
+            {/* ===================== */}
+            {/* ===================== */}
+            {/* ===================== */}
+            {/* <Link to="#" className="link" id="security" onClick={changeBg}>
+              <li
+                className={
+                  activeBg == "security"
+                    ? "sidebarListItem list-item-active"
+                    : "sidebarListItem"
+                }
+              >
+                <SecurityIcon className="sidebarIcon" />
+                Security
+              </li>
+            </Link> */}
             {/* <a className="nav-item_link__yU0Vp" href="/staking">
               <span
                 className="nav-item_linkWrapper__1IVev"
