@@ -8,6 +8,7 @@ import DashBoardDefaultPage from "./DashBoardPages/DashBoardDefaultPage";
 import DashBoardAnalytics from "./DashBoardPages/DashBoardAnalytics";
 import DashBoardTransaction from "./DashBoardPages/DashBoardTransaction";
 import DashboardEgrBalancePage from "./DashBoardPages/DashboardEgrBalancePage";
+import DashBoardSwap from "./DashBoardPages/DashBoardSwapPage";
 import DashBoardHeader from "./DashBoardHeader";
 
 // dashboard styles
@@ -25,6 +26,9 @@ function Dashboard() {
           <Route exact path="/dashboard/lending">
             <DashBoardDefaultPage />
           </Route>
+           <Route exact path="/dashboard/swap"> 
+            <DashBoardSwap />
+          </Route> 
           <Route exact path="/dashboard">
             <DashBoardAnalytics />
           </Route>

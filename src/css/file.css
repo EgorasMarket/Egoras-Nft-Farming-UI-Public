@@ -2,23 +2,24 @@
     display:flex;
 }
 
-.Trade1{
+/* .Trade1{
     flex:1;
     padding:10px 20px 10px 40px;
     background-color: #efecec7d;
-    /* box-shadow: 4px 2px 3px -1px #3b1515a6; */
+    
         box-shadow: 1px 2px 7px 0px #9d9c9ca6;
         height: 600px;
         overflow-y: scroll;
          position:sticky; 
          top:70px;
-}
+} */
 
 .Trade2{
     padding:10px 20px;
-    flex:5;
+    flex:4;
         /* background-color: #eff7ff; */
             background-color: #6cc1b217;
+             position: relative;
 }
 .space{
     margin-right: 15px;
@@ -77,6 +78,7 @@
     font-size: 18px;
      background-color:#c4fbdb;
      color:#000;
+     font-weight: bold;
 }
 .For{
     background-color:#c4fbdb;
@@ -109,6 +111,12 @@ font-weight: bold;
 margin-bottom: 20px;
 cursor:pointer;
 }
+
+.Enable1:hover{
+  background: linear-gradient(
+90deg
+, #ebb396 0%,  #39d97a 100%); 
+}
 .Enable2{
     font-weight: bold;
     font-size: 22px;
@@ -117,7 +125,7 @@ cursor:pointer;
     margin-bottom: 20px;
 }
 .Enable3{
-    width:600px;
+    width:auto;
     background-color:#e4a788;
     border-radius: 10px;
     padding:10px 30px;
@@ -141,12 +149,12 @@ cursor:pointer;
     background-color: #fff;
 }
 
+.ada:hover{
+    background-color: #229e54; 
+    color:#fff;
+}
 .ada1{
-    padding:12px 10px;
-    border:1px solid grey;
-    border-radius: 50px;
-    width:60px;
-    text-align: center;
+    
     background-color: #229e54;
     color:#fff;
 }
@@ -171,15 +179,15 @@ cursor:pointer;
     border-radius: 50px;
     text-align: center;
     background-color: #fff;
-    
+}
+
+.Gas2:hover{
+    background-color: #229e54;
+    color:#fff;
 }
 
 .Gas3{
-    width:150px;
-    padding:10px;
-    border:1px solid grey;
-    border-radius: 50px;
-    text-align: center;
+    
     background-color: #229e54;
     color:#fff;
     
@@ -213,7 +221,7 @@ cursor:pointer;
  } */
 
 
-
+/* 
 @media (max-width:425px){
     .ada1{
         width:38px;
@@ -235,7 +243,7 @@ cursor:pointer;
     }
 }
 
-
+ */
 
 @media (max-width:600px){
     .Trade2{

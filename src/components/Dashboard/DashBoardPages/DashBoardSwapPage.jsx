@@ -33,9 +33,9 @@ const File = () => {
     }
 
     return (
-        <div style={{marginTop:'69px'}}>
+        <div style={{marginTop:'69px'}} className="Trade2">
 
-            <div className="Trade">
+            {/* <div className="Trade"> */}
                 {/* <div className="Trade1">
                     <div className="star"> <img src="img/map.svg"  alt="" className="space"/> <span className="Market">Markets</span></div>
                     <div className="star"> <img src="img/map1.svg"  alt="" className="space"/> <span className="Market">Lend </span></div>
@@ -69,7 +69,7 @@ const File = () => {
 
                      </div> */}
                 
-                 <div className="Trade2">
+                 <div >
              <div className="Trade4">
                 <div>
                     <div>
@@ -81,7 +81,7 @@ const File = () => {
                                 <div className="send5">
                                     <div>
                                         < div className="send6">
-                                            <div className="send7"><img src="img/map10.png" alt="" className="send4"/></div>
+                                            <div className="send7"><img src="../../img/map10.png" alt="" className="send4"/></div>
                                             <div>  <div style={{color:'#000',marginRight:'5px' ,display:'flex',alignItems:'center',}}>USDT <ArrowDropDownIcon/> </div> </div>
                                             
                                              <div style={{color:'#000'}}>MAX</div>
@@ -92,14 +92,14 @@ const File = () => {
                                </div>
                                  <div className="For1">
                                      <div style={{flex:'1',fontWeight:'bold',fontSize:'24px'}}>RECEIVE</div>
-                                     <div style={{flex:'1'}}><img src="img/map11.svg" alt=""/></div>
+                                     <div style={{flex:'1'}}><img src="../../img/map11.svg" alt=""/></div>
                                  </div>
 
                                  <div className="For">
-                                     <div className="send2"><span style={{color:'#000'}}>Balance: ...</span>  <span style={{color:'#000'}}>Amount</span></div>
+                                     <div className="send2"><span style={{color:'#000'}}>Balance: ...</span>  <span className="send3">Amount</span></div>
                                      <div className="send5">
                                          <div className="send6">
-                                           <div className="send7"> <img src="img/map12.png" alt="" className="send4"/></div>
+                                           <div className="send7"> <img src="../../img/map12.png" alt="" className="send4"/></div>
                                           <div> <div style={{display:'flex',alignItems:'center',color:'#000'}}>DF <ArrowDropDownIcon id="COMES1"/>  </div></div>
                                          </div>
                                          <div><input type="" alt="" className="send8"  placeholder="0.00"/></div>
@@ -121,17 +121,17 @@ const File = () => {
 
                    <div className="Enable4">Limit additional price slippage</div>
                    <div className="Enable5">
-                       <div className={speed1 === 'two' ? 'ada1' : 'ada'}   onClick={send1}  id="two" >0.1%</div>
-                       <div className={speed1 === 'two2' ? 'ada1' : 'ada'}  onClick={send1}  id="two2">0.2%</div>
-                       <div className={speed1 === 'two3' ? 'ada1' : 'ada'}   onClick={send1} id="two3">0.5%</div>
-                       <div className={speed1 === 'two4' ? 'ada1' : 'ada'}   onClick={send1} id="two4">1%</div>
-                       <div className={speed1 === 'two5' ? 'ada1' : 'ada'}   onClick={send1} id="two5">3%</div>
-                       <div className={speed1 === 'two6' ? 'ada1' : 'ada'}   onClick={send1} id="two6">5%</div>
+                       <div className={speed1 === 'two' ? 'ada ada1' : 'ada'}   onClick={send1}  id="two" >0.1%</div>
+                       <div className={speed1 === 'two2' ? 'ada ada1' : 'ada'}  onClick={send1}  id="two2">0.2%</div>
+                       <div className={speed1 === 'two3' ? 'ada ada1' : 'ada'}   onClick={send1} id="two3">0.5%</div>
+                       <div className={speed1 === 'two4' ? ' ada ada1' : 'ada'}   onClick={send1} id="two4">1%</div>
+                       <div className={speed1 === 'two5' ? ' ada ada1' : 'ada'}   onClick={send1} id="two5">3%</div>
+                       <div className={speed1 === 'two6' ? ' ada ada1' : 'ada'}   onClick={send1} id="two6">5%</div>
                    </div>
                    <div className="rece">Minimum received:... DF</div>
                    <div className="Gas">Gas Fee (GWEI)</div>
                    <div className="Gas1">
-                       <div className={speed === 'paper' ? 'Gas3' : 'Gas2' } onClick={send} id="paper">121 Standard</div>  <div  className={speed === 'paper1' ? 'Gas3': 'Gas2' }  onClick={send} id="paper1">134 Fast </div> <div className={speed === 'paper2'? 'Gas3': 'Gas2' }  onClick={send} id="paper2">148 instant</div>
+                       <div className={speed === 'paper' ? 'Gas2  Gas3' : 'Gas2' } onClick={send} id="paper">121 Standard</div>  <div  className={speed === 'paper1' ? ' Gas2 Gas3': 'Gas2' }  onClick={send} id="paper1">134 Fast </div> <div className={speed === 'paper2'? ' Gas2 Gas3': 'Gas2' }  onClick={send} id="paper2">148 instant</div>
                    </div>
 
                </div>
@@ -140,7 +140,7 @@ const File = () => {
            </div>
 
 
-            </div>
+            {/* </div> */}
 
             
         </div>

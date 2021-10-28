@@ -138,7 +138,7 @@ const DashboardSideBarMenu = () => {
             {/* ===================== */}
             {/* ===================== */}
             {/* ===================== */}
-            <Link to="#" className="link" id="swap" onClick={changeBg}>
+            <Link to="/dashboard/swap" className="link" id="swap" onClick={changeBg}>
               <li
                 className={
                   activeBg == "swap"
