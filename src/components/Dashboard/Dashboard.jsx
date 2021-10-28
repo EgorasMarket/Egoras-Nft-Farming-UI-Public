@@ -22,10 +22,10 @@ function Dashboard() {
         <DashboardSideBarMenu />
 
         <Switch>
-          <Route exact path="/dashboard">
+          <Route exact path="/dashboard/lending">
             <DashBoardDefaultPage />
           </Route>
-          <Route exact path="/dashboard/staking">
+          <Route exact path="/dashboard">
             <DashBoardAnalytics />
           </Route>
           <Route exact path="/dashboard/transaction">

@@ -1,469 +1,774 @@
 import React, { useState, useEffect } from "react";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+import { Link } from "react-router-dom";
+import SearchIcon from "@mui/icons-material/Search";
+// import {
+//   LineChart,
+//   Line,
+//   XAxis,
+//   YAxis,
+//   CartesianGrid,
+//   Tooltip,
+//   Legend,
+//   ResponsiveContainer,
+// } from "recharts";
 
 import "../../../css/dashboardanalytics.css";
 
-const data = [
-  {
-    name: "Jan",
-    APY: 2400,
-  },
-  {
-    name: "Feb",
-    APY: 1398,
-  },
-  {
-    name: "Mar",
-    APY: 5000,
-  },
-  {
-    name: "Apr",
-    APY: 3908,
-  },
-  {
-    name: "May",
-    APY: 4800,
-  },
-  {
-    name: "Jun",
-    APY: 3800,
-  },
-  {
-    name: "Jul",
-    APY: 1900,
-  },
-  {
-    name: "Aug",
-    APY: 4000,
-  },
-  {
-    name: "Sep",
-    APY: 2300,
-  },
-  {
-    name: "Oct",
-    APY: 5300,
-  },
-  {
-    name: "Nov",
-    APY: 1300,
-  },
-  {
-    name: "Dec",
-    APY: 3000,
-  },
-];
-
 const DashBoardAnalytics = () => {
-  const [active, setActive] = useState("supply");
-  const [percentBtn, setPercentBtn] = useState("");
+  const [categoryBtn, setCategoryBtn] = useState("All");
 
-  const changeBg = (e) => {
-    let currentId = e.currentTarget.id;
-    setActive(currentId);
+  const assets = {
+    assets1: [
+      { name: "Bitcoin" },
+      { type: "BTC-A" },
+      { eusd_Avail: "100M" },
+      { stable: "0.50%" },
+      { ratio: "150%" },
+    ],
+    assets2: [
+      { name: "Ethereum" },
+      { type: "ETH-A" },
+      { eusd_Avail: "99.37M" },
+      { stable: "2.00%" },
+      { ratio: "145%" },
+    ],
+    assets3: [
+      { name: "Tether" },
+      { type: "USDT-A" },
+      { eusd_Avail: "90M" },
+      { stable: "1.00%" },
+      { ratio: "100%" },
+    ],
+    assets4: [
+      { name: "Chainlink" },
+      { type: "LINK-A" },
+      { eusd_Avail: "6.93M" },
+      { stable: "1.00%" },
+      { ratio: "165%" },
+    ],
+    assets5: [
+      { name: "Yearn" },
+      { type: "YF1-A" },
+      { eusd_Avail: "6.44M" },
+      { stable: "1.00%" },
+      { ratio: "165%" },
+    ],
+    assets6: [
+      { name: "Uniswap" },
+      { type: "UNI-A" },
+      { eusd_Avail: "5.0M" },
+      { stable: "1.50%" },
+      { ratio: "120%" },
+    ],
+    assets7: [
+      { name: "Egoras" },
+      { type: "EGR-A" },
+      { eusd_Avail: "100M" },
+      { stable: "0.50%" },
+      { ratio: "170%" },
+    ],
+    assets8: [
+      { name: "Matic" },
+      { type: "MATIC-A" },
+      { eusd_Avail: "3.00M" },
+      { stable: "3.00%" },
+      { ratio: "175%" },
+    ],
+    assets9: [
+      { name: "Aave" },
+      { type: "AAVE-A" },
+      { eusd_Avail: "5.00M" },
+      { stable: "1.00%" },
+      { ratio: "165%" },
+    ],
+    assets10: [
+      { name: "Wrapped Bitcoin" },
+      { type: "WBTC-A" },
+      { eusd_Avail: "30.80M" },
+      { stable: "2.00%" },
+      { ratio: "145%" },
+    ],
+    assets11: [
+      { name: "Egoras Credit" },
+      { type: "EGC-A" },
+      { eusd_Avail: "90M" },
+      { stable: "0.50%" },
+      { ratio: "120%" },
+    ],
+    assets12: [
+      { name: "Ethereum" },
+      { type: "ETH-A" },
+      { eusd_Avail: "90M" },
+      { stable: "0.70%" },
+      { ratio: "130%" },
+    ],
   };
-  const changeBg1 = (e) => {
-    setPercentBtn("hundred_percent");
+
+  const triggerAll = () => {
+    setCategoryBtn("All");
   };
-  const activeClass = (e) => {
-    let currentId = e.currentTarget.id;
-    setPercentBtn(currentId);
+
+  const triggerPopular = () => {
+    setCategoryBtn("Popular");
   };
+  const triggerStable = () => {
+    setCategoryBtn("Stable");
+  };
+  // const [active, setActive] = useState("Swap");
+  // const [percentBtn, setPercentBtn] = useState("");
+
+  // const changeBg = (e) => {
+  //   let currentId = e.currentTarget.id;
+  //   setActive(currentId);
+  // };
+  // const changeBg1 = (e) => {
+  //   setPercentBtn("hundred_percent");
+  // };
+  // const activeClass = (e) => {
+  //   let currentId = e.currentTarget.id;
+  //   setPercentBtn(currentId);
+  // };
 
   return (
     <div className="other2">
       {/* get started section start */}
-
-      <section className="homeProfile-section">
+{/* ============================================================ */}
+{/* ============================================================ */}
+{/* ============================================================ */}
+{/* ============================================================ */}
+      {/* Tokens Section Start */}
+      <section className="collateral-assets-section no-bg">
         <div className="container">
-          <div className="dashboard-area1">
-            <div className="dashboard-area1-cont1">
-              <div className="dashboard-area1-heading-div">
-                <p className="dashboard-area1-heading-div-txt">
-                  Please fill in or select the proportion bar below to enter the
-                  amount of asset you want to supply.
-                </p>
-              </div>
-              {/* ========= */}
-              {/* ========= */}
-              {/* ========= */}
-              <div className="dashboard-area1-heading-coin-display">
-                <div className="coin-display">
-                  <img src="/img/ether-logo.svg" alt="" className="eth-icon" />{" "}
-                  ETH Supplied
-                </div>
-                <div className="coin-display-amount">0.00</div>
-              </div>
-              {/* ========= */}
-              {/* ========= */}
-              {/* ========= */}
-              <div className="dashboard-area1-heading-supply-withdraw-pages">
+          <div className="assets-container">
+            <div className="assets-cont-head-area">
+              <div className="assets-cont-header-arae-btns">
                 <button
                   className={
-                    active == "supply"
-                      ? "supply-btn supply-btn-active"
-                      : "supply-btn"
+                    categoryBtn === "All" ? "assets-header1" : "assets-header2"
                   }
-                  id="supply"
-                  onClick={changeBg}
+                  onClick={triggerAll}
                 >
-                  Supply
+                  All assets
                 </button>
                 <button
                   className={
-                    active == "withdraw"
-                      ? "supply-btn supply-btn-active"
-                      : "supply-btn"
+                    categoryBtn === "Stable"
+                      ? "assets-header1"
+                      : "assets-header2"
                   }
-                  id="withdraw"
-                  onClick={changeBg}
+                  onClick={triggerStable}
                 >
-                  Withdraw
+                  Stablecoins
                 </button>
-              </div>
-              {/* ========= */}
-              {/* ========= */}
-              {/* ========= */}
-              <div className="dashboard-area1-heading-supply-withdraw-input">
-                <div className="withdraw-input-section1">
-                  <div
-                    className={
-                      active == "supply"
-                        ? "safe-to-withdraw"
-                        : "not-safe-to-withdraw"
-                    }
-                  >
-                    ETH Balance
-                  </div>
-                  <div
-                    className={
-                      active == "withdraw"
-                        ? "safe-to-withdraw"
-                        : "not-safe-to-withdraw"
-                    }
-                  >
-                    Safe to Withdraw
-                  </div>
-                  <div className="safe-to-withdraw-figure">0.00</div>
-                </div>
-                <div className="withdraw-input-section2">
-                  <input
-                    type="search"
-                    name=""
-                    value="0.00"
-                    id=""
-                    className="withdraw-input-box"
-                  />
-                  <button className="max-btn" onClick={changeBg1}>
-                    Max
-                  </button>
-                </div>
-                <div className="withdraw-input-section3">
-                  <button
-                    className={
-                      percentBtn == "twentyFive_percent"
-                        ? "percent-increase percent-increase-active"
-                        : "percent-increase"
-                    }
-                    // "percent-increase percent-increase-active"
-                    id="twentyFive_percent"
-                    onClick={activeClass}
-                  >
-                    25%
-                  </button>
-                  <button
-                    className={
-                      percentBtn == "fifty_percent"
-                        ? "percent-increase percent-increase-active"
-                        : "percent-increase"
-                    }
-                    id="fifty_percent"
-                    onClick={activeClass}
-                  >
-                    50%
-                  </button>
-                  <button
-                    className={
-                      percentBtn == "sevenFive_percent"
-                        ? "percent-increase percent-increase-active"
-                        : "percent-increase"
-                    }
-                    id="sevenFive_percent"
-                    onClick={activeClass}
-                  >
-                    75%
-                  </button>
-                  <button
-                    className={
-                      percentBtn == "hundred_percent"
-                        ? "percent-increase percent-increase-active"
-                        : "percent-increase"
-                    }
-                    id="hundred_percent"
-                    onClick={activeClass}
-                  >
-                    100%
-                  </button>
-                </div>
-              </div>
-              {/* ========= */}
-              {/* ========= */}
-              {/* ========= */}
-              <div className="dashboard-area1-heading-supply-withdraw-btn">
-                <button
-                  className={
-                    active == "supply" ? "withdraw-btn" : "not-withdraw-btn"
-                  }
-                >
-                  Supply
-                </button>
-                <button
-                  className={
-                    active == "withdraw" ? "withdraw-btn" : "not-withdraw-btn"
-                  }
-                >
-                  Withdraw
-                </button>
-              </div>
-            </div>
-
-            {/* ===================== */}
-            {/* ===================== */}
-            {/* ===================== */}
-            {/* ===================== */}
-            {/* dashboard second container start */}
-            <div className="dashboard-area1-cont2">
-              <div className="dash-area1-cont2-column">
-                <div className="column1">Total Supply</div>
-                <div className="column2">$0.00</div>
-              </div>
-              <div className="dash-area1-cont2-column">
-                <div className="column1">Adequacy Ratio</div>
-                <div className="column2">...</div>
-              </div>
-              <div className="dash-area1-cont2-column">
-                <div className="column1">Supply APY</div>
-                <div className="column2">1.50%</div>
-              </div>
-              <div className="dash-area1-cont2-column">
-                <div className="column1">LTV (Loan to Value %)</div>
-                <div className="column2">80.00%</div>
-              </div>
-              <div className="dash-area1-cont2-column">
-                <div className="column1">ETH Price</div>
-                <div className="column2">$4,018.00</div>
               </div>
 
-              <div className="chart_section">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart
-                    width={500}
-                    height={300}
-                    data={data}
-                    margin={{
-                      top: 5,
-                      right: 0,
-                      left: 0,
-                      bottom: 5,
-                    }}
-                  >
-                    <CartesianGrid />
-                    <XAxis dataKey="name" />
-                    <YAxis />
-                    <Tooltip />
-                    {/* <Legend /> */}
-                    <Line
-                      type="monotone"
-                      dataKey="APY"
-                      stroke="#229e54"
-                      activeDot={{ r: 7 }}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
+              <div className="search-input">
+                {" "}
+                <input
+                  type="search"
+                  name="search"
+                  id="searchCollaterals"
+                  className="assets-header3"
+                  placeholder="Search..."
+                ></input>{" "}
+                <SearchIcon className="search-icon" />
               </div>
-              {/* ============= */}
-              {/* ============= */}
             </div>
-            {/* dashboard second container end */}
-          </div>
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          {/* ======================= */}
-          <div className="dashboard-area2">
-            {/* dashboard second container start */}
-            <div className="dashboard-area1-cont3">
-              <div className="dash-area1-cont2-header2">
-                <div className="dash-area1-cont2-header1">Transactions</div>
-              </div>
-              <div className="dash-area1-cont2-titles">
-                <div className="title1 user">TYPE</div>
-                <div className="title2 user">HASH</div>
-                <div className="title3 user">ADDRESS</div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles">
-                <div className="title1">
-                  {" "}
-                  <img
-                    src="/img/bnb-icon.svg"
-                    alt=""
-                    className="assets-list-icon"
-                  />
-                  BNB
-                </div>
-                <div className="title2">
-                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
-                </div>
-                <div className="title3">
-                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
-                </div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles">
-                <div className="title1">
-                  {" "}
-                  <img
-                    src="/img/bnb-icon.svg"
-                    alt=""
-                    className="assets-list-icon"
-                  />
-                  BNB
-                </div>
-                <div className="title2">
-                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
-                </div>
-                <div className="title3">
-                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
-                </div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles">
-                <div className="title1">
-                  {" "}
-                  <img
-                    src="/img/bnb-icon.svg"
-                    alt=""
-                    className="assets-list-icon"
-                  />
-                  BNB
-                </div>
-                <div className="title2">
-                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
-                </div>
-                <div className="title3">
-                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
-                </div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles">
-                <div className="title1">
-                  {" "}
-                  <img
-                    src="/img/bnb-icon.svg"
-                    alt=""
-                    className="assets-list-icon"
-                  />
-                  BNB
-                </div>
-                <div className="title2">
-                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
-                </div>
-                <div className="title3">
-                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
-                </div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles">
-                <div className="title1">
-                  {" "}
-                  <img
-                    src="/img/bnb-icon.svg"
-                    alt=""
-                    className="assets-list-icon"
-                  />
-                  BNB
-                </div>
-                <div className="title2">
-                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
-                </div>
-                <div className="title3">
-                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
-                </div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles">
-                <div className="title1">
-                  {" "}
-                  <img
-                    src="/img/bnb-icon.svg"
-                    alt=""
-                    className="assets-list-icon"
-                  />
-                  BNB
-                </div>
-                <div className="title2">
-                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
-                </div>
-                <div className="title3">
-                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
-                </div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-            </div>
-            {/* dashboard second container end */}
-            {/* ==================== */}
-            {/* ==================== */}
-            {/* ==================== */}
+            <table className="assets-table">
+              <thead className="assets-category-titles">
+                <tr className="assets">
+                  <th className="assets-category-titles-heading1">Asset</th>
+                  <th className="assets-category-titles-heading1">Type</th>
+                  <th className="assets-category-titles-heading1 right">
+                    EUSD Available
+                  </th>
+                  <th className="assets-category-titles-heading1 right">
+                    Stable Fee
+                  </th>
+                  <th className="assets-category-titles-heading1 right">
+                    Min Coll.Ratio
+                  </th>
+                  <th className="assets-category-titles-heading1 right"></th>
+                </tr>
+              </thead>
+
+              {/* <div className="table-body-content">
+
+// =====================
+// =====================
+// =====================
+// =====================
+// =====================
+// =====================
+
+                
+              </div> */}
+              <tbody
+                className="assets-table-body popular-categories"
+                id="popular-categories"
+              >
+                {" "}
+                {/* =============== */}
+                {/* =============== */}
+                {/* =============== */}
+                <tr className="assets-category-row">
+                  <td className="assets-category-data">
+                    <div className="assets-data">
+                      <img
+                        src="/img/btc-logo.svg"
+                        alt=""
+                        className="assets-list-icon"
+                      />
+
+                      <div className="assets-data-name">
+                        {assets.assets1[0].name}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="assets-category-data1">
+                    <div className="assets-data-name">
+                      {assets.assets1[1].type}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets1[2].eusd_Avail}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets1[3].stable}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets1[4].ratio}
+                    </div>
+                  </td>
+                  <td className="assets-category-data-last">
+                    <div className="assets-data-name-last">
+                      <button
+                        className="assets-collateralize-button"
+                        style={{ border: "none" }}
+                      >
+                        Swap
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =============== */}
+                {/* =============== */}
+                {/* =============== */}
+                <tr className="assets-category-row">
+                  <td className="assets-category-data">
+                    <div className="assets-data">
+                      <img
+                        src="/img/ether-logo.svg"
+                        alt=""
+                        className="assets-list-icon"
+                      />
+                      <div className="assets-data-name">
+                        {assets.assets2[0].name}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="assets-category-data1">
+                    <div className="assets-data-name">
+                      {assets.assets2[1].type}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets2[2].eusd_Avail}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets2[3].stable}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets2[4].ratio}
+                    </div>
+                  </td>
+                  <td className="assets-category-data-last">
+                    <div className="assets-data-name-last">
+                      <button
+                        className="assets-collateralize-button"
+                        style={{ border: "none" }}
+                      >
+                        Swap
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =============== */}
+                {/* =============== */}
+                {/* =============== */}
+                <tr className="assets-category-row">
+                  <td className="assets-category-data">
+                    <div className="assets-data">
+                      <img
+                        src="/img/tether-icon.svg"
+                        alt=""
+                        className="assets-list-icon"
+                      />
+
+                      <div className="assets-data-name">
+                        {assets.assets3[0].name}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="assets-category-data1">
+                    <div className="assets-data-name">
+                      {assets.assets3[1].type}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets3[2].eusd_Avail}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets3[3].stable}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets3[4].ratio}
+                    </div>
+                  </td>
+                  <td className="assets-category-data-last">
+                    <div className="assets-data-name-last">
+                      <button
+                        className="assets-collateralize-button"
+                        style={{ border: "none" }}
+                      >
+                        Swap
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =============== */}
+                {/* =============== */}
+                {/* =============== */}
+                <tr className="assets-category-row">
+                  <td className="assets-category-data">
+                    <div className="assets-data">
+                      <img
+                        src="/img/chain-link-icon.svg"
+                        alt=""
+                        className="assets-list-icon"
+                      />
+
+                      <div className="assets-data-name">
+                        {assets.assets4[0].name}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="assets-category-data1">
+                    <div className="assets-data-name">
+                      {assets.assets4[1].type}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets4[2].eusd_Avail}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets4[3].stable}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets4[4].ratio}
+                    </div>
+                  </td>
+                  <td className="assets-category-data-last">
+                    <div className="assets-data-name-last">
+                      <button
+                        className="assets-collateralize-button"
+                        style={{ border: "none" }}
+                      >
+                        Swap
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                <tr className="assets-category-row">
+                  <td className="assets-category-data">
+                    <div className="assets-data">
+                      <img
+                        src="/img/yearn-icon.svg"
+                        alt=""
+                        className="assets-list-icon"
+                      />
+
+                      <div className="assets-data-name">
+                        {assets.assets5[0].name}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="assets-category-data1">
+                    <div className="assets-data-name">
+                      {assets.assets5[1].type}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets5[2].eusd_Avail}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets5[3].stable}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets5[4].ratio}
+                    </div>
+                  </td>
+                  <td className="assets-category-data-last">
+                    <div className="assets-data-name-last">
+                      <button
+                        className="assets-collateralize-button"
+                        style={{ border: "none" }}
+                      >
+                        Swap
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                <tr className="assets-category-row">
+                  <td className="assets-category-data">
+                    <div className="assets-data">
+                      <img
+                        src="/img/uniswap-icon.svg"
+                        alt=""
+                        className="assets-list-icon"
+                      />
+
+                      <div className="assets-data-name">
+                        {assets.assets6[0].name}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="assets-category-data1">
+                    <div className="assets-data-name">
+                      {assets.assets6[1].type}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets6[2].eusd_Avail}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets6[3].stable}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets6[4].ratio}
+                    </div>
+                  </td>
+                  <td className="assets-category-data-last">
+                    <div className="assets-data-name-last">
+                      <button
+                        className="assets-collateralize-button"
+                        style={{ border: "none" }}
+                      >
+                        Swap
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                <tr className="assets-category-row">
+                  <td className="assets-category-data">
+                    <div className="assets-data">
+                      <img
+                        src="/img/egoras-favicon.svg"
+                        alt=""
+                        className="assets-list-icon"
+                      />
+
+                      <div className="assets-data-name">
+                        {assets.assets7[0].name}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="assets-category-data1">
+                    <div className="assets-data-name">
+                      {assets.assets7[1].type}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets7[2].eusd_Avail}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets7[3].stable}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets7[4].ratio}
+                    </div>
+                  </td>
+                  <td className="assets-category-data-last">
+                    <div className="assets-data-name-last">
+                      <button
+                        className="assets-collateralize-button"
+                        style={{ border: "none" }}
+                      >
+                        Swap
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                <tr className="assets-category-row">
+                  <td className="assets-category-data">
+                    <div className="assets-data">
+                      <img
+                        src="/img/matic-icon.svg"
+                        alt=""
+                        className="assets-list-icon"
+                      />
+
+                      <div className="assets-data-name">
+                        {assets.assets8[0].name}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="assets-category-data1">
+                    <div className="assets-data-name">
+                      {assets.assets8[1].type}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets8[2].eusd_Avail}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets8[3].stable}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets8[4].ratio}
+                    </div>
+                  </td>
+                  <td className="assets-category-data-last">
+                    <div className="assets-data-name-last">
+                      <button
+                        className="assets-collateralize-button"
+                        style={{ border: "none" }}
+                      >
+                        Swap
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                <tr className="assets-category-row">
+                  <td className="assets-category-data">
+                    <div className="assets-data">
+                      <img
+                        src="/img/aave-icon.svg"
+                        alt=""
+                        className="assets-list-icon"
+                      />
+                      <div className="assets-data-name">
+                        {assets.assets9[0].name}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="assets-category-data1">
+                    <div className="assets-data-name">
+                      {assets.assets9[1].type}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets9[2].eusd_Avail}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets9[3].stable}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets9[4].ratio}
+                    </div>
+                  </td>
+                  <td className="assets-category-data-last">
+                    <div className="assets-data-name-last">
+                      <button
+                        className="assets-collateralize-button"
+                        style={{ border: "none" }}
+                      >
+                        Swap
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                <tr className="assets-category-row">
+                  <td className="assets-category-data">
+                    <div className="assets-data">
+                      <img
+                        src="/img/wrapped-btc.svg"
+                        alt=""
+                        className="assets-list-icon"
+                      />
+
+                      <div className="assets-data-name">
+                        {assets.assets10[0].name}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="assets-category-data1">
+                    <div className="assets-data-name">
+                      {assets.assets10[1].type}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets10[2].eusd_Avail}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets10[3].stable}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets10[4].ratio}
+                    </div>
+                  </td>
+                  <td className="assets-category-data-last">
+                    <div className="assets-data-name-last">
+                      <button
+                        className="assets-collateralize-button"
+                        style={{ border: "none" }}
+                      >
+                        Swap
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                <tr className="assets-category-row">
+                  <td className="assets-category-data">
+                    <div className="assets-data">
+                      <img
+                        src="/img/egc-icon.svg"
+                        alt=""
+                        className="assets-list-icon"
+                      />
+
+                      <div className="assets-data-name">
+                        {assets.assets11[0].name}
+                      </div>
+                    </div>
+                  </td>
+                  <td className="assets-category-data1">
+                    <div className="assets-data-name">
+                      {assets.assets11[1].type}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets11[2].eusd_Avail}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets11[3].stable}
+                    </div>
+                  </td>
+                  <td className="assets-category-data1b">
+                    <div className="assets-data-name">
+                      {assets.assets11[4].ratio}
+                    </div>
+                  </td>
+                  <td className="assets-category-data-last">
+                    <div className="assets-data-name-last">
+                      <button
+                        className="assets-collateralize-button"
+                        style={{ border: "none" }}
+                      >
+                        Swap
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+              </tbody>
+              {/* {{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}} */}
+            </table>
           </div>
         </div>
       </section>
-      {/* =================================================== */}
-      {/* =================================================== */}
-      {/* =================================================== */}
-      {/* =================================================== */}
     </div>
   );
 };
