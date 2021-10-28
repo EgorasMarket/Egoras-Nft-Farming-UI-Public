@@ -1,10 +1,71 @@
 import React, { useState, useEffect } from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 import InputOutlinedIcon from "@material-ui/icons/InputOutlined";
 // import SiMastercard from
 // import { SiMastercard, SiVisa } from "react-icons/si";
 import "../../../css/dashBoarddefaultpage.css";
 // import Carousel from "react-multi-carousel";
 // import "react-multi-carousel/lib/styles.css";
+
+const data = [
+  {
+    name: "Jan",
+    APY: 2400,
+  },
+  {
+    name: "Feb",
+    APY: 1398,
+  },
+  {
+    name: "Mar",
+    APY: 5000,
+  },
+  {
+    name: "Apr",
+    APY: 3908,
+  },
+  {
+    name: "May",
+    APY: 4800,
+  },
+  {
+    name: "Jun",
+    APY: 3800,
+  },
+  {
+    name: "Jul",
+    APY: 1900,
+  },
+  {
+    name: "Aug",
+    APY: 4000,
+  },
+  {
+    name: "Sep",
+    APY: 2300,
+  },
+  {
+    name: "Oct",
+    APY: 5300,
+  },
+  {
+    name: "Nov",
+    APY: 1300,
+  },
+  {
+    name: "Dec",
+    APY: 3000,
+  },
+];
 
 const DashBoardDefaultPage = () => {
   const [active, setActive] = useState("supply");
@@ -183,150 +244,75 @@ const DashBoardDefaultPage = () => {
             {/* ===================== */}
             {/* dashboard second container start */}
             <div className="dashboard-area1-cont2">
-              <div className="dash-area1-cont2-header">
-                <div className="dash-area1-cont2-header1">Profits</div>
+              <div className="dash-area1-cont2-column">
+                <div className="column1">Total Supply</div>
+                <div className="column2">$0.00</div>
               </div>
-              <div className="dash-area1-cont2-titles">
-                <div className="title1">User</div>
-                <div className="title2">Bet</div>
-                <div className="title3">Profit</div>
+              <div className="dash-area1-cont2-column">
+                <div className="column1">Adequacy Ratio</div>
+                <div className="column2">...</div>
               </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles2">
-                <div className="title1">Ekene</div>
-                <div className="title2">20,000</div>
-                <div className="title3">0.0255</div>
+              <div className="dash-area1-cont2-column">
+                <div className="column1">Supply APY</div>
+                <div className="column2">1.50%</div>
               </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles3">
-                <div className="title1">John</div>
-                <div className="title2">10,000</div>
-                <div className="title3">0.2355</div>
+              <div className="dash-area1-cont2-column">
+                <div className="column1">LTV (Loan to Value %)</div>
+                <div className="column2">80.00%</div>
               </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles2">
-                <div className="title1">Morgan</div>
-                <div className="title2">20,000</div>
-                <div className="title3">0.0255</div>
+              <div className="dash-area1-cont2-column">
+                <div className="column1">ETH Price</div>
+                <div className="column2">$4,018.00</div>
               </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles3">
-                <div className="title1">John</div>
-                <div className="title2">10,000</div>
-                <div className="title3">0.2355</div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles2">
-                <div className="title1">Morgan</div>
-                <div className="title2">20,000</div>
-                <div className="title3">0.0255</div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles3">
-                <div className="title1">John</div>
-                <div className="title2">10,000</div>
-                <div className="title3">0.2355</div>
+
+              <div className="chart_section">
+                <ResponsiveContainer width="100%" height="100%">
+                  <LineChart
+                    width={500}
+                    height={300}
+                    data={data}
+                    margin={{
+                      top: 5,
+                      right: 0,
+                      left: 0,
+                      bottom: 5,
+                    }}
+                  >
+                    <CartesianGrid />
+                    <XAxis dataKey="name" />
+                    <YAxis />
+                    <Tooltip />
+                    {/* <Legend /> */}
+                    <Line
+                      type="monotone"
+                      dataKey="APY"
+                      stroke="#229e54"
+                      activeDot={{ r: 7 }}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
               </div>
               {/* ============= */}
               {/* ============= */}
-              <div className="dash-area1-cont2-titles2">
-                <div className="title1">Morgan</div>
-                <div className="title2">20,000</div>
-                <div className="title3">0.0255</div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles3">
-                <div className="title1">John</div>
-                <div className="title2">10,000</div>
-                <div className="title3">0.2355</div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles2">
-                <div className="title1">Morgan</div>
-                <div className="title2">20,000</div>
-                <div className="title3">0.0255</div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles3">
-                <div className="title1">John</div>
-                <div className="title2">10,000</div>
-                <div className="title3">0.2355</div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles2">
-                <div className="title1">Morgan</div>
-                <div className="title2">20,000</div>
-                <div className="title3">0.0255</div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles3">
-                <div className="title1">John</div>
-                <div className="title2">10,000</div>
-                <div className="title3">0.2355</div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles2">
-                <div className="title1">Morgan</div>
-                <div className="title2">20,000</div>
-                <div className="title3">0.0255</div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles3">
-                <div className="title1">John</div>
-                <div className="title2">10,000</div>
-                <div className="title3">0.2355</div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles2">
-                <div className="title1">Morgan</div>
-                <div className="title2">20,000</div>
-                <div className="title3">0.0255</div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles3">
-                <div className="title1">John</div>
-                <div className="title2">10,000</div>
-                <div className="title3">0.2355</div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles2">
-                <div className="title1">Morgan</div>
-                <div className="title2">20,000</div>
-                <div className="title3">0.0255</div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles3">
-                <div className="title1">John</div>
-                <div className="title2">10,000</div>
-                <div className="title3">0.2355</div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles2">
-                <div className="title1">Morgan</div>
-                <div className="title2">20,000</div>
-                <div className="title3">0.0255</div>
-              </div>
             </div>
             {/* dashboard second container end */}
           </div>
+          {/* ======================= */}
+          {/* ======================= */}
+          {/* ======================= */}
+          {/* ======================= */}
+          {/* ======================= */}
+          {/* ======================= */}
+          {/* ======================= */}
+          {/* ======================= */}
+          {/* ======================= */}
+          {/* ======================= */}
+          {/* ======================= */}
+          {/* ======================= */}
+          {/* ======================= */}
+          {/* ======================= */}
+          {/* ======================= */}
+          {/* ======================= */}
           {/* ======================= */}
           {/* ======================= */}
           {/* ======================= */}
@@ -335,62 +321,139 @@ const DashBoardDefaultPage = () => {
             {/* dashboard second container start */}
             <div className="dashboard-area1-cont3">
               <div className="dash-area1-cont2-header2">
-                <div className="dash-area1-cont2-header1">Profits</div>
+                <div className="dash-area1-cont2-header1">Transactions</div>
               </div>
               <div className="dash-area1-cont2-titles">
-                <div className="title1">User</div>
-                <div className="title2">Bet</div>
-                <div className="title3">Profit</div>
+                <div className="title1 user">TYPE</div>
+                <div className="title2 user">HASH</div>
+                <div className="title3 user">ADDRESS</div>
               </div>
               {/* ============= */}
               {/* ============= */}
-              <div className="dash-area1-cont2-titles2">
-                <div className="title1">Ekene</div>
-                <div className="title2">20,000</div>
-                <div className="title3">0.0255</div>
+              <div className="dash-area1-cont2-titles">
+                <div className="title1">
+                  {" "}
+                  <img
+                    src="/img/bnb-icon.svg"
+                    alt=""
+                    className="assets-list-icon"
+                  />
+                  BNB
+                </div>
+                <div className="title2">
+                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
+                </div>
+                <div className="title3">
+                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
+                </div>
               </div>
               {/* ============= */}
               {/* ============= */}
-              <div className="dash-area1-cont2-titles3">
-                <div className="title1">John</div>
-                <div className="title2">10,000</div>
-                <div className="title3">0.2355</div>
+              {/* ============= */}
+              {/* ============= */}
+              <div className="dash-area1-cont2-titles">
+                <div className="title1">
+                  {" "}
+                  <img
+                    src="/img/bnb-icon.svg"
+                    alt=""
+                    className="assets-list-icon"
+                  />
+                  BNB
+                </div>
+                <div className="title2">
+                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
+                </div>
+                <div className="title3">
+                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
+                </div>
               </div>
               {/* ============= */}
               {/* ============= */}
-              <div className="dash-area1-cont2-titles2">
-                <div className="title1">Morgan</div>
-                <div className="title2">20,000</div>
-                <div className="title3">0.0255</div>
+              {/* ============= */}
+              {/* ============= */}
+              <div className="dash-area1-cont2-titles">
+                <div className="title1">
+                  {" "}
+                  <img
+                    src="/img/bnb-icon.svg"
+                    alt=""
+                    className="assets-list-icon"
+                  />
+                  BNB
+                </div>
+                <div className="title2">
+                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
+                </div>
+                <div className="title3">
+                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
+                </div>
               </div>
               {/* ============= */}
               {/* ============= */}
-              <div className="dash-area1-cont2-titles3">
-                <div className="title1">John</div>
-                <div className="title2">10,000</div>
-                <div className="title3">0.2355</div>
+              {/* ============= */}
+              {/* ============= */}
+              <div className="dash-area1-cont2-titles">
+                <div className="title1">
+                  {" "}
+                  <img
+                    src="/img/bnb-icon.svg"
+                    alt=""
+                    className="assets-list-icon"
+                  />
+                  BNB
+                </div>
+                <div className="title2">
+                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
+                </div>
+                <div className="title3">
+                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
+                </div>
               </div>
               {/* ============= */}
               {/* ============= */}
-              <div className="dash-area1-cont2-titles2">
-                <div className="title1">Morgan</div>
-                <div className="title2">20,000</div>
-                <div className="title3">0.0255</div>
+              {/* ============= */}
+              {/* ============= */}
+              <div className="dash-area1-cont2-titles">
+                <div className="title1">
+                  {" "}
+                  <img
+                    src="/img/bnb-icon.svg"
+                    alt=""
+                    className="assets-list-icon"
+                  />
+                  BNB
+                </div>
+                <div className="title2">
+                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
+                </div>
+                <div className="title3">
+                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
+                </div>
               </div>
               {/* ============= */}
               {/* ============= */}
-              <div className="dash-area1-cont2-titles3">
-                <div className="title1">John</div>
-                <div className="title2">10,000</div>
-                <div className="title3">0.2355</div>
+              {/* ============= */}
+              {/* ============= */}
+              <div className="dash-area1-cont2-titles">
+                <div className="title1">
+                  {" "}
+                  <img
+                    src="/img/bnb-icon.svg"
+                    alt=""
+                    className="assets-list-icon"
+                  />
+                  BNB
+                </div>
+                <div className="title2">
+                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
+                </div>
+                <div className="title3">
+                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
+                </div>
               </div>
               {/* ============= */}
               {/* ============= */}
-              <div className="dash-area1-cont2-titles2">
-                <div className="title1">Morgan</div>
-                <div className="title2">20,000</div>
-                <div className="title3">0.0255</div>
-              </div>
             </div>
             {/* dashboard second container end */}
             {/* ==================== */}

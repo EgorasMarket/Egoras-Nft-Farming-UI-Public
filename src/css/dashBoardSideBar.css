@@ -5,7 +5,7 @@
   position: sticky;
   top: 0;
   overflow-x: hidden;
-  width: 7%;
+  width: 15%;
   transition: 0.5s linear;
 }
 .sidebar::-webkit-scrollbar {
@@ -16,8 +16,8 @@
   color: #555;
   width: 100%;
   transition: 0.5s linear;
-  padding: 1em;
-  padding-top: 2em;
+  /* padding: 1em; */
+  padding-top: 8em;
   height: 100%;
   position: relative;
 }
@@ -34,13 +34,13 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  grid-row-gap: 50px;
+  grid-row-gap: 10px;
   align-items: center;
   position: relative;
 }
 a.link {
   width: 100%;
-  color: #e4a788;
+  color: #a3a3a3;
 }
 
 a.link:hover {
@@ -49,31 +49,29 @@ a.link:hover {
 
 .sidebarListItem {
   font-weight: 700;
-  font-size: 12px;
+  font-size: 14px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   width: 100%;
   position: relative;
+  padding: 1em;
 }
 .list-item-active {
   position: relative;
   color: #229e54;
+  background: #f3fef7;
 }
-
 .list-item-active::before {
   content: "";
+  width: 5px;
+  height: 100%;
+  background: #229e54;
   position: absolute;
-  height: 130%;
-  background: #e7fff0;
-  width: 157%;
-  z-index: -1;
-  top: -8px;
-  border-top-left-radius: 52px;
-  border-bottom-left-radius: 52px;
+  left: 0;
 }
 .sidebarIcon {
-  font-size: 35px !important;
+  font-size: 27px !important;
+  margin-right: 15px;
 }
 
 /* .list-item-active::after {

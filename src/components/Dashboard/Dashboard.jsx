@@ -25,7 +25,7 @@ function Dashboard() {
           <Route exact path="/dashboard">
             <DashBoardDefaultPage />
           </Route>
-          <Route exact path="/dashboard/airtime">
+          <Route exact path="/dashboard/staking">
             <DashBoardAnalytics />
           </Route>
           <Route exact path="/dashboard/transaction">
