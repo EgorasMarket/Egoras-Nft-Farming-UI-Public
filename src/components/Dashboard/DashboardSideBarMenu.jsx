@@ -29,6 +29,7 @@ const DashboardSideBarMenu = () => {
     }
     if (linksActive === "/dashboard/transaction") {
       setActiveBg("transaction");
+      // document.getElementById("FooterId").style.display = "none";
     }
     if (linksActive === "/dashboard/governance") {
       setActiveBg("governance");
@@ -39,7 +40,7 @@ const DashboardSideBarMenu = () => {
     if (linksActive === "/dashboard/whitepaper") {
       setActiveBg("whitepaper");
     }
-  });
+  }, []);
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
