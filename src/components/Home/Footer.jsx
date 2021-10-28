@@ -39,13 +39,13 @@ const Footer = () => {
     if (FooterHide === "/dashboard/lending") {
       document.getElementById("FooterId").style.display = "none";
     }
-    if (FooterHide === "/dashboard/staking") {
+    if (FooterHide === "/dashboard/transaction") {
       document.getElementById("FooterId").style.display = "none";
     }
     if (FooterHide === "/dashboard/egr-balance") {
       document.getElementById("FooterId").style.display = "none";
     }
-  });
+  }, []);
 
   const classes = useStyles();
 
