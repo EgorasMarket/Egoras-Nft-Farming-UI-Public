@@ -1,0 +1,215 @@
+.Trade{
+    display:flex;
+}
+
+
+
+.Trade2{
+    padding:10px 20px;
+    flex:4;
+        /* background-color: #eff7ff; */
+            background-color: #6cc1b217;
+             position: relative;
+}
+.space{
+    margin-right: 15px;
+}
+.Market{
+        color: #9598a4;
+        
+}
+.star{
+    padding: 15px 10px;
+}
+.Trade4{
+    max-width: 600px;
+    margin: 50px auto 30px auto;
+     background-color: #fff;
+     padding:40px ;
+     border-radius: 10px;
+         box-shadow: 1px 1px 8px 0px #0000ff40;
+}
+.send1{
+    font-weight:bold;
+    color:#000;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+.send2{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.send3{
+    font-weight: bold;
+    font-size: 20px;
+    color:#000;
+}
+ .send4{
+     width: 50%; 
+} 
+.send5{
+    display:flex;
+    justify-content: space-between;
+}
+.send6{
+    display:flex;
+    justify-content: start;
+    align-items: center;
+}
+.send7{
+    width:60px;
+}
+.send8{
+    border:none;
+    outline:none;
+    width:40px;
+    font-size: 18px;
+     background-color:#c4fbdb;
+     color:#000;
+     font-weight: bold;
+}
+.For{
+    background-color:#c4fbdb;
+    padding:20px 30px;
+    margin-bottom: 40px;
+    border-radius: 10px;
+}
+.For1{
+    display:flex;
+    margin-bottom: 20px;
+}
+.Enable{
+    text-align: center;
+    margin-bottom: 10px;
+    
+}
+.Enable1{
+    padding:20px 10px;
+    margin:auto;
+border-radius: 10px;
+    background: linear-gradient(
+90deg
+, #39d97a 0%, #ebb396 100%);
+text-align: center;
+font-size: 24px;
+color:#fff;
+font-weight: bold;
+margin-bottom: 20px;
+cursor:pointer;
+}
+
+.Enable1:hover{
+  background: linear-gradient(
+90deg
+, #ebb396 0%,  #39d97a 100%); 
+}
+.Enable2{
+    font-weight: bold;
+    font-size: 22px;
+    display:flex;
+    justify-content: right;
+    margin-bottom: 20px;
+}
+.Enable3{
+    width:auto;
+    background-color:#e4a788;
+    border-radius: 10px;
+    padding:10px 30px;
+    box-sizing: border-box;
+}
+.deep{
+    cursor:pointer;
+}
+.Enable4{
+    font-size: 20px;
+    color:white;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.ada{
+    padding:12px 10px;
+    border:1px solid grey;
+    border-radius: 50px;
+    width:60px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.ada:hover{
+    background-color: #229e54; 
+    color:#fff;
+}
+.ada1{
+    
+    background-color: #229e54;
+    color:#fff;
+}
+.Enable5{
+    display:flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.Gas{
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.Gas1{
+   display:flex; 
+   justify-content: space-between;
+   margin-bottom: 15px;
+}
+.Gas2{
+    width:150px;
+    padding:10px;
+    border:1px solid grey;
+    border-radius: 50px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.Gas2:hover{
+    background-color: #229e54;
+    color:#fff;
+}
+
+.Gas3{
+    
+    background-color: #229e54;
+    color:#fff;
+    
+}
+.rece{
+    margin-bottom: 10px;
+}
+#COMES{
+    display:none;
+}
+ 
+
+
+
+
+@media (max-width:600px){
+    .Trade2{
+        padding:10px 10px;
+    }
+    .Trade4{
+        padding:25px 15px;
+    }
+
+    .send7{
+        width:40px;
+    }
+    .send4{
+        width:78%;
+    }
+    .For{
+        padding:20px 14px;
+    }
+    .Enable1{
+        font-size: 20px;
+    }
+    
+}
