@@ -19,7 +19,7 @@ const Home = () => {
     {
       img: "/img/btc-logo.svg",
       name: "Bitcoin",
-      type: "BTC-A",
+      type: "BTC",
       eusd_Avail: "100M",
       stable: "0.50%",
       ratio: "150%",
@@ -28,7 +28,7 @@ const Home = () => {
     {
       img: "/img/ether-logo.svg",
       name: "Ethereum",
-      type: "ETH-A",
+      type: "ETH",
       eusd_Avail: "99.37M",
       stable: "2.00%",
       ratio: "145%",
@@ -37,7 +37,7 @@ const Home = () => {
     {
       img: "/img/tether-icon.svg",
       name: "Tether",
-      type: "USDT-A",
+      type: "USDT",
       eusd_Avail: "90M",
       stable: "1.00%",
       ratio: "100%",
@@ -46,7 +46,7 @@ const Home = () => {
     {
       img: "/img/bnb-icon.svg",
       name: "Binance",
-      type: "BNB-A",
+      type: "BNB",
       eusd_Avail: "6.93M",
       stable: "1.00%",
       ratio: "175%",
@@ -54,7 +54,7 @@ const Home = () => {
     {
       img: "/img/yearn-icon.svg",
       name: "Yearn",
-      type: "YF1-A",
+      type: "YF1",
       eusd_Avail: "6.44M",
       stable: "1.00%",
       ratio: "165%",
@@ -62,7 +62,7 @@ const Home = () => {
     {
       img: "/img/uniswap-icon.svg",
       name: "Uniswap",
-      type: "UNI-A",
+      type: "UNI",
       eusd_Avail: "5.0M",
       stable: "1.50%",
       ratio: "120%",
@@ -71,7 +71,7 @@ const Home = () => {
     {
       img: "/egoras-favicon.svg",
       name: "Egoras",
-      type: "EGR-A",
+      type: "EGR",
       eusd_Avail: "100M",
       stable: "0.50%",
       ratio: "170%",
@@ -79,7 +79,7 @@ const Home = () => {
     {
       img: "/img/matic-icon.svg",
       name: "Matic",
-      type: "MATIC-A",
+      type: "MATIC",
       eusd_Avail: "3.00M",
       stable: "3.00%",
       ratio: "175%",
@@ -87,7 +87,7 @@ const Home = () => {
     {
       img: "/img/aave-icon.svg",
       name: "Aave",
-      type: "AAVE-A",
+      type: "AAVE",
       eusd_Avail: "5.00M",
       stable: "1.00%",
       ratio: "165%",
@@ -95,7 +95,7 @@ const Home = () => {
     {
       img: "/img/wrapped-btc.svg",
       name: "Wrapped Bitcoin",
-      type: "WBTC-A",
+      type: "WBTC",
       eusd_Avail: "30.80M",
       stable: "2.00%",
       ratio: "145%",
@@ -103,7 +103,7 @@ const Home = () => {
     {
       img: "/img/egc-icon.svg",
       name: "Egoras Credit",
-      type: "EGC-A",
+      type: "EGC",
       eusd_Avail: "90M",
       stable: "0.50%",
       ratio: "120%",
@@ -111,7 +111,7 @@ const Home = () => {
     {
       img: "/img/chain-link-icon.svg",
       name: "Chainlink",
-      type: "LINK-A",
+      type: "LINK",
       eusd_Avail: "6.93M",
       stable: "1.00%",
       ratio: "165%",
@@ -339,13 +339,15 @@ const Home = () => {
                       <div className="assets-data-name">{asset.type}</div>
                     </td>
                     <td className="assets-category-data1b">
-                      <div className="assets-data-name">{asset.eusd_Avail}</div>
+                      <div className="assets-data-name ">
+                        {asset.eusd_Avail}
+                      </div>
                     </td>
-                    <td className="assets-category-data1b">
-                      <div className="assets-data-name">{asset.stable}</div>
+                    <td className="assets-category-data1b stable-content">
+                      <div className="assets-data-name ">{asset.stable}</div>
                     </td>
-                    <td className="assets-category-data1b">
-                      <div className="assets-data-name">{asset.ratio}</div>
+                    <td className="assets-category-data1b ratio-content">
+                      <div className="assets-data-name ">{asset.ratio}</div>
                     </td>
                     <td className="assets-category-data-last">
                       <div className="assets-data-name-last">

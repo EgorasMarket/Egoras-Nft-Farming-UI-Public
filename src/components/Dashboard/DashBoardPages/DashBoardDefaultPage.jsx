@@ -67,6 +67,53 @@ const data = [
   },
 ];
 
+const transactions = [
+  {
+    type: "loan",
+    amount: "$200",
+    hash: "0x8894e0a0c962cb723c1976a4421c95949be2d4e3",
+  },
+  {
+    type: "loan",
+    amount: "$200",
+    hash: "0x8894e0a0c962cb723c1976a4421c95949be2d4e3",
+  },
+  {
+    type: "loan",
+    amount: "$200",
+    hash: "0x8894e0a0c962cb723c1976a4421c95949be2d4e3",
+  },
+  {
+    type: "loan",
+    amount: "$200",
+    hash: "0x8894e0a0c962cb723c1976a4421c95949be2d4e3",
+  },
+  {
+    type: "loan",
+    amount: "$200",
+    hash: "0x8894e0a0c962cb723c1976a4421c95949be2d4e3",
+  },
+  {
+    type: "loan",
+    amount: "$200",
+    hash: "0x8894e0a0c962cb723c1976a4421c95949be2d4e3",
+  },
+  {
+    type: "loan",
+    amount: "$200",
+    hash: "0x8894e0a0c962cb723c1976a4421c95949be2d4e3",
+  },
+  {
+    type: "loan",
+    amount: "$200",
+    hash: "0x8894e0a0c962cb723c1976a4421c95949be2d4e3",
+  },
+  {
+    type: "loan",
+    amount: "$200",
+    hash: "0x8894e0a0c962cb723c1976a4421c95949be2d4e3",
+  },
+];
 const DashBoardDefaultPage = () => {
   const [active, setActive] = useState("supply");
   const [percentBtn, setPercentBtn] = useState("");
@@ -325,136 +372,23 @@ const DashBoardDefaultPage = () => {
               </div>
               <div className="dash-area1-cont2-titles">
                 <div className="title1 user">TYPE</div>
-                <div className="title2 user">HASH</div>
+                <div className="title2 user">AMOUNT</div>
                 <div className="title3 user">ADDRESS</div>
               </div>
               {/* ============= */}
               {/* ============= */}
-              <div className="dash-area1-cont2-titles">
-                <div className="title1">
-                  {" "}
-                  <img
-                    src="/img/bnb-icon.svg"
-                    alt=""
-                    className="assets-list-icon"
-                  />
-                  BNB
+
+              {transactions.map((maps) => (
+                <div className="dash-area1-cont2-titles">
+                  <div className="title1">{maps.type}</div>
+                  <div className="title2">{maps.amount}</div>
+                  <a href="#" className="title3">
+                    {maps.hash}
+                  </a>
                 </div>
-                <div className="title2">
-                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
-                </div>
-                <div className="title3">
-                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
-                </div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles">
-                <div className="title1">
-                  {" "}
-                  <img
-                    src="/img/bnb-icon.svg"
-                    alt=""
-                    className="assets-list-icon"
-                  />
-                  BNB
-                </div>
-                <div className="title2">
-                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
-                </div>
-                <div className="title3">
-                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
-                </div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles">
-                <div className="title1">
-                  {" "}
-                  <img
-                    src="/img/bnb-icon.svg"
-                    alt=""
-                    className="assets-list-icon"
-                  />
-                  BNB
-                </div>
-                <div className="title2">
-                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
-                </div>
-                <div className="title3">
-                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
-                </div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles">
-                <div className="title1">
-                  {" "}
-                  <img
-                    src="/img/bnb-icon.svg"
-                    alt=""
-                    className="assets-list-icon"
-                  />
-                  BNB
-                </div>
-                <div className="title2">
-                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
-                </div>
-                <div className="title3">
-                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
-                </div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles">
-                <div className="title1">
-                  {" "}
-                  <img
-                    src="/img/bnb-icon.svg"
-                    alt=""
-                    className="assets-list-icon"
-                  />
-                  BNB
-                </div>
-                <div className="title2">
-                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
-                </div>
-                <div className="title3">
-                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
-                </div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              {/* ============= */}
-              <div className="dash-area1-cont2-titles">
-                <div className="title1">
-                  {" "}
-                  <img
-                    src="/img/bnb-icon.svg"
-                    alt=""
-                    className="assets-list-icon"
-                  />
-                  BNB
-                </div>
-                <div className="title2">
-                  0xf541562c73aabfbfdb8546fc944c16966ea31966a020decd2ecec152100c2ef5
-                </div>
-                <div className="title3">
-                  0x8894e0a0c962cb723c1976a4421c95949be2d4e3
-                </div>
-              </div>
-              {/* ============= */}
-              {/* ============= */}
+              ))}
             </div>
+
             {/* dashboard second container end */}
             {/* ==================== */}
             {/* ==================== */}

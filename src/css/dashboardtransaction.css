@@ -20,6 +20,13 @@
   padding: 2em;
 }
 
+.padding {
+  padding: 0em;
+  display: flex;
+  flex-direction: column;
+  grid-row-gap: 10px;
+}
+
 .staking-area1 {
   height: 100vh;
   overflow-y: scroll;
@@ -78,6 +85,7 @@
   }
   .other2 {
     padding-left: 0em;
+    padding-right: 0;
   }
 }
 @media screen and (max-width: 1000px) {
@@ -105,5 +113,10 @@
   }
   .dashboard-area1-cont2 {
     width: 100%;
+  }
+}
+@media screen and (max-width: 900px) {
+  .staking-area {
+    padding: 1em 0em;
   }
 }
