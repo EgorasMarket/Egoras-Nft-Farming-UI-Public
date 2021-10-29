@@ -46,6 +46,8 @@
   left: 0;
   bottom: 0;
   width: 465px;
+
+  opacity: 0.5;
 }
 
 .stake-hero-btn1:hover {

@@ -4,6 +4,7 @@
   position: relative;
   overflow: hidden;
   display: flex;
+  background: #f6fff9;
   flex-direction: column;
 }
 
@@ -170,7 +171,7 @@
   grid-row-gap: 30px;
   /* flex: 4; */
   width: 95%;
-  padding-left: 27em;
+  padding-left: 14em;
   font-size: 18px;
   transition: 1s ease-in-out;
 }
@@ -202,9 +203,14 @@ a.sidebar-link1 {
   margin-bottom: 20em;
 } */
 
+@media screen and (max-width: 1220px) {
+  .whitepaper-layers {
+    padding-left: 6em;
+  }
+}
 @media screen and (max-width: 1080px) {
   .whitepaper-layers {
-    padding-left: 21em;
+    padding-left: 3em;
   }
 }
 
@@ -214,7 +220,7 @@ a.sidebar-link1 {
   }
 
   .whitepaper-layers {
-    padding-left: 17em;
+    padding-top: 8em;
   }
 }
 @media screen and (max-width: 767px) {
