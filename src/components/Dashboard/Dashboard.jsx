@@ -10,7 +10,7 @@ import DashBoardTransaction from "./DashBoardPages/DashBoardTransaction";
 import DashboardEgrBalancePage from "./DashBoardPages/DashboardEgrBalancePage";
 import DashBoardSwap from "./DashBoardPages/DashBoardSwapPage";
 import DashBoardWhitePaper from "./DashBoardPages/DashBoardWhitePaper";
-import DashBoardHeader from "./DashBoardHeader";
+// import DashBoardHeader from "./DashBoardHeader";
 
 // dashboard styles
 import "../../css/dashboard.css";
@@ -20,7 +20,7 @@ function Dashboard() {
   return (
     <Router>
       {/* <DashBoardHeader /> */}
-      <DashBoardHeader />
+      {/* <DashBoardHeader /> */}
       <div className="dashboard">
         <DashboardSideBarMenu />
 

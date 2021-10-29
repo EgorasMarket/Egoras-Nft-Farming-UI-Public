@@ -404,89 +404,10 @@ const Header = () => {
                 </div>
                 <Divider />
                 <List>
-                  <ListItem>
-                    <Accordion>
-                      <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                      >
-                        <Typography className={classes.heading}>
-                          Products
-                        </Typography>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <div className="footerLinks">
-                          <a
-                            href="https://egoras.ng/appointment"
-                            className="c1link1 a"
-                          >
-                            Get loan
-                          </a>
-                          <a
-                            href="/explore_loans"
-                            className="c1link1"
-                            target="_blank"
-                          >
-                            Explore Collaterals
-                          </a>
-                        </div>
-                      </AccordionDetails>
-                    </Accordion>
-                    {/* <a href="/documents" className="product">
-                      Products
-                    </a> */}
-                  </ListItem>
-                </List>
-                <Divider />
-                <List>
-                  <ListItem>
-                    <Accordion>
-                      <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                      >
-                        <Typography className={classes.heading}>
-                          Company
-                        </Typography>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <div className="footerLinks">
-                          <a href="/about" className="c1link1 a">
-                            About Us
-                          </a>
-                          <a
-                            href="https://egoras.medium.com/"
-                            className="c1link1"
-                            target="_blank"
-                          >
-                            Blog
-                          </a>
-                        </div>
-                      </AccordionDetails>
-                    </Accordion>
-                    {/* <a href="about" className="company">
-                      Company
-                    </a> */}
-                  </ListItem>
-                </List>
-                <Divider />
-                <List>
-                  <ListItem>
-                    <a href="https://t.me/egorasmarket" className="about">
-                      Support
-                    </a>
-                  </ListItem>
-                </List>
-                <Divider />
-                <List>
-                  <ListItem>
-                    <a href="https://egoras.ng/appointment" className="getLoan">
-                      {" "}
-                      Get the loan
-                    </a>
-                  </ListItem>
+                  <a href="/dashboard" className="connect">
+                    {" "}
+                    Launch App <ExitToAppIcon className="exit-to-app" />
+                  </a>
                 </List>
               </Drawer>
             </div>

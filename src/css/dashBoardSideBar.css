@@ -13,6 +13,16 @@
   display: none;
 }
 
+.drop-open-icon {
+  margin-right: 20px;
+  width: 25px;
+  display: none;
+}
+.drop-close-icon {
+  margin-right: 20px;
+  width: 25px;
+  display: none;
+}
 .sidebarWrapper {
   color: #555;
   width: 100%;
@@ -136,12 +146,12 @@ a.link:hover {
   transition: opacity 0.2s ease-out;
 }
 
-.nav-item_spacer__3_Yzq {
+.nav-item_spacer {
   height: 10px;
   border-radius: 30px 0 0 30px;
   opacity: 0;
 }
-.nav-item_spacerInner__HJWlk {
+.nav-item_spacerInner {
   height: 10px;
   border-radius: 0 0 10px 0;
 }
@@ -150,12 +160,18 @@ a.link:hover {
   .sidebar {
     width: 4.5%;
   }
+  .drop-open-icon {
+    margin-right: 20px;
+    width: 25px;
+    display: inline-block;
+  }
 }
 @media screen and (max-width: 1080px) {
   .sidebar {
-    width: 20%;
-    display: none;
+    width: 0;
   }
 
-
+  .sidebarWrapper {
+    display: none;
+  }
 }

@@ -7,13 +7,22 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import ImportExportIcon from "@mui/icons-material/ImportExport";
 import DescriptionIcon from "@mui/icons-material/Description";
 import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import CloseIcon from "@material-ui/icons/Close";
 import { Link } from "react-router-dom";
 
 import "../../css/dashBoardSideBar.css";
+import "../../css/dashboardheader.css";
 
 const DashboardSideBarMenu = () => {
   const [activeBg, setActiveBg] = useState("market");
+  const [click, setClick] = useState("drop");
 
+  const changeOnclick = () => {
+    if (click === "drop") {
+      setClick = () => "notdrop";
+    }
+  };
   const changeBg = (e) => {
     let currentId = e.currentTarget.id;
     setActiveBg(currentId);
@@ -47,9 +56,69 @@ const DashboardSideBarMenu = () => {
       document.getElementById("FooterId").style.display = "none";
     }
   }, []);
+
+  const dropDownOpen = () => {
+    let sideBar = document.getElementById("side_bar");
+    let sideBarWrapper = document.getElementById("side_bar_wrapper");
+    let closeIcon = document.getElementById("close_icon");
+    let openIcon = document.getElementById("open_icon");
+    sideBar.style.width = "230px";
+    sideBarWrapper.style.display = "block";
+    openIcon.style.display = "none";
+    closeIcon.style.display = "inline-block";
+  };
+  const dropDownClose = () => {
+    let sideBar = document.getElementById("side_bar");
+    let sideBarWrapper = document.getElementById("side_bar_wrapper");
+    let closeIcon = document.getElementById("close_icon");
+    let openIcon = document.getElementById("open_icon");
+    sideBar.style.width = "0px";
+    sideBarWrapper.style.display = "none";
+    openIcon.style.display = "inline-block";
+    closeIcon.style.display = "none";
+  };
   return (
-    <div className="sidebar">
-      <div className="sidebarWrapper">
+    <div className="sidebar" id="side_bar">
+      <div>
+        {/* header section  start*/}
+        <section className="DashBoardHeaderSection">
+          <div className="container-fluid">
+            <div className="dashboard-area">
+              <div className="egrLogo2Cont3">
+                <img
+                  src="/img/open-drop-icon.svg"
+                  alt=""
+                  className="drop-open-icon"
+                  id="open_icon"
+                  onClick={dropDownOpen}
+                />
+                <img
+                  src="/img/close-drop-icon.svg"
+                  alt=""
+                  className="drop-close-icon"
+                  id="close_icon"
+                  onClick={dropDownClose}
+                />
+                <a href="/" alt="">
+                  <img
+                    src="/img/egoras-logo.svg"
+                    alt="..."
+                    className="egr-logo3"
+                  />
+                </a>
+              </div>
+              <button className="logout-btn">
+                Log out <ExitToAppIcon />
+              </button>
+            </div>
+          </div>
+        </section>
+        {/* header section  end*/}
+        {/* =================================================== */}
+        {/* =================================================== */}
+        {/* =================================================== */}
+      </div>
+      <div className="sidebarWrapper" id="side_bar_wrapper">
         <div className="sidebarMenu">
           {/* <h3 className="sidebarTitle">Dashboard</h3> */}
           <ul className="sidebarList">

@@ -173,7 +173,9 @@
   width: 95%;
   padding-left: 14em;
   font-size: 18px;
-  transition: 1s ease-in-out;
+  transition: 1s ease-in-out;max-width: 1320px;
+    margin: auto;
+
 }
 .layer-header {
   color: black;

@@ -49,7 +49,10 @@
 
   opacity: 0.5;
 }
-
+.stake-hero-btns {
+  display: flex;
+  margin-top: 50px;
+}
 .stake-hero-btn1:hover {
   border: solid;
   border-color: #e4a788;
@@ -706,12 +709,15 @@ p.key-features-cards-area1-para {
     text-align: center;
     grid-row-gap: 20px;
   }
+  .stake-hero-btns {
+    justify-content: center;
+  }
   .nft-area {
     flex-direction: column;
     grid-row-gap: 20px;
   }
   .nft-area2 {
-    flex-direction: column-reverse;
+    flex-direction: column;
     grid-row-gap: 20px;
   }
 
@@ -731,12 +737,42 @@ p.key-features-cards-area1-para {
   .span4b-txts {
     width: 100%;
   }
+
+  .key-features-cards-area-flex {
+    flex-direction: column;
+    grid-row-gap: 30px;
+  }
+  .key-features-cards-area1a {
+    width: 100%;
+  }
+  .key-features-cards-area1 {
+    width: 100%;
+  }
+  .second-eusd-token-section {
+    padding: 0em;
+    padding-bottom: 2em;
+  }
+  
+}
+@media screen and (max-width: 600px) {
+  .assets-header2 {
+    padding: 0.5em 0.5em;
+    font-size: 12px;
+  }
+  .assets-header1 {
+    padding: 0.5em 0.5em;
+    font-size: 12px;
+  }
 }
 @media screen and (max-width: 449px) {
   .tokenCardflex-txt {
     width: 100%;
     font-size: 24px;
     font-weight: 700;
+  }
+  .stake-hero-btn1 {
+    padding: 1em 1em;
+    font-size: 12px;
   }
 }
 @media screen and (max-width: 375px) {
