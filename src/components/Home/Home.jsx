@@ -13,6 +13,10 @@ import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import "../../css/home.css";
 
 const Home = () => {
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   const [categoryBtn, setCategoryBtn] = useState("Popular");
 
   const assets = [
@@ -186,7 +190,6 @@ const Home = () => {
             <div className="key-features-cards-area">
               <div className="key-features-cards-area-flex">
                 <div className="key-features-cards-area1a btc-color">
-                  <h3 className="btc-card-txt">NEW</h3>
                   <h1 className="btc-card-txt-weight">BTC</h1>
                   <div className="btc-card-fees-figure">
                     <h6 className="fees-figure">Stability Fee: 3.00%</h6>
@@ -199,7 +202,6 @@ const Home = () => {
                   />
                 </div>
                 <div className="key-features-cards-area1a eth-color">
-                  <h3 className="btc-card-txt">NEW</h3>
                   <h1 className="btc-card-txt-weight">ETH</h1>
                   <div className="btc-card-fees-figure">
                     <h6 className="fees-figure">Stability Fee: 3.00%</h6>
@@ -212,7 +214,6 @@ const Home = () => {
                   />
                 </div>
                 <div className="key-features-cards-area1a egr-color">
-                  <h3 className="btc-card-txt">NEW</h3>
                   <h1 className="btc-card-txt-weight">EGR</h1>
                   <div className="btc-card-fees-figure">
                     <h6 className="fees-figure">Stability Fee: 3.00%</h6>
@@ -351,12 +352,13 @@ const Home = () => {
                     </td>
                     <td className="assets-category-data-last">
                       <div className="assets-data-name-last">
-                        <button
+                        <a
+                          href="/dashboard/swap"
                           className="assets-collateralize-button"
                           style={{ border: "none" }}
                         >
-                          Open Vault
-                        </button>
+                          Swap
+                        </a>
                       </div>
                     </td>
                   </tr>

@@ -48,7 +48,7 @@ const Footer = () => {
       if (FooterHide === "/dashboard/swap") {
       document.getElementById("FooterId").style.display = "none";
     }
-  }, []);
+  });
 
   const classes = useStyles();
 

@@ -20,25 +20,31 @@ const DashboardSideBarMenu = () => {
   };
 
   const linksActive = window.location.pathname;
+
   useEffect(() => {
     if (linksActive === "/dashboard/lending") {
       setActiveBg("home");
+      document.getElementById("FooterId").style.display = "none";
     }
     if (linksActive === "/dashboard") {
       setActiveBg("market");
+      document.getElementById("FooterId").style.display = "none";
     }
     if (linksActive === "/dashboard/transaction") {
       setActiveBg("transaction");
-      // document.getElementById("FooterId").style.display = "none";
+      document.getElementById("FooterId").style.display = "none";
     }
     if (linksActive === "/dashboard/governance") {
       setActiveBg("governance");
+      document.getElementById("FooterId").style.display = "none";
     }
     if (linksActive === "/dashboard/swap") {
       setActiveBg("swap");
+      document.getElementById("FooterId").style.display = "none";
     }
     if (linksActive === "/dashboard/whitepaper") {
       setActiveBg("whitepaper");
+      document.getElementById("FooterId").style.display = "none";
     }
   }, []);
   return (
@@ -138,7 +144,12 @@ const DashboardSideBarMenu = () => {
             {/* ===================== */}
             {/* ===================== */}
             {/* ===================== */}
-            <Link to="/dashboard/swap" className="link" id="swap" onClick={changeBg}>
+            <Link
+              to="/dashboard/swap"
+              className="link"
+              id="swap"
+              onClick={changeBg}
+            >
               <li
                 className={
                   activeBg == "swap"
@@ -156,7 +167,12 @@ const DashboardSideBarMenu = () => {
             {/* ===================== */}
             {/* ===================== */}
             {/* ===================== */}
-            <Link to="#" className="link" id="whitepaper" onClick={changeBg}>
+            <Link
+              to="/dashboard/whitepaper"
+              className="link"
+              id="whitepaper"
+              onClick={changeBg}
+            >
               <li
                 className={
                   activeBg == "whitepaper"

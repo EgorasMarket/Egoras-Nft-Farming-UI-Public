@@ -9,10 +9,12 @@ import DashBoardAnalytics from "./DashBoardPages/DashBoardAnalytics";
 import DashBoardTransaction from "./DashBoardPages/DashBoardTransaction";
 import DashboardEgrBalancePage from "./DashBoardPages/DashboardEgrBalancePage";
 import DashBoardSwap from "./DashBoardPages/DashBoardSwapPage";
+import DashBoardWhitePaper from "./DashBoardPages/DashBoardWhitePaper";
 import DashBoardHeader from "./DashBoardHeader";
 
 // dashboard styles
 import "../../css/dashboard.css";
+
 
 function Dashboard() {
   return (
@@ -26,17 +28,17 @@ function Dashboard() {
           <Route exact path="/dashboard/lending">
             <DashBoardDefaultPage />
           </Route>
-           <Route exact path="/dashboard/swap"> 
+          <Route exact path="/dashboard/swap">
             <DashBoardSwap />
-          </Route> 
+          </Route>
           <Route exact path="/dashboard">
             <DashBoardAnalytics />
           </Route>
           <Route exact path="/dashboard/transaction">
             <DashBoardTransaction />
           </Route>
-          <Route exact path="/dashboard/egr-balance">
-            <DashboardEgrBalancePage />
+          <Route exact path="/dashboard/whitepaper">
+            <DashBoardWhitePaper />
           </Route>
         </Switch>
       </div>

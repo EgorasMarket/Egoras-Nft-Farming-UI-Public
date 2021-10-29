@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 import "../../../css/dashboardtransaction.css";
 
 const DashBoardTransaction = () => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   const [categoryBtn, setCategoryBtn] = useState("All");
   const [active, setActive] = useState("supply");
   const [percentBtn, setPercentBtn] = useState("");

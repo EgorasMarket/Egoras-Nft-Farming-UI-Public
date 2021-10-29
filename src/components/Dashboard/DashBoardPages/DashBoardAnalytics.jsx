@@ -15,6 +15,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import "../../../css/dashboardanalytics.css";
 
 const DashBoardAnalytics = () => {
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   const [categoryBtn, setCategoryBtn] = useState("All");
 
   const assets = [
@@ -204,7 +207,6 @@ const DashBoardAnalytics = () => {
                   <th className="assets-category-titles-heading1 right">
                     Min Coll.Ratio
                   </th>
-                  <th className="assets-category-titles-heading1 right"></th>
                 </tr>
               </thead>
 
@@ -251,16 +253,6 @@ const DashBoardAnalytics = () => {
                     </td>
                     <td className="assets-category-data1b ratio-content">
                       <div className="assets-data-name ">{asset.ratio}</div>
-                    </td>
-                    <td className="assets-category-data-last">
-                      <div className="assets-data-name-last">
-                        <Link to='/dashboard/swap'
-                          className="assets-collateralize-button"
-                          style={{ border: "none" }}
-                        >
-                          Swap
-                        </Link>
-                      </div>
                     </td>
                   </tr>
                 ))}

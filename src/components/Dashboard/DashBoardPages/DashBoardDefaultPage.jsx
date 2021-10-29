@@ -115,6 +115,10 @@ const transactions = [
   },
 ];
 const DashBoardDefaultPage = () => {
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   const [active, setActive] = useState("supply");
   const [percentBtn, setPercentBtn] = useState("");
 
