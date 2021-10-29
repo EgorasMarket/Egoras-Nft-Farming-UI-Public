@@ -254,12 +254,12 @@ const DashBoardAnalytics = () => {
                     </td>
                     <td className="assets-category-data-last">
                       <div className="assets-data-name-last">
-                        <button
+                        <Link to='/dashboard/swap'
                           className="assets-collateralize-button"
                           style={{ border: "none" }}
                         >
                           Swap
-                        </button>
+                        </Link>
                       </div>
                     </td>
                   </tr>
