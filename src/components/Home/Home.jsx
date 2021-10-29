@@ -15,92 +15,92 @@ import "../../css/home.css";
 const Home = () => {
   const [categoryBtn, setCategoryBtn] = useState("Popular");
 
-  const assets = {
-    assets1: [
-      { name: "Bitcoin" },
-      { type: "BTC-A" },
-      { eusd_Avail: "100M" },
-      { stable: "0.50%" },
-      { ratio: "150%" },
-    ],
-    assets2: [
-      { name: "Ethereum" },
-      { type: "ETH-A" },
-      { eusd_Avail: "99.37M" },
-      { stable: "2.00%" },
-      { ratio: "145%" },
-    ],
-    assets3: [
-      { name: "Tether" },
-      { type: "USDT-A" },
-      { eusd_Avail: "90M" },
-      { stable: "1.00%" },
-      { ratio: "100%" },
-    ],
-    assets4: [
-      { name: "Chainlink" },
-      { type: "LINK-A" },
-      { eusd_Avail: "6.93M" },
-      { stable: "1.00%" },
-      { ratio: "165%" },
-    ],
-    assets5: [
-      { name: "Yearn" },
-      { type: "YF1-A" },
-      { eusd_Avail: "6.44M" },
-      { stable: "1.00%" },
-      { ratio: "165%" },
-    ],
-    assets6: [
-      { name: "Uniswap" },
-      { type: "UNI-A" },
-      { eusd_Avail: "5.0M" },
-      { stable: "1.50%" },
-      { ratio: "120%" },
-    ],
-    assets7: [
-      { name: "Egoras" },
-      { type: "EGR-A" },
-      { eusd_Avail: "100M" },
-      { stable: "0.50%" },
-      { ratio: "170%" },
-    ],
-    assets8: [
-      { name: "Matic" },
-      { type: "MATIC-A" },
-      { eusd_Avail: "3.00M" },
-      { stable: "3.00%" },
-      { ratio: "175%" },
-    ],
-    assets9: [
-      { name: "Aave" },
-      { type: "AAVE-A" },
-      { eusd_Avail: "5.00M" },
-      { stable: "1.00%" },
-      { ratio: "165%" },
-    ],
-    assets10: [
-      { name: "Wrapped Bitcoin" },
-      { type: "WBTC-A" },
-      { eusd_Avail: "30.80M" },
-      { stable: "2.00%" },
-      { ratio: "145%" },
-    ],
-    assets11: [
-      { name: "Egoras Credit" },
-      { type: "EGC-A" },
-      { eusd_Avail: "90M" },
-      { stable: "0.50%" },
-      { ratio: "120%" },
-    ],
-    assets12: [
-      { name: "Ethereum" },
-      { type: "ETH-A" },
-      { eusd_Avail: "90M" },
-      { stable: "0.70%" },
-      { ratio: "130%" },
-    ],
-  };
+  const assets = [
+     {
+       name: "Bitcoin" ,
+       type: "BTC-A" ,
+       eusd_Avail: "100M" ,
+       stable: "0.50%" ,
+       ratio: "150%" ,
+    },
+      {
+     name: "Ethereum" ,
+       type: "ETH-A" ,
+       eusd_Avail: "99.37M" ,
+       stable: "2.00%" ,
+       ratio: "145%" },
+    
+    {
+       name: "Tether" ,
+        type: "USDT-A" ,
+        eusd_Avail: "90M" ,
+       stable: "1.00%" ,
+        ratio: "100%" ,
+     },
+    {
+        name: "Chainlink" ,
+       type: "LINK-A" ,
+        eusd_Avail: "6.93M" ,
+       stable: "1.00%" ,
+       ratio: "165%" ,
+    },
+    {
+     name: "Yearn" ,
+     type: "YF1-A" ,
+     eusd_Avail: "6.44M" ,
+    stable: "1.00%" ,
+     ratio: "165%" ,
+    },
+    {
+     name: "Uniswap" ,
+     type: "UNI-A" ,
+     eusd_Avail: "5.0M" ,
+     stable: "1.50%" ,
+     ratio: "120%" ,
+    },
+    {
+     name: "Egoras" ,
+     type: "EGR-A" ,
+     eusd_Avail: "100M" ,
+    stable: "0.50%" ,
+     ratio: "170%" ,
+    },
+    {
+     name: "Matic" ,
+     type: "MATIC-A" ,
+     eusd_Avail: "3.00M" ,
+     stable: "3.00%" ,
+    ratio: "175%" ,
+    },
+    {
+    name: "Aave" ,
+     type: "AAVE-A" ,
+     eusd_Avail: "5.00M" ,
+     stable: "1.00%" ,
+     ratio: "165%" ,
+    },
+    {
+     name: "Wrapped Bitcoin" ,
+     type: "WBTC-A" ,
+    eusd_Avail: "30.80M" ,
+     stable: "2.00%" ,
+     ratio: "145%" ,
+    },
+    {
+     name: "Egoras Credit" ,
+     type: "EGC-A" ,
+    eusd_Avail: "90M" ,
+     stable: "0.50%" ,
+     ratio: "120%" ,
+    },
+    {
+     name: "Ethereum" ,
+     type: "ETH-A" ,
+     eusd_Avail: "90M" ,
+     stable: "0.70%" ,
+     ratio: "130%" ,
+    },
+  ];
 
   const triggerAll = () => {
     setCategoryBtn("All");
@@ -306,6 +306,8 @@ const Home = () => {
                 {/* =============== */}
                 {/* =============== */}
                 {/* =============== */}
+      { assets.map( (cat)=>(
+
                 <tr className="assets-category-row">
                   <td className="assets-category-data">
                     <div className="assets-data">
@@ -316,28 +318,28 @@ const Home = () => {
                       />
 
                       <div className="assets-data-name">
-                        {assets.assets1[0].name}
+                        {cat.name}
                       </div>
                     </div>
                   </td>
                   <td className="assets-category-data1">
                     <div className="assets-data-name">
-                      {assets.assets1[1].type}
+                      {cat.type}
                     </div>
                   </td>
                   <td className="assets-category-data1b">
                     <div className="assets-data-name">
-                      {assets.assets1[2].eusd_Avail}
+                      {cat.eusd_Avail}
                     </div>
                   </td>
                   <td className="assets-category-data1b">
                     <div className="assets-data-name">
-                      {assets.assets1[3].stable}
+                      {cat.stable}
                     </div>
                   </td>
                   <td className="assets-category-data1b">
                     <div className="assets-data-name">
-                      {assets.assets1[4].ratio}
+                      {cat.ratio}
                     </div>
                   </td>
                   <td className="assets-category-data-last">
@@ -351,6 +353,9 @@ const Home = () => {
                     </div>
                   </td>
                 </tr>
+                )
+                )
+                }
                 {/* =================== */}
                 {/* =================== */}
                 {/* =================== */}
@@ -358,506 +363,7 @@ const Home = () => {
                 {/* =============== */}
                 {/* =============== */}
                 {/* =============== */}
-                <tr className="assets-category-row">
-                  <td className="assets-category-data">
-                    <div className="assets-data">
-                      <img
-                        src="/img/ether-logo.svg"
-                        alt=""
-                        className="assets-list-icon"
-                      />
-                      <div className="assets-data-name">
-                        {assets.assets2[0].name}
-                      </div>
-                    </div>
-                  </td>
-                  <td className="assets-category-data1">
-                    <div className="assets-data-name">
-                      {assets.assets2[1].type}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets2[2].eusd_Avail}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets2[3].stable}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets2[4].ratio}
-                    </div>
-                  </td>
-                  <td className="assets-category-data-last">
-                    <div className="assets-data-name-last">
-                      <button
-                        className="assets-collateralize-button"
-                        style={{ border: "none" }}
-                      >
-                        Open Vault
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =============== */}
-                {/* =============== */}
-                {/* =============== */}
-                <tr className="assets-category-row">
-                  <td className="assets-category-data">
-                    <div className="assets-data">
-                      <img
-                        src="/img/tether-icon.svg"
-                        alt=""
-                        className="assets-list-icon"
-                      />
-
-                      <div className="assets-data-name">
-                        {assets.assets3[0].name}
-                      </div>
-                    </div>
-                  </td>
-                  <td className="assets-category-data1">
-                    <div className="assets-data-name">
-                      {assets.assets3[1].type}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets3[2].eusd_Avail}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets3[3].stable}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets3[4].ratio}
-                    </div>
-                  </td>
-                  <td className="assets-category-data-last">
-                    <div className="assets-data-name-last">
-                      <button
-                        className="assets-collateralize-button"
-                        style={{ border: "none" }}
-                      >
-                        Open Vault
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =============== */}
-                {/* =============== */}
-                {/* =============== */}
-                <tr className="assets-category-row">
-                  <td className="assets-category-data">
-                    <div className="assets-data">
-                      <img
-                        src="/img/chain-link-icon.svg"
-                        alt=""
-                        className="assets-list-icon"
-                      />
-
-                      <div className="assets-data-name">
-                        {assets.assets4[0].name}
-                      </div>
-                    </div>
-                  </td>
-                  <td className="assets-category-data1">
-                    <div className="assets-data-name">
-                      {assets.assets4[1].type}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets4[2].eusd_Avail}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets4[3].stable}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets4[4].ratio}
-                    </div>
-                  </td>
-                  <td className="assets-category-data-last">
-                    <div className="assets-data-name-last">
-                      <button
-                        className="assets-collateralize-button"
-                        style={{ border: "none" }}
-                      >
-                        Open Vault
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                <tr className="assets-category-row">
-                  <td className="assets-category-data">
-                    <div className="assets-data">
-                      <img
-                        src="/img/yearn-icon.svg"
-                        alt=""
-                        className="assets-list-icon"
-                      />
-
-                      <div className="assets-data-name">
-                        {assets.assets5[0].name}
-                      </div>
-                    </div>
-                  </td>
-                  <td className="assets-category-data1">
-                    <div className="assets-data-name">
-                      {assets.assets5[1].type}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets5[2].eusd_Avail}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets5[3].stable}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets5[4].ratio}
-                    </div>
-                  </td>
-                  <td className="assets-category-data-last">
-                    <div className="assets-data-name-last">
-                      <button
-                        className="assets-collateralize-button"
-                        style={{ border: "none" }}
-                      >
-                        Open Vault
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                <tr className="assets-category-row">
-                  <td className="assets-category-data">
-                    <div className="assets-data">
-                      <img
-                        src="/img/uniswap-icon.svg"
-                        alt=""
-                        className="assets-list-icon"
-                      />
-
-                      <div className="assets-data-name">
-                        {assets.assets6[0].name}
-                      </div>
-                    </div>
-                  </td>
-                  <td className="assets-category-data1">
-                    <div className="assets-data-name">
-                      {assets.assets6[1].type}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets6[2].eusd_Avail}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets6[3].stable}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets6[4].ratio}
-                    </div>
-                  </td>
-                  <td className="assets-category-data-last">
-                    <div className="assets-data-name-last">
-                      <button
-                        className="assets-collateralize-button"
-                        style={{ border: "none" }}
-                      >
-                        Open Vault
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                <tr className="assets-category-row">
-                  <td className="assets-category-data">
-                    <div className="assets-data">
-                      <img
-                        src="/img/egoras-favicon.svg"
-                        alt=""
-                        className="assets-list-icon"
-                      />
-
-                      <div className="assets-data-name">
-                        {assets.assets7[0].name}
-                      </div>
-                    </div>
-                  </td>
-                  <td className="assets-category-data1">
-                    <div className="assets-data-name">
-                      {assets.assets7[1].type}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets7[2].eusd_Avail}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets7[3].stable}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets7[4].ratio}
-                    </div>
-                  </td>
-                  <td className="assets-category-data-last">
-                    <div className="assets-data-name-last">
-                      <button
-                        className="assets-collateralize-button"
-                        style={{ border: "none" }}
-                      >
-                        Open Vault
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                <tr className="assets-category-row">
-                  <td className="assets-category-data">
-                    <div className="assets-data">
-                      <img
-                        src="/img/matic-icon.svg"
-                        alt=""
-                        className="assets-list-icon"
-                      />
-
-                      <div className="assets-data-name">
-                        {assets.assets8[0].name}
-                      </div>
-                    </div>
-                  </td>
-                  <td className="assets-category-data1">
-                    <div className="assets-data-name">
-                      {assets.assets8[1].type}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets8[2].eusd_Avail}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets8[3].stable}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets8[4].ratio}
-                    </div>
-                  </td>
-                  <td className="assets-category-data-last">
-                    <div className="assets-data-name-last">
-                      <button
-                        className="assets-collateralize-button"
-                        style={{ border: "none" }}
-                      >
-                        Open Vault
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                <tr className="assets-category-row">
-                  <td className="assets-category-data">
-                    <div className="assets-data">
-                      <img
-                        src="/img/aave-icon.svg"
-                        alt=""
-                        className="assets-list-icon"
-                      />
-                      <div className="assets-data-name">
-                        {assets.assets9[0].name}
-                      </div>
-                    </div>
-                  </td>
-                  <td className="assets-category-data1">
-                    <div className="assets-data-name">
-                      {assets.assets9[1].type}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets9[2].eusd_Avail}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets9[3].stable}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets9[4].ratio}
-                    </div>
-                  </td>
-                  <td className="assets-category-data-last">
-                    <div className="assets-data-name-last">
-                      <button
-                        className="assets-collateralize-button"
-                        style={{ border: "none" }}
-                      >
-                        Open Vault
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                <tr className="assets-category-row">
-                  <td className="assets-category-data">
-                    <div className="assets-data">
-                      <img
-                        src="/img/wrapped-btc.svg"
-                        alt=""
-                        className="assets-list-icon"
-                      />
-
-                      <div className="assets-data-name">
-                        {assets.assets10[0].name}
-                      </div>
-                    </div>
-                  </td>
-                  <td className="assets-category-data1">
-                    <div className="assets-data-name">
-                      {assets.assets10[1].type}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets10[2].eusd_Avail}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets10[3].stable}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets10[4].ratio}
-                    </div>
-                  </td>
-                  <td className="assets-category-data-last">
-                    <div className="assets-data-name-last">
-                      <button
-                        className="assets-collateralize-button"
-                        style={{ border: "none" }}
-                      >
-                        Open Vault
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                <tr className="assets-category-row">
-                  <td className="assets-category-data">
-                    <div className="assets-data">
-                      <img
-                        src="/img/egc-icon.svg"
-                        alt=""
-                        className="assets-list-icon"
-                      />
-
-                      <div className="assets-data-name">
-                        {assets.assets11[0].name}
-                      </div>
-                    </div>
-                  </td>
-                  <td className="assets-category-data1">
-                    <div className="assets-data-name">
-                      {assets.assets11[1].type}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets11[2].eusd_Avail}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets11[3].stable}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {assets.assets11[4].ratio}
-                    </div>
-                  </td>
-                  <td className="assets-category-data-last">
-                    <div className="assets-data-name-last">
-                      <button
-                        className="assets-collateralize-button"
-                        style={{ border: "none" }}
-                      >
-                        Open Vault
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
+             
               </tbody>
               {/* {{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}} */}
             </table>
