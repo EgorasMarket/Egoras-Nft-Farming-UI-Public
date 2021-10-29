@@ -7,31 +7,103 @@
 .transactionFullSection {
   padding: 2em 0em;
   padding-top: 8em;
+  padding-left: 14em;
 }
 .staking-area {
   background: #fff;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   border-radius: 10px;
   box-shadow: 0px 8px 20px #c1e7ce;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  overflow-y: scroll;
   padding: 2em;
-}
-.staking-area::-webkit-scrollbar {
-  display: none;
 }
 
 .staking-area1 {
-  height: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  width: 100%;
+  padding: 0.5em;
+}
+.staking-area1::-webkit-scrollbar {
+  display: none;
 }
 
 .staking-area1 .assets-category-data {
   height: 100px;
 }
-.stake-cont2 {
+
+.staking-area2 {
   width: 90%;
-  margin: auto;
+}
+.stake-cont2 {
+  width: 85%;
+  margin-left: auto;
+}
+
+@media screen and (max-width: 1311px) {
+  .staking-area1 {
+    width: 120%;
+  }
+  .stake-cont2 {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1220px) {
+  .transactionFullSection {
+    padding-left: 4em;
+  }
+
+  .dashboard-home {
+    padding-left: 4em;
+  }
+  .other2 {
+    padding-left: 4em;
+  }
+  .container {
+    max-width: 1095px !important;
+  }
+  .dashboard-home {
+    padding-right: 0em;
+  }
+}
+@media screen and (max-width: 1080px) {
+  .transactionFullSection {
+    padding-left: 0em;
+  }
+  .dashboard-home {
+    padding-left: 0em;
+  }
+  .other2 {
+    padding-left: 0em;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .staking-area1 {
+    width: 100%;
+  }
+  .staking-area {
+    flex-direction: column;
+    grid-row-gap: 50px;
+  }
+  .staking-area2 {
+    width: 100%;
+    display: none;
+  }
+  .stake-cont2 {
+    width: 100%;
+  }
+  .dashboard-area1 {
+    flex-direction: column;
+    grid-row-gap: 30px;
+  }
+
+  .dashboard-area1-cont1 {
+    width: 100%;
+  }
+  .dashboard-area1-cont2 {
+    width: 100%;
+  }
 }

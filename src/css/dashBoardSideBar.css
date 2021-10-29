@@ -2,11 +2,12 @@
   /* flex: 1; */
   height: 100vh;
   background-color: rgb(255, 255, 255);
-  position: sticky;
+  position: fixed;
   top: 0;
   overflow-x: hidden;
   width: 15%;
   transition: 0.5s linear;
+  z-index: 10;
 }
 .sidebar::-webkit-scrollbar {
   display: none;
@@ -143,4 +144,18 @@ a.link:hover {
 .nav-item_spacerInner__HJWlk {
   height: 10px;
   border-radius: 0 0 10px 0;
+}
+
+@media screen and (max-width: 1220px) {
+  .sidebar {
+    width: 4.5%;
+  }
+}
+@media screen and (max-width: 1080px) {
+  .sidebar {
+    width: 20%;
+    display: none;
+  }
+
+
 }
