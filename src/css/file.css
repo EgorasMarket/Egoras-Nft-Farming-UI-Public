@@ -89,9 +89,7 @@
     padding:20px 10px;
     margin:auto;
 border-radius: 10px;
-    background: linear-gradient(
-90deg
-, #39d97a 0%, #ebb396 100%);
+    background-color:#229e54;
 text-align: center;
 font-size: 24px;
 color:#fff;
@@ -101,9 +99,9 @@ cursor:pointer;
 }
 
 .Enable1:hover{
-  background: linear-gradient(
-90deg
-, #ebb396 0%,  #39d97a 100%); 
+  background-color: 
+  #39d97a ; 
+  color:#000;
 }
 .Enable2{
     font-weight: bold;
@@ -114,7 +112,7 @@ cursor:pointer;
 }
 .Enable3{
     width:auto;
-    background-color:#e4a788;
+    background-color:#c4fbdb;
     border-radius: 10px;
     padding:10px 30px;
     box-sizing: border-box;
@@ -124,7 +122,7 @@ cursor:pointer;
 }
 .Enable4{
     font-size: 20px;
-    color:white;
+    color:#000;
     font-weight: bold;
     margin-bottom: 20px;
 }
