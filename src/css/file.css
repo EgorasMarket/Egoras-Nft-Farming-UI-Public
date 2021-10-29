@@ -191,12 +191,58 @@ cursor:pointer;
 
 
 
-@media (max-width:600px){
-    .Trade2{
-        padding:10px 10px;
+
+
+@media (max-width:460px){
+    .Gas2{
+        display:flex;
+        flex-direction: column;
+        padding:0;
+        width: 80px;
     }
-    .Trade4{
+    .ada{
+        font-size: 12px;
+        width:46px;
+    }
+    .Enable{
+        font-size: 14px;
+    }
+    .Enable4{
+        font-size: 14px;
+    }
+}
+
+@media (min-width:461px)  and (max-width:767px){
+    .ada{
+        width:50px;
+        box-sizing: border-box;
+    }
+    .Gas2{
+        width:110px;
+    }
+    .Enable4{
+        font-size: 16px;
+    }
+}
+
+
+
+
+@media (max-width:767px){
+   .send1{
+       font-size: 14px;
+   }
+   .Trade4{
+       width:100%;
         padding:25px 15px;
+    }
+
+    .Trade2{
+        padding:10px 5px;
+        font-size: 14px;
+    }
+    .Enable2{
+        font-size: 14px;
     }
 
     .send7{
@@ -211,5 +257,20 @@ cursor:pointer;
     .Enable1{
         font-size: 20px;
     }
-    
+    .rete{
+        font-size:14px 
+    }
+    .Enable3{
+        padding:10px 10px;
+    }
+}
+
+@media (min-width:768px){
+.Trade4{
+     max-width: 600px;
+    margin: 50px auto 30px auto;
+}
+.rete{
+    font-size:24px
+}
 }
