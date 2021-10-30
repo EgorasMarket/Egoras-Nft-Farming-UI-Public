@@ -1,7 +1,7 @@
 .dashboard-home {
   flex: 4;
   padding: 4em 2em;
-  width: 100vh;
+  width: 100%;
   background: #f4fff8;
   position: relative;
   padding-top: 8em;
@@ -307,4 +307,56 @@ input.withdraw-input-box:hover {
   font-size: 16px;
   color: #000;
   text-decoration: none !important;
+}
+
+@media screen and (max-width: 767px) {
+  .column-display {
+    display: flex;
+    flex-direction: column;
+    grid-row-gap: 20px;
+    align-items: flex-start;
+  }
+  .title2 {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .title3 {
+    justify-content: space-between;
+  }
+
+  .title1,
+  .title3 {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .title1::before {
+    font-family: Inter, "Helvetica Neue", sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 14px;
+    color: var(--theme-ui-colors-text-muted, #708390);
+    content: "AMOUNT";
+    display: block;
+  }
+  .title2::before {
+    font-family: Inter, "Helvetica Neue", sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 14px;
+    color: var(--theme-ui-colors-text-muted, #708390);
+    content: "TYPE";
+    display: block;
+  }
+  /* 
+  .title3::before {
+    font-family: Inter, "Helvetica Neue", sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 14px;
+    color: var(--theme-ui-colors-text-muted, #708390);
+    content: "ADDRESS";
+    display: block;
+  } */
 }

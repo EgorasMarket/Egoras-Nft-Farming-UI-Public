@@ -29,3 +29,22 @@ button.logout-btn {
   font-weight: 700;
   box-shadow: 0px 5px 13px #cbcbcb;
 }
+
+@media screen and (max-width: 767px) {
+  .drop-open-icon {
+    display: inline-block;
+    width: 20px;
+    margin-right: 10px;
+  }
+  .drop-close-icon {
+    width: 20px;
+  }
+  .egr-logo3 {
+    width: 100px;
+  }
+  .DashBoardHeaderSection {
+    padding: 1.5em 0em;
+  }
+
+  
+}

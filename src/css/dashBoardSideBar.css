@@ -96,30 +96,30 @@ a.link:hover {
   border-top-right-radius: 25px;
   z-index: 5;
 } */
-.nav-item_link__yU0Vp {
+/* .nav-item_link {
   display: flex;
   position: relative;
   text-decoration: none;
   position: relative;
 }
-.nav-item_linkWrapper__1IVev {
+.nav-item_linkWrapper {
   width: 100%;
   outline: none;
   border: 0;
 }
 
-.nav-item_spacer__3_Yzq {
+.nav-item_spacer {
   height: 10px;
   border-radius: 30px 0 0 30px;
   opacity: 0;
 }
 
-.nav-item_spacerInner__HJWlk {
+.nav-item_spacerInner {
   height: 10px;
   border-radius: 0 0 10px 0;
 }
 
-.nav-item_linkBody__2ilRo {
+.nav-item_linkBody {
   cursor: pointer;
   height: 60px;
   border-radius: 30px 0 0 30px;
@@ -130,7 +130,7 @@ a.link:hover {
   justify-content: center;
 }
 
-.nav-item_text__1Kr9k {
+.nav-item_text {
   position: absolute;
   font-size: 16px;
   color: #ed1b6c;
@@ -154,7 +154,7 @@ a.link:hover {
 .nav-item_spacerInner {
   height: 10px;
   border-radius: 0 0 10px 0;
-}
+} */
 
 @media screen and (max-width: 1220px) {
   .sidebar {
@@ -173,5 +173,49 @@ a.link:hover {
 
   .sidebarWrapper {
     display: none;
+  }
+}
+@media screen and (max-width: 767px) {
+  .drop-open-icon {
+    display: inline-block;
+    width: 20px;
+    margin-right: 10px;
+  }
+  .drop-close-icon {
+    width: 20px;
+  }
+  .egr-logo3 {
+    width: 100px;
+  }
+  .DashBoardHeaderSection {
+    padding: 1em 0em;
+  }
+  .dash-area1-cont2-titles {
+    display: none;
+  }
+  .dash-area1-cont2-titles {
+    display: none;
+  }
+}
+@media screen and (max-width: 400px) {
+  .dashboard-area1-cont1 {
+    padding: 0em 1em;
+    padding-top: 1em;
+  }
+
+  .dashboard-area1-heading-supply-withdraw-input {
+    padding: 0em;
+  }
+
+  .dash-area1-cont2-titles {
+    display: none;
+  }
+
+}
+
+@media screen and (max-width: 400px) {
+  .dashboard-area1-cont1 {
+    padding: 0em 1em;
+    padding-top: 1em;
   }
 }

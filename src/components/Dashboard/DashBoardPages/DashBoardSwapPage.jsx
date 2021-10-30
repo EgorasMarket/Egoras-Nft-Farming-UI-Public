@@ -35,39 +35,7 @@ const File = () => {
     return (
         <div style={{marginTop:'69px'}} className="Trade2">
 
-            {/* <div className="Trade"> */}
-                {/* <div className="Trade1">
-                    <div className="star"> <img src="img/map.svg"  alt="" className="space"/> <span className="Market">Markets</span></div>
-                    <div className="star"> <img src="img/map1.svg"  alt="" className="space"/> <span className="Market">Lend </span></div>
-                    <div className="star"> <img src="img/map2.svg"  alt="" className="space"/> <span className="Market">Synths</span></div>
-                    <div className="star"> <img src="img/map.svg"  alt="" className="space"/> <span className="Market">Trade </span></div>
-
-                    <div>
-                         <div className="star"> <img src="img/map3.svg"  alt="" className="space"/> <span className="Market">Farm</span></div>
-                         
-                    </div>
-                      <div>
-                        <div className="star"> <img src="img/map5.svg"  alt="" className="space"/> <span className="Market">Tools </span></div>
-                           
-                        </div>
-                        <div className="star"> <img src="img/map4.svg"  alt="" className="space"/> <span className="Market">Security </span></div>
-                        <div className="star"> <img src="img/map6.svg"  alt="" className="space"/> <span className="Market"> Document </span></div>
-                        <div className="star"> <img src="img/map7.svg"  alt="" className="space"/> <span className="Market">Tutorials </span> </div>
-                        <div className="star"> <img src="img/map8.svg"  alt="" className="space"/> <span className="Market">Governance</span></div>
-                        <div>
-                            <img src="" alt=""/>
-                             <img src="" alt=""/>
-                              <img src="" alt=""/>
-                               <img src="" alt=""/>
-                        </div>
-                        <div>
-                              <img src="" alt=""/>
-                              <img src="" alt=""/>
-                              <img src="" alt=""/>
-                               <img src="" alt=""/>
-                        </div>
-
-                     </div> */}
+           
                 
                  <div >
              <div className="Trade4">
@@ -82,16 +50,16 @@ const File = () => {
                                     <div>
                                         < div className="send6">
                                             <div className="send7"><img src="../../img/map10.png" alt="" className="send4"/></div>
-                                            <div>  <div style={{color:'#000',marginRight:'5px' ,display:'flex',alignItems:'center',}}>USDT <ArrowDropDownIcon/> </div> </div>
+                                            <div>  <div style={{color:'#000',marginRight:'5px' ,display:'flex',alignItems:'center',fontWeight:'600'}}>USDT <ArrowDropDownIcon/> </div> </div>
                                             
-                                             <div style={{color:'#000'}}>MAX</div>
+                                             <div style={{color:'#000', fontWeight:'600'}}>MAX</div>
                                        </div>
                                    </div>
                                    <div><input   placeholder="0.00" className="send8" value="4"/></div>
                                  </div>
                                </div>
                                  <div className="For1">
-                                     <div style={{flex:'1',fontWeight:'bold',fontSize:'24px'}}>RECEIVE</div>
+                                     <div style={{flex:'1',fontWeight:'bold',}}  className="rete">RECEIVE</div>
                                      <div style={{flex:'1'}}><img src="../../img/map11.svg" alt=""/></div>
                                  </div>
 
@@ -100,7 +68,7 @@ const File = () => {
                                      <div className="send5">
                                          <div className="send6">
                                            <div className="send7"> <img src="../../img/map12.png" alt="" className="send4"/></div>
-                                          <div> <div style={{display:'flex',alignItems:'center',color:'#000'}}>DF <ArrowDropDownIcon id="COMES1"/>  </div></div>
+                                          <div> <div style={{display:'flex',alignItems:'center',color:'#000',fontWeight:'600'}}>DF <ArrowDropDownIcon id="COMES1"/>  </div></div>
                                          </div>
                                          <div><input type="" alt="" className="send8"  placeholder="0.00"/></div>
                                      </div>
@@ -131,7 +99,7 @@ const File = () => {
                    <div className="rece">Minimum received:... DF</div>
                    <div className="Gas">Gas Fee (GWEI)</div>
                    <div className="Gas1">
-                       <div className={speed === 'paper' ? 'Gas2  Gas3' : 'Gas2' } onClick={send} id="paper">121 Standard</div>  <div  className={speed === 'paper1' ? ' Gas2 Gas3': 'Gas2' }  onClick={send} id="paper1">134 Fast </div> <div className={speed === 'paper2'? ' Gas2 Gas3': 'Gas2' }  onClick={send} id="paper2">148 instant</div>
+                       <div className={speed === 'paper' ? 'Gas2  Gas3' : 'Gas2' } onClick={send} id="paper">121 <span>Standard</span></div>  <div  className={speed === 'paper1' ? ' Gas2 Gas3': 'Gas2' }  onClick={send} id="paper1">134 <span>Fast</span> </div> <div className={speed === 'paper2'? ' Gas2 Gas3': 'Gas2' }  onClick={send} id="paper2">148 <span>instant</span></div>
                    </div>
 
                </div>

@@ -2,24 +2,14 @@
     display:flex;
 }
 
-/* .Trade1{
-    flex:1;
-    padding:10px 20px 10px 40px;
-    background-color: #efecec7d;
-    
-        box-shadow: 1px 2px 7px 0px #9d9c9ca6;
-        height: 600px;
-        overflow-y: scroll;
-         position:sticky; 
-         top:70px;
-} */
+
 
 .Trade2{
     padding:10px 20px;
     flex:4;
         /* background-color: #eff7ff; */
             background-color: #6cc1b217;
-             position: relative;
+           
 }
 .space{
     margin-right: 15px;
@@ -32,8 +22,7 @@
     padding: 15px 10px;
 }
 .Trade4{
-    max-width: 600px;
-    margin: 50px auto 30px auto;
+   
      background-color: #fff;
      padding:40px ;
      border-radius: 10px;
@@ -93,17 +82,18 @@
 .Enable{
     text-align: center;
     margin-bottom: 10px;
+    color:#229e54;
+    font-weight: 500;
     
 }
 .Enable1{
     padding:20px 10px;
     margin:auto;
-    /* background: linear-gradient(
-90deg, rgb(94, 175, 231) 0%, rgb(110, 93, 231) 100%); */
 border-radius: 10px;
-    background: linear-gradient(
+    /* background: linear-gradient(
 90deg
-, #39d97a 0%, #ebb396 100%);
+, #39d97a 0%, #ebb396 50%, #229e54 100%); */
+background-color: #229e54;
 text-align: center;
 font-size: 24px;
 color:#fff;
@@ -113,9 +103,12 @@ cursor:pointer;
 }
 
 .Enable1:hover{
-  background: linear-gradient(
+  /* background: linear-gradient(
 90deg
-, #ebb396 0%,  #39d97a 100%); 
+, #ebb396 0%,  #39d97a 100%);  */
+background-color: #39d97a ;
+color:#000;
+
 }
 .Enable2{
     font-weight: bold;
@@ -126,7 +119,8 @@ cursor:pointer;
 }
 .Enable3{
     width:auto;
-    background-color:#e4a788;
+    /* background-color:#e4a788; */
+    background-color: #c4fadb;
     border-radius: 10px;
     padding:10px 30px;
     box-sizing: border-box;
@@ -136,14 +130,14 @@ cursor:pointer;
 }
 .Enable4{
     font-size: 20px;
-    color:white;
+    color:#000;
     font-weight: bold;
     margin-bottom: 20px;
 }
 .ada{
     padding:12px 10px;
     border:1px solid grey;
-    border-radius: 50px;
+    border-radius: 100%;
     width:60px;
     text-align: center;
     background-color: #fff;
@@ -179,6 +173,7 @@ cursor:pointer;
     border-radius: 50px;
     text-align: center;
     background-color: #fff;
+    font-weight: 600;
 }
 
 .Gas2:hover{
@@ -198,59 +193,57 @@ cursor:pointer;
 #COMES{
     display:none;
 }
- /* @media (max-width:320px){
-     .Enable3{
-         width:280px;
-     }
- }
- @media (min-width:321px){
-     .Enable3{
-         width:390px;
-     }
- }
-
-  @media (min-width:425px) and (max-width:500px){
-     .Enable3{
-         width:380px;
-     }
- } */
-  /* @media (min-width:520px) {
-     .Enable3{
-         width:420px;
-     }
- } */
-
-
-/* 
-@media (max-width:425px){
-    .ada1{
-        width:38px;
+ 
+@media (max-width:460px){
+    .Gas2{
+        display:flex;
+        flex-direction: column;
+        padding:0;
+        width: 80px;
     }
-     .ada{
-        width:38px;
+    .ada{
+        font-size: 12px;
+        width:46px;
     }
-    .Enable3{
-         width:auto; 
-        padding:10px 12px;
+    .Enable{
+        font-size: 14px;
     }
-    .Gas2,.Gas3{
-        width:auto;
-    }
-}
-@media (max-width:768px){
-    .Trade1{
-        display:none;
+    .Enable4{
+        font-size: 14px;
     }
 }
 
- */
-
-@media (max-width:600px){
-    .Trade2{
-        padding:10px 10px;
+@media (min-width:461px)  and (max-width:767px){
+    .ada{
+        width:50px;
+        box-sizing: border-box;
     }
-    .Trade4{
+    .Gas2{
+        width:110px;
+    }
+    .Enable4{
+        font-size: 16px;
+    }
+}
+
+
+
+
+@media (max-width:767px){
+   .send1{
+       font-size: 14px;
+   }
+   .Trade4{
+       width:100%;
         padding:25px 15px;
+    }
+
+    .Trade2{
+        padding:10px 5px;
+        font-size: 14px;
+    }
+    .Enable2{
+        font-size: 14px;
     }
 
     .send7{
@@ -265,5 +258,20 @@ cursor:pointer;
     .Enable1{
         font-size: 20px;
     }
-    
+    .rete{
+        font-size:14px 
+    }
+    .Enable3{
+        padding:10px 10px;
+    }
+}
+
+@media (min-width:768px){
+.Trade4{
+     max-width: 600px;
+    margin: 50px auto 30px auto;
+}
+.rete{
+    font-size:24px
+}
 }

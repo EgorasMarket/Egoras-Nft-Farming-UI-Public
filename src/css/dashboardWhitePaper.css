@@ -173,9 +173,9 @@
   width: 95%;
   padding-left: 14em;
   font-size: 18px;
-  transition: 1s ease-in-out;max-width: 1320px;
-    margin: auto;
-
+  transition: 1s ease-in-out;
+  max-width: 1320px;
+  margin: auto;
 }
 .layer-header {
   color: black;
@@ -254,9 +254,10 @@ a.sidebar-link1 {
     position: fixed;
     background: #fff;
     padding: 2em 0.5em;
-    top: 57px;
+    top: 80px;
     padding-bottom: 0;
     width: 100%;
+    padding-top: 0em;
     box-shadow: 0px 0px 10px #e1e1e1;
   }
   .details-accord {

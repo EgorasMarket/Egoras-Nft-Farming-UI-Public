@@ -75,7 +75,6 @@
   .dashboard-home {
     padding-right: 0em;
   }
-
 }
 @media screen and (max-width: 1080px) {
   .transactionFullSection {
@@ -119,5 +118,39 @@
 @media screen and (max-width: 900px) {
   .staking-area {
     padding: 1em 0em;
+  }
+  .user {
+    display: none;
+  }
+}
+@media screen and (max-width: 767px) {
+  button.logout-btn {
+    display: none;
+  }
+  .withdraw-btn {
+    width: 100%;
+    padding: 1em 2em;
+    background: #229e54;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+    margin-top: 10px;
+  }
+  .column-display {
+    display: flex;
+    flex-direction: column;
+    grid-row-gap: 20px;
+    align-items: flex-start;
+    padding: 0.5em;
+    padding: 0.5em;
+  }
+}
+@media screen and (max-width: 400px) {
+  .dashboard-area1-cont1 {
+    padding: 0em 1em;
+    padding-top: 1em;
+  }
+  .dashboard-area1-heading-supply-withdraw-input {
+    padding: 0em;
   }
 }

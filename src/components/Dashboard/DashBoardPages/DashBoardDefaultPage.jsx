@@ -383,7 +383,7 @@ const DashBoardDefaultPage = () => {
               {/* ============= */}
 
               {transactions.map((maps) => (
-                <div className="dash-area1-cont2-titles">
+                <div className="dash-area1-cont2-titles column-display">
                   <div className="title1">{maps.type}</div>
                   <div className="title2">{maps.amount}</div>
                   <a href="#" className="title3">

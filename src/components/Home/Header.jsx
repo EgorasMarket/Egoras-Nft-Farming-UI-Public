@@ -149,7 +149,17 @@ const Header = () => {
         document.getElementById("Header").style.display = "none";
       });
     }
-    if (currentPage === "/dashboard/egr-") {
+    if (currentPage === "/dashboard/swap") {
+      setshowHeader(() => {
+        document.getElementById("Header").style.display = "none";
+      });
+    }
+    if (currentPage === "/dashboard/egr") {
+      setshowHeader(() => {
+        document.getElementById("Header").style.display = "none";
+      });
+    }
+    if (currentPage === "/dashboard/whitepaper") {
       setshowHeader(() => {
         document.getElementById("Header").style.display = "none";
       });
