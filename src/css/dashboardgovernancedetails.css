@@ -1,0 +1,12 @@
+.governance_details_section {
+  padding: 0em 2em;
+  padding-left: 17em;
+  padding-top: 10em;
+  position: relative;
+}
+
+.governance_details_area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

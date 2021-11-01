@@ -55,18 +55,40 @@ const DashboardSideBarMenu = () => {
       setActiveBg("whitepaper");
       document.getElementById("FooterId").style.display = "none";
     }
+
+    if (screen.width < 1220) {
+      document.getElementById("open_icon").style.display == "none";
+      document.getElementById("close_icon").style.display == "none";
+      console.log("i workoooo");
+    }
   }, []);
+
 
   const dropDownOpen = () => {
     let sideBar = document.getElementById("side_bar");
     let sideBarWrapper = document.getElementById("side_bar_wrapper");
     let closeIcon = document.getElementById("close_icon");
     let openIcon = document.getElementById("open_icon");
-    sideBar.style.width = "230px";
     sideBarWrapper.style.display = "block";
-    openIcon.style.display = "none";
+    sideBar.style.width = "230px";
+
+    openIcon.style.display = "none ";
     closeIcon.style.display = "inline-block";
   };
+
+  //   const closeIcon = document.getElementById("close_icon");
+  //   const openIcon = document.getElementById("open_icon");
+
+  // if (window.innerWidth >= 1220) {
+  //   openIcon.style.display = "none ";
+  //   closeIcon.style.display = "none";
+  //   console.log("i workoooo");
+  // } else {
+  //   openIcon.style.display = "inline-block ";
+  //   closeIcon.style.display = "none";
+  //   console.log("i workoooo");
+  // }
+
   const dropDownClose = () => {
     let sideBar = document.getElementById("side_bar");
     let sideBarWrapper = document.getElementById("side_bar_wrapper");
@@ -195,7 +217,7 @@ const DashboardSideBarMenu = () => {
             {/* ===================== */}
             {/* ===================== */}
             {/* ===================== */}
-            <Link to="#" className="link" id="governance" onClick={changeBg}>
+            <Link to="/dashboard/governance" className="link" id="governance" onClick={changeBg}>
               <li
                 className={
                   activeBg == "governance"

@@ -13,10 +13,9 @@ import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import "../../css/home.css";
 
 const Home = () => {
-
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [categoryBtn, setCategoryBtn] = useState("Popular");
 
   const assets = [
@@ -301,6 +300,7 @@ const Home = () => {
                     Min Coll.Ratio
                   </th>
                   <th className="assets-category-titles-heading1 right"></th>
+                  <th className="assets-category-titles-heading1 right"></th>
                 </tr>
               </thead>
 
@@ -349,6 +349,17 @@ const Home = () => {
                     </td>
                     <td className="assets-category-data1b ratio-content">
                       <div className="assets-data-name ">{asset.ratio}</div>
+                    </td>
+                    <td className="assets-category-data">
+                      <div className="assets-data-name-last">
+                        <a
+                          href="/dashboard/swap"
+                          className="assets-collateralize-button"
+                          style={{ border: "none" }}
+                        >
+                          Collateralize
+                        </a>
+                      </div>
                     </td>
                     <td className="assets-category-data-last">
                       <div className="assets-data-name-last">

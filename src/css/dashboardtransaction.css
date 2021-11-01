@@ -1,4 +1,4 @@
-.transationPage {
+.transactionPage {
   flex: 4;
   width: 100%;
   background: #f6fff9;
@@ -20,12 +20,17 @@
   padding: 2em;
 }
 
+
+
+
+
 .padding {
   padding: 0em;
   display: flex;
   flex-direction: column;
   grid-row-gap: 10px;
 }
+
 
 .staking-area1 {
   height: 100vh;
@@ -36,6 +41,16 @@
 .staking-area1::-webkit-scrollbar {
   display: none;
 }
+
+
+
+
+
+
+
+
+
+
 
 .staking-area1 .assets-category-data {
   height: 100px;

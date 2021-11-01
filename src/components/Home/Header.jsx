@@ -164,6 +164,11 @@ const Header = () => {
         document.getElementById("Header").style.display = "none";
       });
     }
+    if (currentPage === "/dashboard/governance") {
+      setshowHeader(() => {
+        document.getElementById("Header").style.display = "none";
+      });
+    }
   });
 
   // page hide element

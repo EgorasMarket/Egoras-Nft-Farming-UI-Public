@@ -137,7 +137,7 @@ const DashBoardTransaction = () => {
   };
 
   return (
-    <div className="transationPage">
+    <div className="transactionPage">
       <section className="transactionFullSection">
         <div className="container">
           <div className="staking-area">
