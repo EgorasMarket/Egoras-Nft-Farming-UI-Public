@@ -56,11 +56,11 @@ const DashboardSideBarMenu = () => {
       document.getElementById("FooterId").style.display = "none";
     }
 
-    if (screen.width < 1220) {
-      document.getElementById("open_icon").style.display == "none";
-      document.getElementById("close_icon").style.display == "none";
-      console.log("i workoooo");
-    }
+    // if (screen.width < 1220) {
+    //   document.getElementById("open_icon").style.display == "none";
+    //   document.getElementById("close_icon").style.display == "none";
+    //   console.log("i workoooo");
+    // }
   }, []);
 
 

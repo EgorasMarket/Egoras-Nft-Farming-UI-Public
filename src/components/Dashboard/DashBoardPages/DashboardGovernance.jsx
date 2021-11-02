@@ -203,7 +203,6 @@ const DashboardGovernance = () => {
               <div className="coinsBg_area">
                 <img src={paste.img} alt="" className="coin-img" />
               </div>
-              <p className="coinName">{paste.name}</p>
               <div className="coinSymbol">
                 <img
                   src={paste.symbol_image}
@@ -212,6 +211,8 @@ const DashboardGovernance = () => {
                 />
                 {paste.symbol_name}
               </div>
+              <p className="coinName">{paste.name}</p>
+
               <div className="coin_amount">
                 {paste.coin_amount}
                 <div className="coin_slider"></div>

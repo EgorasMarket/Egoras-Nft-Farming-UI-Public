@@ -9,7 +9,6 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 
-
 import "../../../css/dashboardWhitePaper.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -26,17 +25,20 @@ const DashBoardWhitePaper = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   const [activeLink, setActiveLink] = useState("abstract-link");
   const [activeMenu, setActiveMenu] = useState("details-accord  ");
 
   const toggleActive = (e) => {
     let link = e.currentTarget.id;
     setActiveLink(link);
+
     setActiveMenu("notDetails-accord ");
 
     console.log(e.currentTarget.id);
   };
 
+  
   const toggleActiveDrop = () => {
     setActiveMenu("details-accord ");
   };

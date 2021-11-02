@@ -7,11 +7,10 @@ import DashboardSideBarMenu from "./DashboardSideBarMenu";
 import DashBoardDefaultPage from "./DashBoardPages/DashBoardDefaultPage";
 import DashBoardAnalytics from "./DashBoardPages/DashBoardAnalytics";
 import DashBoardTransaction from "./DashBoardPages/DashBoardTransaction";
-// import DashboardEgrBalancePage from "./DashBoardPages/DashboardEgrBalancePage";
 import DashboardGovernance from "./DashBoardPages/DashboardGovernance";
 import DashBoardSwap from "./DashBoardPages/DashBoardSwapPage";
 import DashBoardWhitePaper from "./DashBoardPages/DashBoardWhitePaper";
-import DashboardGovernanceDetails from "./DashBoardPages/DashboardGovernanceDetails.jsx";
+import DashboardEgrBalancePage from "./DashBoardPages/DashboardEgrBalancePage";
 // import DashBoardHeader from "./DashBoardHeader";
 
 // dashboard styles
@@ -24,7 +23,6 @@ function Dashboard() {
       {/* <DashBoardHeader /> */}
       <div className="dashboard">
         <DashboardSideBarMenu />
-
         <Switch>
           <Route exact path="/dashboard/lending">
             <DashBoardDefaultPage />
@@ -38,8 +36,8 @@ function Dashboard() {
           <Route exact path="/dashboard/governance">
             <DashboardGovernance />
           </Route>
-          <Route exact path="dashboard/governance/details">
-            <DashboardGovernanceDetails />
+          <Route exact path="/dashboard/governance/details">
+            <DashboardEgrBalancePage />
           </Route>
           <Route exact path="/dashboard/transaction">
             <DashBoardTransaction />
@@ -52,6 +50,5 @@ function Dashboard() {
     </Router>
   );
 }
-
 
 export default Dashboard;
