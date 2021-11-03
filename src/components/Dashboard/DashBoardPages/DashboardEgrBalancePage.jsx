@@ -4,6 +4,166 @@ import { Link } from "react-router-dom";
 import "../../../css/dashboardegrbalance.css";
 
 const DashboardEgrBalancePage = () => {
+  const [openActive, setOpenActive] = useState("nav1");
+
+  const openActiveNav = (e) => {
+    let active = e.currentTarget.id;
+
+    setOpenActive(active);
+  };
+
+  // ===============
+  // ===============
+  // ===============
+  // ===============
+  // ===============
+
+  const scrollMe = () => {
+    let current = "";
+
+    var white_layer_1 = document.getElementById("div1");
+    var bounding1 = white_layer_1.getBoundingClientRect();
+
+    var white_layer_2 = document.getElementById("div2");
+    var bounding2 = white_layer_2.getBoundingClientRect();
+
+    var white_layer_3 = document.getElementById("div3");
+    var bounding3 = white_layer_3.getBoundingClientRect();
+
+    var white_layer_4 = document.getElementById("div4");
+    var bounding4 = white_layer_4.getBoundingClientRect();
+
+    var white_layer_5 = document.getElementById("div5");
+    var bounding5 = white_layer_5.getBoundingClientRect();
+
+    var white_layer_6 = document.getElementById("div6");
+    var bounding6 = white_layer_6.getBoundingClientRect();
+
+    var white_layer_7 = document.getElementById("div7");
+    var bounding7 = white_layer_7.getBoundingClientRect();
+
+    var white_layer_8 = document.getElementById("div8");
+    var bounding8 = white_layer_8.getBoundingClientRect();
+
+    var white_layer_9 = document.getElementById("div9");
+    var bounding9 = white_layer_9.getBoundingClientRect();
+
+    var white_layer_10 = document.getElementById("div10");
+    var bounding10 = white_layer_10.getBoundingClientRect();
+
+    var white_layer_11 = document.getElementById("div11");
+    var bounding11 = white_layer_11.getBoundingClientRect();
+
+    if (
+      bounding1.top >= 70 &&
+      bounding1.left >= 0 &&
+      bounding1.right <=
+        (window.innerWidth || document.white_layer_1.clientWidth) &&
+      bounding1.bottom <=
+        (window.innerHeight || document.white_layer_1.clientHeight)
+    ) {
+      setOpenActive("nav1");
+    } else if (
+      bounding2.top >= 70 &&
+      bounding2.left >= 0 &&
+      bounding2.right <=
+        (window.innerWidth || document.white_layer_2.clientWidth) &&
+      bounding2.bottom <=
+        (window.innerHeight || document.white_layer_2.clientHeight)
+    ) {
+      setOpenActive("nav2");
+    } else if (
+      bounding3.top >= 0 &&
+      bounding3.left >= 0 &&
+      bounding3.right <=
+        (window.innerWidth || document.white_layer_3.clientWidth) &&
+      bounding3.bottom >=
+        (window.innerHeight || document.white_layer_3.clientHeight)
+    ) {
+      setOpenActive("nav3");
+    } else if (
+      bounding4.top >= 0 &&
+      bounding4.left >= 0 &&
+      bounding4.right <=
+        (window.innerWidth || document.white_layer_4.clientWidth) &&
+      bounding4.bottom >=
+        (window.innerHeight || document.white_layer_4.clientHeight)
+    ) {
+      setOpenActive("nav4");
+    } else if (
+      bounding5.top >= 0 &&
+      bounding5.left >= 0 &&
+      bounding5.right <=
+        (window.innerWidth || document.white_layer_5.clientWidth) &&
+      bounding5.bottom >=
+        (window.innerHeight || document.white_layer_5.clientHeight)
+    ) {
+      setOpenActive("nav5");
+    } else if (
+      bounding6.top >= 0 &&
+      bounding6.left >= 0 &&
+      bounding6.right <=
+        (window.innerWidth || document.white_layer_6.clientWidth) &&
+      bounding6.bottom >=
+        (window.innerHeight || document.white_layer_6.clientHeight)
+    ) {
+      setOpenActive("nav6");
+    } else if (
+      bounding7.top >= 0 &&
+      bounding7.left >= 0 &&
+      bounding7.right <=
+        (window.innerWidth || document.white_layer_7.clientWidth) &&
+      bounding7.bottom >=
+        (window.innerHeight || document.white_layer_7.clientHeight)
+    ) {
+      setOpenActive("nav7");
+    } else if (
+      bounding8.top >= 0 &&
+      bounding8.left >= 0 &&
+      bounding8.right <=
+        (window.innerWidth || document.white_layer_8.clientWidth) &&
+      bounding8.bottom >=
+        (window.innerHeight || document.white_layer_8.clientHeight)
+    ) {
+      setOpenActive("nav8");
+    } else if (
+      bounding9.top >= 0 &&
+      bounding9.left >= 0 &&
+      bounding9.right <=
+        (window.innerWidth || document.white_layer_9.clientWidth) &&
+      bounding9.bottom >=
+        (window.innerHeight || document.white_layer_9.clientHeight)
+    ) {
+      setOpenActive("nav9");
+    } else if (
+      bounding10.top >= 0 &&
+      bounding10.left >= 0 &&
+      bounding10.right <=
+        (window.innerWidth || document.white_layer_10.clientWidth) &&
+      bounding10.bottom >=
+        (window.innerHeight || document.white_layer_10.clientHeight)
+    ) {
+      setOpenActive("nav10");
+    } else if (
+      bounding11.top >= 0 &&
+      bounding11.left >= 0 &&
+      bounding11.right <=
+        (window.innerWidth || document.white_layer_11.clientWidth) &&
+      bounding11.bottom >=
+        (window.innerHeight || document.white_layer_11.clientHeight)
+    ) {
+      setOpenActive("nav11");
+    }
+  };
+
+  // =======================
+  // =======================
+  // =======================
+  // =======================
+  // =======================
+  // =======================
+  // =======================
+
   const lists = [
     {
       id: 1,
@@ -171,44 +331,144 @@ const DashboardEgrBalancePage = () => {
         <div className="container">
           <div className="project_overview_area">
             <div className="overview_nav">
-              <a href="#" className="overview_nav1">
+              <a
+                href="#div1"
+                id="nav1"
+                className={
+                  openActive == "nav1"
+                    ? "overview_nav1   side_nav_active"
+                    : "overview_nav1"
+                }
+                onClick={openActiveNav}
+              >
                 1. PROJECT OVERVIEW: WHAT IS Bitcoin?
               </a>
-              <a href="#" className="overview_nav1">
+              <a
+                id="nav2"
+                href="#div2"
+                className={
+                  openActive == "nav2"
+                    ? "overview_nav1   side_nav_active"
+                    : "overview_nav1"
+                }
+                onClick={openActiveNav}
+              >
                 2.A. GO-TO-MARKET STRATEGY
               </a>
-              <a href="#" className="overview_nav1">
+              <a
+                href="#div3"
+                id="nav3"
+                className={
+                  openActive == "nav3"
+                    ? "overview_nav1   side_nav_active"
+                    : "overview_nav1"
+                }
+                onClick={openActiveNav}
+              >
                 2.B. PRODUCT VIABILITY
               </a>
-              <a href="#" className="overview_nav1">
+              <a
+                href="#div4"
+                id="nav4"
+                className={
+                  openActive == "nav4"
+                    ? "overview_nav1   side_nav_active"
+                    : "overview_nav1"
+                }
+                onClick={openActiveNav}
+              >
                 3. PRODUCT ROADMAP
               </a>
-              <a href="#" className="overview_nav1">
+              <a
+                href="#div5"
+                id="nav5"
+                className={
+                  openActive == "nav5"
+                    ? "overview_nav1   side_nav_active"
+                    : "overview_nav1"
+                }
+                onClick={openActiveNav}
+              >
                 4. REVENUE STREAMS
               </a>
-              <a href="#" className="overview_nav1">
-                5. PRODUCT DIVE
+              <a
+                href="#div6"
+                id="nav6"
+                className={
+                  openActive == "nav6"
+                    ? "overview_nav1   side_nav_active"
+                    : "overview_nav1"
+                }
+                onClick={openActiveNav}
+              >
+                5. TECHNOLOGIES USED BY THE PROJECT
               </a>
-              <a href="#" className="overview_nav1">
-                6. TECHNOLOGIES USED BY THE PROJECT
+              <a
+                href="#div7"
+                id="nav7"
+                className={
+                  openActive == "nav7"
+                    ? "overview_nav1   side_nav_active"
+                    : "overview_nav1"
+                }
+                onClick={openActiveNav}
+              >
+                6. PARTNERS
               </a>
-              <a href="#" className="overview_nav1">
-                7. PARTNERS
+              <a
+                href="#div8"
+                id="nav8"
+                className={
+                  openActive == "nav8"
+                    ? "overview_nav1   side_nav_active"
+                    : "overview_nav1"
+                }
+                onClick={openActiveNav}
+              >
+                7. TOKEN ECONOMY
               </a>
-              <a href="#" className="overview_nav1">
-                8. TOKEN ECONOMY
+              <a
+                href="#div9"
+                id="nav9"
+                className={
+                  openActive == "nav9"
+                    ? "overview_nav1   side_nav_active"
+                    : "overview_nav1"
+                }
+                onClick={openActiveNav}
+              >
+                8. DETAILED TOKEN METRICS
               </a>
-              <a href="#" className="overview_nav1">
-                9. DETAILED TOKEN METRICS
+              <a
+                href="#div10"
+                id="nav10"
+                className={
+                  openActive == "nav10"
+                    ? "overview_nav1   side_nav_active"
+                    : "overview_nav1"
+                }
+                onClick={openActiveNav}
+              >
+                9. TOKEN DISTRIBUTION
               </a>
-              <a href="#" className="overview_nav1">
-                10. TOKEN DISTRIBUTION
-              </a>
-              <a href="#" className="overview_nav1">
-                11. TOKEN RELEASE SCHEDULE
+              <a
+                href="#div11"
+                id="nav11"
+                className={
+                  openActive == "nav11"
+                    ? "overview_nav1   side_nav_active"
+                    : "overview_nav1"
+                }
+                onClick={openActiveNav}
+              >
+                10. TOKEN RELEASE SCHEDULE
               </a>
             </div>
-            <div className="overview_txts">
+            <div
+              className="overview_txts"
+              id="overview_txts"
+              onScroll={scrollMe}
+            >
               <div className="overview_txt1" id="div1">
                 <div className="overview_txt1_heading">
                   1. PROJECT OVERVIEW: WHAT IS Bitcoin?
@@ -335,7 +595,7 @@ const DashboardEgrBalancePage = () => {
               {/* ================== */}
               {/* ================== */}
               {/* ================== */}
-              <div className="overview_txt1" id="div3">
+              <div className="overview_txt1" id="div4">
                 <div className="overview_txt1_heading">3. PRODUCT ROADMAP</div>
                 <div className="overview_txt1_para">
                   <img
@@ -351,11 +611,121 @@ const DashboardEgrBalancePage = () => {
               {/* ================== */}
               {/* ================== */}
               {/* ================== */}
-              <div className="overview_txt1" id="div3">
+              <div className="overview_txt1" id="div5">
                 <div className="overview_txt1_heading">4. REVENUE STREAMS</div>
                 <div className="overview_txt1_para">
                   <img
                     src="https://storage.googleapis.com/public-dao-pad-prod/1635419804_Rev%20Streams.webp"
+                    alt=""
+                    className="overview_txt_img"
+                  />
+                </div>
+              </div>
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              <div className="overview_txt1" id="div6">
+                <div className="overview_txt1_heading">
+                  5. TECHNOLOGIES USED BY THE PROJECT
+                </div>
+                <div className="overview_txt1_para">
+                  <li className="list_item">
+                    Web frontend based on React + TailwindCSS+ web3.js
+                  </li>
+                  <li className="list_item">
+                    {" "}
+                    Smart contract is written by solidity
+                  </li>
+                  <li className="list_item">
+                    Layer1/Layer2 it will be built on: Ethereum mainnet,
+                    Polygon, BSC and Solan, Arbitrum.
+                  </li>
+                </div>
+              </div>
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              <div className="overview_txt1" id="div7">
+                <div className="overview_txt1_heading">6. Partners</div>
+                <div className="overview_txt1_para">
+                  <img
+                    src="https://storage.googleapis.com/public-dao-pad-prod/1635419794_Partners.webp"
+                    alt=""
+                    className="overview_txt_img"
+                  />
+                </div>
+              </div>
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              <div className="overview_txt1" id="div8">
+                <div className="overview_txt1_heading">7. TOKEN ECONOMY</div>
+                <div className="overview_txt1_para">
+                  <img
+                    src="https://storage.googleapis.com/public-dao-pad-prod/1635419787_Token%20Economy.webp"
+                    alt=""
+                    className="overview_txt_img"
+                  />
+                </div>
+              </div>
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              <div className="overview_txt1" id="div9">
+                <div className="overview_txt1_heading">
+                  8. DETAILED TOKEN METRICS
+                </div>
+                <div className="overview_txt1_para">
+                  <img
+                    src="https://storage.googleapis.com/public-dao-pad-prod/1635419787_Token%20Economy.webp"
+                    alt=""
+                    className="overview_txt_img"
+                  />
+                </div>
+              </div>
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              <div className="overview_txt1" id="div10">
+                <div className="overview_txt1_heading">
+                  9. TOKEN DISTRIBUTION
+                </div>
+                <div className="overview_txt1_para">
+                  <img
+                    src="https://storage.googleapis.com/public-dao-pad-prod/1635419780_Token%20Distribution.webp"
+                    alt=""
+                    className="overview_txt_img"
+                  />
+                </div>
+              </div>
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              {/* ================== */}
+              <div className="overview_txt1" id="div11">
+                <div className="overview_txt1_heading">
+                  10. TOKEN RELEASE SCHEDULE
+                </div>
+                <div className="overview_txt1_para">
+                  <img
+                    src="https://storage.googleapis.com/public-dao-pad-prod/1635419775_Release%20Schedule.webp"
                     alt=""
                     className="overview_txt_img"
                   />

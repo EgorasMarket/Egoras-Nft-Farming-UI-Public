@@ -203,6 +203,13 @@
   flex-direction: column;
   width: 70%;
   grid-row-gap: 35px;
+  height: 439px;
+  overflow-y: scroll;
+  transition: 3s ease-in-out;
+  scroll-behavior: smooth;
+}
+.overview_txts::-webkit-scrollbar {
+  display: none;
 }
 
 .overview_nav1 {
@@ -210,7 +217,20 @@
   font-size: 14px;
   color: #000;
 }
+.overview_nav1:hover {
+  font-weight: 600;
+  font-size: 14px;
+  color: #239e54;
+}
+.side_nav_active {
+  font-weight: 800;
+  font-size: 14px;
+  color: #239e54;
+}
 
+.overview_txt1 {
+  transition: 3s ease-in-out;
+}
 .overview_txt1_heading {
   font-size: 30px;
   font-weight: 800;
@@ -232,4 +252,87 @@
 .slider_percent1 {
   font-weight: 700;
   color: #239e54;
+}
+
+.list_item {
+  list-style-type: disc;
+}
+
+@media screen and (max-width: 1220px) {
+  .governance_details_section {
+    padding-left: 0em;
+  }
+
+  .project_overview_section {
+    padding-left: 0em;
+  }
+}
+@media screen and (max-width: 1080px) {
+  .governance_details_page {
+    padding: 4em 0em;
+  }
+
+  .key_metrics_area {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 899px) {
+  .governance_details_page {
+    padding: 4em 0em;
+  }
+
+  .key_metrics_area {
+    width: 100%;
+  }
+
+  .governance_details_area {
+    flex-direction: column;
+    grid-row-gap: 40px;
+  }
+
+  .project_overview_area {
+    flex-direction: column;
+    grid-row-gap: 50px;
+  }
+
+  .overview_nav {
+    width: 100%;
+  }
+
+  .overview_txts {
+    width: 100%;
+  }
+  .governance_details {
+    width: 100%;
+  }
+
+  .governance_details_slider_amounts {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .governance_details_area {
+    padding: 0em 0em;
+  }
+
+  .project_overview_area {
+    padding: 0em;
+  }
+  .governance_details_section {
+    padding-top: 4em;
+  }
+  .project_overview_section {
+    padding-top: 4em;
+  }
+  .governance_details_links {
+    grid-template-columns: auto auto;
+  }
+  .key_metrics_area {
+    padding: 0.5em;
+  }
+}
+@media screen and (max-width: 376px) {
+  .key_metrics_column1 {
+    padding: 0em 0.5em;
+  }
 }

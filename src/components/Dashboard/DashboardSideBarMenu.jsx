@@ -10,7 +10,6 @@ import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import CloseIcon from "@material-ui/icons/Close";
 import { Link } from "react-router-dom";
-
 import "../../css/dashBoardSideBar.css";
 import "../../css/dashboardheader.css";
 
@@ -211,7 +210,7 @@ const DashboardSideBarMenu = () => {
               >
                 <ImportExportIcon className="sidebarIcon" />
                 Staking
-              </li>
+              </li> 
             </Link>
             {/* ===================== */}
             {/* ===================== */}

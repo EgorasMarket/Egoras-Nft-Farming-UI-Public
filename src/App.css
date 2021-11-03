@@ -4,6 +4,14 @@
   font-family: "Mulish", sans-serif;
   text-decoration: none !important;
 }
+
+html {
+  scroll-behavior: smooth;
+  transition: 2s ease-in;
+}
+
+
+
 a {
   text-decoration: none !important;
   color: #229e54;
