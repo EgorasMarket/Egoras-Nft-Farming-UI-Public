@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import React from "react";
+
+import FlipCountdown from "@rumess/react-flip-countdown";
 import HomeIcon from "@mui/icons-material/Home";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
@@ -11,6 +13,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 
 import "../../css/home.css";
+import "../../css/countdown.css";
 
 const Home = () => {
   useEffect(() => {
@@ -139,21 +142,41 @@ const Home = () => {
       {/* third section start */}
       <section className="earning-section">
         <div className="container">
-          <div className="nft-area2">
+          <div className="nft-area2 column_align">
             <div className="nft-txt-area2 " style={{ width: "100%" }}>
               <div className="span-txts">
-                <p className="span4a-txts">Grow your portfolio with Egoras</p>
+                <p className="span4a-txts">Egoras v2.0</p>
+                <p className="span4a-txts">Coming Soon......</p>
                 <p className="span4b-txts">
                   Build your portfolio with Egoras Interest-free Cryptoloans or
                   earn attractive APY when you stake your crypto.
                 </p>
               </div>
-              <div className="stake-hero-btns">
+
+              <div className="countdown">
+                <FlipCountdown
+                  theme="light" // Options (Default: dark): dark, light.
+                  titlePosition="bottom"
+                  yearTitle="Year"
+                  monthTitle="Months"
+                  dayTitle="Days"
+                  hourTitle="Hours"
+                  minuteTitle="Minutes"
+                  secondTitle="Seconds"
+                  hideYear
+                  hideMonth
+                  endAt={"2021-11-20 01:26:58"} // Date/Time
+                />
+              </div>
+
+              {/* <div className="stake-hero-btns">
                 <a href="/dashboard" className="stake-hero-btn1">
                   Launch App <ExitToAppIcon className="exit-to-app" />
                 </a>
-                <button className="stake-hero-btn2">Read White-Paper</button>
-              </div>
+                <a href="/dashboard/whitepaper" className="stake-hero-btn2">
+                  Read White-Paper
+                </a>
+              </div> */}
             </div>
             <div
               className="nft-img-area2"
@@ -183,7 +206,7 @@ const Home = () => {
       {/* =================== */}
       {/* =================== */}
       {/* fourth section start */}
-      <section className="second-eusd-token-section">
+      {/* <section className="second-eusd-token-section">
         <div className="container">
           <div className="nft-area3">
             <div className="key-features-cards-area">
@@ -229,7 +252,7 @@ const Home = () => {
           </div>
         </div>
         <img src="/img/blur-drop.png" alt="" className="blurDrop-token" />
-      </section>
+      </section> */}
       {/* fourth section end */}
       {/* ==================== */}
       {/* ==================== */}
@@ -238,7 +261,7 @@ const Home = () => {
       {/* =================================================================================================================================================================================================================================================================== */}
       {/* Tokens Section Start */}
 
-      <section className="collateral-assets-section">
+      {/* <section className="collateral-assets-section">
         <div className="container">
           <div className="assets-container">
             <div className="assets-cont-head-area">
@@ -302,9 +325,9 @@ const Home = () => {
                   <th className="assets-category-titles-heading1 right"></th>
                   <th className="assets-category-titles-heading1 right"></th>
                 </tr>
-              </thead>
+              </thead> */}
 
-              {/* <div className="table-body-content">
+      {/* <div className="table-body-content">
 
 // =====================
 // =====================
@@ -315,15 +338,15 @@ const Home = () => {
 
                 
               </div> */}
-              <tbody
+      {/* <tbody
                 className="assets-table-body popular-categories"
                 id="popular-categories"
               >
                 {" "}
                 {/* =============== */}
-                {/* =============== */}
-                {/* =============== */}
-                {assets.map((asset) => (
+      {/* =============== */}
+      {/* =============== */}
+      {/* {assets.map((asset) => (
                   <tr className="assets-category-row">
                     <td className="assets-category-data">
                       <div className="assets-data">
@@ -373,21 +396,21 @@ const Home = () => {
                       </div>
                     </td>
                   </tr>
-                ))}
-                {/* =============== */}
-                {/* =============== */}
-                {/* =============== */}
-              </tbody>
-              {/* {{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}} */}
-            </table>
+                // ))} */}
+      {/* =============== */}
+      {/* =============== */}
+      {/* =============== */}
+      {/* </tbody> */}
+      {/* {{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}} */}
+      {/* </table>
           </div>
-        </div>
-      </section>
+        </div> */}
+      {/* </section> */}
 
       {/* third section start */}
 
       {/* fourth section start */}
-      <section className="second-eusd-token-section">
+      {/* <section className="second-eusd-token-section">
         <div className="container">
           <div className="nft-area3">
             <div className="key-features-cards-area">
@@ -424,7 +447,7 @@ const Home = () => {
           </div>
         </div>
         <img src="/img/blur-drop.png" alt="" className="blurDrop-token" />
-      </section>
+      </section> */}
     </div>
   );
 };

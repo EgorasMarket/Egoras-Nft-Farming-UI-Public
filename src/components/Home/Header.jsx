@@ -383,19 +383,19 @@ const Header = () => {
               <ArrowDropDownIcon />
             </a>
           </ul> */}
-
+{/* 
             <ul className="headerButtons">
               <a href="/dashboard" className="connect">
                 {" "}
                 Launch App <ExitToAppIcon className="exit-to-app" />
               </a>
-            </ul>
+            </ul> */}
             {/* <img
               src="/img/hamburger-open.svg"
               alt=""
               className="hamburgerOpen"
             /> */}
-            <div className="onMobile">
+            {/* <div className="onMobile">
               <Toolbar className="hideNow">
                 <IconButton
                   color="inherit"
@@ -430,7 +430,7 @@ const Header = () => {
                   </a>
                 </List>
               </Drawer>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

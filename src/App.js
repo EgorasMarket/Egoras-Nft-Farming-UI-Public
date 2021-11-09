@@ -5,7 +5,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Header from "./components/Home/Header";
 import "bootstrap/dist/css/bootstrap.css";
 import Home from "./components/Home/Home";
-import Footer from "./components/Home/Footer.jsx";
+// import Footer from "./components/Home/Footer.jsx";
 import "../src/App.css";
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           </Route>
           <Dashboard />
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </Router>
   );

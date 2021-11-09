@@ -6,6 +6,12 @@ import SecurityIcon from "@mui/icons-material/Security";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import ImportExportIcon from "@mui/icons-material/ImportExport";
 import DescriptionIcon from "@mui/icons-material/Description";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import TelegramIcon from "@mui/icons-material/Telegram";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
+import TwitterIcon from "@mui/icons-material/Twitter";
 import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import CloseIcon from "@material-ui/icons/Close";
@@ -26,6 +32,21 @@ const DashboardSideBarMenu = () => {
     let currentId = e.currentTarget.id;
     setActiveBg(currentId);
   };
+
+  const attributes = [
+    {
+      name: "samuel",
+      role: "dev",
+      devName: "CYNTAX",
+    },
+  ];
+  console.log(
+    attributes[0].name +
+      " is a very good " +
+      attributes[0].role +
+      " with a great " +
+      attributes[0].devName
+  );
 
   const linksActive = window.location.pathname;
 
@@ -61,7 +82,6 @@ const DashboardSideBarMenu = () => {
     //   console.log("i workoooo");
     // }
   }, []);
-
 
   const dropDownOpen = () => {
     let sideBar = document.getElementById("side_bar");
@@ -210,13 +230,18 @@ const DashboardSideBarMenu = () => {
               >
                 <ImportExportIcon className="sidebarIcon" />
                 Staking
-              </li> 
+              </li>
             </Link>
             {/* ===================== */}
             {/* ===================== */}
             {/* ===================== */}
             {/* ===================== */}
-            <Link to="/dashboard/governance" className="link" id="governance" onClick={changeBg}>
+            <Link
+              to="/dashboard/governance"
+              className="link"
+              id="governance"
+              onClick={changeBg}
+            >
               <li
                 className={
                   activeBg == "governance"
@@ -325,6 +350,45 @@ const DashboardSideBarMenu = () => {
                 </div>
               </span>
             </a> */}
+          </ul>
+          <hr />
+          <ul className="social_icons">
+            <li className="icons_layer_1">
+              <a href="#" className="twitter_icon">
+                <TwitterIcon className="social_icon" />
+              </a>
+              <a href="#" className="twitter_icon">
+                <FacebookOutlinedIcon className="social_icon" />
+              </a>
+              <a href="#" className="twitter_icon">
+                <GitHubIcon className="social_icon" />
+              </a>
+              <a href="#" className="twitter_icon">
+                <InstagramIcon className="social_icon" />
+              </a>
+            </li>
+            <li className="icons_layer_1">
+              <a href="#" className="twitter_icon">
+                <YouTubeIcon className="social_icon" />
+              </a>
+              <a href="#" className="twitter_icon">
+                <TelegramIcon className="social_icon" />
+              </a>
+              <a href="#" className="twitter_icon">
+                <img
+                  src="/img/linked_in_icon.svg"
+                  alt=""
+                  className="social_icon a"
+                />
+              </a>
+              <a href="#" className="twitter_icon">
+                <img
+                  src="/img/medium_icon.svg"
+                  alt=""
+                  className="social_icon a"
+                />
+              </a>
+            </li>
           </ul>
         </div>
       </div>

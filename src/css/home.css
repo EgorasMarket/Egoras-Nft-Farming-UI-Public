@@ -14,7 +14,7 @@
   font-size: 55px;
   width: 100%;
   font-weight: 900;
-
+  margin: 0;
   line-height: 65px;
 }
 .span4b-txts {
@@ -701,6 +701,15 @@ p.key-features-cards-area1-para {
   /* ====================== */
 }
 
+/* @media screen and (max-width: 800px) {
+  .column_align {
+    flex-direction: column-reverse;
+  }
+  .earning-section {
+    padding: 5em 0em;
+  }
+} */
+
 @media screen and (max-width: 767px) {
   .stats-widget {
     margin: 20px 0px 0px 0px;
@@ -721,6 +730,12 @@ p.key-features-cards-area1-para {
     grid-row-gap: 20px;
   }
 
+  .column_align {
+    flex-direction: column-reverse;
+  }
+  .earning-section {
+    padding: 5em 0em;
+  }
   .nft-area3 {
     flex-direction: column;
     grid-row-gap: 20px;
@@ -752,7 +767,6 @@ p.key-features-cards-area1-para {
     padding: 0em;
     padding-bottom: 2em;
   }
-  
 }
 @media screen and (max-width: 600px) {
   .assets-header2 {
