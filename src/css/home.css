@@ -96,10 +96,11 @@
 } */
 .earning-section {
   padding: 10em 0em;
-  padding-bottom: 2em;
+  padding-bottom: 0em;
   position: relative;
   background: #f2fbf6;
   overflow: hidden;
+  height: 100vh;
 }
 .reduce-padding {
   padding: 4em 0;

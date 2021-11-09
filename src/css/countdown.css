@@ -12,11 +12,11 @@
   .flip-countdown-piece
   .flip-countdown-card
   .flip-countdown-card-sec {
-  margin: 0 0.025em;
-  font-size: 55px;
+  margin: 0 0.025em !important;
+  font-size: 55px !important;
 }
 .flip-countdown.size-medium .flip-countdown-piece {
-  margin: 0em 2em 0em 0em;
+  margin: 0em 2em 0em 0em !important;
 }
 .flip-countdown.theme-light
   .flip-countdown-piece
@@ -43,7 +43,7 @@
 }
 
 .flip-countdown {
-  text-align: left;
+  text-align: left !important;
 }
 
 .count-down-section-btns {
@@ -134,8 +134,8 @@
   right: 0%;
 }
 .flip-countdown .flip-countdown-piece .flip-countdown-card {
-  display: flex;
-  justify-content: center;
+  display: flex !important;
+  justify-content: center !important;
 }
 .circlemy.eusd-token-page {
   position: absolute;
@@ -198,8 +198,8 @@
     .flip-countdown-piece
     .flip-countdown-card
     .flip-countdown-card-sec {
-    margin: 0 0.025em;
-    font-size: 42px;
+    margin: 0 0.025em !important;
+    font-size: 42px !important;
   }
 
   .count-down-btn1 {
@@ -222,7 +222,7 @@
   }
 
   .flip-countdown {
-    text-align: center;
+    text-align: center !important;
   }
   .reverse {
     display: flex;
@@ -248,7 +248,7 @@
 }
 @media screen and (max-width: 400px) {
   .flip-countdown.size-medium .flip-countdown-piece {
-    margin: 0.5em;
+    margin: 0.5em !important;
   }
 
   .egc-illustartiona {
