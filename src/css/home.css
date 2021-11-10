@@ -735,7 +735,7 @@ p.key-features-cards-area1-para {
     flex-direction: column-reverse;
   }
   .earning-section {
-    padding: 5em 0em;
+    padding: 4em 0em;
   }
   .nft-area3 {
     flex-direction: column;
@@ -785,13 +785,72 @@ p.key-features-cards-area1-para {
     font-size: 24px;
     font-weight: 700;
   }
+  .earning-section {
+    padding: 5em 0em;
+    padding-top: 8em;
+    height: 100vh;
+  }
+
   .stake-hero-btn1 {
     padding: 1em 1em;
     font-size: 12px;
+  }
+
+  .nft-area2 {
+    height: 80vh;
+  }
+  .span4a-txts {
+    font-size: 185%;
+    width: 100%;
+    font-weight: 900;
+    margin: 0;
+    line-height: 65px;
+    margin-top: -1em;
+    /* height: 20%; */
+  }
+
+  .span4b-txts {
+    margin: 0;
+  }
+  .flip-countdown.size-medium .flip-countdown-piece .flip-countdown-title {
+    font-size: 14px !important;
+  }
+
+  .flip-countdown.size-medium
+    .flip-countdown-piece
+    .flip-countdown-card
+    .flip-countdown-card-sec {
+    margin: 0 0.025em !important;
+    font-size: 32px !important;
+  }
+
+  /* nft-txt-area */
+  .nft-txt-area2 {
+    width: 100%;
+    height: 200%;
+  }
+
+  /* nft-img-area */
+
+  .nft-img-area2 {
+    display: inline-flex;
+    width: 85%;
+    height: 50%;
+  }
+
+  /* nft-img */
+  .nft-img {
+    width: 100%;
+    margin: auto;
+    height: 100%;
   }
 }
 @media screen and (max-width: 375px) {
   .tokenCardflex-txt {
     font-size: 20px;
+  }
+  .earning-section {
+    padding: 5em 0 1em;
+    height: 100vh;
   }
 }

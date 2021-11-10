@@ -246,6 +246,19 @@
     margin: auto;
   }
 }
+@media screen and (max-width: 449px) {
+  .flip-countdown.size-medium .flip-countdown-piece .flip-countdown-title {
+    font-size: 14px !important;
+  }
+
+  .flip-countdown.size-medium
+    .flip-countdown-piece
+    .flip-countdown-card
+    .flip-countdown-card-sec {
+    margin: 0 0.025em !important;
+    font-size: 32px !important;
+  }
+}
 @media screen and (max-width: 400px) {
   .flip-countdown.size-medium .flip-countdown-piece {
     margin: 0.5em !important;

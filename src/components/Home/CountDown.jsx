@@ -186,6 +186,7 @@ const CountDown = () => {
                 src="/img/egr-stake-coina.png"
                 alt=""
                 style={{ width: "100%", margin: "auto" }}
+                className="nft-img"
               />
             </div>
           </div>
