@@ -3,12 +3,20 @@ import React, { useState, useEffect } from "react";
 import "../../../css/dashboardtransaction.css";
 
 const DashBoardTransaction = () => {
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [categoryBtn, setCategoryBtn] = useState("All");
   const [active, setActive] = useState("supply");
   const [percentBtn, setPercentBtn] = useState("");
+  const [modal, setModal] = useState("not_staking_area3");
+
+  const openModal = () => {
+    setModal("staking_area3");
+  };
+  const closeModal = () => {
+    setModal("not_staking_area3");
+  };
 
   const assets = [
     {
@@ -179,9 +187,7 @@ const DashBoardTransaction = () => {
               <table className="assets-table">
                 <thead className="assets-category-titles">
                   <tr className="assets">
-                    <th className="assets-category-titles-heading1">
-                      Total Staked Amount
-                    </th>
+                    <th className="assets-category-titles-heading1">Asset</th>
                     <th className="assets-category-titles-heading1">Status</th>
                     <th className="assets-category-titles-heading1 right">
                       Estimated APR
@@ -207,7 +213,7 @@ const DashBoardTransaction = () => {
                 
               </div> */}
                 <tbody
-                  className="assets-table-body popular-categories"
+                  className="assets-table-body popular-categories full_no_modal"
                   id="popular-categories"
                 >
                   {" "}
@@ -216,7 +222,7 @@ const DashBoardTransaction = () => {
                   {/* =============== */}
                   {assets.map((asset) => (
                     <tr className="assets-category-row">
-                      <td className="assets-category-data">
+                      <td className="assets-category-data ab">
                         <div className="assets-data">
                           <img
                             src={asset.img}
@@ -227,18 +233,67 @@ const DashBoardTransaction = () => {
                           <div className="assets-data-name">{asset.name}</div>
                         </div>
                       </td>
-                      <td className="assets-category-data1">
+                      <td className="assets-category-data1 abc">
                         <div className="assets-data-name">{asset.type}</div>
                       </td>
-                      <td className="assets-category-data1b">
+                      <td className="assets-category-data1b abcd">
                         <div className="assets-data-name">
                           {asset.eusd_Avail}
                         </div>
                       </td>
-                      <td className="assets-category-data1b stable-content">
+                      <td className="assets-category-data1b stable-content abcde">
                         <div className="assets-data-name ">{asset.stable}</div>
                       </td>
-                      <td className="assets-category-data1b ratio-content">
+                      <td className="assets-category-data1b ratio-content abcdef">
+                        <div className="assets-data-name ">{asset.ratio}</div>
+                      </td>
+                    </tr>
+                  ))}
+                  {/* =================== */}
+                  {/* =================== */}
+                  {/* =================== */}
+                  {/* =================== */}
+                  {/* =============== */}
+                  {/* =============== */}
+                </tbody>
+                {/* ============ */}
+                {/* ============ */}
+                {/* ============ */}
+                {/* ============ */}
+                <tbody
+                  className="assets-table-body popular-categories mobile_modal"
+                  id="popular-categories"
+                  onClick={openModal}
+                >
+                  {" "}
+                  {/* =============== */}
+                  {/* =============== */}
+                  {/* =============== */}
+                  {assets.map((asset) => (
+                    <tr className="assets-category-row">
+                      <td className="assets-category-data ab">
+                        <div className="assets-data">
+                          <img
+                            src={asset.img}
+                            alt=""
+                            className="assets-list-icon"
+                          />
+
+                          <div className="assets-data-name">{asset.name}</div>
+                        </div>
+                      </td>
+                      <td className="assets-category-data1 abc">
+                        <div className="assets-data-name">{asset.type}</div>
+                      </td>
+                      <td className="assets-category-data1b abcd">
+                        <div className="assets-data-name">
+                          {asset.eusd_Avail}
+                        </div>
+                      </td>
+                      <td className="assets-category-data1b stable-content abcde">
+                        <div className="assets-data-name ">{asset.stable}</div>
+                      </td>
+                      <td className="assets-category-data1b ratio-content abcdef">
                         <div className="assets-data-name ">{asset.ratio}</div>
                       </td>
                     </tr>
@@ -253,6 +308,11 @@ const DashBoardTransaction = () => {
                 {/* {{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}} */}
               </table>
             </div>
+
+            {/* ======== */}
+            {/* ======== */}
+            {/* ======== */}
+            {/* ======== */}
             <div className="staking-area2">
               <div className="dashboard-area1-cont1 stake-cont2">
                 {/* ========= */}
@@ -282,7 +342,7 @@ const DashBoardTransaction = () => {
                     id="supply"
                     onClick={changeBg}
                   >
-                    Supply
+                    Stake
                   </button>
                   <button
                     className={
@@ -390,12 +450,177 @@ const DashBoardTransaction = () => {
                       active == "supply" ? "withdraw-btn" : "not-withdraw-btn"
                     }
                   >
-                    Supply
+                    Stake
                   </button>
                   <button
                     className={
                       active == "withdraw" ? "withdraw-btn" : "not-withdraw-btn"
                     }
+                  >
+                    Withdraw
+                  </button>
+                </div>
+              </div>
+            </div>
+            {/* ========= */}
+            {/* ========= */}
+            {/* ========= */}
+            {/* ========= */}
+            <div
+              className={
+                modal == "not_staking_area3"
+                  ? "not_staking_area3"
+                  : "staking_area3"
+              }
+              // onClick={closeModal}
+            >
+              <div
+                className="dashboard-area1-cont1a stake-cont2 "
+ 
+              >
+                {/* ========= */}
+                {/* ========= */}
+                {/* ========= */}
+                <div className="dashboard-area1-heading-coin-display">
+                  <div className="coin-display">
+                    <img
+                      src="/img/ether-logo.svg"
+                      alt=""
+                      className="eth-icon"
+                    />{" "}
+                    ETH Supplied
+                  </div>
+                  <div className="coin-display-amount">0.00</div>
+                </div>
+                {/* ========= */}
+                {/* ========= */}
+                {/* ========= */}
+                <div className="dashboard-area1-heading-supply-withdraw-pages">
+                  <button
+                    className={
+                      active == "supply"
+                        ? "supply-btn supply-btn-active"
+                        : "supply-btn"
+                    }
+                    id="supply"
+                    onClick={changeBg}
+                  >
+                    Stake
+                  </button>
+                  <button
+                    className={
+                      active == "withdraw"
+                        ? "supply-btn supply-btn-active"
+                        : "supply-btn"
+                    }
+                    id="withdraw"
+                    onClick={changeBg}
+                  >
+                    Withdraw
+                  </button>
+                </div>
+                {/* ========= */}
+                {/* ========= */}
+                {/* ========= */}
+                <div className="dashboard-area1-heading-supply-withdraw-input padding">
+                  <div className="withdraw-input-section1">
+                    <div
+                      className={
+                        active == "supply"
+                          ? "safe-to-withdraw"
+                          : "not-safe-to-withdraw"
+                      }
+                    >
+                      ETH Balance
+                    </div>
+                    <div
+                      className={
+                        active == "withdraw"
+                          ? "safe-to-withdraw"
+                          : "not-safe-to-withdraw"
+                      }
+                    >
+                      Safe to Withdraw
+                    </div>
+                    <div className="safe-to-withdraw-figure">0.00</div>
+                  </div>
+                  <div className="withdraw-input-section2">
+                    <input
+                      type="search"
+                      name=""
+                      value="0.00"
+                      id=""
+                      className="withdraw-input-box"
+                    />
+                    <button className="max-btn" onClick={changeBg1}>
+                      Max
+                    </button>
+                  </div>
+                  <div className="withdraw-input-section3">
+                    <button
+                      className={
+                        percentBtn == "twentyFive_percent"
+                          ? "percent-increase percent-increase-active"
+                          : "percent-increase"
+                      }
+                      // "percent-increase percent-increase-active"
+                      id="twentyFive_percent"
+                      onClick={activeClass}
+                    >
+                      25%
+                    </button>
+                    <button
+                      className={
+                        percentBtn == "fifty_percent"
+                          ? "percent-increase percent-increase-active"
+                          : "percent-increase"
+                      }
+                      id="fifty_percent"
+                      onClick={activeClass}
+                    >
+                      50%
+                    </button>
+                    <button
+                      className={
+                        percentBtn == "sevenFive_percent"
+                          ? "percent-increase percent-increase-active"
+                          : "percent-increase"
+                      }
+                      id="sevenFive_percent"
+                      onClick={activeClass}
+                    >
+                      75%
+                    </button>
+                    <button
+                      className={
+                        percentBtn == "hundred_percent"
+                          ? "percent-increase percent-increase-active"
+                          : "percent-increase"
+                      }
+                      id="hundred_percent"
+                      onClick={activeClass}
+                    >
+                      100%
+                    </button>
+                  </div>
+                </div>
+                {/* ========= */}
+                {/* ========= */}
+                {/* ========= */}
+                <div className="dashboard-area1-heading-supply-withdraw-btn">
+                  <button
+                    className={
+                      active == "supply" ? "withdraw-btn" : "not-withdraw-btn"
+                    }
+                    onClick={closeModal}
+                  >
+                    Stake
+                  </button>
+                  <button
+                    className={
+                      active == "withdraw" ? "withdraw-btn" : "not-withdraw-btn"
+                    }
+                    onClick={closeModal}
                   >
                     Withdraw
                   </button>

@@ -2,13 +2,10 @@
     padding:0px 20px;
 } */
 .governance_section {
-  flex: 4;
+  padding: 2em 0em;
+  padding-top: 8em;
+  padding-left: 14em;
   width: 100%;
-  padding-left: 17em;
-  background: #f6fff9;
-  padding-top: 10em;
-  height: 100%;
-  padding-bottom: 3em;
 }
 
 .coins_list_area {
@@ -29,12 +26,15 @@
 }
 
 .coin-img {
-  width: 275px;
+  width: 100%;
   position: absolute;
-  left: 3%;
-  top: -19%;
+  left: 0%;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
   box-shadow: 0px 0px 15px #cfcfcf;
   border-radius: 100%;
+  margin: auto;
 }
 
 .coins_card {
@@ -107,4 +107,128 @@
   width: 80%;
   height: 100%;
   border-radius: 50px;
+}
+
+.governance_page {
+  flex: 4 1;
+  width: 100vh;
+  background: #f6fff9;
+}
+
+@media screen and (max-width: 1455px) {
+  .coins_list_area {
+    grid-template-columns: auto auto auto;
+  }
+  .coins_card {
+    width: 80%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 1320px) {
+  .coins_card {
+    width: 90%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 1220px) {
+  .coins_card {
+    width: 90%;
+    margin: auto;
+  }
+  .coins_list_area {
+    grid-template-columns: auto auto auto;
+  }
+  .governance_section {
+    padding-left: 2em;
+  }
+}
+@media screen and (max-width: 1080px) {
+  .governance_section {
+    padding-left: 0em;
+  }
+}
+@media screen and (max-width: 930px) {
+  .coins_card {
+    width: 90%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 920px) {
+  .coins_card {
+    width: 85%;
+    margin: auto;
+  }
+  .coin-img {
+    left: 0%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 902px) {
+  .coins_card {
+    width: 85%;
+    margin: auto;
+  }
+  .coins_list_area {
+    grid-template-columns: auto auto;
+  }
+  .coin-img {
+    left: 0%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 767px) {
+  .coin-img {
+    left: 0%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 660px) {
+  .coin-img {
+    left: 0%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    margin: auto;
+  }
+  .coins_card {
+    width: 80%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 652px) {
+  .coin-img {
+    left: 0%;
+    top: 0%;
+    right: 0%;
+    bottom: 0%;
+    margin: auto;
+  }
+  .coins_card {
+    width: 50%;
+    margin: auto;
+  }
+  .coins_list_area {
+    grid-template-columns: auto;
+  }
+}
+@media screen and (max-width: 600px) {
+  .coins_card {
+    width: 65%;
+    margin: auto;
+  }
+}
+@media screen and (max-width: 450px) {
+  .coins_card {
+    width: 85%;
+    margin: auto;
+  }
 }

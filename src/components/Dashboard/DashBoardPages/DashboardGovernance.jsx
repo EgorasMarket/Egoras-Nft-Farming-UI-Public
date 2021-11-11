@@ -194,33 +194,35 @@ const DashboardGovernance = () => {
   ];
 
   return (
-    <div className="governance_section">
-      <div className="container">
-        <div className="coins_list_area">
-          {/* //   key={bag.id} */}
-          {lists.map((paste) => (
-            <Link to="/dashboard/governance/details" className="coins_card">
-              <div className="coinsBg_area">
-                <img src={paste.img} alt="" className="coin-img" />
-              </div>
-              <div className="coinSymbol">
-                <img
-                  src={paste.symbol_image}
-                  alt=""
-                  className="assets-list-icon"
-                />
-                {paste.symbol_name}
-              </div>
-              <p className="coinName">{paste.name}</p>
+    <div className="governance_page">
+      <section className="governance_section">
+        <div className="container">
+          <div className="coins_list_area">
+            {/* //   key={bag.id} */}
+            {lists.map((paste) => (
+              <Link to="/dashboard/governance/details" className="coins_card">
+                <div className="coinsBg_area">
+                  <img src={paste.img} alt="" className="coin-img" />
+                </div>
+                <div className="coinSymbol">
+                  <img
+                    src={paste.symbol_image}
+                    alt=""
+                    className="assets-list-icon"
+                  />
+                  {paste.symbol_name}
+                </div>
+                <p className="coinName">{paste.name}</p>
 
-              <div className="coin_amount">
-                {paste.coin_amount}
-                <div className="coin_slider"></div>
-              </div>
-            </Link>
-          ))}
+                <div className="coin_amount">
+                  {paste.coin_amount}
+                  <div className="coin_slider"></div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 };

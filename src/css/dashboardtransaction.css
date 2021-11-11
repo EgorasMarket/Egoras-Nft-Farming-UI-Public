@@ -25,8 +25,81 @@
   flex-direction: column;
   grid-row-gap: 10px;
 }
+.percent-increase {
+  padding: 0.5em 1em;
+  font-size: 12px;
+  margin-left: 10px;
+  border-radius: 50px;
+  border: solid;
+  border-width: 1px;
+  background: none;
+  border-color: #b1b1b1;
+  width: 15%;
+}
+.percent-increase-active {
+  padding: 0.5em 1em;
+  font-size: 12px;
+  margin-left: 10px;
+  border-radius: 50px;
+  border: solid;
+  border-width: 1px;
+  background: none;
+  border-color: #e4a788;
+  background: #e4a788;
+  color: #fff;
+  width: 15%;
+}
+.staking_area3 {
+  display: none;
+}
+.not_staking_area3 {
+  display: none;
+}
 
-
+.dashboard-area1-cont1a {
+  background: #fff;
+  width: 100%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  grid-row-gap: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 25px #c1e3cf;
+  position: relative;
+  background-size: cover;
+  padding: 2em;
+}
+.assets-category-data {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  padding: 16px;
+  display: table-cell;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+.assets-category-data1 {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  padding: 16px;
+  display: table-cell;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+}
+.mobile_modal {
+  display: none;
+}
+.assets-category-data1b {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  padding: 16px;
+  display: table-cell;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  text-align: right;
+}
 .staking-area1 {
   height: 100vh;
   overflow-y: scroll;
@@ -36,16 +109,6 @@
 .staking-area1::-webkit-scrollbar {
   display: none;
 }
-
-
-
-
-
-
-
-
-
-
 
 .staking-area1 .assets-category-data {
   height: 100px;
@@ -62,9 +125,6 @@
 @media screen and (max-width: 1311px) {
   .staking-area1 {
     width: 120%;
-  }
-  .stake-cont2 {
-    width: 90%;
   }
 }
 
@@ -97,6 +157,13 @@
     padding-left: 0em;
     padding-right: 0;
   }
+
+  .percent-increase {
+    width: 20%;
+  }
+  .percent-increase-active {
+    width: 20%;
+  }
 }
 @media screen and (max-width: 1000px) {
   .staking-area1 {
@@ -110,19 +177,73 @@
     width: 100%;
     display: none;
   }
-  .stake-cont2 {
+
+  .staking_area3 {
     width: 100%;
+    display: block;
+    position: fixed;
+    left: 0%;
+    right: 0%;
+    margin: auto;
+    top: 0;
+    z-index: 20000;
+    height: 100vh;
+    background: #00000078;
+    padding-top: 30%;
+    overflow-y: scroll;
   }
+  .not_staking_area3 {
+    display: none;
+    width: 100%;
+    position: fixed;
+    left: 0%;
+    right: 0%;
+    margin: auto;
+    top: 0;
+    z-index: 20000;
+    height: 100vh;
+    background: #00000078;
+    padding-top: 30%;
+    overflow-y: scroll;
+  }
+
   .dashboard-area1 {
     flex-direction: column;
     grid-row-gap: 30px;
   }
 
+  .dashboard-area1-cont1a {
+    width: 95%;
+    height: 30em;
+    margin: auto;
+    box-shadow: 0px 0px 25px #000000;
+  }
   .dashboard-area1-cont1 {
+    padding: 0em 1em;
+    padding-top: 1em;
     width: 100%;
+  }
+
+  .dashboard-area1-cont1a {
+    padding: 0em 1em;
+    padding-top: 1em;
   }
   .dashboard-area1-cont2 {
     width: 100%;
+  }
+
+  .percent-increase {
+    width: 20%;
+  }
+  .percent-increase-active {
+    width: 20%;
+  }
+  .full_no_modal {
+    display: none;
+  }
+
+  .mobile_modal {
+    display: table-row-group;
   }
 }
 @media screen and (max-width: 900px) {
@@ -131,6 +252,52 @@
   }
   .user {
     display: none;
+  }
+
+  .ab::before {
+    font-family: Inter, "Helvetica Neue", sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 14px;
+    color: var(--theme-ui-colors-text-muted, #708390);
+    content: " Asset" !important;
+    display: block;
+  }
+  .abc::before {
+    font-family: Inter, "Helvetica Neue", sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 14px;
+    color: var(--theme-ui-colors-text-muted, #708390);
+    content: "Status" !important;
+    display: block;
+  }
+  .abcd::before {
+    font-family: Inter, "Helvetica Neue", sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 14px;
+    color: var(--theme-ui-colors-text-muted, #708390);
+    content: "Estimated APR." !important;
+    display: block;
+  }
+  .abcde::before {
+    font-family: Inter, "Helvetica Neue", sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 14px;
+    color: var(--theme-ui-colors-text-muted, #708390);
+    content: "Estimated Daily Reward." !important;
+    display: block;
+  }
+  .abcdef::before {
+    font-family: Inter, "Helvetica Neue", sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 14px;
+    color: var(--theme-ui-colors-text-muted, #708390);
+    content: "Earned Rewards." !important;
+    display: block;
   }
 }
 @media screen and (max-width: 767px) {
@@ -156,11 +323,12 @@
   }
 }
 @media screen and (max-width: 400px) {
-  .dashboard-area1-cont1 {
-    padding: 0em 1em;
-    padding-top: 1em;
-  }
   .dashboard-area1-heading-supply-withdraw-input {
     padding: 0em;
+  }
+  .dashboard-area1-heading-coin-display {
+    padding: 2em 0em;
+
+    padding-bottom: 1em;
   }
 }

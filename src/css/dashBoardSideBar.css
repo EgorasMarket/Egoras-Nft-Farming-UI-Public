@@ -13,23 +13,12 @@
   display: none;
 }
 
-.drop-open-icon {
-  margin-right: 20px;
-  width: 25px;
-  display: none;
-}
-
 .open-icon {
   margin-right: 20px;
   width: 25px;
   display: inline-block;
 }
 
-.drop-close-icon {
-  margin-right: 20px;
-  width: 25px;
-  display: none;
-}
 .sidebarWrapper {
   color: #555;
   width: 100%;
@@ -58,6 +47,7 @@
   grid-row-gap: 10px;
   align-items: center;
   position: relative;
+  margin-bottom: 89%;
 }
 a.link {
   width: 100%;
@@ -93,12 +83,44 @@ a.link:hover {
   border-radius: 50px;
   box-shadow: 0px 0px 10px #b4dfc5;
 }
-
+.ma {
+  background: #e7fff0;
+  padding: 6px;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 0px 10px #b4dfc5;
+}
+.am {
+  width: 20px;
+}
 .icons_layer_1 {
   display: flex;
   justify-content: space-evenly;
 }
+.not-sidebar {
+  width: 15%;
+  height: 100vh;
+  background-color: rgb(255, 255, 255);
+  position: fixed;
+  top: 0;
+  overflow-x: hidden;
+  transition: 0.5s linear;
+  z-index: 10;
+}
 
+.not-sidebarWrapper {
+  color: #555;
+  width: 100%;
+  transition: 0.5s linear;
+  /* padding: 1em; */
+  padding-top: 8em;
+  height: 100%;
+  position: relative;
+}
 .list-item-active {
   position: relative;
   color: #229e54;
@@ -120,7 +142,26 @@ a.link:hover {
   font-size: 27px !important;
   margin-right: 15px;
 }
-
+.drop-open-icon {
+  margin-right: 20px;
+  width: 25px;
+  display: none;
+}
+.not-drop-close-icon {
+  margin-right: 20px;
+  width: 25px;
+  display: none;
+}
+.not-drop-open-icon {
+  margin-right: 20px;
+  width: 25px;
+  display: none;
+}
+.drop-close-icon {
+  margin-right: 20px;
+  width: 25px;
+  display: none;
+}
 /* .list-item-active::after {
   content: "";
   width: 106px;
@@ -194,29 +235,77 @@ a.link:hover {
 
 @media screen and (max-width: 1220px) {
   .sidebar {
-    width: 4.5%;
+    width: 3.5%;
   }
-  .drop-open-icon {
-    margin-right: 20px;
-    width: 25px;
-    display: inline-block;
+  .sidebar:hover {
+    width: 20%;
+  }
+  .not-sidebar {
+    width: 3.5%;
+  }
+  .not-sidebar:hover {
+    width: 20%;
   }
 }
+
 @media screen and (max-width: 1080px) {
   .sidebar {
-    width: 0;
+    width: 20%;
+  }
+
+  .not-sidebar {
+    width: 0%;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    top: 0;
+    overflow-x: hidden;
+    transition: 0.5s linear;
+    z-index: 10;
   }
 
   .sidebarWrapper {
-    display: none;
+    color: #555;
+    width: 100%;
+    transition: 0.5s linear;
+    /* padding: 1em; */
+    padding-top: 8em;
+    height: 100%;
+    position: relative;
   }
-}
-@media screen and (max-width: 767px) {
+  .not-sidebarWrapper {
+    display: none;
+    color: #555;
+    width: 100%;
+    transition: 0.5s linear;
+    /* padding: 1em; */
+    padding-top: 8em;
+    height: 100%;
+    position: relative;
+  }
+
   .drop-open-icon {
     display: inline-block;
     width: 20px;
     margin-right: 10px;
   }
+  .not-drop-open-icon {
+    margin-right: 20px;
+    width: 25px;
+    display: none;
+  }
+  .drop-close-icon {
+    margin-right: 20px;
+    width: 25px;
+    display: inline-block;
+  }
+  .not-drop-close-icon {
+    margin-right: 20px;
+    width: 25px;
+    display: none;
+  }
+}
+@media screen and (max-width: 767px) {
   .drop-close-icon {
     width: 20px;
   }
@@ -232,11 +321,49 @@ a.link:hover {
   .dash-area1-cont2-titles {
     display: none;
   }
+
+  .sidebar {
+    width: 30%;
+  }
+  .sidebar:hover {
+    width: 30%;
+  }
+  /* .not-sidebar:hover {
+    width: 20%;
+  } */
+  .not-sidebar {
+    width: 0%;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    top: 0;
+    overflow-x: hidden;
+    transition: 0.5s linear;
+    z-index: 10;
+  }
 }
 @media screen and (max-width: 400px) {
   .dashboard-area1-cont1 {
     padding: 0em 1em;
     padding-top: 1em;
+  }
+
+  .sidebar {
+    width: 55%;
+  }
+
+  .sidebar:hover {
+    width: 55%;
+  }
+  ¸ .not-sidebar {
+    width: 0%;
+    height: 100vh;
+    background-color: rgb(255, 255, 255);
+    position: fixed;
+    top: 0;
+    overflow-x: hidden;
+    transition: 0.5s linear;
+    z-index: 10;
   }
 
   .dashboard-area1-heading-supply-withdraw-input {
