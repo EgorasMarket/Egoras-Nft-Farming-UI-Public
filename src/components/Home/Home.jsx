@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import React from "react";
+import { Link } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
@@ -152,7 +153,7 @@ const Home = () => {
                 <a href="/dashboard" className="stake-hero-btn1">
                   Launch App <ExitToAppIcon className="exit-to-app" />
                 </a>
-                <a href="/dasboard/whitepaper" className="stake-hero-btn2">
+                <a href="/dashboard/whitepaper" className="stake-hero-btn2">
                   Read White-Paper
                 </a>
               </div>
@@ -302,7 +303,6 @@ const Home = () => {
                     Min Coll.Ratio
                   </th>
                   <th className="assets-category-titles-heading1 right"></th>
-                  <th className="assets-category-titles-heading1 right"></th>
                 </tr>
               </thead>
 
@@ -352,26 +352,15 @@ const Home = () => {
                     <td className="assets-category-data1b ratio-content">
                       <div className="assets-data-name ">{asset.ratio}</div>
                     </td>
-                    <td className="assets-category-data">
-                      <div className="assets-data-name-last">
-                        <a
-                          href="/dashboard/swap"
-                          className="assets-collateralize-button"
-                          style={{ border: "none" }}
-                        >
-                          Collateralize
-                        </a>
-                      </div>
-                    </td>
                     <td className="assets-category-data-last">
                       <div className="assets-data-name-last">
-                        <a
-                          href="/dashboard/swap"
+                        <Link
+                          to="/open-vault"
                           className="assets-collateralize-button"
                           style={{ border: "none" }}
                         >
-                          Swap
-                        </a>
+                          Open Vault
+                        </Link>
                       </div>
                     </td>
                   </tr>

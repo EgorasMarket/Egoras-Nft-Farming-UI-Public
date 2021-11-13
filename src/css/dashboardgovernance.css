@@ -228,7 +228,7 @@
 }
 @media screen and (max-width: 450px) {
   .coins_card {
-    width: 85%;
+    width: 95%;
     margin: auto;
   }
 }

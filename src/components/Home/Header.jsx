@@ -174,6 +174,11 @@ const Header = () => {
         document.getElementById("Header").style.display = "none";
       });
     }
+    if (currentPage === "/dashboard/vault") {
+      setshowHeader(() => {
+        document.getElementById("Header").style.display = "none";
+      });
+    }
   });
 
   // page hide element
@@ -383,7 +388,7 @@ const Header = () => {
               <ArrowDropDownIcon />
             </a>
           </ul> */}
-{/* 
+            {/* 
             <ul className="headerButtons">
               <a href="/dashboard" className="connect">
                 {" "}

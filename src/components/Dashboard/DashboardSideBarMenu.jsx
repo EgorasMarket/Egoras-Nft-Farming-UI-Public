@@ -74,6 +74,10 @@ const DashboardSideBarMenu = () => {
       setActiveBg("swap");
       // document.getElementById("FooterId").style.display = "none";
     }
+    if (linksActive === "/dashboard/vault") {
+      setActiveBg("vault");
+      // document.getElementById("FooterId").style.display = "none";
+    }
     if (linksActive === "/dashboard/whitepaper") {
       setActiveBg("whitepaper");
       // document.getElementById("FooterId").style.display = "none";
@@ -183,7 +187,7 @@ const DashboardSideBarMenu = () => {
               {/* =================== */}
               {/* =================== */}
               {/* =================== */}
-              <Link
+              {/* <Link
                 to="/dashboard"
                 id="market"
                 className="link"
@@ -199,13 +203,13 @@ const DashboardSideBarMenu = () => {
                   <BarChartIcon className="sidebarIcon" />
                   Markets
                 </li>
-              </Link>
+              </Link> */}
               {/* ===================== */}
               {/* ===================== */}
               {/* ===================== */}
               {/* ===================== */}
               {/* ===================== */}
-              <Link
+              {/* <Link
                 to="/dashboard/lending"
                 id="home"
                 className="link"
@@ -223,14 +227,14 @@ const DashboardSideBarMenu = () => {
                   <AttachMoneyIcon className="sidebarIcon" />
                   Lending
                 </li>
-              </Link>
+              </Link> */}
               {/* ===================== */}
               {/* ===================== */}
               {/* ===================== */}
               {/* ===================== */}
               {/* ===================== */}
               {/* ===================== */}
-
+              {/* 
               <Link
                 to="/dashboard/transaction"
                 className="link"
@@ -247,7 +251,7 @@ const DashboardSideBarMenu = () => {
                   <ImportExportIcon className="sidebarIcon" />
                   Staking
                 </li>
-              </Link>
+              </Link> */}
               {/* ===================== */}
               {/* ===================== */}
               {/* ===================== */}
@@ -268,6 +272,28 @@ const DashboardSideBarMenu = () => {
                 >
                   <HowToVoteIcon className="sidebarIcon" />
                   Governance
+                </li>
+              </Link>
+              {/* ===================== */}
+              {/* ===================== */}
+              {/* ===================== */}
+              {/* ===================== */}
+
+              <Link
+                to="/dashboard/vault"
+                className="link"
+                id="vault"
+                onClick={changeBg}
+              >
+                <li
+                  className={
+                    activeBg == "vault"
+                      ? "sidebarListItem list-item-active"
+                      : "sidebarListItem"
+                  }
+                >
+                  <SwapHorizontalCircleIcon className="sidebarIcon" />
+                  Vault
                 </li>
               </Link>
               {/* ===================== */}

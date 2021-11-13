@@ -4,10 +4,13 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // dashboard components
 // import DashBoardHeader from "./DashBoardHeader";
 import DashboardSideBarMenu from "./DashboardSideBarMenu";
-import DashBoardDefaultPage from "./DashBoardPages/DashBoardDefaultPage";
-import DashBoardAnalytics from "./DashBoardPages/DashBoardAnalytics";
-import DashBoardTransaction from "./DashBoardPages/DashBoardTransaction";
+// import DashBoardDefaultPage from "./DashBoardPages/";
+// import DashBoardAnalytics from "./DashBoardPages/DashBoardAnalytics";
+// import DashBoardTransaction from "./DashBoardPages/DashBoardTransaction";
 import DashboardGovernance from "./DashBoardPages/DashboardGovernance";
+// import OpenVaultPage from "./OpenVaultPage.js";
+// import OpenVaultPage from "./DashBoardPages/OpenVaultPage";
+import OpenVaultPage from "./DashBoardPages/OpenVaultPage";
 import DashBoardSwap from "./DashBoardPages/DashBoardSwapPage";
 import DashBoardWhitePaper from "./DashBoardPages/DashBoardWhitePaper";
 import DashboardEgrBalancePage from "./DashBoardPages/DashboardEgrBalancePage";
@@ -24,24 +27,27 @@ function Dashboard() {
       <div className="dashboard">
         <DashboardSideBarMenu />
         <Switch>
-          <Route exact path="/dashboard/lending">
+          {/* <Route exact path="/dashboard/lending">
             <DashBoardDefaultPage />
-          </Route>
+          </Route> */}
           <Route exact path="/dashboard/swap">
             <DashBoardSwap />
           </Route>
-          <Route exact path="/dashboard">
-            <DashBoardAnalytics />
+          <Route exact path="/dashboard/vault">
+            <OpenVaultPage />
           </Route>
+          {/* <Route exact path="/dashboard/vault">
+            <OpenVaultPage />
+          </Route> */}
           <Route exact path="/dashboard/governance">
             <DashboardGovernance />
           </Route>
           <Route exact path="/dashboard/governance/details">
             <DashboardEgrBalancePage />
           </Route>
-          <Route exact path="/dashboard/transaction">
+          {/* <Route exact path="/dashboard/transaction">
             <DashBoardTransaction />
-          </Route>
+          </Route> */}
           <Route exact path="/dashboard/whitepaper">
             <DashBoardWhitePaper />
           </Route>
