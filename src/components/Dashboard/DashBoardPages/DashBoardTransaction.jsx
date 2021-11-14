@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import "../../../css/dashboardtransaction.css";
+// import "../../../css";
 
 const DashBoardTransaction = () => {
   useEffect(() => {
@@ -474,10 +475,7 @@ const DashBoardTransaction = () => {
               }
               // onClick={closeModal}
             >
-              <div
-                className="dashboard-area1-cont1a stake-cont2 "
- 
-              >
+              <div className="dashboard-area1-cont1a stake-cont2 ">
                 {/* ========= */}
                 {/* ========= */}
                 {/* ========= */}

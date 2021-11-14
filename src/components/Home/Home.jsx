@@ -355,7 +355,7 @@ const Home = () => {
                     <td className="assets-category-data-last">
                       <div className="assets-data-name-last">
                         <Link
-                          to="/open-vault"
+                          to="/dashboard/vault"
                           className="assets-collateralize-button"
                           style={{ border: "none" }}
                         >

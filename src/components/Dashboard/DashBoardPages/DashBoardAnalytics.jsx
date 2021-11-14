@@ -15,9 +15,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import "../../../css/dashboardanalytics.css";
 
 const DashBoardAnalytics = () => {
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [categoryBtn, setCategoryBtn] = useState("All");
 
   const assets = [
@@ -253,6 +253,17 @@ const DashBoardAnalytics = () => {
                     </td>
                     <td className="assets-category-data1b ratio-content">
                       <div className="assets-data-name ">{asset.ratio}</div>
+                    </td>
+                    <td className="assets-category-data-last">
+                      <div className="assets-data-name-last">
+                        <a
+                          href="/dashboard/vault"
+                          className="assets-collateralize-button"
+                          style={{ border: "none" }}
+                        >
+                          Open Vault
+                        </a>
+                      </div>
                     </td>
                   </tr>
                 ))}

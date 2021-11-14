@@ -187,7 +187,7 @@ const DashboardSideBarMenu = () => {
               {/* =================== */}
               {/* =================== */}
               {/* =================== */}
-              {/* <Link
+              <Link
                 to="/dashboard"
                 id="market"
                 className="link"
@@ -203,7 +203,7 @@ const DashboardSideBarMenu = () => {
                   <BarChartIcon className="sidebarIcon" />
                   Markets
                 </li>
-              </Link> */}
+              </Link>
               {/* ===================== */}
               {/* ===================== */}
               {/* ===================== */}
@@ -234,7 +234,7 @@ const DashboardSideBarMenu = () => {
               {/* ===================== */}
               {/* ===================== */}
               {/* ===================== */}
-              {/* 
+
               <Link
                 to="/dashboard/transaction"
                 className="link"
@@ -251,29 +251,8 @@ const DashboardSideBarMenu = () => {
                   <ImportExportIcon className="sidebarIcon" />
                   Staking
                 </li>
-              </Link> */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-
-              <Link
-                to="/dashboard/governance"
-                className="link"
-                id="governance"
-                onClick={changeBg}
-              >
-                <li
-                  className={
-                    activeBg == "governance"
-                      ? "sidebarListItem list-item-active"
-                      : "sidebarListItem"
-                  }
-                >
-                  <HowToVoteIcon className="sidebarIcon" />
-                  Governance
-                </li>
               </Link>
+
               {/* ===================== */}
               {/* ===================== */}
               {/* ===================== */}
@@ -296,6 +275,29 @@ const DashboardSideBarMenu = () => {
                   Vault
                 </li>
               </Link>
+              {/* ===================== */}
+              {/* ===================== */}
+              {/* ===================== */}
+              {/* ===================== */}
+
+              <Link
+                to="/dashboard/governance"
+                className="link"
+                id="governance"
+                onClick={changeBg}
+              >
+                <li
+                  className={
+                    activeBg == "governance"
+                      ? "sidebarListItem list-item-active"
+                      : "sidebarListItem"
+                  }
+                >
+                  <HowToVoteIcon className="sidebarIcon" />
+                  Governance
+                </li>
+              </Link>
+
               {/* ===================== */}
               {/* ===================== */}
               {/* ===================== */}

@@ -4,9 +4,10 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // dashboard components
 // import DashBoardHeader from "./DashBoardHeader";
 import DashboardSideBarMenu from "./DashboardSideBarMenu";
-// import DashBoardDefaultPage from "./DashBoardPages/";
-// import DashBoardAnalytics from "./DashBoardPages/DashBoardAnalytics";
-// import DashBoardTransaction from "./DashBoardPages/DashBoardTransaction";
+
+// import DashBoardDefaultPage from "./DashBoardPages/DashBoardDefaultPage";
+import DashBoardAnalytics from "./DashBoardPages/DashBoardAnalytics";
+import DashBoardTransaction from "./DashBoardPages/DashBoardTransaction";
 import DashboardGovernance from "./DashBoardPages/DashboardGovernance";
 // import OpenVaultPage from "./OpenVaultPage.js";
 // import OpenVaultPage from "./DashBoardPages/OpenVaultPage";
@@ -27,9 +28,9 @@ function Dashboard() {
       <div className="dashboard">
         <DashboardSideBarMenu />
         <Switch>
-          {/* <Route exact path="/dashboard/lending">
-            <DashBoardDefaultPage />
-          </Route> */}
+          <Route exact path="/dashboard">
+            <DashBoardAnalytics />
+          </Route>
           <Route exact path="/dashboard/swap">
             <DashBoardSwap />
           </Route>
@@ -45,9 +46,9 @@ function Dashboard() {
           <Route exact path="/dashboard/governance/details">
             <DashboardEgrBalancePage />
           </Route>
-          {/* <Route exact path="/dashboard/transaction">
+          <Route exact path="/dashboard/transaction">
             <DashBoardTransaction />
-          </Route> */}
+          </Route>
           <Route exact path="/dashboard/whitepaper">
             <DashBoardWhitePaper />
           </Route>

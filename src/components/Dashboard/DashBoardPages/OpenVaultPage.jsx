@@ -34,6 +34,8 @@ const OpenVaultPage = () => {
   // const firstElement = useRef(null);
 
   const [value, setValue] = useState("");
+  const [eusdValue, setEusdValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(10000000);
   const [validDiv, setValidDiv] = useState("not_ifValidDiv");
   const [buttonOpen, setButtonOpen] = useState("generate_eusd_cont1");
   const [buttonOpen2, setButtonOpen2] = useState("not_generate_eusd_cont");
@@ -48,6 +50,8 @@ const OpenVaultPage = () => {
   // =======
   // =======
   // =======
+
+  const changeMaxValue = () => setEusdValue(maxValue);
 
   const toggleButtonOpen = () => {
     setButtonOpen("not_generate_eusd_cont1");
@@ -67,6 +71,7 @@ const OpenVaultPage = () => {
   // ========================
   // ========================
   const decimalPlace = addCommas(parseFloat(value).toFixed(3));
+  const decimalPlaceB = addCommas(parseFloat(eusdValue).toFixed(3));
   // ========================
   // ========================
   // ========================
@@ -89,6 +94,15 @@ const OpenVaultPage = () => {
       setVaultPrice("price_value_change");
       setAmount("Setup up proxy");
       setValidDiv("ifValidDiv");
+    }
+  };
+  const handleInputChanga = (e) => {
+    console.log(e.target.value + " i work");
+    setEusdValue(removeNonNumeric(e.target.value));
+    if (e.target.value <= 0) {
+      setEusdValue(0.0);
+    } else if (e.target.value > 0) {
+      setEusdValue(e.target.value);
     }
     // setVaultPrice("price_value_change");
 
@@ -146,7 +160,7 @@ const OpenVaultPage = () => {
                         }
                       >
                         <div className="price_value_change_value">
-                          {"$ " + decimalPlace}
+                          {"$ " + decimalPlaceB}
                         </div>
                       </div>
                     </div>
@@ -172,7 +186,7 @@ const OpenVaultPage = () => {
                         }
                       >
                         <div className="price_value_change_value">
-                          {decimalPlace + "%"}
+                          {decimalPlaceB + "%"}
                         </div>
                       </div>
                     </div>
@@ -254,7 +268,7 @@ const OpenVaultPage = () => {
                     }
                   >
                     <div className="price_value_change_value">
-                      {decimalPlace}
+                      {decimalPlaceB}
                     </div>
                   </div>
                 </div>
@@ -384,8 +398,14 @@ const OpenVaultPage = () => {
                       this transaction
                     </button>
                     <div className="open_vault_input_titlesb">
-                      <span className="vault_input0">Deposit BTC</span>
-                      <span className="vault_input1">Balance 0.00 BTC</span>
+                      <span className="vault_input0">Generate EUSD</span>
+                      <span
+                        className="vault_input1"
+                        onClick={changeMaxValue}
+                        style={{ cursor: "pointer" }}
+                      >
+                        Max {maxValue} EUSD
+                      </span>
                     </div>
                     <input
                       type="text"
@@ -393,10 +413,9 @@ const OpenVaultPage = () => {
                       id="value"
                       // {value}
 
-                      // value={value}
                       className="vault_input_vaulta"
                       placeholder="0.00 EUSD"
-                      // onChange={handleInputChange}
+                      onChange={handleInputChanga}
                       // onKeyUp={(e) => onKeyUp(e)}
                     />
                   </div>
