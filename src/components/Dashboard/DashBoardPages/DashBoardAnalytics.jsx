@@ -19,6 +19,8 @@ const DashBoardAnalytics = () => {
     window.scrollTo(0, 0);
   }, []);
   const [categoryBtn, setCategoryBtn] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const assets = [
     {
@@ -122,7 +124,15 @@ const DashBoardAnalytics = () => {
       ratio: "165%",
     },
   ];
-
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+  useEffect(() => {
+    const results = assets.filter((person) =>
+      person.name.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
   const triggerAll = () => {
     setCategoryBtn("All");
   };
@@ -189,6 +199,8 @@ const DashBoardAnalytics = () => {
                   id="searchCollaterals"
                   className="assets-header3"
                   placeholder="Search..."
+                  value={searchTerm}
+                  onChange={handleSearchChange}
                 ></input>{" "}
                 <SearchIcon className="search-icon" />
               </div>
@@ -229,7 +241,7 @@ const DashBoardAnalytics = () => {
                 {/* =============== */}
                 {/* =============== */}
                 {/* =============== */}
-                {assets.map((asset) => (
+                {searchResults.map((asset) => (
                   <tr className="assets-category-row">
                     <td className="assets-category-data">
                       <div className="assets-data">

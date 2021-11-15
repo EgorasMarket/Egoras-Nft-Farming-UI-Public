@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 // import React from "react";
 import { Link } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
@@ -12,18 +13,11 @@ import SearchIcon from "@mui/icons-material/Search";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 
 import "../../css/home.css";
+import { PersonTwoTone } from "@material-ui/icons";
 
 const Home = () => {
-  const [searchTerm, setSearchTerm] = React.useState("");
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  const [categoryBtn, setCategoryBtn] = useState("Popular");
-
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const assets = [
     {
       img: "/img/btc-logo.svg",
@@ -127,6 +121,22 @@ const Home = () => {
     },
   ];
 
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  useEffect(() => {
+    const results = assets.filter((person) =>
+      person.name.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
+
+  const [categoryBtn, setCategoryBtn] = useState("Popular");
+
   const triggerAll = () => {
     setCategoryBtn("All");
   };
@@ -137,6 +147,7 @@ const Home = () => {
   const triggerStable = () => {
     setCategoryBtn("Stable");
   };
+
   return (
     <div>
       {/* =================================================================================================================================================================================================================================================================== */}
@@ -289,6 +300,8 @@ const Home = () => {
                   id="searchCollaterals"
                   className="assets-header3"
                   placeholder="Search..."
+                  value={searchTerm}
+                  onChange={handleSearchChange}
                 ></input>{" "}
                 <SearchIcon className="search-icon" />
               </div>
@@ -330,7 +343,7 @@ const Home = () => {
                 {/* =============== */}
                 {/* =============== */}
                 {/* =============== */}
-                {assets.map((asset) => (
+                {searchResults.map((asset) => (
                   <tr className="assets-category-row">
                     <td className="assets-category-data">
                       <div className="assets-data">
