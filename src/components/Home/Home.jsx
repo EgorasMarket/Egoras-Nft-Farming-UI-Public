@@ -354,13 +354,13 @@ const Home = () => {
                     </td>
                     <td className="assets-category-data-last">
                       <div className="assets-data-name-last">
-                        <Link
-                          to="/dashboard/vault"
+                        <a
+                          href={`vault/${asset.type}/EUSD`}
                           className="assets-collateralize-button"
                           style={{ border: "none" }}
                         >
                           Open Vault
-                        </Link>
+                        </a>
                       </div>
                     </td>
                   </tr>

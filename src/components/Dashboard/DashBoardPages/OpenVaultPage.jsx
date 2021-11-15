@@ -26,14 +26,12 @@ function limit(val, max) {
   return val;
 }
 
-const OpenVaultPage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
+const OpenVaultPage = ({ match }) => {
   // const firstElement = useRef(null);
 
   const [value, setValue] = useState("");
+  const [asset, setAsset] = useState("");
+  const [base, setBase] = useState("");
   const [eusdValue, setEusdValue] = useState(0);
   const [maxValue, setMaxValue] = useState(10000000);
   const [validDiv, setValidDiv] = useState("not_ifValidDiv");
@@ -44,6 +42,21 @@ const OpenVaultPage = () => {
   const [vaultPrice, setVaultPrice] = useState("not_price_value_change");
   // const [valued, setValued] = useState(0);
   // const [valueToNum, setValueToNum] = useState(0);
+
+  // ====================
+  // ====================
+
+  useEffect(() => {
+    setAsset(match.params.asset);
+    setBase(match.params.base);
+    window.scrollTo(0, 0);
+    console.log(match.params.asset, "work", match.params.base);
+  }, []);
+  // ====================
+  // ====================
+  // ====================
+  // ====================
+
   const addCommas = (num) =>
     num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   const removeNonNumeric = (num) => num.toString().replace(/[^0-9]/g, "");
@@ -122,23 +135,23 @@ const OpenVaultPage = () => {
       <section className="open_vault_section">
         <div className="container">
           <div className="open_vault_header">
-            <h3 className="openVault_heading">Open BTC Vault</h3>
+            <h3 className="openVault_heading">Open {asset} Vault</h3>
             <div className="vault_captions">
               <p className="vault_tbd">
                 VaultID
                 <span className="vault_percent">T.B.D</span>
               </p>
-              <p className="vault_tbd">|</p>
+
               <p className="vault_tbd">
                 Stable Fee <span className="vault_percent">2.50%</span>
               </p>
-              <p className="vault_tbd">|</p>
+
               <p className="vault_tbd">
                 Liquidation Fee <span className="vault_percent">13%</span>
               </p>
-              <p className="vault_tbd">|</p>
+
               <p className="vault_tbd">Min. collateral ratio </p>
-              <p className="vault_tbd">|</p>
+
               <p className="vault_tbd">
                 Dust Limit <span className="vault_percent"> $10,000.00</span>
               </p>
@@ -160,7 +173,7 @@ const OpenVaultPage = () => {
                         }
                       >
                         <div className="price_value_change_value">
-                          {"$ " + decimalPlaceB}
+                          ${decimalPlaceB}
                         </div>
                       </div>
                     </div>
@@ -186,7 +199,7 @@ const OpenVaultPage = () => {
                         }
                       >
                         <div className="price_value_change_value">
-                          {decimalPlaceB + "%"}
+                          {decimalPlaceB}%
                         </div>
                       </div>
                     </div>
@@ -244,7 +257,7 @@ const OpenVaultPage = () => {
                   <div className="vault_prices1_cont1">
                     <p className="vault_prices1txt1">
                       <span className="next">0.00000</span>{" "}
-                      <span className="vault_prices1txt1aa"> BTC</span>
+                      <span className="vault_prices1txt1aa"> {asset}</span>
                     </p>
                   </div>
                 </div>
@@ -257,9 +270,11 @@ const OpenVaultPage = () => {
               <div className="vault_amount_withdraw">
                 <div className="vault_amount_withdraw_cont1">
                   <div className="amount_withdraw_cont1_txt1">
-                    Vault Dai Debt
+                    Vault {base} Debt
                   </div>
-                  <div className="amount_withdraw_cont1_txt2">0.0000 EUSD</div>
+                  <div className="amount_withdraw_cont1_txt2">
+                    0.0000 {base}
+                  </div>
                   <div
                     className={
                       vaultPrice == "not_price_value_change"
@@ -278,7 +293,9 @@ const OpenVaultPage = () => {
                   <div className="amount_withdraw_cont1_txt1">
                     Available to Withdraw
                   </div>
-                  <div className="amount_withdraw_cont1_txt2">0.00000 BTC</div>
+                  <div className="amount_withdraw_cont1_txt2">
+                    0.00000 {asset}
+                  </div>
                   <div
                     className={
                       vaultPrice == "not_price_value_change"
@@ -287,7 +304,7 @@ const OpenVaultPage = () => {
                     }
                   >
                     <div className="price_value_change_value">
-                      {decimalPlace + " BTC after"}
+                      {decimalPlace} {asset} after
                     </div>
                   </div>
                 </div>
@@ -297,7 +314,9 @@ const OpenVaultPage = () => {
                   <div className="amount_withdraw_cont1_txt1">
                     Available to Generate
                   </div>
-                  <div className="amount_withdraw_cont1_txt2">0.0000 EUSD</div>
+                  <div className="amount_withdraw_cont1_txt2">
+                    0.0000 {base}
+                  </div>
                   <div
                     className={
                       vaultPrice == "not_price_value_change"
@@ -312,7 +331,7 @@ const OpenVaultPage = () => {
                         thousandSeparator={true}
                         // prefix="EUSD "
                       />
-                      _EUSD after
+                      {base} after
                     </div>
                   </div>
                 </div>
@@ -332,12 +351,12 @@ const OpenVaultPage = () => {
                     <p className="configure">Configure your Vault </p>
                   </div>
                   Simulate your vault by configuring the amount of collateral to
-                  deposit, and DAI to generate.
+                  deposit, and {base} to generate.
                 </div>
                 <div className="open_vault_area2b">
                   <div className="open_vault_input_titles">
-                    <span className="vault_input0">Deposit BTC</span>
-                    <span className="vault_input1">Balance 0.00 BTC</span>
+                    <span className="vault_input0">Deposit {asset}</span>
+                    <span className="vault_input1">Balance 0.00 {asset}</span>
                   </div>
                   <div className="vault_input">
                     <input
@@ -348,7 +367,7 @@ const OpenVaultPage = () => {
 
                       // value={value}
                       className="vault_input_vault"
-                      placeholder="0 BTC"
+                      placeholder={`0.00 ${asset}`}
                       onChange={handleInputChange}
                       // onKeyUp={(e) => onKeyUp(e)}
                     />
@@ -379,7 +398,7 @@ const OpenVaultPage = () => {
                       className="open_vault_input_btn_a"
                       onClick={toggleButtonOpen}
                     >
-                      <AddIcon className="add_icon" /> Generate EUSD with this
+                      <AddIcon className="add_icon" /> Generate {base} with this
                       transaction
                     </button>
                   </div>
@@ -394,17 +413,17 @@ const OpenVaultPage = () => {
                       className="open_vault_input_btn_a bbb"
                       onClick={toggleButtonClose}
                     >
-                      <RemoveIcon className="add_icon" /> Generate EUSD with
+                      <RemoveIcon className="add_icon" /> Generate {base} with
                       this transaction
                     </button>
                     <div className="open_vault_input_titlesb">
-                      <span className="vault_input0">Generate EUSD</span>
+                      <span className="vault_input0">Generate {base}</span>
                       <span
                         className="vault_input1"
                         onClick={changeMaxValue}
                         style={{ cursor: "pointer" }}
                       >
-                        Max {maxValue} EUSD
+                        Max {maxValue} {base}
                       </span>
                     </div>
                     <input
@@ -414,7 +433,7 @@ const OpenVaultPage = () => {
                       // {value}
 
                       className="vault_input_vaulta"
-                      placeholder="0.00 EUSD"
+                      placeholder={base}
                       onChange={handleInputChanga}
                       // onKeyUp={(e) => onKeyUp(e)}
                     />
@@ -432,7 +451,8 @@ const OpenVaultPage = () => {
                         Collateral Locked
                       </div>
                       <div className="valid_div_inner_div_cont2">
-                        0.00 BTC - {decimalPlace}BTC
+                        0.00 {asset} - {decimalPlace}
+                        {asset}
                       </div>
                     </div>
                     {/* ===== */}
@@ -462,10 +482,10 @@ const OpenVaultPage = () => {
                     {/* ===== */}
                     <div className="valid_div_inner_div_cont">
                       <div className="valid_div_inner_div_cont1">
-                        Vault Dai Debt
+                        Vault {base} Debt
                       </div>
                       <div className="valid_div_inner_div_cont2">
-                        0.00 EUSD - 0.00 EUSD
+                        0.00 {base} - 0.00 {base}
                       </div>
                     </div>
                     {/* ===== */}
@@ -476,7 +496,8 @@ const OpenVaultPage = () => {
                         Available to Withdraw
                       </div>
                       <div className="valid_div_inner_div_cont2">
-                        0.00 BTC - {decimalPlace}BTC
+                        0.00 {asset} - {decimalPlace}
+                        {asset}
                       </div>
                     </div>
 
@@ -488,14 +509,14 @@ const OpenVaultPage = () => {
                         Available to Generate
                       </div>
                       <div className="valid_div_inner_div_cont2">
-                        0.00 EUSD - {"  "}
+                        0.00 {base} - {"  "}
                         <NumberFormat
                           value={tokenPrice}
                           displayType="text"
                           thousandSeparator={true}
                           // prefix="EUSD "
                         />
-                        {"  "}_EUSD
+                        {"  "}_{base}
                       </div>
                     </div>
                     {/* ===== */}

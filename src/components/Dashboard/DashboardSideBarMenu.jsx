@@ -258,7 +258,7 @@ const DashboardSideBarMenu = () => {
               {/* ===================== */}
               {/* ===================== */}
 
-              <Link
+              {/* <Link
                 to="/dashboard/vault"
                 className="link"
                 id="vault"
@@ -274,7 +274,7 @@ const DashboardSideBarMenu = () => {
                   <SwapHorizontalCircleIcon className="sidebarIcon" />
                   Vault
                 </li>
-              </Link>
+              </Link> */}
               {/* ===================== */}
               {/* ===================== */}
               {/* ===================== */}

@@ -1,17 +1,14 @@
 .vault_page {
   flex: 4;
-  padding: 4em 2em;
   width: 100%;
-  background: #f4fff8;
-  position: relative;
-  padding-top: 8em;
+  background: #f6fff9;
+}
+
+.open_vault_section {
+  padding: 13em 0em;
+  padding-top: 14em;
   padding-left: 14em;
 }
-/* 
-.open_vault_section {
-  padding: 4em 0em;
-  padding-top: 8em;
-} */
 
 .open_vault_header {
   display: flex;
@@ -143,6 +140,12 @@
   font-size: 14px;
   color: #8c8c8c;
   margin: 0;
+  border-left: solid;
+  border-width: 1px;
+  /* height: 20
+px
+; */
+  padding-left: 9px;
 }
 
 .vault_percent {
@@ -344,4 +347,82 @@ input.vault_input_vaulta:focus-visible {
   border-width: 2px;
   border-color: #56bc7e;
   box-shadow: 0px 0px 10px #c3c3c3;
+}
+
+@media screen and (max-width: 1220px) {
+  .open_vault_section {
+    padding: 13em 0em;
+    padding-top: 14em;
+    padding-left: 3em;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .open_vault_section {
+    padding: 13em 0em;
+    padding-top: 14em;
+    padding-left: 0em;
+  }
+}
+@media screen and (max-width: 950px) {
+  .vault_prices1amount {
+    font-weight: 800;
+    font-size: 24px;
+  }
+
+  .amount_withdraw_cont1_txt1 {
+    font-size: 11px;
+    font-weight: 700;
+    color: #56bc7e;
+  }
+}
+@media screen and (max-width: 900px) {
+  .open_vault_area {
+    display: grid;
+    justify-content: space-between;
+    margin-top: 30px;
+    grid-gap: 48px;
+    gap: 48px;
+    grid-template-columns: 1fr;
+  }
+  .open_vault_section {
+    padding-top: 9em;
+  }
+}
+@media screen and (max-width: 685px) {
+  .vault_captions {
+    display: grid;
+    align-items: center;
+    grid-gap: 30px;
+    gap: 30px;
+    grid-template-columns: auto auto;
+  }
+}
+@media screen and (max-width: 425px) {
+  .vault_amount_withdraw {
+    /* width: 70%; */
+    display: flex;
+    /* flex-direction: column; */
+    background: #fff;
+    box-shadow: 0px 0px 15px #d5e2da;
+    border-radius: 20px;
+    min-height: 120px;
+    padding: 24px;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .vault_prices1amount {
+    font-weight: 800;
+    font-size: 18px;
+  }
+
+  .vault_prices1txt1 {
+    color: #56bc7e;
+    font-size: 11px;
+    font-weight: 700;
+    margin: 0;
+  }
 }

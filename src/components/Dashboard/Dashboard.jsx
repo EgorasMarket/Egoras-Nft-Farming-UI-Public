@@ -28,30 +28,33 @@ function Dashboard() {
       <div className="dashboard">
         <DashboardSideBarMenu />
         <Switch>
-          <Route exact path="/dashboard">
-            <DashBoardAnalytics />
-          </Route>
-          <Route exact path="/dashboard/swap">
-            <DashBoardSwap />
-          </Route>
-          <Route exact path="/dashboard/vault">
-            <OpenVaultPage />
-          </Route>
+          <Route exact path="/dashboard" component={DashBoardAnalytics} />
+          <Route exact path="/dashboard/swap" component={DashBoardSwap} />
+          <Route exact path="/vault/:asset/:base" component={OpenVaultPage} />
+          <Route
+            exact
+            path="/dashboard/governance"
+            component={DashboardGovernance}
+          />
+          <Route
+            exact
+            path="/dashboard/governance/details"
+            component={DashboardEgrBalancePage}
+          />
+          <Route
+            exact
+            path="/dashboard/transaction"
+            component={DashBoardTransaction}
+          />
+          <Route
+            exact
+            path="/dashboard/whitepaper"
+            component={DashBoardWhitePaper}
+          />
+
           {/* <Route exact path="/dashboard/vault">
             <OpenVaultPage />
           </Route> */}
-          <Route exact path="/dashboard/governance">
-            <DashboardGovernance />
-          </Route>
-          <Route exact path="/dashboard/governance/details">
-            <DashboardEgrBalancePage />
-          </Route>
-          <Route exact path="/dashboard/transaction">
-            <DashBoardTransaction />
-          </Route>
-          <Route exact path="/dashboard/whitepaper">
-            <DashBoardWhitePaper />
-          </Route>
         </Switch>
       </div>
     </Router>

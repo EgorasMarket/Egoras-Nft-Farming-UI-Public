@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import { Link } from "react-router-dom";
 import "../../../css/dashboardtransaction.css";
 // import "../../../css";
 
@@ -199,6 +199,7 @@ const DashBoardTransaction = () => {
                     <th className="assets-category-titles-heading1 right">
                       Earned Rewards
                     </th>
+                    <th className="assets-category-titles-heading1 right"></th>
                   </tr>
                 </thead>
 

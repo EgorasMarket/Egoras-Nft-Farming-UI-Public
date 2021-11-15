@@ -15,10 +15,9 @@ function App() {
       <div className="App-header">
         <Header />
         <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
+          <Route exact path="/" component={Home} />
           <Dashboard />
+          {/* <Route component={Dashboard} /> */}
         </Switch>
         <Footer />
       </div>
