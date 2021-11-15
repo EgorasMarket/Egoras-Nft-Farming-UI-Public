@@ -3,8 +3,12 @@
   padding: 4em 2em;
   width: 100vh;
   background: #f6fff9;
+  padding-left: 14em;
 }
 
 .no-bg {
   background: none !important;
+  padding: 2em;
 }
+
+

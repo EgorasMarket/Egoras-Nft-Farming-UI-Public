@@ -1,0 +1,428 @@
+.vault_page {
+  flex: 4;
+  width: 100%;
+  background: #f6fff9;
+}
+
+.open_vault_section {
+  padding: 13em 0em;
+  padding-top: 14em;
+  padding-left: 14em;
+}
+
+.open_vault_header {
+  display: flex;
+  flex-direction: column;
+}
+
+.vault_captions {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 30px;
+}
+
+.open_vault_area {
+  display: grid;
+  justify-content: space-between;
+  margin-top: 30px;
+  gap: 48px;
+  grid-template-columns: 2fr minmax(465px, 1fr);
+}
+
+.open_vault_area1 {
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.open_vault_area2ss {
+  /* width: 70%; */
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  box-shadow: 0px 0px 15px #d5e2da;
+  border-radius: 20px;
+  max-height: 100%;
+  min-height: 80%;
+  /* overflow-x: hidden; */
+  padding: 2em;
+  gap: 32px;
+  margin-bottom: 0em;
+}
+.vault_amount_withdraw {
+  /* width: 70%; */
+  display: flex;
+  /* flex-direction: column; */
+  background: #fff;
+  box-shadow: 0px 0px 15px #d5e2da;
+  border-radius: 20px;
+  min-height: 120px;
+  padding: 24px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.not_generate_eusd_cont1 {
+  display: none;
+}
+.not_generate_eusd_cont {
+  display: none;
+}
+
+.amount_withdraw_cont1_txt1 {
+  font-size: 14px;
+  font-weight: 700;
+  color: #56bc7e;
+}
+.price_value_change {
+  box-sizing: border-box;
+  margin: 8px 0px 0px;
+  border-radius: 20px;
+  background-color: #ddffeb;
+  color: #56bc7e;
+  font-weight: 600;
+  border: none;
+  padding: 0px 8px;
+  display: inline-block;
+  /* line-height: 2; */
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.price_value_change_value {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.not_price_value_change {
+  display: none;
+}
+.amount_withdraw_cont1_txt2 {
+  font-size: 14px;
+  color: #707070;
+  font-weight: 700;
+}
+
+.openVault_heading {
+  margin-bottom: 16px;
+  font-weight: 800;
+}
+.vault_prices {
+  box-sizing: border-box;
+  margin: 0px 0px 16px;
+  min-width: 0px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+  /* align-self: flex-start; */
+}
+.vault_prices1 {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  padding: 16px;
+  border-radius: 20px;
+  background-color: var(--theme-ui-colors-surface, #fff);
+  border: 1px solid rgb(240, 240, 240);
+  overflow: hidden;
+  min-height: 194px;
+  display: flex;
+  cursor: pointer;
+  box-shadow: 0px 0px 15px #d5e2da;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.vault_tbd {
+  font-size: 14px;
+  color: #8c8c8c;
+  margin: 0;
+  border-left: solid;
+  border-width: 1px;
+  /* height: 20
+px
+; */
+  padding-left: 9px;
+}
+
+.vault_percent {
+  margin-left: 15px;
+  color: #56bc7e;
+  font-weight: 800;
+}
+.vault_prices1_cont1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.vault_prices1txt1 {
+  color: #56bc7e;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+}
+.vault_prices1txt1aa {
+  color: #56bc7e;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.vault_prices1amount {
+  font-weight: 800;
+  font-size: 32px;
+}
+
+.next {
+  color: grey;
+}
+
+input.vault_input_vault {
+  width: 100%;
+  height: 76px;
+  border-radius: 8px;
+  border: solid;
+  border-width: 1px;
+  padding: 0.5em 1em;
+  border-color: #d4d4d4;
+  margin-top: 10px;
+}
+input.vault_input_vault:focus-visible {
+  outline: none;
+  border: solid;
+  border-width: 2px;
+  border-color: #56bc7e;
+  box-shadow: 0px 0px 10px #c3c3c3;
+}
+.open_vault_input_titles {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+span.vault_input1 {
+  color: #949494;
+}
+p.configure {
+  font-weight: 800;
+  color: #000;
+  font-size: 16px;
+}
+
+.open_vault_area2a {
+  font-size: 14px;
+  color: grey;
+}
+button.open_vault_input_btn {
+  border: none;
+  padding: 1em;
+  border-radius: 100px;
+  background: #56bc7e;
+  color: #ffff;
+  font-weight: 700;
+  font-size: 18px;
+  box-shadow: -1px 5px 10px #87c8a0;
+}
+button.open_vault_input_btn_a {
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 100px;
+  background: #ebebeb;
+  color: #444;
+  font-weight: 700;
+  width: 100%;
+  font-size: 12px;
+}
+button.open_vault_input_btn_a.bbb {
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 20px;
+  background: #ebebeb;
+  color: #444;
+  font-weight: 700;
+  width: 100%;
+  font-size: 12px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+button.open_vault_input_btn_a:hover {
+  border: none;
+  padding: 0.5em 1em;
+  background: #dfdfdf;
+  color: #444;
+  font-weight: 700;
+  width: 100%;
+  font-size: 12px;
+}
+.ifValidDiv {
+  /* min-height: 95%; */
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.valid_div_inner_div {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.valid_div_inner_div_cont {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  color: #7a7a7a;
+}
+.horizontal {
+  color: #a1a1a1;
+}
+h3.valid_div_inner_div_heading {
+  font-size: 14px;
+  font-weight: 800;
+  display: flex;
+  margin: 0;
+}
+
+.valid_div_inner_div_cont2 {
+  color: #56bc7e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.red {
+  color: red;
+}
+
+.not_ifValidDiv {
+  display: none;
+}
+
+.add_icon {
+  margin-right: 5px;
+  font-size: 18px !important;
+}
+
+.generate_eusd_cont {
+  border: solid;
+  border-width: 1px;
+  border-color: #efefef;
+  border-radius: 20px;
+  padding: 1em 0em;
+  padding-top: 0em;
+  /* height: 81%; */
+  border-top: none;
+}
+.open_vault_input_titlesb {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0.5em 1em;
+  padding-bottom: 0;
+  margin-top: 15px;
+}
+input.vault_input_vaulta {
+  width: 95%;
+  height: 76px;
+  border-radius: 8px;
+  border: solid;
+  border-width: 1px;
+  padding: 0.5em 1em;
+  border-color: #d4d4d4;
+  /* margin: auto; */
+  margin-top: 5px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+input.vault_input_vaulta:focus-visible {
+  outline: none;
+  border: solid;
+  border-width: 2px;
+  border-color: #56bc7e;
+  box-shadow: 0px 0px 10px #c3c3c3;
+}
+
+@media screen and (max-width: 1220px) {
+  .open_vault_section {
+    padding: 13em 0em;
+    padding-top: 14em;
+    padding-left: 3em;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .open_vault_section {
+    padding: 13em 0em;
+    padding-top: 14em;
+    padding-left: 0em;
+  }
+}
+@media screen and (max-width: 950px) {
+  .vault_prices1amount {
+    font-weight: 800;
+    font-size: 24px;
+  }
+
+  .amount_withdraw_cont1_txt1 {
+    font-size: 11px;
+    font-weight: 700;
+    color: #56bc7e;
+  }
+}
+@media screen and (max-width: 900px) {
+  .open_vault_area {
+    display: grid;
+    justify-content: space-between;
+    margin-top: 30px;
+    grid-gap: 48px;
+    gap: 48px;
+    grid-template-columns: 1fr;
+  }
+  .open_vault_section {
+    padding-top: 9em;
+  }
+}
+@media screen and (max-width: 685px) {
+  .vault_captions {
+    display: grid;
+    align-items: center;
+    grid-gap: 30px;
+    gap: 30px;
+    grid-template-columns: auto auto;
+  }
+}
+@media screen and (max-width: 425px) {
+  .vault_amount_withdraw {
+    /* width: 70%; */
+    display: flex;
+    /* flex-direction: column; */
+    background: #fff;
+    box-shadow: 0px 0px 15px #d5e2da;
+    border-radius: 20px;
+    min-height: 120px;
+    padding: 24px;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .vault_prices1amount {
+    font-weight: 800;
+    font-size: 18px;
+  }
+
+  .vault_prices1txt1 {
+    color: #56bc7e;
+    font-size: 11px;
+    font-weight: 700;
+    margin: 0;
+  }
+}

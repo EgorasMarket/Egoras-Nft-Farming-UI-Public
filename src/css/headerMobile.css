@@ -93,14 +93,17 @@
     width: 10px !important;
     padding: 0 !important;
   }
-
+  .connect {
+    float: right;
+    margin-right: 19px;
+    margin-top: 25px;
+  }
   #HideAgain {
     width: 10px !important;
     padding: 0 !important;
   }
   .egrLogo2Cont {
     display: flex;
-    flex-direction: column;
     width: 50%;
   }
 

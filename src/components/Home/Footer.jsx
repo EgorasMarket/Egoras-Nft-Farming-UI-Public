@@ -2,7 +2,10 @@ import React, { useEffect } from "react";
 import { Twitter, Facebook, YouTube, Instagram } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+
 import Accordion from "@material-ui/core/Accordion";
+// import OpenVaultPage from "./DashBoardPages/OpenVaultPage"im
+import OpenVaultPage from "../Dashboard/DashBoardPages/OpenVaultPage";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
@@ -21,8 +24,123 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Footer = () => {
+  const assets = [
+    {
+      img: "/img/btc-logo.svg",
+      name: "Bitcoin",
+      type: "BTC",
+      eusd_Avail: "100M",
+      stable: "0.50%",
+      ratio: "150%",
+    },
+
+    {
+      img: "/img/ether-logo.svg",
+      name: "Ethereum",
+      type: "ETH",
+      eusd_Avail: "99.37M",
+      stable: "2.00%",
+      ratio: "145%",
+    },
+
+    {
+      img: "/img/tether-icon.svg",
+      name: "Tether",
+      type: "USDT",
+      eusd_Avail: "90M",
+      stable: "1.00%",
+      ratio: "100%",
+    },
+
+    {
+      img: "/img/bnb-icon.svg",
+      name: "Binance",
+      type: "BNB",
+      eusd_Avail: "6.93M",
+      stable: "1.00%",
+      ratio: "175%",
+    },
+    {
+      img: "/img/yearn-icon.svg",
+      name: "Yearn",
+      type: "YF1",
+      eusd_Avail: "6.44M",
+      stable: "1.00%",
+      ratio: "165%",
+    },
+    {
+      img: "/img/uniswap-icon.svg",
+      name: "Uniswap",
+      type: "UNI",
+      eusd_Avail: "5.0M",
+      stable: "1.50%",
+      ratio: "120%",
+    },
+
+    {
+      img: "/egoras-favicon.svg",
+      name: "Egoras",
+      type: "EGR",
+      eusd_Avail: "100M",
+      stable: "0.50%",
+      ratio: "170%",
+    },
+    {
+      img: "/img/matic-icon.svg",
+      name: "Matic",
+      type: "MATIC",
+      eusd_Avail: "3.00M",
+      stable: "3.00%",
+      ratio: "175%",
+    },
+    {
+      img: "/img/aave-icon.svg",
+      name: "Aave",
+      type: "AAVE",
+      eusd_Avail: "5.00M",
+      stable: "1.00%",
+      ratio: "165%",
+    },
+    {
+      img: "/img/wrapped-btc.svg",
+      name: "Wrapped Bitcoin",
+      type: "WBTC",
+      eusd_Avail: "30.80M",
+      stable: "2.00%",
+      ratio: "145%",
+    },
+    {
+      img: "/img/egc-icon.svg",
+      name: "Egoras Credit",
+      type: "EGC",
+      eusd_Avail: "90M",
+      stable: "0.50%",
+      ratio: "120%",
+    },
+    {
+      img: "/img/chain-link-icon.svg",
+      name: "Chainlink",
+      type: "LINK",
+      eusd_Avail: "6.93M",
+      stable: "1.00%",
+      ratio: "165%",
+    },
+  ];
+
+  // assets.forEach(asset);
+
   const FooterHide = window.location.pathname;
   useEffect(() => {
+    // console.log(match.assets[0].type, "footer00");
+
+    const urlArr = FooterHide.split("/");
+
+    console.log("/vault/" + urlArr[2] + "/EUSD");
+
+    if (FooterHide === "/vault/" + urlArr[2] + "/EUSD") {
+      document.getElementById("FooterId").style.display = "none";
+    }
+
     if (FooterHide === "/login") {
       document.getElementById("FooterId").style.display = "none";
     }
@@ -39,16 +157,31 @@ const Footer = () => {
     if (FooterHide === "/dashboard/lending") {
       document.getElementById("FooterId").style.display = "none";
     }
+    if (FooterHide === "/dashboard/whitepaper") {
+      document.getElementById("FooterId").style.display = "none";
+    }
     if (FooterHide === "/dashboard/transaction") {
       document.getElementById("FooterId").style.display = "none";
     }
     if (FooterHide === "/dashboard/egr-balance") {
       document.getElementById("FooterId").style.display = "none";
     }
-      if (FooterHide === "/dashboard/swap") {
+    if (FooterHide === "/dashboard/swap") {
       document.getElementById("FooterId").style.display = "none";
     }
-  }, []);
+    if (FooterHide === "/dashboard/governance") {
+      document.getElementById("FooterId").style.display = "none";
+    }
+    if (FooterHide === "/dashboard/governance/details") {
+      document.getElementById("FooterId").style.display = "none";
+    }
+    if (FooterHide === `/vault/${assets[3].type}/EUSD`) {
+      document.getElementById("FooterId").style.display = "none";
+    }
+    // if (FooterHide === `/vault/${assets[(6, 7)].type}/EUSD`) {
+    //   document.getElementById("FooterId").style.display = "none";
+    // }
+  });
 
   const classes = useStyles();
 
@@ -117,7 +250,7 @@ const Footer = () => {
             <div className="footerCard2">
               <div className="footerCardTitle">About Us</div>
               <div className="footerLinks">
-                <a href="#howitworks" className="c1link1 a">
+                <a href="#howitworks" className="c1link1 ">
                   How it works
                 </a>
                 {/* <a href="#token" className="c1link1">
@@ -136,7 +269,7 @@ const Footer = () => {
             <div className="footerCard2">
               <div className="footerCardTitle">Legal</div>
               <div className="footerLinks">
-                <a href="/privacy" className="c1link1 a" target="_blank">
+                <a href="/privacy" className="c1link1 " target="_blank">
                   Privacy policy
                 </a>
                 <a href="/terms-conditions" className="c1link1" target="_blank">
@@ -166,7 +299,7 @@ const Footer = () => {
             <div className="footerCard2">
               <div className="footerCardTitle">Contact Us</div>
               <div className="footerLinks">
-                <a href="https://t.me/egorasmarket" className="c1link1 a">
+                <a href="https://t.me/egorasmarket" className="c1link1 ">
                   Get in Touch Today
                 </a>
                 <a href="" className="c1link1"></a>
@@ -219,7 +352,7 @@ const Footer = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <div className="footerLinks">
-                    <a href="#howitworks" className="c1link1 a">
+                    <a href="#howitworks" className="c1link1 ">
                       How it works
                     </a>
                     <a
@@ -242,7 +375,7 @@ const Footer = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <div className="footerLinks">
-                    <a href="/privacy" className="c1link1 a" target="_blank">
+                    <a href="/privacy" className="c1link1 " target="_blank">
                       Privacy policy
                     </a>
                     <a
@@ -292,7 +425,7 @@ const Footer = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <div className="footerLinks">
-                    <a href="https://t.me/egorasmarket" className="c1link1 a">
+                    <a href="https://t.me/egorasmarket" className="c1link1 ">
                       Get in Touch Today
                     </a>
                     <a href="" className="c1link1"></a>

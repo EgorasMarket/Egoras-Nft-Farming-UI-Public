@@ -1,10 +1,11 @@
 .dashboard-home {
   flex: 4;
   padding: 4em 2em;
-  width: 100vh;
+  width: 100%;
   background: #f4fff8;
   position: relative;
   padding-top: 8em;
+  padding-left: 14em;
 }
 
 .homeprofile-area {
@@ -292,15 +293,12 @@ input.withdraw-input-box:hover {
   display: flex;
   width: 33%;
   justify-content: center;
-  font-size: 11px;
-  color: #1500c5;
-  text-decoration: underline !important;
 }
 .title3 {
   display: flex;
   width: 33%;
   justify-content: flex-end;
-  font-size: 11px;
+  font-size: 12px;
   color: #1500c5;
   text-decoration: underline !important;
 }
@@ -308,4 +306,57 @@ input.withdraw-input-box:hover {
   font-weight: 700;
   font-size: 16px;
   color: #000;
+  text-decoration: none !important;
+}
+
+@media screen and (max-width: 767px) {
+  .column-display {
+    display: flex;
+    flex-direction: column;
+    grid-row-gap: 20px;
+    align-items: flex-start;
+  }
+  .title2 {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .title3 {
+    justify-content: space-between;
+  }
+
+  .title1,
+  .title3 {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .title1::before {
+    font-family: Inter, "Helvetica Neue", sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 14px;
+    color: var(--theme-ui-colors-text-muted, #708390);
+    content: "AMOUNT";
+    display: block;
+  }
+  .title2::before {
+    font-family: Inter, "Helvetica Neue", sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 14px;
+    color: var(--theme-ui-colors-text-muted, #708390);
+    content: "TYPE";
+    display: block;
+  }
+  /* 
+  .title3::before {
+    font-family: Inter, "Helvetica Neue", sans-serif;
+    font-weight: 600;
+    line-height: 1.5;
+    font-size: 14px;
+    color: var(--theme-ui-colors-text-muted, #708390);
+    content: "ADDRESS";
+    display: block;
+  } */
 }

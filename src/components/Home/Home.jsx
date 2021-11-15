@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import React from "react";
+import { Link } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
@@ -13,92 +14,111 @@ import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import "../../css/home.css";
 
 const Home = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [categoryBtn, setCategoryBtn] = useState("Popular");
 
   const assets = [
-     {
-       name: "Bitcoin" ,
-       type: "BTC-A" ,
-       eusd_Avail: "100M" ,
-       stable: "0.50%" ,
-       ratio: "150%" ,
+    {
+      img: "/img/btc-logo.svg",
+      name: "Bitcoin",
+      type: "BTC",
+      eusd_Avail: "100M",
+      stable: "0.50%",
+      ratio: "150%",
     },
-      {
-     name: "Ethereum" ,
-       type: "ETH-A" ,
-       eusd_Avail: "99.37M" ,
-       stable: "2.00%" ,
-       ratio: "145%" },
-    
+
     {
-       name: "Tether" ,
-        type: "USDT-A" ,
-        eusd_Avail: "90M" ,
-       stable: "1.00%" ,
-        ratio: "100%" ,
-     },
-    {
-        name: "Chainlink" ,
-       type: "LINK-A" ,
-        eusd_Avail: "6.93M" ,
-       stable: "1.00%" ,
-       ratio: "165%" ,
+      img: "/img/ether-logo.svg",
+      name: "Ethereum",
+      type: "ETH",
+      eusd_Avail: "99.37M",
+      stable: "2.00%",
+      ratio: "145%",
     },
+
     {
-     name: "Yearn" ,
-     type: "YF1-A" ,
-     eusd_Avail: "6.44M" ,
-    stable: "1.00%" ,
-     ratio: "165%" ,
+      img: "/img/tether-icon.svg",
+      name: "Tether",
+      type: "USDT",
+      eusd_Avail: "90M",
+      stable: "1.00%",
+      ratio: "100%",
     },
+
     {
-     name: "Uniswap" ,
-     type: "UNI-A" ,
-     eusd_Avail: "5.0M" ,
-     stable: "1.50%" ,
-     ratio: "120%" ,
+      img: "/img/bnb-icon.svg",
+      name: "Binance",
+      type: "BNB",
+      eusd_Avail: "6.93M",
+      stable: "1.00%",
+      ratio: "175%",
     },
     {
-     name: "Egoras" ,
-     type: "EGR-A" ,
-     eusd_Avail: "100M" ,
-    stable: "0.50%" ,
-     ratio: "170%" ,
+      img: "/img/yearn-icon.svg",
+      name: "Yearn",
+      type: "YF1",
+      eusd_Avail: "6.44M",
+      stable: "1.00%",
+      ratio: "165%",
     },
     {
-     name: "Matic" ,
-     type: "MATIC-A" ,
-     eusd_Avail: "3.00M" ,
-     stable: "3.00%" ,
-    ratio: "175%" ,
+      img: "/img/uniswap-icon.svg",
+      name: "Uniswap",
+      type: "UNI",
+      eusd_Avail: "5.0M",
+      stable: "1.50%",
+      ratio: "120%",
+    },
+
+    {
+      img: "/egoras-favicon.svg",
+      name: "Egoras",
+      type: "EGR",
+      eusd_Avail: "100M",
+      stable: "0.50%",
+      ratio: "170%",
     },
     {
-    name: "Aave" ,
-     type: "AAVE-A" ,
-     eusd_Avail: "5.00M" ,
-     stable: "1.00%" ,
-     ratio: "165%" ,
+      img: "/img/matic-icon.svg",
+      name: "Matic",
+      type: "MATIC",
+      eusd_Avail: "3.00M",
+      stable: "3.00%",
+      ratio: "175%",
     },
     {
-     name: "Wrapped Bitcoin" ,
-     type: "WBTC-A" ,
-    eusd_Avail: "30.80M" ,
-     stable: "2.00%" ,
-     ratio: "145%" ,
+      img: "/img/aave-icon.svg",
+      name: "Aave",
+      type: "AAVE",
+      eusd_Avail: "5.00M",
+      stable: "1.00%",
+      ratio: "165%",
     },
     {
-     name: "Egoras Credit" ,
-     type: "EGC-A" ,
-    eusd_Avail: "90M" ,
-     stable: "0.50%" ,
-     ratio: "120%" ,
+      img: "/img/wrapped-btc.svg",
+      name: "Wrapped Bitcoin",
+      type: "WBTC",
+      eusd_Avail: "30.80M",
+      stable: "2.00%",
+      ratio: "145%",
     },
     {
-     name: "Ethereum" ,
-     type: "ETH-A" ,
-     eusd_Avail: "90M" ,
-     stable: "0.70%" ,
-     ratio: "130%" ,
+      img: "/img/egc-icon.svg",
+      name: "Egoras Credit",
+      type: "EGC",
+      eusd_Avail: "90M",
+      stable: "0.50%",
+      ratio: "120%",
+    },
+    {
+      img: "/img/chain-link-icon.svg",
+      name: "Chainlink",
+      type: "LINK",
+      eusd_Avail: "6.93M",
+      stable: "1.00%",
+      ratio: "165%",
     },
   ];
 
@@ -133,7 +153,9 @@ const Home = () => {
                 <a href="/dashboard" className="stake-hero-btn1">
                   Launch App <ExitToAppIcon className="exit-to-app" />
                 </a>
-                <button className="stake-hero-btn2">Read White-Paper</button>
+                <a href="/dashboard/whitepaper" className="stake-hero-btn2">
+                  Read White-Paper
+                </a>
               </div>
             </div>
             <div
@@ -170,7 +192,6 @@ const Home = () => {
             <div className="key-features-cards-area">
               <div className="key-features-cards-area-flex">
                 <div className="key-features-cards-area1a btc-color">
-                  <h3 className="btc-card-txt">NEW</h3>
                   <h1 className="btc-card-txt-weight">BTC</h1>
                   <div className="btc-card-fees-figure">
                     <h6 className="fees-figure">Stability Fee: 3.00%</h6>
@@ -183,7 +204,6 @@ const Home = () => {
                   />
                 </div>
                 <div className="key-features-cards-area1a eth-color">
-                  <h3 className="btc-card-txt">NEW</h3>
                   <h1 className="btc-card-txt-weight">ETH</h1>
                   <div className="btc-card-fees-figure">
                     <h6 className="fees-figure">Stability Fee: 3.00%</h6>
@@ -196,7 +216,6 @@ const Home = () => {
                   />
                 </div>
                 <div className="key-features-cards-area1a egr-color">
-                  <h3 className="btc-card-txt">NEW</h3>
                   <h1 className="btc-card-txt-weight">EGR</h1>
                   <div className="btc-card-fees-figure">
                     <h6 className="fees-figure">Stability Fee: 3.00%</h6>
@@ -306,64 +325,49 @@ const Home = () => {
                 {/* =============== */}
                 {/* =============== */}
                 {/* =============== */}
-      { assets.map( (cat)=>(
+                {assets.map((asset) => (
+                  <tr className="assets-category-row">
+                    <td className="assets-category-data">
+                      <div className="assets-data">
+                        <img
+                          src={asset.img}
+                          alt=""
+                          className="assets-list-icon"
+                        />
 
-                <tr className="assets-category-row">
-                  <td className="assets-category-data">
-                    <div className="assets-data">
-                      <img
-                        src="/img/btc-logo.svg"
-                        alt=""
-                        className="assets-list-icon"
-                      />
-
-                      <div className="assets-data-name">
-                        {cat.name}
+                        <div className="assets-data-name">{asset.name}</div>
                       </div>
-                    </div>
-                  </td>
-                  <td className="assets-category-data1">
-                    <div className="assets-data-name">
-                      {cat.type}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {cat.eusd_Avail}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {cat.stable}
-                    </div>
-                  </td>
-                  <td className="assets-category-data1b">
-                    <div className="assets-data-name">
-                      {cat.ratio}
-                    </div>
-                  </td>
-                  <td className="assets-category-data-last">
-                    <div className="assets-data-name-last">
-                      <button
-                        className="assets-collateralize-button"
-                        style={{ border: "none" }}
-                      >
-                        Open Vault
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-                )
-                )
-                }
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
-                {/* =================== */}
+                    </td>
+                    <td className="assets-category-data1">
+                      <div className="assets-data-name">{asset.type}</div>
+                    </td>
+                    <td className="assets-category-data1b">
+                      <div className="assets-data-name ">
+                        {asset.eusd_Avail}
+                      </div>
+                    </td>
+                    <td className="assets-category-data1b stable-content">
+                      <div className="assets-data-name ">{asset.stable}</div>
+                    </td>
+                    <td className="assets-category-data1b ratio-content">
+                      <div className="assets-data-name ">{asset.ratio}</div>
+                    </td>
+                    <td className="assets-category-data-last">
+                      <div className="assets-data-name-last">
+                        <a
+                          href={`vault/${asset.type}/EUSD`}
+                          className="assets-collateralize-button"
+                          style={{ border: "none" }}
+                        >
+                          Open Vault
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
                 {/* =============== */}
                 {/* =============== */}
                 {/* =============== */}
-             
               </tbody>
               {/* {{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}} */}
             </table>
@@ -372,43 +376,7 @@ const Home = () => {
       </section>
 
       {/* third section start */}
-      {/* <section className="earning-section reduce-padding">
-        <div className="container">
-          <div className="nft-area2  align">
-            <div className="nft-txt-area2 " style={{ width: "100%" }}>
-              <div className="span-txts">
-                <p className="span4a-txts">
-                  Join our NFT Program to earn even more
-                </p>
-                <p className="span4b-txts">
-                  Requires NFT to be held in the same wallet connected to the
-                  Egoras Platform. More details to follow soon
-                </p>
-              </div>
-            </div>
-            <div
-              className="nft-img-area2"
-              style={{ display: "inline-flex", width: "100%" }}
-            >
-              <div className="join-nft-list">
-                <div className="join-nft-list1"></div>
-                <div className="join-nft-list1"></div>
-                <div className="join-nft-list1"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <img src="/img/blur-drop.png" alt="" className="blurDrop-token" />
-      </section> */}
-      {/* third section end */}
-      {/* ========================== */}
-      {/* ========================== */}
-      {/* =================================================================================================================================================================================================================================================================== */}
-      {/* Tokens Section Start */}
-      {/* =================== */}
-      {/* =================== */}
-      {/* =================== */}
-      {/* =================== */}
+
       {/* fourth section start */}
       <section className="second-eusd-token-section">
         <div className="container">
@@ -448,103 +416,6 @@ const Home = () => {
         </div>
         <img src="/img/blur-drop.png" alt="" className="blurDrop-token" />
       </section>
-      {/* fourth section end */}
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* ==================== */}
-
-      {/* third section start */}
-      {/* <section className="earning-section reduce-padding">
-        <div className="container">
-          <div className="nft-area2">
-            <div className="nft-txt-area2 " style={{ width: "100%" }}>
-              <div className="span-txts">
-                <p className="span4a-txts">WINR Staking & Mining</p>
-                <p className="span4b-txts">
-                  The first-ever fully decentralized and autonomous gaming
-                  platform which has no human interaction, where payouts cannot
-                  be tampered with at any time and “where everyone is a WINR”.
-                </p>
-              </div>
-            </div>
-            <div
-              className="nft-img-area2"
-              style={{ display: "inline-flex", width: "100%" }}
-            >
-              <img
-                src="/img/chart-up.svg"
-                alt=""
-                style={{ width: "100%", margin: "auto" }}
-              />
-            </div>
-          </div>
-        </div>
-        <img src="/img/blur-drop.png" alt="" className="blurDrop-token" />
-      </section> */}
-
-      {/* ========================== */}
-      {/* ========================== */}
-      {/* =================== */}
-      {/* =================== */}
-      {/* =================== */}
-      {/* =================== */}
-      {/* fourth section start */}
-      {/* <section className="second-eusd-token-section">
-        <div className="container">
-          <div className="nft-area3">
-            <h1 className="key-features-heading">What Is Egoras Stake</h1>
-            <div className="key-features-cards-area">
-              <div className="key-features-cards-area-flex">
-                <div className="key-features-cards-area1 hide-bg">
-                  <div className="key-features-cards-area1-header font-sz">
-                    <CasinoIcon className="home-icon" /> Fully decentralised
-                    Casino and Lottery.
-                  </div>
-                </div>
-                <div className="key-features-cards-area1 hide-bg">
-                  <div className="key-features-cards-area1-header font-sz">
-                    <CasinoIcon className="home-icon" /> Fully decentralised
-                    Casino and Lottery.
-                  </div>
-                </div>
-                <div className="key-features-cards-area1 hide-bg">
-                  <div className="key-features-cards-area1-header font-sz">
-                    <CasinoIcon className="home-icon" /> Fully decentralised
-                    Casino and Lottery.
-                  </div>
-                </div>
-              </div>
-              <div className="key-features-cards-area-flex">
-                <div className="key-features-cards-area1 hide-bg">
-                  <div className="key-features-cards-area1-header font-sz">
-                    <CasinoIcon className="home-icon" /> Fully decentralised
-                    Casino and Lottery.
-                  </div>
-                </div>
-                <div className="key-features-cards-area1 hide-bg">
-                  <div className="key-features-cards-area1-header font-sz">
-                    <CasinoIcon className="home-icon" /> Fully decentralised
-                    Casino and Lottery.
-                  </div>
-                </div>
-                <div className="key-features-cards-area1 hide-bg">
-                  <div className="key-features-cards-area1-header font-sz">
-                    <CasinoIcon className="home-icon" /> Fully decentralised
-                    Casino and Lottery.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <img src="/img/blur-drop.png" alt="" className="blurDrop-token" />
-      </section> */}
-      {/* fourth section end */}
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* ==================== */}
     </div>
   );
 };
