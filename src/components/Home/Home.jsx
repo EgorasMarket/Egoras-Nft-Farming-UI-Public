@@ -14,6 +14,11 @@ import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import "../../css/home.css";
 
 const Home = () => {
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
