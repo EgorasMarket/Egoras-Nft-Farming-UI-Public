@@ -407,6 +407,10 @@ input[type=number] {
     cursor: pointer;
     background-color: rgb(237, 238, 242); 
 }
+.sidebarIcon45{
+    color:#229e54;
+    transform: rotate(90deggi);
+}
 
  @media (max-width:600px){
      .feed22{

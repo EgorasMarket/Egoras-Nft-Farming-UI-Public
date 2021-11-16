@@ -153,7 +153,8 @@ const show46 =()=>{
                                </div>
                                  <div className="For1">
                                      <div style={{flex:'1',fontWeight:'bold',}}  className="rete">RECEIVE</div>
-                                     <div style={{flex:'1'}}><img src="../../img/map11.svg" alt=""/></div>
+                                     {/* <div style={{flex:'1'}}>{<img src="../../img/map11.svg" alt=""/>/</div> */}
+                                      <div style={{flex:'1'}}><svg className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium sidebarIcon45 css-i4bv87-MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true" data-testid="SwapHorizontalCircleIcon"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12s4.48 10 10 10 10-4.48 10-10zm-7-5.5 3.5 3.5-3.5 3.5V11h-4V9h4V6.5zm-6 11L5.5 14 9 10.5V13h4v2H9v2.5z"></path></svg></div>
                                  </div>
 
                                  <div className="For">
