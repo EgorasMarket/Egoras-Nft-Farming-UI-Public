@@ -409,7 +409,7 @@ input[type=number] {
 }
 .sidebarIcon45{
     color:#229e54;
-    transform: rotate(90deggi);
+    transform: rotate(90deg);
 }
 
  @media (max-width:600px){
