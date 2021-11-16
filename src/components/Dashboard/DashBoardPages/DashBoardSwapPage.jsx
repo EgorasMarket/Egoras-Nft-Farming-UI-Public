@@ -59,12 +59,21 @@ const File = () => {
       );
       setSearchResults(results);
       setSearchResults1(results1);
+ 
 
   },[searchTerm])
 
 
 
+ const deff=(ey)=>{
 
+    setChangeShow(ey.target.value);
+    document.getElementById('send8').style.display="block";
+    let pap = document.getElementById('send9');
+    if(pap.value <= 0){
+        document.getElementById('send8').style.display="none"
+    }
+ }
     
 //   let defe = (x)=>{
 //  return(x + x)
@@ -106,7 +115,7 @@ const show46 =()=>{
         document.getElementById('water').style.display='none';
         document.getElementById('COMJ').style.display='none';
         document.getElementById('COMES').style.display='block';
-        window.scroll.top='70px';
+        // window.scroll.top='70px';
     
     }
      const Just2=()=>{
@@ -139,7 +148,7 @@ const show46 =()=>{
                                              <div style={{color:'#000', fontWeight:'600'}}>MAX</div>
                                        </div>
                                    </div>
-                                   <div><input   placeholder="0.00" className="send8" value="4"/></div>
+                                   <div><input type="number"  placeholder="0.00" className="send8" /></div>
                                  </div>
                                </div>
                                  <div className="For1">
@@ -154,7 +163,7 @@ const show46 =()=>{
                                            <div className="send7"> <img src={image} alt="" className="send4"/></div>
                                           <div> <div  onClick={show45} style={{display:'flex',alignItems:'center',color:'#000',fontWeight:'600',cursor:'pointer'}}>{speed4} <ArrowDropDownIcon id="COMES1"/>  </div></div>
                                          </div>
-                                         <div><input type="number" alt="" className="send8"  placeholder="0.00" value={changeShow} onChange={(ey)=>{setChangeShow(ey.target.value);document.getElementById('send8').style.display="block"}} onClick={()=>{setChangeShow('');}}/>
+                                         <div><input type="number" alt="" className="send8" id="send9" placeholder="0.00" value={changeShow} onChange={ deff} onClick={()=>{setChangeShow('');}}/>
                                          <input type="number" alt="" className="send8" id="send8" placeholder="0.00" value={changeShow} />
                                          </div>
                                      </div>

@@ -360,7 +360,7 @@ const OpenVaultPage = ({ match }) => {
                   </div>
                   <div className="vault_input">
                     <input
-                      type="text"
+                      type="number"
                       name="value"
                       id="value"
                       // {value}
@@ -427,7 +427,7 @@ const OpenVaultPage = ({ match }) => {
                       </span>
                     </div>
                     <input
-                      type="text"
+                      type="number"
                       name="value"
                       id="value"
                       // {value}
