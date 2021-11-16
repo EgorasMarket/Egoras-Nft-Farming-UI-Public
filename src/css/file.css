@@ -416,11 +416,15 @@ input[type=number] {
 .sidebarIcon45{
     color:#229e54;
     transform: rotate(90deg);
+    
 }
 
  @media (max-width:600px){
      .feed22{
          width:95vw;
+     }
+     .feed12{
+         padding-top: 13vh;
      }
  }
 @media (max-width:460px){
@@ -449,6 +453,8 @@ input[type=number] {
     }
     .Gas2{
         width:110px;
+        display:flex;
+        flex-direction: column;
     }
     .Enable4{
         font-size: 16px;
