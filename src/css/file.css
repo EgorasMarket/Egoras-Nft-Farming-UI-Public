@@ -199,7 +199,7 @@ color:#000;
     display:none;
 }
 .feed12{
-    z-index: 2;
+    z-index: 10000;
     overflow: hidden;
     display: flex;
     -webkit-box-align: center;
@@ -423,9 +423,7 @@ input[type=number] {
      .feed22{
          width:95vw;
      }
-     .feed12{
-         padding-top: 13vh;
-     }
+     
  }
 @media (max-width:460px){
     .Gas2{
