@@ -1,6 +1,9 @@
 import React, {useState,useEffect} from 'react';
 import "../../../css/file.css";
 
+
+
+
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
 
@@ -40,7 +43,8 @@ const File = () => {
 
 
     const [changeShow,setChangeShow] = useState(0);
-
+    const [changeShow1,setChangeShow1] = useState(0);
+    
 
 
     const [searchTerm, setSearchTerm] = React.useState("");
@@ -74,6 +78,16 @@ const File = () => {
         document.getElementById('send8').style.display="none"
     }
  }
+
+ const deff2=(eye)=>{
+
+    setChangeShow1(eye.target.value);
+    document.getElementById('send208').style.display="block";
+    let pap = document.getElementById('dera3');
+    if(pap.value <= 0){
+        document.getElementById('send208').style.display="none"
+    }
+ }
     
 //   let defe = (x)=>{
 //  return(x + x)
@@ -100,7 +114,7 @@ const show46 =()=>{
     document.getElementById('farm1').style.display='flex';
    document.body.classList.add('queen');
 }
-
+  const sign = "$";
 
     const send = (e)=>{
         const sand = e.target.id;
@@ -148,7 +162,8 @@ const show46 =()=>{
                                              <div style={{color:'#000', fontWeight:'600'}}>MAX</div>
                                        </div>
                                    </div>
-                                   <div><input type="number"  placeholder="0.00" className="send8" /></div>
+                                   <div><input type="number"  placeholder="0.00" className="send8" id="dera3" value={changeShow1} onChange={deff2}/>
+                                   <input type="number" alt="" className="send8" id="send208" placeholder="0.00" value={changeShow1} /></div>
                                  </div>
                                </div>
                                  <div className="For1">
@@ -164,8 +179,9 @@ const show46 =()=>{
                                            <div className="send7"> <img src={image} alt="" className="send4"/></div>
                                           <div> <div  onClick={show45} style={{display:'flex',alignItems:'center',color:'#000',fontWeight:'600',cursor:'pointer'}}>{speed4} <ArrowDropDownIcon id="COMES1"/>  </div></div>
                                          </div>
-                                         <div><input type="number" alt="" className="send8" id="send9" placeholder="0.00" value={changeShow} onChange={ deff} onClick={()=>{setChangeShow('');}}/>
-                                         <input type="number" alt="" className="send8" id="send8" placeholder="0.00" value={changeShow} />
+                                         <div><input type="number" alt="" className="send8" id="send9" placeholder="0.00" value={changeShow} onChange={ deff} />
+                                         <input type="number" alt="" className="send8" id="send8" placeholder="0.00" value ={changeShow} />
+                          
                                          </div>
                                      </div>
                                  </div>

@@ -68,7 +68,7 @@
     border:none;
     outline:none;
     width:100%;
-    font-size: 18px;
+    font-size: 16px;
      background-color:#c4fbdb;
      color:#000;
      font-weight: bold;
@@ -346,6 +346,12 @@ color:#000;
 }
 #send8{
     display:none;
+    font-size: 12px;
+}
+
+#send208{
+    display:none;
+    font-size: 12px;
 }
 .saw{
     padding:15px 15px;
