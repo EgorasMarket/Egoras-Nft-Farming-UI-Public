@@ -235,7 +235,7 @@ const DashboardSideBarMenu = () => {
               {/* ===================== */}
               {/* ===================== */}
 
-              <Link
+              {/* <Link
                 to="/dashboard/transaction"
                 className="link"
                 id="transaction"
@@ -251,7 +251,7 @@ const DashboardSideBarMenu = () => {
                   <ImportExportIcon className="sidebarIcon" />
                   Staking
                 </li>
-              </Link>
+              </Link> */}
 
               {/* ===================== */}
               {/* ===================== */}
