@@ -140,6 +140,9 @@ const Footer = () => {
     if (FooterHide === "/vault/" + urlArr[2] + "/EUSD") {
       document.getElementById("FooterId").style.display = "none";
     }
+    if (FooterHide === "/deposit_vault/" + urlArr[2] + "/EUSD") {
+      document.getElementById("FooterId").style.display = "none";
+    }
 
     if (FooterHide === "/login") {
       document.getElementById("FooterId").style.display = "none";
@@ -175,9 +178,7 @@ const Footer = () => {
     if (FooterHide === "/dashboard/governance/details") {
       document.getElementById("FooterId").style.display = "none";
     }
-    if (FooterHide === `/vault/${assets[3].type}/EUSD`) {
-      document.getElementById("FooterId").style.display = "none";
-    }
+
     // if (FooterHide === `/vault/${assets[(6, 7)].type}/EUSD`) {
     //   document.getElementById("FooterId").style.display = "none";
     // }

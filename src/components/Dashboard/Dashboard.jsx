@@ -12,6 +12,7 @@ import DashboardGovernance from "./DashBoardPages/DashboardGovernance";
 // import OpenVaultPage from "./OpenVaultPage.js";
 // import OpenVaultPage from "./DashBoardPages/OpenVaultPage";
 import OpenVaultPage from "./DashBoardPages/OpenVaultPage";
+import Deposit_vault_form from "./DashBoardPages/Vault_forms/Deposit_vault_form";
 import DashBoardSwap from "./DashBoardPages/DashBoardSwapPage";
 import DashBoardWhitePaper from "./DashBoardPages/DashBoardWhitePaper";
 import DashboardEgrBalancePage from "./DashBoardPages/DashboardEgrBalancePage";
@@ -31,6 +32,11 @@ function Dashboard() {
           <Route exact path="/dashboard" component={DashBoardAnalytics} />
           <Route exact path="/dashboard/swap" component={DashBoardSwap} />
           <Route exact path="/vault/:asset/:base" component={OpenVaultPage} />
+          <Route
+            exact
+            path="/deposit_vault/:asset/:base"
+            component={Deposit_vault_form}
+          />
           <Route
             exact
             path="/dashboard/governance"
