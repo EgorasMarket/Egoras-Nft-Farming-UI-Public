@@ -1,0 +1,537 @@
+  
+{
+    "address": "0xe58c25e6a1139c815d135e14020c96BE13407757",
+    "abi": [
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "_liquidateBy",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_penalty",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_lAmount",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_time",
+            "type": "uint256"
+          }
+        ],
+        "name": "Liquidated",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "_base",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "_asset",
+            "type": "address"
+          },
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "_secretary",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "bool",
+            "name": "_live",
+            "type": "bool"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_maxLoan",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "_ticker",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "_creator",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_time",
+            "type": "uint256"
+          }
+        ],
+        "name": "Listed",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": true,
+            "internalType": "address",
+            "name": "_user",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_id",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_amount",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_collateral",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "_ticker",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "lqp",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_maxDraw",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_time",
+            "type": "uint256"
+          }
+        ],
+        "name": "LoanCreated",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_time",
+            "type": "uint256"
+          }
+        ],
+        "name": "Repaid",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_totalCollateral",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_maxDraw",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_newLqp",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_time",
+            "type": "uint256"
+          }
+        ],
+        "name": "Topped",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "debt",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "liquidationPrice",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "_time",
+            "type": "uint256"
+          }
+        ],
+        "name": "Withdrew",
+        "type": "event"
+      },
+      {
+        "stateMutability": "payable",
+        "type": "fallback"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "_ticker",
+            "type": "string"
+          }
+        ],
+        "name": "__tickerInfo",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "address",
+                "name": "base",
+                "type": "address"
+              },
+              {
+                "internalType": "address",
+                "name": "asset",
+                "type": "address"
+              },
+              {
+                "internalType": "address",
+                "name": "secretary",
+                "type": "address"
+              },
+              {
+                "internalType": "bool",
+                "name": "live",
+                "type": "bool"
+              },
+              {
+                "internalType": "uint256",
+                "name": "maxLoan",
+                "type": "uint256"
+              },
+              {
+                "internalType": "string",
+                "name": "ticker",
+                "type": "string"
+              },
+              {
+                "internalType": "address",
+                "name": "creator",
+                "type": "address"
+              }
+            ],
+            "internalType": "struct EgorasMultiAssetLoanFacet.LoanAssetMeta",
+            "name": "_meta",
+            "type": "tuple"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_amount",
+            "type": "uint256"
+          }
+        ],
+        "name": "draw",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_borrower",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "_ticker",
+            "type": "string"
+          }
+        ],
+        "name": "getLastestLoan",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "_collateral",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_debt",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_max",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_liquidationPrice",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "_stale",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_id",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "_ticker",
+            "type": "string"
+          },
+          {
+            "internalType": "bool",
+            "name": "isDefault",
+            "type": "bool"
+          }
+        ],
+        "name": "liquidate",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_base",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_asset",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_secretary",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "_live",
+            "type": "bool"
+          },
+          {
+            "internalType": "string",
+            "name": "_ticker",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_maxLoan",
+            "type": "uint256"
+          }
+        ],
+        "name": "list",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_collateral",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "_ticker",
+            "type": "string"
+          }
+        ],
+        "name": "open",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "_ticker",
+            "type": "string"
+          }
+        ],
+        "name": "openDefaultAsset",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_amount",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bool",
+            "name": "isDefault",
+            "type": "bool"
+          }
+        ],
+        "name": "repay",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "_ticker",
+            "type": "string"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_collateral",
+            "type": "uint256"
+          }
+        ],
+        "name": "topup",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "_ticker",
+            "type": "string"
+          }
+        ],
+        "name": "topupDefaultAsset",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "stateMutability": "payable",
+        "type": "receive"
+      }
+    ]
+}

@@ -1,0 +1,43 @@
+{
+    "address" : "0xe58c25e6a1139c815d135e14020c96BE13407757",
+    "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "_ticker",
+              "type": "string"
+            }
+          ],
+          "name": "price",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "string",
+              "name": "_ticker",
+              "type": "string"
+            }
+          ],
+          "name": "converter",
+          "outputs": [
+            {
+              "internalType": "bytes",
+              "name": "",
+              "type": "bytes"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ]
+    }
