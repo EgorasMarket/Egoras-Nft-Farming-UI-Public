@@ -18,7 +18,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { Link } from "react-router-dom";
 import "../../css/dashBoardSideBar.css";
 import "../../css/dashboardheader.css";
-
+import {Authenticate} from "../auth/Authenticate";
 const DashboardSideBarMenu = () => {
   const [activeBg, setActiveBg] = useState("market");
   const [click, setClick] = useState("drop");
@@ -162,9 +162,8 @@ const DashboardSideBarMenu = () => {
                 />
               </a>
             </div>
-            <button className="logout-btn">
-              Log out <ExitToAppIcon />
-            </button>
+            <Authenticate isHome="false" />
+           
           </div>
         </div>
       </section>

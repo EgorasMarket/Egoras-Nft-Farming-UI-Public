@@ -75,6 +75,16 @@
   font-weight: 700;
   color: #56bc7e;
 }
+.price_value_change.danger{
+  color: #f75524 !important;
+  background: #fdede8 !important;
+}
+
+.price_value_change.warning{
+  color: #d8762d !important;
+  background: #fff1cf !important;
+}
+
 .price_value_change {
   box-sizing: border-box;
   margin: 8px 0px 0px;

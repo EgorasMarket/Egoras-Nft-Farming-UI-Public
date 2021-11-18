@@ -24,33 +24,6 @@ const DashBoardAnalytics = () => {
 
   const assets = [
     {
-      img: "/img/btc-logo.svg",
-      name: "Bitcoin",
-      type: "BTC",
-      eusd_Avail: "100M",
-      stable: "0.50%",
-      ratio: "150%",
-    },
-
-    {
-      img: "/img/ether-logo.svg",
-      name: "Ethereum",
-      type: "ETH",
-      eusd_Avail: "99.37M",
-      stable: "2.00%",
-      ratio: "145%",
-    },
-
-    {
-      img: "/img/tether-icon.svg",
-      name: "Tether",
-      type: "USDT",
-      eusd_Avail: "90M",
-      stable: "1.00%",
-      ratio: "100%",
-    },
-
-    {
       img: "/img/bnb-icon.svg",
       name: "Binance",
       type: "BNB",
@@ -59,53 +32,12 @@ const DashBoardAnalytics = () => {
       ratio: "175%",
     },
     {
-      img: "/img/yearn-icon.svg",
-      name: "Yearn",
-      type: "YF1",
-      eusd_Avail: "6.44M",
-      stable: "1.00%",
-      ratio: "165%",
-    },
-    {
-      img: "/img/uniswap-icon.svg",
-      name: "Uniswap",
-      type: "UNI",
-      eusd_Avail: "5.0M",
-      stable: "1.50%",
-      ratio: "120%",
-    },
-
-    {
       img: "/egoras-favicon.svg",
       name: "Egoras",
       type: "EGR",
       eusd_Avail: "100M",
       stable: "0.50%",
       ratio: "170%",
-    },
-    {
-      img: "/img/matic-icon.svg",
-      name: "Matic",
-      type: "MATIC",
-      eusd_Avail: "3.00M",
-      stable: "3.00%",
-      ratio: "175%",
-    },
-    {
-      img: "/img/aave-icon.svg",
-      name: "Aave",
-      type: "AAVE",
-      eusd_Avail: "5.00M",
-      stable: "1.00%",
-      ratio: "165%",
-    },
-    {
-      img: "/img/wrapped-btc.svg",
-      name: "Wrapped Bitcoin",
-      type: "WBTC",
-      eusd_Avail: "30.80M",
-      stable: "2.00%",
-      ratio: "145%",
     },
     {
       img: "/img/egc-icon.svg",
@@ -116,9 +48,9 @@ const DashBoardAnalytics = () => {
       ratio: "120%",
     },
     {
-      img: "/img/chain-link-icon.svg",
-      name: "Chainlink",
-      type: "LINK",
+      img: "/img/kodi.png",
+      name: "Kodi",
+      type: "KODI",
       eusd_Avail: "6.93M",
       stable: "1.00%",
       ratio: "165%",
@@ -269,7 +201,7 @@ const DashBoardAnalytics = () => {
                     <td className="assets-category-data-last">
                       <div className="assets-data-name-last">
                         <a
-                          href={`deposit_vault/${asset.type}/EUSD`}
+                          href={`vault/${asset.type}/EUSD`}
                           className="assets-collateralize-button"
                           style={{ border: "none" }}
                         >
