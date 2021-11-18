@@ -369,8 +369,10 @@ color:#000;
     text-align: center; 
     position:sticky;
     bottom: 0;
+    left:0;
     /* height:60px; */
     color:#229e54;
+   
 }
 .saw2{
     position:relative;
@@ -418,6 +420,14 @@ input[type=number] {
     transform: rotate(90deg);
     
 }
+
+/* @media (max-width:410px){
+    .saw1{
+        border-radius: 0;
+    }
+} */
+
+
 
  @media (max-width:600px){
      .feed22{
