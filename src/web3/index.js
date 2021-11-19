@@ -56,6 +56,7 @@ const transactReceipt = async (hash, library) =>{
         status: true,
       }
      } catch (error) {
+       console.log(error);
       return {
         message: error,
         status: false,
@@ -65,7 +66,8 @@ const transactReceipt = async (hash, library) =>{
  const open = async (collateral, amoumt, ticker, signer) =>{
     try {
       const instance = contractInstance(signer);
-      let result = await instance.open(collateral, amoumt, ticker);
+      console.log(collateral, amoumt, ticker);
+      let result = await instance.open4(collateral, amoumt, ticker);
      
       return {
         message: result,
