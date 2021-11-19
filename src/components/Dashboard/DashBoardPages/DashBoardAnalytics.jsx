@@ -22,7 +22,7 @@ const DashBoardAnalytics = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
-const assets = [
+  const assets = [
     {
       img: "/img/bnb-icon.svg",
       name: "Binance",
