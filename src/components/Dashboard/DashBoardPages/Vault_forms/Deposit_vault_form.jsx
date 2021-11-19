@@ -379,15 +379,14 @@ const Deposit_vault_form = ({ match }) => {
                 {/* ifvalid div start */}
                 {/* ifvalid div start */}
                 {/* ifvalid div start */}
-                <div
+                {/* <div
                   className={
                     validDiv == "not_ifValidDiv"
                       ? "not_ifValidDiv"
                       : "ifValidDiv"
                   }
-                >
-                  {" "}
-                  <div
+                > */}
+                {/* <div
                     className={
                       buttonOpen == "generate_eusd_cont1"
                         ? "generate_eusd_cont1"
@@ -402,7 +401,7 @@ const Deposit_vault_form = ({ match }) => {
                       transaction
                     </button>
                   </div>
-                  <div
+                  {/* <div
                     className={
                       buttonOpen2 == "not_generate_eusd_cont"
                         ? "not_generate_eusd_cont"
@@ -437,100 +436,10 @@ const Deposit_vault_form = ({ match }) => {
                       onChange={handleInputChanga}
                       // onKeyUp={(e) => onKeyUp(e)}
                     />
-                  </div>
-                  <hr className="horizontal" />
-                  <div className="valid_div_inner_div">
-                    <h3 className="valid_div_inner_div_heading">
-                      Vault changes
-                    </h3>
-                    {/* ===== */}
-                    {/* ===== */}
-                    {/* ===== */}
-                    <div className="valid_div_inner_div_cont">
-                      <div className="valid_div_inner_div_cont1">
-                        Collateral Locked
-                      </div>
-                      <div className="valid_div_inner_div_cont2">
-                        0.00 {asset} - {decimalPlace}
-                        {asset}
-                      </div>
-                    </div>
-                    {/* ===== */}
-                    {/* ===== */}
-                    {/* ===== */}
-                    <div className="valid_div_inner_div_cont">
-                      <div className="valid_div_inner_div_cont1">
-                        Collateralization Ratio
-                      </div>
-                      <div className="valid_div_inner_div_cont2">
-                        0.00% - 0.00%
-                      </div>
-                    </div>
-                    {/* ===== */}
-                    {/* ===== */}
-                    {/* ===== */}
-                    <div className="valid_div_inner_div_cont">
-                      <div className="valid_div_inner_div_cont1">
-                        Liquidation Price
-                      </div>
-                      <div className="valid_div_inner_div_cont2">
-                        $0.00 - $0.00
-                      </div>
-                    </div>
-                    {/* ===== */}
-                    {/* ===== */}
-                    {/* ===== */}
-                    <div className="valid_div_inner_div_cont">
-                      <div className="valid_div_inner_div_cont1">
-                        Vault {base} Debt
-                      </div>
-                      <div className="valid_div_inner_div_cont2">
-                        0.00 {base} - 0.00 {base}
-                      </div>
-                    </div>
-                    {/* ===== */}
-                    {/* ===== */}
-                    {/* ===== */}
-                    <div className="valid_div_inner_div_cont">
-                      <div className="valid_div_inner_div_cont1">
-                        Available to Withdraw
-                      </div>
-                      <div className="valid_div_inner_div_cont2">
-                        0.00 {asset} - {decimalPlace}
-                        {asset}
-                      </div>
-                    </div>
-
-                    {/* ===== */}
-                    {/* ===== */}
-                    {/* ===== */}
-                    <div className="valid_div_inner_div_cont">
-                      <div className="valid_div_inner_div_cont1">
-                        Available to Generate
-                      </div>
-                      <div className="valid_div_inner_div_cont2">
-                        0.00 {base} - {"  "}
-                        <NumberFormat
-                          value={tokenPrice}
-                          displayType="text"
-                          thousandSeparator={true}
-                          // prefix="EUSD "
-                        />
-                        {"  "}_{base}
-                      </div>
-                    </div>
-                    {/* ===== */}
-                    {/* ===== */}
-                    {/* ===== */}
-                    <div className="valid_div_inner_div_cont">
-                      <div className="valid_div_inner_div_cont1">
-                        Max gas fee
-                      </div>
-                      <div className="valid_div_inner_div_cont2 red">n/a</div>
-                    </div>
-                  </div>
-                </div>
-                <button className="open_vault_input_btn">{amount}</button>
+                  </div> */}
+                {/* <hr className="horizontal" />
+                </div> */}{" "}
+                <button className="open_vault_input_btn">Deposit</button>
               </div>
             </div>
           </div>
