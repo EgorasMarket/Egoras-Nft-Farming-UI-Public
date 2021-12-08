@@ -199,7 +199,7 @@ color:#000;
     display:none;
 }
 .feed12{
-    z-index: 2;
+    z-index: 1000;
     overflow: hidden;
     display: flex;
     -webkit-box-align: center;
