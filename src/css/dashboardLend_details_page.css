@@ -816,7 +816,7 @@ button.pool_detail_heading_area1_invest_btn {
   z-index: 10000;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   backdrop-filter: blur(8px);
 }
 .goDoKycDiv_container {
@@ -830,7 +830,7 @@ button.pool_detail_heading_area1_invest_btn {
   gap: 5px;
   align-items: center;
   text-align: center;
-  animation: slideFromTop 0.3s linear;
+  animation: slideFromTop 0.5s linear;
   position: relative;
 }
 .dark .goDoKycDiv_container {

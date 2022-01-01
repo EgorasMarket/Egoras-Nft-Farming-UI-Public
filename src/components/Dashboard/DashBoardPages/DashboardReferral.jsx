@@ -152,10 +152,17 @@ const DashboardReferral = ({ auth }) => {
       if (account) {
         let response = await getAuthUserStats(account);
         const payload = response.message.data.payload;
-        if (payload.ref_code == "") {
+        if (payload == null) {
           setRefLink(() => "*******");
         } else {
           setRefLink(() => "http://localhost:3000/referal/" + payload.ref_code);
+          if (payload.ref_code == "") {
+            setRefLink(() => "*******");
+          } else {
+            setRefLink(
+              () => "http://localhost:3000/referal/" + payload.ref_code
+            );
+          }
         }
 
         console.log(response.message.data);
@@ -229,12 +236,6 @@ const DashboardReferral = ({ auth }) => {
           setRefCount(pasedResAmnt);
           console.log(resAmnt);
           console.log(parseEther(resAmnt, "wei").toString());
-          // console.log(
-          //   resAmnt.toLocaleString("fullwide", { useGrouping: false })
-          // );
-          // console.log(web3.utils.toWei(resAmnt.toString(), "ether"));
-          // console.log(parseEther(resAmnt.toString(), "wei").toString());
-          // console.log(response.message._referral);
         }
       }
     },
