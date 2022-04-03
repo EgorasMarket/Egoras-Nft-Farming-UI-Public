@@ -12,13 +12,15 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import TwitterIcon from "@mui/icons-material/Twitter";
+
+import OpacityIcon from "@mui/icons-material/Opacity";
 import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import CloseIcon from "@material-ui/icons/Close";
 import { Link } from "react-router-dom";
 import "../../css/dashBoardSideBar.css";
 import "../../css/dashboardheader.css";
-import {Authenticate} from "../auth/Authenticate";
+import { Authenticate } from "../auth/Authenticate";
 const DashboardSideBarMenu = () => {
   const [activeBg, setActiveBg] = useState("market");
   const [click, setClick] = useState("drop");
@@ -163,7 +165,6 @@ const DashboardSideBarMenu = () => {
               </a>
             </div>
             <Authenticate isHome="false" />
-           
           </div>
         </div>
       </section>
@@ -317,6 +318,28 @@ const DashboardSideBarMenu = () => {
                 >
                   <SwapHorizontalCircleIcon className="sidebarIcon" />
                   Swap
+                </li>
+              </Link>
+              {/* ===================== */}
+              {/* ===================== */}
+              {/* ===================== */}
+              {/* ===================== */}
+
+              <Link
+                to="/dashboard/add"
+                className="link"
+                id="pool"
+                onClick={changeBg}
+              >
+                <li
+                  className={
+                    activeBg == "pool"
+                      ? "sidebarListItem list-item-active"
+                      : "sidebarListItem"
+                  }
+                >
+                  <OpacityIcon className="sidebarIcon" />
+                  liquidity
                 </li>
               </Link>
 

@@ -1,0 +1,72 @@
+.token_modal_bg {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: #00000033;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(5px);
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.token_modal_container {
+  position: relative;
+  z-index: 1000000;
+  margin: 0px 0px 2rem;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(247, 248, 250);
+  box-shadow: rgb(47 128 237 / 5%) 0px 4px 8px 0px;
+  padding: 0px;
+  width: 50vw;
+  overflow: hidden auto;
+  align-self: center;
+  max-width: 420px;
+  max-height: 80vh;
+  min-height: 80vh;
+  display: flex;
+  border-radius: 20px;
+  flex-direction: column;
+  gap: 20px;
+}
+.token_modal_head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.close_icon {
+  cursor: pointer;
+}
+.token_modal_head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.remove_token_modal_bg {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  position: absolute;
+  background: #ffffff00;
+  left: 0;
+  right: 0;
+  cursor: pointer;
+}
+.token_modal_head_area {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  gap: 15px;
+}
+.token_modal_input {
+  padding: 1em 1em;
+  width: 100%;
+  border-radius: 20px;
+  border: solid 1px #d6d6d6;
+}
+.token_modal_input:focus-visible {
+  outline: none;
+  border: solid 1px #51b378;
+}

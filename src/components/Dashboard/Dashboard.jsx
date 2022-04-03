@@ -19,7 +19,7 @@ import DashBoardSwap from "./DashBoardPages/DashBoardSwapPage";
 import DashBoardWhitePaper from "./DashBoardPages/DashBoardWhitePaper";
 import DashboardEgrBalancePage from "./DashBoardPages/DashboardEgrBalancePage";
 // import DashBoardHeader from "./DashBoardHeader";
-
+import DashboardAddLiquidtyPage from "./DashBoardPages/DashboardAddLiquidtyPage";
 // dashboard styles
 import "../../css/dashboard.css";
 
@@ -39,6 +39,11 @@ function Dashboard() {
             path="/deposit_vault/:asset/:base"
             component={Withdraw_vault_form}
           /> */}
+          <Route
+            exact
+            path="/dashboard/add"
+            component={DashboardAddLiquidtyPage}
+          />
           <Route
             exact
             path="/dashboard/governance"

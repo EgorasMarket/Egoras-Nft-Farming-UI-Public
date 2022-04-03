@@ -3,7 +3,7 @@
   background-color: #fff;
   position: sticky;
   top: 0;
-  z-index: 10000;
+  z-index: 1000;
   box-shadow: 0px 0px 15px #efefef;
   position: fixed;
   width: 100%;
@@ -45,6 +45,4 @@ button.logout-btn {
   .DashBoardHeaderSection {
     padding: 1.5em 0em;
   }
-
-  
 }

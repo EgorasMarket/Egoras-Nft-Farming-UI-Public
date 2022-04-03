@@ -1,14 +1,14 @@
 .other2 {
   flex: 4;
   padding: 4em 2em;
-  width: 100vh;
+  width: 100vw;
+  height: 100vh;
   background: #f6fff9;
   padding-left: 14em;
+  overflow: scroll;
 }
 
 .no-bg {
   background: none !important;
   padding: 2em;
 }
-
-
