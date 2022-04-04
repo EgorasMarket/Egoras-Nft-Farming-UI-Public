@@ -279,7 +279,7 @@ const DashboardSideBarMenu = () => {
               {/* ===================== */}
               {/* ===================== */}
 
-              <Link
+              {/* <Link
                 to="/dashboard/governance"
                 className="link"
                 id="governance"
@@ -295,14 +295,14 @@ const DashboardSideBarMenu = () => {
                   <HowToVoteIcon className="sidebarIcon" />
                   Governance
                 </li>
-              </Link>
+              </Link> */}
 
               {/* ===================== */}
               {/* ===================== */}
               {/* ===================== */}
               {/* ===================== */}
 
-              <Link
+               <Link
                 to="/dashboard/swap"
                 className="link"
                 id="swap"
@@ -318,7 +318,7 @@ const DashboardSideBarMenu = () => {
                   <SwapHorizontalCircleIcon className="sidebarIcon" />
                   Swap
                 </li>
-              </Link>
+              </Link> 
 
               {/* ===================== */}
               {/* ===================== */}

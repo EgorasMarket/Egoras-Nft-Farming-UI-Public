@@ -1,6 +1,6 @@
   
 {
-    "address": "0xd2E3Ff519d0B3278b9C03934c70871aD4Db9221F",
+    "address": "0x84862fB5e14fB649737Ae154a0b1EbA7f799f176",
     "abi": [
       {
         "anonymous": false,
@@ -311,75 +311,6 @@
         "inputs": [
           {
             "internalType": "uint256",
-            "name": "_collateral",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "_amount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "string",
-            "name": "_ticker",
-            "type": "string"
-          }
-        ],
-        "name": "open2",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "uint256",
-            "name": "_collateral",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "_amount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "string",
-            "name": "_ticker",
-            "type": "string"
-          }
-        ],
-        "name": "open3",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "uint256",
-            "name": "_collateral",
-            "type": "uint256"
-          },
-          {
-            "internalType": "uint256",
-            "name": "_amount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "string",
-            "name": "_ticker",
-            "type": "string"
-          }
-        ],
-        "name": "open4",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "uint256",
             "name": "_amount",
             "type": "uint256"
           },
@@ -434,6 +365,11 @@
             "internalType": "bool",
             "name": "_stale",
             "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_id",
+            "type": "uint256"
           }
         ],
         "stateMutability": "view",
@@ -456,6 +392,11 @@
             "internalType": "bool",
             "name": "isDefault",
             "type": "bool"
+          },
+          {
+            "internalType": "bool",
+            "name": "isBurn",
+            "type": "bool"
           }
         ],
         "name": "repay",
@@ -463,6 +404,29 @@
         "stateMutability": "payable",
         "type": "function",
         "payable": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256[]",
+            "name": "_id",
+            "type": "uint256[]"
+          },
+          {
+            "internalType": "string[]",
+            "name": "_tickers",
+            "type": "string[]"
+          },
+          {
+            "internalType": "bool[]",
+            "name": "_isDefault",
+            "type": "bool[]"
+          }
+        ],
+        "name": "liquidateMany",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
       },
       {
         "inputs": [
@@ -604,6 +568,238 @@
         "stateMutability": "view",
         "type": "function",
         "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "_ticker",
+            "type": "string"
+          },
+          {
+            "internalType": "address",
+            "name": "_user",
+            "type": "address"
+          }
+        ],
+        "name": "__getLoanInfo",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "collateral",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bytes",
+                "name": "ticker",
+                "type": "bytes"
+              },
+              {
+                "internalType": "uint256",
+                "name": "debt",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "max",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "liquidationPrice",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bool",
+                "name": "stale",
+                "type": "bool"
+              }
+            ],
+            "internalType": "struct EgorasMultiAssetLoanFacet.Loan",
+            "name": "_loan",
+            "type": "tuple"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "_ticker",
+            "type": "string"
+          }
+        ],
+        "name": "getTickerInfo",
+        "outputs": [
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          },
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          },
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "id",
+            "type": "uint256"
+          }
+        ],
+        "name": "__getLoanInfoByID",
+        "outputs": [
+          {
+            "components": [
+              {
+                "internalType": "uint256",
+                "name": "id",
+                "type": "uint256"
+              },
+              {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "collateral",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bytes",
+                "name": "ticker",
+                "type": "bytes"
+              },
+              {
+                "internalType": "uint256",
+                "name": "debt",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "max",
+                "type": "uint256"
+              },
+              {
+                "internalType": "uint256",
+                "name": "liquidationPrice",
+                "type": "uint256"
+              },
+              {
+                "internalType": "bool",
+                "name": "stale",
+                "type": "bool"
+              }
+            ],
+            "internalType": "struct EgorasMultiAssetLoanFacet.Loan",
+            "name": "_loan",
+            "type": "tuple"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_user",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "_ticker",
+            "type": "string"
+          }
+        ],
+        "name": "___pendingLoan",
+        "outputs": [
+          {
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function",
+        "constant": true
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_DIVISORw",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_BCRATIOw",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_ACRATIOw",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_LOANABLEw",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_PENALTYw",
+            "type": "uint256"
+          }
+        ],
+        "name": "initvars",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
       }
     ]
 }
