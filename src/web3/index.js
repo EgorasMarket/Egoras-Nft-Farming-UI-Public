@@ -1,14 +1,15 @@
 import { Contract } from "@ethersproject/contracts";
 import ORACLE from "./contracts/Price.json";
 import LOAN from "./contracts/Loan.json";
+import EX from "./contracts/exchange.json";
 import erc20 from "./contracts/erc20.json";
-import swapABI from "./contracts/Swap.json";
 
 const contractInstance = (signer) => {
   return new Contract(LOAN.address, LOAN.abi, signer);
 };
-const swapcontractInstance = (signer) => {
-  return new Contract(swapABI.address, swapABI.abi, signer);
+
+const contractEXInstance = (signer) => {
+  return new Contract(EX.address, EX.abi, signer);
 };
 
 const contractOracleInstance = (signer) => {
@@ -22,7 +23,7 @@ const erc20Instance = (address, signer) => {
 const transactReceipt = async (hash, library) => {
   try {
     let result = await library.getTransactionReceipt(hash);
-    console.log(result, "The receipt");
+
     return {
       message: result,
       status: true,
@@ -44,16 +45,20 @@ const getPrice = async (ticker, signer) => {
       status: true,
     };
   } catch (error) {
+    console.log(error);
     return {
       message: error,
       status: false,
     };
   }
 };
-const open = async (collateral, amoumt, ticker, signer) => {
+
+const repay = async (id, amoumt, isDefault, signer) => {
+  console.log(id, amoumt, isDefault, "Payback");
   try {
     const instance = contractInstance(signer);
-    let result = await instance.open(collateral, amoumt, ticker);
+
+    let result = await instance.repay(id, amoumt, isDefault);
 
     return {
       message: result,
@@ -67,6 +72,101 @@ const open = async (collateral, amoumt, ticker, signer) => {
     };
   }
 };
+
+const open = async (isDefault, collateral, amoumt, ticker, signer) => {
+  console.log(isDefault, collateral, amoumt, ticker, "max man");
+  try {
+    const instance = contractInstance(signer);
+    let result;
+    if (isDefault) {
+      result = await instance.openDefaultAsset(amoumt, ticker, {
+        value: collateral,
+      });
+    } else {
+      result = await instance.open(collateral, amoumt, ticker);
+    }
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
+const draw = async (id, amount, signer) => {
+  try {
+    const instance = contractInstance(signer);
+    let result;
+    result = await instance.draw(id, amount);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
+const topup = async (isDefault, id, ticker, collateral, signer) => {
+  try {
+    const instance = contractInstance(signer);
+    let result;
+    if (isDefault) {
+      result = await instance.topupDefaultAsset(id, ticker, {
+        value: collateral,
+      });
+    } else {
+      result = await instance.topup(id, ticker, collateral);
+    }
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
+const getLatestLoan = async (user, ticker, signer) => {
+  try {
+    const instance = contractInstance(signer);
+
+    let result = await instance.___pendingLoan(user, ticker);
+
+    if (result == true) {
+      let loan = await instance.__getLoanInfo(ticker, user);
+      return {
+        message: result,
+        loanDetails: loan,
+        status: true,
+      };
+    } else {
+      return {
+        message: result,
+        status: true,
+      };
+    }
+  } catch (error) {
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
 const getTickerInfo = async (ticker, signer) => {
   try {
     const instance = contractInstance(signer);
@@ -106,6 +206,7 @@ const checkAllowance = async (address, owner, amount, signer) => {
   }
 };
 const unluckToken = async (address, amount, signer) => {
+  console.log();
   try {
     const instance = erc20Instance(address, signer);
     let result = await instance.approve(LOAN.address, amount);
@@ -139,142 +240,80 @@ const tokenBalance = async (address, account, signer) => {
     };
   }
 };
-const swapUI = async (amount, isBase, signer) => {
-  console.log(amount);
+
+/////////////////// Exchange ////////////////////////
+const exchange = async (ticker, amoumt, isBase, signer) => {
   try {
-    const instance = swapcontractInstance(signer);
+    const instance = contractEXInstance(signer);
 
-    let result = await instance.swap(amount, isBase);
-    console.log(result.toString(), "Allowance check!");
-    if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
-      return {
-        status: true,
-      };
-    } else {
-      return {
-        status: false,
-      };
-    }
-  } catch (error) {
-    console.log(error);
-    return {
-      status: false,
-    };
-  }
-};
+    let result = await instance.exchange(ticker, amoumt, isBase);
 
-const transferUI = async (recipient, amount, signer) => {
-  console.log(recipient, amount);
-  try {
-    const instance = swapcontractInstance(signer);
-
-    let result = await instance.transfer(recipient, amount);
-    console.log(result.toString(), "Allowance check!");
-    if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
-      return {
-        status: true,
-      };
-    } else {
-      return {
-        status: false,
-      };
-    }
-  } catch (error) {
-    console.log(error);
-    return {
-      status: false,
-    };
-  }
-};
-
-const approveUI = async (amount, signer) => {
-  console.log(amount);
-  try {
-    const instance = swapcontractInstance(signer);
-
-    let result = await instance.approve(swapABI.address, amount);
-    console.log(result.toString(), "Allowance check!");
-    if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
-      return {
-        status: true,
-      };
-    } else {
-      return {
-        status: false,
-      };
-    }
-  } catch (error) {
-    console.log(error);
-    return {
-      status: false,
-    };
-  }
-};
-
-const transferFromUI = async (recipient, amount, signer) => {
-  console.log(recipient, amount);
-  try {
-    const instance = swapcontractInstance(signer);
-
-    let result = await instance.transferFrom(
-      swapABI.address,
-      recipient,
-      amount
-    );
-    console.log(result.toString(), "Allowance check!");
-    if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
-      return {
-        status: true,
-      };
-    } else {
-      return {
-        status: false,
-      };
-    }
-  } catch (error) {
-    console.log(error);
-    return {
-      status: false,
-    };
-  }
-};
-
-const getUserTotalSwap = async (user, signer) => {
-  try {
-    const instance = swapcontractInstance(signer);
-    let result = await instance.getUserTotalSwap(user);
     return {
       message: result,
-      // message: result.hash,
       status: true,
     };
   } catch (error) {
+    console.log(error);
     return {
-      message: error.data.message,
+      message: error,
       status: false,
     };
   }
 };
 
-const addLiquidityUI = async (amount, signer) => {
-  console.log(amount);
+const getDefault = async (ticker, amoumt, signer) => {
   try {
-    const instance = swapcontractInstance(signer);
+    const instance = contractEXInstance(signer);
 
-    let result = await instance.addLiquidity(amount);
-    console.log(result.toString(), "Allowance check!");
-    if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
-      return {
-        status: true,
-      };
-    } else {
-      return {
-        status: false,
-      };
-    }
+    let result = await instance.getDefault(ticker, amoumt);
+
+    return {
+      message: result,
+      status: true,
+    };
   } catch (error) {
     console.log(error);
     return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
+const exchangeDefault = async (ticker, amoumt, signer) => {
+  try {
+    const instance = contractEXInstance(signer);
+
+    let result = await instance.exchangeDefault(ticker, { value: amoumt });
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
+const crossexchange = async (from, to, amoumt, signer) => {
+  console.log(from, to, amoumt);
+  try {
+    const instance = contractEXInstance(signer);
+
+    let result = await instance.crossExchange(from, to, amoumt, { value: 0 });
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
       status: false,
     };
   }
@@ -288,4 +327,12 @@ export {
   getTickerInfo,
   tokenBalance,
   open,
+  getLatestLoan,
+  repay,
+  topup,
+  draw,
+  exchange,
+  exchangeDefault,
+  getDefault,
+  crossexchange,
 };

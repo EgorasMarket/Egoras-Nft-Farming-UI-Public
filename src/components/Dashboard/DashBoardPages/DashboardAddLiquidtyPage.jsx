@@ -4,7 +4,27 @@ import AddIcon from "@mui/icons-material/Add";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { TokenModal } from "../DashBoardPages/TokenModal/TokenModal";
 import data from "../../static/MockData";
-// import { ConnectWallet } from "../../auth/ConnectWallet";
+// ================
+// ================
+// ================
+import { Authenticate } from "../../auth/Authenticate";
+import {
+  checkAllowance,
+  unluckToken,
+  transactReceipt,
+  getPrice,
+  getTickerInfo,
+  tokenBalance,
+  exchangeDefault,
+  getDefault,
+  crossexchange,
+} from "../../../web3/index";
+import { parseEther, formatEther } from "@ethersproject/units";
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
 import { ConnectWallet } from "../../auth/ConnectWallet";
 import "../../../css/dashboardAddLiquidity.css";
 const DashboardAddLiquidtyPage = ({ match }) => {
@@ -12,12 +32,30 @@ const DashboardAddLiquidtyPage = ({ match }) => {
   const [modal2, setModal2] = useState(false);
   const [tokenBtn, setTokenBtn] = useState(false);
   const [tokenBtn2, setTokenBtn2] = useState(false);
+  const [defaultPrice, setDefaultPrice] = useState(0);
   const [tokenName, setTokenName] = useState(0);
+  const [base, setBase] = useState("");
   const [tokenName2, setTokenName2] = useState(0);
 
   const [inputVal, setInputVal] = useState();
   // const [inputVal, setInputVal] = useState();
-
+  const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
+  useEffect(() => {
+    var ticker = "EGR-BNB";
+    getPrice(ticker, library.getSigner()).then((price) => {
+      setDefaultPrice(formatEther(price.message));
+    });
+  }, []);
   const [connected, setConnected] = useState(false);
   const onChange = (e) => {
     setInputVal(e.target.value);

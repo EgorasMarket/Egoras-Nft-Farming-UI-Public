@@ -280,7 +280,7 @@ const DashboardSideBarMenu = () => {
               {/* ===================== */}
               {/* ===================== */}
 
-              <Link
+              {/* <Link
                 to="/dashboard/governance"
                 className="link"
                 id="governance"
@@ -296,7 +296,7 @@ const DashboardSideBarMenu = () => {
                   <HowToVoteIcon className="sidebarIcon" />
                   Governance
                 </li>
-              </Link>
+              </Link> */}
 
               {/* ===================== */}
               {/* ===================== */}
