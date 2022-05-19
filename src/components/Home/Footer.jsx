@@ -120,7 +120,7 @@ const Footer = () => {
                       Explore Collaterals
                     </a>
                     <a
-                      href="https://egoras.com/whitepaper"
+                      href="/dashboard/whitepaper"
                       className="c1link1"
                       target="_blank"
                     >
@@ -240,7 +240,7 @@ const Footer = () => {
                           Explore Collaterals
                         </a>
                         <a
-                          href="https://egoras.com/whitepaper"
+                          href="/dashboard/whitepaper"
                           className="c1link1"
                           target="_blank"
                         >
