@@ -4,7 +4,7 @@
   position: relative;
   overflow: hidden;
   display: flex;
-  background: #f6fff9;
+  background: #f9f9f9;
   flex-direction: column;
 }
 
@@ -14,6 +14,8 @@
   position: relative;
   overflow: hidden;
   transition: 1s ease-in-out;
+  height: 100vh;
+  overflow: scroll;
 }
 .whitepaper-area {
   display: flex;
@@ -25,17 +27,18 @@
 
 .mobile-menu {
   padding: 0em 0em;
-  position: fixed;
+  position: absolute;
   width: 100%;
   right: 0;
-  box-shadow: 0px 8px 10px #f7f7f7;
+  box-shadow: none;
   background: #fff;
-  top: 70px;
+  top: 5em;
   z-index: 100;
 }
 
 .mobile-menu .MuiAccordion-rounded:last-child {
-  padding: 0em 2em;
+  padding: 0em;
+  padding-right: 0em;
   /* width: 100%; */
 }
 .details-accord {
@@ -176,7 +179,7 @@
   grid-row-gap: 30px;
   /* flex: 4; */
   width: 95%;
-  padding-left: 14em;
+  padding-left: 0em;
   font-size: 18px;
   transition: 1s ease-in-out;
   max-width: 1470px;
@@ -212,15 +215,27 @@ a.sidebar-link1 {
 
 @media screen and (max-width: 1220px) {
   .whitepaper-layers {
-    padding-left: 6em;
+    padding-left: 0em;
   }
 }
 @media screen and (max-width: 1080px) {
   .whitepaper-layers {
-    padding-left: 3em;
+    padding-left: 0em;
   }
 }
 
+@media screen and (max-width: 991px) {
+  .mobile-menu {
+    padding: 0em 0em;
+    position: absolute;
+    width: 100%;
+    right: 0;
+    box-shadow: none;
+    background: #fff;
+    top: 3.5em;
+    z-index: 100;
+  }
+}
 @media screen and (max-width: 900px) {
   .whitepaper-section {
     padding: 2em 0em;
@@ -259,7 +274,7 @@ a.sidebar-link1 {
     position: fixed;
     background: #fff;
     /* padding: 2em 0.5em; */
-    top: 66px;
+    top: 3.5em;
     padding-bottom: 0;
     width: 100%;
     padding-top: 0em;
@@ -279,5 +294,17 @@ a.sidebar-link1 {
   .whitepaper-layers {
     padding: 8em 1em;
     width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .mobile-menu {
+    position: fixed;
+    background: #fff;
+    /* padding: 2em 0.5em; */
+    top: 3em;
+    padding-bottom: 0;
+    width: 100%;
+    padding-top: 0em;
+    box-shadow: 0px 0px 10px #e1e1e1;
   }
 }

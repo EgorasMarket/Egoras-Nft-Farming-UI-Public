@@ -131,7 +131,7 @@ const Top_up_vault_form = ({ match }) => {
   // // Number("123");
 
   return (
-    <div className="vault_page">
+    <div className="other2">
       <section className="open_vault_section">
         <div className="container">
           <div className="open_vault_header">

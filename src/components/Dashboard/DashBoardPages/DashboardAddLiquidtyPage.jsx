@@ -50,12 +50,12 @@ const DashboardAddLiquidtyPage = ({ match }) => {
     active,
     error,
   } = context;
-  useEffect(() => {
-    var ticker = "EGR-BNB";
-    getPrice(ticker, library.getSigner()).then((price) => {
-      setDefaultPrice(formatEther(price.message));
-    });
-  }, []);
+  // useEffect(() => {
+  //   var ticker = "EGR-BNB";
+  //   getPrice(ticker, library.getSigner()).then((price) => {
+  //     // setDefaultPrice(formatEther(price.message));
+  //   });
+  // }, []);
   const [connected, setConnected] = useState(false);
   const onChange = (e) => {
     setInputVal(e.target.value);
@@ -108,7 +108,7 @@ const DashboardAddLiquidtyPage = ({ match }) => {
   return (
     <div className="other2">
       {/* Tokens Section Start */}
-      <section className=" no-bg">
+      <section>
         <div className="container">
           <div className="liquidity_area">
             <div className="liquidity_cont">

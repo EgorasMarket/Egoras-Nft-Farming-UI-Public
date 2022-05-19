@@ -98,7 +98,7 @@ const DashBoardAnalytics = () => {
       {/* ============================================================ */}
       {/* ============================================================ */}
       {/* Tokens Section Start */}
-      <section className="collateral-assets-section no-bg">
+      <section className="collateral-assets-section no-bg no_pad">
         <div className="container">
           <div className="assets-container">
             <div className="assets-cont-head-area">

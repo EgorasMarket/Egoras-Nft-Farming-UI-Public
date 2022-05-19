@@ -11,18 +11,20 @@
   position: relative;
 }
 .span4a-txts {
-  font-size: 55px;
+  font-size: 54px;
   width: 100%;
-  font-weight: 900;
-
-  line-height: 65px;
+  font-weight: 700;
+  line-height: 62px;
 }
 .span4b-txts {
-  font-size: 18px;
-  font-weight: 500;
-  color: #000000;
   width: 85%;
-  margin-top: 20px;
+  /* margin-top: 20px; */
+  box-sizing: border-box;
+  margin: 16px 0px 0px;
+  min-width: 0px;
+  font-size: 16px;
+  color: #474d57;
+  font-weight: 400;
 }
 
 .stake-hero-btn1 {
@@ -45,13 +47,19 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 465px;
-
-  opacity: 0.5;
+  width: 100%;
+  opacity: 1;
+}
+.blurDrop-token3 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  opacity: 1;
 }
 .stake-hero-btns {
   display: flex;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 .stake-hero-btn1:hover {
   border: solid;
@@ -95,10 +103,10 @@
   color: #000000;
 } */
 .earning-section {
-  padding: 10em 0em;
+  padding: 6em 0em;
   padding-bottom: 2em;
   position: relative;
-  background: #f2fbf6;
+  background: #fafafa;
   overflow: hidden;
 }
 .reduce-padding {
@@ -206,23 +214,31 @@
   font-size: 12px;
   margin: 0;
 }
+.key_features_image {
+  width: 100%;
+}
+.key_features_img {
+  width: 100%;
+}
 
 .key-features-cards-area1 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 30%;
-  height: 200px;
+  min-height: 410px;
   grid-row-gap: 20px;
-  padding: 2em;
+  padding: 1.5em;
   border-radius: 10px;
   box-shadow: 0px 11px 15px #d9ebe1;
   cursor: pointer;
   transition: 0.1s ease-in-out;
   position: relative;
   overflow: hidden;
-  
+  height: 100%;
+  border: solid 1px #ececec;
 }
+
 .btc-color {
   background-image: linear-gradient(45deg, #f19c11, #eb7d41);
 }
@@ -275,17 +291,22 @@
 .key-features-cards-area1:hover {
   background: #229e54;
   color: #fff;
-  box-shadow: 0px 11px 15px #89b79d;
+  box-shadow: 0px 11px 15px #9ec7af;
   transform: translate3d(0, -5px, 0);
   transition: 0.3s ease-in-out;
 }
 .key-features-cards-area1-header {
-  display: flex;
-  align-items: center;
-  font-size: 27px;
-  font-weight: 700;
+  /* display: flex; */
+  /* text-align: center; */
+  font-size: 24px;
+  font-weight: 500;
   width: 100%;
   line-height: 29px;
+}
+.key_features_txts {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 .home-icon {
   font-size: 49px !important;
@@ -298,9 +319,9 @@
   box-shadow: 0px 6px 10px #9bc7ae;
 }
 
-p.key-features-cards-area1-para {
+.key-features-cards-area1-para {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 300;
 }
 /* tokens section  end */
 
@@ -364,7 +385,7 @@ p.key-features-cards-area1-para {
   border-width: 1px;
   cursor: pointer;
   border-color: #d7d7d7;
-  font-weight: 700;
+  font-weight: 500;
   background: none;
 }
 .assets-header2 {
@@ -375,17 +396,20 @@ p.key-features-cards-area1-para {
   border: none;
 }
 .search-input {
-  width: 30%;
+  width: 20%;
   position: relative;
+  border-radius: 20px;
+  overflow: hidden;
 }
 .assets-header3 {
   border: solid;
   border-width: 1px;
   border-radius: 50px;
   padding: 0.5em 1em;
-  padding-left: 2em;
+  padding-left: 1em;
   width: 100%;
   border-color: #adadad;
+  font-size: 14px;
 }
 .assets-header3:focus-visible {
   border-color: #229e54;
@@ -394,10 +418,15 @@ p.key-features-cards-area1-para {
 
 .search-icon {
   position: absolute;
-  left: 12px;
+  right: -1px;
   color: grey;
-  top: 12px;
-  font-size: 20px !important;
+  top: 0;
+  font-size: 39px !important;
+  bottom: auto;
+  background: #229e54;
+  color: #fff;
+  width: 43px !important;
+  padding: 10px;
 }
 .assets-table {
   display: table;
@@ -440,6 +469,7 @@ p.key-features-cards-area1-para {
   color: var(--theme-ui-colors-text-muted, #708390);
   font-size: 14px;
   text-align: left;
+  font-weight: 400;
 }
 
 .assets-table-body {
@@ -532,7 +562,7 @@ p.key-features-cards-area1-para {
   margin: 0px;
   min-width: 0px;
   color: #373737;
-  font-weight: 700;
+  font-weight: 500;
 }
 .assets-data-name-last {
   box-sizing: border-box;
@@ -547,14 +577,14 @@ p.key-features-cards-area1-para {
   margin: 0px;
   min-width: 0px;
   font-family: Inter, "Helvetica Neue", sans-serif;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.5;
   font-size: 14px;
   color: #fff;
   white-space: nowrap;
   cursor: pointer;
-  background-color: #e4a788;
-  border-radius: 32px;
+  background-color: #229e54;
+  border-radius: 5px;
   padding: 8px 32px;
   display: inline-block;
   /* width: 100%; */
@@ -563,11 +593,45 @@ p.key-features-cards-area1-para {
   transition: 0.3s linear;
 }
 .assets-collateralize-button:hover {
-  background: #229e54;
+  background: #5f5f5f;
   color: #fff;
   transform: translate3d(0, -5px, 0);
   transition: 0.3s ease-in-out;
   box-shadow: 0px 4px 10px #d5d5d5;
+}
+
+.getStartedSection {
+  padding: 5em 0em;
+  background: #55bc7e;
+  position: relative;
+  color: #fff;
+}
+.getStarted_area {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+}
+.getStarted_title {
+  font-size: 40px;
+  font-weight: 500;
+}
+.get_started_button {
+  padding: 1em 3.5em;
+  border-radius: 6px;
+  border: none;
+  background: #002c12;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  position: relative;
+  z-index: 2;
+}
+.key_features_section_title {
+  font-size: 28px;
+  font-weight: 700;
+  color: black;
 }
 /* collateral assets section end */
 /* ============================================ */
@@ -701,6 +765,11 @@ p.key-features-cards-area1-para {
   /* ====================== */
   /* ====================== */
 }
+@media screen and (max-width: 768px) {
+  .nft-img-area2 {
+    display: none !important;
+  }
+}
 
 @media screen and (max-width: 767px) {
   .stats-widget {
@@ -711,7 +780,7 @@ p.key-features-cards-area1-para {
     grid-row-gap: 20px;
   }
   .stake-hero-btns {
-    justify-content: center;
+    justify-content: flex-start;
   }
   .nft-area {
     flex-direction: column;
@@ -730,7 +799,7 @@ p.key-features-cards-area1-para {
     text-align: center;
   }
   .span-txts {
-    text-align: center;
+    text-align: left;
   }
   .span2-txts {
     font-size: 33px;
@@ -754,6 +823,14 @@ p.key-features-cards-area1-para {
     padding-bottom: 2em;
   }
 }
+@media screen and (max-width: 610px) {
+  .span4a-txts {
+    font-size: 42px;
+    width: 100%;
+    font-weight: 700;
+    line-height: 44px;
+  }
+}
 @media screen and (max-width: 600px) {
   .assets-header2 {
     padding: 0.5em 0.5em;
@@ -762,6 +839,44 @@ p.key-features-cards-area1-para {
   .assets-header1 {
     padding: 0.5em 0.5em;
     font-size: 12px;
+  }
+  .getStartedSection {
+    padding: 2em 0em;
+    background: #55bc7e;
+    position: relative;
+  }
+  .getStarted_title {
+    font-size: 32px;
+    font-weight: 500;
+  }
+  .get_started_button {
+    padding: 1em 3.5em;
+    border-radius: 6px;
+    border: none;
+    background: #002c12;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+    position: relative;
+    z-index: 2;
+  }
+}
+@media screen and (max-width: 500px) {
+  .span4a-txts {
+    font-size: 38px;
+    width: 100%;
+    font-weight: 700;
+    line-height: 44px;
+  }
+  .span4b-txts {
+    width: 85%;
+    /* margin-top: 20px; */
+    box-sizing: border-box;
+    margin: 16px 0px 0px;
+    min-width: 0px;
+    font-size: 14px;
+    color: #474d57;
+    font-weight: 400;
   }
 }
 @media screen and (max-width: 449px) {

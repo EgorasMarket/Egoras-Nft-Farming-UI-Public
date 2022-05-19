@@ -11,14 +11,16 @@ import NotInterestedIcon from "@mui/icons-material/NotInterested";
 import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
 import SearchIcon from "@mui/icons-material/Search";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
-
+import FlipCountdown from "@rumess/react-flip-countdown";
+import "./countdown.css";
+import WaveAnimation from "./WaveAnimation/WaveAnimation";
 import "../../css/home.css";
 import { PersonTwoTone } from "@material-ui/icons";
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
- const assets = [
+  const assets = [
     {
       img: "/img/bnb-icon.svg",
       name: "Binance",
@@ -67,7 +69,7 @@ const Home = () => {
     setSearchResults(results);
   }, [searchTerm]);
 
-  const [categoryBtn, setCategoryBtn] = useState("Popular");
+  const [categoryBtn, setCategoryBtn] = useState("All");
 
   const triggerAll = () => {
     setCategoryBtn("All");
@@ -105,6 +107,20 @@ const Home = () => {
                   Read White-Paper
                 </a>
               </div>
+              <FlipCountdown
+                className="flip-countdown"
+                titlePosition="bottom"
+                yearTitle="Year"
+                monthTitle="Months"
+                dayTitle="Days"
+                hourTitle="Hours"
+                minuteTitle="Minutes"
+                secondTitle="Seconds"
+                hideYear
+                // hideMonth
+                size="small"
+                endAt={"2022-07-03 00:00:00"}
+              />
             </div>
             <div
               className="nft-img-area2"
@@ -113,17 +129,15 @@ const Home = () => {
               <img
                 src="/img/egr-stake-coina.png"
                 alt=""
-                style={{ width: "100%", margin: "auto" }}
+                style={{ width: "80%", margin: "auto" }}
               />
             </div>
           </div>
         </div>
-        <img src="/img/blur-drop.png" alt="" className="blurDrop-token" />
-        <img
-          src="/img/staking-bg-background.svg"
-          alt=""
-          className="blurDrop-token2"
-        />
+        {/* <img src="/img/blur-drop.png" alt="" className="blurDrop-token" /> */}
+        <img src="/img/hero_bg_bg.png" alt="" className="blurDrop-token2" />
+        {/* <img src="/img/banner-bg.png" alt="" className="blurDrop-token3" /> */}
+        {/* <WaveAnimation /> */}
       </section>
       {/* third section end */}
       {/* ========================== */}
@@ -134,7 +148,7 @@ const Home = () => {
       {/* =================== */}
       {/* =================== */}
       {/* fourth section start */}
-      <section className="second-eusd-token-section">
+      {/* <section className="second-eusd-token-section">
         <div className="container">
           <div className="nft-area3">
             <div className="key-features-cards-area">
@@ -180,8 +194,77 @@ const Home = () => {
           </div>
         </div>
         <img src="/img/blur-drop.png" alt="" className="blurDrop-token" />
-      </section>
+      </section> */}
       {/* fourth section end */}
+
+      <section className="second-eusd-token-section">
+        <div className="container">
+          {/* <div className="key_features_section_title">
+            Explore endless possibilities with Egoras crypto loan.
+          </div> */}
+          <div className="nft-area3">
+            <div className="key-features-cards-area">
+              <div className="key-features-cards-area-flex">
+                <div className="key-features-cards-area1">
+                  <div className="key_features_image">
+                    <img
+                      src="/img/hsh2.svg"
+                      alt=""
+                      className="key_features_img"
+                    />
+                  </div>
+                  <div className="key_features_txts">
+                    <div className="key-features-cards-area1-header">
+                      {" "}
+                      Staking
+                    </div>
+                    <p className="key-features-cards-area1-para">
+                      Earn up to 60% APY when you stake EGR or different assets
+                      in a decentralised and non-custodial manner.
+                    </p>
+                  </div>
+                </div>
+                <div className="key-features-cards-area1">
+                  <div className="key_features_txts">
+                    <div className="key-features-cards-area1-header">
+                      {" "}
+                      Interest-Free CryptoLoans
+                    </div>
+                    <p className="key-features-cards-area1-para">
+                      Why sell your crypto at loss. Deposit 25+ crypto
+                      collaterals to borrow eNGN interest-free.
+                    </p>
+                  </div>
+                  <div className="key_features_image">
+                    <img
+                      src="/img/nft_image-BINANCE.svg"
+                      alt=""
+                      className="key_features_img"
+                    />
+                  </div>
+                </div>
+                <div className="key-features-cards-area1">
+                  <div className="key_features_image">
+                    <img
+                      src="/img/swap_crypt.svg"
+                      alt=""
+                      className="key_features_img"
+                    />
+                  </div>
+                  <div className="key_features_txts">
+                    <div className="key-features-cards-area1-header"> Swap</div>
+                    <p className="key-features-cards-area1-para">
+                      Buy/Sell over 25+ crypto asset to increase your exposure.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img src="/img/blur-drop.png" alt="" className="blurDrop-token" />
+      </section>
+
       {/* ==================== */}
       {/* ==================== */}
       {/* ==================== */}
@@ -196,23 +279,13 @@ const Home = () => {
               <div className="assets-cont-header-arae-btns">
                 <button
                   className={
-                    categoryBtn === "Popular"
-                      ? "assets-header1"
-                      : "assets-header2"
-                  }
-                  onClick={triggerPopular}
-                >
-                  Popular assets
-                </button>
-                <button
-                  className={
                     categoryBtn === "All" ? "assets-header1" : "assets-header2"
                   }
                   onClick={triggerAll}
                 >
                   All assets
                 </button>
-                <button
+                {/* <button
                   className={
                     categoryBtn === "Stable"
                       ? "assets-header1"
@@ -221,7 +294,7 @@ const Home = () => {
                   onClick={triggerStable}
                 >
                   Stablecoins
-                </button>
+                </button> */}
               </div>
 
               <div className="search-input">
@@ -328,43 +401,23 @@ const Home = () => {
       {/* third section start */}
 
       {/* fourth section start */}
-      <section className="second-eusd-token-section">
+
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      <section className="getStartedSection">
         <div className="container">
-          <div className="nft-area3">
-            <div className="key-features-cards-area">
-              <div className="key-features-cards-area-flex">
-                <div className="key-features-cards-area1">
-                  <div className="key-features-cards-area1-header">
-                    <AttachMoneyIcon className="home-icon" /> Staking
-                  </div>
-                  <p className="key-features-cards-area1-para">
-                    Earn up to 60% APY when you stake EGR or different assets in
-                    a decentralised and non-custodial manner.
-                  </p>
-                </div>
-                <div className="key-features-cards-area1">
-                  <div className="key-features-cards-area1-header">
-                    <NotInterestedIcon className="home-icon" />
-                    Interest-Free CryptoLoans
-                  </div>
-                  <p className="key-features-cards-area1-para">
-                    Why sell your crypto at loss. Deposit 25+ crypto collaterals
-                    to borrow eUSD interest-free.
-                  </p>
-                </div>
-                <div className="key-features-cards-area1">
-                  <div className="key-features-cards-area1-header">
-                    <SwapHorizontalCircleIcon className="home-icon" /> Swap
-                  </div>
-                  <p className="key-features-cards-area1-para">
-                    Buy/Sell over 25+ crypto asset to increase your exposure.
-                  </p>
-                </div>
-              </div>
+          <div className="getStarted_area">
+            <div className="getStarted_title">Get crypto loan today</div>
+            <div className="getStarted_btn">
+              <button className="get_started_button">Get started</button>
             </div>
           </div>
         </div>
-        <img src="/img/blur-drop.png" alt="" className="blurDrop-token" />
+        <WaveAnimation />
       </section>
     </div>
   );

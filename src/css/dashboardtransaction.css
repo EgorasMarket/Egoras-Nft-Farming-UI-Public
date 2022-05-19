@@ -175,7 +175,7 @@
     padding-left: 4em;
   }
   .other2 {
-    padding-left: 4em;
+    padding-left: 0em;
   }
   .container {
     max-width: 1095px !important;
@@ -340,7 +340,7 @@
 }
 @media screen and (max-width: 767px) {
   button.logout-btn {
-    display: none;
+    display: block;
   }
   .withdraw-btn {
     width: 100%;

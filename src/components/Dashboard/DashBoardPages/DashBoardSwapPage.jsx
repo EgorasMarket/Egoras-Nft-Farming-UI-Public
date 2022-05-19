@@ -2,7 +2,23 @@ import React, { useState, useEffect } from "react";
 import "../../../css/file.css";
 
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import {Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Modal, ModalBody, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  CardText,
+  CardTitle,
+  Col,
+  Modal,
+  ModalBody,
+  Nav,
+  NavItem,
+  NavLink,
+  Row,
+  TabContent,
+  TabPane,
+} from "reactstrap";
 
 import {
   faCheckCircle,
@@ -11,10 +27,10 @@ import {
   faArrowRight,
   faLock,
   faWindowClose,
-  faWallet
+  faWallet,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {Authenticate} from '../../auth/Authenticate'
+import { Authenticate } from "../../auth/Authenticate";
 import {
   checkAllowance,
   unluckToken,
@@ -24,9 +40,7 @@ import {
   tokenBalance,
   exchangeDefault,
   getDefault,
-  crossexchange
-
-  
+  crossexchange,
 } from "../../../web3/index";
 import { parseEther, formatEther } from "@ethersproject/units";
 import {
@@ -34,24 +48,19 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
-const sweet = [
-  { img: "/img/bnb-icon.svg", bar: "BNB", bar1: "Binance" },
- 
-];
-const sweet1 = [
-  { img: "/img/bnb-icon.svg", bar: "BNB", bar1: "Binance" },
-];
+const sweet = [{ img: "/img/bnb-icon.svg", bar: "BNB", bar1: "Binance" }];
+const sweet1 = [{ img: "/img/bnb-icon.svg", bar: "BNB", bar1: "Binance" }];
 const sweet101 = [
   { imgs: "/img/bnb-icon.svg", nase: "BNB" },
   { imgs: "/egoras-favicon.svg", nase: "EGR" },
   { imgs: "/img/egc-icon.svg", nase: "EGC" },
-  { imgs: "/img/kodi.png", nase: "KODI" }
+  { imgs: "/img/kodi.png", nase: "KODI" },
 ];
 const sweet102 = [
   { imgs: "/img/bnb-icon.svg", nase: "BNB" },
   { imgs: "/egoras-favicon.svg", nase: "EGR" },
   { imgs: "/img/egc-icon.svg", nase: "EGC" },
-  { imgs: "/img/kodi.png", nase: "KODI" }
+  { imgs: "/img/kodi.png", nase: "KODI" },
 ];
 
 // When the user clicks anywhere outside of the modal, close it
@@ -88,7 +97,9 @@ const File = () => {
   const [changeShow1, setChangeShow1] = useState(0);
   const [hash, setHash] = useState("");
   const [task, setTask] = useState("collateral");
-  const [text, setText] = useState("Transacting with blockchain, please wait...");
+  const [text, setText] = useState(
+    "Transacting with blockchain, please wait..."
+  );
   const [asset, setAsset] = useState("");
   const [base, setBase] = useState("");
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -97,15 +108,15 @@ const File = () => {
   const [fromPrice, setFromPrice] = useState(0);
   const [toPrice, setToPrice] = useState(0);
   const [defaultPrice, setDefaultPrice] = useState(0);
-  const [coinBalance, setCoinBalance] = useState(0.00);
-  const [baseBalance, setBaseBalance] = useState(0.00);
+  const [coinBalance, setCoinBalance] = useState(0.0);
+  const [baseBalance, setBaseBalance] = useState(0.0);
   const [crossX, setCrossX] = useState(false);
   const [xDefault, setXDefault] = useState(false);
   const [assetAddress, setAssetAddress] = useState("");
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
-  const switchAssets = () =>{
+  const switchAssets = () => {
     setSpeed4(speed5);
     setSpeed5(speed4);
     setImage1(image);
@@ -114,34 +125,50 @@ const File = () => {
     setCoinBalance(baseBalance);
     setChangeShow1(changeShow);
     setChangeShow(changeShow1);
-    
-  }
+  };
   const feedExchangeData = (initialSpeed4, initialSpeed5) => {
     setChangeShow("");
     setChangeShow1("");
-    if(account){
+    if (account) {
       setModal(true);
       setStage("loading");
-      setText("Fetching data!")
-      if(initialSpeed4 == "BNB" || initialSpeed5 == "BNB"){
-        let ticker = initialSpeed5 == "BNB" ? initialSpeed4+"-"+initialSpeed5 : initialSpeed5+"-"+initialSpeed4;
+      setText("Fetching data!");
+      if (initialSpeed4 == "BNB" || initialSpeed5 == "BNB") {
+        let ticker =
+          initialSpeed5 == "BNB"
+            ? initialSpeed4 + "-" + initialSpeed5
+            : initialSpeed5 + "-" + initialSpeed4;
         initialSpeed5 == "BNB" ? setXDefault(true) : setXDefault(false);
         setCrossX(false);
         getPrice(ticker, library.getSigner()).then((price) => {
-       
           setDefaultPrice(formatEther(price.message));
-        })
-        getTickerInfo(ticker,library.getSigner()).then((data) => {
-            
-            library
+        });
+        getTickerInfo(ticker, library.getSigner()).then((data) => {
+          library
             .getBalance(account)
-            .then(balance => {
-           
+            .then((balance) => {
               setAssetAddress(data.message.asset);
-              tokenBalance(data.message.asset, account, library.getSigner()).then((tb) => {
-                console.log(formatEther(balance), formatEther(tb.message), initialSpeed4, initialSpeed5);
-                setBaseBalance(initialSpeed4 != "BNB" ? formatEther(balance) : formatEther(tb.message));
-                setCoinBalance(initialSpeed4 == "BNB" ? formatEther(balance) : formatEther(tb.message));
+              tokenBalance(
+                data.message.asset,
+                account,
+                library.getSigner()
+              ).then((tb) => {
+                console.log(
+                  formatEther(balance),
+                  formatEther(tb.message),
+                  initialSpeed4,
+                  initialSpeed5
+                );
+                setBaseBalance(
+                  initialSpeed4 != "BNB"
+                    ? formatEther(balance)
+                    : formatEther(tb.message)
+                );
+                setCoinBalance(
+                  initialSpeed4 == "BNB"
+                    ? formatEther(balance)
+                    : formatEther(tb.message)
+                );
                 setModal(false);
               });
             })
@@ -149,45 +176,43 @@ const File = () => {
               setBaseBalance(null);
             });
         });
-      }else {
-       // 
-        let ticker1 = initialSpeed4+"-BNB";
-        let ticker2 = initialSpeed5+"-BNB";
+      } else {
+        //
+        let ticker1 = initialSpeed4 + "-BNB";
+        let ticker2 = initialSpeed5 + "-BNB";
         setCrossX(true);
         setXDefault(false);
         getPrice(ticker2, library.getSigner()).then((price) => {
-          setFromPrice(formatEther(price.message))
-          
-        })
+          setFromPrice(formatEther(price.message));
+        });
 
         getPrice(ticker1, library.getSigner()).then((price) => {
-          setToPrice(formatEther(price.message))
-          
-        })
-        
-        getTickerInfo(ticker1,library.getSigner()).then((data) => {
-          tokenBalance(data.message.asset, account, library.getSigner()).then((tb) => {
+          setToPrice(formatEther(price.message));
+        });
 
-            getTickerInfo(ticker2,library.getSigner()).then((data2) => {
-              setAssetAddress(data2.message.asset);
-              tokenBalance(data2.message.asset, account, library.getSigner()).then((tlb) => {
-                setCoinBalance(formatEther(tb.message));
-                setBaseBalance(formatEther(tlb.message));
-                setModal(false);
-              })
-            })
-          });
-          
-        })
-        
+        getTickerInfo(ticker1, library.getSigner()).then((data) => {
+          tokenBalance(data.message.asset, account, library.getSigner()).then(
+            (tb) => {
+              getTickerInfo(ticker2, library.getSigner()).then((data2) => {
+                setAssetAddress(data2.message.asset);
+                tokenBalance(
+                  data2.message.asset,
+                  account,
+                  library.getSigner()
+                ).then((tlb) => {
+                  setCoinBalance(formatEther(tb.message));
+                  setBaseBalance(formatEther(tlb.message));
+                  setModal(false);
+                });
+              });
+            }
+          );
+        });
       }
-      
-
-     
-    }else{
+    } else {
       setModal(true);
     }
-  }
+  };
   const context = useWeb3React();
   const {
     connector,
@@ -197,12 +222,11 @@ const File = () => {
     activate,
     deactivate,
     active,
-    error
+    error,
   } = context;
   useEffect(() => {
     feedExchangeData(speed4, speed5);
-    
-  },[chainId,account,connector])
+  }, [chainId, account, connector]);
   useEffect(() => {
     const results = sweet.filter((person) =>
       person.bar.toLowerCase().includes(searchTerm)
@@ -216,18 +240,16 @@ const File = () => {
 
   const deff = (ey) => {
     // typing on the token side
-   
-    if(!crossX){
-      if(speed4 == "BNB"){
-        setChangeShow1(ey.target.value/defaultPrice);
-      }else{
+
+    if (!crossX) {
+      if (speed4 == "BNB") {
+        setChangeShow1(ey.target.value / defaultPrice);
+      } else {
         setChangeShow1(defaultPrice * ey.target.value);
       }
-      
-      
-    }else{
-      let bnbValue =  toPrice * ey.target.value;
-      setChangeShow1(bnbValue/fromPrice);
+    } else {
+      let bnbValue = toPrice * ey.target.value;
+      setChangeShow1(bnbValue / fromPrice);
     }
     setChangeShow(ey.target.value);
     document.getElementById("send8").style.display = "block";
@@ -237,26 +259,20 @@ const File = () => {
     }
   };
 
-  const [formData, setFormData] = useState({
-    
-   });
+  const [formData, setFormData] = useState({});
 
   const deff2 = (eye) => {
     // typing on the base side
-    
-    if(!crossX){
-     
-      if(speed5 !== "BNB"){
+
+    if (!crossX) {
+      if (speed5 !== "BNB") {
         setChangeShow(defaultPrice * eye.target.value);
-      }else{
-        setChangeShow(eye.target.value / defaultPrice );
+      } else {
+        setChangeShow(eye.target.value / defaultPrice);
       }
-      
-    }else{
-     
+    } else {
       let bnbValue = fromPrice * eye.target.value;
       setChangeShow(bnbValue / toPrice);
-      
     }
     setChangeShow1(eye.target.value);
     document.getElementById("send208").style.display = "block";
@@ -267,160 +283,160 @@ const File = () => {
   };
   const onSwap = async (e) => {
     e.preventDefault();
-    console.log(toPrice, fromPrice, defaultPrice, crossX, xDefault, speed4, speed5);
+    console.log(
+      toPrice,
+      fromPrice,
+      defaultPrice,
+      crossX,
+      xDefault,
+      speed4,
+      speed5
+    );
     setStage("loading");
     setModal(!modal);
     setText("Swapping! Please wait....");
-    if(speed5 == "BNB"){
-      let ret = await exchangeDefault(speed4+"-"+speed5, parseEther(changeShow1, "wei").toString(), library.getSigner());
+    if (speed5 == "BNB") {
+      let ret = await exchangeDefault(
+        speed4 + "-" + speed5,
+        parseEther(changeShow1, "wei").toString(),
+        library.getSigner()
+      );
       if (ret.status == true) {
-        
         localStorage.setItem("unlocking", true);
         localStorage.setItem("unlockingHash", ret.message.hash);
         setText("Disbursing tokens please wait aleast 1/2 minutes");
         setHash(ret.message.hash);
       } else if (ret.status == false) {
-        if(ret.message.code < 0){
-          setText(ret.message.data.message)
-        }else if(ret.message.code == 4001){
-        setText(ret.message.message)
-      }
+        if (ret.message.code < 0) {
+          setText(ret.message.data.message);
+        } else if (ret.message.code == 4001) {
+          setText(ret.message.message);
+        }
         setStage("error");
         setIsLoading(false);
-
       }
-    }else if(speed5 !== "BNB" && speed4 == "BNB"){
-     
+    } else if (speed5 !== "BNB" && speed4 == "BNB") {
       let check = await checkAllowance(
         assetAddress,
         account,
         parseEther(changeShow1, "wei").toString(),
-        library.getSigner(),
+        library.getSigner()
       );
       if (check.status == true) {
-       
-        let ret = await getDefault(speed5+"-"+speed4, parseEther(changeShow1, "wei").toString(), library.getSigner());
+        let ret = await getDefault(
+          speed5 + "-" + speed4,
+          parseEther(changeShow1, "wei").toString(),
+          library.getSigner()
+        );
         if (ret.status == true) {
-          
           localStorage.setItem("unlocking", true);
           localStorage.setItem("unlockingHash", ret.message.hash);
           setText("Disbursing tokens please wait aleast 1/2 minutes");
           setHash(ret.message.hash);
         } else if (ret.status == false) {
-          if(ret.message.code < 0){
-            setText(ret.message.data.message)
-          }else if(ret.message.code == 4001){
-          setText(ret.message.message)
-        }
+          if (ret.message.code < 0) {
+            setText(ret.message.data.message);
+          } else if (ret.message.code == 4001) {
+            setText(ret.message.message);
+          }
           setStage("error");
           setIsLoading(false);
-  
         }
-        
-
-      }else{
-      setUnlocking(true);
-      setStage("unlock")
-      setIsLoading(false);
+      } else {
+        setUnlocking(true);
+        setStage("unlock");
+        setIsLoading(false);
       }
-    }else if(speed4 !== "BNB" && speed5 !== "BNB"){
-
+    } else if (speed4 !== "BNB" && speed5 !== "BNB") {
       let check = await checkAllowance(
         assetAddress,
         account,
         parseEther(changeShow1, "wei").toString(),
-        library.getSigner(),
+        library.getSigner()
       );
       if (check.status == true) {
-       
-        let ret = await crossexchange(speed5+"-BNB", speed4+"-BNB", parseEther(changeShow1, "wei").toString(), library.getSigner());
+        let ret = await crossexchange(
+          speed5 + "-BNB",
+          speed4 + "-BNB",
+          parseEther(changeShow1, "wei").toString(),
+          library.getSigner()
+        );
         if (ret.status == true) {
-          
           localStorage.setItem("unlocking", true);
           localStorage.setItem("unlockingHash", ret.message.hash);
           setText("Disbursing tokens please wait aleast 1/2 minutes");
           setHash(ret.message.hash);
         } else if (ret.status == false) {
-          if(ret.message.code < 0){
-            setText(ret.message.data.message)
-          }else if(ret.message.code == 4001){
-          setText(ret.message.message)
-        }
+          if (ret.message.code < 0) {
+            setText(ret.message.data.message);
+          } else if (ret.message.code == 4001) {
+            setText(ret.message.message);
+          }
           setStage("error");
           setIsLoading(false);
-  
         }
-        
-
-      }else{
-      setUnlocking(true);
-      setStage("unlock")
-      setIsLoading(false);
+      } else {
+        setUnlocking(true);
+        setStage("unlock");
+        setIsLoading(false);
       }
 
       // crossexchange = async (from, to, amoumt, signer)
     }
-  }
+  };
   //   let defe = (x)=>{
   //  return(x + x)
   //   }
 
   const fetchDetails = (e, token) => {
-    
     let tbase = speed5;
     let ttoken = speed4;
-    if(e == "base"){
-      if(token == speed4){
-       
-        if(token == "BNB"){
-        setSpeed4("EGC");
-        ttoken = "EGC";
-        tbase = token;
-         setImage("/img/egc-icon.svg");
-        }else{
+    if (e == "base") {
+      if (token == speed4) {
+        if (token == "BNB") {
+          setSpeed4("EGC");
+          ttoken = "EGC";
+          tbase = token;
+          setImage("/img/egc-icon.svg");
+        } else {
           setSpeed4("BNB");
           ttoken = "BNB";
           tbase = token;
           setImage("/img/bnb-icon.svg");
         }
-        
-      }else{
+      } else {
         tbase = token;
-         setSpeed5(token);
+        setSpeed5(token);
         // setImage("/img/egc-icon.svg");
       }
-     
-    }else if(e == "token"){
-      if(token == speed5 ){
-        if(token == "BNB"){
-        setSpeed5("EGC");
-        tbase = "EGC";
-        ttoken = token;
-        setImage1("/img/egc-icon.svg");
-        }else{
+    } else if (e == "token") {
+      if (token == speed5) {
+        if (token == "BNB") {
+          setSpeed5("EGC");
+          tbase = "EGC";
+          ttoken = token;
+          setImage1("/img/egc-icon.svg");
+        } else {
           setSpeed5("BNB");
           tbase = "BNB";
           ttoken = token;
           setImage1("/img/bnb-icon.svg");
         }
-        
-
-      }else {
+      } else {
         setSpeed4(token);
         ttoken = token;
         //setImage1("/img/bnb-icon.svg");
       }
-     
-
     }
-   
-    feedExchangeData(e == "token" ? token : ttoken, e == "base" ? token : tbase);
-    
-  }
+
+    feedExchangeData(
+      e == "token" ? token : ttoken,
+      e == "base" ? token : tbase
+    );
+  };
   const toggle = () => {
     setModal(!modal);
-   
-};
+  };
 
   const Continue = async (e) => {
     setStage("");
@@ -428,11 +444,10 @@ const File = () => {
     setModal(!modal);
   };
   const doUnluck = async (e) => {
-   
     setText("Transacting with blockchain, please wait...");
     setStage("loading");
     setIsLoading(true);
-   
+
     let ret = await unluckToken(
       assetAddress,
       parseEther(changeShow1.toString(), "wei").toString(),
@@ -442,15 +457,13 @@ const File = () => {
       localStorage.setItem("unlocking", true);
       localStorage.setItem("unlockingHash", ret.message);
       setText("Unlocking please wait aleast 1/2 minutes");
-      
     } else {
-      if(ret.message.code == 4001){
-        setText(ret.message.message)
+      if (ret.message.code == 4001) {
+        setText(ret.message.message);
       }
-      
-     setStage("error")
+
+      setStage("error");
       setIsLoading(false);
-     
     }
   };
   const close4 = () => {
@@ -497,19 +510,16 @@ const File = () => {
   };
   setInterval(() => {
     if (localStorage.getItem("unlocking") == "true") {
-     
       transactReceipt(localStorage.getItem("unlockingHash"), library).then(
         function (env) {
           // console.log("running Interval", env);
           if (env.status == true && env.message !== null) {
-           
             if (env.message.confirmations > 2) {
               setStage("success");
-              setHash(localStorage.getItem("unlockingHash"))
+              setHash(localStorage.getItem("unlockingHash"));
               setIsLoading(false);
-             
+
               localStorage.setItem("unlocking", false);
-              
             }
           }
         }
@@ -517,7 +527,7 @@ const File = () => {
     }
   }, 7000);
   return (
-    <div style={{ marginTop: "69px" }} className="Trade2">
+    <div className="other2">
       <div>
         <div className="Trade4">
           <div>
@@ -527,7 +537,9 @@ const File = () => {
                 <div>
                   <div className="For">
                     <div className="send2">
-                      <span style={{ color: "#000" }}>Balance: {baseBalance}</span>{" "}
+                      <span style={{ color: "#000" }}>
+                        Balance: {baseBalance}
+                      </span>{" "}
                       <span className="send3">Amount</span>
                     </div>
                     <div className="send5">
@@ -589,7 +601,7 @@ const File = () => {
                     {/* <div style={{flex:'1'}}>{<img src="../../img/map11.svg" alt=""/>/</div> */}
                     <div style={{ flex: "1" }}>
                       <svg
-                      onClick={switchAssets}
+                        onClick={switchAssets}
                         className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium sidebarIcon45 css-i4bv87-MuiSvgIcon-root"
                         focusable="false"
                         viewBox="0 0 24 24"
@@ -603,7 +615,9 @@ const File = () => {
 
                   <div className="For">
                     <div className="send2">
-                      <span style={{ color: "#000" }}>Balance: {coinBalance}</span>{" "}
+                      <span style={{ color: "#000" }}>
+                        Balance: {coinBalance}
+                      </span>{" "}
                       <span className="send3">Amount</span>
                     </div>
                     <div className="send5">
@@ -653,7 +667,12 @@ const File = () => {
                 </div>
 
                 <div className="Enable">Enable Gas Token</div>
-                <button className="logout-btn Enable1 btn-block"  onClick={(e) => onSwap(e)}> Swap 
+                <button
+                  className="logout-btn Enable1 btn-block"
+                  onClick={(e) => onSwap(e)}
+                >
+                  {" "}
+                  Swap
                 </button>
               </form>
             </div>
@@ -790,9 +809,7 @@ const File = () => {
                   {sweet101.map((sde) => (
                     <div
                       className="feed29"
-                      
                       onClick={() => {
-                        
                         setSpeed4(sde.nase);
                         document.body.classList.remove("queen");
                         document.getElementById("farm").style.display = "none";
@@ -814,9 +831,7 @@ const File = () => {
                   {/* {sweet.map((ser)=>(<div  onClick={()=>{setSpeed4(ser.bar); document.getElementById('farm').style.display='none'; setImage(ser.img)}} key={ser}className='saw' style={{display:'flex',alignItems:'center',marginBottom:'10px'}}><img src={ser.img} alt="" className="feed28"/><div style={{display:'flex',marginLeft:'10px',flexDirection:'column'}}><span>{ser.bar}</span><span style={{fontSize:'12px',marginTop:'-5px',fontWeight:'300',color:'rgb(110, 114, 125)'}}>{ser.bar1}</span></div></div>)) */}
                   {searchResults.map((ser) => (
                     <div
-                   
                       onClick={() => {
-                        
                         setSpeed4(ser.bar);
                         document.body.classList.remove("queen");
                         document.getElementById("farm").style.display = "none";
@@ -904,10 +919,8 @@ const File = () => {
                 <div className="feed30">
                   {sweet102.map((sde1) => (
                     <div
-                      
                       className="feed29"
                       onClick={() => {
-                        
                         setSpeed5(sde1.nase);
                         document.getElementById("farm1").style.display = "none";
                         document.body.classList.remove("queen");
@@ -929,9 +942,7 @@ const File = () => {
                   {/* {sweet.map((ser)=>(<div  onClick={()=>{setSpeed4(ser.bar); document.getElementById('farm').style.display='none'; setImage(ser.img)}} key={ser}className='saw' style={{display:'flex',alignItems:'center',marginBottom:'10px'}}><img src={ser.img} alt="" className="feed28"/><div style={{display:'flex',marginLeft:'10px',flexDirection:'column'}}><span>{ser.bar}</span><span style={{fontSize:'12px',marginTop:'-5px',fontWeight:'300',color:'rgb(110, 114, 125)'}}>{ser.bar1}</span></div></div>)) */}
                   {searchResults1.map((serr) => (
                     <div
-                     
                       onClick={() => {
-                        
                         setSpeed5(serr.bar);
                         document.getElementById("farm1").style.display = "none";
                         document.body.classList.remove("queen");
@@ -976,150 +987,130 @@ const File = () => {
         </div>
       ) : null}
 
-<Modal fullscreen  isOpen={modal} toggle={toggle} className="walletModal mx-auto" backdrop={backdrop} keyboard={keyboard}>
-          <ModalBody className='p-4' style={{background: '#f7f8fa', }}>
-          <div style={{marginTop: "190px", }}>
-          
+      <Modal
+        fullscreen
+        isOpen={modal}
+        toggle={toggle}
+        className="walletModal mx-auto"
+        backdrop={backdrop}
+        keyboard={keyboard}
+      >
+        <ModalBody className="p-4" style={{ background: "#f7f8fa" }}>
+          <div style={{ marginTop: "190px" }}>
+            {stage == "unlock" ? (
+              <div>
+                <div className="row">
+                  <h1 className="mb-2 text-center">
+                    <FontAwesomeIcon icon={faLock} />
+                  </h1>
 
-          {
-            stage == "unlock" ? (
-<div>
-                            
-                            <div className="row">
-                            <h1 className="mb-2 text-center"><FontAwesomeIcon
-                                            icon={faLock}
-                                           
-                                          /></h1>
-                            
-                            
-                             <small className="mb-2 text-center">
-                              Approve <b>Egoras</b> to spend {speed5} on
-                              your behalf.
-                            </small>
-                              <div className="transact-stat col-md-6 " style={{margin: "auto"}}>
-                              
-                                <div className="w-100 ">
-                               
-                                 
-                                     
-                                      <input
-                      type="text"
-                      name="stateAmountToGenerate"
-                      value={changeShow1}
-                      readonly
-                      className="vault_input_vaulta"
-                     
-                    />
-                                    </div>
+                  <small className="mb-2 text-center">
+                    Approve <b>Egoras</b> to spend {speed5} on your behalf.
+                  </small>
+                  <div
+                    className="transact-stat col-md-6 "
+                    style={{ margin: "auto" }}
+                  >
+                    <div className="w-100 ">
+                      <input
+                        type="text"
+                        name="stateAmountToGenerate"
+                        value={changeShow1}
+                        readonly
+                        className="vault_input_vaulta"
+                      />
+                    </div>
 
-                                  <div className="text-center">
-                                 
-                                  <button
-                                        className="open_vault_input_btn mt-4 btn-block"
-                                        style={{ padding: "0.9em 4.5em" }}
-                                       
-                                        onClick={(e) => doUnluck(e)}
-                                      >
-                                        {isLoading ? (
-                                          <FontAwesomeIcon
-                                            icon={faCircleNotch}
-                                            spin
-                                          />
-                                        ) : null}{" "}
-                                        Unlock {asset}
-                                      </button>
-                                  </div>
-                                      
-                                    </div>
-                                  </div>
-                               
-                            
-                            <br />
-                          </div>
-            ) : null
-          }
+                    <div className="text-center">
+                      <button
+                        className="open_vault_input_btn mt-4 btn-block"
+                        style={{ padding: "0.9em 4.5em" }}
+                        onClick={(e) => doUnluck(e)}
+                      >
+                        {isLoading ? (
+                          <FontAwesomeIcon icon={faCircleNotch} spin />
+                        ) : null}{" "}
+                        Unlock {asset}
+                      </button>
+                    </div>
+                  </div>
+                </div>
 
-          {
-            stage == "loading" ? (
- <div>
-                            <p className="text-center loadingContainer" style={{fontSize: "54px"}}>
-                              <FontAwesomeIcon icon={faCircleNotch} spin />
-                            </p>
-                            <p className="text-center">{text}</p>
-                          </div>
-            ): null
-          }
+                <br />
+              </div>
+            ) : null}
 
-          {
-            stage == "success" ? (
+            {stage == "loading" ? (
+              <div>
+                <p
+                  className="text-center loadingContainer"
+                  style={{ fontSize: "54px" }}
+                >
+                  <FontAwesomeIcon icon={faCircleNotch} spin />
+                </p>
+                <p className="text-center">{text}</p>
+              </div>
+            ) : null}
+
+            {stage == "success" ? (
               <div className="col-md-12 mt-4">
-                          <h1 className="text-center text-success">
-                            <FontAwesomeIcon icon={faCheckCircle} /> <br />
-                            Success
-                          </h1>
-                          <p className="text-center">
-                            Transaction was successful.
-                            <br />
-                            <a
-                              className="btn btn-link text-success"
-                              href={"https://testnet.bscscan.com/tx/" + hash}
-                              target="_blank"
-                            >
-                              View on bscscan.com
-                            </a>
-                            <br />
-                            <button
-                              className="open_vault_input_btn mt-4 btn-block btn-lg"
-                              onClick={(e) => Continue(e)}
-                            >
-                              Continue
-                            </button>
-                          </p>
-                        </div>
-                      
-            ) : null
-          }
+                <h1 className="text-center text-success">
+                  <FontAwesomeIcon icon={faCheckCircle} /> <br />
+                  Success
+                </h1>
+                <p className="text-center">
+                  Transaction was successful.
+                  <br />
+                  <a
+                    className="btn btn-link text-success"
+                    href={"https://testnet.bscscan.com/tx/" + hash}
+                    target="_blank"
+                  >
+                    View on bscscan.com
+                  </a>
+                  <br />
+                  <button
+                    className="open_vault_input_btn mt-4 btn-block btn-lg"
+                    onClick={(e) => Continue(e)}
+                  >
+                    Continue
+                  </button>
+                </p>
+              </div>
+            ) : null}
 
-           {
-            stage == "error" ? (
+            {stage == "error" ? (
               <div className=" mt-4">
-                          <h1 className="text-center text-danger">
-                            <FontAwesomeIcon icon={faWindowClose} /> <br />
-                            Error
-                          </h1>
-                          <p className="text-center">
-                           {text}
-                            <br />
-                           
-                            <br />
-                            <button
-                              className="open_vault_input_btn mt-4 btn-block btn-lg"
-                              onClick={(e) => Continue(e)}
-                            >
-                              Continue
-                            </button>
-                          </p>
-                        </div>
-                      
-            ) : null
-          }
+                <h1 className="text-center text-danger">
+                  <FontAwesomeIcon icon={faWindowClose} /> <br />
+                  Error
+                </h1>
+                <p className="text-center">
+                  {text}
+                  <br />
 
-          {
-            stage == "connect" ? (
-               <div className=" text-center mt-4">
-               <h1 className="text-center">
-                            <FontAwesomeIcon icon={faWallet} /> <br />
-                           
-                          </h1>
-                          <p>To access this please connect your wallet</p>
-              
-               </div>
-            ) : null
-          }
+                  <br />
+                  <button
+                    className="open_vault_input_btn mt-4 btn-block btn-lg"
+                    onClick={(e) => Continue(e)}
+                  >
+                    Continue
+                  </button>
+                </p>
+              </div>
+            ) : null}
+
+            {stage == "connect" ? (
+              <div className=" text-center mt-4">
+                <h1 className="text-center">
+                  <FontAwesomeIcon icon={faWallet} /> <br />
+                </h1>
+                <p>To access this please connect your wallet</p>
+              </div>
+            ) : null}
           </div>
-         
-          </ModalBody>
-         </Modal>
+        </ModalBody>
+      </Modal>
     </div>
   );
 };

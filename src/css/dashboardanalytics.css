@@ -1,14 +1,27 @@
 .other2 {
-  flex: 4;
-  padding: 4em 2em;
+  flex: 4 1;
+  padding: 4em 0em;
   width: 100vw;
+  /* background: #000; */
+  background: #f9f9f9;
+  padding-left: 0em;
+  padding-top: 5em;
   height: 100vh;
-  background: #f6fff9;
-  padding-left: 14em;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .no-bg {
   background: none !important;
   padding: 2em;
+}
+.no-bg .container {
+  max-width: 1450px;
+  /* overflow: hidden; */
+}
+
+@media screen and (max-width: 500px) {
+  .no_pad {
+    padding: 0em !important;
+  }
 }

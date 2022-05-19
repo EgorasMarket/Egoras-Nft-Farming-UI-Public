@@ -7,7 +7,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import "../../../css/openVault.css";
-import {Modal, ModalBody } from 'reactstrap';
+import { Modal, ModalBody } from "reactstrap";
 
 import {
   faCheckCircle,
@@ -16,10 +16,10 @@ import {
   faArrowRight,
   faLock,
   faWindowClose,
-  faWallet
+  faWallet,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {Authenticate} from '../../auth/Authenticate'
+import { Authenticate } from "../../auth/Authenticate";
 import {
   checkAllowance,
   unluckToken,
@@ -27,8 +27,7 @@ import {
   getPrice,
   getTickerInfo,
   tokenBalance,
-  open
-
+  open,
 } from "../../../web3/index";
 import { parseEther, formatEther } from "@ethersproject/units";
 import {
@@ -67,34 +66,36 @@ const OpenVaultPage = ({ match }) => {
   const [validDiv, setValidDiv] = useState("not_ifValidDiv");
   const [buttonOpen, setButtonOpen] = useState("generate_eusd_cont1");
   const [buttonOpen2, setButtonOpen2] = useState("not_generate_eusd_cont");
-  const [coinBalance, setCoinBalance] = useState(0.00);
+  const [coinBalance, setCoinBalance] = useState(0.0);
   const [amount, setAmount] = useState("Enter an amount");
   const [vaultPrice, setVaultPrice] = useState("not_price_value_change");
   const [tickerPrice, setTickerPrice] = useState(0);
   // const [valueToNum, setValueToNum] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [stage, setStage] = useState("connect");
-  const [text, setText] = useState("Transacting with blockchain, please wait...");
- const [hash, setHash] = useState("");
- const [unlocking, setUnlocking] = useState(false);
-const [loanMetaData, setLoanMetaData] = useState({
-  base: "",
-  asset: "",
-  live: "",
-  maxLoan: 0.00,
-  ticker: "",
-  creator: ""
-});
+  const [text, setText] = useState(
+    "Transacting with blockchain, please wait..."
+  );
+  const [hash, setHash] = useState("");
+  const [unlocking, setUnlocking] = useState(false);
+  const [loanMetaData, setLoanMetaData] = useState({
+    base: "",
+    asset: "",
+    live: "",
+    maxLoan: 0.0,
+    ticker: "",
+    creator: "",
+  });
 
-const [formData, setFormData] = useState({
-   stateCollateral: "",
-   stateMaxGenerate: 0,
-   stateCollaterizationRatio: 0,
-   stateLiquidationPrice: 0,
-   stateCollateralLocked: 0,
-   stateVaultDebt: 0,
-   stateAmountToGenerate: "",
-   stateLiquidationWarning: "success"
+  const [formData, setFormData] = useState({
+    stateCollateral: "",
+    stateMaxGenerate: 0,
+    stateCollaterizationRatio: 0,
+    stateLiquidationPrice: 0,
+    stateCollateralLocked: 0,
+    stateVaultDebt: 0,
+    stateAmountToGenerate: "",
+    stateLiquidationWarning: "success",
   });
   // ====================
   // ====================
@@ -107,60 +108,63 @@ const [formData, setFormData] = useState({
     activate,
     deactivate,
     active,
-    error
+    error,
   } = context;
   useEffect(() => {
-    let assetVal =  match.params.asset;
-    let baseVal  =  match.params.base;
+    let assetVal = match.params.asset;
+    let baseVal = match.params.base;
     setAsset(assetVal);
     setBase(baseVal);
-    let ticker = assetVal+"-"+baseVal;
-    if(account){
+    let ticker = assetVal + "-" + baseVal;
+    if (account) {
       getPrice(ticker, library.getSigner()).then((data) => {
-      if(data.status){
-        setTickerPrice(parseFloat(formatEther(data.message)).toPrecision(4));
-      }
-     
-    });
-
-    getTickerInfo(ticker,library.getSigner()).then((data) => {
-      if(data.status){
-        if(asset == "BNB" || asset == "bnb"){
-         library
-        .getBalance(account)
-        .then(balance => {
-           setCoinBalance(formatEther(balance));
-        })
-        .catch(() => {
-          setCoinBalance(null);
-        });
-        }else{
-           tokenBalance(data.message.asset, account, library.getSigner()).then((balance) => {
-        setCoinBalance(formatEther(balance.message));
-      });
+        if (data.status) {
+          setTickerPrice(parseFloat(formatEther(data.message)).toPrecision(4));
         }
-        setLoanMetaData({...loanMetaData, base: data.message.base, asset: data.message.asset, maxLoan: formatEther(data.message.maxLoan)})
-      }
-     
-    });
+      });
+
+      getTickerInfo(ticker, library.getSigner()).then((data) => {
+        if (data.status) {
+          if (asset == "BNB" || asset == "bnb") {
+            library
+              .getBalance(account)
+              .then((balance) => {
+                setCoinBalance(formatEther(balance));
+              })
+              .catch(() => {
+                setCoinBalance(null);
+              });
+          } else {
+            tokenBalance(data.message.asset, account, library.getSigner()).then(
+              (balance) => {
+                setCoinBalance(formatEther(balance.message));
+              }
+            );
+          }
+          setLoanMetaData({
+            ...loanMetaData,
+            base: data.message.base,
+            asset: data.message.asset,
+            maxLoan: formatEther(data.message.maxLoan),
+          });
+        }
+      });
     }
     window.scrollTo(0, 0);
-    if(!account){
+    if (!account) {
       setStage("connect");
       setModal(!modal);
-    }else{
-       setModal(!modal);
+    } else {
+      setModal(!modal);
       setStage("");
-  }
-  }, [chainId,account, connector]);
+    }
+  }, [chainId, account, connector]);
   // ====================
   // ====================
   // ====================
   // ====================
 
-const doUnluck = async (e) => {
-   
-    
+  const doUnluck = async (e) => {
     setText("Transacting with blockchain, please wait...");
     setStage("loading");
     setIsLoading(true);
@@ -173,15 +177,13 @@ const doUnluck = async (e) => {
       localStorage.setItem("unlocking", true);
       localStorage.setItem("unlockingHash", ret.message);
       setText("Unlocking please wait aleast 1/2 minutes");
-      
     } else {
-      if(ret.message.code == 4001){
-        setText(ret.message.message)
+      if (ret.message.code == 4001) {
+        setText(ret.message.message);
       }
-      
-     setStage("error")
+
+      setStage("error");
       setIsLoading(false);
-     
     }
   };
 
@@ -202,48 +204,42 @@ const doUnluck = async (e) => {
     setButtonOpen("generate_eusd_cont1");
     setButtonOpen2("not_generate_eusd_cont");
   };
-const openCDP = async (e) => {
-   
+  const openCDP = async (e) => {
     setUnlocking(false);
     setStage("loading");
-     setModal(!modal);
+    setModal(!modal);
     setIsLoading(true);
     let check = await checkAllowance(
       loanMetaData.asset,
       account,
       parseEther(formData.stateCollateral.toString(), "wei").toString(),
-      library.getSigner(),
+      library.getSigner()
     );
 
     if (check.status == true) {
-  
-
       let ret = await open(
-       parseEther(formData.stateCollateral.toString(), "wei").toString(),
+        parseEther(formData.stateCollateral.toString(), "wei").toString(),
         parseEther(formData.stateAmountToGenerate.toString(), "wei").toString(),
-        asset+"-"+base,
+        asset + "-" + base,
         library.getSigner()
       );
 
-     
-
       if (ret.status == true) {
         setIsLoading(false);
-        
+
         setHash(ret.message);
       } else if (ret.status == false) {
-        if(ret.message.code < 0){
-          setText(ret.message.data.message)
-        }else if(ret.message.code == 4001){
-        setText(ret.message.message)
-      }
+        if (ret.message.code < 0) {
+          setText(ret.message.data.message);
+        } else if (ret.message.code == 4001) {
+          setText(ret.message.message);
+        }
         setStage("error");
         setIsLoading(false);
-
       }
     } else {
       setUnlocking(true);
-      setStage("unlock")
+      setStage("unlock");
       setIsLoading(false);
     }
   };
@@ -269,51 +265,57 @@ const openCDP = async (e) => {
   // ========================
   // const tokenDecimal = decimalPlace * 65350;
 
-
   // ========================
   // ========================
   // ========================
   // ========================
   // // console.log(+valueToNum);
   // // Number("123");
-   const toggle = () => {
-        setModal(!modal);
-       
-    };
-const Continue = async (e) => {
+  const toggle = () => {
+    setModal(!modal);
+  };
+  const Continue = async (e) => {
     setStage("");
     setText("");
     setModal(!modal);
   };
-const onChange = (e) => {
+  const onChange = (e) => {
+    if (e.target.name == "stateCollateral") {
+      let cAmount = tickerPrice * e.target.value;
+      console.log(cAmount, "C Amount");
+      let maxDraw = cAmount * 0.65;
 
-  if(e.target.name == "stateCollateral"){
-    let cAmount = tickerPrice * e.target.value;
-    console.log(cAmount,  "C Amount");
-    let maxDraw =  cAmount * 0.65;
-
-    setFormData({...formData, stateMaxGenerate: maxDraw, stateCollateral: e.target.value})
-    
-  }else if(e.target.name == "stateAmountToGenerate"){
-   let gn = e.target.value;
-    if( e.target.value > formData.stateMaxGenerate){
-      gn = formData.stateMaxGenerate;
+      setFormData({
+        ...formData,
+        stateMaxGenerate: maxDraw,
+        stateCollateral: e.target.value,
+      });
+    } else if (e.target.name == "stateAmountToGenerate") {
+      let gn = e.target.value;
+      if (e.target.value > formData.stateMaxGenerate) {
+        gn = formData.stateMaxGenerate;
+      }
+      let g = gn * 1500;
+      let c = formData.stateCollateral * 1000;
+      let lp = g / c;
+      let liquidationWarning = (gn / formData.stateMaxGenerate) * 100;
+      let warning = "success";
+      if (liquidationWarning > 66 && liquidationWarning < 83) {
+        warning = "warning";
+      } else if (liquidationWarning >= 83) {
+        warning = "danger";
+      }
+      console.log(liquidationWarning, "liquidationWarning");
+      setFormData({
+        ...formData,
+        stateLiquidationPrice: lp,
+        stateVaultDebt: gn,
+        stateAmountToGenerate: gn,
+        stateLiquidationWarning: warning,
+      });
     }
-    let g = gn * 1500;
-    let c = formData.stateCollateral * 1000;
-    let lp = g / c;
-   let  liquidationWarning = (gn / formData.stateMaxGenerate) * 100;
-   let warning = "success";
-   if(liquidationWarning > 66 && liquidationWarning < 83){
-     warning = "warning";
-   }else if(liquidationWarning >= 83){
-     warning = "danger";
-   }
-   console.log(liquidationWarning, "liquidationWarning");
-    setFormData({...formData, stateLiquidationPrice: lp, stateVaultDebt: gn, stateAmountToGenerate: gn, stateLiquidationWarning: warning})
-  }
-  
-   if (e.target.name == "stateCollateral" && e.target.value <= 0) {
+
+    if (e.target.name == "stateCollateral" && e.target.value <= 0) {
       setVaultPrice("not_price_value_change");
       setAmount("Enter an amount");
       setValidDiv("not_ifValidDiv");
@@ -322,20 +324,18 @@ const onChange = (e) => {
       setAmount("Generate");
       setValidDiv("ifValidDiv");
     }
-}
-   setInterval(() => {
+  };
+  setInterval(() => {
     if (localStorage.getItem("unlocking") == "true") {
-     
       transactReceipt(localStorage.getItem("unlockingHash"), library).then(
         function (env) {
           // console.log("running Interval", env);
           if (env.status == true && env.message !== null) {
             if (env.message.confirmations > 2) {
               setStage("success");
-              setHash(localStorage.getItem("unlockingHash"))
+              setHash(localStorage.getItem("unlockingHash"));
               setIsLoading(false);
               localStorage.setItem("unlocking", false);
-              
             }
           }
         }
@@ -344,12 +344,10 @@ const onChange = (e) => {
   }, 7000);
 
   return (
-    <div className="vault_page">
-  
+    <div className="other2">
       <section className="open_vault_section">
         <div className="container">
           <div className="open_vault_header">
-           
             <h3 className="openVault_heading">Open {asset} Vault</h3>
             <div className="vault_captions">
               <p className="vault_tbd">
@@ -368,7 +366,8 @@ const onChange = (e) => {
               <p className="vault_tbd">Min. collateral ratio </p>
 
               <p className="vault_tbd">
-                Dust Limit <span className="vault_percent"> ${loanMetaData.maxLoan}</span>
+                Dust Limit{" "}
+                <span className="vault_percent"> ${loanMetaData.maxLoan}</span>
               </p>
             </div>
           </div>
@@ -519,7 +518,7 @@ const onChange = (e) => {
                     }
                   >
                     <div className={`price_value_change_value`}>
-                       {formData.stateCollateral} {asset} after
+                      {formData.stateCollateral} {asset} after
                     </div>
                   </div>
                 </div>
@@ -571,9 +570,11 @@ const onChange = (e) => {
                 <div className="open_vault_area2b">
                   <div className="open_vault_input_titles">
                     <span className="vault_input0">Deposit {asset}</span>
-                    <span className="vault_input1">Balance {coinBalance} {asset}</span>
+                    <span className="vault_input1">
+                      Balance {coinBalance} {asset}
+                    </span>
                   </div>
-                   <div className="vault_input">
+                  <div className="vault_input">
                     <input
                       type="number"
                       name="stateCollateral"
@@ -583,7 +584,7 @@ const onChange = (e) => {
                       value={formData.stateCollateral}
                       className="vault_input_vault"
                       placeholder={`0.00 ${asset}`}
-                     onChange={(e) => onChange(e)}
+                      onChange={(e) => onChange(e)}
                       onKeyUp={(e) => onChange(e)}
                     />
                   </div>
@@ -645,7 +646,6 @@ const onChange = (e) => {
                       type="text"
                       name="stateAmountToGenerate"
                       value={formData.stateAmountToGenerate}
-
                       className="vault_input_vaulta"
                       placeholder={base}
                       onChange={(e) => onChange(e)}
@@ -710,8 +710,7 @@ const onChange = (e) => {
                         Available to Withdraw
                       </div>
                       <div className="valid_div_inner_div_cont2">
-                        0.00 {asset} - {formData.stateCollateral}
-                        {" "} {asset}
+                        0.00 {asset} - {formData.stateCollateral} {asset}
                       </div>
                     </div>
 
@@ -723,7 +722,7 @@ const onChange = (e) => {
                         Available to Generate
                       </div>
                       <div className="valid_div_inner_div_cont2">
-                        0.00 {base } - {"  "}
+                        0.00 {base} - {"  "}
                         <NumberFormat
                           value={formData.stateMaxGenerate}
                           displayType="text"
@@ -744,156 +743,138 @@ const onChange = (e) => {
                     </div>
                   </div>
                 </div>
-                <button onClick={openCDP} className="open_vault_input_btn">{amount}</button>
+                <button onClick={openCDP} className="open_vault_input_btn">
+                  {amount}
+                </button>
               </div>
             </div>
           </div>
         </div>
       </section>
-         <Modal fullscreen  isOpen={modal} toggle={toggle} className="walletModal mx-auto" backdrop={backdrop} keyboard={keyboard}>
-          <ModalBody className='p-4' style={{background: '#f7f8fa', }}>
-          <div style={{marginTop: "190px", }}>
-          
+      <Modal
+        fullscreen
+        isOpen={modal}
+        toggle={toggle}
+        className="walletModal mx-auto"
+        backdrop={backdrop}
+        keyboard={keyboard}
+      >
+        <ModalBody className="p-4" style={{ background: "#f7f8fa" }}>
+          <div style={{ marginTop: "190px" }}>
+            {stage == "unlock" ? (
+              <div>
+                <div className="row">
+                  <h1 className="mb-2 text-center">
+                    <FontAwesomeIcon icon={faLock} />
+                  </h1>
 
-          {
-            stage == "unlock" ? (
-<div>
-                            
-                            <div className="row">
-                            <h1 className="mb-2 text-center"><FontAwesomeIcon
-                                            icon={faLock}
-                                           
-                                          /></h1>
-                            
-                            
-                             <small className="mb-2 text-center">
-                              Approve <b>Egoras</b> to spend {asset} on
-                              your behalf.
-                            </small>
-                              <div className="transact-stat col-md-6 " style={{margin: "auto"}}>
-                              
-                                <div className="w-100 ">
-                               
-                                 
-                                     
-                                      <input
-                      type="text"
-                      name="stateAmountToGenerate"
-                      value={formData.stateCollateral}
-                      readonly
-                      className="vault_input_vaulta"
-                     
-                    />
-                                    </div>
+                  <small className="mb-2 text-center">
+                    Approve <b>Egoras</b> to spend {asset} on your behalf.
+                  </small>
+                  <div
+                    className="transact-stat col-md-6 "
+                    style={{ margin: "auto" }}
+                  >
+                    <div className="w-100 ">
+                      <input
+                        type="text"
+                        name="stateAmountToGenerate"
+                        value={formData.stateCollateral}
+                        readonly
+                        className="vault_input_vaulta"
+                      />
+                    </div>
 
-                                  <div className="text-center">
-                                 
-                                  <button
-                                        className="open_vault_input_btn mt-4 btn-block"
-                                        style={{ padding: "0.9em 4.5em" }}
-                                       
-                                        onClick={(e) => doUnluck(e)}
-                                      >
-                                        {isLoading ? (
-                                          <FontAwesomeIcon
-                                            icon={faCircleNotch}
-                                            spin
-                                          />
-                                        ) : null}{" "}
-                                        Unlock {asset}
-                                      </button>
-                                  </div>
-                                      
-                                    </div>
-                                  </div>
-                               
-                            
-                            <br />
-                          </div>
-            ) : null
-          }
+                    <div className="text-center">
+                      <button
+                        className="open_vault_input_btn mt-4 btn-block"
+                        style={{ padding: "0.9em 4.5em" }}
+                        onClick={(e) => doUnluck(e)}
+                      >
+                        {isLoading ? (
+                          <FontAwesomeIcon icon={faCircleNotch} spin />
+                        ) : null}{" "}
+                        Unlock {asset}
+                      </button>
+                    </div>
+                  </div>
+                </div>
 
-          {
-            stage == "loading" ? (
- <div>
-                            <p className="text-center loadingContainer" style={{fontSize: "54px"}}>
-                              <FontAwesomeIcon icon={faCircleNotch} spin />
-                            </p>
-                            <p className="text-center">{text}</p>
-                          </div>
-            ): null
-          }
+                <br />
+              </div>
+            ) : null}
 
-          {
-            stage == "success" ? (
+            {stage == "loading" ? (
+              <div>
+                <p
+                  className="text-center loadingContainer"
+                  style={{ fontSize: "54px" }}
+                >
+                  <FontAwesomeIcon icon={faCircleNotch} spin />
+                </p>
+                <p className="text-center">{text}</p>
+              </div>
+            ) : null}
+
+            {stage == "success" ? (
               <div className="col-md-12 mt-4">
-                          <h1 className="text-center text-success">
-                            <FontAwesomeIcon icon={faCheckCircle} /> <br />
-                            Success
-                          </h1>
-                          <p className="text-center">
-                            Transaction was successful.
-                            <br />
-                            <a
-                              className="btn btn-link text-success"
-                              href={"https://bscscan.com/tx/" + hash}
-                              target="_blank"
-                            >
-                              View on bscscan.com
-                            </a>
-                            <br />
-                            <button
-                              className="open_vault_input_btn mt-4 btn-block btn-lg"
-                              onClick={(e) => Continue(e)}
-                            >
-                              Continue
-                            </button>
-                          </p>
-                        </div>
-                      
-            ) : null
-          }
+                <h1 className="text-center text-success">
+                  <FontAwesomeIcon icon={faCheckCircle} /> <br />
+                  Success
+                </h1>
+                <p className="text-center">
+                  Transaction was successful.
+                  <br />
+                  <a
+                    className="btn btn-link text-success"
+                    href={"https://bscscan.com/tx/" + hash}
+                    target="_blank"
+                  >
+                    View on bscscan.com
+                  </a>
+                  <br />
+                  <button
+                    className="open_vault_input_btn mt-4 btn-block btn-lg"
+                    onClick={(e) => Continue(e)}
+                  >
+                    Continue
+                  </button>
+                </p>
+              </div>
+            ) : null}
 
-           {
-            stage == "error" ? (
+            {stage == "error" ? (
               <div className=" mt-4">
-                          <h1 className="text-center text-danger">
-                            <FontAwesomeIcon icon={faWindowClose} /> <br />
-                            Error
-                          </h1>
-                          <p className="text-center">
-                           {text}
-                            <br />
-                           
-                            <br />
-                            <button
-                              className="open_vault_input_btn mt-4 btn-block btn-lg"
-                              onClick={(e) => Continue(e)}
-                            >
-                              Continue
-                            </button>
-                          </p>
-                        </div>
-                      
-            ) : null
-          }
+                <h1 className="text-center text-danger">
+                  <FontAwesomeIcon icon={faWindowClose} /> <br />
+                  Error
+                </h1>
+                <p className="text-center">
+                  {text}
+                  <br />
 
-          {
-            stage == "connect" ? (
-               <div className=" text-center mt-4">
-               <h1 className="text-center">
-                            <FontAwesomeIcon icon={faWallet} /> <br />
-                           
-                          </h1>
-                          <p>To access this please connect your wallet</p>
-              
-               </div>
-            ) : null
-          }
+                  <br />
+                  <button
+                    className="open_vault_input_btn mt-4 btn-block btn-lg"
+                    onClick={(e) => Continue(e)}
+                  >
+                    Continue
+                  </button>
+                </p>
+              </div>
+            ) : null}
+
+            {stage == "connect" ? (
+              <div className=" text-center mt-4">
+                <h1 className="text-center">
+                  <FontAwesomeIcon icon={faWallet} /> <br />
+                </h1>
+                <p>To access this please connect your wallet</p>
+              </div>
+            ) : null}
           </div>
-         
-          </ModalBody>
-         </Modal>
+        </ModalBody>
+      </Modal>
     </div>
   );
 };
