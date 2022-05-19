@@ -412,9 +412,9 @@ const Home = () => {
         <div className="container">
           <div className="getStarted_area">
             <div className="getStarted_title">Get crypto loan today</div>
-            <div className="getStarted_btn">
+            <a href="/dashboard" className="getStarted_btn">
               <button className="get_started_button">Get started</button>
-            </div>
+            </a>
           </div>
         </div>
         <WaveAnimation />
