@@ -894,9 +894,7 @@ a.visit_app_link_2 {
     width: 100%;
     display: flex;
   }
-  .flex_rev_me {
-    flex-direction: column-reverse;
-  }
+
   .assets-header1 {
     width: 50%;
   }
@@ -1020,6 +1018,9 @@ a.visit_app_link_2 {
   .nft-area {
     flex-direction: column;
     grid-row-gap: 20px;
+  }
+  .flex_rev_me {
+    flex-direction: column-reverse;
   }
   .nft-area2 {
     flex-direction: column;
