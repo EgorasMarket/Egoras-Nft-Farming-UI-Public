@@ -13,7 +13,7 @@
 .span4a-txts {
   font-size: 54px;
   width: 100%;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 62px;
 }
 .span4b-txts {
@@ -1062,7 +1062,7 @@ a.visit_app_link_2 {
   .span4a-txts {
     font-size: 42px;
     width: 100%;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 44px;
   }
 }
@@ -1101,7 +1101,7 @@ a.visit_app_link_2 {
   .span4a-txts {
     font-size: 38px;
     width: 100%;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 44px;
   }
   .key-features-cards-area1 {
@@ -1151,8 +1151,14 @@ a.visit_app_link_2 {
     font-size: 12px;
   }
 }
-@media screen and (max-width: 375px) {
+@media screen and (max-width: 390px) {
   .tokenCardflex-txt {
     font-size: 20px;
+  }
+  .span4a-txts {
+    font-size: 34px;
+    width: 100%;
+    font-weight: 800;
+    line-height: 44px;
   }
 }
