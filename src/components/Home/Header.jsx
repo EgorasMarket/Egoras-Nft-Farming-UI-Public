@@ -142,10 +142,10 @@ const Header = () => {
     if (currentPage === "/dashboard/whitepaper") {
       setshowHeader(false);
     }
-    if (currentPage === "/vault/" + urlArr[2] + "/EUSD") {
+    if (currentPage === "/vault/" + urlArr[2] + "/ENGN") {
       setshowHeader(false);
     }
-    if (currentPage === "/deposit_vault/" + urlArr[2] + "/EUSD") {
+    if (currentPage === "/deposit_vault/" + urlArr[2] + "/ENGN") {
       setshowHeader(false);
     }
   });
@@ -308,7 +308,7 @@ const Header = () => {
       {showHeader === true ? (
         <div id="Header">
           <section className="headerSection">
-            <div className="container-fluid header">
+            <div className="container header">
               <div className="header-area">
                 <a href="/" className="egr_logo2_mobil">
                   <img

@@ -143,7 +143,7 @@ const DashBoardAnalytics = () => {
                   <th className="assets-category-titles-heading1">Asset</th>
                   <th className="assets-category-titles-heading1">Type</th>
                   <th className="assets-category-titles-heading1 right">
-                    EUSD Available
+                    ENGN Available
                   </th>
                   <th className="assets-category-titles-heading1 right">
                     Stable Fee
@@ -201,7 +201,7 @@ const DashBoardAnalytics = () => {
                     <td className="assets-category-data-last">
                       <div className="assets-data-name-last">
                         <a
-                          href={`vault/${asset.type}/EUSD`}
+                          href={`vault/${asset.type}/ENGN`}
                           className="assets-collateralize-button"
                           style={{ border: "none" }}
                         >

@@ -47,10 +47,10 @@ const Footer = () => {
     if (currentPage === "/dashboard/whitepaper") {
       setShowFooter(false);
     }
-    if (currentPage === "/vault/" + urlArr[2] + "/EUSD") {
+    if (currentPage === "/vault/" + urlArr[2] + "/ENGN") {
       setShowFooter(false);
     }
-    if (currentPage === "/deposit_vault/" + urlArr[2] + "/EUSD") {
+    if (currentPage === "/deposit_vault/" + urlArr[2] + "/ENGN") {
       setShowFooter(false);
     }
   });
@@ -112,19 +112,15 @@ const Footer = () => {
                     {/* <a href="/" className="c1link1 a">
                   Home
                 </a> */}
-                    <a
-                      href="https://egoras.com/explore_collaterals"
-                      className="c1link1"
-                      target="_blank"
-                    >
-                      Explore Collaterals
+
+                    <a href="#howitworks" className="c1link1 a">
+                      How it works
                     </a>
-                    <a
-                      href="/dashboard/whitepaper"
-                      className="c1link1"
-                      target="_blank"
-                    >
-                      White Paper
+                    {/* <a href="#token" className="c1link1">
+                  Tokens
+                </a> */}
+                    <a href="#features" className="c1link1">
+                      Features
                     </a>
                   </div>
                 </div>
@@ -132,18 +128,19 @@ const Footer = () => {
                 <div className="footerCard2">
                   <div className="footerCardTitle">About Us</div>
                   <div className="footerLinks">
-                    <a href="#howitworks" className="c1link1 a">
-                      How it works
-                    </a>
-                    {/* <a href="#token" className="c1link1">
-                  Tokens
-                </a> */}
                     <a
-                      href="https://www.youtube.com/channel/UCHfi5EwXig46xp5Dx8hVBHQ/videos"
+                      href="https://egoras.com/about"
                       className="c1link1"
                       target="_blank"
                     >
-                      Stories
+                      About
+                    </a>
+                    <a
+                      href="/dashboard/whitepaper"
+                      className="c1link1"
+                      target="_blank"
+                    >
+                      White Paper
                     </a>
                   </div>
                 </div>
@@ -164,13 +161,6 @@ const Footer = () => {
                       target="_blank"
                     >
                       Terms & conditions
-                    </a>
-                    <a
-                      href="https://egoras.com/img/bye law/Scan.pdf"
-                      className="c1link1"
-                      target="_blank"
-                    >
-                      Co-operative Bye law
                     </a>
                     {/* <a href="#partners" className="c1link1" target="_blank">
                   Partners
@@ -232,19 +222,12 @@ const Footer = () => {
                         {/* <a href="/" className="c1link1 a">
                       Home
                     </a> */}
-                        <a
-                          href="https://egoras.com/explore_collaterals"
-                          className="c1link1"
-                          target="_blank"
-                        >
-                          Explore Collaterals
+
+                        <a href="#howitworks" className="c1link1 a">
+                          How it works
                         </a>
-                        <a
-                          href="/dashboard/whitepaper"
-                          className="c1link1"
-                          target="_blank"
-                        >
-                          White Paper
+                        <a href="#features" className="c1link1" target="_blank">
+                          Features
                         </a>
                       </div>
                     </AccordionDetails>
@@ -261,15 +244,19 @@ const Footer = () => {
                     </AccordionSummary>
                     <AccordionDetails>
                       <div className="footerLinks">
-                        <a href="#howitworks" className="c1link1 a">
-                          How it works
-                        </a>
                         <a
-                          href="https://www.youtube.com/channel/UCHfi5EwXig46xp5Dx8hVBHQ/videos"
+                          href="https://egoras.com/about"
                           className="c1link1"
                           target="_blank"
                         >
-                          Stories
+                          About
+                        </a>
+                        <a
+                          href="/dashboard/whitepaper"
+                          className="c1link1"
+                          target="_blank"
+                        >
+                          White Paper
                         </a>
                       </div>
                     </AccordionDetails>
@@ -298,13 +285,7 @@ const Footer = () => {
                         >
                           Terms & conditions
                         </a>
-                        <a
-                          href="https://egoras.com/img/bye law/Scan.pdf"
-                          className="c1link1"
-                          target="_blank"
-                        >
-                          Co-operative Bye law
-                        </a>
+
                         {/* <a href="#partners" className="c1link1" target="_blank">
                       Partners
                     </a> */}
@@ -370,32 +351,10 @@ const Footer = () => {
                   </Accordion>
                 </div>
               </div>
-              <span className="law_write_up">
-                “Egoras” and “Egoras.com” are trademarks of Egoras Technologies
-                Limited, a company duly registered with CAC with{" "}
-                <span className="add_color">RC Number: 1832671. </span>
-                Egoras.com is a platform used for the provision of financial
-                services under a Multipurpose Co-operative License with
-                registration number <span className="add_color">34052</span>.
-                The Co-operative and Egoras Technologies Limited are duly
-                registered legal entities in Nigeria.
-                <br />
-                <br /> By the Co-operative’s Bye Law, every member of the
-                Co-operative shall subscribe to a minimum of one share and may
-                subscribe to additional shares subject to 20% maximum holding in
-                accordance with the provision of section 27 of the Nigerian
-                Co-operative Societies Act. Members of the Co-operative have
-                their shareholding represented in{" "}
-                <a href="/egc_token" className="add_color">
-                  {" "}
-                  Egoras Credit (EGC)
-                </a>
-                . However, possession of EGC is not proof of membership.
-              </span>
+
               <hr></hr>
               <h5 className="footerBottomPara">
-                ©️ 2022 Egoras Technologies LTD(RC - 1832671). All rights
-                reserved .
+                ©️ 2022 Egoras. All rights reserved .
               </h5>
             </div>
           </section>

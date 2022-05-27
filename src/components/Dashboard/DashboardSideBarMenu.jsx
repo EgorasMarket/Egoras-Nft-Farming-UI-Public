@@ -51,10 +51,10 @@ const DashboardSideBarMenu = () => {
     if (linksActive === "/dashboard/whitepaper") {
       setActiveMenuName("Whitepaper");
     }
-    if (linksActive === "/vault/" + urlArr[2] + "/EUSD") {
+    if (linksActive === "/vault/" + urlArr[2] + "/ENGN") {
       setActiveMenuName("Vault");
     }
-    if (linksActive === "/deposit_vault/" + urlArr[2] + "/EUSD") {
+    if (linksActive === "/deposit_vault/" + urlArr[2] + "/ENGN") {
       setActiveMenuName("Vault");
     }
   });

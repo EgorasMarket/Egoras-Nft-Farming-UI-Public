@@ -7,6 +7,11 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
 import CasinoIcon from "@mui/icons-material/Casino";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+// import Carousel from "react-multi-carousel";
+
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import Marquee from "react-fast-marquee";
 import NotInterestedIcon from "@mui/icons-material/NotInterested";
 import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
 import SearchIcon from "@mui/icons-material/Search";
@@ -16,7 +21,7 @@ import "./countdown.css";
 import WaveAnimation from "./WaveAnimation/WaveAnimation";
 import "../../css/home.css";
 import { PersonTwoTone } from "@material-ui/icons";
-
+import "./Logos.css";
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -55,6 +60,48 @@ const Home = () => {
     },
   ];
 
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 600 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 600, min: 0 },
+      items: 1,
+    },
+  };
+  const FeaturedLogos = [
+    {
+      img: "/img/featured_logos/featured1.svg",
+    },
+    {
+      img: "/img/featured_logos/featured2.svg",
+    },
+    {
+      img: "/img/featured_logos/featured3.svg",
+    },
+    {
+      img: "/img/featured_logos/featured4.svg",
+    },
+    {
+      img: "/img/featured_logos/featured5.svg",
+    },
+    {
+      img: "/img/featured_logos/featured6.svg",
+    },
+    {
+      img: "/img/featured_logos/featured7.svg",
+    },
+  ];
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -137,6 +184,23 @@ const Home = () => {
         {/* <img src="/img/blur-drop.png" alt="" className="blurDrop-token" /> */}
         <img src="/img/hero_bg_bg.png" alt="" className="blurDrop-token2" />
         {/* <img src="/img/banner-bg.png" alt="" className="blurDrop-token3" /> */}
+
+        <div className="floating_images_cont">
+          <img src="/img/floating_cube1.svg" alt="" className="float_cube1" />
+          <img src="/img/floating_cube2.svg" alt="" className="float_cube2" />
+          <img
+            src="/img/floating_layers_img.svg"
+            alt=""
+            className="float_layer1"
+          />
+          <img src="/img/floating_shadow.png" alt="" className="float_shadow" />
+          <img src="/img/floating_circle.png" alt="" className="float_circle" />
+          <img
+            src="/img/floating_circle2.png"
+            alt=""
+            className="float_circle2"
+          />
+        </div>
         {/* <WaveAnimation /> */}
       </section>
       {/* third section end */}
@@ -197,7 +261,7 @@ const Home = () => {
       </section> */}
       {/* fourth section end */}
 
-      <section className="second-eusd-token-section">
+      <section className="second-eusd-token-section" id="features">
         <div className="container">
           {/* <div className="key_features_section_title">
             Explore endless possibilities with Egoras crypto loan.
@@ -224,7 +288,7 @@ const Home = () => {
                     </p>
                   </div>
                 </div>
-                <div className="key-features-cards-area1">
+                <div className="key-features-cards-area1 flex_rev_me">
                   <div className="key_features_txts">
                     <div className="key-features-cards-area1-header">
                       {" "}
@@ -264,6 +328,46 @@ const Home = () => {
         </div>
         <img src="/img/blur-drop.png" alt="" className="blurDrop-token" />
       </section>
+
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* =================================================================================================================================================================================================================================================================== */}
+      {/* Tokens Section Start */}
+
+      {/* third section start */}
+
+      {/* fourth section start */}
+
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* =================================================================================================================================================================================================================================================================== */}
+      {/* Tokens Section Start */}
+
+      {/* <section className="collateral-assets-section">
+        <div className="container"></div>
+      </section> */}
+
+      {/* third section start */}
+
+      {/* fourth section start */}
+
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
 
       {/* ==================== */}
       {/* ==================== */}
@@ -317,7 +421,7 @@ const Home = () => {
                   <th className="assets-category-titles-heading1">Asset</th>
                   <th className="assets-category-titles-heading1">Type</th>
                   <th className="assets-category-titles-heading1 right">
-                    EUSD Available
+                    ENGN Available
                   </th>
                   <th className="assets-category-titles-heading1 right">
                     Stable Fee
@@ -378,7 +482,7 @@ const Home = () => {
                     <td className="assets-category-data-last">
                       <div className="assets-data-name-last">
                         <a
-                          href={`vault/${asset.type}/EUSD`}
+                          href={`/vault/${asset.type}/ENGN`}
                           className="assets-collateralize-button"
                           style={{ border: "none" }}
                         >
@@ -408,6 +512,190 @@ const Home = () => {
       {/* ============================= */}
       {/* ============================= */}
       {/* ============================= */}
+      {/* ============================= */}
+
+      <section className="how_it_works_section" id="howitworks">
+        <div className="container">
+          <div className="how_it_works_section_div">
+            <div className="how_it_works_title_cont">
+              <div className="how_it_works_title">How it works</div>
+              <div className="how_it_works_para">
+                Aave is a fully decentralized, community governed protocol with
+                110,720 token holders.
+              </div>
+            </div>
+            <div className="how_it_works_area">
+              <div className="how_it_works_area1">
+                <div className="how_it_works_area_cont1">
+                  <div className="how_it_works_area_cont1_image">
+                    <img
+                      src="/img/connectWallet_img.png"
+                      alt=""
+                      className="how_it_works_area_cont1_img"
+                    />
+                  </div>
+                  <div className="how_it_works_area_cont1_title">
+                    Connect Wallet
+                  </div>
+                  <div className="how_it_works_area_cont1_para">
+                    Gauge community sentiment on a new proposal through a
+                    Snapshot.
+                  </div>
+
+                  <a href="" className="visit_app_link_2">
+                    How to create Snapshot
+                  </a>
+
+                  <div className="cont1_number">1</div>
+                </div>
+                <div className="how_it_works_area_cont1">
+                  <div className="how_it_works_area_cont1_image">
+                    <img
+                      src="/img/openVault_img.png"
+                      alt=""
+                      className="how_it_works_area_cont1_img"
+                    />
+                  </div>
+                  <div className="how_it_works_area_cont1_title">
+                    Open Vault
+                  </div>
+                  <div className="how_it_works_area_cont1_para">
+                    Gauge community sentiment on a new proposal through a
+                    Snapshot.
+                  </div>
+
+                  <a href="" className="visit_app_link_2">
+                    How to create Snapshot
+                  </a>
+
+                  <div className="cont1_number">2</div>
+                </div>
+                <div className="how_it_works_area_cont1">
+                  <div className="how_it_works_area_cont1_image">
+                    <img
+                      src="/img/generate_engn_img.png"
+                      alt=""
+                      className="how_it_works_area_cont1_img"
+                    />
+                  </div>
+                  <div className="how_it_works_area_cont1_title">
+                    Generate ENGN
+                  </div>
+                  <div className="how_it_works_area_cont1_para">
+                    Gauge community sentiment on a new proposal through a
+                    Snapshot.
+                  </div>
+
+                  <a href="" className="visit_app_link_2">
+                    How to create Snapshot
+                  </a>
+
+                  <div className="cont1_number">3</div>
+                </div>
+              </div>
+              {/* <div className="how_it_works_area2"></div> */}
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+
+      {/* <section className="governance_landing_section">
+        <div className="container">
+          <div className="governance">
+            <div className="how_it_works_title_cont">
+              <div className="how_it_works_title">
+                Governed by the community
+              </div>
+              <div className="how_it_works_para">
+                Aave is a fully decentralized, community governed protocol with
+                110,720 token holders.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      <section className="featured_section">
+        <div className="custom_container">
+          <div className="featured_logos_area">
+            <div className="featured_in_head">Featured In</div>
+            {/* Carousel start==============================
+==============================================
+============================= */}
+            <Carousel
+              responsive={responsive}
+              className="featured_logos"
+              showDots={false}
+              //   infinite={false}
+              autoPlay={true}
+              // autoPlaySpeed={10000}
+              infinite={true}
+              draggable={true}
+              swipeable={true}
+            >
+              {FeaturedLogos.map((data) => (
+                <div className="featured_in_logos_cont">
+                  {" "}
+                  <img src={data.img} alt="" className="featured_logo" />
+                </div>
+              ))}
+            </Carousel>
+            <div className="featured_logos_mobile">
+              {FeaturedLogos.map((data) => (
+                <div className="featured_in_logos_cont">
+                  {" "}
+                  <img src={data.img} alt="" className="featured_logo" />
+                </div>
+              ))}
+            </div>
+            {/* Carousel end==============================
+==============================================
+============================= */}
+          </div>
+        </div>
+      </section>
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
       <section className="getStartedSection">
         <div className="container">
           <div className="getStarted_area">
@@ -418,7 +706,25 @@ const Home = () => {
           </div>
         </div>
         <WaveAnimation />
+        <img
+          src="/img/get_old_tech_bg.png"
+          alt=""
+          className="get_old_tech_bg"
+        />
       </section>
+      {/* ============== */}
+      {/* ============== */}
+      {/* ============== */}
+      {/* ============== */}
+
+      {/* ============== */}
+      {/* ============== */}
+      {/* ============== */}
+      {/* ============== */}
+
+      {/* ============= */}
+      {/* ============= */}
+      {/* ============= */}
     </div>
   );
 };
