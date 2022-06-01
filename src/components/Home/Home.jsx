@@ -520,8 +520,8 @@ const Home = () => {
             <div className="how_it_works_title_cont">
               <div className="how_it_works_title">How it works</div>
               <div className="how_it_works_para">
-                Aave is a fully decentralized, community governed protocol with
-                110,720 token holders.
+                Egoras is a fully decentralized, community governed protocol
+                with 110,720 token holders.
               </div>
             </div>
             <div className="how_it_works_area">
