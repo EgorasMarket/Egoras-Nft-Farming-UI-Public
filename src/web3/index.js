@@ -280,6 +280,62 @@ const getDefault = async (ticker, amoumt, signer) => {
   }
 };
 
+const withdrawable = async (ticker, isDefault, _provider, signer) => {
+  try {
+    const instance = contractEXInstance(signer);
+
+    let result = await instance.withdrawable(ticker, isDefault, _provider);
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
+const removeLiquidity = async (ticker, signer) => {
+  try {
+    const instance = contractEXInstance(signer);
+
+    let result = await instance.removeLiquidity(ticker);
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
+const addLiquidity = async (ticker, amount, signer) => {
+  try {
+    const instance = contractEXInstance(signer);
+
+    let result = await instance.addLiquidity(ticker, { value: amount });
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
 const exchangeDefault = async (ticker, amoumt, signer) => {
   try {
     const instance = contractEXInstance(signer);
@@ -332,6 +388,9 @@ export {
   topup,
   draw,
   exchange,
+  addLiquidity,
+  withdrawable,
+  removeLiquidity,
   exchangeDefault,
   getDefault,
   crossexchange,

@@ -27,7 +27,7 @@ const data = {
       id: "2",
       img: "/img/egc-icon.svg",
       name: "Egoras Credit",
-      contract: "0x3EB0a733787384fB818Fca15562b75Ecf5D4b956",
+      contract: "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
       symbol: "EGC",
       eusd_Avail: "90M",
       stable: "0.50%",
