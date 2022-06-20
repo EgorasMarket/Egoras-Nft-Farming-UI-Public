@@ -137,7 +137,7 @@ const DashboardAddLiquidtyPage = ({ match }) => {
      
     let ret = await addLiquidity(
         data.assets[tokenName2 - 1].symbol+"-BNB",
-          parseEther(inputVal, "wei").toString(),
+          parseEther(inputVal.toString(), "wei").toString(),
           library.getSigner()
         );
          if (ret.status == true) {
