@@ -18,6 +18,9 @@ import {
   exchangeDefault,
   getDefault,
   crossexchange,
+  addLiquidity,
+  withdrawable,
+  removeLiquidity
 } from "../../../web3/index";
 import { parseEther, formatEther } from "@ethersproject/units";
 import {
