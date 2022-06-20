@@ -127,7 +127,7 @@ const DashboardAddLiquidtyPage = ({ match }) => {
     let theAmount = (parseFloat(inputVal) / parseFloat(defaultPrice)) + 1;
    setUnlockAmount(theAmount);
         let check = await checkAllowance(
-        data.assets[tokenName2 -1].symbol,
+        data.assets[tokenName2 -1].contract,
         account,
         parseEther(theAmount.toString(), "wei").toString(),
         library.getSigner()
