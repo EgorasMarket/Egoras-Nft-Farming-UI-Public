@@ -1,451 +1,418 @@
 import React, { useState, useEffect } from "react";
 import HomeIcon from "@mui/icons-material/Home";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import HowToVoteIcon from "@mui/icons-material/HowToVote";
-import SecurityIcon from "@mui/icons-material/Security";
-import BarChartIcon from "@mui/icons-material/BarChart";
-import ImportExportIcon from "@mui/icons-material/ImportExport";
-import DescriptionIcon from "@mui/icons-material/Description";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import TelegramIcon from "@mui/icons-material/Telegram";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import CloseIcon from "@material-ui/icons/Close";
+// import { AccountNavigation } from "./DashboardPages/AccountNavigation";
+import SearchIcon from "@mui/icons-material/Search";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import MenuIcon from "@mui/icons-material/Menu";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import { Authenticate } from "../auth/Authenticate";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import { Link } from "react-router-dom";
-import "../../css/dashBoardSideBar.css";
+import DescriptionIcon from "@mui/icons-material/Description";
+import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
+import OpacityIcon from "@mui/icons-material/Opacity";
+import BarChartIcon from "@mui/icons-material/BarChart";
 import "../../css/dashboardheader.css";
-import {Authenticate} from "../auth/Authenticate";
+import "../../css/dashBoardSideBar.css";
 const DashboardSideBarMenu = () => {
+  const dddd = localStorage.getItem("smallSidetoken");
   const [activeBg, setActiveBg] = useState("market");
-  const [click, setClick] = useState("drop");
-  const [side, setSide] = useState("sidebar");
-  const [sideWrap, setSideWrap] = useState("sidebarWrapper");
-  const [openDrop, setOpenDrop] = useState("drop-open-icon");
-  const [closeDrop, setCloseDrop] = useState("not-drop-close-icon");
+  const [catDiv, setCatDiv] = useState("not_home");
+  const [smallSide, setSmallSide] = useState(dddd);
+  const [cartNum, setCartNum] = useState("");
+  const [image, setImage] = useState("");
+  const [searchBar, setSearchBar] = useState(false);
+  const [acctNav, setAcctNav] = useState(false);
+  const [activeMenuName, setActiveMenuName] = useState("Markets");
 
-  const changeOnclick = () => {
-    if (click === "drop") {
-      setClick = () => "notdrop";
+  const [productNamesZ, setProductNamesZ] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const linksActive = window.location.pathname;
+  const urlArr = linksActive.split("/");
+
+  const toggleAccountNav = () => {
+    if (acctNav == true) {
+      setAcctNav(false);
+    } else if (acctNav == false) {
+      setAcctNav(true);
     }
   };
+  useEffect(() => {
+    if (linksActive === "/dashboard") {
+      setActiveMenuName("Markets");
+    }
+    if (linksActive === "/dashboard/swap") {
+      setActiveMenuName("Swap");
+    }
+    if (linksActive === "/dashboard/add") {
+      setActiveMenuName("Liquidity");
+    }
+    if (linksActive === "/dashboard/whitepaper") {
+      setActiveMenuName("Whitepaper");
+    }
+    if (linksActive === "/vault/" + urlArr[2] + "/ENGN") {
+      setActiveMenuName("Vault");
+    }
+    if (linksActive === "/deposit_vault/" + urlArr[2] + "/ENGN") {
+      setActiveMenuName("Vault");
+    }
+  });
+  useEffect(() => {
+    if (linksActive == "/dashboard/products") {
+      setSearchBar(true);
+    }
+  });
+
+  // //console.log(dddd);
   const changeBg = (e) => {
     let currentId = e.currentTarget.id;
     setActiveBg(currentId);
+    if (linksActive === "/dashboard/products") {
+      setCatDiv("home");
+    }
+    if (linksActive === "/dashboard/products/categories/id-phone") {
+      setActiveBg("products");
+      setCatDiv("home");
+    }
   };
-
-  const openDropDown = () => {
-    setOpenDrop("not-drop-open-icon");
-    setCloseDrop("drop-close-icon");
-
-    setSide("not-sidebar");
-
-    setSideWrap("not-sidebarWrapper");
-  };
-  const closeDropDown = () => {
-    setOpenDrop("drop-open-icon");
-    setCloseDrop("not-drop-close-icon");
-    setSide("sidebar");
-    setSideWrap("sidebarWrapper");
-  };
-  const linksActive = window.location.pathname;
 
   useEffect(() => {
-    if (linksActive === "/dashboard/lending") {
-      setActiveBg("home");
-      // document.getElementById("FooterId").style.display = "none";
-    }
     if (linksActive === "/dashboard") {
       setActiveBg("market");
-      // document.getElementById("FooterId").style.display = "none";
     }
-    if (linksActive === "/dashboard/transaction") {
-      setActiveBg("transaction");
-      // document.getElementById("FooterId").style.display = "none";
-    }
-    if (linksActive === "/dashboard/governance") {
-      setActiveBg("governance");
-      // document.getElementById("FooterId").style.display = "none";
-    }
+
     if (linksActive === "/dashboard/swap") {
       setActiveBg("swap");
-      // document.getElementById("FooterId").style.display = "none";
     }
-    if (linksActive === "/dashboard/vault") {
-      setActiveBg("vault");
-      // document.getElementById("FooterId").style.display = "none";
+    if (linksActive === "/dashboard/add") {
+      setActiveBg("pool");
     }
+
     if (linksActive === "/dashboard/whitepaper") {
       setActiveBg("whitepaper");
-      // document.getElementById("FooterId").style.display = "none";
     }
 
-    // if (screen.width < 1220) {
-    //   document.getElementById("open_icon").style.display == "none";
-    //   document.getElementById("close_icon").style.display == "none";
-    //   console.log("i workoooo");
-    // }
+    if (smallSide == "not_small") {
+      localStorage.setItem("smallSidetoken", "not_small");
+    } else {
+      localStorage.setItem("smallSidetoken", "smallSide");
+    }
   }, []);
 
-  // const dropDownOpen = () => {
-  //   let sideBar = document.getElementById("side_bar");
-  //   let sideBarWrapper = document.getElementById("side_bar_wrapper");
-  //   let closeIcon = document.getElementById("close_icon");
-  //   let openIcon = document.getElementById("open_icon");
-  //   sideBarWrapper.style.display = "block";
-  //   sideBar.style.width = "230px";
-
-  //   openIcon.style.display = "none ";
-  //   closeIcon.style.display = "inline-block";
-  // };
-
-  // //   const closeIcon = document.getElementById("close_icon");
-  // //   const openIcon = document.getElementById("open_icon");
-
-  // // if (window.innerWidth >= 1220) {
-  // //   openIcon.style.display = "none ";
-  // //   closeIcon.style.display = "none";
-  // //   console.log("i workoooo");
-  // // } else {
-  // //   openIcon.style.display = "inline-block ";
-  // //   closeIcon.style.display = "none";
-  // //   console.log("i workoooo");
-  // // }
-
-  // const dropDownClose = () => {
-  //   let sideBar = document.getElementById("side_bar");
-  //   let sideBarWrapper = document.getElementById("side_bar_wrapper");
-  //   let closeIcon = document.getElementById("close_icon");
-  //   let openIcon = document.getElementById("open_icon");
-  //   sideBar.style.width = "0px !important";
-  //   sideBarWrapper.style.display = "none !";
-  //   openIcon.style.display = "inline-block";
-  //   closeIcon.style.display = "none";
-  // };
+  const shrinkAction = () => {
+    if (smallSide == "not_small") {
+      setSmallSide("smallSide");
+      localStorage.setItem("smallSidetoken", "smallSide");
+    } else {
+      setSmallSide("not_small");
+      localStorage.setItem("smallSidetoken", "not_small");
+    }
+  };
 
   return (
-    <div className="side">
+    <div className={smallSide == "not_small" ? "side" : "small_side"}>
       <section className="DashBoardHeaderSection">
         <div className="container-fluid">
           <div className="dashboard-area">
             <div className="egrLogo2Cont3">
-              <img
-                src="/img/open-drop-icon.svg"
-                alt=""
-                className={
-                  openDrop == "drop-open-icon"
-                    ? "drop-open-icon"
-                    : "not-drop-open-icon"
-                }
-                id="open_icon"
-                onClick={openDropDown}
-              />
-              <img
-                src="/img/close-drop-icon.svg"
-                alt=""
-                className={
-                  closeDrop == "not-drop-close-icon"
-                    ? "not-drop-close-icon"
-                    : "drop-close-icon"
-                }
-                id="close_icon"
-                onClick={closeDropDown}
-              />
+              <a href="" alt=""></a>
+            </div>
+
+            {/* <Authenticate isHome="false" /> */}
+
+            <div
+              className={
+                smallSide == "not_small"
+                  ? "user_profile_icon_cont"
+                  : "small_user_profile_icon_cont"
+              }
+            >
+              <div className="together">
+                <div className="immmgg immmgg_desktop">
+                  <Authenticate isHome="false" />
+                </div>
+              </div>
+
+              <div className="welcome_user">
+                <span className="welcome_user_txt">{activeMenuName}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* =============''''''''' */}
+      {/* =============''''''''' */}
+      {/* =============''''''''' */}
+
+      {/* ========== */}
+      {/* ========== */}
+      {/* ========== */}
+
+      <div
+        className="sidebar"
+        // className={side == "sidebar" ? "not-sidebar" : "sidebar"}
+        id="side_bar"
+      >
+        <div className="sidebarWrapper" id="side_bar_wrapper">
+          <div className="sidebarMenu">
+            <div
+              className={
+                smallSide == "not_small"
+                  ? "side_bar_head"
+                  : "small_side_bar_head"
+              }
+            >
+              <MenuIcon className="menu_icon_toggle" onClick={shrinkAction} />
               <a href="/" alt="">
                 <img
                   src="/img/egoras-logo.svg"
                   alt="..."
-                  className="egr-logo3"
+                  className="egr-logo3cc"
                 />
               </a>
             </div>
-            <Authenticate isHome="false" />
-           
-          </div>
-        </div>
-      </section>
-      <div
-        className={side == "sidebar" ? "not-sidebar" : "sidebar"}
-        id="side_bar"
-      >
-        <div
-          className={
-            sideWrap == "sidebarWrapper"
-              ? "not-sidebarWrapper"
-              : "sidebarWrapper"
-          }
-          id="side_bar_wrapper"
-        >
-          <div className="sidebarMenu">
-            {/* <h3 className="sidebarTitle">Dashboard</h3> */}
-            <ul className="sidebarList">
-              {/* =================== */}
-              {/* =================== */}
-              {/* =================== */}
-              {/* =================== */}
-              <Link
-                to="/dashboard"
-                id="market"
-                className="link"
-                onClick={changeBg}
-              >
-                <li
-                  className={
-                    activeBg == "market"
-                      ? "sidebarListItem list-item-active"
-                      : "sidebarListItem"
-                  }
-                >
-                  <BarChartIcon className="sidebarIcon" />
-                  Markets
-                </li>
-              </Link>
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* <Link
-                to="/dashboard/lending"
-                id="home"
-                className="link"
-                onClick={changeBg}
-              >
-                <li
-                  className={
-                    activeBg == "home"
-                      ? "sidebarListItem list-item-active"
-                      : "sidebarListItem"
-                  }
 
-                  // "sidebarListItem list-item-active"
+            {smallSide == "not_small" ? (
+              <ul className="sidebarList">
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                <Link
+                  to="/dashboard"
+                  id="market"
+                  className="link"
+                  onClick={changeBg}
                 >
-                  <AttachMoneyIcon className="sidebarIcon" />
-                  Lending
-                </li>
-              </Link> */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
+                  <li
+                    className={
+                      activeBg == "market"
+                        ? "sidebarListItem list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <BarChartIcon className="sidebarIcon" />
+                    Markets
+                  </li>
+                </Link>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
 
-              {/* <Link
-                to="/dashboard/transaction"
-                className="link"
-                id="transaction"
-                onClick={changeBg}
-              >
-                <li
-                  className={
-                    activeBg == "transaction"
-                      ? "sidebarListItem list-item-active"
-                      : "sidebarListItem"
-                  }
+                <Link
+                  to="/dashboard/swap"
+                  className="link"
+                  id="swap"
+                  onClick={changeBg}
                 >
-                  <ImportExportIcon className="sidebarIcon" />
-                  Staking
-                </li>
-              </Link> */}
+                  <li
+                    className={
+                      activeBg == "swap"
+                        ? "sidebarListItem list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <SwapHorizontalCircleIcon className="sidebarIcon" />
+                    Swap
+                  </li>
+                </Link>
 
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                <Link
+                  to="/dashboard/add"
+                  className="link"
+                  id="pool"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "pool"
+                        ? "sidebarListItem list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <OpacityIcon className="sidebarIcon" />
+                    liquidity
+                  </li>
+                </Link>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                <Link
+                  to="/dashboard/whitepaper"
+                  className="link"
+                  id="whitepaper"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "whitepaper"
+                        ? "sidebarListItem list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <DescriptionIcon className="sidebarIcon" />
+                    White Paper
+                  </li>
+                </Link>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
 
-              {/* <Link
-                to="/dashboard/vault"
-                className="link"
-                id="vault"
-                onClick={changeBg}
-              >
-                <li
-                  className={
-                    activeBg == "vault"
-                      ? "sidebarListItem list-item-active"
-                      : "sidebarListItem"
-                  }
-                >
-                  <SwapHorizontalCircleIcon className="sidebarIcon" />
-                  Vault
-                </li>
-              </Link> */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
 
-              <Link
-                to="/dashboard/governance"
-                className="link"
-                id="governance"
-                onClick={changeBg}
-              >
-                <li
-                  className={
-                    activeBg == "governance"
-                      ? "sidebarListItem list-item-active"
-                      : "sidebarListItem"
-                  }
-                >
-                  <HowToVoteIcon className="sidebarIcon" />
-                  Governance
-                </li>
-              </Link>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
 
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+              </ul>
+            ) : (
+              <ul className="sidebarList">
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                {/* =================== */}
+                <Link
+                  to="/dashboard"
+                  id="market"
+                  className="link hover_link"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "market"
+                        ? "sidebarListItem small_list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <BarChartIcon className="sidebarIcon" />
+                    Markets
+                  </li>
+                  <span className="hover_link_txt">Markets</span>
+                </Link>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                <Link
+                  to="/dashboard/swap"
+                  id="swap"
+                  className="link hover_link"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "swap"
+                        ? "sidebarListItem small_list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <SwapHorizontalCircleIcon className="sidebarIcon" />
+                    Swap
+                  </li>
+                  <span className="hover_link_txt">Swap</span>
+                </Link>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
 
-              <Link
-                to="/dashboard/swap"
-                className="link"
-                id="swap"
-                onClick={changeBg}
-              >
-                <li
-                  className={
-                    activeBg == "swap"
-                      ? "sidebarListItem list-item-active"
-                      : "sidebarListItem"
-                  }
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                <Link
+                  to="/dashboard/add"
+                  id="pool"
+                  className="link hover_link"
+                  onClick={changeBg}
                 >
-                  <SwapHorizontalCircleIcon className="sidebarIcon" />
-                  Swap
-                </li>
-              </Link>
+                  <li
+                    className={
+                      activeBg == "pool"
+                        ? "sidebarListItem small_list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <OpacityIcon className="sidebarIcon" />
+                    Liquidity
+                  </li>
+                  <span className="hover_link_txt">Liquidity</span>
+                </Link>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
 
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-              <Link
-                to="/dashboard/whitepaper"
-                className="link"
-                id="whitepaper"
-                onClick={changeBg}
-              >
-                <li
-                  className={
-                    activeBg == "whitepaper"
-                      ? "sidebarListItem list-item-active"
-                      : "sidebarListItem"
-                  }
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                <Link
+                  to="/dashboard/whitepaper"
+                  id="whitepaper"
+                  className="link hover_link"
+                  onClick={changeBg}
                 >
-                  <DescriptionIcon className="sidebarIcon" />
-                  White Paper
-                </li>
-              </Link>
+                  <li
+                    className={
+                      activeBg == "whitepaper"
+                        ? "sidebarListItem small_list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <DescriptionIcon className="sidebarIcon" />
+                    Whitepaper
+                  </li>
+                  <span className="hover_link_txt">Whitepaper</span>
+                </Link>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
 
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* ===================== */}
-              {/* <Link to="#" className="link" id="security" onClick={changeBg}>
-              <li
-                className={
-                  activeBg == "security"
-                    ? "sidebarListItem list-item-active"
-                    : "sidebarListItem"
-                }
-              >
-                <SecurityIcon className="sidebarIcon" />
-                Security
-              </li>
-            </Link> */}
-              {/* <a className="nav-item_link__yU0Vp" href="/staking">
-              <span
-                className="nav-item_linkWrapper__1IVev"
-                role="button"
-                tabindex="0"
-              >
-                <div
-                  className="nav-item_spacer__3_Yzq nav-item_spacerTop__2C-7C"
-                  style={{ backgroundColor: "rgb(255, 255, 255)" }}
-                >
-                  <div
-                    className="nav-item_spacerInner__HJWlk"
-                    style={{ backgroundColor: "rgb(28, 34, 48)" }}
-                  ></div>
-                </div>
-                <div
-                  className="nav-item_linkBody__2ilRo"
-                  style={{ backgroundColor: "rgb(255, 255, 255)" }}
-                >
-                  <img src="/static/media/stake-active.62f4330e.svg" alt="" />
-                  <span className="nav-item_text__1Kr9k">Staking</span>
-                </div>
-                <div
-                  className="nav-item_spacer__3_Yzq nav-item_spacerBottom__EdM8-"
-                  style={{ backgroundColor: "rgb(255, 255, 255)" }}
-                >
-                  <div
-                    className="nav-item_spacerInner__HJWlk"
-                    style={{ backgroundColor: "rgb(28, 34, 48)" }}
-                  ></div>
-                </div>
-              </span>
-            </a> */}
-            </ul>
-            <hr />
-            <ul className="social_icons">
-              <li className="icons_layer_1">
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+              </ul>
+            )}
+
+            <hr className="hrr" />
+            <div className="buy_ad_div_cont">
+              <div className="buy_ad_div">
+                <div className="buy_ad_div_title">Shop on Egoras</div>
+                <img
+                  src="/img/buy_ad_cart.svg"
+                  alt=""
+                  className="buy_ad_div_img"
+                />
                 <a
-                  href="https://twitter.com/egorasmarket"
-                  className="twitter_icon"
+                  href="https://egoras.com/market"
+                  className="buy_ad_div_btn_div_link"
                 >
-                  <TwitterIcon className="social_icon" />
+                  <button className="buy_ad_btn">Shop Now</button>
                 </a>
-                <a
-                  href="https://web.facebook.com/egorasmarket/"
-                  className="twitter_icon"
-                >
-                  <FacebookOutlinedIcon className="social_icon" />
-                </a>
-                <a
-                  href="https://github.com/EgorasMarket"
-                  className="twitter_icon"
-                >
-                  <GitHubIcon className="social_icon" />
-                </a>
-                <a
-                  href="https://www.instagram.com/egorasofficial/?hl=en"
-                  className="twitter_icon"
-                >
-                  <InstagramIcon className="social_icon" />
-                </a>
-              </li>
-              <li className="icons_layer_1">
-                <a
-                  href="https://www.youtube.com/user/Egoras"
-                  className="twitter_icon"
-                >
-                  <YouTubeIcon className="social_icon" />
-                </a>
-                <a href="https://t.me/egorasmarket" className="twitter_icon">
-                  <TelegramIcon className="social_icon" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/company/egorasmarket/"
-                  className="twitter_icon ma"
-                >
-                  <img src="/img/linked_in_icon.svg" alt="" className=" am" />
-                </a>
-                <a
-                  href="https://egoras.medium.com/"
-                  className="twitter_icon ma"
-                >
-                  <img src="/img/medium_icon.svg" alt="" className=" am" />
-                </a>
-              </li>
-            </ul>
+                <img src="/img/banner-bg.png" alt="" className="buy_ad_bg" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -453,4 +420,12 @@ const DashboardSideBarMenu = () => {
   );
 };
 
+// const mapStateToProps = (state) => ({
+//   auth: state.auth,
+//   isAuthenticated: state.auth.isAuthenticated,
+//   cart: state.shop.cart,
+// });
+
 export default DashboardSideBarMenu;
+
+// export default connect(mapStateToProps, { retrieveCart })(DashboardSidebar);

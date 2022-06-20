@@ -38,7 +38,6 @@ const DashBoardWhitePaper = () => {
     console.log(e.currentTarget.id);
   };
 
-  
   const toggleActiveDrop = () => {
     setActiveMenu("details-accord ");
   };
@@ -46,167 +45,162 @@ const DashBoardWhitePaper = () => {
   const classes = useStyles();
   return (
     <div className="white-paper-div">
-      <section className="whitepaper-section">
-        <div className="whitepaper-area">
-          {/* ================================ */}
-          {/* ================================ */}
-          {/* ================================ */}
-
-          <div className="mobile-menu">
-            <Accordion>
-              <AccordionSummary
+      <div className="mobile-menu">
+        <div className="container">
+          <Accordion>
+            <AccordionSummary
+              onClick={toggleActiveDrop}
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography
+                className={classes.heading}
                 onClick={toggleActiveDrop}
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
               >
-                <Typography
-                  className={classes.heading}
-                  onClick={toggleActiveDrop}
-                >
-                  Menu{" "}
-                </Typography>
-              </AccordionSummary>
-              <div className={activeMenu}>
-                <AccordionDetails>
-                  <div className="sidebar-links">
-                    <div className="sidebar-link1a">
-                      <a
-                        href="#white_layer_1"
-                        className={
-                          activeLink == "abstract-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        id="abstract-link"
-                        onClick={toggleActive}
-                      >
-                        Abstract
-                      </a>
-                    </div>
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    <div className="sidebar-link1a   ">
-                      <a
-                        href="#white_layer_2"
-                        className={
-                          activeLink == "intro-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        onClick={toggleActive}
-                        id="intro-link"
-                      >
-                        Introduction
-                      </a>
-                    </div>
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    <div className="sidebar-link1a">
-                      <a
-                        href="#white_layer_3"
-                        className={
-                          activeLink == "dcentralized-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        onClick={toggleActive}
-                        id="dcentralized-link"
-                      >
-                        Decentralized Autonomous Organization
-                      </a>
-                    </div>
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    <div className="sidebar-link1a">
-                      <a
-                        href="#white_layer_4"
-                        className={
-                          activeLink == "lending-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        onClick={toggleActive}
-                        id="lending-link"
-                      >
-                        Lending Partner Governance
-                      </a>
-                    </div>
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    <div className="sidebar-link1a">
-                      <a
-                        href="#white_layer_5"
-                        className={
-                          activeLink == "collat-approve-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        onClick={toggleActive}
-                        id="collat-approve-link"
-                      >
-                        Collateral Approval Governance
-                      </a>
-                    </div>
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    <div className="sidebar-link1a">
-                      <a
-                        href="#white_layer_6"
-                        className={
-                          activeLink == "non-fungible-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        onClick={toggleActive}
-                        id="non-fungible-link"
-                      >
-                        Non-Fungible Token (NFT)
-                      </a>
-                    </div>
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    <div className="sidebar-link1a">
-                      <a
-                        href="#white_layer_7"
-                        className={
-                          activeLink == "nft-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        onClick={toggleActive}
-                        id="nft-link"
-                      >
-                        NFT Farming
-                      </a>
-                    </div>
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    <div className="sidebar-link1a">
-                      <a
-                        href="#white_layer_8"
-                        className={
-                          activeLink == "micro-collat-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        onClick={toggleActive}
-                        id="micro-collat-link"
-                      >
-                        Micro-Collateral Smart contracts
-                      </a>
-                    </div>
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* <div className="sidebar-link1a">
+                Menu{" "}
+              </Typography>
+            </AccordionSummary>
+            <div className={activeMenu}>
+              <AccordionDetails>
+                <div className="sidebar-links">
+                  <div className="sidebar-link1a">
+                    <a
+                      href="#white_layer_1"
+                      className={
+                        activeLink == "abstract-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      id="abstract-link"
+                      onClick={toggleActive}
+                    >
+                      Abstract
+                    </a>
+                  </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  <div className="sidebar-link1a   ">
+                    <a
+                      href="#white_layer_2"
+                      className={
+                        activeLink == "intro-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      onClick={toggleActive}
+                      id="intro-link"
+                    >
+                      Introduction
+                    </a>
+                  </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  <div className="sidebar-link1a">
+                    <a
+                      href="#white_layer_3"
+                      className={
+                        activeLink == "dcentralized-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      onClick={toggleActive}
+                      id="dcentralized-link"
+                    >
+                      Decentralized Autonomous Organization
+                    </a>
+                  </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  <div className="sidebar-link1a">
+                    <a
+                      href="#white_layer_4"
+                      className={
+                        activeLink == "lending-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      onClick={toggleActive}
+                      id="lending-link"
+                    >
+                      Lending Partner Governance
+                    </a>
+                  </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  <div className="sidebar-link1a">
+                    <a
+                      href="#white_layer_5"
+                      className={
+                        activeLink == "collat-approve-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      onClick={toggleActive}
+                      id="collat-approve-link"
+                    >
+                      Collateral Approval Governance
+                    </a>
+                  </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  <div className="sidebar-link1a">
+                    <a
+                      href="#white_layer_6"
+                      className={
+                        activeLink == "non-fungible-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      onClick={toggleActive}
+                      id="non-fungible-link"
+                    >
+                      Non-Fungible Token (NFT)
+                    </a>
+                  </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  <div className="sidebar-link1a">
+                    <a
+                      href="#white_layer_7"
+                      className={
+                        activeLink == "nft-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      onClick={toggleActive}
+                      id="nft-link"
+                    >
+                      NFT Farming
+                    </a>
+                  </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  <div className="sidebar-link1a">
+                    <a
+                      href="#white_layer_8"
+                      className={
+                        activeLink == "micro-collat-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      onClick={toggleActive}
+                      id="micro-collat-link"
+                    >
+                      Micro-Collateral Smart contracts
+                    </a>
+                  </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* <div className="sidebar-link1a">
                       <a
                         href="#white_layer_9"
                         className={
@@ -220,164 +214,170 @@ const DashBoardWhitePaper = () => {
                         Stable Currency{" "}
                       </a>
                     </div> */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    <div className="sidebar-link1a">
-                      <a
-                        href="#white_layer_10"
-                        className={
-                          activeLink == "token-economy-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        onClick={toggleActive}
-                        id="token-economy-link"
-                      >
-                        Egoras Token Economy{" "}
-                      </a>
-                    </div>
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    <div className="sidebar-link1a">
-                      <a
-                        href="#white_layer_11"
-                        className={
-                          activeLink == "egr-eusd-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        onClick={toggleActive}
-                        id="egr-eusd-link"
-                      >
-                        The EgorasUSD(EUSD){" "}
-                      </a>
-                    </div>
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    <div className="sidebar-link1a">
-                      <a
-                        href="#white_layer_12"
-                        className={
-                          activeLink == "eusd-func-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        onClick={toggleActive}
-                        id="eusd-func-link"
-                      >
-                        Functions of EUSD{" "}
-                      </a>
-                    </div>
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    <div className="sidebar-link1a">
-                      <a
-                        href="#white_layer_13"
-                        className={
-                          activeLink == "gen-eusd-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        onClick={toggleActive}
-                        id="gen-eusd-link"
-                      >
-                        Steps to Generate EUSD{" "}
-                      </a>
-                    </div>
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    <div className="sidebar-link1a">
-                      <a
-                        href="#white_layer_14"
-                        className={
-                          activeLink == "gov-eusd-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        onClick={toggleActive}
-                        id="gov-eusd-link"
-                      >
-                        Steps To Govern the Generation Of EUSD{" "}
-                      </a>
-                    </div>
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    <div className="sidebar-link1a">
-                      <a
-                        href="#white_layer_15"
-                        className={
-                          activeLink == "egr-gov-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        onClick={toggleActive}
-                        id="egr-gov-link"
-                      >
-                        Egoras Governance Token (EGR){" "}
-                      </a>
-                    </div>
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    <div className="sidebar-link1a">
-                      <a
-                        href="#white_layer_16"
-                        className={
-                          activeLink == "egr-credit-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        onClick={toggleActive}
-                        id="egr-credit-link"
-                      >
-                        The Egoras Credit (EGC){" "}
-                      </a>
-                    </div>
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    <div className="sidebar-link1a">
-                      <a
-                        href="#white_layer_17"
-                        className={
-                          activeLink == "facilitate-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        onClick={toggleActive}
-                        id="facilitate-link"
-                      >
-                        How does EGC Facilitate the stability of EgorasUSD
-                      </a>
-                    </div>
-                    {/* ============== */}
-                    {/* ============== */}
-                    {/* ============== */}
-                    <div className="sidebar-link1a">
-                      <a
-                        href="#white_layer_18"
-                        className={
-                          activeLink == "conclusion-link"
-                            ? "sidebar-link1 sidebar-link1-active"
-                            : "sidebar-link1"
-                        }
-                        onClick={toggleActive}
-                        id="conclusion-link"
-                      >
-                        Conclusion{" "}
-                      </a>
-                    </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  <div className="sidebar-link1a">
+                    <a
+                      href="#white_layer_10"
+                      className={
+                        activeLink == "token-economy-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      onClick={toggleActive}
+                      id="token-economy-link"
+                    >
+                      Egoras Token Economy{" "}
+                    </a>
                   </div>
-                </AccordionDetails>
-              </div>
-            </Accordion>
-          </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  <div className="sidebar-link1a">
+                    <a
+                      href="#white_layer_11"
+                      className={
+                        activeLink == "egr-eusd-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      onClick={toggleActive}
+                      id="egr-eusd-link"
+                    >
+                      The EgorasUSD(EUSD){" "}
+                    </a>
+                  </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  <div className="sidebar-link1a">
+                    <a
+                      href="#white_layer_12"
+                      className={
+                        activeLink == "eusd-func-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      onClick={toggleActive}
+                      id="eusd-func-link"
+                    >
+                      Functions of EUSD{" "}
+                    </a>
+                  </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  <div className="sidebar-link1a">
+                    <a
+                      href="#white_layer_13"
+                      className={
+                        activeLink == "gen-eusd-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      onClick={toggleActive}
+                      id="gen-eusd-link"
+                    >
+                      Steps to Generate EUSD{" "}
+                    </a>
+                  </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  <div className="sidebar-link1a">
+                    <a
+                      href="#white_layer_14"
+                      className={
+                        activeLink == "gov-eusd-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      onClick={toggleActive}
+                      id="gov-eusd-link"
+                    >
+                      Steps To Govern the Generation Of EUSD{" "}
+                    </a>
+                  </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  <div className="sidebar-link1a">
+                    <a
+                      href="#white_layer_15"
+                      className={
+                        activeLink == "egr-gov-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      onClick={toggleActive}
+                      id="egr-gov-link"
+                    >
+                      Egoras Governance Token (EGR){" "}
+                    </a>
+                  </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  <div className="sidebar-link1a">
+                    <a
+                      href="#white_layer_16"
+                      className={
+                        activeLink == "egr-credit-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      onClick={toggleActive}
+                      id="egr-credit-link"
+                    >
+                      The Egoras Credit (EGC){" "}
+                    </a>
+                  </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  <div className="sidebar-link1a">
+                    <a
+                      href="#white_layer_17"
+                      className={
+                        activeLink == "facilitate-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      onClick={toggleActive}
+                      id="facilitate-link"
+                    >
+                      How does EGC Facilitate the stability of EgorasUSD
+                    </a>
+                  </div>
+                  {/* ============== */}
+                  {/* ============== */}
+                  {/* ============== */}
+                  <div className="sidebar-link1a">
+                    <a
+                      href="#white_layer_18"
+                      className={
+                        activeLink == "conclusion-link"
+                          ? "sidebar-link1 sidebar-link1-active"
+                          : "sidebar-link1"
+                      }
+                      onClick={toggleActive}
+                      id="conclusion-link"
+                    >
+                      Conclusion{" "}
+                    </a>
+                  </div>
+                </div>
+              </AccordionDetails>
+            </div>
+          </Accordion>
+        </div>
+      </div>
+      <section className="whitepaper-section">
+        <div className="whitepaper-area">
+          {/* ================================ */}
+          {/* ================================ */}
+          {/* ================================ */}
 
           {/* ================================ */}
           {/* ================================ */}

@@ -2,4 +2,6 @@
   display: flex;
 }
 
-
+.Enable1.btn-block{
+  width: 100% !important;
+}

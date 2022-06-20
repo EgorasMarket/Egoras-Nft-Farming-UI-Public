@@ -83,6 +83,9 @@
 } */
 
 @media screen and (max-width: 991px) {
+  .egr_logo2_mobil {
+    display: block;
+  }
   .onMobile {
     display: grid;
     width: 10px !important;
@@ -124,7 +127,7 @@
     padding-top: 0.5em;
   }
   .on-mobile-navigators {
-    display: flex;
+    display: none;
     margin-top: 20px;
   }
 

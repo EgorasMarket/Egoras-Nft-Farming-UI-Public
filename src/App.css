@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "Mulish";
+  font-family: "Roboto";
   text-decoration: none !important;
 }
 
@@ -150,4 +150,296 @@ button:focus {
 .for-des span {
   background: none !important;
   padding: 0.5em;
+}
+/* @import "~react-image-gallery/styles/css/image-gallery.css"; */
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Mulish", sans-serif;
+  text-decoration: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+  transition: 2s ease-in;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+.custom_container {
+  max-width: 1440px;
+  margin: auto;
+  width: 100%;
+  padding: 0em 2em;
+  min-width: 0px;
+}
+a {
+  text-decoration: none !important;
+  color: #229e54;
+}
+li {
+  list-style: none;
+}
+.connect {
+  padding: 0 !important;
+}
+.btn-black.i {
+  padding: 1em 2em;
+  border: none;
+  background: none;
+  color: white;
+}
+.image-wrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  float: left;
+  margin: 10px;
+}
+.image-wrapper button {
+  position: absolute;
+  border: none;
+  background-color: rgb(218, 7, 7);
+  color: rgb(99, 3, 3);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  line-height: 20px;
+}
+
+.heroBtn {
+  outline: none;
+  border: thin;
+}
+
+.image-wrapper .image {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+button:focus {
+  outline: unset !important;
+}
+
+.jss9 {
+  justify-content: flex-end !important;
+}
+
+.jss8 {
+  width: 100% !important;
+}
+.css-19kzrtu {
+  padding: 0 !important;
+  padding-top: 20px !important;
+}
+.css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
+  color: #229e54 !important ;
+  background: #effff5 !important;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+}
+
+.css-1aquho2-MuiTabs-indicator {
+  background-color: #229e54 !important;
+}
+
+.col-md-8 {
+  padding: 0 !important;
+}
+
+.uploadButton::-webkit-file-upload-button {
+  background-color: #229e54;
+  color: #fff;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.uploadButton::-webkit-file-upload-button:hover {
+  background-color: #e4a788;
+  color: #fff;
+  /* transform: translate3d(0, 5px, 0); */
+  transition: 0.3s ease-in-out;
+  box-shadow: 0px 4px 10px #d5d5d5;
+}
+
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+  width: 60% !important;
+}
+
+.rdw-editor-main {
+  border: 1px solid #f7e3e3 !important;
+  border-radius: 5px !important;
+  padding: 0 15px !important;
+}
+
+.MuiSelect-root {
+  width: 60% !important;
+}
+@media screen and (max-width: 991px) {
+}
+@media (min-width: 768px) {
+  .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 !important;
+  }
+}
+.css-1kty9di-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+  color: #229e54 !important;
+}
+
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
+  border-color: #229e54 !important;
+}
+
+.for-des span {
+  background: none !important;
+  padding: 0.5em;
+}
+
+html {
+  scroll-behavior: smooth !important;
+  transition: 2s ease-in;
+}
+
+input:focus-visible {
+  outline: none;
+  border: solid;
+  border-color: #4fcb81;
+  border-width: 1px;
+  box-shadow: 0px 0px 1px 4px #54bc7e2e;
+  transition: 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+input:-internal-autofill-selected {
+  background-color: #4fcb81 !important;
+}
+
+.featured_logos .react-multi-carousel-track {
+  gap: 0px;
+}
+
+.eHUcDD {
+  width: 64px;
+  height: 64px;
+  border-radius: 50% !important ;
+  box-shadow: rgb(36 36 36 / 10%) 0px 8px 16px 0px,
+    rgb(36 36 36 / 4%) 0px 1px 4px 0px;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  background-color: rgb(23, 73, 77) !important;
+}
+
+.text-left .react-date-picker {
+  display: unset !important;
+}
+
+.ReactTags__tag {
+  border: 1px solid #ddd !important;
+  background: #b3f2cc !important;
+  color: #000;
+  font-size: 12px;
+  display: inline-block;
+  padding: 5px;
+  margin: 0 5px;
+  border-radius: 2px;
+}
+
+.ReactTags__remove {
+  border: none;
+  cursor: pointer;
+  background: none;
+  color: #000;
+  margin-left: 4px;
+}
+
+.ReactTags__clearAll {
+  cursor: pointer;
+  padding: 10px;
+  margin: 10px;
+  background: #f88d8d;
+  color: #fff;
+  border: none;
+}
+
+.ReactTags__tagInputField {
+  border-color: rgb(200 231 212);
+  border-style: solid;
+  border-width: 1px;
+  padding: 12px;
+  border-radius: 4px;
+}
+
+.laSVjx.laSVjx.laSVjx {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50% !important;
+  width: 100%;
+  height: 100%;
+  background-color: #093f1f;
+}
+@media screen and (max-width: 1055px) {
+  .alert_cont {
+    position: fixed;
+    top: 1%;
+    left: 37.5%;
+    right: 62%;
+    width: 40%;
+    z-index: 10000;
+    animation: opacity 0.3s linear;
+  }
+}
+@media screen and (max-width: 767px) {
+  .alert_cont {
+    position: fixed;
+    top: 1%;
+    left: 37.5%;
+    right: 62%;
+    width: 60%;
+    z-index: 10000;
+    animation: opacity 0.3s linear;
+  }
+}
+@media screen and (max-width: 700px) {
+  .featured_logos .react-multi-carousel-track {
+    gap: 0px;
+  }
+}
+@media screen and (max-width: 590px) {
+  .featured_logos .react-multi-carousel-track {
+    gap: 0px;
+  }
+
+  .alert_cont {
+    position: fixed;
+    top: 1%;
+    left: 8%;
+    right: 0%;
+    width: 90%;
+    z-index: 10000;
+    margin: auto;
+    animation: opacity 0.3s linear;
+  }
+}
+@media screen and (max-width: 550px) {
+  .custom_container {
+    max-width: 1440px;
+    margin: auto;
+    width: 100%;
+    padding: 0em 1em;
+    min-width: 0px;
+  }
 }

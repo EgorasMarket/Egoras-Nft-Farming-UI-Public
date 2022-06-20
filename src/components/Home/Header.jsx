@@ -5,6 +5,8 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import CloseIcon from "@material-ui/icons/Close";
 import clsx from "clsx";
+import { Authenticate } from "../auth/Authenticate";
+
 import Drawer from "@material-ui/core/Drawer";
 import Toolbar from "@material-ui/core/Toolbar";
 import Accordion from "@material-ui/core/Accordion";
@@ -116,68 +118,35 @@ const useStyles2 = makeStyles((theme) => ({
 // }));
 
 const Header = () => {
-  const [showHeader, setshowHeader] = useState("/");
+  const [showHeader, setshowHeader] = useState(true);
 
   const currentPage = window.location.pathname;
 
   useEffect(() => {
-    //   if(Hides === '/login'){
-    //       document.getElementById('racing').style.display = 'none'
-    //     }
+    const urlArr = currentPage.split("/");
     if (currentPage === "/dashboard/") {
-      setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
-      });
+      setshowHeader(false);
     }
     if (currentPage === "/dashboard") {
-      setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
-      });
+      setshowHeader(false);
     }
     if (currentPage === "/dashboard/lending") {
-      setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
-      });
-    }
-    if (currentPage === "/dashboard/staking") {
-      setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
-      });
-    }
-    if (currentPage === "/dashboard/egr-balance") {
-      setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
-      });
+      setshowHeader(false);
     }
     if (currentPage === "/dashboard/swap") {
-      setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
-      });
+      setshowHeader(false);
     }
-    if (currentPage === "/dashboard/egr") {
-      setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
-      });
+    if (currentPage === "/dashboard/add") {
+      setshowHeader(false);
     }
     if (currentPage === "/dashboard/whitepaper") {
-      setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
-      });
+      setshowHeader(false);
     }
-    if (currentPage === "/dashboard/governance") {
-      setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
-      });
+    if (currentPage === "/vault/" + urlArr[2] + "/ENGN") {
+      setshowHeader(false);
     }
-    if (currentPage === "/dashboard/governance/details") {
-      setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
-      });
-    }
-    if (currentPage === "/dashboard/vault") {
-      setshowHeader(() => {
-        document.getElementById("Header").style.display = "none";
-      });
+    if (currentPage === "/deposit_vault/" + urlArr[2] + "/ENGN") {
+      setshowHeader(false);
     }
   });
 
@@ -335,40 +304,31 @@ const Header = () => {
   };
 
   return (
-    <div id="Header">
-      <section className="headerSection">
-        <div className="container-fluid header">
-          <div className="header-area">
-            <a href="/" className="egrLogo2Cont">
-              <img src="/img/egoras-logo.svg" alt="..." className="egr-logo2" />
-              <div className="on-mobile-navigators">
-                {/* <ul className="headerLinks show-header-links"> */}
-                {/* <a
-                    href="/dashboard"
-                    className={
-                      page1 === "/validator" ? "docs activeLink" : "about"
-                    }
-                    // onClick={clickMe2}
-                  >
-                    App
-                    {page1 === "/dashboard" ? (
-                      <span className="Line"></span>
-                    ) : null}
-                  </a>
-                </ul> */}
-              </div>
-            </a>
+    <>
+      {showHeader === true ? (
+        <div id="Header">
+          <section className="headerSection">
+            <div className="container header">
+              <div className="header-area">
+                <a href="/" className="egr_logo2_mobil">
+                  <img
+                    src="/img/egoras-logo.svg"
+                    alt="..."
+                    className="egr-logo2"
+                  />
+                  <div className="on-mobile-navigators"></div>
+                </a>
 
-            <ul className="headerLinks">
-              <a href="/">
-                {" "}
-                <img
-                  src="/img/egoras-logo.svg"
-                  alt="..."
-                  className="egr-logo"
-                />
-              </a>
-              {/* <a
+                <ul className="headerLinks">
+                  <a href="/">
+                    {" "}
+                    <img
+                      src="/img/egoras-logo.svg"
+                      alt="..."
+                      className="egr-logo"
+                    />
+                  </a>
+                  {/* <a
                 href="/dashboard"
                 className={page1 === "/" ? "docs activeLink" : "about"}
                 // onClick={clickMe1}
@@ -376,9 +336,10 @@ const Header = () => {
                 App <ExitToAppIcon className="exit-to-app" />
                 {page1 === "/" ? <span className="Line"></span> : null}
               </a> */}
-            </ul>
+                </ul>
+                <Authenticate isHome="false" />
 
-            {/* <ul className="headerLinks2">
+                {/* <ul className="headerLinks2">
             <a href="/documents" className="docs">
               Products
             </a>
@@ -388,19 +349,19 @@ const Header = () => {
               <ArrowDropDownIcon />
             </a>
           </ul> */}
-            {/* 
+                {/* 
             <ul className="headerButtons">
               <a href="/dashboard" className="connect">
                 {" "}
                 Launch App <ExitToAppIcon className="exit-to-app" />
               </a>
             </ul> */}
-            {/* <img
+                {/* <img
               src="/img/hamburger-open.svg"
               alt=""
               className="hamburgerOpen"
             /> */}
-            {/* <div className="onMobile">
+                {/* <div className="onMobile">
               <Toolbar className="hideNow">
                 <IconButton
                   color="inherit"
@@ -436,10 +397,12 @@ const Header = () => {
                 </List>
               </Drawer>
             </div> */}
-          </div>
+              </div>
+            </div>
+          </section>
         </div>
-      </section>
-    </div>
+      ) : null}
+    </>
   );
 };
 
