@@ -181,6 +181,7 @@ const OpenVaultPage = ({ match }) => {
             base: data.message.base,
             asset: data.message.asset,
             maxLoan: formatEther(data.message.maxLoan),
+            // maxLoan: formatEther(data.message.maxLoan),
           });
         }
       });

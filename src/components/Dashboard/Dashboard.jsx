@@ -33,7 +33,9 @@ function Dashboard() {
         <Switch>
           <Route exact path="/dashboard" component={DashBoardAnalytics} />
           <Route exact path="/dashboard/swap" component={DashBoardSwap} />
+          {/* <Route exact path="/dashboard/swap" component={DashBoardSwap} /> */}
           <Route exact path="/vault/:asset/:base" component={OpenVaultPage} />
+          {/*  */}
           {/* <Route
             exact
             path="/deposit_vault/:asset/:base"

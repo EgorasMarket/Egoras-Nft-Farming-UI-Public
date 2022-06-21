@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { TokenModal } from "../DashBoardPages/TokenModal/TokenModal";
+import LoadingIcons from 'react-loading-icons'
 import data from "../../static/MockData";
 // ================
 // ================
@@ -20,14 +21,24 @@ import {
   crossexchange,
   addLiquidity,
   withdrawable,
-  removeLiquidity
+  removeLiquidity,
 } from "../../../web3/index";
-import { parseEther, formatEther } from "@ethersproject/units";
+import { parseEther, formatEther, parseUnits } from "@ethersproject/units";
 import {
   Web3ReactProvider,
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+import {
+  faCheckCircle,
+  faCircleNotch,
+  faChevronRight,
+  faArrowRight,
+  faLock,
+  faWindowClose,
+  faWallet,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ConnectWallet } from "../../auth/ConnectWallet";
 import "../../../css/dashboardAddLiquidity.css";
 const DashboardAddLiquidtyPage = ({ match }) => {
@@ -39,8 +50,14 @@ const DashboardAddLiquidtyPage = ({ match }) => {
   const [tokenName, setTokenName] = useState(0);
   const [base, setBase] = useState("");
   const [tokenName2, setTokenName2] = useState(0);
-
+  const [view, setView] = useState("input");
+  const [message, setMessage] = useState("");
+  const [unlocking, setUnlocking] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [inputVal, setInputVal] = useState();
+  const [hash, setHash] = useState("");
+  const [unlockAmount, setUnlockAmount] = useState(0);
+ 
   // const [inputVal, setInputVal] = useState();
   const context = useWeb3React();
   const {
@@ -60,10 +77,38 @@ const DashboardAddLiquidtyPage = ({ match }) => {
   //   });
   // }, []);
   const [connected, setConnected] = useState(false);
+    const Continue = async (e) => {
+    setView("input");
+    setMessage("");
+  
+  };
+  const doUnluck = async (e) => {
+    setMessage("Transacting with blockchain, please wait...");
+    setView("loading");
+    setIsLoading(true);
+
+    let ret = await unluckToken(
+      data.assets[tokenName2 - 1].contract,
+      parseEther(unlockAmount.toString(), "wei").toString(),
+      library.getSigner()
+    );
+    if (ret.status == true) {
+      localStorage.setItem("unlocking", true);
+      localStorage.setItem("unlockingHash", ret.message);
+      setMessage("Unlocking please wait aleast 1/2 minutes");
+    } else {
+      if (ret.message.code == 4001) {
+        setMessage(ret.message.message);
+      }
+
+      setView("error");
+      setIsLoading(false);
+    }
+  };
   const onChange = (e) => {
     setInputVal(e.target.value);
   };
-  const TokenData = (e) => {
+  const TokenData = async (e) => {
     let currentTarget = e.currentTarget.id;
     console.log(currentTarget);
     setTokenName(currentTarget);
@@ -75,9 +120,71 @@ const DashboardAddLiquidtyPage = ({ match }) => {
     }
     setTokenBtn(true);
   };
-  const TokenData2 = (e) => {
+
+  const add = async (e) => {
+    setView("loading");
+    setMessage("Adding! Please wait....");
+    let theAmount = (parseFloat(inputVal) / parseFloat(defaultPrice)) + 1;
+   setUnlockAmount(theAmount);
+        let check = await checkAllowance(
+        data.assets[tokenName2 -1].contract,
+        account,
+        parseEther(theAmount.toString(), "wei").toString(),
+        library.getSigner()
+      );
+
+      if (check.status == true) {
+     
+    let ret = await addLiquidity(
+        data.assets[tokenName2 - 1].symbol+"-BNB",
+       
+        parseEther(inputVal.toString(), "wei").toString(),
+          library.getSigner()
+        );
+         if (ret.status == true) {
+          localStorage.setItem("unlocking", true);
+          localStorage.setItem("unlockingHash", ret.message.hash);
+          setMessage("Adding liquidity tokens please wait aleast 1/2 minutes");
+          setHash(ret.message.hash);
+        } else if (ret.status == false) {
+          if (ret.message.code < 0) {
+            setMessage(ret.message.data.message);
+          } else if (ret.message.code == 4001) {
+            setMessage(ret.message.message);
+          }
+          setView("error");
+          setIsLoading(false);
+        }
+      }else{
+        setUnlocking(true);
+        setView("unlock");
+        setIsLoading(false);
+      }
+  }
+  const TokenData2 = async (e) => {
+    
     let currentTarget = e.currentTarget.id;
-    console.log(currentTarget);
+   
+
+    setView("loading")
+    setMessage("Getting pair price...")
+    let priceData = await getPrice(data.assets[currentTarget - 1].symbol+"-BNB", library.getSigner());
+    console.log("priceData", priceData);
+    if(priceData.status == true){
+       let priceValue = formatEther(priceData.message)
+       setDefaultPrice(priceValue);
+       if(parseFloat(priceValue) > 0){
+         setView("input")
+       }else{
+         setMessage("Error, unable to get pair price")
+
+       setView("error")
+       }
+    }else{
+       setMessage("Error, unable to get pair price")
+
+       setView("error")
+    }
     setTokenName2(currentTarget);
 
     if (modal2 === true) {
@@ -108,161 +215,254 @@ const DashboardAddLiquidtyPage = ({ match }) => {
       background: "#000",
     },
   ];
+
+    setInterval(() => {
+    if (localStorage.getItem("unlocking") == "true") {
+      transactReceipt(localStorage.getItem("unlockingHash"), library).then(
+        function (env) {
+          // console.log("running Interval", env);
+          if (env.status == true && env.message !== null) {
+            if (env.message.confirmations > 2) {
+              setView("success");
+              setHash(localStorage.getItem("unlockingHash"));
+              setIsLoading(false);
+
+              localStorage.setItem("unlocking", false);
+            }
+          }
+        }
+      );
+    }
+  }, 7000);
   return (
+    <Fragment>
     <div className="other2">
       {/* Tokens Section Start */}
       <section>
         <div className="container">
           <div className="liquidity_area">
-            <div className="liquidity_cont">
-              <div className="liquidity_cont_head">
-                <div className="liquidity_cont_head_text">Add Liquidity</div>
-                <SettingsIcon className="settings_icon" />
-              </div>
-              <div className="liquidity_cont_body">
-                <div className="liquidity_cont_body_conts">
-                  <div className="tips_layer">
-                    <div className="tips_writeUp">
-                      <span className="tip_sub_head">Tip: </span> When you add
-                      liquidity, you will receive pool tokens representing your
-                      position. These tokens automatically earn fees
-                      proportional to your share of the pool, and can be
-                      redeemed at any time.
+            {view == "input" ? (
+              <div className="liquidity_cont">
+                <div className="liquidity_cont_head">
+                  <div className="liquidity_cont_head_text">Add Liquidity</div>
+                  <SettingsIcon className="settings_icon" />
+                </div>
+                <div className="liquidity_cont_body">
+                  <div className="liquidity_cont_body_conts">
+                    <div className="tips_layer">
+                      <div className="tips_writeUp">
+                        <span className="tip_sub_head">Tip: </span> When you add
+                        liquidity, you will receive pool tokens representing
+                        your position. These tokens automatically earn fees
+                        proportional to your share of the pool, and can be
+                        redeemed at any time.
+                      </div>
                     </div>
-                  </div>
-                  <div className="input_amnt_layer">
-                    <div className="amnt_input">
-                      <input
-                        type="number"
-                        name="number"
-                        id="number"
-                        onChange={onChange}
-                        placeholder="000"
-                        className="amnt_input_field"
-                        autocomplete="off"
-                        value={tokenBtn == true ? inputVal : null}
-                      />
-
-                      <button className="display_tokens_drop">
-                        <img
-                          src={data.base[0].img}
-                          alt=""
-                          className="asset_icon"
+                    <div className="input_amnt_layer">
+                      <div className="amnt_input">
+                        <input
+                          type="number"
+                          name="number"
+                          id="number"
+                          onChange={onChange}
+                          placeholder="000"
+                          className="amnt_input_field"
+                          autocomplete="off"
+                          value={tokenBtn == true ? inputVal : null}
                         />
-                        {data.base[0].symbol}
-                        <ArrowDropDownIcon className="drop_down_icon" />
-                      </button>
-                    </div>
-                  </div>
-                  {/* <div className="plus_icon_layer"> */}
-                  <AddIcon className="plus_icon_layer" />
 
-                  {/* </div> */}
-                  <div className="input_amnt_layer">
-                    <div className="amnt_input">
-                      <input
-                        type="number"
-                        name="number"
-                        id="number"
-                        placeholder="000"
-                        onChange={onChange}
-                        className="amnt_input_field"
-                        autocomplete="off"
-                        value={tokenBtn2 == true ? inputVal * 200 : null}
-                      />
-                      {tokenBtn2 == false ? (
-                        <button
-                          className="display_tokens_drop display_tokens_drop_not_select "
-                          onClick={toggleModal2}
-                        >
-                          Select a token{" "}
+                        <button className="display_tokens_drop">
+                          <img
+                            src={data.base[0].img}
+                            alt=""
+                            className="asset_icon"
+                          />
+                          {data.base[0].symbol}
                           <ArrowDropDownIcon className="drop_down_icon" />
                         </button>
-                      ) : (
-                        <>
-                          {data.assets.map((token) =>
-                            tokenName2 == token.id ? (
-                              <button
-                                className="display_tokens_drop"
-                                onClick={toggleModal2}
-                              >
-                                <img
-                                  src={token.img}
-                                  alt=""
-                                  className="asset_icon"
-                                />
-                                {token.symbol}
-                                <ArrowDropDownIcon className="drop_down_icon" />
-                              </button>
-                            ) : null
-                          )}
-                        </>
-                      )}
+                      </div>
                     </div>
-                  </div>
-                  <div className="connect_btn_div">
-                    <ConnectWallet
-                      isHome="false"
-                      connect_btn="connect_btn"
-                      connect_btn_class="connect_btn_div"
-                      onClick={() => setConnected(true)}
-                      className="connect_btn"
-                      btn_txt="Enter an amount"
-                    />
+                    {/* <div className="plus_icon_layer"> */}
+                    <AddIcon className="plus_icon_layer" />
+
+                    {/* </div> */}
+                    <div className="input_amnt_layer">
+                      <div className="amnt_input">
+                        <input
+                          type="number"
+                          name="number"
+                          id="number"
+                          placeholder="000"
+                          onChange={onChange}
+                          className="amnt_input_field"
+                          autocomplete="off"
+                          value={tokenBtn2 == true ? parseFloat(inputVal / defaultPrice) : null}
+                        />
+                        {tokenBtn2 == false ? (
+                          <button
+                            className="display_tokens_drop display_tokens_drop_not_select "
+                            onClick={toggleModal2}
+                          >
+                            Select a token{" "}
+                            <ArrowDropDownIcon className="drop_down_icon" />
+                          </button>
+                        ) : (
+                          <>
+                            {data.assets.map((token) =>
+                              tokenName2 == token.id ? (
+                                <button
+                                  className="display_tokens_drop"
+                                  onClick={toggleModal2}
+                                >
+                                  <img
+                                    src={token.img}
+                                    alt=""
+                                    className="asset_icon"
+                                  />
+                                  {token.symbol}
+                                  <ArrowDropDownIcon className="drop_down_icon" />
+                                </button>
+                              ) : null
+                            )}
+                          </>
+                        )}
+                      </div>
+                    </div>
+                    <div className="connect_btn_div">
+
+                         <button
+                        className="connect_btn_div"
+                        style={{ padding: "0.9em 4.5em" }}
+                        onClick={(e) => add(e)}
+                      >
+                        {isLoading ? (
+                          <FontAwesomeIcon icon={faCircleNotch} spin />
+                        ) : null}{" "}
+                      Add Liquidity
+                      </button>
+
+                   
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ) : null}
+
+
+             {view == "unlock" ? (
+             
+                    <div>
+                <div className="row">
+                  <h1 className="mb-2 text-center">
+                    <FontAwesomeIcon icon={faLock} />
+                  </h1>
+
+                  <small className="mb-2 text-center">
+                    Approve <b>Egoras</b> to spend {data.assets[tokenName2 -1].symbol} on your behalf.
+                  </small>
+                  <div
+                    className="transact-stat col-md-6 "
+                    style={{ margin: "auto" }}
+                  >
+                    <div className="w-100 ">
+                      <input
+                        type="text"
+                        name="stateAmountToGenerate"
+                        value={unlockAmount}
+                        readonly
+                        className="vault_input_vaulta"
+                      />
+                    </div>
+
+                    <div className="text-center">
+                      <button
+                        className="open_vault_input_btn mt-4 btn-block"
+                        style={{ padding: "0.9em 4.5em" }}
+                        onClick={(e) => doUnluck(e)}
+                      >
+                        {isLoading ? (
+                          <FontAwesomeIcon icon={faCircleNotch} spin />
+                        ) : null}{" "}
+                        Unlock {data.assets[tokenName2 -1].symbol}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <br />
+              </div>
+            ) : null}
+
+
+             {view == "loading" ? (
+                <div>
+                <p
+                  className="text-center loadingContainer"
+                  style={{ fontSize: "54px" }}
+                >
+                  <FontAwesomeIcon icon={faCircleNotch} spin />
+                </p>
+                <p className="text-center">{message}</p>
+              </div>
+                   
+            ) : null}
+
+
+             {view == "error" ? (
+                  <div className=" mt-4">
+                <h1 className="text-center text-danger">
+                  <FontAwesomeIcon icon={faWindowClose} /> <br />
+                  Error
+                </h1>
+                <p className="text-center">
+                  {message}
+                  <br />
+
+                  <br />
+                  <button
+                    className="open_vault_input_btn mt-4 btn-block btn-lg"
+                    onClick={(e) => Continue(e)}
+                  >
+                    Continue
+                  </button>
+                </p>
+              </div>
+                   
+            ) : null}
+
+
+ {view == "success" ? (
+              <div className="col-md-12 mt-4">
+                <h1 className="text-center text-success">
+                  <FontAwesomeIcon icon={faCheckCircle} /> <br />
+                  Success
+                </h1>
+                <p className="text-center">
+                  Transaction was successful.
+                  <br />
+                  <a
+                    className="btn btn-link text-success"
+                    href={"https://testnet.bscscan.com/tx/" + hash}
+                    target="_blank"
+                  >
+                    View on bscscan.com
+                  </a>
+                  <br />
+                  <button
+                    className="open_vault_input_btn mt-4 btn-block btn-lg"
+                    onClick={(e) => Continue(e)}
+                  >
+                    Continue
+                  </button>
+                </p>
+              </div>
+            ) : null}
+
           </div>
         </div>
       </section>
 
-      {/* {allDatas.map((data) => (
-        <>
-          {tokenData == data.transaction_hash ? (
-            <div className="trans_div">
-              <div className="tranPop_div">
-                <div className="tranPopHeading">
-                  Deposit Details{" "}
-                  <span className="tranPopOutButton">
-                    <CloseIcon
-                      className="closeTranPopDiv"
-                      onClick={closeTranPop}
-                    />
-                  </span>
-                </div>
-                <div className="tranPop_div_cont1">
-                  {" "}
-                  <div className="deposited_icon">
-                    <ArrowDownwardIcon className="arrow_down_deposit_icon" />
-                  </div>
-                  <span className="transPopData">Deposited</span>
-                </div>
-                <div className="tranPop_div_cont1">
-                  Type{" "}
-                  <span className="transPopData"> {data.transaction_type}</span>{" "}
-                </div>
-                <div className="tranPop_div_cont1">
-                  Amount{" "}
-                  <span className="transPopData">
-                    ₦{numberWithCommas(parseInt(data.amount).toFixed(2))}
-                  </span>{" "}
-                </div>
-                <div className="tranPop_div_cont1">
-                  Channel <span className="transPopData">{data.channel}</span>
-                </div>
-                <div className="tranPop_div_cont1">
-                  Status{" "}
-                  <span className="transPopData">
-                    <CircleIcon className="complete_circle" />
-                    Completed
-                  </span>
-                </div>
-              </div>
-            </div>
-          ) : null}
-        </>
-      ))} */}
+     
       {modal == true ? (
         <TokenModal
           toggleTokenModal={toggleModal}
@@ -284,6 +484,7 @@ const DashboardAddLiquidtyPage = ({ match }) => {
         />
       ) : null}
     </div>
+    </Fragment>
   );
 };
 
