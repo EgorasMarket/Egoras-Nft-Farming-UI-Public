@@ -39,7 +39,7 @@ const transactReceipt = async (hash, library) => {
 const getPrice = async (ticker, signer) => {
   try {
     const instance = contractOracleInstance(signer);
-    let result = await instance.price(ticker);
+    let result = await instance.price(ticker+"-XX");
     return {
       message: result,
       status: true,
@@ -58,7 +58,7 @@ const repay = async (id, amoumt, isDefault, signer) => {
   try {
     const instance = contractInstance(signer);
 
-    let result = await instance.repay(id, amoumt, isDefault);
+    let result = await instance.repay(id, amoumt, isDefault, false);
 
     return {
       message: result,
@@ -118,6 +118,7 @@ const draw = async (id, amount, signer) => {
 };
 
 const topup = async (isDefault, id, ticker, collateral, signer) => {
+  console.log(isDefault, id, ticker, collateral)
   try {
     const instance = contractInstance(signer);
     let result;
@@ -338,6 +339,7 @@ const addLiquidity = async (ticker, amoumt, signer) => {
   }
 };
 const exchangeDefault = async (ticker, amoumt, signer) => {
+  console.log(ticker, amoumt, "GET THE DEFAULT")
   try {
     const instance = contractEXInstance(signer);
 
