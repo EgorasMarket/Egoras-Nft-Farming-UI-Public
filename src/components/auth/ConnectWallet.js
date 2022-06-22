@@ -235,17 +235,21 @@ export const ConnectWallet = (props) => {
         <ModalFooter></ModalFooter>
       </Modal>
       <div className={props.connect_btn_class}>
-        {context.active ? (<button className={props.className}>{props.btn_txt}</button>) : (
-          <button
-            onClick={toggle}
-            className={
-              props.isHome == "false" ? props.connect_btn : props.connect_btn
-            }
-          >
-            {" "}
-            Connect Wallet{" "}
+        {/* {context.active ? (
+          <button className={props.className} onClick={props.addLiquidity}>
+            {props.btn_txt}
           </button>
-        )}
+        ) : ( */}
+        <button
+          onClick={toggle}
+          className={
+            props.isHome == "false" ? props.connect_btn : props.connect_btn
+          }
+        >
+          {" "}
+          Connect Wallet{" "}
+        </button>
+        {/* )} */}
       </div>
     </div>
   );
