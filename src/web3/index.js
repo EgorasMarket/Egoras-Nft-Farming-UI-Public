@@ -79,11 +79,11 @@ const open = async (isDefault, collateral, amoumt, ticker, signer) => {
     const instance = contractInstance(signer);
     let result;
     if (isDefault) {
-      result = await instance.openDefaultAsset(amoumt, ticker, {
+      result = await instance.openDefaultAsset(amoumt, ticker+"-L", {
         value: collateral,
       });
     } else {
-      result = await instance.open(collateral, amoumt, ticker);
+      result = await instance.open(collateral, amoumt, ticker+"-L");
     }
 
     return {
@@ -122,11 +122,11 @@ const topup = async (isDefault, id, ticker, collateral, signer) => {
     const instance = contractInstance(signer);
     let result;
     if (isDefault) {
-      result = await instance.topupDefaultAsset(id, ticker, {
+      result = await instance.topupDefaultAsset(id, ticker+"-L", {
         value: collateral,
       });
     } else {
-      result = await instance.topup(id, ticker, collateral);
+      result = await instance.topup(id, ticker+"-L", collateral);
     }
     return {
       message: result,
@@ -144,10 +144,10 @@ const getLatestLoan = async (user, ticker, signer) => {
   try {
     const instance = contractInstance(signer);
 
-    let result = await instance.___pendingLoan(user, ticker);
+    let result = await instance.___pendingLoan(user, ticker+"-L");
 
     if (result == true) {
-      let loan = await instance.__getLoanInfo(ticker, user);
+      let loan = await instance.__getLoanInfo(ticker+"-L", user);
       return {
         message: result,
         loanDetails: loan,
@@ -170,7 +170,7 @@ const getLatestLoan = async (user, ticker, signer) => {
 const getTickerInfo = async (ticker, signer) => {
   try {
     const instance = contractInstance(signer);
-    let result = await instance.__tickerInfo(ticker);
+    let result = await instance.__tickerInfo(ticker+"-L");
 
     return {
       message: result,
@@ -246,7 +246,7 @@ const exchange = async (ticker, amoumt, isBase, signer) => {
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.exchange(ticker, amoumt, isBase);
+    let result = await instance.exchange(ticker+"-X", amoumt, isBase);
 
     return {
       message: result,
@@ -265,7 +265,7 @@ const getDefault = async (ticker, amoumt, signer) => {
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.getDefault(ticker, amoumt);
+    let result = await instance.getDefault(ticker+"-X", amoumt);
 
     return {
       message: result,
@@ -284,7 +284,7 @@ const withdrawable = async (ticker, isDefault, _provider, signer) => {
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.withdrawable(ticker, isDefault, _provider);
+    let result = await instance.withdrawable(ticker+"-L", isDefault, _provider);
 
     return {
       message: result,
@@ -303,7 +303,7 @@ const removeLiquidity = async (ticker, signer) => {
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.removeLiquidity(ticker);
+    let result = await instance.removeLiquidity(ticker+"-X");
 
     return {
       message: result,
@@ -318,11 +318,12 @@ const removeLiquidity = async (ticker, signer) => {
   }
 };
 
-const addLiquidity = async (ticker, amount, signer) => {
+const addLiquidity = async (ticker, amoumt, signer) => {
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.addLiquidity(ticker, { value: amount });
+    console.log(amoumt, ticker)
+    let result = await instance.addLiquidity(ticker+"-X",{ value: amoumt });
 
     return {
       message: result,
@@ -340,7 +341,7 @@ const exchangeDefault = async (ticker, amoumt, signer) => {
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.exchangeDefault(ticker, { value: amoumt });
+    let result = await instance.exchangeDefault(ticker+"-X", { value: amoumt });
 
     return {
       message: result,
@@ -360,7 +361,7 @@ const crossexchange = async (from, to, amoumt, signer) => {
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.crossExchange(from, to, amoumt, { value: 0 });
+    let result = await instance.crossExchange(from+"-X", to+"-X", amoumt, { value: 0 });
 
     return {
       message: result,

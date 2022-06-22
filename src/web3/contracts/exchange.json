@@ -50,6 +50,80 @@
         "inputs": [
           {
             "indexed": false,
+            "internalType": "uint256",
+            "name": "_due",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "bool",
+            "name": "isDefault",
+            "type": "bool"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "userLiquidity",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "user",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "timestamp",
+            "type": "uint256"
+          }
+        ],
+        "name": "LiquidityRemoved",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "_provider",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "due",
+            "type": "uint256"
+          },
+          {
+            "indexed": false,
+            "internalType": "address",
+            "name": "_initiator",
+            "type": "address"
+          },
+          {
+            "indexed": false,
+            "internalType": "string",
+            "name": "_ticker",
+            "type": "string"
+          },
+          {
+            "indexed": false,
+            "internalType": "uint256",
+            "name": "timestamp",
+            "type": "uint256"
+          }
+        ],
+        "name": "Rewarded",
+        "type": "event"
+      },
+      {
+        "anonymous": false,
+        "inputs": [
+          {
+            "indexed": false,
             "internalType": "address",
             "name": "user",
             "type": "address"
@@ -125,30 +199,6 @@
           }
         ],
         "stateMutability": "view",
-        "type": "function",
-        "constant": true
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "string",
-            "name": "_ticker",
-            "type": "string"
-          },
-          {
-            "internalType": "uint256",
-            "name": "_amount",
-            "type": "uint256"
-          },
-          {
-            "internalType": "bool",
-            "name": "_isBase",
-            "type": "bool"
-          }
-        ],
-        "name": "exchange",
-        "outputs": [],
-        "stateMutability": "nonpayable",
         "type": "function"
       },
       {
@@ -180,8 +230,7 @@
         "name": "exchangeDefault",
         "outputs": [],
         "stateMutability": "payable",
-        "type": "function",
-        "payable": true
+        "type": "function"
       },
       {
         "inputs": [
@@ -204,56 +253,20 @@
         "name": "crossExchange",
         "outputs": [],
         "stateMutability": "payable",
-        "type": "function",
-        "payable": true
+        "type": "function"
       },
       {
         "inputs": [
           {
             "internalType": "string",
-            "name": "_from",
+            "name": "_ticker",
             "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "_to",
-            "type": "string"
-          },
-          {
-            "internalType": "uint256",
-            "name": "_amount",
-            "type": "uint256"
           }
         ],
-        "name": "crossExchange2",
+        "name": "addLiquidity",
         "outputs": [],
         "stateMutability": "payable",
-        "type": "function",
-        "payable": true
-      },
-      {
-        "inputs": [
-          {
-            "internalType": "string",
-            "name": "_from",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "_to",
-            "type": "string"
-          },
-          {
-            "internalType": "uint256",
-            "name": "_amount",
-            "type": "uint256"
-          }
-        ],
-        "name": "crossExchange3",
-        "outputs": [],
-        "stateMutability": "payable",
-        "type": "function",
-        "payable": true
+        "type": "function"
       },
       {
         "inputs": [
@@ -263,12 +276,36 @@
             "type": "string"
           },
           {
+            "internalType": "bool",
+            "name": "isDefault",
+            "type": "bool"
+          },
+          {
+            "internalType": "address",
+            "name": "_provider",
+            "type": "address"
+          }
+        ],
+        "name": "withdrawable",
+        "outputs": [
+          {
             "internalType": "uint256",
-            "name": "_amount",
+            "name": "",
             "type": "uint256"
           }
         ],
-        "name": "addLiquidity",
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "_ticker",
+            "type": "string"
+          }
+        ],
+        "name": "removeLiquidity",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -281,11 +318,85 @@
             "type": "string"
           }
         ],
-        "name": "addDefaultLiquidity",
+        "name": "shareSingleFees",
         "outputs": [],
-        "stateMutability": "payable",
-        "type": "function",
-        "payable": true
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "string[]",
+            "name": "_tickers",
+            "type": "string[]"
+          }
+        ],
+        "name": "shareMultipleFees",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_coinAddress",
+            "type": "address"
+          },
+          {
+            "internalType": "address",
+            "name": "_feeCollector",
+            "type": "address"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_fee",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_sysCut",
+            "type": "uint256"
+          },
+          {
+            "internalType": "string",
+            "name": "_feePriceTicker",
+            "type": "string"
+          }
+        ],
+        "name": "initVars",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_provider",
+            "type": "address"
+          },
+          {
+            "internalType": "string",
+            "name": "_ticker",
+            "type": "string"
+          }
+        ],
+        "name": "userLiquidityBalances",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
       }
     ]
 }

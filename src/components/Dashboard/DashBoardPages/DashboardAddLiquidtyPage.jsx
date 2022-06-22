@@ -23,7 +23,7 @@ import {
   withdrawable,
   removeLiquidity,
 } from "../../../web3/index";
-import { parseEther, formatEther } from "@ethersproject/units";
+import { parseEther, formatEther, parseUnits } from "@ethersproject/units";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -137,7 +137,8 @@ const DashboardAddLiquidtyPage = ({ match }) => {
      
     let ret = await addLiquidity(
         data.assets[tokenName2 - 1].symbol+"-BNB",
-          parseEther(inputVal, "wei").toString(),
+       
+        parseEther(inputVal.toString(), "wei").toString(),
           library.getSigner()
         );
          if (ret.status == true) {
