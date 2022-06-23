@@ -24,17 +24,9 @@ const DashBoardAnalytics = () => {
 
   const assets = [
     {
-      img: "/img/bnb-icon.svg",
-      name: "Binance",
-      type: "BNB",
-      eusd_Avail: "6.93M",
-      stable: "1.00%",
-      ratio: "175%",
-    },
-    {
-      img: "/egoras-favicon.svg",
-      name: "Egoras",
-      type: "EGR",
+      img: "/img/eusd-icon-dollar.svg",
+      name: "Egoras Naira",
+      type: "Engn",
       eusd_Avail: "100M",
       stable: "0.50%",
       ratio: "170%",
@@ -46,14 +38,6 @@ const DashBoardAnalytics = () => {
       eusd_Avail: "90M",
       stable: "0.50%",
       ratio: "120%",
-    },
-    {
-      img: "/img/kodi.png",
-      name: "Kodi",
-      type: "KODI",
-      eusd_Avail: "6.93M",
-      stable: "1.00%",
-      ratio: "165%",
     },
   ];
   const handleSearchChange = (event) => {

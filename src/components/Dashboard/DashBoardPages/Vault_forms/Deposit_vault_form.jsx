@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import NumberFormat from "react-number-format";
-
+import { numberWithCommas } from "../../../../static";
 import { Link } from "react-router-dom";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import InfoIcon from "@mui/icons-material/Info";
@@ -173,7 +173,7 @@ const Deposit_vault_form = ({ match }) => {
                         }
                       >
                         <div className="price_value_change_value">
-                          ${decimalPlaceB}
+                          ${parseInt(decimalPlaceB).toFixed(4)}
                         </div>
                       </div>
                     </div>

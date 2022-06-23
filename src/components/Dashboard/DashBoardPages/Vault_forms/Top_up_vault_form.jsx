@@ -199,7 +199,7 @@ const Top_up_vault_form = ({ match }) => {
                         }
                       >
                         <div className="price_value_change_value">
-                          {decimalPlaceB}%
+                          {parseInt(decimalPlaceB).toFixed(4)}%
                         </div>
                       </div>
                     </div>

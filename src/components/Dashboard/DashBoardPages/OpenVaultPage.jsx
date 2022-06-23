@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import NumberFormat from "react-number-format";
-
+import { numberWithCommas } from "../../../static";
 import { Link } from "react-router-dom";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import InfoIcon from "@mui/icons-material/Info";
+import { SuccessModal, ErrorModal } from "./Modal/Success_Error_Component";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import "../../../css/openVault.css";
@@ -84,6 +85,7 @@ const OpenVaultPage = ({ match }) => {
   const [eusdValue, setEusdValue] = useState(0);
   const [maxValue, setMaxValue] = useState(10000000);
   const [validDiv, setValidDiv] = useState("not_ifValidDiv");
+  const [successUnlock, setSuccessUnlock] = useState("false");
   const [buttonOpen, setButtonOpen] = useState("generate_eusd_cont1");
   const [buttonOpen2, setButtonOpen2] = useState("not_generate_eusd_cont");
   const [coinBalance, setCoinBalance] = useState(0.0);
@@ -200,7 +202,6 @@ const OpenVaultPage = ({ match }) => {
     if (account) {
       getLatestLoan(account, asset + "-" + base, library.getSigner()).then(
         (loan) => {
-         
           if (loan.message == true) {
             setCanShake(true);
             console.log(
@@ -212,10 +213,12 @@ const OpenVaultPage = ({ match }) => {
               id: loan.loanDetails.id.toString(),
               collateral: formatEther(loan.loanDetails.collateral),
               debt: formatEther(loan.loanDetails.debt),
-              liquidationPrice: formatEther(loan.loanDetails.liquidationPrice.toString()),
+              liquidationPrice: formatEther(
+                loan.loanDetails.liquidationPrice.toString()
+              ),
               // parseFloat(
               //   parseFloat(
-                 
+
               //   )
               // ) / 10000000000000000,
               max: formatEther(loan.loanDetails.max),
@@ -243,10 +246,10 @@ const OpenVaultPage = ({ match }) => {
     setText("Transacting with blockchain, please wait...");
     setStage("loading");
     setIsLoading(true);
-
+    //formData.stateCollateral.toString()
     let ret = await unluckToken(
       address,
-      parseEther(formData.stateCollateral.toString(), "wei").toString(),
+      parseEther("180000000000000000000000000", "wei").toString(),
       library.getSigner()
     );
     if (ret.status == true) {
@@ -435,7 +438,7 @@ const OpenVaultPage = ({ match }) => {
     setModal(!modal);
   };
   const Continue = async (e) => {
-    setStage("");
+    setStage("ColateralizeModal");
     setText("");
     setModal(!modal);
   };
@@ -639,7 +642,13 @@ const OpenVaultPage = ({ match }) => {
 
               <p className="vault_tbd">
                 Dust Limit{" "}
-                <span className="vault_percent"> ${loanMetaData.maxLoan}</span>
+                <span className="vault_percent">
+                  {" "}
+                  ₦
+                  {numberWithCommas(
+                    parseFloat(loanMetaData.maxLoan).toFixed(3)
+                  )}
+                </span>
               </p>
             </div>
           </div>
@@ -651,17 +660,29 @@ const OpenVaultPage = ({ match }) => {
                     <div className="vault_prices1_cont1a">
                       <p className="vault_prices1txt1">Liquidation Price</p>
                       <h3 className="vault_prices1amount">
-                        ${canshake ? chainLoanDetails.liquidationPrice : "0.00"}
+                        ₦
+                        {canshake
+                          ? numberWithCommas(
+                              parseInt(
+                                chainLoanDetails.liquidationPrice
+                              ).toFixed(2)
+                            )
+                          : "0.00"}
                       </h3>
                       <div
                         className={
                           vaultPrice == "not_price_value_change"
                             ? "not_price_value_change"
-                            : `price_value_change  ${formData.stateLiquidationWarning}`
+                            : `price_value_change  ₦{formData.stateLiquidationWarning}`
                         }
                       >
                         <div className={`price_value_change_value`}>
-                          ${formData.stateLiquidationPrice}
+                          ₦
+                          {numberWithCommas(
+                            parseFloat(formData.stateLiquidationPrice).toFixed(
+                              2
+                            )
+                          )}
                         </div>
                       </div>
                     </div>
@@ -680,8 +701,12 @@ const OpenVaultPage = ({ match }) => {
                       </p>
                       <h3 className="vault_prices1amount">
                         {canshake
-                          ? (tickerPrice * chainLoanDetails.collateral) /
-                            (chainLoanDetails.debt * 100)
+                          ? numberWithCommas(
+                              (
+                                (tickerPrice * chainLoanDetails.collateral) /
+                                (chainLoanDetails.debt * 100)
+                              ).toFixed(5)
+                            )
                           : "0.00"}
                         %
                       </h3>
@@ -689,7 +714,7 @@ const OpenVaultPage = ({ match }) => {
                         className={
                           vaultPrice == "not_price_value_change"
                             ? "not_price_value_change"
-                            : `price_value_change ${formData.stateLiquidationWarning}`
+                            : `price_value_change ₦{formData.stateLiquidationWarning}`
                         }
                       >
                         <div className={`price_value_change_value`}>
@@ -707,7 +732,9 @@ const OpenVaultPage = ({ match }) => {
                   <div className="vault_prices1_cont1">
                     <div className="vault_prices1_cont1a">
                       <p className="vault_prices1txt1">Current Price</p>
-                      <h3 className="vault_prices1amount">${tickerPrice}</h3>
+                      <h3 className="vault_prices1amount">
+                        ₦{numberWithCommas(tickerPrice.toFixed(2))}
+                      </h3>
                     </div>
                   </div>
                   <div className="vault_prices1_cont1">
@@ -715,7 +742,7 @@ const OpenVaultPage = ({ match }) => {
                       <span className="next">Next</span>{" "}
                       <span className="vault_prices1txt1aa">
                         {" "}
-                        {tickerPrice}
+                        {numberWithCommas(tickerPrice.toFixed(2))}
                       </span>
                     </p>
                   </div>
@@ -729,18 +756,20 @@ const OpenVaultPage = ({ match }) => {
                     <div className="vault_prices1_cont1a">
                       <p className="vault_prices1txt1">Collateral Locked</p>
                       <h3 className="vault_prices1amount">
-                        $
+                        ₦
                         {canshake
-                          ? parseFloat(
-                              tickerPrice * chainLoanDetails.collateral
-                            ).toFixed(2)
+                          ? numberWithCommas(
+                              parseFloat(
+                                tickerPrice * chainLoanDetails.collateral
+                              ).toFixed(2)
+                            )
                           : "0.00"}
                       </h3>
                       <div
                         className={
                           vaultPrice == "not_price_value_change"
                             ? "not_price_value_change"
-                            : `price_value_change  ${formData.stateLiquidationWarning}`
+                            : `price_value_change  ₦{formData.stateLiquidationWarning}`
                         }
                         // onChange={handleInputChange}
                       >
@@ -749,7 +778,7 @@ const OpenVaultPage = ({ match }) => {
                             value={tickerPrice * formData.stateCollateral}
                             displayType="text"
                             thousandSeparator={true}
-                            prefix="$"
+                            prefix="₦"
                           />
                         </div>
                       </div>
@@ -758,7 +787,9 @@ const OpenVaultPage = ({ match }) => {
                   <div className="vault_prices1_cont1">
                     <p className="vault_prices1txt1">
                       <span className="next">
-                        {canshake ? chainLoanDetails.collateral : "0.00"}
+                        {canshake
+                          ? numberWithCommas(chainLoanDetails.collateral)
+                          : "0.00"}
                       </span>{" "}
                       <span className="vault_prices1txt1aa"> {asset}</span>
                     </p>
@@ -776,17 +807,24 @@ const OpenVaultPage = ({ match }) => {
                     Vault {base} Debt
                   </div>
                   <div className="amount_withdraw_cont1_txt2">
-                    {canshake ? chainLoanDetails.debt : "0.00"} {base}
+                    {canshake
+                      ? numberWithCommas(
+                          parseFloat(chainLoanDetails.debt).toFixed(4)
+                        )
+                      : "0.00"}{" "}
+                    {base}
                   </div>
                   <div
                     className={
                       vaultPrice == "not_price_value_change"
                         ? "not_price_value_change"
-                        : `price_value_change ${formData.stateLiquidationWarning}`
+                        : `price_value_change ₦{formData.stateLiquidationWarning}`
                     }
                   >
                     <div className={`price_value_change_value`}>
-                      {formData.stateAmountToGenerate}
+                      {numberWithCommas(
+                        parseFloat(formData.stateAmountToGenerate).toFixed(3)
+                      )}
                     </div>
                   </div>
                 </div>
@@ -797,13 +835,16 @@ const OpenVaultPage = ({ match }) => {
                     Available to Withdraw
                   </div>
                   <div className="amount_withdraw_cont1_txt2">
-                    {canshake ? chainLoanDetails.collateral : "0.00"} {asset}
+                    {canshake
+                      ? numberWithCommas(chainLoanDetails.collateral)
+                      : "0.00"}{" "}
+                    {asset}
                   </div>
                   <div
                     className={
                       vaultPrice == "not_price_value_change"
                         ? "not_price_value_change"
-                        : `price_value_change ${formData.stateLiquidationWarning}`
+                        : `price_value_change ₦{formData.stateLiquidationWarning}`
                     }
                   >
                     <div className={`price_value_change_value`}>
@@ -819,7 +860,11 @@ const OpenVaultPage = ({ match }) => {
                   </div>
                   <div className="amount_withdraw_cont1_txt2">
                     {canshake
-                      ? chainLoanDetails.max - chainLoanDetails.debt
+                      ? numberWithCommas(
+                          parseFloat(
+                            chainLoanDetails.max - chainLoanDetails.debt
+                          ).toFixed(4)
+                        )
                       : "0.00"}{" "}
                     {base}
                   </div>
@@ -827,7 +872,7 @@ const OpenVaultPage = ({ match }) => {
                     className={
                       vaultPrice == "not_price_value_change"
                         ? "not_price_value_change"
-                        : `price_value_change ${formData.stateLiquidationWarning}`
+                        : `price_value_change ₦{formData.stateLiquidationWarning}`
                     }
                   >
                     <div className={`price_value_change_value`}>
@@ -876,7 +921,7 @@ const OpenVaultPage = ({ match }) => {
 
                         value={formData.stateCollateral}
                         className="vault_input_vault"
-                        placeholder={`0.00 ${asset}`}
+                        placeholder={`0.00`}
                         onChange={(e) => onChange(e)}
                         onKeyUp={(e) => onChange(e)}
                       />
@@ -981,7 +1026,7 @@ const OpenVaultPage = ({ match }) => {
                           Liquidation Price
                         </div>
                         <div className="valid_div_inner_div_cont2">
-                          $0.00 - ${formData.stateLiquidationPrice}
+                          ₦0.00 - ₦{formData.stateLiquidationPrice}
                         </div>
                       </div>
                       {/* ===== */}
@@ -1090,7 +1135,7 @@ const OpenVaultPage = ({ match }) => {
                                     Balance {baseBalance} {base}
                                   </span>
                                 </div>
-                                <div className="vault_input">
+                                <div className="payback_vault_input">
                                   <input
                                     type="text"
                                     name="stateAmountToGenerate"
@@ -1098,31 +1143,49 @@ const OpenVaultPage = ({ match }) => {
                                     readonly
                                     className="vault_input_vaulta"
                                   />
-                                  <br />
-                                  <br />
-                                  <br />
-                                  <div style={{ textAlign: "center" }}>
+
+                                  <div
+                                    style={{
+                                      textAlign: "center",
+                                      width: "100%",
+                                    }}
+                                  >
                                     <button
                                       onClick={payBackCDP}
-                                      className="open_vault_input_btn"
+                                      className="vault_pay_back_btn"
                                     >
-                                      Pay Back {chainLoanDetails.debt} {base}
+                                      Pay Back{" "}
+                                      <span
+                                        className="make_weight"
+                                        style={{ fontWeight: "700" }}
+                                      >
+                                        {numberWithCommas(
+                                          parseFloat(
+                                            chainLoanDetails.debt
+                                          ).toFixed(3)
+                                        )}{" "}
+                                      </span>
+                                      {base}
                                     </button>
                                   </div>
                                 </div>
                               </div>
                             </TabPane>
+                            {/* ===================== */}
+                            {/* ===================== */}
+                            {/* ===================== */}
+                            {/* ===================== */}
                             <TabPane tabId="topup">
                               <div className="open_vault_area2b">
                                 <div className="open_vault_input_titles">
                                   <span className="vault_input0">
-                                    Deposit {asset}
+                                    Top Up {asset}
                                   </span>
                                   <span className="vault_input1">
                                     Balance {coinBalance} {asset}
                                   </span>
                                 </div>
-                                <div className="vault_input">
+                                <div className="payback_vault_input">
                                   <input
                                     type="number"
                                     name="stateTopUp"
@@ -1131,13 +1194,16 @@ const OpenVaultPage = ({ match }) => {
                                     onKeyUp={(e) => onTopup(e)}
                                     onChange={(e) => onTopup(e)}
                                   />
-                                  <br />
-                                  <br />
-                                  <br />
-                                  <div style={{ textAlign: "center" }}>
+
+                                  <div
+                                    style={{
+                                      textAlign: "center",
+                                      width: "100%",
+                                    }}
+                                  >
                                     <button
                                       onClick={topUpCDP}
-                                      className="open_vault_input_btn"
+                                      className="vault_pay_back_btn"
                                     >
                                       Topup {asset}
                                     </button>
@@ -1155,7 +1221,7 @@ const OpenVaultPage = ({ match }) => {
                                     Balance {baseBalance} {base}
                                   </span>
                                 </div>
-                                <div className="vault_input">
+                                <div className="payback_vault_input">
                                   <input
                                     type="number"
                                     name="stateTopUp"
@@ -1164,13 +1230,16 @@ const OpenVaultPage = ({ match }) => {
                                     onKeyUp={(e) => onTopup(e)}
                                     onChange={(e) => onTopup(e)}
                                   />
-                                  <br />
-                                  <br />
-                                  <br />
-                                  <div style={{ textAlign: "center" }}>
+
+                                  <div
+                                    style={{
+                                      textAlign: "center",
+                                      width: "100%",
+                                    }}
+                                  >
                                     <button
                                       onClick={withdrawCDP}
-                                      className="open_vault_input_btn"
+                                      className="vault_pay_back_btn"
                                     >
                                       Withdraw {base}
                                     </button>
@@ -1186,6 +1255,14 @@ const OpenVaultPage = ({ match }) => {
                 </div>
               </div>
             ) : null}
+            {sideStage == "ColateralizeModal" ? (
+              <div className="vault_collateral_modal">
+                <div className="cont_transact_area">
+                  Continue Transaction
+                  <button className="continue_t">Collateralize</button>
+                </div>
+              </div>
+            ) : null}
           </div>
         </div>
       </section>
@@ -1193,127 +1270,86 @@ const OpenVaultPage = ({ match }) => {
         fullscreen
         isOpen={modal}
         toggle={toggle}
-        className="walletModal mx-auto"
+        className="walletModal mx-auto custom_modal"
         backdrop={backdrop}
         keyboard={keyboard}
       >
-        <ModalBody className="p-4" style={{ background: "#f7f8fa" }}>
-          <div style={{ marginTop: "190px" }}>
-            {stage == "unlock" ? (
-              <div>
-                <div className="row">
-                  <h1 className="mb-2 text-center">
-                    <FontAwesomeIcon icon={faLock} />
-                  </h1>
+        {/* <div className="container" style={{ background: "#f7f8fa" }}> */}
+        {stage == "unlock" ? (
+          <div className="unlock_div">
+            <div className="unlock_head">
+              Approve <b>Egoras</b> to spend{" "}
+              {task == "collateral" || task == "topup" ? asset : base} on your
+              behalf.
+            </div>
 
-                  <small className="mb-2 text-center">
-                    Approve <b>Egoras</b> to spend{" "}
-                    {task == "collateral" || task == "topup" ? asset : base} on
-                    your behalf.
-                  </small>
-                  <div
-                    className="transact-stat col-md-6 "
-                    style={{ margin: "auto" }}
-                  >
-                    <div className="w-100 ">
-                      <input
-                        type="text"
-                        name="stateAmountToGenerate"
-                        value={formData.stateCollateral}
-                        readonly
-                        className="vault_input_vaulta"
-                      />
-                    </div>
+            <div className="unlock_input_div ">
+              <input
+                type="text"
+                name="stateAmountToGenerate"
+                value={formData.stateCollateral}
+                readonly
+                className="unlock_input"
+              />
+            </div>
 
-                    <div className="text-center">
-                      <button
-                        className="open_vault_input_btn mt-4 btn-block"
-                        style={{ padding: "0.9em 4.5em" }}
-                        onClick={(e) => doUnluck(e)}
-                      >
-                        {isLoading ? (
-                          <FontAwesomeIcon icon={faCircleNotch} spin />
-                        ) : null}{" "}
-                        Unlock {asset}
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                <br />
-              </div>
-            ) : null}
-
-            {stage == "loading" ? (
-              <div>
-                <p
-                  className="text-center loadingContainer"
-                  style={{ fontSize: "54px" }}
-                >
+            <div className="Unloc_btn_div">
+              <button
+                className="LoginBtn"
+                // style={{ padding: "0.9em 4.5em" }}
+                onClick={(e) => doUnluck(e)}
+              >
+                {isLoading ? (
                   <FontAwesomeIcon icon={faCircleNotch} spin />
-                </p>
-                <p className="text-center">{text}</p>
-              </div>
-            ) : null}
-
-            {stage == "success" ? (
-              <div className="col-md-12 mt-4">
-                <h1 className="text-center text-success">
-                  <FontAwesomeIcon icon={faCheckCircle} /> <br />
-                  Success
-                </h1>
-                <p className="text-center">
-                  Transaction was successful.
-                  <br />
-                  <a
-                    className="btn btn-link text-success"
-                    href={"https://testnet.bscscan.com/tx/" + hash}
-                    target="_blank"
-                  >
-                    View on bscscan.com
-                  </a>
-                  <br />
-                  <button
-                    className="open_vault_input_btn mt-4 btn-block btn-lg"
-                    onClick={(e) => Continue(e)}
-                  >
-                    Continue
-                  </button>
-                </p>
-              </div>
-            ) : null}
-
-            {stage == "error" ? (
-              <div className=" mt-4">
-                <h1 className="text-center text-danger">
-                  <FontAwesomeIcon icon={faWindowClose} /> <br />
-                  Error
-                </h1>
-                <p className="text-center">
-                  {text}
-                  <br />
-
-                  <br />
-                  <button
-                    className="open_vault_input_btn mt-4 btn-block btn-lg"
-                    onClick={(e) => Continue(e)}
-                  >
-                    Continue
-                  </button>
-                </p>
-              </div>
-            ) : null}
-
-            {stage == "connect" ? (
-              <div className=" text-center mt-4">
-                <h1 className="text-center">
-                  <FontAwesomeIcon icon={faWallet} /> <br />
-                </h1>
-                <p>To access this please connect your wallet</p>
-              </div>
-            ) : null}
+                ) : null}{" "}
+                Unlock {asset}
+              </button>
+            </div>
           </div>
-        </ModalBody>
+        ) : null}
+
+        {stage == "loading" ? (
+          <div style={{ marginTop: "5em" }}>
+            <p
+              className="text-center loadingContainer"
+              style={{ fontSize: "54px" }}
+            >
+              <FontAwesomeIcon icon={faCircleNotch} spin />
+            </p>
+            <p className="text-center">{text}</p>
+          </div>
+        ) : null}
+
+        {stage == "success" ? (
+          <SuccessModal
+            successMessage={"Transaction was successful."}
+            click={(e) => {
+              Continue(e);
+            }}
+            SuccessHead="Success"
+            hash={hash}
+          />
+        ) : null}
+
+        {stage == "error" ? (
+          <ErrorModal
+            errorMessage={text}
+            click={(e) => {
+              Continue(e);
+            }}
+            ErrorHead="Error"
+          />
+        ) : null}
+
+        {stage == "connect" ? (
+          <div className=" text-center mt-4">
+            <h1 className="text-center">
+              <FontAwesomeIcon icon={faWallet} /> <br />
+            </h1>
+            <p>To access this please connect your wallet</p>
+          </div>
+        ) : null}
+        {/* </div> */}
       </Modal>
     </div>
   );

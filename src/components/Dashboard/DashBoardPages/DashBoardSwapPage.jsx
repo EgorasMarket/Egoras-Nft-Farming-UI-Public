@@ -52,15 +52,11 @@ const sweet = [{ img: "/img/bnb-icon.svg", bar: "BNB", bar1: "Binance" }];
 const sweet1 = [{ img: "/img/bnb-icon.svg", bar: "BNB", bar1: "Binance" }];
 const sweet101 = [
   { imgs: "/img/bnb-icon.svg", nase: "BNB" },
-  { imgs: "/egoras-favicon.svg", nase: "EGR" },
   { imgs: "/img/egc-icon.svg", nase: "EGC" },
-  { imgs: "/img/kodi.png", nase: "KODI" },
 ];
 const sweet102 = [
   { imgs: "/img/bnb-icon.svg", nase: "BNB" },
-  { imgs: "/egoras-favicon.svg", nase: "EGR" },
   { imgs: "/img/egc-icon.svg", nase: "EGC" },
-  { imgs: "/img/kodi.png", nase: "KODI" },
 ];
 
 // When the user clicks anywhere outside of the modal, close it
@@ -677,90 +673,6 @@ const File = () => {
                   Swap
                 </button>
               </form>
-            </div>
-          </div>
-
-          <div id="COMJ">
-            <div className="Enable2 deep" onClick={Just}>
-              Advanced <ArrowDropDownIcon />
-            </div>
-          </div>
-          <div id="COMES">
-            <div className="Enable2 deep" onClick={Just2}>
-              Advanced <ArrowDropDownIcon />
-            </div>
-          </div>
-
-          <div className="Enable3" id="water">
-            <div className="Enable4">Limit additional price slippage</div>
-            <div className="Enable5">
-              <div
-                className={speed1 === "two" ? "ada ada1" : "ada"}
-                onClick={send1}
-                id="two"
-              >
-                0.1%
-              </div>
-              <div
-                className={speed1 === "two2" ? "ada ada1" : "ada"}
-                onClick={send1}
-                id="two2"
-              >
-                0.2%
-              </div>
-              <div
-                className={speed1 === "two3" ? "ada ada1" : "ada"}
-                onClick={send1}
-                id="two3"
-              >
-                0.5%
-              </div>
-              <div
-                className={speed1 === "two4" ? " ada ada1" : "ada"}
-                onClick={send1}
-                id="two4"
-              >
-                1%
-              </div>
-              <div
-                className={speed1 === "two5" ? " ada ada1" : "ada"}
-                onClick={send1}
-                id="two5"
-              >
-                3%
-              </div>
-              <div
-                className={speed1 === "two6" ? " ada ada1" : "ada"}
-                onClick={send1}
-                id="two6"
-              >
-                5%
-              </div>
-            </div>
-            <div className="rece">Minimum received:... DF</div>
-            <div className="Gas">Gas Fee (GWEI)</div>
-            <div className="Gas1">
-              <div
-                className={speed === "paper" ? "Gas2  Gas3" : "Gas2"}
-                onClick={send}
-                id="paper"
-              >
-                121 <span>Standard</span>
-              </div>{" "}
-              <div
-                className={speed === "paper1" ? " Gas2 Gas3" : "Gas2"}
-                onClick={send}
-                id="paper1"
-              >
-                134 <span>Fast</span>{" "}
-              </div>{" "}
-              <div
-                className={speed === "paper2" ? " Gas2 Gas3" : "Gas2"}
-                onClick={send}
-                id="paper2"
-              >
-                148 <span>instant</span>
-              </div>
             </div>
           </div>
         </div>
