@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import NumberFormat from "react-number-format";
-
+import { numberWithCommas } from "../../../static";
 import { Link } from "react-router-dom";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import InfoIcon from "@mui/icons-material/Info";
@@ -200,7 +200,6 @@ const OpenVaultPage = ({ match }) => {
     if (account) {
       getLatestLoan(account, asset + "-" + base, library.getSigner()).then(
         (loan) => {
-         
           if (loan.message == true) {
             setCanShake(true);
             console.log(
@@ -212,10 +211,12 @@ const OpenVaultPage = ({ match }) => {
               id: loan.loanDetails.id.toString(),
               collateral: formatEther(loan.loanDetails.collateral),
               debt: formatEther(loan.loanDetails.debt),
-              liquidationPrice: formatEther(loan.loanDetails.liquidationPrice.toString()),
+              liquidationPrice: formatEther(
+                loan.loanDetails.liquidationPrice.toString()
+              ),
               // parseFloat(
               //   parseFloat(
-                 
+
               //   )
               // ) / 10000000000000000,
               max: formatEther(loan.loanDetails.max),
@@ -639,7 +640,7 @@ const OpenVaultPage = ({ match }) => {
 
               <p className="vault_tbd">
                 Dust Limit{" "}
-                <span className="vault_percent"> ${loanMetaData.maxLoan}</span>
+                <span className="vault_percent"> ₦{loanMetaData.maxLoan}</span>
               </p>
             </div>
           </div>
@@ -651,17 +652,20 @@ const OpenVaultPage = ({ match }) => {
                     <div className="vault_prices1_cont1a">
                       <p className="vault_prices1txt1">Liquidation Price</p>
                       <h3 className="vault_prices1amount">
-                        ${canshake ? chainLoanDetails.liquidationPrice : "0.00"}
+                        ₦
+                        {canshake
+                          ? numberWithCommas(chainLoanDetails.liquidationPrice)
+                          : "0.00"}
                       </h3>
                       <div
                         className={
                           vaultPrice == "not_price_value_change"
                             ? "not_price_value_change"
-                            : `price_value_change  ${formData.stateLiquidationWarning}`
+                            : `price_value_change  ₦{formData.stateLiquidationWarning}`
                         }
                       >
                         <div className={`price_value_change_value`}>
-                          ${formData.stateLiquidationPrice}
+                          ₦{formData.stateLiquidationPrice}
                         </div>
                       </div>
                     </div>
@@ -680,8 +684,12 @@ const OpenVaultPage = ({ match }) => {
                       </p>
                       <h3 className="vault_prices1amount">
                         {canshake
-                          ? (tickerPrice * chainLoanDetails.collateral) /
-                            (chainLoanDetails.debt * 100)
+                          ? numberWithCommas(
+                              (
+                                (tickerPrice * chainLoanDetails.collateral) /
+                                (chainLoanDetails.debt * 100)
+                              ).toFixed(5)
+                            )
                           : "0.00"}
                         %
                       </h3>
@@ -689,7 +697,7 @@ const OpenVaultPage = ({ match }) => {
                         className={
                           vaultPrice == "not_price_value_change"
                             ? "not_price_value_change"
-                            : `price_value_change ${formData.stateLiquidationWarning}`
+                            : `price_value_change ₦{formData.stateLiquidationWarning}`
                         }
                       >
                         <div className={`price_value_change_value`}>
@@ -707,7 +715,7 @@ const OpenVaultPage = ({ match }) => {
                   <div className="vault_prices1_cont1">
                     <div className="vault_prices1_cont1a">
                       <p className="vault_prices1txt1">Current Price</p>
-                      <h3 className="vault_prices1amount">${tickerPrice}</h3>
+                      <h3 className="vault_prices1amount">₦{tickerPrice}</h3>
                     </div>
                   </div>
                   <div className="vault_prices1_cont1">
@@ -729,7 +737,7 @@ const OpenVaultPage = ({ match }) => {
                     <div className="vault_prices1_cont1a">
                       <p className="vault_prices1txt1">Collateral Locked</p>
                       <h3 className="vault_prices1amount">
-                        $
+                        ₦
                         {canshake
                           ? parseFloat(
                               tickerPrice * chainLoanDetails.collateral
@@ -740,7 +748,7 @@ const OpenVaultPage = ({ match }) => {
                         className={
                           vaultPrice == "not_price_value_change"
                             ? "not_price_value_change"
-                            : `price_value_change  ${formData.stateLiquidationWarning}`
+                            : `price_value_change  ₦{formData.stateLiquidationWarning}`
                         }
                         // onChange={handleInputChange}
                       >
@@ -749,7 +757,7 @@ const OpenVaultPage = ({ match }) => {
                             value={tickerPrice * formData.stateCollateral}
                             displayType="text"
                             thousandSeparator={true}
-                            prefix="$"
+                            prefix="₦"
                           />
                         </div>
                       </div>
@@ -782,7 +790,7 @@ const OpenVaultPage = ({ match }) => {
                     className={
                       vaultPrice == "not_price_value_change"
                         ? "not_price_value_change"
-                        : `price_value_change ${formData.stateLiquidationWarning}`
+                        : `price_value_change ₦{formData.stateLiquidationWarning}`
                     }
                   >
                     <div className={`price_value_change_value`}>
@@ -803,7 +811,7 @@ const OpenVaultPage = ({ match }) => {
                     className={
                       vaultPrice == "not_price_value_change"
                         ? "not_price_value_change"
-                        : `price_value_change ${formData.stateLiquidationWarning}`
+                        : `price_value_change ₦{formData.stateLiquidationWarning}`
                     }
                   >
                     <div className={`price_value_change_value`}>
@@ -827,7 +835,7 @@ const OpenVaultPage = ({ match }) => {
                     className={
                       vaultPrice == "not_price_value_change"
                         ? "not_price_value_change"
-                        : `price_value_change ${formData.stateLiquidationWarning}`
+                        : `price_value_change ₦{formData.stateLiquidationWarning}`
                     }
                   >
                     <div className={`price_value_change_value`}>
@@ -876,7 +884,7 @@ const OpenVaultPage = ({ match }) => {
 
                         value={formData.stateCollateral}
                         className="vault_input_vault"
-                        placeholder={`0.00 ${asset}`}
+                        placeholder={`0.00 ₦{asset}`}
                         onChange={(e) => onChange(e)}
                         onKeyUp={(e) => onChange(e)}
                       />
@@ -981,7 +989,7 @@ const OpenVaultPage = ({ match }) => {
                           Liquidation Price
                         </div>
                         <div className="valid_div_inner_div_cont2">
-                          $0.00 - ${formData.stateLiquidationPrice}
+                          ₦0.00 - ₦{formData.stateLiquidationPrice}
                         </div>
                       </div>
                       {/* ===== */}
