@@ -987,6 +987,11 @@ const OpenVaultPage = ({ match }) => {
                         className="vault_input_vaulta"
                         placeholder={base}
                         onChange={(e) => onChange(e)}
+                        style={{
+                          marginRight: "10px",
+                          marginLeft: "10px",
+                          width: "95%",
+                        }}
                         onKeyUp={(e) => onChange(e)}
                       />
                     </div>
