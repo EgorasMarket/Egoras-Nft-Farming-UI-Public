@@ -144,9 +144,11 @@ const File = () => {
           setDefaultPrice(formatEther(price.message));
         });
         getTickerInfo(ticker, library.getSigner()).then((data) => {
+          console.log(data)
           library
             .getBalance(account)
             .then((balance) => {
+
               setAssetAddress(data.message.asset);
               tokenBalance(
                 data.message.asset,

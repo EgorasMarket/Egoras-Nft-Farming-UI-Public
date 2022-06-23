@@ -148,7 +148,7 @@ const OpenVaultPage = ({ match }) => {
     if (account) {
       getPrice(ticker, library.getSigner()).then((data) => {
         if (data.status) {
-          setTickerPrice(parseFloat(formatEther(data.message)).toPrecision(4));
+          setTickerPrice(parseFloat(formatEther(data.message)));
         }
       });
 
@@ -200,6 +200,7 @@ const OpenVaultPage = ({ match }) => {
     if (account) {
       getLatestLoan(account, asset + "-" + base, library.getSigner()).then(
         (loan) => {
+         
           if (loan.message == true) {
             setCanShake(true);
             console.log(
@@ -208,15 +209,15 @@ const OpenVaultPage = ({ match }) => {
             );
             setChainLoanDetails({
               ...chainLoanDetails,
-              id: parseInt(loan.loanDetails.id.toString()),
+              id: loan.loanDetails.id.toString(),
               collateral: formatEther(loan.loanDetails.collateral),
               debt: formatEther(loan.loanDetails.debt),
-              liquidationPrice:
-                parseFloat(
-                  parseFloat(
-                    formatEther(loan.loanDetails.liquidationPrice.toString())
-                  )
-                ).toPrecision(4) / 10000000000000000,
+              liquidationPrice: formatEther(loan.loanDetails.liquidationPrice.toString()),
+              // parseFloat(
+              //   parseFloat(
+                 
+              //   )
+              // ) / 10000000000000000,
               max: formatEther(loan.loanDetails.max),
             });
             setSideStage("locked");
