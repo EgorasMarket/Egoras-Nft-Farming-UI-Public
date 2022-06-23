@@ -176,6 +176,12 @@
   pointer-events: none;
 }
 
+.connect_btn:disabled {
+  background: #d2d2d2;
+  cursor: not-allowed;
+  color: #969696;
+}
+
 .sk-folding-cube {
   margin: 20px auto;
   width: 40px;

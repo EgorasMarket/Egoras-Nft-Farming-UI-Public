@@ -48,6 +48,7 @@ const DashboardAddLiquidtyPage = ({ match }) => {
   const [tokenBtn, setTokenBtn] = useState(false);
   const [tokenBtn2, setTokenBtn2] = useState(false);
   const [defaultPrice, setDefaultPrice] = useState(0);
+  const [button_txt, setBtnTxt] = useState("");
   const [tokenName, setTokenName] = useState(0);
   const [base, setBase] = useState("");
   const [tokenName2, setTokenName2] = useState(0);
@@ -58,6 +59,7 @@ const DashboardAddLiquidtyPage = ({ match }) => {
   const [inputVal, setInputVal] = useState();
   const [hash, setHash] = useState("");
   const [unlockAmount, setUnlockAmount] = useState(0);
+  const [disabled, setDisabled] = useState(true);
 
   // const [inputVal, setInputVal] = useState();
   const context = useWeb3React();
@@ -108,6 +110,27 @@ const DashboardAddLiquidtyPage = ({ match }) => {
   const onChange = (e) => {
     setInputVal(e.target.value);
   };
+
+  useEffect(() => {
+    if (inputVal <= 0 || tokenBtn2 === false) {
+      setBtnTxt("Enter an amount");
+      setDisabled(true);
+      console.log(
+        "==================",
+        "add amount here please",
+        "=================="
+      );
+    } else if (inputVal > 0 || tokenBtn2 === true) {
+      setDisabled(false);
+      setBtnTxt("Add Liquidity");
+      console.log("==================", "amount is okay", "==================");
+    }
+
+    // return () => {
+    //   second;
+    // };
+  });
+
   const TokenData = async (e) => {
     let currentTarget = e.currentTarget.id;
     console.log(currentTarget);
@@ -299,7 +322,7 @@ const DashboardAddLiquidtyPage = ({ match }) => {
                             className="amnt_input_field"
                             autocomplete="off"
                             value={
-                              tokenBtn2 == true
+                              tokenBtn2 === true
                                 ? parseFloat(inputVal / defaultPrice)
                                 : null
                             }
@@ -307,7 +330,10 @@ const DashboardAddLiquidtyPage = ({ match }) => {
                           {tokenBtn2 == false ? (
                             <button
                               className="display_tokens_drop display_tokens_drop_not_select "
-                              onClick={toggleModal2}
+                              onClick={() => {
+                                toggleModal2();
+                                setInputVal(0);
+                              }}
                             >
                               Select a token{" "}
                               <ArrowDropDownIcon className="drop_down_icon" />
@@ -318,7 +344,10 @@ const DashboardAddLiquidtyPage = ({ match }) => {
                                 tokenName2 == token.id ? (
                                   <button
                                     className="display_tokens_drop"
-                                    onClick={toggleModal2}
+                                    onClick={() => {
+                                      toggleModal2();
+                                      setInputVal(0);
+                                    }}
                                   >
                                     <img
                                       src={token.img}
@@ -339,11 +368,12 @@ const DashboardAddLiquidtyPage = ({ match }) => {
                           className="connect_btn"
                           style={{ padding: "0.9em 4.5em" }}
                           onClick={(e) => add(e)}
+                          disabled={disabled}
                         >
                           {isLoading ? (
                             <FontAwesomeIcon icon={faCircleNotch} spin />
                           ) : null}{" "}
-                          Add Liquidity
+                          {button_txt}
                         </button>
                       </div>
                     </div>
@@ -398,7 +428,10 @@ const DashboardAddLiquidtyPage = ({ match }) => {
               {view == "error" ? (
                 <ErrorModal
                   errorMessage={message}
-                  click={(e) => Continue(e)}
+                  click={(e) => {
+                    Continue(e);
+                    setInputVal(0);
+                  }}
                   ErrorHead="Error"
                 />
               ) : null}
@@ -406,7 +439,10 @@ const DashboardAddLiquidtyPage = ({ match }) => {
               {view == "success" ? (
                 <SuccessModal
                   successMessage={message}
-                  click={(e) => Continue(e)}
+                  click={(e) => {
+                    Continue(e);
+                    setInputVal(0);
+                  }}
                   SuccessHead="Success"
                   hash={hash}
                 />
