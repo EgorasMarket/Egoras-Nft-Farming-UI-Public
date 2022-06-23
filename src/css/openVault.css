@@ -16,7 +16,9 @@
   display: flex;
   flex-direction: column;
 }
-
+.vault_input0 {
+  color: #000;
+}
 .vault_captions {
   display: flex;
   align-items: center;
@@ -46,7 +48,7 @@
   box-shadow: 0px 0px 15px #d5e2da;
   border-radius: 20px;
   max-height: 100%;
-  min-height: 80%;
+  /* min-height: 80%; */
   /* overflow-x: hidden; */
   padding: 2em;
   grid-gap: 32px;
@@ -65,22 +67,65 @@
   justify-content: space-between;
   align-items: center;
 }
-
+.card-header {
+  /* padding: 0.5rem 1rem; */
+  /* margin-bottom: 0; */
+  background-color: #ffffff !important;
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.125); */
+}
+.card-body {
+  padding: 0 !important;
+}
+.card {
+  border: none !important;
+  gap: 25px !important;
+}
+.nav-tabs {
+  border-bottom: 1px solid #ededed !important;
+  cursor: pointer !important;
+}
 .not_generate_eusd_cont1 {
   display: none;
 }
 .not_generate_eusd_cont {
   display: none;
 }
-.nav-pills .nav-link.active,
+/* .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
   background-color: #239e54 !important;
-}
+} */
 .nav-link {
-  color: #239e54 !important;
+  color: #acacac !important;
 }
-.nav-link.active {
+.vault_pay_back_btn {
+  padding: 0.8em 2em;
+  border: none;
+  border-radius: 6px;
+  background: #229e54;
+  color: #ffff;
+  font-weight: 400;
+  box-shadow: 0px 5px 13px #cbcbcb;
+  font-size: 15px;
+  width: 100%;
+}
+/* .nav-link.active {
   color: white !important;
+} */
+.payback_vault_input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 23px;
+}
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: #e1f7ea !important;
+  color: #229e54 !important;
+  font-weight: 700;
+  border-bottom: solid 2px #229e54 !important;
+  /* margin-bottom: 2em; */
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }
 .amount_withdraw_cont1_txt1 {
   font-size: 14px;
@@ -96,7 +141,9 @@
   color: #d8762d !important;
   background: #fff1cf !important;
 }
-
+.custom_modal .modal-content {
+  padding: 1em !important;
+}
 .price_value_change {
   box-sizing: border-box;
   margin: 8px 0px 0px;
@@ -351,7 +398,7 @@ h3.valid_div_inner_div_heading {
   margin-top: 15px;
 }
 input.vault_input_vaulta {
-  width: 95%;
+  width: 100%;
   height: 76px;
   border-radius: 8px;
   border: solid;
@@ -359,9 +406,11 @@ input.vault_input_vaulta {
   padding: 0.5em 1em;
   border-color: #d4d4d4;
   /* margin: auto; */
-  margin-top: 5px;
+  /* margin-top: 5px;
   margin-right: 10px;
-  margin-left: 10px;
+  margin-left: 10px; */
+  margin: 0;
+  margin-top: 1em;
 }
 input.vault_input_vaulta:focus-visible {
   outline: none;

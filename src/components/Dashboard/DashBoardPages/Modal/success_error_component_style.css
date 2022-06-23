@@ -9,8 +9,10 @@
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  padding: 1em;
+  padding-top: 7em;
 }
 
 .success_modal_div,
