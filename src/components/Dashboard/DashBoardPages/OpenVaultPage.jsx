@@ -624,7 +624,7 @@ const OpenVaultPage = ({ match }) => {
             <div className="vault_captions">
               <p className="vault_tbd">
                 VaultID
-                <span className="vault_percent">T.B.D</span>
+                <span className="vault_percent">E.C.V</span>
               </p>
 
               <p className="vault_tbd">
@@ -632,7 +632,7 @@ const OpenVaultPage = ({ match }) => {
               </p>
 
               <p className="vault_tbd">
-                Liquidation Fee <span className="vault_percent">35%</span>
+                Liquidation Fee <span className="vault_percent">13%</span>
               </p>
 
               <p className="vault_tbd">
@@ -987,6 +987,11 @@ const OpenVaultPage = ({ match }) => {
                         className="vault_input_vaulta"
                         placeholder={base}
                         onChange={(e) => onChange(e)}
+                        style={{
+                          marginRight: "10px",
+                          marginLeft: "10px",
+                          width: "95%",
+                        }}
                         onKeyUp={(e) => onChange(e)}
                       />
                     </div>
