@@ -38,10 +38,16 @@ const Footer = () => {
     if (currentPage === "/dashboard/lend") {
       setShowFooter(false);
     }
+    if (currentPage === "/dashboard/lend/pool/detail/branch/asset") {
+      setShowFooter(false);
+    }
     if (currentPage === "/dashboard/lending") {
       setShowFooter(false);
     }
     if (currentPage === "/dashboard/swap") {
+      setShowFooter(false);
+    }
+    if (currentPage === "/dashboard/lend/pool/detail") {
       setShowFooter(false);
     }
     if (currentPage === "/dashboard/add") {

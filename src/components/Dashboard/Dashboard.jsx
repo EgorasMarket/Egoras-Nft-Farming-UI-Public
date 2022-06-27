@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import DashBoard_lend_details_page from "./DashBoard_lend_details_page";
+import DashBoardBranchAsset from "./DashBoardPages/DashBoardBranchAsset";
 // dashboard components
 // import DashBoardHeader from "./DashBoardHeader";
 import DashboardSideBarMenu from "./DashboardSideBarMenu";
@@ -50,6 +51,16 @@ function Dashboard() {
             exact
             path="/dashboard/governance"
             component={DashboardGovernance}
+          />
+          <Route
+            exact
+            path="/dashboard/lend/pool/detail"
+            component={DashBoard_lend_details_page}
+          />
+          <Route
+            exact
+            path="/dashboard/lend/pool/detail/branch/asset"
+            component={DashBoardBranchAsset}
           />
           <Route
             exact

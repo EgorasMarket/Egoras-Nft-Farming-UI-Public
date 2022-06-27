@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import "../../../css/dashboardLend.css";
+import CircleIcon from "@mui/icons-material/Circle";
 import EastIcon from "@mui/icons-material/East";
 // import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
@@ -317,7 +318,7 @@ const DashBoardLendPage = () => {
                     }
                     onClick={toggleActiveBtn}
                   >
-                    All
+                    All Pools
                   </div>
                   <div
                     id="Closed"
@@ -363,7 +364,7 @@ const DashBoardLendPage = () => {
                 
               </div> */}
                 <tbody
-                  className="assets-table-body popular-categories"
+                  className="assets-table-body popular-categories transitionMe"
                   id="popular-categories"
                 >
                   {" "}
@@ -374,7 +375,7 @@ const DashBoardLendPage = () => {
                     ? searchResults
                         .filter((person) => person.Status == "Ongoing")
                         .map((asset) => (
-                          <tr className="assets-category-row">
+                          <tr className="assets-category-row  transitionMe">
                             <td className="assets-category-data">
                               <div className="assets-data">
                                 <img
@@ -422,26 +423,26 @@ const DashBoardLendPage = () => {
                                     : null
                                 }
                               >
-                                {asset.Status}
+                                <div className="status_column">
+                                  {asset.Status}
+                                  <CircleIcon className="status_circle" />
+                                </div>
                               </div>
                             </td>
                             <td className="assets-category-data-last">
-                              <div className="assets-btn">
-                                {/* <a
-                          href={`vault/${asset.type}/ENGN`}
-                          className="assets-collateralize-button"
-                          style={{ border: "none" }}
-                        > */}
+                              <a
+                                href="/dashboard/lend/pool/detail"
+                                className="assets-btn"
+                              >
                                 See details{" "}
                                 <EastIcon className="see_more_icon" />
-                                {/* </a> */}
-                              </div>
+                              </a>
                             </td>
                           </tr>
                         ))
                     : activeBtn === "All"
                     ? searchResults.map((asset) => (
-                        <tr className="assets-category-row">
+                        <tr className="assets-category-row  transitionMe">
                           <td className="assets-category-data">
                             <div className="assets-data">
                               <img
@@ -489,19 +490,19 @@ const DashBoardLendPage = () => {
                                   : null
                               }
                             >
-                              {asset.Status}
+                              <div className="status_column">
+                                {asset.Status}
+                                <CircleIcon className="status_circle" />
+                              </div>
                             </div>
                           </td>
                           <td className="assets-category-data-last">
-                            <div className="assets-btn">
-                              {/* <a
-                          href={`vault/${asset.type}/ENGN`}
-                          className="assets-collateralize-button"
-                          style={{ border: "none" }}
-                        > */}
+                            <a
+                              href="/dashboard/lend/pool/detail"
+                              className="assets-btn"
+                            >
                               See details <EastIcon className="see_more_icon" />
-                              {/* </a> */}
-                            </div>
+                            </a>
                           </td>
                         </tr>
                       ))
@@ -509,7 +510,7 @@ const DashBoardLendPage = () => {
                     ? searchResults
                         .filter((person) => person.Status == "Closed")
                         .map((asset) => (
-                          <tr className="assets-category-row">
+                          <tr className="assets-category-row  transitionMe">
                             <td className="assets-category-data">
                               <div className="assets-data">
                                 <img
@@ -557,20 +558,20 @@ const DashBoardLendPage = () => {
                                     : null
                                 }
                               >
-                                {asset.Status}
+                                <div className="status_column">
+                                  {asset.Status}
+                                  <CircleIcon className="status_circle" />
+                                </div>
                               </div>
                             </td>
                             <td className="assets-category-data-last">
-                              <div className="assets-btn">
-                                {/* <a
-                          href={`vault/${asset.type}/ENGN`}
-                          className="assets-collateralize-button"
-                          style={{ border: "none" }}
-                        > */}
+                              <a
+                                href="/dashboard/lend/pool/detail"
+                                className="assets-btn"
+                              >
                                 See details{" "}
                                 <EastIcon className="see_more_icon" />
-                                {/* </a> */}
-                              </div>
+                              </a>
                             </td>
                           </tr>
                         ))

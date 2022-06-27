@@ -50,6 +50,9 @@ const DashboardSideBarMenu = () => {
     if (linksActive === "/dashboard/swap") {
       setActiveMenuName("Swap");
     }
+    if (linksActive === "/dashboard/lend/pool/detail") {
+      setActiveMenuName("Pool Details");
+    }
     if (linksActive === "/dashboard/add") {
       setActiveMenuName("Liquidity");
     }
@@ -90,6 +93,9 @@ const DashboardSideBarMenu = () => {
       setActiveBg("market");
     }
     if (linksActive === "/dashboard/lend") {
+      setActiveBg("lend");
+    }
+    if (linksActive === "/dashboard/lend/pool/detail") {
       setActiveBg("lend");
     }
 

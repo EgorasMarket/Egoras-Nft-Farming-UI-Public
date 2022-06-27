@@ -136,10 +136,16 @@ const Header = () => {
     if (currentPage === "/dashboard/lend") {
       setshowHeader(false);
     }
+    if (currentPage === "/dashboard/lend/pool/detail") {
+      setshowHeader(false);
+    }
     if (currentPage === "/dashboard/swap") {
       setshowHeader(false);
     }
     if (currentPage === "/dashboard/add") {
+      setshowHeader(false);
+    }
+    if (currentPage === "/dashboard/lend/pool/detail/branch/asset") {
       setshowHeader(false);
     }
     if (currentPage === "/dashboard/whitepaper") {
