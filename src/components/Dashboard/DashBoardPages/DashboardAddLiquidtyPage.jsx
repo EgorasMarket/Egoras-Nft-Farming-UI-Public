@@ -308,8 +308,9 @@ const DashboardAddLiquidtyPage = ({ match }) => {
                         </div>
                       </div>
                       {/* <div className="plus_icon_layer"> */}
-                      <AddIcon className="plus_icon_layer" />
-
+                      <div className="plus_icon_layer">
+                        <AddIcon className="plus_icon_layer_icon" />
+                      </div>
                       {/* </div> */}
                       <div className="input_amnt_layer">
                         <div className="amnt_input">
@@ -366,7 +367,7 @@ const DashboardAddLiquidtyPage = ({ match }) => {
                       <div className="connect_btn_div">
                         <button
                           className="connect_btn"
-                          style={{ padding: "0.9em 4.5em" }}
+                          style={{ padding: "1.5em 0.5em" }}
                           onClick={(e) => add(e)}
                           disabled={disabled}
                         >

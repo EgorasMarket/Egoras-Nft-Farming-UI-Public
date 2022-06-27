@@ -8,6 +8,7 @@ import { SuccessModal, ErrorModal } from "./Modal/Success_Error_Component";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import "../../../css/openVault.css";
+import SwitchToggle from "./SwitchToggle/SwitchToggle";
 import {
   Button,
   Card,
@@ -56,6 +57,7 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+import { Checkbox } from "@mui/material";
 function limit(val, max) {
   if (val.length === 1 && val[0] > max[0]) {
     val = "0" + val;
@@ -102,6 +104,8 @@ const OpenVaultPage = ({ match }) => {
     "Transacting with blockchain, please wait..."
   );
   const [hash, setHash] = useState("");
+  const [checkBox, setCheckBox] = useState(false);
+  const [disable, setDisable] = useState(true);
   const [shake, setShake] = useState(0);
   const [canshake, setCanShake] = useState(false);
   const [unlocking, setUnlocking] = useState(false);
@@ -178,6 +182,22 @@ const OpenVaultPage = ({ match }) => {
               }
             );
           }
+          // const checkUnlock = async () => {
+          //   let engn = await checkAllowance(
+          //     data.base,
+          //     account,
+          //     parseEther("5000000", "wei").toString(),
+          //     library.getSigner()
+          //   );
+
+          //   let egc = await checkAllowance(
+          //     data.asset,
+          //     account,
+          //     parseEther("5000000", "wei").toString(),
+          //     library.getSigner()
+          //   );
+          // };
+
           setLoanMetaData({
             ...loanMetaData,
             base: data.message.base,
@@ -256,13 +276,19 @@ const OpenVaultPage = ({ match }) => {
       localStorage.setItem("unlocking", true);
       localStorage.setItem("unlockingHash", ret.message);
       setText("Unlocking please wait aleast 1/2 minutes");
+      setCheckBox(true);
+      setDisable(false);
     } else {
       if (ret.message.code == 4001) {
         setText(ret.message.message);
+        setCheckBox(false);
+        setDisable(true);
       }
 
       setStage("error");
       setIsLoading(false);
+      setCheckBox(false);
+      setDisable(true);
     }
   };
 
@@ -319,6 +345,7 @@ const OpenVaultPage = ({ match }) => {
           localStorage.setItem("unlockingHash", ret.message.hash);
           setText("Sending token please wait aleast 1/2 minutes");
           setHash(ret.message.hash);
+          setStage("success");
         } else if (ret.status == false) {
           if (ret.message.code < 0) {
             setText(ret.message.data.message);
@@ -390,6 +417,7 @@ const OpenVaultPage = ({ match }) => {
         localStorage.setItem("unlockingHash", ret.message.hash);
         setText("Disbursing tokens please wait aleast 1/2 minutes");
         setHash(ret.message.hash);
+        setStage("success");
       } else if (ret.status == false) {
         if (ret.message.code < 0) {
           setText(ret.message.data.message);
@@ -441,6 +469,7 @@ const OpenVaultPage = ({ match }) => {
     setStage("ColateralizeModal");
     setText("");
     setModal(!modal);
+    window.location.reload();
   };
 
   const onTopup = (e) => {
@@ -468,6 +497,7 @@ const OpenVaultPage = ({ match }) => {
       localStorage.setItem("unlockingHash", ret.message.hash);
       setText("Sending token please wait aleast 1/2 minutes");
       setHash(ret.message.hash);
+      setStage("success");
     } else if (ret.status == false) {
       if (ret.message.code < 0) {
         setText(ret.message.data.message);
@@ -508,6 +538,7 @@ const OpenVaultPage = ({ match }) => {
           localStorage.setItem("unlockingHash", ret.message.hash);
           setText("Sending token please wait aleast 1/2 minutes");
           setHash(ret.message.hash);
+          setStage("success");
         } else if (ret.status == false) {
           if (ret.message.code < 0) {
             setText(ret.message.data.message);
@@ -597,6 +628,9 @@ const OpenVaultPage = ({ match }) => {
   };
   setInterval(() => {
     if (localStorage.getItem("unlocking") == "true") {
+      setCheckBox(true);
+      setDisable(false);
+
       transactReceipt(localStorage.getItem("unlockingHash"), library).then(
         function (env) {
           // console.log("running Interval", env);
@@ -612,8 +646,20 @@ const OpenVaultPage = ({ match }) => {
           }
         }
       );
+    } else {
+      setCheckBox(false);
+      setDisable(true);
     }
-  }, 7000);
+  }, 100000);
+  useEffect(() => {
+    if (localStorage.getItem("unlocking") == "true") {
+      setCheckBox(true);
+      setDisable(false);
+    } else {
+      setCheckBox(false);
+      setDisable(true);
+    }
+  }, [checkBox]);
 
   return (
     <div className="other2">
@@ -1086,7 +1132,38 @@ const OpenVaultPage = ({ match }) => {
                       </div>
                     </div>
                   </div>
-                  <button onClick={openCDP} className="open_vault_input_btn">
+
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      marginTop: "-1em",
+                      marginBottom: "-1em",
+                      justifyContent: "space-between",
+                      fontSize: "16px",
+                      fontWeight: "800",
+                      color: "#070707",
+                    }}
+                  >
+                    {checkBox == false ? ` Unlock ${asset}` : "Unlocked"}{" "}
+                    <SwitchToggle
+                      checkBox={checkBox}
+                      doUnluck={(e) => doUnluck(e)}
+                    />{" "}
+                  </div>
+
+                  {/* {checkBox == false ? (
+                    <button className="open_vault_input_btn" disabled={disable}>
+                      Unlock Contract
+                    </button>
+                  ) : (
+                  
+                  )} */}
+                  <button
+                    onClick={openCDP}
+                    className="open_vault_input_btn"
+                    // disabled={disable}
+                  >
                     {amount}
                   </button>
                 </div>
@@ -1148,7 +1225,26 @@ const OpenVaultPage = ({ match }) => {
                                     readonly
                                     className="vault_input_vaulta"
                                   />
-
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      marginTop: "-1em",
+                                      marginBottom: "-1em",
+                                      justifyContent: "space-between",
+                                      fontSize: "16px",
+                                      fontWeight: "800",
+                                      color: "#070707",
+                                    }}
+                                  >
+                                    {checkBox == false
+                                      ? ` Unlock ${asset}`
+                                      : "Unlocked"}{" "}
+                                    <SwitchToggle
+                                      checkBox={checkBox}
+                                      doUnluck={(e) => doUnluck(e)}
+                                    />{" "}
+                                  </div>
                                   <div
                                     style={{
                                       textAlign: "center",
@@ -1158,6 +1254,7 @@ const OpenVaultPage = ({ match }) => {
                                     <button
                                       onClick={payBackCDP}
                                       className="vault_pay_back_btn"
+                                      // disabled={disable}
                                     >
                                       Pay Back{" "}
                                       <span
@@ -1199,7 +1296,26 @@ const OpenVaultPage = ({ match }) => {
                                     onKeyUp={(e) => onTopup(e)}
                                     onChange={(e) => onTopup(e)}
                                   />
-
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      marginTop: "-1em",
+                                      marginBottom: "-1em",
+                                      justifyContent: "space-between",
+                                      fontSize: "16px",
+                                      fontWeight: "800",
+                                      color: "#070707",
+                                    }}
+                                  >
+                                    {checkBox == false
+                                      ? ` Unlock ${asset}`
+                                      : "Unlocked"}
+                                    <SwitchToggle
+                                      checkBox={checkBox}
+                                      doUnluck={(e) => doUnluck(e)}
+                                    />{" "}
+                                  </div>
                                   <div
                                     style={{
                                       textAlign: "center",
@@ -1209,6 +1325,7 @@ const OpenVaultPage = ({ match }) => {
                                     <button
                                       onClick={topUpCDP}
                                       className="vault_pay_back_btn"
+                                      // disabled={disable}
                                     >
                                       Topup {asset}
                                     </button>
@@ -1235,7 +1352,26 @@ const OpenVaultPage = ({ match }) => {
                                     onKeyUp={(e) => onTopup(e)}
                                     onChange={(e) => onTopup(e)}
                                   />
-
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      marginTop: "-1em",
+                                      marginBottom: "-1em",
+                                      justifyContent: "space-between",
+                                      fontSize: "16px",
+                                      fontWeight: "800",
+                                      color: "#070707",
+                                    }}
+                                  >
+                                    {checkBox == false
+                                      ? ` Unlock ${asset}`
+                                      : "Unlocked"}
+                                    <SwitchToggle
+                                      checkBox={checkBox}
+                                      doUnluck={(e) => doUnluck(e)}
+                                    />{" "}
+                                  </div>
                                   <div
                                     style={{
                                       textAlign: "center",
@@ -1245,6 +1381,7 @@ const OpenVaultPage = ({ match }) => {
                                     <button
                                       onClick={withdrawCDP}
                                       className="vault_pay_back_btn"
+                                      // disabled={disable}
                                     >
                                       Withdraw {base}
                                     </button>
@@ -1257,14 +1394,6 @@ const OpenVaultPage = ({ match }) => {
                       </Card>
                     </div>
                   </div>
-                </div>
-              </div>
-            ) : null}
-            {sideStage == "ColateralizeModal" ? (
-              <div className="vault_collateral_modal">
-                <div className="cont_transact_area">
-                  Continue Transaction
-                  <button className="continue_t">Collateralize</button>
                 </div>
               </div>
             ) : null}
@@ -1307,7 +1436,7 @@ const OpenVaultPage = ({ match }) => {
                 {isLoading ? (
                   <FontAwesomeIcon icon={faCircleNotch} spin />
                 ) : null}{" "}
-                Unlock {asset}
+                {checkBox == false ? ` Unlock ${asset}` : "Unlocked"}
               </button>
             </div>
           </div>

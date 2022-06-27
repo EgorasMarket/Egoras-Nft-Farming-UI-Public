@@ -22,7 +22,7 @@ import DashboardEgrBalancePage from "./DashBoardPages/DashboardEgrBalancePage";
 import DashboardAddLiquidtyPage from "./DashBoardPages/DashboardAddLiquidtyPage";
 // dashboard styles
 import "../../css/dashboard.css";
-
+import DashBoardLendPage from "./DashBoardPages/DashBoardLendPage";
 function Dashboard() {
   return (
     <Router>
@@ -56,6 +56,7 @@ function Dashboard() {
             path="/dashboard/governance/details"
             component={DashboardEgrBalancePage}
           />
+          <Route exact path="/dashboard/lend" component={DashBoardLendPage} />
           <Route
             exact
             path="/dashboard/transaction"
