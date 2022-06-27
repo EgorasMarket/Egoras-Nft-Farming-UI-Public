@@ -74,7 +74,7 @@
 .liquidity_cont_body_conts {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 }
 .tips_layer {
   padding: 20px;
@@ -149,8 +149,21 @@
 }
 .plus_icon_layer {
   align-items: center;
-  width: 100% !important;
-  font-size: 16px !important;
+  width: 100%;
+  /* font-size: 16px !important; */
+  display: flex;
+  animation: ce;
+  justify-content: center;
+  margin-top: -1.2em;
+  margin-bottom: -1.2em;
+  position: relative;
+}
+.plus_icon_layer_icon {
+  background: #f3f3f3 !important;
+  border-radius: 8px !important;
+  border: solid 4px #fff !important;
+  font-size: 32px !important;
+  color: #7c7c7c !important;
 }
 .connect_btn_div {
   display: flex;
@@ -179,9 +192,9 @@
 }
 
 .connect_btn:disabled {
-  background: #d2d2d2;
+  background: #e4e4e4;
   cursor: not-allowed;
-  color: #969696;
+  color: #a9a9a9;
 }
 
 .sk-folding-cube {

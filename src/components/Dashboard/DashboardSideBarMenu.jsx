@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+import InstagramIcon from "@mui/icons-material/Instagram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
+import TelegramIcon from "@mui/icons-material/Telegram";
+import TwitterIcon from "@mui/icons-material/Twitter";
 import HomeIcon from "@mui/icons-material/Home";
 // import { AccountNavigation } from "./DashboardPages/AccountNavigation";
 import SearchIcon from "@mui/icons-material/Search";
@@ -45,11 +50,17 @@ const DashboardSideBarMenu = () => {
     if (linksActive === "/dashboard/swap") {
       setActiveMenuName("Swap");
     }
+    if (linksActive === "/dashboard/lend/pool/detail") {
+      setActiveMenuName("Pool Details");
+    }
     if (linksActive === "/dashboard/add") {
       setActiveMenuName("Liquidity");
     }
     if (linksActive === "/dashboard/whitepaper") {
       setActiveMenuName("Whitepaper");
+    }
+    if (linksActive === "/dashboard/lend") {
+      setActiveMenuName("lend");
     }
     if (linksActive === "/vault/" + urlArr[2] + "/ENGN") {
       setActiveMenuName("Vault");
@@ -80,6 +91,12 @@ const DashboardSideBarMenu = () => {
   useEffect(() => {
     if (linksActive === "/dashboard") {
       setActiveBg("market");
+    }
+    if (linksActive === "/dashboard/lend") {
+      setActiveBg("lend");
+    }
+    if (linksActive === "/dashboard/lend/pool/detail") {
+      setActiveBg("lend");
     }
 
     if (linksActive === "/dashboard/swap") {
@@ -193,7 +210,28 @@ const DashboardSideBarMenu = () => {
                     }
                   >
                     <BarChartIcon className="sidebarIcon" />
-                    Markets
+                    Borrow
+                  </li>
+                </Link>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                <Link
+                  to="/dashboard/lend"
+                  id="lend"
+                  className="link"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "lend"
+                        ? "sidebarListItem list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <BarChartIcon className="sidebarIcon" />
+                    Lend
                   </li>
                 </Link>
                 {/* ===================== */}
@@ -302,9 +340,31 @@ const DashboardSideBarMenu = () => {
                     }
                   >
                     <BarChartIcon className="sidebarIcon" />
-                    Markets
+                    Borrow
                   </li>
-                  <span className="hover_link_txt">Markets</span>
+                  <span className="hover_link_txt">Borrow</span>
+                </Link>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                <Link
+                  to="/dashboard/lend"
+                  id="lend"
+                  className="link hover_link"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "lend"
+                        ? "sidebarListItem small_list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <BarChartIcon className="sidebarIcon" />
+                    Lend
+                  </li>
+                  <span className="hover_link_txt">Lend</span>
                 </Link>
                 {/* ===================== */}
                 {/* ===================== */}
@@ -396,22 +456,17 @@ const DashboardSideBarMenu = () => {
             )}
 
             <hr className="hrr" />
-            <div className="buy_ad_div_cont">
-              <div className="buy_ad_div">
-                <div className="buy_ad_div_title">Shop on Egoras</div>
-                <img
-                  src="/img/buy_ad_cart.svg"
-                  alt=""
-                  className="buy_ad_div_img"
-                />
-                <a
-                  href="https://egoras.com/market"
-                  className="buy_ad_div_btn_div_link"
-                >
-                  <button className="buy_ad_btn">Shop Now</button>
-                </a>
-                <img src="/img/banner-bg.png" alt="" className="buy_ad_bg" />
+            <div className="social_handles_cont">
+              <div className="social_handles_cont_div">
+                <FacebookRoundedIcon />
+                <TelegramIcon />
+                <TwitterIcon />
               </div>
+              {/* <div className="social_handles_cont_div">
+                <InstagramIcon />
+                {/* <YouTubeIcon /> */}
+              {/* <TwitterIcon /> */}
+              {/* </div> */}
             </div>
           </div>
         </div>

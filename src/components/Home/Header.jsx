@@ -133,10 +133,19 @@ const Header = () => {
     if (currentPage === "/dashboard/lending") {
       setshowHeader(false);
     }
+    if (currentPage === "/dashboard/lend") {
+      setshowHeader(false);
+    }
+    if (currentPage === "/dashboard/lend/pool/detail") {
+      setshowHeader(false);
+    }
     if (currentPage === "/dashboard/swap") {
       setshowHeader(false);
     }
     if (currentPage === "/dashboard/add") {
+      setshowHeader(false);
+    }
+    if (currentPage === "/dashboard/lend/pool/detail/branch/asset") {
       setshowHeader(false);
     }
     if (currentPage === "/dashboard/whitepaper") {
@@ -337,7 +346,11 @@ const Header = () => {
                 {page1 === "/" ? <span className="Line"></span> : null}
               </a> */}
                 </ul>
-                <Authenticate isHome="false" />
+                <div>
+                  <a href="/products">Products</a>
+
+                  <Authenticate isHome="false" />
+                </div>
 
                 {/* <ul className="headerLinks2">
             <a href="/documents" className="docs">

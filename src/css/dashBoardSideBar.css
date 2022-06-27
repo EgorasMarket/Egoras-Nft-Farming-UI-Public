@@ -430,12 +430,7 @@
   align-items: center;
   overflow: hidden;
 }
-.buy_ad_div_cont {
-  position: relative;
-  background: #2cbd70;
-  margin: 0.5em;
-  border-radius: 10px;
-  padding: 0.5em;
+.social_handles_cont {
 }
 .buy_ad_bg {
   position: absolute;

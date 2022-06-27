@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import DashBoard_lend_details_page from "./DashBoard_lend_details_page";
+import DashBoardBranchAsset from "./DashBoardPages/DashBoardBranchAsset";
 // dashboard components
 // import DashBoardHeader from "./DashBoardHeader";
 import DashboardSideBarMenu from "./DashboardSideBarMenu";
@@ -22,7 +23,7 @@ import DashboardEgrBalancePage from "./DashBoardPages/DashboardEgrBalancePage";
 import DashboardAddLiquidtyPage from "./DashBoardPages/DashboardAddLiquidtyPage";
 // dashboard styles
 import "../../css/dashboard.css";
-
+import DashBoardLendPage from "./DashBoardPages/DashBoardLendPage";
 function Dashboard() {
   return (
     <Router>
@@ -53,9 +54,20 @@ function Dashboard() {
           />
           <Route
             exact
+            path="/dashboard/lend/pool/detail"
+            component={DashBoard_lend_details_page}
+          />
+          <Route
+            exact
+            path="/dashboard/lend/pool/detail/branch/asset"
+            component={DashBoardBranchAsset}
+          />
+          <Route
+            exact
             path="/dashboard/governance/details"
             component={DashboardEgrBalancePage}
           />
+          <Route exact path="/dashboard/lend" component={DashBoardLendPage} />
           <Route
             exact
             path="/dashboard/transaction"

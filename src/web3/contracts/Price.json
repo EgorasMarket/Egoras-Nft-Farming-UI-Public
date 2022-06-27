@@ -1,43 +1,43 @@
 {
-    "address" : "0x118393969e6E5c7cde798B0EC8390De2DfdfBD19",
-    "abi": [
+  "address": "0xf85D026E19D239E0012800BCdAaC4B639e3E426F",
+  "abi": [
+    {
+      "inputs": [
         {
-          "inputs": [
-            {
-              "internalType": "string",
-              "name": "_ticker",
-              "type": "string"
-            }
-          ],
-          "name": "price",
-          "outputs": [
-            {
-              "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "string",
-              "name": "_ticker",
-              "type": "string"
-            }
-          ],
-          "name": "converter",
-          "outputs": [
-            {
-              "internalType": "bytes",
-              "name": "",
-              "type": "bytes"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
         }
-      ]
+      ],
+      "name": "price",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        }
+      ],
+      "name": "converter",
+      "outputs": [
+        {
+          "internalType": "bytes",
+          "name": "",
+          "type": "bytes"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
     }
+  ]
+}

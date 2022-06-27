@@ -1,0 +1,229 @@
+.pool_deatail_area {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  position: relative;
+}
+.no_paddd {
+  padding: 0 !important;
+}
+.pool_detail_heading {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -2em;
+}
+
+.pool_detail_heading_area1 {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 40%;
+}
+.pool_detail_heading_area1_img {
+  width: 40px;
+}
+.pool_detail_heading_area1_txt_cont {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  width: 100%;
+}
+
+.pool_detail_heading_area1_invest_btn_div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10%;
+}
+.pool_detail_heading_area1_txt_cont_2 {
+  font-weight: 700;
+}
+.pool_detail_heading_area1_txt_cont_1 {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+.pool_detail_investmentcapacity_box {
+  width: 15%;
+  border: solid 1px #c5c5c5;
+  border-radius: 20px;
+  padding: 2px 0px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a8a8a8;
+}
+button.pool_detail_heading_area1_invest_btn {
+  width: 100%;
+  padding: 10px 0px;
+  border-radius: 10px;
+  border: none;
+  background: #229e54;
+  color: #fff;
+}
+.pool_detail_sub_area1 {
+  background: #fff;
+  padding: 1em;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border: solid 1px #ececec;
+}
+.vertical_rule {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  width: 1px;
+  align-self: stretch;
+  border-left: 1px solid rgb(238, 238, 238);
+}
+.pool_detail_sub_area1_area1 {
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.pool_detail_sub_area1_area1_cont1 {
+  font-weight: 700;
+}
+.pool_detail_sub_area1_area1_cont2 {
+  font-size: 13px;
+  color: #8a8a8a;
+}
+.Asset_Originator_Details_cont {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 2em;
+}
+.Asset_Originator_Details_cont_heading {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.Asset_Originator_Details_cont_body {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  background: #fff;
+  padding: 2em;
+  border-radius: 10px;
+  border: solid 1px #f0f0f0;
+}
+.Asset_Originator_Details_cont_body_txt {
+  font-size: 14px;
+  font-weight: 300;
+}
+.Asset_Originator_Details_cont_body_issuer_cont {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+.Asset_Originator_Details_cont_body_head_img {
+  width: 150px;
+}
+
+.Asset_Originator_Details_cont_body_issuer_cont_head {
+  font-size: 14px;
+  color: #9a9a9a;
+}
+
+.Asset_Originator_Details_cont_body_issuer_cont_txt {
+  font-size: 15px;
+  font-weight: 600;
+}
+.pool_status_cont_heading {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.pool_status {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 2em;
+}
+.pool_status_Details_cont_body {
+  display: flex;
+  justify-content: space-between;
+  gap: 35px;
+}
+
+.pool_status_Details_cont_body1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 38px;
+  padding: 2em;
+  border: solid 1px #f0f0f0;
+  background: #fff;
+  border-radius: 10px;
+}
+.pool_status_Details_cont_body1_cont1 {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.pool_status_Details_cont_body1_cont2 {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.pool_status_Details_cont_body1_head {
+  font-weight: 700;
+}
+.pool_status_Details_cont_body1_sub_conts {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 100;
+  color: #3f3f3f;
+}
+.custom_hr {
+  border-width: 1px 0px 0px;
+  border-top-style: solid;
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  border-color: #a2a2a2;
+}
+
+.pool_status_Details_cont_body2 {
+  width: 100%;
+}
+.pool_lending_pages_links {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 14px;
+  margin-bottom: 1em;
+  position: absolute;
+  top: 0;
+  background: #fff;
+  width: 100%;
+  padding: 1em;
+  left: 0;
+}
+.pool_lending_pages_links {
+  display: flex;
+  align-items: center;
+  grid-gap: 15px;
+  gap: 15px;
+  font-size: 14px;
+  margin-bottom: 1em;
+  top: 0px;
+  background: #fff;
+  width: 100%;
+  padding: 1em;
+  left: 0;
+  position: sticky;
+  z-index: 1;
+}
+.pool_lend_details_link {
+  color: #8898a3;
+}

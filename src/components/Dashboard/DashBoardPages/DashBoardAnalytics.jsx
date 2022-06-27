@@ -23,14 +23,14 @@ const DashBoardAnalytics = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   const assets = [
-    {
-      img: "/img/eusd-icon-dollar.svg",
-      name: "Egoras Naira",
-      type: "Engn",
-      eusd_Avail: "100M",
-      stable: "0.50%",
-      ratio: "170%",
-    },
+    // {
+    //   img: "/img/eusd-icon-dollar.svg",
+    //   name: "Egoras Naira",
+    //   type: "Engn",
+    //   eusd_Avail: "100M",
+    //   stable: "0.50%",
+    //   ratio: "170%",
+    // },
     {
       img: "/img/egc-icon.svg",
       name: "Egoras Credit",
