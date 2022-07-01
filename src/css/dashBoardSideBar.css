@@ -51,7 +51,7 @@ hr.hrr {
   padding: 1em 1em;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 10px;
   flex-wrap: wrap;
 }

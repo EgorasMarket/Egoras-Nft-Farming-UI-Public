@@ -42,12 +42,17 @@
   font-size: 14px;
   border: solid 1px #229e54;
   color: #229e54;
-  padding: 0.5em 2em;
+  padding: 0.5em 0em;
   border-radius: 5px;
   transition: 0.5s linear;
   display: flex;
   align-items: center;
+  grid-gap: 2px;
   gap: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
 }
 
 .assets-btn:hover {
@@ -68,7 +73,7 @@
 }
 
 .investmentcapacity_box {
-  width: 50%;
+  width: 75px;
   border: solid 1px grey;
   border-radius: 20px;
   padding: 5px 0px;
@@ -259,4 +264,28 @@
   color: #000;
   font-size: 14px;
   font-weight: 600;
+}
+@media screen and (max-width: 1095px) {
+  /* footer  section start */
+  .stable-content {
+    display: none !important;
+  }
+  .none_display {
+    display: none;
+  }
+}
+@media screen and (max-width: 900px) {
+  /* footer  section start */
+  .lending_area1 {
+    display: flex;
+    /* align-items: flex-start; */
+    /* background: #d6eddf; */
+    padding: 0em;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .lending_area1_cont1 {
+    width: 100%;
+  }
 }

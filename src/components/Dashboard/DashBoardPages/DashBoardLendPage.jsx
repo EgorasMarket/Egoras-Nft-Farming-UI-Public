@@ -49,6 +49,7 @@ const DashBoardLendPage = () => {
 
   const assets = [
     {
+      id: "1",
       img: "/img/pool_asset_icon.png",
       PoolName: "Real-World Asset Market",
       PoolNameText: "Market of RWA pools, built on the Aave protocol",
@@ -58,6 +59,7 @@ const DashBoardLendPage = () => {
       Status: "Active",
     },
     {
+      id: "2",
       img: "/img/pool_asset_icon.png",
       PoolName: "Real-World Asset Market",
       PoolNameText: "Market of RWA pools, built on the Aave protocol",
@@ -67,6 +69,7 @@ const DashBoardLendPage = () => {
       Status: "Active",
     },
     {
+      id: "3",
       img: "/img/pool_asset_icon.png",
       PoolName: "Real-World Asset Market",
       PoolNameText: "Market of RWA pools, built on the Aave protocol",
@@ -76,6 +79,7 @@ const DashBoardLendPage = () => {
       Status: "Active",
     },
     {
+      id: "4",
       img: "/img/pool_asset_icon.png",
       PoolName: "Real-World Asset Market",
       PoolNameText: "Market of RWA pools, built on the Aave protocol",
@@ -85,6 +89,7 @@ const DashBoardLendPage = () => {
       Status: "Active",
     },
     {
+      id: "5",
       img: "/img/pool_asset_icon.png",
       PoolName: "Real-World Asset Market",
       PoolNameText: "Market of RWA pools, built on the Aave protocol",
@@ -94,96 +99,7 @@ const DashBoardLendPage = () => {
       Status: "Active",
     },
     {
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      PoolNameText: "Market of RWA pools, built on the Aave protocol",
-      InvestmentCapacity: "1.82",
-      PoolValue: "5,368,699",
-      SeniorAPY: "10.87",
-      Status: "Active",
-    },
-    {
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      PoolNameText: "Market of RWA pools, built on the Aave protocol",
-      InvestmentCapacity: "1.82",
-      PoolValue: "5,368,699",
-      SeniorAPY: "10.87",
-      Status: "Active",
-    },
-    {
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      PoolNameText: "Market of RWA pools, built on the Aave protocol",
-      InvestmentCapacity: "1.82",
-      PoolValue: "5,368,699",
-      SeniorAPY: "10.87",
-      Status: "Active",
-    },
-    {
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      PoolNameText: "Market of RWA pools, built on the Aave protocol",
-      InvestmentCapacity: "1.82",
-      PoolValue: "5,368,699",
-      SeniorAPY: "10.87",
-      Status: "Active",
-    },
-    {
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      PoolNameText: "Market of RWA pools, built on the Aave protocol",
-      InvestmentCapacity: "1.82",
-      PoolValue: "5,368,699",
-      SeniorAPY: "10.87",
-      Status: "Active",
-    },
-    {
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      PoolNameText: "Market of RWA pools, built on the Aave protocol",
-      InvestmentCapacity: "1.82",
-      PoolValue: "5,368,699",
-      SeniorAPY: "10.87",
-      Status: "Active",
-    },
-    {
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      PoolNameText: "Market of RWA pools, built on the Aave protocol",
-      InvestmentCapacity: "1.82",
-      PoolValue: "5,368,699",
-      SeniorAPY: "10.87",
-      Status: "Active",
-    },
-    {
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      PoolNameText: "Market of RWA pools, built on the Aave protocol",
-      InvestmentCapacity: "1.82",
-      PoolValue: "5,368,699",
-      SeniorAPY: "10.87",
-      Status: "Active",
-    },
-    {
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      PoolNameText: "Market of RWA pools, built on the Aave protocol",
-      InvestmentCapacity: "1.82",
-      PoolValue: "5,368,699",
-      SeniorAPY: "10.87",
-      Status: "Active",
-    },
-    {
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      PoolNameText: "Market of RWA pools, built on the Aave protocol",
-      InvestmentCapacity: "1.82",
-      PoolValue: "5,368,699",
-      SeniorAPY: "10.87",
-      Status: "Active",
-    },
-    {
+      id: "6",
       img: "/img/pool_asset_icon.png",
       PoolName: "Real-World Asset Market",
       PoolNameText: "Market of RWA pools, built on the Aave protocol",
@@ -193,17 +109,6 @@ const DashBoardLendPage = () => {
       Status: "Active",
     },
   ];
-
-  useEffect(() => {
-    axios
-      .get(api_url + "/v1/rewards/get/reward/by/" + 23, null, config)
-      .then((data) => {
-        console.log(data, "powerful");
-      })
-      .catch((err) => {
-        //console.log(err); // "oh, no!"
-      });
-  }, []);
 
   return (
     <div className="other2">
@@ -330,10 +235,10 @@ const DashBoardLendPage = () => {
                     <th className="assets-category-titles-heading1 right">
                       Pool Value
                     </th>
-                    <th className="assets-category-titles-heading1 right">
+                    <th className="assets-category-titles-heading1 right none_display">
                       Senior APY
                     </th>
-                    <th className="assets-category-titles-heading1 right">
+                    <th className="assets-category-titles-heading1 right ">
                       Status
                     </th>
                   </tr>
@@ -392,8 +297,7 @@ const DashBoardLendPage = () => {
                       </td>
                       <td className="assets-category-data1b stable-content">
                         <div className="assets-data-name_pool ">
-                          {asset.SeniorAPY}
-                          <span className="asset_symbol"> %</span>
+                          13.0<span className="asset_symbol">%</span>
                         </div>
                       </td>
                       <td className="assets-category-data1b ratio-content">
@@ -415,7 +319,7 @@ const DashBoardLendPage = () => {
                       </td>
                       <td className="assets-category-data-last">
                         <a
-                          href="/dashboard/lend/pool/detail"
+                          href={`/dashboard/lend/pool/detail`}
                           className="assets-btn"
                         >
                           See details <EastIcon className="see_more_icon" />

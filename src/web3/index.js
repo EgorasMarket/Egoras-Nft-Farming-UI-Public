@@ -3,9 +3,16 @@ import ORACLE from "./contracts/Price.json";
 import LOAN from "./contracts/Loan.json";
 import EX from "./contracts/exchange.json";
 import erc20 from "./contracts/erc20.json";
-
+import EgorasLoanV2Facet from "./contracts/V2/EgorasLoanV2Facet.json";
+import EgorasSwapFacet from "./contracts/V2/EgorasSwapFacet.json";
 const contractInstance = (signer) => {
   return new Contract(LOAN.address, LOAN.abi, signer);
+};
+const contractEgorasLoanV2Instance = (signer) => {
+  return new Contract(EgorasLoanV2Facet.address, EgorasLoanV2Facet.abi, signer);
+};
+const contractEgorasSwapFacetInstance = (signer) => {
+  return new Contract(EgorasSwapFacet.address, EgorasSwapFacet.abi, signer);
 };
 
 const contractEXInstance = (signer) => {
@@ -39,7 +46,7 @@ const transactReceipt = async (hash, library) => {
 const getPrice = async (ticker, signer) => {
   try {
     const instance = contractOracleInstance(signer);
-    let result = await instance.price(ticker+"-XX");
+    let result = await instance.price(ticker + "-XX");
     return {
       message: result,
       status: true,
@@ -79,11 +86,11 @@ const open = async (isDefault, collateral, amoumt, ticker, signer) => {
     const instance = contractInstance(signer);
     let result;
     if (isDefault) {
-      result = await instance.openDefaultAsset(amoumt, ticker+"-XX", {
+      result = await instance.openDefaultAsset(amoumt, ticker + "-XX", {
         value: collateral,
       });
     } else {
-      result = await instance.open(collateral, amoumt, ticker+"-XX");
+      result = await instance.open(collateral, amoumt, ticker + "-XX");
     }
 
     return {
@@ -98,7 +105,152 @@ const open = async (isDefault, collateral, amoumt, ticker, signer) => {
     };
   }
 };
+// =======================================================================
+// =======================================================================
+// =======================================================================
+// ===============================Start V2===============================
+// =======================================================================
 
+const lendUS = async (branch, amount, loanID, signer) => {
+  try {
+    const instance = contractEgorasLoanV2Instance(signer);
+    let result;
+    result = await instance.lendUS(branch, amount, loanID);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const takeDividend = async (loanID, signer) => {
+  try {
+    const instance = contractEgorasLoanV2Instance(signer);
+    let result;
+    result = await instance.takeDividend(loanID);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const takeBackLoan = async (loanID, signer) => {
+  try {
+    const instance = contractEgorasLoanV2Instance(signer);
+    let result;
+    result = await instance.takeBackLoan(loanID);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const getTotalLended = async (loanID, signer) => {
+  try {
+    const instance = contractEgorasLoanV2Instance(signer);
+    let result;
+    result = await instance.getTotalLended(loanID);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const getInvestorsDividend = async (loanID, user, signer) => {
+  try {
+    const instance = contractEgorasLoanV2Instance(signer);
+    let result;
+    result = await instance.getInvestorsDividend(loanID, user);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const userStats = async (loanID, user, signer) => {
+  try {
+    const instance = contractEgorasLoanV2Instance(signer);
+    let result;
+    result = await instance.userStats(loanID, user);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const system = async (signer) => {
+  try {
+    const instance = contractEgorasLoanV2Instance(signer);
+    let result;
+    result = await instance.system();
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const burnAccumulatedDividend = async (signer) => {
+  try {
+    const instance = contractEgorasLoanV2Instance(signer);
+    let result;
+    result = await instance.burnAccumulatedDividend();
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
+// =======================================================================
+// =======================================================================
+// ===============================Stop V2===============================
 const draw = async (id, amount, signer) => {
   try {
     const instance = contractInstance(signer);
@@ -118,16 +270,16 @@ const draw = async (id, amount, signer) => {
 };
 
 const topup = async (isDefault, id, ticker, collateral, signer) => {
-  console.log(isDefault, id, ticker, collateral)
+  console.log(isDefault, id, ticker, collateral);
   try {
     const instance = contractInstance(signer);
     let result;
     if (isDefault) {
-      result = await instance.topupDefaultAsset(id, ticker+"-XX", {
+      result = await instance.topupDefaultAsset(id, ticker + "-XX", {
         value: collateral,
       });
     } else {
-      result = await instance.topup(id, ticker+"-XX", collateral);
+      result = await instance.topup(id, ticker + "-XX", collateral);
     }
     return {
       message: result,
@@ -145,10 +297,10 @@ const getLatestLoan = async (user, ticker, signer) => {
   try {
     const instance = contractInstance(signer);
 
-    let result = await instance.___pendingLoan(user, ticker+"-XX");
+    let result = await instance.___pendingLoan(user, ticker + "-XX");
 
     if (result == true) {
-      let loan = await instance.__getLoanInfo(ticker+"-XX", user);
+      let loan = await instance.__getLoanInfo(ticker + "-XX", user);
       return {
         message: result,
         loanDetails: loan,
@@ -171,7 +323,7 @@ const getLatestLoan = async (user, ticker, signer) => {
 const getTickerInfo = async (ticker, signer) => {
   try {
     const instance = contractInstance(signer);
-    let result = await instance.__tickerInfo(ticker+"-XX");
+    let result = await instance.__tickerInfo(ticker + "-XX");
 
     return {
       message: result,
@@ -247,7 +399,7 @@ const exchange = async (ticker, amoumt, isBase, signer) => {
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.exchange(ticker+"-XX", amoumt, isBase);
+    let result = await instance.exchange(ticker + "-XX", amoumt, isBase);
 
     return {
       message: result,
@@ -266,7 +418,7 @@ const getDefault = async (ticker, amoumt, signer) => {
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.getDefault(ticker+"-XX", amoumt);
+    let result = await instance.getDefault(ticker + "-XX", amoumt);
 
     return {
       message: result,
@@ -285,7 +437,11 @@ const withdrawable = async (ticker, isDefault, _provider, signer) => {
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.withdrawable(ticker+"-XX", isDefault, _provider);
+    let result = await instance.withdrawable(
+      ticker + "-XX",
+      isDefault,
+      _provider
+    );
 
     return {
       message: result,
@@ -304,7 +460,7 @@ const removeLiquidity = async (ticker, signer) => {
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.removeLiquidity(ticker+"-XX");
+    let result = await instance.removeLiquidity(ticker + "-XX");
 
     return {
       message: result,
@@ -323,8 +479,8 @@ const addLiquidity = async (ticker, amoumt, signer) => {
   try {
     const instance = contractEXInstance(signer);
 
-    console.log(amoumt, ticker)
-    let result = await instance.addLiquidity(ticker+"-XX",{ value: amoumt });
+    console.log(amoumt, ticker);
+    let result = await instance.addLiquidity(ticker + "-XX", { value: amoumt });
 
     return {
       message: result,
@@ -339,11 +495,13 @@ const addLiquidity = async (ticker, amoumt, signer) => {
   }
 };
 const exchangeDefault = async (ticker, amoumt, signer) => {
-  console.log(ticker, amoumt, "GET THE DEFAULT")
+  console.log(ticker, amoumt, "GET THE DEFAULT");
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.exchangeDefault(ticker+"-XX", { value: amoumt });
+    let result = await instance.exchangeDefault(ticker + "-XX", {
+      value: amoumt,
+    });
 
     return {
       message: result,
@@ -363,7 +521,12 @@ const crossexchange = async (from, to, amoumt, signer) => {
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.crossExchange(from+"-XX", to+"-XX", amoumt, { value: 0 });
+    let result = await instance.crossExchange(
+      from + "-XX",
+      to + "-XX",
+      amoumt,
+      { value: 0 }
+    );
 
     return {
       message: result,
@@ -397,4 +560,12 @@ export {
   exchangeDefault,
   getDefault,
   crossexchange,
+  lendUS,
+  takeDividend,
+  takeBackLoan,
+  getTotalLended,
+  getInvestorsDividend,
+  userStats,
+  system,
+  burnAccumulatedDividend,
 };
