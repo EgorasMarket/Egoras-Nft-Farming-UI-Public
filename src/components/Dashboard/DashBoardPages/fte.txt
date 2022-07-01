@@ -1,0 +1,228 @@
+   {assets.map((data) => (
+        <>
+          {assetDetailModal == data.id ? (
+            <div className="asset_detail_modal_div">
+              <div className="asset_detail_modal_div_conts">
+                <div className="asset_detail_heading" style={{ margin: "0" }}>
+                  <div className="pool_detail_heading_area1">
+                    <img
+                      src={data.img}
+                      alt=""
+                      className="pool_detail_heading_area1_img"
+                    />
+                    <div className="pool_detail_heading_area1_txt_cont">
+                      <div className="pool_detail_heading_area1_txt_cont_1">
+                        {data.PoolName}
+                      </div>
+                      <div className="pool_detail_heading_area1_txt_cont_2">
+                        Assets {">"} Asset{data.id}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* ====== */}
+                {/* ====== */}
+                {/* ====== */}
+                <div className="asset_status_details_div1">
+                  <div className="asset_status_details_div1_head">
+                    Status{" "}
+                    <div className="staus_btn_div">
+                      <button
+                        className={
+                          data.Status === "Ongoing"
+                            ? "status_btn_ongoing"
+                            : data.Status === "Closed"
+                            ? "status_btn_closed"
+                            : "status_btn"
+                        }
+                      >
+                        {data.Status}
+                      </button>
+                    </div>
+                  </div>
+                  <div className="asset_status_details_div1_body">
+                    <div className="asset_status_details_div1_body1">
+                      <div className="asset_status_details_div1_body1_cont1">
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          Available for Financing
+                        </div>
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          0.00 Engn
+                        </div>
+                      </div>
+                      <hr class="custom_hr"></hr>
+                      <div className="asset_status_details_div1_body1_cont1">
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          Outstanding
+                        </div>
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          27,110.85 Engn
+                        </div>
+                      </div>
+                      <hr class="custom_hr"></hr>
+                      <div className="asset_status_details_div1_body1_cont1">
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          Maturity date
+                        </div>
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          {data.EndDate}
+                        </div>
+                      </div>
+                      <hr class="custom_hr"></hr>
+                      <div className="asset_status_details_div1_body1_cont1">
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          Amount
+                        </div>
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          {data.Amount}Engn
+                        </div>
+                      </div>
+                    </div>
+                    {/* ======== */}
+                    {/* ======== */}
+                    {/* ======== */}
+                    {/* ======== */}
+                    <div className="asset_status_details_div1_body1">
+                      <div className="asset_status_details_div1_body1_cont1">
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          Risk group
+                        </div>
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          0
+                        </div>
+                      </div>
+                      <hr class="custom_hr"></hr>
+                      <div className="asset_status_details_div1_body1_cont1">
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          Financing fee
+                        </div>
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          {data.Fee} %
+                        </div>
+                      </div>
+                      <hr class="custom_hr"></hr>
+                      <div className="asset_status_details_div1_body1_cont1">
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          Date
+                        </div>
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          {data.Date} %
+                        </div>
+                      </div>
+                      {/* <div className="asset_status_details_div1_body1_cont1">
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          Financed by
+                        </div>
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          Nov 13, 2024
+                        </div>
+                      </div> */}
+                    </div>
+                  </div>
+                </div>
+                {/* ============ */}
+                {/* ============ */}
+                {/* ============ */}
+                {/* ============ */}
+                <div className="Asset_Originator_Details_cont">
+                  <div className="Asset_Originator_Details_cont_heading">
+                    Asset Details
+                  </div>
+                  <div className="Asset_Originator_Details_cont_body">
+                    {/* <div className="Asset_Originator_Details_cont_body_head_img_cont">
+                      <img
+                        src="/img/branch_detail_img.png"
+                        className="Asset_Originator_Details_cont_body_head_img"
+                      />
+                    </div> */}
+                    <div className="Asset_Originator_Details_cont_body_txt">
+                      Branch is a financial technology company that lends money
+                      to consumers using machine learning algorithms to
+                      determine credit worthiness via customers' smartphones.
+                      Branch was founded in 2015 and has operations in Kenya,
+                      Nigeria, Tanzania, Mexico and India, and has since
+                      originated over $500M in loans to over 4 millions
+                      borrowers. This Tinlake pool will consist of tranches of a
+                      secured non convertible debenture with a maturity of 3
+                      years backed by a portfolio of loans made to customers.The
+                      current weighted average loan balance is $49 (ranging from
+                      $6 to $2,500) with average maturity of 70 days.
+                    </div>
+                    <div className="asset_details_spec_div">
+                      {/* <div className="asset_details_spec_div_title"> */}
+                      <Accordion
+                        title="Asset Specifications"
+                        customClass=" accordionClass "
+                      >
+                        <div className="asset_spec_body">
+                          <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
+                            Ram: 4gb
+                          </div>
+                          <hr class="custom_hr"></hr>
+                          <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
+                            Rom: 128gb
+                          </div>
+                          <hr class="custom_hr"></hr>
+                          <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
+                            Display: 6.43 inches
+                          </div>
+                          <hr class="custom_hr"></hr>
+                          <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
+                            Processor: Snapdragon 678
+                          </div>
+                          <hr class="custom_hr"></hr>
+                          <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
+                            Rear Camera: 48 MP + 8 MP + 2 MP + 2 MP
+                          </div>
+                          <hr class="custom_hr"></hr>
+                          <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
+                            Front Camera: 13 MP
+                          </div>
+                          <hr class="custom_hr"></hr>
+                          <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
+                            Battery: 5000 mAh
+                          </div>
+                          <hr class="custom_hr"></hr>
+                          <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
+                            SIM: Dual SIM (Nano-SIM, dual stand-by)
+                          </div>
+                        </div>
+                      </Accordion>
+                      {/* </div> */}
+                    </div>
+                  </div>
+                </div>
+                {/* ============ */}
+                {/* ============ */}
+                {/* ============ */}
+                {/* ============ */}
+                <div className="Asset_Originator_Details_cont">
+                  <div className="Asset_Originator_Details_cont_heading">
+                    Transaction Data
+                  </div>
+                  <div className="transactionData_body">
+                    <div className="transactionData_body1">Transaction Id</div>
+                    <div className="transactionData_body1">
+                      <a
+                        href="https://bscscan.com/tx/0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7"
+                        className="transaction_id_link"
+                        target="_blank"
+                      >
+                        {data.txHash.substring(0, 28) + "..."}
+                      </a>
+                      <CopyAllIcon className="copy_all_tx_hash_icon" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="close_asset_detail_modal"
+                onClick={closeAssetDetailModal}
+              >
+                <CloseIcon className="close_asset_detail_modal_icon" />
+                Close
+              </div>
+            </div>
+          ) : null}
+        </>
+      ))}

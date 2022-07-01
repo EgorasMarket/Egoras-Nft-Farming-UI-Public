@@ -24,6 +24,50 @@
   top: 0%;
   left: 50%;
 } */
+hr.hrr {
+  margin: 0;
+}
+.medium_icon {
+  font-family: serif;
+  font-size: 20px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: #ddfbe9;
+  padding: 5px;
+  border-radius: 50%;
+  color: #229e54;
+  transition: 0.3s ease-in-out;
+}
+.medium_icon:hover {
+  background: #229e54;
+  transition: 0.3s ease-in-out;
+  color: #fff;
+}
+.social_handles_cont_div {
+  padding: 1em 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.socail_links_icon {
+  background: #ddfbe9 !important;
+  padding: 5px !important;
+  font-size: 32px !important;
+  border-radius: 50% !important;
+  color: #229e54 !important;
+  transition: 0.3s ease-in-out;
+}
+.socail_links_icon:hover {
+  background: #229e54 !important;
+  color: #fff !important;
+  transition: 0.3s ease-in-out;
+}
 .egoras_icon_over_lay_div {
   position: absolute;
   width: 56px;

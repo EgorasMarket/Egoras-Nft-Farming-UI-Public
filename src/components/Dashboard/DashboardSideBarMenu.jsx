@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import HomeIcon from "@mui/icons-material/Home";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import CreditScoreTwoToneIcon from "@mui/icons-material/CreditScoreTwoTone";
 // import { AccountNavigation } from "./DashboardPages/AccountNavigation";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -47,10 +50,19 @@ const DashboardSideBarMenu = () => {
     if (linksActive === "/dashboard") {
       setActiveMenuName("Markets");
     }
+    if (linksActive === "/dashboard/user") {
+      setActiveMenuName("Account Details");
+    }
     if (linksActive === "/dashboard/swap") {
       setActiveMenuName("Swap");
     }
     if (linksActive === "/dashboard/lend/pool/detail") {
+      setActiveMenuName("Pool Details");
+    }
+    if (linksActive === "/dashboard/lend/pool/detail/branch/asset") {
+      setActiveMenuName("Pool Details");
+    }
+    if (linksActive === "/dashboard/lend/pool/detail/transactions") {
       setActiveMenuName("Pool Details");
     }
     if (linksActive === "/dashboard/add") {
@@ -95,7 +107,16 @@ const DashboardSideBarMenu = () => {
     if (linksActive === "/dashboard/lend") {
       setActiveBg("lend");
     }
+    if (linksActive === "/dashboard/user") {
+      setActiveBg("account");
+    }
     if (linksActive === "/dashboard/lend/pool/detail") {
+      setActiveBg("lend");
+    }
+    if (linksActive === "/dashboard/lend/pool/detail/branch/asset") {
+      setActiveBg("lend");
+    }
+    if (linksActive === "/dashboard/lend/pool/detail/transactions") {
       setActiveBg("lend");
     }
 
@@ -209,7 +230,7 @@ const DashboardSideBarMenu = () => {
                         : "sidebarListItem"
                     }
                   >
-                    <BarChartIcon className="sidebarIcon" />
+                    <CreditScoreTwoToneIcon className="sidebarIcon" />
                     Borrow
                   </li>
                 </Link>
@@ -230,7 +251,7 @@ const DashboardSideBarMenu = () => {
                         : "sidebarListItem"
                     }
                   >
-                    <BarChartIcon className="sidebarIcon" />
+                    <MonetizationOnIcon className="sidebarIcon" />
                     Lend
                   </li>
                 </Link>
@@ -278,27 +299,33 @@ const DashboardSideBarMenu = () => {
                     liquidity
                   </li>
                 </Link>
+
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
                 <Link
-                  to="/dashboard/whitepaper"
+                  to="/dashboard/user"
                   className="link"
-                  id="whitepaper"
+                  id="account"
                   onClick={changeBg}
                 >
                   <li
                     className={
-                      activeBg == "whitepaper"
+                      activeBg == "account"
                         ? "sidebarListItem list-item-active"
                         : "sidebarListItem"
                     }
                   >
-                    <DescriptionIcon className="sidebarIcon" />
-                    White Paper
+                    <AccountCircleIcon className="sidebarIcon" />
+                    Account
                   </li>
                 </Link>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
@@ -339,7 +366,7 @@ const DashboardSideBarMenu = () => {
                         : "sidebarListItem"
                     }
                   >
-                    <BarChartIcon className="sidebarIcon" />
+                    <CreditScoreTwoToneIcon className="sidebarIcon" />
                     Borrow
                   </li>
                   <span className="hover_link_txt">Borrow</span>
@@ -361,7 +388,7 @@ const DashboardSideBarMenu = () => {
                         : "sidebarListItem"
                     }
                   >
-                    <BarChartIcon className="sidebarIcon" />
+                    <MonetizationOnIcon className="sidebarIcon" />
                     Lend
                   </li>
                   <span className="hover_link_txt">Lend</span>
@@ -415,6 +442,29 @@ const DashboardSideBarMenu = () => {
                   </li>
                   <span className="hover_link_txt">Liquidity</span>
                 </Link>
+
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                <Link
+                  to="/dashboard/user"
+                  id="account"
+                  className="link hover_link"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "account"
+                        ? "sidebarListItem small_list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <AccountCircleIcon className="sidebarIcon" />
+                    Account
+                  </li>
+                  <span className="hover_link_txt">Liquidity</span>
+                </Link>
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
@@ -424,24 +474,7 @@ const DashboardSideBarMenu = () => {
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
-                <Link
-                  to="/dashboard/whitepaper"
-                  id="whitepaper"
-                  className="link hover_link"
-                  onClick={changeBg}
-                >
-                  <li
-                    className={
-                      activeBg == "whitepaper"
-                        ? "sidebarListItem small_list-item-active"
-                        : "sidebarListItem"
-                    }
-                  >
-                    <DescriptionIcon className="sidebarIcon" />
-                    Whitepaper
-                  </li>
-                  <span className="hover_link_txt">Whitepaper</span>
-                </Link>
+
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
@@ -458,9 +491,21 @@ const DashboardSideBarMenu = () => {
             <hr className="hrr" />
             <div className="social_handles_cont">
               <div className="social_handles_cont_div">
-                <FacebookRoundedIcon />
-                <TelegramIcon />
-                <TwitterIcon />
+                <a href="">
+                  <FacebookRoundedIcon className="socail_links_icon" />
+                </a>
+                <a href="">
+                  <TelegramIcon className="socail_links_icon" />
+                </a>
+                <a href="">
+                  <TwitterIcon className="socail_links_icon" />
+                </a>
+                <a href="">
+                  <LinkedInIcon className="socail_links_icon" />
+                </a>
+                <a href="">
+                  <span className="medium_icon">M</span>
+                </a>
               </div>
               {/* <div className="social_handles_cont_div">
                 <InstagramIcon />

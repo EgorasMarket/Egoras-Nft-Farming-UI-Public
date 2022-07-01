@@ -125,6 +125,7 @@ const File = () => {
   const feedExchangeData = (initialSpeed4, initialSpeed5) => {
     setChangeShow("");
     setChangeShow1("");
+
     if (account) {
       setModal(true);
       setStage("loading");
@@ -139,38 +140,39 @@ const File = () => {
         getPrice(ticker, library.getSigner()).then((price) => {
           setDefaultPrice(formatEther(price.message));
         });
+
         getTickerInfo(ticker, library.getSigner()).then((data) => {
-          console.log(data)
+          console.log(data);
           library
             .getBalance(account)
             .then((balance) => {
-
               setAssetAddress(data.message.asset);
-              tokenBalance(
-                data.message.asset,
-                account,
-                library.getSigner()
-              ).then((tb) => {
-                console.log(
-                  formatEther(balance),
-                  formatEther(tb.message),
-                  initialSpeed4,
-                  initialSpeed5
-                );
-                setBaseBalance(
-                  initialSpeed4 != "BNB"
-                    ? formatEther(balance)
-                    : formatEther(tb.message)
-                );
-                setCoinBalance(
-                  initialSpeed4 == "BNB"
-                    ? formatEther(balance)
-                    : formatEther(tb.message)
-                );
-                setModal(false);
-              });
+              tokenBalance(data.message.asset, account, library.getSigner())
+                .then((tb) => {
+                  console.log(
+                    formatEther(balance),
+                    formatEther(tb.message),
+                    initialSpeed4,
+                    initialSpeed5
+                  );
+                  setBaseBalance(
+                    initialSpeed4 != "BNB"
+                      ? formatEther(balance)
+                      : formatEther(tb.message)
+                  );
+                  setCoinBalance(
+                    initialSpeed4 == "BNB"
+                      ? formatEther(balance)
+                      : formatEther(tb.message)
+                  );
+                  setModal(false);
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
             })
-            .catch(() => {
+            .catch((error) => {
+              console.log(error);
               setBaseBalance(null);
             });
         });
@@ -188,24 +190,32 @@ const File = () => {
           setToPrice(formatEther(price.message));
         });
 
-        getTickerInfo(ticker1, library.getSigner()).then((data) => {
-          tokenBalance(data.message.asset, account, library.getSigner()).then(
-            (tb) => {
-              getTickerInfo(ticker2, library.getSigner()).then((data2) => {
-                setAssetAddress(data2.message.asset);
-                tokenBalance(
-                  data2.message.asset,
-                  account,
-                  library.getSigner()
-                ).then((tlb) => {
-                  setCoinBalance(formatEther(tb.message));
-                  setBaseBalance(formatEther(tlb.message));
-                  setModal(false);
+        getTickerInfo(ticker1, library.getSigner())
+          .then((data) => {
+            tokenBalance(data.message.asset, account, library.getSigner()).then(
+              (tb) => {
+                getTickerInfo(ticker2, library.getSigner()).then((data2) => {
+                  setAssetAddress(data2.message.asset);
+                  tokenBalance(
+                    data2.message.asset,
+                    account,
+                    library.getSigner()
+                  )
+                    .then((tlb) => {
+                      setCoinBalance(formatEther(tb.message));
+                      setBaseBalance(formatEther(tlb.message));
+                      setModal(false);
+                    })
+                    .catch((error) => {
+                      console.log(error);
+                    });
                 });
-              });
-            }
-          );
-        });
+              }
+            );
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     } else {
       setModal(true);
@@ -223,7 +233,14 @@ const File = () => {
     error,
   } = context;
   useEffect(() => {
-    feedExchangeData(speed4, speed5);
+    console.log(chainId);
+
+    if (chainId !== "56") {
+      console.log("Please connect to binance smart chain network");
+    } else if (chainId === "56") {
+      feedExchangeData(speed4, speed5, chainId);
+      console.log("You are connected to the right network");
+    }
   }, [chainId, account, connector]);
   useEffect(() => {
     const results = sweet.filter((person) =>
@@ -524,6 +541,15 @@ const File = () => {
       );
     }
   }, 7000);
+
+  // useEffect(() => {
+  //   console.log(
+  //     window.ethereum.networkVersion,
+  //     "window.ethereum.networkVersion"
+  //   );
+
+  // });
+
   return (
     <div className="other2">
       <div>
