@@ -7,6 +7,12 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import CloseIcon from "@mui/icons-material/Close";
+import { parseEther, formatEther } from "@ethersproject/units";
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
 // import DashboardIcon from "@mui/icons-material/Dashboard";
 // import Accordion from "../Accordion";
 // import InventoryIcon from "@mui/icons-material/Inventory";
@@ -14,10 +20,47 @@ import CloseIcon from "@mui/icons-material/Close";
 // import ReceiptIcon from "@mui/icons-material/Receipt";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import CopyAllIcon from "@mui/icons-material/CopyAll";
+import {
+  lendUS,
+  takeDividend,
+  takeBackLoan,
+  getTotalLended,
+  getInvestorsDividend,
+  userStats,
+  system,
+  burnAccumulatedDividend,
+} from "../../web3/index";
 const DashBoard_lend_details_page = () => {
+  const context = useWeb3React();
   const [activeLink, setActiveLink] = useState("");
+  const [loanId, setLoanId] = useState();
   const [assetModal, setAssetModal] = React.useState(false);
   const [backModal, setBackModal] = React.useState(false);
+  const [branch, setBranch] = React.useState("Branch");
+  const [chainLoanDetails, setChainLoanDetails] = useState({});
+  const [text, setText] = useState(
+    "Transacting with blockchain, please wait..."
+  );
+  const [hash, setHash] = useState("");
+  const [unlocking, setUnlocking] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [task, setTask] = useState("collateral");
+  const [stage, setStage] = useState("connect");
+  const [isLoading, setIsLoading] = useState(false);
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
+  const [formData, setFormData] = useState({
+    BackAmount: "",
+  });
+  const { BackAmount } = formData;
   const toggleAssetModal = () => {
     setAssetModal(!assetModal);
     // setBackModal(!backModal);
@@ -596,6 +639,45 @@ const DashBoard_lend_details_page = () => {
       Status: "Ongoing",
     },
   ];
+
+  const handleBackChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const submitBackedAmount = () => {
+    console.log(formData, "=====formdata=====");
+  };
+  const BackLoan = async (e) => {
+    // setTask("paypack");
+    // setUnlocking(false);
+    // setStage("loading");
+    // setModal(!modal);
+    // setIsLoading(true);
+    // setText("Withdrawing, please wait...");
+    let ret = await lendUS(
+      "rru",
+      "23567",
+      parseEther(formData.BackAmount.toString(), "wei").toString(),
+      library.getSigner()
+    );
+    console.log(ret);
+    // if (ret.status == true) {
+    //   // localStorage.setItem("unlocking", true);
+    //   // localStorage.setItem("unlockingHash", ret.message.hash);
+    //   // setText("Sending token please wait aleast 1/2 minutes");
+    //   // setHash(ret.message.hash);
+    //   // setStage("success");
+    //   console.log(ret);
+    // } else if (ret.status == false) {
+    //   if (ret.message.code < 0) {
+    //     setText(ret.message.data.message);
+    //   } else if (ret.message.code == 4001) {
+    //     setText(ret.message.message);
+    //   }
+    //   setStage("error");
+    //   setIsLoading(false);
+    // }
+  };
   return (
     <div className="other2">
       {/* get started section start */}
@@ -923,6 +1005,9 @@ const DashBoard_lend_details_page = () => {
                     type="number"
                     className="back_modal_input"
                     placeholder="0.00 Engn"
+                    name="BackAmount"
+                    value={BackAmount}
+                    onChange={handleBackChange}
                   />
                   <div className="back_modal_input_amnt_head_minimum">
                     Minimum Amount: 50,000.00 Engn
@@ -934,7 +1019,9 @@ const DashBoard_lend_details_page = () => {
                 <span className="amount_earned_mnthly_value"> 13%</span>
               </div>
               <div className="back_loan_btn_div">
-                <button className="back_loan_btn">Fund</button>
+                <button className="back_loan_btn" onClick={BackLoan}>
+                  Fund
+                </button>
               </div>
             </div>
           </div>
