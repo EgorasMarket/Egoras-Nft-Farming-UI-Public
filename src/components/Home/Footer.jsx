@@ -47,6 +47,9 @@ const Footer = () => {
     if (currentPage === "/dashboard/swap") {
       setShowFooter(false);
     }
+    if (currentPage === "/dashboard/user") {
+      setShowFooter(false);
+    }
     if (currentPage === "/dashboard/lend/pool/detail") {
       setShowFooter(false);
     }

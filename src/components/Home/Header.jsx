@@ -139,6 +139,9 @@ const Header = () => {
     if (currentPage === "/dashboard/lend/pool/detail") {
       setshowHeader(false);
     }
+    if (currentPage === "/dashboard/user") {
+      setshowHeader(false);
+    }
     if (currentPage === "/dashboard/swap") {
       setshowHeader(false);
     }

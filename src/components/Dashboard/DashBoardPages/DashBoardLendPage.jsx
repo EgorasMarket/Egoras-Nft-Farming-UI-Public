@@ -14,12 +14,13 @@ const DashBoardLendPage = () => {
   const [categoryBtn, setCategoryBtn] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [activeBtn, setActivrBtn] = useState("Ongoing");
+  const [activeBtn, setActivrBtn] = useState("Active");
   const [age, setAge] = React.useState("");
 
   const handleChange = (event) => {
     setAge(event.target.value);
   };
+
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);
   };
@@ -46,7 +47,7 @@ const DashBoardLendPage = () => {
       InvestmentCapacity: "1.82",
       PoolValue: "5,368,699",
       SeniorAPY: "10.87",
-      Status: "Ongoing",
+      Status: "Active",
     },
     {
       img: "/img/pool_asset_icon.png",
@@ -55,7 +56,7 @@ const DashBoardLendPage = () => {
       InvestmentCapacity: "1.82",
       PoolValue: "5,368,699",
       SeniorAPY: "10.87",
-      Status: "Closed",
+      Status: "Active",
     },
     {
       img: "/img/pool_asset_icon.png",
@@ -64,7 +65,7 @@ const DashBoardLendPage = () => {
       InvestmentCapacity: "1.82",
       PoolValue: "5,368,699",
       SeniorAPY: "10.87",
-      Status: "Ongoing",
+      Status: "Active",
     },
     {
       img: "/img/pool_asset_icon.png",
@@ -73,7 +74,7 @@ const DashBoardLendPage = () => {
       InvestmentCapacity: "1.82",
       PoolValue: "5,368,699",
       SeniorAPY: "10.87",
-      Status: "Closed",
+      Status: "Active",
     },
     {
       img: "/img/pool_asset_icon.png",
@@ -82,7 +83,7 @@ const DashBoardLendPage = () => {
       InvestmentCapacity: "1.82",
       PoolValue: "5,368,699",
       SeniorAPY: "10.87",
-      Status: "Closed",
+      Status: "Active",
     },
     {
       img: "/img/pool_asset_icon.png",
@@ -91,7 +92,7 @@ const DashBoardLendPage = () => {
       InvestmentCapacity: "1.82",
       PoolValue: "5,368,699",
       SeniorAPY: "10.87",
-      Status: "Ongoing",
+      Status: "Active",
     },
     {
       img: "/img/pool_asset_icon.png",
@@ -100,7 +101,7 @@ const DashBoardLendPage = () => {
       InvestmentCapacity: "1.82",
       PoolValue: "5,368,699",
       SeniorAPY: "10.87",
-      Status: "Ongoing",
+      Status: "Active",
     },
     {
       img: "/img/pool_asset_icon.png",
@@ -109,7 +110,7 @@ const DashBoardLendPage = () => {
       InvestmentCapacity: "1.82",
       PoolValue: "5,368,699",
       SeniorAPY: "10.87",
-      Status: "Ongoing",
+      Status: "Active",
     },
     {
       img: "/img/pool_asset_icon.png",
@@ -118,7 +119,7 @@ const DashBoardLendPage = () => {
       InvestmentCapacity: "1.82",
       PoolValue: "5,368,699",
       SeniorAPY: "10.87",
-      Status: "Closed",
+      Status: "Active",
     },
     {
       img: "/img/pool_asset_icon.png",
@@ -127,7 +128,7 @@ const DashBoardLendPage = () => {
       InvestmentCapacity: "1.82",
       PoolValue: "5,368,699",
       SeniorAPY: "10.87",
-      Status: "Closed",
+      Status: "Active",
     },
     {
       img: "/img/pool_asset_icon.png",
@@ -136,7 +137,7 @@ const DashBoardLendPage = () => {
       InvestmentCapacity: "1.82",
       PoolValue: "5,368,699",
       SeniorAPY: "10.87",
-      Status: "Closed",
+      Status: "Active",
     },
     {
       img: "/img/pool_asset_icon.png",
@@ -145,7 +146,7 @@ const DashBoardLendPage = () => {
       InvestmentCapacity: "1.82",
       PoolValue: "5,368,699",
       SeniorAPY: "10.87",
-      Status: "Ongoing",
+      Status: "Active",
     },
     {
       img: "/img/pool_asset_icon.png",
@@ -154,7 +155,7 @@ const DashBoardLendPage = () => {
       InvestmentCapacity: "1.82",
       PoolValue: "5,368,699",
       SeniorAPY: "10.87",
-      Status: "Closed",
+      Status: "Active",
     },
     {
       img: "/img/pool_asset_icon.png",
@@ -163,7 +164,7 @@ const DashBoardLendPage = () => {
       InvestmentCapacity: "1.82",
       PoolValue: "5,368,699",
       SeniorAPY: "10.87",
-      Status: "Ongoing",
+      Status: "Active",
     },
     {
       img: "/img/pool_asset_icon.png",
@@ -172,7 +173,7 @@ const DashBoardLendPage = () => {
       InvestmentCapacity: "1.82",
       PoolValue: "5,368,699",
       SeniorAPY: "10.87",
-      Status: "Closed",
+      Status: "Active",
     },
     {
       img: "/img/pool_asset_icon.png",
@@ -181,7 +182,7 @@ const DashBoardLendPage = () => {
       InvestmentCapacity: "1.82",
       PoolValue: "5,368,699",
       SeniorAPY: "10.87",
-      Status: "Ongoing",
+      Status: "Active",
     },
   ];
   return (
@@ -290,47 +291,13 @@ const DashBoardLendPage = () => {
                       label="Sort by branch"
                       onChange={handleChange}
                     >
-                      <MenuItem value={10}>Agip Branch</MenuItem>
-                      <MenuItem value={20}>Oyigbo Branch</MenuItem>
-                      <MenuItem value={30}>RU Branch</MenuItem>
+                      <MenuItem value={1}>All Branches</MenuItem>
+                      <MenuItem value={2}>Agip Branch</MenuItem>
+                      <MenuItem value={3}>Oyigbo Branch</MenuItem>
+                      <MenuItem value={4}>RU Branch</MenuItem>
                     </Select>
                   </FormControl>
                   {/* </Box> */}
-                </div>
-                <div className="filter_table_area_2">
-                  <div
-                    id="Ongoing"
-                    className={
-                      activeBtn == "Ongoing"
-                        ? "filter_table_btn1_active"
-                        : "filter_table_btn1"
-                    }
-                    onClick={toggleActiveBtn}
-                  >
-                    Ongoing
-                  </div>
-                  <div
-                    id="All"
-                    className={
-                      activeBtn == "All"
-                        ? "filter_table_btn1_active"
-                        : "filter_table_btn1"
-                    }
-                    onClick={toggleActiveBtn}
-                  >
-                    All Pools
-                  </div>
-                  <div
-                    id="Closed"
-                    className={
-                      activeBtn == "Closed"
-                        ? "filter_table_btn1_active"
-                        : "filter_table_btn1"
-                    }
-                    onClick={toggleActiveBtn}
-                  >
-                    Closed
-                  </div>
                 </div>
               </div>
               <table className="assets-table">
@@ -338,7 +305,7 @@ const DashBoardLendPage = () => {
                   <tr className="assets">
                     <th className="assets-category-titles-heading1">Pool</th>
                     <th className="assets-category-titles-heading1">
-                      Investment Capacity
+                      Lending Capacity
                     </th>
                     <th className="assets-category-titles-heading1 right">
                       Pool Value
@@ -371,211 +338,71 @@ const DashBoardLendPage = () => {
                   {/* =============== */}
                   {/* =============== */}
                   {/* =============== */}
-                  {activeBtn === "Ongoing"
-                    ? searchResults
-                        .filter((person) => person.Status == "Ongoing")
-                        .map((asset) => (
-                          <tr className="assets-category-row  transitionMe">
-                            <td className="assets-category-data">
-                              <div className="assets-data">
-                                <img
-                                  src={asset.img}
-                                  alt=""
-                                  className="assets-list-icon_pool_icon"
-                                />
+                  {searchResults.map((asset) => (
+                    <tr className="assets-category-row  transitionMe">
+                      <td className="assets-category-data">
+                        <div className="assets-data">
+                          <img
+                            src={asset.img}
+                            alt=""
+                            className="assets-list-icon_pool_icon"
+                          />
 
-                                <div className="assets-data-pool_name">
-                                  {asset.PoolName}
-                                  <span className="poolName_txt">
-                                    {asset.PoolNameText}
-                                  </span>
-                                </div>
-                              </div>
-                            </td>
-                            <td className="assets-category-data1">
-                              <div className="assets-data-name_pool_invest_capcity">
-                                <div className="investmentcapacity_box">
-                                  {" "}
-                                  {asset.InvestmentCapacity}M Engn
-                                </div>
-                              </div>
-                            </td>
-                            <td className="assets-category-data1b">
-                              <div className="assets-data-name_pool">
-                                {asset.PoolValue}{" "}
-                                <span className="asset_symbol"> Engn</span>
-                              </div>
-                            </td>
-                            <td className="assets-category-data1b stable-content">
-                              <div className="assets-data-name_pool ">
-                                {asset.SeniorAPY}
-                                <span className="asset_symbol"> %</span>
-                              </div>
-                            </td>
-                            <td className="assets-category-data1b ratio-content">
-                              <div
-                                className="assets-data-name_pool "
-                                style={
-                                  asset.Status === "Ongoing"
-                                    ? { color: "#1fb73f" }
-                                    : asset.Status === "Closed"
-                                    ? { color: "#e6a538" }
-                                    : null
-                                }
-                              >
-                                <div className="status_column">
-                                  {asset.Status}
-                                  <CircleIcon className="status_circle" />
-                                </div>
-                              </div>
-                            </td>
-                            <td className="assets-category-data-last">
-                              <a
-                                href="/dashboard/lend/pool/detail"
-                                className="assets-btn"
-                              >
-                                See details{" "}
-                                <EastIcon className="see_more_icon" />
-                              </a>
-                            </td>
-                          </tr>
-                        ))
-                    : activeBtn === "All"
-                    ? searchResults.map((asset) => (
-                        <tr className="assets-category-row  transitionMe">
-                          <td className="assets-category-data">
-                            <div className="assets-data">
-                              <img
-                                src={asset.img}
-                                alt=""
-                                className="assets-list-icon_pool_icon"
-                              />
-
-                              <div className="assets-data-pool_name">
-                                {asset.PoolName}
-                                <span className="poolName_txt">
-                                  {asset.PoolNameText}
-                                </span>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="assets-category-data1">
-                            <div className="assets-data-name_pool_invest_capcity">
-                              <div className="investmentcapacity_box">
-                                {" "}
-                                {asset.InvestmentCapacity}M Engn
-                              </div>
-                            </div>
-                          </td>
-                          <td className="assets-category-data1b">
-                            <div className="assets-data-name_pool">
-                              {asset.PoolValue}{" "}
-                              <span className="asset_symbol"> Engn</span>
-                            </div>
-                          </td>
-                          <td className="assets-category-data1b stable-content">
-                            <div className="assets-data-name_pool ">
-                              {asset.SeniorAPY}
-                              <span className="asset_symbol"> %</span>
-                            </div>
-                          </td>
-                          <td className="assets-category-data1b ratio-content">
-                            <div
-                              className="assets-data-name_pool "
-                              style={
-                                asset.Status === "Ongoing"
-                                  ? { color: "#1fb73f" }
-                                  : asset.Status === "Closed"
-                                  ? { color: "#e6a538" }
-                                  : null
-                              }
-                            >
-                              <div className="status_column">
-                                {asset.Status}
-                                <CircleIcon className="status_circle" />
-                              </div>
-                            </div>
-                          </td>
-                          <td className="assets-category-data-last">
-                            <a
-                              href="/dashboard/lend/pool/detail"
-                              className="assets-btn"
-                            >
-                              See details <EastIcon className="see_more_icon" />
-                            </a>
-                          </td>
-                        </tr>
-                      ))
-                    : activeBtn === "Closed"
-                    ? searchResults
-                        .filter((person) => person.Status == "Closed")
-                        .map((asset) => (
-                          <tr className="assets-category-row  transitionMe">
-                            <td className="assets-category-data">
-                              <div className="assets-data">
-                                <img
-                                  src={asset.img}
-                                  alt=""
-                                  className="assets-list-icon_pool_icon"
-                                />
-
-                                <div className="assets-data-pool_name">
-                                  {asset.PoolName}
-                                  <span className="poolName_txt">
-                                    {asset.PoolNameText}
-                                  </span>
-                                </div>
-                              </div>
-                            </td>
-                            <td className="assets-category-data1">
-                              <div className="assets-data-name_pool_invest_capcity">
-                                <div className="investmentcapacity_box">
-                                  {" "}
-                                  {asset.InvestmentCapacity}M Engn
-                                </div>
-                              </div>
-                            </td>
-                            <td className="assets-category-data1b">
-                              <div className="assets-data-name_pool">
-                                {asset.PoolValue}{" "}
-                                <span className="asset_symbol"> Engn</span>
-                              </div>
-                            </td>
-                            <td className="assets-category-data1b stable-content">
-                              <div className="assets-data-name_pool ">
-                                {asset.SeniorAPY}
-                                <span className="asset_symbol"> %</span>
-                              </div>
-                            </td>
-                            <td className="assets-category-data1b ratio-content">
-                              <div
-                                className="assets-data-name_pool "
-                                style={
-                                  asset.Status === "Ongoing"
-                                    ? { color: "#1fb73f" }
-                                    : asset.Status === "Closed"
-                                    ? { color: "#e6a538" }
-                                    : null
-                                }
-                              >
-                                <div className="status_column">
-                                  {asset.Status}
-                                  <CircleIcon className="status_circle" />
-                                </div>
-                              </div>
-                            </td>
-                            <td className="assets-category-data-last">
-                              <a
-                                href="/dashboard/lend/pool/detail"
-                                className="assets-btn"
-                              >
-                                See details{" "}
-                                <EastIcon className="see_more_icon" />
-                              </a>
-                            </td>
-                          </tr>
-                        ))
-                    : null}
+                          <div className="assets-data-pool_name">
+                            {asset.PoolName}
+                            <span className="poolName_txt">
+                              {asset.PoolNameText}
+                            </span>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="assets-category-data1">
+                        <div className="assets-data-name_pool_invest_capcity">
+                          <div className="investmentcapacity_box">
+                            {" "}
+                            {asset.InvestmentCapacity}M Engn
+                          </div>
+                        </div>
+                      </td>
+                      <td className="assets-category-data1b">
+                        <div className="assets-data-name_pool">
+                          {asset.PoolValue}{" "}
+                          <span className="asset_symbol"> Engn</span>
+                        </div>
+                      </td>
+                      <td className="assets-category-data1b stable-content">
+                        <div className="assets-data-name_pool ">
+                          {asset.SeniorAPY}
+                          <span className="asset_symbol"> %</span>
+                        </div>
+                      </td>
+                      <td className="assets-category-data1b ratio-content">
+                        <div
+                          className="assets-data-name_pool "
+                          style={
+                            asset.Status === "Active"
+                              ? { color: "#1fb73f" }
+                              : asset.Status === "Active"
+                              ? { color: "#e6a538" }
+                              : null
+                          }
+                        >
+                          <div className="status_column">
+                            {asset.Status}
+                            <CircleIcon className="status_circle" />
+                          </div>
+                        </div>
+                      </td>
+                      <td className="assets-category-data-last">
+                        <a
+                          href="/dashboard/lend/pool/detail"
+                          className="assets-btn"
+                        >
+                          See details <EastIcon className="see_more_icon" />
+                        </a>
+                      </td>
+                    </tr>
+                  ))}
                   {/* =================== */}
                   {/* =================== */}
                   {/* =================== */}
