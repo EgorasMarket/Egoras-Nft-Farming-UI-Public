@@ -925,13 +925,13 @@ const DashBoard_lend_details_page = () => {
                     placeholder="0.00 Engn"
                   />
                   <div className="back_modal_input_amnt_head_minimum">
-                    Minimum Amount: #50,000.00 Engn
+                    Minimum Amount: 50,000.00 Engn
                   </div>
                 </span>
               </div>
               <div className="amount_earned_mnthly">
-                Expected Earnings Monthly:{" "}
-                <span className="amount_earned_mnthly_value">0.00 Engn</span>
+                Expected APY:
+                <span className="amount_earned_mnthly_value"> 13%</span>
               </div>
               <div className="back_loan_btn_div">
                 <button className="back_loan_btn">Fund</button>

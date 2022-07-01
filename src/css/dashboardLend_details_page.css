@@ -455,7 +455,7 @@ button.pool_detail_heading_area1_invest_btn {
   color: #898989;
 }
 .amount_earned_mnthly_value {
-  font-size: 15px;
+  /* font-size: 15px; */
   font-weight: 600;
   color: #000;
 }

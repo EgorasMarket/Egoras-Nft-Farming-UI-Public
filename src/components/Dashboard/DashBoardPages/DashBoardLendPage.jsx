@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import "../../../css/dashboardLend.css";
 import CircleIcon from "@mui/icons-material/Circle";
 import EastIcon from "@mui/icons-material/East";
+import { API_URL as api_url } from "../../../actions/types";
+import { config } from "../../../actions/Config";
+import axios from "axios";
+// import { Context } from "../../context/Context";
+import { UserContext } from "../../context/Context";
+
 // import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -11,6 +17,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 const DashBoardLendPage = () => {
+  const { account } = useContext(UserContext);
+  console.log(account);
   const [categoryBtn, setCategoryBtn] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -185,6 +193,18 @@ const DashBoardLendPage = () => {
       Status: "Active",
     },
   ];
+
+  useEffect(() => {
+    axios
+      .get(api_url + "/v1/rewards/get/reward/by/" + 23, null, config)
+      .then((data) => {
+        console.log(data, "powerful");
+      })
+      .catch((err) => {
+        //console.log(err); // "oh, no!"
+      });
+  }, []);
+
   return (
     <div className="other2">
       {/* get started section start */}
