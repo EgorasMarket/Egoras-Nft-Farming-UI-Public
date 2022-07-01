@@ -350,7 +350,7 @@ const Header = () => {
               </a> */}
                 </ul>
                 <div>
-                  <a href="/products">Products</a>
+                  {/* <a href="/products">Products</a> */}
 
                   <Authenticate isHome="false" />
                 </div>
