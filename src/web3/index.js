@@ -5,6 +5,7 @@ import EX from "./contracts/exchange.json";
 import erc20 from "./contracts/erc20.json";
 import EgorasLoanV2Facet from "./contracts/V2/EgorasLoanV2Facet.json";
 import EgorasSwapFacet from "./contracts/V2/EgorasSwapFacet.json";
+import COINS from "./contracts/V2/coins.json";
 const contractInstance = (signer) => {
   return new Contract(LOAN.address, LOAN.abi, signer);
 };
@@ -358,6 +359,45 @@ const checkAllowance = async (address, owner, amount, signer) => {
     };
   }
 };
+
+const checkAllowanceL = async (owner, amount, signer) => {
+  try {
+    const instance = erc20Instance(COINS.engn, signer);
+    let result = await instance.allowance(owner, EgorasLoanV2Facet.address);
+
+    if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
+      return {
+        status: true,
+      };
+    } else {
+      return {
+        status: false,
+      };
+    }
+  } catch (error) {
+    return {
+      status: false,
+    };
+  }
+};
+
+const unluckToken2 = async (amount, signer) => {
+  try {
+    const instance = erc20Instance(COINS.engn, signer);
+    let result = await instance.approve(EgorasLoanV2Facet.address, amount);
+    return {
+      message: result.hash,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
 const unluckToken = async (address, amount, signer) => {
   console.log();
   try {
@@ -567,5 +607,7 @@ export {
   getInvestorsDividend,
   userStats,
   system,
+  checkAllowanceL,
+  unluckToken2,
   burnAccumulatedDividend,
 };

@@ -56,12 +56,12 @@ function Dashboard() {
           />
           <Route
             exact
-            path="/dashboard/lend/pool/detail"
+            path="/dashboard/lend/pool/:branchAddress/detail"
             component={DashBoard_lend_details_page}
           />
           <Route
             exact
-            path="/dashboard/lend/pool/detail/branch/asset"
+            path="/dashboard/lend/pool/detail/branch/:branchAddress/asset"
             component={DashBoardBranchAsset}
           />
           <Route

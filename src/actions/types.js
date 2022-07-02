@@ -11,4 +11,4 @@
 // export const API_URL = "https://d127bd2bcb6cb0.localhost.run";
 // export const API_URL = "http://localhost:4000";
 // export const API_URL = "https://earner.egoras.com";
-export const API_URL = "http://192.168.43.179:4000";
+export const API_URL = "http://192.168.43.179:5000";

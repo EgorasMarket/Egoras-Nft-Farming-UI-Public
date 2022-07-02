@@ -13,14 +13,47 @@ import InventoryIcon from "@mui/icons-material/Inventory";
 import CloseIcon from "@mui/icons-material/Close";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-
+import axios from "axios";
+import { config } from "../../../actions/Config";
+import { API_URL as api_url } from "../../../actions/types";
+// import Web3 from "web3";
+import {
+  checkAllowance,
+  unluckToken,
+  transactReceipt,
+  getPrice,
+  getTickerInfo,
+  tokenBalance,
+  open,
+  getLatestLoan,
+  repay,
+  topup,
+  draw,
+} from "../../../web3/index";
+import { parseEther, formatEther } from "@ethersproject/units";
 const DashBoardUserDetails = () => {
   const [walletAddr, setWalletAddr] = useState(
     "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
   );
   const [conecttxt, setConnectTxt] = useState("Not Connected");
   const [seemore, setSeemore] = useState(false);
-  const { account } = useWeb3React();
+  const [tokenBal, setTokenBal] = useState(0.0);
+  const [UserPoolsDetails, setUserPoolsDetails] = useState({
+    lockedBalance: "0.00",
+    pool: "0",
+  });
+  const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
+  //   const { account } = useWeb3React();
   const avatarRef = useRef();
   useEffect(() => {
     setWalletAddr(account);
@@ -39,6 +72,33 @@ const DashBoardUserDetails = () => {
       element.appendChild(icon);
     }
   }, [account, avatarRef]);
+  useEffect(() => {
+    axios
+      .get(api_url + "/api/lend/user/account/" + account, null, config)
+      .then((data) => {
+        console.log(data.data.payload, "powerful333333");
+        // console.log(txnhash);
+        // setBranches(data.data.payload);
+        setUserPoolsDetails({
+          lockedBalance: data.data.payload[0].balance,
+          pool: data.data.payload[0].pool,
+        });
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, []);
+  useEffect(() => {
+    // if (account === true) {
+    // var tokenInst = new web3.eth.Contract(tokenABI, tokenAddress);
+    // tokenInst.methods
+    //   .balanceOf("0x260c25f991171850f48889eb9d8aF11998D20c30")
+    //   .call()
+    //   .then(function (bal) {
+    //     console.log(bal);
+    //   });l
+  }, []);
+
   const assets = [
     {
       id: 1,
@@ -305,12 +365,17 @@ const DashBoardUserDetails = () => {
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
                   <span>Your Balance</span>
-                  <span>0.00 Engn</span>
+                  <span>{tokenBal} Engn</span>
                 </div>
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
                   <span>Locked</span>
-                  <span>0.00 Engn</span>
+
+                  {UserPoolsDetails.lockedBalance === null ? (
+                    <span>0.00 Engn</span>
+                  ) : (
+                    <span>{UserPoolsDetails.lockedBalance} Engn</span>
+                  )}
                 </div>
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
@@ -337,7 +402,7 @@ const DashBoardUserDetails = () => {
                 <hr class="custom_hr"></hr> */}
                 <div className="user_details_body1_body_cont1">
                   <span>Total Pools Funded</span>
-                  <span>0</span>
+                  <span>{UserPoolsDetails.pool}</span>
                 </div>
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
