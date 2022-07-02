@@ -17,8 +17,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 const DashBoardLendPage = () => {
-  const { account } = useContext(UserContext);
-  console.log(account);
+  const { Branches } = useContext(UserContext);
+  console.log(Branches);
   const [categoryBtn, setCategoryBtn] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -128,7 +128,7 @@ const DashBoardLendPage = () => {
                     Total Value Locked(in Pools)
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    407.92M <span className="usd_sign">USD</span>
+                    407.92M <span className="usd_sign">₦</span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
@@ -150,7 +150,7 @@ const DashBoardLendPage = () => {
                     Liquid Assets
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    14.21M <span className="usd_sign">USD</span>
+                    14.21M <span className="usd_sign">₦</span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
@@ -171,7 +171,7 @@ const DashBoardLendPage = () => {
                     Default Protection:{" "}
                     <span className="lending_area1_last_cont1_divs_cont_value">
                       {" "}
-                      2.26M USD
+                      2.26M ₦
                     </span>{" "}
                   </span>
                   <span className="lending_area1_last_cont1_divs_cont3">
@@ -241,6 +241,9 @@ const DashBoardLendPage = () => {
                     <th className="assets-category-titles-heading1 right ">
                       Status
                     </th>
+                    <th className="assets-category-titles-heading1 right ">
+                      Action
+                    </th>
                   </tr>
                 </thead>
 
@@ -263,20 +266,22 @@ const DashBoardLendPage = () => {
                   {/* =============== */}
                   {/* =============== */}
                   {/* =============== */}
-                  {searchResults.map((asset) => (
+                  {Branches.map((asset) => (
                     <tr className="assets-category-row  transitionMe">
                       <td className="assets-category-data">
                         <div className="assets-data">
                           <img
-                            src={asset.img}
+                            src="/img/pool_asset_icon.png"
                             alt=""
                             className="assets-list-icon_pool_icon"
                           />
 
                           <div className="assets-data-pool_name">
-                            {asset.PoolName}
+                            {asset.name} Branch
                             <span className="poolName_txt">
-                              {asset.PoolNameText}
+                              {/* {asset.PoolNameText}
+                               */}
+                              Emerging Markets
                             </span>
                           </div>
                         </div>
@@ -285,13 +290,13 @@ const DashBoardLendPage = () => {
                         <div className="assets-data-name_pool_invest_capcity">
                           <div className="investmentcapacity_box">
                             {" "}
-                            {asset.InvestmentCapacity}M Engn
+                            {parseInt(asset.amount).toFixed(0)} Engn
                           </div>
                         </div>
                       </td>
                       <td className="assets-category-data1b">
                         <div className="assets-data-name_pool">
-                          {asset.PoolValue}{" "}
+                          {parseInt(asset.funded).toFixed(2)}{" "}
                           <span className="asset_symbol"> Engn</span>
                         </div>
                       </td>
@@ -304,22 +309,26 @@ const DashBoardLendPage = () => {
                         <div
                           className="assets-data-name_pool "
                           style={
-                            asset.Status === "Active"
+                            asset.suspended === "true"
                               ? { color: "#1fb73f" }
-                              : asset.Status === "Active"
+                              : asset.suspended === "false"
                               ? { color: "#e6a538" }
                               : null
                           }
                         >
                           <div className="status_column">
-                            {asset.Status}
+                            {asset.suspended === "true"
+                              ? "Active"
+                              : asset.suspended === "false"
+                              ? "Inactive"
+                              : null}
                             <CircleIcon className="status_circle" />
                           </div>
                         </div>
                       </td>
                       <td className="assets-category-data-last">
                         <a
-                          href={`/dashboard/lend/pool/detail`}
+                          href={`/dashboard/lend/pool/${asset.branchAddress}/detail`}
                           className="assets-btn"
                         >
                           See details <EastIcon className="see_more_icon" />

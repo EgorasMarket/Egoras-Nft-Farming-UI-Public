@@ -13,14 +13,49 @@ import InventoryIcon from "@mui/icons-material/Inventory";
 import CloseIcon from "@mui/icons-material/Close";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-
+import axios from "axios";
+import { config } from "../../../actions/Config";
+import { API_URL as api_url } from "../../../actions/types";
+// import Web3 from "web3";
+import {
+  checkAllowance,
+  unluckToken,
+  transactReceipt,
+  getPrice,
+  getTickerInfo,
+  tokenBalance,
+  open,
+  getLatestLoan,
+  repay,
+  topup,
+  draw,
+} from "../../../web3/index";
+import { parseEther, formatEther } from "@ethersproject/units";
 const DashBoardUserDetails = () => {
   const [walletAddr, setWalletAddr] = useState(
     "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
   );
   const [conecttxt, setConnectTxt] = useState("Not Connected");
   const [seemore, setSeemore] = useState(false);
-  const { account } = useWeb3React();
+  const [assetDetailModal, setAssetDetailModal] = useState("");
+
+  const [tokenBal, setTokenBal] = useState(0.0);
+  const [UserPoolsDetails, setUserPoolsDetails] = useState({
+    lockedBalance: "0.00",
+    pool: "0",
+  });
+  const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
+  //   const { account } = useWeb3React();
   const avatarRef = useRef();
   useEffect(() => {
     setWalletAddr(account);
@@ -39,6 +74,45 @@ const DashBoardUserDetails = () => {
       element.appendChild(icon);
     }
   }, [account, avatarRef]);
+  useEffect(() => {
+    axios
+      .get(api_url + "/api/lend/user/account/" + account, null, config)
+      .then((data) => {
+        console.log(data.data.payload, "powerful333333");
+        // console.log(txnhash);
+        // setBranches(data.data.payload);
+        setUserPoolsDetails({
+          lockedBalance: data.data.payload[0].balance,
+          pool: data.data.payload[0].pool,
+        });
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .get(api_url + "/api/lend/user/transaction/" + walletAddr, null, config)
+      .then((data) => {
+        console.log(data.data.payload, "powerful333333");
+        // console.log(txnhash);
+        // setBranches(data.data.payload);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, []);
+  useEffect(() => {
+    // if (account === true) {
+    // var tokenInst = new web3.eth.Contract(tokenABI, tokenAddress);
+    // tokenInst.methods
+    //   .balanceOf("0x260c25f991171850f48889eb9d8aF11998D20c30")
+    //   .call()
+    //   .then(function (bal) {
+    //     console.log(bal);
+    //   });l
+  }, []);
+
   const assets = [
     {
       id: 1,
@@ -50,10 +124,10 @@ const DashBoardUserDetails = () => {
         "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
       Amount: "150,000",
       Senior_APY: "13.10",
-      //   Status: "Ongoing",
+      Status: "Ongoing",
     },
     {
-      id: 1,
+      id: 2,
       img: "/img/pool_asset_icon.png",
       Pool: "Real-World Asset Market",
       Date: "June 3rd 2022",
@@ -62,10 +136,10 @@ const DashBoardUserDetails = () => {
         "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
       Amount: "150,000",
       Senior_APY: "13.10",
-      //   Status: "Ongoing",
+      Status: "Ongoing",
     },
     {
-      id: 1,
+      id: 3,
       img: "/img/pool_asset_icon.png",
       Pool: "Real-World Asset Market",
       Date: "June 3rd 2022",
@@ -74,10 +148,10 @@ const DashBoardUserDetails = () => {
         "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
       Amount: "150,000",
       Senior_APY: "13.10",
-      //   Status: "Ongoing",
+      Status: "Ongoing",
     },
     {
-      id: 1,
+      id: 4,
       img: "/img/pool_asset_icon.png",
       Pool: "Real-World Asset Market",
       Date: "June 3rd 2022",
@@ -86,10 +160,10 @@ const DashBoardUserDetails = () => {
         "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
       Amount: "150,000",
       Senior_APY: "13.10",
-      //   Status: "Ongoing",
+      Status: "Ongoing",
     },
     {
-      id: 1,
+      id: 5,
       img: "/img/pool_asset_icon.png",
       Pool: "Real-World Asset Market",
       Date: "June 3rd 2022",
@@ -98,10 +172,10 @@ const DashBoardUserDetails = () => {
         "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
       Amount: "150,000",
       Senior_APY: "13.10",
-      //   Status: "Ongoing",
+      Status: "Ongoing",
     },
     {
-      id: 1,
+      id: 6,
       img: "/img/pool_asset_icon.png",
       Pool: "Real-World Asset Market",
       Date: "June 3rd 2022",
@@ -110,10 +184,10 @@ const DashBoardUserDetails = () => {
         "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
       Amount: "150,000",
       Senior_APY: "13.10",
-      //   Status: "Ongoing",
+      Status: "Ongoing",
     },
     {
-      id: 1,
+      id: 7,
       img: "/img/pool_asset_icon.png",
       Pool: "Real-World Asset Market",
       Date: "June 3rd 2022",
@@ -122,10 +196,10 @@ const DashBoardUserDetails = () => {
         "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
       Amount: "150,000",
       Senior_APY: "13.10",
-      //   Status: "Ongoing",
+      Status: "Ongoing",
     },
     {
-      id: 1,
+      id: 8,
       img: "/img/pool_asset_icon.png",
       Pool: "Real-World Asset Market",
       Date: "June 3rd 2022",
@@ -134,10 +208,10 @@ const DashBoardUserDetails = () => {
         "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
       Amount: "150,000",
       Senior_APY: "13.10",
-      //   Status: "Ongoing",
+      Status: "Ongoing",
     },
     {
-      id: 1,
+      id: 9,
       img: "/img/pool_asset_icon.png",
       Pool: "Real-World Asset Market",
       Date: "June 3rd 2022",
@@ -146,10 +220,10 @@ const DashBoardUserDetails = () => {
         "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
       Amount: "150,000",
       Senior_APY: "13.10",
-      //   Status: "Ongoing",
+      Status: "Ongoing",
     },
     {
-      id: 1,
+      id: 10,
       img: "/img/pool_asset_icon.png",
       Pool: "Real-World Asset Market",
       Date: "June 3rd 2022",
@@ -158,10 +232,10 @@ const DashBoardUserDetails = () => {
         "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
       Amount: "150,000",
       Senior_APY: "13.10",
-      //   Status: "Ongoing",
+      Status: "Ongoing",
     },
     {
-      id: 1,
+      id: 11,
       img: "/img/pool_asset_icon.png",
       Pool: "Real-World Asset Market",
       Date: "June 3rd 2022",
@@ -170,10 +244,10 @@ const DashBoardUserDetails = () => {
         "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
       Amount: "150,000",
       Senior_APY: "13.10",
-      //   Status: "Ongoing",
+      Status: "Ongoing",
     },
     {
-      id: 1,
+      id: 12,
       img: "/img/pool_asset_icon.png",
       Pool: "Real-World Asset Market",
       Date: "June 3rd 2022",
@@ -182,10 +256,10 @@ const DashBoardUserDetails = () => {
         "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
       Amount: "150,000",
       Senior_APY: "13.10",
-      //   Status: "Ongoing",
+      Status: "Ongoing",
     },
     {
-      id: 1,
+      id: 13,
       img: "/img/pool_asset_icon.png",
       Pool: "Real-World Asset Market",
       Date: "June 3rd 2022",
@@ -194,84 +268,22 @@ const DashBoardUserDetails = () => {
         "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
       Amount: "150,000",
       Senior_APY: "13.10",
-      //   Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      //   Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      //   Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      //   Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      //   Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      //   Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      //   Status: "Ongoing",
+      Status: "Ongoing",
     },
   ];
 
   const toggleSeemore = () => {
     setSeemore(!seemore);
+  };
+
+  const closeAssetDetailModal = () => {
+    setAssetDetailModal("");
+    console.log("i am not here");
+  };
+  const ChangeAssetDetailModal = (e) => {
+    let currentTarget = e.currentTarget.id;
+    console.log(currentTarget);
+    setAssetDetailModal(currentTarget);
   };
   return (
     <div className="other2">
@@ -305,12 +317,17 @@ const DashBoardUserDetails = () => {
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
                   <span>Your Balance</span>
-                  <span>0.00 Engn</span>
+                  <span>{tokenBal} Engn</span>
                 </div>
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
                   <span>Locked</span>
-                  <span>0.00 Engn</span>
+
+                  {UserPoolsDetails.lockedBalance === null ? (
+                    <span>0.00 Engn</span>
+                  ) : (
+                    <span>{UserPoolsDetails.lockedBalance} Engn</span>
+                  )}
                 </div>
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
@@ -337,7 +354,7 @@ const DashBoardUserDetails = () => {
                 <hr class="custom_hr"></hr> */}
                 <div className="user_details_body1_body_cont1">
                   <span>Total Pools Funded</span>
-                  <span>0</span>
+                  <span>{UserPoolsDetails.pool}</span>
                 </div>
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
@@ -354,14 +371,12 @@ const DashBoardUserDetails = () => {
                   <span>Earnings</span>
                   <span>0.00 Engn</span>
                 </div>
-                <hr class="custom_hr"></hr>
-                <button className="redeem_btn">Redeem Earnings</button>
               </div>
             </div>
 
             <div className="recent_transaction_body">
               <div className="recent_transaction_body_head" id="transact_head">
-                Recent Transactions
+                Backed Loans
               </div>
               <div className="asset_list_body">
                 <div className="asset_list_body_head list_body_head2">
@@ -378,8 +393,7 @@ const DashBoardUserDetails = () => {
                       <div
                         className="asset_list_body_body_cont_1"
                         id={data.id}
-
-                        //   onClick={ChangeAssetDetailModal}
+                        onClick={ChangeAssetDetailModal}
                       >
                         {/* <div className="asset_list_body_body_cont_1a">
                               {data.id}
@@ -427,6 +441,169 @@ const DashBoardUserDetails = () => {
       {/* ============================= */}
       {/* ============================= */}
       {/* ============================= */}
+      {assets.map((data) => (
+        <>
+          {assetDetailModal == data.id ? (
+            <div className="asset_detail_modal_div">
+              <div className="asset_detail_modal_div_conts">
+                <div className="asset_detail_heading" style={{ margin: "0" }}>
+                  <div className="pool_detail_heading_area1">
+                    <img
+                      src={data.img}
+                      alt=""
+                      className="pool_detail_heading_area1_img"
+                      //   onClick={toggleImgDiv}
+                      style={{ cursor: "pointer" }}
+                    />
+                    <div className="pool_detail_heading_area1_txt_cont">
+                      <div className="pool_detail_heading_area1_txt_cont_1">
+                        {data.Pool}
+                      </div>
+                      <div className="pool_detail_heading_area1_txt_cont_2">
+                        Assets {">"} Asset{data.id}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* ====== */}
+                {/* ====== */}
+                {/* ====== */}
+                <div className="asset_status_details_div1">
+                  <div className="asset_status_details_div1_head">
+                    Status{" "}
+                    <div className="staus_btn_div">
+                      <button
+                        className={
+                          data.Status === "Ongoing"
+                            ? "status_btn_ongoing"
+                            : data.Status === "Closed"
+                            ? "status_btn_closed"
+                            : "status_btn"
+                        }
+                      >
+                        {data.Status}
+                      </button>
+                    </div>
+                  </div>
+                  <div className="asset_status_details_div1_body">
+                    <div className="asset_status_details_div1_body1">
+                      <div className="asset_status_details_div1_body1_cont1">
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          Available for Financing
+                        </div>
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          {data.Amount} Engn
+                        </div>
+                      </div>
+                      <hr class="custom_hr"></hr>
+                      <div className="asset_status_details_div1_body1_cont1">
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          Outstanding
+                        </div>
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          {data.Amount} Engn
+                        </div>
+                      </div>
+                      <hr class="custom_hr"></hr>
+                      <div className="asset_status_details_div1_body1_cont1">
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          Asset Duration
+                        </div>
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          {data.EndDate}
+                        </div>
+                      </div>
+                      <hr class="custom_hr"></hr>
+                      <div className="asset_status_details_div1_body1_cont1">
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          Amount
+                        </div>
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          {data.Amount}Engn
+                        </div>
+                      </div>
+                    </div>
+                    {/* ======== */}
+                    {/* ======== */}
+                    {/* ======== */}
+                    {/* ======== */}
+                    <div className="asset_status_details_div1_body1">
+                      <div className="asset_status_details_div1_body1_cont1">
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          Risk group
+                        </div>
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          0
+                        </div>
+                      </div>
+                      <hr class="custom_hr"></hr>
+                      <div className="asset_status_details_div1_body1_cont1">
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          Financing fee
+                        </div>
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          13 %
+                        </div>
+                      </div>
+                      <hr class="custom_hr"></hr>
+                      <div className="asset_status_details_div1_body1_cont1">
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          Date
+                        </div>
+                        <div className="asset_status_details_div1_body1_cont1_txt1">
+                          {data.EndDate}
+                        </div>
+                      </div>
+                      {/* <div className="asset_status_details_div1_body1_cont1">
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            Financed by
+                          </div>
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            Nov 13, 2024
+                          </div>
+                        </div> */}
+                    </div>
+                  </div>
+                </div>
+                {/* ============ */}
+                {/* ============ */}
+                {/* ============ */}
+                {/* ============ */}
+
+                {/* ============ */}
+                {/* ============ */}
+                {/* ============ */}
+                {/* ============ */}
+                <div className="Asset_Originator_Details_cont">
+                  <div className="Asset_Originator_Details_cont_heading">
+                    Transaction Data
+                  </div>
+                  <div className="transactionData_body">
+                    <div className="transactionData_body1">Transaction Id</div>
+                    <div className="transactionData_body1">
+                      <a
+                        href="https://bscscan.com/tx/0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7"
+                        className="transaction_id_link"
+                        target="_blank"
+                      >
+                        {data.txHash.substring(0, 28) + "..."}
+                      </a>
+                      <CopyAllIcon className="copy_all_tx_hash_icon" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="close_asset_detail_modal"
+                onClick={closeAssetDetailModal}
+              >
+                <CloseIcon className="close_asset_detail_modal_icon" />
+                Close
+              </div>
+            </div>
+          ) : null}
+        </>
+      ))}
     </div>
   );
 };
