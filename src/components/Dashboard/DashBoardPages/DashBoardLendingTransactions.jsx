@@ -1,23 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 // import "../../../css/dashboard_branch_assets.css";
-import { Link } from "react-router-dom";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import Accordion from "../Accordion";
-import InventoryIcon from "@mui/icons-material/Inventory";
-import CloseIcon from "@mui/icons-material/Close";
-import ReceiptIcon from "@mui/icons-material/Receipt";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import CopyAllIcon from "@mui/icons-material/CopyAll";
-import { AreaChart, Area, Tooltip, ResponsiveContainer } from "recharts";
-import { UserContext } from "../../context/Context";
-import axios from "axios";
-import { config } from "../../../actions/Config";
-import { API_URL as api_url } from "../../../actions/types";
+import { Link } from 'react-router-dom';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import Accordion from '../Accordion';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import CloseIcon from '@mui/icons-material/Close';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import CopyAllIcon from '@mui/icons-material/CopyAll';
+import {
+  AreaChart,
+  Area,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
+import { UserContext } from '../../context/Context';
+import axios from 'axios';
+import { config } from '../../../actions/Config';
+import { API_URL as api_url } from '../../../actions/types';
 import {
   Web3ReactProvider,
   useWeb3React,
   UnsupportedChainIdError,
-} from "@web3-react/core";
+} from '@web3-react/core';
 const DashBoardLendingTransactions = ({ match }) => {
   const context = useWeb3React();
   const {
@@ -30,39 +35,42 @@ const DashBoardLendingTransactions = ({ match }) => {
     active,
     error,
   } = context;
-  const [activeBtn, setActivrBtn] = useState("Ongoing");
+  const [activeBtn, setActivrBtn] = useState('Ongoing');
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
-  const [activeLink, setActiveLink] = useState("");
+  const [activeLink, setActiveLink] = useState('');
   const [assetDetailModal, setAssetDetailModal] = useState(0);
   const [transactions, setTransactions] = useState([]);
   const [BranchDetails, setBranchDetails] = useState({
-    branchName: "",
-    amount: "",
+    branchName: '',
+    amount: '',
   });
   const currentPage = window.location.pathname;
-  const urlArr = currentPage.split("/");
+  const urlArr = currentPage.split('/');
   useEffect(() => {
-    if (currentPage === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
-      setActiveLink("Overview");
+    if (
+      currentPage ===
+      '/dashboard/lend/pool/' + urlArr[4] + '/detail'
+    ) {
+      setActiveLink('Overview');
     } else if (
       currentPage ===
-      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+      '/dashboard/lend/pool/detail/branch/' + urlArr[6] + '/asset'
     ) {
-      setActiveLink("Asset");
+      setActiveLink('Asset');
     } else if (
       currentPage ===
-      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+      '/dashboard/lend/pool/detail/' + urlArr[5] + '/transactions'
     ) {
-      setActiveLink("transaction");
+      setActiveLink('transaction');
     }
   });
 
   useEffect(() => {
     if (account) {
       axios
-        .get(api_url + "/api/lend/unique/" + txnhash, null, config)
+        .get(api_url + '/api/lend/unique/' + txnhash, null, config)
         .then((data) => {
-          console.log(data.data.payload, "powerful333333");
+          console.log(data.data.payload, 'powerful333333');
           // console.log(txnhash);
           // setBranches(data.data.payload);
           setBranchDetails({
@@ -80,9 +88,9 @@ const DashBoardLendingTransactions = ({ match }) => {
   useEffect(() => {
     if (account) {
       axios
-        .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
+        .get(api_url + '/api/branch/alltime/' + txnhash, null, config)
         .then((data) => {
-          console.log(data.data.payload, "powerful3333oooo33");
+          console.log(data.data.payload, 'powerful3333oooo33');
           setTransactions(data.data.payload);
         })
         .catch((err) => {
@@ -108,9 +116,9 @@ const DashBoardLendingTransactions = ({ match }) => {
               <Link
                 to={`/dashboard/lend/pool/${txnhash}/detail`}
                 className={
-                  activeLink === "Overview"
-                    ? "pool_lend_details_link_active"
-                    : "pool_lend_details_link"
+                  activeLink === 'Overview'
+                    ? 'pool_lend_details_link_active'
+                    : 'pool_lend_details_link'
                 }
               >
                 <DashboardIcon className="asset_overview_link_icon" />
@@ -120,9 +128,9 @@ const DashBoardLendingTransactions = ({ match }) => {
               <Link
                 to={`/dashboard/lend/pool/detail/branch/${txnhash}/asset`}
                 className={
-                  activeLink === "Asset"
-                    ? "pool_lend_details_link_active"
-                    : "pool_lend_details_link"
+                  activeLink === 'Asset'
+                    ? 'pool_lend_details_link_active'
+                    : 'pool_lend_details_link'
                 }
               >
                 <InventoryIcon className="asset_overview_link_icon" />
@@ -132,9 +140,9 @@ const DashBoardLendingTransactions = ({ match }) => {
               <Link
                 to={`/dashboard/lend/pool/detail/${txnhash}/transactions`}
                 className={
-                  activeLink === "transaction"
-                    ? "pool_lend_details_link_active"
-                    : "pool_lend_details_link"
+                  activeLink === 'transaction'
+                    ? 'pool_lend_details_link_active'
+                    : 'pool_lend_details_link'
                 }
               >
                 <ReceiptIcon className="asset_overview_link_icon" />
@@ -145,10 +153,10 @@ const DashBoardLendingTransactions = ({ match }) => {
               <div className="pool_detail_heading_area1">
                 <img
                   src={
-                    BranchDetails.branchName === "EGORAS OYIGBO"
-                      ? "/img/oyigbo_icon.svg"
-                      : BranchDetails.branchName === "EGORAS AGIP"
-                      ? "/img/agip_icon.svg"
+                    BranchDetails.branchName === 'EGORAS OYIGBO'
+                      ? '/img/oyigbo_icon.svg'
+                      : BranchDetails.branchName === 'EGORAS AGIP'
+                      ? '/img/agip_icon.svg'
                       : null
                   }
                   alt=""
@@ -213,7 +221,13 @@ const DashBoardLendingTransactions = ({ match }) => {
                     margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
                   >
                     <defs>
-                      <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                      <linearGradient
+                        id="colorUv"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
                         <stop
                           offset="5%"
                           stopColor="#60c589"
@@ -252,14 +266,24 @@ const DashBoardLendingTransactions = ({ match }) => {
             {/* ===================== */}
 
             <div className="asset_list_div">
-              <div className="asset_list_heading">Transaction List </div>
+              <div className="asset_list_heading">
+                Transaction List{' '}
+              </div>
               <div className="asset_list_body">
                 <div className="asset_list_body_head">
                   {/* <div className="asset_list_body_head_tab1">Asset Id</div> */}
-                  <div className="asset_list_body_head_tab1">Txn hash</div>
-                  <div className="asset_list_body_head_tab3">Date & Time</div>
-                  <div className="asset_list_body_head_tab5">Amount(Engn)</div>
-                  <div className="asset_list_body_head_tab6">Financing Fee</div>
+                  <div className="asset_list_body_head_tab1">
+                    Txn hash
+                  </div>
+                  <div className="asset_list_body_head_tab3">
+                    Date & Time
+                  </div>
+                  <div className="asset_list_body_head_tab5">
+                    Amount(Engn)
+                  </div>
+                  <div className="asset_list_body_head_tab6">
+                    Financing Fee
+                  </div>
                 </div>
                 <div className="asset_list_body_body_cont">
                   {transactions.map((data) => (
@@ -275,9 +299,10 @@ const DashBoardLendingTransactions = ({ match }) => {
                         <a
                           href={`https://bscscan.com/tx/${data.transactionHash}`}
                           target="_blank"
-                          style={{ color: "#000" }}
+                          style={{ color: '#000' }}
                         >
-                          {data.transactionHash.substring(0, 28) + "..."}
+                          {data.transactionHash.substring(0, 28) +
+                            '...'}
                         </a>
                       </div>
 
@@ -288,7 +313,9 @@ const DashBoardLendingTransactions = ({ match }) => {
                       <div className="asset_list_body_body_cont_1e">
                         {parseInt(data.amount).toFixed()}
                       </div>
-                      <div className="asset_list_body_body_cont_1f">13%</div>
+                      <div className="asset_list_body_body_cont_1f">
+                        13%
+                      </div>
                       {/* <div className="asset_list_body_body_cont_1g">
                         <button
                           className={
