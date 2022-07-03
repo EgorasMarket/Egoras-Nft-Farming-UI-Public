@@ -43,6 +43,7 @@ const DashBoardUserDetails = () => {
   const [seemore, setSeemore] = useState(false);
   const [assetDetailModal, setAssetDetailModal] = useState("");
   const [loanAsset, setLoanAsset] = useState([]);
+  const [disable, setDisable] = useState(true);
 
   const [tokenBal, setTokenBal] = useState(0.0);
   const [UserPoolsDetails, setUserPoolsDetails] = useState({
@@ -399,6 +400,9 @@ const DashBoardUserDetails = () => {
                   <div className="asset_list_body_head_tab1">Pool</div>
                   <div className="asset_list_body_head_tab2">Date</div>
                   <div className="asset_list_body_head_tab3">Amount(Engn)</div>
+                  <div className="asset_list_body_head_tab3">
+                    Amount Funded(Engn)
+                  </div>
                   <div className="asset_list_body_head_tab4">Senior APY</div>
                   <div className="asset_list_body_head_tab7">Txn Hash</div>
                 </div>
@@ -426,7 +430,10 @@ const DashBoardUserDetails = () => {
                           {data.createdAt.slice(0, 10)}
                         </div>
                         <div className="asset_list_body_body_cont_1c">
-                          {parseInt(data.amount).toFixed()}
+                          {parseInt(data.amount).toFixed(2)}
+                        </div>
+                        <div className="asset_list_body_body_cont_1c">
+                          {parseInt(data.funded).toFixed(2)}
                         </div>
                         <div className="asset_list_body_body_cont_1d">13%</div>
                         <div className="asset_list_body_body_cont_1g">
@@ -458,9 +465,11 @@ const DashBoardUserDetails = () => {
       {loanAsset.map((data) => {
         var ms = new Date(data.updatedAt).getTime() + 86400000 * 30;
         // console.log(ms);
-        var tomorrow = new Date(ms);
-        console.log(tomorrow);
-
+        var endDate = new Date(ms);
+        console.log(endDate);
+        if (new Date() === endDate) {
+          setDisable(false);
+        }
         return (
           <>
             {assetDetailModal == data.id ? (
@@ -493,13 +502,15 @@ const DashBoardUserDetails = () => {
                     >
                       <span className="reward_amount">
                         <span className="reward_amount_title">Reward:</span>{" "}
-                        0.00 Engn
+                        {parseFloat(data.funded * 0.015).toFixed(2)} Engn
                       </span>
-                      <Timer deadline={new Date(tomorrow)} />
+                      <Timer deadline={new Date(endDate)} />
                       {/* <span className="reward_txt">Redeem Reward In</span> */}
 
                       <span className="reward_btn_div">
-                        <button className="reward_btn">Reedem</button>
+                        <button className="reward_btn" disabled={disable}>
+                          Reedem
+                        </button>
                       </span>
                     </div>
                   </div>
@@ -527,10 +538,19 @@ const DashBoardUserDetails = () => {
                       <div className="asset_status_details_div1_body1">
                         <div className="asset_status_details_div1_body1_cont1">
                           <div className="asset_status_details_div1_body1_cont1_txt1">
-                            Amount
+                            Pool Amount
                           </div>
                           <div className="asset_status_details_div1_body1_cont1_txt1">
                             {parseInt(data.amount).toFixed()} Engn
+                          </div>
+                        </div>
+                        <hr class="custom_hr"></hr>
+                        <div className="asset_status_details_div1_body1_cont1">
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            Amount Funded
+                          </div>
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            {parseInt(data.funded).toFixed()} Engn
                           </div>
                         </div>
                         <hr class="custom_hr"></hr>

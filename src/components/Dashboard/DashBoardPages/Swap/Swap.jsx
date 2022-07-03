@@ -91,22 +91,7 @@ const Swap = () => {
 
     // else()
   };
-  return (
-    <div className="other2">
-      {/* =================================================================================================================================================================================================================================================================== */}
-      {/* Tokens Section Start */}
-      <section className="" id="token">
-        <div class="eusd-token-page container">
-          <AddLiquidity closeModal={toggleModal} />
-        </div>
-        <img src="/img/token-dots.svg" alt="" className="tokenDots" />
-      </section>
-      {/* Tokens Section End */}
-
-      {/* fourth section end */}
-      {/* {generateModal == true ? <AddLiquidity closeModal={toggleModal} /> : null} */}
-    </div>
-  );
+  return <AddLiquidity closeModal={toggleModal} />;
 };
 
 export default Swap;
