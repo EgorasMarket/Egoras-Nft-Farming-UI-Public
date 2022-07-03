@@ -44,8 +44,14 @@ const Timer = ({ deadline }) => {
 
   return (
     <div>
-      <span>{countdown.days}dd : </span>
-      <span>{countdown.hours}hr : </span>
+      <span>
+        {countdown.days}
+        <span className="time_tick">dd</span> :{" "}
+      </span>
+      <span>
+        {countdown.hours}
+        <span className="time_tick">hr</span> :{" "}
+      </span>
       <span>{countdown.minutes}mm : </span>
       <span>{countdown.seconds}ss</span>
     </div>
