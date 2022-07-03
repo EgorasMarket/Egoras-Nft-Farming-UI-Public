@@ -68,6 +68,7 @@ const DashBoard_lend_details_page = ({ match }) => {
   const [BranchDetails, setBranchDetails] = useState({
     branchName: "",
     amount: "",
+    funded: "",
   });
   console.log(match.params.branchAddress);
   const context = useWeb3React();
@@ -161,35 +162,28 @@ const DashBoard_lend_details_page = ({ match }) => {
     }
   });
   useEffect(() => {
-    axios
-      .get(api_url + "/api/lend/unique/" + txnhash, null, config)
-      .then((data) => {
-        console.log(data.data.payload, "powerful333333");
-        // console.log(txnhash);
-        // setBranches(data.data.payload);
-        setBranchDetails({
-          branchName: data.data.payload[0].name,
-          amount: data.data.payload[0].amount,
+    if (account) {
+      axios
+        .get(api_url + "/api/lend/unique/" + txnhash, null, config)
+        .then((data) => {
+          console.log(data.data.payload, "powerful333333");
+          // console.log(txnhash);
+          // setBranches(data.data.payload);
+          setBranchDetails({
+            branchName: data.data.payload[0].name,
+            amount: data.data.payload[0].amount,
+            funded: data.data.payload[0].funded,
+          });
+          setLoanAssets(data.data.payload);
+        })
+        .catch((err) => {
+          console.log(err); // "oh, no!"
         });
-        setLoanAssets(data.data.payload);
-      })
-      .catch((err) => {
-        console.log(err); // "oh, no!"
-      });
-  }, []);
-  // const toggleImgDiv = () => {
-  //   setImgDiv(!imgDiv);
-  // };
 
-  // const ChangeAssetDetailModal = (e) => {
-  //   let currentTarget = e.currentTarget.id;
-  //   console.log(currentTarget);
-  //   setAssetDetailModal(currentTarget);
-  // };
-  // const closeAssetDetailModal = () => {
-  //   setAssetDetailModal(0);
-  //   console.log("i am not here");
-  // };
+      return;
+    }
+  }, [account]);
+
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);
   };
@@ -352,9 +346,9 @@ const DashBoard_lend_details_page = ({ match }) => {
               <div className="pool_detail_heading_area1">
                 <img
                   src={
-                    BranchDetails.branchName === "OYIGBO"
+                    BranchDetails.branchName === "EGORAS OYIGBO"
                       ? "/img/oyigbo_icon.svg"
-                      : BranchDetails.branchName === "AGIP"
+                      : BranchDetails.branchName === "EGORAS AGIP"
                       ? "/img/agip_icon.svg"
                       : null
                   }
@@ -409,24 +403,13 @@ const DashBoard_lend_details_page = ({ match }) => {
 
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
-                  10.75 <span className="asset_symbol"> %</span>
+                  13 <span className="asset_symbol"> %</span>
                 </div>
                 <div className="pool_detail_sub_area1_area1_cont2">
-                  Senior APY(30 days)
+                  Estimated APY(30 days)
                 </div>
               </div>
               <span className="vertical_rule"></span>
-
-              <div className="pool_detail_sub_area1_area1">
-                <div className="pool_detail_sub_area1_area1_cont1">
-                  48.45 <span className="asset_symbol"> %</span>
-                </div>
-                <div className="pool_detail_sub_area1_area1_cont2">
-                  Junior APY(90 days)
-                </div>
-              </div>
-              <span className="vertical_rule"></span>
-
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
                   {parseInt(BranchDetails.amount).toFixed(2)}{" "}
@@ -448,9 +431,9 @@ const DashBoard_lend_details_page = ({ match }) => {
                 <div className="Asset_Originator_Details_cont_body_head_img_cont">
                   <img
                     src={
-                      BranchDetails.branchName === "OYIGBO"
+                      BranchDetails.branchName === "EGORAS OYIGBO"
                         ? "/img/oyigbo_icon2.svg"
-                        : BranchDetails.branchName === "AGIP"
+                        : BranchDetails.branchName === "EGORAS AGIP"
                         ? "/img/agip_icon2.svg"
                         : null
                     }
@@ -476,10 +459,10 @@ const DashBoard_lend_details_page = ({ match }) => {
                     Issuer
                   </div>
                   <div className="Asset_Originator_Details_cont_body_issuer_cont_txt">
-                    {BranchDetails.branchName === "OYIGBO"
-                      ? "   Oyigbo Branch"
-                      : BranchDetails.branchName === "AGIP"
-                      ? "   Rumueme Branch"
+                    {BranchDetails.branchName === "EGORAS OYIGBO"
+                      ? "Egoras Oyigbo Branch"
+                      : BranchDetails.branchName === "EGORAS AGIP"
+                      ? "Egoras Agip branch"
                       : null}
                   </div>
                 </div>
@@ -508,7 +491,7 @@ const DashBoard_lend_details_page = ({ match }) => {
                     <hr className="custom_hr" />
                     <div className="pool_status_Details_cont_body1_sub_conts">
                       <div className="pool_status_Details_cont_body1_sub_conts_1">
-                        Average APY
+                        Estimated APY
                       </div>
                       <div className="pool_status_Details_cont_body1_sub_conts_2">
                         13.0%
@@ -535,19 +518,10 @@ const DashBoard_lend_details_page = ({ match }) => {
                         Available Liquidity
                       </div>
                       <div className="pool_status_Details_cont_body1_sub_conts_2">
-                        0 Engn
+                        {parseInt(BranchDetails.funded).toFixed(2)} Engn
                       </div>
                     </div>
                     <hr className="custom_hr" />
-
-                    <div className="pool_status_Details_cont_body1_sub_conts">
-                      <div className="pool_status_Details_cont_body1_sub_conts_1">
-                        Cash Drag
-                      </div>
-                      <div className="pool_status_Details_cont_body1_sub_conts_2">
-                        0%
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>

@@ -13,8 +13,23 @@ import { UserContext } from "../../context/Context";
 import axios from "axios";
 import { config } from "../../../actions/Config";
 import { API_URL as api_url } from "../../../actions/types";
-
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
 const DashBoardLendingTransactions = ({ match }) => {
+  const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
   const [activeBtn, setActivrBtn] = useState("Ongoing");
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
   const [activeLink, setActiveLink] = useState("");
@@ -43,306 +58,41 @@ const DashBoardLendingTransactions = ({ match }) => {
   });
 
   useEffect(() => {
-    axios
-      .get(api_url + "/api/lend/unique/" + txnhash, null, config)
-      .then((data) => {
-        console.log(data.data.payload, "powerful333333");
-        // console.log(txnhash);
-        // setBranches(data.data.payload);
-        setBranchDetails({
-          branchName: data.data.payload[0].name,
-          amount: data.data.payload[0].amount,
+    if (account) {
+      axios
+        .get(api_url + "/api/lend/unique/" + txnhash, null, config)
+        .then((data) => {
+          console.log(data.data.payload, "powerful333333");
+          // console.log(txnhash);
+          // setBranches(data.data.payload);
+          setBranchDetails({
+            branchName: data.data.payload[0].name,
+            amount: data.data.payload[0].amount,
+          });
+        })
+        .catch((err) => {
+          console.log(err); // "oh, no!"
         });
-      })
-      .catch((err) => {
-        console.log(err); // "oh, no!"
-      });
-  }, []);
+
+      return;
+    }
+  }, [account]);
   useEffect(() => {
-    axios
-      .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
-      .then((data) => {
-        console.log(data.data.payload, "powerful3333oooo33");
-        setTransactions(data.data.payload);
-      })
-      .catch((err) => {
-        console.log(err); // "oh, no!"
-      });
-  }, []);
-  const data2 = [
-    {
-      PoolValue: 0,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      PoolValue: 100,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      PoolValue: 200,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      PoolValue: 4300,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      PoolValue: 4400,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      PoolValue: 4200,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      PoolValue: 4500,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      PoolValue: 4600,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      PoolValue: 4700,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      PoolValue: 4500,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      PoolValue: 4600,
-      pv: 2400,
-      amt: 2400,
-    },
+    if (account) {
+      axios
+        .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
+        .then((data) => {
+          console.log(data.data.payload, "powerful3333oooo33");
+          setTransactions(data.data.payload);
+        })
+        .catch((err) => {
+          console.log(err); // "oh, no!"
+        });
 
-    {
-      PoolValue: 4600,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      PoolValue: 4800,
-      pv: 2400,
-      amt: 2400,
-    },
-  ];
-  const assets = [
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 2,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Closed",
-    },
-    {
-      id: 3,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 4,
+      return;
+    }
+  }, [account]);
 
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Closed",
-    },
-    {
-      id: 5,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Closed",
-    },
-    {
-      id: 6,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 7,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 8,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 9,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Closed",
-    },
-    {
-      id: 10,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Closed",
-    },
-    {
-      id: 11,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Closed",
-    },
-    {
-      id: 12,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 13,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Closed",
-    },
-    {
-      id: 14,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 15,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Closed",
-    },
-    {
-      id: 16,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-  ];
   return (
     <div className="other2">
       {/* get started section start */}
@@ -395,9 +145,9 @@ const DashBoardLendingTransactions = ({ match }) => {
               <div className="pool_detail_heading_area1">
                 <img
                   src={
-                    BranchDetails.branchName === "OYIGBO"
+                    BranchDetails.branchName === "EGORAS OYIGBO"
                       ? "/img/oyigbo_icon.svg"
-                      : BranchDetails.branchName === "AGIP"
+                      : BranchDetails.branchName === "EGORAS AGIP"
                       ? "/img/agip_icon.svg"
                       : null
                   }

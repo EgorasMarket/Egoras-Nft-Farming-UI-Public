@@ -11,12 +11,28 @@ import axios from "axios";
 import { UserContext } from "../../context/Context";
 import Nodata from "./nodataComponent/Nodata";
 // import PropTypes from "prop-types";
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 const DashBoardLendPage = () => {
+  const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
   const { Branches } = useContext(UserContext);
   console.log(Branches);
   const [categoryBtn, setCategoryBtn] = useState("All");
@@ -36,80 +52,17 @@ const DashBoardLendPage = () => {
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
-  useEffect(() => {
-    const results = assets.filter((person) =>
-      person.PoolName.toString()
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase())
-    );
-    setSearchResults(results);
-  }, [searchTerm]);
+  //   useEffect(() => {
+  //     const results = assets.filter((person) =>
+  //       person.PoolName.toString()
+  //         .toLowerCase()
+  //         .includes(searchTerm.toLowerCase())
+  //     );
+  //     setSearchResults(results);
+  //   }, [searchTerm]);
   const triggerAll = () => {
     setCategoryBtn("All");
   };
-
-  const assets = [
-    {
-      id: "1",
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      PoolNameText: "Market of RWA pools, built on the Aave protocol",
-      InvestmentCapacity: "1.82",
-      PoolValue: "5,368,699",
-      SeniorAPY: "10.87",
-      Status: "Active",
-    },
-    {
-      id: "2",
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      PoolNameText: "Market of RWA pools, built on the Aave protocol",
-      InvestmentCapacity: "1.82",
-      PoolValue: "5,368,699",
-      SeniorAPY: "10.87",
-      Status: "Active",
-    },
-    {
-      id: "3",
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      PoolNameText: "Market of RWA pools, built on the Aave protocol",
-      InvestmentCapacity: "1.82",
-      PoolValue: "5,368,699",
-      SeniorAPY: "10.87",
-      Status: "Active",
-    },
-    {
-      id: "4",
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      PoolNameText: "Market of RWA pools, built on the Aave protocol",
-      InvestmentCapacity: "1.82",
-      PoolValue: "5,368,699",
-      SeniorAPY: "10.87",
-      Status: "Active",
-    },
-    {
-      id: "5",
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      PoolNameText: "Market of RWA pools, built on the Aave protocol",
-      InvestmentCapacity: "1.82",
-      PoolValue: "5,368,699",
-      SeniorAPY: "10.87",
-      Status: "Active",
-    },
-    {
-      id: "6",
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      PoolNameText: "Market of RWA pools, built on the Aave protocol",
-      InvestmentCapacity: "1.82",
-      PoolValue: "5,368,699",
-      SeniorAPY: "10.87",
-      Status: "Active",
-    },
-  ];
 
   useEffect(() => {}, []);
 
@@ -277,9 +230,9 @@ const DashBoardLendPage = () => {
                           <div className="assets-data">
                             <img
                               src={
-                                asset.name === "OYIGBO"
+                                asset.name === "EGORAS OYIGBO"
                                   ? "/img/oyigbo_icon.svg"
-                                  : asset.name === "AGIP"
+                                  : asset.name === "EGORAS AGIP"
                                   ? "/img/agip_icon.svg"
                                   : null
                               }
