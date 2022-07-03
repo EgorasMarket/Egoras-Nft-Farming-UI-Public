@@ -11,6 +11,7 @@ import CopyAllIcon from "@mui/icons-material/CopyAll";
 import { AreaChart, Area, Tooltip, ResponsiveContainer } from "recharts";
 import { UserContext } from "../../context/Context";
 import axios from "axios";
+import Nodata from "./nodataComponent/Nodata";
 import { config } from "../../../actions/Config";
 // import { API_URL as api_url } from "../actions/types";
 import { API_URL as api_url } from "../../../actions/types";
@@ -68,7 +69,7 @@ const DashBoardBranchAsset = ({ match }) => {
       axios
         .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
         .then((data) => {
-          console.log(data.data.payload, "powerful");
+          console.log(data.data.payload, "made man");
 
           setLoans(data.data.payload);
         })
@@ -275,7 +276,12 @@ const DashBoardBranchAsset = ({ match }) => {
                     width={730}
                     height={150}
                     data={graphData}
-                    margin={{ top: 10, tright: 0, left: 0, bottom: 0 }}
+                    margin={{
+                      top: 10,
+                      tright: 0,
+                      left: 0,
+                      bottom: 0,
+                    }}
                   >
                     <defs>
                       <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -362,7 +368,7 @@ const DashBoardBranchAsset = ({ match }) => {
                   <div className="asset_list_body_head_tab1">Asset Name</div>
                   <div className="asset_list_body_head_tab3">Date & Time</div>
                   <div className="asset_list_body_head_tab4 maturity_date">
-                    Maturity Date
+                    Duration
                   </div>
                   <div className="asset_list_body_head_tab5">Amount(Engn)</div>
                   <div className="asset_list_body_head_tab6 body_head_tab6">
@@ -371,8 +377,16 @@ const DashBoardBranchAsset = ({ match }) => {
                   <div className="asset_list_body_head_tab7">Status</div>
                 </div>
                 <div className="asset_list_body_body_cont">
-                  {activeBtn === "Ongoing"
-                    ? loans
+                  {activeBtn === "Ongoing" ? (
+                    loans.length <= 0 ? (
+                      <div className="no_loans_div">
+                        <div className="no_loans_div_cont">
+                          <Nodata />
+                          No funded pools yet.
+                        </div>{" "}
+                      </div>
+                    ) : (
+                      loans
                         .filter((person) => person.state == "OPEN")
                         .map((data) => (
                           <div
@@ -391,7 +405,7 @@ const DashBoardBranchAsset = ({ match }) => {
                               {data.createdAt.slice(0, 10)}
                             </div>
                             <div className="asset_list_body_body_cont_1d">
-                              {data.createdAt.slice(0, 10)}
+                              {data.length}month(s)
                             </div>
                             <div className="asset_list_body_body_cont_1e">
                               {parseInt(data.amount).toFixed()}
@@ -415,8 +429,17 @@ const DashBoardBranchAsset = ({ match }) => {
                             <KeyboardArrowRightIcon className="arrow_right_arrow" />
                           </div>
                         ))
-                    : activeBtn === "All"
-                    ? loans.map((data) => (
+                    )
+                  ) : activeBtn === "All" ? (
+                    loans.length <= 0 ? (
+                      <div className="no_loans_div">
+                        <div className="no_loans_div_cont">
+                          <Nodata />
+                          No funded pools yet.
+                        </div>{" "}
+                      </div>
+                    ) : (
+                      loans.map((data) => (
                         <div
                           className="asset_list_body_body_cont_1"
                           id={data.newLoanID}
@@ -433,7 +456,7 @@ const DashBoardBranchAsset = ({ match }) => {
                             {data.createdAt.slice(0, 10)}
                           </div>
                           <div className="asset_list_body_body_cont_1d">
-                            {data.createdAt.slice(0, 10)}
+                            {data.length}month(s)
                           </div>
                           <div className="asset_list_body_body_cont_1e">
                             {parseInt(data.amount).toFixed()}
@@ -457,8 +480,17 @@ const DashBoardBranchAsset = ({ match }) => {
                           <KeyboardArrowRightIcon className="arrow_right_arrow" />
                         </div>
                       ))
-                    : activeBtn === "Closed"
-                    ? loans
+                    )
+                  ) : activeBtn === "Closed" ? (
+                    loans.length <= 0 ? (
+                      <div className="no_loans_div">
+                        <div className="no_loans_div_cont">
+                          <Nodata />
+                          No funded pools yet.
+                        </div>{" "}
+                      </div>
+                    ) : (
+                      loans
                         .filter((person) => person.state === "FILLED")
                         .map((data) => (
                           <div
@@ -477,7 +509,7 @@ const DashBoardBranchAsset = ({ match }) => {
                               {data.createdAt.slice(0, 10)}
                             </div>
                             <div className="asset_list_body_body_cont_1d">
-                              {data.createdAt.slice(0, 10)}
+                              {data.length}month(s)
                             </div>
                             <div className="asset_list_body_body_cont_1e">
                               {parseInt(data.amount).toFixed()}
@@ -501,7 +533,8 @@ const DashBoardBranchAsset = ({ match }) => {
                             <KeyboardArrowRightIcon className="arrow_right_arrow" />
                           </div>
                         ))
-                    : null}
+                    )
+                  ) : null}
                 </div>
               </div>
             </div>
@@ -514,120 +547,126 @@ const DashBoardBranchAsset = ({ match }) => {
       {/* ============================= */}
       {/* ============================= */}
       {/* ============================= */}
-      {loans.map((data) => (
-        <>
-          {assetDetailModal == data.newLoanID ? (
-            <div className="asset_detail_modal_div">
-              <div className="asset_detail_modal_div_conts">
-                <div className="asset_detail_heading" style={{ margin: "0" }}>
-                  <div className="pool_detail_heading_area1">
-                    <img
-                      src={data.img}
-                      alt=""
-                      className="pool_detail_heading_area1_img"
-                      onClick={toggleImgDiv}
-                      style={{ cursor: "pointer" }}
-                    />
-                    <div className="pool_detail_heading_area1_txt_cont">
-                      <div className="pool_detail_heading_area1_txt_cont_1">
-                        {data.title.substring(0, 15) + "..."}
-                      </div>
-                      <div className="pool_detail_heading_area1_txt_cont_2">
-                        Assets {">"} Asset{data.newLoanID}
+      {loans.map((data) => {
+        const meta = JSON.parse(data.metadata);
+
+        const tHash = `https://bscscan.com/tx/${data.transactionHash}`;
+
+        console.log(meta);
+        return (
+          <>
+            {assetDetailModal == data.newLoanID ? (
+              <div className="asset_detail_modal_div">
+                <div className="asset_detail_modal_div_conts">
+                  <div className="asset_detail_heading" style={{ margin: "0" }}>
+                    <div className="pool_detail_heading_area1">
+                      <img
+                        src={meta.arrayImg}
+                        alt=""
+                        className="pool_detail_heading_area1_img"
+                        onClick={toggleImgDiv}
+                        style={{ cursor: "pointer" }}
+                      />
+                      <div className="pool_detail_heading_area1_txt_cont">
+                        <div className="pool_detail_heading_area1_txt_cont_1">
+                          {data.title.substring(0, 15) + "..."}
+                        </div>
+                        <div className="pool_detail_heading_area1_txt_cont_2">
+                          Assets {">"} Asset{data.newLoanID}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                {/* ====== */}
-                {/* ====== */}
-                {/* ====== */}
-                <div className="asset_status_details_div1">
-                  <div className="asset_status_details_div1_head">
-                    Status{" "}
-                    <div className="staus_btn_div">
-                      <button
-                        className={
-                          data.state === "OPEN"
-                            ? "status_btn_ongoing"
-                            : data.state === "FILLED"
-                            ? "status_btn_closed"
-                            : "status_btn"
-                        }
-                      >
-                        {data.state}
-                      </button>
-                    </div>
-                  </div>
-                  <div className="asset_status_details_div1_body">
-                    <div className="asset_status_details_div1_body1">
-                      <div className="asset_status_details_div1_body1_cont1">
-                        <div className="asset_status_details_div1_body1_cont1_txt1">
-                          Available for Financing
-                        </div>
-                        <div className="asset_status_details_div1_body1_cont1_txt1">
-                          {parseInt(data.amount).toFixed()} Engn
-                        </div>
-                      </div>
-                      <hr class="custom_hr"></hr>
-                      <div className="asset_status_details_div1_body1_cont1">
-                        <div className="asset_status_details_div1_body1_cont1_txt1">
-                          Outstanding
-                        </div>
-                        <div className="asset_status_details_div1_body1_cont1_txt1">
-                          {data.amount - data.funded} Engn
-                        </div>
-                      </div>
-                      <hr class="custom_hr"></hr>
-                      <div className="asset_status_details_div1_body1_cont1">
-                        <div className="asset_status_details_div1_body1_cont1_txt1">
-                          Asset Duration
-                        </div>
-                        <div className="asset_status_details_div1_body1_cont1_txt1">
-                          {data.length}day(s)
-                        </div>
-                      </div>
-                      <hr class="custom_hr"></hr>
-                      <div className="asset_status_details_div1_body1_cont1">
-                        <div className="asset_status_details_div1_body1_cont1_txt1">
-                          Amount
-                        </div>
-                        <div className="asset_status_details_div1_body1_cont1_txt1">
-                          {parseInt(data.amount).toFixed()}Engn
-                        </div>
+                  {/* ====== */}
+                  {/* ====== */}
+                  {/* ====== */}
+                  <div className="asset_status_details_div1">
+                    <div className="asset_status_details_div1_head">
+                      Status{" "}
+                      <div className="staus_btn_div">
+                        <button
+                          className={
+                            data.state === "OPEN"
+                              ? "status_btn_ongoing"
+                              : data.state === "FILLED"
+                              ? "status_btn_closed"
+                              : "status_btn"
+                          }
+                        >
+                          {data.state}
+                        </button>
                       </div>
                     </div>
-                    {/* ======== */}
-                    {/* ======== */}
-                    {/* ======== */}
-                    {/* ======== */}
-                    <div className="asset_status_details_div1_body1">
-                      <div className="asset_status_details_div1_body1_cont1">
-                        <div className="asset_status_details_div1_body1_cont1_txt1">
-                          Risk group
+                    <div className="asset_status_details_div1_body">
+                      <div className="asset_status_details_div1_body1">
+                        <div className="asset_status_details_div1_body1_cont1">
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            Available for Financing
+                          </div>
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            {parseInt(data.amount).toFixed()} Engn
+                          </div>
                         </div>
-                        <div className="asset_status_details_div1_body1_cont1_txt1">
-                          0
+                        <hr class="custom_hr"></hr>
+                        <div className="asset_status_details_div1_body1_cont1">
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            Outstanding
+                          </div>
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            {data.amount - data.funded} Engn
+                          </div>
+                        </div>
+                        <hr class="custom_hr"></hr>
+                        <div className="asset_status_details_div1_body1_cont1">
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            Asset Duration
+                          </div>
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            {data.length}day(s)
+                          </div>
+                        </div>
+                        <hr class="custom_hr"></hr>
+                        <div className="asset_status_details_div1_body1_cont1">
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            Amount
+                          </div>
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            {parseInt(data.amount).toFixed()}Engn
+                          </div>
                         </div>
                       </div>
-                      <hr class="custom_hr"></hr>
-                      <div className="asset_status_details_div1_body1_cont1">
-                        <div className="asset_status_details_div1_body1_cont1_txt1">
-                          Financing fee
+                      {/* ======== */}
+                      {/* ======== */}
+                      {/* ======== */}
+                      {/* ======== */}
+                      <div className="asset_status_details_div1_body1">
+                        <div className="asset_status_details_div1_body1_cont1">
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            Risk group
+                          </div>
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            0
+                          </div>
                         </div>
-                        <div className="asset_status_details_div1_body1_cont1_txt1">
-                          13 %
+                        <hr class="custom_hr"></hr>
+                        <div className="asset_status_details_div1_body1_cont1">
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            Financing fee
+                          </div>
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            13 %
+                          </div>
                         </div>
-                      </div>
-                      <hr class="custom_hr"></hr>
-                      <div className="asset_status_details_div1_body1_cont1">
-                        <div className="asset_status_details_div1_body1_cont1_txt1">
-                          Date
+                        <hr class="custom_hr"></hr>
+                        <div className="asset_status_details_div1_body1_cont1">
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            Date
+                          </div>
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            {data.createdAt.slice(0, 10)}
+                          </div>
                         </div>
-                        <div className="asset_status_details_div1_body1_cont1_txt1">
-                          {data.createdAt.slice(0, 10)}
-                        </div>
-                      </div>
-                      {/* <div className="asset_status_details_div1_body1_cont1">
+                        {/* <div className="asset_status_details_div1_body1_cont1">
                           <div className="asset_status_details_div1_body1_cont1_txt1">
                             Financed by
                           </div>
@@ -635,129 +674,125 @@ const DashBoardBranchAsset = ({ match }) => {
                             Nov 13, 2024
                           </div>
                         </div> */}
+                      </div>
                     </div>
                   </div>
-                </div>
-                {/* ============ */}
-                {/* ============ */}
-                {/* ============ */}
-                {/* ============ */}
-                <div className="Asset_Originator_Details_cont">
-                  <div className="Asset_Originator_Details_cont_heading">
-                    Asset Details
-                  </div>
-                  <div className="Asset_Originator_Details_cont_body">
-                    {/* <div className="Asset_Originator_Details_cont_body_head_img_cont">
+                  {/* ============ */}
+                  {/* ============ */}
+                  {/* ============ */}
+                  {/* ============ */}
+                  <div className="Asset_Originator_Details_cont">
+                    <div className="Asset_Originator_Details_cont_heading">
+                      Asset Details
+                    </div>
+                    <div className="Asset_Originator_Details_cont_body">
+                      {/* <div className="Asset_Originator_Details_cont_body_head_img_cont">
                         <img
                           src="/img/branch_detail_img.png"
                           className="Asset_Originator_Details_cont_body_head_img"
                         />
                       </div> */}
-                    <div className="Asset_Originator_Details_cont_body_txt">
-                      Branch is a financial technology company that lends money
-                      to consumers using machine learning algorithms to
-                      determine credit worthiness via customers' smartphones.
-                      Branch was founded in 2015 and has operations in Kenya,
-                      Nigeria, Tanzania, Mexico and India, and has since
-                      originated over $500M in loans to over 4 millions
-                      borrowers. This Tinlake pool will consist of tranches of a
-                      secured non convertible debenture with a maturity of 3
-                      years backed by a portfolio of loans made to customers.The
-                      current weighted average loan balance is $49 (ranging from
-                      $6 to $2,500) with average maturity of 70 days.
-                    </div>
-                    <div className="asset_details_spec_div">
-                      {/* <div className="asset_details_spec_div_title"> */}
-                      <Accordion
-                        title="Asset Specifications"
-                        customClass=" accordionClass "
-                      >
-                        <div className="asset_spec_body">
-                          <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
-                            Ram: 4gb
+                      <div
+                        className="Asset_Originator_Details_cont_body_txt"
+                        dangerouslySetInnerHTML={{
+                          __html: meta.story,
+                        }}
+                      ></div>
+                      <div className="asset_details_spec_div">
+                        {/* <div className="asset_details_spec_div_title"> */}
+                        {/* <Accordion
+                          title="Asset Specifications"
+                          customClass=" accordionClass "
+                        >
+                          <div className="asset_spec_body">
+                            <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
+                              Ram: 4gb
+                            </div>
+                            <hr class="custom_hr"></hr>
+                            <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
+                              Rom: 128gb
+                            </div>
+                            <hr class="custom_hr"></hr>
+                            <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
+                              Display: 6.43 inches
+                            </div>
+                            <hr class="custom_hr"></hr>
+                            <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
+                              Processor: Snapdragon 678
+                            </div>
+                            <hr class="custom_hr"></hr>
+                            <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
+                              Rear Camera: 48 MP + 8 MP + 2 MP + 2 MP
+                            </div>
+                            <hr class="custom_hr"></hr>
+                            <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
+                              Front Camera: 13 MP
+                            </div>
+                            <hr class="custom_hr"></hr>
+                            <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
+                              Battery: 5000 mAh
+                            </div>
+                            <hr class="custom_hr"></hr>
+                            <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
+                              SIM: Dual SIM (Nano-SIM, dual stand-by)
+                            </div>
                           </div>
-                          <hr class="custom_hr"></hr>
-                          <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
-                            Rom: 128gb
-                          </div>
-                          <hr class="custom_hr"></hr>
-                          <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
-                            Display: 6.43 inches
-                          </div>
-                          <hr class="custom_hr"></hr>
-                          <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
-                            Processor: Snapdragon 678
-                          </div>
-                          <hr class="custom_hr"></hr>
-                          <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
-                            Rear Camera: 48 MP + 8 MP + 2 MP + 2 MP
-                          </div>
-                          <hr class="custom_hr"></hr>
-                          <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
-                            Front Camera: 13 MP
-                          </div>
-                          <hr class="custom_hr"></hr>
-                          <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
-                            Battery: 5000 mAh
-                          </div>
-                          <hr class="custom_hr"></hr>
-                          <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
-                            SIM: Dual SIM (Nano-SIM, dual stand-by)
-                          </div>
-                        </div>
-                      </Accordion>
-                      {/* </div> */}
+                        </Accordion> */}
+                        {/* </div> */}
+                      </div>
                     </div>
                   </div>
-                </div>
-                {/* ============ */}
-                {/* ============ */}
-                {/* ============ */}
-                {/* ============ */}
-                <div className="Asset_Originator_Details_cont">
-                  <div className="Asset_Originator_Details_cont_heading">
-                    Transaction Data
-                  </div>
-                  <div className="transactionData_body">
-                    <div className="transactionData_body1">Transaction Id</div>
-                    <div className="transactionData_body1">
-                      <a
-                        href="https://bscscan.com/tx/0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7"
-                        className="transaction_id_link"
-                        target="_blank"
-                      >
-                        {data.transactionHash.substring(0, 28) + "..."}
-                      </a>
-                      <CopyAllIcon className="copy_all_tx_hash_icon" />
+                  {/* ============ */}
+                  {/* ============ */}
+                  {/* ============ */}
+                  {/* ============ */}
+                  <div className="Asset_Originator_Details_cont">
+                    <div className="Asset_Originator_Details_cont_heading">
+                      Transaction Data
+                    </div>
+                    <div className="transactionData_body">
+                      <div className="transactionData_body1">
+                        Transaction Id
+                      </div>
+                      <div className="transactionData_body1">
+                        <a
+                          href={tHash}
+                          className="transaction_id_link"
+                          target="_blank"
+                        >
+                          {data.transactionHash.substring(0, 28) + "..."}
+                        </a>
+                        <CopyAllIcon className="copy_all_tx_hash_icon" />
+                      </div>
                     </div>
                   </div>
                 </div>
+                <div
+                  className="close_asset_detail_modal"
+                  onClick={closeAssetDetailModal}
+                >
+                  <CloseIcon className="close_asset_detail_modal_icon" />
+                  Close
+                </div>
+                {imgDiv === true ? (
+                  <div className="img_modal">
+                    <div className="img_modal_div">
+                      <img src={data.img} alt="" style={{ width: "100%" }} />
+                    </div>
+                    <div
+                      className="close_asset_detail_modal"
+                      onClick={toggleImgDiv}
+                    >
+                      <CloseIcon className="close_asset_detail_modal_icon" />
+                      Close
+                    </div>
+                  </div>
+                ) : null}
               </div>
-              <div
-                className="close_asset_detail_modal"
-                onClick={closeAssetDetailModal}
-              >
-                <CloseIcon className="close_asset_detail_modal_icon" />
-                Close
-              </div>
-              {imgDiv === true ? (
-                <div className="img_modal">
-                  <div className="img_modal_div">
-                    <img src={data.img} alt="" style={{ width: "100%" }} />
-                  </div>
-                  <div
-                    className="close_asset_detail_modal"
-                    onClick={toggleImgDiv}
-                  >
-                    <CloseIcon className="close_asset_detail_modal_icon" />
-                    Close
-                  </div>
-                </div>
-              ) : null}
-            </div>
-          ) : null}
-        </>
-      ))}
+            ) : null}
+          </>
+        );
+      })}
     </div>
   );
 };

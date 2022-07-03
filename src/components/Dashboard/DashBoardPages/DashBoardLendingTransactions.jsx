@@ -13,6 +13,7 @@ import { UserContext } from "../../context/Context";
 import axios from "axios";
 import { config } from "../../../actions/Config";
 import { API_URL as api_url } from "../../../actions/types";
+import Nodata from "./nodataComponent/Nodata";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -37,7 +38,6 @@ const DashBoardLendingTransactions = ({ match }) => {
   const [activeLink, setActiveLink] = useState("");
   const [assetDetailModal, setAssetDetailModal] = useState(0);
   const [transactions, setTransactions] = useState([]);
-
   const currentPage = window.location.pathname;
   const urlArr = currentPage.split("/");
   useEffect(() => {
@@ -75,7 +75,7 @@ const DashBoardLendingTransactions = ({ match }) => {
   useEffect(() => {
     if (account) {
       axios
-        .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
+        .get(api_url + "/api/branch/alltime/" + txnhash, null, config)
         .then((data) => {
           console.log(data.data.payload, "powerful3333oooo33");
           setTransactions(data.data.payload);
@@ -259,34 +259,42 @@ const DashBoardLendingTransactions = ({ match }) => {
                   <div className="asset_list_body_head_tab6">Financing Fee</div>
                 </div>
                 <div className="asset_list_body_body_cont">
-                  {transactions.map((data) => (
-                    <div
-                      className="asset_list_body_body_cont_1"
-                      id={data.id}
-                      //   onClick={ChangeAssetDetailModal}
-                    >
-                      {/* <div className="asset_list_body_body_cont_1a">
+                  {transactions.length <= 0 ? (
+                    <div className="no_loans_div">
+                      <div className="no_loans_div_cont">
+                        <Nodata />
+                        No Transactions yet.
+                      </div>{" "}
+                    </div>
+                  ) : (
+                    transactions.map((data) => (
+                      <div
+                        className="asset_list_body_body_cont_1"
+                        id={data.id}
+                        //   onClick={ChangeAssetDetailModal}
+                      >
+                        {/* <div className="asset_list_body_body_cont_1a">
                             {data.id}
                           </div> */}
-                      <div className="asset_list_body_body_cont_1a">
-                        <a
-                          href={`https://bscscan.com/tx/${data.transactionHash}`}
-                          target="_blank"
-                          style={{ color: "#000" }}
-                        >
-                          {data.transactionHash.substring(0, 28) + "..."}
-                        </a>
-                      </div>
+                        <div className="asset_list_body_body_cont_1a">
+                          <a
+                            href={`https://bscscan.com/tx/${data.transactionHash}`}
+                            target="_blank"
+                            style={{ color: "#000" }}
+                          >
+                            {data.transactionHash.substring(0, 28) + "..."}
+                          </a>
+                        </div>
 
-                      <div className="asset_list_body_body_cont_1c">
-                        {data.createdAt.slice(0, 10)}
-                      </div>
+                        <div className="asset_list_body_body_cont_1c">
+                          {data.createdAt.slice(0, 10)}
+                        </div>
 
-                      <div className="asset_list_body_body_cont_1e">
-                        {parseInt(data.amount).toFixed()}
-                      </div>
-                      <div className="asset_list_body_body_cont_1f">13%</div>
-                      {/* <div className="asset_list_body_body_cont_1g">
+                        <div className="asset_list_body_body_cont_1e">
+                          {parseInt(data.amount).toFixed()}
+                        </div>
+                        <div className="asset_list_body_body_cont_1f">13%</div>
+                        {/* <div className="asset_list_body_body_cont_1g">
                         <button
                           className={
                             data.Status === "Ongoing"
@@ -299,9 +307,10 @@ const DashBoardLendingTransactions = ({ match }) => {
                           {data.Status}
                         </button>
                       </div> */}
-                      <KeyboardArrowRightIcon className="arrow_right_arrow" />
-                    </div>
-                  ))}
+                        <KeyboardArrowRightIcon className="arrow_right_arrow" />
+                      </div>
+                    ))
+                  )}
                 </div>
               </div>
             </div>

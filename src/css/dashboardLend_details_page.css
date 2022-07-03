@@ -111,9 +111,10 @@ button.pool_detail_heading_area1_invest_btn {
   flex-direction: column;
   gap: 25px;
   background: #fff;
-  padding: 2em;
+  padding: 1em;
   border-radius: 10px;
   border: solid 1px #f0f0f0;
+  overflow: scroll;
 }
 .Asset_Originator_Details_cont_body_txt {
   font-size: 14px;

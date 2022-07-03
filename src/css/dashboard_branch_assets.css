@@ -232,7 +232,7 @@ svg.recharts-surface {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 100000;
+  z-index: 10000000;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -534,7 +534,30 @@ svg.recharts-surface {
     color: #8898a3 !important;
     display: none !important;
   }
+  .asset_status_details_div1_body {
+    display: flex;
+    justify-content: space-between;
+    grid-gap: 40px;
+    gap: 40px;
+    flex-direction: column;
+  }
 
+  .transactionData_body {
+    padding: 1em;
+  }
+
+  .transactionData_body1 {
+    display: flex;
+    align-items: center;
+    grid-gap: 5px;
+    gap: 5px;
+    overflow: scroll;
+    white-space: nowrap;
+  }
+
+  .asset_detail_modal_div_conts {
+    gap: 10px;
+  }
   .pool_detail_assets_body_layer_1_cont1_heading_1 {
     font-weight: 700;
     font-size: 14px;
