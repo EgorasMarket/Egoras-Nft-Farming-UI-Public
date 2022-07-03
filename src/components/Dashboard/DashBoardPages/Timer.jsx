@@ -44,16 +44,45 @@ const Timer = ({ deadline }) => {
 
   return (
     <div>
-      <span>
+      <span style={{ fontSize: "18px", fontWeight: "700", color: "#229e54" }}>
         {countdown.days}
-        <span className="time_tick">dd</span> :{" "}
+        <span
+          className="time_tick"
+          style={{ fontSize: "14px", fontWeight: "400", color: "#000" }}
+        >
+          dd
+        </span>{" "}
+        :{" "}
       </span>
-      <span>
+      <span style={{ fontSize: "18px", fontWeight: "700", color: "#229e54" }}>
         {countdown.hours}
-        <span className="time_tick">hr</span> :{" "}
+        <span
+          className="time_tick"
+          style={{ fontSize: "14px", fontWeight: "400", color: "#000" }}
+        >
+          hr
+        </span>{" "}
+        :{" "}
       </span>
-      <span>{countdown.minutes}mm : </span>
-      <span>{countdown.seconds}ss</span>
+      <span style={{ fontSize: "18px", fontWeight: "700", color: "#229e54" }}>
+        {countdown.minutes}
+        <span
+          className="time_tick"
+          style={{ fontSize: "14px", fontWeight: "400", color: "#000" }}
+        >
+          mm
+        </span>{" "}
+        :{" "}
+      </span>
+      <span style={{ fontSize: "18px", fontWeight: "700", color: "#229e54" }}>
+        {countdown.seconds}
+        <span
+          className="time_tick"
+          style={{ fontSize: "14px", fontWeight: "400", color: "#000" }}
+        >
+          ss
+        </span>
+      </span>
     </div>
   );
 };

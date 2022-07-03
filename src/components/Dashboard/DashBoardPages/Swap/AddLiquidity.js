@@ -4,7 +4,20 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { TokenModal } from "./TokenModal/TokenModal";
 
 import SwapVerticalCircleIcon from "@mui/icons-material/SwapVerticalCircle";
-
+import {
+  SuccessModal,
+  ErrorModal,
+} from "../../DashBoardPages/Modal/Success_Error_Component";
+import {
+  faCheckCircle,
+  faCircleNotch,
+  faChevronRight,
+  faArrowRight,
+  faLock,
+  faWindowClose,
+  faWallet,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   // Web3ReactProvider,
   useWeb3React,
@@ -323,62 +336,23 @@ const AddLiquidity = ({ match, closeModal, which }) => {
   }, 7000);
 
   return (
-    <div>
-      {/* Tokens Section Start */}
-      <div className="container">
-        <div>
+    // <div>
+    <div className="other2">
+      <section className=" no-bg no_paddd">
+        <div className="container relative">
           <div className="liquidity_area">
-            <div className="liquidity_cont">
-              {stage == "loading" ? (
-                <div className="loading_div">
-                  <section
-                    className="tokenSection2 text-black "
-                    id="token"
-                    style={{
-                      width: "100%",
-                      minWidth: "450px",
-                      fontSize: "14px",
-                    }}
-                  >
-                    <div class="eusd-token-page container">
-                      <div class="eusd-token-page hero text-center">
-                        <div class="eusd-token-page circle"></div>
-                        <div class="eusd-token-page circle circle2"></div>
-                        <div class="eusd-token-page circle circle3"></div>
-                        <div class="eusd-token-page circle circle4"></div>
-                        <img
-                          src="/img/token-hero-center-blur2.png"
-                          alt="Waves"
-                          class="eusd-token-page waves"
-                        />
-                        <img
-                          src="/img/eusd-icon-dollar.svg"
-                          alt="OUSD coin"
-                          class="eusd-token-page coin"
-                        />
-                        <div class="eusd-token-page d-flex flex-column align-items-center">
-                          <div class="eusd-token-page ticker-symbol"></div>
-                          <h1 class="transacting_text">
-                            {text}
-                            {/* The gsfcdhvsds sdvf */}
-                          </h1>
-                          <div
-                            className="swap_engn_btns"
-                            style={{
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "10px",
-                            }}
-                          >
-                            {" "}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </section>
+            {stage == "loading" ? (
+              <div className="bacModal_div">
+                <div className="back_modal_container">
+                  <div className="back_modal_cont">
+                    <FontAwesomeIcon icon={faCircleNotch} spin />
+                    <p className="text-center">{text}</p>
+                  </div>
                 </div>
-              ) : null}
-              {stage == "swap" ? (
+              </div>
+            ) : null}
+            {stage == "swap" ? (
+              <div className="liquidity_cont">
                 <div className="liquidity_cont_body">
                   <div className="liquidity_cont_body_conts">
                     <div>
@@ -437,7 +411,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
                             //   }
                           />
 
-                          <>
+                          <div>
                             <button className="display_tokens_drop">
                               <img
                                 src={
@@ -454,7 +428,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
 
                               <ArrowDropDownIcon className="drop_down_icon" />
                             </button>
-                          </>
+                          </div>
                         </div>
                       </div>
 
@@ -478,157 +452,80 @@ const AddLiquidity = ({ match, closeModal, which }) => {
                     </div>
                   </div>
                 </div>
-              ) : null}
+              </div>
+            ) : null}
 
-              {stage == "success" ? (
-                <div className="processing_transac_div insufficient">
-                  <div className="success_container">
-                    <div className="success_heading">
-                      <img
-                        style={{ width: "100%" }}
-                        src="/img/succees_div_heading_icon.svg"
-                        alt=""
-                        // onClick={onclick}
-                      />
-
-                      {/* <img
-                                style={{ width: "100%" }}
-                                src="/img/succees_div_heading_icon.svg"
-                                alt=""
-                                // onClick={onclick}
-                              /> */}
-                    </div>
-                    <div className="success_title">
-                      <span> Success</span>
-                    </div>
-                    {/* <div className="success_para">{msg}</div> */}
-                    <div className="success_para">
-                      Transaction was successful.
-                    </div>
-                    <a
-                      className="btn btn-link text-success"
-                      href={"https://bscscan.com/tx/" + hash}
-                      target="_blank"
-                    >
-                      View on bscscan.com
-                    </a>
-                    <div className="success_btn_div">
-                      <button
-                        style={{
-                          backgroundColor: "#3fa96b",
-                          boxShadow: "0px 4px 10px #5fa97e",
-                        }}
-                        className="success_btn"
-                        onClick={Continue}
-                      >
-                        Continue
-                      </button>
-                    </div>
-                  </div>
+            {stage == "success" ? (
+              <div className="bacModal_div">
+                <div className="back_modal_container">
+                  <SuccessModal
+                    successMessage={"Transaction was successful."}
+                    click={(e) => {
+                      Continue(e);
+                    }}
+                    SuccessHead="Success"
+                    hash={hash}
+                  />
                 </div>
-              ) : null}
+              </div>
+            ) : null}
 
-              {stage == "unlock" ? (
-                <div className="processing_transac_div insufficient">
-                  <div className="success_container">
-                    <div className="success_heading">
-                      <img
-                        style={{ width: "100%" }}
-                        src="/img/error_div_heading_icon.svg"
-                        alt=""
-                        // onClick={onclick}
-                      />
+            {stage == "unlock" ? (
+              <div className="bacModal_div">
+                <div className="back_modal_container">
+                  <div className="back_modal_cont">
+                    <CloseIcon
+                      className="closeBackModalIcon"
+                      onClick={() => {
+                        setStage("back");
+                      }}
+                    />
 
-                      {/* <img
-                                style={{ width: "100%" }}
-                                src="/img/succees_div_heading_icon.svg"
-                                alt=""
-                                // onClick={onclick}
-                              /> */}
-                    </div>
-                    <div className="success_title">
-                      <span>Unlock</span>
-                    </div>
-                    {/* <div className="success_para">{msg}</div> */}
-                    <div className="success_para">
-                      {" "}
+                    <div className="unlock_head">
                       Approve <b>Egoras</b> to spend {baseVal.symbol} on your
                       behalf.
                     </div>
-                    <div className="success_btn_div">
+
+                    {/* <div className="unlock_input_div ">
+                        <input
+                          type="text"
+                          name="stateAmountToGenerate"
+                          value={formData.BackAmount}
+                          readonly
+                          className="unlock_input"
+                        />
+                      </div> */}
+
+                    <div className="Unloc_btn_div">
                       <button
-                        className="jsx-4146495177 connect_btn d-flex align-items-center justify-content-center mx-auto  zIndex2"
+                        className="LoginBtn"
+                        // style={{ padding: "0.9em 4.5em" }}
                         onClick={(e) => doUnluck(e)}
                       >
-                        Unlock
+                        unlock
                       </button>
                     </div>
                   </div>
                 </div>
-              ) : null}
+              </div>
+            ) : null}
 
-              {stage == "error" ? (
-                <div className="processing_transac_div insufficient">
-                  <div className="success_container">
-                    <div className="success_heading">
-                      <img
-                        style={{ width: "100%" }}
-                        src="/img/error_div_heading_icon.svg"
-                        alt=""
-                        // onClick={onclick}
-                      />
-
-                      {/* <img
-                                style={{ width: "100%" }}
-                                src="/img/succees_div_heading_icon.svg"
-                                alt=""
-                                // onClick={onclick}
-                              /> */}
-                    </div>
-                    <div className="success_title">
-                      <span>Error</span>
-                    </div>
-                    {/* <div className="success_para">{msg}</div> */}
-                    <div className="success_para">{text}</div>
-                    <div className="success_btn_div">
-                      <button
-                        style={{
-                          backgroundColor: "#ff575a",
-                          boxShadow: "#ffc2c3 0px 4px 10px",
-                        }}
-                        className="success_btn"
-                        onClick={Continue}
-                      >
-                        Continue
-                      </button>
-                    </div>
-                  </div>
+            {stage == "error" ? (
+              <div className="bacModal_div">
+                <div className="back_modal_container">
+                  <ErrorModal
+                    errorMessage="Unsuccesful transaction"
+                    click={(e) => {
+                      Continue(e);
+                    }}
+                    ErrorHead="Error"
+                  />
                 </div>
-              ) : null}
-            </div>
+              </div>
+            ) : null}
           </div>
         </div>
-      </div>
-      {modal == true ? (
-        <TokenModal
-          toggleTokenModal={toggleModal}
-          execute={TokenData}
-          tokenData1={data.base}
-          tokenData={data.assets}
-          disabled="disabled"
-          // tokenId={data.tokenData}
-        />
-      ) : null}
-      {modal2 == true ? (
-        <TokenModal
-          toggleTokenModal={toggleModal2}
-          execute={TokenData2}
-          tokenData={data.assets}
-          tokenData1={data.base}
-          disabled="disabled"
-          // tokenId={data.tokenData}
-        />
-      ) : null}
+      </section>
     </div>
   );
 };
