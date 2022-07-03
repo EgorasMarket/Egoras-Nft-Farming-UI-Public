@@ -3,19 +3,48 @@ import ORACLE from "./contracts/Price.json";
 import LOAN from "./contracts/Loan.json";
 import EX from "./contracts/exchange.json";
 import erc20 from "./contracts/erc20.json";
+import erc22 from "./contracts/erc22.json";
 import EgorasLoanV2Facet from "./contracts/V2/EgorasLoanV2Facet.json";
-import EgorasSwapFacet from "./contracts/V2/EgorasSwapFacet.json";
+import EgorasPriceOracleFacet from "./contracts/EgorasPriceOracleFacet.json";
+import EgorasSwapFacet from "./contracts/EgorasSwapFacet.json";
 import COINS from "./contracts/V2/coins.json";
+import Contract_Address from "./contracts/Contract_Address.json";
+const dynamicInstance = (signer, abi, address) => {
+  return new Contract(address, abi, signer);
+};
 const contractInstance = (signer) => {
   return new Contract(LOAN.address, LOAN.abi, signer);
 };
 const contractEgorasLoanV2Instance = (signer) => {
   return new Contract(EgorasLoanV2Facet.address, EgorasLoanV2Facet.abi, signer);
 };
-const contractEgorasSwapFacetInstance = (signer) => {
-  return new Contract(EgorasSwapFacet.address, EgorasSwapFacet.abi, signer);
-};
+const initContract = async (baseAddress, tokenAddress, ticker, signer) => {
+  try {
+    const instance = dynamicInstance(
+      signer,
+      EgorasSwapFacet.abi,
+      Contract_Address.address
+    );
 
+    let result = await instance.initContructor(
+      Contract_Address.address,
+      baseAddress,
+      tokenAddress,
+      ticker
+    );
+    return {
+      message: result.hash,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message:
+        typeof error.data === "undefined" ? error.message : error.data.message,
+      status: false,
+    };
+  }
+};
 const contractEXInstance = (signer) => {
   return new Contract(EX.address, EX.abi, signer);
 };
@@ -27,7 +56,28 @@ const contractOracleInstance = (signer) => {
 const erc20Instance = (address, signer) => {
   return new Contract(address, erc20.abi, signer);
 };
-
+const erc20Instance2 = (signer, coin) => {
+  console.log(erc22, coin, "IN");
+  let address = "";
+  switch (coin) {
+    case "egr":
+      address = erc22.egr;
+      break;
+    case "engn":
+      address = erc22.engn;
+      break;
+    case "egc":
+      address = erc22.egc;
+      break;
+    case "eusd":
+      address = erc22.eusd;
+      break;
+    default:
+      break;
+  }
+  console.log(address, "GS");
+  return new Contract(address, erc22.abi, signer);
+};
 const transactReceipt = async (hash, library) => {
   try {
     let result = await library.getTransactionReceipt(hash);
@@ -106,6 +156,81 @@ const open = async (isDefault, collateral, amoumt, ticker, signer) => {
     };
   }
 };
+// =======================================================================
+// =======================================================================
+// =======================================================================
+// ===============================convert===============================
+
+const getPriceImpl = async (ticker, signer) => {
+  try {
+    const instance = dynamicInstance(
+      signer,
+      EgorasPriceOracleFacet.abi,
+      Contract_Address.address
+    );
+    let result = await instance.price(ticker);
+    console.log(result);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message:
+        typeof error.data == "undefined" ? error.message : error.data.message,
+      status: false,
+    };
+  }
+};
+
+const swapBase = async (amount, isBase, signer) => {
+  try {
+    const instance = dynamicInstance(
+      signer,
+      EgorasSwapFacet.abi,
+      Contract_Address.address
+    );
+    let result = await instance.getToken(amount);
+    return {
+      message: result.hash,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message:
+        typeof error.data == "undefined" ? error.message : error.data.message,
+      status: false,
+    };
+  }
+};
+
+const swapImpl = async (amount, isBase, signer) => {
+  try {
+    const instance = dynamicInstance(
+      signer,
+      EgorasSwapFacet.abi,
+      Contract_Address.address
+    );
+    let result = await instance.swap(amount, isBase);
+    return {
+      message: result.hash,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message:
+        typeof error.data == "undefined" ? error.message : error.data.message,
+      status: false,
+    };
+  }
+};
+// =======================================================================
+// =======================================================================
+// =======================================================================
+// =======================================================================
+// ===============================convert===============================
+// =======================================================================
+
 // =======================================================================
 // =======================================================================
 // =======================================================================
@@ -415,7 +540,54 @@ const unluckToken = async (address, amount, signer) => {
     };
   }
 };
+const unluckToken3 = async (amount, signer, coin) => {
+  console.log(amount, signer, coin);
+  try {
+    const instance = erc20Instance2(signer, coin);
+    let result = await instance.approve(Contract_Address.address, amount);
+    return {
+      message: result.hash,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message:
+        typeof error.data == "undefined" ? error.message : error.data.message,
+      status: false,
+    };
+  }
+};
+const checkAllowance2 = async (owner, amount, signer, coin) => {
+  console.log(
+    owner,
+    amount,
+    coin,
+    signer,
+    Contract_Address.address,
+    "THE alloancw"
+  );
+  try {
+    const instance = erc20Instance2(signer, coin);
 
+    let result = await instance.allowance(owner, Contract_Address.address);
+    console.log(result.toString(), "Allowance check!", amount.toString());
+    if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
+      return {
+        status: true,
+      };
+    } else {
+      return {
+        status: false,
+      };
+    }
+  } catch (error) {
+    console.log(error);
+    return {
+      status: false,
+    };
+  }
+};
 const tokenBalance = async (address, account, signer) => {
   try {
     const instance = erc20Instance(address, signer);
@@ -584,6 +756,7 @@ const crossexchange = async (from, to, amoumt, signer) => {
 export {
   getPrice,
   unluckToken,
+  unluckToken3,
   checkAllowance,
   transactReceipt,
   getTickerInfo,
@@ -593,6 +766,7 @@ export {
   repay,
   topup,
   draw,
+  checkAllowance2,
   exchange,
   addLiquidity,
   withdrawable,
@@ -607,7 +781,11 @@ export {
   getInvestorsDividend,
   userStats,
   system,
+  initContract,
   checkAllowanceL,
   unluckToken2,
   burnAccumulatedDividend,
+  getPriceImpl,
+  swapBase,
+  swapImpl,
 };

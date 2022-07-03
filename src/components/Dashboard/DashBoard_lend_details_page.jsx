@@ -153,6 +153,11 @@ const DashBoard_lend_details_page = ({ match }) => {
       "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setActiveLink("Asset");
+    } else if (
+      currentPage ===
+      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+    ) {
+      setActiveLink("transaction");
     }
   });
   useEffect(() => {
@@ -259,7 +264,7 @@ const DashBoard_lend_details_page = ({ match }) => {
       localStorage.setItem("unlockingHash", ret.message.hash);
       setText("Sending token please wait aleast 1/2 minutes");
       setHash(ret.message.hash);
-      setStage("success");
+      // setStage("success");
       console.log(ret);
     } else if (ret.status == false) {
       if (ret.message.code < 0) {
@@ -332,8 +337,12 @@ const DashBoard_lend_details_page = ({ match }) => {
               </Link>
               {/* <span class="vertical_ruleB"></span> */}
               <Link
-                to="/dashboard/lend/pool/detail/transactions"
-                className="pool_lend_details_link"
+                to={`/dashboard/lend/pool/detail/${txnhash}/transactions`}
+                className={
+                  activeLink === "transaction"
+                    ? "pool_lend_details_link_active"
+                    : "pool_lend_details_link"
+                }
               >
                 <ReceiptIcon className="asset_overview_link_icon" />
                 Transactions
@@ -342,7 +351,13 @@ const DashBoard_lend_details_page = ({ match }) => {
             <div className="pool_detail_heading">
               <div className="pool_detail_heading_area1">
                 <img
-                  src="/img/pool_asset_icon.png"
+                  src={
+                    BranchDetails.branchName === "OYIGBO"
+                      ? "/img/oyigbo_icon.svg"
+                      : BranchDetails.branchName === "AGIP"
+                      ? "/img/agip_icon.svg"
+                      : null
+                  }
                   alt=""
                   className="pool_detail_heading_area1_img"
                 />
@@ -432,7 +447,13 @@ const DashBoard_lend_details_page = ({ match }) => {
               <div className="Asset_Originator_Details_cont_body">
                 <div className="Asset_Originator_Details_cont_body_head_img_cont">
                   <img
-                    src="/img/branch_detail_img.png"
+                    src={
+                      BranchDetails.branchName === "OYIGBO"
+                        ? "/img/oyigbo_icon2.svg"
+                        : BranchDetails.branchName === "AGIP"
+                        ? "/img/agip_icon2.svg"
+                        : null
+                    }
                     className="Asset_Originator_Details_cont_body_head_img"
                   />
                 </div>
@@ -455,7 +476,11 @@ const DashBoard_lend_details_page = ({ match }) => {
                     Issuer
                   </div>
                   <div className="Asset_Originator_Details_cont_body_issuer_cont_txt">
-                    1754 Factory Series 3
+                    {BranchDetails.branchName === "OYIGBO"
+                      ? "   Oyigbo Branch"
+                      : BranchDetails.branchName === "AGIP"
+                      ? "   Rumueme Branch"
+                      : null}
                   </div>
                 </div>
               </div>
@@ -574,7 +599,7 @@ const DashBoard_lend_details_page = ({ match }) => {
                               </div> */}
                         <div className="asset_list_body_body_cont_1a">
                           {/* {data.title} */}
-                          {data.title.substring(0, 15) + "..."}
+                          {data.title.substring(0, 20) + "..."}
                         </div>
 
                         <div className="asset_list_body_body_cont_1c">

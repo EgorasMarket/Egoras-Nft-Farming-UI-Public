@@ -133,6 +133,21 @@ const Header = () => {
     if (currentPage === "/dashboard/lending") {
       setshowHeader(false);
     }
+    if (currentPage === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
+      setshowHeader(false);
+    }
+    if (
+      currentPage ===
+      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+    ) {
+      setshowHeader(false);
+    }
+    if (
+      currentPage ===
+      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+    ) {
+      setshowHeader(false);
+    }
     if (currentPage === "/dashboard/lend") {
       setshowHeader(false);
     }

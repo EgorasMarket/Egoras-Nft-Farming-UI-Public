@@ -38,6 +38,7 @@ const DashBoardUserDetails = () => {
   const [conecttxt, setConnectTxt] = useState("Not Connected");
   const [seemore, setSeemore] = useState(false);
   const [assetDetailModal, setAssetDetailModal] = useState("");
+  const [loanAsset, setLoanAsset] = useState([]);
 
   const [tokenBal, setTokenBal] = useState(0.0);
   const [UserPoolsDetails, setUserPoolsDetails] = useState({
@@ -75,43 +76,40 @@ const DashBoardUserDetails = () => {
     }
   }, [account, avatarRef]);
   useEffect(() => {
-    axios
-      .get(api_url + "/api/lend/user/account/" + account, null, config)
-      .then((data) => {
-        console.log(data.data.payload, "powerful333333");
-        // console.log(txnhash);
-        // setBranches(data.data.payload);
-        setUserPoolsDetails({
-          lockedBalance: data.data.payload[0].balance,
-          pool: data.data.payload[0].pool,
+    if (account) {
+      axios
+        .get(api_url + "/api/lend/user/account/" + account, null, config)
+        .then((data) => {
+          console.log(data.data.payload, "powerful333333");
+          // console.log(txnhash);
+          // setBranches(data.data.payload);
+          setUserPoolsDetails({
+            lockedBalance: data.data.payload[0].balance,
+            pool: data.data.payload[0].pool,
+          });
+        })
+        .catch((err) => {
+          console.log(err); // "oh, no!"
         });
-      })
-      .catch((err) => {
-        console.log(err); // "oh, no!"
-      });
-  }, []);
+      return;
+    }
+  }, [account]);
   useEffect(() => {
-    axios
-      .get(api_url + "/api/lend/user/transaction/" + walletAddr, null, config)
-      .then((data) => {
-        console.log(data.data.payload, "powerful333333");
-        // console.log(txnhash);
-        // setBranches(data.data.payload);
-      })
-      .catch((err) => {
-        console.log(err); // "oh, no!"
-      });
-  }, []);
-  useEffect(() => {
-    // if (account === true) {
-    // var tokenInst = new web3.eth.Contract(tokenABI, tokenAddress);
-    // tokenInst.methods
-    //   .balanceOf("0x260c25f991171850f48889eb9d8aF11998D20c30")
-    //   .call()
-    //   .then(function (bal) {
-    //     console.log(bal);
-    //   });l
-  }, []);
+    if (account) {
+      axios
+        .get(api_url + "/api/lend/user/transaction/" + account, null, config)
+        .then((data) => {
+          console.log(data.data.payload, "powerful333333");
+          setLoanAsset(data.data.payload);
+          // console.log(txnhash);
+          // setBranches(data.data.payload);
+        })
+        .catch((err) => {
+          console.log(err); // "oh, no!"
+        });
+      return;
+    }
+  }, [account]);
 
   const assets = [
     {
@@ -326,7 +324,9 @@ const DashBoardUserDetails = () => {
                   {UserPoolsDetails.lockedBalance === null ? (
                     <span>0.00 Engn</span>
                   ) : (
-                    <span>{UserPoolsDetails.lockedBalance} Engn</span>
+                    <span>
+                      {parseInt(UserPoolsDetails.lockedBalance).toFixed()} Engn
+                    </span>
                   )}
                 </div>
                 <hr class="custom_hr"></hr>
@@ -388,7 +388,7 @@ const DashBoardUserDetails = () => {
                   <div className="asset_list_body_head_tab7">Txn Hash</div>
                 </div>
                 <div className="asset_list_body_body_cont">
-                  {(seemore == false ? assets.slice(0, 6) : assets).map(
+                  {(seemore == false ? loanAsset.slice(0, 6) : loanAsset).map(
                     (data) => (
                       <div
                         className="asset_list_body_body_cont_1"
@@ -400,24 +400,22 @@ const DashBoardUserDetails = () => {
                             </div> */}
                         <div className="asset_list_body_body_cont_1a">
                           <img
-                            src={data.img}
+                            src="/img/pool_asset_icon.png"
                             alt=""
                             className="assets-list-icon_pool_icon"
                           />{" "}
-                          {data.Pool}
+                          {data.title.substring(0, 15) + "..."}
                         </div>
 
                         <div className="asset_list_body_body_cont_1b">
-                          {data.Date}
+                          {data.createdAt.slice(0, 10)}
                         </div>
                         <div className="asset_list_body_body_cont_1c">
-                          {data.Amount}
+                          {parseInt(data.amount).toFixed()}
                         </div>
-                        <div className="asset_list_body_body_cont_1d">
-                          {data.Senior_APY}%
-                        </div>
+                        <div className="asset_list_body_body_cont_1d">13%</div>
                         <div className="asset_list_body_body_cont_1g">
-                          {data.txHash.substring(0, 24) + "..."}
+                          {data.transactionHash.substring(0, 24) + "..."}
                         </div>
                       </div>
                     )
@@ -441,7 +439,7 @@ const DashBoardUserDetails = () => {
       {/* ============================= */}
       {/* ============================= */}
       {/* ============================= */}
-      {assets.map((data) => (
+      {loanAsset.map((data) => (
         <>
           {assetDetailModal == data.id ? (
             <div className="asset_detail_modal_div">

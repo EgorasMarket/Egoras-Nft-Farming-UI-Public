@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import DashBoard_lend_details_page from "./DashBoard_lend_details_page";
 import DashBoardBranchAsset from "./DashBoardPages/DashBoardBranchAsset";
 import DashBoardLendingTransactions from "./DashBoardPages/DashBoardLendingTransactions";
+import Swap from "./DashBoardPages/Swap/Swap";
 import DashBoardUserDetails from "./DashBoardPages/DashBoardUserDetails";
 // dashboard components
 // import DashBoardHeader from "./DashBoardHeader";
@@ -27,15 +28,27 @@ import DashboardAddLiquidtyPage from "./DashBoardPages/DashboardAddLiquidtyPage"
 import "../../css/dashboard.css";
 import DashBoardLendPage from "./DashBoardPages/DashBoardLendPage";
 function Dashboard() {
+  const [gettingReady, setGettingReady] = useState(true);
   return (
     <Router>
       {/* <DashBoardHeader /> */}
       {/* <DashBoardHeader /> */}
       <div className="dashboard">
+        {gettingReady === true ? (
+          <div className="hold_On_div">
+            <div className="hold_On_div_div_txt">
+              Please hold on for a while...{" "}
+              <span className="hold_On_div_div_txt_para">
+                We are getting things ready.
+              </span>
+            </div>
+          </div>
+        ) : null}
+
         <DashboardSideBarMenu />
         <Switch>
           <Route exact path="/dashboard" component={DashBoardAnalytics} />
-          <Route exact path="/dashboard/swap" component={DashBoardSwap} />
+          {/* <Route exact path="/dashboard/swap" component={DashBoardSwap} /> */}
           {/* <Route exact path="/dashboard/swap" component={DashBoardSwap} /> */}
           <Route exact path="/vault/:asset/:base" component={OpenVaultPage} />
           {/*  */}
@@ -44,11 +57,11 @@ function Dashboard() {
             path="/deposit_vault/:asset/:base"
             component={Withdraw_vault_form}
           /> */}
-          <Route
+          {/* <Route
             exact
             path="/dashboard/add"
             component={DashboardAddLiquidtyPage}
-          />
+          /> */}
           <Route
             exact
             path="/dashboard/governance"
@@ -64,6 +77,7 @@ function Dashboard() {
             path="/dashboard/lend/pool/detail/branch/:branchAddress/asset"
             component={DashBoardBranchAsset}
           />
+          <Route exact path="/dashboard/swap" component={Swap} />
           <Route
             exact
             path="/dashboard/user"
@@ -71,7 +85,7 @@ function Dashboard() {
           />
           <Route
             exact
-            path="/dashboard/lend/pool/detail/transactions"
+            path="/dashboard/lend/pool/detail/:branchAddress/transactions"
             component={DashBoardLendingTransactions}
           />
           <Route
