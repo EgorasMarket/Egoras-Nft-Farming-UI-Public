@@ -27,8 +27,14 @@ import DashboardAddLiquidtyPage from "./DashBoardPages/DashboardAddLiquidtyPage"
 // dashboard styles
 import "../../css/dashboard.css";
 import DashBoardLendPage from "./DashBoardPages/DashBoardLendPage";
+// const CSSProperties = {
+//   display: "block",
+//   margin: "0 auto",
+//   borderColor: "red",
+// };
 function Dashboard() {
   const [gettingReady, setGettingReady] = useState(true);
+
   return (
     <Router>
       {/* <DashBoardHeader /> */}

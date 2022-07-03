@@ -148,7 +148,7 @@ const Home = () => {
                   Read White-Paper
                 </a>
               </div>
-              <FlipCountdown
+              {/* <FlipCountdown
                 className="flip-countdown"
                 titlePosition="bottom"
                 yearTitle="Year"
@@ -160,8 +160,8 @@ const Home = () => {
                 hideYear
                 // hideMonth
                 size="small"
-                endAt={'2022-07-03 13:00:00'}
-              />
+                endAt={"2022-07-03 08:00:00"}
+              /> */}
             </div>
             <div
               className="nft-img-area2"
