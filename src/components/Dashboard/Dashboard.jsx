@@ -33,7 +33,7 @@ import DashBoardLendPage from "./DashBoardPages/DashBoardLendPage";
 //   borderColor: "red",
 // };
 function Dashboard() {
-  const [gettingReady, setGettingReady] = useState(true);
+  const [gettingReady, setGettingReady] = useState(false);
 
   return (
     <Router>
@@ -127,8 +127,9 @@ function Dashboard() {
             </Switch>
           </>
         )}
-
-        <img src="/img/pleasewait.png" alt="" className="add_waiting_img" />
+        {gettingReady === true ? (
+          <img src="/img/pleasewait.png" alt="" className="add_waiting_img" />
+        ) : null}
       </div>
     </Router>
   );
