@@ -164,7 +164,7 @@ const DashBoard_lend_details_page = ({ match }) => {
   useEffect(() => {
     if (account) {
       axios
-        .get(api_url + "/api/lend/unique/" + txnhash, null, config)
+        .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
         .then((data) => {
           console.log(data.data.payload, "powerful333333");
           // console.log(txnhash);

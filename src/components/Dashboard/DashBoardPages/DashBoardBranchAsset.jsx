@@ -365,7 +365,9 @@ const DashBoardBranchAsset = ({ match }) => {
                   <div className="asset_list_body_head_tab3">Date & Time</div>
                   <div className="asset_list_body_head_tab4">Maturity Date</div>
                   <div className="asset_list_body_head_tab5">Amount(Engn)</div>
-                  <div className="asset_list_body_head_tab6">Financing Fee</div>
+                  <div className="asset_list_body_head_tab6 body_head_tab6">
+                    Financing Fee
+                  </div>
                   <div className="asset_list_body_head_tab7">Status</div>
                 </div>
                 <div className="asset_list_body_body_cont">
@@ -394,7 +396,7 @@ const DashBoardBranchAsset = ({ match }) => {
                             <div className="asset_list_body_body_cont_1e">
                               {parseInt(data.amount).toFixed()}
                             </div>
-                            <div className="asset_list_body_body_cont_1f">
+                            <div className="asset_list_body_body_cont_1f body_cont1_f">
                               13%
                             </div>
                             <div className="asset_list_body_body_cont_1g">
@@ -436,7 +438,7 @@ const DashBoardBranchAsset = ({ match }) => {
                           <div className="asset_list_body_body_cont_1e">
                             {parseInt(data.amount).toFixed()}
                           </div>
-                          <div className="asset_list_body_body_cont_1f">
+                          <div className="asset_list_body_body_cont_1f body_cont1_f">
                             13%
                           </div>
                           <div className="asset_list_body_body_cont_1g">
@@ -480,7 +482,7 @@ const DashBoardBranchAsset = ({ match }) => {
                             <div className="asset_list_body_body_cont_1e">
                               {parseInt(data.amount).toFixed()}
                             </div>
-                            <div className="asset_list_body_body_cont_1f">
+                            <div className="asset_list_body_body_cont_1f  body_cont1_f">
                               13%
                             </div>
                             <div className="asset_list_body_body_cont_1g">

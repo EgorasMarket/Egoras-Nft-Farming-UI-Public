@@ -475,3 +475,28 @@ svg.recharts-surface {
     transform: scale(1);
   }
 }
+@media screen and (max-width: 1400px) {
+  .pool_detail_assets_body_layer_1 {
+    gap: 10px;
+  }
+  .pool_detail_assets_body_layer_1_cont1 {
+    padding: 1em;
+  }
+  .filter_table_area_2 {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 1142px) {
+  .asset_list_body_body_cont_1a {
+    text-align: inherit;
+  }
+}
+@media screen and (max-width: 767px) {
+  .body_cont1_f {
+    display: none;
+  }
+
+  .body_head_tab6 {
+    display: none;
+  }
+}
