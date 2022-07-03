@@ -4,6 +4,7 @@
   /* background: #d6eddf; */
   padding: 0em;
   justify-content: space-between;
+  gap: 20px;
 }
 .table_body {
   display: flex;
@@ -14,7 +15,7 @@
   padding: 1em;
 }
 .lending_area1_cont1 {
-  width: 24%;
+  width: 100%;
   display: flex;
   align-items: flex-start;
   border-right: 2px grey solid;
@@ -27,6 +28,16 @@
   gap: 10px;
   justify-content: space-between;
   align-items: flex-start;
+}
+.no_loans_div {
+  width: 100%;
+  display: table-caption;
+  padding: 2em;
+  text-align: center;
+}
+.no_loans_div_cont {
+  display: flex;
+  flex-direction: column;
 }
 .help_outline {
   color: #708390 !important;

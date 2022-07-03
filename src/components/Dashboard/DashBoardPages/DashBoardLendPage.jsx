@@ -9,7 +9,7 @@ import { config } from "../../../actions/Config";
 import axios from "axios";
 // import { Context } from "../../context/Context";
 import { UserContext } from "../../context/Context";
-
+import Nodata from "./nodataComponent/Nodata";
 // import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
@@ -21,6 +21,7 @@ const DashBoardLendPage = () => {
   console.log(Branches);
   const [categoryBtn, setCategoryBtn] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const [lockedValue, setLockedValue] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
   const [activeBtn, setActivrBtn] = useState("Active");
   const [age, setAge] = React.useState("");
@@ -110,6 +111,8 @@ const DashBoardLendPage = () => {
     },
   ];
 
+  useEffect(() => {}, []);
+
   return (
     <div className="other2">
       {/* get started section start */}
@@ -128,17 +131,9 @@ const DashBoardLendPage = () => {
                     Total Value Locked(in Pools)
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    407.92M <span className="usd_sign">₦</span>
+                    {parseInt(lockedValue).toFixed(2)}{" "}
+                    <span className="usd_sign">NGN</span>
                   </div>
-                </div>
-                <div className="lending_area1_cont1_body_1">
-                  <HelpOutlineIcon className="help_outline" />
-                </div>
-              </div>
-              <div className="lending_area1_cont1">
-                <div className="lending_area1_cont1_body_1">
-                  <div className="lending_area1_cont1_heading">Utilization</div>
-                  <div className="lending_area1_cont1_body_txt">96.51%</div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
                   <HelpOutlineIcon className="help_outline" />
@@ -147,36 +142,38 @@ const DashBoardLendPage = () => {
               <div className="lending_area1_cont1">
                 <div className="lending_area1_cont1_body_1">
                   <div className="lending_area1_cont1_heading">
-                    Liquid Assets
+                    Total Value Locked(in Pools)
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    14.21M <span className="usd_sign">₦</span>
+                    {parseInt(lockedValue / 570).toFixed(2)}{" "}
+                    <span className="usd_sign">USD</span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
                   <HelpOutlineIcon className="help_outline" />
                 </div>
               </div>
+
               <div className="lending_area1_cont1">
                 <div className="lending_area1_last_cont1_divs">
                   <span className="lending_area1_last_cont1_divs_cont1">
                     {" "}
-                    Avg. APY:{" "}
+                    Est.APY:{" "}
                     <span className="lending_area1_last_cont1_divs_cont_value">
                       {" "}
-                      8.09%
+                      13.0%
                     </span>
                   </span>
-                  <span className="lending_area1_last_cont1_divs_cont2">
+                  {/* <span className="lending_area1_last_cont1_divs_cont2">
                     Default Protection:{" "}
                     <span className="lending_area1_last_cont1_divs_cont_value">
                       {" "}
                       2.26M ₦
                     </span>{" "}
-                  </span>
+                  </span> */}
                   <span className="lending_area1_last_cont1_divs_cont3">
                     {" "}
-                    Total Pool Tokens:{" "}
+                    Total Pool Assets:{" "}
                     <span className="lending_area1_last_cont1_divs_cont_value">
                       {" "}
                       385.57 M
@@ -236,7 +233,7 @@ const DashBoardLendPage = () => {
                       Pool Value
                     </th>
                     <th className="assets-category-titles-heading1 right none_display">
-                      Senior APY
+                      Estimated APY
                     </th>
                     <th className="assets-category-titles-heading1 right ">
                       Status
@@ -258,96 +255,104 @@ const DashBoardLendPage = () => {
 
                 
               </div> */}
-                <tbody
-                  className="assets-table-body popular-categories transitionMe"
-                  id="popular-categories"
-                >
-                  {" "}
-                  {/* =============== */}
-                  {/* =============== */}
-                  {/* =============== */}
-                  {Branches.map((asset) => (
-                    <tr className="assets-category-row  transitionMe">
-                      <td className="assets-category-data">
-                        <div className="assets-data">
-                          <img
-                            src={
-                              asset.name === "OYIGBO"
-                                ? "/img/oyigbo_icon.svg"
-                                : asset.name === "AGIP"
-                                ? "/img/agip_icon.svg"
+                {Branches.length <= 0 ? (
+                  <div className="no_loans_div">
+                    <div className="no_loans_div_cont">
+                      <Nodata />
+                      No Pools yet.
+                    </div>{" "}
+                  </div>
+                ) : (
+                  <tbody
+                    className="assets-table-body popular-categories transitionMe"
+                    id="popular-categories"
+                  >
+                    {" "}
+                    {/* =============== */}
+                    {/* =============== */}
+                    {/* =============== */}
+                    {Branches.map((asset) => (
+                      <tr className="assets-category-row  transitionMe">
+                        <td className="assets-category-data">
+                          <div className="assets-data">
+                            <img
+                              src={
+                                asset.name === "OYIGBO"
+                                  ? "/img/oyigbo_icon.svg"
+                                  : asset.name === "AGIP"
+                                  ? "/img/agip_icon.svg"
+                                  : null
+                              }
+                              alt=""
+                              className="assets-list-icon_pool_icon"
+                            />
+
+                            <div className="assets-data-pool_name">
+                              {asset.name} Branch
+                              <span className="poolName_txt">
+                                {/* {asset.PoolNameText}
+                                 */}
+                                Emerging Markets
+                              </span>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="assets-category-data1">
+                          <div className="assets-data-name_pool_invest_capcity">
+                            <div className="investmentcapacity_box">
+                              {" "}
+                              {parseInt(asset.amount).toFixed(0)} Engn
+                            </div>
+                          </div>
+                        </td>
+                        <td className="assets-category-data1b">
+                          <div className="assets-data-name_pool">
+                            {parseInt(asset.funded).toFixed(2)}{" "}
+                            <span className="asset_symbol"> Engn</span>
+                          </div>
+                        </td>
+                        <td className="assets-category-data1b stable-content">
+                          <div className="assets-data-name_pool ">
+                            13.0<span className="asset_symbol">%</span>
+                          </div>
+                        </td>
+                        <td className="assets-category-data1b ratio-content">
+                          <div
+                            className="assets-data-name_pool "
+                            style={
+                              asset.suspended === "true"
+                                ? { color: "#1fb73f" }
+                                : asset.suspended === "false"
+                                ? { color: "#e6a538" }
                                 : null
                             }
-                            alt=""
-                            className="assets-list-icon_pool_icon"
-                          />
-
-                          <div className="assets-data-pool_name">
-                            {asset.name} Branch
-                            <span className="poolName_txt">
-                              {/* {asset.PoolNameText}
-                               */}
-                              Emerging Markets
-                            </span>
+                          >
+                            <div className="status_column">
+                              {asset.suspended === "true"
+                                ? "Active"
+                                : asset.suspended === "false"
+                                ? "Inactive"
+                                : null}
+                              <CircleIcon className="status_circle" />
+                            </div>
                           </div>
-                        </div>
-                      </td>
-                      <td className="assets-category-data1">
-                        <div className="assets-data-name_pool_invest_capcity">
-                          <div className="investmentcapacity_box">
-                            {" "}
-                            {parseInt(asset.amount).toFixed(0)} Engn
-                          </div>
-                        </div>
-                      </td>
-                      <td className="assets-category-data1b">
-                        <div className="assets-data-name_pool">
-                          {parseInt(asset.funded).toFixed(2)}{" "}
-                          <span className="asset_symbol"> Engn</span>
-                        </div>
-                      </td>
-                      <td className="assets-category-data1b stable-content">
-                        <div className="assets-data-name_pool ">
-                          13.0<span className="asset_symbol">%</span>
-                        </div>
-                      </td>
-                      <td className="assets-category-data1b ratio-content">
-                        <div
-                          className="assets-data-name_pool "
-                          style={
-                            asset.suspended === "true"
-                              ? { color: "#1fb73f" }
-                              : asset.suspended === "false"
-                              ? { color: "#e6a538" }
-                              : null
-                          }
-                        >
-                          <div className="status_column">
-                            {asset.suspended === "true"
-                              ? "Active"
-                              : asset.suspended === "false"
-                              ? "Inactive"
-                              : null}
-                            <CircleIcon className="status_circle" />
-                          </div>
-                        </div>
-                      </td>
-                      <td className="assets-category-data-last">
-                        <a
-                          href={`/dashboard/lend/pool/${asset.branchAddress}/detail`}
-                          className="assets-btn"
-                        >
-                          See details <EastIcon className="see_more_icon" />
-                        </a>
-                      </td>
-                    </tr>
-                  ))}
-                  {/* =================== */}
-                  {/* =================== */}
-                  {/* =================== */}
-                  {/* =================== */}
-                </tbody>
-                {/* {{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}} */}
+                        </td>
+                        <td className="assets-category-data-last">
+                          <a
+                            href={`/dashboard/lend/pool/${asset.branchAddress}/detail`}
+                            className="assets-btn"
+                          >
+                            See details <EastIcon className="see_more_icon" />
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                    {/* =================== */}
+                    {/* =================== */}
+                    {/* =================== */}
+                    {/* =================== */}
+                  </tbody>
+                )}
               </table>
             </div>
           </div>
