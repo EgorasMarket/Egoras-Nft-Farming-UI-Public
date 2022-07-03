@@ -162,6 +162,7 @@ svg.recharts-surface {
   font-weight: 300;
   text-align: center;
   align-items: center;
+  overflow: hidden;
 }
 .asset_list_body_body_cont_1b {
   display: flex;
@@ -483,7 +484,7 @@ svg.recharts-surface {
     padding: 1em;
   }
   .filter_table_area_2 {
-    width: 50%;
+    width: 50% !important;
   }
 }
 @media screen and (max-width: 1142px) {
@@ -491,12 +492,131 @@ svg.recharts-surface {
     text-align: inherit;
   }
 }
+@media screen and (max-width: 991px) {
+  .asset_other2 {
+    padding-top: 4em !important;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .body_cont1_f {
     display: none;
   }
-
+  .pool_detail_assets_body_layer_1 {
+    grid-gap: 10px;
+    gap: 10px;
+    flex-direction: column;
+  }
   .body_head_tab6 {
+    display: none;
+  }
+  .filter_table_area_2 {
+    width: 60% !important;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border: solid 1px #e4e4e4;
+    border-radius: 46px;
+    padding: 10px;
+    background: #fff;
+    box-shadow: 0px 2px 6px #eaeaea;
+  }
+  .pool_deatail_area {
+    display: flex;
+    flex-direction: column;
+    grid-gap: 40px;
+    gap: 15px;
+    position: relative;
+  }
+}
+@media screen and (max-width: 672px) {
+  .arrow_right_arrow {
+    color: #8898a3 !important;
+    display: none !important;
+  }
+
+  .pool_detail_assets_body_layer_1_cont1_heading_1 {
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .asset_list_body_head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    color: black;
+    background: #fff;
+    padding: 0.5em;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+    border: solid 1px #ededed;
+    position: sticky;
+    top: 55px;
+    background: white;
+    font-weight: 600;
+    z-index: 1;
+    overflow: scroll;
+    gap: 10px;
+  }
+  .asset_list_body_body_cont_1 {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em;
+    background: #fff;
+    border: solid 1px #f0f0f0;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0px 0px 4px #dfdfdf;
+    align-items: center;
+    animation: fade 0.5s ease-in-out;
+    transition: 0.3s ease-in-out;
+    overflow: scroll;
+    gap: 10px;
+  }
+  .asset_list_body_body_cont_1a {
+    font-size: 12px;
+  }
+  .asset_list_body_body_cont_1b {
+    font-size: 12px;
+  }
+  .asset_list_body_body_cont_1c {
+    font-size: 12px;
+  }
+  .asset_list_body_body_cont_1d {
+    font-size: 12px;
+  }
+  .asset_list_body_body_cont_1e {
+    font-size: 12px;
+  }
+  .asset_list_body_body_cont_1f {
+    font-size: 12px;
+  }
+  .asset_list_body_body_cont_1g {
+    font-size: 12px;
+  }
+  .pool_detail_assets_body_layer_1_cont1_heading_1 {
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .asset_list_div {
+    padding: 0.5em;
+  }
+}
+@media screen and (max-width: 500px) {
+  .maturity_date {
+    display: none;
+    width: 100%;
+    justify-content: center;
+  }
+  .filter_table_area_2 {
+    width: 100% !important;
+  }
+  .asset_list_body_body_cont_1d {
+    font-size: 12px;
+    display: none;
+  }
+  .asset_list_head {
     display: none;
   }
 }

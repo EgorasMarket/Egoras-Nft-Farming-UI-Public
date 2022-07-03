@@ -16,6 +16,18 @@
   gap: 10px;
 }
 
+.wallet_addr_cont_txt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 215px;
+}
+.wallet_addr_cont {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .connected_txt {
   font-size: 14px;
   color: #a4a4a4;
@@ -28,6 +40,7 @@
   display: flex;
   flex-direction: column;
   gap: 50px;
+  margin-top: 2em;
 }
 /* .user_details_body1 {
   display: flex;
@@ -180,4 +193,24 @@
 .reward_amount_title {
   font-size: 14px;
   font-weight: 700;
+}
+@media screen and (max-width: 991px) {
+  .user_details_body1 {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .user_dashboard_area {
+    margin-top: 0em;
+  }
+}
+@media screen and (max-width: 600px) {
+  .user_details_body1 {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .user_details_body1_body_cont_area1 {
+    padding: 1em;
+  }
 }

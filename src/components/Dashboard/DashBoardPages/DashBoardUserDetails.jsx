@@ -13,6 +13,7 @@ import "../../../css/dashboard_user_details.css";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import Accordion from "../Accordion";
 import InventoryIcon from "@mui/icons-material/Inventory";
+import Nodata from "./nodataComponent/Nodata";
 import CloseIcon from "@mui/icons-material/Close";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
@@ -128,165 +129,6 @@ const DashBoardUserDetails = () => {
     }
   }, [account]);
 
-  const assets = [
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 2,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 3,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 4,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 5,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 6,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 7,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 8,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 9,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 10,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 11,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 12,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 13,
-      img: "/img/pool_asset_icon.png",
-      Pool: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Senior_APY: "13.10",
-      Status: "Ongoing",
-    },
-  ];
-
   const toggleSeemore = () => {
     setSeemore(!seemore);
   };
@@ -308,7 +150,7 @@ const DashBoardUserDetails = () => {
       {/* ============================================================ */}
       {/* ============================================================ */}
       {/* Tokens Section Start */}
-      <section className=" no-bg ">
+      <section className=" no-bg no_paddd ">
         <div className="container">
           <div className="user_dashboard_area">
             <div className="userdAshboard_head">
@@ -316,7 +158,8 @@ const DashBoardUserDetails = () => {
                 <div className="metamask_prof_pic" ref={avatarRef}></div>
                 <div className="user_walletAddress">
                   <div className="wallet_addr_cont">
-                    {walletAddr}
+                    <div className="wallet_addr_cont_txt">{walletAddr}</div>
+
                     <CopyAllIcon className="copy_all_tx_hash_icon" />
                   </div>
                   <span className="connected_txt">{conecttxt}</span>
@@ -407,39 +250,50 @@ const DashBoardUserDetails = () => {
                   <div className="asset_list_body_head_tab7">Txn Hash</div>
                 </div>
                 <div className="asset_list_body_body_cont">
-                  {(seemore == false ? loanAsset.slice(0, 6) : loanAsset).map(
-                    (data) => (
-                      <div
-                        className="asset_list_body_body_cont_1"
-                        id={data.id}
-                        onClick={ChangeAssetDetailModal}
-                      >
-                        {/* <div className="asset_list_body_body_cont_1a">
+                  {loanAsset.length <= 0 ? (
+                    <div className="no_loans_div">
+                      <div className="no_loans_div_cont">
+                        <Nodata />
+                        No funded pools yet.
+                      </div>{" "}
+                    </div>
+                  ) : (
+                    (seemore == false ? loanAsset.slice(0, 6) : loanAsset).map(
+                      (data) => (
+                        <div
+                          className="asset_list_body_body_cont_1"
+                          id={data.id}
+                          onClick={ChangeAssetDetailModal}
+                        >
+                          {/* <div className="asset_list_body_body_cont_1a">
                               {data.id}
                             </div> */}
-                        <div className="asset_list_body_body_cont_1a">
-                          <img
-                            src="/img/pool_asset_icon.png"
-                            alt=""
-                            className="assets-list-icon_pool_icon"
-                          />{" "}
-                          {data.title.substring(0, 15) + "..."}
-                        </div>
+                          <div className="asset_list_body_body_cont_1a">
+                            <img
+                              src="/img/pool_asset_icon.png"
+                              alt=""
+                              className="assets-list-icon_pool_icon"
+                            />{" "}
+                            {data.title.substring(0, 15) + "..."}
+                          </div>
 
-                        <div className="asset_list_body_body_cont_1b">
-                          {data.createdAt.slice(0, 10)}
+                          <div className="asset_list_body_body_cont_1b">
+                            {data.createdAt.slice(0, 10)}
+                          </div>
+                          <div className="asset_list_body_body_cont_1c">
+                            {parseInt(data.amount).toFixed(2)}
+                          </div>
+                          <div className="asset_list_body_body_cont_1c">
+                            {parseInt(data.funded).toFixed(2)}
+                          </div>
+                          <div className="asset_list_body_body_cont_1d">
+                            13%
+                          </div>
+                          <div className="asset_list_body_body_cont_1g">
+                            {data.transactionHash.substring(0, 24) + "..."}
+                          </div>
                         </div>
-                        <div className="asset_list_body_body_cont_1c">
-                          {parseInt(data.amount).toFixed(2)}
-                        </div>
-                        <div className="asset_list_body_body_cont_1c">
-                          {parseInt(data.funded).toFixed(2)}
-                        </div>
-                        <div className="asset_list_body_body_cont_1d">13%</div>
-                        <div className="asset_list_body_body_cont_1g">
-                          {data.transactionHash.substring(0, 24) + "..."}
-                        </div>
-                      </div>
+                      )
                     )
                   )}
                 </div>

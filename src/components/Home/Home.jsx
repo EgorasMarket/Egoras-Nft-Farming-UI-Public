@@ -40,7 +40,7 @@ const Home = () => {
       name: "Egoras Credit",
       type: "EGC",
       eusd_Avail: "90M",
-      stable: "0.50%",
+      stable: "0.0%",
       ratio: "120%",
     },
   ];
@@ -405,9 +405,7 @@ const Home = () => {
                 <tr className="assets">
                   <th className="assets-category-titles-heading1">Asset</th>
                   <th className="assets-category-titles-heading1">Type</th>
-                  <th className="assets-category-titles-heading1 right">
-                    ENGN Available
-                  </th>
+
                   <th className="assets-category-titles-heading1 right">
                     Stable Fee
                   </th>
@@ -453,11 +451,7 @@ const Home = () => {
                     <td className="assets-category-data1">
                       <div className="assets-data-name">{asset.type}</div>
                     </td>
-                    <td className="assets-category-data1b">
-                      <div className="assets-data-name ">
-                        {asset.eusd_Avail}
-                      </div>
-                    </td>
+
                     <td className="assets-category-data1b stable-content">
                       <div className="assets-data-name ">{asset.stable}</div>
                     </td>

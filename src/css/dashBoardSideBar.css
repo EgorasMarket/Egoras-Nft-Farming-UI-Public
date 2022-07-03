@@ -576,6 +576,9 @@ hr.hrr {
   .side {
     width: 0;
   }
+  .social_handles_cont_div {
+    display: none;
+  }
   .side_bar_head {
     display: none;
   }

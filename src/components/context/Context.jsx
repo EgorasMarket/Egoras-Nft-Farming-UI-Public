@@ -7,7 +7,14 @@ export const UserContext = React.createContext();
 
 export const Context = ({ children, branchId }) => {
   const [Branches, setBranches] = useState([]);
-
+  const [BranchDetails, setBranchDetails] = useState({
+    branchName: "",
+    amount: "",
+    funded: "",
+  });
+  const [rumuName, setRumuName] = useState(false);
+  const [agipName, setAgipName] = useState(false);
+  const [oyName, setOyName] = useState(false);
   //   const [txnhash, setTxnHash] = useState("");
 
   useEffect(() => {
@@ -17,6 +24,21 @@ export const Context = ({ children, branchId }) => {
         console.log(data.data.payload, "powerful");
 
         setBranches(data.data.payload);
+        setBranchDetails({
+          branchName: data.data.payload[0].name,
+          amount: data.data.payload[0].amount,
+          funded: data.data.payload[0].funded,
+        });
+        let babara = data.data.payload[0].name.includes("Rumukwrushi");
+        let babara2 = data.data.payload[0].name.includes("Agip");
+        let babara3 = data.data.payload[0].name.includes("Oyigbo");
+        console.log(data.data.payload[0].name);
+        setRumuName(babara);
+        setAgipName(babara2);
+        setOyName(babara3);
+
+        // console.log(babara);
+        console.log(babara, babara2, babara3);
       })
       .catch((err) => {
         console.log(err); // "oh, no!"
@@ -27,8 +49,12 @@ export const Context = ({ children, branchId }) => {
     <UserContext.Provider
       value={{
         Branches,
+        BranchDetails,
         // loans,
         branchId,
+        rumuName,
+        agipName,
+        oyName,
       }}
     >
       {children}

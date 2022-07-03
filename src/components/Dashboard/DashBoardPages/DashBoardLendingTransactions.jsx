@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 // import "../../../css/dashboard_branch_assets.css";
 import { Link } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -30,15 +30,14 @@ const DashBoardLendingTransactions = ({ match }) => {
     active,
     error,
   } = context;
+  const { Branches, BranchDetails, rumuName, agipName, oyName } =
+    useContext(UserContext);
   const [activeBtn, setActivrBtn] = useState("Ongoing");
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
   const [activeLink, setActiveLink] = useState("");
   const [assetDetailModal, setAssetDetailModal] = useState(0);
   const [transactions, setTransactions] = useState([]);
-  const [BranchDetails, setBranchDetails] = useState({
-    branchName: "",
-    amount: "",
-  });
+
   const currentPage = window.location.pathname;
   const urlArr = currentPage.split("/");
   useEffect(() => {
@@ -65,10 +64,6 @@ const DashBoardLendingTransactions = ({ match }) => {
           console.log(data.data.payload, "powerful333333");
           // console.log(txnhash);
           // setBranches(data.data.payload);
-          setBranchDetails({
-            branchName: data.data.payload[0].name,
-            amount: data.data.payload[0].amount,
-          });
         })
         .catch((err) => {
           console.log(err); // "oh, no!"
@@ -94,7 +89,7 @@ const DashBoardLendingTransactions = ({ match }) => {
   }, [account]);
 
   return (
-    <div className="other2">
+    <div className="other2 asset_other2">
       {/* get started section start */}
       {/* ============================================================ */}
       {/* ============================================================ */}
@@ -145,10 +140,12 @@ const DashBoardLendingTransactions = ({ match }) => {
               <div className="pool_detail_heading_area1">
                 <img
                   src={
-                    BranchDetails.branchName === "EGORAS OYIGBO"
+                    oyName === true
                       ? "/img/oyigbo_icon.svg"
-                      : BranchDetails.branchName === "EGORAS AGIP"
+                      : agipName === true
                       ? "/img/agip_icon.svg"
+                      : rumuName === true
+                      ? "/img/rumu_icon.svg"
                       : null
                   }
                   alt=""

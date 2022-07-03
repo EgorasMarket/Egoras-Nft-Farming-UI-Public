@@ -32,14 +32,13 @@ const DashBoardBranchAsset = ({ match }) => {
     active,
     error,
   } = context;
+
+  const { Branches, BranchDetails, rumuName, agipName, oyName } =
+    useContext(UserContext);
   const [loans, setLoans] = useState([]);
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
   const [totalPoolValue, setTotalPoolValue] = useState("");
   const [graphData, setGraphData] = useState("");
-  const [BranchDetails, setBranchDetails] = useState({
-    branchName: "",
-    amount: "",
-  });
 
   const [activeBtn, setActivrBtn] = useState("Ongoing");
   const [activeLink, setActiveLink] = useState("");
@@ -99,10 +98,6 @@ const DashBoardBranchAsset = ({ match }) => {
           console.log(data.data.payload, "powerful333333");
           // console.log(txnhash);
           // setBranches(data.data.payload);
-          setBranchDetails({
-            branchName: data.data.payload[0].name,
-            amount: data.data.payload[0].amount,
-          });
         })
         .catch((err) => {
           console.log(err); // "oh, no!"
@@ -161,7 +156,7 @@ const DashBoardBranchAsset = ({ match }) => {
     setActivrBtn(event.currentTarget.id);
   };
   return (
-    <div className="other2">
+    <div className="other2 asset_other2">
       {/* get started section start */}
       {/* ============================================================ */}
       {/* ============================================================ */}
@@ -213,10 +208,12 @@ const DashBoardBranchAsset = ({ match }) => {
               <div className="pool_detail_heading_area1">
                 <img
                   src={
-                    BranchDetails.branchName === "EGORAS OYIGBO"
+                    oyName === true
                       ? "/img/oyigbo_icon.svg"
-                      : BranchDetails.branchName === "EGORAS AGIP"
+                      : agipName === true
                       ? "/img/agip_icon.svg"
+                      : rumuName === true
+                      ? "/img/rumu_icon.svg"
                       : null
                   }
                   alt=""
@@ -321,7 +318,8 @@ const DashBoardBranchAsset = ({ match }) => {
 
             <div className="asset_list_div">
               <div className="asset_list_heading">
-                Asset List{" "}
+                <span className="asset_list_head">Asset List </span>
+
                 <div className="filter_table_area_2">
                   <div
                     id="Ongoing"
@@ -363,7 +361,9 @@ const DashBoardBranchAsset = ({ match }) => {
                   {/* <div className="asset_list_body_head_tab1">Asset Id</div> */}
                   <div className="asset_list_body_head_tab1">Asset Name</div>
                   <div className="asset_list_body_head_tab3">Date & Time</div>
-                  <div className="asset_list_body_head_tab4">Maturity Date</div>
+                  <div className="asset_list_body_head_tab4 maturity_date">
+                    Maturity Date
+                  </div>
                   <div className="asset_list_body_head_tab5">Amount(Engn)</div>
                   <div className="asset_list_body_head_tab6 body_head_tab6">
                     Financing Fee

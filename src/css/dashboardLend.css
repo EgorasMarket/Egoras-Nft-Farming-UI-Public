@@ -300,6 +300,57 @@
   .lending_area1_cont1 {
     width: 100%;
   }
+  .branch_name_title::before {
+    font-family: "Mulish" !important;
+    font-weight: 500 !important;
+    line-height: 1.5 !important;
+    font-size: 14px !important;
+    color: #7d7d7d !important;
+    content: "Asset" !important;
+    display: block !important;
+  }
+  .branch_Lending_Capacity::before {
+    font-family: "Mulish" !important;
+    font-weight: 500 !important;
+    line-height: 1.5 !important;
+    font-size: 14px !important;
+    color: #7d7d7d !important;
+    content: "Lending Capacity" !important;
+    display: block !important;
+  }
+  .branch_pool_value::before {
+    font-family: "Mulish" !important;
+    font-weight: 500 !important;
+    line-height: 1.5 !important;
+    font-size: 14px !important;
+    color: #7d7d7d !important;
+    content: "Pool Value" !important;
+    display: block !important;
+  }
+  .branch_apy::before {
+    font-family: "Mulish" !important;
+    font-weight: 500 !important;
+    line-height: 1.5 !important;
+    font-size: 14px !important;
+    color: #7d7d7d !important;
+    content: "Est APY" !important;
+    display: block !important;
+  }
+  .branch_loan_status::before {
+    font-family: "Mulish" !important;
+    font-weight: 500 !important;
+    line-height: 1.5 !important;
+    font-size: 14px !important;
+    color: #7d7d7d !important;
+    content: "Status" !important;
+    display: block !important;
+  }
+  .branch_loan_action {
+    width: 100%;
+  }
+  .assets-btn {
+    width: 100%;
+  }
 }
 @media screen and (max-width: 767px) {
   /* footer  section start */

@@ -38,7 +38,7 @@ import { API_URL as api_url } from "../../actions/types";
 // import ReceiptIcon from "@mui/icons-material/Receipt";
 // import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 // import CopyAllIcon from "@mui/icons-material/CopyAll";
-// import { UserContext } from "../context/Context";
+import { UserContext } from "../context/Context";
 
 import {
   lendUS,
@@ -65,14 +65,11 @@ import {
 } from "../../web3/index";
 const DashBoard_lend_details_page = ({ match }) => {
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
-  const [BranchDetails, setBranchDetails] = useState({
-    branchName: "",
-    amount: "",
-    funded: "",
-  });
+  const { BranchDetails, rumuName, agipName, oyName } = useContext(UserContext);
   console.log(match.params.branchAddress);
   const context = useWeb3React();
   const [LoanAssets, setLoanAssets] = useState([]);
+
   const [activeLink, setActiveLink] = useState("");
   const [checkBox, setCheckBox] = useState(false);
 
@@ -167,13 +164,14 @@ const DashBoard_lend_details_page = ({ match }) => {
         .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
         .then((data) => {
           console.log(data.data.payload, "powerful333333");
+
           // console.log(txnhash);
           // setBranches(data.data.payload);
-          setBranchDetails({
-            branchName: data.data.payload[0].name,
-            amount: data.data.payload[0].amount,
-            funded: data.data.payload[0].funded,
-          });
+          // setBranchDetails({
+          //   branchName: data.data.payload[0].name,
+          //   amount: data.data.payload[0].amount,
+          //   funded: data.data.payload[0].funded,
+          // });
           setLoanAssets(data.data.payload);
         })
         .catch((err) => {
@@ -187,6 +185,8 @@ const DashBoard_lend_details_page = ({ match }) => {
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);
   };
+
+  // console.log(c, b, d);
 
   const handleBackChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -294,7 +294,7 @@ const DashBoard_lend_details_page = ({ match }) => {
     }
   }, 7000);
   return (
-    <div className="other2">
+    <div className="other2 asset_other2">
       {/* get started section start */}
       {/* ============================================================ */}
       {/* ============================================================ */}
@@ -346,10 +346,12 @@ const DashBoard_lend_details_page = ({ match }) => {
               <div className="pool_detail_heading_area1">
                 <img
                   src={
-                    BranchDetails.branchName === "EGORAS OYIGBO"
+                    oyName === true
                       ? "/img/oyigbo_icon.svg"
-                      : BranchDetails.branchName === "EGORAS AGIP"
+                      : agipName === true
                       ? "/img/agip_icon.svg"
+                      : rumuName === true
+                      ? "/img/rumu_icon.svg"
                       : null
                   }
                   alt=""
@@ -431,10 +433,12 @@ const DashBoard_lend_details_page = ({ match }) => {
                 <div className="Asset_Originator_Details_cont_body_head_img_cont">
                   <img
                     src={
-                      BranchDetails.branchName === "EGORAS OYIGBO"
+                      oyName === true
                         ? "/img/oyigbo_icon2.svg"
-                        : BranchDetails.branchName === "EGORAS AGIP"
+                        : agipName === true
                         ? "/img/agip_icon2.svg"
+                        : rumuName === true
+                        ? "/img/rumu_icon2.svg"
                         : null
                     }
                     className="Asset_Originator_Details_cont_body_head_img"
@@ -459,10 +463,12 @@ const DashBoard_lend_details_page = ({ match }) => {
                     Issuer
                   </div>
                   <div className="Asset_Originator_Details_cont_body_issuer_cont_txt">
-                    {BranchDetails.branchName === "EGORAS OYIGBO"
+                    {oyName === true
                       ? "Egoras Oyigbo Branch"
-                      : BranchDetails.branchName === "EGORAS AGIP"
-                      ? "Egoras Agip branch"
+                      : agipName === true
+                      ? "Egoras Agip Branch"
+                      : rumuName === true
+                      ? "Egoras Rumukwrushi Branch"
                       : null}
                   </div>
                 </div>
@@ -552,10 +558,16 @@ const DashBoard_lend_details_page = ({ match }) => {
             <div className="asset_list_body_head2">
               {/* <div className="asset_list_body_head_tab1">Asset Id</div> */}
               <div className="asset_list_body_head_tab1">Asset Name</div>
-              <div className="asset_list_body_head_tab3">Date & Time</div>
-              <div className="asset_list_body_head_tab4">Maturity Date</div>
+              <div className="asset_list_body_head_tab3 date_time_head">
+                Date & Time
+              </div>
+              <div className="asset_list_body_head_tab4 date_duration_row22">
+                Duration
+              </div>
               <div className="asset_list_body_head_tab5">Amount(Engn)</div>
-              <div className="asset_list_body_head_tab6">Financing Fee</div>
+              <div className="asset_list_body_head_tab6 finance_fee_details_page">
+                Financing Fee
+              </div>
               <div className="asset_list_body_head_tab7">Action</div>
             </div>
             <div className="asset_list_body_body_cont">
@@ -576,22 +588,24 @@ const DashBoard_lend_details_page = ({ match }) => {
                           {data.title.substring(0, 20) + "..."}
                         </div>
 
-                        <div className="asset_list_body_body_cont_1c">
+                        <div className="asset_list_body_body_cont_1c date_time_row">
                           {data.createdAt.slice(0, 10)}
                         </div>
-                        <div className="asset_list_body_body_cont_1d">
+                        <div className="asset_list_body_body_cont_1d date_duration_row22">
                           {data.length} month(s)
                         </div>
                         <div className="asset_list_body_body_cont_1e">
                           {parseInt(data.amount).toFixed()}
                         </div>
-                        <div className="asset_list_body_body_cont_1f">13 %</div>
+                        <div className="asset_list_body_body_cont_1f finance_fee_details_page_row">
+                          13 %
+                        </div>
                         <div className="asset_list_body_body_cont_1g">
                           <button
                             onClick={ChangeAssetDetailModal}
                             className="back_btn"
                           >
-                            Back
+                            Lend
                           </button>
                         </div>
                       </div>
