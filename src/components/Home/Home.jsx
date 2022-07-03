@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 // import React from "react";
-import { Link } from 'react-router-dom';
-import HomeIcon from '@mui/icons-material/Home';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
-import HowToVoteIcon from '@mui/icons-material/HowToVote';
-import CasinoIcon from '@mui/icons-material/Casino';
-import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { Link } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import HowToVoteIcon from "@mui/icons-material/HowToVote";
+import CasinoIcon from "@mui/icons-material/Casino";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 // import Carousel from "react-multi-carousel";
 
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
-import Marquee from 'react-fast-marquee';
-import NotInterestedIcon from '@mui/icons-material/NotInterested';
-import SwapHorizontalCircleIcon from '@mui/icons-material/SwapHorizontalCircle';
-import SearchIcon from '@mui/icons-material/Search';
-import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
-import FlipCountdown from '@rumess/react-flip-countdown';
-import './countdown.css';
-import WaveAnimation from './WaveAnimation/WaveAnimation';
-import '../../css/home.css';
-import { PersonTwoTone } from '@material-ui/icons';
-import './Logos.css';
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import Marquee from "react-fast-marquee";
+import NotInterestedIcon from "@mui/icons-material/NotInterested";
+import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
+import SearchIcon from "@mui/icons-material/Search";
+import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
+import FlipCountdown from "@rumess/react-flip-countdown";
+import "./countdown.css";
+import WaveAnimation from "./WaveAnimation/WaveAnimation";
+import "../../css/home.css";
+import { PersonTwoTone } from "@material-ui/icons";
+import "./Logos.css";
 const Home = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
   const assets = [
@@ -36,12 +36,12 @@ const Home = () => {
     //   ratio: "170%",
     // },
     {
-      img: '/img/egc-icon.svg',
-      name: 'Egoras Credit',
-      type: 'EGC',
-      eusd_Avail: '90M',
-      stable: '0.50%',
-      ratio: '120%',
+      img: "/img/egc-icon.svg",
+      name: "Egoras Credit",
+      type: "EGC",
+      eusd_Avail: "90M",
+      stable: "0.50%",
+      ratio: "120%",
     },
   ];
 
@@ -66,25 +66,25 @@ const Home = () => {
   };
   const FeaturedLogos = [
     {
-      img: '/img/featured_logos/featured1.svg',
+      img: "/img/featured_logos/featured1.svg",
     },
     {
-      img: '/img/featured_logos/featured2.svg',
+      img: "/img/featured_logos/featured2.svg",
     },
     {
-      img: '/img/featured_logos/featured3.svg',
+      img: "/img/featured_logos/featured3.svg",
     },
     {
-      img: '/img/featured_logos/featured4.svg',
+      img: "/img/featured_logos/featured4.svg",
     },
     {
-      img: '/img/featured_logos/featured5.svg',
+      img: "/img/featured_logos/featured5.svg",
     },
     {
-      img: '/img/featured_logos/featured6.svg',
+      img: "/img/featured_logos/featured6.svg",
     },
     {
-      img: '/img/featured_logos/featured7.svg',
+      img: "/img/featured_logos/featured7.svg",
     },
   ];
   const handleSearchChange = (event) => {
@@ -96,25 +96,22 @@ const Home = () => {
   }, []);
   useEffect(() => {
     const results = assets.filter((person) =>
-      person.name
-        .toString()
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase())
+      person.name.toString().toLowerCase().includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
   }, [searchTerm]);
 
-  const [categoryBtn, setCategoryBtn] = useState('All');
+  const [categoryBtn, setCategoryBtn] = useState("All");
 
   const triggerAll = () => {
-    setCategoryBtn('All');
+    setCategoryBtn("All");
   };
 
   const triggerPopular = () => {
-    setCategoryBtn('Popular');
+    setCategoryBtn("Popular");
   };
   const triggerStable = () => {
-    setCategoryBtn('Stable');
+    setCategoryBtn("Stable");
   };
 
   return (
@@ -126,25 +123,19 @@ const Home = () => {
       <section className="earning-section">
         <div className="container">
           <div className="nft-area2">
-            <div className="nft-txt-area2 " style={{ width: '100%' }}>
+            <div className="nft-txt-area2 " style={{ width: "100%" }}>
               <div className="span-txts">
-                <p className="span4a-txts">
-                  Grow your portfolio with Egoras
-                </p>
+                <p className="span4a-txts">Grow your portfolio with Egoras</p>
                 <p className="span4b-txts">
-                  Build your portfolio with Egoras Interest-free
-                  Cryptoloans or earn attractive APY when you stake
-                  your crypto.
+                  Build your portfolio with Egoras Interest-free Cryptoloans or
+                  earn attractive APY when you stake your crypto.
                 </p>
               </div>
               <div className="stake-hero-btns">
                 <a href="/dashboard" className="stake-hero-btn1">
                   Launch App <ExitToAppIcon className="exit-to-app" />
                 </a>
-                <a
-                  href="/dashboard/whitepaper"
-                  className="stake-hero-btn2"
-                >
+                <a href="/dashboard/whitepaper" className="stake-hero-btn2">
                   Read White-Paper
                 </a>
               </div>
@@ -165,50 +156,30 @@ const Home = () => {
             </div>
             <div
               className="nft-img-area2"
-              style={{ display: 'inline-flex', width: '100%' }}
+              style={{ display: "inline-flex", width: "100%" }}
             >
               <img
                 src="/img/egr-stake-coina.png"
                 alt=""
-                style={{ width: '80%', margin: 'auto' }}
+                style={{ width: "80%", margin: "auto" }}
               />
             </div>
           </div>
         </div>
         {/* <img src="/img/blur-drop.png" alt="" className="blurDrop-token" /> */}
-        <img
-          src="/img/hero_bg_bg.png"
-          alt=""
-          className="blurDrop-token2"
-        />
+        <img src="/img/hero_bg_bg.png" alt="" className="blurDrop-token2" />
         {/* <img src="/img/banner-bg.png" alt="" className="blurDrop-token3" /> */}
 
         <div className="floating_images_cont">
-          <img
-            src="/img/floating_cube1.svg"
-            alt=""
-            className="float_cube1"
-          />
-          <img
-            src="/img/floating_cube2.svg"
-            alt=""
-            className="float_cube2"
-          />
+          <img src="/img/floating_cube1.svg" alt="" className="float_cube1" />
+          <img src="/img/floating_cube2.svg" alt="" className="float_cube2" />
           <img
             src="/img/floating_layers_img.svg"
             alt=""
             className="float_layer1"
           />
-          <img
-            src="/img/floating_shadow.png"
-            alt=""
-            className="float_shadow"
-          />
-          <img
-            src="/img/floating_circle.png"
-            alt=""
-            className="float_circle"
-          />
+          <img src="/img/floating_shadow.png" alt="" className="float_shadow" />
+          <img src="/img/floating_circle.png" alt="" className="float_circle" />
           <img
             src="/img/floating_circle2.png"
             alt=""
@@ -293,20 +264,19 @@ const Home = () => {
                   </div>
                   <div className="key_features_txts">
                     <div className="key-features-cards-area1-header">
-                      {' '}
+                      {" "}
                       Staking
                     </div>
                     <p className="key-features-cards-area1-para">
-                      Earn up to 60% APY when you stake EGR or
-                      different assets in a decentralised and
-                      non-custodial manner.
+                      Earn up to 60% APY when you stake EGR or different assets
+                      in a decentralised and non-custodial manner.
                     </p>
                   </div>
                 </div>
                 <div className="key-features-cards-area1 flex_rev_me">
                   <div className="key_features_txts">
                     <div className="key-features-cards-area1-header">
-                      {' '}
+                      {" "}
                       Interest-Free CryptoLoans
                     </div>
                     <p className="key-features-cards-area1-para">
@@ -331,13 +301,9 @@ const Home = () => {
                     />
                   </div>
                   <div className="key_features_txts">
-                    <div className="key-features-cards-area1-header">
-                      {' '}
-                      Swap
-                    </div>
+                    <div className="key-features-cards-area1-header"> Swap</div>
                     <p className="key-features-cards-area1-para">
-                      Buy/Sell over 25+ crypto asset to increase your
-                      exposure.
+                      Buy/Sell over 25+ crypto asset to increase your exposure.
                     </p>
                   </div>
                 </div>
@@ -345,11 +311,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <img
-          src="/img/blur-drop.png"
-          alt=""
-          className="blurDrop-token"
-        />
+        <img src="/img/blur-drop.png" alt="" className="blurDrop-token" />
       </section>
 
       {/* ==================== */}
@@ -406,9 +368,7 @@ const Home = () => {
               <div className="assets-cont-header-arae-btns">
                 <button
                   className={
-                    categoryBtn === 'All'
-                      ? 'assets-header1'
-                      : 'assets-header2'
+                    categoryBtn === "All" ? "assets-header1" : "assets-header2"
                   }
                   onClick={triggerAll}
                 >
@@ -427,7 +387,7 @@ const Home = () => {
               </div>
 
               <div className="search-input">
-                {' '}
+                {" "}
                 <input
                   type="search"
                   name="search"
@@ -436,19 +396,15 @@ const Home = () => {
                   placeholder="Search..."
                   value={searchTerm}
                   onChange={handleSearchChange}
-                ></input>{' '}
+                ></input>{" "}
                 <SearchIcon className="search-icon" />
               </div>
             </div>
             <table className="assets-table">
               <thead className="assets-category-titles">
                 <tr className="assets">
-                  <th className="assets-category-titles-heading1">
-                    Asset
-                  </th>
-                  <th className="assets-category-titles-heading1">
-                    Type
-                  </th>
+                  <th className="assets-category-titles-heading1">Asset</th>
+                  <th className="assets-category-titles-heading1">Type</th>
                   <th className="assets-category-titles-heading1 right">
                     ENGN Available
                   </th>
@@ -477,7 +433,7 @@ const Home = () => {
                 className="assets-table-body popular-categories"
                 id="popular-categories"
               >
-                {' '}
+                {" "}
                 {/* =============== */}
                 {/* =============== */}
                 {/* =============== */}
@@ -491,15 +447,11 @@ const Home = () => {
                           className="assets-list-icon"
                         />
 
-                        <div className="assets-data-name">
-                          {asset.name}
-                        </div>
+                        <div className="assets-data-name">{asset.name}</div>
                       </div>
                     </td>
                     <td className="assets-category-data1">
-                      <div className="assets-data-name">
-                        {asset.type}
-                      </div>
+                      <div className="assets-data-name">{asset.type}</div>
                     </td>
                     <td className="assets-category-data1b">
                       <div className="assets-data-name ">
@@ -507,21 +459,17 @@ const Home = () => {
                       </div>
                     </td>
                     <td className="assets-category-data1b stable-content">
-                      <div className="assets-data-name ">
-                        {asset.stable}
-                      </div>
+                      <div className="assets-data-name ">{asset.stable}</div>
                     </td>
                     <td className="assets-category-data1b ratio-content">
-                      <div className="assets-data-name ">
-                        {asset.ratio}
-                      </div>
+                      <div className="assets-data-name ">{asset.ratio}</div>
                     </td>
                     <td className="assets-category-data-last">
                       <div className="assets-data-name-last">
                         <a
                           href={`/vault/${asset.type}/ENGN`}
                           className="assets-collateralize-button"
-                          style={{ border: 'none' }}
+                          style={{ border: "none" }}
                         >
                           Open Vault
                         </a>
@@ -557,8 +505,8 @@ const Home = () => {
             <div className="how_it_works_title_cont">
               <div className="how_it_works_title">How it works</div>
               <div className="how_it_works_para">
-                Egoras is a fully decentralized, community governed
-                protocol with 110,720 token holders.
+                Egoras is a fully decentralized, community governed protocol
+                with 110,720 token holders.
               </div>
             </div>
             <div className="how_it_works_area">
@@ -575,8 +523,8 @@ const Home = () => {
                     Connect Wallet
                   </div>
                   <div className="how_it_works_area_cont1_para">
-                    Gauge community sentiment on a new proposal
-                    through a Snapshot.
+                    Gauge community sentiment on a new proposal through a
+                    Snapshot.
                   </div>
 
                   <a href="" className="visit_app_link_2">
@@ -597,8 +545,8 @@ const Home = () => {
                     Open Vault
                   </div>
                   <div className="how_it_works_area_cont1_para">
-                    Gauge community sentiment on a new proposal
-                    through a Snapshot.
+                    Gauge community sentiment on a new proposal through a
+                    Snapshot.
                   </div>
 
                   <a href="" className="visit_app_link_2">
@@ -619,8 +567,8 @@ const Home = () => {
                     Generate ENGN
                   </div>
                   <div className="how_it_works_area_cont1_para">
-                    Gauge community sentiment on a new proposal
-                    through a Snapshot.
+                    Gauge community sentiment on a new proposal through a
+                    Snapshot.
                   </div>
 
                   <a href="" className="visit_app_link_2">
@@ -701,24 +649,16 @@ const Home = () => {
             >
               {FeaturedLogos.map((data) => (
                 <div className="featured_in_logos_cont">
-                  {' '}
-                  <img
-                    src={data.img}
-                    alt=""
-                    className="featured_logo"
-                  />
+                  {" "}
+                  <img src={data.img} alt="" className="featured_logo" />
                 </div>
               ))}
             </Carousel>
             <div className="featured_logos_mobile">
               {FeaturedLogos.map((data) => (
                 <div className="featured_in_logos_cont">
-                  {' '}
-                  <img
-                    src={data.img}
-                    alt=""
-                    className="featured_logo"
-                  />
+                  {" "}
+                  <img src={data.img} alt="" className="featured_logo" />
                 </div>
               ))}
             </div>
@@ -744,13 +684,9 @@ const Home = () => {
       <section className="getStartedSection">
         <div className="container">
           <div className="getStarted_area">
-            <div className="getStarted_title">
-              Get crypto loan today
-            </div>
+            <div className="getStarted_title">Get crypto loan today</div>
             <a href="/dashboard" className="getStarted_btn">
-              <button className="get_started_button">
-                Get started
-              </button>
+              <button className="get_started_button">Get started</button>
             </a>
           </div>
         </div>

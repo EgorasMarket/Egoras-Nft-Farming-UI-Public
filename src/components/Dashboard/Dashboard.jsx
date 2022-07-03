@@ -8,7 +8,7 @@ import DashBoardUserDetails from "./DashBoardPages/DashBoardUserDetails";
 // dashboard components
 // import DashBoardHeader from "./DashBoardHeader";
 import DashboardSideBarMenu from "./DashboardSideBarMenu";
-
+import LoadingIcons from "react-loading-icons";
 // import DashBoardDefaultPage from "./DashBoardPages/DashBoardDefaultPage";
 import DashBoardAnalytics from "./DashBoardPages/DashBoardAnalytics";
 import DashBoardTransaction from "./DashBoardPages/DashBoardTransaction";
@@ -43,6 +43,7 @@ function Dashboard() {
         {gettingReady === true ? (
           <div className="hold_On_div">
             <div className="hold_On_div_div_txt">
+              <LoadingIcons.Puff fill="#000" stroke="#000" />
               Please hold on for a while...{" "}
               <span className="hold_On_div_div_txt_para">
                 We are getting things ready.
