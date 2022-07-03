@@ -94,6 +94,7 @@
   vertical-align: sub;
   width: 40px;
   height: 40px;
+  border-radius: 6px;
 }
 .assets-data-name_pool {
   box-sizing: border-box;

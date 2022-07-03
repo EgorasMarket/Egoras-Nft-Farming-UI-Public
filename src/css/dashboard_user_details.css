@@ -3,7 +3,12 @@
   align-items: flex-start;
   flex-direction: column;
   grid-gap: 10px;
+  grid-gap: 10px;
   gap: 10px;
+  padding: 1em;
+  background: #fff;
+  border: solid 1px #e7e7e7;
+  border-radius: 10px;
 }
 .userdAshboard_head_area {
   display: flex;

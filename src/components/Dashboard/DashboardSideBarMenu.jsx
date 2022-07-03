@@ -59,15 +59,27 @@ const DashboardSideBarMenu = () => {
     if (linksActive === "/dashboard/lend/pool/detail") {
       setActiveMenuName("Pool Details");
     }
-    if (linksActive === "/dashboard/lend/pool/detail/branch/asset") {
+    if (
+      linksActive ===
+      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+    ) {
+      setActiveMenuName("Pool Details");
+    }
+    if (
+      linksActive ===
+      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+    ) {
+      setActiveMenuName("Pool Details");
+    }
+    if (linksActive === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
       setActiveMenuName("Pool Details");
     }
     if (linksActive === "/dashboard/lend/pool/detail/transactions") {
       setActiveMenuName("Pool Details");
     }
-    if (linksActive === "/dashboard/add") {
-      setActiveMenuName("Liquidity");
-    }
+    // if (linksActive === "/dashboard/add") {
+    //   setActiveMenuName("Liquidity");
+    // }
     if (linksActive === "/dashboard/whitepaper") {
       setActiveMenuName("Whitepaper");
     }
@@ -110,10 +122,19 @@ const DashboardSideBarMenu = () => {
     if (linksActive === "/dashboard/user") {
       setActiveBg("account");
     }
-    if (linksActive === "/dashboard/lend/pool/detail") {
+    if (
+      linksActive ===
+      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+    ) {
       setActiveBg("lend");
     }
-    if (linksActive === "/dashboard/lend/pool/detail/branch/asset") {
+    if (
+      linksActive ===
+      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+    ) {
+      setActiveBg("lend");
+    }
+    if (linksActive === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
       setActiveBg("lend");
     }
     if (linksActive === "/dashboard/lend/pool/detail/transactions") {
@@ -282,7 +303,7 @@ const DashboardSideBarMenu = () => {
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
-                <Link
+                {/* <Link
                   to="/dashboard/add"
                   className="link"
                   id="pool"
@@ -298,7 +319,7 @@ const DashboardSideBarMenu = () => {
                     <OpacityIcon className="sidebarIcon" />
                     liquidity
                   </li>
-                </Link>
+                </Link> */}
 
                 {/* ===================== */}
                 {/* ===================== */}
@@ -424,7 +445,7 @@ const DashboardSideBarMenu = () => {
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
-                <Link
+                {/* <Link
                   to="/dashboard/add"
                   id="pool"
                   className="link hover_link"
@@ -441,7 +462,7 @@ const DashboardSideBarMenu = () => {
                     Liquidity
                   </li>
                   <span className="hover_link_txt">Liquidity</span>
-                </Link>
+                </Link> */}
 
                 {/* ===================== */}
                 {/* ===================== */}
@@ -463,7 +484,7 @@ const DashboardSideBarMenu = () => {
                     <AccountCircleIcon className="sidebarIcon" />
                     Account
                   </li>
-                  <span className="hover_link_txt">Liquidity</span>
+                  <span className="hover_link_txt">Account</span>
                 </Link>
                 {/* ===================== */}
                 {/* ===================== */}

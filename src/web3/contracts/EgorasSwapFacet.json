@@ -1,5 +1,4 @@
 {
-  "address": "0xcCf8E0F685C59b43716ea713cA8aCBB20201AAD8",
   "abi": [
     {
       "anonymous": false,
@@ -126,19 +125,6 @@
       "name": "initContructor",
       "outputs": [],
       "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "getPrice",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
       "type": "function"
     },
     {

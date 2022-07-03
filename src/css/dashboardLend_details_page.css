@@ -21,6 +21,7 @@
 }
 .pool_detail_heading_area1_img {
   width: 40px;
+  border-radius: 5px;
 }
 .pool_detail_heading_area1_txt_cont {
   display: flex;

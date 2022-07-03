@@ -9,20 +9,66 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import CopyAllIcon from "@mui/icons-material/CopyAll";
 import { AreaChart, Area, Tooltip, ResponsiveContainer } from "recharts";
-const DashBoardLendingTransactions = () => {
+import { UserContext } from "../../context/Context";
+import axios from "axios";
+import { config } from "../../../actions/Config";
+import { API_URL as api_url } from "../../../actions/types";
+
+const DashBoardLendingTransactions = ({ match }) => {
   const [activeBtn, setActivrBtn] = useState("Ongoing");
+  const [txnhash, setTxnHash] = useState(match.params.branchAddress);
   const [activeLink, setActiveLink] = useState("");
   const [assetDetailModal, setAssetDetailModal] = useState(0);
+  const [transactions, setTransactions] = useState([]);
+  const [BranchDetails, setBranchDetails] = useState({
+    branchName: "",
+    amount: "",
+  });
   const currentPage = window.location.pathname;
+  const urlArr = currentPage.split("/");
   useEffect(() => {
-    if (currentPage === "/dashboard/lend/pool/detail") {
+    if (currentPage === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
       setActiveLink("Overview");
-    } else if (currentPage === "/dashboard/lend/pool/detail/branch/asset") {
+    } else if (
+      currentPage ===
+      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+    ) {
       setActiveLink("Asset");
-    } else if (currentPage === "/dashboard/lend/pool/detail/transactions") {
-      setActiveLink("Transaction");
+    } else if (
+      currentPage ===
+      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+    ) {
+      setActiveLink("transaction");
     }
   });
+
+  useEffect(() => {
+    axios
+      .get(api_url + "/api/lend/unique/" + txnhash, null, config)
+      .then((data) => {
+        console.log(data.data.payload, "powerful333333");
+        // console.log(txnhash);
+        // setBranches(data.data.payload);
+        setBranchDetails({
+          branchName: data.data.payload[0].name,
+          amount: data.data.payload[0].amount,
+        });
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
+      .then((data) => {
+        console.log(data.data.payload, "powerful3333oooo33");
+        setTransactions(data.data.payload);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, []);
   const data2 = [
     {
       PoolValue: 0,
@@ -310,7 +356,7 @@ const DashBoardLendingTransactions = () => {
           <div className="pool_deatail_area">
             <div className="pool_lending_pages_links">
               <Link
-                to="/dashboard/lend/pool/detail"
+                to={`/dashboard/lend/pool/${txnhash}/detail`}
                 className={
                   activeLink === "Overview"
                     ? "pool_lend_details_link_active"
@@ -322,7 +368,7 @@ const DashBoardLendingTransactions = () => {
               </Link>
               {/* <span class="vertical_ruleB"></span> */}
               <Link
-                to="/dashboard/lend/pool/detail/branch/asset"
+                to={`/dashboard/lend/pool/detail/branch/${txnhash}/asset`}
                 className={
                   activeLink === "Asset"
                     ? "pool_lend_details_link_active"
@@ -334,9 +380,9 @@ const DashBoardLendingTransactions = () => {
               </Link>
               {/* <span class="vertical_ruleB"></span> */}
               <Link
-                to="/dashboard/lend/pool/detail/branch/transactions"
+                to={`/dashboard/lend/pool/detail/${txnhash}/transactions`}
                 className={
-                  activeLink === "Transaction"
+                  activeLink === "transaction"
                     ? "pool_lend_details_link_active"
                     : "pool_lend_details_link"
                 }
@@ -348,13 +394,19 @@ const DashBoardLendingTransactions = () => {
             <div className="pool_detail_heading">
               <div className="pool_detail_heading_area1">
                 <img
-                  src="/img/pool_asset_icon.png"
+                  src={
+                    BranchDetails.branchName === "OYIGBO"
+                      ? "/img/oyigbo_icon.svg"
+                      : BranchDetails.branchName === "AGIP"
+                      ? "/img/agip_icon.svg"
+                      : null
+                  }
                   alt=""
                   className="pool_detail_heading_area1_img"
                 />
                 <div className="pool_detail_heading_area1_txt_cont">
                   <div className="pool_detail_heading_area1_txt_cont_1">
-                    Branch Series 3 (1754 Factory){" "}
+                    {BranchDetails.branchName} Branch
                     {/* <div className="pool_detail_investmentcapacity_box">
                       {" "}
                       41.2M Engn
@@ -373,7 +425,7 @@ const DashBoardLendingTransactions = () => {
               <div className="pool_detail_assets_body_layer_1_cont1">
                 <div className="pool_detail_assets_body_layer_1_cont1_heading">
                   <div className="pool_detail_assets_body_layer_1_cont1_heading_1">
-                    Asset Value
+                    Total Transactions
                   </div>
                   <div className="pool_detail_assets_body_layer_1_cont1_heading_1">
                     8,336,195 Engn
@@ -381,15 +433,15 @@ const DashBoardLendingTransactions = () => {
                 </div>
                 <div className="pool_detail_assets_body_layer_1_cont1_sub_heading">
                   <div className="pool_detail_assets_body_layer_1_cont1_sub_heading_1">
-                    Total Transactions
+                    Transactions Count
                   </div>
                   <div className="pool_detail_assets_body_layer_1_cont1_sub_heading_1">
                     <div className="pool_detail_assets_body_layer_1_cont1_sub_heading_1a">
-                      0 Txn
+                      {transactions.length}Txn
                     </div>
-                    <div className="pool_detail_assets_body_layer_1_cont1_sub_heading_1b">
+                    {/* <div className="pool_detail_assets_body_layer_1_cont1_sub_heading_1b">
                       Vlue: 4,000,000 Engn
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -407,7 +459,7 @@ const DashBoardLendingTransactions = () => {
                   <AreaChart
                     width={730}
                     height={150}
-                    data={data2}
+                    data={transactions}
                     margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
                   >
                     <defs>
@@ -430,7 +482,7 @@ const DashBoardLendingTransactions = () => {
                     <Tooltip />
                     <Area
                       type="monotone"
-                      dataKey="PoolValue"
+                      dataKey="amount"
                       stroke="#166235"
                       fillOpacity={1}
                       fill="url(#colorUv)"
@@ -460,7 +512,7 @@ const DashBoardLendingTransactions = () => {
                   <div className="asset_list_body_head_tab6">Financing Fee</div>
                 </div>
                 <div className="asset_list_body_body_cont">
-                  {assets.map((data) => (
+                  {transactions.map((data) => (
                     <div
                       className="asset_list_body_body_cont_1"
                       id={data.id}
@@ -471,24 +523,22 @@ const DashBoardLendingTransactions = () => {
                           </div> */}
                       <div className="asset_list_body_body_cont_1a">
                         <a
-                          href={`https://bscscan.com/tx/${data.txHash}`}
+                          href={`https://bscscan.com/tx/${data.transactionHash}`}
                           target="_blank"
                           style={{ color: "#000" }}
                         >
-                          {data.txHash.substring(0, 28) + "..."}
+                          {data.transactionHash.substring(0, 28) + "..."}
                         </a>
                       </div>
 
                       <div className="asset_list_body_body_cont_1c">
-                        {data.Date}
+                        {data.createdAt.slice(0, 10)}
                       </div>
 
                       <div className="asset_list_body_body_cont_1e">
-                        {data.Amount}
+                        {parseInt(data.amount).toFixed()}
                       </div>
-                      <div className="asset_list_body_body_cont_1f">
-                        {data.Fee}%
-                      </div>
+                      <div className="asset_list_body_body_cont_1f">13%</div>
                       {/* <div className="asset_list_body_body_cont_1g">
                         <button
                           className={

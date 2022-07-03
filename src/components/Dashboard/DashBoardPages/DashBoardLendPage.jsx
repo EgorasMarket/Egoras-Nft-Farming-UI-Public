@@ -271,7 +271,13 @@ const DashBoardLendPage = () => {
                       <td className="assets-category-data">
                         <div className="assets-data">
                           <img
-                            src="/img/pool_asset_icon.png"
+                            src={
+                              asset.name === "OYIGBO"
+                                ? "/img/oyigbo_icon.svg"
+                                : asset.name === "AGIP"
+                                ? "/img/agip_icon.svg"
+                                : null
+                            }
                             alt=""
                             className="assets-list-icon_pool_icon"
                           />

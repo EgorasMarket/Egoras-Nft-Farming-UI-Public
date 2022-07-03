@@ -17,6 +17,8 @@ import { API_URL as api_url } from "../../../actions/types";
 const DashBoardBranchAsset = ({ match }) => {
   const { loans } = useContext(UserContext);
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
+  const [totalPoolValue, setTotalPoolValue] = useState("");
+  const [graphData, setGraphData] = useState("");
   const [BranchDetails, setBranchDetails] = useState({
     branchName: "",
     amount: "",
@@ -36,6 +38,11 @@ const DashBoardBranchAsset = ({ match }) => {
       "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setActiveLink("Asset");
+    } else if (
+      currentPage ===
+      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+    ) {
+      setActiveLink("transaction");
     }
   });
   const data2 = [
@@ -106,7 +113,7 @@ const DashBoardBranchAsset = ({ match }) => {
       amt: 2400,
     },
   ];
-
+  console.log(data2);
   const toggleImgDiv = () => {
     setImgDiv(!imgDiv);
   };
@@ -339,6 +346,43 @@ const DashBoardBranchAsset = ({ match }) => {
         console.log(err); // "oh, no!"
       });
   }, []);
+  useEffect(() => {
+    axios
+      .get(api_url + "/api/branch/specific/" + txnhash, null, config)
+      .then((data) => {
+        console.log(data.data.payload[0].total, "powerfulttt5tt333333");
+        setTotalPoolValue(data.data.payload[0].total);
+        // console.log(txnhash);
+        // setBranches(data.data.payload);
+        // setBranchDetails({
+        //   branchName: data.data.payload[0].name,
+        //   amount: data.data.payload[0].amount,
+        // });
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .get(api_url + "/api/branch/chart/" + txnhash, null, config)
+      .then((data) => {
+        console.log(data.data.payload, "powerfulttt5tt333333");
+        setGraphData(data.data.payload);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, []);
+  // var grapDataa =
+  //   graphData &&
+  //   graphData.length > 0 &&
+  //   graphData.map((graphDataList) => graphDataList.amount);
+  // console.log(
+  //   graphData &&
+  //     graphData.length > 0 &&
+  //     graphData.map((graphDataList) => graphDataList.amount)
+  // );
   const closeAssetDetailModal = () => {
     setAssetDetailModal("");
     console.log("i am not here");
@@ -384,8 +428,12 @@ const DashBoardBranchAsset = ({ match }) => {
               </Link>
               {/* <span class="vertical_ruleB"></span> */}
               <Link
-                to="/dashboard/lend/pool/detail/transactions"
-                className="pool_lend_details_link"
+                to={`/dashboard/lend/pool/detail/${txnhash}/transactions`}
+                className={
+                  activeLink === "transaction"
+                    ? "pool_lend_details_link_active"
+                    : "pool_lend_details_link"
+                }
               >
                 <ReceiptIcon className="asset_overview_link_icon" />
                 Transactions
@@ -394,7 +442,13 @@ const DashBoardBranchAsset = ({ match }) => {
             <div className="pool_detail_heading">
               <div className="pool_detail_heading_area1">
                 <img
-                  src="/img/pool_asset_icon.png"
+                  src={
+                    BranchDetails.branchName === "OYIGBO"
+                      ? "/img/oyigbo_icon.svg"
+                      : BranchDetails.branchName === "AGIP"
+                      ? "/img/agip_icon.svg"
+                      : null
+                  }
                   alt=""
                   className="pool_detail_heading_area1_img"
                 />
@@ -419,10 +473,10 @@ const DashBoardBranchAsset = ({ match }) => {
               <div className="pool_detail_assets_body_layer_1_cont1">
                 <div className="pool_detail_assets_body_layer_1_cont1_heading">
                   <div className="pool_detail_assets_body_layer_1_cont1_heading_1">
-                    Asset Value
+                    Total Asset Value
                   </div>
                   <div className="pool_detail_assets_body_layer_1_cont1_heading_1">
-                    8,336,195 Engn
+                    {parseInt(totalPoolValue).toFixed(2)} Engn
                   </div>
                 </div>
                 <div className="pool_detail_assets_body_layer_1_cont1_sub_heading">
@@ -453,8 +507,8 @@ const DashBoardBranchAsset = ({ match }) => {
                   <AreaChart
                     width={730}
                     height={150}
-                    data={data2}
-                    margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
+                    data={graphData}
+                    margin={{ top: 10, tright: 0, left: 0, bottom: 0 }}
                   >
                     <defs>
                       <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
@@ -476,7 +530,7 @@ const DashBoardBranchAsset = ({ match }) => {
                     <Tooltip />
                     <Area
                       type="monotone"
-                      dataKey="PoolValue"
+                      dataKey="amount"
                       stroke="#166235"
                       fillOpacity={1}
                       fill="url(#colorUv)"
@@ -558,7 +612,7 @@ const DashBoardBranchAsset = ({ match }) => {
                                 {data.id}
                               </div> */}
                             <div className="asset_list_body_body_cont_1a">
-                              {data.title.substring(0, 15) + "..."}
+                              {data.title.substring(0, 20) + "..."}
                             </div>
 
                             <div className="asset_list_body_body_cont_1c">
@@ -590,86 +644,86 @@ const DashBoardBranchAsset = ({ match }) => {
                           </div>
                         ))
                     : activeBtn === "All"
-                    ? assets.map((data) => (
+                    ? loans.map((data) => (
                         <div
                           className="asset_list_body_body_cont_1"
-                          id={data.id}
+                          id={data.newLoanID}
                           onClick={ChangeAssetDetailModal}
                         >
                           {/* <div className="asset_list_body_body_cont_1a">
-                              {data.id}
-                            </div> */}
+                                {data.id}
+                              </div> */}
                           <div className="asset_list_body_body_cont_1a">
-                            {data.PoolName}
+                            {data.title.substring(0, 20) + "..."}
                           </div>
 
                           <div className="asset_list_body_body_cont_1c">
-                            {data.Date}
+                            {data.createdAt.slice(0, 10)}
                           </div>
                           <div className="asset_list_body_body_cont_1d">
-                            {data.EndDate}
+                            {data.createdAt.slice(0, 10)}
                           </div>
                           <div className="asset_list_body_body_cont_1e">
-                            {data.Amount}
+                            {parseInt(data.amount).toFixed()}
                           </div>
                           <div className="asset_list_body_body_cont_1f">
-                            {data.Fee}%
+                            13%
                           </div>
                           <div className="asset_list_body_body_cont_1g">
                             <button
                               className={
-                                data.Status === "Ongoing"
+                                data.state === "OPEN"
                                   ? "status_btn_ongoing"
-                                  : data.Status === "Closed"
+                                  : data.state === "FILLED"
                                   ? "status_btn_closed"
                                   : "status_btn"
                               }
                             >
-                              {data.Status}
+                              {data.state}
                             </button>
                           </div>
                           <KeyboardArrowRightIcon className="arrow_right_arrow" />
                         </div>
                       ))
                     : activeBtn === "Closed"
-                    ? assets
-                        .filter((person) => person.Status == "Closed")
+                    ? loans
+                        .filter((person) => person.state === "FILLED")
                         .map((data) => (
                           <div
                             className="asset_list_body_body_cont_1"
-                            id={data.id}
+                            id={data.newLoanID}
                             onClick={ChangeAssetDetailModal}
                           >
                             {/* <div className="asset_list_body_body_cont_1a">
                                 {data.id}
                               </div> */}
                             <div className="asset_list_body_body_cont_1a">
-                              {data.PoolName}
+                              {data.title.substring(0, 20) + "..."}
                             </div>
 
                             <div className="asset_list_body_body_cont_1c">
-                              {data.Date}
+                              {data.createdAt.slice(0, 10)}
                             </div>
                             <div className="asset_list_body_body_cont_1d">
-                              {data.EndDate}
+                              {data.createdAt.slice(0, 10)}
                             </div>
                             <div className="asset_list_body_body_cont_1e">
-                              {data.Amount}
+                              {parseInt(data.amount).toFixed()}
                             </div>
                             <div className="asset_list_body_body_cont_1f">
-                              {data.Fee}%
+                              13%
                             </div>
                             <div className="asset_list_body_body_cont_1g">
                               <button
                                 className={
-                                  data.Status === "Ongoing"
+                                  data.state === "OPEN"
                                     ? "status_btn_ongoing"
-                                    : data.Status === "Closed"
+                                    : data.state === "FILLED"
                                     ? "status_btn_closed"
                                     : "status_btn"
                                 }
                               >
-                                {data.Status}
+                                {data.state}
                               </button>
                             </div>
                             <KeyboardArrowRightIcon className="arrow_right_arrow" />
@@ -723,7 +777,7 @@ const DashBoardBranchAsset = ({ match }) => {
                         className={
                           data.state === "OPEN"
                             ? "status_btn_ongoing"
-                            : data.state === "Closed"
+                            : data.state === "FILLED"
                             ? "status_btn_closed"
                             : "status_btn"
                         }

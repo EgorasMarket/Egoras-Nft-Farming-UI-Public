@@ -47,6 +47,7 @@
 }
 svg.recharts-surface {
   width: 100% !important;
+  padding: 0.5em;
 }
 .asset_list_body_head {
   display: flex;
