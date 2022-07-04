@@ -199,9 +199,9 @@ const AddLiquidity = ({ match, closeModal, which }) => {
     // console.log(egcToEngn);
     if (baseVal.symbol == "EGC") {
       // console.log(formatEther)
-      setInputVal2(parseFloat(egcToEngn) * parseFloat(e.target.value));
+      setInputVal2(parseFloat(defaultPrice) * parseFloat(e.target.value));
     } else {
-      setInputVal2(parseFloat(e.target.value) / parseFloat(egcToEngn));
+      setInputVal2(parseFloat(e.target.value) / parseFloat(defaultPrice));
     }
     console.log(baseVal, "inputVal");
     setInputVal(e.target.value);
