@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import { TokenModal } from "./TokenModal/TokenModal";
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import { TokenModal } from './TokenModal/TokenModal';
 
-import SwapVerticalCircleIcon from "@mui/icons-material/SwapVerticalCircle";
+import SwapVerticalCircleIcon from '@mui/icons-material/SwapVerticalCircle';
 import {
   SuccessModal,
   ErrorModal,
-} from "../../DashBoardPages/Modal/Success_Error_Component";
+} from '../../DashBoardPages/Modal/Success_Error_Component';
 import {
   faCheckCircle,
   faCircleNotch,
@@ -16,18 +16,18 @@ import {
   faLock,
   faWindowClose,
   faWallet,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   // Web3ReactProvider,
   useWeb3React,
   // UnsupportedChainIdError,
-} from "@web3-react/core";
-import axios from "axios";
-import { parseEther, formatEther } from "@ethersproject/units";
-import CloseIcon from "@mui/icons-material/Close";
+} from '@web3-react/core';
+import axios from 'axios';
+import { parseEther, formatEther } from '@ethersproject/units';
+import CloseIcon from '@mui/icons-material/Close';
 // import data from "../../MockData";
-import data from "../../../static/MockData";
+import data from '../../../static/MockData';
 import {
   checkAllowance2,
   unluckToken3,
@@ -35,14 +35,14 @@ import {
   swapImpl,
   getPriceImpl,
   swapBase,
-} from "../../../../web3/index";
+} from '../../../../web3/index';
 
 // import { ConnectWallet } from "../../../auth/ConnectWallet";
-import "./AddLiquidity.css";
+import './AddLiquidity.css';
 const AddLiquidity = ({ match, closeModal, which }) => {
   const config = {
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
     },
   };
 
@@ -52,33 +52,33 @@ const AddLiquidity = ({ match, closeModal, which }) => {
   const [tokenBtn2, setTokenBtn2] = useState(false);
   const [defaultPrice, setDefaultPrice] = useState(0);
   const [tokenName, setTokenName] = useState(0);
-  const [base, setBase] = useState("");
-  const [stage, setStage] = useState("swap");
+  const [base, setBase] = useState('');
+  const [stage, setStage] = useState('swap');
   const [tokenName2, setTokenName2] = useState(0);
   const [egcToEngn, setEgcToEngn] = useState(0);
-  const [text, setText] = useState("");
-  const [hash, setHash] = useState("");
+  const [text, setText] = useState('');
+  const [hash, setHash] = useState('');
   const [inputToggle, setInputToggle] = useState(false);
   const [baseVal, setBaseVal] = useState({
-    id: "1",
-    img: "/img/egc-icon.svg",
-    name: "Egoras Credit",
-    contract: "0x3EB0a733787384fB818Fca15562b75Ecf5D4b956",
-    symbol: "EGC",
-    eusd_Avail: "90M",
-    stable: "0.50%",
-    ratio: "120%",
+    id: '1',
+    img: '/img/egc-icon.svg',
+    name: 'Egoras Credit',
+    contract: '0x3EB0a733787384fB818Fca15562b75Ecf5D4b956',
+    symbol: 'EGC',
+    eusd_Avail: '90M',
+    stable: '0.50%',
+    ratio: '120%',
     balance: 0,
   });
   const [assetVal, setAssetVal] = useState({
-    id: "1",
-    img: "/img/eusd-icon-dollar.svg",
-    name: "Egoras Naira",
-    contract: "0x3EB0a733787384fB818Fca15562b75Ecf5D4b956",
-    symbol: "eNGN",
-    eusd_Avail: "6.93M",
-    stable: "1.00%",
-    ratio: "165%",
+    id: '1',
+    img: '/img/eusd-icon-dollar.svg',
+    name: 'Egoras Naira',
+    contract: '0x3EB0a733787384fB818Fca15562b75Ecf5D4b956',
+    symbol: 'eNGN',
+    eusd_Avail: '6.93M',
+    stable: '1.00%',
+    ratio: '165%',
     balance: 0,
   });
 
@@ -93,8 +93,8 @@ const AddLiquidity = ({ match, closeModal, which }) => {
     active,
     error,
   } = context;
-  const [inputVal, setInputVal] = useState("");
-  const [inputVal2, setInputVal2] = useState("");
+  const [inputVal, setInputVal] = useState('');
+  const [inputVal2, setInputVal2] = useState('');
   const [priceReady, setPriceReady] = useState(false);
   // const [inputVal, setInputVal] = useState();
 
@@ -103,7 +103,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
   useEffect(() => {
     // console.log(account, library);
     if (account) {
-      var ticker = "EGC-eNGN";
+      var ticker = 'EGC-eNGN';
       getPriceImpl(ticker, library.getSigner()).then((price) => {
         console.log(formatEther(price.message));
         setDefaultPrice(formatEther(price.message));
@@ -114,16 +114,16 @@ const AddLiquidity = ({ match, closeModal, which }) => {
   const getHistoricalPrice = async (event) => {
     // setEgcToEngn
     let string =
-      "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=ngn&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
+      'https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=ngn&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true';
     await fetch(string)
       .then((resp) => resp.json())
       .then((data) => {
-        setEgcToEngn(data["egoras-credit"].ngn);
+        setEgcToEngn(data['egoras-credit'].ngn);
         // console.log(data["egoras-credit"].ngn);
         // const {egorascredit} = data;
       });
     let string2 =
-      "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=bnb&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
+      'https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=bnb&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true';
     await fetch(string2)
       .then((resp) => resp.json())
       .then((data) => console.log(data));
@@ -134,10 +134,10 @@ const AddLiquidity = ({ match, closeModal, which }) => {
   }, []);
 
   const Continue = async (e) => {
-    setStage("swap");
-    setText("");
-    setInputVal("");
-    setInputVal2("");
+    setStage('swap');
+    setText('');
+    setInputVal('');
+    setInputVal2('');
   };
 
   const [connected, setConnected] = useState(false);
@@ -145,65 +145,69 @@ const AddLiquidity = ({ match, closeModal, which }) => {
     if (inputToggle == true) {
       setInputToggle(false);
       setBaseVal({
-        id: "1",
-        img: "/img/egc-icon.svg",
-        name: "Egoras Credit",
-        contract: "0x3EB0a733787384fB818Fca15562b75Ecf5D4b956",
-        symbol: "EGC",
-        eusd_Avail: "90M",
-        stable: "0.50%",
-        ratio: "120%",
+        id: '1',
+        img: '/img/egc-icon.svg',
+        name: 'Egoras Credit',
+        contract: '0x3EB0a733787384fB818Fca15562b75Ecf5D4b956',
+        symbol: 'EGC',
+        eusd_Avail: '90M',
+        stable: '0.50%',
+        ratio: '120%',
         balance: 0,
       });
       setAssetVal({
-        id: "1",
-        img: "/img/eusd-icon-dollar.svg",
-        name: "Egoras Naira",
-        contract: "0x3EB0a733787384fB818Fca15562b75Ecf5D4b956",
-        symbol: "eNGN",
-        eusd_Avail: "6.93M",
-        stable: "1.00%",
-        ratio: "165%",
+        id: '1',
+        img: '/img/eusd-icon-dollar.svg',
+        name: 'Egoras Naira',
+        contract: '0x3EB0a733787384fB818Fca15562b75Ecf5D4b956',
+        symbol: 'eNGN',
+        eusd_Avail: '6.93M',
+        stable: '1.00%',
+        ratio: '165%',
         balance: 0,
       });
     } else if (inputToggle == false) {
       setInputToggle(true);
       setBaseVal({
-        id: "1",
-        img: "/img/eusd-icon-dollar.svg",
-        name: "Egoras Naira",
-        contract: "0x3EB0a733787384fB818Fca15562b75Ecf5D4b956",
-        symbol: "eNGN",
-        eusd_Avail: "6.93M",
-        stable: "1.00%",
-        ratio: "165%",
+        id: '1',
+        img: '/img/eusd-icon-dollar.svg',
+        name: 'Egoras Naira',
+        contract: '0x3EB0a733787384fB818Fca15562b75Ecf5D4b956',
+        symbol: 'eNGN',
+        eusd_Avail: '6.93M',
+        stable: '1.00%',
+        ratio: '165%',
         balance: 0,
       });
       setAssetVal({
-        id: "1",
-        img: "/img/egc-icon.svg",
-        name: "Egoras Credit",
-        contract: "0x3EB0a733787384fB818Fca15562b75Ecf5D4b956",
-        symbol: "EGC",
-        eusd_Avail: "90M",
-        stable: "0.50%",
-        ratio: "120%",
+        id: '1',
+        img: '/img/egc-icon.svg',
+        name: 'Egoras Credit',
+        contract: '0x3EB0a733787384fB818Fca15562b75Ecf5D4b956',
+        symbol: 'EGC',
+        eusd_Avail: '90M',
+        stable: '0.50%',
+        ratio: '120%',
         balance: 0,
       });
     }
-    setInputVal("0");
+    setInputVal('0');
 
     console.log(baseVal, inputVal);
   };
   const onChange = (e) => {
     // console.log(egcToEngn);
-    if (baseVal.symbol == "EGC") {
+    if (baseVal.symbol == 'EGC') {
       // console.log(formatEther)
-      setInputVal2(parseFloat(defaultPrice) * parseFloat(e.target.value));
+      setInputVal2(
+        parseFloat(defaultPrice) * parseFloat(e.target.value)
+      );
     } else {
-      setInputVal2(parseFloat(e.target.value) / parseFloat(defaultPrice));
+      setInputVal2(
+        parseFloat(e.target.value) / parseFloat(defaultPrice)
+      );
     }
-    console.log(baseVal, "inputVal");
+    console.log(baseVal, 'inputVal');
     setInputVal(e.target.value);
   };
   const TokenData = (e) => {
@@ -241,31 +245,31 @@ const AddLiquidity = ({ match, closeModal, which }) => {
   };
 
   const doSwap = async () => {
-    console.log("baseVal", baseVal);
+    console.log('baseVal', baseVal);
 
-    setText("Transacting with blockchain, please wait...");
-    setStage("loading");
-    console.log(baseVal.symbol, "baseVal.symbol");
+    setText('Transacting with blockchain, please wait...');
+    setStage('loading');
+    console.log(baseVal.symbol, 'baseVal.symbol');
 
     let ckeckAllowance = await checkAllowance2(
       account,
-      parseEther(inputVal.toString(), "wei").toString(),
+      parseEther(inputVal.toString(), 'wei').toString(),
       library.getSigner(),
       baseVal.symbol.toLowerCase()
     );
     // alert("Within the block chain 1: " + ckeckAllowance)
 
     if (ckeckAllowance.status == true) {
-      let isBase = baseVal.symbol == "eNGN" ? false : true;
+      let isBase = baseVal.symbol == 'eNGN' ? false : true;
 
       let ret = isBase
         ? await swapImpl(
-            parseEther(inputVal.toString(), "wei").toString(),
+            parseEther(inputVal.toString(), 'wei').toString(),
             isBase,
             library.getSigner()
           )
         : await swapBase(
-            parseEther(inputVal.toString(), "wei").toString(),
+            parseEther(inputVal.toString(), 'wei').toString(),
             isBase,
             library.getSigner()
           );
@@ -274,13 +278,13 @@ const AddLiquidity = ({ match, closeModal, which }) => {
 
       if (ret.status == true) {
         setHash(ret.message);
-        setStage("success");
+        setStage('success');
       } else if (ret.status == false) {
         setText(ret.message);
-        setStage("error");
+        setStage('error');
       }
     } else {
-      setStage("unlock");
+      setStage('unlock');
     }
   };
 
@@ -293,45 +297,46 @@ const AddLiquidity = ({ match, closeModal, which }) => {
   };
   const background = [
     {
-      background: "#000",
+      background: '#000',
     },
   ];
 
   const doUnluck = async (e) => {
-    setText("Transacting with blockchain, please wait...");
+    setText('Transacting with blockchain, please wait...');
     let infinityunlock = 900000000000000;
     // parseEther( depositAmount.toString(), "wei").toString()
-    setStage("loading");
+    setStage('loading');
     let ret = await unluckToken3(
-      parseEther(infinityunlock.toString(), "wei").toString(),
+      parseEther(infinityunlock.toString(), 'wei').toString(),
       library.getSigner(),
       baseVal.symbol.toLowerCase()
     );
     if (ret.status == true) {
-      localStorage.setItem("unlocking", true);
-      localStorage.setItem("unlockingHash", ret.message);
+      localStorage.setItem('unlocking', true);
+      localStorage.setItem('unlockingHash', ret.message);
 
-      setText("Unlocking please wait aleast 1/2 minutes");
+      setText('Unlocking please wait aleast 1/2 minutes');
     } else {
       setText(ret.message);
-      setStage("error");
+      setStage('error');
     }
   };
 
   setInterval(() => {
-    if (localStorage.getItem("unlocking") == "true") {
-      console.log("running Interval");
-      transactReceipt(localStorage.getItem("unlockingHash"), library).then(
-        function (env) {
-          console.log("running Interval", env);
-          if (env.status == true && env.message !== null) {
-            if (env.message.confirmations > 0) {
-              localStorage.setItem("unlocking", false);
-              setStage("swap");
-            }
+    if (localStorage.getItem('unlocking') == 'true') {
+      console.log('running Interval');
+      transactReceipt(
+        localStorage.getItem('unlockingHash'),
+        library
+      ).then(function (env) {
+        console.log('running Interval', env);
+        if (env.status == true && env.message !== null) {
+          if (env.message.confirmations > 0) {
+            localStorage.setItem('unlocking', false);
+            setStage('swap');
           }
         }
-      );
+      });
     }
   }, 7000);
 
@@ -341,7 +346,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
       <section className=" no-bg no_paddd">
         <div className="container relative">
           <div className="liquidity_area">
-            {stage == "loading" ? (
+            {stage == 'loading' ? (
               <div className="bacModal_div">
                 <div className="back_modal_container">
                   <div className="back_modal_cont">
@@ -351,7 +356,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
                 </div>
               </div>
             ) : null}
-            {stage == "swap" ? (
+            {stage == 'swap' ? (
               <div className="liquidity_cont">
                 <div className="liquidity_cont_body">
                   <div className="liquidity_cont_body_conts">
@@ -373,7 +378,9 @@ const AddLiquidity = ({ match, closeModal, which }) => {
                           <button className="display_tokens_drop">
                             <img
                               src={
-                                inputToggle == false ? baseVal.img : baseVal.img
+                                inputToggle == false
+                                  ? baseVal.img
+                                  : baseVal.img
                               }
                               alt=""
                               className="asset_icon"
@@ -438,15 +445,17 @@ const AddLiquidity = ({ match, closeModal, which }) => {
                         <button
                           id="generate"
                           disabled={
-                            inputVal <= 0 || inputVal2 <= 0 ? true : false
+                            inputVal <= 0 || inputVal2 <= 0
+                              ? true
+                              : false
                           }
-                          style={{ marginTop: "50px" }}
+                          style={{ marginTop: '50px' }}
                           class="jsx-4146495177 connect_btn d-flex align-items-center justify-content-center mx-auto  zIndex2"
                           onClick={doSwap}
                         >
-                          {inputVal === "" || inputVal2 === ""
-                            ? "Enter an amount"
-                            : "Convert"}
+                          {inputVal === '' || inputVal2 === ''
+                            ? 'Enter an amount'
+                            : 'Convert'}
                         </button>
                       </div>
                     </div>
@@ -455,7 +464,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
               </div>
             ) : null}
 
-            {stage == "success" ? (
+            {stage == 'success' ? (
               <div className="bacModal_div">
                 <div className="back_modal_container">
                   <SuccessModal
@@ -470,20 +479,20 @@ const AddLiquidity = ({ match, closeModal, which }) => {
               </div>
             ) : null}
 
-            {stage == "unlock" ? (
+            {stage == 'unlock' ? (
               <div className="bacModal_div">
                 <div className="back_modal_container">
                   <div className="back_modal_cont">
                     <CloseIcon
                       className="closeBackModalIcon"
                       onClick={() => {
-                        setStage("back");
+                        setStage('back');
                       }}
                     />
 
                     <div className="unlock_head">
-                      Approve <b>Egoras</b> to spend {baseVal.symbol} on your
-                      behalf.
+                      Approve <b>Egoras</b> to spend {baseVal.symbol}{' '}
+                      on your behalf.
                     </div>
 
                     {/* <div className="unlock_input_div ">
@@ -510,7 +519,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
               </div>
             ) : null}
 
-            {stage == "error" ? (
+            {stage == 'error' ? (
               <div className="bacModal_div">
                 <div className="back_modal_container">
                   <ErrorModal
