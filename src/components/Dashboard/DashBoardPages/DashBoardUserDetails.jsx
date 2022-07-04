@@ -266,43 +266,48 @@ const DashBoardUserDetails = () => {
                     </div>
                   ) : (
                     (seemore == false ? loanAsset.slice(0, 6) : loanAsset).map(
-                      (data) => (
-                        <div
-                          className="asset_list_body_body_cont_1"
-                          id={data.id}
-                          onClick={ChangeAssetDetailModal}
-                        >
-                          {/* <div className="asset_list_body_body_cont_1a">
+                      (data) => {
+                        const meta = JSON.parse(data.metadata);
+                        return (
+                          <div
+                            className="asset_list_body_body_cont_1"
+                            id={data.id}
+                            onClick={ChangeAssetDetailModal}
+                          >
+                            {/* <div className="asset_list_body_body_cont_1a">
                               {data.id}
                             </div> */}
-                          <div className="asset_list_body_body_cont_1a">
-                            <img
-                              src="/img/pool_asset_icon.png"
-                              alt=""
-                              className="assets-list-icon_pool_icon"
-                            />{" "}
-                            {data.title.substring(0, 15) + "..."}
-                          </div>
+                            <div className="asset_list_body_body_cont_1a">
+                              <img
+                                src={meta.arrayImg}
+                                alt=""
+                                className="assets-list-icon_pool_icon"
+                              />{" "}
+                              {data.title.substring(0, 15) + "..."}
+                            </div>
 
-                          <div className="asset_list_body_body_cont_1b">
-                            {data.createdAt.slice(0, 10)}
+                            <div className="asset_list_body_body_cont_1b">
+                              {data.createdAt.slice(0, 10)}
+                            </div>
+                            <div className="asset_list_body_body_cont_1c">
+                              {numberWithCommas(
+                                parseInt(data.amount).toFixed(2)
+                              )}
+                            </div>
+                            <div className="asset_list_body_body_cont_1c">
+                              {numberWithCommas(
+                                parseInt(data.lendAmount).toFixed(2)
+                              )}
+                            </div>
+                            <div className="asset_list_body_body_cont_1d">
+                              13%
+                            </div>
+                            <div className="asset_list_body_body_cont_1g">
+                              {data.transactionHash.substring(0, 24) + "..."}
+                            </div>
                           </div>
-                          <div className="asset_list_body_body_cont_1c">
-                            {numberWithCommas(parseInt(data.amount).toFixed(2))}
-                          </div>
-                          <div className="asset_list_body_body_cont_1c">
-                            {numberWithCommas(
-                              parseInt(data.lendAmount).toFixed(2)
-                            )}
-                          </div>
-                          <div className="asset_list_body_body_cont_1d">
-                            13%
-                          </div>
-                          <div className="asset_list_body_body_cont_1g">
-                            {data.transactionHash.substring(0, 24) + "..."}
-                          </div>
-                        </div>
-                      )
+                        );
+                      }
                     )
                   )}
                 </div>
