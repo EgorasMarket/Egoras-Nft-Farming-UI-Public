@@ -42,6 +42,7 @@ import {
   unluckToken,
   transactReceipt,
   getPrice,
+  getPriceImpl,
   getTickerInfo,
   tokenBalance,
   open,
@@ -151,7 +152,7 @@ const OpenVaultPage = ({ match }) => {
     setBase(baseVal);
     let ticker = assetVal + "-" + baseVal;
     if (account) {
-      getPrice(ticker, library.getSigner()).then((data) => {
+      getPriceImpl(ticker, library.getSigner()).then((data) => {
         if (data.status) {
           setTickerPrice(parseFloat(formatEther(data.message)));
         }
@@ -584,6 +585,7 @@ const OpenVaultPage = ({ match }) => {
       let cAmount = tickerPrice * e.target.value;
       console.log(cAmount, "C Amount");
       let maxDraw = cAmount * 0.65;
+      console.log(tickerPrice, "tickerPrice", maxDraw, "maxDraw");
 
       setFormData({
         ...formData,
