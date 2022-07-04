@@ -412,6 +412,11 @@ button.pool_detail_heading_area1_invest_btn {
   border: none;
   margin-top: 1em;
 }
+.back_loan_btn:disabled {
+  background: #a8a8a8;
+  color: rgb(185, 185, 185);
+  cursor: not-allowed;
+}
 
 .input_space {
   position: relative;

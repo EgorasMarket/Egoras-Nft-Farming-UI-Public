@@ -191,7 +191,7 @@ const DashBoardUserDetails = () => {
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
                   <span>Usd Balance</span>
-                  <span>{parseInt(tokenBal / 570).toFixed(2)} USD</span>
+                  <span>{parseInt(tokenBal / 618).toFixed(2)} USD</span>
                 </div>
 
                 <hr class="custom_hr"></hr>
@@ -284,7 +284,7 @@ const DashBoardUserDetails = () => {
                             {parseInt(data.amount).toFixed(2)}
                           </div>
                           <div className="asset_list_body_body_cont_1c">
-                            {parseInt(data.funded).toFixed(2)}
+                            {parseInt(data.lendAmount).toFixed(2)}
                           </div>
                           <div className="asset_list_body_body_cont_1d">
                             13%
@@ -356,7 +356,7 @@ const DashBoardUserDetails = () => {
                     >
                       <span className="reward_amount">
                         <span className="reward_amount_title">Reward:</span>{" "}
-                        {parseFloat(data.funded * 0.015).toFixed(2)} Engn
+                        {parseFloat(data.lendAmount * 0.015).toFixed(2)} Engn
                       </span>
                       <Timer deadline={new Date(endDate)} />
                       {/* <span className="reward_txt">Redeem Reward In</span> */}
@@ -404,7 +404,7 @@ const DashBoardUserDetails = () => {
                             Amount Funded
                           </div>
                           <div className="asset_status_details_div1_body1_cont1_txt1">
-                            {parseInt(data.funded).toFixed()} Engn
+                            {parseInt(data.lendAmount).toFixed()} Engn
                           </div>
                         </div>
                         <hr class="custom_hr"></hr>
@@ -481,7 +481,7 @@ const DashBoardUserDetails = () => {
                       </div>
                       <div className="transactionData_body1">
                         <a
-                          href="https://bscscan.com/tx/0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7"
+                          href={`https://bscscan.com/tx/${data.transactionHash}`}
                           className="transaction_id_link"
                           target="_blank"
                         >

@@ -777,7 +777,11 @@ const DashBoardBranchAsset = ({ match }) => {
                 {imgDiv === true ? (
                   <div className="img_modal">
                     <div className="img_modal_div">
-                      <img src={data.img} alt="" style={{ width: "100%" }} />
+                      <img
+                        src={meta.arrayImg}
+                        alt=""
+                        style={{ width: "100%" }}
+                      />
                     </div>
                     <div
                       className="close_asset_detail_modal"

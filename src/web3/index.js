@@ -247,11 +247,33 @@ const lendUS = async (branch, amount, loanID, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
-    return {
-      message: error,
-      status: false,
-    };
+    console.log(error.data, "errorr message index");
+    if (
+      error.data.message ===
+      "execution reverted: Already a lender, you can only top up!"
+    ) {
+      console.log("you have leneded now backup");
+      try {
+        const instance = contractEgorasLoanV2Instance(signer);
+        let result;
+        result = await instance.topupLend(loanID, amount);
+        return {
+          message: result,
+          status: true,
+        };
+      } catch (error) {
+        console.log(error.data, "errorr message index");
+        return {
+          message: error,
+          status: false,
+        };
+      }
+    } else {
+      return {
+        message: error,
+        status: false,
+      };
+    }
   }
 };
 const takeDividend = async (loanID, signer) => {

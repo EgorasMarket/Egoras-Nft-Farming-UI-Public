@@ -80,6 +80,7 @@ const DashBoard_lend_details_page = ({ match }) => {
   const [backModal, setBackModal] = React.useState(false);
   const [branch, setBranch] = React.useState("Branch");
   const [chainLoanDetails, setChainLoanDetails] = useState({});
+  const [disable, setDisable] = useState(true);
   const [text, setText] = useState(
     "Transacting with blockchain, please wait..."
   );
@@ -225,11 +226,12 @@ const DashBoard_lend_details_page = ({ match }) => {
     let currentTarget = e.currentTarget.id;
     console.log(currentTarget);
     console.log(BackAmount);
-
+    setStage("loading");
+    setIsLoading(true);
     // setUnlocking(false);
     // setStage("loading");
     // setIsLoading(true);
-    // setText("Lendind, please wait...");
+    setText("Lendind, please wait...");
     let check = await checkAllowanceL(
       account,
       parseEther(formData.BackAmount.toString(), "wei").toString(),
@@ -287,6 +289,7 @@ const DashBoard_lend_details_page = ({ match }) => {
         }
       );
     } else {
+      // setStage("error");
     }
   }, 7000);
   return (
@@ -642,7 +645,7 @@ const DashBoard_lend_details_page = ({ match }) => {
                             onChange={handleBackChange}
                           />
                           <div className="back_modal_input_amnt_head_minimum">
-                            Minimum Amount: 50,000.00 Engn
+                            Minimum Amount: 30,000.00 Engn
                           </div>
                         </span>
                       </div>
@@ -655,6 +658,7 @@ const DashBoard_lend_details_page = ({ match }) => {
                           className="back_loan_btn"
                           onClick={BackLoan}
                           id={data.newLoanID}
+                          // disabled={disable}
                         >
                           Fund
                         </button>
@@ -714,7 +718,9 @@ const DashBoard_lend_details_page = ({ match }) => {
                   {isLoading ? (
                     <FontAwesomeIcon icon={faCircleNotch} spin />
                   ) : null}{" "}
-                  {checkBox == false ? ` Unlock ${asset}` : "Unlocked"}
+                  {/* {checkBox == false ? ` Unlock ${asset}` : "Unlocked"}
+                   */}
+                  Unlock
                 </button>
               </div>
             </div>

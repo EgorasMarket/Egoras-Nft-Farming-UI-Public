@@ -16,7 +16,6 @@ import {
   CardHeader,
   CardText,
   CardTitle,
-  Col,
   Modal,
   ModalBody,
   Nav,
@@ -276,19 +275,19 @@ const OpenVaultPage = ({ match }) => {
       localStorage.setItem("unlocking", true);
       localStorage.setItem("unlockingHash", ret.message);
       setText("Unlocking please wait aleast 1/2 minutes");
-      setCheckBox(true);
-      setDisable(false);
+      // setCheckBox(true);
+      // setDisable(false);
     } else {
       if (ret.message.code == 4001) {
         setText(ret.message.message);
-        setCheckBox(false);
-        setDisable(true);
+        // setCheckBox(false);
+        // setDisable(true);
       }
 
       setStage("error");
       setIsLoading(false);
-      setCheckBox(false);
-      setDisable(true);
+      // setCheckBox(false);
+      // setDisable(true);
     }
   };
 
@@ -628,8 +627,8 @@ const OpenVaultPage = ({ match }) => {
   };
   setInterval(() => {
     if (localStorage.getItem("unlocking") == "true") {
-      setCheckBox(true);
-      setDisable(false);
+      // setCheckBox(true);
+      // setDisable(false);
 
       transactReceipt(localStorage.getItem("unlockingHash"), library).then(
         function (env) {
@@ -647,19 +646,19 @@ const OpenVaultPage = ({ match }) => {
         }
       );
     } else {
-      setCheckBox(false);
-      setDisable(true);
+      // setCheckBox(false);
+      // setDisable(true);
     }
   }, 7000);
-  useEffect(() => {
-    if (localStorage.getItem("unlocking") == "true") {
-      setCheckBox(true);
-      setDisable(false);
-    } else {
-      setCheckBox(false);
-      setDisable(true);
-    }
-  }, [checkBox]);
+  // useEffect(() => {
+  //   if (localStorage.getItem("unlocking") == "true") {
+  //     // setCheckBox(true);
+  //     // setDisable(false);
+  //   } else {
+  //     setCheckBox(false);
+  //     setDisable(true);
+  //   }
+  // }, [checkBox]);
 
   return (
     <div className="other2">
@@ -1132,7 +1131,7 @@ const OpenVaultPage = ({ match }) => {
                       </div>
                     </div>
                   </div>
-
+                  {/* 
                   <div
                     style={{
                       display: "flex",
@@ -1150,7 +1149,7 @@ const OpenVaultPage = ({ match }) => {
                       checkBox={checkBox}
                       doUnluck={(e) => doUnluck(e)}
                     />{" "}
-                  </div>
+                  </div> */}
 
                   {/* {checkBox == false ? (
                     <button className="open_vault_input_btn" disabled={disable}>
@@ -1225,7 +1224,7 @@ const OpenVaultPage = ({ match }) => {
                                     readonly
                                     className="vault_input_vaulta"
                                   />
-                                  <div
+                                  {/* <div
                                     style={{
                                       display: "flex",
                                       alignItems: "center",
@@ -1244,7 +1243,7 @@ const OpenVaultPage = ({ match }) => {
                                       checkBox={checkBox}
                                       doUnluck={(e) => doUnluck(e)}
                                     />{" "}
-                                  </div>
+                                  </div> */}
                                   <div
                                     style={{
                                       textAlign: "center",
@@ -1296,7 +1295,7 @@ const OpenVaultPage = ({ match }) => {
                                     onKeyUp={(e) => onTopup(e)}
                                     onChange={(e) => onTopup(e)}
                                   />
-                                  <div
+                                  {/* <div
                                     style={{
                                       display: "flex",
                                       alignItems: "center",
@@ -1315,7 +1314,7 @@ const OpenVaultPage = ({ match }) => {
                                       checkBox={checkBox}
                                       doUnluck={(e) => doUnluck(e)}
                                     />{" "}
-                                  </div>
+                                  </div> */}
                                   <div
                                     style={{
                                       textAlign: "center",
@@ -1352,7 +1351,7 @@ const OpenVaultPage = ({ match }) => {
                                     onKeyUp={(e) => onTopup(e)}
                                     onChange={(e) => onTopup(e)}
                                   />
-                                  <div
+                                  {/* <div
                                     style={{
                                       display: "flex",
                                       alignItems: "center",
@@ -1371,7 +1370,7 @@ const OpenVaultPage = ({ match }) => {
                                       checkBox={checkBox}
                                       doUnluck={(e) => doUnluck(e)}
                                     />{" "}
-                                  </div>
+                                  </div> */}
                                   <div
                                     style={{
                                       textAlign: "center",
@@ -1433,10 +1432,11 @@ const OpenVaultPage = ({ match }) => {
                 // style={{ padding: "0.9em 4.5em" }}
                 onClick={(e) => doUnluck(e)}
               >
-                {isLoading ? (
+                {/* {isLoading ? (
                   <FontAwesomeIcon icon={faCircleNotch} spin />
-                ) : null}{" "}
-                {checkBox == false ? ` Unlock ${asset}` : "Unlocked"}
+                ) : null}{" "} */}
+                {/* {checkBox == false ? ` Unlock ${asset}` : "Unlocked"} */}
+                Unlock
               </button>
             </div>
           </div>

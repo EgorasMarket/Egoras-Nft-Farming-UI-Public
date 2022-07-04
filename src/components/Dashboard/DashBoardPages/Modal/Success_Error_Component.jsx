@@ -19,7 +19,7 @@ export const SuccessModal = ({ successMessage, click, SuccessHead, hash }) => {
           <div className="success_modal_div_body">{successMessage}</div>
           <a
             className="btn btn-link text-success"
-            href={"https://testnet.bscscan.com/tx/" + hash}
+            href={"https://bscscan.com/tx/" + hash}
             target="_blank"
           >
             View on bscscan.com
