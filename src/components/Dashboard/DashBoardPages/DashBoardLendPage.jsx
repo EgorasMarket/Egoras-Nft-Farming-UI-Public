@@ -1,26 +1,26 @@
-import React, { useState, useEffect, useContext } from "react";
-import SearchIcon from "@mui/icons-material/Search";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import "../../../css/dashboardLend.css";
-import CircleIcon from "@mui/icons-material/Circle";
-import EastIcon from "@mui/icons-material/East";
-import { API_URL as api_url } from "../../../actions/types";
-import { config } from "../../../actions/Config";
-import axios from "axios";
+import React, { useState, useEffect, useContext } from 'react';
+import SearchIcon from '@mui/icons-material/Search';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import '../../../css/dashboardLend.css';
+import CircleIcon from '@mui/icons-material/Circle';
+import EastIcon from '@mui/icons-material/East';
+import { API_URL as api_url } from '../../../actions/types';
+import { config } from '../../../actions/Config';
+import axios from 'axios';
 // import { Context } from "../../context/Context";
-import { UserContext } from "../../context/Context";
-import Nodata from "./nodataComponent/Nodata";
+import { UserContext } from '../../context/Context';
+import Nodata from './nodataComponent/Nodata';
 // import PropTypes from "prop-types";
 import {
   Web3ReactProvider,
   useWeb3React,
   UnsupportedChainIdError,
-} from "@web3-react/core";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+} from '@web3-react/core';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 const DashBoardLendPage = () => {
   const context = useWeb3React();
   const {
@@ -36,12 +36,12 @@ const DashBoardLendPage = () => {
   const { Branches, BranchDetails, rumuName, agipName, oyName } =
     useContext(UserContext);
   console.log(Branches);
-  const [categoryBtn, setCategoryBtn] = useState("All");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [categoryBtn, setCategoryBtn] = useState('All');
+  const [searchTerm, setSearchTerm] = useState('');
   const [lockedValue, setLockedValue] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
-  const [activeBtn, setActivrBtn] = useState("Active");
-  const [age, setAge] = React.useState("");
+  const [activeBtn, setActivrBtn] = useState('Active');
+  const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -62,7 +62,7 @@ const DashBoardLendPage = () => {
   //     setSearchResults(results);
   //   }, [searchTerm]);
   const triggerAll = () => {
-    setCategoryBtn("All");
+    setCategoryBtn('All');
   };
 
   return (
@@ -83,7 +83,7 @@ const DashBoardLendPage = () => {
                     Total Value Locked(in Pools)
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    {parseInt(lockedValue).toFixed(2)}{" "}
+                    {parseInt(lockedValue).toFixed(2)}{' '}
                     <span className="usd_sign">NGN</span>
                   </div>
                 </div>
@@ -97,7 +97,7 @@ const DashBoardLendPage = () => {
                     Total Value Locked(in Pools)
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    {parseInt(lockedValue / 570).toFixed(2)}{" "}
+                    {parseInt(lockedValue / 570).toFixed(2)}{' '}
                     <span className="usd_sign">USD</span>
                   </div>
                 </div>
@@ -109,10 +109,10 @@ const DashBoardLendPage = () => {
               <div className="lending_area1_cont1">
                 <div className="lending_area1_last_cont1_divs">
                   <span className="lending_area1_last_cont1_divs_cont1">
-                    {" "}
-                    Est.APY:{" "}
+                    {' '}
+                    Est.APY:{' '}
                     <span className="lending_area1_last_cont1_divs_cont_value">
-                      {" "}
+                      {' '}
                       13.0%
                     </span>
                   </span>
@@ -124,12 +124,12 @@ const DashBoardLendPage = () => {
                     </span>{" "}
                   </span> */}
                   <span className="lending_area1_last_cont1_divs_cont3">
-                    {" "}
-                    Total Pool Assets:{" "}
+                    {' '}
+                    Total Pool Assets:{' '}
                     <span className="lending_area1_last_cont1_divs_cont_value">
-                      {" "}
+                      {' '}
                       385.57 M
-                    </span>{" "}
+                    </span>{' '}
                   </span>
                 </div>
               </div>
@@ -154,7 +154,7 @@ const DashBoardLendPage = () => {
               <div className="filter_table_area">
                 <div className="filter_table_area_1">
                   {/* <Box sx={{ minWidth: 120 }}> */}
-                  <FormControl style={{ width: "100%" }}>
+                  <FormControl style={{ width: '100%' }}>
                     <InputLabel id="demo-simple-select-label">
                       Sort by branch
                     </InputLabel>
@@ -177,7 +177,9 @@ const DashBoardLendPage = () => {
               <table className="assets-table">
                 <thead className="assets-category-titles">
                   <tr className="assets">
-                    <th className="assets-category-titles-heading1">Pool</th>
+                    <th className="assets-category-titles-heading1">
+                      Pool
+                    </th>
                     <th className="assets-category-titles-heading1">
                       Lending Capacity
                     </th>
@@ -212,14 +214,14 @@ const DashBoardLendPage = () => {
                     <div className="no_loans_div_cont">
                       <Nodata />
                       No Pools yet.
-                    </div>{" "}
+                    </div>{' '}
                   </div>
                 ) : (
                   <tbody
                     className="assets-table-body popular-categories transitionMe"
                     id="popular-categories"
                   >
-                    {" "}
+                    {' '}
                     {/* =============== */}
                     {/* =============== */}
                     {/* =============== */}
@@ -231,11 +233,11 @@ const DashBoardLendPage = () => {
                               <img
                                 src={
                                   oyName === true
-                                    ? "/img/oyigbo_icon.svg"
+                                    ? '/img/oyigbo_icon.svg'
                                     : agipName === true
-                                    ? "/img/agip_icon.svg"
+                                    ? '/img/agip_icon.svg'
                                     : rumuName === true
-                                    ? "/img/rumu_icon.svg"
+                                    ? '/img/rumu_icon.svg'
                                     : null
                                 }
                                 alt=""
@@ -255,39 +257,42 @@ const DashBoardLendPage = () => {
                           <td className="assets-category-data1 branch_Lending_Capacity">
                             <div className="assets-data-name_pool_invest_capcity">
                               <div className="investmentcapacity_box">
-                                {" "}
-                                {parseInt(asset.amount).toFixed(0)} Engn
+                                {' '}
+                                {parseInt(asset.amount).toFixed(
+                                  0
+                                )}{' '}
+                                Engn
                               </div>
                             </div>
                           </td>
                           <td className="assets-category-data1b branch_pool_value">
                             <div className="assets-data-name_pool">
-                              {parseInt(asset.funded).toFixed(2)}{" "}
-                              <span className="asset_symbol"> Engn</span>
+                              {parseInt(asset.funded).toFixed(2)}{' '}
+                              <span className="asset_symbol">
+                                {' '}
+                                Engn
+                              </span>
                             </div>
                           </td>
                           <td className="assets-category-data1b stable-content branch_apy">
                             <div className="assets-data-name_pool ">
-                              13.0<span className="asset_symbol">%</span>
+                              13.0
+                              <span className="asset_symbol">%</span>
                             </div>
                           </td>
                           <td className="assets-category-data1b ratio-content branch_loan_status">
                             <div
                               className="assets-data-name_pool "
                               style={
-                                asset.suspended === "true"
-                                  ? { color: "#1fb73f" }
-                                  : asset.suspended === "false"
-                                  ? { color: "#e6a538" }
-                                  : null
+                                asset.suspended === 'false'
+                                  ? { color: '#1fb73f' }
+                                  : { color: '#e6a538' }
                               }
                             >
                               <div className="status_column">
-                                {asset.suspended === "true"
-                                  ? "Active"
-                                  : asset.suspended === "false"
-                                  ? "Inactive"
-                                  : null}
+                                {asset.suspended === 'false'
+                                  ? 'Active'
+                                  : 'Inactive'}
                                 <CircleIcon className="status_circle" />
                               </div>
                             </div>
@@ -297,7 +302,8 @@ const DashBoardLendPage = () => {
                               href={`/dashboard/lend/pool/${asset.branchAddress}/detail`}
                               className="assets-btn"
                             >
-                              See details <EastIcon className="see_more_icon" />
+                              See details{' '}
+                              <EastIcon className="see_more_icon" />
                             </a>
                           </td>
                         </tr>
