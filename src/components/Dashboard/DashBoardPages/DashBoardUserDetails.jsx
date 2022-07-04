@@ -8,6 +8,7 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+import { numberWithCommas } from "../../static/static";
 import CopyAllIcon from "@mui/icons-material/CopyAll";
 import "../../../css/dashboard_user_details.css";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -20,6 +21,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import axios from "axios";
 import { config } from "../../../actions/Config";
 import { API_URL as api_url } from "../../../actions/types";
+// import { numberWithCommas } from "../../static/static";
 import { formatDuration, intervalToDuration } from "date-fns";
 // import Web3 from "web3";
 import {
@@ -184,14 +186,19 @@ const DashBoardUserDetails = () => {
                     <span>0.00 Engn</span>
                   ) : (
                     <span>
-                      {parseInt(UserPoolsDetails.lockedBalance).toFixed()} Engn
+                      {numberWithCommas(
+                        parseInt(UserPoolsDetails.lockedBalance).toFixed()
+                      )}{" "}
+                      Engn
                     </span>
                   )}
                 </div>
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
                   <span>Usd Balance</span>
-                  <span>{parseInt(tokenBal / 618).toFixed(2)} USD</span>
+                  <span>
+                    {numberWithCommas(parseInt(tokenBal / 618).toFixed(2))} USD
+                  </span>
                 </div>
 
                 <hr class="custom_hr"></hr>
@@ -281,10 +288,12 @@ const DashBoardUserDetails = () => {
                             {data.createdAt.slice(0, 10)}
                           </div>
                           <div className="asset_list_body_body_cont_1c">
-                            {parseInt(data.amount).toFixed(2)}
+                            {numberWithCommas(parseInt(data.amount).toFixed(2))}
                           </div>
                           <div className="asset_list_body_body_cont_1c">
-                            {parseInt(data.lendAmount).toFixed(2)}
+                            {numberWithCommas(
+                              parseInt(data.lendAmount).toFixed(2)
+                            )}
                           </div>
                           <div className="asset_list_body_body_cont_1d">
                             13%
@@ -356,7 +365,10 @@ const DashBoardUserDetails = () => {
                     >
                       <span className="reward_amount">
                         <span className="reward_amount_title">Reward:</span>{" "}
-                        {parseFloat(data.lendAmount * 0.015).toFixed(2)} Engn
+                        {numberWithCommas(
+                          parseFloat(data.lendAmount * 0.015).toFixed(2)
+                        )}{" "}
+                        Engn
                       </span>
                       <Timer deadline={new Date(endDate)} />
                       {/* <span className="reward_txt">Redeem Reward In</span> */}
@@ -395,7 +407,8 @@ const DashBoardUserDetails = () => {
                             Pool Amount
                           </div>
                           <div className="asset_status_details_div1_body1_cont1_txt1">
-                            {parseInt(data.amount).toFixed()} Engn
+                            {numberWithCommas(parseInt(data.amount).toFixed())}{" "}
+                            Engn
                           </div>
                         </div>
                         <hr class="custom_hr"></hr>
@@ -404,7 +417,10 @@ const DashBoardUserDetails = () => {
                             Amount Funded
                           </div>
                           <div className="asset_status_details_div1_body1_cont1_txt1">
-                            {parseInt(data.lendAmount).toFixed()} Engn
+                            {numberWithCommas(
+                              parseInt(data.lendAmount).toFixed()
+                            )}{" "}
+                            Engn
                           </div>
                         </div>
                         <hr class="custom_hr"></hr>
