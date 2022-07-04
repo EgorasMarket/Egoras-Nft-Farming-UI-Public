@@ -12,6 +12,7 @@ import {
   SuccessModal,
   ErrorModal,
 } from "../Dashboard/DashBoardPages/Modal/Success_Error_Component";
+import { numberWithCommas } from "../static/static";
 import {
   faCheckCircle,
   faCircleNotch,
@@ -413,7 +414,7 @@ const DashBoard_lend_details_page = ({ match }) => {
               <span className="vertical_rule"></span>
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
-                  {parseInt(BranchDetails.amount).toFixed(2)}{" "}
+                  {numberWithCommas(parseInt(BranchDetails.amount).toFixed(2))}{" "}
                   <span className="asset_symbol"> Engn</span>
                 </div>
                 <div className="pool_detail_sub_area1_area1_cont2">
@@ -490,7 +491,10 @@ const DashBoard_lend_details_page = ({ match }) => {
                         Asset value
                       </div>
                       <div className="pool_status_Details_cont_body1_sub_conts_2">
-                        {parseInt(BranchDetails.amount).toFixed(2)} Engn
+                        {numberWithCommas(
+                          parseInt(BranchDetails.amount).toFixed(2)
+                        )}{" "}
+                        Engn
                       </div>
                     </div>
                     <hr className="custom_hr" />
@@ -523,7 +527,10 @@ const DashBoard_lend_details_page = ({ match }) => {
                         Available Liquidity
                       </div>
                       <div className="pool_status_Details_cont_body1_sub_conts_2">
-                        {parseInt(BranchDetails.funded).toFixed(2)} Engn
+                        {numberWithCommas(
+                          parseInt(BranchDetails.funded).toFixed(2)
+                        )}{" "}
+                        Engn
                       </div>
                     </div>
                     <hr className="custom_hr" />
@@ -594,7 +601,7 @@ const DashBoard_lend_details_page = ({ match }) => {
                           {data.length} month(s)
                         </div>
                         <div className="asset_list_body_body_cont_1e">
-                          {parseInt(data.amount).toFixed()}
+                          {numberWithCommas(parseInt(data.amount).toFixed(2))}
                         </div>
                         <div className="asset_list_body_body_cont_1f finance_fee_details_page_row">
                           13 %

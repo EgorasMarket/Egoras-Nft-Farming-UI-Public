@@ -11,7 +11,7 @@ import axios from 'axios';
 import { UserContext } from '../../context/Context';
 import Nodata from './nodataComponent/Nodata';
 // import PropTypes from "prop-types";
-
+import { numberWithCommas } from '../../static/static';
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -84,7 +84,9 @@ const DashBoardLendPage = () => {
                     Total Value Locked(in Pools)
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    {parseInt(lockedValue).toFixed(2)}{' '}
+                    {numberWithCommas(
+                      parseInt(lockedValue).toFixed(2)
+                    )}{' '}
                     <span className="usd_sign">NGN</span>
                   </div>
                 </div>
@@ -98,7 +100,9 @@ const DashBoardLendPage = () => {
                     Total Value Locked(in Pools)
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    {parseInt(lockedValue / 570).toFixed(2)}{' '}
+                    {numberWithCommas(
+                      parseInt(lockedValue / 570).toFixed(2)
+                    )}{' '}
                     <span className="usd_sign">USD</span>
                   </div>
                 </div>
@@ -259,8 +263,8 @@ const DashBoardLendPage = () => {
                             <div className="assets-data-name_pool_invest_capcity">
                               <div className="investmentcapacity_box">
                                 {' '}
-                                {parseInt(asset.amount).toFixed(
-                                  0
+                                {numberWithCommas(
+                                  parseInt(asset.amount).toFixed(0)
                                 )}{' '}
                                 Engn
                               </div>
@@ -268,7 +272,9 @@ const DashBoardLendPage = () => {
                           </td>
                           <td className="assets-category-data1b branch_pool_value">
                             <div className="assets-data-name_pool">
-                              {parseInt(asset.funded).toFixed(2)}{' '}
+                              {numberWithCommas(
+                                parseInt(asset.funded).toFixed(2)
+                              )}{' '}
                               <span className="asset_symbol">
                                 {' '}
                                 Engn

@@ -19,6 +19,8 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+import { numberWithCommas } from "../../static/static";
+
 const DashBoardLendingTransactions = ({ match }) => {
   const context = useWeb3React();
   const {
@@ -291,7 +293,7 @@ const DashBoardLendingTransactions = ({ match }) => {
                         </div>
 
                         <div className="asset_list_body_body_cont_1e">
-                          {parseInt(data.amount).toFixed()}
+                          {numberWithCommas(parseInt(data.amount).toFixed())}
                         </div>
                         <div className="asset_list_body_body_cont_1f">13%</div>
                         {/* <div className="asset_list_body_body_cont_1g">

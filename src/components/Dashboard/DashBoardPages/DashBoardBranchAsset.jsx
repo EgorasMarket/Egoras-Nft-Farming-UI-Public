@@ -12,6 +12,7 @@ import { AreaChart, Area, Tooltip, ResponsiveContainer } from "recharts";
 import { UserContext } from "../../context/Context";
 import axios from "axios";
 import Nodata from "./nodataComponent/Nodata";
+import { numberWithCommas } from "../../static/static";
 import { config } from "../../../actions/Config";
 // import { API_URL as api_url } from "../actions/types";
 import { API_URL as api_url } from "../../../actions/types";
@@ -244,7 +245,7 @@ const DashBoardBranchAsset = ({ match }) => {
                     Total Asset Value
                   </div>
                   <div className="pool_detail_assets_body_layer_1_cont1_heading_1">
-                    {parseInt(totalPoolValue).toFixed(2)} Engn
+                    {numberWithCommas(parseInt(totalPoolValue).toFixed(2))} Engn
                   </div>
                 </div>
                 <div className="pool_detail_assets_body_layer_1_cont1_sub_heading">
@@ -408,7 +409,9 @@ const DashBoardBranchAsset = ({ match }) => {
                               {data.length}month(s)
                             </div>
                             <div className="asset_list_body_body_cont_1e">
-                              {parseInt(data.amount).toFixed()}
+                              {numberWithCommas(
+                                parseInt(data.amount).toFixed()
+                              )}
                             </div>
                             <div className="asset_list_body_body_cont_1f body_cont1_f">
                               13%
@@ -459,7 +462,7 @@ const DashBoardBranchAsset = ({ match }) => {
                             {data.length}month(s)
                           </div>
                           <div className="asset_list_body_body_cont_1e">
-                            {parseInt(data.amount).toFixed()}
+                            {numberWithCommas(parseInt(data.amount).toFixed())}
                           </div>
                           <div className="asset_list_body_body_cont_1f body_cont1_f">
                             13%
@@ -512,7 +515,9 @@ const DashBoardBranchAsset = ({ match }) => {
                               {data.length}month(s)
                             </div>
                             <div className="asset_list_body_body_cont_1e">
-                              {parseInt(data.amount).toFixed()}
+                              {numberWithCommas(
+                                parseInt(data.amount).toFixed()
+                              )}
                             </div>
                             <div className="asset_list_body_body_cont_1f  body_cont1_f">
                               13%
@@ -604,7 +609,8 @@ const DashBoardBranchAsset = ({ match }) => {
                             Available for Financing
                           </div>
                           <div className="asset_status_details_div1_body1_cont1_txt1">
-                            {parseInt(data.amount).toFixed()} Engn
+                            {numberWithCommas(parseInt(data.amount).toFixed())}{" "}
+                            Engn
                           </div>
                         </div>
                         <hr class="custom_hr"></hr>
@@ -613,7 +619,7 @@ const DashBoardBranchAsset = ({ match }) => {
                             Outstanding
                           </div>
                           <div className="asset_status_details_div1_body1_cont1_txt1">
-                            {data.amount - data.funded} Engn
+                            {numberWithCommas(data.amount - data.funded)} Engn
                           </div>
                         </div>
                         <hr class="custom_hr"></hr>
@@ -631,7 +637,8 @@ const DashBoardBranchAsset = ({ match }) => {
                             Amount
                           </div>
                           <div className="asset_status_details_div1_body1_cont1_txt1">
-                            {parseInt(data.amount).toFixed()}Engn
+                            {numberWithCommas(parseInt(data.amount).toFixed())}
+                            Engn
                           </div>
                         </div>
                       </div>
