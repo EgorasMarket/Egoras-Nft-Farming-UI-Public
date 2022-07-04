@@ -459,7 +459,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
               <div className="bacModal_div">
                 <div className="back_modal_container">
                   <SuccessModal
-                    successMessage={"Transaction was successful."}
+                    successMessage={text}
                     click={(e) => {
                       Continue(e);
                     }}
@@ -514,7 +514,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
               <div className="bacModal_div">
                 <div className="back_modal_container">
                   <ErrorModal
-                    errorMessage="Unsuccesful transaction"
+                    errorMessage={text}
                     click={(e) => {
                       Continue(e);
                     }}
