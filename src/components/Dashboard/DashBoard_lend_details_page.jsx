@@ -72,6 +72,7 @@ const DashBoard_lend_details_page = ({ match }) => {
 
   const [activeLink, setActiveLink] = useState("");
   const [checkBox, setCheckBox] = useState(false);
+  const [errMessage, setErrMessage] = useState("");
 
   // const [loanId, setLoanId] = useState();
   const [assetModal, setAssetModal] = React.useState(false);
@@ -240,33 +241,32 @@ const DashBoard_lend_details_page = ({ match }) => {
     );
     console.log(check);
     if (check.status == true) {
+      let ret = await lendUS(
+        txnhash,
+        parseEther(formData.BackAmount.toString(), "wei").toString(),
+        currentTarget,
+        library.getSigner()
+      );
+
+      if (ret.status == true) {
+        localStorage.setItem("unlocking", true);
+        localStorage.setItem("unlockingHash", ret.message.hash);
+        setText("Sending token please wait aleast 1/2 minutes");
+        setHash(ret.message.hash);
+        // setStage("success");
+        console.log(ret);
+      } else if (ret.status == false) {
+        if (ret.message.code < 0) {
+          setText(ret.message.data.message);
+        } else if (ret.message.code == 4001) {
+          setText(ret.message.message);
+        }
+        setStage("error");
+        setIsLoading(false);
+      }
     } else {
       // setUnlocking(true);
       setStage("unlock");
-      setIsLoading(false);
-    }
-
-    let ret = await lendUS(
-      txnhash,
-      parseEther(formData.BackAmount.toString(), "wei").toString(),
-      currentTarget,
-      library.getSigner()
-    );
-
-    if (ret.status == true) {
-      localStorage.setItem("unlocking", true);
-      localStorage.setItem("unlockingHash", ret.message.hash);
-      setText("Sending token please wait aleast 1/2 minutes");
-      setHash(ret.message.hash);
-      // setStage("success");
-      console.log(ret);
-    } else if (ret.status == false) {
-      if (ret.message.code < 0) {
-        setText(ret.message.data.message);
-      } else if (ret.message.code == 4001) {
-        setText(ret.message.message);
-      }
-      setStage("error");
       setIsLoading(false);
     }
   };
@@ -733,7 +733,7 @@ const DashBoard_lend_details_page = ({ match }) => {
         <div className="bacModal_div">
           <div className="back_modal_container">
             <SuccessModal
-              successMessage={"Transaction was successful."}
+              successMessage={text}
               click={(e) => {
                 Continue(e);
               }}
@@ -747,7 +747,7 @@ const DashBoard_lend_details_page = ({ match }) => {
         <div className="bacModal_div">
           <div className="back_modal_container">
             <ErrorModal
-              errorMessage="Unsuccesful transaction"
+              errorMessage={text}
               click={(e) => {
                 Continue(e);
               }}
