@@ -160,28 +160,24 @@ const DashBoard_lend_details_page = ({ match }) => {
     }
   });
   useEffect(() => {
-    if (account) {
-      axios
-        .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
-        .then((data) => {
-          console.log(data.data.payload, "powerful333333");
+    axios
+      .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
+      .then((data) => {
+        console.log(data.data.payload, "powerful333333");
 
-          // console.log(txnhash);
-          // setBranches(data.data.payload);
-          // setBranchDetails({
-          //   branchName: data.data.payload[0].name,
-          //   amount: data.data.payload[0].amount,
-          //   funded: data.data.payload[0].funded,
-          // });
-          setLoanAssets(data.data.payload);
-        })
-        .catch((err) => {
-          console.log(err); // "oh, no!"
-        });
-
-      return;
-    }
-  }, [account]);
+        // console.log(txnhash);
+        // setBranches(data.data.payload);
+        // setBranchDetails({
+        //   branchName: data.data.payload[0].name,
+        //   amount: data.data.payload[0].amount,
+        //   funded: data.data.payload[0].funded,
+        // });
+        setLoanAssets(data.data.payload);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, []);
 
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);

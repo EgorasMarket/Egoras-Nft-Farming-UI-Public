@@ -65,20 +65,20 @@ const DashBoardBranchAsset = ({ match }) => {
   });
 
   useEffect(() => {
-    if (account) {
-      axios
-        .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
-        .then((data) => {
-          console.log(data.data.payload, "made man");
+    // if (account) {
+    axios
+      .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
+      .then((data) => {
+        console.log(data.data.payload, "made man");
 
-          setLoans(data.data.payload);
-        })
-        .catch((err) => {
-          console.log(err); // "oh, no!"
-        });
-      return;
-    }
-  }, [account]);
+        setLoans(data.data.payload);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+    //   return;
+    // }
+  }, []);
 
   // console.log(data2);
   const toggleImgDiv = () => {
@@ -92,54 +92,54 @@ const DashBoardBranchAsset = ({ match }) => {
   };
 
   useEffect(() => {
-    if (account) {
-      axios
-        .get(api_url + "/api/lend/unique/" + txnhash, null, config)
-        .then((data) => {
-          console.log(data.data.payload, "powerful333333");
-          // console.log(txnhash);
-          // setBranches(data.data.payload);
-        })
-        .catch((err) => {
-          console.log(err); // "oh, no!"
-        });
-      return;
-    }
-  }, [account]);
+    // if (account) {
+    axios
+      .get(api_url + "/api/lend/unique/" + txnhash, null, config)
+      .then((data) => {
+        console.log(data.data.payload, "powerful333333");
+        // console.log(txnhash);
+        // setBranches(data.data.payload);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+    //   return;
+    // }
+  }, []);
   useEffect(() => {
-    if (account) {
-      axios
-        .get(api_url + "/api/branch/specific/" + txnhash, null, config)
-        .then((data) => {
-          console.log(data.data.payload[0].total, "powerfulttt5tt333333");
-          setTotalPoolValue(data.data.payload[0].total);
-          // console.log(txnhash);
-          // setBranches(data.data.payload);
-          // setBranchDetails({
-          //   branchName: data.data.payload[0].name,
-          //   amount: data.data.payload[0].amount,
-          // });
-        })
-        .catch((err) => {
-          console.log(err); // "oh, no!"
-        });
-      return;
-    }
-  }, [account]);
+    // if (account) {
+    axios
+      .get(api_url + "/api/branch/specific/" + txnhash, null, config)
+      .then((data) => {
+        console.log(data.data.payload[0].total, "powerfulttt5tt333333");
+        setTotalPoolValue(data.data.payload[0].total);
+        // console.log(txnhash);
+        // setBranches(data.data.payload);
+        // setBranchDetails({
+        //   branchName: data.data.payload[0].name,
+        //   amount: data.data.payload[0].amount,
+        // });
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+    //   return;
+    // }
+  }, []);
   useEffect(() => {
-    if (account) {
-      axios
-        .get(api_url + "/api/branch/chart/" + txnhash, null, config)
-        .then((data) => {
-          console.log(data.data.payload, "powerfulttt5tt333333");
-          setGraphData(data.data.payload);
-        })
-        .catch((err) => {
-          console.log(err); // "oh, no!"
-        });
-      return;
-    }
-  }, [account]);
+    // if (account) {
+    axios
+      .get(api_url + "/api/branch/chart/" + txnhash, null, config)
+      .then((data) => {
+        console.log(data.data.payload, "powerfulttt5tt333333");
+        setGraphData(data.data.payload);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+    //   return;
+    // }
+  }, []);
   // var grapDataa =
   //   graphData &&
   //   graphData.length > 0 &&

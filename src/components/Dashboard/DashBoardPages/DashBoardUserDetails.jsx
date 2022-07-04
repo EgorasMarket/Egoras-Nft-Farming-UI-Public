@@ -93,41 +93,41 @@ const DashBoardUserDetails = () => {
     }
   }, [account, avatarRef]);
   useEffect(() => {
-    if (account) {
-      axios
-        .get(api_url + "/api/lend/user/account/" + account, null, config)
-        .then((data) => {
-          console.log(data.data.payload, "powerful333333");
-          // console.log(txnhash);
-          // setBranches(data.data.payload);
-          setUserPoolsDetails({
-            lockedBalance: data.data.payload[0].balance,
-            pool: data.data.payload[0].pool,
-          });
-        })
-        .catch((err) => {
-          console.log(err); // "oh, no!"
+    // if (account) {
+    axios
+      .get(api_url + "/api/lend/user/account/" + account, null, config)
+      .then((data) => {
+        console.log(data.data.payload, "powerful333333");
+        // console.log(txnhash);
+        // setBranches(data.data.payload);
+        setUserPoolsDetails({
+          lockedBalance: data.data.payload[0].balance,
+          pool: data.data.payload[0].pool,
         });
-      return;
-    }
-  }, [account]);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+    //   return;
+    // }
+  }, []);
   useEffect(() => {
-    if (account) {
-      axios
-        .get(api_url + "/api/lend/user/transaction/" + account, null, config)
-        .then((data) => {
-          console.log(data.data.payload, "powerful333333");
-          console.log("/api/lend/user/transaction/" + account);
-          setLoanAsset(data.data.payload);
-          // console.log(txnhash);
-          // setBranches(data.data.payload);
-        })
-        .catch((err) => {
-          console.log(err); // "oh, no!"
-        });
-      return;
-    }
-  }, [account]);
+    // if (account) {
+    axios
+      .get(api_url + "/api/lend/user/transaction/" + account, null, config)
+      .then((data) => {
+        console.log(data.data.payload, "powerful333333");
+        console.log("/api/lend/user/transaction/" + account);
+        setLoanAsset(data.data.payload);
+        // console.log(txnhash);
+        // setBranches(data.data.payload);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+    //   return;
+    // }
+  }, []);
 
   const toggleSeemore = () => {
     setSeemore(!seemore);

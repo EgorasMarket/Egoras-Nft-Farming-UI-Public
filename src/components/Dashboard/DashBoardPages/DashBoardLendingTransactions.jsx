@@ -57,36 +57,36 @@ const DashBoardLendingTransactions = ({ match }) => {
   });
 
   useEffect(() => {
-    if (account) {
-      axios
-        .get(api_url + "/api/lend/unique/" + txnhash, null, config)
-        .then((data) => {
-          console.log(data.data.payload, "powerful333333");
-          // console.log(txnhash);
-          // setBranches(data.data.payload);
-        })
-        .catch((err) => {
-          console.log(err); // "oh, no!"
-        });
+    // if (account) {
+    axios
+      .get(api_url + "/api/lend/unique/" + txnhash, null, config)
+      .then((data) => {
+        console.log(data.data.payload, "powerful333333");
+        // console.log(txnhash);
+        // setBranches(data.data.payload);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
 
-      return;
-    }
-  }, [account]);
+    //   return;
+    // }
+  }, []);
   useEffect(() => {
-    if (account) {
-      axios
-        .get(api_url + "/api/branch/alltime/" + txnhash, null, config)
-        .then((data) => {
-          console.log(data.data.payload, "powerful3333oooo33");
-          setTransactions(data.data.payload);
-        })
-        .catch((err) => {
-          console.log(err); // "oh, no!"
-        });
+    // if (account) {
+    axios
+      .get(api_url + "/api/branch/alltime/" + txnhash, null, config)
+      .then((data) => {
+        console.log(data.data.payload, "powerful3333oooo33");
+        setTransactions(data.data.payload);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
 
-      return;
-    }
-  }, [account]);
+    //   return;
+    // }
+  }, []);
 
   return (
     <div className="other2 asset_other2">
