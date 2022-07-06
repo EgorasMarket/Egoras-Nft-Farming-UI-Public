@@ -156,6 +156,8 @@ const OpenVaultPage = ({ match }) => {
     active,
     error,
   } = context;
+
+  console.log('ok');
   useEffect(() => {
     let assetVal = match.params.asset;
     let baseVal = match.params.base;
