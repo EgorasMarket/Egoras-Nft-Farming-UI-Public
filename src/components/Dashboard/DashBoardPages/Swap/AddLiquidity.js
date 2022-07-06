@@ -200,11 +200,11 @@ const AddLiquidity = ({ match, closeModal, which }) => {
     if (baseVal.symbol == 'EGC') {
       // console.log(formatEther)
       setInputVal2(
-        parseFloat(defaultPrice) * parseFloat(e.target.value)
+        parseFloat(egcToEngn) * parseFloat(e.target.value)
       );
     } else {
       setInputVal2(
-        parseFloat(e.target.value) / parseFloat(defaultPrice)
+        parseFloat(e.target.value) / parseFloat(egcToEngn)
       );
     }
     console.log(baseVal, 'inputVal');
@@ -468,7 +468,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
               <div className="bacModal_div">
                 <div className="back_modal_container">
                   <SuccessModal
-                    successMessage={text}
+                    successMessage={'Transaction was successful.'}
                     click={(e) => {
                       Continue(e);
                     }}
@@ -523,7 +523,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
               <div className="bacModal_div">
                 <div className="back_modal_container">
                   <ErrorModal
-                    errorMessage={text}
+                    errorMessage="Unsuccesful transaction"
                     click={(e) => {
                       Continue(e);
                     }}
