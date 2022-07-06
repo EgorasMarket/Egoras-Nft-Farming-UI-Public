@@ -91,6 +91,11 @@ function Dashboard() {
                 path="/dashboard/earn/pool/:branchAddress/detail"
                 component={DashBoard_lend_details_page}
               />
+              {/* <Route
+                exact
+                path="/dashboard/liquidity"
+                component={DashboardAddLiquidtyPage}
+              /> */}
               <Route
                 exact
                 path="/dashboard/earn/pool/detail/branch/:branchAddress/asset"

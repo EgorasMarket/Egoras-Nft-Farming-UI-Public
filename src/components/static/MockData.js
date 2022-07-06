@@ -49,6 +49,17 @@ const data = {
       ratio: "165%",
       balance: 0,
     },
+    {
+      id: "2",
+      img: "/img/egoras-favicon.svg",
+      name: "Egoras Rights",
+      contract: "0x3EB0a733787384fB818Fca15562b75Ecf5D4b956",
+      symbol: "egr",
+      eusd_Avail: "6.93M",
+      stable: "1.00%",
+      ratio: "165%",
+      balance: 0,
+    },
   ],
 };
 export default data;
