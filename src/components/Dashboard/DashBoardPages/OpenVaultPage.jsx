@@ -7,6 +7,7 @@ import InfoIcon from "@mui/icons-material/Info";
 import { SuccessModal, ErrorModal } from "./Modal/Success_Error_Component";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import CloseIcon from "@mui/icons-material/Close";
 import "../../../css/openVault.css";
 import SwitchToggle from "./SwitchToggle/SwitchToggle";
 import {
@@ -1401,92 +1402,89 @@ const OpenVaultPage = ({ match }) => {
           </div>
         </div>
       </section>
-      <Modal
-        fullscreen
-        isOpen={modal}
-        toggle={toggle}
-        className="walletModal mx-auto custom_modal"
-        backdrop={backdrop}
-        keyboard={keyboard}
-      >
-        {/* <div className="container" style={{ background: "#f7f8fa" }}> */}
-        {stage == "unlock" ? (
-          <div className="unlock_div">
-            <div className="unlock_head">
-              Approve <b>Egoras</b> to spend{" "}
-              {task == "collateral" || task == "topup" ? asset : base} on your
-              behalf.
-            </div>
 
-            <div className="unlock_input_div ">
-              <input
-                type="text"
-                name="stateAmountToGenerate"
-                value={formData.stateCollateral}
-                readonly
-                className="unlock_input"
+      {stage == "success" ? (
+        <div className="bacModal_div">
+          <div className="back_modal_container">
+            <SuccessModal
+              successMessage={text}
+              click={(e) => {
+                Continue(e);
+              }}
+              SuccessHead="Success"
+              hash={hash}
+            />
+          </div>
+        </div>
+      ) : null}
+      {stage == "loading" ? (
+        <div className="bacModal_div">
+          <div className="back_modal_container">
+            <div className="back_modal_cont">
+              <FontAwesomeIcon icon={faCircleNotch} spin />
+              <p className="text-center">{text}</p>
+            </div>
+          </div>
+        </div>
+      ) : null}
+      {stage == "unlock" ? (
+        <div className="bacModal_div">
+          <div className="back_modal_container">
+            <div className="back_modal_cont">
+              <CloseIcon
+                className="closeBackModalIcon"
+                onClick={() => {
+                  setStage("back");
+                }}
               />
-            </div>
 
-            <div className="Unloc_btn_div">
-              <button
-                className="LoginBtn"
-                // style={{ padding: "0.9em 4.5em" }}
-                onClick={(e) => doUnluck(e)}
-              >
-                {/* {isLoading ? (
+              <div className="unlock_head">
+                Approve <b>Egoras</b> to spend{" "}
+                {task == "collateral" || task == "topup" ? asset : base} on your
+                behalf.
+              </div>
+
+              <div className="unlock_input_div ">
+                <input
+                  type="text"
+                  name="stateAmountToGenerate"
+                  value={formData.stateCollateral}
+                  readonly
+                  className="unlock_input"
+                />
+              </div>
+
+              <div className="Unloc_btn_div">
+                <button
+                  className="LoginBtn"
+                  // style={{ padding: "0.9em 4.5em" }}
+                  onClick={(e) => doUnluck(e)}
+                >
+                  {/* {isLoading ? (
                   <FontAwesomeIcon icon={faCircleNotch} spin />
                 ) : null}{" "} */}
-                {/* {checkBox == false ? ` Unlock ${asset}` : "Unlocked"} */}
-                Unlock
-              </button>
+                  {/* {checkBox == false ? ` Unlock ${asset}` : "Unlocked"} */}
+                  Unlock
+                </button>
+              </div>
             </div>
           </div>
-        ) : null}
+        </div>
+      ) : null}
 
-        {stage == "loading" ? (
-          <div style={{ marginTop: "5em" }}>
-            <p
-              className="text-center loadingContainer"
-              style={{ fontSize: "54px" }}
-            >
-              <FontAwesomeIcon icon={faCircleNotch} spin />
-            </p>
-            <p className="text-center">{text}</p>
+      {stage == "error" ? (
+        <div className="bacModal_div">
+          <div className="back_modal_container">
+            <ErrorModal
+              errorMessage={text}
+              click={(e) => {
+                Continue(e);
+              }}
+              ErrorHead="Error"
+            />
           </div>
-        ) : null}
-
-        {stage == "success" ? (
-          <SuccessModal
-            successMessage={"Transaction was successful."}
-            click={(e) => {
-              Continue(e);
-            }}
-            SuccessHead="Success"
-            hash={hash}
-          />
-        ) : null}
-
-        {stage == "error" ? (
-          <ErrorModal
-            errorMessage={text}
-            click={(e) => {
-              Continue(e);
-            }}
-            ErrorHead="Error"
-          />
-        ) : null}
-
-        {stage == "connect" ? (
-          <div className=" text-center mt-4">
-            <h1 className="text-center">
-              <FontAwesomeIcon icon={faWallet} /> <br />
-            </h1>
-            <p>To access this please connect your wallet</p>
-          </div>
-        ) : null}
-        {/* </div> */}
-      </Modal>
+        </div>
+      ) : null}
     </div>
   );
 };

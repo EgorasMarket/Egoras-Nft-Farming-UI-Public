@@ -24,6 +24,7 @@ import DashBoardWhitePaper from "./DashBoardPages/DashBoardWhitePaper";
 import DashboardEgrBalancePage from "./DashBoardPages/DashboardEgrBalancePage";
 // import DashBoardHeader from "./DashBoardHeader";
 import DashboardAddLiquidtyPage from "./DashBoardPages/DashboardAddLiquidtyPage";
+import { SplashScreen } from "./SplashScreen/SplashScreen";
 // dashboard styles
 import "../../css/dashboard.css";
 import DashBoardLendPage from "./DashBoardPages/DashBoardLendPage";
@@ -34,33 +35,39 @@ import DashBoardLendPage from "./DashBoardPages/DashBoardLendPage";
 // };
 function Dashboard() {
   const [gettingReady, setGettingReady] = useState(false);
+  const [splashScreen, setSplashScreen] = useState(true);
+  useEffect(() => {
+    // //console.log(isAuthenticated,'77777');
+    setSplashScreen(true);
+    // //console.log('trueee');
+    const timer = setTimeout(() => {
+      setSplashScreen(false);
+    }, 5000);
+  }, []);
 
   return (
     <Router>
       {/* <DashBoardHeader /> */}
       {/* <DashBoardHeader /> */}
       <div className="dashboard">
-        {gettingReady === true ? (
-          <div className="hold_On_div">
-            <div className="hold_On_div_div_txt">
-              <LoadingIcons.Puff fill="#000" stroke="#000" />
-              Please hold on for a while...{" "}
-              <span className="hold_On_div_div_txt_para">
-                We are getting things ready.
-              </span>
-            </div>
-          </div>
+        {splashScreen == true ? (
+          <SplashScreen />
         ) : (
           <>
             {" "}
             <DashboardSideBarMenu />
             <Switch>
-              <Route exact path="/dashboard" component={DashBoardAnalytics} />
+              <Route exact path="/dashboard" component={DashBoardLendPage} />
+              <Route
+                exact
+                path="/dashboard/stake"
+                component={DashBoardAnalytics}
+              />
               {/* <Route exact path="/dashboard/swap" component={DashBoardSwap} /> */}
               {/* <Route exact path="/dashboard/swap" component={DashBoardSwap} /> */}
               <Route
                 exact
-                path="/vault/:asset/:base"
+                path="/dashboard/stake/vault/:asset/:base"
                 component={OpenVaultPage}
               />
               {/*  */}
@@ -81,12 +88,12 @@ function Dashboard() {
               />
               <Route
                 exact
-                path="/dashboard/lend/pool/:branchAddress/detail"
+                path="/dashboard/earn/pool/:branchAddress/detail"
                 component={DashBoard_lend_details_page}
               />
               <Route
                 exact
-                path="/dashboard/lend/pool/detail/branch/:branchAddress/asset"
+                path="/dashboard/earn/pool/detail/branch/:branchAddress/asset"
                 component={DashBoardBranchAsset}
               />
               <Route exact path="/dashboard/swap" component={Swap} />
@@ -97,7 +104,7 @@ function Dashboard() {
               />
               <Route
                 exact
-                path="/dashboard/lend/pool/detail/:branchAddress/transactions"
+                path="/dashboard/earn/pool/detail/:branchAddress/transactions"
                 component={DashBoardLendingTransactions}
               />
               <Route
@@ -107,7 +114,7 @@ function Dashboard() {
               />
               <Route
                 exact
-                path="/dashboard/lend"
+                path="/dashboard/earn"
                 component={DashBoardLendPage}
               />
               <Route
@@ -121,15 +128,12 @@ function Dashboard() {
                 component={DashBoardWhitePaper}
               />
 
-              {/* <Route exact path="/dashboard/vault">
+              {/* <Route exact path="/dashboard/stake/vault">
             <OpenVaultPage />
           </Route> */}
             </Switch>
           </>
         )}
-        {gettingReady === true ? (
-          <img src="/img/pleasewait.png" alt="" className="add_waiting_img" />
-        ) : null}
       </div>
     </Router>
   );

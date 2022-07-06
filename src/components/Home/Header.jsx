@@ -133,25 +133,28 @@ const Header = () => {
     if (currentPage === "/dashboard/lending") {
       setshowHeader(false);
     }
-    if (currentPage === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
+    if (currentPage === "/dashboard/stake") {
+      setshowHeader(false);
+    }
+    if (currentPage === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
       setshowHeader(false);
     }
     if (
       currentPage ===
-      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setshowHeader(false);
     }
     if (
       currentPage ===
-      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
     ) {
       setshowHeader(false);
     }
-    if (currentPage === "/dashboard/lend") {
+    if (currentPage === "/dashboard/earn") {
       setshowHeader(false);
     }
-    if (currentPage === "/dashboard/lend/pool/detail") {
+    if (currentPage === "/dashboard/earn/pool/detail") {
       setshowHeader(false);
     }
     if (currentPage === "/dashboard/user") {
@@ -163,16 +166,19 @@ const Header = () => {
     if (currentPage === "/dashboard/add") {
       setshowHeader(false);
     }
-    if (currentPage === "/dashboard/lend/pool/detail/branch/asset") {
+    if (currentPage === "/dashboard/earn/pool/detail/branch/asset") {
       setshowHeader(false);
     }
     if (currentPage === "/dashboard/whitepaper") {
       setshowHeader(false);
     }
-    if (currentPage === "/vault/" + urlArr[2] + "/ENGN") {
+    if (currentPage === "/dashboard/stake/vault/" + urlArr[4] + "/ENGN") {
       setshowHeader(false);
     }
-    if (currentPage === "/deposit_vault/" + urlArr[2] + "/ENGN") {
+    if (
+      currentPage ===
+      "/dashboard/stake/deposit_vault/" + urlArr[4] + "/ENGN"
+    ) {
       setshowHeader(false);
     }
   });

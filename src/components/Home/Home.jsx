@@ -461,7 +461,7 @@ const Home = () => {
                     <td className="assets-category-data-last">
                       <div className="assets-data-name-last">
                         <a
-                          href={`/vault/${asset.type}/ENGN`}
+                          href={`/dashboard/stake/vault/${asset.type}/ENGN`}
                           className="assets-collateralize-button"
                           style={{ border: "none" }}
                         >
