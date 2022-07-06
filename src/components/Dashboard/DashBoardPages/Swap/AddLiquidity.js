@@ -33,6 +33,7 @@ import {
   unluckToken3,
   transactReceipt,
   swapImpl,
+  getPrice,
   getPriceImpl,
   swapBase,
 } from '../../../../web3/index';
@@ -70,17 +71,30 @@ const AddLiquidity = ({ match, closeModal, which }) => {
     ratio: '120%',
     balance: 0,
   });
-  const [assetVal, setAssetVal] = useState({
-    id: '1',
-    img: '/img/eusd-icon-dollar.svg',
-    name: 'Egoras Naira',
-    contract: '0x3EB0a733787384fB818Fca15562b75Ecf5D4b956',
-    symbol: 'eNGN',
-    eusd_Avail: '6.93M',
-    stable: '1.00%',
-    ratio: '165%',
-    balance: 0,
-  });
+  const [assetVal, setAssetVal] = useState([
+    {
+      id: '1',
+      img: '/img/eusd-icon-dollar.svg',
+      name: 'Egoras Naira',
+      contract: '0x3EB0a733787384fB818Fca15562b75Ecf5D4b956',
+      symbol: 'eNGN',
+      eusd_Avail: '6.93M',
+      stable: '1.00%',
+      ratio: '165%',
+      balance: 0,
+    },
+    {
+      id: '2',
+      img: '/img/eusd-icon-dollar.svg',
+      name: 'Egoras Rights',
+      contract: '0x3EB0a733787384fB818Fca15562b75Ecf5D4b956',
+      symbol: 'egr',
+      eusd_Avail: '6.93M',
+      stable: '1.00%',
+      ratio: '165%',
+      balance: 0,
+    },
+  ]);
 
   const context = useWeb3React();
   const {
@@ -104,7 +118,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
     // console.log(account, library);
     if (account) {
       var ticker = 'EGC-eNGN';
-      getPriceImpl(ticker, library.getSigner()).then((price) => {
+      getPrice(ticker, library.getSigner()).then((price) => {
         console.log(formatEther(price.message));
         setDefaultPrice(formatEther(price.message));
       });
@@ -200,11 +214,11 @@ const AddLiquidity = ({ match, closeModal, which }) => {
     if (baseVal.symbol == 'EGC') {
       // console.log(formatEther)
       setInputVal2(
-        parseFloat(egcToEngn) * parseFloat(e.target.value)
+        parseFloat(defaultPrice) * parseFloat(e.target.value)
       );
     } else {
       setInputVal2(
-        parseFloat(e.target.value) / parseFloat(egcToEngn)
+        parseFloat(e.target.value) / parseFloat(defaultPrice)
       );
     }
     console.log(baseVal, 'inputVal');
@@ -419,22 +433,47 @@ const AddLiquidity = ({ match, closeModal, which }) => {
                           />
 
                           <div>
-                            <button className="display_tokens_drop">
-                              <img
-                                src={
-                                  inputToggle == false
-                                    ? assetVal.img
-                                    : assetVal.img
-                                }
-                                alt=""
-                                className="asset_icon"
-                              />
-                              {inputToggle == false
-                                ? assetVal.symbol
-                                : assetVal.symbol}
+                            {tokenBtn2 == false ? (
+                              <button
+                                className="display_tokens_drop display_tokens_drop_not_select "
+                                onClick={() => {
+                                  toggleModal2();
+                                  setInputVal(0);
+                                }}
+                              >
+                                Select a token{' '}
+                                <ArrowDropDownIcon className="drop_down_icon" />
+                              </button>
+                            ) : (
+                              <>
+                                {data.assets.map((token) =>
+                                  tokenName2 == token.id ? (
+                                    <button
+                                      className="display_tokens_drop"
+                                      onClick={() => {
+                                        toggleModal2();
+                                        setInputVal(0);
+                                      }}
+                                    >
+                                      <img
+                                        src={
+                                          inputToggle == false
+                                            ? assetVal.img
+                                            : assetVal.img
+                                        }
+                                        alt=""
+                                        className="asset_icon"
+                                      />
+                                      {inputToggle == false
+                                        ? assetVal.symbol
+                                        : assetVal.symbol}
 
-                              <ArrowDropDownIcon className="drop_down_icon" />
-                            </button>
+                                      <ArrowDropDownIcon className="drop_down_icon" />
+                                    </button>
+                                  ) : null
+                                )}
+                              </>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -535,6 +574,26 @@ const AddLiquidity = ({ match, closeModal, which }) => {
           </div>
         </div>
       </section>
+      {modal == true ? (
+        <TokenModal
+          toggleTokenModal={toggleModal}
+          execute={TokenData}
+          tokenData1={data.base}
+          tokenData={data.assets}
+          disabled="disabled"
+          // tokenId={data.tokenData}
+        />
+      ) : null}
+      {modal2 == true ? (
+        <TokenModal
+          toggleTokenModal={toggleModal2}
+          execute={TokenData2}
+          tokenData={assetVal}
+          tokenData1={data.base}
+          // disabled={true}
+          // tokenId={data.tokenData}
+        />
+      ) : null}
     </div>
   );
 };
