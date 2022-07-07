@@ -411,19 +411,19 @@ vl {
 }
 
 .lightMode_icon {
-  color: #5e8b70;
+  color: #88b89b !important;
   font-size: 20px !important;
 }
 .darkMode_icon {
-  color: #d8d8d8;
+  color: #648772 !important;
   font-size: 20px !important;
 }
 .lightMode_icon_active {
-  color: #818181;
+  color: #000000 !important;
   font-size: 20px !important;
 }
 .darkMode_icon_active {
-  color: #ffffff;
+  color: #ffffff !important;
   font-size: 20px !important;
 }
 /* ========== */

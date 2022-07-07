@@ -350,7 +350,7 @@ const DashBoardLendPage = () => {
                           </td>
                           <td className="assets-category-data-last branch_loan_action">
                             <a
-                              href={`/dashboard/earn/pool/${asset.branchAddress}/detail`}
+                              href={`/dashboard/lend/pool/${asset.branchAddress}/detail`}
                               className="assets-btn"
                             >
                               See details <EastIcon className="see_more_icon" />

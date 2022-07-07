@@ -35,31 +35,28 @@ const Footer = () => {
     if (currentPage === "/dashboard") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/earn") {
+    if (currentPage === "/dashboard/lend") {
       setShowFooter(false);
     }
     if (
       currentPage ===
-      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
+    if (currentPage === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
       setShowFooter(false);
     }
     if (
       currentPage ===
-      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
+      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
     ) {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/earn/pool/detail/branch/asset") {
+    if (currentPage === "/dashboard/lend/pool/detail/branch/asset") {
       setShowFooter(false);
     }
     if (currentPage === "/dashboard/lending") {
-      setShowFooter(false);
-    }
-    if (currentPage === "/dashboard/stake") {
       setShowFooter(false);
     }
     if (currentPage === "/dashboard/swap") {
@@ -68,7 +65,7 @@ const Footer = () => {
     if (currentPage === "/dashboard/user") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/earn/pool/detail") {
+    if (currentPage === "/dashboard/lend/pool/detail") {
       setShowFooter(false);
     }
     if (currentPage === "/dashboard/add") {
@@ -77,17 +74,13 @@ const Footer = () => {
     if (currentPage === "/dashboard/whitepaper") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/stake/vault/" + urlArr[4] + "/ENGN") {
+    if (currentPage === "/vault/" + urlArr[2] + "/ENGN") {
       setShowFooter(false);
     }
-    if (
-      currentPage ===
-      "/dashboard/stake/deposit_vault/" + urlArr[4] + "/ENGN"
-    ) {
+    if (currentPage === "/deposit_vault/" + urlArr[2] + "/ENGN") {
       setShowFooter(false);
     }
   });
-
   const classes = useStyles();
 
   return (

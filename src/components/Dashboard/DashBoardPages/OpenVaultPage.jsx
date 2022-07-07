@@ -211,10 +211,10 @@ const OpenVaultPage = ({ match }) => {
     window.scrollTo(0, 0);
     if (!account) {
       setStage("connect");
-      setModal(true);
+      setModal(!modal);
     } else {
-      setModal(false);
-      setSideStage("collateral");
+      setModal(!modal);
+      setStage("");
     }
   }, [chainId, account, connector]);
 

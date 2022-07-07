@@ -1326,6 +1326,21 @@ a.visit_app_link_2 {
 .dark .floating_div_cont_area1_cont1 {
   color: #ffffff;
 }
+.dark .whyEgorasSection {
+  background: #212b25;
+}
+.dark .whyEgoras_body_cont1 {
+  background: #355743;
+  border: solid 1px #6b967d;
+
+  box-shadow: 0px 10px 20px #000000;
+}
+.dark .whyEgoras_heading {
+  color: #fff;
+}
+.dark .whyEgoras_body_cont1_text {
+  color: #ffffff;
+}
 .dark .floating_div_cont_area1_cont2 {
   color: #fff;
 }

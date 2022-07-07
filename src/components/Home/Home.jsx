@@ -139,8 +139,8 @@ const Home = () => {
             <div className="nft-txt-area2 " style={{ width: "100%" }}>
               <div className="span-txts">
                 <p className="span4a-txts">
-                  Liquidity for <span className="real_life">Real-life</span>{" "}
-                  assets.
+                  Unlocking Liquidity for{" "}
+                  <span className="real_life">Real-World</span> assets.
                 </p>
                 <p className="span4b-txts">
                   Egoras is a decentralized organization built to enable anyone

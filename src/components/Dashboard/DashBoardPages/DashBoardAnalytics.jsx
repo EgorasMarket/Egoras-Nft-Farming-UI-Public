@@ -171,7 +171,7 @@ const DashBoardAnalytics = () => {
                     <td className="assets-category-data-last">
                       <div className="assets-data-name-last">
                         <a
-                          href={`/dashboard/stake/vault/${asset.type}/ENGN`}
+                          href={`vault/${asset.type}/ENGN`}
                           className="assets-collateralize-button"
                           style={{ border: "none" }}
                         >

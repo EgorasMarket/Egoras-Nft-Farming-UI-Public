@@ -143,45 +143,36 @@ const Header = ({ togglemakeDark, check }) => {
       setBetaDiv(false);
     }
     if (currentPage === "/dashboard") {
-      setBetaDiv(false);
       setshowHeader(false);
+      setBetaDiv(false);
     }
     if (currentPage === "/dashboard/lending") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/stake") {
-      setshowHeader(false);
-      setBetaDiv(false);
-    }
-    if (currentPage === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
+    if (currentPage === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
       setshowHeader(false);
       setBetaDiv(false);
     }
     if (
       currentPage ===
-      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    // if (urlArr == "/dashborad") {
-    //   setBetaDiv(false);
-    // } else {
-    //   setBetaDiv(true);
-    // }
     if (
       currentPage ===
-      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
+      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
     ) {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/earn") {
+    if (currentPage === "/dashboard/lend") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/earn/pool/detail") {
+    if (currentPage === "/dashboard/lend/pool/detail") {
       setshowHeader(false);
       setBetaDiv(false);
     }
@@ -197,7 +188,7 @@ const Header = ({ togglemakeDark, check }) => {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/earn/pool/detail/branch/asset") {
+    if (currentPage === "/dashboard/lend/pool/detail/branch/asset") {
       setshowHeader(false);
       setBetaDiv(false);
     }
@@ -205,14 +196,11 @@ const Header = ({ togglemakeDark, check }) => {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/stake/vault/" + urlArr[4] + "/ENGN") {
+    if (currentPage === "/vault/" + urlArr[2] + "/ENGN") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (
-      currentPage ===
-      "/dashboard/stake/deposit_vault/" + urlArr[4] + "/ENGN"
-    ) {
+    if (currentPage === "/deposit_vault/" + urlArr[2] + "/ENGN") {
       setshowHeader(false);
       setBetaDiv(false);
     }
@@ -422,7 +410,6 @@ const Header = ({ togglemakeDark, check }) => {
                           ? "lightMode_icon_active"
                           : "lightMode_icon"
                       }
-                      className="lightMode_icon"
                     />
                     <SwitchToggle2
                       className="toggle_dark_mode"
