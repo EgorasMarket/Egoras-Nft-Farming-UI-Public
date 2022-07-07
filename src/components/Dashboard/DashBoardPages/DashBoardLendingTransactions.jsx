@@ -38,6 +38,7 @@ const DashBoardLendingTransactions = ({ match }) => {
   const [activeBtn, setActivrBtn] = useState("Ongoing");
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
   const [activeLink, setActiveLink] = useState("");
+  const [totalTransactions, setTotalTransactions] = useState(0);
   const [assetDetailModal, setAssetDetailModal] = useState(0);
   const [transactions, setTransactions] = useState([]);
   const currentPage = window.location.pathname;
@@ -64,6 +65,8 @@ const DashBoardLendingTransactions = ({ match }) => {
       .get(api_url + "/api/lend/unique/" + txnhash, null, config)
       .then((data) => {
         console.log(data.data.payload, "powerful333333");
+        setTransactions(data.data.payload);
+
         // console.log(txnhash);
         // setBranches(data.data.payload);
       })
@@ -79,8 +82,9 @@ const DashBoardLendingTransactions = ({ match }) => {
     axios
       .get(api_url + "/api/branch/alltime/" + txnhash, null, config)
       .then((data) => {
-        console.log(data.data.payload, "powerful3333oooo33");
-        setTransactions(data.data.payload);
+        console.log(data.data.payload[0].totalSum, "powerful3333oooo33");
+        setTotalTransactions(data.data.payload[0].totalSum);
+        // setTransactions(data.data.payload);
       })
       .catch((err) => {
         console.log(err); // "oh, no!"
@@ -177,7 +181,8 @@ const DashBoardLendingTransactions = ({ match }) => {
                     Total Transactions
                   </div>
                   <div className="pool_detail_assets_body_layer_1_cont1_heading_1">
-                    8,336,195 Engn
+                    {numberWithCommas(parseInt(totalTransactions).toFixed(4))}{" "}
+                    Engn
                   </div>
                 </div>
                 <div className="pool_detail_assets_body_layer_1_cont1_sub_heading">
@@ -197,7 +202,7 @@ const DashBoardLendingTransactions = ({ match }) => {
               <div className="pool_detail_assets_body_layer_1_cont1">
                 <div className="pool_detail_assets_body_layer_1_cont1_heading">
                   <div className="pool_detail_assets_body_layer_1_cont1_heading_1">
-                    Transcations
+                    Transactions
                   </div>
                   <div className="pool_detail_assets_body_layer_1_cont1_heading_1">
                     per/day
@@ -257,7 +262,9 @@ const DashBoardLendingTransactions = ({ match }) => {
                   {/* <div className="asset_list_body_head_tab1">Asset Id</div> */}
                   <div className="asset_list_body_head_tab1">Txn hash</div>
                   <div className="asset_list_body_head_tab3">Date & Time</div>
-                  <div className="asset_list_body_head_tab5">Amount(Engn)</div>
+                  <div className="asset_list_body_head_tab5">
+                    Amount Funded(Engn)
+                  </div>
                   <div className="asset_list_body_head_tab6">Financing Fee</div>
                 </div>
                 <div className="asset_list_body_body_cont">
@@ -269,34 +276,39 @@ const DashBoardLendingTransactions = ({ match }) => {
                       </div>{" "}
                     </div>
                   ) : (
-                    transactions.map((data) => (
-                      <div
-                        className="asset_list_body_body_cont_1"
-                        id={data.id}
-                        //   onClick={ChangeAssetDetailModal}
-                      >
-                        {/* <div className="asset_list_body_body_cont_1a">
+                    transactions
+                      .slice(0)
+                      .reverse()
+                      .map((data) => (
+                        <div
+                          className="asset_list_body_body_cont_1"
+                          id={data.id}
+                          //   onClick={ChangeAssetDetailModal}
+                        >
+                          {/* <div className="asset_list_body_body_cont_1a">
                             {data.id}
                           </div> */}
-                        <div className="asset_list_body_body_cont_1a">
-                          <a
-                            href={`https://bscscan.com/tx/${data.transactionHash}`}
-                            target="_blank"
-                            style={{ color: "#000" }}
-                          >
-                            {data.transactionHash.substring(0, 28) + "..."}
-                          </a>
-                        </div>
+                          <div className="asset_list_body_body_cont_1a">
+                            <a
+                              href={`https://bscscan.com/tx/${data.transactionHash}`}
+                              target="_blank"
+                              style={{ color: "#000" }}
+                            >
+                              {data.transactionHash.substring(0, 28) + "..."}
+                            </a>
+                          </div>
 
-                        <div className="asset_list_body_body_cont_1c">
-                          {data.createdAt.slice(0, 10)}
-                        </div>
+                          <div className="asset_list_body_body_cont_1c">
+                            {data.createdAt.slice(0, 10)}
+                          </div>
 
-                        <div className="asset_list_body_body_cont_1e">
-                          {numberWithCommas(parseInt(data.amount).toFixed())}
-                        </div>
-                        <div className="asset_list_body_body_cont_1f">13%</div>
-                        {/* <div className="asset_list_body_body_cont_1g">
+                          <div className="asset_list_body_body_cont_1e">
+                            {numberWithCommas(parseInt(data.amount).toFixed())}
+                          </div>
+                          <div className="asset_list_body_body_cont_1f">
+                            13%
+                          </div>
+                          {/* <div className="asset_list_body_body_cont_1g">
                         <button
                           className={
                             data.Status === "Ongoing"
@@ -309,9 +321,9 @@ const DashBoardLendingTransactions = ({ match }) => {
                           {data.Status}
                         </button>
                       </div> */}
-                        <KeyboardArrowRightIcon className="arrow_right_arrow" />
-                      </div>
-                    ))
+                          <KeyboardArrowRightIcon className="arrow_right_arrow" />
+                        </div>
+                      ))
                   )}
                 </div>
               </div>

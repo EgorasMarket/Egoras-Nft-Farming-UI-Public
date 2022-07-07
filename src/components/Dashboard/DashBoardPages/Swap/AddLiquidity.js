@@ -33,6 +33,7 @@ import {
   unluckToken3,
   transactReceipt,
   swapImpl,
+  getPrice,
   getPriceImpl,
   swapBase,
 } from "../../../../web3/index";
@@ -104,7 +105,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
     // console.log(account, library);
     if (account) {
       var ticker = "EGC-eNGN";
-      getPriceImpl(ticker, library.getSigner()).then((price) => {
+      getPrice(ticker, library.getSigner()).then((price) => {
         console.log(formatEther(price.message));
         setDefaultPrice(formatEther(price.message));
       });
@@ -459,7 +460,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
               <div className="bacModal_div">
                 <div className="back_modal_container">
                   <SuccessModal
-                    successMessage={text}
+                    successMessage={"Transaction was successful."}
                     click={(e) => {
                       Continue(e);
                     }}
@@ -514,7 +515,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
               <div className="bacModal_div">
                 <div className="back_modal_container">
                   <ErrorModal
-                    errorMessage={text}
+                    errorMessage="Unsuccesful transaction"
                     click={(e) => {
                       Continue(e);
                     }}

@@ -398,7 +398,33 @@ const Home = () => {
       {/* ============================= */}
       {/* ============================= */}
       {/* ============================= */}
-
+      <section className="egoras_benefit_section">
+        <div className="container">
+          <div className="benefit_section_area">
+            <div className="benefit_section_area1">
+              <div className="benefit_section_area1_layer1">
+                Egoras bridges assets like cars, household electronics to
+                block-chain.
+              </div>
+              <div className="benefit_section_area1_layer1">
+                Egoras enables anyone to get loans with any real-world assets
+                without banks or other intermediaries.
+              </div>
+              <div className="benefit_section_area1_layer1">
+                Egoras enables anyone to sell any kind of asset easily in
+                minutes.
+              </div>
+            </div>
+            <div className="benefit_section_are2">
+              <img
+                src="/img/coin_layer.svg"
+                alt=""
+                className="benefit_section_are2_img"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
       {/* ==================== */}
       {/* ==================== */}
       {/* ==================== */}
