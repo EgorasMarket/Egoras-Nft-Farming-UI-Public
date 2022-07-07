@@ -10,10 +10,6 @@ import {
 } from './Modal/Success_Error_Component';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-<<<<<<< HEAD
-import CloseIcon from '@mui/icons-material/Close';
-=======
->>>>>>> 10bd4bdc95387bf6e18f26a2e25d64e8a9dc3369
 import '../../../css/openVault.css';
 import SwitchToggle from './SwitchToggle/SwitchToggle';
 import {
@@ -1482,8 +1478,6 @@ const OpenVaultPage = ({ match }) => {
           </div>
         </div>
       </section>
-<<<<<<< HEAD
-=======
       <Modal
         fullscreen
         isOpen={modal}
@@ -1500,7 +1494,6 @@ const OpenVaultPage = ({ match }) => {
               {task == 'collateral' || task == 'topup' ? asset : base}{' '}
               on your behalf.
             </div>
->>>>>>> 10bd4bdc95387bf6e18f26a2e25d64e8a9dc3369
 
       {stage == 'success' ? (
         <div className="bacModal_div">
@@ -1570,21 +1563,6 @@ const OpenVaultPage = ({ match }) => {
               </div>
             </div>
           </div>
-<<<<<<< HEAD
-        </div>
-      ) : null}
-
-      {stage == 'error' ? (
-        <div className="bacModal_div">
-          <div className="back_modal_container">
-            <ErrorModal
-              errorMessage={text}
-              click={(e) => {
-                Continue(e);
-              }}
-              ErrorHead="Error"
-            />
-=======
         ) : null}
 
         {stage == 'loading' ? (
@@ -1626,7 +1604,6 @@ const OpenVaultPage = ({ match }) => {
               <FontAwesomeIcon icon={faWallet} /> <br />
             </h1>
             <p>To access this please connect your wallet</p>
->>>>>>> 10bd4bdc95387bf6e18f26a2e25d64e8a9dc3369
           </div>
         </div>
       ) : null}
