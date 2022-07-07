@@ -173,7 +173,9 @@ const Home = () => {
             <div
               className="nft-img-area2"
               style={{ display: "inline-flex", width: "100%" }}
-            ></div>
+            >
+              <img src="/img/home_hero_img.svg" alt="" />
+            </div>
           </div>
         </div>
         {/* <img src="/img/blur-drop.png" alt="" className="blurDrop-token" /> */}
@@ -358,7 +360,7 @@ const Home = () => {
                 </div>
                 <div className="whyEgoras_body_cont1_img">
                   <img
-                    src="/img/dont_accept_img.svg"
+                    src="/img/dont_accept_img2.svg"
                     className="whyEgoras_body_cont1_img_image"
                     alt=""
                   />
@@ -371,7 +373,7 @@ const Home = () => {
                 </div>
                 <div className="whyEgoras_body_cont1_img">
                   <img
-                    src="/img/dont_accept_img.svg"
+                    src="/img/dont_accept_img3.svg"
                     className="whyEgoras_body_cont1_img_image"
                     alt=""
                   />
