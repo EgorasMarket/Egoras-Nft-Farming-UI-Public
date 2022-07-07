@@ -303,39 +303,42 @@ const DashBoardLendingTransactions = ({ match }) => {
                       </div>{' '}
                     </div>
                   ) : (
-                    transactions.map((data) => (
-                      <div
-                        className="asset_list_body_body_cont_1"
-                        id={data.id}
-                        //   onClick={ChangeAssetDetailModal}
-                      >
-                        {/* <div className="asset_list_body_body_cont_1a">
+                    transactions
+                      .slice(0)
+                      .reverse()
+                      .map((data) => (
+                        <div
+                          className="asset_list_body_body_cont_1"
+                          id={data.id}
+                          //   onClick={ChangeAssetDetailModal}
+                        >
+                          {/* <div className="asset_list_body_body_cont_1a">
                             {data.id}
                           </div> */}
-                        <div className="asset_list_body_body_cont_1a">
-                          <a
-                            href={`https://bscscan.com/tx/${data.transactionHash}`}
-                            target="_blank"
-                            style={{ color: '#000' }}
-                          >
-                            {data.transactionHash.substring(0, 28) +
-                              '...'}
-                          </a>
-                        </div>
+                          <div className="asset_list_body_body_cont_1a">
+                            <a
+                              href={`https://bscscan.com/tx/${data.transactionHash}`}
+                              target="_blank"
+                              style={{ color: '#000' }}
+                            >
+                              {data.transactionHash.substring(0, 28) +
+                                '...'}
+                            </a>
+                          </div>
 
-                        <div className="asset_list_body_body_cont_1c">
-                          {data.createdAt.slice(0, 10)}
-                        </div>
+                          <div className="asset_list_body_body_cont_1c">
+                            {data.createdAt.slice(0, 10)}
+                          </div>
 
-                        <div className="asset_list_body_body_cont_1e">
-                          {numberWithCommas(
-                            parseInt(data.amount).toFixed()
-                          )}
-                        </div>
-                        <div className="asset_list_body_body_cont_1f">
-                          13%
-                        </div>
-                        {/* <div className="asset_list_body_body_cont_1g">
+                          <div className="asset_list_body_body_cont_1e">
+                            {numberWithCommas(
+                              parseInt(data.amount).toFixed()
+                            )}
+                          </div>
+                          <div className="asset_list_body_body_cont_1f">
+                            13%
+                          </div>
+                          {/* <div className="asset_list_body_body_cont_1g">
                         <button
                           className={
                             data.Status === "Ongoing"
@@ -348,9 +351,9 @@ const DashBoardLendingTransactions = ({ match }) => {
                           {data.Status}
                         </button>
                       </div> */}
-                        <KeyboardArrowRightIcon className="arrow_right_arrow" />
-                      </div>
-                    ))
+                          <KeyboardArrowRightIcon className="arrow_right_arrow" />
+                        </div>
+                      ))
                   )}
                 </div>
               </div>
