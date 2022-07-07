@@ -744,7 +744,7 @@ const DashBoard_lend_details_page = ({ match }) => {
             <SuccessModal
               successMessage={text}
               click={(e) => {
-                Continue(e);
+                window.location.href = "/dashboard/user";
               }}
               SuccessHead="Success"
               hash={hash}

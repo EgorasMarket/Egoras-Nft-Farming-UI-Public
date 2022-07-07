@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Twitter, Facebook, YouTube, Instagram } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-
+import WaveAnimation from "./WaveAnimation/WaveAnimation";
 import Accordion from "@material-ui/core/Accordion";
 // import OpenVaultPage from "./DashBoardPages/OpenVaultPage"im
 import OpenVaultPage from "../Dashboard/DashBoardPages/OpenVaultPage";
@@ -391,6 +391,7 @@ const Footer = () => {
               </h5>
             </div>
           </section>
+          <WaveAnimation />
         </div>
       ) : null}
     </>

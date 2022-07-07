@@ -1,7 +1,10 @@
+div#FooterId {
+  position: relative;
+}
 .footerSection {
   padding: 2em 0em;
   position: relative;
-  background-color: #f9f9f9;
+  background-color: #f3f3f3;
   overflow: hidden;
 }
 .law_write_up {
@@ -117,3 +120,29 @@
   /* border: none; */
   box-shadow: none !important;
 }
+/* ========================== */
+/* ========================== */
+/* ========================== */
+/* ========================== */
+/* ========================== */
+
+.dark .footerSection {
+  background-color: #355743;
+}
+.dark .footerCardTitle {
+  color: #fff;
+}
+.dark .c1link1 {
+  color: #b4cbbd;
+}
+.dark .footerBottomPara {
+  color: #ffffff;
+}
+
+/* ========================== */
+/* ========================== */
+/* ========================== */
+/* ========================== */
+/* ========================== */
+/* ========================== */
+/* ========================== */

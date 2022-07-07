@@ -1,13 +1,29 @@
+div#Header {
+  display: flex;
+
+  flex-direction: column;
+  align-self: baseline;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 .headerSection {
   background-color: #fff;
   top: 0;
   z-index: 100;
   font-family: Roboto;
-  box-shadow: 0px 0px 15px #efefef;
-  padding: 0.5em 2em;
-  background-color: #fff;
+  /* box-shadow: 0px 0px 15px #efefef; */
+  padding: 1em 2em;
   position: fixed;
   width: 100%;
+  position: sticky;
+}
+.we_on_beta_div {
+  background: #e3f5ea;
+  text-align: center;
+  padding: 1em;
+  color: #175b32;
+  font-size: 14px;
 }
 .header-area {
   display: flex;
@@ -388,3 +404,38 @@ vl {
     font-size: 12px;
   }
 }
+.toggle_dark_mode_div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.lightMode_icon {
+  color: #5e8b70;
+  font-size: 20px !important;
+}
+.darkMode_icon {
+  color: #d8d8d8;
+  font-size: 20px !important;
+}
+.lightMode_icon_active {
+  color: #818181;
+  font-size: 20px !important;
+}
+.darkMode_icon_active {
+  color: #ffffff;
+  font-size: 20px !important;
+}
+/* ========== */
+/* ========== */
+
+.dark .headerSection {
+  background-color: #355743;
+}
+.dark .we_on_beta_div {
+  background: #5b7b68;
+  color: #ffffff;
+}
+
+/* ========== */
+/* ========== */
