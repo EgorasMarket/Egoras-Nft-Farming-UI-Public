@@ -43,6 +43,7 @@ const DashBoardLendingTransactions = ({ match }) => {
   const [activeBtn, setActivrBtn] = useState('Ongoing');
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
   const [activeLink, setActiveLink] = useState('');
+  const [totalTransactions, setTotalTransactions] = useState(0);
   const [assetDetailModal, setAssetDetailModal] = useState(0);
   const [transactions, setTransactions] = useState([]);
   const currentPage = window.location.pathname;
@@ -89,7 +90,11 @@ const DashBoardLendingTransactions = ({ match }) => {
     axios
       .get(api_url + '/api/branch/alltime/' + txnhash, null, config)
       .then((data) => {
-        console.log(data.data.payload, 'powerful3333oooo33');
+        console.log(
+          data.data.payload[0].totalSum,
+          'powerful3333oooo33'
+        );
+        setTotalTransactions(data.data.payload[0].totalSum);
         // setTransactions(data.data.payload);
       })
       .catch((err) => {
@@ -187,7 +192,10 @@ const DashBoardLendingTransactions = ({ match }) => {
                     Total Transactions
                   </div>
                   <div className="pool_detail_assets_body_layer_1_cont1_heading_1">
-                    8,336,195 Engn
+                    {numberWithCommas(
+                      parseInt(totalTransactions).toFixed(4)
+                    )}{' '}
+                    Engn
                   </div>
                 </div>
                 <div className="pool_detail_assets_body_layer_1_cont1_sub_heading">
