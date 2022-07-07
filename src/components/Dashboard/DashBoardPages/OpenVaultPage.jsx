@@ -10,7 +10,10 @@ import {
 } from './Modal/Success_Error_Component';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+<<<<<<< HEAD
 import CloseIcon from '@mui/icons-material/Close';
+=======
+>>>>>>> 10bd4bdc95387bf6e18f26a2e25d64e8a9dc3369
 import '../../../css/openVault.css';
 import SwitchToggle from './SwitchToggle/SwitchToggle';
 import {
@@ -1479,6 +1482,25 @@ const OpenVaultPage = ({ match }) => {
           </div>
         </div>
       </section>
+<<<<<<< HEAD
+=======
+      <Modal
+        fullscreen
+        isOpen={modal}
+        toggle={toggle}
+        className="walletModal mx-auto custom_modal"
+        backdrop={backdrop}
+        keyboard={keyboard}
+      >
+        {/* <div className="container" style={{ background: "#f7f8fa" }}> */}
+        {stage == 'unlock' ? (
+          <div className="unlock_div">
+            <div className="unlock_head">
+              Approve <b>Egoras</b> to spend{' '}
+              {task == 'collateral' || task == 'topup' ? asset : base}{' '}
+              on your behalf.
+            </div>
+>>>>>>> 10bd4bdc95387bf6e18f26a2e25d64e8a9dc3369
 
       {stage == 'success' ? (
         <div className="bacModal_div">
@@ -1548,6 +1570,7 @@ const OpenVaultPage = ({ match }) => {
               </div>
             </div>
           </div>
+<<<<<<< HEAD
         </div>
       ) : null}
 
@@ -1561,6 +1584,49 @@ const OpenVaultPage = ({ match }) => {
               }}
               ErrorHead="Error"
             />
+=======
+        ) : null}
+
+        {stage == 'loading' ? (
+          <div style={{ marginTop: '5em' }}>
+            <p
+              className="text-center loadingContainer"
+              style={{ fontSize: '54px' }}
+            >
+              <FontAwesomeIcon icon={faCircleNotch} spin />
+            </p>
+            <p className="text-center">{text}</p>
+          </div>
+        ) : null}
+
+        {stage == 'success' ? (
+          <SuccessModal
+            successMessage={'Transaction was successful.'}
+            click={(e) => {
+              Continue(e);
+            }}
+            SuccessHead="Success"
+            hash={hash}
+          />
+        ) : null}
+
+        {stage == 'error' ? (
+          <ErrorModal
+            errorMessage={text}
+            click={(e) => {
+              Continue(e);
+            }}
+            ErrorHead="Error"
+          />
+        ) : null}
+
+        {stage == 'connect' ? (
+          <div className=" text-center mt-4">
+            <h1 className="text-center">
+              <FontAwesomeIcon icon={faWallet} /> <br />
+            </h1>
+            <p>To access this please connect your wallet</p>
+>>>>>>> 10bd4bdc95387bf6e18f26a2e25d64e8a9dc3369
           </div>
         </div>
       ) : null}
