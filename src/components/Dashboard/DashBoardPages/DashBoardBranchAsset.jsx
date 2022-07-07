@@ -1,26 +1,34 @@
-import React, { useState, useEffect, useContext } from "react";
-import "../../../css/dashboard_branch_assets.css";
-import { Link } from "react-router-dom";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import Accordion from "../Accordion";
-import InventoryIcon from "@mui/icons-material/Inventory";
-import CloseIcon from "@mui/icons-material/Close";
-import ReceiptIcon from "@mui/icons-material/Receipt";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import CopyAllIcon from "@mui/icons-material/CopyAll";
-import { AreaChart, Area, Tooltip, ResponsiveContainer } from "recharts";
-import { UserContext } from "../../context/Context";
-import axios from "axios";
-import Nodata from "./nodataComponent/Nodata";
-import { numberWithCommas } from "../../static/static";
-import { config } from "../../../actions/Config";
+import React, { useState, useEffect, useContext } from 'react';
+import '../../../css/dashboard_branch_assets.css';
+
+import { Link } from 'react-router-dom';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import Accordion from '../Accordion';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import CloseIcon from '@mui/icons-material/Close';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import CopyAllIcon from '@mui/icons-material/CopyAll';
+import ProgressBar from 'react-animated-progress-bar';
+
+import {
+  AreaChart,
+  Area,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
+import { UserContext } from '../../context/Context';
+import axios from 'axios';
+import Nodata from './nodataComponent/Nodata';
+import { numberWithCommas } from '../../static/static';
+import { config } from '../../../actions/Config';
 // import { API_URL as api_url } from "../actions/types";
-import { API_URL as api_url } from "../../../actions/types";
+import { API_URL as api_url } from '../../../actions/types';
 import {
   Web3ReactProvider,
   useWeb3React,
   UnsupportedChainIdError,
-} from "@web3-react/core";
+} from '@web3-react/core';
 
 const DashBoardBranchAsset = ({ match }) => {
   const context = useWeb3React();
@@ -39,38 +47,45 @@ const DashBoardBranchAsset = ({ match }) => {
     useContext(UserContext);
   const [loans, setLoans] = useState([]);
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
-  const [totalPoolValue, setTotalPoolValue] = useState("");
-  const [graphData, setGraphData] = useState("");
+  const [totalPoolValue, setTotalPoolValue] = useState('');
+  const [graphData, setGraphData] = useState('');
 
-  const [activeBtn, setActivrBtn] = useState("Ongoing");
-  const [activeLink, setActiveLink] = useState("");
-  const [assetDetailModal, setAssetDetailModal] = useState("");
+  const [activeBtn, setActivrBtn] = useState('Ongoing');
+  const [activeLink, setActiveLink] = useState('');
+  const [assetDetailModal, setAssetDetailModal] = useState('');
   const [imgDiv, setImgDiv] = useState(false);
   const currentPage = window.location.pathname;
-  const urlArr = currentPage.split("/");
+  const urlArr = currentPage.split('/');
 
   useEffect(() => {
-    if (currentPage === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
-      setActiveLink("Overview");
+    if (
+      currentPage ===
+      '/dashboard/earn/pool/' + urlArr[4] + '/detail'
+    ) {
+      setActiveLink('Overview');
     } else if (
       currentPage ===
-      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
+      '/dashboard/earn/pool/detail/branch/' + urlArr[6] + '/asset'
     ) {
-      setActiveLink("Asset");
+      setActiveLink('Asset');
     } else if (
       currentPage ===
-      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
+      '/dashboard/earn/pool/detail/' + urlArr[5] + '/transactions'
     ) {
-      setActiveLink("transaction");
+      setActiveLink('transaction');
     }
   });
 
   useEffect(() => {
     // if (account) {
     axios
-      .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
+      .get(
+        api_url + '/api/branch/transactions/' + txnhash,
+        null,
+        config
+      )
       .then((data) => {
-        console.log(data.data.payload, "made man");
+        console.log(data.data.payload, 'made man');
 
         setLoans(data.data.payload);
       })
@@ -95,9 +110,9 @@ const DashBoardBranchAsset = ({ match }) => {
   useEffect(() => {
     // if (account) {
     axios
-      .get(api_url + "/api/lend/unique/" + txnhash, null, config)
+      .get(api_url + '/api/lend/unique/' + txnhash, null, config)
       .then((data) => {
-        console.log(data.data.payload, "powerful333333");
+        console.log(data.data.payload, 'powerful333333');
         // console.log(txnhash);
         // setBranches(data.data.payload);
       })
@@ -110,9 +125,12 @@ const DashBoardBranchAsset = ({ match }) => {
   useEffect(() => {
     // if (account) {
     axios
-      .get(api_url + "/api/branch/specific/" + txnhash, null, config)
+      .get(api_url + '/api/branch/specific/' + txnhash, null, config)
       .then((data) => {
-        console.log(data.data.payload[0].total, "powerfulttt5tt333333");
+        console.log(
+          data.data.payload[0].total,
+          'powerfulttt5tt333333'
+        );
         setTotalPoolValue(data.data.payload[0].total);
         // console.log(txnhash);
         // setBranches(data.data.payload);
@@ -130,9 +148,9 @@ const DashBoardBranchAsset = ({ match }) => {
   useEffect(() => {
     // if (account) {
     axios
-      .get(api_url + "/api/branch/chart/" + txnhash, null, config)
+      .get(api_url + '/api/branch/chart/' + txnhash, null, config)
       .then((data) => {
-        console.log(data.data.payload, "powerfulttt5tt333333");
+        console.log(data.data.payload, 'powerfulttt5tt333333');
         setGraphData(data.data.payload);
       })
       .catch((err) => {
@@ -151,8 +169,8 @@ const DashBoardBranchAsset = ({ match }) => {
   //     graphData.map((graphDataList) => graphDataList.amount)
   // );
   const closeAssetDetailModal = () => {
-    setAssetDetailModal("");
-    console.log("i am not here");
+    setAssetDetailModal('');
+    console.log('i am not here');
   };
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);
@@ -173,9 +191,9 @@ const DashBoardBranchAsset = ({ match }) => {
               <Link
                 to={`/dashboard/earn/pool/${txnhash}/detail`}
                 className={
-                  activeLink === "Overview"
-                    ? "pool_lend_details_link_active"
-                    : "pool_lend_details_link"
+                  activeLink === 'Overview'
+                    ? 'pool_lend_details_link_active'
+                    : 'pool_lend_details_link'
                 }
               >
                 <DashboardIcon className="asset_overview_link_icon" />
@@ -185,9 +203,9 @@ const DashBoardBranchAsset = ({ match }) => {
               <Link
                 to={`/dashboard/earn/pool/detail/branch/${txnhash}/asset`}
                 className={
-                  activeLink === "Asset"
-                    ? "pool_lend_details_link_active"
-                    : "pool_lend_details_link"
+                  activeLink === 'Asset'
+                    ? 'pool_lend_details_link_active'
+                    : 'pool_lend_details_link'
                 }
               >
                 <InventoryIcon className="asset_overview_link_icon" />
@@ -197,9 +215,9 @@ const DashBoardBranchAsset = ({ match }) => {
               <Link
                 to={`/dashboard/earn/pool/detail/${txnhash}/transactions`}
                 className={
-                  activeLink === "transaction"
-                    ? "pool_lend_details_link_active"
-                    : "pool_lend_details_link"
+                  activeLink === 'transaction'
+                    ? 'pool_lend_details_link_active'
+                    : 'pool_lend_details_link'
                 }
               >
                 <ReceiptIcon className="asset_overview_link_icon" />
@@ -211,11 +229,11 @@ const DashBoardBranchAsset = ({ match }) => {
                 <img
                   src={
                     oyName === true
-                      ? "/img/oyigbo_icon.svg"
+                      ? '/img/oyigbo_icon.svg'
                       : agipName === true
-                      ? "/img/agip_icon.svg"
+                      ? '/img/agip_icon.svg'
                       : rumuName === true
-                      ? "/img/rumu_icon.svg"
+                      ? '/img/rumu_icon.svg'
                       : null
                   }
                   alt=""
@@ -245,7 +263,10 @@ const DashBoardBranchAsset = ({ match }) => {
                     Total Asset Value
                   </div>
                   <div className="pool_detail_assets_body_layer_1_cont1_heading_1">
-                    {numberWithCommas(parseInt(totalPoolValue).toFixed(2))} Engn
+                    {numberWithCommas(
+                      parseInt(totalPoolValue).toFixed(2)
+                    )}{' '}
+                    Engn
                   </div>
                 </div>
                 <div className="pool_detail_assets_body_layer_1_cont1_sub_heading">
@@ -285,7 +306,13 @@ const DashBoardBranchAsset = ({ match }) => {
                     }}
                   >
                     <defs>
-                      <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
+                      <linearGradient
+                        id="colorUv"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
                         <stop
                           offset="5%"
                           stopColor="#60c589"
@@ -331,9 +358,9 @@ const DashBoardBranchAsset = ({ match }) => {
                   <div
                     id="Ongoing"
                     className={
-                      activeBtn == "Ongoing"
-                        ? "filter_table_btn1_active"
-                        : "filter_table_btn1"
+                      activeBtn == 'Ongoing'
+                        ? 'filter_table_btn1_active'
+                        : 'filter_table_btn1'
                     }
                     onClick={toggleActiveBtn}
                   >
@@ -342,9 +369,9 @@ const DashBoardBranchAsset = ({ match }) => {
                   <div
                     id="All"
                     className={
-                      activeBtn == "All"
-                        ? "filter_table_btn1_active"
-                        : "filter_table_btn1"
+                      activeBtn == 'All'
+                        ? 'filter_table_btn1_active'
+                        : 'filter_table_btn1'
                     }
                     onClick={toggleActiveBtn}
                   >
@@ -353,9 +380,9 @@ const DashBoardBranchAsset = ({ match }) => {
                   <div
                     id="Closed"
                     className={
-                      activeBtn == "Closed"
-                        ? "filter_table_btn1_active"
-                        : "filter_table_btn1"
+                      activeBtn == 'Closed'
+                        ? 'filter_table_btn1_active'
+                        : 'filter_table_btn1'
                     }
                     onClick={toggleActiveBtn}
                   >
@@ -366,29 +393,37 @@ const DashBoardBranchAsset = ({ match }) => {
               <div className="asset_list_body">
                 <div className="asset_list_body_head">
                   {/* <div className="asset_list_body_head_tab1">Asset Id</div> */}
-                  <div className="asset_list_body_head_tab1">Asset Name</div>
-                  <div className="asset_list_body_head_tab3">Date & Time</div>
+                  <div className="asset_list_body_head_tab1">
+                    Asset Name
+                  </div>
+                  <div className="asset_list_body_head_tab3">
+                    Date & Time
+                  </div>
                   <div className="asset_list_body_head_tab4 maturity_date">
                     Duration
                   </div>
-                  <div className="asset_list_body_head_tab5">Amount(Engn)</div>
+                  <div className="asset_list_body_head_tab5">
+                    Amount(Engn)
+                  </div>
                   <div className="asset_list_body_head_tab6 body_head_tab6">
                     Financing Fee
                   </div>
-                  <div className="asset_list_body_head_tab7">Status</div>
+                  <div className="asset_list_body_head_tab7">
+                    Status
+                  </div>
                 </div>
                 <div className="asset_list_body_body_cont">
-                  {activeBtn === "Ongoing" ? (
+                  {activeBtn === 'Ongoing' ? (
                     loans.length <= 0 ? (
                       <div className="no_loans_div">
                         <div className="no_loans_div_cont">
                           <Nodata />
                           No funded pools yet.
-                        </div>{" "}
+                        </div>{' '}
                       </div>
                     ) : (
                       loans
-                        .filter((person) => person.state == "OPEN")
+                        .filter((person) => person.state == 'OPEN')
                         .map((data) => (
                           <div
                             className="asset_list_body_body_cont_1"
@@ -399,7 +434,7 @@ const DashBoardBranchAsset = ({ match }) => {
                                 {data.id}
                               </div> */}
                             <div className="asset_list_body_body_cont_1a">
-                              {data.title.substring(0, 20) + "..."}
+                              {data.title.substring(0, 20) + '...'}
                             </div>
 
                             <div className="asset_list_body_body_cont_1c">
@@ -419,11 +454,11 @@ const DashBoardBranchAsset = ({ match }) => {
                             <div className="asset_list_body_body_cont_1g">
                               <button
                                 className={
-                                  data.state === "OPEN"
-                                    ? "status_btn_ongoing"
-                                    : data.state === "Closed"
-                                    ? "status_btn_closed"
-                                    : "status_btn"
+                                  data.state === 'OPEN'
+                                    ? 'status_btn_ongoing'
+                                    : data.state === 'Closed'
+                                    ? 'status_btn_closed'
+                                    : 'status_btn'
                                 }
                               >
                                 {data.state}
@@ -433,13 +468,13 @@ const DashBoardBranchAsset = ({ match }) => {
                           </div>
                         ))
                     )
-                  ) : activeBtn === "All" ? (
+                  ) : activeBtn === 'All' ? (
                     loans.length <= 0 ? (
                       <div className="no_loans_div">
                         <div className="no_loans_div_cont">
                           <Nodata />
                           No funded pools yet.
-                        </div>{" "}
+                        </div>{' '}
                       </div>
                     ) : (
                       loans.map((data) => (
@@ -452,7 +487,7 @@ const DashBoardBranchAsset = ({ match }) => {
                                 {data.id}
                               </div> */}
                           <div className="asset_list_body_body_cont_1a">
-                            {data.title.substring(0, 20) + "..."}
+                            {data.title.substring(0, 20) + '...'}
                           </div>
 
                           <div className="asset_list_body_body_cont_1c">
@@ -462,7 +497,9 @@ const DashBoardBranchAsset = ({ match }) => {
                             {data.length}month(s)
                           </div>
                           <div className="asset_list_body_body_cont_1e">
-                            {numberWithCommas(parseInt(data.amount).toFixed())}
+                            {numberWithCommas(
+                              parseInt(data.amount).toFixed()
+                            )}
                           </div>
                           <div className="asset_list_body_body_cont_1f body_cont1_f">
                             13%
@@ -470,11 +507,11 @@ const DashBoardBranchAsset = ({ match }) => {
                           <div className="asset_list_body_body_cont_1g">
                             <button
                               className={
-                                data.state === "OPEN"
-                                  ? "status_btn_ongoing"
-                                  : data.state === "FILLED"
-                                  ? "status_btn_closed"
-                                  : "status_btn"
+                                data.state === 'OPEN'
+                                  ? 'status_btn_ongoing'
+                                  : data.state === 'FILLED'
+                                  ? 'status_btn_closed'
+                                  : 'status_btn'
                               }
                             >
                               {data.state}
@@ -484,17 +521,17 @@ const DashBoardBranchAsset = ({ match }) => {
                         </div>
                       ))
                     )
-                  ) : activeBtn === "Closed" ? (
+                  ) : activeBtn === 'Closed' ? (
                     loans.length <= 0 ? (
                       <div className="no_loans_div">
                         <div className="no_loans_div_cont">
                           <Nodata />
                           No funded pools yet.
-                        </div>{" "}
+                        </div>{' '}
                       </div>
                     ) : (
                       loans
-                        .filter((person) => person.state === "FILLED")
+                        .filter((person) => person.state === 'FILLED')
                         .map((data) => (
                           <div
                             className="asset_list_body_body_cont_1"
@@ -505,7 +542,7 @@ const DashBoardBranchAsset = ({ match }) => {
                                 {data.id}
                               </div> */}
                             <div className="asset_list_body_body_cont_1a">
-                              {data.title.substring(0, 20) + "..."}
+                              {data.title.substring(0, 20) + '...'}
                             </div>
 
                             <div className="asset_list_body_body_cont_1c">
@@ -525,11 +562,11 @@ const DashBoardBranchAsset = ({ match }) => {
                             <div className="asset_list_body_body_cont_1g">
                               <button
                                 className={
-                                  data.state === "OPEN"
-                                    ? "status_btn_ongoing"
-                                    : data.state === "FILLED"
-                                    ? "status_btn_closed"
-                                    : "status_btn"
+                                  data.state === 'OPEN'
+                                    ? 'status_btn_ongoing'
+                                    : data.state === 'FILLED'
+                                    ? 'status_btn_closed'
+                                    : 'status_btn'
                                 }
                               >
                                 {data.state}
@@ -556,46 +593,66 @@ const DashBoardBranchAsset = ({ match }) => {
         const meta = JSON.parse(data.metadata);
 
         const tHash = `https://bscscan.com/tx/${data.transactionHash}`;
-
-        console.log(meta);
+        const returnProgress = () => {
+          let value = parseInt(data.funded);
+          let percentage = value / parseInt(data.amount);
+          let final = percentage * 100;
+          return final.toString();
+        };
         return (
           <>
+            {/* modal starts here */}
             {assetDetailModal == data.newLoanID ? (
               <div className="asset_detail_modal_div">
                 <div className="asset_detail_modal_div_conts">
-                  <div className="asset_detail_heading" style={{ margin: "0" }}>
+                  <div
+                    className="asset_detail_heading"
+                    style={{ margin: '0' }}
+                  >
                     <div className="pool_detail_heading_area1">
                       <img
                         src={meta.arrayImg}
                         alt=""
                         className="pool_detail_heading_area1_img"
                         onClick={toggleImgDiv}
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: 'pointer' }}
                       />
                       <div className="pool_detail_heading_area1_txt_cont">
                         <div className="pool_detail_heading_area1_txt_cont_1">
-                          {data.title.substring(0, 15) + "..."}
+                          {data.title.substring(0, 15) + '...'}
                         </div>
                         <div className="pool_detail_heading_area1_txt_cont_2">
-                          Assets {">"} Asset{data.newLoanID}
+                          Assets {'>'} Asset{data.newLoanID}
                         </div>
                       </div>
                     </div>
+                    <ProgressBar
+                      width="400px"
+                      height="10px"
+                      rect
+                      fontColor="gray"
+                      percentage={returnProgress()}
+                      rectPadding="1px"
+                      rectBorderRadius="20px"
+                      trackPathColor="transparent"
+                      bgColor="#333333"
+                      trackBorderColor="grey"
+                    />
                   </div>
                   {/* ====== */}
                   {/* ====== */}
                   {/* ====== */}
                   <div className="asset_status_details_div1">
                     <div className="asset_status_details_div1_head">
-                      Status{" "}
+                      Status{' '}
                       <div className="staus_btn_div">
                         <button
                           className={
-                            data.state === "OPEN"
-                              ? "status_btn_ongoing"
-                              : data.state === "FILLED"
-                              ? "status_btn_closed"
-                              : "status_btn"
+                            data.state === 'OPEN'
+                              ? 'status_btn_ongoing'
+                              : data.state === 'FILLED'
+                              ? 'status_btn_closed'
+                              : 'status_btn'
                           }
                         >
                           {data.state}
@@ -609,17 +666,32 @@ const DashBoardBranchAsset = ({ match }) => {
                             Available for Financing
                           </div>
                           <div className="asset_status_details_div1_body1_cont1_txt1">
-                            {numberWithCommas(parseInt(data.amount).toFixed())}{" "}
+                            {numberWithCommas(
+                              parseInt(data.amount).toFixed()
+                            )}{' '}
                             Engn
                           </div>
                         </div>
                         <hr class="custom_hr"></hr>
                         <div className="asset_status_details_div1_body1_cont1">
                           <div className="asset_status_details_div1_body1_cont1_txt1">
+                            Funded
+                          </div>
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            {numberWithCommas(data.funded)} Engn
+                          </div>
+                        </div>
+
+                        <hr class="custom_hr"></hr>
+                        <div className="asset_status_details_div1_body1_cont1">
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
                             Outstanding
                           </div>
                           <div className="asset_status_details_div1_body1_cont1_txt1">
-                            {numberWithCommas(data.amount - data.funded)} Engn
+                            {numberWithCommas(
+                              data.amount - data.funded
+                            )}{' '}
+                            Engn
                           </div>
                         </div>
                         <hr class="custom_hr"></hr>
@@ -637,7 +709,9 @@ const DashBoardBranchAsset = ({ match }) => {
                             Amount
                           </div>
                           <div className="asset_status_details_div1_body1_cont1_txt1">
-                            {numberWithCommas(parseInt(data.amount).toFixed())}
+                            {numberWithCommas(
+                              parseInt(data.amount).toFixed()
+                            )}
                             Engn
                           </div>
                         </div>
@@ -767,7 +841,8 @@ const DashBoardBranchAsset = ({ match }) => {
                           className="transaction_id_link"
                           target="_blank"
                         >
-                          {data.transactionHash.substring(0, 28) + "..."}
+                          {data.transactionHash.substring(0, 28) +
+                            '...'}
                         </a>
                         <CopyAllIcon className="copy_all_tx_hash_icon" />
                       </div>
@@ -787,7 +862,7 @@ const DashBoardBranchAsset = ({ match }) => {
                       <img
                         src={meta.arrayImg}
                         alt=""
-                        style={{ width: "100%" }}
+                        style={{ width: '100%' }}
                       />
                     </div>
                     <div

@@ -20,7 +20,7 @@ import { config } from '../../../actions/Config';
 import { API_URL as api_url } from '../../../actions/types';
 import Nodata from './nodataComponent/Nodata';
 import {
-  Web3ReactProvider,
+  Web3Reactvider,
   useWeb3React,
   UnsupportedChainIdError,
 } from '@web3-react/core';
