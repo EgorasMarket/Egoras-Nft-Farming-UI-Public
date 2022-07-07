@@ -26,21 +26,20 @@ import "../../css/dashboardheader.css";
 import "../../css/dashBoardSideBar.css";
 const DashboardSideBarMenu = () => {
   const dddd = localStorage.getItem("smallSidetoken");
-  const [activeBg, setActiveBg] = useState("Earn");
+  const [activeBg, setActiveBg] = useState("market");
   const [catDiv, setCatDiv] = useState("not_home");
   const [smallSide, setSmallSide] = useState(dddd);
   const [cartNum, setCartNum] = useState("");
   const [image, setImage] = useState("");
   const [searchBar, setSearchBar] = useState(false);
   const [acctNav, setAcctNav] = useState(false);
-  const [activeMenuName, setActiveMenuName] = useState("Earn");
+  const [activeMenuName, setActiveMenuName] = useState("Markets");
 
   const [productNamesZ, setProductNamesZ] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const linksActive = window.location.pathname;
   const urlArr = linksActive.split("/");
-  const urlArr2 = linksActive.split("/");
 
   const toggleAccountNav = () => {
     if (acctNav == true) {
@@ -51,36 +50,33 @@ const DashboardSideBarMenu = () => {
   };
   useEffect(() => {
     if (linksActive === "/dashboard") {
-      setActiveMenuName("Earn");
+      setActiveMenuName("Markets");
     }
     if (linksActive === "/dashboard/user") {
       setActiveMenuName("Account Details");
     }
-    if (linksActive === "/dashboard/stake") {
-      setActiveMenuName("Staking");
-    }
     if (linksActive === "/dashboard/swap") {
       setActiveMenuName("Swap");
     }
-    if (linksActive === "/dashboard/earn/pool/detail") {
+    if (linksActive === "/dashboard/lend/pool/detail") {
       setActiveMenuName("Pool Details");
     }
     if (
       linksActive ===
-      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setActiveMenuName("Pool Details");
     }
     if (
       linksActive ===
-      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
+      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
     ) {
       setActiveMenuName("Pool Details");
     }
-    if (linksActive === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
+    if (linksActive === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
       setActiveMenuName("Pool Details");
     }
-    if (linksActive === "/dashboard/earn/pool/detail/transactions") {
+    if (linksActive === "/dashboard/lend/pool/detail/transactions") {
       setActiveMenuName("Pool Details");
     }
     // if (linksActive === "/dashboard/add") {
@@ -89,13 +85,13 @@ const DashboardSideBarMenu = () => {
     if (linksActive === "/dashboard/whitepaper") {
       setActiveMenuName("Whitepaper");
     }
-    if (linksActive === "/dashboard/earn") {
-      setActiveMenuName("Earn");
+    if (linksActive === "/dashboard/lend") {
+      setActiveMenuName("lend");
     }
-    if (linksActive === "/dashboard/stake/vault/" + urlArr2[4] + "/ENGN") {
+    if (linksActive === "/vault/" + urlArr[2] + "/ENGN") {
       setActiveMenuName("Vault");
     }
-    if (linksActive === "/dashboard/deposit_vault/" + urlArr2[4] + "/ENGN") {
+    if (linksActive === "/deposit_vault/" + urlArr[2] + "/ENGN") {
       setActiveMenuName("Vault");
     }
   });
@@ -120,34 +116,31 @@ const DashboardSideBarMenu = () => {
 
   useEffect(() => {
     if (linksActive === "/dashboard") {
-      setActiveBg("Earn");
+      setActiveBg("market");
     }
-    if (linksActive === "/dashboard/earn") {
-      setActiveBg("Earn");
+    if (linksActive === "/dashboard/lend") {
+      setActiveBg("lend");
     }
     if (linksActive === "/dashboard/user") {
       setActiveBg("account");
     }
-    if (linksActive === "/dashboard/stake") {
-      setActiveBg("market");
+    if (
+      linksActive ===
+      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+    ) {
+      setActiveBg("lend");
     }
     if (
       linksActive ===
-      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
     ) {
-      setActiveBg("Earn");
+      setActiveBg("lend");
     }
-    if (
-      linksActive ===
-      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
-    ) {
-      setActiveBg("Earn");
+    if (linksActive === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
+      setActiveBg("lend");
     }
-    if (linksActive === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
-      setActiveBg("Earn");
-    }
-    if (linksActive === "/dashboard/earn/pool/detail/transactions") {
-      setActiveBg("Earn");
+    if (linksActive === "/dashboard/lend/pool/detail/transactions") {
+      setActiveBg("lend");
     }
 
     if (linksActive === "/dashboard/swap") {
@@ -160,15 +153,7 @@ const DashboardSideBarMenu = () => {
     if (linksActive === "/dashboard/whitepaper") {
       setActiveBg("whitepaper");
     }
-    if (linksActive === "/dashboard/stake/vault/" + urlArr2[4] + "/ENGN") {
-      setActiveBg("market");
-    }
-    if (
-      linksActive ===
-      "/dashboard/stake/deposit_vault/" + urlArr2[4] + "/ENGN"
-    ) {
-      setActiveBg("market");
-    }
+
     if (smallSide == "not_small") {
       localStorage.setItem("smallSidetoken", "not_small");
     } else {
@@ -255,34 +240,8 @@ const DashboardSideBarMenu = () => {
                 {/* =================== */}
                 {/* =================== */}
                 {/* =================== */}
-
-                {/* ===================== */}
-                {/* ===================== */}
-                {/* ===================== */}
-                {/* ===================== */}
-                <a
-                  href="/dashboard/earn"
-                  id="Earn"
-                  className="link"
-                  onClick={changeBg}
-                >
-                  <li
-                    className={
-                      activeBg == "Earn"
-                        ? "sidebarListItem list-item-active"
-                        : "sidebarListItem"
-                    }
-                  >
-                    <StarsIcon className="sidebarIcon" />
-                    Earn
-                  </li>
-                </a>
-                {/* ===================== */}
-                {/* ===================== */}
-                {/* ===================== */}
-
-                <a
-                  href="/dashboard/stake"
+                <Link
+                  to="/dashboard"
                   id="market"
                   className="link"
                   onClick={changeBg}
@@ -297,11 +256,35 @@ const DashboardSideBarMenu = () => {
                     <ApprovalIcon className="sidebarIcon" />
                     Stake
                   </li>
-                </a>
+                </Link>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                <Link
+                  to="/dashboard/lend"
+                  id="lend"
+                  className="link"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "lend"
+                        ? "sidebarListItem list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <StarsIcon className="sidebarIcon" />
+                    Earn
+                  </li>
+                </Link>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
                 {/* ===================== */}
 
-                <a
-                  href="/dashboard/swap"
+                <Link
+                  to="/dashboard/swap"
                   className="link"
                   id="swap"
                   onClick={changeBg}
@@ -316,7 +299,7 @@ const DashboardSideBarMenu = () => {
                     <SwapHorizontalCircleIcon className="sidebarIcon" />
                     Swap
                   </li>
-                </a>
+                </Link>
 
                 {/* ===================== */}
                 {/* ===================== */}
@@ -344,8 +327,8 @@ const DashboardSideBarMenu = () => {
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
-                <a
-                  href="/dashboard/user"
+                <Link
+                  to="/dashboard/user"
                   className="link"
                   id="account"
                   onClick={changeBg}
@@ -358,9 +341,9 @@ const DashboardSideBarMenu = () => {
                     }
                   >
                     <AccountCircleIcon className="sidebarIcon" />
-                    Portfolio
+                    Account
                   </li>
-                </a>
+                </Link>
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
@@ -393,31 +376,8 @@ const DashboardSideBarMenu = () => {
                 {/* =================== */}
                 {/* =================== */}
                 {/* =================== */}
-
-                <a
-                  href="/dashboard/earn"
-                  id="Earn"
-                  className="link hover_link"
-                  onClick={changeBg}
-                >
-                  <li
-                    className={
-                      activeBg == "Earn"
-                        ? "sidebarListItem small_list-item-active"
-                        : "sidebarListItem"
-                    }
-                  >
-                    <StarsIcon className="sidebarIcon" />
-                    Earn
-                  </li>
-                  <span className="hover_link_txt">Earn</span>
-                </a>
-                {/* ===================== */}
-                {/* ===================== */}
-                {/* ===================== */}
-                {/* ===================== */}
-                <a
-                  href="/dashboard/stake"
+                <Link
+                  to="/dashboard"
                   id="market"
                   className="link hover_link"
                   onClick={changeBg}
@@ -433,13 +393,35 @@ const DashboardSideBarMenu = () => {
                     Stake
                   </li>
                   <span className="hover_link_txt">Stake</span>
-                </a>
+                </Link>
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
-                <a
-                  href="/dashboard/swap"
+                <Link
+                  to="/dashboard/lend"
+                  id="lend"
+                  className="link hover_link"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "lend"
+                        ? "sidebarListItem small_list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <StarsIcon className="sidebarIcon" />
+                    Earn
+                  </li>
+                  <span className="hover_link_txt">Earn</span>
+                </Link>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                <Link
+                  to="/dashboard/swap"
                   id="swap"
                   className="link hover_link"
                   onClick={changeBg}
@@ -455,7 +437,7 @@ const DashboardSideBarMenu = () => {
                     Swap
                   </li>
                   <span className="hover_link_txt">Swap</span>
-                </a>
+                </Link>
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
@@ -488,8 +470,8 @@ const DashboardSideBarMenu = () => {
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
-                <a
-                  href="/dashboard/user"
+                <Link
+                  to="/dashboard/user"
                   id="account"
                   className="link hover_link"
                   onClick={changeBg}
@@ -502,10 +484,10 @@ const DashboardSideBarMenu = () => {
                     }
                   >
                     <AccountCircleIcon className="sidebarIcon" />
-                    Portfolio
+                    Account
                   </li>
-                  <span className="hover_link_txt">Portfolio</span>
-                </a>
+                  <span className="hover_link_txt">Account</span>
+                </Link>
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
