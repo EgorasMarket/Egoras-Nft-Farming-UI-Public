@@ -6,7 +6,9 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import CloseIcon from "@material-ui/icons/Close";
 import clsx from "clsx";
 import { Authenticate } from "../auth/Authenticate";
-
+import SwitchToggle2 from "../Dashboard/DashBoardPages/SwitchToggle/SwitchToggle2";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import Drawer from "@material-ui/core/Drawer";
 import Toolbar from "@material-ui/core/Toolbar";
 import Accordion from "@material-ui/core/Accordion";
@@ -117,69 +119,102 @@ const useStyles2 = makeStyles((theme) => ({
 
 // }));
 
-const Header = () => {
+const Header = ({ togglemakeDark, check }) => {
   const [showHeader, setshowHeader] = useState(true);
+  const [betaDiv, setBetaDiv] = useState(true);
+  // const [darkMode, setDarkMode] = useState(null);
+  const [darkMode, setDarkMode] = useState(localStorage.getItem("uiMode"));
 
   const currentPage = window.location.pathname;
+  // if (localStorage.getItem("username") === null) {
+  //   //...
+  // }
+
+  const lightSet = () => {
+    // if (darkMode)
+    console.log("light");
+    localStorage.setItem("uiMode", "light");
+  };
 
   useEffect(() => {
     const urlArr = currentPage.split("/");
     if (currentPage === "/dashboard/") {
       setshowHeader(false);
+      setBetaDiv(false);
     }
     if (currentPage === "/dashboard") {
+      setBetaDiv(false);
       setshowHeader(false);
     }
     if (currentPage === "/dashboard/lending") {
       setshowHeader(false);
+      setBetaDiv(false);
     }
     if (currentPage === "/dashboard/stake") {
       setshowHeader(false);
+      setBetaDiv(false);
     }
     if (currentPage === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
       setshowHeader(false);
+      setBetaDiv(false);
     }
     if (
       currentPage ===
       "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setshowHeader(false);
+      setBetaDiv(false);
     }
+    // if (urlArr == "/dashborad") {
+    //   setBetaDiv(false);
+    // } else {
+    //   setBetaDiv(true);
+    // }
     if (
       currentPage ===
       "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
     ) {
       setshowHeader(false);
+      setBetaDiv(false);
     }
     if (currentPage === "/dashboard/earn") {
       setshowHeader(false);
+      setBetaDiv(false);
     }
     if (currentPage === "/dashboard/earn/pool/detail") {
       setshowHeader(false);
+      setBetaDiv(false);
     }
     if (currentPage === "/dashboard/user") {
       setshowHeader(false);
+      setBetaDiv(false);
     }
     if (currentPage === "/dashboard/swap") {
       setshowHeader(false);
+      setBetaDiv(false);
     }
     if (currentPage === "/dashboard/add") {
       setshowHeader(false);
+      setBetaDiv(false);
     }
     if (currentPage === "/dashboard/earn/pool/detail/branch/asset") {
       setshowHeader(false);
+      setBetaDiv(false);
     }
     if (currentPage === "/dashboard/whitepaper") {
       setshowHeader(false);
+      setBetaDiv(false);
     }
     if (currentPage === "/dashboard/stake/vault/" + urlArr[4] + "/ENGN") {
       setshowHeader(false);
+      setBetaDiv(false);
     }
     if (
       currentPage ===
       "/dashboard/stake/deposit_vault/" + urlArr[4] + "/ENGN"
     ) {
       setshowHeader(false);
+      setBetaDiv(false);
     }
   });
 
@@ -338,8 +373,14 @@ const Header = () => {
 
   return (
     <>
+      {betaDiv === true ? (
+        <div className="we_on_beta_div">
+          Welcome to Egoras v2 Beta. If you find any issues please let us know.
+        </div>
+      ) : null}
+
       {showHeader === true ? (
-        <div id="Header">
+        <div id="Header" className="header_div">
           <section className="headerSection">
             <div className="container header">
               <div className="header-area">
@@ -351,7 +392,6 @@ const Header = () => {
                   />
                   <div className="on-mobile-navigators"></div>
                 </a>
-
                 <ul className="headerLinks">
                   <a href="/">
                     {" "}
@@ -370,12 +410,36 @@ const Header = () => {
                 {page1 === "/" ? <span className="Line"></span> : null}
               </a> */}
                 </ul>
-                <div>
+
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                >
                   {/* <a href="/products">Products</a> */}
+                  <div className="toggle_dark_mode_div">
+                    <LightModeIcon
+                      className={
+                        check === false
+                          ? "lightMode_icon_active"
+                          : "lightMode_icon"
+                      }
+                      className="lightMode_icon"
+                    />
+                    <SwitchToggle2
+                      className="toggle_dark_mode"
+                      darkMode={togglemakeDark}
+                      checkBox={check}
+                    />
+                    <DarkModeIcon
+                      className={
+                        check === false
+                          ? "darkMode_icon"
+                          : "darkMode_icon_active"
+                      }
+                    />
+                  </div>
 
                   <Authenticate isHome="false" />
                 </div>
-
                 {/* <ul className="headerLinks2">
             <a href="/documents" className="docs">
               Products

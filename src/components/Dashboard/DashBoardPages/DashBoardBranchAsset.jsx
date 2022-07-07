@@ -278,7 +278,7 @@ const DashBoardBranchAsset = ({ match }) => {
                     height={150}
                     data={graphData}
                     margin={{
-                      top: 10,
+                      top: 0,
                       tright: 0,
                       left: 0,
                       bottom: 0,
