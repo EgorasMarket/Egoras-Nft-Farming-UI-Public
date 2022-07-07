@@ -33,6 +33,7 @@ import {
   unluckToken3,
   transactReceipt,
   swapImpl,
+  getPrice,
   getPriceImpl,
   swapBase,
 } from '../../../../web3/index';
@@ -104,7 +105,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
     // console.log(account, library);
     if (account) {
       var ticker = 'EGC-eNGN';
-      getPriceImpl(ticker, library.getSigner()).then((price) => {
+      getPrice(ticker, library.getSigner()).then((price) => {
         console.log(formatEther(price.message));
         setDefaultPrice(formatEther(price.message));
       });
@@ -200,11 +201,11 @@ const AddLiquidity = ({ match, closeModal, which }) => {
     if (baseVal.symbol == 'EGC') {
       // console.log(formatEther)
       setInputVal2(
-        parseFloat(egcToEngn) * parseFloat(e.target.value)
+        parseFloat(defaultPrice) * parseFloat(e.target.value)
       );
     } else {
       setInputVal2(
-        parseFloat(e.target.value) / parseFloat(egcToEngn)
+        parseFloat(e.target.value) / parseFloat(defaultPrice)
       );
     }
     console.log(baseVal, 'inputVal');
