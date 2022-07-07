@@ -292,7 +292,7 @@ const DashBoard_lend_details_page = ({ match }) => {
     } else {
       // setStage("error");
     }
-  }, 7000);
+  }, 1000);
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -744,7 +744,7 @@ const DashBoard_lend_details_page = ({ match }) => {
             <SuccessModal
               successMessage={text}
               click={(e) => {
-                Continue(e);
+                window.location.href = "/dashboard/user";
               }}
               SuccessHead="Success"
               hash={hash}

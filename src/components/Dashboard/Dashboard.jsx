@@ -21,6 +21,8 @@ import Top_up_vault_form from "./DashBoardPages/Vault_forms/Top_up_vault_form";
 import Withdraw_vault_form from "./DashBoardPages/Vault_forms/Withdraw_vault_form";
 import DashBoardSwap from "./DashBoardPages/DashBoardSwapPage";
 import DashBoardWhitePaper from "./DashBoardPages/DashBoardWhitePaper";
+import { SplashScreen } from "./SplashScreen/SplashScreen";
+// import {spla}
 import DashboardEgrBalancePage from "./DashBoardPages/DashboardEgrBalancePage";
 // import DashBoardHeader from "./DashBoardHeader";
 import DashboardAddLiquidtyPage from "./DashBoardPages/DashboardAddLiquidtyPage";
@@ -33,105 +35,114 @@ import DashBoardLendPage from "./DashBoardPages/DashBoardLendPage";
 //   borderColor: "red",
 // };
 function Dashboard() {
-  const [gettingReady, setGettingReady] = useState(false);
+  const [splashScreen, setSplashScreen] = useState(true);
+  const currentPage = window.location.pathname;
+  const urlArr = currentPage.split("/");
 
+  useEffect(() => {
+    // //console.log(isAuthenticated,'77777');
+    setSplashScreen(true);
+    // //console.log('trueee');
+    const timer = setTimeout(() => {
+      setSplashScreen(false);
+    }, 5000);
+  }, []);
+  useEffect(() => {
+    if (currentPage === "/vault/" + urlArr[2] + "/ENGN") {
+      setSplashScreen(false);
+    }
+    if (currentPage === "/deposit_vault/" + urlArr[2] + "/ENGN") {
+      setSplashScreen(false);
+    }
+  }, []);
   return (
-    <Router>
-      {/* <DashBoardHeader /> */}
-      {/* <DashBoardHeader /> */}
-      <div className="dashboard">
-        {gettingReady === true ? (
-          <div className="hold_On_div">
-            <div className="hold_On_div_div_txt">
-              <LoadingIcons.Puff fill="#000" stroke="#000" />
-              Please hold on for a while...{" "}
-              <span className="hold_On_div_div_txt_para">
-                We are getting things ready.
-              </span>
-            </div>
-          </div>
-        ) : (
-          <>
-            {" "}
-            <DashboardSideBarMenu />
-            <Switch>
-              <Route exact path="/dashboard" component={DashBoardAnalytics} />
-              {/* <Route exact path="/dashboard/swap" component={DashBoardSwap} /> */}
-              {/* <Route exact path="/dashboard/swap" component={DashBoardSwap} /> */}
-              <Route
-                exact
-                path="/vault/:asset/:base"
-                component={OpenVaultPage}
-              />
-              {/*  */}
-              {/* <Route
+    <>
+      {splashScreen === true ? (
+        <SplashScreen />
+      ) : (
+        <Router>
+          {/* <DashBoardHeader /> */}
+          {/* <DashBoardHeader /> */}
+          <div className="dashboard">
+            <>
+              {" "}
+              <DashboardSideBarMenu />
+              <Switch>
+                <Route exact path="/dashboard" component={DashBoardAnalytics} />
+                {/* <Route exact path="/dashboard/swap" component={DashBoardSwap} /> */}
+                {/* <Route exact path="/dashboard/swap" component={DashBoardSwap} /> */}
+                <Route
+                  exact
+                  path="/vault/:asset/:base"
+                  component={OpenVaultPage}
+                />
+                {/*  */}
+                {/* <Route
             exact
             path="/deposit_vault/:asset/:base"
             component={Withdraw_vault_form}
           /> */}
-              {/* <Route
+                {/* <Route
             exact
             path="/dashboard/add"
             component={DashboardAddLiquidtyPage}
           /> */}
-              <Route
-                exact
-                path="/dashboard/governance"
-                component={DashboardGovernance}
-              />
-              <Route
-                exact
-                path="/dashboard/lend/pool/:branchAddress/detail"
-                component={DashBoard_lend_details_page}
-              />
-              <Route
-                exact
-                path="/dashboard/lend/pool/detail/branch/:branchAddress/asset"
-                component={DashBoardBranchAsset}
-              />
-              <Route exact path="/dashboard/swap" component={Swap} />
-              <Route
-                exact
-                path="/dashboard/user"
-                component={DashBoardUserDetails}
-              />
-              <Route
-                exact
-                path="/dashboard/lend/pool/detail/:branchAddress/transactions"
-                component={DashBoardLendingTransactions}
-              />
-              <Route
-                exact
-                path="/dashboard/governance/details"
-                component={DashboardEgrBalancePage}
-              />
-              <Route
-                exact
-                path="/dashboard/lend"
-                component={DashBoardLendPage}
-              />
-              <Route
-                exact
-                path="/dashboard/transaction"
-                component={DashBoardTransaction}
-              />
-              <Route
-                exact
-                path="/dashboard/whitepaper"
-                component={DashBoardWhitePaper}
-              />
+                <Route
+                  exact
+                  path="/dashboard/governance"
+                  component={DashboardGovernance}
+                />
+                <Route
+                  exact
+                  path="/dashboard/lend/pool/:branchAddress/detail"
+                  component={DashBoard_lend_details_page}
+                />
+                <Route
+                  exact
+                  path="/dashboard/lend/pool/detail/branch/:branchAddress/asset"
+                  component={DashBoardBranchAsset}
+                />
+                <Route exact path="/dashboard/swap" component={Swap} />
+                <Route
+                  exact
+                  path="/dashboard/user"
+                  component={DashBoardUserDetails}
+                />
+                <Route
+                  exact
+                  path="/dashboard/lend/pool/detail/:branchAddress/transactions"
+                  component={DashBoardLendingTransactions}
+                />
+                <Route
+                  exact
+                  path="/dashboard/governance/details"
+                  component={DashboardEgrBalancePage}
+                />
+                <Route
+                  exact
+                  path="/dashboard/lend"
+                  component={DashBoardLendPage}
+                />
+                <Route
+                  exact
+                  path="/dashboard/transaction"
+                  component={DashBoardTransaction}
+                />
+                <Route
+                  exact
+                  path="/dashboard/whitepaper"
+                  component={DashBoardWhitePaper}
+                />
 
-              {/* <Route exact path="/dashboard/vault">
+                {/* <Route exact path="/dashboard/vault">
             <OpenVaultPage />
           </Route> */}
-            </Switch>
-          </>
-        )}
-        {gettingReady === true ? (
-          <img src="/img/pleasewait.png" alt="" className="add_waiting_img" />
-        ) : null}
-      </div>
-    </Router>
+              </Switch>
+            </>
+          </div>
+        </Router>
+      )}
+    </>
   );
 }
 

@@ -240,8 +240,8 @@ const DashboardSideBarMenu = () => {
                 {/* =================== */}
                 {/* =================== */}
                 {/* =================== */}
-                <Link
-                  to="/dashboard"
+                <a
+                  href="/dashboard"
                   id="market"
                   className="link"
                   onClick={changeBg}
@@ -256,13 +256,13 @@ const DashboardSideBarMenu = () => {
                     <ApprovalIcon className="sidebarIcon" />
                     Stake
                   </li>
-                </Link>
+                </a>
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
-                <Link
-                  to="/dashboard/lend"
+                <a
+                  href="/dashboard/lend"
                   id="lend"
                   className="link"
                   onClick={changeBg}
@@ -277,14 +277,14 @@ const DashboardSideBarMenu = () => {
                     <StarsIcon className="sidebarIcon" />
                     Earn
                   </li>
-                </Link>
+                </a>
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
 
-                <Link
-                  to="/dashboard/swap"
+                <a
+                  href="/dashboard/swap"
                   className="link"
                   id="swap"
                   onClick={changeBg}
@@ -299,7 +299,7 @@ const DashboardSideBarMenu = () => {
                     <SwapHorizontalCircleIcon className="sidebarIcon" />
                     Swap
                   </li>
-                </Link>
+                </a>
 
                 {/* ===================== */}
                 {/* ===================== */}
@@ -327,8 +327,8 @@ const DashboardSideBarMenu = () => {
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
-                <Link
-                  to="/dashboard/user"
+                <a
+                  href="/dashboard/user"
                   className="link"
                   id="account"
                   onClick={changeBg}
@@ -343,7 +343,7 @@ const DashboardSideBarMenu = () => {
                     <AccountCircleIcon className="sidebarIcon" />
                     Account
                   </li>
-                </Link>
+                </a>
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
@@ -376,8 +376,8 @@ const DashboardSideBarMenu = () => {
                 {/* =================== */}
                 {/* =================== */}
                 {/* =================== */}
-                <Link
-                  to="/dashboard"
+                <a
+                  href="/dashboard"
                   id="market"
                   className="link hover_link"
                   onClick={changeBg}
@@ -393,13 +393,13 @@ const DashboardSideBarMenu = () => {
                     Stake
                   </li>
                   <span className="hover_link_txt">Stake</span>
-                </Link>
+                </a>
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
-                <Link
-                  to="/dashboard/lend"
+                <a
+                  href="/dashboard/lend"
                   id="lend"
                   className="link hover_link"
                   onClick={changeBg}
@@ -415,13 +415,13 @@ const DashboardSideBarMenu = () => {
                     Earn
                   </li>
                   <span className="hover_link_txt">Earn</span>
-                </Link>
+                </a>
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
-                <Link
-                  to="/dashboard/swap"
+                <a
+                  href="/dashboard/swap"
                   id="swap"
                   className="link hover_link"
                   onClick={changeBg}
@@ -437,7 +437,7 @@ const DashboardSideBarMenu = () => {
                     Swap
                   </li>
                   <span className="hover_link_txt">Swap</span>
-                </Link>
+                </a>
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
@@ -470,8 +470,8 @@ const DashboardSideBarMenu = () => {
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
-                <Link
-                  to="/dashboard/user"
+                <a
+                  href="/dashboard/user"
                   id="account"
                   className="link hover_link"
                   onClick={changeBg}
@@ -487,7 +487,7 @@ const DashboardSideBarMenu = () => {
                     Account
                   </li>
                   <span className="hover_link_txt">Account</span>
-                </Link>
+                </a>
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}

@@ -651,7 +651,7 @@ const OpenVaultPage = ({ match }) => {
       // setCheckBox(false);
       // setDisable(true);
     }
-  }, 7000);
+  }, 1000);
   // useEffect(() => {
   //   if (localStorage.getItem("unlocking") == "true") {
   //     // setCheckBox(true);
