@@ -340,7 +340,7 @@ const DashBoardUserDetails = () => {
         }
         return (
           <>
-            {assetDetailModal == data.id ? (
+            {assetDetailModal == data.rowNumber ? (
               <div className="asset_detail_modal_div">
                 <div className="asset_detail_modal_div_conts">
                   <div className="asset_detail_heading" style={{ margin: "0" }}>

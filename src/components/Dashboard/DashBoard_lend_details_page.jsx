@@ -147,16 +147,16 @@ const DashBoard_lend_details_page = ({ match }) => {
   const currentPage = window.location.pathname;
   const urlArr = currentPage.split("/");
   useEffect(() => {
-    if (currentPage === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
+    if (currentPage === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
       setActiveLink("Overview");
     } else if (
       currentPage ===
-      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setActiveLink("Asset");
     } else if (
       currentPage ===
-      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
     ) {
       setActiveLink("transaction");
     }
@@ -307,7 +307,7 @@ const DashBoard_lend_details_page = ({ match }) => {
           <div className="pool_deatail_area">
             <div className="pool_lending_pages_links">
               <Link
-                to={`/dashboard/lend/pool/${txnhash}/detail`}
+                to={`/dashboard/earn/pool/${txnhash}/detail`}
                 className={
                   activeLink === "Overview"
                     ? "pool_lend_details_link_active"
@@ -319,7 +319,7 @@ const DashBoard_lend_details_page = ({ match }) => {
               </Link>
               {/* <span class="vertical_ruleB"></span> */}
               <Link
-                to={`/dashboard/lend/pool/detail/branch/${txnhash}/asset`}
+                to={`/dashboard/earn/pool/detail/branch/${txnhash}/asset`}
                 className={
                   activeLink === "Asset"
                     ? "pool_lend_details_link_active"
@@ -331,7 +331,7 @@ const DashBoard_lend_details_page = ({ match }) => {
               </Link>
               {/* <span class="vertical_ruleB"></span> */}
               <Link
-                to={`/dashboard/lend/pool/detail/${txnhash}/transactions`}
+                to={`/dashboard/earn/pool/detail/${txnhash}/transactions`}
                 className={
                   activeLink === "transaction"
                     ? "pool_lend_details_link_active"

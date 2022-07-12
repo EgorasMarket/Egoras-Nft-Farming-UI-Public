@@ -33,6 +33,10 @@ const Home = () => {
   const [numberFromFund, setNumberFromFund] = useState(990000);
   const [numberToFund, setNumberToFund] = useState(1000000);
   const [aboutVideoModal, setAboutVideoModal] = useState(false);
+  const [animate1, setAnimate1] = useState(true);
+  const [animate2, setAnimate2] = useState(false);
+  const [animate3, setAnimate3] = useState(false);
+  const [animate4, setAnimate4] = useState(false);
   // const [uiMode, setUiMode] = useState(localStorage.getItem("uiMode"));
   // const []
   const assets = [
@@ -127,6 +131,39 @@ const Home = () => {
     setCategoryBtn("Stable");
   };
 
+  useEffect(() => {
+    // setAnimate1(true);
+    const timer = setTimeout(() => {
+      setAnimate1(false);
+      setAnimate2(true);
+    }, 4000);
+  }, [animate1]);
+  useEffect(() => {
+    const timer2 = setTimeout(() => {
+      setAnimate2(false);
+      setAnimate3(true);
+    }, 4000);
+  }, [animate2]);
+  useEffect(() => {
+    const timer3 = setTimeout(() => {
+      setAnimate3(false);
+      setAnimate4(true);
+    }, 4000);
+  }, [animate3]);
+  useEffect(() => {
+    const timer4 = setTimeout(() => {
+      setAnimate4(false);
+      setAnimate1(true);
+    }, 4000);
+  }, [animate4]);
+  // useEffect(() => {
+
+  //   const timer3 = setTimeout(() => {
+  //     setAnimate3(false);
+  //     setAnimate4(true);
+  //   }, 5000);
+  // }, []);
+
   return (
     <div>
       {/* =================================================================================================================================================================================================================================================================== */}
@@ -144,7 +181,7 @@ const Home = () => {
                 </p>
                 <p className="span4b-txts">
                   Egoras is a decentralized organization built to enable anyone
-                  to get funding or sell any real-life asset easily.
+                  to get funding or sell any real-world asset easily.
                 </p>
               </div>
               <div className="stake-hero-btns">
@@ -174,7 +211,142 @@ const Home = () => {
               className="nft-img-area2"
               style={{ display: "inline-flex", width: "100%" }}
             >
-              <img src="/img/home_hero_img.svg" alt="" />
+              <img
+                src="/img/liquidity-hero_bg_1.svg"
+                alt=""
+                className="liquidity_hero_bg_1"
+              />
+              <img
+                src="/img/liquidity_hero_bg_base.svg"
+                alt=""
+                className="liquidity_hero_bg_base"
+              />
+              <img
+                src="/img/liquidity_hero_bg_logos1.svg"
+                alt=""
+                className={
+                  animate1 === true
+                    ? "liquidity_hero_bg_logos1 animate"
+                    : "liquidity_hero_bg_logos1"
+                }
+              />
+              <img
+                src="/img/liquidity_hero_bg_logos1.svg"
+                alt=""
+                className={
+                  animate3 === true
+                    ? "liquidity_hero_bg_logos3 animate"
+                    : "liquidity_hero_bg_logos3"
+                }
+              />
+              <img
+                src="/img/liquidity_hero_bg_logos2.svg"
+                alt=""
+                className={
+                  animate2 === true
+                    ? "liquidity_hero_bg_logos2 animate"
+                    : "liquidity_hero_bg_logos2"
+                }
+              />
+              <img
+                src="/img/liquidity_hero_bg_logos4.svg"
+                alt=""
+                className={
+                  animate4 === true
+                    ? "liquidity_hero_bg_logos4 animate"
+                    : "liquidity_hero_bg_logos4"
+                }
+              />
+              <img
+                src="/img/shooting_light.svg"
+                alt=""
+                // className="shooting_light1"
+                className={
+                  animate1 === true
+                    ? "shooting_light1 shoot"
+                    : "shooting_light1"
+                }
+              />
+              <img
+                src="/img/shooting_light.svg"
+                alt=""
+                // className="shooting_light3"
+                className={
+                  animate3 === true
+                    ? "shooting_light3 shoot3"
+                    : "shooting_light3"
+                }
+              />
+              <img
+                src="/img/shooting_light.svg"
+                alt=""
+                // className="shooting_light2"
+                className={
+                  animate2 === true
+                    ? "shooting_light2 shoot2"
+                    : "shooting_light2"
+                }
+              />
+              <img
+                src="/img/shooting_light.svg"
+                alt=""
+                // className="shooting_light2"
+                className={
+                  animate4 === true
+                    ? "shooting_light4 shoot4"
+                    : "shooting_light4"
+                }
+              />
+              <img
+                src="/img/asset_display_icon1.svg"
+                alt=""
+                className="asset_display_icon1"
+                className={
+                  animate1 === true
+                    ? "asset_display_icon1"
+                    : "asset_display_icon1_none"
+                }
+              />
+              <img
+                src="/img/asset_display_icon2.svg"
+                alt=""
+                className="asset_display_icon1"
+                className={
+                  animate2 === true
+                    ? "asset_display_icon1"
+                    : "asset_display_icon1_none"
+                }
+              />
+              <img
+                src="/img/asset_display_icon3.svg"
+                alt=""
+                className="asset_display_icon1"
+                className={
+                  animate3 === true
+                    ? "asset_display_icon1"
+                    : "asset_display_icon1_none"
+                }
+              />
+              <img
+                src="/img/asset_display_icon4.svg"
+                alt=""
+                className="asset_display_icon1"
+                className={
+                  animate4 === true
+                    ? "asset_display_icon1"
+                    : "asset_display_icon1_none"
+                }
+              />
+              <img
+                src="/img/liquidity_hero_center_turning_bg.svg"
+                alt=""
+                className="liquidity_hero_center_turning_bg"
+              />
+              <img
+                src="/img/liquidity_hero_center_asset_display_bg.svg"
+                alt=""
+                className="liquidity_hero_center_asset_display_bg"
+              />
             </div>
           </div>
         </div>
@@ -202,13 +374,13 @@ const Home = () => {
 
         <div className="floating_absolute_div">
           <div className="floating_div_cont_area">
-            <div className="floating_div_cont_area1">
+            {/* <div className="floating_div_cont_area1">
               <div className="floating_div_cont_area1_cont1">
                 Total Transactions
               </div>
               <div className="floating_div_cont_area1_cont2">50 Txns</div>
             </div>
-            <span class="vertical_rule"></span>
+            <span class="vertical_rule"></span> */}
             <div className="floating_div_cont_area1">
               <div className="floating_div_cont_area1_cont1">
                 Total Assets Value
@@ -221,7 +393,7 @@ const Home = () => {
                   to={numberTo}
                   toLocaleStringProps={["en-US"]}
                 />{" "}
-                Engn
+                USD
               </div>
             </div>
             <span class="vertical_rule"></span>
@@ -237,16 +409,16 @@ const Home = () => {
                   to={numberToFund}
                   toLocaleStringProps={["en-US"]}
                 />{" "}
-                Engn
+                USD
               </div>
             </div>
-            <span class="vertical_rule"></span>
-            <div className="floating_div_cont_area1">
+            {/* <span class="vertical_rule"></span> */}
+            {/* <div className="floating_div_cont_area1">
               <div className="floating_div_cont_area1_cont1">
                 Estimated APY:
               </div>
               <div className="floating_div_cont_area1_cont2">13%</div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
@@ -297,14 +469,14 @@ const Home = () => {
                     alt=""
                     className="thumbnail_img"
                   />
-                  <div className="wrap">
-                    <img
-                      src="/img/play_thumbnail_btn.svg"
-                      alt=""
-                      className="thumbnail_btn"
-                      onClick={toggleAboutVideoModal}
-                    />
-                  </div>
+                  {/* <div className="wrap"> */}
+                  <img
+                    src="/img/play_thumbnail_btn.svg"
+                    alt=""
+                    className="thumbnail_btn"
+                    onClick={toggleAboutVideoModal}
+                  />
+                  {/* </div> */}
                 </div>
               </div>
             </div>
@@ -338,7 +510,7 @@ const Home = () => {
       <section className="whyEgorasSection">
         <div className="container">
           <div className="why_egoras_area">
-            <div className="whyEgoras_heading">Why Egoras</div>
+            <div className="whyEgoras_heading">Why Egoras?</div>
             <div className="whyEgoras_body">
               <div className="whyEgoras_body_cont1">
                 <div className="whyEgoras_body_cont1_text">
@@ -352,6 +524,11 @@ const Home = () => {
                     alt=""
                   />
                 </div>
+                <img
+                  src="/img/abstract_right_card_bg.png"
+                  alt=""
+                  className="abstract_right_card_bg"
+                />
               </div>
               <div className="whyEgoras_body_cont1">
                 <div className="whyEgoras_body_cont1_text">
@@ -378,10 +555,20 @@ const Home = () => {
                     alt=""
                   />
                 </div>
+                <img
+                  src="/img/abstract_right_card_bg.png"
+                  alt=""
+                  className="abstract_right_card_bg"
+                />
               </div>
             </div>
           </div>
         </div>
+        {/* <img
+          src="/img/right_cut_circle.svg"
+          alt=""
+          className="right_cut_circle"
+        /> */}
       </section>
       {/* ==================== */}
       {/* ==================== */}
@@ -403,14 +590,35 @@ const Home = () => {
           <div className="benefit_section_area">
             <div className="benefit_section_area1">
               <div className="benefit_section_area1_layer1">
+                <div className="benefit_section_area1_layer1_icon">
+                  <img
+                    src="/img/bridge_icon.png"
+                    alt=""
+                    className="bridge_icon"
+                  />
+                </div>{" "}
                 Egoras bridges assets like cars, household electronics to
                 block-chain.
               </div>
               <div className="benefit_section_area1_layer1">
+                <div className="benefit_section_area1_layer1_icon">
+                  <img
+                    src="/img/wallet_icon.png"
+                    alt=""
+                    className="bridge_icon"
+                  />
+                </div>{" "}
                 Egoras enables anyone to get loans with any real-world assets
                 without banks or other intermediaries.
               </div>
               <div className="benefit_section_area1_layer1">
+                <div className="benefit_section_area1_layer1_icon">
+                  <img
+                    src="/img/sale_icon.svg"
+                    alt=""
+                    className="bridge_icon"
+                  />
+                </div>{" "}
                 Egoras enables anyone to sell any kind of asset easily in
                 minutes.
               </div>
@@ -424,6 +632,21 @@ const Home = () => {
             </div>
           </div>
         </div>
+        {/* <img
+          src="/img/cube1_absolute.svg"
+          alt=""
+          className="benefit_section_circles"
+        /> */}
+        {/* <img
+          src="/img/right_cut_circle.svg"
+          alt=""
+          className="benefit_section_circles"
+        /> */}
+        <img
+          src="/img/abstract_right_card_bg.png"
+          alt=""
+          className="abstract_left_section_bg"
+        />
       </section>
       {/* ==================== */}
       {/* ==================== */}
@@ -567,7 +790,7 @@ const Home = () => {
       <section className="getStartedSection">
         <div className="container">
           <div className="getStarted_area">
-            <div className="getStarted_title">Sounds Interesting ?</div>
+            <div className="getStarted_title">Sounds Interesting?</div>
             <a href="/dashboard" className="getStarted_btn">
               <button className="get_started_button">Get started</button>
             </a>

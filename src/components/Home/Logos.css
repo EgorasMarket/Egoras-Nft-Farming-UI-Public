@@ -956,13 +956,15 @@ button.compliment_btn {
 
 .thumbnail_btn {
   position: absolute;
-  top: 155px;
-  left: 285px;
+  top: 0;
+  left: 0;
   right: 0;
   width: 90px;
   cursor: pointer;
   z-index: 1;
   transition: transform 0.2s;
+  bottom: 0;
+  margin: auto;
 }
 .thumbnail_btn:hover {
   transform: scale(1.1);
@@ -2129,14 +2131,15 @@ section.productsDisplaySection {
   }
   .thumbnail_btn {
     position: absolute;
-    top: auto;
-    bottom: auto;
-    left: auto;
-    right: auto;
-    width: 80px;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 90px;
     cursor: pointer;
     z-index: 1;
     transition: transform 0.2s;
+    bottom: 0;
+    margin: auto;
   }
   .hero_img_area2_img {
     width: 100%;

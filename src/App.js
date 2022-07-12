@@ -60,7 +60,7 @@ function App() {
           <Header togglemakeDark={togglemakeDark} check={cClass} />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Dashboard />
+            <Dashboard check={cClass} togglemakeDark={togglemakeDark} />
             {/* <Route component={Dashboard} /> */}
           </Switch>
           <Footer />

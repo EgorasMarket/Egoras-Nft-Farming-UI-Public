@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
+import Web3 from "web3";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TelegramIcon from "@mui/icons-material/Telegram";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import HomeIcon from "@mui/icons-material/Home";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import jazzicon from "@metamask/jazzicon";
 import StarsIcon from "@mui/icons-material/Stars";
 import ApprovalIcon from "@mui/icons-material/Approval";
 import CreditScoreTwoToneIcon from "@mui/icons-material/CreditScoreTwoTone";
@@ -21,10 +24,18 @@ import { Link } from "react-router-dom";
 import DescriptionIcon from "@mui/icons-material/Description";
 import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
 import OpacityIcon from "@mui/icons-material/Opacity";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import "../../css/dashboardheader.css";
 import "../../css/dashBoardSideBar.css";
-const DashboardSideBarMenu = () => {
+import SwitchToggle2 from "./DashBoardPages/SwitchToggle/SwitchToggle2";
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
+const DashboardSideBarMenu = ({ check, togglemakeDark }) => {
   const dddd = localStorage.getItem("smallSidetoken");
   const [activeBg, setActiveBg] = useState("market");
   const [catDiv, setCatDiv] = useState("not_home");
@@ -34,13 +45,32 @@ const DashboardSideBarMenu = () => {
   const [searchBar, setSearchBar] = useState(false);
   const [acctNav, setAcctNav] = useState(false);
   const [activeMenuName, setActiveMenuName] = useState("Markets");
-
+  const [showHeader, setshowHeader] = useState(true);
+  const [betaDiv, setBetaDiv] = useState(true);
+  const [conecttxt, setConnectTxt] = useState("Not Connected");
+  // const [darkMode, setDarkMode] = useState(null);
+  const [walletAddr, setWalletAddr] = useState(
+    "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+  );
+  const [disconnetDiv, setDisconnectDiv] = useState(false);
+  const [coinBalance, setCoinBalance] = React.useState("0.00");
   const [productNamesZ, setProductNamesZ] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const linksActive = window.location.pathname;
   const urlArr = linksActive.split("/");
-
+  const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
+  const avatarRef = useRef();
   const toggleAccountNav = () => {
     if (acctNav == true) {
       setAcctNav(false);
@@ -49,8 +79,28 @@ const DashboardSideBarMenu = () => {
     }
   };
   useEffect(() => {
+    setWalletAddr(account);
+    // console.log(walletAddr.slice(0, 10));
+    const element = avatarRef.current;
+    if (element && account) {
+      setWalletAddr(account);
+      setConnectTxt("Connected");
+      const addr = account.slice(2, 10);
+      const seed = parseInt(addr, 16);
+      console.log(addr, seed);
+      const icon = jazzicon(20, seed); //generates a size 20 icon
+      if (element.firstChild) {
+        element.removeChild(element.firstChild);
+      }
+      element.appendChild(icon);
+    }
+  }, [account, avatarRef]);
+  useEffect(() => {
     if (linksActive === "/dashboard") {
-      setActiveMenuName("Markets");
+      setActiveMenuName("Earn");
+    }
+    if (linksActive === "/dashboard/stake") {
+      setActiveMenuName("Stake");
     }
     if (linksActive === "/dashboard/user") {
       setActiveMenuName("Account Details");
@@ -58,26 +108,26 @@ const DashboardSideBarMenu = () => {
     if (linksActive === "/dashboard/swap") {
       setActiveMenuName("Swap");
     }
-    if (linksActive === "/dashboard/lend/pool/detail") {
-      setActiveMenuName("Pool Details");
+    if (linksActive === "/dashboard/earn/pool/detail") {
+      setActiveMenuName("Earn");
     }
     if (
       linksActive ===
-      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
-      setActiveMenuName("Pool Details");
+      setActiveMenuName("Earn");
     }
     if (
       linksActive ===
-      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
     ) {
-      setActiveMenuName("Pool Details");
+      setActiveMenuName("Earn");
     }
-    if (linksActive === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
-      setActiveMenuName("Pool Details");
+    if (linksActive === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
+      setActiveMenuName("Earn");
     }
-    if (linksActive === "/dashboard/lend/pool/detail/transactions") {
-      setActiveMenuName("Pool Details");
+    if (linksActive === "/dashboard/earn/pool/detail/transactions") {
+      setActiveMenuName("Earn");
     }
     // if (linksActive === "/dashboard/add") {
     //   setActiveMenuName("Liquidity");
@@ -85,13 +135,16 @@ const DashboardSideBarMenu = () => {
     if (linksActive === "/dashboard/whitepaper") {
       setActiveMenuName("Whitepaper");
     }
-    if (linksActive === "/dashboard/lend") {
-      setActiveMenuName("lend");
+    if (linksActive === "/dashboard/earn") {
+      setActiveMenuName("Earn");
     }
-    if (linksActive === "/vault/" + urlArr[2] + "/ENGN") {
+    if (linksActive === "/dashboard/stake/vault/" + urlArr[4] + "/ENGN") {
       setActiveMenuName("Vault");
     }
-    if (linksActive === "/deposit_vault/" + urlArr[2] + "/ENGN") {
+    if (
+      linksActive ===
+      "/dashboard/stake/deposit_vault/" + urlArr[4] + "/ENGN"
+    ) {
       setActiveMenuName("Vault");
     }
   });
@@ -115,10 +168,16 @@ const DashboardSideBarMenu = () => {
   };
 
   useEffect(() => {
-    if (linksActive === "/dashboard") {
+    if (linksActive === "/dashboard/stake") {
       setActiveBg("market");
     }
-    if (linksActive === "/dashboard/lend") {
+    if (linksActive === "/dashboard") {
+      setActiveBg("lend");
+    }
+    if (linksActive === "/dashboard/") {
+      setActiveBg("lend");
+    }
+    if (linksActive === "/dashboard/earn") {
       setActiveBg("lend");
     }
     if (linksActive === "/dashboard/user") {
@@ -126,20 +185,20 @@ const DashboardSideBarMenu = () => {
     }
     if (
       linksActive ===
-      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setActiveBg("lend");
     }
     if (
       linksActive ===
-      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
     ) {
       setActiveBg("lend");
     }
-    if (linksActive === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
+    if (linksActive === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
       setActiveBg("lend");
     }
-    if (linksActive === "/dashboard/lend/pool/detail/transactions") {
+    if (linksActive === "/dashboard/earn/pool/detail/transactions") {
       setActiveBg("lend");
     }
 
@@ -170,7 +229,9 @@ const DashboardSideBarMenu = () => {
       localStorage.setItem("smallSidetoken", "not_small");
     }
   };
-
+  const toggleDisconnectDiv = () => {
+    setDisconnectDiv(!disconnetDiv);
+  };
   return (
     <div className={smallSide == "not_small" ? "side" : "small_side"}>
       <section className="DashBoardHeaderSection">
@@ -190,9 +251,52 @@ const DashboardSideBarMenu = () => {
               }
             >
               <div className="together">
-                <div className="immmgg immmgg_desktop">
-                  <Authenticate isHome="false" />
+                <div className="toggle_dark_mode_div">
+                  <LightModeIcon
+                    className={
+                      check === false
+                        ? "lightMode_icon_active"
+                        : "lightMode_icon"
+                    }
+                  />
+                  <SwitchToggle2
+                    className="toggle_dark_mode"
+                    darkMode={togglemakeDark}
+                    checkBox={check}
+                  />
+                  <DarkModeIcon
+                    className={
+                      check === false ? "darkMode_icon" : "darkMode_icon_active"
+                    }
+                  />
                 </div>
+                {account ? (
+                  <div className="connected_header_address">
+                    <p className="header_wllt_bal">{coinBalance}</p>
+                    <div
+                      className="metamask_prof_pic_icon"
+                      ref={avatarRef}
+                    ></div>
+
+                    <div className="wallet_addr_cont_txt_header">
+                      <div className="wall_addr">{walletAddr}</div>
+                    </div>
+                    <div
+                      className="wallet_settings_icon_cont"
+                      onClick={toggleDisconnectDiv}
+                    >
+                      <SettingsOutlinedIcon className="wallet_settings_icon" />
+                    </div>
+
+                    {disconnetDiv === true ? (
+                      <div className="disconnect_button_div">
+                        <Authenticate isHome="false" />
+                      </div>
+                    ) : null}
+                  </div>
+                ) : (
+                  <Authenticate isHome="false" />
+                )}
               </div>
 
               <div className="welcome_user">
@@ -241,28 +345,7 @@ const DashboardSideBarMenu = () => {
                 {/* =================== */}
                 {/* =================== */}
                 <a
-                  href="/dashboard"
-                  id="market"
-                  className="link"
-                  onClick={changeBg}
-                >
-                  <li
-                    className={
-                      activeBg == "market"
-                        ? "sidebarListItem list-item-active"
-                        : "sidebarListItem"
-                    }
-                  >
-                    <ApprovalIcon className="sidebarIcon" />
-                    Stake
-                  </li>
-                </a>
-                {/* ===================== */}
-                {/* ===================== */}
-                {/* ===================== */}
-                {/* ===================== */}
-                <a
-                  href="/dashboard/lend"
+                  href="/dashboard/earn"
                   id="lend"
                   className="link"
                   onClick={changeBg}
@@ -276,6 +359,27 @@ const DashboardSideBarMenu = () => {
                   >
                     <StarsIcon className="sidebarIcon" />
                     Earn
+                  </li>
+                </a>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                <a
+                  href="/dashboard/stake"
+                  id="market"
+                  className="link"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "market"
+                        ? "sidebarListItem list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <ApprovalIcon className="sidebarIcon" />
+                    Stake
                   </li>
                 </a>
                 {/* ===================== */}
@@ -377,29 +481,7 @@ const DashboardSideBarMenu = () => {
                 {/* =================== */}
                 {/* =================== */}
                 <a
-                  href="/dashboard"
-                  id="market"
-                  className="link hover_link"
-                  onClick={changeBg}
-                >
-                  <li
-                    className={
-                      activeBg == "market"
-                        ? "sidebarListItem small_list-item-active"
-                        : "sidebarListItem"
-                    }
-                  >
-                    <ApprovalIcon className="sidebarIcon" />
-                    Stake
-                  </li>
-                  <span className="hover_link_txt">Stake</span>
-                </a>
-                {/* ===================== */}
-                {/* ===================== */}
-                {/* ===================== */}
-                {/* ===================== */}
-                <a
-                  href="/dashboard/lend"
+                  href="/dashboard/earn"
                   id="lend"
                   className="link hover_link"
                   onClick={changeBg}
@@ -415,6 +497,28 @@ const DashboardSideBarMenu = () => {
                     Earn
                   </li>
                   <span className="hover_link_txt">Earn</span>
+                </a>
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                {/* ===================== */}
+                <a
+                  href="/dashboard/stake"
+                  id="market"
+                  className="link hover_link"
+                  onClick={changeBg}
+                >
+                  <li
+                    className={
+                      activeBg == "market"
+                        ? "sidebarListItem small_list-item-active"
+                        : "sidebarListItem"
+                    }
+                  >
+                    <ApprovalIcon className="sidebarIcon" />
+                    Stake
+                  </li>
+                  <span className="hover_link_txt">Stake</span>
                 </a>
                 {/* ===================== */}
                 {/* ===================== */}

@@ -62,12 +62,11 @@ export const Authenticate = (props) => {
   const [clickedmodal, setClickedmodal] = useState(false);
   const [backdrop, setBackdrop] = useState(true);
   const [keyboard, setKeyboard] = useState(false);
+
   const toggle = () => {
     setModal(!modal);
     setClickedmodal(true);
   };
-
-  useEffect(() => {}, []);
 
   const context = useWeb3React();
   const {
@@ -235,22 +234,19 @@ export const Authenticate = (props) => {
         <ModalFooter></ModalFooter>
       </Modal>
       {context.active ? (
-        <span className="wallet-id">
-          {props.isHome == "false"
-            ? context.account.substring(0, 6) +
-              "..." +
-              context.account.substring(38, 42)
-            : null}{" "}
-          <button
-            onClick={() => {
-              deactivate();
-            }}
-            className={props.isHome == "false" ? "logout-btn" : "logout-btn"}
-          >
-            {" "}
-            Disconnect <FontAwesomeIcon icon={faSignOutAlt} />{" "}
-          </button>
-        </span>
+        <button
+          onClick={() => {
+            deactivate();
+          }}
+          className={
+            props.isHome == "false"
+              ? "logout-btn disconnect_btn"
+              : "logout-btn disconnect_btn"
+          }
+        >
+          {" "}
+          Disconnect <FontAwesomeIcon icon={faSignOutAlt} />{" "}
+        </button>
       ) : (
         <button
           onClick={toggle}

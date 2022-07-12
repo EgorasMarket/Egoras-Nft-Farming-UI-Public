@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+// import WalletConnector from "./WalletConnect/WalletConnector";
+// import WalletConnector from "./walletConnect/WalletConnector";
 // import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import CloseIcon from "@material-ui/icons/Close";
 import clsx from "clsx";
+import Web3 from "web3";
 import { Authenticate } from "../auth/Authenticate";
 import SwitchToggle2 from "../Dashboard/DashBoardPages/SwitchToggle/SwitchToggle2";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import Drawer from "@material-ui/core/Drawer";
 import Toolbar from "@material-ui/core/Toolbar";
 import Accordion from "@material-ui/core/Accordion";
@@ -16,18 +20,37 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-
+import jazzicon from "@metamask/jazzicon";
+import { Web3Provider } from "@ethersproject/providers";
 // =======================
+import { parseEther, formatEther } from "@ethersproject/units";
 import List from "@material-ui/core/List";
-
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ListItem from "@material-ui/core/ListItem";
-
+import {
+  checkAllowance,
+  unluckToken,
+  transactReceipt,
+  getPrice,
+  getTickerInfo,
+  tokenBalance,
+  open,
+  getLatestLoan,
+  repay,
+  topup,
+  draw,
+} from "../../web3/index.js";
 // styles
 import "../../css/header.css";
 import "../../css/headerMobile.css";
+// import Web3 from "web3";
 // import { Authenticate } from "../../../auth/Authenticate";
 
 const drawerWidth = 240;
@@ -123,13 +146,45 @@ const Header = ({ togglemakeDark, check }) => {
   const [showHeader, setshowHeader] = useState(true);
   const [betaDiv, setBetaDiv] = useState(true);
   // const [darkMode, setDarkMode] = useState(null);
-  const [darkMode, setDarkMode] = useState(localStorage.getItem("uiMode"));
-
+  const [walletAddr, setWalletAddr] = useState(
+    "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+  );
+  const [conecttxt, setConnectTxt] = useState("Not Connected");
   const currentPage = window.location.pathname;
   // if (localStorage.getItem("username") === null) {
   //   //...
   // }
 
+  const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
+  const avatarRef = useRef();
+
+  useEffect(() => {
+    setWalletAddr(account);
+    // console.log(walletAddr.slice(0, 10));
+    const element = avatarRef.current;
+    if (element && account) {
+      setWalletAddr(account);
+      setConnectTxt("Connected");
+      const addr = account.slice(2, 10);
+      const seed = parseInt(addr, 16);
+      console.log(addr, seed);
+      const icon = jazzicon(20, seed); //generates a size 20 icon
+      if (element.firstChild) {
+        element.removeChild(element.firstChild);
+      }
+      element.appendChild(icon);
+    }
+  }, [account, avatarRef]);
   const lightSet = () => {
     // if (darkMode)
     console.log("light");
@@ -146,33 +201,33 @@ const Header = ({ togglemakeDark, check }) => {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/lending") {
+    if (currentPage === "/dashboard/earning") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
+    if (currentPage === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
       setshowHeader(false);
       setBetaDiv(false);
     }
     if (
       currentPage ===
-      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setshowHeader(false);
       setBetaDiv(false);
     }
     if (
       currentPage ===
-      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
     ) {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/lend") {
+    if (currentPage === "/dashboard/earn") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/lend/pool/detail") {
+    if (currentPage === "/dashboard/earn/pool/detail") {
       setshowHeader(false);
       setBetaDiv(false);
     }
@@ -188,7 +243,7 @@ const Header = ({ togglemakeDark, check }) => {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/lend/pool/detail/branch/asset") {
+    if (currentPage === "/dashboard/earn/pool/detail/branch/asset") {
       setshowHeader(false);
       setBetaDiv(false);
     }
@@ -196,11 +251,18 @@ const Header = ({ togglemakeDark, check }) => {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/vault/" + urlArr[2] + "/ENGN") {
+    if (currentPage === "/dashboard/stake") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/deposit_vault/" + urlArr[2] + "/ENGN") {
+    if (currentPage === "/dashboard/stake/vault/" + urlArr[4] + "/ENGN") {
+      setshowHeader(false);
+      setBetaDiv(false);
+    }
+    if (
+      currentPage ===
+      "/dashboard/stake/deposit_vault/" + urlArr[4] + "/ENGN"
+    ) {
       setshowHeader(false);
       setBetaDiv(false);
     }
@@ -237,6 +299,8 @@ const Header = ({ togglemakeDark, check }) => {
   // =============
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorEl1, setAnchorEl1] = React.useState(null);
+  const [disconnetDiv, setDisconnectDiv] = useState(false);
+  const [coinBalance, setCoinBalance] = React.useState("0.00");
   const open1 = Boolean(anchorEl);
   const open2 = Boolean(anchorEl1);
   const handleClick = (event) => {
@@ -358,12 +422,24 @@ const Header = ({ togglemakeDark, check }) => {
 
     dropMenu.style.display = "none";
   };
-
+  const web3 = new Web3(window.ethereum);
+  useEffect(async () => {
+    if (account) {
+      const getBalance = await web3.eth.getBalance(account);
+      const ethBalance = web3.utils.fromWei(getBalance, "ether");
+      console.log(ethBalance);
+      setCoinBalance(parseFloat(ethBalance).toFixed(3));
+    }
+  }, [coinBalance, account]);
+  const toggleDisconnectDiv = () => {
+    setDisconnectDiv(!disconnetDiv);
+  };
   return (
     <>
       {betaDiv === true ? (
         <div className="we_on_beta_div">
-          Welcome to Egoras v2 Beta. If you find any issues please let us know.
+          Welcome to Egoras v2 Beta. If you find any issues please let us know.{" "}
+          <a href="">cs@egoras.com</a>
         </div>
       ) : null}
 
@@ -424,8 +500,35 @@ const Header = ({ togglemakeDark, check }) => {
                       }
                     />
                   </div>
+                  {account ? (
+                    <div className="connected_header_address">
+                      <p className="header_wllt_bal">{coinBalance}</p>
+                      <div
+                        className="metamask_prof_pic_icon"
+                        ref={avatarRef}
+                      ></div>
 
-                  <Authenticate isHome="false" />
+                      <div className="wallet_addr_cont_txt_header">
+                        <div className="wall_addr">{walletAddr}</div>
+                      </div>
+                      <div
+                        className="wallet_settings_icon_cont"
+                        onClick={toggleDisconnectDiv}
+                      >
+                        <SettingsOutlinedIcon className="wallet_settings_icon" />
+                      </div>
+
+                      {disconnetDiv === true ? (
+                        <div className="disconnect_button_div">
+                          <Authenticate isHome="false" />
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : (
+                    <Authenticate isHome="false" />
+                  )}
+
+                  {/* <WalletConnector /> */}
                 </div>
                 {/* <ul className="headerLinks2">
             <a href="/documents" className="docs">

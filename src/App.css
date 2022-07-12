@@ -17,6 +17,9 @@ a {
 li {
   list-style: none;
 }
+.dark {
+  background: #212b25;
+}
 .btn-black.i {
   padding: 1em 2em;
   border: none;

@@ -47,7 +47,7 @@
     "serve-build": "^0.1.0",
     "styled-components": "^5.3.3",
     "web-vitals": "^1.1.2",
-    "web3": "^1.6.1"
+    "web3": "^1.7.4"
   },
   "scripts": {
     "start": "react-scripts start",

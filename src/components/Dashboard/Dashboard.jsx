@@ -34,7 +34,7 @@ import DashBoardLendPage from "./DashBoardPages/DashBoardLendPage";
 //   margin: "0 auto",
 //   borderColor: "red",
 // };
-function Dashboard() {
+function Dashboard({ check, togglemakeDark }) {
   const [splashScreen, setSplashScreen] = useState(true);
   const currentPage = window.location.pathname;
   const urlArr = currentPage.split("/");
@@ -48,10 +48,13 @@ function Dashboard() {
     }, 5000);
   }, []);
   useEffect(() => {
-    if (currentPage === "/vault/" + urlArr[2] + "/ENGN") {
+    if (currentPage === "/dashboard/stake/vault/" + urlArr[4] + "/ENGN") {
       setSplashScreen(false);
     }
-    if (currentPage === "/deposit_vault/" + urlArr[2] + "/ENGN") {
+    if (
+      currentPage ===
+      "/dashboard/stake/deposit_vault/" + urlArr[4] + "/ENGN"
+    ) {
       setSplashScreen(false);
     }
   }, []);
@@ -66,14 +69,21 @@ function Dashboard() {
           <div className="dashboard">
             <>
               {" "}
-              <DashboardSideBarMenu />
+              <DashboardSideBarMenu
+                check={check}
+                togglemakeDark={togglemakeDark}
+              />
               <Switch>
-                <Route exact path="/dashboard" component={DashBoardAnalytics} />
+                <Route
+                  exact
+                  path="/dashboard/stake"
+                  component={DashBoardAnalytics}
+                />
                 {/* <Route exact path="/dashboard/swap" component={DashBoardSwap} /> */}
                 {/* <Route exact path="/dashboard/swap" component={DashBoardSwap} /> */}
                 <Route
                   exact
-                  path="/vault/:asset/:base"
+                  path="/dashboard/stake/vault/:asset/:base"
                   component={OpenVaultPage}
                 />
                 {/*  */}
@@ -94,12 +104,12 @@ function Dashboard() {
                 />
                 <Route
                   exact
-                  path="/dashboard/lend/pool/:branchAddress/detail"
+                  path="/dashboard/earn/pool/:branchAddress/detail"
                   component={DashBoard_lend_details_page}
                 />
                 <Route
                   exact
-                  path="/dashboard/lend/pool/detail/branch/:branchAddress/asset"
+                  path="/dashboard/earn/pool/detail/branch/:branchAddress/asset"
                   component={DashBoardBranchAsset}
                 />
                 <Route exact path="/dashboard/swap" component={Swap} />
@@ -110,7 +120,7 @@ function Dashboard() {
                 />
                 <Route
                   exact
-                  path="/dashboard/lend/pool/detail/:branchAddress/transactions"
+                  path="/dashboard/earn/pool/detail/:branchAddress/transactions"
                   component={DashBoardLendingTransactions}
                 />
                 <Route
@@ -120,9 +130,11 @@ function Dashboard() {
                 />
                 <Route
                   exact
-                  path="/dashboard/lend"
+                  path="/dashboard/earn"
                   component={DashBoardLendPage}
                 />
+                <Route exact path="/dashboard" component={DashBoardLendPage} />
+                <Route exact path="/dashboard/" component={DashBoardLendPage} />
                 <Route
                   exact
                   path="/dashboard/transaction"
