@@ -246,7 +246,7 @@ const DashBoard_lend_details_page = ({ match }) => {
         currentTarget,
         library.getSigner()
       );
-
+      console.log(ret.status);
       if (ret.status == true) {
         localStorage.setItem("unlocking", true);
         localStorage.setItem("unlockingHash", ret.message.hash);
