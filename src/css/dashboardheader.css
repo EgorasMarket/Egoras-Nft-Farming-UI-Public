@@ -2,17 +2,127 @@
   padding: 1em 1.5em;
   background-color: #fff;
   position: sticky;
-  top: 0;
+  top: 39px;
   z-index: 10000;
-  /* box-shadow: 0px 0px 15px #efefef; */
+  box-shadow: 0px 5px 9px #e5e5e5;
   position: fixed;
   width: 100%;
 }
+.header_token_prices_div {
+  background: #ebebeb;
+  position: absolute;
+  width: 100vw;
+  color: #474747;
+  padding: 10px 0px;
+  font-size: 13px;
+  z-index: 10000;
+}
+.dark .header_token_prices_div {
+  background: #4d705c;
+  color: #fff;
+}
+.dash_board_links_tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.socail_links_icon2 {
+  background: #e2e2e2 !important;
+  padding: 2px !important;
+  font-size: 24px !important;
+  border-radius: 50% !important;
+  color: #434343 !important;
+  transition: 0.3s ease-in-out;
+}
+.dark .socail_links_icon2 {
+  background: #5b7b68 !important;
+  color: #ffffff !important;
+  transition: 0.3s ease-in-out;
+}
+.socail_links_icon2:hover {
+  background: #229e54 !important;
+  color: #ffffff !important;
+  transition: 0.3s ease-in-out;
+}
+.vertical_rule2 {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  width: 0px;
+  align-self: stretch;
+  border-left: 1px solid rgb(168 168 168);
+}
+.dark .vertical_rule2 {
+  border-left: 1px solid rgb(238, 238, 238);
+}
+.medium_icon2 {
+  font-family: serif;
+  font-size: 14px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: #e2e2e2;
+  padding: 5px;
+  border-radius: 50%;
+  color: #434343;
+  transition: 0.3s ease-in-out;
+}
+.dark .medium_icon2 {
+  background: #5b7b68;
+  color: #ffffff;
+  transition: 0.3s ease-in-out;
+}
+.medium_icon2:hover {
+  background: #229e54;
 
+  color: #ffffff;
+  transition: 0.3s ease-in-out;
+}
+.dash_board_links {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  width: 100vw;
+}
+.dash_board_links_area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 20px;
+  gap: 20px;
+  background: #ffffff;
+  background-color: #ffffffa8;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border: solid 1px #dcdcdc;
+  box-shadow: 0px 0px 9px #cccccc;
+  padding: 1em;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  font-size: 12px;
+}
+.dark .dash_board_links_area {
+  background: #4d705c;
+  background-color: #355743a8;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border: solid 1px #5b7b68;
+  box-shadow: 0px 0px 9px #141b17;
+}
 .DashboardHeaderArea {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.header_token_prices_div_area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
 }
 
 .together {
@@ -85,7 +195,62 @@
   border-radius: 10px;
   /* cursor: pointer; */
 }
+.user_profile_icon_cont2 {
+  display: flex;
+  /* width: 82%; */
+  /* flex-direction: column; */
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+  border: none;
+  padding: 0.3em 1em;
+  border-width: 1px;
+  /* border-color: #cdcdcd; */
+  border-radius: 10px;
+  /* cursor: pointer; */
+}
+.header_tabs {
+  display: flex;
+  gap: 10px;
+  padding: 5px 5px;
+  border: solid 1px #d3d3d3;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #ebebeb;
+  margin-left: 13em;
+}
 
+.dark .header_tabs {
+  border: solid 1px #64796d;
+  background: #212b25;
+}
+.header_tab1 {
+  cursor: pointer;
+  width: 100px;
+  padding: 6px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(0, 0, 0) !important;
+}
+
+.header_tab1_active {
+  background: #fff;
+  padding: 6px 0px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px #dedede;
+  color: rgb(0, 0, 0) !important;
+  font-weight: 700;
+}
+
+.dark .header_tab1_active {
+  background: #229e54;
+  box-shadow: 0px 0px 5px #000000;
+}
 .welcome_user {
   display: flex;
   margin: 0;

@@ -7,10 +7,12 @@ import EastIcon from "@mui/icons-material/East";
 import { API_URL as api_url } from "../../../actions/types";
 import { config } from "../../../actions/Config";
 import axios from "axios";
+import ProgressBar from "@hawk-ui/progress-bar";
 // import { Context } from "../../context/Context";
 import { UserContext } from "../../context/Context";
 import Nodata from "./nodataComponent/Nodata";
 // import PropTypes from "prop-types";
+// import YanProgress from "react-yan-progress";
 import { numberWithCommas } from "../../static/static";
 import {
   Web3ReactProvider,
@@ -228,7 +230,7 @@ const DashBoardLendPage = () => {
                       Amount Funded
                     </th>
                     <th className="assets-category-titles-heading1 right">
-                      Remaining Funds
+                      Funding Progress
                     </th>
                     <th className="assets-category-titles-heading1 right none_display">
                       Estimated APY
@@ -319,10 +321,38 @@ const DashBoardLendPage = () => {
                           </td>
                           <td className="assets-category-data1b branch_pool_value">
                             <div className="assets-data-name_pool">
-                              {numberWithCommas(
-                                parseInt(asset.amount - asset.funded).toFixed(2)
-                              )}{" "}
-                              <span className="asset_symbol"> Engn</span>
+                              <div className="asset_amount_progress_div">
+                                <div className="asset_amount_progress_div_txt"></div>
+                                <label for="file">
+                                  {parseInt(
+                                    (asset.funded / asset.amount) * 100
+                                  ).toFixed()}
+                                  %
+                                </label>
+                                <progress
+                                  className={
+                                    asset.funded < asset.amount
+                                      ? "progress_bar progress_bar_progress"
+                                      : "progress_bar"
+                                  }
+                                  // "progress_bar"
+                                  id="file"
+                                  aria-valuenow={asset.amount - asset.funded}
+                                  value={asset.funded}
+                                  max={asset.amount}
+                                ></progress>
+                                {/* <div
+                                  role="progressbar"
+                                  aria-valuenow="20"
+                                  aria-valuemin="0"
+                                  aria-valuemax="100"
+                                >
+                                  20 %
+                                </div> */}
+                                {/* <div className="asset_amount_progress_div_bar">
+                                  <div className="asset_amount_progress_div_bar_progress"></div>
+                                </div> */}
+                              </div>
                             </div>
                           </td>
                           <td className="assets-category-data1b stable-content branch_apy">

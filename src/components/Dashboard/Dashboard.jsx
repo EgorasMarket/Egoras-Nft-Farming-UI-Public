@@ -8,6 +8,7 @@ import DashBoardUserDetails from "./DashBoardPages/DashBoardUserDetails";
 // dashboard components
 // import DashBoardHeader from "./DashBoardHeader";
 import DashboardSideBarMenu from "./DashboardSideBarMenu";
+import DashboardSideBarMenu2 from "./DashboardSideBarMenu2";
 import LoadingIcons from "react-loading-icons";
 // import DashBoardDefaultPage from "./DashBoardPages/DashBoardDefaultPage";
 import DashBoardAnalytics from "./DashBoardPages/DashBoardAnalytics";
@@ -45,7 +46,7 @@ function Dashboard({ check, togglemakeDark }) {
     // //console.log('trueee');
     const timer = setTimeout(() => {
       setSplashScreen(false);
-    }, 5000);
+    }, 3000);
   }, []);
   useEffect(() => {
     if (currentPage === "/dashboard/stake/vault/" + urlArr[4] + "/ENGN") {
@@ -69,7 +70,11 @@ function Dashboard({ check, togglemakeDark }) {
           <div className="dashboard">
             <>
               {" "}
-              <DashboardSideBarMenu
+              {/* <DashboardSideBarMenu
+                check={check}
+                togglemakeDark={togglemakeDark}
+              /> */}
+              <DashboardSideBarMenu2
                 check={check}
                 togglemakeDark={togglemakeDark}
               />
@@ -151,6 +156,7 @@ function Dashboard({ check, togglemakeDark }) {
           </Route> */}
               </Switch>
             </>
+            <img src="/img/dash_boardBg.svg" alt="" className="dash_boardBg" />
           </div>
         </Router>
       )}

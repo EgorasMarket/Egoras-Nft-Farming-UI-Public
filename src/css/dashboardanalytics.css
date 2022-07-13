@@ -3,12 +3,12 @@
   padding: 4em 0em;
   width: 100vw;
   /* background: #000; */
-  background: #f9f9f9;
   padding-left: 0em;
-  padding-top: 5em;
+  padding-top: 8em;
   height: 100vh;
   overflow-y: scroll;
   overflow-x: hidden;
+  position: relative;
 }
 
 .no-bg {

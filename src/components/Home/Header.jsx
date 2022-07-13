@@ -502,7 +502,7 @@ const Header = ({ togglemakeDark, check }) => {
                   </div>
                   {account ? (
                     <div className="connected_header_address">
-                      <p className="header_wllt_bal">{coinBalance}</p>
+                      <p className="header_wllt_bal">{coinBalance} BNB</p>
                       <div
                         className="metamask_prof_pic_icon"
                         ref={avatarRef}

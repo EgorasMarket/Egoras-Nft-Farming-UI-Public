@@ -184,6 +184,7 @@ button.pool_detail_heading_area1_invest_btn {
   font-size: 14px;
   font-weight: 100;
   color: #3f3f3f;
+  align-items: center;
 }
 .custom_hr {
   border-width: 1px 0px 0px;
@@ -446,6 +447,10 @@ button.pool_detail_heading_area1_invest_btn {
   color: #363636;
   border-radius: 4px;
 }
+.dark .closeBackModalIcon {
+  color: #ffffff;
+}
+
 .back_modal_input_amnt_head_minimum {
   font-size: 12px;
   display: flex;

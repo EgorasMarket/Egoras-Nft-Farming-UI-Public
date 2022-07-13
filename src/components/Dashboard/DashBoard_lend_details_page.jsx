@@ -232,7 +232,7 @@ const DashBoard_lend_details_page = ({ match }) => {
     // setUnlocking(false);
     // setStage("loading");
     // setIsLoading(true);
-    setText("Lendind, please wait...");
+    setText("Lending, please wait...");
     let check = await checkAllowanceL(
       account,
       parseEther(formData.BackAmount.toString(), "wei").toString(),
@@ -385,40 +385,61 @@ const DashBoard_lend_details_page = ({ match }) => {
             <div className="pool_detail_sub_area1">
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
-                  Emerging Market Consumer Loans
+                  {numberWithCommas(parseInt(BranchDetails.amount).toFixed(2))}{" "}
                 </div>
                 <div className="pool_detail_sub_area1_area1_cont2">
-                  Asset Type
+                  Assets Value
                 </div>
               </div>
               <span className="vertical_rule"></span>
 
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
-                  6 months
+                  {numberWithCommas(parseInt(BranchDetails.funded).toFixed(2))}{" "}
                 </div>
                 <div className="pool_detail_sub_area1_area1_cont2">
-                  Asset Maturity
+                  Amount Funded
                 </div>
               </div>
               <span className="vertical_rule"></span>
 
+              <div className="pool_detail_sub_area1_area1">
+                <div className="pool_detail_sub_area1_area1_cont1">
+                  <div className="asset_amount_progress_div">
+                    <div className="asset_amount_progress_div_txt"></div>
+                    <label for="file">
+                      {parseInt(
+                        (BranchDetails.funded / BranchDetails.amount) * 100
+                      ).toFixed()}
+                      %
+                    </label>
+                    <progress
+                      className={
+                        BranchDetails.funded < BranchDetails.amount
+                          ? "progress_bar progress_bar_progress"
+                          : "progress_bar"
+                      }
+                      // "progress_bar"
+                      id="file"
+                      aria-valuenow={
+                        BranchDetails.amount - BranchDetails.funded
+                      }
+                      value={BranchDetails.funded}
+                      max={BranchDetails.amount}
+                    ></progress>
+                  </div>
+                </div>
+                <div className="pool_detail_sub_area1_area1_cont2">
+                  Funding Progress
+                </div>
+              </div>
+              <span className="vertical_rule"></span>
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
                   13 <span className="asset_symbol"> %</span>
                 </div>
                 <div className="pool_detail_sub_area1_area1_cont2">
-                  Estimated APY(30 days)
-                </div>
-              </div>
-              <span className="vertical_rule"></span>
-              <div className="pool_detail_sub_area1_area1">
-                <div className="pool_detail_sub_area1_area1_cont1">
-                  {numberWithCommas(parseInt(BranchDetails.amount).toFixed(2))}{" "}
-                  <span className="asset_symbol"> Engn</span>
-                </div>
-                <div className="pool_detail_sub_area1_area1_cont2">
-                  Pool Value
+                  Estimated APY(365 days)
                 </div>
               </div>
             </div>
@@ -534,6 +555,38 @@ const DashBoard_lend_details_page = ({ match }) => {
                       </div>
                     </div>
                     <hr className="custom_hr" />
+                    <div className="pool_status_Details_cont_body1_sub_conts">
+                      <div className="pool_status_Details_cont_body1_sub_conts_1">
+                        Funding Progress
+                      </div>
+                      <div className="pool_status_Details_cont_body1_sub_conts_2">
+                        <div className="asset_amount_progress_div">
+                          <div className="asset_amount_progress_div_txt"></div>
+                          <label for="file">
+                            {parseInt(
+                              (BranchDetails.funded / BranchDetails.amount) *
+                                100
+                            ).toFixed()}
+                            %
+                          </label>
+                          <progress
+                            className={
+                              BranchDetails.funded < BranchDetails.amount
+                                ? "progress_bar progress_bar_progress"
+                                : "progress_bar"
+                            }
+                            // "progress_bar"
+                            id="file"
+                            aria-valuenow={
+                              BranchDetails.amount - BranchDetails.funded
+                            }
+                            value={BranchDetails.funded}
+                            max={BranchDetails.amount}
+                          ></progress>
+                        </div>
+                      </div>
+                    </div>
+                    <hr className="custom_hr" />
                   </div>
                 </div>
               </div>
@@ -564,13 +617,12 @@ const DashBoard_lend_details_page = ({ match }) => {
             <div className="asset_list_body_head2">
               {/* <div className="asset_list_body_head_tab1">Asset Id</div> */}
               <div className="asset_list_body_head_tab1">Asset Name</div>
-              <div className="asset_list_body_head_tab3 date_time_head">
-                Date & Time
-              </div>
-              <div className="asset_list_body_head_tab4 date_duration_row22">
-                Duration
-              </div>
+
               <div className="asset_list_body_head_tab5">Amount(Engn)</div>
+              <div className="asset_list_body_head_tab5">
+                Amount Funded(Engn)
+              </div>
+              <div className="asset_list_body_head_tab5">Funding Progress</div>
               <div className="asset_list_body_head_tab6 finance_fee_details_page">
                 Financing Fee
               </div>
@@ -579,43 +631,75 @@ const DashBoard_lend_details_page = ({ match }) => {
             <div className="asset_list_body_body_cont">
               {activeBtn === "Ongoing"
                 ? LoanAssets.filter((person) => person.state == "OPEN").map(
-                    (data) => (
-                      <div
-                        className="asset_list_body_body_cont_1"
-                        id={data.newLoanID}
-                        onClick={ChangeAssetDetailModal}
-                        // onClick={ChangeAssetDetailModal}
-                      >
-                        {/* <div className="asset_list_body_body_cont_1a">
+                    (data) => {
+                      var percentage = (data.funded / data.amount) * 100;
+                      return (
+                        <div
+                          className="asset_list_body_body_cont_1"
+                          id={data.newLoanID}
+                          onClick={ChangeAssetDetailModal}
+                          // onClick={ChangeAssetDetailModal}
+                        >
+                          {/* <div className="asset_list_body_body_cont_1a">
                                 {data.id}
                               </div> */}
-                        <div className="asset_list_body_body_cont_1a">
-                          {/* {data.title} */}
-                          {data.title.substring(0, 20) + "..."}
-                        </div>
+                          <div className="asset_list_body_body_cont_1a">
+                            {/* {data.title} */}
+                            {data.title.substring(0, 20) + "..."}
+                          </div>
 
-                        <div className="asset_list_body_body_cont_1c date_time_row">
-                          {data.createdAt.slice(0, 10)}
+                          <div className="asset_list_body_body_cont_1e">
+                            {numberWithCommas(parseInt(data.amount).toFixed(2))}
+                          </div>
+
+                          <div className="asset_list_body_body_cont_1e">
+                            {numberWithCommas(parseInt(data.funded).toFixed(2))}
+                          </div>
+
+                          <div className="asset_list_body_body_cont_1e">
+                            <div className="asset_amount_progress_div">
+                              <div className="asset_amount_progress_div_txt"></div>
+                              <label for="file">
+                                {parseInt(
+                                  (data.funded / data.amount) * 100
+                                ).toFixed()}
+                                %
+                              </label>
+                              <progress
+                                className={
+                                  percentage < 100
+                                    ? "progress_bar progress_bar_progress"
+                                    : "progress_bar"
+                                }
+                                // className={
+                                //   data.funded < data.amount
+                                //     ? " progress_bar progress_bar_progress"
+                                //     : data.funded === data.amount
+                                //     ? "progress_bar"
+                                //     : " progress_bar progress_bar_progress"
+                                // }
+                                // "progress_bar"
+                                id="file"
+                                aria-valuenow={data.amount - data.funded}
+                                value={data.funded}
+                                max={data.amount}
+                              ></progress>
+                            </div>
+                          </div>
+                          <div className="asset_list_body_body_cont_1f finance_fee_details_page_row">
+                            13 %
+                          </div>
+                          <div className="asset_list_body_body_cont_1g">
+                            <button
+                              onClick={ChangeAssetDetailModal}
+                              className="back_btn"
+                            >
+                              Lend
+                            </button>
+                          </div>
                         </div>
-                        <div className="asset_list_body_body_cont_1d date_duration_row22">
-                          {data.length} month(s)
-                        </div>
-                        <div className="asset_list_body_body_cont_1e">
-                          {numberWithCommas(parseInt(data.amount).toFixed(2))}
-                        </div>
-                        <div className="asset_list_body_body_cont_1f finance_fee_details_page_row">
-                          13 %
-                        </div>
-                        <div className="asset_list_body_body_cont_1g">
-                          <button
-                            onClick={ChangeAssetDetailModal}
-                            className="back_btn"
-                          >
-                            Lend
-                          </button>
-                        </div>
-                      </div>
-                    )
+                      );
+                    }
                   )
                 : null}
             </div>
