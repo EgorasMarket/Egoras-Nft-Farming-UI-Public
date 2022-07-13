@@ -1,18 +1,18 @@
-import React, { useState, useEffect, useContext } from "react";
-import "../../css/dashboardLend_details_page.css";
-import { Link } from "react-router-dom";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import InventoryIcon from "@mui/icons-material/Inventory";
-import ReceiptIcon from "@mui/icons-material/Receipt";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-import CloseIcon from "@mui/icons-material/Close";
-import { parseEther, formatEther } from "@ethersproject/units";
+import React, { useState, useEffect, useContext } from 'react';
+import '../../css/dashboardLend_details_page.css';
+import { Link } from 'react-router-dom';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import CloseIcon from '@mui/icons-material/Close';
+import { parseEther, formatEther } from '@ethersproject/units';
 import {
   SuccessModal,
   ErrorModal,
-} from "../Dashboard/DashBoardPages/Modal/Success_Error_Component";
-import { numberWithCommas } from "../static/static";
+} from '../Dashboard/DashBoardPages/Modal/Success_Error_Component';
+import { numberWithCommas } from '../static/static';
 import {
   faCheckCircle,
   faCircleNotch,
@@ -21,17 +21,17 @@ import {
   faLock,
   faWindowClose,
   faWallet,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Checkbox } from "@mui/material";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Checkbox } from '@mui/material';
 import {
   Web3ReactProvider,
   useWeb3React,
   UnsupportedChainIdError,
-} from "@web3-react/core";
-import axios from "axios";
-import { config } from "../../actions/Config";
-import { API_URL as api_url } from "../../actions/types";
+} from '@web3-react/core';
+import axios from 'axios';
+import { config } from '../../actions/Config';
+import { API_URL as api_url } from '../../actions/types';
 // import DashboardIcon from "@mui/icons-material/Dashboard";
 // import Accordion from "../Accordion";
 // import InventoryIcon from "@mui/icons-material/Inventory";
@@ -39,7 +39,7 @@ import { API_URL as api_url } from "../../actions/types";
 // import ReceiptIcon from "@mui/icons-material/Receipt";
 // import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 // import CopyAllIcon from "@mui/icons-material/CopyAll";
-import { UserContext } from "../context/Context";
+import { UserContext } from '../context/Context';
 
 import {
   lendUS,
@@ -63,45 +63,46 @@ import {
   draw,
   checkAllowanceL,
   unluckToken2,
-} from "../../web3/index";
+} from '../../web3/index';
 const DashBoard_lend_details_page = ({ match }) => {
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
-  const { BranchDetails, rumuName, agipName, oyName } = useContext(UserContext);
+  const { BranchDetails, rumuName, agipName, oyName } =
+    useContext(UserContext);
   console.log(match.params.branchAddress);
   const context = useWeb3React();
   const [LoanAssets, setLoanAssets] = useState([]);
 
-  const [activeLink, setActiveLink] = useState("");
+  const [activeLink, setActiveLink] = useState('');
   const [checkBox, setCheckBox] = useState(false);
-  const [errMessage, setErrMessage] = useState("");
+  const [errMessage, setErrMessage] = useState('');
 
   // const [loanId, setLoanId] = useState();
   const [assetModal, setAssetModal] = React.useState(false);
-  const [LoanId, setLoanId] = React.useState("");
+  const [LoanId, setLoanId] = React.useState('');
   const [backModal, setBackModal] = React.useState(false);
-  const [branch, setBranch] = React.useState("Branch");
+  const [branch, setBranch] = React.useState('Branch');
   const [chainLoanDetails, setChainLoanDetails] = useState({});
   const [disable, setDisable] = useState(true);
   const [text, setText] = useState(
-    "Transacting with blockchain, please wait..."
+    'Transacting with blockchain, please wait...'
   );
-  const [assetDetailModal, setAssetDetailModal] = useState("");
-  const [hash, setHash] = useState("");
+  const [assetDetailModal, setAssetDetailModal] = useState('');
+  const [hash, setHash] = useState('');
   const [unlocking, setUnlocking] = useState(false);
   const [modal, setModal] = useState(false);
-  const [task, setTask] = useState("collateral");
-  const [stage, setStage] = useState("back");
+  const [task, setTask] = useState('collateral');
+  const [stage, setStage] = useState('back');
   const [isLoading, setIsLoading] = useState(false);
-  const [asset, setAsset] = useState("");
-  const [base, setBase] = useState("");
+  const [asset, setAsset] = useState('');
+  const [base, setBase] = useState('');
 
   const [loanMetaData, setLoanMetaData] = useState({
-    base: "",
-    asset: "",
-    live: "",
+    base: '',
+    asset: '',
+    live: '',
     maxLoan: 0.0,
-    ticker: "",
-    creator: "",
+    ticker: '',
+    creator: '',
   });
   const {
     connector,
@@ -114,7 +115,7 @@ const DashBoard_lend_details_page = ({ match }) => {
     error,
   } = context;
   const [formData, setFormData] = useState({
-    BackAmount: "",
+    BackAmount: '',
   });
   const { BackAmount } = formData;
   const toggleAssetModal = () => {
@@ -134,38 +135,45 @@ const DashBoard_lend_details_page = ({ match }) => {
   };
 
   const Continue = async (e) => {
-    setStage("back");
-    setText("");
+    setStage('back');
+    setText('');
     // setModal(!modal);
     // window.location.reload();
   };
   const closeAssetDetailModal = () => {
-    setAssetDetailModal("");
-    console.log("i am not here");
+    setAssetDetailModal('');
+    console.log('i am not here');
   };
-  const [activeBtn, setActivrBtn] = useState("Ongoing");
+  const [activeBtn, setActivrBtn] = useState('Ongoing');
   const currentPage = window.location.pathname;
-  const urlArr = currentPage.split("/");
+  const urlArr = currentPage.split('/');
   useEffect(() => {
-    if (currentPage === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
-      setActiveLink("Overview");
+    if (
+      currentPage ===
+      '/dashboard/earn/pool/' + urlArr[4] + '/detail'
+    ) {
+      setActiveLink('Overview');
     } else if (
       currentPage ===
-      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
+      '/dashboard/earn/pool/detail/branch/' + urlArr[6] + '/asset'
     ) {
-      setActiveLink("Asset");
+      setActiveLink('Asset');
     } else if (
       currentPage ===
-      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
+      '/dashboard/earn/pool/detail/' + urlArr[5] + '/transactions'
     ) {
-      setActiveLink("transaction");
+      setActiveLink('transaction');
     }
   });
   useEffect(() => {
     axios
-      .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
+      .get(
+        api_url + '/api/branch/transactions/' + txnhash,
+        null,
+        config
+      )
       .then((data) => {
-        console.log(data.data.payload, "powerful333333");
+        console.log(data.data.payload, 'powerful333333');
 
         // console.log(txnhash);
         // setBranches(data.data.payload);
@@ -192,21 +200,24 @@ const DashBoard_lend_details_page = ({ match }) => {
   };
 
   const submitBackedAmount = () => {
-    console.log(formData, "=====formdata=====");
+    console.log(formData, '=====formdata=====');
   };
   const doUnluck = async (e) => {
-    setText("Transacting with blockchain, please wait...");
-    setStage("loading");
+    setText('Transacting with blockchain, please wait...');
+    setStage('loading');
     setIsLoading(true);
     //formData.stateCollateral.toString()
     let ret = await unluckToken2(
-      parseEther("180000000000000000000000000000000000", "wei").toString(),
+      parseEther(
+        '180000000000000000000000000000000000',
+        'wei'
+      ).toString(),
       library.getSigner()
     );
     if (ret.status == true) {
-      localStorage.setItem("unlocking", true);
-      localStorage.setItem("unlockingHash", ret.message);
-      setText("Unlocking please wait aleast 1/2 minutes");
+      localStorage.setItem('unlocking', true);
+      localStorage.setItem('unlockingHash', ret.message);
+      setText('Unlocking please wait aleast 1/2 minutes');
       // setCheckBox(true);
       // setDisable(false);
     } else {
@@ -216,7 +227,7 @@ const DashBoard_lend_details_page = ({ match }) => {
         // setDisable(true);
       }
 
-      setStage("error");
+      setStage('error');
       setIsLoading(false);
       // setCheckBox(false);
       // setDisable(true);
@@ -227,30 +238,30 @@ const DashBoard_lend_details_page = ({ match }) => {
     let currentTarget = e.currentTarget.id;
     console.log(currentTarget);
     console.log(BackAmount);
-    setStage("loading");
+    setStage('loading');
     setIsLoading(true);
     // setUnlocking(false);
     // setStage("loading");
     // setIsLoading(true);
-    setText("Lendind, please wait...");
+    setText('Lendind, please wait...');
     let check = await checkAllowanceL(
       account,
-      parseEther(formData.BackAmount.toString(), "wei").toString(),
+      parseEther(formData.BackAmount.toString(), 'wei').toString(),
       library.getSigner()
     );
     console.log(check);
     if (check.status == true) {
       let ret = await lendUS(
         txnhash,
-        parseEther(formData.BackAmount.toString(), "wei").toString(),
+        parseEther(formData.BackAmount.toString(), 'wei').toString(),
         currentTarget,
         library.getSigner()
       );
 
       if (ret.status == true) {
-        localStorage.setItem("unlocking", true);
-        localStorage.setItem("unlockingHash", ret.message.hash);
-        setText("Sending token please wait aleast 1/2 minutes");
+        localStorage.setItem('unlocking', true);
+        localStorage.setItem('unlockingHash', ret.message.hash);
+        setText('Sending token please wait aleast 1/2 minutes');
         setHash(ret.message.hash);
         // setStage("success");
         console.log(ret);
@@ -260,35 +271,36 @@ const DashBoard_lend_details_page = ({ match }) => {
         } else if (ret.message.code == 4001) {
           setText(ret.message.message);
         }
-        setStage("error");
+        setStage('error');
         setIsLoading(false);
       }
     } else {
       // setUnlocking(true);
-      setStage("unlock");
+      setStage('unlock');
       setIsLoading(false);
     }
   };
 
   setInterval(() => {
-    if (localStorage.getItem("unlocking") == "true") {
+    if (localStorage.getItem('unlocking') == 'true') {
       // setCheckBox(true);
       // setDisable(false);
 
-      transactReceipt(localStorage.getItem("unlockingHash"), library).then(
-        function (env) {
-          // console.log("running Interval", env);
-          if (env.status == true && env.message !== null) {
-            if (env.message.confirmations > 2) {
-              setStage("success");
-              setHash(localStorage.getItem("unlockingHash"));
-              setIsLoading(false);
+      transactReceipt(
+        localStorage.getItem('unlockingHash'),
+        library
+      ).then(function (env) {
+        // console.log("running Interval", env);
+        if (env.status == true && env.message !== null) {
+          if (env.message.confirmations > 2) {
+            setStage('success');
+            setHash(localStorage.getItem('unlockingHash'));
+            setIsLoading(false);
 
-              localStorage.setItem("unlocking", false);
-            }
+            localStorage.setItem('unlocking', false);
           }
         }
-      );
+      });
     } else {
       // setStage("error");
     }
@@ -309,9 +321,9 @@ const DashBoard_lend_details_page = ({ match }) => {
               <Link
                 to={`/dashboard/earn/pool/${txnhash}/detail`}
                 className={
-                  activeLink === "Overview"
-                    ? "pool_lend_details_link_active"
-                    : "pool_lend_details_link"
+                  activeLink === 'Overview'
+                    ? 'pool_lend_details_link_active'
+                    : 'pool_lend_details_link'
                 }
               >
                 <DashboardIcon className="asset_overview_link_icon" />
@@ -321,9 +333,9 @@ const DashBoard_lend_details_page = ({ match }) => {
               <Link
                 to={`/dashboard/earn/pool/detail/branch/${txnhash}/asset`}
                 className={
-                  activeLink === "Asset"
-                    ? "pool_lend_details_link_active"
-                    : "pool_lend_details_link"
+                  activeLink === 'Asset'
+                    ? 'pool_lend_details_link_active'
+                    : 'pool_lend_details_link'
                 }
               >
                 <InventoryIcon className="asset_overview_link_icon" />
@@ -333,9 +345,9 @@ const DashBoard_lend_details_page = ({ match }) => {
               <Link
                 to={`/dashboard/earn/pool/detail/${txnhash}/transactions`}
                 className={
-                  activeLink === "transaction"
-                    ? "pool_lend_details_link_active"
-                    : "pool_lend_details_link"
+                  activeLink === 'transaction'
+                    ? 'pool_lend_details_link_active'
+                    : 'pool_lend_details_link'
                 }
               >
                 <ReceiptIcon className="asset_overview_link_icon" />
@@ -347,11 +359,11 @@ const DashBoard_lend_details_page = ({ match }) => {
                 <img
                   src={
                     oyName === true
-                      ? "/img/oyigbo_icon.svg"
+                      ? '/img/oyigbo_icon.svg'
                       : agipName === true
-                      ? "/img/agip_icon.svg"
+                      ? '/img/agip_icon.svg'
                       : rumuName === true
-                      ? "/img/rumu_icon.svg"
+                      ? '/img/rumu_icon.svg'
                       : null
                   }
                   alt=""
@@ -414,7 +426,9 @@ const DashBoard_lend_details_page = ({ match }) => {
               <span className="vertical_rule"></span>
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
-                  {numberWithCommas(parseInt(BranchDetails.amount).toFixed(2))}{" "}
+                  {numberWithCommas(
+                    parseInt(BranchDetails.amount).toFixed(2)
+                  )}{' '}
                   <span className="asset_symbol"> Engn</span>
                 </div>
                 <div className="pool_detail_sub_area1_area1_cont2">
@@ -434,29 +448,31 @@ const DashBoard_lend_details_page = ({ match }) => {
                   <img
                     src={
                       oyName === true
-                        ? "/img/oyigbo_icon2.svg"
+                        ? '/img/oyigbo_icon2.svg'
                         : agipName === true
-                        ? "/img/agip_icon2.svg"
+                        ? '/img/agip_icon2.svg'
                         : rumuName === true
-                        ? "/img/rumu_icon2.svg"
+                        ? '/img/rumu_icon2.svg'
                         : null
                     }
                     className="Asset_Originator_Details_cont_body_head_img"
                   />
                 </div>
                 <div className="Asset_Originator_Details_cont_body_txt">
-                  Egoras Technologies Limited Agip Branch is located at
-                  Kilometre 7 Ikwere Road Rumeme, beside Rivers State College of
-                  Health Science and Technologies. Our aim is to render improved
-                  quality financial services and as well lower the cost of the
-                  services in these communities around through
-                  micro-collateralized loans. The pool seeks to generate
-                  uncorrelated and excess risk-adjusted returns to its investors
-                  by providing secured loans to individuals and small businesses
-                  in the community. Egoras Technologies Limited Agip Branch
-                  started operations on the 6th of September, 2021 and has since
-                  empowered over 1,500 customers with about ₦76,407,085 in loans
-                  .
+                  Egoras Technologies Limited Agip Branch is located
+                  at Kilometre 7 Ikwere Road Rumeme, beside Rivers
+                  State College of Health Science and Technologies.
+                  Our aim is to render improved quality financial
+                  services and as well lower the cost of the services
+                  in these communities around through
+                  micro-collateralized loans. The pool seeks to
+                  generate uncorrelated and excess risk-adjusted
+                  returns to its investors by providing secured loans
+                  to individuals and small businesses in the
+                  community. Egoras Technologies Limited Agip Branch
+                  started operations on the 6th of September, 2021 and
+                  has since empowered over 1,500 customers with about
+                  ₦76,407,085 in loans .
                 </div>
                 <div className="Asset_Originator_Details_cont_body_issuer_cont">
                   <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
@@ -464,11 +480,11 @@ const DashBoard_lend_details_page = ({ match }) => {
                   </div>
                   <div className="Asset_Originator_Details_cont_body_issuer_cont_txt">
                     {oyName === true
-                      ? "Egoras Oyigbo Branch"
+                      ? 'Egoras Oyigbo Branch'
                       : agipName === true
-                      ? "Egoras Agip Branch"
+                      ? 'Egoras Agip Branch'
                       : rumuName === true
-                      ? "Egoras Rumukwrushi Branch"
+                      ? 'Egoras Rumukwrushi Branch'
                       : null}
                   </div>
                 </div>
@@ -479,7 +495,9 @@ const DashBoard_lend_details_page = ({ match }) => {
             {/* ============== */}
 
             <div className="pool_status">
-              <div className="pool_status_cont_heading">Pool Status</div>
+              <div className="pool_status_cont_heading">
+                Pool Status
+              </div>
               <div className="pool_status_Details_cont_body">
                 <div className="pool_status_Details_cont_body1">
                   <div className="pool_status_Details_cont_body1_cont1">
@@ -493,7 +511,7 @@ const DashBoard_lend_details_page = ({ match }) => {
                       <div className="pool_status_Details_cont_body1_sub_conts_2">
                         {numberWithCommas(
                           parseInt(BranchDetails.amount).toFixed(2)
-                        )}{" "}
+                        )}{' '}
                         Engn
                       </div>
                     </div>
@@ -529,7 +547,7 @@ const DashBoard_lend_details_page = ({ match }) => {
                       <div className="pool_status_Details_cont_body1_sub_conts_2">
                         {numberWithCommas(
                           parseInt(BranchDetails.funded).toFixed(2)
-                        )}{" "}
+                        )}{' '}
                         Engn
                       </div>
                     </div>
@@ -555,7 +573,7 @@ const DashBoard_lend_details_page = ({ match }) => {
           <div className="asset_list_modal_container">
             {/* <div className="asset_list_body"> */}
             <div className="asset_list_txt">
-              Asset List{" "}
+              Asset List{' '}
               <CloseIcon
                 className="closeBackModalIcon"
                 onClick={toggleAssetModal}
@@ -563,67 +581,73 @@ const DashBoard_lend_details_page = ({ match }) => {
             </div>
             <div className="asset_list_body_head2">
               {/* <div className="asset_list_body_head_tab1">Asset Id</div> */}
-              <div className="asset_list_body_head_tab1">Asset Name</div>
+              <div className="asset_list_body_head_tab1">
+                Asset Name
+              </div>
               <div className="asset_list_body_head_tab3 date_time_head">
                 Date & Time
               </div>
               <div className="asset_list_body_head_tab4 date_duration_row22">
                 Duration
               </div>
-              <div className="asset_list_body_head_tab5">Amount(Engn)</div>
+              <div className="asset_list_body_head_tab5">
+                Amount(Engn)
+              </div>
               <div className="asset_list_body_head_tab6 finance_fee_details_page">
                 Financing Fee
               </div>
               <div className="asset_list_body_head_tab7">Action</div>
             </div>
             <div className="asset_list_body_body_cont">
-              {activeBtn === "Ongoing"
-                ? LoanAssets.filter((person) => person.state == "OPEN").map(
-                    (data) => (
-                      <div
-                        className="asset_list_body_body_cont_1"
-                        id={data.newLoanID}
-                        onClick={ChangeAssetDetailModal}
-                        // onClick={ChangeAssetDetailModal}
-                      >
-                        {/* <div className="asset_list_body_body_cont_1a">
+              {activeBtn === 'Ongoing'
+                ? LoanAssets.filter(
+                    (person) => person.state == 'OPEN'
+                  ).map((data) => (
+                    <div
+                      className="asset_list_body_body_cont_1"
+                      id={data.newLoanID}
+                      onClick={ChangeAssetDetailModal}
+                      // onClick={ChangeAssetDetailModal}
+                    >
+                      {/* <div className="asset_list_body_body_cont_1a">
                                 {data.id}
                               </div> */}
-                        <div className="asset_list_body_body_cont_1a">
-                          {/* {data.title} */}
-                          {data.title.substring(0, 20) + "..."}
-                        </div>
-
-                        <div className="asset_list_body_body_cont_1c date_time_row">
-                          {data.createdAt.slice(0, 10)}
-                        </div>
-                        <div className="asset_list_body_body_cont_1d date_duration_row22">
-                          {data.length} month(s)
-                        </div>
-                        <div className="asset_list_body_body_cont_1e">
-                          {numberWithCommas(parseInt(data.amount).toFixed(2))}
-                        </div>
-                        <div className="asset_list_body_body_cont_1f finance_fee_details_page_row">
-                          13 %
-                        </div>
-                        <div className="asset_list_body_body_cont_1g">
-                          <button
-                            onClick={ChangeAssetDetailModal}
-                            className="back_btn"
-                          >
-                            Lend
-                          </button>
-                        </div>
+                      <div className="asset_list_body_body_cont_1a">
+                        {/* {data.title} */}
+                        {data.title.substring(0, 20) + '...'}
                       </div>
-                    )
-                  )
+
+                      <div className="asset_list_body_body_cont_1c date_time_row">
+                        {data.createdAt.slice(0, 10)}
+                      </div>
+                      <div className="asset_list_body_body_cont_1d date_duration_row22">
+                        {data.length} month(s)
+                      </div>
+                      <div className="asset_list_body_body_cont_1e">
+                        {numberWithCommas(
+                          parseInt(data.amount).toFixed(2)
+                        )}
+                      </div>
+                      <div className="asset_list_body_body_cont_1f finance_fee_details_page_row">
+                        13 %
+                      </div>
+                      <div className="asset_list_body_body_cont_1g">
+                        <button
+                          onClick={ChangeAssetDetailModal}
+                          className="back_btn"
+                        >
+                          Lend
+                        </button>
+                      </div>
+                    </div>
+                  ))
                 : null}
             </div>
             {/* </div> */}
           </div>
         </div>
       ) : null}
-      {stage == "back" ? (
+      {stage == 'back' ? (
         <>
           {LoanAssets.map((data) => (
             <>
@@ -635,7 +659,9 @@ const DashBoard_lend_details_page = ({ match }) => {
                         className="closeBackModalIcon"
                         onClick={closeAssetDetailModal}
                       />
-                      <div className="back_modal_heading">Back this pool</div>
+                      <div className="back_modal_heading">
+                        Back this pool
+                      </div>
 
                       <div className="back_Modal_input_area">
                         <div className="back_modal_input_amnt_head">
@@ -652,13 +678,16 @@ const DashBoard_lend_details_page = ({ match }) => {
                             onChange={handleBackChange}
                           />
                           <div className="back_modal_input_amnt_head_minimum">
-                            Minimum Amount: 30,000.00 Engn
+                            {/* Minimum Amount: 30,000.00 Engn */}
                           </div>
                         </span>
                       </div>
                       <div className="amount_earned_mnthly">
                         Expected APY:
-                        <span className="amount_earned_mnthly_value"> 13%</span>
+                        <span className="amount_earned_mnthly_value">
+                          {' '}
+                          13%
+                        </span>
                       </div>
                       <div className="back_loan_btn_div">
                         <button
@@ -679,7 +708,7 @@ const DashBoard_lend_details_page = ({ match }) => {
         </>
       ) : null}
 
-      {stage == "loading" ? (
+      {stage == 'loading' ? (
         <div className="bacModal_div">
           <div className="back_modal_container">
             <div className="back_modal_cont">
@@ -689,21 +718,23 @@ const DashBoard_lend_details_page = ({ match }) => {
           </div>
         </div>
       ) : null}
-      {stage == "unlock" ? (
+      {stage == 'unlock' ? (
         <div className="bacModal_div">
           <div className="back_modal_container">
             <div className="back_modal_cont">
               <CloseIcon
                 className="closeBackModalIcon"
                 onClick={() => {
-                  setStage("back");
+                  setStage('back');
                 }}
               />
 
               <div className="unlock_head">
-                Approve <b>Egoras</b> to spend{" "}
-                {task == "collateral" || task == "topup" ? asset : base} on your
-                behalf.
+                Approve <b>Egoras</b> to spend{' '}
+                {task == 'collateral' || task == 'topup'
+                  ? asset
+                  : base}{' '}
+                on your behalf.
               </div>
 
               <div className="unlock_input_div ">
@@ -724,7 +755,7 @@ const DashBoard_lend_details_page = ({ match }) => {
                 >
                   {isLoading ? (
                     <FontAwesomeIcon icon={faCircleNotch} spin />
-                  ) : null}{" "}
+                  ) : null}{' '}
                   {/* {checkBox == false ? ` Unlock ${asset}` : "Unlocked"}
                    */}
                   Unlock
@@ -738,7 +769,7 @@ const DashBoard_lend_details_page = ({ match }) => {
       // ==========
 
       null}
-      {stage == "success" ? (
+      {stage == 'success' ? (
         <div className="bacModal_div">
           <div className="back_modal_container">
             <SuccessModal
@@ -752,7 +783,7 @@ const DashBoard_lend_details_page = ({ match }) => {
           </div>
         </div>
       ) : null}
-      {stage == "error" ? (
+      {stage == 'error' ? (
         <div className="bacModal_div">
           <div className="back_modal_container">
             <ErrorModal

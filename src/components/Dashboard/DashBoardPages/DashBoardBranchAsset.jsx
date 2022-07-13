@@ -626,6 +626,7 @@ const DashBoardBranchAsset = ({ match }) => {
                         </div>
                       </div>
                     </div>
+
                     <ProgressBar
                       width="400px"
                       height="10px"
@@ -635,7 +636,6 @@ const DashBoardBranchAsset = ({ match }) => {
                       rectPadding="1px"
                       rectBorderRadius="20px"
                       trackPathColor="transparent"
-                      bgColor="#333333"
                       trackBorderColor="grey"
                     />
                   </div>
