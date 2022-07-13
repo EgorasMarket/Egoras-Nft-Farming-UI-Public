@@ -413,47 +413,22 @@ const AddLiquidity = ({ match, closeModal, which }) => {
                           />
 
                           <div>
-                            {tokenBtn2 == false ? (
-                              <button
-                                className="display_tokens_drop display_tokens_drop_not_select "
-                                onClick={() => {
-                                  toggleModal2();
-                                  setInputVal(0);
-                                }}
-                              >
-                                Select a token{" "}
-                                <ArrowDropDownIcon className="drop_down_icon" />
-                              </button>
-                            ) : (
-                              <>
-                                {data.assets.map((token) =>
-                                  tokenName2 == token.id ? (
-                                    <button
-                                      className="display_tokens_drop"
-                                      onClick={() => {
-                                        toggleModal2();
-                                        setInputVal(0);
-                                      }}
-                                    >
-                                      <img
-                                        src={
-                                          inputToggle == false
-                                            ? assetVal.img
-                                            : assetVal.img
-                                        }
-                                        alt=""
-                                        className="asset_icon"
-                                      />
-                                      {inputToggle == false
-                                        ? assetVal.symbol
-                                        : assetVal.symbol}
+                            <button className="display_tokens_drop">
+                              <img
+                                src={
+                                  inputToggle == false
+                                    ? assetVal.img
+                                    : assetVal.img
+                                }
+                                alt=""
+                                className="asset_icon"
+                              />
+                              {inputToggle == false
+                                ? assetVal.symbol
+                                : assetVal.symbol}
 
-                                      <ArrowDropDownIcon className="drop_down_icon" />
-                                    </button>
-                                  ) : null
-                                )}
-                              </>
-                            )}
+                              <ArrowDropDownIcon className="drop_down_icon" />
+                            </button>
                           </div>
                         </div>
                       </div>
@@ -552,26 +527,6 @@ const AddLiquidity = ({ match, closeModal, which }) => {
           </div>
         </div>
       </section>
-      {modal == true ? (
-        <TokenModal
-          toggleTokenModal={toggleModal}
-          execute={TokenData}
-          tokenData1={data.base}
-          tokenData={data.assets}
-          disabled="disabled"
-          // tokenId={data.tokenData}
-        />
-      ) : null}
-      {modal2 == true ? (
-        <TokenModal
-          toggleTokenModal={toggleModal2}
-          execute={TokenData2}
-          tokenData={assetVal}
-          tokenData1={data.base}
-          // disabled={true}
-          // tokenId={data.tokenData}
-        />
-      ) : null}
     </div>
   );
 };

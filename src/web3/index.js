@@ -247,7 +247,7 @@ const lendUS = async (branch, amount, loanID, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error.data, "errorr message index");
+    console.log(error.data.message, "errorr message index");
     if (
       error.data.message ===
       "execution reverted: Already a lender, you can only top up!"

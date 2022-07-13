@@ -90,6 +90,7 @@ const DashBoardLendPage = () => {
       })
       .catch((err) => {
         console.log(err); // "oh, no!"
+        console.log(err.message); // "oh, no!"
       });
   }, []);
 

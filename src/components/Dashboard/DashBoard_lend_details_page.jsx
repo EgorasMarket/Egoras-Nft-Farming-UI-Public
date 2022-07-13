@@ -736,7 +736,7 @@ const DashBoard_lend_details_page = ({ match }) => {
                             onChange={handleBackChange}
                           />
                           <div className="back_modal_input_amnt_head_minimum">
-                            {/* Minimum Amount: 30,000.00 Engn */}
+                            Minimum Amount: 30,000.00 Engn
                           </div>
                         </span>
                       </div>
