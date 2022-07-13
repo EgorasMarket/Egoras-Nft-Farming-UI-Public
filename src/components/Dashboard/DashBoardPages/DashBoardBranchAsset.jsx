@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "../../../css/dashboard_branch_assets.css";
+
 import { Link } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import Accordion from "../Accordion";
@@ -8,6 +9,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import CopyAllIcon from "@mui/icons-material/CopyAll";
+// import ProgressBar from 'react-animated-progress-bar';
+
 import { AreaChart, Area, Tooltip, ResponsiveContainer } from "recharts";
 import { UserContext } from "../../context/Context";
 import axios from "axios";
@@ -556,10 +559,15 @@ const DashBoardBranchAsset = ({ match }) => {
         const meta = JSON.parse(data.metadata);
 
         const tHash = `https://bscscan.com/tx/${data.transactionHash}`;
-
-        console.log(meta);
+        const returnProgress = () => {
+          let value = parseInt(data.funded);
+          let percentage = value / parseInt(data.amount);
+          let final = percentage * 100;
+          return final.toString();
+        };
         return (
           <>
+            {/* modal starts here */}
             {assetDetailModal == data.newLoanID ? (
               <div className="asset_detail_modal_div">
                 <div className="asset_detail_modal_div_conts">
@@ -613,6 +621,16 @@ const DashBoardBranchAsset = ({ match }) => {
                             Engn
                           </div>
                         </div>
+                        <hr class="custom_hr"></hr>
+                        <div className="asset_status_details_div1_body1_cont1">
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            Funded
+                          </div>
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            {numberWithCommas(data.funded)} Engn
+                          </div>
+                        </div>
+
                         <hr class="custom_hr"></hr>
                         <div className="asset_status_details_div1_body1_cont1">
                           <div className="asset_status_details_div1_body1_cont1_txt1">
