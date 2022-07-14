@@ -64,6 +64,7 @@ import {
   checkAllowanceL,
   unluckToken2,
 } from "../../web3/index";
+
 const DashBoard_lend_details_page = ({ match }) => {
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
   const { BranchDetails, rumuName, agipName, oyName } = useContext(UserContext);
@@ -94,7 +95,8 @@ const DashBoard_lend_details_page = ({ match }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [asset, setAsset] = useState("");
   const [base, setBase] = useState("");
-
+  const [coinBalance2, setCoinBalance2] = React.useState(0.0);
+  const [baseBalance, setBaseBalance] = useState(0.0);
   const [loanMetaData, setLoanMetaData] = useState({
     base: "",
     asset: "",
@@ -272,9 +274,6 @@ const DashBoard_lend_details_page = ({ match }) => {
 
   setInterval(() => {
     if (localStorage.getItem("unlocking") == "true") {
-      // setCheckBox(true);
-      // setDisable(false);
-
       transactReceipt(localStorage.getItem("unlockingHash"), library).then(
         function (env) {
           // console.log("running Interval", env);
@@ -293,6 +292,44 @@ const DashBoard_lend_details_page = ({ match }) => {
       // setStage("error");
     }
   }, 1000);
+  useEffect(() => {
+    let assetVal = "EGC";
+    let baseVal = "ENGN";
+    setAsset(assetVal);
+    setBase(baseVal);
+    let ticker = assetVal + "-" + baseVal;
+    if (account) {
+      getTickerInfo(ticker, library.getSigner()).then((data) => {
+        if (data.status) {
+          tokenBalance(data.message.base, account, library.getSigner()).then(
+            (balance) => {
+              setBaseBalance(formatEther(balance.message));
+            }
+          );
+
+          if (asset == "BNB" || asset == "bnb") {
+            library
+              .getBalance(account)
+              .then((balance) => {
+                setCoinBalance2(formatEther(balance));
+              })
+              .catch(() => {
+                setCoinBalance2(null);
+              });
+          } else {
+            tokenBalance(data.message.asset, account, library.getSigner()).then(
+              (balance) => {
+                setCoinBalance2(formatEther(balance.message));
+              }
+            );
+          }
+        }
+      });
+    }
+  }, [chainId, account, connector, baseBalance, coinBalance2]);
+
+  console.log(baseBalance);
+  console.log(coinBalance2);
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -724,6 +761,9 @@ const DashBoard_lend_details_page = ({ match }) => {
                       <div className="back_Modal_input_area">
                         <div className="back_modal_input_amnt_head">
                           Input amount
+                          <span className="base_balance">
+                            Balance: {parseFloat(baseBalance).toFixed(3)}Engn
+                          </span>
                         </div>
                         <span className="input_space">
                           <AccountBalanceWalletIcon className="input_dollar_sign" />

@@ -32,6 +32,21 @@ import "../../css/dashboardheader.css";
 import "../../css/dashBoardSideBar.css";
 import SwitchToggle2 from "./DashBoardPages/SwitchToggle/SwitchToggle2";
 import {
+  checkAllowance,
+  unluckToken,
+  transactReceipt,
+  getPrice,
+  getPriceImpl,
+  getTickerInfo,
+  tokenBalance,
+  open,
+  getLatestLoan,
+  repay,
+  topup,
+  draw,
+} from "../../web3/index";
+import { parseEther, formatEther } from "@ethersproject/units";
+import {
   Web3ReactProvider,
   useWeb3React,
   UnsupportedChainIdError,
@@ -43,6 +58,8 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const [smallSide, setSmallSide] = useState(dddd);
   const [cartNum, setCartNum] = useState("");
   const [image, setImage] = useState("");
+  const [asset, setAsset] = useState("");
+  const [base, setBase] = useState("");
   const [searchBar, setSearchBar] = useState(false);
   const [acctNav, setAcctNav] = useState(false);
   const [activeMenuName, setActiveMenuName] = useState("Markets");
@@ -55,6 +72,9 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   );
   const [disconnetDiv, setDisconnectDiv] = useState(false);
   const [coinBalance, setCoinBalance] = React.useState("0.00");
+  const [coinBalance2, setCoinBalance2] = React.useState(0.0);
+  const [baseBalance, setBaseBalance] = useState(0.0);
+
   const [productNamesZ, setProductNamesZ] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -234,14 +254,86 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   useEffect(async () => {
     if (account) {
       const getBalance = await web3.eth.getBalance(account);
+      // const getBalance2 = await web3.eth.getBalance(
+      //   "0xe03f527a64128e8Edb64bf67256416302c56c4b7"
+      // );
       const ethBalance = web3.utils.fromWei(getBalance, "ether");
+      // const ethBalance2 = web3.utils.fromWei(getBalance2, "ether");
       console.log(ethBalance);
+      // console.log(getBalance2);
       setCoinBalance(parseFloat(ethBalance).toFixed(3));
     }
   }, [coinBalance, account]);
   const toggleDisconnectDiv = () => {
     setDisconnectDiv(!disconnetDiv);
   };
+  useEffect(() => {
+    let assetVal = "EGC";
+    let baseVal = "ENGN";
+    setAsset(assetVal);
+    setBase(baseVal);
+    let ticker = assetVal + "-" + baseVal;
+    if (account) {
+      // getPrice(ticker, library.getSigner()).then((data) => {
+      //   if (data.status) {
+      //     setTickerPrice(parseFloat(formatEther(data.message)));
+      //   }
+      // });
+
+      getTickerInfo(ticker, library.getSigner()).then((data) => {
+        if (data.status) {
+          tokenBalance(data.message.base, account, library.getSigner()).then(
+            (balance) => {
+              setBaseBalance(formatEther(balance.message));
+            }
+          );
+
+          if (asset == "BNB" || asset == "bnb") {
+            library
+              .getBalance(account)
+              .then((balance) => {
+                setCoinBalance2(formatEther(balance));
+              })
+              .catch(() => {
+                setCoinBalance2(null);
+              });
+          } else {
+            tokenBalance(data.message.asset, account, library.getSigner()).then(
+              (balance) => {
+                setCoinBalance2(formatEther(balance.message));
+              }
+            );
+          }
+          // const checkUnlock = async () => {
+          //   let engn = await checkAllowance(
+          //     data.base,
+          //     account,
+          //     parseEther("5000000", "wei").toString(),
+          //     library.getSigner()
+          //   );
+
+          //   let egc = await checkAllowance(
+          //     data.asset,
+          //     account,
+          //     parseEther("5000000", "wei").toString(),
+          //     library.getSigner()
+          //   );
+          // };
+
+          // setLoanMetaData({
+          //   ...loanMetaData,
+          //   base: data.message.base,
+          //   asset: data.message.asset,
+          //   maxLoan: formatEther(data.message.maxLoan),
+          //   // maxLoan: formatEther(data.message.maxLoan),
+          // });
+        }
+      });
+    }
+  }, [chainId, account, connector, baseBalance, coinBalance2]);
+
+  // console.log(baseBalance);
+  // console.log(coinBalance2);
   return (
     <div className={smallSide == "not_small" ? "side" : "small_side"}>
       <div className="header_token_prices_div">

@@ -140,6 +140,9 @@
   padding: 10px;
   padding-top: 0;
   padding-bottom: 5px;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #575757;
 }
 .plus_icon_layer {
   align-items: center;

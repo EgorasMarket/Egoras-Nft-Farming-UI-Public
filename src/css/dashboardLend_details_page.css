@@ -385,6 +385,9 @@ button.pool_detail_heading_area1_invest_btn {
 .back_modal_input_amnt_head {
   font-size: 12px;
   color: #585858;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .back_modal_input {

@@ -36,6 +36,8 @@ import {
   getPrice,
   getPriceImpl,
   swapBase,
+  getTickerInfo,
+  tokenBalance,
 } from "../../../../web3/index";
 
 // import { ConnectWallet } from "../../../auth/ConnectWallet";
@@ -56,6 +58,10 @@ const AddLiquidity = ({ match, closeModal, which }) => {
   const [base, setBase] = useState("");
   const [stage, setStage] = useState("swap");
   const [tokenName2, setTokenName2] = useState(0);
+  const [asset, setAsset] = useState("");
+  // const [base, setBase] = useState("");
+  const [coinBalance2, setCoinBalance2] = React.useState(0.0);
+  const [baseBalance, setBaseBalance] = useState(0.0);
   const [egcToEngn, setEgcToEngn] = useState(0);
   const [text, setText] = useState("");
   const [hash, setHash] = useState("");
@@ -336,6 +342,44 @@ const AddLiquidity = ({ match, closeModal, which }) => {
     }
   }, 7000);
 
+  useEffect(() => {
+    let assetVal = "EGC";
+    let baseVal = "ENGN";
+    setAsset(assetVal);
+    setBase(baseVal);
+    let ticker = assetVal + "-" + baseVal;
+    if (account) {
+      getTickerInfo(ticker, library.getSigner()).then((data) => {
+        if (data.status) {
+          tokenBalance(data.message.base, account, library.getSigner()).then(
+            (balance) => {
+              setBaseBalance(formatEther(balance.message));
+            }
+          );
+
+          if (asset == "BNB" || asset == "bnb") {
+            library
+              .getBalance(account)
+              .then((balance) => {
+                setCoinBalance2(formatEther(balance));
+              })
+              .catch(() => {
+                setCoinBalance2(null);
+              });
+          } else {
+            tokenBalance(data.message.asset, account, library.getSigner()).then(
+              (balance) => {
+                setCoinBalance2(formatEther(balance.message));
+              }
+            );
+          }
+        }
+      });
+    }
+  }, [chainId, account, connector, baseBalance, coinBalance2]);
+
+  console.log(baseBalance);
+  console.log(coinBalance2);
   return (
     // <div>
     <div className="other2">
@@ -358,7 +402,16 @@ const AddLiquidity = ({ match, closeModal, which }) => {
                   <div className="liquidity_cont_body_conts">
                     <div>
                       <div className="input_amnt_layer">
-                        <span className="input_txt">From</span>
+                        <span className="input_txt">
+                          From
+                          <span className="token_balances_span">
+                            Balance:{" "}
+                            {baseVal.symbol === "EGC"
+                              ? parseFloat(coinBalance2).toFixed(3)
+                              : parseFloat(baseBalance).toFixed(3)}{" "}
+                            {baseVal.symbol === "EGC" ? "EGC" : "ENGN"}
+                          </span>
+                        </span>
                         <div className="amnt_input">
                           <input
                             type="number"
@@ -395,7 +448,16 @@ const AddLiquidity = ({ match, closeModal, which }) => {
                       />
 
                       <div className="input_amnt_layer">
-                        <span className="input_txt">To</span>
+                        <span className="input_txt">
+                          To{" "}
+                          <span className="token_balances_span">
+                            Balance:{" "}
+                            {assetVal.symbol === "EGC"
+                              ? parseFloat(coinBalance2).toFixed(3)
+                              : parseFloat(baseBalance).toFixed(3)}{" "}
+                            {assetVal.symbol === "EGC" ? "EGC" : "ENGN"}
+                          </span>
+                        </span>
                         <div className="amnt_input">
                           <input
                             type="number"
