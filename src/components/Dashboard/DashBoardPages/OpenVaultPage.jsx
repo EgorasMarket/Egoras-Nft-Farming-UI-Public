@@ -1,14 +1,17 @@
-import React, { useState, useEffect, useCallback } from "react";
-import NumberFormat from "react-number-format";
-import { numberWithCommas } from "../../../static";
-import { Link } from "react-router-dom";
-import SwapVertIcon from "@mui/icons-material/SwapVert";
-import InfoIcon from "@mui/icons-material/Info";
-import { SuccessModal, ErrorModal } from "./Modal/Success_Error_Component";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import "../../../css/openVault.css";
-import SwitchToggle from "./SwitchToggle/SwitchToggle";
+import React, { useState, useEffect, useCallback } from 'react';
+import NumberFormat from 'react-number-format';
+import { numberWithCommas } from '../../../static';
+import { Link } from 'react-router-dom';
+import SwapVertIcon from '@mui/icons-material/SwapVert';
+import InfoIcon from '@mui/icons-material/Info';
+import {
+  SuccessModal,
+  ErrorModal,
+} from './Modal/Success_Error_Component';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import '../../../css/openVault.css';
+import SwitchToggle from './SwitchToggle/SwitchToggle';
 import {
   Button,
   Card,
@@ -16,7 +19,6 @@ import {
   CardHeader,
   CardText,
   CardTitle,
-  Col,
   Modal,
   ModalBody,
   Nav,
@@ -25,7 +27,7 @@ import {
   Row,
   TabContent,
   TabPane,
-} from "reactstrap";
+} from 'reactstrap';
 
 import {
   faCheckCircle,
@@ -35,14 +37,15 @@ import {
   faLock,
   faWindowClose,
   faWallet,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Authenticate } from "../../auth/Authenticate";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Authenticate } from '../../auth/Authenticate';
 import {
   checkAllowance,
   unluckToken,
   transactReceipt,
   getPrice,
+  getPriceImpl,
   getTickerInfo,
   tokenBalance,
   open,
@@ -50,22 +53,22 @@ import {
   repay,
   topup,
   draw,
-} from "../../../web3/index";
-import { parseEther, formatEther } from "@ethersproject/units";
+} from '../../../web3/index';
+import { parseEther, formatEther } from '@ethersproject/units';
 import {
   Web3ReactProvider,
   useWeb3React,
   UnsupportedChainIdError,
-} from "@web3-react/core";
-import { Checkbox } from "@mui/material";
+} from '@web3-react/core';
+import { Checkbox } from '@mui/material';
 function limit(val, max) {
   if (val.length === 1 && val[0] > max[0]) {
-    val = "0" + val;
+    val = '0' + val;
   }
 
   if (val.length === 2) {
     if (Number(val) === 0) {
-      val = "01";
+      val = '01';
 
       //this can happen when user paste number
     } else if (val > max) {
@@ -81,56 +84,60 @@ const OpenVaultPage = ({ match }) => {
   const [modal, setModal] = useState(false);
   const [backdrop, setBackdrop] = useState(true);
   const [keyboard, setKeyboard] = useState(false);
-  const [value, setValue] = useState("");
-  const [asset, setAsset] = useState("");
-  const [base, setBase] = useState("");
+  const [value, setValue] = useState('');
+  const [asset, setAsset] = useState('');
+  const [base, setBase] = useState('');
   const [eusdValue, setEusdValue] = useState(0);
   const [maxValue, setMaxValue] = useState(10000000);
-  const [validDiv, setValidDiv] = useState("not_ifValidDiv");
-  const [successUnlock, setSuccessUnlock] = useState("false");
-  const [buttonOpen, setButtonOpen] = useState("generate_eusd_cont1");
-  const [buttonOpen2, setButtonOpen2] = useState("not_generate_eusd_cont");
+  const [validDiv, setValidDiv] = useState('not_ifValidDiv');
+  const [successUnlock, setSuccessUnlock] = useState('false');
+  const [buttonOpen, setButtonOpen] = useState('generate_eusd_cont1');
+  const [buttonOpen2, setButtonOpen2] = useState(
+    'not_generate_eusd_cont'
+  );
   const [coinBalance, setCoinBalance] = useState(0.0);
   const [baseBalance, setBaseBalance] = useState(0.0);
 
-  const [amount, setAmount] = useState("Enter an amount");
-  const [vaultPrice, setVaultPrice] = useState("not_price_value_change");
+  const [amount, setAmount] = useState('Enter an amount');
+  const [vaultPrice, setVaultPrice] = useState(
+    'not_price_value_change'
+  );
   const [tickerPrice, setTickerPrice] = useState(0);
   // const [valueToNum, setValueToNum] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [stage, setStage] = useState("connect");
-  const [sideStage, setSideStage] = useState("collateral");
+  const [stage, setStage] = useState('connect');
+  const [sideStage, setSideStage] = useState('collateral');
   const [text, setText] = useState(
-    "Transacting with blockchain, please wait..."
+    'Transacting with blockchain, please wait...'
   );
-  const [hash, setHash] = useState("");
+  const [hash, setHash] = useState('');
   const [checkBox, setCheckBox] = useState(false);
   const [disable, setDisable] = useState(true);
   const [shake, setShake] = useState(0);
   const [canshake, setCanShake] = useState(false);
   const [unlocking, setUnlocking] = useState(false);
-  const [activeTab, setActiveTab] = useState("payback");
+  const [activeTab, setActiveTab] = useState('payback');
   const [chainLoanDetails, setChainLoanDetails] = useState({});
-  const [task, setTask] = useState("collateral");
+  const [task, setTask] = useState('collateral');
   const [loanMetaData, setLoanMetaData] = useState({
-    base: "",
-    asset: "",
-    live: "",
+    base: '',
+    asset: '',
+    live: '',
     maxLoan: 0.0,
-    ticker: "",
-    creator: "",
+    ticker: '',
+    creator: '',
   });
 
   const [formData, setFormData] = useState({
-    stateCollateral: "",
-    stateTopUp: "",
+    stateCollateral: '',
+    stateTopUp: '',
     stateMaxGenerate: 0,
     stateCollaterizationRatio: 0,
     stateLiquidationPrice: 0,
     stateCollateralLocked: 0,
     stateVaultDebt: 0,
-    stateAmountToGenerate: "",
-    stateLiquidationWarning: "success",
+    stateAmountToGenerate: '',
+    stateLiquidationWarning: 'success',
   });
   // ====================
   // ====================
@@ -150,7 +157,7 @@ const OpenVaultPage = ({ match }) => {
     let baseVal = match.params.base;
     setAsset(assetVal);
     setBase(baseVal);
-    let ticker = assetVal + "-" + baseVal;
+    let ticker = assetVal + '-' + baseVal;
     if (account) {
       getPrice(ticker, library.getSigner()).then((data) => {
         if (data.status) {
@@ -160,13 +167,15 @@ const OpenVaultPage = ({ match }) => {
 
       getTickerInfo(ticker, library.getSigner()).then((data) => {
         if (data.status) {
-          tokenBalance(data.message.base, account, library.getSigner()).then(
-            (balance) => {
-              setBaseBalance(formatEther(balance.message));
-            }
-          );
+          tokenBalance(
+            data.message.base,
+            account,
+            library.getSigner()
+          ).then((balance) => {
+            setBaseBalance(formatEther(balance.message));
+          });
 
-          if (asset == "BNB" || asset == "bnb") {
+          if (asset == 'BNB' || asset == 'bnb') {
             library
               .getBalance(account)
               .then((balance) => {
@@ -176,11 +185,13 @@ const OpenVaultPage = ({ match }) => {
                 setCoinBalance(null);
               });
           } else {
-            tokenBalance(data.message.asset, account, library.getSigner()).then(
-              (balance) => {
-                setCoinBalance(formatEther(balance.message));
-              }
-            );
+            tokenBalance(
+              data.message.asset,
+              account,
+              library.getSigner()
+            ).then((balance) => {
+              setCoinBalance(formatEther(balance.message));
+            });
           }
           // const checkUnlock = async () => {
           //   let engn = await checkAllowance(
@@ -210,45 +221,47 @@ const OpenVaultPage = ({ match }) => {
     }
     window.scrollTo(0, 0);
     if (!account) {
-      setStage("connect");
+      setStage('connect');
       setModal(!modal);
     } else {
       setModal(!modal);
-      setStage("");
+      setStage('');
     }
   }, [chainId, account, connector]);
 
   useEffect(() => {
     if (account) {
-      getLatestLoan(account, asset + "-" + base, library.getSigner()).then(
-        (loan) => {
-          if (loan.message == true) {
-            setCanShake(true);
-            console.log(
-              loan.loanDetails.liquidationPrice.toString(),
-              "loan.loanDetails.liquidationPrice"
-            );
-            setChainLoanDetails({
-              ...chainLoanDetails,
-              id: loan.loanDetails.id.toString(),
-              collateral: formatEther(loan.loanDetails.collateral),
-              debt: formatEther(loan.loanDetails.debt),
-              liquidationPrice: formatEther(
-                loan.loanDetails.liquidationPrice.toString()
-              ),
-              // parseFloat(
-              //   parseFloat(
+      getLatestLoan(
+        account,
+        asset + '-' + base,
+        library.getSigner()
+      ).then((loan) => {
+        if (loan.message == true) {
+          setCanShake(true);
+          console.log(
+            loan.loanDetails.liquidationPrice.toString(),
+            'loan.loanDetails.liquidationPrice'
+          );
+          setChainLoanDetails({
+            ...chainLoanDetails,
+            id: loan.loanDetails.id.toString(),
+            collateral: formatEther(loan.loanDetails.collateral),
+            debt: formatEther(loan.loanDetails.debt),
+            liquidationPrice: formatEther(
+              loan.loanDetails.liquidationPrice.toString()
+            ),
+            // parseFloat(
+            //   parseFloat(
 
-              //   )
-              // ) / 10000000000000000,
-              max: formatEther(loan.loanDetails.max),
-            });
-            setSideStage("locked");
-          } else {
-            setSideStage("collateral");
-          }
+            //   )
+            // ) / 10000000000000000,
+            max: formatEther(loan.loanDetails.max),
+          });
+          setSideStage('locked');
+        } else {
+          setSideStage('collateral');
         }
-      );
+      });
     }
   }, [shake, chainId, account, connector]);
   // ====================
@@ -257,44 +270,45 @@ const OpenVaultPage = ({ match }) => {
   // ====================
 
   const doUnluck = async (e) => {
-    let address = "";
-    if (task == "payback") {
+    let address = '';
+    if (task == 'payback') {
       address = loanMetaData.base;
-    } else if (task == "collateral") {
+    } else if (task == 'collateral') {
       address = loanMetaData.asset;
     }
-    setText("Transacting with blockchain, please wait...");
-    setStage("loading");
+    setText('Transacting with blockchain, please wait...');
+    setStage('loading');
     setIsLoading(true);
     //formData.stateCollateral.toString()
     let ret = await unluckToken(
       address,
-      parseEther("180000000000000000000000000", "wei").toString(),
+      parseEther('180000000000000000000000000', 'wei').toString(),
       library.getSigner()
     );
     if (ret.status == true) {
-      localStorage.setItem("unlocking", true);
-      localStorage.setItem("unlockingHash", ret.message);
-      setText("Unlocking please wait aleast 1/2 minutes");
-      setCheckBox(true);
-      setDisable(false);
+      localStorage.setItem('unlocking', true);
+      localStorage.setItem('unlockingHash', ret.message);
+      setText('Unlocking please wait aleast 1/2 minutes');
+      // setCheckBox(true);
+      // setDisable(false);
     } else {
       if (ret.message.code == 4001) {
         setText(ret.message.message);
-        setCheckBox(false);
-        setDisable(true);
+        // setCheckBox(false);
+        // setDisable(true);
       }
 
-      setStage("error");
+      setStage('error');
       setIsLoading(false);
-      setCheckBox(false);
-      setDisable(true);
+      // setCheckBox(false);
+      // setDisable(true);
     }
   };
 
   const addCommas = (num) =>
-    num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  const removeNonNumeric = (num) => num.toString().replace(/[^0-9]/g, "");
+    num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  const removeNonNumeric = (num) =>
+    num.toString().replace(/[^0-9]/g, '');
   // =======
   // =======
   // =======
@@ -302,79 +316,91 @@ const OpenVaultPage = ({ match }) => {
   const changeMaxValue = () => setEusdValue(maxValue);
 
   const toggleButtonOpen = () => {
-    setButtonOpen("not_generate_eusd_cont1");
-    setButtonOpen2("generate_eusd_cont");
+    setButtonOpen('not_generate_eusd_cont1');
+    setButtonOpen2('generate_eusd_cont');
   };
   const toggleButtonClose = () => {
-    setButtonOpen("generate_eusd_cont1");
-    setButtonOpen2("not_generate_eusd_cont");
+    setButtonOpen('generate_eusd_cont1');
+    setButtonOpen2('not_generate_eusd_cont');
   };
   const openCDP = async (e) => {
-    setTask("collateral");
+    setTask('collateral');
 
     setUnlocking(false);
-    setStage("loading");
+    setStage('loading');
     setModal(!modal);
     setIsLoading(true);
 
-    if (asset !== "BNB" && asset !== "bnb") {
+    if (asset !== 'BNB' && asset !== 'bnb') {
       let check = await checkAllowance(
         loanMetaData.asset,
         account,
-        parseEther(formData.stateCollateral.toString(), "wei").toString(),
+        parseEther(
+          formData.stateCollateral.toString(),
+          'wei'
+        ).toString(),
         library.getSigner()
       );
 
       if (check.status == true) {
-        setText("Collateralizing, please wait...");
+        setText('Collateralizing, please wait...');
         console.log(formData.stateAmountToGenerate);
 
         let ret = await open(
           false,
-          parseEther(formData.stateCollateral.toString(), "wei").toString(),
+          parseEther(
+            formData.stateCollateral.toString(),
+            'wei'
+          ).toString(),
           parseEther(
             formData.stateAmountToGenerate.toString(),
-            "wei"
+            'wei'
           ).toString(),
-          asset + "-" + base,
+          asset + '-' + base,
           library.getSigner()
         );
 
         if (ret.status == true) {
-          localStorage.setItem("unlocking", true);
-          localStorage.setItem("unlockingHash", ret.message.hash);
-          setText("Sending token please wait aleast 1/2 minutes");
+          localStorage.setItem('unlocking', true);
+          localStorage.setItem('unlockingHash', ret.message.hash);
+          setText('Sending token please wait aleast 1/2 minutes');
           setHash(ret.message.hash);
-          setStage("success");
+          setStage('success');
         } else if (ret.status == false) {
           if (ret.message.code < 0) {
             setText(ret.message.data.message);
           } else if (ret.message.code == 4001) {
             setText(ret.message.message);
           }
-          setStage("error");
+          setStage('error');
           setIsLoading(false);
         }
       } else {
         setUnlocking(true);
-        setStage("unlock");
+        setStage('unlock');
         setIsLoading(false);
       }
     } else {
-      setText("Collateralizing, please wait...");
+      setText('Collateralizing, please wait...');
 
       let ret = await open(
         true,
-        parseEther(formData.stateCollateral.toString(), "wei").toString(),
-        parseEther(formData.stateAmountToGenerate.toString(), "wei").toString(),
-        asset + "-" + base,
+        parseEther(
+          formData.stateCollateral.toString(),
+          'wei'
+        ).toString(),
+        parseEther(
+          formData.stateAmountToGenerate.toString(),
+          'wei'
+        ).toString(),
+        asset + '-' + base,
         library.getSigner()
       );
 
       if (ret.status == true) {
-        localStorage.setItem("unlocking", true);
-        localStorage.setItem("unlockingHash", ret.message.hash);
-        setText("Sending token please wait aleast 1/2 minutes");
+        localStorage.setItem('unlocking', true);
+        localStorage.setItem('unlockingHash', ret.message.hash);
+        setText('Sending token please wait aleast 1/2 minutes');
         setHash(ret.message.hash);
       } else if (ret.status == false) {
         if (ret.message.code < 0) {
@@ -382,54 +408,57 @@ const OpenVaultPage = ({ match }) => {
         } else if (ret.message.code == 4001) {
           setText(ret.message.message);
         }
-        setStage("error");
+        setStage('error');
         setIsLoading(false);
       }
     }
   };
 
   const payBackCDP = async (e) => {
-    setFormData({ ...formData, stateCollateral: chainLoanDetails.debt });
-    setTask("payback");
+    setFormData({
+      ...formData,
+      stateCollateral: chainLoanDetails.debt,
+    });
+    setTask('payback');
     setUnlocking(false);
-    setStage("loading");
+    setStage('loading');
     setModal(!modal);
     setIsLoading(true);
     let check = await checkAllowance(
       loanMetaData.base,
       account,
-      parseEther(chainLoanDetails.debt.toString(), "wei").toString(),
+      parseEther(chainLoanDetails.debt.toString(), 'wei').toString(),
       library.getSigner()
     );
 
     if (check.status == true) {
-      setText("Offsetting debt, please wait...");
+      setText('Offsetting debt, please wait...');
 
       let ret = await repay(
         chainLoanDetails.id,
-        parseEther(chainLoanDetails.debt, "wei").toString(),
-        asset == "BNB" ? true : false,
+        parseEther(chainLoanDetails.debt, 'wei').toString(),
+        asset == 'BNB' ? true : false,
         library.getSigner()
       );
 
       if (ret.status == true) {
-        localStorage.setItem("unlocking", true);
-        localStorage.setItem("unlockingHash", ret.message.hash);
-        setText("Disbursing tokens please wait aleast 1/2 minutes");
+        localStorage.setItem('unlocking', true);
+        localStorage.setItem('unlockingHash', ret.message.hash);
+        setText('Disbursing tokens please wait aleast 1/2 minutes');
         setHash(ret.message.hash);
-        setStage("success");
+        setStage('success');
       } else if (ret.status == false) {
         if (ret.message.code < 0) {
           setText(ret.message.data.message);
         } else if (ret.message.code == 4001) {
           setText(ret.message.message);
         }
-        setStage("error");
+        setStage('error');
         setIsLoading(false);
       }
     } else {
       setUnlocking(true);
-      setStage("unlock");
+      setStage('unlock');
       setIsLoading(false);
     }
   };
@@ -466,8 +495,8 @@ const OpenVaultPage = ({ match }) => {
     setModal(!modal);
   };
   const Continue = async (e) => {
-    setStage("ColateralizeModal");
-    setText("");
+    setStage('ColateralizeModal');
+    setText('');
     setModal(!modal);
     window.location.reload();
   };
@@ -481,92 +510,95 @@ const OpenVaultPage = ({ match }) => {
     // setVaultPrice("price_value_change");
   };
   const withdrawCDP = async (e) => {
-    setTask("paypack");
+    setTask('paypack');
     setUnlocking(false);
-    setStage("loading");
+    setStage('loading');
     setModal(!modal);
     setIsLoading(true);
-    setText("Withdrawing, please wait...");
+    setText('Withdrawing, please wait...');
     let ret = await draw(
       chainLoanDetails.id,
-      parseEther(formData.stateTopUp.toString(), "wei").toString(),
+      parseEther(formData.stateTopUp.toString(), 'wei').toString(),
       library.getSigner()
     );
     if (ret.status == true) {
-      localStorage.setItem("unlocking", true);
-      localStorage.setItem("unlockingHash", ret.message.hash);
-      setText("Sending token please wait aleast 1/2 minutes");
+      localStorage.setItem('unlocking', true);
+      localStorage.setItem('unlockingHash', ret.message.hash);
+      setText('Sending token please wait aleast 1/2 minutes');
       setHash(ret.message.hash);
-      setStage("success");
+      setStage('success');
     } else if (ret.status == false) {
       if (ret.message.code < 0) {
         setText(ret.message.data.message);
       } else if (ret.message.code == 4001) {
         setText(ret.message.message);
       }
-      setStage("error");
+      setStage('error');
       setIsLoading(false);
     }
   };
   const topUpCDP = async (e) => {
-    setTask("collateral");
+    setTask('collateral');
     setUnlocking(false);
-    setStage("loading");
+    setStage('loading');
     setModal(!modal);
     setIsLoading(true);
 
-    if (asset !== "BNB" && asset !== "bnb") {
+    if (asset !== 'BNB' && asset !== 'bnb') {
       let check = await checkAllowance(
         loanMetaData.asset,
         account,
-        parseEther(formData.stateTopUp.toString(), "wei").toString(),
+        parseEther(formData.stateTopUp.toString(), 'wei').toString(),
         library.getSigner()
       );
 
       if (check.status == true) {
-        setText("Adding Collateral, please wait...");
+        setText('Adding Collateral, please wait...');
         let ret = await topup(
           false,
           chainLoanDetails.id,
-          asset + "-" + base,
-          parseEther(formData.stateTopUp.toString(), "wei").toString(),
+          asset + '-' + base,
+          parseEther(
+            formData.stateTopUp.toString(),
+            'wei'
+          ).toString(),
           library.getSigner()
         );
 
         if (ret.status == true) {
-          localStorage.setItem("unlocking", true);
-          localStorage.setItem("unlockingHash", ret.message.hash);
-          setText("Sending token please wait aleast 1/2 minutes");
+          localStorage.setItem('unlocking', true);
+          localStorage.setItem('unlockingHash', ret.message.hash);
+          setText('Sending token please wait aleast 1/2 minutes');
           setHash(ret.message.hash);
-          setStage("success");
+          setStage('success');
         } else if (ret.status == false) {
           if (ret.message.code < 0) {
             setText(ret.message.data.message);
           } else if (ret.message.code == 4001) {
             setText(ret.message.message);
           }
-          setStage("error");
+          setStage('error');
           setIsLoading(false);
         }
       } else {
         setUnlocking(true);
-        setStage("unlock");
+        setStage('unlock');
         setIsLoading(false);
       }
     } else {
-      setText("Adding Collateral, please wait...");
+      setText('Adding Collateral, please wait...');
       let ret = await topup(
         true,
         chainLoanDetails.id,
-        asset + "-" + base,
-        parseEther(formData.stateTopUp.toString(), "wei").toString(),
+        asset + '-' + base,
+        parseEther(formData.stateTopUp.toString(), 'wei').toString(),
         library.getSigner()
       );
 
       if (ret.status == true) {
-        localStorage.setItem("unlocking", true);
-        localStorage.setItem("unlockingHash", ret.message.hash);
-        setText("Sending token please wait aleast 1/2 minutes");
+        localStorage.setItem('unlocking', true);
+        localStorage.setItem('unlockingHash', ret.message.hash);
+        setText('Sending token please wait aleast 1/2 minutes');
         setHash(ret.message.hash);
       } else if (ret.status == false) {
         if (ret.message.code < 0) {
@@ -574,24 +606,25 @@ const OpenVaultPage = ({ match }) => {
         } else if (ret.message.code == 4001) {
           setText(ret.message.message);
         }
-        setStage("error");
+        setStage('error');
         setIsLoading(false);
       }
     }
   };
 
   const onChange = (e) => {
-    if (e.target.name == "stateCollateral") {
+    if (e.target.name == 'stateCollateral') {
       let cAmount = tickerPrice * e.target.value;
-      console.log(cAmount, "C Amount");
+      console.log(cAmount, 'C Amount');
       let maxDraw = cAmount * 0.65;
+      console.log(tickerPrice, 'tickerPrice', maxDraw, 'maxDraw');
 
       setFormData({
         ...formData,
         stateMaxGenerate: maxDraw,
         stateCollateral: e.target.value,
       });
-    } else if (e.target.name == "stateAmountToGenerate") {
+    } else if (e.target.name == 'stateAmountToGenerate') {
       let gn = e.target.value;
       if (e.target.value > formData.stateMaxGenerate) {
         gn = formData.stateMaxGenerate;
@@ -600,11 +633,11 @@ const OpenVaultPage = ({ match }) => {
       let c = formData.stateCollateral * 1000;
       let lp = g / c;
       let liquidationWarning = (gn / formData.stateMaxGenerate) * 100;
-      let warning = "success";
+      let warning = 'success';
       if (liquidationWarning > 66 && liquidationWarning < 83) {
-        warning = "warning";
+        warning = 'warning';
       } else if (liquidationWarning >= 83) {
-        warning = "danger";
+        warning = 'danger';
       }
 
       setFormData({
@@ -616,50 +649,54 @@ const OpenVaultPage = ({ match }) => {
       });
     }
 
-    if (e.target.name == "stateCollateral" && e.target.value <= 0) {
-      setVaultPrice("not_price_value_change");
-      setAmount("Enter an amount");
-      setValidDiv("not_ifValidDiv");
-    } else if (e.target.name == "stateCollateral" && e.target.value > 0) {
-      setVaultPrice("price_value_change");
-      setAmount("Generate");
-      setValidDiv("ifValidDiv");
+    if (e.target.name == 'stateCollateral' && e.target.value <= 0) {
+      setVaultPrice('not_price_value_change');
+      setAmount('Enter an amount');
+      setValidDiv('not_ifValidDiv');
+    } else if (
+      e.target.name == 'stateCollateral' &&
+      e.target.value > 0
+    ) {
+      setVaultPrice('price_value_change');
+      setAmount('Generate');
+      setValidDiv('ifValidDiv');
     }
   };
   setInterval(() => {
-    if (localStorage.getItem("unlocking") == "true") {
-      setCheckBox(true);
-      setDisable(false);
+    if (localStorage.getItem('unlocking') == 'true') {
+      // setCheckBox(true);
+      // setDisable(false);
 
-      transactReceipt(localStorage.getItem("unlockingHash"), library).then(
-        function (env) {
-          // console.log("running Interval", env);
-          if (env.status == true && env.message !== null) {
-            setShake(shake + 10);
-            if (env.message.confirmations > 2) {
-              setStage("success");
-              setHash(localStorage.getItem("unlockingHash"));
-              setIsLoading(false);
+      transactReceipt(
+        localStorage.getItem('unlockingHash'),
+        library
+      ).then(function (env) {
+        // console.log("running Interval", env);
+        if (env.status == true && env.message !== null) {
+          setShake(shake + 10);
+          if (env.message.confirmations > 2) {
+            setStage('success');
+            setHash(localStorage.getItem('unlockingHash'));
+            setIsLoading(false);
 
-              localStorage.setItem("unlocking", false);
-            }
+            localStorage.setItem('unlocking', false);
           }
         }
-      );
+      });
     } else {
-      setCheckBox(false);
-      setDisable(true);
+      // setCheckBox(false);
+      // setDisable(true);
     }
-  }, 100000);
-  useEffect(() => {
-    if (localStorage.getItem("unlocking") == "true") {
-      setCheckBox(true);
-      setDisable(false);
-    } else {
-      setCheckBox(false);
-      setDisable(true);
-    }
-  }, [checkBox]);
+  }, 7000);
+  // useEffect(() => {
+  //   if (localStorage.getItem("unlocking") == "true") {
+  //     // setCheckBox(true);
+  //     // setDisable(false);
+  //   } else {
+  //     setCheckBox(false);
+  //     setDisable(true);
+  //   }
+  // }, [checkBox]);
 
   return (
     <div className="other2">
@@ -678,18 +715,19 @@ const OpenVaultPage = ({ match }) => {
               </p>
 
               <p className="vault_tbd">
-                Liquidation Fee <span className="vault_percent">13%</span>
+                Liquidation Fee{' '}
+                <span className="vault_percent">13%</span>
               </p>
 
               <p className="vault_tbd">
-                Min. collateral ratio{" "}
+                Min. collateral ratio{' '}
                 <span className="vault_percent">150%</span>
               </p>
 
               <p className="vault_tbd">
-                Dust Limit{" "}
+                Dust Limit{' '}
                 <span className="vault_percent">
-                  {" "}
+                  {' '}
                   ₦
                   {numberWithCommas(
                     parseFloat(loanMetaData.maxLoan).toFixed(3)
@@ -704,7 +742,9 @@ const OpenVaultPage = ({ match }) => {
                 <div className="vault_prices1">
                   <div className="vault_prices1_cont1">
                     <div className="vault_prices1_cont1a">
-                      <p className="vault_prices1txt1">Liquidation Price</p>
+                      <p className="vault_prices1txt1">
+                        Liquidation Price
+                      </p>
                       <h3 className="vault_prices1amount">
                         ₦
                         {canshake
@@ -713,21 +753,21 @@ const OpenVaultPage = ({ match }) => {
                                 chainLoanDetails.liquidationPrice
                               ).toFixed(2)
                             )
-                          : "0.00"}
+                          : '0.00'}
                       </h3>
                       <div
                         className={
-                          vaultPrice == "not_price_value_change"
-                            ? "not_price_value_change"
+                          vaultPrice == 'not_price_value_change'
+                            ? 'not_price_value_change'
                             : `price_value_change  ₦{formData.stateLiquidationWarning}`
                         }
                       >
                         <div className={`price_value_change_value`}>
                           ₦
                           {numberWithCommas(
-                            parseFloat(formData.stateLiquidationPrice).toFixed(
-                              2
-                            )
+                            parseFloat(
+                              formData.stateLiquidationPrice
+                            ).toFixed(2)
                           )}
                         </div>
                       </div>
@@ -749,17 +789,18 @@ const OpenVaultPage = ({ match }) => {
                         {canshake
                           ? numberWithCommas(
                               (
-                                (tickerPrice * chainLoanDetails.collateral) /
+                                (tickerPrice *
+                                  chainLoanDetails.collateral) /
                                 (chainLoanDetails.debt * 100)
                               ).toFixed(5)
                             )
-                          : "0.00"}
+                          : '0.00'}
                         %
                       </h3>
                       <div
                         className={
-                          vaultPrice == "not_price_value_change"
-                            ? "not_price_value_change"
+                          vaultPrice == 'not_price_value_change'
+                            ? 'not_price_value_change'
                             : `price_value_change ₦{formData.stateLiquidationWarning}`
                         }
                       >
@@ -777,7 +818,9 @@ const OpenVaultPage = ({ match }) => {
                 <div className="vault_prices1">
                   <div className="vault_prices1_cont1">
                     <div className="vault_prices1_cont1a">
-                      <p className="vault_prices1txt1">Current Price</p>
+                      <p className="vault_prices1txt1">
+                        Current Price
+                      </p>
                       <h3 className="vault_prices1amount">
                         ₦{numberWithCommas(tickerPrice.toFixed(2))}
                       </h3>
@@ -785,9 +828,9 @@ const OpenVaultPage = ({ match }) => {
                   </div>
                   <div className="vault_prices1_cont1">
                     <p className="vault_prices1txt1">
-                      <span className="next">Next</span>{" "}
+                      <span className="next">Next</span>{' '}
                       <span className="vault_prices1txt1aa">
-                        {" "}
+                        {' '}
                         {numberWithCommas(tickerPrice.toFixed(2))}
                       </span>
                     </p>
@@ -800,28 +843,33 @@ const OpenVaultPage = ({ match }) => {
                 <div className="vault_prices1">
                   <div className="vault_prices1_cont1">
                     <div className="vault_prices1_cont1a">
-                      <p className="vault_prices1txt1">Collateral Locked</p>
+                      <p className="vault_prices1txt1">
+                        Collateral Locked
+                      </p>
                       <h3 className="vault_prices1amount">
                         ₦
                         {canshake
                           ? numberWithCommas(
                               parseFloat(
-                                tickerPrice * chainLoanDetails.collateral
+                                tickerPrice *
+                                  chainLoanDetails.collateral
                               ).toFixed(2)
                             )
-                          : "0.00"}
+                          : '0.00'}
                       </h3>
                       <div
                         className={
-                          vaultPrice == "not_price_value_change"
-                            ? "not_price_value_change"
+                          vaultPrice == 'not_price_value_change'
+                            ? 'not_price_value_change'
                             : `price_value_change  ₦{formData.stateLiquidationWarning}`
                         }
                         // onChange={handleInputChange}
                       >
                         <div className={`price_value_change_value`}>
                           <NumberFormat
-                            value={tickerPrice * formData.stateCollateral}
+                            value={
+                              tickerPrice * formData.stateCollateral
+                            }
                             displayType="text"
                             thousandSeparator={true}
                             prefix="₦"
@@ -834,10 +882,15 @@ const OpenVaultPage = ({ match }) => {
                     <p className="vault_prices1txt1">
                       <span className="next">
                         {canshake
-                          ? numberWithCommas(chainLoanDetails.collateral)
-                          : "0.00"}
-                      </span>{" "}
-                      <span className="vault_prices1txt1aa"> {asset}</span>
+                          ? numberWithCommas(
+                              chainLoanDetails.collateral
+                            )
+                          : '0.00'}
+                      </span>{' '}
+                      <span className="vault_prices1txt1aa">
+                        {' '}
+                        {asset}
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -857,19 +910,21 @@ const OpenVaultPage = ({ match }) => {
                       ? numberWithCommas(
                           parseFloat(chainLoanDetails.debt).toFixed(4)
                         )
-                      : "0.00"}{" "}
+                      : '0.00'}{' '}
                     {base}
                   </div>
                   <div
                     className={
-                      vaultPrice == "not_price_value_change"
-                        ? "not_price_value_change"
+                      vaultPrice == 'not_price_value_change'
+                        ? 'not_price_value_change'
                         : `price_value_change ₦{formData.stateLiquidationWarning}`
                     }
                   >
                     <div className={`price_value_change_value`}>
                       {numberWithCommas(
-                        parseFloat(formData.stateAmountToGenerate).toFixed(3)
+                        parseFloat(
+                          formData.stateAmountToGenerate
+                        ).toFixed(3)
                       )}
                     </div>
                   </div>
@@ -883,13 +938,13 @@ const OpenVaultPage = ({ match }) => {
                   <div className="amount_withdraw_cont1_txt2">
                     {canshake
                       ? numberWithCommas(chainLoanDetails.collateral)
-                      : "0.00"}{" "}
+                      : '0.00'}{' '}
                     {asset}
                   </div>
                   <div
                     className={
-                      vaultPrice == "not_price_value_change"
-                        ? "not_price_value_change"
+                      vaultPrice == 'not_price_value_change'
+                        ? 'not_price_value_change'
                         : `price_value_change ₦{formData.stateLiquidationWarning}`
                     }
                   >
@@ -908,16 +963,17 @@ const OpenVaultPage = ({ match }) => {
                     {canshake
                       ? numberWithCommas(
                           parseFloat(
-                            chainLoanDetails.max - chainLoanDetails.debt
+                            chainLoanDetails.max -
+                              chainLoanDetails.debt
                           ).toFixed(4)
                         )
-                      : "0.00"}{" "}
+                      : '0.00'}{' '}
                     {base}
                   </div>
                   <div
                     className={
-                      vaultPrice == "not_price_value_change"
-                        ? "not_price_value_change"
+                      vaultPrice == 'not_price_value_change'
+                        ? 'not_price_value_change'
                         : `price_value_change ₦{formData.stateLiquidationWarning}`
                     }
                   >
@@ -941,19 +997,23 @@ const OpenVaultPage = ({ match }) => {
             {/* ytwtedogeydgygedygfegdfcwel */}
             {/* ytwtedogeydgygedygfegdfcwel */}
             {/* ytwtedogeydgygedygfegdfcwel */}
-            {sideStage == "collateral" ? (
+            {sideStage == 'collateral' ? (
               <div className="open_vault_area2">
                 <div className="open_vault_area2ss">
                   <div className="open_vault_area2a">
                     <div className="open_vault_area2a_heading">
-                      <p className="configure">Configure your Vault </p>
+                      <p className="configure">
+                        Configure your Vault{' '}
+                      </p>
                     </div>
-                    Simulate your vault by configuring the amount of collateral
-                    to deposit, and {base} to generate.
+                    Simulate your vault by configuring the amount of
+                    collateral to deposit, and {base} to generate.
                   </div>
                   <div className="open_vault_area2b">
                     <div className="open_vault_input_titles">
-                      <span className="vault_input0">Deposit {asset}</span>
+                      <span className="vault_input0">
+                        Deposit {asset}
+                      </span>
                       <span className="vault_input1">
                         Balance {coinBalance} {asset}
                       </span>
@@ -981,47 +1041,49 @@ const OpenVaultPage = ({ match }) => {
                   {/* ifvalid div start */}
                   <div
                     className={
-                      validDiv == "not_ifValidDiv"
-                        ? "not_ifValidDiv"
-                        : "ifValidDiv"
+                      validDiv == 'not_ifValidDiv'
+                        ? 'not_ifValidDiv'
+                        : 'ifValidDiv'
                     }
                   >
-                    {" "}
+                    {' '}
                     <div
                       className={
-                        buttonOpen == "generate_eusd_cont1"
-                          ? "generate_eusd_cont1"
-                          : "not_generate_eusd_cont1"
+                        buttonOpen == 'generate_eusd_cont1'
+                          ? 'generate_eusd_cont1'
+                          : 'not_generate_eusd_cont1'
                       }
                     >
                       <button
                         className="open_vault_input_btn_a"
                         onClick={toggleButtonOpen}
                       >
-                        <AddIcon className="add_icon" /> Generate {base} with
-                        this transaction
+                        <AddIcon className="add_icon" /> Generate{' '}
+                        {base} with this transaction
                       </button>
                     </div>
                     <div
                       className={
-                        buttonOpen2 == "not_generate_eusd_cont"
-                          ? "not_generate_eusd_cont"
-                          : "generate_eusd_cont"
+                        buttonOpen2 == 'not_generate_eusd_cont'
+                          ? 'not_generate_eusd_cont'
+                          : 'generate_eusd_cont'
                       }
                     >
                       <button
                         className="open_vault_input_btn_a bbb"
                         onClick={toggleButtonClose}
                       >
-                        <RemoveIcon className="add_icon" /> Generate {base} with
-                        this transaction
+                        <RemoveIcon className="add_icon" /> Generate{' '}
+                        {base} with this transaction
                       </button>
                       <div className="open_vault_input_titlesb">
-                        <span className="vault_input0">Generate {base}</span>
+                        <span className="vault_input0">
+                          Generate {base}
+                        </span>
                         <span
                           className="vault_input1"
                           onClick={changeMaxValue}
-                          style={{ cursor: "pointer" }}
+                          style={{ cursor: 'pointer' }}
                         >
                           Max {formData.stateMaxGenerate} {base}
                         </span>
@@ -1034,9 +1096,9 @@ const OpenVaultPage = ({ match }) => {
                         placeholder={base}
                         onChange={(e) => onChange(e)}
                         style={{
-                          marginRight: "10px",
-                          marginLeft: "10px",
-                          width: "95%",
+                          marginRight: '10px',
+                          marginLeft: '10px',
+                          width: '95%',
                         }}
                         onKeyUp={(e) => onChange(e)}
                       />
@@ -1088,7 +1150,8 @@ const OpenVaultPage = ({ match }) => {
                           Vault {base} Debt
                         </div>
                         <div className="valid_div_inner_div_cont2">
-                          0.00 {base} - {formData.stateAmountToGenerate} {base}
+                          0.00 {base} -{' '}
+                          {formData.stateAmountToGenerate} {base}
                         </div>
                       </div>
                       {/* ===== */}
@@ -1099,7 +1162,8 @@ const OpenVaultPage = ({ match }) => {
                           Available to Withdraw
                         </div>
                         <div className="valid_div_inner_div_cont2">
-                          0.00 {asset} - {formData.stateCollateral} {asset}
+                          0.00 {asset} - {formData.stateCollateral}{' '}
+                          {asset}
                         </div>
                       </div>
 
@@ -1111,14 +1175,14 @@ const OpenVaultPage = ({ match }) => {
                           Available to Generate
                         </div>
                         <div className="valid_div_inner_div_cont2">
-                          0.00 {base} - {"  "}
+                          0.00 {base} - {'  '}
                           <NumberFormat
                             value={formData.stateMaxGenerate}
                             displayType="text"
                             thousandSeparator={true}
                             //  prefix="EUSD "
                           />
-                          {"  "} {base}
+                          {'  '} {base}
                         </div>
                       </div>
                       {/* ===== */}
@@ -1128,11 +1192,13 @@ const OpenVaultPage = ({ match }) => {
                         <div className="valid_div_inner_div_cont1">
                           Max gas fee
                         </div>
-                        <div className="valid_div_inner_div_cont2 red">n/a</div>
+                        <div className="valid_div_inner_div_cont2 red">
+                          n/a
+                        </div>
                       </div>
                     </div>
                   </div>
-
+                  {/* 
                   <div
                     style={{
                       display: "flex",
@@ -1150,7 +1216,7 @@ const OpenVaultPage = ({ match }) => {
                       checkBox={checkBox}
                       doUnluck={(e) => doUnluck(e)}
                     />{" "}
-                  </div>
+                  </div> */}
 
                   {/* {checkBox == false ? (
                     <button className="open_vault_input_btn" disabled={disable}>
@@ -1170,26 +1236,31 @@ const OpenVaultPage = ({ match }) => {
               </div>
             ) : null}
 
-            {sideStage == "locked" ? (
+            {sideStage == 'locked' ? (
               <div className="open_vault_area2">
                 <div className="open_vault_area2ss">
                   <div className="open_vault_area2a">
                     <div>
                       <Card>
-                        <CardHeader tag="h6" className="p-0 border-bottom-0">
+                        <CardHeader
+                          tag="h6"
+                          className="p-0 border-bottom-0"
+                        >
                           <Nav tabs fill pills>
                             <NavItem>
                               <NavLink
-                                active={activeTab == "payback"}
-                                onClick={() => setActiveTab("payback")}
+                                active={activeTab == 'payback'}
+                                onClick={() =>
+                                  setActiveTab('payback')
+                                }
                               >
                                 Payback
                               </NavLink>
                             </NavItem>
                             <NavItem>
                               <NavLink
-                                active={activeTab == "topup"}
-                                onClick={() => setActiveTab("topup")}
+                                active={activeTab == 'topup'}
+                                onClick={() => setActiveTab('topup')}
                               >
                                 Topup
                               </NavLink>
@@ -1197,8 +1268,10 @@ const OpenVaultPage = ({ match }) => {
 
                             <NavItem>
                               <NavLink
-                                active={activeTab == "withdraw"}
-                                onClick={() => setActiveTab("withdraw")}
+                                active={activeTab == 'withdraw'}
+                                onClick={() =>
+                                  setActiveTab('withdraw')
+                                }
                               >
                                 Withdraw
                               </NavLink>
@@ -1225,7 +1298,7 @@ const OpenVaultPage = ({ match }) => {
                                     readonly
                                     className="vault_input_vaulta"
                                   />
-                                  <div
+                                  {/* <div
                                     style={{
                                       display: "flex",
                                       alignItems: "center",
@@ -1244,11 +1317,11 @@ const OpenVaultPage = ({ match }) => {
                                       checkBox={checkBox}
                                       doUnluck={(e) => doUnluck(e)}
                                     />{" "}
-                                  </div>
+                                  </div> */}
                                   <div
                                     style={{
-                                      textAlign: "center",
-                                      width: "100%",
+                                      textAlign: 'center',
+                                      width: '100%',
                                     }}
                                   >
                                     <button
@@ -1256,16 +1329,16 @@ const OpenVaultPage = ({ match }) => {
                                       className="vault_pay_back_btn"
                                       // disabled={disable}
                                     >
-                                      Pay Back{" "}
+                                      Pay Back{' '}
                                       <span
                                         className="make_weight"
-                                        style={{ fontWeight: "700" }}
+                                        style={{ fontWeight: '700' }}
                                       >
                                         {numberWithCommas(
                                           parseFloat(
                                             chainLoanDetails.debt
                                           ).toFixed(3)
-                                        )}{" "}
+                                        )}{' '}
                                       </span>
                                       {base}
                                     </button>
@@ -1296,7 +1369,7 @@ const OpenVaultPage = ({ match }) => {
                                     onKeyUp={(e) => onTopup(e)}
                                     onChange={(e) => onTopup(e)}
                                   />
-                                  <div
+                                  {/* <div
                                     style={{
                                       display: "flex",
                                       alignItems: "center",
@@ -1315,11 +1388,11 @@ const OpenVaultPage = ({ match }) => {
                                       checkBox={checkBox}
                                       doUnluck={(e) => doUnluck(e)}
                                     />{" "}
-                                  </div>
+                                  </div> */}
                                   <div
                                     style={{
-                                      textAlign: "center",
-                                      width: "100%",
+                                      textAlign: 'center',
+                                      width: '100%',
                                     }}
                                   >
                                     <button
@@ -1352,7 +1425,7 @@ const OpenVaultPage = ({ match }) => {
                                     onKeyUp={(e) => onTopup(e)}
                                     onChange={(e) => onTopup(e)}
                                   />
-                                  <div
+                                  {/* <div
                                     style={{
                                       display: "flex",
                                       alignItems: "center",
@@ -1371,11 +1444,11 @@ const OpenVaultPage = ({ match }) => {
                                       checkBox={checkBox}
                                       doUnluck={(e) => doUnluck(e)}
                                     />{" "}
-                                  </div>
+                                  </div> */}
                                   <div
                                     style={{
-                                      textAlign: "center",
-                                      width: "100%",
+                                      textAlign: 'center',
+                                      width: '100%',
                                     }}
                                   >
                                     <button
@@ -1409,12 +1482,12 @@ const OpenVaultPage = ({ match }) => {
         keyboard={keyboard}
       >
         {/* <div className="container" style={{ background: "#f7f8fa" }}> */}
-        {stage == "unlock" ? (
+        {stage == 'unlock' ? (
           <div className="unlock_div">
             <div className="unlock_head">
-              Approve <b>Egoras</b> to spend{" "}
-              {task == "collateral" || task == "topup" ? asset : base} on your
-              behalf.
+              Approve <b>Egoras</b> to spend{' '}
+              {task == 'collateral' || task == 'topup' ? asset : base}{' '}
+              on your behalf.
             </div>
 
             <div className="unlock_input_div ">
@@ -1433,20 +1506,21 @@ const OpenVaultPage = ({ match }) => {
                 // style={{ padding: "0.9em 4.5em" }}
                 onClick={(e) => doUnluck(e)}
               >
-                {isLoading ? (
+                {/* {isLoading ? (
                   <FontAwesomeIcon icon={faCircleNotch} spin />
-                ) : null}{" "}
-                {checkBox == false ? ` Unlock ${asset}` : "Unlocked"}
+                ) : null}{" "} */}
+                {/* {checkBox == false ? ` Unlock ${asset}` : "Unlocked"} */}
+                Unlock
               </button>
             </div>
           </div>
         ) : null}
 
-        {stage == "loading" ? (
-          <div style={{ marginTop: "5em" }}>
+        {stage == 'loading' ? (
+          <div style={{ marginTop: '5em' }}>
             <p
               className="text-center loadingContainer"
-              style={{ fontSize: "54px" }}
+              style={{ fontSize: '54px' }}
             >
               <FontAwesomeIcon icon={faCircleNotch} spin />
             </p>
@@ -1454,9 +1528,9 @@ const OpenVaultPage = ({ match }) => {
           </div>
         ) : null}
 
-        {stage == "success" ? (
+        {stage == 'success' ? (
           <SuccessModal
-            successMessage={"Transaction was successful."}
+            successMessage={'Transaction was successful.'}
             click={(e) => {
               Continue(e);
             }}
@@ -1465,7 +1539,7 @@ const OpenVaultPage = ({ match }) => {
           />
         ) : null}
 
-        {stage == "error" ? (
+        {stage == 'error' ? (
           <ErrorModal
             errorMessage={text}
             click={(e) => {
@@ -1475,7 +1549,7 @@ const OpenVaultPage = ({ match }) => {
           />
         ) : null}
 
-        {stage == "connect" ? (
+        {stage == 'connect' ? (
           <div className=" text-center mt-4">
             <h1 className="text-center">
               <FontAwesomeIcon icon={faWallet} /> <br />

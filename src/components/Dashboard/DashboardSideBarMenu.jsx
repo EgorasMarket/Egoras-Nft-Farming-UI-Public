@@ -7,6 +7,8 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import HomeIcon from "@mui/icons-material/Home";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import StarsIcon from "@mui/icons-material/Stars";
+import ApprovalIcon from "@mui/icons-material/Approval";
 import CreditScoreTwoToneIcon from "@mui/icons-material/CreditScoreTwoTone";
 // import { AccountNavigation } from "./DashboardPages/AccountNavigation";
 import SearchIcon from "@mui/icons-material/Search";
@@ -59,15 +61,27 @@ const DashboardSideBarMenu = () => {
     if (linksActive === "/dashboard/lend/pool/detail") {
       setActiveMenuName("Pool Details");
     }
-    if (linksActive === "/dashboard/lend/pool/detail/branch/asset") {
+    if (
+      linksActive ===
+      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+    ) {
+      setActiveMenuName("Pool Details");
+    }
+    if (
+      linksActive ===
+      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+    ) {
+      setActiveMenuName("Pool Details");
+    }
+    if (linksActive === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
       setActiveMenuName("Pool Details");
     }
     if (linksActive === "/dashboard/lend/pool/detail/transactions") {
       setActiveMenuName("Pool Details");
     }
-    if (linksActive === "/dashboard/add") {
-      setActiveMenuName("Liquidity");
-    }
+    // if (linksActive === "/dashboard/add") {
+    //   setActiveMenuName("Liquidity");
+    // }
     if (linksActive === "/dashboard/whitepaper") {
       setActiveMenuName("Whitepaper");
     }
@@ -110,10 +124,19 @@ const DashboardSideBarMenu = () => {
     if (linksActive === "/dashboard/user") {
       setActiveBg("account");
     }
-    if (linksActive === "/dashboard/lend/pool/detail") {
+    if (
+      linksActive ===
+      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+    ) {
       setActiveBg("lend");
     }
-    if (linksActive === "/dashboard/lend/pool/detail/branch/asset") {
+    if (
+      linksActive ===
+      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+    ) {
+      setActiveBg("lend");
+    }
+    if (linksActive === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
       setActiveBg("lend");
     }
     if (linksActive === "/dashboard/lend/pool/detail/transactions") {
@@ -230,8 +253,8 @@ const DashboardSideBarMenu = () => {
                         : "sidebarListItem"
                     }
                   >
-                    <CreditScoreTwoToneIcon className="sidebarIcon" />
-                    Borrow
+                    <ApprovalIcon className="sidebarIcon" />
+                    Stake
                   </li>
                 </Link>
                 {/* ===================== */}
@@ -251,8 +274,8 @@ const DashboardSideBarMenu = () => {
                         : "sidebarListItem"
                     }
                   >
-                    <MonetizationOnIcon className="sidebarIcon" />
-                    Lend
+                    <StarsIcon className="sidebarIcon" />
+                    Earn
                   </li>
                 </Link>
                 {/* ===================== */}
@@ -282,7 +305,7 @@ const DashboardSideBarMenu = () => {
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
-                <Link
+                {/* <Link
                   to="/dashboard/add"
                   className="link"
                   id="pool"
@@ -298,7 +321,7 @@ const DashboardSideBarMenu = () => {
                     <OpacityIcon className="sidebarIcon" />
                     liquidity
                   </li>
-                </Link>
+                </Link> */}
 
                 {/* ===================== */}
                 {/* ===================== */}
@@ -366,10 +389,10 @@ const DashboardSideBarMenu = () => {
                         : "sidebarListItem"
                     }
                   >
-                    <CreditScoreTwoToneIcon className="sidebarIcon" />
-                    Borrow
+                    <ApprovalIcon className="sidebarIcon" />
+                    Stake
                   </li>
-                  <span className="hover_link_txt">Borrow</span>
+                  <span className="hover_link_txt">Stake</span>
                 </Link>
                 {/* ===================== */}
                 {/* ===================== */}
@@ -388,10 +411,10 @@ const DashboardSideBarMenu = () => {
                         : "sidebarListItem"
                     }
                   >
-                    <MonetizationOnIcon className="sidebarIcon" />
-                    Lend
+                    <StarsIcon className="sidebarIcon" />
+                    Earn
                   </li>
-                  <span className="hover_link_txt">Lend</span>
+                  <span className="hover_link_txt">Earn</span>
                 </Link>
                 {/* ===================== */}
                 {/* ===================== */}
@@ -424,7 +447,7 @@ const DashboardSideBarMenu = () => {
                 {/* ===================== */}
                 {/* ===================== */}
                 {/* ===================== */}
-                <Link
+                {/* <Link
                   to="/dashboard/add"
                   id="pool"
                   className="link hover_link"
@@ -441,7 +464,7 @@ const DashboardSideBarMenu = () => {
                     Liquidity
                   </li>
                   <span className="hover_link_txt">Liquidity</span>
-                </Link>
+                </Link> */}
 
                 {/* ===================== */}
                 {/* ===================== */}
@@ -463,7 +486,7 @@ const DashboardSideBarMenu = () => {
                     <AccountCircleIcon className="sidebarIcon" />
                     Account
                   </li>
-                  <span className="hover_link_txt">Liquidity</span>
+                  <span className="hover_link_txt">Account</span>
                 </Link>
                 {/* ===================== */}
                 {/* ===================== */}
@@ -491,27 +514,22 @@ const DashboardSideBarMenu = () => {
             <hr className="hrr" />
             <div className="social_handles_cont">
               <div className="social_handles_cont_div">
-                <a href="">
+                <a href="https://www.facebook.com/egorasmarket/">
                   <FacebookRoundedIcon className="socail_links_icon" />
                 </a>
-                <a href="">
+                <a href="https://t.me/egorasmarket">
                   <TelegramIcon className="socail_links_icon" />
                 </a>
-                <a href="">
+                <a href="https://twitter.com/Egorasmarket?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor">
                   <TwitterIcon className="socail_links_icon" />
                 </a>
-                <a href="">
+                <a href="https://ng.linkedin.com/company/egorasmarket">
                   <LinkedInIcon className="socail_links_icon" />
                 </a>
-                <a href="">
+                <a href="https://egoras.medium.com/">
                   <span className="medium_icon">M</span>
                 </a>
               </div>
-              {/* <div className="social_handles_cont_div">
-                <InstagramIcon />
-                {/* <YouTubeIcon /> */}
-              {/* <TwitterIcon /> */}
-              {/* </div> */}
             </div>
           </div>
         </div>

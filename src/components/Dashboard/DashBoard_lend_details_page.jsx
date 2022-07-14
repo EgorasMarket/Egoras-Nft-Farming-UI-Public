@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../../css/dashboardLend_details_page.css";
 import { Link } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -9,17 +9,38 @@ import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import CloseIcon from "@mui/icons-material/Close";
 import { parseEther, formatEther } from "@ethersproject/units";
 import {
+  SuccessModal,
+  ErrorModal,
+} from "../Dashboard/DashBoardPages/Modal/Success_Error_Component";
+import { numberWithCommas } from "../static/static";
+import {
+  faCheckCircle,
+  faCircleNotch,
+  faChevronRight,
+  faArrowRight,
+  faLock,
+  faWindowClose,
+  faWallet,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Checkbox } from "@mui/material";
+import {
   Web3ReactProvider,
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+import axios from "axios";
+import { config } from "../../actions/Config";
+import { API_URL as api_url } from "../../actions/types";
 // import DashboardIcon from "@mui/icons-material/Dashboard";
 // import Accordion from "../Accordion";
 // import InventoryIcon from "@mui/icons-material/Inventory";
 // import CloseIcon from "@mui/icons-material/Close";
 // import ReceiptIcon from "@mui/icons-material/Receipt";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import CopyAllIcon from "@mui/icons-material/CopyAll";
+// import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+// import CopyAllIcon from "@mui/icons-material/CopyAll";
+import { UserContext } from "../context/Context";
+
 import {
   lendUS,
   takeDividend,
@@ -29,24 +50,59 @@ import {
   userStats,
   system,
   burnAccumulatedDividend,
+  checkAllowance,
+  unluckToken,
+  transactReceipt,
+  getPrice,
+  getTickerInfo,
+  tokenBalance,
+  open,
+  getLatestLoan,
+  repay,
+  topup,
+  draw,
+  checkAllowanceL,
+  unluckToken2,
 } from "../../web3/index";
-const DashBoard_lend_details_page = () => {
+const DashBoard_lend_details_page = ({ match }) => {
+  const [txnhash, setTxnHash] = useState(match.params.branchAddress);
+  const { BranchDetails, rumuName, agipName, oyName } = useContext(UserContext);
+  console.log(match.params.branchAddress);
   const context = useWeb3React();
+  const [LoanAssets, setLoanAssets] = useState([]);
+
   const [activeLink, setActiveLink] = useState("");
-  const [loanId, setLoanId] = useState();
+  const [checkBox, setCheckBox] = useState(false);
+  const [errMessage, setErrMessage] = useState("");
+
+  // const [loanId, setLoanId] = useState();
   const [assetModal, setAssetModal] = React.useState(false);
+  const [LoanId, setLoanId] = React.useState("");
   const [backModal, setBackModal] = React.useState(false);
   const [branch, setBranch] = React.useState("Branch");
   const [chainLoanDetails, setChainLoanDetails] = useState({});
+  const [disable, setDisable] = useState(true);
   const [text, setText] = useState(
     "Transacting with blockchain, please wait..."
   );
+  const [assetDetailModal, setAssetDetailModal] = useState("");
   const [hash, setHash] = useState("");
   const [unlocking, setUnlocking] = useState(false);
   const [modal, setModal] = useState(false);
   const [task, setTask] = useState("collateral");
-  const [stage, setStage] = useState("connect");
+  const [stage, setStage] = useState("back");
   const [isLoading, setIsLoading] = useState(false);
+  const [asset, setAsset] = useState("");
+  const [base, setBase] = useState("");
+
+  const [loanMetaData, setLoanMetaData] = useState({
+    base: "",
+    asset: "",
+    live: "",
+    maxLoan: 0.0,
+    ticker: "",
+    creator: "",
+  });
   const {
     connector,
     library,
@@ -66,579 +122,70 @@ const DashBoard_lend_details_page = () => {
     // setBackModal(!backModal);
   };
 
-  const toggleBackModal = () => {
-    setBackModal(!backModal);
-    setAssetModal(!assetModal);
+  // const toggleBackModal = () => {
+  //   setBackModal(!backModal);
+  //   setAssetModal(!assetModal);
+  // };
+
+  const ChangeAssetDetailModal = (e) => {
+    let currentTarget = e.currentTarget.id;
+    console.log(currentTarget);
+    setAssetDetailModal(currentTarget);
+  };
+
+  const Continue = async (e) => {
+    setStage("back");
+    setText("");
+    // setModal(!modal);
+    // window.location.reload();
+  };
+  const closeAssetDetailModal = () => {
+    setAssetDetailModal("");
+    console.log("i am not here");
   };
   const [activeBtn, setActivrBtn] = useState("Ongoing");
   const currentPage = window.location.pathname;
+  const urlArr = currentPage.split("/");
   useEffect(() => {
-    if (currentPage === "/dashboard/lend/pool/detail") {
+    if (currentPage === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
       setActiveLink("Overview");
-    } else if (currentPage === "/dashboard/lend/pool/detail/branch/asset") {
+    } else if (
+      currentPage ===
+      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+    ) {
       setActiveLink("Asset");
+    } else if (
+      currentPage ===
+      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+    ) {
+      setActiveLink("transaction");
     }
   });
+  useEffect(() => {
+    axios
+      .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
+      .then((data) => {
+        console.log(data.data.payload, "powerful333333");
 
-  // const toggleImgDiv = () => {
-  //   setImgDiv(!imgDiv);
-  // };
+        // console.log(txnhash);
+        // setBranches(data.data.payload);
+        // setBranchDetails({
+        //   branchName: data.data.payload[0].name,
+        //   amount: data.data.payload[0].amount,
+        //   funded: data.data.payload[0].funded,
+        // });
+        setLoanAssets(data.data.payload);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, []);
 
-  // const ChangeAssetDetailModal = (e) => {
-  //   let currentTarget = e.currentTarget.id;
-  //   console.log(currentTarget);
-  //   setAssetDetailModal(currentTarget);
-  // };
-  // const closeAssetDetailModal = () => {
-  //   setAssetDetailModal(0);
-  //   console.log("i am not here");
-  // };
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);
   };
-  const assets2 = [
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 1,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 2,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Closed",
-    },
-    {
-      id: 3,
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 4,
 
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Closed",
-    },
-    {
-      id: 5,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Closed",
-    },
-    {
-      id: 6,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 7,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 8,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 9,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Closed",
-    },
-    {
-      id: 10,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Closed",
-    },
-    {
-      id: 11,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Closed",
-    },
-    {
-      id: 12,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 13,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Closed",
-    },
-    {
-      id: 14,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-    {
-      id: 15,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Closed",
-    },
-    {
-      id: 16,
-
-      img: "/img/pool_asset_icon.png",
-      PoolName: "Real-World Asset Market",
-      Date: "June 3rd 2022",
-      EndDate: "September 3rd 2022",
-      txHash:
-        "0x1b0d1ff88db603ae22581ba820d1a27cd21b853d956219ded76a28ea83426bf7",
-      Amount: "150,000",
-      Fee: "13.10",
-      Status: "Ongoing",
-    },
-  ];
+  // console.log(c, b, d);
 
   const handleBackChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -647,38 +194,107 @@ const DashBoard_lend_details_page = () => {
   const submitBackedAmount = () => {
     console.log(formData, "=====formdata=====");
   };
+  const doUnluck = async (e) => {
+    setText("Transacting with blockchain, please wait...");
+    setStage("loading");
+    setIsLoading(true);
+    //formData.stateCollateral.toString()
+    let ret = await unluckToken2(
+      parseEther("180000000000000000000000000000000000", "wei").toString(),
+      library.getSigner()
+    );
+    if (ret.status == true) {
+      localStorage.setItem("unlocking", true);
+      localStorage.setItem("unlockingHash", ret.message);
+      setText("Unlocking please wait aleast 1/2 minutes");
+      // setCheckBox(true);
+      // setDisable(false);
+    } else {
+      if (ret.message.code == 4001) {
+        setText(ret.message.message);
+        // setCheckBox(false);
+        // setDisable(true);
+      }
+
+      setStage("error");
+      setIsLoading(false);
+      // setCheckBox(false);
+      // setDisable(true);
+    }
+  };
+
   const BackLoan = async (e) => {
-    // setTask("paypack");
+    let currentTarget = e.currentTarget.id;
+    console.log(currentTarget);
+    console.log(BackAmount);
+    setStage("loading");
+    setIsLoading(true);
     // setUnlocking(false);
     // setStage("loading");
-    // setModal(!modal);
     // setIsLoading(true);
-    // setText("Withdrawing, please wait...");
-    let ret = await lendUS(
+    setText("Lendind, please wait...");
+    let check = await checkAllowanceL(
       account,
       parseEther(formData.BackAmount.toString(), "wei").toString(),
       library.getSigner()
     );
-    console.log(ret);
-    // if (ret.status == true) {
-    //   // localStorage.setItem("unlocking", true);
-    //   // localStorage.setItem("unlockingHash", ret.message.hash);
-    //   // setText("Sending token please wait aleast 1/2 minutes");
-    //   // setHash(ret.message.hash);
-    //   // setStage("success");
-    //   console.log(ret);
-    // } else if (ret.status == false) {
-    //   if (ret.message.code < 0) {
-    //     setText(ret.message.data.message);
-    //   } else if (ret.message.code == 4001) {
-    //     setText(ret.message.message);
-    //   }
-    //   setStage("error");
-    //   setIsLoading(false);
-    // }
+    console.log(check);
+    if (check.status == true) {
+      let ret = await lendUS(
+        txnhash,
+        parseEther(formData.BackAmount.toString(), "wei").toString(),
+        currentTarget,
+        library.getSigner()
+      );
+
+      if (ret.status == true) {
+        localStorage.setItem("unlocking", true);
+        localStorage.setItem("unlockingHash", ret.message.hash);
+        setText("Sending token please wait aleast 1/2 minutes");
+        setHash(ret.message.hash);
+        // setStage("success");
+        console.log(ret);
+      } else if (ret.status == false) {
+        if (ret.message.code < 0) {
+          setText(ret.message.data.message);
+        } else if (ret.message.code == 4001) {
+          setText(ret.message.message);
+        }
+        setStage("error");
+        setIsLoading(false);
+      }
+    } else {
+      // setUnlocking(true);
+      setStage("unlock");
+      setIsLoading(false);
+    }
   };
+
+  setInterval(() => {
+    if (localStorage.getItem("unlocking") == "true") {
+      // setCheckBox(true);
+      // setDisable(false);
+
+      transactReceipt(localStorage.getItem("unlockingHash"), library).then(
+        function (env) {
+          // console.log("running Interval", env);
+          if (env.status == true && env.message !== null) {
+            if (env.message.confirmations > 2) {
+              setStage("success");
+              setHash(localStorage.getItem("unlockingHash"));
+              setIsLoading(false);
+
+              localStorage.setItem("unlocking", false);
+            }
+          }
+        }
+      );
+    } else {
+      // setStage("error");
+    }
+  }, 7000);
   return (
-    <div className="other2">
+    <div className="other2 asset_other2">
       {/* get started section start */}
       {/* ============================================================ */}
       {/* ============================================================ */}
@@ -691,7 +307,7 @@ const DashBoard_lend_details_page = () => {
           <div className="pool_deatail_area">
             <div className="pool_lending_pages_links">
               <Link
-                to="/dashboard/lend/pool/detail"
+                to={`/dashboard/lend/pool/${txnhash}/detail`}
                 className={
                   activeLink === "Overview"
                     ? "pool_lend_details_link_active"
@@ -703,7 +319,7 @@ const DashBoard_lend_details_page = () => {
               </Link>
               {/* <span class="vertical_ruleB"></span> */}
               <Link
-                to="/dashboard/lend/pool/detail/branch/asset"
+                to={`/dashboard/lend/pool/detail/branch/${txnhash}/asset`}
                 className={
                   activeLink === "Asset"
                     ? "pool_lend_details_link_active"
@@ -715,8 +331,12 @@ const DashBoard_lend_details_page = () => {
               </Link>
               {/* <span class="vertical_ruleB"></span> */}
               <Link
-                to="/dashboard/lend/pool/detail/transactions"
-                className="pool_lend_details_link"
+                to={`/dashboard/lend/pool/detail/${txnhash}/transactions`}
+                className={
+                  activeLink === "transaction"
+                    ? "pool_lend_details_link_active"
+                    : "pool_lend_details_link"
+                }
               >
                 <ReceiptIcon className="asset_overview_link_icon" />
                 Transactions
@@ -725,13 +345,21 @@ const DashBoard_lend_details_page = () => {
             <div className="pool_detail_heading">
               <div className="pool_detail_heading_area1">
                 <img
-                  src="/img/pool_asset_icon.png"
+                  src={
+                    oyName === true
+                      ? "/img/oyigbo_icon.svg"
+                      : agipName === true
+                      ? "/img/agip_icon.svg"
+                      : rumuName === true
+                      ? "/img/rumu_icon.svg"
+                      : null
+                  }
                   alt=""
                   className="pool_detail_heading_area1_img"
                 />
                 <div className="pool_detail_heading_area1_txt_cont">
                   <div className="pool_detail_heading_area1_txt_cont_1">
-                    Branch Series 3 (1754 Factory){" "}
+                    {BranchDetails.branchName} branch
                     {/* <div className="pool_detail_investmentcapacity_box">
                       {" "}
                       41.2M Engn
@@ -767,7 +395,7 @@ const DashBoard_lend_details_page = () => {
 
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
-                  3 months
+                  6 months
                 </div>
                 <div className="pool_detail_sub_area1_area1_cont2">
                   Asset Maturity
@@ -777,27 +405,17 @@ const DashBoard_lend_details_page = () => {
 
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
-                  10.75 <span className="asset_symbol"> %</span>
+                  13 <span className="asset_symbol"> %</span>
                 </div>
                 <div className="pool_detail_sub_area1_area1_cont2">
-                  Senior APY(30 days)
+                  Estimated APY(30 days)
                 </div>
               </div>
               <span className="vertical_rule"></span>
-
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
-                  48.45 <span className="asset_symbol"> %</span>
-                </div>
-                <div className="pool_detail_sub_area1_area1_cont2">
-                  Junior APY(90 days)
-                </div>
-              </div>
-              <span className="vertical_rule"></span>
-
-              <div className="pool_detail_sub_area1_area1">
-                <div className="pool_detail_sub_area1_area1_cont1">
-                  8,336,195 <span className="asset_symbol"> Engn</span>
+                  {numberWithCommas(parseInt(BranchDetails.amount).toFixed(2))}{" "}
+                  <span className="asset_symbol"> Engn</span>
                 </div>
                 <div className="pool_detail_sub_area1_area1_cont2">
                   Pool Value
@@ -814,29 +432,44 @@ const DashBoard_lend_details_page = () => {
               <div className="Asset_Originator_Details_cont_body">
                 <div className="Asset_Originator_Details_cont_body_head_img_cont">
                   <img
-                    src="/img/branch_detail_img.png"
+                    src={
+                      oyName === true
+                        ? "/img/oyigbo_icon2.svg"
+                        : agipName === true
+                        ? "/img/agip_icon2.svg"
+                        : rumuName === true
+                        ? "/img/rumu_icon2.svg"
+                        : null
+                    }
                     className="Asset_Originator_Details_cont_body_head_img"
                   />
                 </div>
                 <div className="Asset_Originator_Details_cont_body_txt">
-                  Branch is a financial technology company that lends money to
-                  consumers using machine learning algorithms to determine
-                  credit worthiness via customers' smartphones. Branch was
-                  founded in 2015 and has operations in Kenya, Nigeria,
-                  Tanzania, Mexico and India, and has since originated over
-                  $500M in loans to over 4 millions borrowers. This Tinlake pool
-                  will consist of tranches of a secured non convertible
-                  debenture with a maturity of 3 years backed by a portfolio of
-                  loans made to customers.The current weighted average loan
-                  balance is $49 (ranging from $6 to $2,500) with average
-                  maturity of 70 days.
+                  Egoras Technologies Limited Agip Branch is located at
+                  Kilometre 7 Ikwere Road Rumeme, beside Rivers State College of
+                  Health Science and Technologies. Our aim is to render improved
+                  quality financial services and as well lower the cost of the
+                  services in these communities around through
+                  micro-collateralized loans. The pool seeks to generate
+                  uncorrelated and excess risk-adjusted returns to its investors
+                  by providing secured loans to individuals and small businesses
+                  in the community. Egoras Technologies Limited Agip Branch
+                  started operations on the 6th of September, 2021 and has since
+                  empowered over 1,500 customers with about ₦76,407,085 in loans
+                  .
                 </div>
                 <div className="Asset_Originator_Details_cont_body_issuer_cont">
                   <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
                     Issuer
                   </div>
                   <div className="Asset_Originator_Details_cont_body_issuer_cont_txt">
-                    1754 Factory Series 3
+                    {oyName === true
+                      ? "Egoras Oyigbo Branch"
+                      : agipName === true
+                      ? "Egoras Agip Branch"
+                      : rumuName === true
+                      ? "Egoras Rumukwrushi Branch"
+                      : null}
                   </div>
                 </div>
               </div>
@@ -858,13 +491,16 @@ const DashBoard_lend_details_page = () => {
                         Asset value
                       </div>
                       <div className="pool_status_Details_cont_body1_sub_conts_2">
-                        8,336,195 Engn
+                        {numberWithCommas(
+                          parseInt(BranchDetails.amount).toFixed(2)
+                        )}{" "}
+                        Engn
                       </div>
                     </div>
                     <hr className="custom_hr" />
                     <div className="pool_status_Details_cont_body1_sub_conts">
                       <div className="pool_status_Details_cont_body1_sub_conts_1">
-                        Average financing fee
+                        Estimated APY
                       </div>
                       <div className="pool_status_Details_cont_body1_sub_conts_2">
                         13.0%
@@ -877,7 +513,7 @@ const DashBoard_lend_details_page = () => {
                         Average maturity
                       </div>
                       <div className="pool_status_Details_cont_body1_sub_conts_2">
-                        3 months
+                        6 months
                       </div>
                     </div>
                   </div>
@@ -891,19 +527,13 @@ const DashBoard_lend_details_page = () => {
                         Available Liquidity
                       </div>
                       <div className="pool_status_Details_cont_body1_sub_conts_2">
-                        0 Engn
+                        {numberWithCommas(
+                          parseInt(BranchDetails.funded).toFixed(2)
+                        )}{" "}
+                        Engn
                       </div>
                     </div>
                     <hr className="custom_hr" />
-
-                    <div className="pool_status_Details_cont_body1_sub_conts">
-                      <div className="pool_status_Details_cont_body1_sub_conts_1">
-                        Cash Drag
-                      </div>
-                      <div className="pool_status_Details_cont_body1_sub_conts_2">
-                        0%
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -934,95 +564,204 @@ const DashBoard_lend_details_page = () => {
             <div className="asset_list_body_head2">
               {/* <div className="asset_list_body_head_tab1">Asset Id</div> */}
               <div className="asset_list_body_head_tab1">Asset Name</div>
-              <div className="asset_list_body_head_tab3">Date & Time</div>
-              <div className="asset_list_body_head_tab4">Maturity Date</div>
+              <div className="asset_list_body_head_tab3 date_time_head">
+                Date & Time
+              </div>
+              <div className="asset_list_body_head_tab4 date_duration_row22">
+                Duration
+              </div>
               <div className="asset_list_body_head_tab5">Amount(Engn)</div>
-              <div className="asset_list_body_head_tab6">Financing Fee</div>
+              <div className="asset_list_body_head_tab6 finance_fee_details_page">
+                Financing Fee
+              </div>
               <div className="asset_list_body_head_tab7">Action</div>
             </div>
             <div className="asset_list_body_body_cont">
               {activeBtn === "Ongoing"
-                ? assets2
-                    .filter((person) => person.Status == "Ongoing")
-                    .map((data) => (
+                ? LoanAssets.filter((person) => person.state == "OPEN").map(
+                    (data) => (
                       <div
                         className="asset_list_body_body_cont_1"
-                        id={data.id}
+                        id={data.newLoanID}
+                        onClick={ChangeAssetDetailModal}
                         // onClick={ChangeAssetDetailModal}
                       >
                         {/* <div className="asset_list_body_body_cont_1a">
                                 {data.id}
                               </div> */}
                         <div className="asset_list_body_body_cont_1a">
-                          {data.PoolName}
+                          {/* {data.title} */}
+                          {data.title.substring(0, 20) + "..."}
                         </div>
 
-                        <div className="asset_list_body_body_cont_1c">
-                          {data.Date}
+                        <div className="asset_list_body_body_cont_1c date_time_row">
+                          {data.createdAt.slice(0, 10)}
                         </div>
-                        <div className="asset_list_body_body_cont_1d">
-                          {data.EndDate}
+                        <div className="asset_list_body_body_cont_1d date_duration_row22">
+                          {data.length} month(s)
                         </div>
                         <div className="asset_list_body_body_cont_1e">
-                          {data.Amount}
+                          {numberWithCommas(parseInt(data.amount).toFixed(2))}
                         </div>
-                        <div className="asset_list_body_body_cont_1f">
-                          {data.Fee}%
+                        <div className="asset_list_body_body_cont_1f finance_fee_details_page_row">
+                          13 %
                         </div>
                         <div className="asset_list_body_body_cont_1g">
                           <button
-                            onClick={toggleBackModal}
+                            onClick={ChangeAssetDetailModal}
                             className="back_btn"
                           >
-                            Back
+                            Lend
                           </button>
                         </div>
                       </div>
-                    ))
+                    )
+                  )
                 : null}
             </div>
             {/* </div> */}
           </div>
         </div>
       ) : null}
+      {stage == "back" ? (
+        <>
+          {LoanAssets.map((data) => (
+            <>
+              {assetDetailModal == data.newLoanID ? (
+                <div className="bacModal_div">
+                  <div className="back_modal_container">
+                    <div className="back_modal_cont">
+                      <CloseIcon
+                        className="closeBackModalIcon"
+                        onClick={closeAssetDetailModal}
+                      />
+                      <div className="back_modal_heading">Back this pool</div>
 
-      {backModal === true ? (
+                      <div className="back_Modal_input_area">
+                        <div className="back_modal_input_amnt_head">
+                          Input amount
+                        </div>
+                        <span className="input_space">
+                          <AccountBalanceWalletIcon className="input_dollar_sign" />
+                          <input
+                            type="number"
+                            className="back_modal_input"
+                            placeholder="0.00 Engn"
+                            name="BackAmount"
+                            value={BackAmount}
+                            onChange={handleBackChange}
+                          />
+                          <div className="back_modal_input_amnt_head_minimum">
+                            Minimum Amount: 30,000.00 Engn
+                          </div>
+                        </span>
+                      </div>
+                      <div className="amount_earned_mnthly">
+                        Expected APY:
+                        <span className="amount_earned_mnthly_value"> 13%</span>
+                      </div>
+                      <div className="back_loan_btn_div">
+                        <button
+                          className="back_loan_btn"
+                          onClick={BackLoan}
+                          id={data.newLoanID}
+                          // disabled={disable}
+                        >
+                          Fund
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+            </>
+          ))}
+        </>
+      ) : null}
+
+      {stage == "loading" ? (
+        <div className="bacModal_div">
+          <div className="back_modal_container">
+            <div className="back_modal_cont">
+              <FontAwesomeIcon icon={faCircleNotch} spin />
+              <p className="text-center">{text}</p>
+            </div>
+          </div>
+        </div>
+      ) : null}
+      {stage == "unlock" ? (
         <div className="bacModal_div">
           <div className="back_modal_container">
             <div className="back_modal_cont">
               <CloseIcon
                 className="closeBackModalIcon"
-                onClick={toggleBackModal}
+                onClick={() => {
+                  setStage("back");
+                }}
               />
-              <div className="back_modal_heading">Back this pool</div>
 
-              <div className="back_Modal_input_area">
-                <div className="back_modal_input_amnt_head">Input amount</div>
-                <span className="input_space">
-                  <AccountBalanceWalletIcon className="input_dollar_sign" />
-                  <input
-                    type="number"
-                    className="back_modal_input"
-                    placeholder="0.00 Engn"
-                    name="BackAmount"
-                    value={BackAmount}
-                    onChange={handleBackChange}
-                  />
-                  <div className="back_modal_input_amnt_head_minimum">
-                    Minimum Amount: 50,000.00 Engn
-                  </div>
-                </span>
+              <div className="unlock_head">
+                Approve <b>Egoras</b> to spend{" "}
+                {task == "collateral" || task == "topup" ? asset : base} on your
+                behalf.
               </div>
-              <div className="amount_earned_mnthly">
-                Expected APY:
-                <span className="amount_earned_mnthly_value"> 13%</span>
+
+              <div className="unlock_input_div ">
+                <input
+                  type="text"
+                  name="stateAmountToGenerate"
+                  value={formData.BackAmount}
+                  readonly
+                  className="unlock_input"
+                />
               </div>
-              <div className="back_loan_btn_div">
-                <button className="back_loan_btn" onClick={BackLoan}>
-                  Fund
+
+              <div className="Unloc_btn_div">
+                <button
+                  className="LoginBtn"
+                  // style={{ padding: "0.9em 4.5em" }}
+                  onClick={(e) => doUnluck(e)}
+                >
+                  {isLoading ? (
+                    <FontAwesomeIcon icon={faCircleNotch} spin />
+                  ) : null}{" "}
+                  {/* {checkBox == false ? ` Unlock ${asset}` : "Unlocked"}
+                   */}
+                  Unlock
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+      ) : // ==========
+      // ==========
+      // ==========
+
+      null}
+      {stage == "success" ? (
+        <div className="bacModal_div">
+          <div className="back_modal_container">
+            <SuccessModal
+              successMessage={text}
+              click={(e) => {
+                Continue(e);
+              }}
+              SuccessHead="Success"
+              hash={hash}
+            />
+          </div>
+        </div>
+      ) : null}
+      {stage == "error" ? (
+        <div className="bacModal_div">
+          <div className="back_modal_container">
+            <ErrorModal
+              errorMessage={text}
+              click={(e) => {
+                Continue(e);
+              }}
+              ErrorHead="Error"
+            />
           </div>
         </div>
       ) : null}

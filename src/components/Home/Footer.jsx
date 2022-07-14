@@ -38,6 +38,21 @@ const Footer = () => {
     if (currentPage === "/dashboard/lend") {
       setShowFooter(false);
     }
+    if (
+      currentPage ===
+      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+    ) {
+      setShowFooter(false);
+    }
+    if (currentPage === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
+      setShowFooter(false);
+    }
+    if (
+      currentPage ===
+      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+    ) {
+      setShowFooter(false);
+    }
     if (currentPage === "/dashboard/lend/pool/detail/branch/asset") {
       setShowFooter(false);
     }

@@ -1003,7 +1003,7 @@ const File = () => {
                   <br />
                   <a
                     className="btn btn-link text-success"
-                    href={"https://testnet.bscscan.com/tx/" + hash}
+                    href={"https://bscscan.com/tx/" + hash}
                     target="_blank"
                   >
                     View on bscscan.com

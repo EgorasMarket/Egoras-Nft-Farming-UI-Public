@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import SearchIcon from "@mui/icons-material/Search";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import SearchIcon from '@mui/icons-material/Search';
 // import {
 //   LineChart,
 //   Line,
@@ -12,14 +12,14 @@ import SearchIcon from "@mui/icons-material/Search";
 //   ResponsiveContainer,
 // } from "recharts";
 
-import "../../../css/dashboardanalytics.css";
+import '../../../css/dashboardanalytics.css';
 
 const DashBoardAnalytics = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const [categoryBtn, setCategoryBtn] = useState("All");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [categoryBtn, setCategoryBtn] = useState('All');
+  const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
 
   const assets = [
@@ -32,12 +32,20 @@ const DashBoardAnalytics = () => {
     //   ratio: "170%",
     // },
     {
-      img: "/img/egc-icon.svg",
-      name: "Egoras Credit",
-      type: "EGC",
-      eusd_Avail: "90M",
-      stable: "0.50%",
-      ratio: "120%",
+      img: '/img/egc-icon.svg',
+      name: 'Egoras Credit',
+      type: 'EGC',
+      eusd_Avail: '90M',
+      stable: '0.0%',
+      ratio: '120%',
+    },
+    {
+      img: '/img/egc-icon.svg',
+      name: 'Egoras Right',
+      type: 'EGR',
+      eusd_Avail: '90M',
+      stable: '0.0%',
+      ratio: '120%',
     },
   ];
   const handleSearchChange = (event) => {
@@ -45,19 +53,22 @@ const DashBoardAnalytics = () => {
   };
   useEffect(() => {
     const results = assets.filter((person) =>
-      person.name.toString().toLowerCase().includes(searchTerm.toLowerCase())
+      person.name
+        .toString()
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase())
     );
     setSearchResults(results);
   }, [searchTerm]);
   const triggerAll = () => {
-    setCategoryBtn("All");
+    setCategoryBtn('All');
   };
 
   const triggerPopular = () => {
-    setCategoryBtn("Popular");
+    setCategoryBtn('Popular');
   };
   const triggerStable = () => {
-    setCategoryBtn("Stable");
+    setCategoryBtn('Stable');
   };
   // const [active, setActive] = useState("Swap");
   // const [percentBtn, setPercentBtn] = useState("");
@@ -89,26 +100,18 @@ const DashBoardAnalytics = () => {
               <div className="assets-cont-header-arae-btns">
                 <button
                   className={
-                    categoryBtn === "All" ? "assets-header1" : "assets-header2"
+                    categoryBtn === 'All'
+                      ? 'assets-header1'
+                      : 'assets-header2'
                   }
                   onClick={triggerAll}
                 >
                   All assets
                 </button>
-                <button
-                  className={
-                    categoryBtn === "Stable"
-                      ? "assets-header1"
-                      : "assets-header2"
-                  }
-                  onClick={triggerStable}
-                >
-                  Stablecoins
-                </button>
               </div>
 
               <div className="search-input">
-                {" "}
+                {' '}
                 <input
                   type="search"
                   name="search"
@@ -117,18 +120,20 @@ const DashBoardAnalytics = () => {
                   placeholder="Search..."
                   value={searchTerm}
                   onChange={handleSearchChange}
-                ></input>{" "}
+                ></input>{' '}
                 <SearchIcon className="search-icon" />
               </div>
             </div>
             <table className="assets-table">
               <thead className="assets-category-titles">
                 <tr className="assets">
-                  <th className="assets-category-titles-heading1">Asset</th>
-                  <th className="assets-category-titles-heading1">Type</th>
-                  <th className="assets-category-titles-heading1 right">
-                    ENGN Available
+                  <th className="assets-category-titles-heading1">
+                    Asset
                   </th>
+                  <th className="assets-category-titles-heading1">
+                    Type
+                  </th>
+
                   <th className="assets-category-titles-heading1 right">
                     Stable Fee
                   </th>
@@ -153,7 +158,7 @@ const DashBoardAnalytics = () => {
                 className="assets-table-body popular-categories"
                 id="popular-categories"
               >
-                {" "}
+                {' '}
                 {/* =============== */}
                 {/* =============== */}
                 {/* =============== */}
@@ -167,27 +172,33 @@ const DashBoardAnalytics = () => {
                           className="assets-list-icon"
                         />
 
-                        <div className="assets-data-name">{asset.name}</div>
+                        <div className="assets-data-name">
+                          {asset.name}
+                        </div>
                       </div>
                     </td>
                     <td className="assets-category-data1">
-                      <div className="assets-data-name">{asset.type}</div>
+                      <div className="assets-data-name">
+                        {asset.type}
+                      </div>
                     </td>
-                    <td className="assets-category-data1b">
-                      <div className="assets-data-name">{asset.eusd_Avail}</div>
-                    </td>
+
                     <td className="assets-category-data1b stable-content">
-                      <div className="assets-data-name ">{asset.stable}</div>
+                      <div className="assets-data-name ">
+                        {asset.stable}
+                      </div>
                     </td>
                     <td className="assets-category-data1b ratio-content">
-                      <div className="assets-data-name ">{asset.ratio}</div>
+                      <div className="assets-data-name ">
+                        {asset.ratio}
+                      </div>
                     </td>
                     <td className="assets-category-data-last">
                       <div className="assets-data-name-last">
                         <a
                           href={`vault/${asset.type}/ENGN`}
                           className="assets-collateralize-button"
-                          style={{ border: "none" }}
+                          style={{ border: 'none' }}
                         >
                           Open Vault
                         </a>
