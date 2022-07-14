@@ -32,7 +32,6 @@ function App() {
       setCClass(true);
     }
   });
-
   const togglemakeDark = () => {
     if (localStorage.getItem("uiMode") == "light") {
       localStorage.setItem("uiMode", "dark");

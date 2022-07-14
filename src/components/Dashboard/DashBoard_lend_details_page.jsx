@@ -624,7 +624,7 @@ const DashBoard_lend_details_page = ({ match }) => {
               </div>
               <div className="asset_list_body_head_tab5">Funding Progress</div>
               <div className="asset_list_body_head_tab6 finance_fee_details_page">
-                Financing Fee
+                Estimated APY
               </div>
               <div className="asset_list_body_head_tab7">Action</div>
             </div>

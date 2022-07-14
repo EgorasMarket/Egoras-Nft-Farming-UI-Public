@@ -230,15 +230,15 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
       localStorage.setItem("smallSidetoken", "not_small");
     }
   };
-  // const web3 = new Web3(window.ethereum);
-  // useEffect(async () => {
-  //   if (account) {
-  //     const getBalance = await web3.eth.getBalance(account);
-  //     const ethBalance = web3.utils.fromWei(getBalance, "ether");
-  //     console.log(ethBalance);
-  //     setCoinBalance(parseFloat(ethBalance).toFixed(3));
-  //   }
-  // }, [coinBalance, account]);
+  const web3 = new Web3(window.ethereum);
+  useEffect(async () => {
+    if (account) {
+      const getBalance = await web3.eth.getBalance(account);
+      const ethBalance = web3.utils.fromWei(getBalance, "ether");
+      console.log(ethBalance);
+      setCoinBalance(parseFloat(ethBalance).toFixed(3));
+    }
+  }, [coinBalance, account]);
   const toggleDisconnectDiv = () => {
     setDisconnectDiv(!disconnetDiv);
   };

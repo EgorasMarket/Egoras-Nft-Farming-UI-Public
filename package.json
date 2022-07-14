@@ -22,7 +22,6 @@
     "@rumess/react-flip-countdown": "^1.2.3",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
     "@web3-react/core": "^6.1.9",
     "@web3-react/frame-connector": "^6.0.9",
     "@web3-react/injected-connector": "^6.0.7",
@@ -41,7 +40,7 @@
     "react-router": "^5.2.1",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
-    "reactstrap": "^9.1.1",
+    "reactstrap": "^9.0.1",
     "recharts": "^2.1.12",
     "serve": "^13.0.2",
     "serve-build": "^0.1.0",
@@ -72,5 +71,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^8.16.0",
+    "@testing-library/user-event": "^14.2.3"
   }
 }

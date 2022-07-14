@@ -7,7 +7,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import CloseIcon from "@material-ui/icons/Close";
 import clsx from "clsx";
-// import Web3 from "web3";
+import Web3 from "web3";
 import { Authenticate } from "../auth/Authenticate";
 import SwitchToggle2 from "../Dashboard/DashBoardPages/SwitchToggle/SwitchToggle2";
 import LightModeIcon from "@mui/icons-material/LightMode";
@@ -422,15 +422,15 @@ const Header = ({ togglemakeDark, check }) => {
 
     dropMenu.style.display = "none";
   };
-  // const web3 = new Web3(window.ethereum);
-  // useEffect(async () => {
-  //   if (account) {
-  //     const getBalance = await web3.eth.getBalance(account);
-  //     const ethBalance = web3.utils.fromWei(getBalance, "ether");
-  //     console.log(ethBalance);
-  //     setCoinBalance(parseFloat(ethBalance).toFixed(3));
-  //   }
-  // }, [coinBalance, account]);
+  const web3 = new Web3(window.ethereum);
+  useEffect(async () => {
+    if (account) {
+      const getBalance = await web3.eth.getBalance(account);
+      const ethBalance = web3.utils.fromWei(getBalance, "ether");
+      console.log(ethBalance);
+      setCoinBalance(parseFloat(ethBalance).toFixed(3));
+    }
+  }, [coinBalance, account]);
   const toggleDisconnectDiv = () => {
     setDisconnectDiv(!disconnetDiv);
   };
