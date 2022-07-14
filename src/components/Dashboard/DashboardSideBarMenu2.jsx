@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
-import Web3 from "web3";
+// import Web3 from "web3";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
@@ -229,15 +229,15 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
       localStorage.setItem("smallSidetoken", "not_small");
     }
   };
-  const web3 = new Web3(window.ethereum);
-  useEffect(async () => {
-    if (account) {
-      const getBalance = await web3.eth.getBalance(account);
-      const ethBalance = web3.utils.fromWei(getBalance, "ether");
-      console.log(ethBalance);
-      setCoinBalance(parseFloat(ethBalance).toFixed(3));
-    }
-  }, [coinBalance, account]);
+  // const web3 = new Web3(window.ethereum);
+  // useEffect(async () => {
+  //   if (account) {
+  //     const getBalance = await web3.eth.getBalance(account);
+  //     const ethBalance = web3.utils.fromWei(getBalance, "ether");
+  //     console.log(ethBalance);
+  //     setCoinBalance(parseFloat(ethBalance).toFixed(3));
+  //   }
+  // }, [coinBalance, account]);
   const toggleDisconnectDiv = () => {
     setDisconnectDiv(!disconnetDiv);
   };

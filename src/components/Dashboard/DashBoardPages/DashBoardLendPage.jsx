@@ -7,7 +7,6 @@ import EastIcon from "@mui/icons-material/East";
 import { API_URL as api_url } from "../../../actions/types";
 import { config } from "../../../actions/Config";
 import axios from "axios";
-import ProgressBar from "@hawk-ui/progress-bar";
 // import { Context } from "../../context/Context";
 import { UserContext } from "../../context/Context";
 import Nodata from "./nodataComponent/Nodata";
