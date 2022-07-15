@@ -527,6 +527,24 @@ const checkAllowanceL = async (owner, amount, signer) => {
     };
   }
 };
+const getEgcSmartContractBalnce = async (
+  coinAddress,
+  contractAddress,
+  signer
+) => {
+  try {
+    const instance = erc20Instance(coinAddress, signer);
+    let result = await instance.balanceOf(contractAddress);
+    return {
+      message: result.toString(),
+      status: true,
+    };
+  } catch (error) {
+    return {
+      status: false,
+    };
+  }
+};
 
 const unluckToken2 = async (amount, signer) => {
   try {
@@ -810,4 +828,5 @@ export {
   getPriceImpl,
   swapBase,
   swapImpl,
+  getEgcSmartContractBalnce,
 };

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { TokenModal } from "./TokenModal/TokenModal";
-
+import { CopperLoading } from "respinner";
 import SwapVerticalCircleIcon from "@mui/icons-material/SwapVerticalCircle";
 import {
   SuccessModal,
@@ -388,10 +388,23 @@ const AddLiquidity = ({ match, closeModal, which }) => {
           <div className="liquidity_area">
             {stage == "loading" ? (
               <div className="bacModal_div">
-                <div className="back_modal_container">
-                  <div className="back_modal_cont">
-                    <FontAwesomeIcon icon={faCircleNotch} spin />
-                    <p className="text-center">{text}</p>
+                <div className="bacModal_div">
+                  <div className="back_modal_container">
+                    <div className="back_modal_cont_loading">
+                      <CopperLoading
+                        fill="#229e54"
+                        borderRadius={4}
+                        count={12}
+                        size={200}
+                      />
+                      <div className="loading_title">
+                        {text}
+
+                        <span className="loaing_span_para">
+                          Confirm this transaction in your wallet.
+                        </span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -522,7 +535,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
               <div className="bacModal_div">
                 <div className="back_modal_container">
                   <SuccessModal
-                    successMessage={"Transaction was successful."}
+                    successMessage={text}
                     click={(e) => {
                       Continue(e);
                     }}
@@ -577,7 +590,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
               <div className="bacModal_div">
                 <div className="back_modal_container">
                   <ErrorModal
-                    errorMessage="Unsuccesful transaction"
+                    errorMessage={text}
                     click={(e) => {
                       Continue(e);
                     }}

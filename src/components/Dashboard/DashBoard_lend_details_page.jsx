@@ -7,11 +7,17 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import CloseIcon from "@mui/icons-material/Close";
+
+import { CopperLoading } from "respinner";
 import { parseEther, formatEther } from "@ethersproject/units";
+import LOAN from "../../web3/contracts/Loan.json";
+import SwapContract from "../../web3/contracts/Contract_Address.json";
+import Web3 from "web3";
 import {
   SuccessModal,
   ErrorModal,
 } from "../Dashboard/DashBoardPages/Modal/Success_Error_Component";
+
 import { numberWithCommas } from "../static/static";
 import {
   faCheckCircle,
@@ -63,6 +69,7 @@ import {
   draw,
   checkAllowanceL,
   unluckToken2,
+  getEgcSmartContractBalnce,
 } from "../../web3/index";
 
 const DashBoard_lend_details_page = ({ match }) => {
@@ -330,6 +337,11 @@ const DashBoard_lend_details_page = ({ match }) => {
 
   console.log(baseBalance);
   console.log(coinBalance2);
+  const CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -428,7 +440,7 @@ const DashBoard_lend_details_page = ({ match }) => {
                   Assets Value
                 </div>
               </div>
-              <span className="vertical_rule"></span>
+              <span className="vertical_rule2a"></span>
 
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
@@ -438,7 +450,7 @@ const DashBoard_lend_details_page = ({ match }) => {
                   Amount Funded
                 </div>
               </div>
-              <span className="vertical_rule"></span>
+              <span className="vertical_rule2a"></span>
 
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
@@ -470,7 +482,7 @@ const DashBoard_lend_details_page = ({ match }) => {
                   Funding Progress
                 </div>
               </div>
-              <span className="vertical_rule"></span>
+              <span className="vertical_rule2a"></span>
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
                   13 <span className="asset_symbol"> %</span>
@@ -503,18 +515,57 @@ const DashBoard_lend_details_page = ({ match }) => {
                   />
                 </div>
                 <div className="Asset_Originator_Details_cont_body_txt">
-                  Egoras Technologies Limited Agip Branch is located at
-                  Kilometre 7 Ikwere Road Rumeme, beside Rivers State College of
-                  Health Science and Technologies. Our aim is to render improved
-                  quality financial services and as well lower the cost of the
-                  services in these communities around through
-                  micro-collateralized loans. The pool seeks to generate
-                  uncorrelated and excess risk-adjusted returns to its investors
-                  by providing secured loans to individuals and small businesses
-                  in the community. Egoras Technologies Limited Agip Branch
-                  started operations on the 6th of September, 2021 and has since
-                  empowered over 1,500 customers with about ₦76,407,085 in loans
-                  .
+                  {oyName === true ? (
+                    <span>
+                      Egoras Technologies Limited Agip Branch is located at
+                      Kilometre 7 Ikwere Road Rumeme, beside Rivers State
+                      College of Health Science and Technologies. Our aim is to
+                      render improved quality financial services and as well
+                      lower the cost of the services in these communities around
+                      through micro-collateralized loans. The pool seeks to
+                      generate uncorrelated and excess risk-adjusted returns to
+                      its investors by providing secured loans to individuals
+                      and small businesses in the community. Egoras Technologies
+                      Limited Agip Branch started operations on the 6th of
+                      September, 2021 and has since empowered over 1,500
+                      customers with about ₦76,407,085 in loans .
+                    </span>
+                  ) : agipName === true ? (
+                    <span>
+                      Egoras Technologies Limited Agip Branch is located at
+                      Kilometre 7 Ikwere Road Rumeme, beside Rivers State
+                      College of Health Science and Technologies. Our aim is to
+                      render improved quality financial services and as well
+                      lower the cost of the services in these communities around
+                      through micro-collateralized loans. The pool seeks to
+                      generate uncorrelated and excess risk-adjusted returns to
+                      its investors by providing secured loans to individuals
+                      and small businesses in the community. Egoras Technologies
+                      Limited Agip Branch started operations on the 6th of
+                      September, 2021 and has since empowered over 1,500
+                      customers with about ₦76,407,085 in loans .
+                    </span>
+                  ) : rumuName === true ? (
+                    <span>
+                      EGORAS Rumukurushi is a Branch of EGORAS TECHNOLOGIES
+                      which mission is to provide Zero interest loans to people
+                      across the globe, refurbishing of Household properties and
+                      making Life easy for all through the sale of subsidized
+                      Household properties and industrial equipment. <br />
+                      EGORAS Rumukurushi started her business operations in July
+                      2021 and have since them impacted over 4000 customer with
+                      her services, which are
+                      <br /> 1. Granting of Free interest Loan
+                      <br />
+                      2. Sale of highly discounted household properties, gadgets
+                      and industrial equipment
+                      <br /> 3. Buying of Brand New/ Fairly used household
+                      properties, gadgets and industrial equipment at a very
+                      good rate.
+                      <br /> Our Aim is to reach out to 20,000 customers before
+                      the end of the year with our services.
+                    </span>
+                  ) : null}
                 </div>
                 <div className="Asset_Originator_Details_cont_body_issuer_cont">
                   <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
@@ -670,18 +721,20 @@ const DashBoard_lend_details_page = ({ match }) => {
                 ? LoanAssets.filter((person) => person.state == "OPEN").map(
                     (data) => {
                       var percentage = (data.funded / data.amount) * 100;
+                      const meta = JSON.parse(data.metadata);
                       return (
                         <div
                           className="asset_list_body_body_cont_1"
                           id={data.newLoanID}
                           onClick={ChangeAssetDetailModal}
-                          // onClick={ChangeAssetDetailModal}
                         >
-                          {/* <div className="asset_list_body_body_cont_1a">
-                                {data.id}
-                              </div> */}
                           <div className="asset_list_body_body_cont_1a">
                             {/* {data.title} */}
+                            <img
+                              src={meta.arrayImg}
+                              alt=""
+                              className="assets-list-icon_pool_icon"
+                            />{" "}
                             {data.title.substring(0, 20) + "..."}
                           </div>
 
@@ -740,7 +793,6 @@ const DashBoard_lend_details_page = ({ match }) => {
                   )
                 : null}
             </div>
-            {/* </div> */}
           </div>
         </div>
       ) : null}
@@ -806,9 +858,20 @@ const DashBoard_lend_details_page = ({ match }) => {
       {stage == "loading" ? (
         <div className="bacModal_div">
           <div className="back_modal_container">
-            <div className="back_modal_cont">
-              <FontAwesomeIcon icon={faCircleNotch} spin />
-              <p className="text-center">{text}</p>
+            <div className="back_modal_cont_loading">
+              <CopperLoading
+                fill="#229e54"
+                borderRadius={4}
+                count={12}
+                size={200}
+              />
+              <div className="loading_title">
+                {text}
+
+                <span className="loaing_span_para">
+                  Confirm this transaction in your wallet.
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -866,7 +929,7 @@ const DashBoard_lend_details_page = ({ match }) => {
         <div className="bacModal_div">
           <div className="back_modal_container">
             <SuccessModal
-              successMessage={text}
+              successMessage={"Transaction was successful"}
               click={(e) => {
                 window.location.href = "/dashboard/user";
               }}

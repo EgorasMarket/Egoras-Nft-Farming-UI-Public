@@ -114,6 +114,13 @@
     display: block;
     width: 130px;
   }
+  .dark .egr-logo2dark {
+    display: block;
+    width: 130px;
+  }
+  .dark .egr-logo2 {
+    display: none;
+  }
 
   .headerLinks {
     display: none;

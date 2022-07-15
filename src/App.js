@@ -24,7 +24,7 @@ import Footer from "./components/Home/Footer.jsx";
 import "../src/App.css";
 function App() {
   const [cClass, setCClass] = useState(false);
-  // localStorage.setItem("uiMode", "light");
+  // localStorage.setItem("uiMode", "dark");
   useEffect(() => {
     if (localStorage.getItem("uiMode") === "light") {
       setCClass(false);

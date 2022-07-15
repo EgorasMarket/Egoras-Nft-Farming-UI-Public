@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 // import React from "react";
 import { Link } from "react-router-dom";
@@ -8,7 +8,15 @@ import HowToVoteIcon from "@mui/icons-material/HowToVote";
 import CasinoIcon from "@mui/icons-material/Casino";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import WhyPeopleTrustUs from "./WhyPeopleTrustUs/WhyPeopleTrustUs";
+import { parseEther, formatEther } from "@ethersproject/units";
+import axios from "axios";
+
+import { API_URL as api_url } from "../../actions/types";
+import { config } from "@fortawesome/fontawesome-svg-core";
 // import Carousel from "react-multi-carousel";
+import Web3 from "web3";
+import LOAN from "../../web3/contracts/Loan.json";
+import SwapContract from "../../web3/contracts/Contract_Address.json";
 import NumberScroller from "react-number-scroller";
 import CloseIcon from "@mui/icons-material/Close";
 import Carousel from "react-multi-carousel";
@@ -24,21 +32,75 @@ import WaveAnimation from "./WaveAnimation/WaveAnimation";
 import "../../css/home.css";
 import { PersonTwoTone } from "@material-ui/icons";
 import { numberWithCommas } from "../../static";
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
 import "./Logos.css";
+import {
+  lendUS,
+  takeDividend,
+  takeBackLoan,
+  getTotalLended,
+  getInvestorsDividend,
+  userStats,
+  system,
+  burnAccumulatedDividend,
+  checkAllowance,
+  unluckToken,
+  transactReceipt,
+  getPrice,
+  getTickerInfo,
+  tokenBalance,
+  open,
+  getLatestLoan,
+  repay,
+  topup,
+  draw,
+  checkAllowanceL,
+  unluckToken2,
+  getEgcSmartContractBalnce,
+} from "../../web3/index";
 const Home = () => {
+  const context = useWeb3React();
+
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [numberFrom, setNumberFrom] = useState(7990000);
+  const [numberFrom, setNumberFrom] = useState(100);
   const [numberTo, setNumberTo] = useState(8000000);
-  const [numberFromFund, setNumberFromFund] = useState(990000);
-  const [numberToFund, setNumberToFund] = useState(1000000);
+  const [numberFromFund, setNumberFromFund] = useState(100);
+  const [numberToFund, setNumberToFund] = useState(100000);
   const [aboutVideoModal, setAboutVideoModal] = useState(false);
   const [animate1, setAnimate1] = useState(true);
   const [animate2, setAnimate2] = useState(false);
   const [animate3, setAnimate3] = useState(false);
   const [animate4, setAnimate4] = useState(false);
+  const [egcUsd, setEgcUsd] = useState(0);
+  const [egcVal, setEgcVal] = useState(0);
+  const [egcVal2, setEgcVal2] = useState(0);
+  const [egrVal, setEgrVal] = useState(0);
+  const [egrVal2, setEgrVal2] = useState(0);
+  const [egrUsd, setEgrUsd] = useState(0);
+  const [sumVals, setSumVals] = useState(0);
+  const [sumVals2, setSumVals2] = useState(0);
+  const [valDisplay, setValDisplay] = useState(0);
+  const [valDisplay2, setValDisplay2] = useState(0);
+  const [TotalSum, setTotalSum] = useState(0);
+  const [lockedValue, setLockedValue] = useState(0);
+
   // const [uiMode, setUiMode] = useState(localStorage.getItem("uiMode"));
   // const []
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
   const assets = [
     // {
     //   img: "/img/eusd-icon-dollar.svg",
@@ -83,31 +145,117 @@ const Home = () => {
   };
   const FeaturedLogos = [
     {
+      link: "https://finance.yahoo.com/",
       img: "/img/featured_logos/featured1.svg",
     },
+
     {
-      img: "/img/featured_logos/featured2.svg",
-    },
-    {
+      link: "https://cointelegraph.com/",
       img: "/img/featured_logos/featured3.svg",
     },
     {
+      link: "https://www.newsbtc.com/",
       img: "/img/featured_logos/featured4.svg",
     },
+
     {
-      img: "/img/featured_logos/featured5.svg",
-    },
-    {
+      link: "https://apnews.com/",
       img: "/img/featured_logos/featured6.svg",
-    },
-    {
-      img: "/img/featured_logos/featured7.svg",
     },
   ];
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
-
+  useEffect(() => {
+    axios
+      .get(api_url + "/api/branch/totalpools", null, config)
+      .then((data) => {
+        console.log(data.data.payload[0].total, "powerfulpools");
+        setLockedValue(() => parseInt(data.data.payload[0].total) / 618);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, [lockedValue]);
+  useEffect(() => {
+    axios
+      .get(
+        api_url +
+          "/pub/loan/vault/balance/" +
+          LOAN.address +
+          "/" +
+          "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
+        null,
+        config
+      )
+      .then((data) => {
+        console.log(data.data.data.balance, "egc balnce vault");
+        setEgcVal(() => parseInt(data.data.data.balance));
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+    // ============
+    // ============
+    // ============
+    axios
+      .get(
+        api_url +
+          "/pub/loan/vault/balance/" +
+          SwapContract.address +
+          "/" +
+          "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
+        null,
+        config
+      )
+      .then((data) => {
+        console.log(data.data.data.balance, "egc balnce swap");
+        setEgcVal2(() => parseInt(data.data.data.balance));
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+    // ============
+    // ============
+    // ============
+    axios
+      .get(
+        api_url +
+          "/pub/loan/vault/balance/" +
+          SwapContract.address +
+          "/" +
+          "0x8e9a916b6920136110a77E9acAf878862358A467",
+        null,
+        config
+      )
+      .then((data) => {
+        console.log(data.data.data.balance, "egr balnce swap");
+        setEgrVal(() => parseInt(data.data.data.balance));
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+    // ============
+    // ============
+    // ============
+    axios
+      .get(
+        api_url +
+          "/pub/loan/vault/balance/" +
+          SwapContract.address +
+          "/" +
+          "0x8e9a916b6920136110a77E9acAf878862358A467",
+        null,
+        config
+      )
+      .then((data) => {
+        console.log(data.data.data.balance, "egr balnce vault");
+        setEgrVal2(() => parseInt(data.data.data.balance));
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -135,34 +283,139 @@ const Home = () => {
     // setAnimate1(true);
     const timer = setTimeout(() => {
       setAnimate1(false);
+      setAnimate3(false);
+      setAnimate4(false);
       setAnimate2(true);
     }, 4000);
   }, [animate1]);
   useEffect(() => {
     const timer2 = setTimeout(() => {
       setAnimate2(false);
+      setAnimate1(false);
+      setAnimate4(false);
       setAnimate3(true);
     }, 4000);
   }, [animate2]);
   useEffect(() => {
     const timer3 = setTimeout(() => {
+      setAnimate2(false);
       setAnimate3(false);
+      setAnimate1(false);
       setAnimate4(true);
     }, 4000);
   }, [animate3]);
   useEffect(() => {
     const timer4 = setTimeout(() => {
       setAnimate4(false);
+      setAnimate3(false);
+      setAnimate2(false);
       setAnimate1(true);
     }, 4000);
   }, [animate4]);
   // useEffect(() => {
 
-  //   const timer3 = setTimeout(() => {
-  //     setAnimate3(false);
-  //     setAnimate4(true);
-  //   }, 5000);
+  // const timer3 = setTimeout(() => {
+  //   setAnimate3(false);
+  //   setAnimate4(true);
+  // }, 5000);
   // }, []);
+  // useEffect(
+  //   async (e) => {
+  //     if (account) {
+  //       let check = await getEgcSmartContractBalnce(
+  //         "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
+  //         LOAN.address,
+  //         library.getSigner()
+  //       );
+  //       console.log(check);
+  //       const etherValue = Web3.utils.fromWei(check.message, "ether");
+  //       console.log(parseInt(etherValue), "egc_loan");
+  //       setEgcVal(() => parseInt(etherValue));
+  //       // =============
+  //       // =============
+  //       // =============
+  //       // =============
+  //       let check2 = await getEgcSmartContractBalnce(
+  //         "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
+  //         SwapContract.address,
+  //         library.getSigner()
+  //       );
+  //       console.log(check2);
+  //       const etherValue2 = Web3.utils.fromWei(check2.message, "ether");
+  //       console.log(parseInt(etherValue2), "egc_swap");
+  //       setEgcVal2(() => parseInt(etherValue2));
+  //       // =============
+  //       // =============
+  //       // =============
+  //       // =============
+  //       let check3 = await getEgcSmartContractBalnce(
+  //         "0x8e9a916b6920136110a77E9acAf878862358A467",
+  //         LOAN.address,
+  //         library.getSigner()
+  //       );
+  //       console.log(check3);
+  //       const etherValue3 = Web3.utils.fromWei(check3.message, "ether");
+  //       console.log(parseInt(etherValue3), "egr_loan");
+  //       setEgrVal(() => parseInt(etherValue3));
+
+  //       // =============
+  //       // =============
+  //       // =============
+  //       // =============
+  //       let check4 = await getEgcSmartContractBalnce(
+  //         "0x8e9a916b6920136110a77E9acAf878862358A467",
+  //         SwapContract.address,
+  //         library.getSigner()
+  //       );
+  //       console.log(check4);
+  //       const etherValue4 = Web3.utils.fromWei(check4.message, "ether");
+  //       console.log(parseInt(etherValue4), "egr_swap");
+  //       setEgrVal2(() => parseInt(etherValue4));
+  //     }
+  //   },
+  //   [account]
+  // );
+  useEffect(
+    async (e) => {
+      let string =
+        "https://api.coingecko.com/api/v3/simple/price?ids=egoras&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
+      await fetch(string)
+        .then((resp) => resp.json())
+        .then((data) => {
+          const egr_usd_val = data["egoras"].usd;
+          console.log(egr_usd_val);
+          setEgrUsd(() => egr_usd_val);
+        });
+      // ===============================
+      let string2 =
+        "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
+      await fetch(string2)
+        .then((resp) => resp.json())
+        .then((data) => {
+          const egc_usd_val = data["egoras-credit"].usd;
+          console.log(egc_usd_val);
+          setEgcUsd(() => egc_usd_val);
+        });
+      setSumVals(() => parseInt(egcVal) + parseInt(egcVal2));
+      setSumVals2(() => parseInt(egrVal) + parseInt(egrVal2));
+      setValDisplay(() => egcUsd * sumVals);
+      setValDisplay2(() => egrUsd * sumVals2);
+      setTotalSum(() => valDisplay + valDisplay2);
+      console.log(sumVals);
+      console.log(egcUsd, egrUsd);
+    },
+    [
+      valDisplay,
+      valDisplay2,
+      sumVals,
+      sumVals2,
+      egcUsd,
+      egrUsd,
+      egcVal,
+      egcVal2,
+      TotalSum,
+    ]
+  );
 
   return (
     <div>
@@ -382,31 +635,29 @@ const Home = () => {
             </div>
             <span class="vertical_rule"></span> */}
             <div className="floating_div_cont_area1">
-              <div className="floating_div_cont_area1_cont1">
-                Total Assets Value
-              </div>
+              <div className="floating_div_cont_area1_cont1">Current TVL</div>
               <div className="floating_div_cont_area1_cont2">
                 <NumberScroller
                   step={1}
                   timeout={1000}
-                  from={numberFrom}
-                  to={numberTo}
+                  from={10}
+                  to={Math.ceil(TotalSum)}
                   toLocaleStringProps={["en-US"]}
                 />{" "}
                 USD
               </div>
             </div>
-            <span class="vertical_rule"></span>
+            <span class="vertical_rule2a"></span>
             <div className="floating_div_cont_area1">
               <div className="floating_div_cont_area1_cont1">
-                Total Amount funded
+                Total Amount Funded In Pools
               </div>
               <div className="floating_div_cont_area1_cont2">
                 <NumberScroller
                   step={1}
                   timeout={1000}
-                  from={numberFromFund}
-                  to={numberToFund}
+                  from={100}
+                  to={Math.ceil(lockedValue)}
                   toLocaleStringProps={["en-US"]}
                 />{" "}
                 USD
@@ -468,6 +719,11 @@ const Home = () => {
                     src="/img/logoVideoThumbnail.svg"
                     alt=""
                     className="thumbnail_img"
+                  />
+                  <img
+                    src="/img/egoras-logo.svg"
+                    alt=""
+                    className="thumbnail_img2"
                   />
                   {/* <div className="wrap"> */}
                   <img
@@ -755,16 +1011,18 @@ const Home = () => {
             >
               {FeaturedLogos.map((data) => (
                 <div className="featured_in_logos_cont">
-                  {" "}
-                  <img src={data.img} alt="" className="featured_logo" />
+                  <a href={data.link} target="_blank">
+                    <img src={data.img} alt="" className="featured_logo" />
+                  </a>
                 </div>
               ))}
             </Carousel>
             <div className="featured_logos_mobile">
               {FeaturedLogos.map((data) => (
                 <div className="featured_in_logos_cont">
-                  {" "}
-                  <img src={data.img} alt="" className="featured_logo" />
+                  <a href={data.link} target="_blank">
+                    <img src={data.img} alt="" className="featured_logo" />
+                  </a>
                 </div>
               ))}
             </div>

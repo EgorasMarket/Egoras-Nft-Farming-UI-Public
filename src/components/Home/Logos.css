@@ -1371,6 +1371,9 @@ section.productsDisplaySection {
   background: rgb(0 0 0 / 0%) !important;
   border: solid 1px #bcbcbc;
 }
+.dark .react-multiple-carousel__arrow {
+  background: rgb(255, 255, 255) !important;
+}
 
 .featured_logos_area .react-multiple-carousel__arrow::before {
   font-size: 20px;
@@ -2432,7 +2435,7 @@ section.productsDisplaySection {
 /* =============================== */
 
 .dark .featured_section {
-  background: #212b25;
+  background: #1e2822;
 }
 .dark .featured_in_head:after {
   background: #ffffff;
@@ -2440,7 +2443,9 @@ section.productsDisplaySection {
 .dark .featured_in_head {
   color: #ffffff;
 }
-
+.dark .about_video_thumbnail_cont_bg {
+  background: #fff;
+}
 /* =============================== */
 /* =============================== */
 /* =============================== */

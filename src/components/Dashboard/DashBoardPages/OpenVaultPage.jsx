@@ -8,6 +8,8 @@ import { SuccessModal, ErrorModal } from "./Modal/Success_Error_Component";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import CloseIcon from "@mui/icons-material/Close";
+import { CopperLoading } from "respinner";
+
 import "../../../css/openVault.css";
 import SwitchToggle from "./SwitchToggle/SwitchToggle";
 import {
@@ -156,6 +158,7 @@ const OpenVaultPage = ({ match }) => {
       getPrice(ticker, library.getSigner()).then((data) => {
         if (data.status) {
           setTickerPrice(parseFloat(formatEther(data.message)));
+          console.log(parseFloat(formatEther(data.message)));
         }
       });
 
@@ -244,6 +247,9 @@ const OpenVaultPage = ({ match }) => {
               // ) / 10000000000000000,
               max: formatEther(loan.loanDetails.max),
             });
+
+            console.log(formatEther(loan.loanDetails.collateral));
+            console.log(formatEther(loan.loanDetails.debt));
             setSideStage("locked");
           } else {
             setSideStage("collateral");
@@ -695,10 +701,19 @@ const OpenVaultPage = ({ match }) => {
                 Dust Limit{" "}
                 <span className="vault_percent">
                   {" "}
-                  ₦
-                  {numberWithCommas(
-                    parseFloat(loanMetaData.maxLoan).toFixed(3)
-                  )}
+                  <span>
+                    {" "}
+                    $
+                    {numberWithCommas(
+                      parseFloat(loanMetaData.maxLoan / 618).toFixed(3)
+                    )}
+                  </span>
+                  <span className="dust_limit_usd_">
+                    ~ ₦
+                    {numberWithCommas(
+                      parseFloat(loanMetaData.maxLoan).toFixed(3)
+                    )}
+                  </span>
                 </span>
               </p>
             </div>
@@ -711,14 +726,26 @@ const OpenVaultPage = ({ match }) => {
                     <div className="vault_prices1_cont1a">
                       <p className="vault_prices1txt1">Liquidation Price</p>
                       <h3 className="vault_prices1amount">
-                        ₦
-                        {canshake
-                          ? numberWithCommas(
-                              parseInt(
-                                chainLoanDetails.liquidationPrice
-                              ).toFixed(2)
-                            )
-                          : "0.00"}
+                        <span className="normal_val">
+                          $
+                          {canshake
+                            ? numberWithCommas(
+                                parseInt(
+                                  chainLoanDetails.liquidationPrice / 618
+                                ).toFixed(2)
+                              )
+                            : "0.00"}
+                        </span>
+                        <span className="dollar_val">
+                          ~ ₦
+                          {canshake
+                            ? numberWithCommas(
+                                parseInt(
+                                  chainLoanDetails.liquidationPrice
+                                ).toFixed(2)
+                              )
+                            : "0.00"}
+                        </span>
                       </h3>
                       <div
                         className={
@@ -751,15 +778,18 @@ const OpenVaultPage = ({ match }) => {
                         Collateralization Ratio
                       </p>
                       <h3 className="vault_prices1amount">
-                        {canshake
-                          ? numberWithCommas(
-                              (
-                                (tickerPrice * chainLoanDetails.collateral) /
-                                (chainLoanDetails.debt * 100)
-                              ).toFixed(5)
-                            )
-                          : "0.00"}
-                        %
+                        <span className="normal_val">
+                          {canshake
+                            ? numberWithCommas(
+                                (
+                                  (tickerPrice * chainLoanDetails.collateral) /
+                                  (chainLoanDetails.debt * 100)
+                                ).toFixed(5)
+                              )
+                            : "0.00"}
+                          %{/* {/* (36,800ngn * 0.004egc)/(15engn *100)/} */}
+                          {/* (150* amount of engn to withdraw )/(100* amount of egc deposited in vault) */}
+                        </span>
                       </h3>
                       <div
                         className={
@@ -784,7 +814,12 @@ const OpenVaultPage = ({ match }) => {
                     <div className="vault_prices1_cont1a">
                       <p className="vault_prices1txt1">Current Price</p>
                       <h3 className="vault_prices1amount">
-                        ₦{numberWithCommas(tickerPrice.toFixed(2))}
+                        <span className="normal_val">
+                          ${numberWithCommas((tickerPrice / 618).toFixed(2))}
+                        </span>
+                        <span className="dollar_val">
+                          ~ ₦{numberWithCommas(tickerPrice.toFixed(2))}
+                        </span>
                       </h3>
                     </div>
                   </div>
@@ -807,14 +842,27 @@ const OpenVaultPage = ({ match }) => {
                     <div className="vault_prices1_cont1a">
                       <p className="vault_prices1txt1">Collateral Locked</p>
                       <h3 className="vault_prices1amount">
-                        ₦
-                        {canshake
-                          ? numberWithCommas(
-                              parseFloat(
-                                tickerPrice * chainLoanDetails.collateral
-                              ).toFixed(2)
-                            )
-                          : "0.00"}
+                        <span className="normal_val">
+                          $
+                          {canshake
+                            ? numberWithCommas(
+                                parseFloat(
+                                  (tickerPrice * chainLoanDetails.collateral) /
+                                    618
+                                ).toFixed(2)
+                              )
+                            : "0.00"}
+                        </span>
+                        <span className="dollar_val">
+                          ~ ₦
+                          {canshake
+                            ? numberWithCommas(
+                                parseFloat(
+                                  tickerPrice * chainLoanDetails.collateral
+                                ).toFixed(2)
+                              )
+                            : "0.00"}
+                        </span>
                       </h3>
                       <div
                         className={
@@ -1448,21 +1496,31 @@ const OpenVaultPage = ({ match }) => {
           </div>
         ) : null}
 
-        {stage == "loading" ? (
-          <div style={{ marginTop: "5em" }}>
-            <p
-              className="text-center loadingContainer"
-              style={{ fontSize: "54px" }}
-            >
-              <FontAwesomeIcon icon={faCircleNotch} spin />
-            </p>
-            <p className="text-center">{text}</p>
+        {stage === "loading" ? (
+          <div className="bacModal_div">
+            <div className="back_modal_container">
+              <div className="back_modal_cont_loading">
+                <CopperLoading
+                  fill="#229e54"
+                  borderRadius={4}
+                  count={12}
+                  size={200}
+                />
+                <div className="loading_title">
+                  {text}
+
+                  <span className="loaing_span_para">
+                    Confirm this transaction in your wallet.
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         ) : null}
 
         {stage == "success" ? (
           <SuccessModal
-            successMessage={"Transaction was successful."}
+            successMessage={"Transaction was successful"}
             click={(e) => {
               Continue(e);
             }}
@@ -1482,11 +1540,13 @@ const OpenVaultPage = ({ match }) => {
         ) : null}
 
         {stage == "connect" ? (
-          <div className=" text-center mt-4">
+          <div className="to_connect_div">
             <h1 className="text-center">
               <FontAwesomeIcon icon={faWallet} /> <br />
             </h1>
             <p>To access this please connect your wallet</p>
+
+            <Authenticate isHome="false" />
           </div>
         ) : null}
         {/* </div> */}

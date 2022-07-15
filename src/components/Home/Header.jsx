@@ -9,6 +9,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import clsx from "clsx";
 import Web3 from "web3";
 import { Authenticate } from "../auth/Authenticate";
+import { Sling as Hamburger } from "hamburger-react";
 import SwitchToggle2 from "../Dashboard/DashBoardPages/SwitchToggle/SwitchToggle2";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -145,10 +146,10 @@ const useStyles2 = makeStyles((theme) => ({
 const Header = ({ togglemakeDark, check }) => {
   const [showHeader, setshowHeader] = useState(true);
   const [betaDiv, setBetaDiv] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+
   // const [darkMode, setDarkMode] = useState(null);
-  const [walletAddr, setWalletAddr] = useState(
-    "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-  );
+  const [walletAddr, setWalletAddr] = useState("0xXXXXXXXXXXxxxxxxxxXXXXXXXX");
   const [conecttxt, setConnectTxt] = useState("Not Connected");
   const currentPage = window.location.pathname;
   // if (localStorage.getItem("username") === null) {
@@ -169,8 +170,8 @@ const Header = ({ togglemakeDark, check }) => {
   const avatarRef = useRef();
 
   useEffect(() => {
-    setWalletAddr(account);
-    // console.log(walletAddr.slice(0, 10));
+    // setWalletAddr(account);
+    // // console.log(walletAddr.slice(0, 10));
     const element = avatarRef.current;
     if (element && account) {
       setWalletAddr(account);
@@ -184,11 +185,11 @@ const Header = ({ togglemakeDark, check }) => {
       }
       element.appendChild(icon);
     }
-  }, [account, avatarRef]);
+  }, [account, avatarRef, walletAddr]);
   const lightSet = () => {
     // if (darkMode)
-    console.log("light");
-    localStorage.setItem("uiMode", "light");
+    console.log("dark");
+    localStorage.setItem("uiMode", "dark");
   };
 
   useEffect(() => {
@@ -454,6 +455,11 @@ const Header = ({ togglemakeDark, check }) => {
                     alt="..."
                     className="egr-logo2"
                   />
+                  <img
+                    src="/img/logoVideoThumbnail.svg"
+                    alt="..."
+                    className="egr-logo2dark"
+                  />
                   <div className="on-mobile-navigators"></div>
                 </a>
                 <ul className="headerLinks">
@@ -463,6 +469,11 @@ const Header = ({ togglemakeDark, check }) => {
                       src="/img/egoras-logo.svg"
                       alt="..."
                       className="egr-logo"
+                    />
+                    <img
+                      src="/img/logoVideoThumbnail.svg"
+                      alt="..."
+                      className="egr-logodark"
                     />
                   </a>
                   {/* <a
@@ -500,33 +511,38 @@ const Header = ({ togglemakeDark, check }) => {
                       }
                     />
                   </div>
-                  {account ? (
-                    <div className="connected_header_address">
-                      <p className="header_wllt_bal">{coinBalance} BNB</p>
-                      <div
-                        className="metamask_prof_pic_icon"
-                        ref={avatarRef}
-                      ></div>
+                  <div className="desktop_view_cont">
+                    {account ? (
+                      <div className="connected_header_address">
+                        <p className="header_wllt_bal">{coinBalance} BNB</p>
+                        <div
+                          className="metamask_prof_pic_icon"
+                          ref={avatarRef}
+                        ></div>
 
-                      <div className="wallet_addr_cont_txt_header">
-                        <div className="wall_addr">{walletAddr}</div>
-                      </div>
-                      <div
-                        className="wallet_settings_icon_cont"
-                        onClick={toggleDisconnectDiv}
-                      >
-                        <SettingsOutlinedIcon className="wallet_settings_icon" />
-                      </div>
-
-                      {disconnetDiv === true ? (
-                        <div className="disconnect_button_div">
-                          <Authenticate isHome="false" />
+                        <div className="wallet_addr_cont_txt_header">
+                          <div className="wall_addr">{walletAddr}</div>
                         </div>
-                      ) : null}
-                    </div>
-                  ) : (
-                    <Authenticate isHome="false" />
-                  )}
+                        <div
+                          className="wallet_settings_icon_cont"
+                          onClick={toggleDisconnectDiv}
+                        >
+                          <SettingsOutlinedIcon className="wallet_settings_icon" />
+                        </div>
+
+                        {disconnetDiv === true ? (
+                          <div className="disconnect_button_div">
+                            <Authenticate isHome="false" />
+                          </div>
+                        ) : null}
+                      </div>
+                    ) : (
+                      <Authenticate isHome="false" />
+                    )}
+                  </div>
+                  <div className="header_menu_icon_cont">
+                    <Hamburger toggled={isOpen} toggle={setIsOpen} />
+                  </div>
 
                   {/* <WalletConnector /> */}
                 </div>
@@ -589,6 +605,38 @@ const Header = ({ togglemakeDark, check }) => {
               </Drawer>
             </div> */}
               </div>
+              {isOpen === true ? (
+                <div className="mobile_view_header_cont_head_body">
+                  <div className="mobile_view_header_cont_head_body_cont1">
+                    <div className="mobile_view_header_cont_head_body_cont1_title">
+                      Balance:
+                    </div>
+                    <div className="mobile_view_header_cont_head_body_cont1_para">
+                      <p className="header_wllt_bal">{coinBalance} BNB</p>
+                    </div>
+                  </div>
+
+                  <span className="header_rule"></span>
+                  <div className="mobile_view_header_cont_head_body_cont1">
+                    <div className="mobile_view_header_cont_head_body_cont1_title">
+                      Account
+                    </div>
+                    <div className="mobile_view_header_cont_head_body_cont1_para">
+                      <div
+                        className="metamask_prof_pic_icon"
+                        ref={avatarRef}
+                      ></div>
+                      {/* <div className="wallet_addr_cont_txt_header"> */}
+                      <div className="wall_addr2">{walletAddr}</div>
+                      {/* </div> */}
+                    </div>
+                  </div>
+                  <span className="header_rule"></span>
+                  <div className="mobile_view_header_cont_head_body_cont1_btn">
+                    <Authenticate isHome="false" />
+                  </div>
+                </div>
+              ) : null}
             </div>
           </section>
         </div>

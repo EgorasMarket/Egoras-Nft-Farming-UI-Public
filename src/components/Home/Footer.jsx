@@ -104,6 +104,11 @@ const Footer = () => {
                       alt="..."
                       className="egr2-logo"
                     />
+                    <img
+                      src="/img/logoVideoThumbnail.svg"
+                      alt="..."
+                      className="egr2-logo2"
+                    />
                   </a>
 
                   <div className="footerIcons">
@@ -384,7 +389,7 @@ const Footer = () => {
                 </div>
               </div>
 
-              <hr></hr>
+              <hr className="footer_hr_rule"></hr>
               <h5 className="footerBottomPara">
                 ©️ 2022 Egoras. All rights reserved .
               </h5>

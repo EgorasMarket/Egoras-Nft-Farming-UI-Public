@@ -351,24 +351,55 @@ button.pool_detail_heading_area1_invest_btn {
   z-index: 10000000;
   background: #0000008a;
   backdrop-filter: blur(5px);
+  /* align-items: center; */
+}
+
+.dark .back_modal_cont_loading {
+  background: #365543;
+  border: solid 1px #4f695b;
+  color: #fff;
 }
 
 .back_modal_container {
   width: 100%;
   max-width: 500px;
 }
+.loading_title {
+  margin: 0;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
 
+.loaing_span_para {
+  font-weight: 300;
+  font-size: 14px;
+}
 .back_modal_cont {
-  /* width: 100%; */
-  /* max-width: 500px; */
   width: 100%;
-  padding: 1em;
+  padding: 2em;
   background: #fff;
   border-radius: 7px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  grid-gap: 8px;
+  gap: 20px;
   position: relative;
+}
+.back_modal_cont_loading {
+  width: 100%;
+  padding: 2em;
+  background: #fff;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 8px;
+  gap: 20px;
+  position: relative;
+  align-items: center;
 }
 
 .back_modal_heading {
@@ -485,6 +516,9 @@ button.pool_detail_heading_area1_invest_btn {
     border: solid 1px #ececec;
     flex-direction: column;
   }
+  .no_paddd {
+    padding: 2em 0em !important;
+  }
   .pool_detail_sub_area1_area1 {
     align-items: flex-start;
   }
@@ -522,7 +556,7 @@ button.pool_detail_heading_area1_invest_btn {
     font-size: 14px;
   }
   .pool_lending_pages_links {
-    top: 0px;
+    top: 21px;
   }
   .finance_fee_details_page {
     display: none !important;

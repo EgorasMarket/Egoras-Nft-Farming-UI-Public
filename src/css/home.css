@@ -26,39 +26,48 @@
 .liquidity_hero_bg_1 {
   width: 167%;
   position: absolute;
-  top: -124px;
+  top: -21%;
   /* bottom: -113px; */
-  left: -225px;
+  left: -35%;
 }
 .liquidity_hero_bg_logos1 {
   width: 12%;
-  top: 58px;
+  top: 11%;
   position: absolute;
-  left: 270px;
+  left: 43%;
   filter: drop-shadow(2px 4px 6px #c0c0c0) grayscale(1);
   /* animation: scale 4s linear infinite; */
 }
 .liquidity_hero_bg_logos2 {
   width: 12%;
-  top: 215px;
+  top: 38%;
   position: absolute;
-  left: 430px;
+  left: 67%;
   filter: drop-shadow(2px 4px 6px #c0c0c0) grayscale(1);
   /* animation: scale 4s linear infinite; */
 }
+.vertical_rule2a {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  width: 0% !important;
+  align-self: stretch;
+  border-left: 1px solid rgb(238, 238, 238);
+  /* height: 10px; */
+}
 .liquidity_hero_bg_logos4 {
   width: 12%;
-  top: 215px;
+  top: 38%;
   position: absolute;
-  right: 453px;
+  right: 71%;
   filter: drop-shadow(2px 4px 6px #c0c0c0) grayscale(1);
   /* animation: scale 4s linear infinite; */
 }
 .liquidity_hero_bg_logos3 {
   width: 12%;
-  bottom: 114px;
+  bottom: 20%;
   position: absolute;
-  left: 275px;
+  left: 42%;
   filter: drop-shadow(2px 4px 6px #c0c0c0) grayscale(1);
   /* animation: scale 4s linear infinite; */
 }
@@ -69,60 +78,63 @@
   width: 100%;
 }
 .liquidity_hero_center_turning_bg {
-  width: 147px;
+  width: 23%;
   position: absolute;
   top: 0;
-  bottom: 55px;
+  bottom: 10%;
   margin: auto;
-  left: 240px;
+  left: 38%;
   animation: spin 4s linear infinite;
 }
 .liquidity_hero_center_asset_display_bg {
-  width: 107px;
+  width: 17%;
   position: absolute;
   top: 0;
-  bottom: 55px;
+  bottom: 10%;
   margin: auto;
-  left: 260px;
+  left: 41%;
   /* animation: spin 4s linear infinite; */
 }
 
 .shooting_light1 {
   position: absolute;
-  top: 78px;
-
-  left: 260px;
+  top: 14%;
+  left: 41%;
   transform: rotate(268deg);
   z-index: -1;
+  width: 15%;
 }
 .shooting_light3 {
   position: absolute;
-  bottom: 130px;
-  left: 260px;
+  bottom: 22%;
+  left: 40%;
   transform: rotate(90deg);
   z-index: -1;
+  width: 15%;
 }
 .shooting_light2 {
   position: absolute;
-  bottom: 303px;
-  left: 433px;
+  bottom: 54%;
+  left: 67%;
   z-index: -1;
+  width: 15%;
 }
 .shooting_light4 {
   position: absolute;
-  bottom: 303px;
-  right: 454px;
+  bottom: 54%;
+  right: 72%;
   z-index: -1;
+  width: 15%;
   transform: rotate(180deg);
 }
 .asset_display_icon1 {
   position: absolute;
-  width: 60px;
-  left: -10px;
-  right: 0;
+  width: 13%;
+  left: 43%;
+  right: 45%;
   margin: auto;
-  top: -55px;
-  bottom: 0;
+  top: 38%;
+  bottom: 48%;
   z-index: 1;
   opacity: 1;
   display: block;
@@ -194,46 +206,42 @@
 }
 @keyframes shoot {
   0% {
-    top: 78px;
+    top: 14%;
   }
-  50% {
-    top: 180px;
-  }
+
   100% {
-    top: 223px;
+    top: 40%;
   }
 }
 @keyframes shoot3 {
   0% {
-    bottom: 130px;
+    bottom: 22%;
   }
-  /* 50% {
-    bottom: 110px;
-  } */
+
   100% {
-    bottom: 280px;
+    bottom: 50%;
   }
 }
 @keyframes shoot2 {
   0% {
-    left: 433px;
+    left: 67%;
   }
   /* 50% {
     bottom: 110px;
   } */
   100% {
-    left: 276px;
+    left: 45%;
   }
 }
 @keyframes shoot4 {
   0% {
-    right: 454px;
+    right: 72%;
   }
   /* 50% {
     bottom: 110px;
   } */
   100% {
-    right: 276px;
+    right: 47%;
   }
 }
 
@@ -724,6 +732,7 @@ a.visit_app_link_2 {
 }
 .nft-area2 {
   gap: 20px;
+  overflow: hidden;
 }
 .nft-area3 {
   display: flex;
@@ -1134,6 +1143,7 @@ a.visit_app_link_2 {
   -webkit-box-pack: justify;
   justify-content: space-between;
   text-align: right;
+  align-items: center;
 }
 .right {
   text-align: right;
@@ -1286,6 +1296,14 @@ a.visit_app_link_2 {
 /* ============================== */
 /* ============================== */
 /* ============================== */
+@media screen and (max-width: 1399px) {
+  /* .liquidity_hero_center_asset_display_bg {
+    left: 39%;
+  }
+  .liquidity_hero_center_turning_bg {
+    left: 36%;
+  } */
+}
 @media screen and (max-width: 991px) {
   .stake-banner-blue {
     text-align: center;
@@ -1491,6 +1509,20 @@ a.visit_app_link_2 {
   .floating_div_cont_area1_cont2 {
     font-size: 32px;
     font-weight: 700;
+  }
+
+  .vertical_rule2a {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    width: 0% !important;
+    align-self: stretch;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    width: 100% !important;
+    /* height: 10px; */
+  }
+  .dark .vertical_rule2a {
+    border-bottom: 1px solid rgb(93 121 104);
   }
   .benefit_section_area1_layer1 {
     padding: 1em;
@@ -1785,7 +1817,7 @@ a.visit_app_link_2 {
 /* =================================== */
 
 .dark .earning-section {
-  background: #212b25;
+  background: #1e2822;
 }
 .dark .span4a-txts {
   color: #fff;
@@ -1799,20 +1831,20 @@ a.visit_app_link_2 {
   background: #fff;
 }
 .dark .floating_absolute_div {
-  background: #5b7b68;
+  background: #365543;
   box-shadow: 0px 0px 25px #000000;
 
-  border: solid 1px #212b25;
+  border: solid 1px #1e2822;
 }
 .dark .floating_div_cont_area1_cont1 {
   color: #ffffff;
 }
 .dark .whyEgorasSection {
-  background: #212b25;
+  background: #1e2822;
 }
 .dark .whyEgoras_body_cont1 {
-  background: #355743;
-  border: solid 1px #6b967d;
+  background: #365543;
+  border: solid 1px #475d50;
 
   box-shadow: 0px 10px 20px #000000;
 }
@@ -1826,7 +1858,7 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark .real_world_adoption {
-  background: #212b25;
+  background: #1e2822;
 }
 .dark .real_world_adoption_area2_title {
   color: #fff;
@@ -1836,35 +1868,36 @@ a.visit_app_link_2 {
 }
 
 .dark .getStartedSection {
-  background: #212b25;
+  background: #1e2822;
 }
 .dark .getStarted_area {
-  background: #5b7b68;
-  border: solid 1px #b7cabe;
+  background: #365543;
+  border: solid 1px #667f71;
   box-shadow: 0px 10px 20px #000000;
 }
 .dark .getStarted_title {
   color: #fff;
 }
 .dark .egoras_benefit_section {
-  background: #212b25;
+  background: #1e2822;
 }
 .dark .benefit_section_area1_layer1 {
-  border: solid 1px #6f8377;
+  border: solid 1px #667f71;
 
-  background: #355743;
+  background: #365543;
 
   color: #fff;
   box-shadow: 0px 10px 20px #000000;
 }
 
 .dark .sidebar {
-  background-color: #355743;
+  background-color: #365543;
 }
 .dark .DashBoardHeaderSection {
-  background-color: #355743a8;
+  background-color: #2d513cbd;
+  -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-  border-bottom: solid 1px #5b7b68;
+  border-bottom: solid 1px #3b5344;
   box-shadow: 0px 5px 9px #000000;
 }
 
@@ -1876,11 +1909,11 @@ a.visit_app_link_2 {
 }
 .dark .list-item-active {
   color: #ffffff;
-  background: #212b25;
+  background: #1e2822;
 }
 .dark .lending_area1_cont1 {
-  background: #229e54;
-  border: solid 1px #8cddae;
+  background: #4d705c;
+  border: solid 1px #6d907c;
   box-shadow: 0px 10px 20px #000000;
   color: #fff;
 }
@@ -1901,16 +1934,16 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark .table_body {
-  border: solid 1px #85a692;
+  border: solid 1px #667f71;
 }
 .dark .assets-data-name {
   color: #ffffff;
 }
 .dark .filter_table_area_1 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
   color: #ffffff !important;
-  background: #5b7b68 !important;
+  background: #365543 !important;
   box-shadow: 0px 2px 4px #000000 !important;
-  border-color: #85a692 !important;
+  border-color: #667f71 !important;
 }
 .dark .filter_table_area_1 .css-1kty9di-MuiFormLabel-root-MuiInputLabel-root {
   color: #ffffff !important;
@@ -1920,7 +1953,7 @@ a.visit_app_link_2 {
 }
 .dark .assets-category-row {
   box-shadow: rgb(0 0 0) 0px 0px 6px;
-  background: #5b7b68;
+  background: #365543;
 }
 .dark .assets-data-pool_name {
   color: #ffffff;
@@ -1955,21 +1988,21 @@ a.visit_app_link_2 {
   color: rgb(255 255 255 / 60%);
 }
 .dark .small_list-item-active {
-  color: #355743;
+  color: #365543;
   background: #ffffff;
 
   box-shadow: 0px 0px 5px #39493f;
 }
 .dark .hold_On_div {
-  background: #212b25;
+  background: #1e2822;
 }
 .dark .pool_lending_pages_links {
-  background: #5b7b68;
+  background: #365543;
   border: solid 1px #83b095;
 }
 .dark .pool_lend_details_link_active {
-  background: #355743;
-  border-bottom: solid 1px #355743;
+  background: #16221b;
+  border-bottom: solid 1px #365543;
   color: #fff;
 }
 .dark .pool_lend_details_link {
@@ -1977,14 +2010,14 @@ a.visit_app_link_2 {
 }
 .dark .pool_lend_details_link .asset_overview_link_icon {
   background: #d5e1e9;
-  color: #355743;
+  color: #365543;
 }
 .dark .pool_detail_heading {
   color: #fff;
 }
 .dark .pool_detail_sub_area1 {
-  background: #5b7b68;
-  border: solid 1px #90b79f;
+  background: #365543;
+  border: solid 1px #667f71;
   color: #fff;
 }
 .dark .pool_detail_sub_area1_area1_cont2 {
@@ -1994,8 +2027,8 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark .Asset_Originator_Details_cont_body {
-  background: #5b7b68;
-  border: solid 1px #90b79f;
+  background: #365543;
+  border: solid 1px #667f71;
   color: #fff;
 }
 .dark .Asset_Originator_Details_cont_body_issuer_cont_head {
@@ -2005,8 +2038,8 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark .pool_status_Details_cont_body1 {
-  border: solid 1px #90b79f;
-  background: #5b7b68;
+  border: solid 1px #667f71;
+  background: #365543;
 
   color: #fff;
 }
@@ -2014,13 +2047,13 @@ a.visit_app_link_2 {
   color: #e7e7e7;
 }
 .dark .liquidity_cont {
-  background: #5b7b68;
+  background: #365543;
   box-shadow: 0px 10px 20px #000;
-  border: solid 1px #95b7a3;
+  border: solid 1px #63806e;
 }
 .dark .amnt_input {
-  border: solid 1px #27382e;
-  background: #355743;
+  border: solid 1px #4f6a5b;
+  background: #223229;
 }
 .dark .connect_btn:disabled {
   background: #85ab95;
@@ -2045,8 +2078,8 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark .pool_detail_assets_body_layer_1_cont1 {
-  background: #5b7b68;
-  border: solid 1px #90b79f;
+  background: #365543;
+  border: solid 1px #667f71;
   color: #fff;
 }
 .dark .pool_detail_assets_body_layer_1_cont1_sub_heading_1b {
@@ -2056,42 +2089,59 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark .toggle_dark_mode_div {
-  background: #212b25;
+  background: #1e2822;
   border: solid 1px #62816e;
 }
 .dark .connected_header_address {
   border: solid 1px #64796d;
   border-radius: 6px;
   color: #fff;
-  background: #212b25;
+  background: #1e2822;
 }
 .dark .wallet_addr_cont_txt_header {
-  background: #212b25;
+  background: #1e2822;
   color: #ffffff;
 }
 .dark .wallet_settings_icon_cont {
-  background: #5b7b68;
+  background: #41584a;
   color: #ffffff;
 }
+.dark .thumbnail_img2 {
+  display: block;
+}
+
+.thumbnail_img2 {
+  display: none;
+}
+.dark .thumbnail_img {
+  display: none;
+}
+.dark .vertical_rule {
+  border-color: rgb(93 121 104);
+}
+.dark .vertical_rule2a {
+  border-color: rgb(93 121 104);
+}
+
 .dark .metamask_prof_pic_icon {
   filter: drop-shadow(2px 2px 5px #000);
 }
 .dark .disconnect_button_div {
-  background: #212b25;
+  background: #1e2822;
 
   box-shadow: 0px 0px 10px #000000;
 
   border: solid 1px #62816e;
 }
-.dark button.logout-btn {
+.dark .logout-btn {
   box-shadow: 0px 5px 13px #000000;
 }
 .dark .disconnect_button_div:before {
-  border-bottom: 10px solid #212b25;
+  border-bottom: 10px solid #1e2822;
 }
 .dark .filter_table_area_2 {
-  border: solid 1px #90b79f;
-  background: #5c826b;
+  border: solid 1px #667f71;
+  background: #365543;
   box-shadow: 0px 2px 6px #000000;
 }
 .dark .filter_table_btn1 {
@@ -2100,44 +2150,44 @@ a.visit_app_link_2 {
 .dark .filter_table_btn1_active {
   background: #ffffff;
 
-  color: #212b25;
+  color: #1e2822;
 }
 .dark .asset_list_body_head {
   color: white;
   background: #fff;
-  border: solid 1px #90b79f;
-  background: #5c826b;
+  border: solid 1px #667f71;
+  background: #365543;
 }
 .dark .asset_list_body_body_cont_1 {
-  background: #5c826b;
-  border: solid 1px #90b79f;
+  background: #365543;
+  border: solid 1px #667f71;
   box-shadow: 0px 0px 4px #000000;
   color: #fff;
 }
 .dark .asset_list_div {
-  border: solid 1px #90b79f;
+  border: solid 1px #667f71;
 }
 .dark .Asset_Originator_Details_cont_body_txt span {
-  background: #5b7b68 !important;
+  background: #365543 !important;
   color: #fff !important;
 }
 .dark .asset_detail_modal_div_conts {
-  background: #355743;
+  background: #1e2822;
   box-shadow: 0px 0px 20px #000;
 }
 .dark .asset_detail_heading {
-  background: #5b7b68;
-  border: solid 1px #90b79f;
+  background: #365543;
+  border: solid 1px #667f71;
   color: #fff;
 }
 .dark .asset_status_details_div1 {
-  border: solid 1px #90b79f;
-  background: #5b7b68;
+  border: solid 1px #667f71;
+  background: #365543;
   color: #fff;
 }
 .dark .transactionData_body {
-  background: #5b7b68;
-  border: solid 1px #90b79f;
+  background: #365543;
+  border: solid 1px #667f71;
   color: #fff;
 }
 .dark .transaction_id_link {
@@ -2147,22 +2197,22 @@ a.visit_app_link_2 {
   color: #ffffff !important;
 }
 .dark .recent_transaction_body {
-  border: solid 1px #90b79f;
+  border: solid 1px #667f71;
   color: #fff;
 }
 .dark .see_more_btn {
   background: #ffffff;
-  color: #5c826b;
+  color: #365543;
   box-shadow: 0px 5px 10px #000000;
 }
 .dark .user_details_body1_body_cont_area1 {
-  background: #5c826b;
-  border: solid 1px #90b79f;
+  background: #365543;
+  border: solid 1px #667f71;
   color: #fff;
 }
 .dark .userdAshboard_head {
-  background: #5c826b;
-  border: solid 1px #90b79f;
+  background: #365543;
+  border: solid 1px #667f71;
   color: #fff;
 }
 .dark .metamask_prof_pic {
@@ -2173,19 +2223,19 @@ a.visit_app_link_2 {
 }
 .dark .reward_btn:disabled {
   background: #8fb9a1;
-  box-shadow: 0px 10px 10px #355743;
-  color: #355743;
+  box-shadow: 0px 10px 10px #365543;
+  color: #365543;
 }
 .dark .pool_detail_heading_area2 span {
   color: #ffffff !important;
 }
 .dark .reward_btn {
   background: #ffffff;
-  color: #5c826b;
+  color: #365543;
   box-shadow: 0px 5px 10px #000000;
 }
 .dark .asset_list_modal_container {
-  background: #355743;
+  background: #1e2822;
   box-shadow: 0px 0px 15px #000000;
   color: #fff;
 }
@@ -2193,29 +2243,29 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark .asset_list_body_head2 {
-  border: solid 1px #90b79f;
-  background: #5c826b;
+  border: solid 1px #667f71;
+  background: #365543;
   color: #fff;
 }
 .dark .back_modal_cont {
-  background: #5c826b;
+  background: #365543;
   box-shadow: 0px 0px 20px #000;
-  border: solid 1px #90b79f;
+  border: solid 1px #667f71;
   color: #fff;
 }
 .dark .back_modal_input {
-  border: solid 1px #759783;
-  background: #355743;
-  box-shadow: 0px 3px 5px #355743;
+  border: solid 1px #39433d;
+  background: #26362c;
+  box-shadow: 0px 3px 5px #000000;
   color: #fff;
 }
 .dark .back_modal_input_amnt_head {
   color: #e3e3e3;
 }
 .dark .amount_earned_mnthly {
-  border: solid 1px #759783;
-  background: #355743;
-  box-shadow: 0px 0px 6px #355743;
+  border: solid 1px #2f4a3a;
+  background: #26362c;
+  box-shadow: 0px 0px 6px #212f26;
   color: #bcbcbc;
 }
 .dark .amount_earned_mnthly_value {
@@ -2223,16 +2273,16 @@ a.visit_app_link_2 {
 }
 .dark .back_loan_btn {
   background: #ffffff;
-  color: #5c826b;
+  color: #365543;
 }
 .dark .assets-header1 {
   border-color: #82b597;
-  background: #5b7b68;
+  background: #365543;
   color: #fff;
 }
 .dark .assets-header3 {
   border-color: #73a888;
-  background: #5b7b68;
+  background: #365543;
   color: #fff;
 }
 .dark .assets-header3::placeholder {
@@ -2243,19 +2293,19 @@ a.visit_app_link_2 {
 }
 .dark .vault_prices1 {
   box-shadow: 0px 0px 15px #000000;
-  background: #5b7b68;
-  border: solid 1px #90b79f;
+  background: #365543;
+  border: solid 1px #667f71;
   color: #fff;
 }
 .dark .vault_tbd {
   color: #ffffff;
 }
 .dark .vault_amount_withdraw {
-  background: #5b7b68;
+  background: #365543;
   box-shadow: 0px 0px 15px #000000;
 
   color: #fff;
-  border: solid 1px #90b79f;
+  border: solid 1px #667f71;
 }
 .dark .amount_withdraw_cont1_txt2 {
   color: #ffffff;
@@ -2273,25 +2323,25 @@ a.visit_app_link_2 {
   color: #aeffce;
 }
 .dark .open_vault_area2ss {
-  background: #5b7b68;
+  background: #365543;
   box-shadow: 0px 0px 15px #000000;
-  border: solid 1px #90b79f;
+  border: solid 1px #667f71;
 }
 .dark .card {
-  background-color: #5b7b68;
+  background-color: #365543;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 .dark .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-  background-color: #212b25 !important;
+  background-color: #1e2822 !important;
   color: #ffffff !important;
   border-bottom: solid 2px #ffffff !important;
 }
 .dark .nav-tabs {
-  border-bottom: 1px solid #5b7b68 !important;
+  border-bottom: 1px solid #365543 !important;
 }
 .dark .card-header {
-  background-color: #5b7b68 !important;
+  background-color: #365543 !important;
 }
 .dark .vault_input0 {
   color: #fff;
@@ -2301,18 +2351,18 @@ a.visit_app_link_2 {
 }
 .dark input.vault_input_vaulta {
   border-color: #597865;
-  background: #212b25;
+  background: #1e2822;
   box-shadow: 0px 0px 10px #000;
   color: #fff;
 }
 .dark .vault_pay_back_btn {
   background: #ffffff;
-  color: #5b7b68;
+  color: #365543;
   box-shadow: 0px 5px 13px #28392f;
 }
 .dark input.vault_input_vault {
   border-color: #597865;
-  background: #212b25;
+  background: #1e2822;
   box-shadow: 0px 0px 10px #000;
   color: #fff;
 }
@@ -2324,7 +2374,7 @@ a.visit_app_link_2 {
 }
 .dark .open_vault_input_btn {
   background: #ffffff;
-  color: #5b7b68;
+  color: #365543;
   box-shadow: 0px 5px 13px #28392f;
 }
 .dark h3.valid_div_inner_div_heading {
@@ -2346,6 +2396,9 @@ a.visit_app_link_2 {
   color: #ffffff !important;
 }
 .dark .branch_pool_value::before {
+  color: #ffffff !important;
+}
+.dark .branch_pool_value_progress::before {
   color: #ffffff !important;
 }
 .dark td.assets-category-data::before {

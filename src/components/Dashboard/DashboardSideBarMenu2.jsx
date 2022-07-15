@@ -6,6 +6,7 @@ import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import Web3 from "web3";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TelegramIcon from "@mui/icons-material/Telegram";
+import { Sling as Hamburger } from "hamburger-react";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import HomeIcon from "@mui/icons-material/Home";
@@ -30,6 +31,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import "../../css/dashboardheader.css";
 import "../../css/dashBoardSideBar.css";
+import { numberWithCommas } from "../../static";
 import SwitchToggle2 from "./DashBoardPages/SwitchToggle/SwitchToggle2";
 import {
   checkAllowance,
@@ -56,6 +58,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const [activeBg, setActiveBg] = useState("market");
   const [catDiv, setCatDiv] = useState("not_home");
   const [smallSide, setSmallSide] = useState(dddd);
+  const [isOpen, setIsOpen] = useState(false);
   const [cartNum, setCartNum] = useState("");
   const [image, setImage] = useState("");
   const [asset, setAsset] = useState("");
@@ -71,6 +74,8 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
   );
   const [disconnetDiv, setDisconnectDiv] = useState(false);
+  const [egcUsdVal, setEgcUsdVal] = useState(0);
+  const [egrUsdVal, setEgrUsdVal] = useState(0);
   const [coinBalance, setCoinBalance] = React.useState("0.00");
   const [coinBalance2, setCoinBalance2] = React.useState(0.0);
   const [baseBalance, setBaseBalance] = useState(0.0);
@@ -100,7 +105,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     }
   };
   useEffect(() => {
-    setWalletAddr(account);
+    // setWalletAddr(account);
     // console.log(walletAddr.slice(0, 10));
     const element = avatarRef.current;
     if (element && account) {
@@ -334,6 +339,31 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
 
   // console.log(baseBalance);
   // console.log(coinBalance2);
+
+  useEffect(
+    async (e) => {
+      let string =
+        "https://api.coingecko.com/api/v3/simple/price?ids=egoras&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
+      await fetch(string)
+        .then((resp) => resp.json())
+        .then((data) => {
+          const egr_usd_val = data["egoras"].usd;
+          console.log(egr_usd_val);
+          setEgrUsdVal(() => egr_usd_val);
+        });
+      // ===============================
+      let string2 =
+        "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
+      await fetch(string2)
+        .then((resp) => resp.json())
+        .then((data) => {
+          const egc_usd_val = data["egoras-credit"].usd;
+          console.log(egc_usd_val);
+          setEgcUsdVal(() => egc_usd_val);
+        });
+    },
+    [egcUsdVal, egrUsdVal]
+  );
   return (
     <div className={smallSide == "not_small" ? "side" : "small_side"}>
       <div className="header_token_prices_div">
@@ -345,18 +375,22 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
               1 ENGN ~ 618 USD
             </div>
             <span class="vertical_rule2"></span>
-            <div className="header_token_prices_div_area1">1 EGC ~ 618 USD</div>
+            <div className="header_token_prices_div_area1">
+              1 EGC ~ {numberWithCommas(egcUsdVal.toFixed(2))} USD
+            </div>
             <span class="vertical_rule2"></span>
-            <div className="header_token_prices_div_area1">1 EGR ~ 618 USD</div>
+            <div className="header_token_prices_div_area1">
+              1 EGR ~ {egrUsdVal.toFixed(3)} USD
+            </div>
             <span class="vertical_rule2"></span>
             <div className="header_token_prices_div_area1">1 ENGN ~ 1 NGN</div>
             <span class="vertical_rule2"></span>
             <div className="header_token_prices_div_area1">
-              1 EGC ~ 61,800 NGN
+              1 EGC ~ {numberWithCommas((egcUsdVal * 618).toFixed(2))} NGN
             </div>
             <span class="vertical_rule2"></span>
             <div className="header_token_prices_div_area1">
-              1 EGR ~ 0.10 NGN
+              1 EGR ~ {(egrUsdVal * 618).toFixed(2)} NGN
             </div>
           </div>
         </div>
@@ -364,6 +398,15 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
       <section className="DashBoardHeaderSection">
         <div className="container-fluid">
           <div className="dashboard-area">
+            <a href="/" className="egr_logo2_mobil">
+              <img src="/img/egoras-logo.svg" alt="..." className="egr-logo2" />
+              <img
+                src="/img/logoVideoThumbnail.svg"
+                alt="..."
+                className="egr-logo2dark"
+              />
+              <div className="on-mobile-navigators"></div>
+            </a>
             <div className="egrLogo2Cont3">
               <a href="/">
                 {" "}
@@ -371,6 +414,11 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   src="/img/egoras-logo.svg"
                   alt="..."
                   className="egr-logo"
+                />
+                <img
+                  src="/img/logoVideoThumbnail.svg"
+                  alt="..."
+                  className="egr-logodark"
                 />
               </a>
             </div>
@@ -419,6 +467,9 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             </div>
             <div className="user_profile_icon_cont2">
               <div className="together">
+                <div className="header_menu_icon_con_dash">
+                  <Hamburger toggled={isOpen} toggle={setIsOpen} />
+                </div>
                 <div className="toggle_dark_mode_div">
                   <LightModeIcon
                     className={
@@ -439,7 +490,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   />
                 </div>
                 {account ? (
-                  <div className="connected_header_address">
+                  <div className="connected_header_address dash_connected_header_address">
                     <p className="header_wllt_bal">{coinBalance} BNB</p>
                     <div
                       className="metamask_prof_pic_icon"
@@ -463,11 +514,42 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                     ) : null}
                   </div>
                 ) : (
-                  <Authenticate isHome="false" />
+                  <div className="connect_div_dash_head">
+                    <Authenticate isHome="false" />
+                  </div>
                 )}
               </div>
             </div>
           </div>
+          {isOpen === true ? (
+            <div className="mobile_view_header_cont_head_body_dash">
+              <div className="mobile_view_header_cont_head_body_cont1">
+                <div className="mobile_view_header_cont_head_body_cont1_title">
+                  Balance:
+                </div>
+                <div className="mobile_view_header_cont_head_body_cont1_para">
+                  <p className="header_wllt_bal">{coinBalance} BNB</p>
+                </div>
+              </div>
+
+              <span className="header_rule"></span>
+              <div className="mobile_view_header_cont_head_body_cont1">
+                <div className="mobile_view_header_cont_head_body_cont1_title">
+                  Account
+                </div>
+                <div className="mobile_view_header_cont_head_body_cont1_para">
+                  <div className="metamask_prof_pic_icon" ref={avatarRef}></div>
+                  {/* <div className="wallet_addr_cont_txt_header"> */}
+                  <div className="wall_addr2">{walletAddr}</div>
+                  {/* </div> */}
+                </div>
+              </div>
+              <span className="header_rule"></span>
+              <div className="mobile_view_header_cont_head_body_cont1_btn">
+                <Authenticate isHome="false" />
+              </div>
+            </div>
+          ) : null}
         </div>
       </section>
 
@@ -496,6 +578,45 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             </a>
           </div>
         </div>
+      </div>
+      <div className="header_tabs2">
+        <a
+          id="lend"
+          href="/dashboard/earn"
+          className={activeBg == "lend" ? "header_tab1_active " : "header_tab1"}
+          onClick={changeBg}
+        >
+          Earn
+        </a>
+
+        <a
+          id="market"
+          href="/dashboard/stake"
+          className={
+            activeBg == "market" ? "header_tab1_active " : "header_tab1"
+          }
+          onClick={changeBg}
+        >
+          Stake
+        </a>
+        <a
+          id="swap"
+          href="/dashboard/swap"
+          className={activeBg == "swap" ? "header_tab1_active " : "header_tab1"}
+          onClick={changeBg}
+        >
+          Swap
+        </a>
+        <a
+          id="account"
+          href="/dashboard/user"
+          className={
+            activeBg == "account" ? "header_tab1_active " : "header_tab1"
+          }
+          onClick={changeBg}
+        >
+          Account
+        </a>
       </div>
       {/* =============''''''''' */}
       {/* =============''''''''' */}

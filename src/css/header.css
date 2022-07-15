@@ -7,6 +7,7 @@ div#Header {
   top: 0;
   z-index: 100;
 }
+
 .headerSection {
   background-color: #fff;
   top: 0;
@@ -120,9 +121,19 @@ div#Header {
 }
 .egr-logo {
   width: 150px;
-  margin-right: 50px;
+  /* margin-right: 50px; */
+}
+.egr-logodark {
+  width: 150px;
+  /* margin-right: 50px; */
+  display: none;
 }
 .egr-logo2 {
+  width: 180px;
+  margin-right: 0px;
+  display: none;
+}
+.egr-logo2dark {
   width: 180px;
   margin-right: 0px;
   display: none;
@@ -480,22 +491,7 @@ vl {
 .ExploreLoanDropdown:active {
   display: block;
 } */
-@media screen and (max-width: 500px) {
-  .wallet-id {
-    display: flex;
-    align-items: center;
-    grid-gap: 5px;
-    gap: 5px;
-    font-size: 12px;
-  }
-  .we_on_beta_div {
-    background: #e3f5ea;
-    text-align: center;
-    padding: 1em;
-    color: #175b32;
-    font-size: 11px;
-  }
-}
+
 .toggle_dark_mode_div {
   display: flex;
   align-items: center;
@@ -516,6 +512,19 @@ vl {
   color: #648772 !important;
   font-size: 20px !important;
 }
+
+/* .dark .egr-logo2dark {
+  display: block;
+} */
+.dark .egr-logodark {
+  display: block;
+}
+/* .dark .egr-logo2 {
+  display: none;
+} */
+.dark .egr-logo {
+  display: none;
+}
 .lightMode_icon_active {
   color: #000000 !important;
   font-size: 20px !important;
@@ -528,15 +537,103 @@ vl {
 /* ========== */
 
 .dark .headerSection {
-  background-color: #355743bd;
+  background-color: #2d513cbd;
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-  border-bottom: solid 1px #5b7b68;
+  border-bottom: solid 1px #3b5344;
 }
 .dark .we_on_beta_div {
-  background: #5b7b68;
+  background: #407555;
   color: #ffffff;
 }
 
+.hamburger-react {
+  color: rgb(0, 0, 0);
+}
+.dark .hamburger-react {
+  color: #fff;
+}
+.mobile_view_header_cont_head_body {
+  display: none;
+}
+.mobile_view_header_cont_head_body_cont1 {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+.mobile_view_header_cont_head_body_cont1_para {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.wall_addr2 {
+  max-width: 100px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mobile_view_header_cont_head_body_cont1_btn {
+  width: 100%;
+}
+.disconnect_btn {
+  width: 100%;
+}
+.logout-btn {
+  width: 100%;
+}
+.header_menu_icon_cont {
+  display: none;
+}
 /* ========== */
 /* ========== */
+@media screen and (max-width: 767px) {
+  .desktop_view_cont {
+    display: none;
+  }
+  .mobile_view_header_cont {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background: #2a4635cc;
+    z-index: 10000;
+    left: 0;
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+  .header_menu_icon_cont {
+    display: block;
+  }
+  .mobile_view_header_cont_head_body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: rgb(0, 0, 0);
+    gap: 10px;
+    align-items: flex-end;
+    padding: 1em;
+  }
+  .dark .mobile_view_header_cont_head_body {
+    color: #fff;
+  }
+}
+@media screen and (max-width: 500px) {
+  .wallet-id {
+    display: flex;
+    align-items: center;
+    grid-gap: 5px;
+    gap: 5px;
+    font-size: 12px;
+  }
+  .we_on_beta_div {
+    background: #e3f5ea;
+    text-align: center;
+    padding: 1em;
+    color: #175b32;
+    font-size: 11px;
+  }
+}

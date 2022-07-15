@@ -319,7 +319,7 @@ const DashBoardLendPage = () => {
                               <span className="asset_symbol"> Engn</span>
                             </div>
                           </td>
-                          <td className="assets-category-data1b branch_pool_value">
+                          <td className="assets-category-data1b branch_pool_value_progress">
                             <div className="assets-data-name_pool">
                               <div className="asset_amount_progress_div">
                                 <div className="asset_amount_progress_div_txt"></div>

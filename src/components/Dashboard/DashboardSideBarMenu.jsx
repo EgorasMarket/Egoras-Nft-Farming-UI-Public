@@ -10,6 +10,10 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import HomeIcon from "@mui/icons-material/Home";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import jazzicon from "@metamask/jazzicon";
+import axios from "axios";
+
+import { API_URL as api_url } from "../../actions/types";
+
 import StarsIcon from "@mui/icons-material/Stars";
 import ApprovalIcon from "@mui/icons-material/Approval";
 import CreditScoreTwoToneIcon from "@mui/icons-material/CreditScoreTwoTone";
@@ -232,6 +236,7 @@ const DashboardSideBarMenu = ({ check, togglemakeDark }) => {
   const toggleDisconnectDiv = () => {
     setDisconnectDiv(!disconnetDiv);
   };
+
   return (
     <div className={smallSide == "not_small" ? "side" : "small_side"}>
       <section className="DashBoardHeaderSection">
