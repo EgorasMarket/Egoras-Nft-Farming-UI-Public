@@ -277,11 +277,11 @@
   align-items: center;
 }
 .floating_div_cont_area1_cont1 {
-  font-size: 16px;
+  font-size: 26px;
   color: #7c7c7c;
 }
 .floating_div_cont_area1_cont2 {
-  font-size: 42px;
+  font-size: 54px;
   font-weight: 700;
 }
 .span4b-txts {
@@ -1492,7 +1492,7 @@ a.visit_app_link_2 {
     flex-direction: column;
     grid-gap: 5px;
     gap: 5px;
-    padding: 1em 3em;
+    padding: 2em 3em;
     width: 100%;
     align-items: flex-start;
   }
@@ -1655,7 +1655,7 @@ a.visit_app_link_2 {
     right: 0;
     border-radius: 10px;
     border: solid 1px #d6e2db;
-    bottom: -90px;
+    bottom: -54px;
   }
   .real_world_adoption {
     padding: 2em 0em;
@@ -1676,7 +1676,7 @@ a.visit_app_link_2 {
     grid-gap: 5px;
     grid-gap: 5px;
     gap: 5px;
-    padding: 1em 2em;
+    padding: 2em 2em;
     width: 100%;
     align-items: flex-start;
   }
