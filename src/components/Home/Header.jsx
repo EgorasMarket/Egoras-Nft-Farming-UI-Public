@@ -304,6 +304,7 @@ const Header = ({ togglemakeDark, check }) => {
   const [anchorEl1, setAnchorEl1] = React.useState(null);
   const [disconnetDiv, setDisconnectDiv] = useState(false);
   const [coinBalance, setCoinBalance] = React.useState("0.00");
+  const [connectNewAccountBtn, setConnectNewAccountBtn] = useState(false);
   const open1 = Boolean(anchorEl);
   const open2 = Boolean(anchorEl1);
   const handleClick = (event) => {
@@ -446,12 +447,12 @@ const Header = ({ togglemakeDark, check }) => {
         .getId()
         .then((networkId) => {
           if (networkId != chainIdBsc) {
-            setConnectId(true);
+            setConnectId(() => true);
             console.log(
               "You are not on the right network please connect to BSC"
             );
           } else {
-            setConnectId(false);
+            setConnectId(() => false);
 
             console.log(
               "You are  on the right network please carry out transaction"
@@ -461,36 +462,49 @@ const Header = ({ togglemakeDark, check }) => {
         .catch((err) => {
           // unable to retrieve network id
         });
+    } else {
+      setConnectId(() => false);
     }
-  }, [account]);
+  });
+
+  useEffect(() => {
+    if (window.ethereum) {
+      setConnectNewAccountBtn(false);
+    } else {
+      setConnectNewAccountBtn(true);
+    }
+  });
+
   const switchNetwork = async () => {
-    if (account) {
-      try {
+    // if (window.ethereum) {
+    try {
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: web3.utils.toHex(chainIdBsc) }],
+      });
+    } catch (err) {
+      // This error code indicates that the chain has not been added to MetaMask
+      if (err.code === 4902) {
         await window.ethereum.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: web3.utils.toHex(chainIdBsc) }],
-        });
-      } catch (err) {
-        // This error code indicates that the chain has not been added to MetaMask
-        if (err.code === 4902) {
-          await window.ethereum.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              {
-                chainName: "Binance Smart Chain",
-                chainId: web3.utils.toHex(chainIdBsc),
-                nativeCurrency: {
-                  name: "Smart Chain",
-                  decimals: 18,
-                  symbol: "BNB",
-                },
-                rpcUrls: ["https://bsc-dataseed.binance.org/"],
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainName: "Binance Smart Chain",
+              chainId: web3.utils.toHex(chainIdBsc),
+              nativeCurrency: {
+                name: "Smart Chain",
+                decimals: 18,
+                symbol: "BNB",
               },
-            ],
-          });
-        }
+              rpcUrls: ["https://bsc-dataseed.binance.org/"],
+            },
+          ],
+        });
       }
     }
+    // } else {
+    //   setConnectNewAccountBtn(true);
+    // }
   };
   return (
     <>
@@ -721,9 +735,16 @@ const Header = ({ togglemakeDark, check }) => {
                   network or add the network if it's not added in your wallet.
                 </span>
                 <div className="change_network_btn_div">
-                  <button className="changeNetworkBtn" onClick={switchNetwork}>
-                    Switch Network
-                  </button>
+                  {connectNewAccountBtn === true ? (
+                    <Authenticate isHome="false" />
+                  ) : (
+                    <button
+                      className="changeNetworkBtn"
+                      onClick={switchNetwork}
+                    >
+                      Switch Network
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
