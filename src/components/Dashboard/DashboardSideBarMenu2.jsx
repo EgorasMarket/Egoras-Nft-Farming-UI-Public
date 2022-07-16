@@ -75,6 +75,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const [walletAddr, setWalletAddr] = useState(
     "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
   );
+  const [connectNewAccountBtn, setConnectNewAccountBtn] = useState(false);
   const [disconnetDiv, setDisconnectDiv] = useState(false);
   const [egcUsdVal, setEgcUsdVal] = useState(0);
   const [egrUsdVal, setEgrUsdVal] = useState(0);
@@ -370,18 +371,18 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const chainIdBsc = "56";
 
   useEffect(() => {
-    // if (account) {
-    if (window.ethereum) {
+    if (account) {
       web3.eth.net
         .getId()
         .then((networkId) => {
           if (networkId != chainIdBsc) {
-            setConnectId(true);
+            setConnectId(() => true);
             console.log(
               "You are not on the right network please connect to BSC"
             );
           } else {
-            setConnectId(false);
+            setConnectId(() => false);
+
             console.log(
               "You are  on the right network please carry out transaction"
             );
@@ -391,46 +392,48 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           // unable to retrieve network id
         });
     } else {
-      // if no window.ethereum then MetaMask is not installed
-      alert(
-        "MetaMask is not installed. Please consider installing it: https://metamask.io/download.html"
-      );
+      setConnectId(() => false);
     }
-    // }
   });
-  const switchNetwork = async () => {
+
+  useEffect(() => {
     if (window.ethereum) {
-      try {
-        await window.ethereum.request({
-          method: "wallet_switchEthereumChain",
-          params: [{ chainId: web3.utils.toHex(chainIdBsc) }],
-        });
-      } catch (err) {
-        // This error code indicates that the chain has not been added to MetaMask
-        if (err.code === 4902) {
-          await window.ethereum.request({
-            method: "wallet_addEthereumChain",
-            params: [
-              {
-                chainName: "Binance Smart Chain",
-                chainId: web3.utils.toHex(chainIdBsc),
-                nativeCurrency: {
-                  name: "Smart Chain",
-                  decimals: 18,
-                  symbol: "BNB",
-                },
-                rpcUrls: ["https://bsc-dataseed.binance.org/"],
-              },
-            ],
-          });
-        }
-      }
+      setConnectNewAccountBtn(false);
     } else {
-      // if no window.ethereum then MetaMask is not installed
-      alert(
-        "MetaMask is not installed. Please consider installing it: https://metamask.io/download.html"
-      );
+      setConnectNewAccountBtn(true);
     }
+  });
+
+  const switchNetwork = async () => {
+    // if (window.ethereum) {
+    try {
+      await window.ethereum.request({
+        method: "wallet_switchEthereumChain",
+        params: [{ chainId: web3.utils.toHex(chainIdBsc) }],
+      });
+    } catch (err) {
+      // This error code indicates that the chain has not been added to MetaMask
+      if (err.code === 4902) {
+        await window.ethereum.request({
+          method: "wallet_addEthereumChain",
+          params: [
+            {
+              chainName: "Binance Smart Chain",
+              chainId: web3.utils.toHex(chainIdBsc),
+              nativeCurrency: {
+                name: "Smart Chain",
+                decimals: 18,
+                symbol: "BNB",
+              },
+              rpcUrls: ["https://bsc-dataseed.binance.org/"],
+            },
+          ],
+        });
+      }
+    }
+    // } else {
+    //   setConnectNewAccountBtn(true);
+    // }
   };
   return (
     <div className={smallSide == "not_small" ? "side" : "small_side"}>
