@@ -51,6 +51,7 @@ import {
 // styles
 import "../../css/header.css";
 import "../../css/headerMobile.css";
+import { AccountBalanceTwoTone } from "@material-ui/icons";
 // import Web3 from "web3";
 // import { Authenticate } from "../../../auth/Authenticate";
 
@@ -147,6 +148,7 @@ const Header = ({ togglemakeDark, check }) => {
   const [showHeader, setshowHeader] = useState(true);
   const [betaDiv, setBetaDiv] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  const [connectId, setConnectId] = useState(false);
 
   // const [darkMode, setDarkMode] = useState(null);
   const [walletAddr, setWalletAddr] = useState("0xXXXXXXXXXXxxxxxxxxXXXXXXXX");
@@ -435,6 +437,61 @@ const Header = ({ togglemakeDark, check }) => {
   const toggleDisconnectDiv = () => {
     setDisconnectDiv(!disconnetDiv);
   };
+
+  const chainIdBsc = "56";
+
+  useEffect(() => {
+    if (account) {
+      web3.eth.net
+        .getId()
+        .then((networkId) => {
+          if (networkId != chainIdBsc) {
+            setConnectId(true);
+            console.log(
+              "You are not on the right network please connect to BSC"
+            );
+          } else {
+            setConnectId(false);
+
+            console.log(
+              "You are  on the right network please carry out transaction"
+            );
+          }
+        })
+        .catch((err) => {
+          // unable to retrieve network id
+        });
+    }
+  }, [account]);
+  const switchNetwork = async () => {
+    if (account) {
+      try {
+        await window.ethereum.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: web3.utils.toHex(chainIdBsc) }],
+        });
+      } catch (err) {
+        // This error code indicates that the chain has not been added to MetaMask
+        if (err.code === 4902) {
+          await window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [
+              {
+                chainName: "Binance Smart Chain",
+                chainId: web3.utils.toHex(chainIdBsc),
+                nativeCurrency: {
+                  name: "Smart Chain",
+                  decimals: 18,
+                  symbol: "BNB",
+                },
+                rpcUrls: ["https://bsc-dataseed.binance.org/"],
+              },
+            ],
+          });
+        }
+      }
+    }
+  };
   return (
     <>
       {betaDiv === true ? (
@@ -639,6 +696,38 @@ const Header = ({ togglemakeDark, check }) => {
               ) : null}
             </div>
           </section>
+          {connectId == true ? (
+            <div className="right_network_id_modal_div">
+              <div className="right_network_id_modal_cont">
+                {/* <div className="close_chain_icon_cont">
+                  <CloseIcon
+                    className="close_chain_icon"
+                    onClick={() => {
+                      setConnectId(!connectId);
+                    }}
+                  />
+                </div> */}
+                <div className="change_network_img">
+                  <img
+                    src="/img/smart_chain_id_change_image.svg"
+                    alt=""
+                    className="chain_id_img"
+                  />
+                </div>
+                Oops, your wallet is not on the right network.
+                <span className="right_network_id_modal_cont_para">
+                  It seems your wallet is running on a different network from
+                  Egoras.app. Please click the button below to change your
+                  network or add the network if it's not added in your wallet.
+                </span>
+                <div className="change_network_btn_div">
+                  <button className="changeNetworkBtn" onClick={switchNetwork}>
+                    Switch Network
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : null}
         </div>
       ) : null}
     </>

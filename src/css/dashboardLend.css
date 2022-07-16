@@ -240,6 +240,7 @@
 }
 .filter_table_area_1 .MuiSelect-root {
   width: 100% !important;
+  background: #fff !important;
 }
 
 .filter_table_area_1 .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {

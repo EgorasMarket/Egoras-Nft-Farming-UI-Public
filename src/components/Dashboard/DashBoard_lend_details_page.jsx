@@ -74,11 +74,15 @@ import {
 
 const DashBoard_lend_details_page = ({ match }) => {
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
-  const { BranchDetails, rumuName, agipName, oyName } = useContext(UserContext);
+  // const { rumuName, agipName, oyName } = useContext(UserContext);
   console.log(match.params.branchAddress);
   const context = useWeb3React();
   const [LoanAssets, setLoanAssets] = useState([]);
-
+  const [BranchDetails, setBranchDetails] = useState({
+    branchName: "",
+    amount: "",
+    funded: "",
+  });
   const [activeLink, setActiveLink] = useState("");
   const [checkBox, setCheckBox] = useState(false);
   const [errMessage, setErrMessage] = useState("");
@@ -93,6 +97,9 @@ const DashBoard_lend_details_page = ({ match }) => {
   const [text, setText] = useState(
     "Transacting with blockchain, please wait..."
   );
+  const [rumuName, setRumuName] = useState(false);
+  const [agipName, setAgipName] = useState(false);
+  const [oyName, setOyName] = useState(false);
   const [assetDetailModal, setAssetDetailModal] = useState("");
   const [hash, setHash] = useState("");
   const [unlocking, setUnlocking] = useState(false);
@@ -184,6 +191,33 @@ const DashBoard_lend_details_page = ({ match }) => {
         //   funded: data.data.payload[0].funded,
         // });
         setLoanAssets(data.data.payload);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .get(api_url + "/api/lend/all/" + txnhash, null, config)
+      .then((data) => {
+        console.log(data.data.payload[0].name, "teeyuwiuoyuwuyi");
+
+        // setBranches(data.data.payload);
+        setBranchDetails({
+          branchName: data.data.payload[0].name,
+          amount: data.data.payload[0].amount,
+          funded: data.data.payload[0].funded,
+        });
+        let babara = data.data.payload[0].name.includes("R");
+        let babara2 = data.data.payload[0].name.includes("A");
+        let babara3 = data.data.payload[0].name.includes("O");
+        console.log(data.data.payload[0].name);
+        setRumuName(babara);
+        setAgipName(babara2);
+        setOyName(babara3);
+
+        console.log(babara);
+        console.log(babara, babara2, babara3);
       })
       .catch((err) => {
         console.log(err); // "oh, no!"
@@ -485,6 +519,19 @@ const DashBoard_lend_details_page = ({ match }) => {
               <span className="vertical_rule2a"></span>
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
+                  {numberWithCommas(
+                    parseInt(
+                      BranchDetails.amount - BranchDetails.funded
+                    ).toFixed(2)
+                  )}{" "}
+                </div>
+                <div className="pool_detail_sub_area1_area1_cont2">
+                  Funding left
+                </div>
+              </div>
+              <span className="vertical_rule2a"></span>
+              <div className="pool_detail_sub_area1_area1">
+                <div className="pool_detail_sub_area1_area1_cont1">
                   13 <span className="asset_symbol"> %</span>
                 </div>
                 <div className="pool_detail_sub_area1_area1_cont2">
@@ -517,7 +564,7 @@ const DashBoard_lend_details_page = ({ match }) => {
                 <div className="Asset_Originator_Details_cont_body_txt">
                   {oyName === true ? (
                     <span>
-                      Egoras Technologies Limited Agip Branch is located at
+                      Egoras Technologies Limited Oyigbo Branch is located at
                       Kilometre 7 Ikwere Road Rumeme, beside Rivers State
                       College of Health Science and Technologies. Our aim is to
                       render improved quality financial services and as well
@@ -526,7 +573,7 @@ const DashBoard_lend_details_page = ({ match }) => {
                       generate uncorrelated and excess risk-adjusted returns to
                       its investors by providing secured loans to individuals
                       and small businesses in the community. Egoras Technologies
-                      Limited Agip Branch started operations on the 6th of
+                      Limited Oyigbo Branch started operations on the 6th of
                       September, 2021 and has since empowered over 1,500
                       customers with about ₦76,407,085 in loans .
                     </span>
@@ -645,6 +692,20 @@ const DashBoard_lend_details_page = ({ match }) => {
                     <hr className="custom_hr" />
                     <div className="pool_status_Details_cont_body1_sub_conts">
                       <div className="pool_status_Details_cont_body1_sub_conts_1">
+                        Liquidity Left
+                      </div>
+                      <div className="pool_status_Details_cont_body1_sub_conts_2">
+                        {numberWithCommas(
+                          parseInt(
+                            BranchDetails.amount - BranchDetails.funded
+                          ).toFixed(2)
+                        )}{" "}
+                        Engn
+                      </div>
+                    </div>
+                    <hr className="custom_hr" />
+                    <div className="pool_status_Details_cont_body1_sub_conts">
+                      <div className="pool_status_Details_cont_body1_sub_conts_1">
                         Funding Progress
                       </div>
                       <div className="pool_status_Details_cont_body1_sub_conts_2">
@@ -689,10 +750,7 @@ const DashBoard_lend_details_page = ({ match }) => {
       {/* ================================================= */}
 
       {assetModal === true ? (
-        <div
-          className="asset_list_modal
-      "
-        >
+        <div className="asset_list_modal">
           <div className="asset_list_modal_container">
             {/* <div className="asset_list_body"> */}
             <div className="asset_list_txt">
@@ -707,12 +765,11 @@ const DashBoard_lend_details_page = ({ match }) => {
               <div className="asset_list_body_head_tab1">Asset Name</div>
 
               <div className="asset_list_body_head_tab5">Amount(Engn)</div>
-              <div className="asset_list_body_head_tab5">
-                Amount Funded(Engn)
-              </div>
+              <div className="asset_list_body_head_tab5">Funded(Engn)</div>
               <div className="asset_list_body_head_tab5">Funding Progress</div>
+              <div className="asset_list_body_head_tab5">Funding left</div>
               <div className="asset_list_body_head_tab6 finance_fee_details_page">
-                Estimated APY
+                APY
               </div>
               <div className="asset_list_body_head_tab7">Action</div>
             </div>
@@ -776,6 +833,11 @@ const DashBoard_lend_details_page = ({ match }) => {
                               ></progress>
                             </div>
                           </div>
+                          <div className="asset_list_body_body_cont_1e">
+                            {numberWithCommas(
+                              parseInt(data.amount - data.funded).toFixed(2)
+                            )}
+                          </div>
                           <div className="asset_list_body_body_cont_1f finance_fee_details_page_row">
                             13 %
                           </div>
@@ -798,60 +860,90 @@ const DashBoard_lend_details_page = ({ match }) => {
       ) : null}
       {stage == "back" ? (
         <>
-          {LoanAssets.map((data) => (
-            <>
-              {assetDetailModal == data.newLoanID ? (
-                <div className="bacModal_div">
-                  <div className="back_modal_container">
-                    <div className="back_modal_cont">
-                      <CloseIcon
-                        className="closeBackModalIcon"
-                        onClick={closeAssetDetailModal}
-                      />
-                      <div className="back_modal_heading">Back this pool</div>
-
-                      <div className="back_Modal_input_area">
-                        <div className="back_modal_input_amnt_head">
-                          Input amount
-                          <span className="base_balance">
-                            Balance: {parseFloat(baseBalance).toFixed(3)}Engn
+          {LoanAssets.map((data) => {
+            const amnt_remaining = data.amount - data.funded;
+            if (BackAmount < amnt_remaining) {
+              console.log("ure amount is less than the remaining amount");
+            } else if (BackAmount > amnt_remaining) {
+              console.log("ure amount is greater than the remaining amount");
+            }
+            return (
+              <>
+                {assetDetailModal == data.newLoanID ? (
+                  <div className="bacModal_div">
+                    <div className="back_modal_container">
+                      <div className="back_modal_cont">
+                        <CloseIcon
+                          className="closeBackModalIcon"
+                          onClick={closeAssetDetailModal}
+                        />
+                        <div className="back_modal_heading">Back this pool</div>
+                        <div className="fundin_amnt_left_amnt_div">
+                          Funding amount left in this pool:{" "}
+                          <span className="fundin_amnt_left_amnt">
+                            {numberWithCommas(
+                              parseInt(data.amount - data.funded).toFixed(2)
+                            )}{" "}
+                            Engn
                           </span>
                         </div>
-                        <span className="input_space">
-                          <AccountBalanceWalletIcon className="input_dollar_sign" />
-                          <input
-                            type="number"
-                            className="back_modal_input"
-                            placeholder="0.00 Engn"
-                            name="BackAmount"
-                            value={BackAmount}
-                            onChange={handleBackChange}
-                          />
-                          <div className="back_modal_input_amnt_head_minimum">
-                            Minimum Amount: 30,000.00 Engn
+
+                        <div className="back_Modal_input_area">
+                          <div className="back_modal_input_amnt_head">
+                            Input amount
+                            <span className="base_balance">
+                              Balance: {parseFloat(baseBalance).toFixed(3)}Engn
+                            </span>
                           </div>
-                        </span>
-                      </div>
-                      <div className="amount_earned_mnthly">
-                        Expected APY:
-                        <span className="amount_earned_mnthly_value"> 13%</span>
-                      </div>
-                      <div className="back_loan_btn_div">
-                        <button
-                          className="back_loan_btn"
-                          onClick={BackLoan}
-                          id={data.newLoanID}
-                          // disabled={disable}
-                        >
-                          Fund
-                        </button>
+                          <span className="input_space">
+                            <AccountBalanceWalletIcon className="input_dollar_sign" />
+                            <input
+                              type="number"
+                              className="back_modal_input"
+                              placeholder="0.00 Engn"
+                              name="BackAmount"
+                              value={BackAmount}
+                              onChange={handleBackChange}
+                            />
+                            {/* <div className="back_modal_input_amnt_head_minimum">
+                            Minimum Amount: 30,000.00 Engn
+                          </div> */}
+                          </span>
+                        </div>
+                        <div className="amount_earned_mnthly">
+                          Expected APY:
+                          <span className="amount_earned_mnthly_value">
+                            {" "}
+                            13%
+                          </span>
+                        </div>
+                        <div className="back_loan_btn_div">
+                          {BackAmount > amnt_remaining ? (
+                            <button
+                              className="back_loan_btn"
+                              id={data.newLoanID}
+                              disabled={true}
+                            >
+                              Amount exceeds funding amount
+                            </button>
+                          ) : (
+                            <button
+                              className="back_loan_btn"
+                              onClick={BackLoan}
+                              id={data.newLoanID}
+                              // disabled={disable}
+                            >
+                              Fund
+                            </button>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ) : null}
-            </>
-          ))}
+                ) : null}
+              </>
+            );
+          })}
         </>
       ) : null}
 

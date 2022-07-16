@@ -364,6 +364,20 @@ dark button.logout-btn {
     width: 20px;
   } */
 
+  .header_tab1_active {
+    background: none;
+    box-shadow: none;
+    color: rgb(33 170 97) !important;
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+  }
+  .header_tab1 {
+    display: flex;
+    flex-direction: column;
+    color: #acacac !important;
+    font-size: 14px;
+  }
   .header_token_prices_div {
     display: none;
   }
@@ -390,7 +404,7 @@ dark button.logout-btn {
     left: 0;
     border-radius: 0;
     border: none;
-    padding: 1em 1em;
+    padding: 0em 1em;
     display: flex;
     z-index: 10000;
   }

@@ -43,13 +43,18 @@ const DashBoardBranchAsset = ({ match }) => {
     error,
   } = context;
 
-  const { Branches, BranchDetails, rumuName, agipName, oyName } =
-    useContext(UserContext);
   const [loans, setLoans] = useState([]);
+  const [BranchDetails, setBranchDetails] = useState({
+    branchName: '',
+    amount: '',
+    funded: '',
+  });
+  const [rumuName, setRumuName] = useState(false);
+  const [agipName, setAgipName] = useState(false);
+  const [oyName, setOyName] = useState(false);
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
   const [totalPoolValue, setTotalPoolValue] = useState('');
   const [graphData, setGraphData] = useState('');
-
   const [activeBtn, setActivrBtn] = useState('Ongoing');
   const [activeLink, setActiveLink] = useState('');
   const [assetDetailModal, setAssetDetailModal] = useState('');
@@ -175,6 +180,34 @@ const DashBoardBranchAsset = ({ match }) => {
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);
   };
+
+  useEffect(() => {
+    axios
+      .get(api_url + '/api/lend/all/' + txnhash, null, config)
+      .then((data) => {
+        console.log(data.data.payload[0].name, 'teeyuwiuoyuwuyi');
+
+        // setBranches(data.data.payload);
+        setBranchDetails({
+          branchName: data.data.payload[0].name,
+          amount: data.data.payload[0].amount,
+          funded: data.data.payload[0].funded,
+        });
+        let babara = data.data.payload[0].name.includes('R');
+        let babara2 = data.data.payload[0].name.includes('A');
+        let babara3 = data.data.payload[0].name.includes('O');
+        console.log(data.data.payload[0].name);
+        setRumuName(babara);
+        setAgipName(babara2);
+        setOyName(babara3);
+
+        console.log(babara);
+        console.log(babara, babara2, babara3);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, []);
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -400,13 +433,16 @@ const DashBoardBranchAsset = ({ match }) => {
                     Amount(Engn)
                   </div>
                   <div className="asset_list_body_head_tab4 maturity_date">
-                    Amount Funded(Engn)
+                    Funded(Engn)
                   </div>
                   <div className="asset_list_body_head_tab5">
                     Funding Progress
                   </div>
+                  <div className="asset_list_body_head_tab5">
+                    Funding Left
+                  </div>
                   <div className="asset_list_body_head_tab6 body_head_tab6">
-                    Estimated APY
+                    APY
                   </div>
                   <div className="asset_list_body_head_tab7">
                     Status
@@ -489,6 +525,14 @@ const DashBoardBranchAsset = ({ match }) => {
                                     max={data.amount}
                                   ></progress>
                                 </div>
+                              </div>
+
+                              <div className="asset_list_body_body_cont_1d">
+                                {numberWithCommas(
+                                  parseInt(
+                                    data.amount - data.funded
+                                  ).toFixed(2)
+                                )}
                               </div>
                               <div className="asset_list_body_body_cont_1f body_cont1_f">
                                 13%
@@ -585,6 +629,13 @@ const DashBoardBranchAsset = ({ match }) => {
                                 ></progress>
                               </div>
                             </div>
+                            <div className="asset_list_body_body_cont_1d">
+                              {numberWithCommas(
+                                parseInt(
+                                  data.amount - data.funded
+                                ).toFixed(2)
+                              )}
+                            </div>
                             <div className="asset_list_body_body_cont_1f body_cont1_f">
                               13%
                             </div>
@@ -680,6 +731,13 @@ const DashBoardBranchAsset = ({ match }) => {
                                     max={data.amount}
                                   ></progress>
                                 </div>
+                              </div>
+                              <div className="asset_list_body_body_cont_1d">
+                                {numberWithCommas(
+                                  parseInt(
+                                    data.amount - data.funded
+                                  ).toFixed(2)
+                                )}
                               </div>
                               <div className="asset_list_body_body_cont_1f  body_cont1_f">
                                 13%
@@ -835,7 +893,7 @@ const DashBoardBranchAsset = ({ match }) => {
                             </div>
                           </div>
                         </div>
-                        <hr class="custom_hr"></hr>
+                        {/* <hr class="custom_hr"></hr> */}
                       </div>
                       {/* ======== */}
                       {/* ======== */}
@@ -843,6 +901,19 @@ const DashBoardBranchAsset = ({ match }) => {
                       {/* ======== */}
                       <div className="asset_status_details_div1_body1">
                         {/* <hr class="custom_hr"></hr> */}
+
+                        <div className="asset_status_details_div1_body1_cont1">
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            Funding left
+                          </div>
+                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                            {numberWithCommas(
+                              data.amount - data.funded
+                            )}{' '}
+                            Engn
+                          </div>
+                        </div>
+                        <hr class="custom_hr"></hr>
                         <div className="asset_status_details_div1_body1_cont1">
                           <div className="asset_status_details_div1_body1_cont1_txt1">
                             Estimated APY

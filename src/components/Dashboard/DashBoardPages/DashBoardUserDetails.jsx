@@ -284,10 +284,8 @@ const DashBoardUserDetails = () => {
                   <div className="asset_list_body_head_tab1">Pool</div>
                   <div className="asset_list_body_head_tab2">Date</div>
                   <div className="asset_list_body_head_tab3">Amount(Engn)</div>
-                  <div className="asset_list_body_head_tab3">
-                    Amount Funded(Engn)
-                  </div>
-                  <div className="asset_list_body_head_tab4">Senior APY</div>
+                  <div className="asset_list_body_head_tab3">Funded(Engn)</div>
+                  <div className="asset_list_body_head_tab4"> APY</div>
                   <div className="asset_list_body_head_tab7">Txn Hash</div>
                 </div>
                 <div className="asset_list_body_body_cont">
