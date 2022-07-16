@@ -15,6 +15,7 @@ import { API_URL as api_url } from "../../actions/types";
 import { config } from "@fortawesome/fontawesome-svg-core";
 // import Carousel from "react-multi-carousel";
 import Web3 from "web3";
+// import { numberWithCommas } from "../../static";
 import LOAN from "../../web3/contracts/Loan.json";
 import SwapContract from "../../web3/contracts/Contract_Address.json";
 import NumberScroller from "react-number-scroller";
@@ -88,6 +89,8 @@ const Home = () => {
   const [valDisplay2, setValDisplay2] = useState(0);
   const [TotalSum, setTotalSum] = useState(0);
   const [lockedValue, setLockedValue] = useState(0);
+  const [totalAmountFrom, setTotalAmountFrom] = useState(0);
+  const [totu, setTotu] = useState(0);
 
   // const [uiMode, setUiMode] = useState(localStorage.getItem("uiMode"));
   // const []
@@ -145,21 +148,21 @@ const Home = () => {
   };
   const FeaturedLogos = [
     {
-      link: "https://finance.yahoo.com/",
+      link: "https://finance.yahoo.com/news/egoras-protocol-promises-revolutionize-microfinance-145500324.html",
       img: "/img/featured_logos/featured1.svg",
     },
 
     {
-      link: "https://cointelegraph.com/",
+      link: "https://cointelegraph.com/press-releases/egoras-raises-13m-in-private-round",
       img: "/img/featured_logos/featured3.svg",
     },
     {
-      link: "https://www.newsbtc.com/",
+      link: "https://www.newsbtc.com/press-releases/egoras-a-decentralized-finance-ecosystem-for-growing-markets/",
       img: "/img/featured_logos/featured4.svg",
     },
 
     {
-      link: "https://apnews.com/",
+      link: "https://apnews.com/press-release/accesswire/business-small-business-corporate-news-microfinance-products-and-services-ee9eb494f14ea9ce6faa51d3f53a20c9",
       img: "/img/featured_logos/featured6.svg",
     },
   ];
@@ -383,7 +386,7 @@ const Home = () => {
         .then((resp) => resp.json())
         .then((data) => {
           const egr_usd_val = data["egoras"].usd;
-          console.log(egr_usd_val);
+          // console.log(egr_usd_val);
           setEgrUsd(() => egr_usd_val);
         });
       // ===============================
@@ -393,7 +396,7 @@ const Home = () => {
         .then((resp) => resp.json())
         .then((data) => {
           const egc_usd_val = data["egoras-credit"].usd;
-          console.log(egc_usd_val);
+          // console.log(egc_usd_val);
           setEgcUsd(() => egc_usd_val);
         });
       setSumVals(() => parseInt(egcVal) + parseInt(egcVal2));
@@ -401,8 +404,12 @@ const Home = () => {
       setValDisplay(() => egcUsd * sumVals);
       setValDisplay2(() => egrUsd * sumVals2);
       setTotalSum(() => valDisplay + valDisplay2);
-      console.log(sumVals);
-      console.log(egcUsd, egrUsd);
+      setTotalAmountFrom(() => TotalSum * 0.95);
+      setTotu(() => Math.round(totalAmountFrom));
+
+      console.log(Math.round(totalAmountFrom), "iiiiiiii");
+      // console.log(egcUsd, egrUsd);
+      // console.log(totalAmountFrom);
     },
     [
       valDisplay,
@@ -414,9 +421,19 @@ const Home = () => {
       egcVal,
       egcVal2,
       TotalSum,
+      totu,
+      totalAmountFrom,
     ]
   );
-
+  // console.log(Math.round(totalAmountFrom));
+  // console.log(Math.round(TotalSum));
+  // let amountFrom = Math.round(totalAmountFrom);
+  // let amountTo = Math.round(TotalSum);
+  // console.log(parseInt(amountFrom));
+  // const tOTU = parseInt(amountFrom);
+  const tOTU1 = 2041224;
+  // const tOTU2 = tOTU;
+  console.log(totu, "amount from utututututu");
   return (
     <div>
       {/* =================================================================================================================================================================================================================================================================== */}
@@ -637,30 +654,25 @@ const Home = () => {
             <div className="floating_div_cont_area1">
               <div className="floating_div_cont_area1_cont1">Current TVL</div>
               <div className="floating_div_cont_area1_cont2">
-                <NumberScroller
-                  step={1}
+                {totu == 0 ? (
+                  <p>Loading...</p>
+                ) : totu !== 0 ? (
+                  <div>{numberWithCommas(Math.round(TotalSum))} USD</div>
+                ) : null}
+                {/* <NumberScroller
                   timeout={1000}
-                  from={10}
+                  from={totu === 0 ? 0 : totu}
                   to={Math.ceil(TotalSum)}
                   toLocaleStringProps={["en-US"]}
-                />{" "}
-                USD
-              </div>
-            </div>
-            <span class="vertical_rule2a"></span>
-            <div className="floating_div_cont_area1">
-              <div className="floating_div_cont_area1_cont1">
-                Total Amount Funded In Pools
-              </div>
-              <div className="floating_div_cont_area1_cont2">
-                <NumberScroller
-                  step={1}
+                  // renderFrequency={1}
+                />{" "} */}
+                {/* <NumberScroller
                   timeout={1000}
-                  from={100}
-                  to={Math.ceil(lockedValue)}
+                  from={totu === 0 ? 0 : totu}
+                  to={Math.ceil(TotalSum)}
                   toLocaleStringProps={["en-US"]}
-                />{" "}
-                USD
+                  // renderFrequency={1}
+                />{" "} */}
               </div>
             </div>
             {/* <span class="vertical_rule"></span> */}

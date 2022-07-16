@@ -369,10 +369,10 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
       <div className="header_token_prices_div">
         <div className="container-fluid">
           <div className="header_token_prices_div_area">
-            <div className="header_token_prices_div_area1">1 NGN ~ 618 USD</div>
+            <div className="header_token_prices_div_area1">624 NGN ~ 1 USD</div>
             <span class="vertical_rule2"></span>
             <div className="header_token_prices_div_area1">
-              1 ENGN ~ 618 USD
+              624 ENGN ~ 1 USD
             </div>
             <span class="vertical_rule2"></span>
             <div className="header_token_prices_div_area1">
