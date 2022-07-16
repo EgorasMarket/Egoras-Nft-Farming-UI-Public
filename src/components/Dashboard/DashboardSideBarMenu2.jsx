@@ -4,6 +4,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 // import Web3 from "web3";
 import Web3 from "web3";
+import CloseIcon from "@material-ui/icons/Close";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TelegramIcon from "@mui/icons-material/Telegram";
 import { Sling as Hamburger } from "hamburger-react";
@@ -55,6 +56,7 @@ import {
 } from "@web3-react/core";
 const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const dddd = localStorage.getItem("smallSidetoken");
+  const [connectId, setConnectId] = useState(false);
   const [activeBg, setActiveBg] = useState("market");
   const [catDiv, setCatDiv] = useState("not_home");
   const [smallSide, setSmallSide] = useState(dddd);
@@ -364,6 +366,72 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     },
     [egcUsdVal, egrUsdVal]
   );
+
+  const chainIdBsc = "56";
+
+  useEffect(() => {
+    // if (account) {
+    if (window.ethereum) {
+      web3.eth.net
+        .getId()
+        .then((networkId) => {
+          if (networkId != chainIdBsc) {
+            setConnectId(true);
+            console.log(
+              "You are not on the right network please connect to BSC"
+            );
+          } else {
+            setConnectId(false);
+            console.log(
+              "You are  on the right network please carry out transaction"
+            );
+          }
+        })
+        .catch((err) => {
+          // unable to retrieve network id
+        });
+    } else {
+      // if no window.ethereum then MetaMask is not installed
+      alert(
+        "MetaMask is not installed. Please consider installing it: https://metamask.io/download.html"
+      );
+    }
+    // }
+  });
+  const switchNetwork = async () => {
+    if (window.ethereum) {
+      try {
+        await window.ethereum.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: web3.utils.toHex(chainIdBsc) }],
+        });
+      } catch (err) {
+        // This error code indicates that the chain has not been added to MetaMask
+        if (err.code === 4902) {
+          await window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [
+              {
+                chainName: "Binance Smart Chain",
+                chainId: web3.utils.toHex(chainIdBsc),
+                nativeCurrency: {
+                  name: "Smart Chain",
+                  decimals: 18,
+                  symbol: "BNB",
+                },
+                rpcUrls: ["https://bsc-dataseed.binance.org/"],
+              },
+            ],
+          });
+        }
+      }
+    } else {
+      // if no window.ethereum then MetaMask is not installed
+      alert(
+        "MetaMask is not installed. Please consider installing it: https://metamask.io/download.html"
+      );
+    }
+  };
   return (
     <div className={smallSide == "not_small" ? "side" : "small_side"}>
       <div className="header_token_prices_div">
@@ -586,6 +654,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           className={activeBg == "lend" ? "header_tab1_active " : "header_tab1"}
           onClick={changeBg}
         >
+          <StarsIcon className="sidebarIcon" />
           Earn
         </a>
 
@@ -597,6 +666,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           }
           onClick={changeBg}
         >
+          <ApprovalIcon className="sidebarIcon" />
           Stake
         </a>
         <a
@@ -605,6 +675,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           className={activeBg == "swap" ? "header_tab1_active " : "header_tab1"}
           onClick={changeBg}
         >
+          <SwapHorizontalCircleIcon className="sidebarIcon" />
           Swap
         </a>
         <a
@@ -615,6 +686,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           }
           onClick={changeBg}
         >
+          <AccountCircleIcon className="sidebarIcon" />
           Account
         </a>
       </div>
@@ -625,6 +697,38 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
       {/* ========== */}
       {/* ========== */}
       {/* ========== */}
+      {connectId == true ? (
+        <div className="right_network_id_modal_div">
+          <div className="right_network_id_modal_cont">
+            {/* <div className="close_chain_icon_cont">
+              <CloseIcon
+                className="close_chain_icon"
+                onClick={() => {
+                  setConnectId(!connectId);
+                }}
+              />
+            </div> */}
+            <div className="change_network_img">
+              <img
+                src="/img/smart_chain_id_change_image.svg"
+                alt=""
+                className="chain_id_img"
+              />
+            </div>
+            Oops, your wallet is not on the right network.
+            <span className="right_network_id_modal_cont_para">
+              It seems your wallet is running on a different network from
+              Egoras.app. Please click the button below to change your network
+              or add the network if it's not added in your wallet.
+            </span>
+            <div className="change_network_btn_div">
+              <button className="changeNetworkBtn" onClick={switchNetwork}>
+                Switch Network
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

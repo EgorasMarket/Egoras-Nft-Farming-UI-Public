@@ -19,7 +19,70 @@ div#Header {
   width: 100%;
   position: sticky;
 }
+.right_network_id_modal_div {
+  background: #00000063;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(7px);
+}
 
+.right_network_id_modal_cont {
+  padding: 2em;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0px 0px 10px black;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+  grid-gap: 5px;
+  gap: 15px;
+  align-items: center;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  position: relative;
+}
+
+.dark .right_network_id_modal_cont {
+  background: #354a3d;
+  border: solid 1px #5c7365;
+  color: #fff;
+}
+.change_network_btn_div {
+  width: 100%;
+}
+.right_network_id_modal_cont_para {
+  font-weight: 300;
+  font-size: 14px;
+}
+.close_chain_icon_cont {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-end;
+  position: absolute;
+  top: 3%;
+  right: 3%;
+}
+.close_chain_icon {
+  cursor: pointer;
+}
+.changeNetworkBtn {
+  width: 100%;
+  padding: 1em 1em;
+  border-radius: 8px;
+  border: none;
+  background: #229e54;
+  color: #fff;
+}
 .connected_header_address {
   display: flex;
   /* align-items: center; */

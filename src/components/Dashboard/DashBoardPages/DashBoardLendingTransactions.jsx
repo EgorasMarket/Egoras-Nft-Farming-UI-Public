@@ -33,8 +33,16 @@ const DashBoardLendingTransactions = ({ match }) => {
     active,
     error,
   } = context;
-  const { Branches, BranchDetails, rumuName, agipName, oyName } =
-    useContext(UserContext);
+  // const { Branches, BranchDetails, rumuName, agipName, oyName } =
+  //   useContext(UserContext);
+  const [BranchDetails, setBranchDetails] = useState({
+    branchName: "",
+    amount: "",
+    funded: "",
+  });
+  const [rumuName, setRumuName] = useState(false);
+  const [agipName, setAgipName] = useState(false);
+  const [oyName, setOyName] = useState(false);
   const [activeBtn, setActivrBtn] = useState("Ongoing");
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
   const [activeLink, setActiveLink] = useState("");
@@ -93,7 +101,33 @@ const DashBoardLendingTransactions = ({ match }) => {
     //   return;
     // }
   }, []);
+  useEffect(() => {
+    axios
+      .get(api_url + "/api/lend/all/" + txnhash, null, config)
+      .then((data) => {
+        console.log(data.data.payload[0].name, "teeyuwiuoyuwuyi");
 
+        // setBranches(data.data.payload);
+        setBranchDetails({
+          branchName: data.data.payload[0].name,
+          amount: data.data.payload[0].amount,
+          funded: data.data.payload[0].funded,
+        });
+        let babara = data.data.payload[0].name.includes("R");
+        let babara2 = data.data.payload[0].name.includes("A");
+        let babara3 = data.data.payload[0].name.includes("O");
+        console.log(data.data.payload[0].name);
+        setRumuName(babara);
+        setAgipName(babara2);
+        setOyName(babara3);
+
+        console.log(babara);
+        console.log(babara, babara2, babara3);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, []);
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -261,11 +295,9 @@ const DashBoardLendingTransactions = ({ match }) => {
                 <div className="asset_list_body_head">
                   {/* <div className="asset_list_body_head_tab1">Asset Id</div> */}
                   <div className="asset_list_body_head_tab1">Txn hash</div>
-                  <div className="asset_list_body_head_tab3">Date & Time</div>
-                  <div className="asset_list_body_head_tab5">
-                    Amount Funded(Engn)
-                  </div>
-                  <div className="asset_list_body_head_tab6">Financing Fee</div>
+                  <div className="asset_list_body_head_tab3">Date</div>
+                  <div className="asset_list_body_head_tab5">Funded(Engn)</div>
+                  <div className="asset_list_body_head_tab6">APY</div>
                 </div>
                 <div className="asset_list_body_body_cont">
                   {transactions.length <= 0 ? (
@@ -288,7 +320,7 @@ const DashBoardLendingTransactions = ({ match }) => {
                           {/* <div className="asset_list_body_body_cont_1a">
                             {data.id}
                           </div> */}
-                          <div className="asset_list_body_body_cont_1a">
+                          <div className="asset_list_body_body_cont_1a mobile_hash_head">
                             <a
                               href={`https://bscscan.com/tx/${data.transactionHash}`}
                               target="_blank"

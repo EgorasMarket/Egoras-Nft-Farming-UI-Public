@@ -95,7 +95,7 @@ svg.recharts-surface {
 
 .asset_list_body_head_tab1 {
   display: flex;
-  width: 100%;
+  width: 160%;
   justify-content: flex-start;
 }
 .asset_list_body_head_tab2 {
@@ -173,7 +173,8 @@ svg.recharts-surface {
   font-weight: 700;
   text-align: center;
   align-items: center;
-  overflow: hidden;
+  /* overflow: hidden; */
+  white-space: nowrap;
 }
 .asset_list_body_body_cont_1b {
   display: flex;
@@ -182,6 +183,7 @@ svg.recharts-surface {
   font-size: 14px;
   font-weight: 300;
   text-align: center;
+  white-space: nowrap;
 }
 .asset_list_body_body_cont_1c {
   display: flex;
@@ -190,6 +192,7 @@ svg.recharts-surface {
   font-size: 14px;
   font-weight: 300;
   text-align: center;
+  white-space: nowrap;
 }
 .asset_list_body_body_cont_1d {
   display: flex;
@@ -198,6 +201,7 @@ svg.recharts-surface {
   font-size: 14px;
   font-weight: 300;
   text-align: center;
+  white-space: nowrap;
 }
 .asset_list_body_body_cont_1e {
   display: flex;
@@ -206,6 +210,7 @@ svg.recharts-surface {
   font-size: 14px;
   font-weight: 300;
   text-align: center;
+  white-space: nowrap;
 }
 .asset_list_body_body_cont_1f {
   display: flex;
@@ -214,6 +219,7 @@ svg.recharts-surface {
   font-size: 14px;
   font-weight: 300;
   text-align: center;
+  white-space: nowrap;
 }
 .asset_list_body_body_cont_1g {
   display: flex;
@@ -222,6 +228,7 @@ svg.recharts-surface {
   font-size: 14px;
   font-weight: 300;
   text-align: center;
+  white-space: nowrap;
 }
 .asset_list_div {
   display: flex;

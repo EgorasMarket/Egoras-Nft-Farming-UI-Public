@@ -12,7 +12,16 @@
   justify-content: space-between;
   margin-top: -2em;
 }
-
+.fundin_amnt_left_amnt_div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 400;
+}
+.fundin_amnt_left_amnt {
+  font-weight: 800;
+}
 .pool_detail_heading_area1 {
   display: flex;
   align-items: center;
@@ -325,6 +334,8 @@ button.pool_detail_heading_area1_invest_btn {
   background: white;
   font-weight: 600;
   z-index: 1;
+  gap: 10px;
+  overflow: scroll;
 }
 .asset_list_txt {
   margin-bottom: 0.5em;
@@ -449,7 +460,7 @@ button.pool_detail_heading_area1_invest_btn {
 }
 .back_loan_btn:disabled {
   background: #a8a8a8;
-  color: rgb(185, 185, 185);
+  color: #e7e7e7;
   cursor: not-allowed;
 }
 
@@ -504,6 +515,9 @@ button.pool_detail_heading_area1_invest_btn {
   /* font-size: 15px; */
   font-weight: 600;
   color: #000;
+}
+.mobile_hash_head {
+  overflow: hidden;
 }
 @media screen and (max-width: 991px) {
   .pool_detail_sub_area1 {
@@ -583,6 +597,10 @@ button.pool_detail_heading_area1_invest_btn {
   .asset_list_body_head2 {
     padding: 0.5em;
   }
+
+  .back_modal_cont {
+    padding: 1em;
+  }
   .asset_list_body_head_tab2,
   .asset_list_body_head_tab1,
   .asset_list_body_head_tab3,
@@ -591,6 +609,7 @@ button.pool_detail_heading_area1_invest_btn {
   .asset_list_body_head_tab6,
   .asset_list_body_head_tab7 {
     font-size: 12px;
+    white-space: nowrap;
   }
 }
 @media screen and (max-width: 500px) {

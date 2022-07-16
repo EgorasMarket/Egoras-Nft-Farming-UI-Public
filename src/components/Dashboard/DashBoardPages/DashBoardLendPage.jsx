@@ -35,8 +35,7 @@ const DashBoardLendPage = () => {
     active,
     error,
   } = context;
-  const { Branches, BranchDetails, rumuName, agipName, oyName } =
-    useContext(UserContext);
+  const { Branches, BranchDetails } = useContext(UserContext);
   console.log(Branches);
   const [categoryBtn, setCategoryBtn] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
@@ -46,6 +45,9 @@ const DashBoardLendPage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [activeBtn, setActivrBtn] = useState("Active");
   const [age, setAge] = React.useState("");
+  const [rumuName, setRumuName] = useState("R");
+  const [agipName, setAgipName] = useState(false);
+  const [oyName, setOyName] = useState(false);
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -92,7 +94,33 @@ const DashBoardLendPage = () => {
         console.log(err.message); // "oh, no!"
       });
   }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(api_url + "/api/lend/all/" + txnhash, null, config)
+  //     .then((data) => {
+  //       console.log(data.data.payload[0].name, "teeyuwiuoyuwuyi");
 
+  //       // // setBranches(data.data.payload);
+  //       // setBranchDetails({
+  //       //   branchName: data.data.payload[0].name,
+  //       //   amount: data.data.payload[0].amount,
+  //       //   funded: data.data.payload[0].funded,
+  //       // });
+  //       let babara = data.data.payload[0].name.includes("R");
+  //       let babara2 = data.data.payload[0].name.includes("A");
+  //       let babara3 = data.data.payload[0].name.includes("O");
+  //       console.log(data.data.payload[0].name);
+  //       setRumuName(babara);
+  //       setAgipName(babara2);
+  //       setOyName(babara3);
+
+  //       console.log(babara);
+  //       console.log(babara, babara2, babara3);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err); // "oh, no!"
+  //     });
+  // }, []);
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -271,18 +299,21 @@ const DashBoardLendPage = () => {
                     {/* =============== */}
                     {/* =============== */}
                     {/* =============== */}
-                    {Branches.map((asset) => {
+                    {Branches.filter(
+                      (person) => person.suspended == "false"
+                    ).map((asset) => {
+                      var percentage = (asset.funded / asset.amount) * 100;
                       return (
                         <tr className="assets-category-row  transitionMe">
                           <td className="assets-category-data branch_name_title">
                             <div className="assets-data">
                               <img
                                 src={
-                                  oyName === true
+                                  asset.name === "OYIGBO"
                                     ? "/img/oyigbo_icon.svg"
-                                    : agipName === true
+                                    : asset.name === "AGIP"
                                     ? "/img/agip_icon.svg"
-                                    : rumuName === true
+                                    : asset.name === "Rumukwrushi"
                                     ? "/img/rumu_icon.svg"
                                     : null
                                 }
@@ -324,14 +355,11 @@ const DashBoardLendPage = () => {
                               <div className="asset_amount_progress_div">
                                 <div className="asset_amount_progress_div_txt"></div>
                                 <label for="file">
-                                  {parseInt(
-                                    (asset.funded / asset.amount) * 100
-                                  ).toFixed()}
-                                  %
+                                  {parseInt(percentage).toFixed()}%
                                 </label>
                                 <progress
                                   className={
-                                    asset.funded < asset.amount
+                                    percentage < 100
                                       ? "progress_bar progress_bar_progress"
                                       : "progress_bar"
                                   }
