@@ -43,7 +43,7 @@ const DashBoardLendPage = () => {
   const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);
   const [totalLendingCount, setTotalLendingCount] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
-  const [activeBtn, setActivrBtn] = useState("Active");
+  const [activeBtn, setActivrBtn] = useState("Ongoing");
   const [age, setAge] = React.useState("");
   const [rumuName, setRumuName] = useState("R");
   const [agipName, setAgipName] = useState(false);
@@ -246,6 +246,41 @@ const DashBoardLendPage = () => {
                   </FormControl>
                   {/* </Box> */}
                 </div>
+                <div className="filter_table_area_2">
+                  <div
+                    id="Ongoing"
+                    className={
+                      activeBtn == "Ongoing"
+                        ? "filter_table_btn1_active"
+                        : "filter_table_btn1"
+                    }
+                    onClick={toggleActiveBtn}
+                  >
+                    Active
+                  </div>
+                  <div
+                    id="All"
+                    className={
+                      activeBtn == "All"
+                        ? "filter_table_btn1_active"
+                        : "filter_table_btn1"
+                    }
+                    onClick={toggleActiveBtn}
+                  >
+                    All
+                  </div>
+                  <div
+                    id="Closed"
+                    className={
+                      activeBtn == "Closed"
+                        ? "filter_table_btn1_active"
+                        : "filter_table_btn1"
+                    }
+                    onClick={toggleActiveBtn}
+                  >
+                    Inactive
+                  </div>
+                </div>
               </div>
               <table className="assets-table">
                 <thead className="assets-category-titles">
@@ -299,77 +334,80 @@ const DashBoardLendPage = () => {
                     {/* =============== */}
                     {/* =============== */}
                     {/* =============== */}
-                    {Branches.filter(
-                      (person) => person.suspended == "false"
-                    ).map((asset) => {
-                      var percentage = (asset.funded / asset.amount) * 100;
-                      return (
-                        <tr className="assets-category-row  transitionMe">
-                          <td className="assets-category-data branch_name_title">
-                            <div className="assets-data">
-                              <img
-                                src={
-                                  asset.name === "OYIGBO"
-                                    ? "/img/oyigbo_icon.svg"
-                                    : asset.name === "AGIP"
-                                    ? "/img/agip_icon.svg"
-                                    : asset.name === "Rumukwrushi"
-                                    ? "/img/rumu_icon.svg"
-                                    : null
-                                }
-                                alt=""
-                                className="assets-list-icon_pool_icon"
-                              />
+                    {activeBtn === "Ongoing"
+                      ? Branches.filter(
+                          (person) => person.suspended == "false"
+                        ).map((asset) => {
+                          var percentage = (asset.funded / asset.amount) * 100;
+                          return (
+                            <tr className="assets-category-row  transitionMe">
+                              <td className="assets-category-data branch_name_title">
+                                <div className="assets-data">
+                                  <img
+                                    src={
+                                      asset.name === "OYIGBO"
+                                        ? "/img/oyigbo_icon.svg"
+                                        : asset.name === "AGIP"
+                                        ? "/img/agip_icon.svg"
+                                        : asset.name === "Rumukwrushi"
+                                        ? "/img/rumu_icon.svg"
+                                        : null
+                                    }
+                                    alt=""
+                                    className="assets-list-icon_pool_icon"
+                                  />
 
-                              <div className="assets-data-pool_name">
-                                {asset.name} Branch
-                                <span className="poolName_txt">
-                                  {/* {asset.PoolNameText}
-                                   */}
-                                  Emerging Markets
-                                </span>
-                              </div>
-                            </div>
-                          </td>
-                          <td className="assets-category-data1 branch_Lending_Capacity">
-                            <div className="assets-data-name_pool_invest_capcity">
-                              <div className="investmentcapacity_box">
-                                {" "}
-                                {numberWithCommas(
-                                  parseInt(asset.amount).toFixed(0)
-                                )}{" "}
-                                Engn
-                              </div>
-                            </div>
-                          </td>
-                          <td className="assets-category-data1b branch_pool_value">
-                            <div className="assets-data-name_pool">
-                              {numberWithCommas(
-                                parseInt(asset.funded).toFixed(2)
-                              )}{" "}
-                              <span className="asset_symbol"> Engn</span>
-                            </div>
-                          </td>
-                          <td className="assets-category-data1b branch_pool_value_progress">
-                            <div className="assets-data-name_pool">
-                              <div className="asset_amount_progress_div">
-                                <div className="asset_amount_progress_div_txt"></div>
-                                <label for="file">
-                                  {parseInt(percentage).toFixed()}%
-                                </label>
-                                <progress
-                                  className={
-                                    percentage < 100
-                                      ? "progress_bar progress_bar_progress"
-                                      : "progress_bar"
-                                  }
-                                  // "progress_bar"
-                                  id="file"
-                                  aria-valuenow={asset.amount - asset.funded}
-                                  value={asset.funded}
-                                  max={asset.amount}
-                                ></progress>
-                                {/* <div
+                                  <div className="assets-data-pool_name">
+                                    {asset.name} Branch
+                                    <span className="poolName_txt">
+                                      {/* {asset.PoolNameText}
+                                       */}
+                                      Emerging Markets
+                                    </span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="assets-category-data1 branch_Lending_Capacity">
+                                <div className="assets-data-name_pool_invest_capcity">
+                                  <div className="investmentcapacity_box">
+                                    {" "}
+                                    {numberWithCommas(
+                                      parseInt(asset.amount).toFixed(0)
+                                    )}{" "}
+                                    Engn
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="assets-category-data1b branch_pool_value">
+                                <div className="assets-data-name_pool">
+                                  {numberWithCommas(
+                                    parseInt(asset.funded).toFixed(2)
+                                  )}{" "}
+                                  <span className="asset_symbol"> Engn</span>
+                                </div>
+                              </td>
+                              <td className="assets-category-data1b branch_pool_value_progress">
+                                <div className="assets-data-name_pool">
+                                  <div className="asset_amount_progress_div">
+                                    <div className="asset_amount_progress_div_txt"></div>
+                                    <label for="file">
+                                      {parseInt(percentage).toFixed()}%
+                                    </label>
+                                    <progress
+                                      className={
+                                        percentage < 100
+                                          ? "progress_bar progress_bar_progress"
+                                          : "progress_bar"
+                                      }
+                                      // "progress_bar"
+                                      id="file"
+                                      aria-valuenow={
+                                        asset.amount - asset.funded
+                                      }
+                                      value={asset.funded}
+                                      max={asset.amount}
+                                    ></progress>
+                                    {/* <div
                                   role="progressbar"
                                   aria-valuenow="20"
                                   aria-valuemin="0"
@@ -377,46 +415,305 @@ const DashBoardLendPage = () => {
                                 >
                                   20 %
                                 </div> */}
-                                {/* <div className="asset_amount_progress_div_bar">
+                                    {/* <div className="asset_amount_progress_div_bar">
                                   <div className="asset_amount_progress_div_bar_progress"></div>
                                 </div> */}
-                              </div>
-                            </div>
-                          </td>
-                          <td className="assets-category-data1b stable-content branch_apy">
-                            <div className="assets-data-name_pool ">
-                              13.0
-                              <span className="asset_symbol">%</span>
-                            </div>
-                          </td>
-                          <td className="assets-category-data1b ratio-content branch_loan_status">
-                            <div
-                              className="assets-data-name_pool "
-                              style={
-                                asset.suspended === "false"
-                                  ? { color: "#1fb73f" }
-                                  : { color: "#e6a538" }
-                              }
-                            >
-                              <div className="status_column">
-                                {asset.suspended === "false"
-                                  ? "Active"
-                                  : "Inactive"}
-                                <CircleIcon className="status_circle" />
-                              </div>
-                            </div>
-                          </td>
-                          <td className="assets-category-data-last branch_loan_action">
-                            <a
-                              href={`/dashboard/earn/pool/${asset.branchAddress}/detail`}
-                              className="assets-btn"
-                            >
-                              See details <EastIcon className="see_more_icon" />
-                            </a>
-                          </td>
-                        </tr>
-                      );
-                    })}
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="assets-category-data1b stable-content branch_apy">
+                                <div className="assets-data-name_pool ">
+                                  13.0
+                                  <span className="asset_symbol">%</span>
+                                </div>
+                              </td>
+                              <td className="assets-category-data1b ratio-content branch_loan_status">
+                                <div
+                                  className="assets-data-name_pool2 "
+                                  style={
+                                    asset.suspended === "false"
+                                      ? { color: "#1fb73f " }
+                                      : { color: "#e6a538" }
+                                  }
+                                >
+                                  <div className="status_column">
+                                    <div className="status_txt">
+                                      {asset.suspended === "false"
+                                        ? "Active"
+                                        : "Inactive"}
+                                    </div>
+
+                                    <CircleIcon className="status_circle" />
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="assets-category-data-last branch_loan_action">
+                                <a
+                                  href={`/dashboard/earn/pool/${asset.branchAddress}/detail`}
+                                  className="assets-btn"
+                                >
+                                  See details{" "}
+                                  <EastIcon className="see_more_icon" />
+                                </a>
+                              </td>
+                            </tr>
+                          );
+                        })
+                      : activeBtn === "All"
+                      ? Branches.map((asset) => {
+                          var percentage = (asset.funded / asset.amount) * 100;
+                          return (
+                            <tr className="assets-category-row  transitionMe">
+                              <td className="assets-category-data branch_name_title">
+                                <div className="assets-data">
+                                  <img
+                                    src={
+                                      asset.name === "OYIGBO"
+                                        ? "/img/oyigbo_icon.svg"
+                                        : asset.name === "AGIP"
+                                        ? "/img/agip_icon.svg"
+                                        : asset.name === "Rumukwrushi"
+                                        ? "/img/rumu_icon.svg"
+                                        : null
+                                    }
+                                    alt=""
+                                    className="assets-list-icon_pool_icon"
+                                  />
+
+                                  <div className="assets-data-pool_name">
+                                    {asset.name} Branch
+                                    <span className="poolName_txt">
+                                      {/* {asset.PoolNameText}
+                                       */}
+                                      Emerging Markets
+                                    </span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="assets-category-data1 branch_Lending_Capacity">
+                                <div className="assets-data-name_pool_invest_capcity">
+                                  <div className="investmentcapacity_box">
+                                    {" "}
+                                    {numberWithCommas(
+                                      parseInt(asset.amount).toFixed(0)
+                                    )}{" "}
+                                    Engn
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="assets-category-data1b branch_pool_value">
+                                <div className="assets-data-name_pool">
+                                  {numberWithCommas(
+                                    parseInt(asset.funded).toFixed(2)
+                                  )}{" "}
+                                  <span className="asset_symbol"> Engn</span>
+                                </div>
+                              </td>
+                              <td className="assets-category-data1b branch_pool_value_progress">
+                                <div className="assets-data-name_pool">
+                                  <div className="asset_amount_progress_div">
+                                    <div className="asset_amount_progress_div_txt"></div>
+                                    <label for="file">
+                                      {parseInt(percentage).toFixed()}%
+                                    </label>
+                                    <progress
+                                      className={
+                                        percentage < 100
+                                          ? "progress_bar progress_bar_progress"
+                                          : "progress_bar"
+                                      }
+                                      // "progress_bar"
+                                      id="file"
+                                      aria-valuenow={
+                                        asset.amount - asset.funded
+                                      }
+                                      value={asset.funded}
+                                      max={asset.amount}
+                                    ></progress>
+                                    {/* <div
+                                  role="progressbar"
+                                  aria-valuenow="20"
+                                  aria-valuemin="0"
+                                  aria-valuemax="100"
+                                >
+                                  20 %
+                                </div> */}
+                                    {/* <div className="asset_amount_progress_div_bar">
+                                  <div className="asset_amount_progress_div_bar_progress"></div>
+                                </div> */}
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="assets-category-data1b stable-content branch_apy">
+                                <div className="assets-data-name_pool ">
+                                  13.0
+                                  <span className="asset_symbol">%</span>
+                                </div>
+                              </td>
+                              <td className="assets-category-data1b ratio-content branch_loan_status">
+                                <div
+                                  className="assets-data-name_pool2 "
+                                  style={
+                                    asset.suspended === "false"
+                                      ? { color: "#1fb73f" }
+                                      : { color: "#e6a538" }
+                                  }
+                                >
+                                  <div className="status_column">
+                                    <div className="status_txt">
+                                      {asset.suspended === "false"
+                                        ? "Active"
+                                        : "Inactive"}
+                                    </div>
+                                    <CircleIcon className="status_circle" />
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="assets-category-data-last branch_loan_action">
+                                <a
+                                  href={`/dashboard/earn/pool/${asset.branchAddress}/detail`}
+                                  className="assets-btn"
+                                >
+                                  See details{" "}
+                                  <EastIcon className="see_more_icon" />
+                                </a>
+                              </td>
+                            </tr>
+                          );
+                        })
+                      : activeBtn === "Closed"
+                      ? Branches.filter(
+                          (person) => person.suspended == "true"
+                        ).map((asset) => {
+                          var percentage = (asset.funded / asset.amount) * 100;
+                          return (
+                            <tr className="assets-category-row  transitionMe">
+                              <td className="assets-category-data branch_name_title">
+                                <div className="assets-data">
+                                  <img
+                                    src={
+                                      asset.name === "OYIGBO"
+                                        ? "/img/oyigbo_icon.svg"
+                                        : asset.name === "AGIP"
+                                        ? "/img/agip_icon.svg"
+                                        : asset.name === "Rumukwrushi"
+                                        ? "/img/rumu_icon.svg"
+                                        : null
+                                    }
+                                    alt=""
+                                    className="assets-list-icon_pool_icon"
+                                  />
+
+                                  <div className="assets-data-pool_name">
+                                    {asset.name} Branch
+                                    <span className="poolName_txt">
+                                      {/* {asset.PoolNameText}
+                                       */}
+                                      Emerging Markets
+                                    </span>
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="assets-category-data1 branch_Lending_Capacity">
+                                <div className="assets-data-name_pool_invest_capcity">
+                                  <div className="investmentcapacity_box">
+                                    {" "}
+                                    {numberWithCommas(
+                                      parseInt(asset.amount).toFixed(0)
+                                    )}{" "}
+                                    Engn
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="assets-category-data1b branch_pool_value">
+                                <div className="assets-data-name_pool">
+                                  {numberWithCommas(
+                                    parseInt(asset.funded).toFixed(2)
+                                  )}{" "}
+                                  <span className="asset_symbol"> Engn</span>
+                                </div>
+                              </td>
+                              <td className="assets-category-data1b branch_pool_value_progress">
+                                <div className="assets-data-name_pool">
+                                  <div className="asset_amount_progress_div">
+                                    <div className="asset_amount_progress_div_txt"></div>
+                                    <label for="file">
+                                      {parseInt(percentage).toFixed()}%
+                                    </label>
+                                    <progress
+                                      className={
+                                        percentage < 100
+                                          ? "progress_bar progress_bar_progress"
+                                          : "progress_bar"
+                                      }
+                                      // "progress_bar"
+                                      id="file"
+                                      aria-valuenow={
+                                        asset.amount - asset.funded
+                                      }
+                                      value={asset.funded}
+                                      max={asset.amount}
+                                    ></progress>
+                                    {/* <div
+                                  role="progressbar"
+                                  aria-valuenow="20"
+                                  aria-valuemin="0"
+                                  aria-valuemax="100"
+                                >
+                                  20 %
+                                </div> */}
+                                    {/* <div className="asset_amount_progress_div_bar">
+                                  <div className="asset_amount_progress_div_bar_progress"></div>
+                                </div> */}
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="assets-category-data1b stable-content branch_apy">
+                                <div className="assets-data-name_pool ">
+                                  13.0
+                                  <span className="asset_symbol">%</span>
+                                </div>
+                              </td>
+                              <td className="assets-category-data1b ratio-content branch_loan_status">
+                                <div
+                                  className="assets-data-name_pool2 "
+                                  style={
+                                    asset.suspended === "false"
+                                      ? { color: "#1fb73f" }
+                                      : { color: "#e6a538" }
+                                  }
+                                >
+                                  <div className="status_column">
+                                    <div className="status_txt">
+                                      {asset.suspended === "false"
+                                        ? "Active"
+                                        : "Inactive"}
+                                    </div>
+                                    <CircleIcon className="status_circle" />
+                                  </div>
+                                </div>
+                              </td>
+                              <td className="assets-category-data-last branch_loan_action">
+                                <a
+                                  href={`/dashboard/earn/pool/${asset.branchAddress}/detail`}
+                                  className="assets-btn"
+                                >
+                                  See details{" "}
+                                  <EastIcon className="see_more_icon" />
+                                </a>
+                              </td>
+                            </tr>
+                          );
+                        })
+                      : null}
+                    {/* =================== */}
+                    {/* =================== */}
+                    {/* =================== */}
+                    {/* =================== */}
+                    {/* =================== */}
+                    {/* =================== */}
+                    {/* =================== */}
+                    {/* =================== */}
                     {/* =================== */}
                     {/* =================== */}
                     {/* =================== */}

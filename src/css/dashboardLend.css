@@ -119,6 +119,21 @@
   gap: 5px;
   justify-content: flex-end;
 }
+.dark .status_txt {
+  color: #fff;
+}
+.assets-data-name_pool2 {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  color: #373737;
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: flex-end;
+}
 .assets-data-name_pool_invest_capcity {
   box-sizing: border-box;
   margin: 0px;
@@ -439,5 +454,12 @@
 
   .pool_container {
     gap: 10px;
+  }
+  .filter_table_area {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
   }
 }
