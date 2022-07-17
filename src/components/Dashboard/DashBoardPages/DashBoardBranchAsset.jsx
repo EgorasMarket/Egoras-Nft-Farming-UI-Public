@@ -653,7 +653,9 @@ const DashBoardBranchAsset = ({ match }) => {
                                 )}
                               </div>
                               <div className="asset_list_body_body_cont_1d">
-                                {data.length}month(s)
+                                {numberWithCommas(
+                                  parseInt(data.funded).toFixed(2)
+                                )}
                               </div>
                               <div className="asset_list_body_body_cont_1e">
                                 <div className="asset_amount_progress_div">
