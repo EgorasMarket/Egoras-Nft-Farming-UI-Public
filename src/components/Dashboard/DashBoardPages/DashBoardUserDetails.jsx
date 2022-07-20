@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import jazzicon from "@metamask/jazzicon";
 import Timer from "./Timer";
 import { addDays, format } from "date-fns";
-
+import { Link } from "react-router-dom";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -47,6 +47,7 @@ const DashBoardUserDetails = () => {
   const [assetDetailModal, setAssetDetailModal] = useState("");
   const [loanAsset, setLoanAsset] = useState([]);
   const [disable, setDisable] = useState(true);
+  const [activeLink, setActiveLink] = useState("");
   const [base, setBase] = useState("");
   const [asset, setAsset] = useState("");
   const [coinBalance2, setCoinBalance2] = React.useState(0.0);
@@ -185,8 +186,17 @@ const DashBoardUserDetails = () => {
 
   console.log(baseBalance);
   console.log(coinBalance2);
+  const currentPage = window.location.pathname;
+  const urlArr = currentPage.split("/");
+  useEffect(() => {
+    if (currentPage === "/dashboard/user") {
+      setActiveLink("poolDetails");
+    } else if (currentPage === "/dashboard/user/referral") {
+      setActiveLink("referral");
+    }
+  });
   return (
-    <div className="other2">
+    <div className="other2 asset_other2">
       {/* get started section start */}
       {/* ============================================================ */}
       {/* ============================================================ */}
@@ -194,8 +204,32 @@ const DashBoardUserDetails = () => {
       {/* ============================================================ */}
       {/* Tokens Section Start */}
       <section className=" no-bg no_paddd ">
-        <div className="container">
-          <div className="user_dashboard_area">
+        <div className="container relative">
+          <div className="pool_deatail_area">
+            <div className="pool_lending_pages_links">
+              <Link
+                to="/dashboard/user"
+                className={
+                  activeLink === "poolDetails"
+                    ? "pool_lend_details_link_active"
+                    : "pool_lend_details_link"
+                }
+              >
+                <DashboardIcon className="asset_overview_link_icon" />
+                Pool Details
+              </Link>
+              <Link
+                to="/dashboard/user/referral"
+                className={
+                  activeLink === "referral"
+                    ? "pool_lend_details_link_active"
+                    : "pool_lend_details_link"
+                }
+              >
+                <DashboardIcon className="asset_overview_link_icon" />
+                Refferal
+              </Link>
+            </div>
             <div className="userdAshboard_head">
               <div className="userdAshboard_head_area">
                 <div className="metamask_prof_pic" ref={avatarRef}></div>
@@ -316,7 +350,7 @@ const DashBoardUserDetails = () => {
                             </div>
 
                             <div className="asset_list_body_body_cont_1b">
-                              {data.createdAt.slice(0, 10)}
+                              {data.updatedAt.slice(0, 10)}
                             </div>
                             <div className="asset_list_body_body_cont_1c">
                               {numberWithCommas(

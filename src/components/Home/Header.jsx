@@ -208,6 +208,10 @@ const Header = ({ togglemakeDark, check }) => {
       setshowHeader(false);
       setBetaDiv(false);
     }
+    if (currentPage === "/dashboard/user/referral") {
+      setshowHeader(false);
+      setBetaDiv(false);
+    }
     if (currentPage === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
       setshowHeader(false);
       setBetaDiv(false);

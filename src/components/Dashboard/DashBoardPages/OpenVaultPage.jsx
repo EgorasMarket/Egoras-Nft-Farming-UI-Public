@@ -732,7 +732,7 @@ const OpenVaultPage = ({ match }) => {
                             ? numberWithCommas(
                                 parseInt(
                                   chainLoanDetails.liquidationPrice / 618
-                                ).toFixed(2)
+                                ).toFixed(5)
                               )
                             : "0.00"}
                         </span>
@@ -742,7 +742,7 @@ const OpenVaultPage = ({ match }) => {
                             ? numberWithCommas(
                                 parseInt(
                                   chainLoanDetails.liquidationPrice
-                                ).toFixed(2)
+                                ).toFixed(5)
                               )
                             : "0.00"}
                         </span>
@@ -758,7 +758,7 @@ const OpenVaultPage = ({ match }) => {
                           ₦
                           {numberWithCommas(
                             parseFloat(formData.stateLiquidationPrice).toFixed(
-                              2
+                              5
                             )
                           )}
                         </div>
@@ -815,10 +815,10 @@ const OpenVaultPage = ({ match }) => {
                       <p className="vault_prices1txt1">Current Price</p>
                       <h3 className="vault_prices1amount">
                         <span className="normal_val">
-                          ${numberWithCommas((tickerPrice / 618).toFixed(2))}
+                          ${numberWithCommas((tickerPrice / 618).toFixed(5))}
                         </span>
                         <span className="dollar_val">
-                          ~ ₦{numberWithCommas(tickerPrice.toFixed(2))}
+                          ~ ₦{numberWithCommas(tickerPrice.toFixed(5))}
                         </span>
                       </h3>
                     </div>
@@ -828,7 +828,7 @@ const OpenVaultPage = ({ match }) => {
                       <span className="next">Next</span>{" "}
                       <span className="vault_prices1txt1aa">
                         {" "}
-                        {numberWithCommas(tickerPrice.toFixed(2))}
+                        {numberWithCommas(tickerPrice.toFixed(5))}
                       </span>
                     </p>
                   </div>
@@ -849,7 +849,7 @@ const OpenVaultPage = ({ match }) => {
                                 parseFloat(
                                   (tickerPrice * chainLoanDetails.collateral) /
                                     618
-                                ).toFixed(2)
+                                ).toFixed(5)
                               )
                             : "0.00"}
                         </span>
@@ -859,7 +859,7 @@ const OpenVaultPage = ({ match }) => {
                             ? numberWithCommas(
                                 parseFloat(
                                   tickerPrice * chainLoanDetails.collateral
-                                ).toFixed(2)
+                                ).toFixed(5)
                               )
                             : "0.00"}
                         </span>
