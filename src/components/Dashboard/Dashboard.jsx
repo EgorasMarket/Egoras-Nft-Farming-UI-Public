@@ -10,6 +10,7 @@ import DashBoardUserDetails from "./DashBoardPages/DashBoardUserDetails";
 import DashboardSideBarMenu from "./DashboardSideBarMenu";
 import DashboardSideBarMenu2 from "./DashboardSideBarMenu2";
 import LoadingIcons from "react-loading-icons";
+import DashboardReferral from "./DashBoardPages/DashboardReferral";
 // import DashBoardDefaultPage from "./DashBoardPages/DashBoardDefaultPage";
 import DashBoardAnalytics from "./DashBoardPages/DashBoardAnalytics";
 import DashBoardTransaction from "./DashBoardPages/DashBoardTransaction";
@@ -132,6 +133,11 @@ function Dashboard({ check, togglemakeDark }) {
                   exact
                   path="/dashboard/governance/details"
                   component={DashboardEgrBalancePage}
+                />
+                <Route
+                  exact
+                  path="/dashboard/user/referral"
+                  component={DashboardReferral}
                 />
                 <Route
                   exact

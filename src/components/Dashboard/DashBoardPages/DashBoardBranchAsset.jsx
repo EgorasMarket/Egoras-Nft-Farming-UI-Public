@@ -1,15 +1,20 @@
 import React, { useState, useEffect, useContext } from 'react';
 import '../../../css/dashboard_branch_assets.css';
-
+import Chart from 'react-apexcharts';
 import { Link } from 'react-router-dom';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import Accordion from '../Accordion';
+import Sparkline from '../../static/Sparkline';
+import CircleIcon from '@mui/icons-material/Circle';
+import EastIcon from '@mui/icons-material/East';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import CloseIcon from '@mui/icons-material/Close';
 import ReceiptIcon from '@mui/icons-material/Receipt';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import CopyAllIcon from '@mui/icons-material/CopyAll';
 // import ProgressBar from 'react-animated-progress-bar';
+
+import data from '../../static/FakerModule';
 
 import {
   AreaChart,
@@ -51,17 +56,28 @@ const DashBoardBranchAsset = ({ match }) => {
   });
   const [rumuName, setRumuName] = useState(false);
   const [agipName, setAgipName] = useState(false);
+  const [graphAmount, setgraphamount] = useState(0);
   const [oyName, setOyName] = useState(false);
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
   const [totalPoolValue, setTotalPoolValue] = useState('');
   const [graphData, setGraphData] = useState('');
-  // const newData = [...graphData];
-
-  // for (const data of newData) {
-  //   data.amount = 1;
-  // }
-  // console.log(newData, 'timberlake');
-
+  const [graphData2, setGraphData2] = useState([]);
+  const [options, setObject] = useState({
+    chart: {
+      id: 'basic-bar',
+    },
+    xaxis: {
+      categories: [
+        1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999,
+      ],
+    },
+  });
+  const [series, setSeries] = useState([
+    {
+      name: 'series-1',
+      data: [14300, 14400, 144500, 144600, 14300, 1400, 1500000],
+    },
+  ]);
   const [activeBtn, setActivrBtn] = useState('Ongoing');
   const [activeLink, setActiveLink] = useState('');
   const [assetDetailModal, setAssetDetailModal] = useState('');
@@ -126,7 +142,7 @@ const DashBoardBranchAsset = ({ match }) => {
       .then((data) => {
         console.log(data.data.payload, 'powerful333333');
         // console.log(txnhash);
-        // setBranches(data.data.payload);
+        // setloans(data.data.payload);
       })
       .catch((err) => {
         console.log(err); // "oh, no!"
@@ -145,7 +161,7 @@ const DashBoardBranchAsset = ({ match }) => {
         );
         setTotalPoolValue(data.data.payload[0].total);
         // console.log(txnhash);
-        // setBranches(data.data.payload);
+        // setloans(data.data.payload);
         // setBranchDetails({
         //   branchName: data.data.payload[0].name,
         //   amount: data.data.payload[0].amount,
@@ -162,15 +178,26 @@ const DashBoardBranchAsset = ({ match }) => {
     axios
       .get(api_url + '/api/branch/chart/' + txnhash, null, config)
       .then((data) => {
+        console.log(data.data.payload, 'powerfulttt5tt333333');
+        console.log(data.data.payload[0], 'powerfulttt5tt333333');
+        // setGraphData2(data.data.payload);
         // setGraphData(data.data.payload);
         const temp = data.data.payload;
 
         for (const data of temp) {
           //get the amount from the data object
-
-          data.amount = parseInt(data.amount).toFixed(2);
+          data.value = Number(parseInt(data.value).toFixed(2));
         }
-        setGraphData(temp);
+        setGraphData2(() => temp);
+        const array = temp.map((data) => {
+          return parseInt(data.amount);
+        });
+
+        console.log(array, 'higi');
+        console.log(temp, 'temppppoppp');
+
+        setSeries([{ data: array }]);
+        // setgraphamount(parseInt(graphData.amount).toFixed(0));
       })
       .catch((err) => {
         console.log(err); // "oh, no!"
@@ -178,6 +205,15 @@ const DashBoardBranchAsset = ({ match }) => {
     //   return;
     // }
   }, []);
+  console.log(graphData2, 'grapodtatatata');
+  // const values = [];
+  // for (let i = 0; i < 100; i++) {
+  //   values.push({
+  //     timestamp: graphData2[0].timestamp,
+  //     value: graphData2[0].value,
+  //   });
+  // }
+  console.log(series, 'ersrresrr');
   // var grapDataa =
   //   graphData &&
   //   graphData.length > 0 &&
@@ -201,7 +237,7 @@ const DashBoardBranchAsset = ({ match }) => {
       .then((data) => {
         console.log(data.data.payload[0].name, 'teeyuwiuoyuwuyi');
 
-        // setBranches(data.data.payload);
+        // setloans(data.data.payload);
         setBranchDetails({
           branchName: data.data.payload[0].name,
           amount: data.data.payload[0].amount,
@@ -222,6 +258,61 @@ const DashBoardBranchAsset = ({ match }) => {
         console.log(err); // "oh, no!"
       });
   }, []);
+  var btc = [
+    {
+      timestamp: '2022-07-16T09:37:07.000Z',
+      value: 225000,
+    },
+    {
+      timestamp: '2022-07-16T09:37:07.000Z',
+      value: 81900,
+    },
+    {
+      timestamp: '2022-07-16T15:09:00.000Z',
+      value: 15900,
+    },
+    {
+      timestamp: '2022-07-16T15:20:00.000Z',
+      value: 15900,
+    },
+    {
+      timestamp: '2022-07-16T15:44:01.000Z',
+      value: 31800,
+    },
+    {
+      timestamp: '2022-07-18T12:40:00.000Z',
+      value: 100000,
+    },
+    {
+      timestamp: '2022-07-18T13:56:00.000Z',
+      value: 183190,
+    },
+    {
+      timestamp: '2022-07-18T14:25:00.000Z',
+      value: 545200,
+    },
+    {
+      timestamp: '2022-07-18T14:59:01.000Z',
+      value: 131900,
+    },
+    {
+      timestamp: '2022-07-18T15:39:00.000Z',
+      value: 199900,
+    },
+    {
+      timestamp: '2022-07-18T16:11:01.000Z',
+      value: 181700,
+    },
+    {
+      timestamp: '2022-07-18T16:27:01.000Z',
+      value: 126700,
+    },
+    {
+      timestamp: '2022-07-18T16:46:00.000Z',
+      value: 121600,
+    },
+  ];
+  console.log(btc, 'btcbtcbtbcbtcbbtcb');
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -340,13 +431,33 @@ const DashBoardBranchAsset = ({ match }) => {
                   </div>
                 </div>
                 <div className="assets_chart_area">
-                  {/* <ResponsiveContainer width="100%" height="100%"> */}
+                  {/* <div className="row">
+                    <div className="mixed-chart">
+                      <Chart
+                        options={options}
+                        series={series}
+                        type="area"
+                        width="500"
+                      />
+                    </div>
+                  </div> */}
+                  {graphData2.length == 0 ? (
+                    <p>Loading....</p>
+                  ) : (
+                    <Sparkline values={graphData2} />
+                  )}
+                </div>
+                {/* ========= */}
+                {/* ========= */}
+                {/* ========= */}
+                {/* <div className="assets_chart_area">
+              
                   <AreaChart
                     width={730}
                     height={150}
                     data={graphData}
                     margin={{
-                      top: 10,
+                      top: 0,
                       tright: 0,
                       left: 0,
                       bottom: 0,
@@ -372,9 +483,7 @@ const DashBoardBranchAsset = ({ match }) => {
                         />
                       </linearGradient>
                     </defs>
-                    {/* <XAxis dataKey="name" /> */}
-                    {/* <YAxis /> */}
-                    {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                 
                     <Tooltip />
                     <Area
                       type="monotone"
@@ -385,8 +494,8 @@ const DashBoardBranchAsset = ({ match }) => {
                       strokeWidth={2}
                     />
                   </AreaChart>
-                  {/* </ResponsiveContainer> */}
-                </div>
+                
+                </div>*/}
               </div>
             </div>
 
@@ -437,44 +546,599 @@ const DashBoardBranchAsset = ({ match }) => {
                   </div>
                 </div>
               </div>
-              <div className="asset_list_body">
-                <div className="asset_list_body_head">
-                  {/* <div className="asset_list_body_head_tab1">Asset Id</div> */}
-                  <div className="asset_list_body_head_tab1">
-                    Asset Name
+
+              <div className="asset_list_desktop_view">
+                <table className="assets-table">
+                  <thead className="assets-category-titles">
+                    <tr className="assets">
+                      <th className="assets-category-titles-heading1">
+                        Asset Name
+                      </th>
+                      <th className="assets-category-titles-heading1">
+                        Amount(Engn)
+                      </th>
+                      <th className="assets-category-titles-heading1 right">
+                        Funded(Engn)
+                      </th>
+                      <th className="assets-category-titles-heading1 right">
+                        Funding Progress
+                      </th>
+                      <th className="assets-category-titles-heading1 right none_display">
+                        Funding Left
+                      </th>
+                      <th className="assets-category-titles-heading1 right ">
+                        APY
+                      </th>
+                      <th className="assets-category-titles-heading1 right ">
+                        Status
+                      </th>
+                      <th className="assets-category-titles-heading1 right "></th>
+                    </tr>
+                  </thead>
+
+                  {/* <div className="table-body-content">
+
+// =====================
+// =====================
+// =====================
+// =====================
+// =====================
+// =====================
+
+                
+              </div> */}
+                  {loans.length <= 0 ? (
+                    <div className="no_loans_div">
+                      <div className="no_loans_div_cont">
+                        <Nodata />
+                        No Pools yet.
+                      </div>{' '}
+                    </div>
+                  ) : (
+                    <tbody
+                      className="assets-table-body popular-categories transitionMe"
+                      id="popular-categories"
+                    >
+                      {' '}
+                      {/* =============== */}
+                      {/* =============== */}
+                      {/* =============== */}
+                      {activeBtn === 'Ongoing'
+                        ? loans
+                            .filter(
+                              (person) => person.state == 'OPEN'
+                            )
+                            .map((asset) => {
+                              var percentage =
+                                (asset.funded / asset.amount) * 100;
+                              const meta = JSON.parse(asset.metadata);
+
+                              return (
+                                <tr
+                                  className="assets-category-row  transitionMe"
+                                  id={asset.newLoanID}
+                                  onClick={ChangeAssetDetailModal}
+                                >
+                                  <td className="assets-category-data branch_name_title">
+                                    <div className="assets-data">
+                                      <img
+                                        src={meta.arrayImg}
+                                        alt=""
+                                        className="assets-list-icon_pool_icon"
+                                      />
+
+                                      <div className="assets-data-pool_name">
+                                        {asset.title.substring(
+                                          0,
+                                          20
+                                        ) + '...'}
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td className="assets-category-data1 branch_Lending_Capacity">
+                                    {/* <div className="assets-data-name_pool_invest_capcity"> */}
+                                    <div className="asset_list_body_body_cont_1c">
+                                      {numberWithCommas(
+                                        parseInt(
+                                          asset.amount
+                                        ).toFixed(2)
+                                      )}
+                                    </div>
+                                    {/* </div> */}
+                                  </td>
+                                  <td className="assets-category-data1b branch_pool_value">
+                                    <div className="assets-data-name_pool">
+                                      {numberWithCommas(
+                                        parseInt(
+                                          asset.funded
+                                        ).toFixed(2)
+                                      )}
+                                    </div>
+                                  </td>
+                                  <td className="assets-category-data1b branch_pool_value_progress">
+                                    <div className="assets-data-name_pool">
+                                      <div className="asset_amount_progress_div">
+                                        <div className="asset_amount_progress_div_txt"></div>
+                                        <label for="file">
+                                          {parseInt(
+                                            percentage
+                                          ).toFixed()}
+                                          %
+                                        </label>
+                                        <progress
+                                          className={
+                                            percentage < 100
+                                              ? 'progress_bar progress_bar_progress'
+                                              : 'progress_bar'
+                                          }
+                                          // "progress_bar"
+                                          id="file"
+                                          aria-valuenow={
+                                            asset.amount -
+                                            asset.funded
+                                          }
+                                          value={asset.funded}
+                                          max={asset.amount}
+                                        ></progress>
+                                        {/* <div
+                                  role="progressbar"
+                                  aria-valuenow="20"
+                                  aria-valuemin="0"
+                                  aria-valuemax="100"
+                                >
+                                  20 %
+                                </div> */}
+                                        {/* <div className="asset_amount_progress_div_bar">
+                                  <div className="asset_amount_progress_div_bar_progress"></div>
+                                </div> */}
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    <div className="assets-data-name_pool ">
+                                      {numberWithCommas(
+                                        parseInt(
+                                          asset.amount - asset.funded
+                                        ).toFixed(2)
+                                      )}
+                                    </div>
+                                  </td>
+                                  <td className="assets-category-data1b ratio-content branch_loan_status">
+                                    <div className="asset_list_body_body_cont_1f body_cont1_f">
+                                      13%
+                                    </div>
+                                  </td>
+                                  <td className="assets-category-data-last branch_loan_action">
+                                    <div className="asset_list_body_body_cont_1g">
+                                      <button
+                                        className={
+                                          asset.state === 'OPEN'
+                                            ? 'status_btn_ongoing'
+                                            : asset.state === 'FILLED'
+                                            ? 'status_btn_closed'
+                                            : 'status_btn'
+                                        }
+                                      >
+                                        {asset.state}
+                                      </button>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <KeyboardArrowRightIcon className="arrow_right_arrow" />
+                                  </td>
+                                </tr>
+                              );
+                            })
+                        : activeBtn === 'All'
+                        ? loans.map((asset) => {
+                            var percentage =
+                              (asset.funded / asset.amount) * 100;
+                            const meta = JSON.parse(asset.metadata);
+                            return (
+                              <tr
+                                className="assets-category-row  transitionMe"
+                                id={asset.newLoanID}
+                                onClick={ChangeAssetDetailModal}
+                              >
+                                <td className="assets-category-data branch_name_title">
+                                  <div className="assets-data">
+                                    <img
+                                      src={meta.arrayImg}
+                                      alt=""
+                                      className="assets-list-icon_pool_icon"
+                                    />
+
+                                    <div className="assets-data-pool_name">
+                                      {asset.title.substring(0, 20) +
+                                        '...'}
+                                    </div>
+                                  </div>
+                                </td>
+                                <td className="assets-category-data1 branch_Lending_Capacity">
+                                  {/* <div className="assets-data-name_pool_invest_capcity"> */}
+                                  <div className="asset_list_body_body_cont_1c">
+                                    {numberWithCommas(
+                                      parseInt(asset.amount).toFixed(
+                                        2
+                                      )
+                                    )}
+                                  </div>
+                                  {/* </div> */}
+                                </td>
+                                <td className="assets-category-data1b branch_pool_value">
+                                  <div className="assets-data-name_pool">
+                                    {numberWithCommas(
+                                      parseInt(asset.funded).toFixed(
+                                        2
+                                      )
+                                    )}
+                                  </div>
+                                </td>
+                                <td className="assets-category-data1b branch_pool_value_progress">
+                                  <div className="assets-data-name_pool">
+                                    <div className="asset_amount_progress_div">
+                                      <div className="asset_amount_progress_div_txt"></div>
+                                      <label for="file">
+                                        {parseInt(
+                                          percentage
+                                        ).toFixed()}
+                                        %
+                                      </label>
+                                      <progress
+                                        className={
+                                          percentage < 100
+                                            ? 'progress_bar progress_bar_progress'
+                                            : 'progress_bar'
+                                        }
+                                        // "progress_bar"
+                                        id="file"
+                                        aria-valuenow={
+                                          asset.amount - asset.funded
+                                        }
+                                        value={asset.funded}
+                                        max={asset.amount}
+                                      ></progress>
+                                      {/* <div
+                                  role="progressbar"
+                                  aria-valuenow="20"
+                                  aria-valuemin="0"
+                                  aria-valuemax="100"
+                                >
+                                  20 %
+                                </div> */}
+                                      {/* <div className="asset_amount_progress_div_bar">
+                                  <div className="asset_amount_progress_div_bar_progress"></div>
+                                </div> */}
+                                    </div>
+                                  </div>
+                                </td>
+                                <td className="assets-category-data1b stable-content branch_apy">
+                                  <div className="assets-data-name_pool ">
+                                    {numberWithCommas(
+                                      parseInt(
+                                        asset.amount - asset.funded
+                                      ).toFixed(2)
+                                    )}
+                                  </div>
+                                </td>
+                                <td className="assets-category-data1b ratio-content branch_loan_status">
+                                  <div className="asset_list_body_body_cont_1f body_cont1_f">
+                                    13%
+                                  </div>
+                                </td>
+                                <td className="assets-category-data-last branch_loan_action">
+                                  <div className="asset_list_body_body_cont_1g">
+                                    <button
+                                      className={
+                                        asset.state === 'OPEN'
+                                          ? 'status_btn_ongoing'
+                                          : asset.state === 'FILLED'
+                                          ? 'status_btn_closed'
+                                          : 'status_btn'
+                                      }
+                                    >
+                                      {asset.state}
+                                    </button>
+                                  </div>
+                                </td>
+                                <td>
+                                  <KeyboardArrowRightIcon className="arrow_right_arrow" />
+                                </td>
+                              </tr>
+                            );
+                          })
+                        : activeBtn === 'Closed'
+                        ? loans
+                            .filter(
+                              (person) => person.state == 'FILLED'
+                            )
+                            .map((asset) => {
+                              var percentage =
+                                (asset.funded / asset.amount) * 100;
+                              const meta = JSON.parse(asset.metadata);
+                              return (
+                                <tr
+                                  className="assets-category-row  transitionMe"
+                                  id={asset.newLoanID}
+                                  onClick={ChangeAssetDetailModal}
+                                >
+                                  <td className="assets-category-data branch_name_title">
+                                    <div className="assets-data">
+                                      <img
+                                        src={meta.arrayImg}
+                                        alt=""
+                                        className="assets-list-icon_pool_icon"
+                                      />
+
+                                      <div className="assets-data-pool_name">
+                                        {asset.title.substring(
+                                          0,
+                                          20
+                                        ) + '...'}
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td className="assets-category-data1 branch_Lending_Capacity">
+                                    {/* <div className="assets-data-name_pool_invest_capcity"> */}
+                                    <div className="asset_list_body_body_cont_1c">
+                                      {numberWithCommas(
+                                        parseInt(
+                                          asset.amount
+                                        ).toFixed(2)
+                                      )}
+                                    </div>
+                                    {/* </div> */}
+                                  </td>
+                                  <td className="assets-category-data1b branch_pool_value">
+                                    <div className="assets-data-name_pool">
+                                      {numberWithCommas(
+                                        parseInt(
+                                          asset.funded
+                                        ).toFixed(2)
+                                      )}
+                                    </div>
+                                  </td>
+                                  <td className="assets-category-data1b branch_pool_value_progress">
+                                    <div className="assets-data-name_pool">
+                                      <div className="asset_amount_progress_div">
+                                        <div className="asset_amount_progress_div_txt"></div>
+                                        <label for="file">
+                                          {parseInt(
+                                            percentage
+                                          ).toFixed()}
+                                          %
+                                        </label>
+                                        <progress
+                                          className={
+                                            percentage < 100
+                                              ? 'progress_bar progress_bar_progress'
+                                              : 'progress_bar'
+                                          }
+                                          // "progress_bar"
+                                          id="file"
+                                          aria-valuenow={
+                                            asset.amount -
+                                            asset.funded
+                                          }
+                                          value={asset.funded}
+                                          max={asset.amount}
+                                        ></progress>
+                                        {/* <div
+                                  role="progressbar"
+                                  aria-valuenow="20"
+                                  aria-valuemin="0"
+                                  aria-valuemax="100"
+                                >
+                                  20 %
+                                </div> */}
+                                        {/* <div className="asset_amount_progress_div_bar">
+                                  <div className="asset_amount_progress_div_bar_progress"></div>
+                                </div> */}
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    <div className="assets-data-name_pool ">
+                                      {numberWithCommas(
+                                        parseInt(
+                                          asset.amount - asset.funded
+                                        ).toFixed(2)
+                                      )}
+                                    </div>
+                                  </td>
+                                  <td className="assets-category-data1b ratio-content branch_loan_status">
+                                    <div className="asset_list_body_body_cont_1f body_cont1_f">
+                                      13%
+                                    </div>
+                                  </td>
+                                  <td className="assets-category-data-last branch_loan_action">
+                                    <div className="asset_list_body_body_cont_1g">
+                                      <button
+                                        className={
+                                          asset.state === 'OPEN'
+                                            ? 'status_btn_ongoing'
+                                            : asset.state === 'FILLED'
+                                            ? 'status_btn_closed'
+                                            : 'status_btn'
+                                        }
+                                      >
+                                        {asset.state}
+                                      </button>
+                                    </div>
+                                  </td>
+                                  <td>
+                                    <KeyboardArrowRightIcon className="arrow_right_arrow" />
+                                  </td>
+                                </tr>
+                              );
+                            })
+                        : null}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                    </tbody>
+                  )}
+                </table>
+              </div>
+              {/* ======================================================== */}
+              {/* ======================================================== */}
+              {/* ======================================================== */}
+              {/* ======================================================== */}
+              {/* ======================================================== */}
+              {/* ======================================================== */}
+              {/* ======================================================== */}
+              {/* ======================================================== */}
+              {/* ======================================================== */}
+              <div className="asset_list_mobile_view">
+                <div className="asset_list_body">
+                  <div className="asset_list_body_head">
+                    {/* <div className="asset_list_body_head_tab1">Asset Id</div> */}
+                    <div className="asset_list_body_head_tab1">
+                      Asset Name
+                    </div>
+                    <div className="asset_list_body_head_tab3">
+                      Amount(Engn)
+                    </div>
+                    <div className="asset_list_body_head_tab4 maturity_date">
+                      Funded(Engn)
+                    </div>
+                    <div className="asset_list_body_head_tab5">
+                      Funding Progress
+                    </div>
+                    <div className="asset_list_body_head_tab5">
+                      Funding Left
+                    </div>
+                    <div className="asset_list_body_head_tab6 body_head_tab6">
+                      APY
+                    </div>
+                    <div className="asset_list_body_head_tab7">
+                      Status
+                    </div>
                   </div>
-                  <div className="asset_list_body_head_tab3">
-                    Amount(Engn)
-                  </div>
-                  <div className="asset_list_body_head_tab4 maturity_date">
-                    Funded(Engn)
-                  </div>
-                  <div className="asset_list_body_head_tab5">
-                    Funding Progress
-                  </div>
-                  <div className="asset_list_body_head_tab5">
-                    Funding Left
-                  </div>
-                  <div className="asset_list_body_head_tab6 body_head_tab6">
-                    APY
-                  </div>
-                  <div className="asset_list_body_head_tab7">
-                    Status
-                  </div>
-                </div>
-                <div className="asset_list_body_body_cont">
-                  {activeBtn === 'Ongoing' ? (
-                    loans.length <= 0 ? (
-                      <div className="no_loans_div">
-                        <div className="no_loans_div_cont">
-                          <Nodata />
-                          No funded pools yet.
-                        </div>{' '}
-                      </div>
-                    ) : (
-                      loans
-                        .filter((person) => person.state == 'OPEN')
-                        .map((data) => {
+                  <div className="asset_list_body_body_cont">
+                    {activeBtn === 'Ongoing' ? (
+                      loans.length <= 0 ? (
+                        <div className="no_loans_div">
+                          <div className="no_loans_div_cont">
+                            <Nodata />
+                            No funded pools yet.
+                          </div>{' '}
+                        </div>
+                      ) : (
+                        loans
+                          .filter((person) => person.state == 'OPEN')
+                          .map((data) => {
+                            var percentage =
+                              (data.funded / data.amount) * 100;
+                            const meta = JSON.parse(data.metadata);
+
+                            return (
+                              <div
+                                className="asset_list_body_body_cont_1"
+                                id={data.newLoanID}
+                                onClick={ChangeAssetDetailModal}
+                              >
+                                {/* <div className="asset_list_body_body_cont_1a">
+                                {data.id}
+                              </div> */}
+                                <div className="asset_list_body_body_cont_1a">
+                                  <img
+                                    src={meta.arrayImg}
+                                    alt=""
+                                    className="assets-list-icon_pool_icon"
+                                  />{' '}
+                                  {data.title.substring(0, 20) +
+                                    '...'}
+                                </div>
+
+                                <div className="asset_list_body_body_cont_1c">
+                                  {numberWithCommas(
+                                    parseInt(data.amount).toFixed(2)
+                                  )}
+                                </div>
+                                <div className="asset_list_body_body_cont_1d">
+                                  {numberWithCommas(
+                                    parseInt(data.funded).toFixed(2)
+                                  )}
+                                </div>
+                                <div className="asset_list_body_body_cont_1e">
+                                  <div className="asset_amount_progress_div">
+                                    <div className="asset_amount_progress_div_txt"></div>
+                                    <label for="file">
+                                      {parseInt(percentage).toFixed()}
+                                      %
+                                    </label>
+                                    <progress
+                                      className={
+                                        percentage < 100
+                                          ? 'progress_bar progress_bar_progress'
+                                          : 'progress_bar'
+                                      }
+                                      // className={
+                                      //   data.funded < data.amount
+                                      //     ? " progress_bar progress_bar_progress"
+                                      //     : data.funded === data.amount
+                                      //     ? "progress_bar"
+                                      //     : " progress_bar progress_bar_progress"
+                                      // }
+                                      // "progress_bar"
+                                      id="file"
+                                      aria-valuenow={
+                                        data.amount - data.funded
+                                      }
+                                      value={data.funded}
+                                      max={data.amount}
+                                    ></progress>
+                                  </div>
+                                </div>
+
+                                <div className="asset_list_body_body_cont_1d">
+                                  {numberWithCommas(
+                                    parseInt(
+                                      data.amount - data.funded
+                                    ).toFixed(2)
+                                  )}
+                                </div>
+                                <div className="asset_list_body_body_cont_1f body_cont1_f">
+                                  13%
+                                </div>
+                                <div className="asset_list_body_body_cont_1g">
+                                  <button
+                                    className={
+                                      data.state === 'OPEN'
+                                        ? 'status_btn_ongoing'
+                                        : data.state === 'Closed'
+                                        ? 'status_btn_closed'
+                                        : 'status_btn'
+                                    }
+                                  >
+                                    {data.state}
+                                  </button>
+                                </div>
+                                <KeyboardArrowRightIcon className="arrow_right_arrow" />
+                              </div>
+                            );
+                          })
+                      )
+                    ) : activeBtn === 'All' ? (
+                      loans.length <= 0 ? (
+                        <div className="no_loans_div">
+                          <div className="no_loans_div_cont">
+                            <Nodata />
+                            No funded pools yet.
+                          </div>{' '}
+                        </div>
+                      ) : (
+                        loans.map((data) => {
                           var percentage =
                             (data.funded / data.amount) * 100;
                           const meta = JSON.parse(data.metadata);
@@ -540,7 +1204,6 @@ const DashBoardBranchAsset = ({ match }) => {
                                   ></progress>
                                 </div>
                               </div>
-
                               <div className="asset_list_body_body_cont_1d">
                                 {numberWithCommas(
                                   parseInt(
@@ -549,211 +1212,6 @@ const DashBoardBranchAsset = ({ match }) => {
                                 )}
                               </div>
                               <div className="asset_list_body_body_cont_1f body_cont1_f">
-                                13%
-                              </div>
-                              <div className="asset_list_body_body_cont_1g">
-                                <button
-                                  className={
-                                    data.state === 'OPEN'
-                                      ? 'status_btn_ongoing'
-                                      : data.state === 'Closed'
-                                      ? 'status_btn_closed'
-                                      : 'status_btn'
-                                  }
-                                >
-                                  {data.state}
-                                </button>
-                              </div>
-                              <KeyboardArrowRightIcon className="arrow_right_arrow" />
-                            </div>
-                          );
-                        })
-                    )
-                  ) : activeBtn === 'All' ? (
-                    loans.length <= 0 ? (
-                      <div className="no_loans_div">
-                        <div className="no_loans_div_cont">
-                          <Nodata />
-                          No funded pools yet.
-                        </div>{' '}
-                      </div>
-                    ) : (
-                      loans.map((data) => {
-                        var percentage =
-                          (data.funded / data.amount) * 100;
-                        const meta = JSON.parse(data.metadata);
-
-                        return (
-                          <div
-                            className="asset_list_body_body_cont_1"
-                            id={data.newLoanID}
-                            onClick={ChangeAssetDetailModal}
-                          >
-                            {/* <div className="asset_list_body_body_cont_1a">
-                                {data.id}
-                              </div> */}
-                            <div className="asset_list_body_body_cont_1a">
-                              <img
-                                src={meta.arrayImg}
-                                alt=""
-                                className="assets-list-icon_pool_icon"
-                              />{' '}
-                              {data.title.substring(0, 20) + '...'}
-                            </div>
-
-                            <div className="asset_list_body_body_cont_1c">
-                              {numberWithCommas(
-                                parseInt(data.amount).toFixed(2)
-                              )}
-                            </div>
-                            <div className="asset_list_body_body_cont_1d">
-                              {numberWithCommas(
-                                parseInt(data.funded).toFixed(2)
-                              )}
-                            </div>
-                            <div className="asset_list_body_body_cont_1e">
-                              <div className="asset_amount_progress_div">
-                                <div className="asset_amount_progress_div_txt"></div>
-                                <label for="file">
-                                  {parseInt(
-                                    (data.funded / data.amount) * 100
-                                  ).toFixed()}
-                                  %
-                                </label>
-                                <progress
-                                  className={
-                                    percentage < 100
-                                      ? 'progress_bar progress_bar_progress'
-                                      : 'progress_bar'
-                                  }
-                                  // className={
-                                  //   data.funded < data.amount
-                                  //     ? " progress_bar progress_bar_progress"
-                                  //     : data.funded === data.amount
-                                  //     ? "progress_bar"
-                                  //     : " progress_bar progress_bar_progress"
-                                  // }
-                                  // "progress_bar"
-                                  id="file"
-                                  aria-valuenow={
-                                    data.amount - data.funded
-                                  }
-                                  value={data.funded}
-                                  max={data.amount}
-                                ></progress>
-                              </div>
-                            </div>
-                            <div className="asset_list_body_body_cont_1d">
-                              {numberWithCommas(
-                                parseInt(
-                                  data.amount - data.funded
-                                ).toFixed(2)
-                              )}
-                            </div>
-                            <div className="asset_list_body_body_cont_1f body_cont1_f">
-                              13%
-                            </div>
-                            <div className="asset_list_body_body_cont_1g">
-                              <button
-                                className={
-                                  data.state === 'OPEN'
-                                    ? 'status_btn_ongoing'
-                                    : data.state === 'FILLED'
-                                    ? 'status_btn_closed'
-                                    : 'status_btn'
-                                }
-                              >
-                                {data.state}
-                              </button>
-                            </div>
-                            <KeyboardArrowRightIcon className="arrow_right_arrow" />
-                          </div>
-                        );
-                      })
-                    )
-                  ) : activeBtn === 'Closed' ? (
-                    loans.length <= 0 ? (
-                      <div className="no_loans_div">
-                        <div className="no_loans_div_cont">
-                          <Nodata />
-                          No funded pools yet.
-                        </div>{' '}
-                      </div>
-                    ) : (
-                      loans
-                        .filter((person) => person.state === 'FILLED')
-                        .map((data) => {
-                          var percentage =
-                            (data.funded / data.amount) * 100;
-                          const meta = JSON.parse(data.metadata);
-
-                          return (
-                            <div
-                              className="asset_list_body_body_cont_1"
-                              id={data.newLoanID}
-                              onClick={ChangeAssetDetailModal}
-                            >
-                              {/* <div className="asset_list_body_body_cont_1a">
-                                {data.id}
-                              </div> */}
-                              <div className="asset_list_body_body_cont_1a">
-                                <img
-                                  src={meta.arrayImg}
-                                  alt=""
-                                  className="assets-list-icon_pool_icon"
-                                />{' '}
-                                {data.title.substring(0, 20) + '...'}
-                              </div>
-
-                              <div className="asset_list_body_body_cont_1c">
-                                {numberWithCommas(
-                                  parseInt(data.amount).toFixed(2)
-                                )}
-                              </div>
-                              <div className="asset_list_body_body_cont_1d">
-                                {data.length}month(s)
-                              </div>
-                              <div className="asset_list_body_body_cont_1e">
-                                <div className="asset_amount_progress_div">
-                                  <div className="asset_amount_progress_div_txt"></div>
-                                  <label for="file">
-                                    {parseInt(
-                                      (data.funded / data.amount) *
-                                        100
-                                    ).toFixed()}
-                                    %
-                                  </label>
-                                  <progress
-                                    className={
-                                      percentage < 100
-                                        ? 'progress_bar progress_bar_progress'
-                                        : 'progress_bar'
-                                    }
-                                    // className={
-                                    //   data.funded < data.amount
-                                    //     ? " progress_bar progress_bar_progress"
-                                    //     : data.funded === data.amount
-                                    //     ? "progress_bar"
-                                    //     : " progress_bar progress_bar_progress"
-                                    // }
-                                    // "progress_bar"
-                                    id="file"
-                                    aria-valuenow={
-                                      data.amount - data.funded
-                                    }
-                                    value={data.funded}
-                                    max={data.amount}
-                                  ></progress>
-                                </div>
-                              </div>
-                              <div className="asset_list_body_body_cont_1d">
-                                {numberWithCommas(
-                                  parseInt(
-                                    data.amount - data.funded
-                                  ).toFixed(2)
-                                )}
-                              </div>
-                              <div className="asset_list_body_body_cont_1f  body_cont1_f">
                                 13%
                               </div>
                               <div className="asset_list_body_body_cont_1g">
@@ -773,8 +1231,117 @@ const DashBoardBranchAsset = ({ match }) => {
                             </div>
                           );
                         })
-                    )
-                  ) : null}
+                      )
+                    ) : activeBtn === 'Closed' ? (
+                      loans.length <= 0 ? (
+                        <div className="no_loans_div">
+                          <div className="no_loans_div_cont">
+                            <Nodata />
+                            No funded pools yet.
+                          </div>{' '}
+                        </div>
+                      ) : (
+                        loans
+                          .filter(
+                            (person) => person.state === 'FILLED'
+                          )
+                          .map((data) => {
+                            var percentage =
+                              (data.funded / data.amount) * 100;
+                            const meta = JSON.parse(data.metadata);
+
+                            return (
+                              <div
+                                className="asset_list_body_body_cont_1"
+                                id={data.newLoanID}
+                                onClick={ChangeAssetDetailModal}
+                              >
+                                {/* <div className="asset_list_body_body_cont_1a">
+                                {data.id}
+                              </div> */}
+                                <div className="asset_list_body_body_cont_1a">
+                                  <img
+                                    src={meta.arrayImg}
+                                    alt=""
+                                    className="assets-list-icon_pool_icon"
+                                  />{' '}
+                                  {data.title.substring(0, 20) +
+                                    '...'}
+                                </div>
+
+                                <div className="asset_list_body_body_cont_1c">
+                                  {numberWithCommas(
+                                    parseInt(data.amount).toFixed(2)
+                                  )}
+                                </div>
+                                <div className="asset_list_body_body_cont_1d">
+                                  {numberWithCommas(
+                                    parseInt(data.funded).toFixed(2)
+                                  )}
+                                </div>
+                                <div className="asset_list_body_body_cont_1e">
+                                  <div className="asset_amount_progress_div">
+                                    <div className="asset_amount_progress_div_txt"></div>
+                                    <label for="file">
+                                      {parseInt(
+                                        (data.funded / data.amount) *
+                                          100
+                                      ).toFixed()}
+                                      %
+                                    </label>
+                                    <progress
+                                      className={
+                                        percentage < 100
+                                          ? 'progress_bar progress_bar_progress'
+                                          : 'progress_bar'
+                                      }
+                                      // className={
+                                      //   data.funded < data.amount
+                                      //     ? " progress_bar progress_bar_progress"
+                                      //     : data.funded === data.amount
+                                      //     ? "progress_bar"
+                                      //     : " progress_bar progress_bar_progress"
+                                      // }
+                                      // "progress_bar"
+                                      id="file"
+                                      aria-valuenow={
+                                        data.amount - data.funded
+                                      }
+                                      value={data.funded}
+                                      max={data.amount}
+                                    ></progress>
+                                  </div>
+                                </div>
+                                <div className="asset_list_body_body_cont_1d">
+                                  {numberWithCommas(
+                                    parseInt(
+                                      data.amount - data.funded
+                                    ).toFixed(2)
+                                  )}
+                                </div>
+                                <div className="asset_list_body_body_cont_1f  body_cont1_f">
+                                  13%
+                                </div>
+                                <div className="asset_list_body_body_cont_1g">
+                                  <button
+                                    className={
+                                      data.state === 'OPEN'
+                                        ? 'status_btn_ongoing'
+                                        : data.state === 'FILLED'
+                                        ? 'status_btn_closed'
+                                        : 'status_btn'
+                                    }
+                                  >
+                                    {data.state}
+                                  </button>
+                                </div>
+                                <KeyboardArrowRightIcon className="arrow_right_arrow" />
+                              </div>
+                            );
+                          })
+                      )
+                    ) : null}
+                  </div>
                 </div>
               </div>
             </div>

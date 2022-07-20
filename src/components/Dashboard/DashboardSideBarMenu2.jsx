@@ -212,6 +212,9 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     if (linksActive === "/dashboard/user") {
       setActiveBg("account");
     }
+    if (linksActive === "/dashboard/user/referral") {
+      setActiveBg("account");
+    }
     if (
       linksActive ===
       "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
@@ -681,6 +684,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           <SwapHorizontalCircleIcon className="sidebarIcon" />
           Swap
         </a>
+
         <a
           id="account"
           href="/dashboard/user"

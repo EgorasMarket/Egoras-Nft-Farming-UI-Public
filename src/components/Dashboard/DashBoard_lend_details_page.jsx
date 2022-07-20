@@ -7,7 +7,7 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import CloseIcon from "@mui/icons-material/Close";
-
+import SwitchToggle from "./DashBoardPages/SwitchToggle/SwitchToggle";
 import { CopperLoading } from "respinner";
 import { parseEther, formatEther } from "@ethersproject/units";
 import LOAN from "../../web3/contracts/Loan.json";
@@ -111,6 +111,7 @@ const DashBoard_lend_details_page = ({ match }) => {
   const [base, setBase] = useState("");
   const [coinBalance2, setCoinBalance2] = React.useState(0.0);
   const [baseBalance, setBaseBalance] = useState(0.0);
+  const [unlockedCheck, setUnlockedCheck] = useState(false);
   const [loanMetaData, setLoanMetaData] = useState({
     base: "",
     asset: "",
@@ -266,6 +267,26 @@ const DashBoard_lend_details_page = ({ match }) => {
     }
   };
 
+  // useEffect(async (e) => {
+  //   console.log(BackAmount);
+
+  //   if (account) {
+  //     let check2 = await checkAllowanceL(
+  //       account,
+  //       parseEther(BackAmount.toString(), "wei").toString(),
+  //       library.getSigner()
+  //     );
+  //     console.log(check2);
+  //     if (check2.status == true) {
+  //       setUnlockedCheck(true);
+  //     } else {
+  //       // // setUnlocking(true);
+  //       // setStage("unlock");
+  //       // setIsLoading(false);
+  //     }
+  //   }
+  // }, []);
+
   const BackLoan = async (e) => {
     let currentTarget = e.currentTarget.id;
     console.log(currentTarget);
@@ -376,6 +397,7 @@ const DashBoard_lend_details_page = ({ match }) => {
     margin: "0 auto",
     borderColor: "red",
   };
+  var percentage = (BranchDetails.funded / BranchDetails.amount) * 100;
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -498,7 +520,7 @@ const DashBoard_lend_details_page = ({ match }) => {
                     </label>
                     <progress
                       className={
-                        BranchDetails.funded < BranchDetails.amount
+                        percentage < 100
                           ? "progress_bar progress_bar_progress"
                           : "progress_bar"
                       }
@@ -917,6 +939,12 @@ const DashBoard_lend_details_page = ({ match }) => {
                             13%
                           </span>
                         </div>
+                        {/* <div className="unlock_check_div">
+                          <SwitchToggle
+                            checkBox={unlockedCheck}
+                            // doUnluck={doUnluck}
+                          />
+                        </div> */}
                         <div className="back_loan_btn_div">
                           {BackAmount > amnt_remaining ? (
                             <button
