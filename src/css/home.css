@@ -1954,6 +1954,7 @@ a.visit_app_link_2 {
 .dark .assets-category-row {
   box-shadow: rgb(0 0 0) 0px 0px 6px;
   background: #365543;
+  color: #fff;
 }
 .dark .assets-data-pool_name {
   color: #ffffff;
