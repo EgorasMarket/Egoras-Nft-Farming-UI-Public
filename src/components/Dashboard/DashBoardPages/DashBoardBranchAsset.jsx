@@ -55,6 +55,13 @@ const DashBoardBranchAsset = ({ match }) => {
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
   const [totalPoolValue, setTotalPoolValue] = useState('');
   const [graphData, setGraphData] = useState('');
+  // const newData = [...graphData];
+
+  // for (const data of newData) {
+  //   data.amount = 1;
+  // }
+  // console.log(newData, 'timberlake');
+
   const [activeBtn, setActivrBtn] = useState('Ongoing');
   const [activeLink, setActiveLink] = useState('');
   const [assetDetailModal, setAssetDetailModal] = useState('');
@@ -155,8 +162,15 @@ const DashBoardBranchAsset = ({ match }) => {
     axios
       .get(api_url + '/api/branch/chart/' + txnhash, null, config)
       .then((data) => {
-        console.log(data.data.payload, 'powerfulttt5tt333333');
-        setGraphData(data.data.payload);
+        // setGraphData(data.data.payload);
+        const temp = data.data.payload;
+
+        for (const data of temp) {
+          //get the amount from the data object
+
+          data.amount = parseInt(data.amount).toFixed(2);
+        }
+        setGraphData(temp);
       })
       .catch((err) => {
         console.log(err); // "oh, no!"
