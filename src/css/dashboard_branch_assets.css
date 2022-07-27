@@ -17,6 +17,10 @@
 .asset_list_mobile_view {
   display: none;
 }
+
+.asset_list_desktop_view2 {
+  overflow-x: scroll;
+}
 .progress-bar {
   display: flex;
   flex-direction: column;
@@ -202,7 +206,7 @@ svg.recharts-surface {
 .asset_list_body_body_cont_1c {
   display: flex;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-end;
   font-size: 14px;
   font-weight: 300;
   text-align: center;
@@ -220,7 +224,7 @@ svg.recharts-surface {
 .asset_list_body_body_cont_1e {
   display: flex;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-end;
   font-size: 14px;
   font-weight: 300;
   text-align: center;
@@ -229,7 +233,7 @@ svg.recharts-surface {
 .asset_list_body_body_cont_1f {
   display: flex;
   width: 100%;
-  justify-content: center;
+  justify-content: flex-end;
   font-size: 14px;
   font-weight: 300;
   text-align: center;
@@ -237,7 +241,7 @@ svg.recharts-surface {
 }
 .asset_list_body_body_cont_1g {
   display: flex;
-  width: 80%;
+  width: 100%;
   justify-content: flex-end;
   font-size: 14px;
   font-weight: 300;
@@ -541,9 +545,6 @@ svg.recharts-surface {
 }
 
 @media screen and (max-width: 767px) {
-  .body_cont1_f {
-    display: none;
-  }
   .pool_detail_assets_body_layer_1 {
     grid-gap: 10px;
     gap: 10px;
@@ -572,10 +573,6 @@ svg.recharts-surface {
   }
 }
 @media screen and (max-width: 672px) {
-  .arrow_right_arrow {
-    color: #8898a3 !important;
-    display: none !important;
-  }
   .asset_status_details_div1_body {
     display: flex;
     justify-content: space-between;
@@ -685,3 +682,134 @@ svg.recharts-surface {
     display: none;
   }
 }
+
+/* ============Table styles -=============== */
+/* ============Table styles -=============== */
+
+.branch_asset_table {
+  box-sizing: border-box;
+  margin: 0px auto;
+  min-width: 0px;
+  width: 100%;
+  /* max-width: 1232px; */
+  display: table;
+  padding: 0px;
+  border-collapse: separate;
+  border-spacing: 0px 9px;
+  margin-top: 20px;
+}
+.branch_asset_titles {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  display: table-header-group;
+}
+.branch_asset_title_div {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  background: #d0d0d0;
+}
+.branch_asset_heading_titles {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  padding: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: #606060;
+  font-size: 14px;
+  text-align: right;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.branch_asset_heading_titles_first {
+  position: sticky;
+  left: 0;
+  /* z-index: 100; */
+  background: inherit;
+  text-align: left;
+}
+.branch_asset_body {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  width: 100%;
+}
+.branch_asset_body_row {
+  box-sizing: border-box;
+  /* margin: 0px 0px 16px; */
+  min-width: 0px;
+  display: table-row;
+  flex-direction: column;
+  box-shadow: rgb(227 227 227) 0px 0px 6px;
+  background: white;
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out 0s, box-shadow 0.2s ease-in-out 0s;
+  cursor: pointer;
+}
+.branch_asset_body_row_data {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  padding: 16px;
+  display: table-cell;
+  justify-content: space-between;
+  white-space: nowrap;
+}
+.branch_asset_body_row_data_first {
+  position: sticky;
+  left: 0;
+  /* z-index: 100; */
+  background: inherit;
+  /* text-align: left; */
+}
+
+.branch_asset_body_row:hover {
+  box-shadow: rgb(0 0 0 / 15%) 0px 0px 10px;
+  transform: scaleX(0.99);
+}
+
+.branch_asset_body_row_data_first:first-child {
+  border-radius: 8px 0px 0px 8px;
+}
+.branch_asset_body_row_data_last {
+  text-align: right;
+}
+.branch_asset_body_row_data_last:last-child {
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.branch_asset_heading_titles_first:first-child {
+  border-radius: 7px 0px 0px 7px;
+  /* border: solid; */
+}
+.branch_asset_heading_titles_last:last-child {
+  border-radius: 0px 7px 7px 0px;
+  /* border: solid; */
+}
+
+.dark .branch_asset_title_div {
+  background: #365543;
+  /* color: #fff; */
+  /* border: solid 1px #fff; */
+}
+
+.dark .branch_asset_heading_titles {
+  color: #ffffff;
+}
+.dark .branch_asset_body_row {
+  box-shadow: rgb(0 0 0) 0px 0px 6px;
+  background: #365543;
+  color: #fff;
+}
+
+@media screen and (max-width: 767px) {
+  .branch_asset_body_row_data {
+    padding: 8px;
+  }
+}
+
+/* ============Table styles -=============== */
+/* ============Table styles -=============== */

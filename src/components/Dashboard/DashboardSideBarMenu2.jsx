@@ -356,6 +356,9 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           const egr_usd_val = data["egoras"].usd;
           console.log(egr_usd_val);
           setEgrUsdVal(() => egr_usd_val);
+        })
+        .catch((error) => {
+          console.log(error);
         });
       // ===============================
       let string2 =
@@ -366,6 +369,9 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           const egc_usd_val = data["egoras-credit"].usd;
           console.log(egc_usd_val);
           setEgcUsdVal(() => egc_usd_val);
+        })
+        .catch((error) => {
+          console.log(error);
         });
     },
     [egcUsdVal, egrUsdVal]

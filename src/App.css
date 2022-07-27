@@ -450,7 +450,7 @@ input:-internal-autofill-selected {
   stroke: #238c4e;
   fill: #edfaf2;
   stop-color: green;
-  stroke-width: 3px;
+  stroke-width: 2px;
   width: 100%;
   stroke-linecap: round;
   stroke-linejoin: round;

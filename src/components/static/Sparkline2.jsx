@@ -59,7 +59,7 @@ const Sparkline2 = (props) => {
         ref={sparklineRef}
         width="200"
         // width={[props.width, "500"]}
-        height="50"
+        height="80"
         strokeWidth="2"
         fill="#ecfff4"
         cursorWidth="2"
@@ -68,7 +68,7 @@ const Sparkline2 = (props) => {
         className="chart_svg"
         strokeLinecap="round"
       ></svg>
-      <div>{currentDatapoint?.timestamp ? getText(currentDatapoint) : ""}</div>
+      {/* <div>{currentDatapoint?.timestamp ? getText(currentDatapoint) : ""}</div> */}
     </div>
   );
 };

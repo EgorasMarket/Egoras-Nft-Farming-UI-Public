@@ -1,7 +1,7 @@
 .userdAshboard_head {
   display: flex;
   align-items: flex-start;
-  flex-direction: column;
+  /* flex-direction: column; */
   grid-gap: 10px;
   grid-gap: 10px;
   gap: 10px;
@@ -9,6 +9,8 @@
   background: #fff;
   border: solid 1px #e7e7e7;
   border-radius: 10px;
+  justify-content: space-between;
+  align-items: center;
 }
 .userdAshboard_head_area {
   display: flex;
@@ -16,6 +18,40 @@
   gap: 10px;
 }
 
+.welcome_bonus_div {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  align-items: flex-end;
+}
+.welcome_bonus_div_body {
+  font-size: 45px;
+  font-weight: 700;
+}
+.welcome_bonus_div_head {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.welcome_bonus_icon_div {
+  padding: 3px;
+  background: #d7f5e3;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome_bonus_icon_div_icon {
+  background: white;
+  padding: 2px;
+  font-size: 15px !important;
+  border-radius: 50%;
+  box-shadow: 0px 3px 6px #79ae8e;
+  color: #229e54;
+}
 .wallet_addr_cont_txt {
   white-space: nowrap;
   overflow: hidden;
@@ -129,7 +165,7 @@
 }
 .seemore_btn_div {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 .see_more_btn {
@@ -203,6 +239,14 @@
 @media screen and (max-width: 767px) {
   .user_dashboard_area {
     margin-top: 0em;
+  }
+  .userdAshboard_head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .welcome_bonus_div {
+    align-items: flex-start;
   }
 }
 @media screen and (max-width: 600px) {
