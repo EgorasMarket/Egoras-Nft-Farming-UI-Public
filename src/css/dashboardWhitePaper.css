@@ -287,9 +287,6 @@ a.sidebar-link1 {
     height: 100vh;
     overflow-y: scroll;
   }
-  .headerSection {
-    position: fixed !important;
-  }
 
   .whitepaper-layers {
     padding: 8em 1em;

@@ -1,7 +1,25 @@
 .dashboard {
   display: flex;
+  position: relative;
+  overflow: hidden;
+  background: #f9f9f9;
+  z-index: 1;
 }
 
+.dark .dashboard {
+  background: #1e2822;
+}
+.dash_boardBg {
+  position: absolute;
+  width: 100vw;
+  opacity: 0.016;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+.dark .dash_boardBg {
+  opacity: 0.04;
+}
 .Enable1.btn-block {
   width: 100% !important;
 }

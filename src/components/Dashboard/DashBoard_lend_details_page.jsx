@@ -7,11 +7,17 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import CloseIcon from "@mui/icons-material/Close";
+
+import { CopperLoading } from "respinner";
 import { parseEther, formatEther } from "@ethersproject/units";
+import LOAN from "../../web3/contracts/Loan.json";
+import SwapContract from "../../web3/contracts/Contract_Address.json";
+import Web3 from "web3";
 import {
   SuccessModal,
   ErrorModal,
 } from "../Dashboard/DashBoardPages/Modal/Success_Error_Component";
+
 import { numberWithCommas } from "../static/static";
 import {
   faCheckCircle,
@@ -63,14 +69,20 @@ import {
   draw,
   checkAllowanceL,
   unluckToken2,
+  getEgcSmartContractBalnce,
 } from "../../web3/index";
+
 const DashBoard_lend_details_page = ({ match }) => {
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
-  const { BranchDetails, rumuName, agipName, oyName } = useContext(UserContext);
+  // const { rumuName, agipName, oyName } = useContext(UserContext);
   console.log(match.params.branchAddress);
   const context = useWeb3React();
   const [LoanAssets, setLoanAssets] = useState([]);
-
+  const [BranchDetails, setBranchDetails] = useState({
+    branchName: "",
+    amount: "",
+    funded: "",
+  });
   const [activeLink, setActiveLink] = useState("");
   const [checkBox, setCheckBox] = useState(false);
   const [errMessage, setErrMessage] = useState("");
@@ -85,6 +97,9 @@ const DashBoard_lend_details_page = ({ match }) => {
   const [text, setText] = useState(
     "Transacting with blockchain, please wait..."
   );
+  const [rumuName, setRumuName] = useState(false);
+  const [agipName, setAgipName] = useState(false);
+  const [oyName, setOyName] = useState(false);
   const [assetDetailModal, setAssetDetailModal] = useState("");
   const [hash, setHash] = useState("");
   const [unlocking, setUnlocking] = useState(false);
@@ -94,7 +109,8 @@ const DashBoard_lend_details_page = ({ match }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [asset, setAsset] = useState("");
   const [base, setBase] = useState("");
-
+  const [coinBalance2, setCoinBalance2] = React.useState(0.0);
+  const [baseBalance, setBaseBalance] = useState(0.0);
   const [loanMetaData, setLoanMetaData] = useState({
     base: "",
     asset: "",
@@ -147,16 +163,16 @@ const DashBoard_lend_details_page = ({ match }) => {
   const currentPage = window.location.pathname;
   const urlArr = currentPage.split("/");
   useEffect(() => {
-    if (currentPage === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
+    if (currentPage === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
       setActiveLink("Overview");
     } else if (
       currentPage ===
-      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setActiveLink("Asset");
     } else if (
       currentPage ===
-      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
     ) {
       setActiveLink("transaction");
     }
@@ -175,6 +191,33 @@ const DashBoard_lend_details_page = ({ match }) => {
         //   funded: data.data.payload[0].funded,
         // });
         setLoanAssets(data.data.payload);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, []);
+  useEffect(() => {
+    axios
+      .get(api_url + "/api/lend/all/" + txnhash, null, config)
+      .then((data) => {
+        console.log(data.data.payload[0].name, "teeyuwiuoyuwuyi");
+
+        // setBranches(data.data.payload);
+        setBranchDetails({
+          branchName: data.data.payload[0].name,
+          amount: data.data.payload[0].amount,
+          funded: data.data.payload[0].funded,
+        });
+        let babara = data.data.payload[0].name.includes("R");
+        let babara2 = data.data.payload[0].name.includes("A");
+        let babara3 = data.data.payload[0].name.includes("O");
+        console.log(data.data.payload[0].name);
+        setRumuName(babara);
+        setAgipName(babara2);
+        setOyName(babara3);
+
+        console.log(babara);
+        console.log(babara, babara2, babara3);
       })
       .catch((err) => {
         console.log(err); // "oh, no!"
@@ -232,7 +275,7 @@ const DashBoard_lend_details_page = ({ match }) => {
     // setUnlocking(false);
     // setStage("loading");
     // setIsLoading(true);
-    setText("Lendind, please wait...");
+    setText("Lending, please wait...");
     let check = await checkAllowanceL(
       account,
       parseEther(formData.BackAmount.toString(), "wei").toString(),
@@ -246,7 +289,7 @@ const DashBoard_lend_details_page = ({ match }) => {
         currentTarget,
         library.getSigner()
       );
-
+      console.log(ret.status);
       if (ret.status == true) {
         localStorage.setItem("unlocking", true);
         localStorage.setItem("unlockingHash", ret.message.hash);
@@ -272,9 +315,6 @@ const DashBoard_lend_details_page = ({ match }) => {
 
   setInterval(() => {
     if (localStorage.getItem("unlocking") == "true") {
-      // setCheckBox(true);
-      // setDisable(false);
-
       transactReceipt(localStorage.getItem("unlockingHash"), library).then(
         function (env) {
           // console.log("running Interval", env);
@@ -292,7 +332,50 @@ const DashBoard_lend_details_page = ({ match }) => {
     } else {
       // setStage("error");
     }
-  }, 7000);
+  }, 1000);
+  useEffect(() => {
+    let assetVal = "EGC";
+    let baseVal = "ENGN";
+    setAsset(assetVal);
+    setBase(baseVal);
+    let ticker = assetVal + "-" + baseVal;
+    if (account) {
+      getTickerInfo(ticker, library.getSigner()).then((data) => {
+        if (data.status) {
+          tokenBalance(data.message.base, account, library.getSigner()).then(
+            (balance) => {
+              setBaseBalance(formatEther(balance.message));
+            }
+          );
+
+          if (asset == "BNB" || asset == "bnb") {
+            library
+              .getBalance(account)
+              .then((balance) => {
+                setCoinBalance2(formatEther(balance));
+              })
+              .catch(() => {
+                setCoinBalance2(null);
+              });
+          } else {
+            tokenBalance(data.message.asset, account, library.getSigner()).then(
+              (balance) => {
+                setCoinBalance2(formatEther(balance.message));
+              }
+            );
+          }
+        }
+      });
+    }
+  }, [chainId, account, connector, baseBalance, coinBalance2]);
+
+  console.log(baseBalance);
+  console.log(coinBalance2);
+  const CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -307,7 +390,7 @@ const DashBoard_lend_details_page = ({ match }) => {
           <div className="pool_deatail_area">
             <div className="pool_lending_pages_links">
               <Link
-                to={`/dashboard/lend/pool/${txnhash}/detail`}
+                to={`/dashboard/earn/pool/${txnhash}/detail`}
                 className={
                   activeLink === "Overview"
                     ? "pool_lend_details_link_active"
@@ -319,7 +402,7 @@ const DashBoard_lend_details_page = ({ match }) => {
               </Link>
               {/* <span class="vertical_ruleB"></span> */}
               <Link
-                to={`/dashboard/lend/pool/detail/branch/${txnhash}/asset`}
+                to={`/dashboard/earn/pool/detail/branch/${txnhash}/asset`}
                 className={
                   activeLink === "Asset"
                     ? "pool_lend_details_link_active"
@@ -331,7 +414,7 @@ const DashBoard_lend_details_page = ({ match }) => {
               </Link>
               {/* <span class="vertical_ruleB"></span> */}
               <Link
-                to={`/dashboard/lend/pool/detail/${txnhash}/transactions`}
+                to={`/dashboard/earn/pool/detail/${txnhash}/transactions`}
                 className={
                   activeLink === "transaction"
                     ? "pool_lend_details_link_active"
@@ -385,40 +468,74 @@ const DashBoard_lend_details_page = ({ match }) => {
             <div className="pool_detail_sub_area1">
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
-                  Emerging Market Consumer Loans
+                  {numberWithCommas(parseInt(BranchDetails.amount).toFixed(2))}{" "}
                 </div>
                 <div className="pool_detail_sub_area1_area1_cont2">
-                  Asset Type
+                  Assets Value
                 </div>
               </div>
-              <span className="vertical_rule"></span>
+              <span className="vertical_rule2a"></span>
 
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
-                  6 months
+                  {numberWithCommas(parseInt(BranchDetails.funded).toFixed(2))}{" "}
                 </div>
                 <div className="pool_detail_sub_area1_area1_cont2">
-                  Asset Maturity
+                  Amount Funded
                 </div>
               </div>
-              <span className="vertical_rule"></span>
+              <span className="vertical_rule2a"></span>
 
+              <div className="pool_detail_sub_area1_area1">
+                <div className="pool_detail_sub_area1_area1_cont1">
+                  <div className="asset_amount_progress_div">
+                    <div className="asset_amount_progress_div_txt"></div>
+                    <label for="file">
+                      {parseInt(
+                        (BranchDetails.funded / BranchDetails.amount) * 100
+                      ).toFixed()}
+                      %
+                    </label>
+                    <progress
+                      className={
+                        BranchDetails.funded < BranchDetails.amount
+                          ? "progress_bar progress_bar_progress"
+                          : "progress_bar"
+                      }
+                      // "progress_bar"
+                      id="file"
+                      aria-valuenow={
+                        BranchDetails.amount - BranchDetails.funded
+                      }
+                      value={BranchDetails.funded}
+                      max={BranchDetails.amount}
+                    ></progress>
+                  </div>
+                </div>
+                <div className="pool_detail_sub_area1_area1_cont2">
+                  Funding Progress
+                </div>
+              </div>
+              <span className="vertical_rule2a"></span>
+              <div className="pool_detail_sub_area1_area1">
+                <div className="pool_detail_sub_area1_area1_cont1">
+                  {numberWithCommas(
+                    parseInt(
+                      BranchDetails.amount - BranchDetails.funded
+                    ).toFixed(2)
+                  )}{" "}
+                </div>
+                <div className="pool_detail_sub_area1_area1_cont2">
+                  Funding left
+                </div>
+              </div>
+              <span className="vertical_rule2a"></span>
               <div className="pool_detail_sub_area1_area1">
                 <div className="pool_detail_sub_area1_area1_cont1">
                   13 <span className="asset_symbol"> %</span>
                 </div>
                 <div className="pool_detail_sub_area1_area1_cont2">
-                  Estimated APY(30 days)
-                </div>
-              </div>
-              <span className="vertical_rule"></span>
-              <div className="pool_detail_sub_area1_area1">
-                <div className="pool_detail_sub_area1_area1_cont1">
-                  {numberWithCommas(parseInt(BranchDetails.amount).toFixed(2))}{" "}
-                  <span className="asset_symbol"> Engn</span>
-                </div>
-                <div className="pool_detail_sub_area1_area1_cont2">
-                  Pool Value
+                  Estimated APY(365 days)
                 </div>
               </div>
             </div>
@@ -445,18 +562,57 @@ const DashBoard_lend_details_page = ({ match }) => {
                   />
                 </div>
                 <div className="Asset_Originator_Details_cont_body_txt">
-                  Egoras Technologies Limited Agip Branch is located at
-                  Kilometre 7 Ikwere Road Rumeme, beside Rivers State College of
-                  Health Science and Technologies. Our aim is to render improved
-                  quality financial services and as well lower the cost of the
-                  services in these communities around through
-                  micro-collateralized loans. The pool seeks to generate
-                  uncorrelated and excess risk-adjusted returns to its investors
-                  by providing secured loans to individuals and small businesses
-                  in the community. Egoras Technologies Limited Agip Branch
-                  started operations on the 6th of September, 2021 and has since
-                  empowered over 1,500 customers with about ₦76,407,085 in loans
-                  .
+                  {oyName === true ? (
+                    <span>
+                      Egoras Technologies Limited Oyigbo Branch is located at
+                      Kilometre 7 Ikwere Road Rumeme, beside Rivers State
+                      College of Health Science and Technologies. Our aim is to
+                      render improved quality financial services and as well
+                      lower the cost of the services in these communities around
+                      through micro-collateralized loans. The pool seeks to
+                      generate uncorrelated and excess risk-adjusted returns to
+                      its investors by providing secured loans to individuals
+                      and small businesses in the community. Egoras Technologies
+                      Limited Oyigbo Branch started operations on the 6th of
+                      September, 2021 and has since empowered over 1,500
+                      customers with about ₦76,407,085 in loans .
+                    </span>
+                  ) : agipName === true ? (
+                    <span>
+                      Egoras Technologies Limited Agip Branch is located at
+                      Kilometre 7 Ikwere Road Rumeme, beside Rivers State
+                      College of Health Science and Technologies. Our aim is to
+                      render improved quality financial services and as well
+                      lower the cost of the services in these communities around
+                      through micro-collateralized loans. The pool seeks to
+                      generate uncorrelated and excess risk-adjusted returns to
+                      its investors by providing secured loans to individuals
+                      and small businesses in the community. Egoras Technologies
+                      Limited Agip Branch started operations on the 6th of
+                      September, 2021 and has since empowered over 1,500
+                      customers with about ₦76,407,085 in loans .
+                    </span>
+                  ) : rumuName === true ? (
+                    <span>
+                      EGORAS Rumukurushi is a Branch of EGORAS TECHNOLOGIES
+                      which mission is to provide Zero interest loans to people
+                      across the globe, refurbishing of Household properties and
+                      making Life easy for all through the sale of subsidized
+                      Household properties and industrial equipment. <br />
+                      EGORAS Rumukurushi started her business operations in July
+                      2021 and have since them impacted over 4000 customer with
+                      her services, which are
+                      <br /> 1. Granting of Free interest Loan
+                      <br />
+                      2. Sale of highly discounted household properties, gadgets
+                      and industrial equipment
+                      <br /> 3. Buying of Brand New/ Fairly used household
+                      properties, gadgets and industrial equipment at a very
+                      good rate.
+                      <br /> Our Aim is to reach out to 20,000 customers before
+                      the end of the year with our services.
+                    </span>
+                  ) : null}
                 </div>
                 <div className="Asset_Originator_Details_cont_body_issuer_cont">
                   <div className="Asset_Originator_Details_cont_body_issuer_cont_head">
@@ -534,6 +690,52 @@ const DashBoard_lend_details_page = ({ match }) => {
                       </div>
                     </div>
                     <hr className="custom_hr" />
+                    <div className="pool_status_Details_cont_body1_sub_conts">
+                      <div className="pool_status_Details_cont_body1_sub_conts_1">
+                        Liquidity Left
+                      </div>
+                      <div className="pool_status_Details_cont_body1_sub_conts_2">
+                        {numberWithCommas(
+                          parseInt(
+                            BranchDetails.amount - BranchDetails.funded
+                          ).toFixed(2)
+                        )}{" "}
+                        Engn
+                      </div>
+                    </div>
+                    <hr className="custom_hr" />
+                    <div className="pool_status_Details_cont_body1_sub_conts">
+                      <div className="pool_status_Details_cont_body1_sub_conts_1">
+                        Funding Progress
+                      </div>
+                      <div className="pool_status_Details_cont_body1_sub_conts_2">
+                        <div className="asset_amount_progress_div">
+                          <div className="asset_amount_progress_div_txt"></div>
+                          <label for="file">
+                            {parseInt(
+                              (BranchDetails.funded / BranchDetails.amount) *
+                                100
+                            ).toFixed()}
+                            %
+                          </label>
+                          <progress
+                            className={
+                              BranchDetails.funded < BranchDetails.amount
+                                ? "progress_bar progress_bar_progress"
+                                : "progress_bar"
+                            }
+                            // "progress_bar"
+                            id="file"
+                            aria-valuenow={
+                              BranchDetails.amount - BranchDetails.funded
+                            }
+                            value={BranchDetails.funded}
+                            max={BranchDetails.amount}
+                          ></progress>
+                        </div>
+                      </div>
+                    </div>
+                    <hr className="custom_hr" />
                   </div>
                 </div>
               </div>
@@ -548,10 +750,7 @@ const DashBoard_lend_details_page = ({ match }) => {
       {/* ================================================= */}
 
       {assetModal === true ? (
-        <div
-          className="asset_list_modal
-      "
-        >
+        <div className="asset_list_modal">
           <div className="asset_list_modal_container">
             {/* <div className="asset_list_body"> */}
             <div className="asset_list_txt">
@@ -564,127 +763,207 @@ const DashBoard_lend_details_page = ({ match }) => {
             <div className="asset_list_body_head2">
               {/* <div className="asset_list_body_head_tab1">Asset Id</div> */}
               <div className="asset_list_body_head_tab1">Asset Name</div>
-              <div className="asset_list_body_head_tab3 date_time_head">
-                Date & Time
-              </div>
-              <div className="asset_list_body_head_tab4 date_duration_row22">
-                Duration
-              </div>
+
               <div className="asset_list_body_head_tab5">Amount(Engn)</div>
+              <div className="asset_list_body_head_tab5">Funded(Engn)</div>
+              <div className="asset_list_body_head_tab5">Funding Progress</div>
+              <div className="asset_list_body_head_tab5">Funding left</div>
               <div className="asset_list_body_head_tab6 finance_fee_details_page">
-                Financing Fee
+                APY
               </div>
               <div className="asset_list_body_head_tab7">Action</div>
             </div>
             <div className="asset_list_body_body_cont">
               {activeBtn === "Ongoing"
                 ? LoanAssets.filter((person) => person.state == "OPEN").map(
-                    (data) => (
-                      <div
-                        className="asset_list_body_body_cont_1"
-                        id={data.newLoanID}
-                        onClick={ChangeAssetDetailModal}
-                        // onClick={ChangeAssetDetailModal}
-                      >
-                        {/* <div className="asset_list_body_body_cont_1a">
-                                {data.id}
-                              </div> */}
-                        <div className="asset_list_body_body_cont_1a">
-                          {/* {data.title} */}
-                          {data.title.substring(0, 20) + "..."}
-                        </div>
+                    (data) => {
+                      var percentage = (data.funded / data.amount) * 100;
+                      const meta = JSON.parse(data.metadata);
+                      return (
+                        <div
+                          className="asset_list_body_body_cont_1"
+                          id={data.newLoanID}
+                          onClick={ChangeAssetDetailModal}
+                        >
+                          <div className="asset_list_body_body_cont_1a">
+                            {/* {data.title} */}
+                            <img
+                              src={meta.arrayImg}
+                              alt=""
+                              className="assets-list-icon_pool_icon"
+                            />{" "}
+                            {data.title.substring(0, 20) + "..."}
+                          </div>
 
-                        <div className="asset_list_body_body_cont_1c date_time_row">
-                          {data.createdAt.slice(0, 10)}
+                          <div className="asset_list_body_body_cont_1e">
+                            {numberWithCommas(parseInt(data.amount).toFixed(2))}
+                          </div>
+
+                          <div className="asset_list_body_body_cont_1e">
+                            {numberWithCommas(parseInt(data.funded).toFixed(2))}
+                          </div>
+
+                          <div className="asset_list_body_body_cont_1e">
+                            <div className="asset_amount_progress_div">
+                              <div className="asset_amount_progress_div_txt"></div>
+                              <label for="file">
+                                {parseInt(
+                                  (data.funded / data.amount) * 100
+                                ).toFixed()}
+                                %
+                              </label>
+                              <progress
+                                className={
+                                  percentage < 100
+                                    ? "progress_bar progress_bar_progress"
+                                    : "progress_bar"
+                                }
+                                // className={
+                                //   data.funded < data.amount
+                                //     ? " progress_bar progress_bar_progress"
+                                //     : data.funded === data.amount
+                                //     ? "progress_bar"
+                                //     : " progress_bar progress_bar_progress"
+                                // }
+                                // "progress_bar"
+                                id="file"
+                                aria-valuenow={data.amount - data.funded}
+                                value={data.funded}
+                                max={data.amount}
+                              ></progress>
+                            </div>
+                          </div>
+                          <div className="asset_list_body_body_cont_1e">
+                            {numberWithCommas(
+                              parseInt(data.amount - data.funded).toFixed(2)
+                            )}
+                          </div>
+                          <div className="asset_list_body_body_cont_1f finance_fee_details_page_row">
+                            13 %
+                          </div>
+                          <div className="asset_list_body_body_cont_1g">
+                            <button
+                              onClick={ChangeAssetDetailModal}
+                              className="back_btn"
+                            >
+                              Lend
+                            </button>
+                          </div>
                         </div>
-                        <div className="asset_list_body_body_cont_1d date_duration_row22">
-                          {data.length} month(s)
-                        </div>
-                        <div className="asset_list_body_body_cont_1e">
-                          {numberWithCommas(parseInt(data.amount).toFixed(2))}
-                        </div>
-                        <div className="asset_list_body_body_cont_1f finance_fee_details_page_row">
-                          13 %
-                        </div>
-                        <div className="asset_list_body_body_cont_1g">
-                          <button
-                            onClick={ChangeAssetDetailModal}
-                            className="back_btn"
-                          >
-                            Lend
-                          </button>
-                        </div>
-                      </div>
-                    )
+                      );
+                    }
                   )
                 : null}
             </div>
-            {/* </div> */}
           </div>
         </div>
       ) : null}
       {stage == "back" ? (
         <>
-          {LoanAssets.map((data) => (
-            <>
-              {assetDetailModal == data.newLoanID ? (
-                <div className="bacModal_div">
-                  <div className="back_modal_container">
-                    <div className="back_modal_cont">
-                      <CloseIcon
-                        className="closeBackModalIcon"
-                        onClick={closeAssetDetailModal}
-                      />
-                      <div className="back_modal_heading">Back this pool</div>
-
-                      <div className="back_Modal_input_area">
-                        <div className="back_modal_input_amnt_head">
-                          Input amount
+          {LoanAssets.map((data) => {
+            const amnt_remaining = data.amount - data.funded;
+            if (BackAmount < amnt_remaining) {
+              console.log("ure amount is less than the remaining amount");
+            } else if (BackAmount > amnt_remaining) {
+              console.log("ure amount is greater than the remaining amount");
+            }
+            return (
+              <>
+                {assetDetailModal == data.newLoanID ? (
+                  <div className="bacModal_div">
+                    <div className="back_modal_container">
+                      <div className="back_modal_cont">
+                        <CloseIcon
+                          className="closeBackModalIcon"
+                          onClick={closeAssetDetailModal}
+                        />
+                        <div className="back_modal_heading">Back this pool</div>
+                        <div className="fundin_amnt_left_amnt_div">
+                          Funding amount left in this pool:{" "}
+                          <span className="fundin_amnt_left_amnt">
+                            {numberWithCommas(
+                              parseInt(data.amount - data.funded).toFixed(2)
+                            )}{" "}
+                            Engn
+                          </span>
                         </div>
-                        <span className="input_space">
-                          <AccountBalanceWalletIcon className="input_dollar_sign" />
-                          <input
-                            type="number"
-                            className="back_modal_input"
-                            placeholder="0.00 Engn"
-                            name="BackAmount"
-                            value={BackAmount}
-                            onChange={handleBackChange}
-                          />
-                          <div className="back_modal_input_amnt_head_minimum">
-                            Minimum Amount: 30,000.00 Engn
+
+                        <div className="back_Modal_input_area">
+                          <div className="back_modal_input_amnt_head">
+                            Input amount
+                            <span className="base_balance">
+                              Balance: {parseFloat(baseBalance).toFixed(3)}Engn
+                            </span>
                           </div>
-                        </span>
-                      </div>
-                      <div className="amount_earned_mnthly">
-                        Expected APY:
-                        <span className="amount_earned_mnthly_value"> 13%</span>
-                      </div>
-                      <div className="back_loan_btn_div">
-                        <button
-                          className="back_loan_btn"
-                          onClick={BackLoan}
-                          id={data.newLoanID}
-                          // disabled={disable}
-                        >
-                          Fund
-                        </button>
+                          <span className="input_space">
+                            <AccountBalanceWalletIcon className="input_dollar_sign" />
+                            <input
+                              type="number"
+                              className="back_modal_input"
+                              placeholder="0.00 Engn"
+                              name="BackAmount"
+                              value={BackAmount}
+                              onChange={handleBackChange}
+                            />
+                            {/* <div className="back_modal_input_amnt_head_minimum">
+                            Minimum Amount: 30,000.00 Engn
+                          </div> */}
+                          </span>
+                        </div>
+                        <div className="amount_earned_mnthly">
+                          Expected APY:
+                          <span className="amount_earned_mnthly_value">
+                            {" "}
+                            13%
+                          </span>
+                        </div>
+                        <div className="back_loan_btn_div">
+                          {BackAmount > amnt_remaining ? (
+                            <button
+                              className="back_loan_btn"
+                              id={data.newLoanID}
+                              disabled={true}
+                            >
+                              Amount exceeds funding amount
+                            </button>
+                          ) : (
+                            <button
+                              className="back_loan_btn"
+                              onClick={BackLoan}
+                              id={data.newLoanID}
+                              // disabled={disable}
+                            >
+                              Fund
+                            </button>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              ) : null}
-            </>
-          ))}
+                ) : null}
+              </>
+            );
+          })}
         </>
       ) : null}
 
       {stage == "loading" ? (
         <div className="bacModal_div">
           <div className="back_modal_container">
-            <div className="back_modal_cont">
-              <FontAwesomeIcon icon={faCircleNotch} spin />
-              <p className="text-center">{text}</p>
+            <div className="back_modal_cont_loading">
+              <CopperLoading
+                fill="#229e54"
+                borderRadius={4}
+                count={12}
+                size={200}
+              />
+              <div className="loading_title">
+                {text}
+
+                <span className="loaing_span_para">
+                  Confirm this transaction in your wallet.
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -742,9 +1021,9 @@ const DashBoard_lend_details_page = ({ match }) => {
         <div className="bacModal_div">
           <div className="back_modal_container">
             <SuccessModal
-              successMessage={text}
+              successMessage={"Transaction was successful"}
               click={(e) => {
-                Continue(e);
+                window.location.href = "/dashboard/user";
               }}
               SuccessHead="Success"
               hash={hash}

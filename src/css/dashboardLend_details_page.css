@@ -12,7 +12,16 @@
   justify-content: space-between;
   margin-top: -2em;
 }
-
+.fundin_amnt_left_amnt_div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 400;
+}
+.fundin_amnt_left_amnt {
+  font-weight: 800;
+}
 .pool_detail_heading_area1 {
   display: flex;
   align-items: center;
@@ -77,7 +86,7 @@ button.pool_detail_heading_area1_invest_btn {
   box-sizing: border-box;
   margin: 0px;
   padding: 0px;
-  width: 1px;
+  width: 0px;
   align-self: stretch;
   border-left: 1px solid rgb(238, 238, 238);
 }
@@ -184,6 +193,7 @@ button.pool_detail_heading_area1_invest_btn {
   font-size: 14px;
   font-weight: 100;
   color: #3f3f3f;
+  align-items: center;
 }
 .custom_hr {
   border-width: 1px 0px 0px;
@@ -324,6 +334,8 @@ button.pool_detail_heading_area1_invest_btn {
   background: white;
   font-weight: 600;
   z-index: 1;
+  gap: 10px;
+  overflow: scroll;
 }
 .asset_list_txt {
   margin-bottom: 0.5em;
@@ -350,24 +362,55 @@ button.pool_detail_heading_area1_invest_btn {
   z-index: 10000000;
   background: #0000008a;
   backdrop-filter: blur(5px);
+  /* align-items: center; */
+}
+
+.dark .back_modal_cont_loading {
+  background: #365543;
+  border: solid 1px #4f695b;
+  color: #fff;
 }
 
 .back_modal_container {
   width: 100%;
   max-width: 500px;
 }
+.loading_title {
+  margin: 0;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
 
+.loaing_span_para {
+  font-weight: 300;
+  font-size: 14px;
+}
 .back_modal_cont {
-  /* width: 100%; */
-  /* max-width: 500px; */
   width: 100%;
-  padding: 1em;
+  padding: 2em;
   background: #fff;
   border-radius: 7px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  grid-gap: 8px;
+  gap: 20px;
   position: relative;
+}
+.back_modal_cont_loading {
+  width: 100%;
+  padding: 2em;
+  background: #fff;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 8px;
+  gap: 20px;
+  position: relative;
+  align-items: center;
 }
 
 .back_modal_heading {
@@ -384,6 +427,9 @@ button.pool_detail_heading_area1_invest_btn {
 .back_modal_input_amnt_head {
   font-size: 12px;
   color: #585858;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .back_modal_input {
@@ -414,7 +460,7 @@ button.pool_detail_heading_area1_invest_btn {
 }
 .back_loan_btn:disabled {
   background: #a8a8a8;
-  color: rgb(185, 185, 185);
+  color: #e7e7e7;
   cursor: not-allowed;
 }
 
@@ -446,6 +492,10 @@ button.pool_detail_heading_area1_invest_btn {
   color: #363636;
   border-radius: 4px;
 }
+.dark .closeBackModalIcon {
+  color: #ffffff;
+}
+
 .back_modal_input_amnt_head_minimum {
   font-size: 12px;
   display: flex;
@@ -466,6 +516,9 @@ button.pool_detail_heading_area1_invest_btn {
   font-weight: 600;
   color: #000;
 }
+.mobile_hash_head {
+  overflow: hidden;
+}
 @media screen and (max-width: 991px) {
   .pool_detail_sub_area1 {
     background: #fff;
@@ -477,6 +530,9 @@ button.pool_detail_heading_area1_invest_btn {
     border: solid 1px #ececec;
     flex-direction: column;
   }
+  .no_paddd {
+    padding: 2em 0em !important;
+  }
   .pool_detail_sub_area1_area1 {
     align-items: flex-start;
   }
@@ -484,7 +540,7 @@ button.pool_detail_heading_area1_invest_btn {
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
-    width: 100% !important;
+    width: 0% !important;
     align-self: stretch;
     border-bottom: 1px solid rgb(238, 238, 238) !important;
     /* height: 10px; */
@@ -514,7 +570,7 @@ button.pool_detail_heading_area1_invest_btn {
     font-size: 14px;
   }
   .pool_lending_pages_links {
-    top: 0px;
+    top: 21px;
   }
   .finance_fee_details_page {
     display: none !important;
@@ -541,6 +597,10 @@ button.pool_detail_heading_area1_invest_btn {
   .asset_list_body_head2 {
     padding: 0.5em;
   }
+
+  .back_modal_cont {
+    padding: 1em;
+  }
   .asset_list_body_head_tab2,
   .asset_list_body_head_tab1,
   .asset_list_body_head_tab3,
@@ -549,6 +609,7 @@ button.pool_detail_heading_area1_invest_btn {
   .asset_list_body_head_tab6,
   .asset_list_body_head_tab7 {
     font-size: 12px;
+    white-space: nowrap;
   }
 }
 @media screen and (max-width: 500px) {

@@ -168,9 +168,79 @@
   align-items: center;
   justify-content: center;
 }
+.asset_amount_progress_div {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.asset_amount_progress_div_bar_progress {
+  background: #29a159;
+  width: 60%;
+  height: 100%;
+  border-radius: 50px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.asset_amount_progress_div_bar {
+  border: solid 1px #29a159;
+  width: 100%;
+  height: 5px;
+  border-radius: 50px;
+  position: relative;
+}
 
+.progress_bar {
+  background: none;
+}
+.progress_bar::-webkit-progress-bar {
+  background-color: rgb(255 255 255);
+  height: 7px;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-user-modify: read-only !important;
+  border-radius: 50px;
+  border: solid 1px #229e54;
+  overflow: hidden;
+}
+.progress_bar_progress::-webkit-progress-bar {
+  background-color: rgb(255 255 255);
+  height: 7px;
+  width: 100%;
+  box-sizing: border-box;
+  -webkit-user-modify: read-only !important;
+  border-radius: 50px;
+  border: solid 1px #ffaa3a;
+  overflow: hidden;
+}
+.dark .progress_bar::-webkit-progress-bar {
+  border: solid 1px #ffffff;
+}
+/* .progress_bar::-webkit-progress-inner-element {
+  box-sizing: inherit;
+  -webkit-user-modify: read-only;
+  height: 100%;
+  width: 100%;
+} */
+.progress_bar::-webkit-progress-value {
+  background-color: rgb(34 158 84);
+  height: 100%;
+  width: 50%;
+  box-sizing: border-box;
+  -webkit-user-modify: read-only !important;
+}
+.progress_bar_progress::-webkit-progress-value {
+  background-color: #ffaa3a;
+  height: 100%;
+  width: 50%;
+  box-sizing: border-box;
+  -webkit-user-modify: read-only !important;
+}
 .filter_table_area_1 .MuiSelect-root {
   width: 100% !important;
+  background: #fff !important;
 }
 
 .filter_table_area_1 .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
@@ -306,7 +376,7 @@
     line-height: 1.5 !important;
     font-size: 14px !important;
     color: #7d7d7d !important;
-    content: "Asset" !important;
+    content: "Pool" !important;
     display: block !important;
   }
   .branch_Lending_Capacity::before {
@@ -315,7 +385,7 @@
     line-height: 1.5 !important;
     font-size: 14px !important;
     color: #7d7d7d !important;
-    content: "Lending Capacity" !important;
+    content: "Funding Capacity" !important;
     display: block !important;
   }
   .branch_pool_value::before {
@@ -324,7 +394,16 @@
     line-height: 1.5 !important;
     font-size: 14px !important;
     color: #7d7d7d !important;
-    content: "Pool Value" !important;
+    content: "Amount Funded" !important;
+    display: block !important;
+  }
+  .branch_pool_value_progress::before {
+    font-family: "Mulish" !important;
+    font-weight: 500 !important;
+    line-height: 1.5 !important;
+    font-size: 14px !important;
+    color: #7d7d7d !important;
+    content: "Funding progress" !important;
     display: block !important;
   }
   .branch_apy::before {

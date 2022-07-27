@@ -14,6 +14,17 @@
   border: solid 1px #ebebeb;
   border-radius: 10px;
 }
+.progress-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  background: none !important;
+  transition: width 0.6s ease;
+}
 .pool_detail_assets_body_layer_1_cont2 {
   width: 100%;
 }
@@ -84,7 +95,7 @@ svg.recharts-surface {
 
 .asset_list_body_head_tab1 {
   display: flex;
-  width: 100%;
+  width: 160%;
   justify-content: flex-start;
 }
 .asset_list_body_head_tab2 {
@@ -159,10 +170,11 @@ svg.recharts-surface {
   width: 100%;
   justify-content: flex-start;
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 700;
   text-align: center;
   align-items: center;
-  overflow: hidden;
+  /* overflow: hidden; */
+  white-space: nowrap;
 }
 .asset_list_body_body_cont_1b {
   display: flex;
@@ -171,6 +183,7 @@ svg.recharts-surface {
   font-size: 14px;
   font-weight: 300;
   text-align: center;
+  white-space: nowrap;
 }
 .asset_list_body_body_cont_1c {
   display: flex;
@@ -179,6 +192,7 @@ svg.recharts-surface {
   font-size: 14px;
   font-weight: 300;
   text-align: center;
+  white-space: nowrap;
 }
 .asset_list_body_body_cont_1d {
   display: flex;
@@ -187,6 +201,7 @@ svg.recharts-surface {
   font-size: 14px;
   font-weight: 300;
   text-align: center;
+  white-space: nowrap;
 }
 .asset_list_body_body_cont_1e {
   display: flex;
@@ -195,6 +210,7 @@ svg.recharts-surface {
   font-size: 14px;
   font-weight: 300;
   text-align: center;
+  white-space: nowrap;
 }
 .asset_list_body_body_cont_1f {
   display: flex;
@@ -203,6 +219,7 @@ svg.recharts-surface {
   font-size: 14px;
   font-weight: 300;
   text-align: center;
+  white-space: nowrap;
 }
 .asset_list_body_body_cont_1g {
   display: flex;
@@ -211,6 +228,7 @@ svg.recharts-surface {
   font-size: 14px;
   font-weight: 300;
   text-align: center;
+  white-space: nowrap;
 }
 .asset_list_div {
   display: flex;
@@ -323,6 +341,7 @@ svg.recharts-surface {
   font-weight: 300;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .asset_details_spec_div {
   display: flex;
@@ -374,6 +393,7 @@ svg.recharts-surface {
   background: #fbfbfb;
   box-shadow: 0px 4px 4px #ededed;
 }
+
 .accordion-title::after {
   content: "";
   width: 0;

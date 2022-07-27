@@ -588,7 +588,7 @@ h1.eusd-token-page {
   padding: 4em 0;
   position: relative;
   background: #f2fbf6;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .span-txts {
   width: 100%;

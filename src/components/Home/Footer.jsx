@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Twitter, Facebook, YouTube, Instagram } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-
+import WaveAnimation from "./WaveAnimation/WaveAnimation";
 import Accordion from "@material-ui/core/Accordion";
 // import OpenVaultPage from "./DashBoardPages/OpenVaultPage"im
 import OpenVaultPage from "../Dashboard/DashBoardPages/OpenVaultPage";
@@ -35,28 +35,28 @@ const Footer = () => {
     if (currentPage === "/dashboard") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/lend") {
+    if (currentPage === "/dashboard/earn") {
       setShowFooter(false);
     }
     if (
       currentPage ===
-      "/dashboard/lend/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/lend/pool/" + urlArr[4] + "/detail") {
+    if (currentPage === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
       setShowFooter(false);
     }
     if (
       currentPage ===
-      "/dashboard/lend/pool/detail/" + urlArr[5] + "/transactions"
+      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
     ) {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/lend/pool/detail/branch/asset") {
+    if (currentPage === "/dashboard/earn/pool/detail/branch/asset") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/lending") {
+    if (currentPage === "/dashboard/earning") {
       setShowFooter(false);
     }
     if (currentPage === "/dashboard/swap") {
@@ -65,7 +65,7 @@ const Footer = () => {
     if (currentPage === "/dashboard/user") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/lend/pool/detail") {
+    if (currentPage === "/dashboard/earn/pool/detail") {
       setShowFooter(false);
     }
     if (currentPage === "/dashboard/add") {
@@ -74,14 +74,19 @@ const Footer = () => {
     if (currentPage === "/dashboard/whitepaper") {
       setShowFooter(false);
     }
-    if (currentPage === "/vault/" + urlArr[2] + "/ENGN") {
+    if (currentPage === "/dashboard/stake") {
       setShowFooter(false);
     }
-    if (currentPage === "/deposit_vault/" + urlArr[2] + "/ENGN") {
+    if (currentPage === "/dashboard/stake/vault/" + urlArr[4] + "/ENGN") {
+      setShowFooter(false);
+    }
+    if (
+      currentPage ===
+      "/dashboard/stake/deposit_vault/" + urlArr[4] + "/ENGN"
+    ) {
       setShowFooter(false);
     }
   });
-
   const classes = useStyles();
 
   return (
@@ -98,6 +103,11 @@ const Footer = () => {
                       src="/img/egoras-logo.svg"
                       alt="..."
                       className="egr2-logo"
+                    />
+                    <img
+                      src="/img/logoVideoThumbnail.svg"
+                      alt="..."
+                      className="egr2-logo2"
                     />
                   </a>
 
@@ -379,12 +389,13 @@ const Footer = () => {
                 </div>
               </div>
 
-              <hr></hr>
+              <hr className="footer_hr_rule"></hr>
               <h5 className="footerBottomPara">
                 ©️ 2022 Egoras. All rights reserved .
               </h5>
             </div>
           </section>
+          <WaveAnimation />
         </div>
       ) : null}
     </>

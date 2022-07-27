@@ -3,12 +3,12 @@
   padding: 4em 0em;
   width: 100vw;
   /* background: #000; */
-  background: #f9f9f9;
   padding-left: 0em;
-  padding-top: 5em;
+  padding-top: 8em;
   height: 100vh;
   overflow-y: scroll;
   overflow-x: hidden;
+  position: relative;
 }
 
 .no-bg {
@@ -22,6 +22,6 @@
 
 @media screen and (max-width: 500px) {
   .no_pad {
-    padding: 0em !important;
+    padding: 2em 0em !important;
   }
 }

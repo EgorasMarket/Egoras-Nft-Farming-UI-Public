@@ -47,7 +47,10 @@ const DashBoardUserDetails = () => {
   const [assetDetailModal, setAssetDetailModal] = useState("");
   const [loanAsset, setLoanAsset] = useState([]);
   const [disable, setDisable] = useState(true);
-
+  const [base, setBase] = useState("");
+  const [asset, setAsset] = useState("");
+  const [coinBalance2, setCoinBalance2] = React.useState(0.0);
+  const [baseBalance, setBaseBalance] = useState(0.0);
   const [tokenBal, setTokenBal] = useState(0.0);
   const [UserPoolsDetails, setUserPoolsDetails] = useState({
     lockedBalance: "0.00",
@@ -144,6 +147,44 @@ const DashBoardUserDetails = () => {
     console.log(currentTarget);
     setAssetDetailModal(currentTarget);
   };
+  useEffect(() => {
+    let assetVal = "EGC";
+    let baseVal = "ENGN";
+    setAsset(assetVal);
+    setBase(baseVal);
+    let ticker = assetVal + "-" + baseVal;
+    if (account) {
+      getTickerInfo(ticker, library.getSigner()).then((data) => {
+        if (data.status) {
+          tokenBalance(data.message.base, account, library.getSigner()).then(
+            (balance) => {
+              setBaseBalance(formatEther(balance.message));
+            }
+          );
+
+          if (asset == "BNB" || asset == "bnb") {
+            library
+              .getBalance(account)
+              .then((balance) => {
+                setCoinBalance2(formatEther(balance));
+              })
+              .catch(() => {
+                setCoinBalance2(null);
+              });
+          } else {
+            tokenBalance(data.message.asset, account, library.getSigner()).then(
+              (balance) => {
+                setCoinBalance2(formatEther(balance.message));
+              }
+            );
+          }
+        }
+      });
+    }
+  }, [chainId, account, connector, baseBalance, coinBalance2]);
+
+  console.log(baseBalance);
+  console.log(coinBalance2);
   return (
     <div className="other2">
       {/* get started section start */}
@@ -176,11 +217,11 @@ const DashBoardUserDetails = () => {
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
                   <span>Your Balance</span>
-                  <span>{tokenBal} Engn</span>
+                  <span>{parseFloat(baseBalance).toFixed(3)} Engn</span>
                 </div>
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
-                  <span>Locked</span>
+                  <span>Locked Engn in Assets</span>
 
                   {UserPoolsDetails.lockedBalance === null ? (
                     <span>0.00 Engn</span>
@@ -192,13 +233,6 @@ const DashBoardUserDetails = () => {
                       Engn
                     </span>
                   )}
-                </div>
-                <hr class="custom_hr"></hr>
-                <div className="user_details_body1_body_cont1">
-                  <span>Usd Balance</span>
-                  <span>
-                    {numberWithCommas(parseInt(tokenBal / 618).toFixed(2))} USD
-                  </span>
                 </div>
 
                 <hr class="custom_hr"></hr>
@@ -250,10 +284,8 @@ const DashBoardUserDetails = () => {
                   <div className="asset_list_body_head_tab1">Pool</div>
                   <div className="asset_list_body_head_tab2">Date</div>
                   <div className="asset_list_body_head_tab3">Amount(Engn)</div>
-                  <div className="asset_list_body_head_tab3">
-                    Amount Funded(Engn)
-                  </div>
-                  <div className="asset_list_body_head_tab4">Senior APY</div>
+                  <div className="asset_list_body_head_tab3">Funded(Engn)</div>
+                  <div className="asset_list_body_head_tab4"> APY</div>
                   <div className="asset_list_body_head_tab7">Txn Hash</div>
                 </div>
                 <div className="asset_list_body_body_cont">
@@ -274,9 +306,6 @@ const DashBoardUserDetails = () => {
                             id={data.id}
                             onClick={ChangeAssetDetailModal}
                           >
-                            {/* <div className="asset_list_body_body_cont_1a">
-                              {data.id}
-                            </div> */}
                             <div className="asset_list_body_body_cont_1a">
                               <img
                                 src={meta.arrayImg}
@@ -340,7 +369,7 @@ const DashBoardUserDetails = () => {
         }
         return (
           <>
-            {assetDetailModal == data.id ? (
+            {assetDetailModal == data.rowNumber ? (
               <div className="asset_detail_modal_div">
                 <div className="asset_detail_modal_div_conts">
                   <div className="asset_detail_heading" style={{ margin: "0" }}>

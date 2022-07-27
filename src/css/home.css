@@ -11,19 +11,287 @@
   position: relative;
 }
 .span4a-txts {
-  font-size: 54px;
+  font-size: 64px;
   width: 100%;
   font-weight: 800;
-  line-height: 62px;
+  line-height: 1.2;
+}
+.real_life {
+  color: #229e54;
+}
+.nft-img-area2 {
+  width: 100% !important;
+  position: relative;
+}
+.liquidity_hero_bg_1 {
+  width: 167%;
+  position: absolute;
+  top: -21%;
+  /* bottom: -113px; */
+  left: -35%;
+}
+.liquidity_hero_bg_logos1 {
+  width: 12%;
+  top: 11%;
+  position: absolute;
+  left: 43%;
+  filter: drop-shadow(2px 4px 6px #c0c0c0) grayscale(1);
+  /* animation: scale 4s linear infinite; */
+}
+.liquidity_hero_bg_logos2 {
+  width: 12%;
+  top: 38%;
+  position: absolute;
+  left: 67%;
+  filter: drop-shadow(2px 4px 6px #c0c0c0) grayscale(1);
+  /* animation: scale 4s linear infinite; */
+}
+.vertical_rule2a {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  width: 0% !important;
+  align-self: stretch;
+  border-left: 1px solid rgb(238, 238, 238);
+  /* height: 10px; */
+}
+.liquidity_hero_bg_logos4 {
+  width: 12%;
+  top: 38%;
+  position: absolute;
+  right: 71%;
+  filter: drop-shadow(2px 4px 6px #c0c0c0) grayscale(1);
+  /* animation: scale 4s linear infinite; */
+}
+.liquidity_hero_bg_logos3 {
+  width: 12%;
+  bottom: 20%;
+  position: absolute;
+  left: 42%;
+  filter: drop-shadow(2px 4px 6px #c0c0c0) grayscale(1);
+  /* animation: scale 4s linear infinite; */
+}
+.animate {
+  animation: scale 4s linear infinite;
+}
+.liquidity_hero_bg_base {
+  width: 100%;
+}
+.liquidity_hero_center_turning_bg {
+  width: 23%;
+  position: absolute;
+  top: 0;
+  bottom: 10%;
+  margin: auto;
+  left: 38%;
+  animation: spin 4s linear infinite;
+}
+.liquidity_hero_center_asset_display_bg {
+  width: 17%;
+  position: absolute;
+  top: 0;
+  bottom: 10%;
+  margin: auto;
+  left: 41%;
+  /* animation: spin 4s linear infinite; */
+}
+
+.shooting_light1 {
+  position: absolute;
+  top: 14%;
+  left: 41%;
+  transform: rotate(268deg);
+  z-index: -1;
+  width: 15%;
+}
+.shooting_light3 {
+  position: absolute;
+  bottom: 22%;
+  left: 40%;
+  transform: rotate(90deg);
+  z-index: -1;
+  width: 15%;
+}
+.shooting_light2 {
+  position: absolute;
+  bottom: 54%;
+  left: 67%;
+  z-index: -1;
+  width: 15%;
+}
+.shooting_light4 {
+  position: absolute;
+  bottom: 54%;
+  right: 72%;
+  z-index: -1;
+  width: 15%;
+  transform: rotate(180deg);
+}
+.asset_display_icon1 {
+  position: absolute;
+  width: 13%;
+  left: 43%;
+  right: 45%;
+  margin: auto;
+  top: 38%;
+  bottom: 48%;
+  z-index: 1;
+  opacity: 1;
+  display: block;
+  animation: fadeIn 4s linear;
+}
+.asset_display_icon1_none {
+  display: none;
+  opacity: 0;
+}
+/* .asset_display_icon1 {
+  position: absolute;
+  width: 60px;
+  left: -10px;
+  right: 0;
+  margin: auto;
+  top: -55px;
+  bottom: 0;
+  z-index: 1;
+} */
+.shoot {
+  animation: shoot 4s linear infinite;
+}
+.shoot3 {
+  animation: shoot3 4s linear infinite;
+}
+.shoot2 {
+  animation: shoot2 4s linear infinite;
+}
+.shoot4 {
+  animation: shoot4 4s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes scale {
+  0% {
+    transform: scale(1);
+    filter: drop-shadow(2px 4px 6px #c0c0c0) grayscale(1);
+  }
+  50% {
+    transform: scale(1.5);
+    filter: drop-shadow(2px 4px 6px #c0c0c0) grayscale(0);
+  }
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(2px 4px 6px #c0c0c0) grayscale(1);
+  }
+}
+@keyframes shoot {
+  0% {
+    top: 14%;
+  }
+
+  100% {
+    top: 40%;
+  }
+}
+@keyframes shoot3 {
+  0% {
+    bottom: 22%;
+  }
+
+  100% {
+    bottom: 50%;
+  }
+}
+@keyframes shoot2 {
+  0% {
+    left: 67%;
+  }
+  /* 50% {
+    bottom: 110px;
+  } */
+  100% {
+    left: 45%;
+  }
+}
+@keyframes shoot4 {
+  0% {
+    right: 72%;
+  }
+  /* 50% {
+    bottom: 110px;
+  } */
+  100% {
+    right: 47%;
+  }
+}
+
+.floating_absolute_div {
+  position: absolute;
+  width: 100%;
+  /* padding: 2em; */
+  background: #fff;
+  box-shadow: 0px 0px 25px #e4f3ea;
+  z-index: 10;
+  max-width: 1280px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  border-radius: 10px;
+  border: solid 1px #d6e2db;
+  bottom: -85px;
+}
+
+.floating_div_cont_area {
+  display: flex;
+  justify-content: space-between;
+}
+.floating_div_cont_area1 {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 5px;
+  grid-gap: 5px;
+  gap: 5px;
+  padding: 2em 0em;
+  width: 100%;
+  align-items: center;
+}
+.floating_div_cont_area1_cont1 {
+  font-size: 26px;
+  color: #7c7c7c;
+}
+.floating_div_cont_area1_cont2 {
+  font-size: 54px;
+  font-weight: 700;
 }
 .span4b-txts {
   width: 85%;
   /* margin-top: 20px; */
   box-sizing: border-box;
-  margin: 16px 0px 0px;
+  margin: 20px 0px 0px;
   min-width: 0px;
-  font-size: 16px;
-  color: #474d57;
+  font-size: 20px;
+  color: #7a897f;
   font-weight: 400;
 }
 
@@ -81,7 +349,22 @@
     bottom: 68px;
   }
 }
+.right_cut_circle {
+  position: absolute;
+  top: -97px;
+  right: -1;
+  right: -182px;
+  width: 369px;
+  filter: blur(14px);
+}
 
+.benefit_section_circles {
+  bottom: 0;
+  position: absolute;
+  width: 271px;
+  /* filter: blur(15px); */
+  left: -37px;
+}
 .float_circle {
   position: absolute;
   width: 20px;
@@ -130,6 +413,43 @@
   bottom: -50%;
   left: -8%;
   z-index: -1;
+  display: none;
+}
+
+.real_world_adoption {
+  padding: 2em 0em;
+  padding-top: 10em;
+  background: #fafafa;
+}
+.real_world_adoption_area {
+  display: flex;
+  grid-gap: 10px;
+  grid-gap: 10px;
+  /* grid-gap: 73px; */
+  gap: 40px;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.real_world_adoption_area1 {
+  width: 100%;
+}
+.real_world_adoption_area2 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.real_world_adoption_area2_title {
+  font-size: 48px;
+  font-weight: 700;
+}
+.real_world_adoption_area2_para {
+  font-size: 24px;
+  color: #647069;
+  font-weight: 300;
+  width: 80%;
 }
 .how_it_works_section {
   padding: 4em 0em;
@@ -215,19 +535,19 @@ a.visit_app_link_2 {
   gap: 50px;
 }
 .stake-hero-btn1 {
-  margin-right: 15px;
   padding: 1em 2em;
   border: solid;
   border-color: #229e54;
   color: #229e54;
   border-width: 0.5px;
-  border-radius: 10px;
+  border-radius: 6px;
   cursor: pointer;
   background: #f2fbf65e;
   position: relative;
-  font-size: 13px;
+  font-size: 16px;
   transition: 0.3s ease-in-out;
   /* opacity: .5; */
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
 .blurDrop-token2 {
@@ -246,7 +566,7 @@ a.visit_app_link_2 {
 }
 .stake-hero-btns {
   display: flex;
-  margin-top: 30px;
+  margin-top: 40px;
 }
 .stake-hero-btn1:hover {
   border: solid;
@@ -259,13 +579,14 @@ a.visit_app_link_2 {
   box-shadow: 0px 4px 10px #d5d5d5;
 }
 .stake-hero-btn2 {
+  margin-right: 15px;
   padding: 1em 2em;
   background: #229e54;
   color: #ffff;
-  border-radius: 10px;
+  border-radius: 6px;
   cursor: pointer;
   position: relative;
-  font-size: 13px;
+  font-size: 15px;
   transition: 0.3s ease-in-out;
   border: none;
 }
@@ -277,7 +598,60 @@ a.visit_app_link_2 {
   transition: 0.3s ease-in-out;
   box-shadow: 0px 4px 10px #d5d5d5;
 }
+.whyEgorasSection {
+  padding: 4em 0em;
+  position: relative;
+  background: #fafafa;
+}
+.why_egoras_area {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+.whyEgoras_heading {
+  font-size: 48px;
+  font-weight: 700;
+}
 
+.whyEgoras_body {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.whyEgoras_body_cont1 {
+  padding: 2em;
+  background: #fff;
+  border: solid 1px #e9e8e8;
+  border-radius: 10px;
+  box-shadow: 0px 10px 20px #f0f0f0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  position: relative;
+  overflow: hidden;
+}
+.abstract_right_card_bg {
+  position: absolute;
+  bottom: 0;
+  width: 200px;
+  right: 0;
+}
+.whyEgoras_body_cont1_img_image {
+  width: 100%;
+}
+.whyEgoras_body_cont1_img {
+  width: 80%;
+  margin: auto;
+}
+.whyEgoras_body_cont1_text {
+  font-size: 18px;
+  font-weight: 300;
+  color: #647069;
+  font-size: 20px;
+  color: #000;
+}
 /* .span2-txts {
   font-size: 38px;
   font-weight: 800;
@@ -290,17 +664,25 @@ a.visit_app_link_2 {
   color: #000000;
 } */
 .earning-section {
-  padding: 6em 0em;
-  padding-bottom: 2em;
+  padding: 2em 0em;
+  padding-bottom: 8em;
   position: relative;
   background: #fafafa;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 .reduce-padding {
   padding: 4em 0;
 }
 .span-txts {
   width: 100%;
+}
+
+.abstract_left_section_bg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 602px;
+  transform: rotate(91deg);
 }
 .tokenDots {
   position: absolute;
@@ -347,6 +729,10 @@ a.visit_app_link_2 {
   align-items: center;
   position: relative;
   z-index: 5;
+}
+.nft-area2 {
+  gap: 20px;
+  overflow: hidden;
 }
 .nft-area3 {
   display: flex;
@@ -407,7 +793,12 @@ a.visit_app_link_2 {
 .key_features_img {
   width: 100%;
 }
-
+.egoras_benefit_section {
+  padding: 4em 0em;
+  position: relative;
+  background: #fafafa;
+  overflow: hidden;
+}
 .key-features-cards-area1 {
   display: flex;
   flex-direction: column;
@@ -425,7 +816,51 @@ a.visit_app_link_2 {
   height: 100%;
   border: solid 1px #ececec;
 }
+.egoras_benefit_section {
+  padding: 4em 0em;
+  position: relative;
+  background: #fafafa;
+}
 
+.benefit_section_area {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+.benefit_section_area1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.benefit_section_are2 {
+  width: 100%;
+}
+.benefit_section_area1_layer1 {
+  padding: 1em;
+  border: solid 1px #e7e7e7;
+  border-radius: 7px;
+  background: #fff;
+  width: 85%;
+  /* box-shadow: 0px 10px 20px #e4e4e4; */
+  font-size: 20px;
+  display: flex;
+  grid-gap: 10px;
+  gap: 10px;
+  /* flex-direction: column; */
+  font-weight: 300;
+}
+.benefit_section_area1_layer1_icon {
+  width: 50px;
+}
+.bridge_icon {
+  width: 35px;
+}
+.benefit_section_are2_img {
+  width: 100%;
+}
 .btc-color {
   background-image: linear-gradient(45deg, #f19c11, #eb7d41);
 }
@@ -708,6 +1143,7 @@ a.visit_app_link_2 {
   -webkit-box-pack: justify;
   justify-content: space-between;
   text-align: right;
+  align-items: center;
 }
 .right {
   text-align: right;
@@ -788,29 +1224,32 @@ a.visit_app_link_2 {
 }
 
 .getStartedSection {
-  padding: 5em 0em;
-  background: #55bc7e;
+  padding: 2em 0em;
   position: relative;
-  color: #fff;
-
   overflow: hidden;
-
-  background-color: #166938;
-  background-image: radial-gradient(
-      at 0% 0%,
-      hsl(144deg 34% 60%) 0,
-      transparent 50%
-    ),
-    radial-gradient(at 50% 100%, hsl(144deg 63% 39%) 0, transparent 50%);
+  background: #fafafa;
 }
+
 .getStarted_area {
-  display: flex;
+  width: 100%;
+  /* max-width: 980px; */
   flex-direction: column;
+  grid-gap: 30px;
   gap: 30px;
   align-items: center;
   justify-content: space-between;
   position: relative;
   z-index: 5;
+  margin: auto;
+  display: flex;
+  background: #effbf4;
+  padding: 3em;
+  border-radius: 8px;
+  border: solid 1px #c5e3d1;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0px 10px 20px #e2e2e2;
+  text-align: center;
 }
 .getStarted_title {
   font-size: 40px;
@@ -820,7 +1259,7 @@ a.visit_app_link_2 {
   padding: 1em 3.5em;
   border-radius: 6px;
   border: none;
-  background: #002c12;
+  background: #229e54;
   color: #fff;
   font-size: 14px;
   font-weight: 400;
@@ -857,6 +1296,14 @@ a.visit_app_link_2 {
 /* ============================== */
 /* ============================== */
 /* ============================== */
+@media screen and (max-width: 1399px) {
+  /* .liquidity_hero_center_asset_display_bg {
+    left: 39%;
+  }
+  .liquidity_hero_center_turning_bg {
+    left: 36%;
+  } */
+}
 @media screen and (max-width: 991px) {
   .stake-banner-blue {
     text-align: center;
@@ -865,6 +1312,12 @@ a.visit_app_link_2 {
 }
 
 @media screen and (max-width: 900px) {
+  .nft-img-area2 {
+    display: none !important;
+  }
+  .floating_absolute_div {
+    bottom: -142px;
+  }
   /* collateral assets section start */
   .assets-cont-head-area {
     align-items: flex-start;
@@ -999,12 +1452,86 @@ a.visit_app_link_2 {
   }
 }
 @media screen and (max-width: 768px) {
-  .nft-img-area2 {
-    display: none !important;
+  .whyEgorasSection {
+    padding: 2em 0em;
+    position: relative;
+    background: #fafafa;
   }
 }
 
 @media screen and (max-width: 767px) {
+  .whyEgoras_body {
+    display: flex;
+    justify-content: space-between;
+    grid-gap: 20px;
+    gap: 20px;
+    flex-direction: column;
+  }
+  .floating_div_cont_area {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  .benefit_section_area {
+    display: flex;
+    grid-gap: 20px;
+    gap: 20px;
+    align-items: center;
+    flex-direction: column;
+  }
+  .benefit_section_area1 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 40px;
+    gap: 10px;
+  }
+  .floating_div_cont_area1 {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 5px;
+    gap: 5px;
+    padding: 2em 3em;
+    width: 100%;
+    align-items: flex-start;
+  }
+  .floating_absolute_div {
+    bottom: -190px;
+  }
+  .floating_div_cont_area1_cont1 {
+    font-size: 14px;
+    color: #7c7c7c;
+  }
+  .real_world_adoption {
+    padding-top: 12em;
+  }
+  .floating_div_cont_area1_cont2 {
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  .vertical_rule2a {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    width: 0% !important;
+    align-self: stretch;
+    border-bottom: 1px solid rgb(238, 238, 238);
+    width: 100% !important;
+    /* height: 10px; */
+  }
+  .dark .vertical_rule2a {
+    border-bottom: 1px solid rgb(93 121 104);
+  }
+  .benefit_section_area1_layer1 {
+    padding: 1em;
+    border: solid 1px #dadada;
+    border-radius: 10px;
+    background: #fff;
+    width: 100%;
+    box-shadow: 0px 10px 20px #e4e4e4;
+  }
   .stats-widget {
     margin: 20px 0px 0px 0px;
   }
@@ -1014,6 +1541,8 @@ a.visit_app_link_2 {
   }
   .stake-hero-btns {
     justify-content: flex-start;
+    /* flex-direction: column; */
+    gap: 12px;
   }
   .nft-area {
     flex-direction: column;
@@ -1090,7 +1619,7 @@ a.visit_app_link_2 {
     padding: 1em 3.5em;
     border-radius: 6px;
     border: none;
-    background: #002c12;
+    background: #229e54;
     color: #fff;
     font-size: 13px;
     font-weight: 400;
@@ -1099,6 +1628,90 @@ a.visit_app_link_2 {
   }
 }
 @media screen and (max-width: 500px) {
+  .real_world_adoption_area2_title {
+    font-size: 32px;
+    font-weight: 700;
+  }
+  .real_world_adoption_area2_para {
+    font-size: 16px;
+    color: #647069;
+    font-weight: 300;
+    width: 80%;
+  }
+  .whyEgoras_heading {
+    font-size: 32px;
+    font-weight: 700;
+  }
+  .floating_absolute_div {
+    position: absolute;
+    width: 100%;
+    /* padding: 2em; */
+    background: #fff;
+    box-shadow: 0px 0px 25px #e4f3ea;
+    z-index: 10;
+    max-width: 1280px;
+    margin: auto;
+    left: 0;
+    right: 0;
+    border-radius: 10px;
+    border: solid 1px #d6e2db;
+    bottom: -54px;
+  }
+  .real_world_adoption {
+    padding: 2em 0em;
+    padding-top: 6em;
+    background: #fafafa;
+  }
+  .egoras_benefit_section {
+    padding: 2em 0em;
+    position: relative;
+    background: #fafafa;
+  }
+  .floating_div_cont_area1 {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 5px;
+    grid-gap: 5px;
+    grid-gap: 5px;
+    grid-gap: 5px;
+    gap: 5px;
+    padding: 2em 2em;
+    width: 100%;
+    align-items: flex-start;
+  }
+  .benefit_section_are2 {
+    width: 80%;
+  }
+  .benefit_section_area1 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 40px;
+    gap: 16px;
+  }
+
+  .stake-hero-btn1 {
+    padding: 2em 1em;
+    font-size: 12px;
+    text-align: center;
+    width: 50%;
+  }
+  .stake-hero-btn2 {
+    padding: 2em 1em;
+    font-size: 12px;
+    margin: 0;
+    text-align: center;
+    width: 50%;
+  }
+  .floating_div_cont_area1_cont1 {
+    font-size: 14px;
+    color: #7c7c7c;
+  }
+  .floating_div_cont_area1_cont2 {
+    font-size: 26px;
+    font-weight: 700;
+  }
   .span4a-txts {
     font-size: 38px;
     width: 100%;
@@ -1136,20 +1749,49 @@ a.visit_app_link_2 {
     color: #474d57;
     font-weight: 400;
   }
+  .whyEgoras_body_cont1 {
+    padding: 1em;
+    background: #fff;
+    border: solid 1px #e9e8e8;
+    border-radius: 10px;
+    box-shadow: 0px 10px 20px #f0f0f0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    grid-gap: 50px;
+    gap: 50px;
+    position: relative;
+    overflow: hidden;
+  }
+  .whyEgoras_body_cont1_text {
+    font-size: 18px;
+    font-weight: 300;
+    color: #647069;
+    font-size: 16px;
+    color: #000;
+  }
+  .whyEgoras_body_cont1_img {
+    width: 70%;
+    margin: auto;
+  }
+  .benefit_section_area1_layer1 {
+    padding: 1em;
+    border: solid 1px #dadada;
+    border-radius: 5px;
+    background: #fff;
+    width: 100%;
+    box-shadow: 0px 10px 20px #e4e4e4;
+    font-size: 16px;
+  }
+  .benefit_section_are2 {
+    width: 70%;
+  }
 }
 @media screen and (max-width: 449px) {
   .tokenCardflex-txt {
     width: 100%;
     font-size: 24px;
     font-weight: 700;
-  }
-  .stake-hero-btn1 {
-    padding: 1em 1em;
-    font-size: 12px;
-  }
-  .stake-hero-btn2 {
-    padding: 1em 1em;
-    font-size: 12px;
   }
 }
 @media screen and (max-width: 390px) {
@@ -1163,3 +1805,631 @@ a.visit_app_link_2 {
     line-height: 44px;
   }
 }
+
+/* =================================== */
+/* =================================== */
+/* =================================== */
+/* =================================== */
+
+/* Dark Mode Styles */
+/* =================================== */
+/* =================================== */
+/* =================================== */
+
+.dark .earning-section {
+  background: #1e2822;
+}
+.dark .span4a-txts {
+  color: #fff;
+}
+.dark .span4b-txts {
+  color: #bcc7c0;
+}
+.dark .stake-hero-btn1 {
+  border-color: #ffffff;
+  color: #229e54 !important;
+  background: #fff;
+}
+.dark .floating_absolute_div {
+  background: #365543;
+  box-shadow: 0px 0px 25px #000000;
+
+  border: solid 1px #1e2822;
+}
+.dark .floating_div_cont_area1_cont1 {
+  color: #ffffff;
+}
+.dark .whyEgorasSection {
+  background: #1e2822;
+}
+.dark .whyEgoras_body_cont1 {
+  background: #365543;
+  border: solid 1px #475d50;
+
+  box-shadow: 0px 10px 20px #000000;
+}
+.dark .whyEgoras_heading {
+  color: #fff;
+}
+.dark .whyEgoras_body_cont1_text {
+  color: #ffffff;
+}
+.dark .floating_div_cont_area1_cont2 {
+  color: #fff;
+}
+.dark .real_world_adoption {
+  background: #1e2822;
+}
+.dark .real_world_adoption_area2_title {
+  color: #fff;
+}
+.dark .real_world_adoption_area2_para {
+  color: #bbcec3;
+}
+
+.dark .getStartedSection {
+  background: #1e2822;
+}
+.dark .getStarted_area {
+  background: #365543;
+  border: solid 1px #667f71;
+  box-shadow: 0px 10px 20px #000000;
+}
+.dark .getStarted_title {
+  color: #fff;
+}
+.dark .egoras_benefit_section {
+  background: #1e2822;
+}
+.dark .benefit_section_area1_layer1 {
+  border: solid 1px #667f71;
+
+  background: #365543;
+
+  color: #fff;
+  box-shadow: 0px 10px 20px #000000;
+}
+
+.dark .sidebar {
+  background-color: #365543;
+}
+.dark .DashBoardHeaderSection {
+  background-color: #2d513cbd;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-bottom: solid 1px #3b5344;
+  box-shadow: 0px 5px 9px #000000;
+}
+
+.dark .sidebarListItem {
+  color: #c0e8d0;
+}
+.dark hr.hrr {
+  color: #fff;
+}
+.dark .list-item-active {
+  color: #ffffff;
+  background: #1e2822;
+}
+.dark .lending_area1_cont1 {
+  background: #4d705c;
+  border: solid 1px #6d907c;
+  box-shadow: 0px 10px 20px #000000;
+  color: #fff;
+}
+.dark .lending_area1_cont1_heading {
+  font-size: 13px;
+  color: #e3e3e3;
+}
+.dark .help_outline {
+  color: #ffffff !important;
+}
+.dark .lending_area1_last_cont1_divs_cont1 {
+  color: #e2e2e2;
+}
+.dark .lending_area1_last_cont1_divs_cont3 {
+  color: #e6e6e6;
+}
+.dark .lending_area1_last_cont1_divs_cont_value {
+  color: #fff;
+}
+.dark .table_body {
+  border: solid 1px #667f71;
+}
+.dark .assets-data-name {
+  color: #ffffff;
+}
+.dark .filter_table_area_1 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+  color: #ffffff !important;
+  background: #365543 !important;
+  box-shadow: 0px 2px 4px #000000 !important;
+  border-color: #667f71 !important;
+}
+.dark .filter_table_area_1 .css-1kty9di-MuiFormLabel-root-MuiInputLabel-root {
+  color: #ffffff !important;
+}
+.dark .assets-category-titles-heading1 {
+  color: #d4d4d4;
+}
+.dark .assets-category-row {
+  box-shadow: rgb(0 0 0) 0px 0px 6px;
+  background: #365543;
+}
+.dark .assets-data-pool_name {
+  color: #ffffff;
+}
+.dark .poolName_txt {
+  color: #cecece;
+}
+.dark .investmentcapacity_box {
+  border: solid 1px white;
+  color: #d0d0d0;
+}
+.dark .assets-data-name_pool {
+  color: #ffffff;
+}
+.dark .asset_symbol {
+  color: #d6d6d6;
+}
+.dark .assets-data-name_pool {
+  color: #fff !important;
+}
+.dark .assets-btn {
+  border: solid 1px #ffffff;
+  color: #ffffff;
+}
+.dark .welcome_user_txt {
+  color: #ffffff;
+}
+.dark .menu_icon_toggle {
+  color: #fff;
+}
+.dark .filter_table_area_1 .css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root {
+  color: rgb(255 255 255 / 60%);
+}
+.dark .small_list-item-active {
+  color: #365543;
+  background: #ffffff;
+
+  box-shadow: 0px 0px 5px #39493f;
+}
+.dark .hold_On_div {
+  background: #1e2822;
+}
+.dark .pool_lending_pages_links {
+  background: #365543;
+  border: solid 1px #83b095;
+}
+.dark .pool_lend_details_link_active {
+  background: #16221b;
+  border-bottom: solid 1px #365543;
+  color: #fff;
+}
+.dark .pool_lend_details_link {
+  color: #1b231e;
+}
+.dark .pool_lend_details_link .asset_overview_link_icon {
+  background: #d5e1e9;
+  color: #365543;
+}
+.dark .pool_detail_heading {
+  color: #fff;
+}
+.dark .pool_detail_sub_area1 {
+  background: #365543;
+  border: solid 1px #667f71;
+  color: #fff;
+}
+.dark .pool_detail_sub_area1_area1_cont2 {
+  color: #e1e1e1;
+}
+.dark .Asset_Originator_Details_cont_heading {
+  color: #fff;
+}
+.dark .Asset_Originator_Details_cont_body {
+  background: #365543;
+  border: solid 1px #667f71;
+  color: #fff;
+}
+.dark .Asset_Originator_Details_cont_body_issuer_cont_head {
+  color: #e8e8e8;
+}
+.dark .pool_status_cont_heading {
+  color: #fff;
+}
+.dark .pool_status_Details_cont_body1 {
+  border: solid 1px #667f71;
+  background: #365543;
+
+  color: #fff;
+}
+.dark .pool_status_Details_cont_body1_sub_conts {
+  color: #e7e7e7;
+}
+.dark .liquidity_cont {
+  background: #365543;
+  box-shadow: 0px 10px 20px #000;
+  border: solid 1px #63806e;
+}
+.dark .amnt_input {
+  border: solid 1px #4f6a5b;
+  background: #223229;
+}
+.dark .connect_btn:disabled {
+  background: #85ab95;
+  color: #4e6959;
+}
+.dark .input_txt {
+  color: #fff;
+}
+.dark .plus_icon_layer {
+  color: #ffffff;
+}
+.dark .amnt_input_field {
+  color: #fff;
+}
+.dark .connect_btn {
+  background: #ddf2e5;
+  color: #26392d;
+}
+.dark .display_tokens_drop {
+  background: #638671;
+  box-shadow: 0px 5px 15px #161e19;
+  color: #fff;
+}
+.dark .pool_detail_assets_body_layer_1_cont1 {
+  background: #365543;
+  border: solid 1px #667f71;
+  color: #fff;
+}
+.dark .pool_detail_assets_body_layer_1_cont1_sub_heading_1b {
+  color: #d8d8d8;
+}
+.dark .asset_list_heading {
+  color: #fff;
+}
+.dark .toggle_dark_mode_div {
+  background: #1e2822;
+  border: solid 1px #62816e;
+}
+.dark .connected_header_address {
+  border: solid 1px #64796d;
+  border-radius: 6px;
+  color: #fff;
+  background: #1e2822;
+}
+.dark .wallet_addr_cont_txt_header {
+  background: #1e2822;
+  color: #ffffff;
+}
+.dark .wallet_settings_icon_cont {
+  background: #41584a;
+  color: #ffffff;
+}
+.dark .thumbnail_img2 {
+  display: block;
+}
+
+.thumbnail_img2 {
+  display: none;
+}
+.dark .thumbnail_img {
+  display: none;
+}
+.dark .vertical_rule {
+  border-color: rgb(93 121 104);
+}
+.dark .vertical_rule2a {
+  border-color: rgb(93 121 104);
+}
+
+.dark .metamask_prof_pic_icon {
+  filter: drop-shadow(2px 2px 5px #000);
+}
+.dark .disconnect_button_div {
+  background: #1e2822;
+
+  box-shadow: 0px 0px 10px #000000;
+
+  border: solid 1px #62816e;
+}
+.dark .logout-btn {
+  box-shadow: 0px 5px 13px #000000;
+}
+.dark .disconnect_button_div:before {
+  border-bottom: 10px solid #1e2822;
+}
+.dark .filter_table_area_2 {
+  border: solid 1px #667f71;
+  background: #365543;
+  box-shadow: 0px 2px 6px #000000;
+}
+.dark .filter_table_btn1 {
+  color: #ffffff;
+}
+.dark .filter_table_btn1_active {
+  background: #ffffff;
+
+  color: #1e2822;
+}
+.dark .asset_list_body_head {
+  color: white;
+  background: #fff;
+  border: solid 1px #667f71;
+  background: #365543;
+}
+.dark .asset_list_body_body_cont_1 {
+  background: #365543;
+  border: solid 1px #667f71;
+  box-shadow: 0px 0px 4px #000000;
+  color: #fff;
+}
+.dark .asset_list_div {
+  border: solid 1px #667f71;
+}
+.dark .Asset_Originator_Details_cont_body_txt span {
+  background: #365543 !important;
+  color: #fff !important;
+}
+.dark .asset_detail_modal_div_conts {
+  background: #1e2822;
+  box-shadow: 0px 0px 20px #000;
+}
+.dark .asset_detail_heading {
+  background: #365543;
+  border: solid 1px #667f71;
+  color: #fff;
+}
+.dark .asset_status_details_div1 {
+  border: solid 1px #667f71;
+  background: #365543;
+  color: #fff;
+}
+.dark .transactionData_body {
+  background: #365543;
+  border: solid 1px #667f71;
+  color: #fff;
+}
+.dark .transaction_id_link {
+  color: #fff;
+}
+.dark a {
+  color: #ffffff !important;
+}
+.dark .recent_transaction_body {
+  border: solid 1px #667f71;
+  color: #fff;
+}
+.dark .see_more_btn {
+  background: #ffffff;
+  color: #365543;
+  box-shadow: 0px 5px 10px #000000;
+}
+.dark .user_details_body1_body_cont_area1 {
+  background: #365543;
+  border: solid 1px #667f71;
+  color: #fff;
+}
+.dark .userdAshboard_head {
+  background: #365543;
+  border: solid 1px #667f71;
+  color: #fff;
+}
+.dark .metamask_prof_pic {
+  filter: drop-shadow(2px 2px 5px #000);
+}
+.dark .connected_txt {
+  color: #e1e1e1;
+}
+.dark .reward_btn:disabled {
+  background: #8fb9a1;
+  box-shadow: 0px 10px 10px #365543;
+  color: #365543;
+}
+.dark .pool_detail_heading_area2 span {
+  color: #ffffff !important;
+}
+.dark .reward_btn {
+  background: #ffffff;
+  color: #365543;
+  box-shadow: 0px 5px 10px #000000;
+}
+.dark .asset_list_modal_container {
+  background: #1e2822;
+  box-shadow: 0px 0px 15px #000000;
+  color: #fff;
+}
+.dark .asset_list_txt {
+  color: #fff;
+}
+.dark .asset_list_body_head2 {
+  border: solid 1px #667f71;
+  background: #365543;
+  color: #fff;
+}
+.dark .back_modal_cont {
+  background: #365543;
+  box-shadow: 0px 0px 20px #000;
+  border: solid 1px #667f71;
+  color: #fff;
+}
+.dark .back_modal_input {
+  border: solid 1px #39433d;
+  background: #26362c;
+  box-shadow: 0px 3px 5px #000000;
+  color: #fff;
+}
+.dark .back_modal_input_amnt_head {
+  color: #e3e3e3;
+}
+.dark .amount_earned_mnthly {
+  border: solid 1px #2f4a3a;
+  background: #26362c;
+  box-shadow: 0px 0px 6px #212f26;
+  color: #bcbcbc;
+}
+.dark .amount_earned_mnthly_value {
+  color: #fff;
+}
+.dark .back_loan_btn {
+  background: #ffffff;
+  color: #365543;
+}
+.dark .assets-header1 {
+  border-color: #82b597;
+  background: #365543;
+  color: #fff;
+}
+.dark .assets-header3 {
+  border-color: #73a888;
+  background: #365543;
+  color: #fff;
+}
+.dark .assets-header3::placeholder {
+  color: #d1d1d1;
+}
+.dark .openVault_heading {
+  color: #fff;
+}
+.dark .vault_prices1 {
+  box-shadow: 0px 0px 15px #000000;
+  background: #365543;
+  border: solid 1px #667f71;
+  color: #fff;
+}
+.dark .vault_tbd {
+  color: #ffffff;
+}
+.dark .vault_amount_withdraw {
+  background: #365543;
+  box-shadow: 0px 0px 15px #000000;
+
+  color: #fff;
+  border: solid 1px #667f71;
+}
+.dark .amount_withdraw_cont1_txt2 {
+  color: #ffffff;
+}
+.dark .next {
+  color: white;
+}
+.dark .vault_prices1txt1 {
+  color: #aeffce;
+}
+.dark .vault_prices1txt1aa {
+  color: #aeffce;
+}
+.dark .amount_withdraw_cont1_txt1 {
+  color: #aeffce;
+}
+.dark .open_vault_area2ss {
+  background: #365543;
+  box-shadow: 0px 0px 15px #000000;
+  border: solid 1px #667f71;
+}
+.dark .card {
+  background-color: #365543;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+.dark .nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: #1e2822 !important;
+  color: #ffffff !important;
+  border-bottom: solid 2px #ffffff !important;
+}
+.dark .nav-tabs {
+  border-bottom: 1px solid #365543 !important;
+}
+.dark .card-header {
+  background-color: #365543 !important;
+}
+.dark .vault_input0 {
+  color: #fff;
+}
+.dark span.vault_input1 {
+  color: #aeffce;
+}
+.dark input.vault_input_vaulta {
+  border-color: #597865;
+  background: #1e2822;
+  box-shadow: 0px 0px 10px #000;
+  color: #fff;
+}
+.dark .vault_pay_back_btn {
+  background: #ffffff;
+  color: #365543;
+  box-shadow: 0px 5px 13px #28392f;
+}
+.dark input.vault_input_vault {
+  border-color: #597865;
+  background: #1e2822;
+  box-shadow: 0px 0px 10px #000;
+  color: #fff;
+}
+.dark p.configure {
+  color: rgb(255, 255, 255);
+}
+.dark .open_vault_area2a {
+  color: #e5e5e5;
+}
+.dark .open_vault_input_btn {
+  background: #ffffff;
+  color: #365543;
+  box-shadow: 0px 5px 13px #28392f;
+}
+.dark h3.valid_div_inner_div_heading {
+  color: #fff;
+}
+.dark .valid_div_inner_div_cont {
+  color: #ffffff;
+}
+.dark .valid_div_inner_div_cont2 {
+  color: #aeffce;
+}
+.dark .branch_name_title::before {
+  color: #dfdfdf !important;
+}
+.dark .branch_Lending_Capacity::before {
+  color: #ffffff !important;
+}
+.dark .branch_loan_status::before {
+  color: #ffffff !important;
+}
+.dark .branch_pool_value::before {
+  color: #ffffff !important;
+}
+.dark .branch_pool_value_progress::before {
+  color: #ffffff !important;
+}
+.dark td.assets-category-data::before {
+  color: #fff;
+}
+.dark .assets-category-data1::before {
+  color: #fff;
+}
+.dark .ratio-content::before {
+  color: #fff;
+}
+@media screen and (max-width: 991px) {
+  .dark .list-item-active {
+    color: #ffffff !important;
+    background: none;
+  }
+  .dark .small_list-item-active {
+    color: #fff;
+    background: none;
+    box-shadow: none;
+  }
+  .dark .sidebar {
+    box-shadow: 0px 0px 5px #18201b;
+  }
+}
+/* =================================== */
+/* =================================== */
+/* =================================== */
+/* =================================== */
+/* =================================== */
+/* =================================== */
+/* =================================== */
+/* =================================== */
+/* =================================== */

@@ -513,15 +513,38 @@ hr.hrr {
     width: 4%;
   }
 }
+@media screen and (max-width: 1323px) {
+  .header_tabs {
+    margin-left: 0em;
+  }
+  .egr-logodark {
+    margin-right: 0px;
+  }
+  .egr-logo {
+    margin-right: 0px;
+  }
+  .DashBoardHeaderSection {
+    padding: 1em 0em;
+  }
+  .user_profile_icon_cont2 {
+    padding: 0em 0em;
+  }
+}
 @media screen and (max-width: 1220px) {
   .small_side {
     /* flex: 1; */
     width: 5%;
   }
+  .header_token_prices_div {
+    font-size: 12px;
+  }
+  .header_token_prices_div_area {
+    gap: 5px;
+  }
 }
 @media screen and (max-width: 1168px) {
   .side {
-    width: 149px;
+    width: 0;
   }
   .small_side {
     /* flex: 1; */
@@ -575,6 +598,17 @@ hr.hrr {
 @media screen and (max-width: 991px) {
   .side {
     width: 0;
+  }
+
+  /* .header_tabs {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    justify-content: space-around;
+    background: #fff;
+  } */
+  .dash_connected_header_address {
+    display: none !important;
   }
   .social_handles_cont_div {
     display: none;
@@ -722,7 +756,7 @@ hr.hrr {
     }
   }
   .sidebarIcon {
-    font-size: 24px !important;
+    font-size: 20px !important;
     margin-right: 0px;
   }
   .cat_div {
