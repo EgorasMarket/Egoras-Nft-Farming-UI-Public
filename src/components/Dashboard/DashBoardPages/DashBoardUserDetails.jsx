@@ -101,6 +101,7 @@ const DashBoardUserDetails = () => {
       element.appendChild(icon);
     }
   }, [account, avatarRef]);
+  console.log("i am here");
   useEffect(() => {
     // if (account) {
     axios
