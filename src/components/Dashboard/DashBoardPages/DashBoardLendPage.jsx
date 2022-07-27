@@ -238,11 +238,15 @@ const DashBoardLendPage = ({ submitKyc }) => {
         postData,
         config
       );
-      console.log(res);
+
+      window.location.href = res.data.session.redirectUrl;
+      console.log(res.data.session.redirectUrl);
+      console.log(res.data.status);
     } catch (err) {
       console.log(err);
     }
   };
+
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -253,14 +257,14 @@ const DashBoardLendPage = ({ submitKyc }) => {
       {/* Tokens Section Start */}
       <section className="collateral-assets-section no-bg no_pad">
         <div className="container">
-          <div className="onboard_as_user_div">
+          {/* <div className="onboard_as_user_div">
             <button
               className="onboard_as_user_btn"
               onClick={toggleOnBoardUserDiv}
             >
               Onboard as user
             </button>
-          </div>
+          </div> */}
           <div className="pool_container">
             <div className="lending_area1">
               <div className="lending_area1_cont1">
@@ -367,27 +371,7 @@ const DashBoardLendPage = ({ submitKyc }) => {
 
             <div className="table_body">
               <div className="filter_table_area">
-                <div className="filter_table_area_1">
-                  {/* <Box sx={{ minWidth: 120 }}> */}
-                  <FormControl style={{ width: "100%" }}>
-                    <InputLabel id="demo-simple-select-label">
-                      Sort by branch
-                    </InputLabel>
-                    <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      value={age}
-                      label="Sort by branch"
-                      onChange={handleChange}
-                    >
-                      <MenuItem value={1}>All Branches</MenuItem>
-                      <MenuItem value={2}>Agip Branch</MenuItem>
-                      <MenuItem value={3}>Oyigbo Branch</MenuItem>
-                      <MenuItem value={4}>RU Branch</MenuItem>
-                    </Select>
-                  </FormControl>
-                  {/* </Box> */}
-                </div>
+                <div className="filter_table_area_1">All Branches</div>
                 <div className="filter_table_area_2">
                   <div
                     id="Ongoing"

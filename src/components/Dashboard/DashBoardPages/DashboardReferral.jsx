@@ -9,7 +9,7 @@ import TollIcon from "@mui/icons-material/Toll";
 import GroupsIcon from "@mui/icons-material/Groups";
 const DashboardReferral = () => {
   const [activeLink, setActiveLink] = useState("");
-  const [comingSoon, setComingSoon] = useState(false);
+  const [comingSoon, setComingSoon] = useState(true);
   const [copyValue, setCopyValue] = useState("https://egoras.org/ref/2672828");
   const currentPage = window.location.pathname;
   const urlArr = currentPage.split("/");
