@@ -7,12 +7,42 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import TollIcon from "@mui/icons-material/Toll";
 import GroupsIcon from "@mui/icons-material/Groups";
-const DashboardReferral = () => {
+import { connect } from "react-redux";
+
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
+
+import axios from "axios";
+import { config } from "../../../actions/Config";
+import { API_URL as api_url } from "../../../actions/types";
+
+const DashboardReferral = ({ auth }) => {
   const [activeLink, setActiveLink] = useState("");
   const [comingSoon, setComingSoon] = useState(false);
-  const [copyValue, setCopyValue] = useState("https://egoras.org/ref/2672828");
+  const [copyValue, setCopyValue] = useState("");
+  const [address, setAddress] = useState(
+    "0x3dE7916840227889UIOC0DA2Bf9A209C3A91d755790FC"
+  );
   const currentPage = window.location.pathname;
   const urlArr = currentPage.split("/");
+  const [leaderBoard1, setLeaderBoard] = useState([]);
+  const [myReferrals, setMyReferrals] = useState([]);
+  const context = useWeb3React();
+
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
+
   useEffect(() => {
     if (currentPage === "/dashboard/user") {
       setActiveLink("poolDetails");
@@ -161,8 +191,35 @@ const DashboardReferral = () => {
     },
   ];
   useEffect(() => {
-    // setCopyValue(auth.user.user.ref_auth);
+    axios
+      .get(api_url + "/api/user/fetch/top/referals", null, config)
+      .then((data) => {
+        setLeaderBoard(data.data.allData);
+        // console.log(data.data.allData);
+        // console.log(leaderBoard);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
   }, []);
+
+  useEffect(() => {
+    console.log(account, auth.user.payload.ref_code);
+    setCopyValue("https://egoras.org/referal/" + auth.user.payload.ref_code);
+    localStorage.setItem("WA_ST", account);
+    axios
+      .get(api_url + "/api/user/fetch/my/referals/" + account, null, config)
+      .then((data) => {
+        setMyReferrals(data.data.data);
+        console.log(data.data.data);
+        // console.log(leaderBoard);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, [account, auth]);
+  // console.log(leaderBoard1);
+  // console.log(leaderBoard);
 
   const copyText = () => {
     var copyText = document.getElementById("myInput");
@@ -301,13 +358,13 @@ const DashboardReferral = () => {
                           </div>
                         </div>
 
-                        {leaderBoard.slice(0, 8).map((data) => (
+                        {leaderBoard1.slice(0, 8).map((data) => (
                           <div className="dashBoard_ref_area2_cont1_body_div1">
                             <div className="dashBoard_ref_area2_cont1_body_div1_cont1 dashBoard_ref_area2_cont1_body_div1_cont1_first">
-                              {data.sn}
+                              {"1"}
                             </div>
                             <div className="dashBoard_ref_area2_cont1_body_div1_cont1">
-                              {data.user}
+                              {data.username}
                             </div>
                             <div className="dashBoard_ref_area2_cont1_body_div1_cont1">
                               {data.address.substring(0, 5) +
@@ -318,7 +375,7 @@ const DashboardReferral = () => {
                               {data.referrals}
                             </div>
                             <div className="dashBoard_ref_area2_cont1_body_div1_cont1 dashBoard_ref_area2_cont1_body_div1_cont1_last">
-                              ${data.amountEarned.toFixed(2)}
+                              {/* ${data.amountEarned.toFixed(2)} */}${"1800"}
                             </div>
                           </div>
                         ))}
@@ -346,10 +403,10 @@ const DashboardReferral = () => {
                             </div>
                           </div>
 
-                          {leaderBoard.slice(0, 5).map((data) => (
+                          {myReferrals.slice(0, 5).map((data) => (
                             <div className="dashBoard_ref_area2_cont1_body_div1">
                               <div className="dashBoard_ref_area2_cont1_body_div1_cont1_first">
-                                {data.user}
+                                {data.username}
                               </div>
                               <div className="dashBoard_ref_area2_cont1_body_div1_cont1_last">
                                 {data.address.substring(0, 5) +
@@ -397,4 +454,11 @@ const DashboardReferral = () => {
   );
 };
 
-export default DashboardReferral;
+// export default DashboardReferral;
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+// let  res = await getLogin2(
+export default connect(mapStateToProps, {})(DashboardReferral);
