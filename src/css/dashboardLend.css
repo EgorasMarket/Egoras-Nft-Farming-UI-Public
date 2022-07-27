@@ -29,6 +29,25 @@
   justify-content: space-between;
   align-items: flex-start;
 }
+
+.onboard_as_user_div {
+  padding: 2em 0em;
+  display: flex;
+  justify-content: end;
+  padding-top: 0;
+}
+.onboard_as_user_btn {
+  padding: 15px 0px;
+  width: 200px;
+  border-radius: 8px;
+  background: #229e54;
+  color: #fff;
+  border: none;
+  box-shadow: 0px 10px 10px #bfbfbf;
+}
+.dark .onboard_as_user_btn {
+  box-shadow: 0px 10px 10px #000000;
+}
 .no_loans_div {
   width: 100%;
   display: table-caption;
@@ -48,7 +67,51 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  position: relative;
 }
+.helper_txt_div {
+  position: absolute;
+  font-size: 12px;
+  background: #000000bd;
+  padding: 1em;
+  width: 225px;
+  right: 0;
+  backdrop-filter: blur(4px);
+  border: solid 1px black;
+  border-radius: 3px;
+  top: 18px;
+  bottom: auto;
+  left: auto;
+  margin: auto;
+  display: flex;
+  color: #fff;
+  box-shadow: 0px 5px 10px #8b8b8b;
+  text-align: center;
+  display: none;
+  /* animation: fadeIn 2s linear; */
+}
+.dark .helper_txt_div {
+  box-shadow: 0px 5px 10px #000000;
+}
+
+.helper_txt_div:before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: -1px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid hsla(0, 0%, 100%, 0);
+  border-bottom: 10px solid #000;
+}
+.lending_area1_cont1_body_1:hover .helper_txt_div {
+  display: block;
+  /* animation: fadeIn 2s linear; */
+}
+/* .help_outline:hover + .helper_txt_div {
+  display: block;
+} */
 .assets-btn {
   font-size: 14px;
   border: solid 1px #229e54;
@@ -85,14 +148,116 @@
 
 .investmentcapacity_box {
   width: 100px;
-  border: solid 1px grey;
+  /* border: solid 1px grey; */
   border-radius: 20px;
   padding: 5px 0px;
-  font-size: 12px;
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #708390;
+  color: #000000;
+  text-decoration: underline !important;
+}
+
+.onBoardUserDiv {
+  position: fixed;
+  top: 0;
+  z-index: 10000;
+  padding: 2em;
+  background: #000000a1;
+  width: 100vw;
+  height: 100vh;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.onBoardUserDiv_head {
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+.rule_progress {
+  position: absolute;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  background: #acc3b5;
+  left: 0;
+  border-radius: 20px;
+}
+.stepdiv1 {
+  position: relative;
+  padding: 1em;
+  padding-bottom: 0;
+  padding-top: 0;
+  font-weight: 700;
+}
+.stepDiv1_sub_content {
+  padding: 1em 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 0;
+  font-size: 14px;
+  color: #727272;
+  font-weight: 400;
+}
+.onBoardUserDiv_body_cont {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.onBoardUserDiv_body {
+  max-width: 550px;
+  width: 100%;
+  margin: auto;
+  background: #fff;
+  padding: 2em;
+  border-radius: 7px;
+  margin-top: 0;
+}
+.close_onBoardUserDiv_btn_cont {
+  position: absolute;
+  top: 1%;
+  left: 1%;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.subMitDetails_cont {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.subMitDetails_cont_input_body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.subMitDetails_cont_input_body_cont1 {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  color: #000;
+  font-weight: 700;
+}
+.submitDetails_cont_input_area {
+  padding: 10px;
+  border: solid 1px #c9c9c9;
+  border-radius: 6px;
+}
+.proceed_to_cube_btn {
+  padding: 10px;
+  width: 100%;
+  border-radius: 6px;
+  border: none;
+  background: #229e54;
+  color: #fff;
+  font-weight: 600;
 }
 .poolName_txt {
   font-size: 12px;
@@ -108,6 +273,21 @@
   border-radius: 6px;
 }
 .assets-data-name_pool {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  color: #373737;
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: flex-end;
+}
+.dark .status_txt {
+  color: #fff;
+}
+.assets-data-name_pool2 {
   box-sizing: border-box;
   margin: 0px;
   min-width: 0px;
@@ -439,5 +619,12 @@
 
   .pool_container {
     gap: 10px;
+  }
+  .filter_table_area {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-end;
   }
 }

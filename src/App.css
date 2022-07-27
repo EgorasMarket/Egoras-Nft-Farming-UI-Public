@@ -446,3 +446,12 @@ input:-internal-autofill-selected {
     min-width: 0px;
   }
 }
+.chart_svg {
+  stroke: #238c4e;
+  fill: #edfaf2;
+  stop-color: green;
+  stroke-width: 2px;
+  width: 100%;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

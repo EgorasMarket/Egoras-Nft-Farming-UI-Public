@@ -62,6 +62,9 @@ const Footer = () => {
     if (currentPage === "/dashboard/swap") {
       setShowFooter(false);
     }
+    if (currentPage === "/dashboard/user/referral") {
+      setShowFooter(false);
+    }
     if (currentPage === "/dashboard/user") {
       setShowFooter(false);
     }

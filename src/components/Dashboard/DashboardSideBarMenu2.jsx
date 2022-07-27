@@ -212,6 +212,9 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     if (linksActive === "/dashboard/user") {
       setActiveBg("account");
     }
+    if (linksActive === "/dashboard/user/referral") {
+      setActiveBg("account");
+    }
     if (
       linksActive ===
       "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
@@ -353,6 +356,9 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           const egr_usd_val = data["egoras"].usd;
           console.log(egr_usd_val);
           setEgrUsdVal(() => egr_usd_val);
+        })
+        .catch((error) => {
+          console.log(error);
         });
       // ===============================
       let string2 =
@@ -363,6 +369,9 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           const egc_usd_val = data["egoras-credit"].usd;
           console.log(egc_usd_val);
           setEgcUsdVal(() => egc_usd_val);
+        })
+        .catch((error) => {
+          console.log(error);
         });
     },
     [egcUsdVal, egrUsdVal]
@@ -681,6 +690,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           <SwapHorizontalCircleIcon className="sidebarIcon" />
           Swap
         </a>
+
         <a
           id="account"
           href="/dashboard/user"

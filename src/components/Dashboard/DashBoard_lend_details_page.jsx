@@ -7,12 +7,13 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import CloseIcon from "@mui/icons-material/Close";
-
+import SwitchToggle from "./DashBoardPages/SwitchToggle/SwitchToggle";
 import { CopperLoading } from "respinner";
 import { parseEther, formatEther } from "@ethersproject/units";
 import LOAN from "../../web3/contracts/Loan.json";
 import SwapContract from "../../web3/contracts/Contract_Address.json";
 import Web3 from "web3";
+import Nodata from "./DashBoardPages/nodataComponent/Nodata";
 import {
   SuccessModal,
   ErrorModal,
@@ -111,6 +112,7 @@ const DashBoard_lend_details_page = ({ match }) => {
   const [base, setBase] = useState("");
   const [coinBalance2, setCoinBalance2] = React.useState(0.0);
   const [baseBalance, setBaseBalance] = useState(0.0);
+  const [unlockedCheck, setUnlockedCheck] = useState(false);
   const [loanMetaData, setLoanMetaData] = useState({
     base: "",
     asset: "",
@@ -228,6 +230,8 @@ const DashBoard_lend_details_page = ({ match }) => {
     setActivrBtn(event.currentTarget.id);
   };
 
+  const FundingProgress = (BranchDetails.funded / BranchDetails.amount) * 100;
+
   // console.log(c, b, d);
 
   const handleBackChange = (e) => {
@@ -265,6 +269,26 @@ const DashBoard_lend_details_page = ({ match }) => {
       // setDisable(true);
     }
   };
+
+  // useEffect(async (e) => {
+  //   console.log(BackAmount);
+
+  //   if (account) {
+  //     let check2 = await checkAllowanceL(
+  //       account,
+  //       parseEther(BackAmount.toString(), "wei").toString(),
+  //       library.getSigner()
+  //     );
+  //     console.log(check2);
+  //     if (check2.status == true) {
+  //       setUnlockedCheck(true);
+  //     } else {
+  //       // // setUnlocking(true);
+  //       // setStage("unlock");
+  //       // setIsLoading(false);
+  //     }
+  //   }
+  // }, []);
 
   const BackLoan = async (e) => {
     let currentTarget = e.currentTarget.id;
@@ -376,6 +400,7 @@ const DashBoard_lend_details_page = ({ match }) => {
     margin: "0 auto",
     borderColor: "red",
   };
+  var percentage = (BranchDetails.funded / BranchDetails.amount) * 100;
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -498,7 +523,7 @@ const DashBoard_lend_details_page = ({ match }) => {
                     </label>
                     <progress
                       className={
-                        BranchDetails.funded < BranchDetails.amount
+                        percentage < 100
                           ? "progress_bar progress_bar_progress"
                           : "progress_bar"
                       }
@@ -712,15 +737,11 @@ const DashBoard_lend_details_page = ({ match }) => {
                         <div className="asset_amount_progress_div">
                           <div className="asset_amount_progress_div_txt"></div>
                           <label for="file">
-                            {parseInt(
-                              (BranchDetails.funded / BranchDetails.amount) *
-                                100
-                            ).toFixed()}
-                            %
+                            {parseInt(FundingProgress).toFixed()}%
                           </label>
                           <progress
                             className={
-                              BranchDetails.funded < BranchDetails.amount
+                              FundingProgress < 100
                                 ? "progress_bar progress_bar_progress"
                                 : "progress_bar"
                             }
@@ -760,100 +781,173 @@ const DashBoard_lend_details_page = ({ match }) => {
                 onClick={toggleAssetModal}
               />
             </div>
-            <div className="asset_list_body_head2">
-              {/* <div className="asset_list_body_head_tab1">Asset Id</div> */}
-              <div className="asset_list_body_head_tab1">Asset Name</div>
+            {/* ========== */}
+            {/* ========== */}
+            {/* ========== */}
+            {/* ========== */}
+            <div className="asset_list_desktop_view2">
+              <table className="branch_asset_table">
+                <thead className="branch_asset_titles">
+                  <tr className="branch_asset_title_div">
+                    <th className="branch_asset_heading_titles branch_asset_heading_titles_first">
+                      Asset Name
+                    </th>
+                    <th className="branch_asset_heading_titles">
+                      Amount(Engn)
+                    </th>
+                    <th className="branch_asset_heading_titles">
+                      Funded(Engn)
+                    </th>
+                    <th className="branch_asset_heading_titles">
+                      Funding Progress
+                    </th>
+                    <th className="branch_asset_heading_titles">
+                      Funding Left
+                    </th>
+                    <th className="branch_asset_heading_titles ">APY</th>
+                    <th className="branch_asset_heading_titles branch_asset_heading_titles_last">
+                      Action
+                    </th>
+                  </tr>
+                </thead>
 
-              <div className="asset_list_body_head_tab5">Amount(Engn)</div>
-              <div className="asset_list_body_head_tab5">Funded(Engn)</div>
-              <div className="asset_list_body_head_tab5">Funding Progress</div>
-              <div className="asset_list_body_head_tab5">Funding left</div>
-              <div className="asset_list_body_head_tab6 finance_fee_details_page">
-                APY
-              </div>
-              <div className="asset_list_body_head_tab7">Action</div>
-            </div>
-            <div className="asset_list_body_body_cont">
-              {activeBtn === "Ongoing"
-                ? LoanAssets.filter((person) => person.state == "OPEN").map(
-                    (data) => {
-                      var percentage = (data.funded / data.amount) * 100;
-                      const meta = JSON.parse(data.metadata);
-                      return (
-                        <div
-                          className="asset_list_body_body_cont_1"
-                          id={data.newLoanID}
-                          onClick={ChangeAssetDetailModal}
-                        >
-                          <div className="asset_list_body_body_cont_1a">
-                            {/* {data.title} */}
-                            <img
-                              src={meta.arrayImg}
-                              alt=""
-                              className="assets-list-icon_pool_icon"
-                            />{" "}
-                            {data.title.substring(0, 20) + "..."}
-                          </div>
+                {/* <div className="table-body-content">
 
-                          <div className="asset_list_body_body_cont_1e">
-                            {numberWithCommas(parseInt(data.amount).toFixed(2))}
-                          </div>
+// =====================
+// =====================
+// =====================
+// =====================
+// =====================
+// =====================
 
-                          <div className="asset_list_body_body_cont_1e">
-                            {numberWithCommas(parseInt(data.funded).toFixed(2))}
-                          </div>
+                
+              </div> */}
+                {LoanAssets.length <= 0 ? (
+                  <div className="no_loans_div">
+                    <div className="no_loans_div_cont">
+                      <Nodata />
+                      No Pools yet.
+                    </div>{" "}
+                  </div>
+                ) : (
+                  <tbody className="branch_asset_body" id="popular-categories">
+                    {" "}
+                    {/* =============== */}
+                    {/* =============== */}
+                    {/* =============== */}
+                    {LoanAssets.filter((person) => person.state == "OPEN").map(
+                      (asset) => {
+                        var percentage = (asset.funded / asset.amount) * 100;
+                        const meta = JSON.parse(asset.metadata);
 
-                          <div className="asset_list_body_body_cont_1e">
-                            <div className="asset_amount_progress_div">
-                              <div className="asset_amount_progress_div_txt"></div>
-                              <label for="file">
-                                {parseInt(
-                                  (data.funded / data.amount) * 100
-                                ).toFixed()}
-                                %
-                              </label>
-                              <progress
-                                className={
-                                  percentage < 100
-                                    ? "progress_bar progress_bar_progress"
-                                    : "progress_bar"
-                                }
-                                // className={
-                                //   data.funded < data.amount
-                                //     ? " progress_bar progress_bar_progress"
-                                //     : data.funded === data.amount
-                                //     ? "progress_bar"
-                                //     : " progress_bar progress_bar_progress"
-                                // }
-                                // "progress_bar"
-                                id="file"
-                                aria-valuenow={data.amount - data.funded}
-                                value={data.funded}
-                                max={data.amount}
-                              ></progress>
-                            </div>
-                          </div>
-                          <div className="asset_list_body_body_cont_1e">
-                            {numberWithCommas(
-                              parseInt(data.amount - data.funded).toFixed(2)
-                            )}
-                          </div>
-                          <div className="asset_list_body_body_cont_1f finance_fee_details_page_row">
-                            13 %
-                          </div>
-                          <div className="asset_list_body_body_cont_1g">
-                            <button
-                              onClick={ChangeAssetDetailModal}
-                              className="back_btn"
-                            >
-                              Lend
-                            </button>
-                          </div>
-                        </div>
-                      );
-                    }
-                  )
-                : null}
+                        return (
+                          <tr
+                            className="branch_asset_body_row "
+                            id={asset.newLoanID}
+                            onClick={ChangeAssetDetailModal}
+                          >
+                            <td className="branch_asset_body_row_data branch_asset_body_row_data_first  ">
+                              <div className="assets-data">
+                                <img
+                                  src={meta.arrayImg}
+                                  alt=""
+                                  className="assets-list-icon_pool_icon"
+                                />
+
+                                <div className="assets-data-pool_name">
+                                  {asset.title.substring(0, 8) + "..."}
+                                </div>
+                              </div>
+                            </td>
+                            <td className="branch_asset_body_row_data  ">
+                              {/* <div className="assets-data-name_pool_invest_capcity"> */}
+                              <div className="asset_list_body_body_cont_1c">
+                                {numberWithCommas(
+                                  parseInt(asset.amount).toFixed(2)
+                                )}
+                              </div>
+                              {/* </div> */}
+                            </td>
+                            <td className="branch_asset_body_row_data  ">
+                              <div className="assets-data-name_pool">
+                                {numberWithCommas(
+                                  parseInt(asset.funded).toFixed(2)
+                                )}
+                              </div>
+                            </td>
+                            <td className="branch_asset_body_row_data  ">
+                              <div className="assets-data-name_pool">
+                                <div className="asset_amount_progress_div">
+                                  <div className="asset_amount_progress_div_txt"></div>
+                                  <label for="file">
+                                    {parseInt(percentage).toFixed()}%
+                                  </label>
+                                  <progress
+                                    className={
+                                      percentage < 100
+                                        ? "progress_bar progress_bar_progress"
+                                        : "progress_bar"
+                                    }
+                                    // "progress_bar"
+                                    id="file"
+                                    aria-valuenow={asset.amount - asset.funded}
+                                    value={asset.funded}
+                                    max={asset.amount}
+                                  ></progress>
+                                  {/* <div
+                                  role="progressbar"
+                                  aria-valuenow="20"
+                                  aria-valuemin="0"
+                                  aria-valuemax="100"
+                                >
+                                  20 %
+                                </div> */}
+                                  {/* <div className="asset_amount_progress_div_bar">
+                                  <div className="asset_amount_progress_div_bar_progress"></div>
+                                </div> */}
+                                </div>
+                              </div>
+                            </td>
+                            <td className="branch_asset_body_row_data  ">
+                              <div className="assets-data-name_pool ">
+                                {numberWithCommas(
+                                  parseInt(asset.amount - asset.funded).toFixed(
+                                    2
+                                  )
+                                )}
+                              </div>
+                            </td>
+                            <td className="branch_asset_body_row_data   ">
+                              <div className="asset_list_body_body_cont_1f body_cont1_f">
+                                13%
+                              </div>
+                            </td>
+                            <td className="branch_asset_body_row_data branch_asset_body_row_data_last">
+                              <div className="asset_list_body_body_cont_1g">
+                                <button
+                                  onClick={ChangeAssetDetailModal}
+                                  className="back_btn"
+                                >
+                                  Lend
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      }
+                    )}
+                    {/* =================== */}
+                    {/* =================== */}
+                    {/* =================== */}
+                    {/* =================== */}
+                    {/* =================== */}
+                    {/* =================== */}
+                    {/* =================== */}
+                    {/* =================== */}
+                    {/* =================== */}
+                  </tbody>
+                )}
+              </table>
             </div>
           </div>
         </div>
@@ -917,6 +1011,12 @@ const DashBoard_lend_details_page = ({ match }) => {
                             13%
                           </span>
                         </div>
+                        {/* <div className="unlock_check_div">
+                          <SwitchToggle
+                            checkBox={unlockedCheck}
+                            // doUnluck={doUnluck}
+                          />
+                        </div> */}
                         <div className="back_loan_btn_div">
                           {BackAmount > amnt_remaining ? (
                             <button

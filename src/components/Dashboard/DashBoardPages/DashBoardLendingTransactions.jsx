@@ -291,73 +291,115 @@ const DashBoardLendingTransactions = ({ match }) => {
 
             <div className="asset_list_div">
               <div className="asset_list_heading">Transaction List </div>
-              <div className="asset_list_body">
-                <div className="asset_list_body_head">
-                  {/* <div className="asset_list_body_head_tab1">Asset Id</div> */}
-                  <div className="asset_list_body_head_tab1">Txn hash</div>
-                  <div className="asset_list_body_head_tab3">Date</div>
-                  <div className="asset_list_body_head_tab5">Funded(Engn)</div>
-                  <div className="asset_list_body_head_tab6">APY</div>
-                </div>
-                <div className="asset_list_body_body_cont">
+              {/* ==================== */}
+              {/* ==================== */}
+              {/* ==================== */}
+              {/* ==================== */}
+              {/* ==================== */}
+              {/* ==================== */}
+              {/* ==================== */}
+              {/* ==================== */}
+              <div className="asset_list_desktop_view2">
+                <table className="branch_asset_table">
+                  <thead className="branch_asset_titles">
+                    <tr className="branch_asset_title_div">
+                      <th className="branch_asset_heading_titles branch_asset_heading_titles_first">
+                        Txn hash
+                      </th>
+                      <th className="branch_asset_heading_titles">Date</th>
+                      <th className="branch_asset_heading_titles">
+                        Funded(Engn)
+                      </th>
+                      <th className="branch_asset_heading_titles ">APY</th>
+                      <th className="branch_asset_heading_titles branch_asset_heading_titles_last"></th>
+                    </tr>
+                  </thead>
+
+                  {/* <div className="table-body-content">
+
+// =====================
+// =====================
+// =====================
+// =====================
+// =====================
+// =====================
+
+                
+              </div> */}
                   {transactions.length <= 0 ? (
                     <div className="no_loans_div">
                       <div className="no_loans_div_cont">
                         <Nodata />
-                        No Transactions yet.
+                        No Transactions.
                       </div>{" "}
                     </div>
                   ) : (
-                    transactions
-                      .slice(0)
-                      .reverse()
-                      .map((data) => (
-                        <div
-                          className="asset_list_body_body_cont_1"
-                          id={data.id}
-                          //   onClick={ChangeAssetDetailModal}
-                        >
-                          {/* <div className="asset_list_body_body_cont_1a">
-                            {data.id}
-                          </div> */}
-                          <div className="asset_list_body_body_cont_1a mobile_hash_head">
-                            <a
-                              href={`https://bscscan.com/tx/${data.transactionHash}`}
-                              target="_blank"
-                              style={{ color: "#000" }}
+                    <tbody
+                      className="branch_asset_body"
+                      id="popular-categories"
+                    >
+                      {" "}
+                      {/* =============== */}
+                      {/* =============== */}
+                      {/* =============== */}
+                      {transactions
+                        .slice(0)
+                        .reverse()
+                        .map((asset) => {
+                          return (
+                            <tr
+                              className="branch_asset_body_row "
+                              id={asset.id}
                             >
-                              {data.transactionHash.substring(0, 28) + "..."}
-                            </a>
-                          </div>
-
-                          <div className="asset_list_body_body_cont_1c">
-                            {data.createdAt.slice(0, 10)}
-                          </div>
-
-                          <div className="asset_list_body_body_cont_1e">
-                            {numberWithCommas(parseInt(data.amount).toFixed())}
-                          </div>
-                          <div className="asset_list_body_body_cont_1f">
-                            13%
-                          </div>
-                          {/* <div className="asset_list_body_body_cont_1g">
-                        <button
-                          className={
-                            data.Status === "Ongoing"
-                              ? "status_btn_ongoing"
-                              : data.Status === "Closed"
-                              ? "status_btn_closed"
-                              : "status_btn"
-                          }
-                        >
-                          {data.Status}
-                        </button>
-                      </div> */}
-                          <KeyboardArrowRightIcon className="arrow_right_arrow" />
-                        </div>
-                      ))
+                              <td className="branch_asset_body_row_data branch_asset_body_row_data_first  ">
+                                <div className="asset_list_body_body_cont_1a mobile_hash_head">
+                                  <a
+                                    href={`https://bscscan.com/tx/${asset.transactionHash}`}
+                                    target="_blank"
+                                    style={{ color: "#000" }}
+                                  >
+                                    {asset.transactionHash.substring(0, 28) +
+                                      "..."}
+                                  </a>
+                                </div>
+                              </td>
+                              <td className="branch_asset_body_row_data  ">
+                                {/* <div className="assets-data-name_pool_invest_capcity"> */}
+                                <div className="asset_list_body_body_cont_1c">
+                                  {asset.createdAt.slice(0, 10)}
+                                </div>
+                                {/* </div> */}
+                              </td>
+                              <td className="branch_asset_body_row_data  ">
+                                <div className="asset_list_body_body_cont_1e">
+                                  {numberWithCommas(
+                                    parseInt(asset.amount).toFixed()
+                                  )}
+                                </div>
+                              </td>
+                              <td className="branch_asset_body_row_data  ">
+                                <div className="asset_list_body_body_cont_1f">
+                                  13%
+                                </div>
+                              </td>
+                              <td className="branch_asset_body_row_data  branch_asset_body_row_data_last">
+                                <KeyboardArrowRightIcon className="arrow_right_arrow" />
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                    </tbody>
                   )}
-                </div>
+                </table>
               </div>
             </div>
           </div>
