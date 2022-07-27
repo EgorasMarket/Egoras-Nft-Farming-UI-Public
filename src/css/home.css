@@ -1963,8 +1963,8 @@ a.visit_app_link_2 {
   color: #cecece;
 }
 .dark .investmentcapacity_box {
-  border: solid 1px white;
-  color: #d0d0d0;
+  /* border: solid 1px white; */
+  color: #ffffff;
 }
 .dark .assets-data-name_pool {
   color: #ffffff;

@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import "../../../css/dashBoardReferral.css";
 import Sparkline2 from "../../static/Sparkline2";
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import TollIcon from "@mui/icons-material/Toll";
+import GroupsIcon from "@mui/icons-material/Groups";
 const DashboardReferral = () => {
   const [activeLink, setActiveLink] = useState("");
-  const [comingSoon, setComingSoon] = useState(true);
+  const [comingSoon, setComingSoon] = useState(false);
+  const [copyValue, setCopyValue] = useState("https://egoras.org/ref/2672828");
   const currentPage = window.location.pathname;
   const urlArr = currentPage.split("/");
   useEffect(() => {
@@ -70,6 +74,111 @@ const DashboardReferral = () => {
       value: 121600,
     },
   ];
+  const leaderBoard = [
+    {
+      sn: 1,
+      user: "@xamborg",
+      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      referrals: 60,
+      amountEarned: 200,
+    },
+    {
+      sn: 2,
+      user: "@xamborg",
+      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      referrals: 55,
+      amountEarned: 200,
+    },
+    {
+      sn: 3,
+      user: "@xamborg",
+      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      referrals: 50,
+      amountEarned: 200,
+    },
+    {
+      sn: 4,
+      user: "@xamborg",
+      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      referrals: 40,
+      amountEarned: 200,
+    },
+    {
+      sn: 5,
+      user: "@xamborg",
+      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      referrals: 38,
+      amountEarned: 200,
+    },
+    {
+      sn: 6,
+      user: "@xamborg",
+      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      referrals: 35,
+      amountEarned: 200,
+    },
+    {
+      sn: 7,
+      user: "@xamborg",
+      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      referrals: 30,
+      amountEarned: 200,
+    },
+    {
+      sn: 8,
+      user: "@xamborg",
+      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      referrals: 20,
+      amountEarned: 200,
+    },
+    {
+      sn: 9,
+      user: "@xamborg",
+      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      referrals: 10,
+      amountEarned: 200,
+    },
+    {
+      sn: 10,
+      user: "@xamborg",
+      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      referrals: 8,
+      amountEarned: 200,
+    },
+    {
+      sn: 11,
+      user: "@xamborg",
+      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      referrals: 7,
+      amountEarned: 200,
+    },
+    {
+      sn: 12,
+      user: "@xamborg",
+      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      referrals: 4,
+      amountEarned: 200,
+    },
+  ];
+  useEffect(() => {
+    // setCopyValue(auth.user.user.ref_auth);
+  }, []);
+
+  const copyText = () => {
+    var copyText = document.getElementById("myInput");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    navigator.clipboard.writeText(copyText.value);
+
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Copied Code ";
+    tooltip.style.display = "block";
+  };
+  function outFunc() {
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Copy to clipboard";
+    tooltip.style.display = "none";
+  }
   return (
     <>
       <div className="other2 asset_other2">
@@ -115,51 +224,170 @@ const DashboardReferral = () => {
                   </div>
                 </div>
               ) : (
-                <div className="dashBoard_ref_area1">
-                  <div className="dashBoard_ref_area1_cont1">
-                    <div className="dashBoard_ref_area1_cont1_icon_div">
-                      <TollIcon className="stackedCoin_icon" />
+                <>
+                  <div className="dashBoard_ref_area1">
+                    <div className="dashBoard_ref_area1_cont1">
+                      <div className="dashBoard_ref_area1_cont1_icon_div">
+                        <TollIcon className="stackedCoin_icon" />
+                      </div>
+                      <div className="dashBoard_ref_area1_cont1_div1">
+                        <div className="dashBoard_ref_area1_cont1_div1_cont1">
+                          Total Earnings
+                        </div>
+                        <div className="dashBoard_ref_area1_cont1_div1_cont2">
+                          $100.00
+                        </div>
+                      </div>
+                      <div className="dashBoard_ref_area1_cont1_div1">
+                        <div className="dashBoard_ref_area1_cont1_div1_cont1">
+                          Initial Earnings
+                        </div>
+                        <div className="dashBoard_ref_area1_cont1_div1_cont2">
+                          $30.00
+                        </div>
+                      </div>
+                      <div className="dashBoard_ref_area1_cont1_div1">
+                        <div className="dashBoard_ref_area1_cont1_div1_cont1">
+                          Referral Earnings
+                        </div>
+                        <div className="dashBoard_ref_area1_cont1_div1_cont2">
+                          $70.00
+                        </div>
+                      </div>
                     </div>
-                    <div className="dashBoard_ref_area1_cont1_div1">
-                      <div className="dashBoard_ref_area1_cont1_div1_cont1">
-                        Total Earnings
+                    <div className="dashBoard_ref_area1_cont2">
+                      <div className="dashBoard_ref_area1_cont1_icon_div">
+                        <GroupAddIcon className="stackedCoin_icon" />
                       </div>
-                      <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                        $100.00
+                      <div className="dashBoard_ref_area1_cont1_div1">
+                        <div className="dashBoard_ref_area1_cont1_div1_cont1">
+                          Total Referrals
+                        </div>
+                        <div className="dashBoard_ref_area1_cont1_div1_cont2">
+                          57
+                        </div>
                       </div>
-                    </div>
-                    <div className="dashBoard_ref_area1_cont1_div1">
-                      <div className="dashBoard_ref_area1_cont1_div1_cont1">
-                        Initial Earnings
-                      </div>
-                      <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                        $30.00
-                      </div>
-                    </div>
-                    <div className="dashBoard_ref_area1_cont1_div1">
-                      <div className="dashBoard_ref_area1_cont1_div1_cont1">
-                        Referral Earnings
-                      </div>
-                      <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                        $70.00
+                      <div className="ref_chart_div">
+                        <Sparkline2 values={btc} />
                       </div>
                     </div>
                   </div>
-                  <div className="dashBoard_ref_area1_cont2">
-                    <div className="dashBoard_ref_area1_cont1_icon_div">
-                      <TollIcon className="stackedCoin_icon" />
-                    </div>
-                    <div className="dashBoard_ref_area1_cont1_div1">
-                      <div className="dashBoard_ref_area1_cont1_div1_cont1">
-                        Total Referral
+
+                  <div className="dashBoard_ref_area2">
+                    <div className="dashBoard_ref_area2_cont1">
+                      <div className="dashBoard_ref_area2_cont1_head">
+                        <span className="leaderBoard_icon_div">
+                          <MilitaryTechIcon className="leaderBoard_icon" />
+                        </span>
+                        Leader board
                       </div>
-                      <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                        57
+                      <span className="table_hr"></span>
+                      <div className="dashBoard_ref_area2_cont1_body">
+                        <div className="dashBoard_ref_area2_cont1_body_div_head">
+                          <div className="dashBoard_ref_area2_cont1_body_div_head_cont1 dashBoard_ref_area2_cont1_body_div_head_cont1_first">
+                            S/N
+                          </div>
+                          <div className="dashBoard_ref_area2_cont1_body_div_head_cont1">
+                            User
+                          </div>
+                          <div className="dashBoard_ref_area2_cont1_body_div_head_cont1">
+                            Address
+                          </div>
+                          <div className="dashBoard_ref_area2_cont1_body_div_head_cont1">
+                            Total Referrals
+                          </div>
+                          <div className="dashBoard_ref_area2_cont1_body_div_head_cont1 dashBoard_ref_area2_cont1_body_div_head_cont1_last">
+                            Amount Earned
+                          </div>
+                        </div>
+
+                        {leaderBoard.slice(0, 8).map((data) => (
+                          <div className="dashBoard_ref_area2_cont1_body_div1">
+                            <div className="dashBoard_ref_area2_cont1_body_div1_cont1 dashBoard_ref_area2_cont1_body_div1_cont1_first">
+                              {data.sn}
+                            </div>
+                            <div className="dashBoard_ref_area2_cont1_body_div1_cont1">
+                              {data.user}
+                            </div>
+                            <div className="dashBoard_ref_area2_cont1_body_div1_cont1">
+                              {data.address.substring(0, 5) +
+                                "..." +
+                                data.address.substring(20, 24)}
+                            </div>
+                            <div className="dashBoard_ref_area2_cont1_body_div1_cont1">
+                              {data.referrals}
+                            </div>
+                            <div className="dashBoard_ref_area2_cont1_body_div1_cont1 dashBoard_ref_area2_cont1_body_div1_cont1_last">
+                              ${data.amountEarned.toFixed(2)}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="show_more_btn_div">
+                        <button className="show_more_btn">Show more</button>
                       </div>
                     </div>
-                    <Sparkline2 values={btc} />
+                    <div className="dashBoard_ref_area2_cont2">
+                      <div className="dashBoard_ref_area2_cont2_div1">
+                        <div className="dashBoard_ref_area2_cont1_head">
+                          <span className="leaderBoard_icon_div">
+                            <GroupsIcon className="leaderBoard_icon" />
+                          </span>
+                          My Referrals
+                        </div>
+                        <span className="table_hr"></span>
+                        <div className="dashBoard_ref_area2_cont1_body">
+                          <div className="dashBoard_ref_area2_cont1_body_div_head">
+                            <div className="dashBoard_ref_area2_cont1_body_div_head_cont1_first">
+                              User
+                            </div>
+                            <div className="dashBoard_ref_area2_cont1_body_div_head_cont1_last">
+                              Address
+                            </div>
+                          </div>
+
+                          {leaderBoard.slice(0, 5).map((data) => (
+                            <div className="dashBoard_ref_area2_cont1_body_div1">
+                              <div className="dashBoard_ref_area2_cont1_body_div1_cont1_first">
+                                {data.user}
+                              </div>
+                              <div className="dashBoard_ref_area2_cont1_body_div1_cont1_last">
+                                {data.address.substring(0, 5) +
+                                  "..." +
+                                  data.address.substring(20, 24)}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="show_more_btn_div">
+                          <button className="show_more_btn">Show more</button>
+                        </div>
+                      </div>
+                      <div className="dashBoard_ref_area2_cont2_div2">
+                        <div className="dashBoard_ref_area2_cont2_div2_head">
+                          Copy your referral link and invite friends to earn
+                          more.
+                        </div>
+                        <input
+                          type="text"
+                          value={copyValue}
+                          className="referral_default_value"
+                          id="myInput"
+                        />
+                        <div className="refferal_copy_btns">
+                          <button
+                            className="ref_btn"
+                            onClick={copyText}
+                            onMouseOut={outFunc}
+                          >
+                            Copy referral code
+                            <span className="tooltiptext" id="myTooltip"></span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                </>
               )}
             </div>
           </div>
