@@ -114,6 +114,8 @@ const DashBoardLendPage = ({ submitKyc }) => {
     email: "",
     firstName: "",
     lastName: "",
+    username: "",
+    ref_code: "",
   });
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -150,7 +152,7 @@ const DashBoardLendPage = ({ submitKyc }) => {
     setCategoryBtn("All");
   };
 
-  const { email, firstName, lastName } = kyc;
+  const { email, firstName, lastName, username, ref_code } = kyc;
   useEffect(() => {
     axios
       .get(api_url + "/api/branch/totalpools", null, config)
@@ -228,6 +230,7 @@ const DashBoardLendPage = ({ submitKyc }) => {
       lastName: lastName,
       address: "lastName",
       ref_code: "",
+      username: "",
     });
     console.log("====================================");
     console.log(email, firstName, lastName);
@@ -902,7 +905,9 @@ const DashBoardLendPage = ({ submitKyc }) => {
                 {verified === true ? (
                   <div className="stepDiv1_sub_content">
                     <div className="subMitDetails_cont">
-                      Submit your details to continue{" "}
+                      Submit your KYC information through Complycube for
+                      verification. This is a one time process to become an
+                      eligible user in all Egoras pools.
                       <div className="subMitDetails_cont_input_body">
                         <div className="subMitDetails_cont_input_body_cont1">
                           First Name{" "}
@@ -931,6 +936,26 @@ const DashBoardLendPage = ({ submitKyc }) => {
                             className="submitDetails_cont_input_area"
                             name="email"
                             value={email}
+                            onChange={onChangeKyc}
+                          />
+                        </div>
+                        <div className="subMitDetails_cont_input_body_cont1">
+                          UserName{" "}
+                          <input
+                            type="email"
+                            className="submitDetails_cont_input_area"
+                            name="username"
+                            value={username}
+                            onChange={onChangeKyc}
+                          />
+                        </div>
+                        <div className="subMitDetails_cont_input_body_cont1">
+                          Referral Code{" "}
+                          <input
+                            type="email"
+                            className="submitDetails_cont_input_area"
+                            name="ref_code"
+                            value={ref_code}
                             onChange={onChangeKyc}
                           />
                         </div>

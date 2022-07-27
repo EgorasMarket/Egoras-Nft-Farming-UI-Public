@@ -165,7 +165,7 @@
   position: fixed;
   top: 0;
   z-index: 10000;
-  padding: 2em;
+  padding: 1em;
   background: #000000a1;
   width: 100vw;
   height: 100vh;
@@ -175,6 +175,7 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  overflow: scroll;
 }
 .onBoardUserDiv_head {
   font-size: 20px;
@@ -213,7 +214,7 @@
   gap: 15px;
 }
 .onBoardUserDiv_body {
-  max-width: 550px;
+  max-width: 590px;
   width: 100%;
   margin: auto;
   background: #fff;
