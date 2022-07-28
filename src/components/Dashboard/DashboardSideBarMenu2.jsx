@@ -449,10 +449,10 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
       <div className="header_token_prices_div">
         <div className="container-fluid">
           <div className="header_token_prices_div_area">
-            <div className="header_token_prices_div_area1">624 NGN ~ 1 USD</div>
+            <div className="header_token_prices_div_area1">720 NGN ~ 1 USD</div>
             <span class="vertical_rule2"></span>
             <div className="header_token_prices_div_area1">
-              624 ENGN ~ 1 USD
+              720 ENGN ~ 1 USD
             </div>
             <span class="vertical_rule2"></span>
             <div className="header_token_prices_div_area1">
@@ -466,11 +466,11 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             <div className="header_token_prices_div_area1">1 ENGN ~ 1 NGN</div>
             <span class="vertical_rule2"></span>
             <div className="header_token_prices_div_area1">
-              1 EGC ~ {numberWithCommas((egcUsdVal * 618).toFixed(2))} NGN
+              1 EGC ~ {numberWithCommas((egcUsdVal * 720).toFixed(2))} NGN
             </div>
             <span class="vertical_rule2"></span>
             <div className="header_token_prices_div_area1">
-              1 EGR ~ {(egrUsdVal * 618).toFixed(2)} NGN
+              1 EGR ~ {(egrUsdVal * 720).toFixed(2)} NGN
             </div>
           </div>
         </div>
