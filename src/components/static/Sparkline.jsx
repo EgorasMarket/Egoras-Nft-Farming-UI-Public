@@ -46,16 +46,29 @@ const Sparkline = (props) => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        overflow: "scroll",
+      }}
+    >
       <svg
         ref={sparklineRef}
-        width="500"
-        // id="wave"
-        // viewBox="0 0 1440 365.38"
-        height="200"
-        strokeWidth="2"
+        viewBox="0 0 100 30"
+        width="100%"
+        height="30%"
+        // width="500"
+        // height="200"
+        // preserveAspectRatio="none"
+        // style={{
+        //   paddingBottom: "92%",
+        // }}
+        // preserveAspectRatio="none"
+        strokeWidth="0.5"
         fill="#ecfff4"
-        cursorWidth="2"
+        cursorWidth="0.5"
         stroke="#229e54"
         // stroke={props.darkView == true ? "#000" : "229e54"}
         className="chart_svg"
