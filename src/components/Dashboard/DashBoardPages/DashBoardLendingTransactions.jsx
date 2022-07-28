@@ -106,7 +106,7 @@ const DashBoardLendingTransactions = ({ match }) => {
 
     //   return;
     // }
-  }, [graphData2]);
+  }, []);
   console.log(graphData2);
   useEffect(() => {
     // if (account) {

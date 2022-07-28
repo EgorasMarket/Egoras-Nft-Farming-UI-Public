@@ -195,7 +195,7 @@ const DashBoardBranchAsset = ({ match }) => {
       });
     //   return;
     // }
-  }, [graphData2]);
+  }, []);
   console.log(graphData2, "grapodtatatata");
   // const values = [];
   // for (let i = 0; i < 100; i++) {

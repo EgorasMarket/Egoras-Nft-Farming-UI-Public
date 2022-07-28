@@ -134,7 +134,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
 
   useEffect(() => {
     console.log(account, auth);
-    if (auth.user.payload == null) {
+    if (auth.user == null || auth.user.payload == null) {
       console.log("auth is empty");
       setRef_code("");
     } else {
