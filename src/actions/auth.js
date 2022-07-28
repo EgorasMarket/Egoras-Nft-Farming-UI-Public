@@ -26,7 +26,7 @@ export const loadUser = () => async (dispatch) => {
     const res = await axios.get(
       api_url + "/api/user/fetch/user/by/address/" + localStorage.WA_ST
     );
-    console.log(res);
+    // console.log(res);
     // //console.log("Yes I call You because i can", res.data);
     dispatch({
       type: USER_LOADED,

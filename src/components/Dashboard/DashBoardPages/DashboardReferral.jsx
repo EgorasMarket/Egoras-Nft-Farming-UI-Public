@@ -206,7 +206,7 @@ const DashboardReferral = ({ auth }) => {
   useEffect(() => {
     console.log(account, auth.user.payload.ref_code);
     setCopyValue("https://egoras.org/referal/" + auth.user.payload.ref_code);
-    localStorage.setItem("WA_ST", account);
+    // localStorage.setItem("WA_ST", account);
     axios
       .get(api_url + "/api/user/fetch/my/referals/" + account, null, config)
       .then((data) => {

@@ -300,7 +300,7 @@ const DashBoardUserDetails = () => {
                 </div>
                 <hr class="custom_hr"></hr> */}
                 <div className="user_details_body1_body_cont1">
-                  <span>Total Pools Funded</span>
+                  <span>Total Transactions</span>
                   <span>{UserPoolsDetails.pool}</span>
                 </div>
                 <hr class="custom_hr"></hr>
@@ -394,7 +394,7 @@ const DashBoardUserDetails = () => {
                         return (
                           <tr
                             className="branch_asset_body_row "
-                            id={asset.newLoanID}
+                            id={asset.rowNumber}
                             onClick={ChangeAssetDetailModal}
                           >
                             <td className="branch_asset_body_row_data branch_asset_body_row_data_first  ">
@@ -577,7 +577,7 @@ const DashBoardUserDetails = () => {
                           className={
                             data.state === "OPEN"
                               ? "status_btn_ongoing"
-                              : data.state === "Failed"
+                              : data.state === "FILLED"
                               ? "status_btn_closed"
                               : "status_btn"
                           }

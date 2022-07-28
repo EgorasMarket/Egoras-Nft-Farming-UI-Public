@@ -50,7 +50,8 @@ const Sparkline = (props) => {
       <svg
         ref={sparklineRef}
         width="500"
-        // width={[props.width, "500"]}
+        // id="wave"
+        // viewBox="0 0 1440 365.38"
         height="200"
         strokeWidth="2"
         fill="#ecfff4"
