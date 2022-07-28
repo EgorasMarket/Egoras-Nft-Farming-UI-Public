@@ -162,7 +162,15 @@ svg.recharts-surface {
     opacity: 1;
   }
 }
-
+.assets_chart_area2 {
+  display: none;
+}
+.dark .assets_chart_area2 {
+  display: block;
+}
+.dark .assets_chart_area1 {
+  display: none;
+}
 .asset_list_body_body_cont_1 {
   display: flex;
   justify-content: space-between;

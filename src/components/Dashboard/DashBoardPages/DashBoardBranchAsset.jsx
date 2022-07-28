@@ -16,7 +16,15 @@ import CopyAllIcon from "@mui/icons-material/CopyAll";
 
 import data from "../../static/FakerModule";
 
-import { AreaChart, Area, Tooltip, ResponsiveContainer } from "recharts";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 import { UserContext } from "../../context/Context";
 import axios from "axios";
 import Nodata from "./nodataComponent/Nodata";
@@ -187,7 +195,7 @@ const DashBoardBranchAsset = ({ match }) => {
       });
     //   return;
     // }
-  }, []);
+  }, [graphData2]);
   console.log(graphData2, "grapodtatatata");
   // const values = [];
   // for (let i = 0; i < 100; i++) {
@@ -410,22 +418,107 @@ const DashBoardBranchAsset = ({ match }) => {
                     Jun 3, 2022 - present
                   </div>
                 </div>
-                <div className="assets_chart_area">
-                  {/* <div className="row">
-                    <div className="mixed-chart">
-                      <Chart
-                        options={options}
-                        series={series}
-                        type="area"
-                        width="500"
+                <div
+                  className="assets_chart_area1"
+                  style={{ width: "100%", height: 200 }}
+                >
+                  <ResponsiveContainer>
+                    <AreaChart
+                      width={130}
+                      height={10}
+                      data={graphData2}
+                      margin={{
+                        top: 0,
+                        right: 0,
+                        left: 0,
+                        bottom: 0,
+                      }}
+                    >
+                      <defs>
+                        <linearGradient
+                          id="colorUv"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="5%"
+                            stopColor="#60c589"
+                            stopOpacity={0.3}
+                          />
+                          <stop
+                            offset="100%"
+                            stopColor="#60c589"
+                            stopOpacity={0}
+                          />
+                        </linearGradient>
+                      </defs>
+                      {/* <XAxis dataKey="name" /> */}
+                      {/* <YAxis /> */}
+                      {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                      <Tooltip />
+                      <Area
+                        type="monotone"
+                        dataKey="value"
+                        stroke="#229e54"
+                        fillOpacity={1}
+                        fill="url(#colorUv)"
+                        strokeWidth={2}
                       />
-                    </div>
-                  </div> */}
-                  {graphData2.length == 0 ? (
-                    <p>Loading....</p>
-                  ) : (
-                    <Sparkline values={graphData2} />
-                  )}
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+                <div
+                  className="assets_chart_area2"
+                  style={{ width: "100%", height: 200 }}
+                >
+                  <ResponsiveContainer>
+                    <AreaChart
+                      width={130}
+                      height={10}
+                      data={graphData2}
+                      margin={{
+                        top: 0,
+                        right: 0,
+                        left: 0,
+                        bottom: 0,
+                      }}
+                    >
+                      <defs>
+                        <linearGradient
+                          id="colorUv"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="5%"
+                            stopColor="#fff"
+                            stopOpacity={0.3}
+                          />
+                          <stop
+                            offset="100%"
+                            stopColor="#fff"
+                            stopOpacity={0}
+                          />
+                        </linearGradient>
+                      </defs>
+                      {/* <XAxis dataKey="name" /> */}
+                      {/* <YAxis /> */}
+                      {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                      <Tooltip />
+                      <Area
+                        type="monotone"
+                        dataKey="value"
+                        stroke="#fff"
+                        fillOpacity={1}
+                        fill="url(#colorUv)"
+                        strokeWidth={2}
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
                 </div>
                 {/* ========= */}
                 {/* ========= */}
