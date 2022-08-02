@@ -2,14 +2,42 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import "../../../css/dashBoardReferral.css";
+import Web3 from "web3";
 import Sparkline2 from "../../static/Sparkline2";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import TollIcon from "@mui/icons-material/Toll";
 import GroupsIcon from "@mui/icons-material/Groups";
+// import { UserContext } from "../context/Context";
+import { parseEther, formatEther } from "@ethersproject/units";
+
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
+import {
+  getUserStats,
+  getReferrals,
+  getMyReferralsCount,
+} from "../../../web3/index";
 const DashboardReferral = () => {
+  const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
   const [activeLink, setActiveLink] = useState("");
   const [comingSoon, setComingSoon] = useState(false);
+  const [refEarnings, setRefEarnings] = useState(0.0);
+  const [refCount, setRefCount] = useState(0);
+  const [welcomeBonus, setWelcomeBonus] = useState(0.0);
   const [copyValue, setCopyValue] = useState("https://egoras.org/ref/2672828");
   const currentPage = window.location.pathname;
   const urlArr = currentPage.split("/");
@@ -160,9 +188,7 @@ const DashboardReferral = () => {
       amountEarned: 200,
     },
   ];
-  useEffect(() => {
-    // setCopyValue(auth.user.user.ref_auth);
-  }, []);
+  const web3 = new Web3(window.ethereum);
 
   const copyText = () => {
     var copyText = document.getElementById("myInput");
@@ -179,6 +205,41 @@ const DashboardReferral = () => {
     tooltip.innerHTML = "Copy to clipboard";
     tooltip.style.display = "none";
   }
+  useEffect(async (e) => {
+    if (account) {
+      let response = await getUserStats(account, library.getSigner());
+      console.log(response);
+      if (response.status === true) {
+        const resAmnt = parseFloat(
+          formatEther(response.message._referral._hex)
+        );
+        setRefEarnings(resAmnt);
+        console.log(response.message._referral);
+      }
+    }
+  }, []);
+  useEffect(async (e) => {
+    if (account) {
+      let response = await getUserStats(account, library.getSigner());
+      console.log(response);
+      if (response.status === true) {
+        const resAmnt = parseFloat(formatEther(response.message._wB._hex));
+        setWelcomeBonus(resAmnt);
+        console.log(response.message._referral);
+      }
+    }
+  }, []);
+  useEffect(async (e) => {
+    if (account) {
+      let response = await getMyReferralsCount(account, library.getSigner());
+      console.log(response);
+      if (response.status === true) {
+        const resAmnt = parseFloat(formatEther(response.message._hex));
+        setRefCount(resAmnt);
+        // console.log(response.message._referral);
+      }
+    }
+  }, []);
   return (
     <>
       <div className="other2 asset_other2">
@@ -235,15 +296,15 @@ const DashboardReferral = () => {
                           Total Earnings
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          $100.00
+                          {welcomeBonus + refEarnings} Engn
                         </div>
                       </div>
                       <div className="dashBoard_ref_area1_cont1_div1">
                         <div className="dashBoard_ref_area1_cont1_div1_cont1">
-                          Initial Earnings
+                          Welcome Bonus
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          $30.00
+                          {parseFloat(welcomeBonus).toFixed(2)} Engn
                         </div>
                       </div>
                       <div className="dashBoard_ref_area1_cont1_div1">
@@ -251,7 +312,7 @@ const DashboardReferral = () => {
                           Referral Earnings
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          $70.00
+                          {parseFloat(refEarnings).toFixed(2)} Engn
                         </div>
                       </div>
                     </div>
@@ -264,7 +325,7 @@ const DashboardReferral = () => {
                           Total Referrals
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          57
+                          {refCount}
                         </div>
                       </div>
                       <div className="ref_chart_div">

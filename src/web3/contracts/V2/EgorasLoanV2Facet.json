@@ -334,10 +334,6 @@
       "type": "fallback"
     },
     {
-      "stateMutability": "payable",
-      "type": "receive"
-    },
-    {
       "inputs": [
         {
           "internalType": "address",
@@ -383,20 +379,63 @@
     {
       "inputs": [
         {
-          "internalType": "address",
-          "name": "_branch",
-          "type": "address"
+          "internalType": "string",
+          "name": "_title",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
         }
       ],
-      "name": "suspendBranch",
+      "name": "applyForLoan",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "burnAccumulatedDividend",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_loanID",
+          "type": "uint256"
+        }
+      ],
+      "name": "burnNFT",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_loanID",
+          "type": "uint256"
+        }
+      ],
+      "name": "getInvestorsDividend",
       "outputs": [
         {
-          "internalType": "bool",
+          "internalType": "uint256",
           "name": "",
-          "type": "bool"
+          "type": "uint256"
         }
       ],
-      "stateMutability": "nonpayable",
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -471,161 +510,6 @@
       "type": "function"
     },
     {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_user",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_loanID",
-          "type": "uint256"
-        }
-      ],
-      "name": "getInvestorsDividend",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_branch",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_amount",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "loanID",
-          "type": "uint256"
-        }
-      ],
-      "name": "lendUS",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "_title",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_amount",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_length",
-          "type": "uint256"
-        },
-        {
-          "internalType": "string",
-          "name": "_loanMetaData",
-          "type": "string"
-        }
-      ],
-      "name": "applyForLoan",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_loanID",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "_user",
-          "type": "address"
-        }
-      ],
-      "name": "userStats",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "_dividend",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_allDividend",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_loanID",
-          "type": "uint256"
-        }
-      ],
-      "name": "takeDividend",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_loanID",
-          "type": "uint256"
-        }
-      ],
-      "name": "takeBackLoan",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "burnAccumulatedDividend",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_loanID",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_amount",
-          "type": "uint256"
-        }
-      ],
-      "name": "topupLend",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
       "inputs": [],
       "name": "getPri",
       "outputs": [
@@ -636,145 +520,6 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_loanID",
-          "type": "uint256"
-        }
-      ],
-      "name": "repayDividendLoan",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_loanID",
-          "type": "uint256"
-        }
-      ],
-      "name": "burnNFT",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_loanID",
-          "type": "uint256"
-        }
-      ],
-      "name": "repayOnlyLoan",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_loanID",
-          "type": "uint256"
-        }
-      ],
-      "name": "getTotalLended",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "loan",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "system",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "_dividend",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_repaid",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_burned",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_total",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_DIVIDEND_DIVISOR",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_INTEREST_DIVISOR",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_INTEREST",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_DAYINMILL",
-          "type": "uint256"
-        },
-        {
-          "internalType": "address",
-          "name": "_egorasEGC",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "_eNFTAddress",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "_egorasENGN",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "_oracle",
-          "type": "address"
-        },
-        {
-          "internalType": "string",
-          "name": "_ticker",
-          "type": "string"
-        }
-      ],
-      "name": "initSystem",
-      "outputs": [],
-      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -836,6 +581,178 @@
           "internalType": "uint256",
           "name": "_loanID",
           "type": "uint256"
+        }
+      ],
+      "name": "getTotalLended",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "loan",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_DIVIDEND_DIVISOR",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_INTEREST_DIVISOR",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_INTEREST",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_DAYINMILL",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_egorasEGC",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_eNFTAddress",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_egorasENGN",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_oracle",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        }
+      ],
+      "name": "initSystem",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_branch",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "loanID",
+          "type": "uint256"
+        }
+      ],
+      "name": "internalLending",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_loanID",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        }
+      ],
+      "name": "internalTopup",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_branch",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "loanID",
+          "type": "uint256"
+        }
+      ],
+      "name": "lendUS",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_loanID",
+          "type": "uint256"
+        }
+      ],
+      "name": "repayDividendLoan",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_loanID",
+          "type": "uint256"
+        }
+      ],
+      "name": "repayOnlyLoan",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_loanID",
+          "type": "uint256"
         },
         {
           "internalType": "address",
@@ -852,6 +769,130 @@
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_branch",
+          "type": "address"
+        }
+      ],
+      "name": "suspendBranch",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "system",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_dividend",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_repaid",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_burned",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_total",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_loanID",
+          "type": "uint256"
+        }
+      ],
+      "name": "takeBackLoan",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_loanID",
+          "type": "uint256"
+        }
+      ],
+      "name": "takeDividend",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_loanID",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "topupLend",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_loanID",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        }
+      ],
+      "name": "userStats",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_dividend",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_allDividend",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "receive"
     }
   ]
 }

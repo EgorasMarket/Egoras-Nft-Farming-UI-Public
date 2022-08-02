@@ -1,0 +1,283 @@
+{
+  "address": "0xe6C7a147B7E026F7e051021072749e31ca7DE417",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_time",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_upline",
+          "type": "address"
+        }
+      ],
+      "name": "KYC",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_pythia",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_addBy",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_time",
+          "type": "uint256"
+        }
+      ],
+      "name": "RPythiaAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_pythia",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_addBy",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_time",
+          "type": "uint256"
+        }
+      ],
+      "name": "RPythiaSuspended",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_pythia",
+          "type": "address"
+        }
+      ],
+      "name": "setRPythia",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_pythia",
+          "type": "address"
+        }
+      ],
+      "name": "suspendRPythia",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "_users",
+          "type": "address[]"
+        },
+        {
+          "internalType": "address[]",
+          "name": "_upline",
+          "type": "address[]"
+        }
+      ],
+      "name": "kycUsers",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "branch",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "loanID",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isWelcomebonus",
+          "type": "bool"
+        }
+      ],
+      "name": "lend",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "loanID",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "isWelcomebonus",
+          "type": "bool"
+        }
+      ],
+      "name": "topup",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_welcome",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_referral",
+          "type": "uint256"
+        }
+      ],
+      "name": "setBonuses",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "returnBonuses",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_referral",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_welcome",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_upline",
+          "type": "address"
+        }
+      ],
+      "name": "getMyReferrals",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "_referrals",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_upline",
+          "type": "address"
+        }
+      ],
+      "name": "getMyReferralsCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_total",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        }
+      ],
+      "name": "getUserStats",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_referral",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_rUsed",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_wB",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_wBUsed",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}

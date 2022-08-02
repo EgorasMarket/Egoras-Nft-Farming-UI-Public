@@ -5,6 +5,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Header from "./components/Home/Header";
 import "bootstrap/dist/css/bootstrap.css";
 import Home from "./components/Home/Home";
+import AboutUs from "./components/Home/AboutUs";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -59,6 +60,7 @@ function App() {
           <Header togglemakeDark={togglemakeDark} check={cClass} />
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={AboutUs} />
             <Dashboard check={cClass} togglemakeDark={togglemakeDark} />
             {/* <Route component={Dashboard} /> */}
           </Switch>

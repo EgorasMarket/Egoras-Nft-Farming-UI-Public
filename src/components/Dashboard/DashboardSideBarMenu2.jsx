@@ -511,6 +511,10 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                 }
                 onClick={changeBg}
               >
+                <span class="Ping -top-1">
+                  <span class="c-flashingPart"></span>
+                  <span class="c-basePart"></span>
+                </span>
                 Earn
               </a>
 
