@@ -1,0 +1,450 @@
+.about_us_section_hero {
+  padding: 4em 0em;
+  position: relative;
+  /* background: #fafafa; */
+  background-image: radial-gradient(white, #ececec);
+}
+.dark .about_us_section_hero {
+  background-image: radial-gradient(#274b35, #1e2822);
+  color: #fff;
+}
+.about_us_section_hero_area_1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  font-size: 24px;
+  gap: 20px;
+}
+
+.about_us_section_hero_area_1_title {
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+.about_us_section_hero_area {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 30px;
+  gap: 85px;
+}
+.about_hero_bg_logo {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 50%;
+  opacity: 0.03;
+}
+
+.dark .about_hero_bg_logo {
+  opacity: 0.2;
+  filter: brightness(0.5);
+}
+.egoras_logos_cont {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.egoras_logos_cont_1 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #ffffff17;
+  padding: 10px;
+  border-radius: 50px;
+  border: solid 1px #cdcdcd;
+  backdrop-filter: blur(4px);
+}
+.egoras_logos_cont_1_img {
+  width: 45px;
+}
+.egoras_logos_cont_1_txt {
+  font-size: 18px;
+}
+.about_us_section_hero_area_2 {
+  display: flex;
+  align-items: center;
+  gap: 8%;
+  justify-content: space-between;
+}
+.about_us_section_hero_area_2_img_container_img {
+  width: 100%;
+}
+.about_us_section_hero_area_2_img_container {
+  width: 80%;
+}
+.about_us_section_hero_area_2_txt_container {
+  width: 100%;
+  font-size: 20px;
+}
+.about_us_section_hero_area_2_txt_container_head {
+  font-size: 38px;
+  font-weight: 800;
+}
+section.advantages_section {
+  padding: 4em 0em;
+  background: #f0f0f0;
+  position: relative;
+  overflow: hidden;
+}
+.advantages_section_area {
+  display: flex;
+  justify-content: space-between;
+  gap: 10%;
+}
+
+.advantages_section_area_1 {
+  width: 70%;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.advantages_section_area_2 {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  justify-content: space-between;
+  width: 70%;
+}
+
+.advantages_section_area_2_cont1 {
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.advantages_section_area_2_cont1_head {
+  font-size: 24px;
+  font-weight: 700;
+  color: #229e54;
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 10px;
+}
+img.about_step_icon {
+  width: 20px;
+}
+.dark .advantages_section {
+  background: #213328;
+  color: #fff;
+}
+.about_simple_section_lines {
+  position: absolute;
+  bottom: 0;
+  /* width: 100%; */
+}
+.about_hero_section_lines {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+section.help_u_section {
+  padding: 4em 0em;
+  position: relative;
+  background: #f0f0f0;
+}
+.dark .help_u_section {
+  background: #213328;
+  color: #fff;
+}
+.help_u_section_area {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+.help_u_section_area_head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 32px;
+  font-weight: 700;
+  align-items: center;
+  text-align: center;
+}
+.help_u_section_area_head_para {
+  font-size: 16px;
+  width: 80%;
+  font-weight: 400;
+}
+.help_u_section_area_cont {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+  gap: 20px;
+}
+.help_u_section_area_cont1 {
+  background: #fff;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  border-radius: 8px;
+  border: 1px solid rgb(229 229 229);
+  padding: 80px 42px 42px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
+  gap: 10px;
+  box-shadow: 0px 0px 15px #e1e1e1;
+}
+.dark .help_u_section_area_cont1 {
+  background: linear-gradient(
+    244.66deg,
+    #2b603f80 1.9%,
+    #21332800 33.08%,
+    #161a1891 97.23%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0px 0px 15px #0d1611;
+}
+.we_help_icon {
+  border-radius: 50%;
+}
+.help_u_section_area_cont1_head {
+  font-size: 22px;
+  font-weight: 700;
+}
+.to_help_section_lines {
+  width: 100%;
+  bottom: 0;
+  position: absolute;
+}
+.road_map_container {
+  position: relative;
+}
+.road_map_street_bg {
+  position: absolute;
+}
+/* .road_map_area {
+  background-image: url(/public/img/road_map_street_bg.png);
+} */
+.dark .roadmap_section {
+  background-color: #213328;
+  background-blend-mode: color-burn;
+}
+.roadmap_section {
+  height: 100%;
+
+  background-size: cover;
+  background-color: #f0f0f0;
+  background-blend-mode: lighten;
+  padding: 9em 0em;
+  padding-top: 0;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 40px;
+  gap: 40px;
+}
+.road_map_head {
+  color: rgb(0, 0, 0);
+  padding: 0.5em;
+  font-size: 48px;
+  font-weight: 700;
+  backdrop-filter: blur(23px);
+}
+.dark .road_map_head {
+  color: #fff;
+}
+.road_map_area {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  max-width: 1855px;
+  margin: auto;
+  padding: 1em;
+}
+.road_route {
+  width: 100%;
+}
+
+.road_map_area_div1 {
+  position: absolute;
+  left: 1%;
+  bottom: 21%;
+  top: 88%;
+  margin: auto;
+}
+.road_map_area_div2 {
+  position: absolute;
+  left: 17%;
+  bottom: 19%;
+  top: 85%;
+  margin: auto;
+}
+.road_map_area_div3 {
+  position: absolute;
+  left: 30%;
+  bottom: 57%;
+  top: 85%;
+  margin: auto;
+}
+.road_map_area_div4 {
+  position: absolute;
+  right: 53%;
+  bottom: 68%;
+  top: 30%;
+  margin: auto;
+}
+.road_map_area_div5 {
+  position: absolute;
+  right: 35%;
+  bottom: 88%;
+  top: 21%;
+  margin: auto;
+}
+.road_map_area_div6 {
+  position: absolute;
+  right: 5%;
+  bottom: 93%;
+  top: 13%;
+  margin: auto;
+}
+.road_map_area_div_circle_bg {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.road_map_area_div_circle {
+  background: #ffffff;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 4;
+}
+.road_map_area_div_circle_blur {
+  width: 30px;
+  height: 30px;
+  background: #64b886;
+  position: absolute;
+  top: 0;
+  left: -24%;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  margin: auto;
+  filter: blur(8px);
+}
+.road_map_area_div3_txt_cont {
+  color: rgb(0, 0, 0);
+  font-size: 38px;
+  position: absolute;
+  font-weight: 800;
+  /* left: 25%; */
+  /* right: -86px; */
+  /* bottom: 13%; */
+  /* top: 9px; */
+  margin: auto;
+  width: 170px;
+  width: 100%;
+  min-width: 280px;
+  /* text-align: center; */
+  display: flex;
+  flex-direction: column;
+}
+.road_map_area_div3_txt_cont_para {
+  font-size: 14px;
+  font-weight: 400;
+}
+.road_map_area_div1_txt_cont {
+  color: rgb(0, 0, 0);
+  font-size: 38px;
+  position: absolute;
+  font-weight: 800;
+  /* left: 25%; */
+  /* right: -86px; */
+  bottom: 0;
+  /* top: 80%; */
+  margin: auto;
+  width: 100%;
+  min-width: 280px;
+  /* text-align: center; */
+}
+.dark .road_map_area_div1_txt_cont {
+  color: #fff;
+}
+
+.dark .road_map_area_div3_txt_cont {
+  color: #fff;
+}
+.dark .road_map_area_div6_txt_cont {
+  color: #fff;
+}
+
+.road_map_area_div6_txt_cont {
+  color: rgb(0, 0, 0);
+  font-size: 38px;
+  position: absolute;
+  font-weight: 800;
+  /* left: 25%; */
+  right: 1px;
+  /* bottom: 13%; */
+  /* top: 9px; */
+  margin: auto;
+  width: 170px;
+  text-align: right;
+  width: 100%;
+  min-width: 280px;
+}
+li.roadMap_list_conts {
+  list-style: disc !important;
+}
+ul.roadMap_list_area {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+ul.roadMap_list_area_last {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+section.featuredIn_section {
+  padding: 4em 0em;
+  background: #213328;
+  position: relative;
+}
+.feauturedIn_area_body {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.feauturedIn_area {
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+.featuredIn_logo_img {
+  width: 100%;
+}
+.feauturedIn_area_head {
+  background: #36554387;
+  padding: 0.5em;
+  width: 165px;
+  text-align: center;
+  backdrop-filter: blur(7px);
+  border-radius: 5px;
+}
+.join_community_section {
+  padding: 4em 0em;
+  position: relative;
+}

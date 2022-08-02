@@ -7,6 +7,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import Home from "./components/Home/Home";
 import { loadUser } from "./actions/auth";
 
+import AboutUs from "./components/Home/AboutUs";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -72,6 +73,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/referal/:ref" component={Referal} />
+              <Route exact path="/about" component={AboutUs} />
               <Dashboard check={cClass} togglemakeDark={togglemakeDark} />
               {/* <Route component={Dashboard} /> */}
             </Switch>

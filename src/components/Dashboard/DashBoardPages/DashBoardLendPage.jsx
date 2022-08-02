@@ -12,6 +12,7 @@ import { config } from "../../../actions/Config";
 import { Authenticate } from "../../auth/Authenticate";
 import axios from "axios";
 // import
+import CountryDropdown from "country-dropdown-with-flags-for-react";
 import {
   Stepper,
   Step,
@@ -111,6 +112,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   const [oyName, setOyName] = useState(false);
   const [ref_code, setRef_code] = useState("");
   const { step, incrementStep, decrementStep } = useStepper(0, 3);
+  const [value, setValue] = React.useState(null);
+
   const [kyc, setKyc] = useState({
     email: "",
     firstName: "",
@@ -877,6 +880,58 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                       ? { background: "#a6a6a6" }
                       : { background: "#229e54" }
                   }
+                ></div>
+              </div>
+              {/* ================= */}
+              {/* ================= */}
+              {/* ================= */}
+              {/* ================= */}
+              <div className="stepdiv1">
+                <span
+                // style={
+                //   verified === false
+                //     ? { color: "#a6a6a6" }
+                //     : { color: "black" }
+                // }
+                >
+                  Select Country
+                </span>
+                {/* {verified === true ? ( */}
+                <div className="stepDiv1_sub_content">
+                  <div className="subMitDetails_cont">
+                    Select your country of origin to continue with the
+                    verification
+                    <div className="subMitDetails_cont_input_body">
+                      <div className="subMitDetails_cont_input_body_cont1">
+                        Country{" "}
+                        <CountryDropdown
+                          id="country_id"
+                          className="country_select_input"
+                          preferredCountries={["gb", "us"]}
+                          value=""
+                          handleChange={(e) => console.log(e.target.value)}
+                        ></CountryDropdown>
+                      </div>
+                      <div className="button_comply_cube_div">
+                        <button
+                          className="proceed_to_cube_btn"
+                          // onClick={submitKycDetails}
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* ) : null} */}
+
+                <div
+                  className="rule_progress"
+                  // style={
+                  //   verified === false
+                  //     ? { background: "#a6a6a6" }
+                  //     : { background: "#229e54" }
+                  // }
                 ></div>
               </div>
               {/* ================= */}

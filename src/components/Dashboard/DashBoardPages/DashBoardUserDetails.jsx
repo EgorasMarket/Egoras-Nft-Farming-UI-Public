@@ -253,7 +253,7 @@ const DashBoardUserDetails = () => {
                   </div>
                   Welcome Bonus
                 </div>
-                <div className="welcome_bonus_div_body">$30.00</div>
+                <div className="welcome_bonus_div_body">$100.00</div>
               </div>
             </div>
             <div className="user_details_body1">
