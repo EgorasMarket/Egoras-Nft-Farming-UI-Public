@@ -13,6 +13,7 @@
   gap: 25px;
   border: solid 1px #dddddd;
   box-shadow: 0px 6px 10px #d5d5d5;
+  overflow: scroll;
 }
 .dashBoard_ref_area1_cont2 {
   display: flex;
@@ -55,7 +56,12 @@
 }
 .dashBoard_ref_area1_cont1_div1_cont2 {
   font-weight: 700;
-  font-size: 38px;
+  font-size: 30px;
+  white-space: nowrap;
+}
+.engn_symbol_sign {
+  font-size: 18px;
+  font-weight: 400;
 }
 .comingSoon_div {
   position: fixed;

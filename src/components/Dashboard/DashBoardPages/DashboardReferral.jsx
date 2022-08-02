@@ -205,41 +205,58 @@ const DashboardReferral = () => {
     tooltip.innerHTML = "Copy to clipboard";
     tooltip.style.display = "none";
   }
-  useEffect(async (e) => {
-    if (account) {
-      let response = await getUserStats(account, library.getSigner());
-      console.log(response);
-      if (response.status === true) {
-        const resAmnt = parseFloat(
-          formatEther(response.message._referral._hex)
-        );
-        setRefEarnings(resAmnt);
-        console.log(response.message._referral);
+  useEffect(
+    async (e) => {
+      if (account) {
+        let response = await getUserStats(account, library.getSigner());
+        console.log(response);
+        if (response.status === true) {
+          const resAmnt = parseFloat(
+            formatEther(response.message._referral._hex)
+          );
+          setRefEarnings(resAmnt);
+          console.log(response.message._referral);
+        }
       }
-    }
-  }, []);
-  useEffect(async (e) => {
-    if (account) {
-      let response = await getUserStats(account, library.getSigner());
-      console.log(response);
-      if (response.status === true) {
-        const resAmnt = parseFloat(formatEther(response.message._wB._hex));
-        setWelcomeBonus(resAmnt);
-        console.log(response.message._referral);
+    },
+    [account]
+  );
+  useEffect(
+    async (e) => {
+      if (account) {
+        let response = await getUserStats(account, library.getSigner());
+        console.log(response);
+        if (response.status === true) {
+          const resAmnt = parseFloat(formatEther(response.message._wB._hex));
+          setWelcomeBonus(resAmnt);
+          console.log(response.message._referral);
+        }
       }
-    }
-  }, []);
-  useEffect(async (e) => {
-    if (account) {
-      let response = await getMyReferralsCount(account, library.getSigner());
-      console.log(response);
-      if (response.status === true) {
-        const resAmnt = parseFloat(formatEther(response.message._hex));
-        setRefCount(resAmnt);
-        // console.log(response.message._referral);
+    },
+    [account]
+  );
+  useEffect(
+    async (e) => {
+      if (account) {
+        let response = await getMyReferralsCount(account, library.getSigner());
+        console.log(response);
+        if (response.status === true) {
+          const resAmnt = formatEther(response.message._hex).toString();
+          const pasedResAmnt = parseEther(resAmnt, "wei").toString();
+          setRefCount(pasedResAmnt);
+          console.log(resAmnt);
+          console.log(parseEther(resAmnt, "wei").toString());
+          // console.log(
+          //   resAmnt.toLocaleString("fullwide", { useGrouping: false })
+          // );
+          // console.log(web3.utils.toWei(resAmnt.toString(), "ether"));
+          // console.log(parseEther(resAmnt.toString(), "wei").toString());
+          // console.log(response.message._referral);
+        }
       }
-    }
-  }, []);
+    },
+    [account]
+  );
   return (
     <>
       <div className="other2 asset_other2">
@@ -296,7 +313,8 @@ const DashboardReferral = () => {
                           Total Earnings
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          {welcomeBonus + refEarnings} Engn
+                          {welcomeBonus + refEarnings}{" "}
+                          <span className="engn_symbol_sign">Engn</span>
                         </div>
                       </div>
                       <div className="dashBoard_ref_area1_cont1_div1">
@@ -304,7 +322,8 @@ const DashboardReferral = () => {
                           Welcome Bonus
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          {parseFloat(welcomeBonus).toFixed(2)} Engn
+                          {parseFloat(welcomeBonus).toFixed(2)}{" "}
+                          <span className="engn_symbol_sign">Engn</span>
                         </div>
                       </div>
                       <div className="dashBoard_ref_area1_cont1_div1">
@@ -312,7 +331,8 @@ const DashboardReferral = () => {
                           Referral Earnings
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          {parseFloat(refEarnings).toFixed(2)} Engn
+                          {parseFloat(refEarnings).toFixed(2)}{" "}
+                          <span className="engn_symbol_sign">Engn</span>
                         </div>
                       </div>
                     </div>
