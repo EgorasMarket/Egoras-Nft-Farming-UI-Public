@@ -94,7 +94,6 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
     error,
   } = context;
   const { Branches, BranchDetails } = useContext(UserContext);
-  console.log(Branches);
   const [categoryBtn, setCategoryBtn] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [onBoardUserDiv, setOnBoardUserDiv] = useState(false);
@@ -197,47 +196,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
     setKyc({ ...kyc, [e.target.name]: e.target.value });
   };
 
-  // const submitKycDetails = async () => {
-  //   // const body = JSON.stringify({
-  //   //   email,
-  //   //   firstName,
-  //   //   lastName,
-  //   // });
-  //   // console.log(body);
-  //   // try {
-  //   //   const res = await axios.post(
-  //   //     api_url + "/api/kyc/initialize",
-  //   //     body,
-  //   //     config
-  //   //   );
-  //   //   console.log(res);
-  //   //   return {
-  //   //     status: true,
-  //   //     data: res.data,
-  //   //   };
-  //   // } catch (err) {
-  //   //   console.log(err);
-  //   //   return {
-  //   //     success: false,
-  //   //     data: err.response,
-  //   //   };
-  //   // }
-  //   axios
-  //     .post(api_url + "/api/kyc/initialize", {
-  //       data: kyc,
-  //     })
-  //     .then(function (response) {
-  //       console.log(response.data);
-  //       // history("/", { replace: true });
-  //     });
-  // };
-
   const submitKycDetails = async (e) => {
-    // const body = JSON.stringify({
-    //   email,
-    //   firstName,
-    //   lastName,
-    // });
     let postData;
 
     if (typeof localStorage.referer != "undefined") {
@@ -988,7 +947,6 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                             className="submitDetails_cont_input_area"
                             name="ref_code"
                             value={ref_code}
-                            // onChange={onChangeKyc}
                           />
                         </div>
                         <div className="button_comply_cube_div">
