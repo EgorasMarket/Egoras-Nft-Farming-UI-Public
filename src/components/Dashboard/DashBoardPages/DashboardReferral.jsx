@@ -8,6 +8,7 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import TollIcon from "@mui/icons-material/Toll";
 import GroupsIcon from "@mui/icons-material/Groups";
+import { connect } from "react-redux";
 // import { UserContext } from "../context/Context";
 import { parseEther, formatEther } from "@ethersproject/units";
 
@@ -16,13 +17,31 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+
+import axios from "axios";
+import { config } from "../../../actions/Config";
+import { API_URL as api_url } from "../../../actions/types";
 import {
   getUserStats,
   getReferrals,
   getMyReferralsCount,
 } from "../../../web3/index";
-const DashboardReferral = () => {
+const DashboardReferral = ({ auth }) => {
+  const [activeLink, setActiveLink] = useState("");
+  const [comingSoon, setComingSoon] = useState(false);
+  const [refEarnings, setRefEarnings] = useState(0.0);
+  const [refCount, setRefCount] = useState(0);
+  const [welcomeBonus, setWelcomeBonus] = useState(0.0);
+  const [copyValue, setCopyValue] = useState("");
+  const [address, setAddress] = useState(
+    "0x3dE7916840227889UIOC0DA2Bf9A209C3A91d755790FC"
+  );
+  const currentPage = window.location.pathname;
+  const urlArr = currentPage.split("/");
+  const [leaderBoard1, setLeaderBoard] = useState([]);
+  const [myReferrals, setMyReferrals] = useState([]);
   const context = useWeb3React();
+
   const {
     connector,
     library,
@@ -33,16 +52,6 @@ const DashboardReferral = () => {
     active,
     error,
   } = context;
-  const [activeLink, setActiveLink] = useState("");
-  const [comingSoon, setComingSoon] = useState(false);
-  const [refEarnings, setRefEarnings] = useState(0.0);
-  const [refCount, setRefCount] = useState(0);
-  const [welcomeBonus, setWelcomeBonus] = useState(0.0);
-  const [copyValue, setCopyValue] = useState("https://egoras.org/ref/2672828");
-  const currentPage = window.location.pathname;
-  const urlArr = currentPage.split("/");
-  const [leaderBoard1, setLeaderBoard] = useState([]);
-  const [myReferrals, setMyReferrals] = useState([]);
 
   useEffect(() => {
     if (currentPage === "/dashboard/user") {
@@ -191,6 +200,18 @@ const DashboardReferral = () => {
       amountEarned: 200,
     },
   ];
+  useEffect(() => {
+    axios
+      .get(api_url + "/api/user/fetch/top/referals", null, config)
+      .then((data) => {
+        setLeaderBoard(data.data.allData);
+        // console.log(data.data.allData);
+        // console.log(leaderBoard);
+      })
+      .catch((err) => {
+        console.log(err); // "oh, no!"
+      });
+  }, []);
   const web3 = new Web3(window.ethereum);
 
   useEffect(() => {
