@@ -5,8 +5,7 @@ import "../../../css/dashboardLend.css";
 import CloseIcon from "@mui/icons-material/Close";
 import CircleIcon from "@mui/icons-material/Circle";
 
-// import { connect } from "react-redux";
-
+import { connect } from "react-redux";
 import EastIcon from "@mui/icons-material/East";
 import { API_URL as api_url } from "../../../actions/types";
 import { config } from "../../../actions/Config";
@@ -83,7 +82,7 @@ import Select from "@mui/material/Select";
 // ===========
 // ===========
 // ===========
-const DashBoardLendPage = ({ submitKyc }) => {
+const DashBoardLendPage = ({ submitKyc, auth }) => {
   const context = useWeb3React();
   const {
     connector,
@@ -96,7 +95,6 @@ const DashBoardLendPage = ({ submitKyc }) => {
     error,
   } = context;
   const { Branches, BranchDetails } = useContext(UserContext);
-  console.log(Branches);
   const [categoryBtn, setCategoryBtn] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
   const [onBoardUserDiv, setOnBoardUserDiv] = useState(false);
@@ -110,7 +108,9 @@ const DashBoardLendPage = ({ submitKyc }) => {
   const [age, setAge] = React.useState("");
   const [rumuName, setRumuName] = useState("R");
   const [agipName, setAgipName] = useState(false);
+  const [address, setAddress] = useState("");
   const [oyName, setOyName] = useState(false);
+  const [ref_code, setRef_code] = useState("");
   const { step, incrementStep, decrementStep } = useStepper(0, 3);
   const [value, setValue] = React.useState(null);
 
@@ -119,7 +119,7 @@ const DashBoardLendPage = ({ submitKyc }) => {
     firstName: "",
     lastName: "",
     username: "",
-    ref_code: "",
+    // ref_code: "",
   });
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -135,7 +135,19 @@ const DashBoardLendPage = ({ submitKyc }) => {
   };
 
   useEffect(() => {
+    console.log(account, auth);
+    if (auth.user == null || auth.user.payload == null) {
+      console.log("auth is empty");
+      setRef_code("");
+    } else {
+      console.log("auth is not empty");
+      setRef_code(auth.user.payload.ref_code);
+    }
+  }, [auth]);
+
+  useEffect(() => {
     if (account) {
+      setAddress(account);
       setConnected(() => false);
       setVerified(() => true);
     } else {
@@ -156,7 +168,7 @@ const DashBoardLendPage = ({ submitKyc }) => {
     setCategoryBtn("All");
   };
 
-  const { email, firstName, lastName, username, ref_code } = kyc;
+  const { email, firstName, lastName, username } = kyc;
   useEffect(() => {
     axios
       .get(api_url + "/api/branch/totalpools", null, config)
@@ -187,57 +199,35 @@ const DashBoardLendPage = ({ submitKyc }) => {
     setKyc({ ...kyc, [e.target.name]: e.target.value });
   };
 
-  // const submitKycDetails = async () => {
-  //   // const body = JSON.stringify({
-  //   //   email,
-  //   //   firstName,
-  //   //   lastName,
-  //   // });
-  //   // console.log(body);
-  //   // try {
-  //   //   const res = await axios.post(
-  //   //     api_url + "/api/kyc/initialize",
-  //   //     body,
-  //   //     config
-  //   //   );
-  //   //   console.log(res);
-  //   //   return {
-  //   //     status: true,
-  //   //     data: res.data,
-  //   //   };
-  //   // } catch (err) {
-  //   //   console.log(err);
-  //   //   return {
-  //   //     success: false,
-  //   //     data: err.response,
-  //   //   };
-  //   // }
-  //   axios
-  //     .post(api_url + "/api/kyc/initialize", {
-  //       data: kyc,
-  //     })
-  //     .then(function (response) {
-  //       console.log(response.data);
-  //       // history("/", { replace: true });
-  //     });
-  // };
-
   const submitKycDetails = async (e) => {
-    // const body = JSON.stringify({
-    //   email,
-    //   firstName,
-    //   lastName,
-    // });
-    const postData = JSON.stringify({
-      email: email,
-      firstName: firstName,
-      lastName: lastName,
-      address: "lastName",
-      ref_code: "",
-      username: "",
-    });
+    let postData;
+
+    if (typeof localStorage.referer != "undefined") {
+      // localStorage.getItem("referer");
+      // setRef_auth(localStorage.getItem("referer"));
+      console.log(typeof localStorage.referer);
+
+      postData = JSON.stringify({
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        address: address,
+        ref_code: localStorage.getItem("referer"),
+        username: username,
+      });
+    } else {
+      postData = JSON.stringify({
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        address: address,
+        ref_code: "",
+        username: username,
+      });
+    }
+
     console.log("====================================");
-    console.log(email, firstName, lastName);
+    console.log(postData);
     console.log("====================================");
     try {
       const res = await axios.post(
@@ -1012,7 +1002,6 @@ const DashBoardLendPage = ({ submitKyc }) => {
                             className="submitDetails_cont_input_area"
                             name="ref_code"
                             value={ref_code}
-                            onChange={onChangeKyc}
                           />
                         </div>
                         <div className="button_comply_cube_div">
@@ -1057,4 +1046,11 @@ const DashBoardLendPage = ({ submitKyc }) => {
   );
 };
 
-export default DashBoardLendPage;
+// export default DashBoardLendPage;
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+// let  res = await getLogin2(
+export default connect(mapStateToProps, {})(DashBoardLendPage);
