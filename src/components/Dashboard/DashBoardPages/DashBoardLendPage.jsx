@@ -1007,7 +1007,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                           preferredCountries={['gb', 'us']}
                           value={country}
                           handleChange={(e) => {
-                            // setCountry(e.target.value);
+                            setCountry(e.target.value);
                             console.log(
                               e.target.value.split('(', 1).toString()
                             );
