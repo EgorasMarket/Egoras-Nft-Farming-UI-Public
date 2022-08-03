@@ -8,7 +8,16 @@ import CloseIcon from "@mui/icons-material/Close";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import CopyAllIcon from "@mui/icons-material/CopyAll";
-import { AreaChart, Area, Tooltip, ResponsiveContainer } from "recharts";
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
+
 import { UserContext } from "../../context/Context";
 import axios from "axios";
 import { config } from "../../../actions/Config";
@@ -49,6 +58,8 @@ const DashBoardLendingTransactions = ({ match }) => {
   const [totalTransactions, setTotalTransactions] = useState(0);
   const [assetDetailModal, setAssetDetailModal] = useState(0);
   const [transactions, setTransactions] = useState([]);
+  const [graphData2, setGraphData2] = useState([]);
+
   const currentPage = window.location.pathname;
   const urlArr = currentPage.split("/");
   useEffect(() => {
@@ -74,6 +85,17 @@ const DashBoardLendingTransactions = ({ match }) => {
       .then((data) => {
         console.log(data.data.payload, "powerful333333");
         setTransactions(data.data.payload);
+        const temp = data.data.payload;
+        for (const data of temp) {
+          //get the amount from the data object
+          data.amount = Number(parseInt(data.amount).toFixed(2));
+        }
+        setGraphData2(() => temp);
+        const array = temp.map((data) => {
+          return parseInt(data.amount);
+        });
+        console.log(array, "higi");
+        // setGraphData2(() => array);
 
         // console.log(txnhash);
         // setBranches(data.data.payload);
@@ -85,6 +107,7 @@ const DashBoardLendingTransactions = ({ match }) => {
     //   return;
     // }
   }, []);
+  console.log(graphData2);
   useEffect(() => {
     // if (account) {
     axios
@@ -128,6 +151,62 @@ const DashBoardLendingTransactions = ({ match }) => {
         console.log(err); // "oh, no!"
       });
   }, []);
+  const data = [
+    {
+      name: "Page A",
+      uv: 114000,
+      pv: 2400,
+      amt: 2400,
+    },
+    {
+      name: "Page B",
+      uv: 3000,
+      pv: 1398,
+      amt: 2210,
+    },
+    {
+      name: "Page C",
+      uv: 2000,
+      pv: 9800,
+      amt: 2290,
+    },
+    {
+      name: "Page D",
+      uv: 2780,
+      pv: 3908,
+      amt: 2000,
+    },
+    {
+      name: "Page E",
+      uv: 111890,
+      pv: 489999900,
+      amt: 2181,
+    },
+    {
+      name: "Page E",
+      uv: 1890,
+      pv: 48800,
+      amt: 2181,
+    },
+    {
+      name: "Page E",
+      uv: 1890,
+      pv: 483300,
+      amt: 2181,
+    },
+    {
+      name: "Page E",
+      uv: 11890,
+      pv: 483300,
+      amt: 2181,
+    },
+    {
+      name: "Page E",
+      uv: 1199991890,
+      pv: 483300,
+      amt: 2181,
+    },
+  ];
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -242,42 +321,107 @@ const DashBoardLendingTransactions = ({ match }) => {
                     per/day
                   </div>
                 </div>
-                <div className="assets_chart_area">
-                  {/* <ResponsiveContainer width="100%" height="100%"> */}
-                  <AreaChart
-                    width={730}
-                    height={150}
-                    data={transactions}
-                    margin={{ top: 10, right: 0, left: 0, bottom: 0 }}
-                  >
-                    <defs>
-                      <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                        <stop
-                          offset="5%"
-                          stopColor="#60c589"
-                          stopOpacity={0.6}
-                        />
-                        <stop
-                          offset="95%"
-                          stopColor="#60c589"
-                          stopOpacity={0}
-                        />
-                      </linearGradient>
-                    </defs>
-                    {/* <XAxis dataKey="name" /> */}
-                    {/* <YAxis /> */}
-                    {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                    <Tooltip />
-                    <Area
-                      type="monotone"
-                      dataKey="amount"
-                      stroke="#166235"
-                      fillOpacity={1}
-                      fill="url(#colorUv)"
-                      strokeWidth={2}
-                    />
-                  </AreaChart>
-                  {/* </ResponsiveContainer> */}
+                <div
+                  className="assets_chart_area1"
+                  style={{ width: "100%", height: 200 }}
+                >
+                  <ResponsiveContainer>
+                    <AreaChart
+                      width={130}
+                      height={10}
+                      data={graphData2}
+                      margin={{
+                        top: 0,
+                        right: 0,
+                        left: 0,
+                        bottom: 0,
+                      }}
+                    >
+                      <defs>
+                        <linearGradient
+                          id="colorUv"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="5%"
+                            stopColor="#60c589"
+                            stopOpacity={0.3}
+                          />
+                          <stop
+                            offset="100%"
+                            stopColor="#60c589"
+                            stopOpacity={0}
+                          />
+                        </linearGradient>
+                      </defs>
+                      {/* <XAxis dataKey="name" /> */}
+                      {/* <YAxis /> */}
+                      {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                      <Tooltip />
+                      <Area
+                        type="monotone"
+                        dataKey="amount"
+                        stroke="#229e54"
+                        fillOpacity={1}
+                        fill="url(#colorUv)"
+                        strokeWidth={2}
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+                <div
+                  className="assets_chart_area2"
+                  style={{ width: "100%", height: 200 }}
+                >
+                  <ResponsiveContainer>
+                    <AreaChart
+                      width={130}
+                      height={10}
+                      data={graphData2}
+                      margin={{
+                        top: 0,
+                        right: 0,
+                        left: 0,
+                        bottom: 0,
+                      }}
+                    >
+                      <defs>
+                        <linearGradient
+                          id="colorUv"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="5%"
+                            stopColor="#fff"
+                            stopOpacity={0.3}
+                          />
+                          <stop
+                            offset="100%"
+                            stopColor="#fff"
+                            stopOpacity={0}
+                          />
+                        </linearGradient>
+                      </defs>
+                      {/* <XAxis dataKey="name" /> */}
+                      {/* <YAxis /> */}
+                      {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                      <Tooltip />
+                      <Area
+                        type="monotone"
+                        dataKey="amount"
+                        stroke="#fff"
+                        fillOpacity={1}
+                        fill="url(#colorUv)"
+                        strokeWidth={2}
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
                 </div>
               </div>
             </div>

@@ -5,7 +5,9 @@ import EX from './contracts/exchange.json';
 import erc20 from './contracts/erc20.json';
 import erc22 from './contracts/erc22.json';
 import EgorasLoanV2Facet from './contracts/V2/EgorasLoanV2Facet.json';
+import EgorasLoanV2ReferralFacet from './contracts/V2/EgorasLoanV2ReferralFacet.json';
 import EgorasPriceOracleFacet from './contracts/EgorasPriceOracleFacet.json';
+
 import EgorasSwapFacet from './contracts/EgorasSwapFacet.json';
 import COINS from './contracts/V2/coins.json';
 import Contract_Address from './contracts/Contract_Address.json';
@@ -19,6 +21,13 @@ const contractEgorasLoanV2Instance = (signer) => {
   return new Contract(
     EgorasLoanV2Facet.address,
     EgorasLoanV2Facet.abi,
+    signer
+  );
+};
+const contractEgorasLoanV2ReferralFacet = (signer) => {
+  return new Contract(
+    EgorasLoanV2ReferralFacet.address,
+    EgorasLoanV2ReferralFacet.abi,
     signer
   );
 };
@@ -426,6 +435,111 @@ const burnAccumulatedDividend = async (signer) => {
     };
   }
 };
+
+// ======================
+// ======================
+// ======================
+// ===========Referral system start================
+
+// function lend(uint amount, address branch, uint loanID, bool isWelcomebonus)
+
+const lend = async (
+  amount,
+  branch,
+  loanID,
+  isWelcomebonus,
+  signer
+) => {
+  try {
+    const instance = contractEgorasLoanV2ReferralFacet(signer);
+    let result;
+    result = await instance.lend(
+      amount,
+      branch,
+      loanID,
+      isWelcomebonus
+    );
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error.message, 'errorr message index');
+    if (
+      error.data.message ===
+      'execution reverted: Already a lender, you can only top up!'
+    ) {
+      console.log('you have leneded now backup');
+      try {
+        //    function topup(uint amount,uint loanID, bool isWelcomebonus)
+        const instance = contractEgorasLoanV2ReferralFacet(signer);
+        let result;
+        result = await instance.topup(amount, loanID, isWelcomebonus);
+        return {
+          message: result,
+          status: true,
+        };
+      } catch (error) {
+        console.log(error.data, 'errorr message index');
+        return {
+          message: error,
+          status: false,
+        };
+      }
+    } else {
+      return {
+        message: error,
+        status: false,
+      };
+    }
+  }
+};
+
+//  function getMyReferrals(address _upline) external view returns(address[] memory _referrals)
+
+const getReferrals = async (_upline, signer) => {
+  try {
+    const instance = contractEgorasLoanV2ReferralFacet(signer);
+    let result;
+    result = await instance.getReferrals(_upline);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};
+// getMyReferralsCount(address _upline)
+const getMyReferralsCount = async (_upline, signer) => {
+  try {
+    const instance = contractEgorasLoanV2ReferralFacet(signer);
+    let result;
+    result = await instance.getMyReferralsCount(_upline);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};
+// getUserStats(address _user)
+const getUserStats = async (_user, signer) => {
+  try {
+    const instance = contractEgorasLoanV2ReferralFacet(signer);
+    let result;
+    result = await instance.getUserStats(_user);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// =========================================
 
 // =======================================================================
 // =======================================================================
@@ -890,4 +1004,7 @@ export {
   swapBase,
   swapImpl,
   getEgcSmartContractBalnce,
+  getReferrals,
+  getMyReferralsCount,
+  getUserStats,
 };

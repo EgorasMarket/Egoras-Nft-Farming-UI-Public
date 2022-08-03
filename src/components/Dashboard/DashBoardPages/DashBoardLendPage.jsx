@@ -5,14 +5,24 @@ import '../../../css/dashboardLend.css';
 import CloseIcon from '@mui/icons-material/Close';
 import CircleIcon from '@mui/icons-material/Circle';
 
-// import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import EastIcon from '@mui/icons-material/East';
 import { API_URL as api_url } from '../../../actions/types';
 import { config } from '../../../actions/Config';
 import { Authenticate } from '../../auth/Authenticate';
 import axios from 'axios';
 // import
-
+import CountryDropdown from 'country-dropdown-with-flags-for-react';
+import {
+  Stepper,
+  Step,
+  useStepper,
+  StepNumber,
+  StepTitle,
+  StepStatus,
+  StepDescription,
+} from 'react-progress-stepper';
+// import { Context } from "../../context/Context";
 import { UserContext } from '../../context/Context';
 import Nodata from './nodataComponent/Nodata';
 
@@ -72,7 +82,7 @@ import Select from '@mui/material/Select';
 // ===========
 // ===========
 // ===========
-const DashBoardLendPage = ({ submitKyc }) => {
+const DashBoardLendPage = ({ submitKyc, auth }) => {
   const context = useWeb3React();
   const {
     connector,
@@ -85,7 +95,6 @@ const DashBoardLendPage = ({ submitKyc }) => {
     error,
   } = context;
   const { Branches, BranchDetails } = useContext(UserContext);
-  console.log(Branches);
   const [categoryBtn, setCategoryBtn] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
   const [onBoardUserDiv, setOnBoardUserDiv] = useState(false);
@@ -99,12 +108,18 @@ const DashBoardLendPage = ({ submitKyc }) => {
   const [age, setAge] = React.useState('');
   const [rumuName, setRumuName] = useState('R');
   const [agipName, setAgipName] = useState(false);
+  const [address, setAddress] = useState('');
   const [oyName, setOyName] = useState(false);
-  // const { step, incrementStep, decrementStep } = useStepper(0, 3);
+  const [ref_code, setRef_code] = useState('');
+  const { step, incrementStep, decrementStep } = useStepper(0, 3);
+  const [value, setValue] = React.useState(null);
+
   const [kyc, setKyc] = useState({
     email: '',
     firstName: '',
     lastName: '',
+    username: '',
+    // ref_code: "",
   });
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -120,7 +135,19 @@ const DashBoardLendPage = ({ submitKyc }) => {
   };
 
   useEffect(() => {
+    console.log(account, auth);
+    if (auth.user == null || auth.user.payload == null) {
+      console.log('auth is empty');
+      setRef_code('');
+    } else {
+      console.log('auth is not empty');
+      setRef_code(auth.user.payload.ref_code);
+    }
+  }, [auth]);
+
+  useEffect(() => {
     if (account) {
+      setAddress(account);
       setConnected(() => false);
       setVerified(() => true);
     } else {
@@ -141,7 +168,7 @@ const DashBoardLendPage = ({ submitKyc }) => {
     setCategoryBtn('All');
   };
 
-  const { email, firstName, lastName } = kyc;
+  const { email, firstName, lastName, username } = kyc;
   useEffect(() => {
     axios
       .get(api_url + '/api/branch/totalpools', null, config)
@@ -172,56 +199,35 @@ const DashBoardLendPage = ({ submitKyc }) => {
     setKyc({ ...kyc, [e.target.name]: e.target.value });
   };
 
-  // const submitKycDetails = async () => {
-  //   // const body = JSON.stringify({
-  //   //   email,
-  //   //   firstName,
-  //   //   lastName,
-  //   // });
-  //   // console.log(body);
-  //   // try {
-  //   //   const res = await axios.post(
-  //   //     api_url + "/api/kyc/initialize",
-  //   //     body,
-  //   //     config
-  //   //   );
-  //   //   console.log(res);
-  //   //   return {
-  //   //     status: true,
-  //   //     data: res.data,
-  //   //   };
-  //   // } catch (err) {
-  //   //   console.log(err);
-  //   //   return {
-  //   //     success: false,
-  //   //     data: err.response,
-  //   //   };
-  //   // }
-  //   axios
-  //     .post(api_url + "/api/kyc/initialize", {
-  //       data: kyc,
-  //     })
-  //     .then(function (response) {
-  //       console.log(response.data);
-  //       // history("/", { replace: true });
-  //     });
-  // };
-
   const submitKycDetails = async (e) => {
-    // const body = JSON.stringify({
-    //   email,
-    //   firstName,
-    //   lastName,
-    // });
-    const postData = JSON.stringify({
-      email: email,
-      firstName: firstName,
-      lastName: lastName,
-      address: 'lastName',
-      ref_code: '',
-    });
+    let postData;
+
+    if (typeof localStorage.referer != 'undefined') {
+      // localStorage.getItem("referer");
+      // setRef_auth(localStorage.getItem("referer"));
+      console.log(typeof localStorage.referer);
+
+      postData = JSON.stringify({
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        address: address,
+        ref_code: localStorage.getItem('referer'),
+        username: username,
+      });
+    } else {
+      postData = JSON.stringify({
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        address: address,
+        ref_code: '',
+        username: username,
+      });
+    }
+
     console.log('====================================');
-    console.log(email, firstName, lastName);
+    console.log(postData);
     console.log('====================================');
     try {
       const res = await axios.post(
@@ -248,14 +254,14 @@ const DashBoardLendPage = ({ submitKyc }) => {
       {/* Tokens Section Start */}
       <section className="collateral-assets-section no-bg no_pad">
         <div className="container">
-          {/* <div className="onboard_as_user_div">
+          <div className="onboard_as_user_div">
             <button
               className="onboard_as_user_btn"
               onClick={toggleOnBoardUserDiv}
             >
               Onboard as user
             </button>
-          </div> */}
+          </div>
           <div className="pool_container">
             <div className="lending_area1">
               <div className="lending_area1_cont1">
@@ -917,6 +923,60 @@ const DashBoardLendPage = ({ submitKyc }) => {
               {/* ================= */}
               <div className="stepdiv1">
                 <span
+                // style={
+                //   verified === false
+                //     ? { color: "#a6a6a6" }
+                //     : { color: "black" }
+                // }
+                >
+                  Select Country
+                </span>
+                {/* {verified === true ? ( */}
+                <div className="stepDiv1_sub_content">
+                  <div className="subMitDetails_cont">
+                    Select your country of origin to continue with the
+                    verification
+                    <div className="subMitDetails_cont_input_body">
+                      <div className="subMitDetails_cont_input_body_cont1">
+                        Country{' '}
+                        <CountryDropdown
+                          id="country_id"
+                          className="country_select_input"
+                          preferredCountries={['gb', 'us']}
+                          value=""
+                          handleChange={(e) =>
+                            console.log(e.target.value)
+                          }
+                        ></CountryDropdown>
+                      </div>
+                      <div className="button_comply_cube_div">
+                        <button
+                          className="proceed_to_cube_btn"
+                          // onClick={submitKycDetails}
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* ) : null} */}
+
+                <div
+                  className="rule_progress"
+                  // style={
+                  //   verified === false
+                  //     ? { background: "#a6a6a6" }
+                  //     : { background: "#229e54" }
+                  // }
+                ></div>
+              </div>
+              {/* ================= */}
+              {/* ================= */}
+              {/* ================= */}
+              {/* ================= */}
+              <div className="stepdiv1">
+                <span
                   style={
                     verified === false
                       ? { color: '#a6a6a6' }
@@ -928,7 +988,9 @@ const DashBoardLendPage = ({ submitKyc }) => {
                 {verified === true ? (
                   <div className="stepDiv1_sub_content">
                     <div className="subMitDetails_cont">
-                      Submit your details to continue{' '}
+                      Submit your KYC information through Complycube
+                      for verification. This is a one time process to
+                      become an eligible user in all Egoras pools.
                       <div className="subMitDetails_cont_input_body">
                         <div className="subMitDetails_cont_input_body_cont1">
                           First Name{' '}
@@ -958,6 +1020,25 @@ const DashBoardLendPage = ({ submitKyc }) => {
                             name="email"
                             value={email}
                             onChange={onChangeKyc}
+                          />
+                        </div>
+                        <div className="subMitDetails_cont_input_body_cont1">
+                          UserName{' '}
+                          <input
+                            type="email"
+                            className="submitDetails_cont_input_area"
+                            name="username"
+                            value={username}
+                            onChange={onChangeKyc}
+                          />
+                        </div>
+                        <div className="subMitDetails_cont_input_body_cont1">
+                          Referral Code{' '}
+                          <input
+                            type="email"
+                            className="submitDetails_cont_input_area"
+                            name="ref_code"
+                            value={ref_code}
                           />
                         </div>
                         <div className="button_comply_cube_div">
@@ -1002,4 +1083,11 @@ const DashBoardLendPage = ({ submitKyc }) => {
   );
 };
 
-export default DashBoardLendPage;
+// export default DashBoardLendPage;
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+// let  res = await getLogin2(
+export default connect(mapStateToProps, {})(DashBoardLendPage);

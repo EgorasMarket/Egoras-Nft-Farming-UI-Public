@@ -5,6 +5,9 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import Header from "./components/Home/Header";
 import "bootstrap/dist/css/bootstrap.css";
 import Home from "./components/Home/Home";
+import { loadUser } from "./actions/auth";
+
+import AboutUs from "./components/Home/AboutUs";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -14,6 +17,8 @@ import {
   NoEthereumProviderError,
   UserRejectedRequestError as UserRejectedRequestErrorInjected,
 } from "@web3-react/injected-connector";
+import { Provider } from "react-redux";
+
 import { Web3Provider } from "@ethersproject/providers";
 import { formatEther } from "@ethersproject/units";
 import { useEagerConnect, useInactiveListener } from "./hooks";
@@ -22,7 +27,13 @@ import { injected, walletconnect } from "./connectors";
 // import OpenVaultPage from "./components/Dashboard/DashBoardPages/OpenVaultPage";
 import Footer from "./components/Home/Footer.jsx";
 import "../src/App.css";
+import store from "./store";
+import Referal from "./components/Referral/Referal";
 function App() {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  });
+
   const [cClass, setCClass] = useState(false);
   // localStorage.setItem("uiMode", "dark");
   useEffect(() => {
@@ -51,20 +62,25 @@ function App() {
   }
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <Router>
-        <div
-          className={cClass === true ? "dark " : "App-header"}
-          // className="dark"
-        >
-          <Header togglemakeDark={togglemakeDark} check={cClass} />
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Dashboard check={cClass} togglemakeDark={togglemakeDark} />
-            {/* <Route component={Dashboard} /> */}
-          </Switch>
-          <Footer />
-        </div>
-      </Router>
+      <Provider store={store}>
+        {/* <Provider> */}
+        <Router>
+          <div
+            className={cClass === true ? "dark " : "App-header"}
+            // className="dark"
+          >
+            <Header togglemakeDark={togglemakeDark} check={cClass} />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/referal/:ref" component={Referal} />
+              <Route exact path="/about" component={AboutUs} />
+              <Dashboard check={cClass} togglemakeDark={togglemakeDark} />
+              {/* <Route component={Dashboard} /> */}
+            </Switch>
+            <Footer />
+          </div>
+        </Router>
+      </Provider>
     </Web3ReactProvider>
   );
 }

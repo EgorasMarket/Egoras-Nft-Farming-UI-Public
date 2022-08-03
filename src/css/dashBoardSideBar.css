@@ -192,6 +192,7 @@ hr.hrr {
 .hover_link_txt {
   position: absolute;
 }
+
 .hover_link_txt {
   display: none;
   -webkit-backdrop-filter: blur(1px);

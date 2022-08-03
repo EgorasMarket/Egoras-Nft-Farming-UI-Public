@@ -450,8 +450,33 @@ input:-internal-autofill-selected {
   stroke: #238c4e;
   fill: #edfaf2;
   stop-color: green;
-  stroke-width: 2px;
-  width: 100%;
+  stroke-width: 0.5px;
+  /* width: 100%; */
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+.sparkline--cursor {
+  /* stroke: orange; */
+  stroke-width: 0.5;
+}
+
+.sparkline--spot {
+  /* fill: inherit; */
+  /* stroke: red; */
+  stroke-width: 0.5px;
+}
+rect.sparkline--interaction-layer {
+  height: 100%;
+  width: 100%;
+}
+.recharts-tooltip-wrapper {
+  border-radius: 7px;
+}
+.recharts-default-tooltip {
+  border-radius: 7px;
+}
+.dark .recharts-default-tooltip {
+  background: #1e2822 !important;
+  color: #fff !important;
+  border: solid 1px #4e7a60 !important;
 }

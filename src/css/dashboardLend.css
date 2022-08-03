@@ -165,7 +165,7 @@
   position: fixed;
   top: 0;
   z-index: 10000;
-  padding: 2em;
+  padding: 1em;
   background: #000000a1;
   width: 100vw;
   height: 100vh;
@@ -175,6 +175,7 @@
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  overflow: scroll;
 }
 .onBoardUserDiv_head {
   font-size: 20px;
@@ -197,6 +198,22 @@
   padding-top: 0;
   font-weight: 700;
 }
+.country_select_input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 7px;
+  border: solid 1px #d0d0d0;
+}
+.country-select .country-list {
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+.country-select.inside .selected-flag {
+  width: 46px;
+  background: #f3f3f3;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
 .stepDiv1_sub_content {
   padding: 1em 1em;
   display: flex;
@@ -213,7 +230,7 @@
   gap: 15px;
 }
 .onBoardUserDiv_body {
-  max-width: 550px;
+  max-width: 590px;
   width: 100%;
   margin: auto;
   background: #fff;
@@ -356,7 +373,7 @@
   align-items: center;
   border: solid 1px #e4e4e4;
   border-radius: 46px;
-  padding: 10px;
+  padding: 5px;
   background: #fff;
   box-shadow: 0px 2px 6px #eaeaea;
 }
@@ -648,5 +665,12 @@
     flex-direction: column;
     gap: 12px;
     align-items: flex-end;
+  }
+  .onBoardUserDiv_body {
+    padding: 1em;
+    padding-right: 0em;
+  }
+  .stepDiv1_sub_content {
+    padding: 0.5em 0.5em;
   }
 }
