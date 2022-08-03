@@ -28,7 +28,7 @@ import {
 } from "../../../web3/index";
 const DashboardReferral = ({ auth }) => {
   const [activeLink, setActiveLink] = useState("");
-  const [comingSoon, setComingSoon] = useState(false);
+  const [comingSoon, setComingSoon] = useState(true);
   const [refEarnings, setRefEarnings] = useState(0.0);
   const [refCount, setRefCount] = useState(0);
   const [welcomeBonus, setWelcomeBonus] = useState(0.0);
@@ -215,19 +215,23 @@ const DashboardReferral = ({ auth }) => {
   const web3 = new Web3(window.ethereum);
 
   useEffect(() => {
-    console.log(account, auth.user.payload.ref_code);
-    setCopyValue("https://egoras.org/referal/" + auth.user.payload.ref_code);
-    // localStorage.setItem("WA_ST", account);
-    axios
-      .get(api_url + "/api/user/fetch/my/referals/" + account, null, config)
-      .then((data) => {
-        setMyReferrals(data.data.data);
-        console.log(data.data.data);
-        // console.log(leaderBoard);
-      })
-      .catch((err) => {
-        console.log(err); // "oh, no!"
-      });
+    console.log(auth);
+
+    if (auth.user != null) {
+      // console.log(account, auth.user.payload.ref_code);
+      // setCopyValue("https://egoras.org/referal/" + auth.user.payload.ref_code);
+      localStorage.setItem("WA_ST", account);
+      axios
+        .get(api_url + "/api/user/fetch/my/referals/" + account, null, config)
+        .then((data) => {
+          setMyReferrals(data.data.data);
+          console.log(data.data.data);
+          // console.log(leaderBoard);
+        })
+        .catch((err) => {
+          console.log(err); // "oh, no!"
+        });
+    }
   }, [account, auth]);
   // console.log(leaderBoard1);
   // console.log(leaderBoard);
@@ -247,41 +251,58 @@ const DashboardReferral = ({ auth }) => {
     tooltip.innerHTML = "Copy to clipboard";
     tooltip.style.display = "none";
   }
-  useEffect(async (e) => {
-    if (account) {
-      let response = await getUserStats(account, library.getSigner());
-      console.log(response);
-      if (response.status === true) {
-        const resAmnt = parseFloat(
-          formatEther(response.message._referral._hex)
-        );
-        setRefEarnings(resAmnt);
-        console.log(response.message._referral);
+  useEffect(
+    async (e) => {
+      if (account) {
+        let response = await getUserStats(account, library.getSigner());
+        console.log(response);
+        if (response.status === true) {
+          const resAmnt = parseFloat(
+            formatEther(response.message._referral._hex)
+          );
+          setRefEarnings(resAmnt);
+          console.log(response.message._referral);
+        }
       }
-    }
-  }, []);
-  useEffect(async (e) => {
-    if (account) {
-      let response = await getUserStats(account, library.getSigner());
-      console.log(response);
-      if (response.status === true) {
-        const resAmnt = parseFloat(formatEther(response.message._wB._hex));
-        setWelcomeBonus(resAmnt);
-        console.log(response.message._referral);
+    },
+    [account]
+  );
+  useEffect(
+    async (e) => {
+      if (account) {
+        let response = await getUserStats(account, library.getSigner());
+        console.log(response);
+        if (response.status === true) {
+          const resAmnt = parseFloat(formatEther(response.message._wB._hex));
+          setWelcomeBonus(resAmnt);
+          console.log(response.message._referral);
+        }
       }
-    }
-  }, []);
-  useEffect(async (e) => {
-    if (account) {
-      let response = await getMyReferralsCount(account, library.getSigner());
-      console.log(response);
-      if (response.status === true) {
-        const resAmnt = parseFloat(formatEther(response.message._hex));
-        setRefCount(resAmnt);
-        // console.log(response.message._referral);
+    },
+    [account]
+  );
+  useEffect(
+    async (e) => {
+      if (account) {
+        let response = await getMyReferralsCount(account, library.getSigner());
+        console.log(response);
+        if (response.status === true) {
+          const resAmnt = formatEther(response.message._hex).toString();
+          const pasedResAmnt = parseEther(resAmnt, "wei").toString();
+          setRefCount(pasedResAmnt);
+          console.log(resAmnt);
+          console.log(parseEther(resAmnt, "wei").toString());
+          // console.log(
+          //   resAmnt.toLocaleString("fullwide", { useGrouping: false })
+          // );
+          // console.log(web3.utils.toWei(resAmnt.toString(), "ether"));
+          // console.log(parseEther(resAmnt.toString(), "wei").toString());
+          // console.log(response.message._referral);
+        }
       }
-    }
-  }, []);
+    },
+    [account]
+  );
   return (
     <>
       <div className="other2 asset_other2">
@@ -338,7 +359,8 @@ const DashboardReferral = ({ auth }) => {
                           Total Earnings
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          {welcomeBonus + refEarnings} Engn
+                          {welcomeBonus + refEarnings}{" "}
+                          <span className="engn_symbol_sign">Engn</span>
                         </div>
                       </div>
                       <div className="dashBoard_ref_area1_cont1_div1">
@@ -346,7 +368,8 @@ const DashboardReferral = ({ auth }) => {
                           Welcome Bonus
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          {parseFloat(welcomeBonus).toFixed(2)} Engn
+                          {parseFloat(welcomeBonus).toFixed(2)}{" "}
+                          <span className="engn_symbol_sign">Engn</span>
                         </div>
                       </div>
                       <div className="dashBoard_ref_area1_cont1_div1">
@@ -354,7 +377,8 @@ const DashboardReferral = ({ auth }) => {
                           Referral Earnings
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          {parseFloat(refEarnings).toFixed(2)} Engn
+                          {parseFloat(refEarnings).toFixed(2)}{" "}
+                          <span className="engn_symbol_sign">Engn</span>
                         </div>
                       </div>
                     </div>

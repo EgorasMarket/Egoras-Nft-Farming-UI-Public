@@ -168,11 +168,7 @@ const Footer = () => {
                 <div className="footerCard2">
                   <div className="footerCardTitle">About Us</div>
                   <div className="footerLinks">
-                    <a
-                      href="https://egoras.com/about"
-                      className="c1link1"
-                      target="_blank"
-                    >
+                    <a href="/about" className="c1link1" target="_blank">
                       About
                     </a>
                     <a
@@ -284,11 +280,7 @@ const Footer = () => {
                     </AccordionSummary>
                     <AccordionDetails>
                       <div className="footerLinks">
-                        <a
-                          href="https://egoras.com/about"
-                          className="c1link1"
-                          target="_blank"
-                        >
+                        <a href="/about" className="c1link1" target="_blank">
                           About
                         </a>
                         <a

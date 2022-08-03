@@ -8,19 +8,7 @@ import setAuthToken from "../utils/setAuthToken";
 
 // Load User
 export const loadUser = () => async (dispatch) => {
-  console.log(localStorage.WA_ST, "okkkkkkk");
-
-  //   if (localStorage.token) {
-  //     setAuthToken(localStorage.token);
-  //   }
-
-  // const res = await axios.get(api_url2 + "/v1/user/info");
-  // // //console.log(res, 'lllll');
-  // // //console.log("Yes I call You because i can", res.data);
-  // dispatch({
-  //   type: USER_LOADED,
-  //   payload: res.data,
-  // });
+  // console.log(localStorage.WA_ST, "okkkkkkk");
 
   try {
     const res = await axios.get(
@@ -33,7 +21,7 @@ export const loadUser = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (error) {
-    //console.log("not registered");
+    console.log("not registered");
     dispatch({
       type: AUTH_ERROR,
     });
