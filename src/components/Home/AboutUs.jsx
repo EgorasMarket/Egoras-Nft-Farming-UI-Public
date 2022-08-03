@@ -2,6 +2,8 @@ import React from "react";
 import "../../css/aboutus.css";
 import EastIcon from "@mui/icons-material/East";
 import TelegramIcon from "@mui/icons-material/Telegram";
+import Marquee from "react-fast-marquee";
+
 // import roadMap from "/img/road_map_street_bg.png";
 const AboutUs = () => {
   return (
@@ -45,9 +47,14 @@ const AboutUs = () => {
             <div className="about_us_section_hero_area_2">
               <div className="about_us_section_hero_area_2_img_container">
                 <img
-                  src="/img/dummy_img_sea.svg"
+                  src="/img/egoras_vector_coins.svg"
                   alt=""
                   className="about_us_section_hero_area_2_img_container_img"
+                />
+                <img
+                  src="/img/egoras_vector_coins_dark.svg"
+                  alt=""
+                  className="about_us_section_hero_area_2_img_container_img_dark"
                 />
               </div>
               <div className="about_us_section_hero_area_2_txt_container">
@@ -92,7 +99,7 @@ const AboutUs = () => {
               <div className="advantages_section_area_2_cont1">
                 <div className="advantages_section_area_2_cont1_head">
                   <img
-                    src="/img/about_step_icon.svg"
+                    src="/img/stake_about_icon.svg"
                     alt=""
                     className="about_step_icon"
                   />
@@ -105,7 +112,7 @@ const AboutUs = () => {
               <div className="advantages_section_area_2_cont1">
                 <div className="advantages_section_area_2_cont1_head">
                   <img
-                    src="/img/about_step_icon.svg"
+                    src="/img/earn_about_icon.svg"
                     alt=""
                     className="about_step_icon"
                   />{" "}
@@ -117,7 +124,7 @@ const AboutUs = () => {
               <div className="advantages_section_area_2_cont1">
                 <div className="advantages_section_area_2_cont1_head">
                   <img
-                    src="/img/about_step_icon.svg"
+                    src="/img/swap_about_icon.svg"
                     alt=""
                     className="about_step_icon"
                   />{" "}
@@ -143,66 +150,52 @@ const AboutUs = () => {
       <section className="help_u_section">
         <div className="container">
           <div className="help_u_section_area">
-            <div className="help_u_section_area_head">
-              We’re here to help you be successful.{" "}
-              <div className="help_u_section_area_head_para">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem
-                dolorem deserunt adipisci illo obcaecati veniam?
-              </div>
-            </div>
+            <div className="help_u_section_area_head">How it works. </div>
             <div className="help_u_section_area_cont">
               <div className="help_u_section_area_cont1">
                 <div className="help_u_section_area_cont1_icon">
                   <img
-                    src="/img/dummy_we_help_icon.svg"
+                    src="/img/how_it_wrk_icon1.svg"
                     alt=""
                     className="we_help_icon"
                   />
                 </div>
                 <div className="help_u_section_area_cont1_head">
-                  Credit Delegation
+                  Stake your token{" "}
                 </div>
                 <div className="help_u_section_area_cont1_para">
-                  Liquidity providers & lenders can choose to offer line of
-                  credit to borrower of their own choice. The transaction is
-                  facilitated by Trustscore that runs on proprietary algorithms
-                  to evaluate borrower's credit worthiness by choice.
+                  Browse by category and stake your EGR token to support an
+                  entrepreneur.
                 </div>
               </div>
               <div className="help_u_section_area_cont1">
                 <div className="help_u_section_area_cont1_icon">
                   <img
-                    src="/img/dummy_we_help_icon.svg"
+                    src="/img/how_it_wrk_icon2.svg"
                     alt=""
                     className="we_help_icon"
                   />
                 </div>
                 <div className="help_u_section_area_cont1_head">
-                  Credit Delegation
+                  Approve Collaterals
                 </div>
                 <div className="help_u_section_area_cont1_para">
-                  Liquidity providers & lenders can choose to offer line of
-                  credit to borrower of their own choice. The transaction is
-                  facilitated by Trustscore that runs on proprietary algorithms
-                  to evaluate borrower's credit worthiness by choice.
+                  Fund collaterals without risking your EGR token.
                 </div>
               </div>
               <div className="help_u_section_area_cont1">
                 <div className="help_u_section_area_cont1_icon">
                   <img
-                    src="/img/dummy_we_help_icon.svg"
+                    src="/img/how_it_wrk_icon3.svg"
                     alt=""
                     className="we_help_icon"
                   />
                 </div>
                 <div className="help_u_section_area_cont1_head">
-                  Credit Delegation
+                  Claim Interest weekly
                 </div>
                 <div className="help_u_section_area_cont1_para">
-                  Liquidity providers & lenders can choose to offer line of
-                  credit to borrower of their own choice. The transaction is
-                  facilitated by Trustscore that runs on proprietary algorithms
-                  to evaluate borrower's credit worthiness by choice.
+                  Earn over 20% APR for approving/declining collaterals.
                 </div>
               </div>
             </div>
@@ -338,7 +331,160 @@ const AboutUs = () => {
                   </li>
                   <li className="roadMap_list_conts">
                     {" "}
-                    Lunch on bigger exchanges.
+                    Launch on bigger exchanges.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {" "}
+                    Expansion across Africa.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {" "}
+                    Launch of V3 (DEBT MARKETPLACE).
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="road_map_area_div6">
+            <div className="road_map_area_div_circle_bg">
+              <div className="road_map_area_div_circle"></div>
+              <div className="road_map_area_div_circle_blur"></div>
+            </div>
+            <div className="road_map_area_div6_txt_cont">
+              2024{" "}
+              <div className="road_map_area_div3_txt_cont_para">
+                <ul className="roadMap_list_area_last">
+                  <li className="roadMap_list_conts">
+                    {" "}
+                    Expansion across the globe
+                  </li>
+                  <li className="roadMap_list_conts">
+                    Launch of V4( Debt marketplace).
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="road_map_area_mobile">
+          {/* <img
+            src="/img/mobile_road_map_line.svg"
+            alt=""
+            className="mobile_road_map_line"
+          /> */}
+          <div className="mobile_road_map_line_div"></div>
+          <div className="road_map_area_div1">
+            <div className="road_map_area_div_circle_bg">
+              <div className="road_map_area_div_circle"></div>
+              <div className="road_map_area_div_circle_blur"></div>
+            </div>
+            <div className="road_map_area_div1_txt_cont">
+              2019{" "}
+              <div className="road_map_area_div3_txt_cont_para">
+                <ul className="roadMap_list_area">
+                  <li className="roadMap_list_conts">
+                    {" "}
+                    Launch of Organisation.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="road_map_area_div2">
+            <div className="road_map_area_div_circle_bg">
+              <div className="road_map_area_div_circle"></div>
+              <div className="road_map_area_div_circle_blur"></div>
+            </div>
+            <div className="road_map_area_div3_txt_cont">
+              2020{" "}
+              <div className="road_map_area_div3_txt_cont_para">
+                <ul className="roadMap_list_area">
+                  <li className="roadMap_list_conts"> Pawnbroker License.</li>
+                  <li className="roadMap_list_conts"> Moneylender License.</li>
+                  <li className="roadMap_list_conts">
+                    {" "}
+                    Onboard 5,000 borrowers.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="road_map_area_div3">
+            <div className="road_map_area_div_circle_bg">
+              <div className="road_map_area_div_circle"></div>
+              <div className="road_map_area_div_circle_blur"></div>
+            </div>
+            <div className="road_map_area_div3_txt_cont">
+              2021{" "}
+              <div className="road_map_area_div3_txt_cont_para">
+                <ul className="roadMap_list_area">
+                  <li className="roadMap_list_conts"> Launch of our token.</li>
+                  <li className="roadMap_list_conts"> Cooperative license.</li>
+                  <li className="roadMap_list_conts"> Onboard 20,000 users.</li>
+                  <li className="roadMap_list_conts"> List on exchanges.</li>
+                  <li className="roadMap_list_conts">
+                    {" "}
+                    Expansion of offline locations.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="road_map_area_div4">
+            <div className="road_map_area_div_circle_bg">
+              <div className="road_map_area_div_circle"></div>
+              <div className="road_map_area_div_circle_blur"></div>
+            </div>
+            <div className="road_map_area_div3_txt_cont">
+              2022{" "}
+              <div className="road_map_area_div3_txt_cont_para">
+                <ul className="roadMap_list_area">
+                  <li className="roadMap_list_conts">
+                    {" "}
+                    Launch of liquidity services.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    Launch of refurbishing facility.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {" "}
+                    Launch of decentralized debt marketplace.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {" "}
+                    Expansion to all cities in Nigeria.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {" "}
+                    Listing on top tier exchanges.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {" "}
+                    Marketing campaign for debt marketplace.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div className="road_map_area_div5">
+            <div className="road_map_area_div_circle_bg">
+              <div className="road_map_area_div_circle"></div>
+              <div className="road_map_area_div_circle_blur"></div>
+            </div>
+            <div className="road_map_area_div3_txt_cont">
+              2023{" "}
+              <div className="road_map_area_div3_txt_cont_para">
+                <ul className="roadMap_list_area">
+                  <li className="roadMap_list_conts">
+                    Launch of liquidity services for vehicles.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {" "}
+                    Launch of refurbishing facility cars.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {" "}
+                    Launch on bigger exchanges.
                   </li>
                   <li className="roadMap_list_conts">
                     {" "}
@@ -385,51 +531,62 @@ const AboutUs = () => {
           <div className="feauturedIn_area">
             <div className="feauturedIn_area_head">Feautured In</div>
             <div className="feauturedIn_area_body">
-              <div className="feauturedIn_area_body_cont1">
+              <Marquee
+                speed={50}
+                pauseOnHover={true}
+                gradientColor="[255, 255, 255]"
+              >
+                {/* <div className="feauturedIn_area_body_cont1"> */}
                 <img
                   src="/img/FeaturedInLogos/FeaturedInLogos_1.svg"
                   alt=""
                   className="featuredIn_logo_img"
                 />
-              </div>
-              <div className="feauturedIn_area_body_cont1">
+                {/* </div> */}
+                {/* <div className="feauturedIn_area_body_cont1"> */}
                 <img
                   src="/img/FeaturedInLogos/FeaturedInLogos_2.svg"
                   alt=""
                   className="featuredIn_logo_img"
                 />
-              </div>
-              <div className="feauturedIn_area_body_cont1">
+                {/* </div> */}
+                {/* <div className="feauturedIn_area_body_cont1"> */}
                 <img
                   src="/img/FeaturedInLogos/FeaturedInLogos_3.svg"
                   alt=""
                   className="featuredIn_logo_img"
                 />
-              </div>
-              <div className="feauturedIn_area_body_cont1">
+                {/* </div> */}
+                {/* <div className="feauturedIn_area_body_cont1"> */}
                 <img
                   src="/img/FeaturedInLogos/FeaturedInLogos_4.svg"
                   alt=""
                   className="featuredIn_logo_img"
                 />
-              </div>
-              <div className="feauturedIn_area_body_cont1">
+                {/* </div> */}
+                {/* <div className="feauturedIn_area_body_cont1"> */}
                 <img
                   src="/img/FeaturedInLogos/FeaturedInLogos_5.svg"
                   alt=""
                   className="featuredIn_logo_img"
                 />
-              </div>
-              <div className="feauturedIn_area_body_cont1">
+                {/* </div> */}
+                {/* <div className="feauturedIn_area_body_cont1"> */}
                 <img
                   src="/img/FeaturedInLogos/FeaturedInLogos_6.svg"
                   alt=""
                   className="featuredIn_logo_img"
                 />
-              </div>
+                {/* </div> */}
+              </Marquee>
             </div>
           </div>
         </div>
+        <img
+          src="/img/to_help_section_lines.svg"
+          alt=""
+          className="to_help_section_lines"
+        />
       </section>
       {/* =================== */}
       {/* =================== */}
@@ -447,11 +604,14 @@ const AboutUs = () => {
                 To Get Support, Latest news, Announcement And Quick Updates on
                 Easyfi
               </div>
-              <div className="join_community_area1_btn">
-                <button>
+              <a
+                href="https://t.me/egorasmarket"
+                className="join_community_area1_btn"
+              >
+                <button className="join_community_area1_btn_btn">
                   Join Telegram <EastIcon className="arrow_join_icon" />
                 </button>
-              </div>
+              </a>
             </div>
             <div className="join_community_area2">
               <div className="join_us_icon_div">
@@ -460,6 +620,11 @@ const AboutUs = () => {
             </div>
           </div>
         </div>
+        <img
+          src="/img/to_help_section_lines.svg"
+          alt=""
+          className="to_help_section_lines"
+        />
       </section>
     </div>
   );

@@ -28,7 +28,7 @@ import {
 } from "../../../web3/index";
 const DashboardReferral = ({ auth }) => {
   const [activeLink, setActiveLink] = useState("");
-  const [comingSoon, setComingSoon] = useState(false);
+  const [comingSoon, setComingSoon] = useState(true);
   const [refEarnings, setRefEarnings] = useState(0.0);
   const [refCount, setRefCount] = useState(0);
   const [welcomeBonus, setWelcomeBonus] = useState(0.0);
@@ -215,19 +215,23 @@ const DashboardReferral = ({ auth }) => {
   const web3 = new Web3(window.ethereum);
 
   useEffect(() => {
-    console.log(account, auth.user.payload.ref_code);
-    setCopyValue("https://egoras.org/referal/" + auth.user.payload.ref_code);
-    // localStorage.setItem("WA_ST", account);
-    axios
-      .get(api_url + "/api/user/fetch/my/referals/" + account, null, config)
-      .then((data) => {
-        setMyReferrals(data.data.data);
-        console.log(data.data.data);
-        // console.log(leaderBoard);
-      })
-      .catch((err) => {
-        console.log(err); // "oh, no!"
-      });
+    console.log(auth);
+
+    if (auth.user != null) {
+      // console.log(account, auth.user.payload.ref_code);
+      // setCopyValue("https://egoras.org/referal/" + auth.user.payload.ref_code);
+      localStorage.setItem("WA_ST", account);
+      axios
+        .get(api_url + "/api/user/fetch/my/referals/" + account, null, config)
+        .then((data) => {
+          setMyReferrals(data.data.data);
+          console.log(data.data.data);
+          // console.log(leaderBoard);
+        })
+        .catch((err) => {
+          console.log(err); // "oh, no!"
+        });
+    }
   }, [account, auth]);
   // console.log(leaderBoard1);
   // console.log(leaderBoard);

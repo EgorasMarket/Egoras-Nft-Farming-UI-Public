@@ -246,7 +246,7 @@ const DashBoardUserDetails = () => {
                 </div>
               </div>
               <span className="hr_vertical"></span>
-              <div className="welcome_bonus_div">
+              {/* <div className="welcome_bonus_div">
                 <div className="welcome_bonus_div_head">
                   <div className="welcome_bonus_icon_div">
                     <StarRateIcon className="welcome_bonus_icon_div_icon" />
@@ -254,7 +254,7 @@ const DashBoardUserDetails = () => {
                   Welcome Bonus
                 </div>
                 <div className="welcome_bonus_div_body">$100.00</div>
-              </div>
+              </div> */}
             </div>
             <div className="user_details_body1">
               <div className="user_details_body1_body_cont_area1">

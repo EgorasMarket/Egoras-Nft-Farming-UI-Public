@@ -75,6 +75,16 @@
 .about_us_section_hero_area_2_img_container_img {
   width: 100%;
 }
+.dark .about_us_section_hero_area_2_img_container_img {
+  display: none;
+}
+.dark .about_us_section_hero_area_2_img_container_img_dark {
+  display: block;
+}
+.about_us_section_hero_area_2_img_container_img_dark {
+  display: none;
+  width: 100%;
+}
 .about_us_section_hero_area_2_img_container {
   width: 80%;
 }
@@ -96,6 +106,8 @@ section.advantages_section {
   display: flex;
   justify-content: space-between;
   gap: 10%;
+  position: relative;
+  z-index: 1;
 }
 
 .advantages_section_area_1 {
@@ -180,7 +192,7 @@ section.help_u_section {
 }
 .help_u_section_area_cont {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   width: 100%;
   justify-content: space-between;
   gap: 20px;
@@ -210,7 +222,8 @@ section.help_u_section {
   box-shadow: 0px 0px 15px #0d1611;
 }
 .we_help_icon {
-  border-radius: 50%;
+  /* border-radius: 50%; */
+  width: 50px;
 }
 .help_u_section_area_cont1_head {
   font-size: 22px;
@@ -267,6 +280,9 @@ section.help_u_section {
   max-width: 1855px;
   margin: auto;
   padding: 1em;
+}
+.road_map_area_mobile {
+  display: none;
 }
 .road_route {
   width: 100%;
@@ -353,13 +369,13 @@ section.help_u_section {
   margin: auto;
   width: 170px;
   width: 100%;
-  min-width: 280px;
+  min-width: 190px;
   /* text-align: center; */
   display: flex;
   flex-direction: column;
 }
 .road_map_area_div3_txt_cont_para {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
 }
 .road_map_area_div1_txt_cont {
@@ -419,6 +435,7 @@ section.featuredIn_section {
   padding: 4em 0em;
   background: #213328;
   position: relative;
+  overflow: hidden;
 }
 .feauturedIn_area_body {
   display: flex;
@@ -431,10 +448,13 @@ section.featuredIn_section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  grid-gap: 30px;
   gap: 30px;
+  position: relative;
+  z-index: 2;
 }
 .featuredIn_logo_img {
-  width: 100%;
+  width: 210px;
 }
 .feauturedIn_area_head {
   background: #36554387;
@@ -447,4 +467,233 @@ section.featuredIn_section {
 .join_community_section {
   padding: 4em 0em;
   position: relative;
+  background: #213328;
+}
+.join_community_area {
+  background: linear-gradient(
+    244.66deg,
+    #2b603f80 1.9%,
+    #21332800 33.08%,
+    #161a1891 97.23%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0px 0px 15px #0d1611;
+  padding: 4em;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  grid-gap: 20px;
+  gap: 20px;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(2px);
+}
+
+.join_community_area1 {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
+  gap: 15px;
+  width: 80%;
+}
+.join_community_area1_head {
+  font-size: 42px;
+  font-weight: 700;
+}
+.join_community_area1_para {
+  font-size: 18px;
+  font-weight: 200;
+  color: #87a090;
+}
+.join_community_area1_btn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+button.join_community_area1_btn_btn {
+  padding: 15px;
+  width: 190px;
+  border-radius: 50px;
+  background: #2aa15a;
+  color: #fff;
+  border: none;
+}
+.join_community_area2 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 2em;
+  padding-right: 4em;
+}
+
+.arrow_telegram_icon {
+  font-size: 153px !important;
+  background: grey;
+  border-radius: 50%;
+  padding: 0.1em;
+  background-image: radial-gradient(#79ce9a, #446652);
+}
+
+@media screen and (max-width: 991px) {
+  .road_map_area {
+    display: none;
+  }
+  .road_map_area_mobile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .mobile_road_map_line {
+    width: 10px;
+    margin: auto;
+    margin-left: 1em;
+  }
+  .about_us_section_hero_area_2 {
+    flex-direction: column;
+  }
+  .advantages_section_area {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .help_u_section_area_cont {
+    flex-direction: column;
+  }
+  .join_community_area {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .join_community_area2 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0em;
+    padding-right: 0em;
+  }
+  .join_community_area1_btn {
+    justify-content: center;
+  }
+  .mobile_road_map_line_div {
+    width: 15px;
+    height: 78em;
+    background: #229e54;
+    margin: auto;
+    margin-left: 1em;
+  }
+  .road_map_area_div1 {
+    position: absolute;
+    left: 39px;
+    bottom: inherit;
+    top: 23px;
+    margin: auto;
+  }
+  .road_map_area_div1_txt_cont {
+    bottom: -26px;
+  }
+  .road_map_area_div2 {
+    position: absolute;
+    left: 39px;
+    bottom: inherit;
+    top: 75px;
+    margin: auto;
+  }
+  .road_map_area_div3 {
+    position: absolute;
+    left: 39px;
+    bottom: inherit;
+    top: 15em;
+    margin: auto;
+  }
+  .road_map_area_div4 {
+    position: absolute;
+    left: 39px;
+    bottom: inherit;
+    top: 29em;
+    margin: auto;
+    right: inherit;
+  }
+  .road_map_area_div5 {
+    position: absolute;
+    left: 39px;
+    bottom: inherit;
+    top: 50em;
+    margin: auto;
+    right: inherit;
+  }
+  .road_map_area_div6 {
+    position: absolute;
+    right: inherit;
+    bottom: inherit;
+    top: 67em;
+    margin: auto;
+    left: 39px;
+  }
+  .road_map_area_div6_txt_cont {
+    color: rgb(0, 0, 0);
+    font-size: 38px;
+    position: absolute;
+    font-weight: 800;
+    margin: auto;
+    left: 0;
+    width: 170px;
+    width: 100%;
+    min-width: 190px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+  .roadmap_section {
+    padding: 2em 0em;
+    padding-top: 0;
+  }
+}
+@media screen and (max-width: 650px) {
+  .about_us_section_hero_area_1_title {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .egoras_logos_cont {
+    justify-content: center;
+  }
+  .egoras_logos_cont_1 {
+    width: 25%;
+  }
+  .egoras_logos_cont_1_img {
+    width: 25px;
+  }
+  .egoras_logos_cont_1_txt {
+    font-size: 14px;
+  }
+  .about_us_section_hero_area_2_img_container_img_dark {
+    width: 80%;
+    margin: auto;
+  }
+  .about_us_section_hero_area_2_txt_container {
+    font-size: 18px;
+  }
+  .advantages_section_area_1 {
+    width: 100%;
+    font-size: 32px;
+  }
+  .advantages_section_area_2 {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .egoras_logos_cont_1 {
+    gap: 5px;
+    width: 30%;
+  }
+  .egoras_logos_cont_1_img {
+    width: 20px;
+  }
+  .egoras_logos_cont_1_txt {
+    font-size: 10px;
+  }
 }
