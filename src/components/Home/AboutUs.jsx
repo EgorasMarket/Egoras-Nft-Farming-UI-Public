@@ -607,6 +607,7 @@ const AboutUs = () => {
               <a
                 href="https://t.me/egorasmarket"
                 className="join_community_area1_btn"
+                target="_blank"
               >
                 <button className="join_community_area1_btn_btn">
                   Join Telegram <EastIcon className="arrow_join_icon" />
