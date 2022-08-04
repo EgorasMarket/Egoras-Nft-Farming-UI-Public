@@ -38,50 +38,7 @@ import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 
-// ===========
-// ===========
-// ===========
-// ===========
-
-// const submitKyc = (email, firstName, lastName) => async (dispatch) => {
-//   const config = {
-//     headers: {
-//       Accept: "*",
-//       "Content-Type": "application/json",
-//       "Access-Control-Allow-Origin": "*",
-//       timeout: 1000,
-//     },
-//   };
-
-//   const body = JSON.stringify({
-//     email,
-//     firstName,
-//     lastName,
-//   });
-
-//   console.log(body);
-
-//   try {
-//     const res = await axios.post(api_url + "/api/kyc/initialize", body, config);
-//     console.log(res);
-//     return {
-//       status: true,
-//       data: res.data,
-//     };
-//   } catch (err) {
-//     console.log(err);
-//     return {
-//       success: false,
-//       data: err.response,
-//     };
-//   }
-// };
-
-// ===========
-// ===========
-// ===========
 const DashBoardLendPage = ({ submitKyc, auth }) => {
   const context = useWeb3React();
   const {
@@ -113,6 +70,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   const [ref_code, setRef_code] = useState("");
   const { step, incrementStep, decrementStep } = useStepper(0, 3);
   const [value, setValue] = React.useState(null);
+  const [country, setCountry] = React.useState("");
+  const [getRef, setGetRef] = React.useState("");
 
   const [kyc, setKyc] = useState({
     email: "",
@@ -135,6 +94,9 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   };
 
   useEffect(() => {
+    if (typeof localStorage.referer != "undefined") {
+      setGetRef(localStorage.getItem("referer"));
+    }
     console.log(account, auth);
     if (auth.user == null || auth.user.payload == null) {
       console.log("auth is empty");
@@ -203,9 +165,109 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   const onChangeKyc = (e) => {
     console.log(e.target.value);
     setKyc({ ...kyc, [e.target.name]: e.target.value });
+    // validateInputs(e.target.value);
   };
 
   const submitKycDetails = async (e) => {
+    let postData;
+    let countryData = {
+      address: address,
+      country,
+    };
+
+    if (!account) {
+      console.log("Please connect your wallet");
+      alert("Please connect your wallet");
+      return;
+    }
+
+    console.log(typeof localStorage.referer);
+
+    postData = JSON.stringify({
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      address: address,
+      // ref_code: localStorage.getItem('referer'),
+      ref_code:
+        typeof localStorage.referer != "undefined"
+          ? localStorage.getItem("referer")
+          : "",
+      username: username,
+    });
+
+    console.log("====================================");
+    console.log(postData);
+    console.log("====================================");
+    try {
+      const res = await axios.post(
+        api_url + "/api/user/submit/users/country",
+        countryData,
+        config
+      );
+      console.log(res);
+      // window.location.href = res.data.session.redirectUrl;
+      // console.log(res.data.session.redirectUrl);
+      // console.log(res.data.status);
+
+      alert("Upladed successfully");
+    } catch (err) {
+      console.log(err.response);
+    }
+  };
+  const validateInputs = (input) => {
+    //check firstname
+    if (!input) {
+      return false;
+    }
+  };
+
+  const updateKycDetails = async (e) => {
+    alert("welcome");
+
+    let postData;
+
+    if (!account) {
+      console.log("Please connect your wallet");
+      alert("Please connect your wallet");
+      return;
+    }
+
+    console.log(typeof localStorage.referer);
+
+    postData = JSON.stringify({
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      address: address,
+      // ref_code: localStorage.getItem('referer'),
+      ref_code:
+        typeof localStorage.referer != "undefined"
+          ? localStorage.getItem("referer")
+          : "",
+
+      username: username,
+    });
+
+    console.log("====================================");
+    console.log(postData);
+    console.log("====================================");
+    try {
+      const res = await axios.post(
+        api_url + "/api/kyc/initialize",
+        postData,
+        config
+      );
+
+      alert("Upladed successfully");
+
+      toggleOnBoardUserDiv();
+    } catch (err) {
+      console.log(err.response);
+    }
+  };
+
+  const submitKycDetails_bkp = async (e) => {
     let postData;
 
     if (typeof localStorage.referer != "undefined") {
@@ -218,7 +280,11 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
         firstName: firstName,
         lastName: lastName,
         address: address,
-        ref_code: localStorage.getItem("referer"),
+        // ref_code: localStorage.getItem('referer'),
+        ref_code:
+          typeof localStorage.referer != "undefined"
+            ? localStorage.getItem("referer")
+            : "",
         username: username,
       });
     } else {
@@ -237,7 +303,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
     console.log("====================================");
     try {
       const res = await axios.post(
-        api_url + "/api/kyc/initialize",
+        api_url + "/api/user/submit/users/country",
         postData,
         config
       );
@@ -909,19 +975,24 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                     verification
                     <div className="subMitDetails_cont_input_body">
                       <div className="subMitDetails_cont_input_body_cont1">
-                        Country{" "}
+                        Country
                         <CountryDropdown
                           id="country_id"
                           className="country_select_input"
                           preferredCountries={["gb", "us"]}
-                          value=""
-                          handleChange={(e) => console.log(e.target.value)}
+                          value={country}
+                          handleChange={(e) => {
+                            setCountry(e.target.value);
+                            console.log(
+                              e.target.value.split("(", 1).toString()
+                            );
+                          }}
                         ></CountryDropdown>
                       </div>
                       <div className="button_comply_cube_div">
                         <button
                           className="proceed_to_cube_btn"
-                          // onClick={submitKycDetails}
+                          onClick={submitKycDetails}
                         >
                           Submit
                         </button>
@@ -1007,15 +1078,15 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                             type="email"
                             className="submitDetails_cont_input_area"
                             name="ref_code"
-                            value={ref_code}
+                            value={getRef}
                           />
                         </div>
                         <div className="button_comply_cube_div">
                           <button
                             className="proceed_to_cube_btn"
-                            onClick={submitKycDetails}
+                            onClick={updateKycDetails}
                           >
-                            Proceed to complycube
+                            Save Information
                           </button>
                         </div>
                       </div>
