@@ -4,7 +4,7 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import "../../../css/dashboardLend.css";
 import CloseIcon from "@mui/icons-material/Close";
 import CircleIcon from "@mui/icons-material/Circle";
-
+import { loadUser } from "../../../actions/auth";
 import { connect } from "react-redux";
 import EastIcon from "@mui/icons-material/East";
 import { API_URL as api_url } from "../../../actions/types";
@@ -180,6 +180,12 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
         console.log(err); // "oh, no!"
       });
   }, []);
+
+  useEffect(async () => {
+    if (account) {
+      console.log(account, auth, "res res res res res res ");
+    }
+  }, [account, auth]);
 
   useEffect(() => {
     axios

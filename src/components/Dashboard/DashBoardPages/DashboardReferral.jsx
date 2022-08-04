@@ -253,7 +253,7 @@ const DashboardReferral = ({ auth }) => {
     tooltip.style.display = "none";
   }
 
-  console.log(library._network, "library , library");
+  // console.log(library._network.name, "library , library");
   useEffect(
     async (e) => {
       if (account) {
