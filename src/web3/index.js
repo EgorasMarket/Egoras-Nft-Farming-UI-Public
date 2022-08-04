@@ -1,16 +1,16 @@
-import { Contract } from "@ethersproject/contracts";
-import ORACLE from "./contracts/Price.json";
-import LOAN from "./contracts/Loan.json";
-import EX from "./contracts/exchange.json";
-import erc20 from "./contracts/erc20.json";
-import erc22 from "./contracts/erc22.json";
-import EgorasLoanV2Facet from "./contracts/V2/EgorasLoanV2Facet.json";
-import EgorasLoanV2ReferralFacet from "./contracts/V2/EgorasLoanV2ReferralFacet.json";
-import EgorasPriceOracleFacet from "./contracts/EgorasPriceOracleFacet.json";
+import { Contract } from '@ethersproject/contracts';
+import ORACLE from './contracts/Price.json';
+import LOAN from './contracts/Loan.json';
+import EX from './contracts/exchange.json';
+import erc20 from './contracts/erc20.json';
+import erc22 from './contracts/erc22.json';
+import EgorasLoanV2Facet from './contracts/V2/EgorasLoanV2Facet.json';
+import EgorasLoanV2ReferralFacet from './contracts/V2/EgorasLoanV2ReferralFacet.json';
+import EgorasPriceOracleFacet from './contracts/EgorasPriceOracleFacet.json';
 
-import EgorasSwapFacet from "./contracts/EgorasSwapFacet.json";
-import COINS from "./contracts/V2/coins.json";
-import Contract_Address from "./contracts/Contract_Address.json";
+import EgorasSwapFacet from './contracts/EgorasSwapFacet.json';
+import COINS from './contracts/V2/coins.json';
+import Contract_Address from './contracts/Contract_Address.json';
 const dynamicInstance = (signer, abi, address) => {
   return new Contract(address, abi, signer);
 };
@@ -18,7 +18,11 @@ const contractInstance = (signer) => {
   return new Contract(LOAN.address, LOAN.abi, signer);
 };
 const contractEgorasLoanV2Instance = (signer) => {
-  return new Contract(EgorasLoanV2Facet.address, EgorasLoanV2Facet.abi, signer);
+  return new Contract(
+    EgorasLoanV2Facet.address,
+    EgorasLoanV2Facet.abi,
+    signer
+  );
 };
 const contractEgorasLoanV2ReferralFacet = (signer) => {
   return new Contract(
@@ -27,7 +31,12 @@ const contractEgorasLoanV2ReferralFacet = (signer) => {
     signer
   );
 };
-const initContract = async (baseAddress, tokenAddress, ticker, signer) => {
+const initContract = async (
+  baseAddress,
+  tokenAddress,
+  ticker,
+  signer
+) => {
   try {
     const instance = dynamicInstance(
       signer,
@@ -49,7 +58,9 @@ const initContract = async (baseAddress, tokenAddress, ticker, signer) => {
     console.log(error);
     return {
       message:
-        typeof error.data === "undefined" ? error.message : error.data.message,
+        typeof error.data === 'undefined'
+          ? error.message
+          : error.data.message,
       status: false,
     };
   }
@@ -66,25 +77,25 @@ const erc20Instance = (address, signer) => {
   return new Contract(address, erc20.abi, signer);
 };
 const erc20Instance2 = (signer, coin) => {
-  console.log(erc22, coin, "IN");
-  let address = "";
+  console.log(erc22, coin, 'IN');
+  let address = '';
   switch (coin) {
-    case "egr":
+    case 'egr':
       address = erc22.egr;
       break;
-    case "engn":
+    case 'engn':
       address = erc22.engn;
       break;
-    case "egc":
+    case 'egc':
       address = erc22.egc;
       break;
-    case "eusd":
+    case 'eusd':
       address = erc22.eusd;
       break;
     default:
       break;
   }
-  console.log(address, "GS");
+  console.log(address, 'GS');
   return new Contract(address, erc22.abi, signer);
 };
 const transactReceipt = async (hash, library) => {
@@ -106,7 +117,7 @@ const transactReceipt = async (hash, library) => {
 const getPrice = async (ticker, signer) => {
   try {
     const instance = contractOracleInstance(signer);
-    let result = await instance.price(ticker + "-XX");
+    let result = await instance.price(ticker + '-XX');
     return {
       message: result,
       status: true,
@@ -121,7 +132,7 @@ const getPrice = async (ticker, signer) => {
 };
 
 const repay = async (id, amoumt, isDefault, signer) => {
-  console.log(id, amoumt, isDefault, "Payback");
+  console.log(id, amoumt, isDefault, 'Payback');
   try {
     const instance = contractInstance(signer);
 
@@ -140,17 +151,31 @@ const repay = async (id, amoumt, isDefault, signer) => {
   }
 };
 
-const open = async (isDefault, collateral, amoumt, ticker, signer) => {
-  console.log(isDefault, collateral, amoumt, ticker, "max man");
+const open = async (
+  isDefault,
+  collateral,
+  amoumt,
+  ticker,
+  signer
+) => {
+  console.log(isDefault, collateral, amoumt, ticker, 'max man');
   try {
     const instance = contractInstance(signer);
     let result;
     if (isDefault) {
-      result = await instance.openDefaultAsset(amoumt, ticker + "-XX", {
-        value: collateral,
-      });
+      result = await instance.openDefaultAsset(
+        amoumt,
+        ticker + '-XX',
+        {
+          value: collateral,
+        }
+      );
     } else {
-      result = await instance.open(collateral, amoumt, ticker + "-XX");
+      result = await instance.open(
+        collateral,
+        amoumt,
+        ticker + '-XX'
+      );
     }
 
     return {
@@ -186,7 +211,9 @@ const getPriceImpl = async (ticker, signer) => {
   } catch (error) {
     return {
       message:
-        typeof error.data == "undefined" ? error.message : error.data.message,
+        typeof error.data == 'undefined'
+          ? error.message
+          : error.data.message,
       status: false,
     };
   }
@@ -207,7 +234,9 @@ const swapBase = async (amount, isBase, signer) => {
   } catch (error) {
     return {
       message:
-        typeof error.data == "undefined" ? error.message : error.data.message,
+        typeof error.data == 'undefined'
+          ? error.message
+          : error.data.message,
       status: false,
     };
   }
@@ -228,7 +257,9 @@ const swapImpl = async (amount, isBase, signer) => {
   } catch (error) {
     return {
       message:
-        typeof error.data == "undefined" ? error.message : error.data.message,
+        typeof error.data == 'undefined'
+          ? error.message
+          : error.data.message,
       status: false,
     };
   }
@@ -256,12 +287,12 @@ const lendUS = async (branch, amount, loanID, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error.message, "errorr message index");
+    console.log(error.message, 'errorr message index');
     if (
-      error.data.message ===
-      "execution reverted: Already a lender, you can only top up!"
+      error.message ===
+      'execution reverted: Already a lender, you can only top up!'
     ) {
-      console.log("you have leneded now backup");
+      console.log('you have leneded now backup');
       try {
         const instance = contractEgorasLoanV2Instance(signer);
         let result;
@@ -271,7 +302,7 @@ const lendUS = async (branch, amount, loanID, signer) => {
           status: true,
         };
       } catch (error) {
-        console.log(error.data, "errorr message index");
+        console.log(error.data, 'errorr message index');
         return {
           message: error,
           status: false,
@@ -412,22 +443,33 @@ const burnAccumulatedDividend = async (signer) => {
 
 // function lend(uint amount, address branch, uint loanID, bool isWelcomebonus)
 
-const lend = async (amount, branch, loanID, isWelcomebonus, signer) => {
+const lend = async (
+  amount,
+  branch,
+  loanID,
+  isWelcomebonus,
+  signer
+) => {
   try {
     const instance = contractEgorasLoanV2ReferralFacet(signer);
     let result;
-    result = await instance.lend(amount, branch, loanID, isWelcomebonus);
+    result = await instance.lend(
+      amount,
+      branch,
+      loanID,
+      isWelcomebonus
+    );
     return {
       message: result,
       status: true,
     };
   } catch (error) {
-    console.log(error.message, "errorr message index");
+    console.log(error.message, 'errorr message index');
     if (
       error.data.message ===
-      "execution reverted: Already a lender, you can only top up!"
+      'execution reverted: Already a lender, you can only top up!'
     ) {
-      console.log("you have leneded now backup");
+      console.log('you have leneded now backup');
       try {
         //    function topup(uint amount,uint loanID, bool isWelcomebonus)
         const instance = contractEgorasLoanV2ReferralFacet(signer);
@@ -438,7 +480,7 @@ const lend = async (amount, branch, loanID, isWelcomebonus, signer) => {
           status: true,
         };
       } catch (error) {
-        console.log(error.data, "errorr message index");
+        console.log(error.data, 'errorr message index');
         return {
           message: error,
           status: false,
@@ -538,11 +580,11 @@ const topup = async (isDefault, id, ticker, collateral, signer) => {
     const instance = contractInstance(signer);
     let result;
     if (isDefault) {
-      result = await instance.topupDefaultAsset(id, ticker + "-XX", {
+      result = await instance.topupDefaultAsset(id, ticker + '-XX', {
         value: collateral,
       });
     } else {
-      result = await instance.topup(id, ticker + "-XX", collateral);
+      result = await instance.topup(id, ticker + '-XX', collateral);
     }
     return {
       message: result,
@@ -560,10 +602,10 @@ const getLatestLoan = async (user, ticker, signer) => {
   try {
     const instance = contractInstance(signer);
 
-    let result = await instance.___pendingLoan(user, ticker + "-XX");
+    let result = await instance.___pendingLoan(user, ticker + '-XX');
 
     if (result == true) {
-      let loan = await instance.__getLoanInfo(ticker + "-XX", user);
+      let loan = await instance.__getLoanInfo(ticker + '-XX', user);
       return {
         message: result,
         loanDetails: loan,
@@ -586,7 +628,7 @@ const getLatestLoan = async (user, ticker, signer) => {
 const getTickerInfo = async (ticker, signer) => {
   try {
     const instance = contractInstance(signer);
-    let result = await instance.__tickerInfo(ticker + "-XX");
+    let result = await instance.__tickerInfo(ticker + '-XX');
 
     return {
       message: result,
@@ -606,7 +648,9 @@ const checkAllowance = async (address, owner, amount, signer) => {
     const instance = erc20Instance(address, signer);
     let result = await instance.allowance(owner, LOAN.address);
 
-    if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
+    if (
+      parseFloat(result.toString()) >= parseFloat(amount.toString())
+    ) {
       return {
         status: true,
       };
@@ -625,9 +669,14 @@ const checkAllowance = async (address, owner, amount, signer) => {
 const checkAllowanceL = async (owner, amount, signer) => {
   try {
     const instance = erc20Instance(COINS.engn, signer);
-    let result = await instance.allowance(owner, EgorasLoanV2Facet.address);
+    let result = await instance.allowance(
+      owner,
+      EgorasLoanV2Facet.address
+    );
 
-    if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
+    if (
+      parseFloat(result.toString()) >= parseFloat(amount.toString())
+    ) {
       return {
         status: true,
       };
@@ -664,7 +713,10 @@ const getEgcSmartContractBalnce = async (
 const unluckToken2 = async (amount, signer) => {
   try {
     const instance = erc20Instance(COINS.engn, signer);
-    let result = await instance.approve(EgorasLoanV2Facet.address, amount);
+    let result = await instance.approve(
+      EgorasLoanV2Facet.address,
+      amount
+    );
     return {
       message: result.hash,
       status: true,
@@ -699,7 +751,10 @@ const unluckToken3 = async (amount, signer, coin) => {
   console.log(amount, signer, coin);
   try {
     const instance = erc20Instance2(signer, coin);
-    let result = await instance.approve(Contract_Address.address, amount);
+    let result = await instance.approve(
+      Contract_Address.address,
+      amount
+    );
     return {
       message: result.hash,
       status: true,
@@ -708,7 +763,9 @@ const unluckToken3 = async (amount, signer, coin) => {
     console.log(error);
     return {
       message:
-        typeof error.data == "undefined" ? error.message : error.data.message,
+        typeof error.data == 'undefined'
+          ? error.message
+          : error.data.message,
       status: false,
     };
   }
@@ -720,14 +777,23 @@ const checkAllowance2 = async (owner, amount, signer, coin) => {
     coin,
     signer,
     Contract_Address.address,
-    "THE alloancw"
+    'THE alloancw'
   );
   try {
     const instance = erc20Instance2(signer, coin);
 
-    let result = await instance.allowance(owner, Contract_Address.address);
-    console.log(result.toString(), "Allowance check!", amount.toString());
-    if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
+    let result = await instance.allowance(
+      owner,
+      Contract_Address.address
+    );
+    console.log(
+      result.toString(),
+      'Allowance check!',
+      amount.toString()
+    );
+    if (
+      parseFloat(result.toString()) >= parseFloat(amount.toString())
+    ) {
       return {
         status: true,
       };
@@ -766,7 +832,11 @@ const exchange = async (ticker, amoumt, isBase, signer) => {
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.exchange(ticker + "-XX", amoumt, isBase);
+    let result = await instance.exchange(
+      ticker + '-XX',
+      amoumt,
+      isBase
+    );
 
     return {
       message: result,
@@ -785,7 +855,7 @@ const getDefault = async (ticker, amoumt, signer) => {
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.getDefault(ticker + "-XX", amoumt);
+    let result = await instance.getDefault(ticker + '-XX', amoumt);
 
     return {
       message: result,
@@ -805,7 +875,7 @@ const withdrawable = async (ticker, isDefault, _provider, signer) => {
     const instance = contractEXInstance(signer);
 
     let result = await instance.withdrawable(
-      ticker + "-XX",
+      ticker + '-XX',
       isDefault,
       _provider
     );
@@ -827,7 +897,7 @@ const removeLiquidity = async (ticker, signer) => {
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.removeLiquidity(ticker + "-XX");
+    let result = await instance.removeLiquidity(ticker + '-XX');
 
     return {
       message: result,
@@ -847,7 +917,9 @@ const addLiquidity = async (ticker, amoumt, signer) => {
     const instance = contractEXInstance(signer);
 
     console.log(amoumt, ticker);
-    let result = await instance.addLiquidity(ticker + "-XX", { value: amoumt });
+    let result = await instance.addLiquidity(ticker + '-XX', {
+      value: amoumt,
+    });
 
     return {
       message: result,
@@ -862,11 +934,11 @@ const addLiquidity = async (ticker, amoumt, signer) => {
   }
 };
 const exchangeDefault = async (ticker, amoumt, signer) => {
-  console.log(ticker, amoumt, "GET THE DEFAULT");
+  console.log(ticker, amoumt, 'GET THE DEFAULT');
   try {
     const instance = contractEXInstance(signer);
 
-    let result = await instance.exchangeDefault(ticker + "-XX", {
+    let result = await instance.exchangeDefault(ticker + '-XX', {
       value: amoumt,
     });
 
@@ -889,8 +961,8 @@ const crossexchange = async (from, to, amoumt, signer) => {
     const instance = contractEXInstance(signer);
 
     let result = await instance.crossExchange(
-      from + "-XX",
-      to + "-XX",
+      from + '-XX',
+      to + '-XX',
       amoumt,
       { value: 0 }
     );

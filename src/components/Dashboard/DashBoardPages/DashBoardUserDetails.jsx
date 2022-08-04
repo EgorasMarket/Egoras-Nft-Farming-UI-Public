@@ -3,6 +3,8 @@ import jazzicon from "@metamask/jazzicon";
 import Timer from "./Timer";
 import { addDays, format } from "date-fns";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+
 import StarRateIcon from "@mui/icons-material/StarRate";
 import {
   Web3ReactProvider,
@@ -23,7 +25,12 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import axios from "axios";
 import { config } from "../../../actions/Config";
-import { API_URL as api_url } from "../../../actions/types";
+import {
+  API_URL as api_url,
+  PENDING,
+  COMPLETED,
+  CANCELLED,
+} from "../../../actions/types";
 // import { numberWithCommas } from "../../static/static";
 import { formatDuration, intervalToDuration } from "date-fns";
 import { getUserStats } from "../../../web3/index";
@@ -42,7 +49,7 @@ import {
   draw,
 } from "../../../web3/index";
 import { parseEther, formatEther } from "@ethersproject/units";
-const DashBoardUserDetails = () => {
+const DashBoardUserDetails = ({ auth }) => {
   const [walletAddr, setWalletAddr] = useState(
     "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
   );
@@ -104,6 +111,7 @@ const DashBoardUserDetails = () => {
       element.appendChild(icon);
     }
   }, [account, avatarRef]);
+  console.log("i am here");
   useEffect(() => {
     if (account) {
       axios
@@ -215,6 +223,30 @@ const DashBoardUserDetails = () => {
     },
     [account]
   );
+  const redeem = () => {
+    console.log(auth);
+
+    if (!auth || !auth.user.payload.address) {
+      console.log("cannnot redeem , no address was parsed");
+      return;
+    }
+
+    const { kyc_status, status } = auth.user.payload;
+
+    switch (kyc_status) {
+      case PENDING:
+        console.log(
+          "You have to complete your KYC before you can make withdrawal"
+        );
+        break;
+
+      case CANCELLED:
+        alert("Your KYC process have been cancelled, Please contact support ");
+        break;
+      case COMPLETED:
+        alert("you can proceed now");
+    }
+  };
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -581,8 +613,12 @@ const DashBoardUserDetails = () => {
                       {/* <span className="reward_txt">Redeem Reward In</span> */}
 
                       <span className="reward_btn_div">
-                        <button className="reward_btn" disabled={disable}>
-                          Reedem
+                        <button
+                          className="reward_btn"
+                          disabled={disable}
+                          onClick={redeem}
+                        >
+                          Reedeem
                         </button>
                       </span>
                     </div>
@@ -731,4 +767,10 @@ const DashBoardUserDetails = () => {
   );
 };
 
-export default DashBoardUserDetails;
+// export default DashBoardUserDetails;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+// let  res = await getLogin2(
+export default connect(mapStateToProps, {})(DashBoardUserDetails);

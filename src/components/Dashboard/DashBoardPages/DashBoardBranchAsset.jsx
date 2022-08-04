@@ -1,20 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
-import "../../../css/dashboard_branch_assets.css";
-import Chart from "react-apexcharts";
-import { Link } from "react-router-dom";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import Accordion from "../Accordion";
-import Sparkline from "../../static/Sparkline";
-import CircleIcon from "@mui/icons-material/Circle";
-import EastIcon from "@mui/icons-material/East";
-import InventoryIcon from "@mui/icons-material/Inventory";
-import CloseIcon from "@mui/icons-material/Close";
-import ReceiptIcon from "@mui/icons-material/Receipt";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import CopyAllIcon from "@mui/icons-material/CopyAll";
+import React, { useState, useEffect, useContext } from 'react';
+import '../../../css/dashboard_branch_assets.css';
+import Chart from 'react-apexcharts';
+import { Link } from 'react-router-dom';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import Accordion from '../Accordion';
+import Sparkline from '../../static/Sparkline';
+import CircleIcon from '@mui/icons-material/Circle';
+import EastIcon from '@mui/icons-material/East';
+import InventoryIcon from '@mui/icons-material/Inventory';
+import CloseIcon from '@mui/icons-material/Close';
+import ReceiptIcon from '@mui/icons-material/Receipt';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import CopyAllIcon from '@mui/icons-material/CopyAll';
 // import ProgressBar from 'react-animated-progress-bar';
 
-import data from "../../static/FakerModule";
+import data from '../../static/FakerModule';
 
 import {
   AreaChart,
@@ -24,19 +24,19 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-} from "recharts";
-import { UserContext } from "../../context/Context";
-import axios from "axios";
-import Nodata from "./nodataComponent/Nodata";
-import { numberWithCommas } from "../../static/static";
-import { config } from "../../../actions/Config";
+} from 'recharts';
+import { UserContext } from '../../context/Context';
+import axios from 'axios';
+import Nodata from './nodataComponent/Nodata';
+import { numberWithCommas } from '../../static/static';
+import { config } from '../../../actions/Config';
 // import { API_URL as api_url } from "../actions/types";
-import { API_URL as api_url } from "../../../actions/types";
+import { API_URL as api_url } from '../../../actions/types';
 import {
   Web3ReactProvider,
   useWeb3React,
   UnsupportedChainIdError,
-} from "@web3-react/core";
+} from '@web3-react/core';
 
 const DashBoardBranchAsset = ({ match }) => {
   const context = useWeb3React();
@@ -53,61 +53,70 @@ const DashBoardBranchAsset = ({ match }) => {
 
   const [loans, setLoans] = useState([]);
   const [BranchDetails, setBranchDetails] = useState({
-    branchName: "",
-    amount: "",
-    funded: "",
+    branchName: '',
+    amount: '',
+    funded: '',
   });
   const [rumuName, setRumuName] = useState(false);
   const [agipName, setAgipName] = useState(false);
   const [graphAmount, setgraphamount] = useState(0);
   const [oyName, setOyName] = useState(false);
   const [txnhash, setTxnHash] = useState(match.params.branchAddress);
-  const [totalPoolValue, setTotalPoolValue] = useState("");
-  const [graphData, setGraphData] = useState("");
+  const [totalPoolValue, setTotalPoolValue] = useState('');
+  const [graphData, setGraphData] = useState('');
   const [graphData2, setGraphData2] = useState([]);
   const [options, setObject] = useState({
     chart: {
-      id: "basic-bar",
+      id: 'basic-bar',
     },
     xaxis: {
-      categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999],
+      categories: [
+        1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999,
+      ],
     },
   });
   const [series, setSeries] = useState([
     {
-      name: "series-1",
+      name: 'series-1',
       data: [14300, 14400, 144500, 144600, 14300, 1400, 1500000],
     },
   ]);
-  const [activeBtn, setActivrBtn] = useState("Ongoing");
-  const [activeLink, setActiveLink] = useState("");
-  const [assetDetailModal, setAssetDetailModal] = useState("");
+  const [activeBtn, setActivrBtn] = useState('Ongoing');
+  const [activeLink, setActiveLink] = useState('');
+  const [assetDetailModal, setAssetDetailModal] = useState('');
   const [imgDiv, setImgDiv] = useState(false);
   const currentPage = window.location.pathname;
-  const urlArr = currentPage.split("/");
+  const urlArr = currentPage.split('/');
 
   useEffect(() => {
-    if (currentPage === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
-      setActiveLink("Overview");
+    if (
+      currentPage ===
+      '/dashboard/earn/pool/' + urlArr[4] + '/detail'
+    ) {
+      setActiveLink('Overview');
     } else if (
       currentPage ===
-      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
+      '/dashboard/earn/pool/detail/branch/' + urlArr[6] + '/asset'
     ) {
-      setActiveLink("Asset");
+      setActiveLink('Asset');
     } else if (
       currentPage ===
-      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
+      '/dashboard/earn/pool/detail/' + urlArr[5] + '/transactions'
     ) {
-      setActiveLink("transaction");
+      setActiveLink('transaction');
     }
   });
 
   useEffect(() => {
     // if (account) {
     axios
-      .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
+      .get(
+        api_url + '/api/branch/transactions/' + txnhash,
+        null,
+        config
+      )
       .then((data) => {
-        console.log(data.data.payload, "made man");
+        console.log(data.data.payload, 'made man');
 
         setLoans(data.data.payload);
       })
@@ -132,9 +141,9 @@ const DashBoardBranchAsset = ({ match }) => {
   useEffect(() => {
     // if (account) {
     axios
-      .get(api_url + "/api/lend/unique/" + txnhash, null, config)
+      .get(api_url + '/api/lend/unique/' + txnhash, null, config)
       .then((data) => {
-        console.log(data.data.payload, "powerful333333");
+        console.log(data.data.payload, 'powerful333333');
         // console.log(txnhash);
         // setloans(data.data.payload);
       })
@@ -147,9 +156,12 @@ const DashBoardBranchAsset = ({ match }) => {
   useEffect(() => {
     // if (account) {
     axios
-      .get(api_url + "/api/branch/specific/" + txnhash, null, config)
+      .get(api_url + '/api/branch/specific/' + txnhash, null, config)
       .then((data) => {
-        console.log(data.data.payload[0].total, "powerfulttt5tt333333");
+        console.log(
+          data.data.payload[0].total,
+          'powerfulttt5tt333333'
+        );
         setTotalPoolValue(data.data.payload[0].total);
         // console.log(txnhash);
         // setloans(data.data.payload);
@@ -167,10 +179,10 @@ const DashBoardBranchAsset = ({ match }) => {
   useEffect(() => {
     // if (account) {
     axios
-      .get(api_url + "/api/branch/chart/" + txnhash, null, config)
+      .get(api_url + '/api/branch/chart/' + txnhash, null, config)
       .then((data) => {
-        console.log(data.data.payload, "powerfulttt5tt333333");
-        console.log(data.data.payload[0], "powerfulttt5tt333333");
+        console.log(data.data.payload, 'powerfulttt5tt333333');
+        console.log(data.data.payload[0], 'powerfulttt5tt333333');
         // setGraphData2(data.data.payload);
         // setGraphData(data.data.payload);
         const temp = data.data.payload;
@@ -184,8 +196,8 @@ const DashBoardBranchAsset = ({ match }) => {
           return parseInt(data.amount);
         });
 
-        console.log(array, "higi");
-        console.log(temp, "temppppoppp");
+        console.log(array, 'higi');
+        console.log(temp, 'temppppoppp');
 
         setSeries([{ data: array }]);
         // setgraphamount(parseInt(graphData.amount).toFixed(0));
@@ -196,7 +208,7 @@ const DashBoardBranchAsset = ({ match }) => {
     //   return;
     // }
   }, []);
-  console.log(graphData2, "grapodtatatata");
+  console.log(graphData2, 'grapodtatatata');
   // const values = [];
   // for (let i = 0; i < 100; i++) {
   //   values.push({
@@ -204,7 +216,7 @@ const DashBoardBranchAsset = ({ match }) => {
   //     value: graphData2[0].value,
   //   });
   // }
-  console.log(series, "ersrresrr");
+  console.log(series, 'ersrresrr');
   // var grapDataa =
   //   graphData &&
   //   graphData.length > 0 &&
@@ -215,8 +227,8 @@ const DashBoardBranchAsset = ({ match }) => {
   //     graphData.map((graphDataList) => graphDataList.amount)
   // );
   const closeAssetDetailModal = () => {
-    setAssetDetailModal("");
-    console.log("i am not here");
+    setAssetDetailModal('');
+    console.log('i am not here');
   };
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);
@@ -224,9 +236,9 @@ const DashBoardBranchAsset = ({ match }) => {
 
   useEffect(() => {
     axios
-      .get(api_url + "/api/lend/all/" + txnhash, null, config)
+      .get(api_url + '/api/lend/all/' + txnhash, null, config)
       .then((data) => {
-        console.log(data.data.payload[0].name, "teeyuwiuoyuwuyi");
+        console.log(data.data.payload[0].name, 'teeyuwiuoyuwuyi');
 
         // setloans(data.data.payload);
         setBranchDetails({
@@ -234,9 +246,9 @@ const DashBoardBranchAsset = ({ match }) => {
           amount: data.data.payload[0].amount,
           funded: data.data.payload[0].funded,
         });
-        let babara = data.data.payload[0].name.includes("R");
-        let babara2 = data.data.payload[0].name.includes("A");
-        let babara3 = data.data.payload[0].name.includes("O");
+        let babara = data.data.payload[0].name.includes('R');
+        let babara2 = data.data.payload[0].name.includes('A');
+        let babara3 = data.data.payload[0].name.includes('O');
         console.log(data.data.payload[0].name);
         setRumuName(babara);
         setAgipName(babara2);
@@ -251,59 +263,59 @@ const DashBoardBranchAsset = ({ match }) => {
   }, []);
   var btc = [
     {
-      timestamp: "2022-07-16T09:37:07.000Z",
+      timestamp: '2022-07-16T09:37:07.000Z',
       value: 225000,
     },
     {
-      timestamp: "2022-07-16T09:37:07.000Z",
+      timestamp: '2022-07-16T09:37:07.000Z',
       value: 81900,
     },
     {
-      timestamp: "2022-07-16T15:09:00.000Z",
+      timestamp: '2022-07-16T15:09:00.000Z',
       value: 15900,
     },
     {
-      timestamp: "2022-07-16T15:20:00.000Z",
+      timestamp: '2022-07-16T15:20:00.000Z',
       value: 15900,
     },
     {
-      timestamp: "2022-07-16T15:44:01.000Z",
+      timestamp: '2022-07-16T15:44:01.000Z',
       value: 31800,
     },
     {
-      timestamp: "2022-07-18T12:40:00.000Z",
+      timestamp: '2022-07-18T12:40:00.000Z',
       value: 100000,
     },
     {
-      timestamp: "2022-07-18T13:56:00.000Z",
+      timestamp: '2022-07-18T13:56:00.000Z',
       value: 183190,
     },
     {
-      timestamp: "2022-07-18T14:25:00.000Z",
+      timestamp: '2022-07-18T14:25:00.000Z',
       value: 545200,
     },
     {
-      timestamp: "2022-07-18T14:59:01.000Z",
+      timestamp: '2022-07-18T14:59:01.000Z',
       value: 131900,
     },
     {
-      timestamp: "2022-07-18T15:39:00.000Z",
+      timestamp: '2022-07-18T15:39:00.000Z',
       value: 199900,
     },
     {
-      timestamp: "2022-07-18T16:11:01.000Z",
+      timestamp: '2022-07-18T16:11:01.000Z',
       value: 181700,
     },
     {
-      timestamp: "2022-07-18T16:27:01.000Z",
+      timestamp: '2022-07-18T16:27:01.000Z',
       value: 126700,
     },
     {
-      timestamp: "2022-07-18T16:46:00.000Z",
+      timestamp: '2022-07-18T16:46:00.000Z',
       value: 121600,
     },
   ];
-  console.log(btc, "btcbtcbtbcbtcbbtcb");
+  console.log(btc, 'btcbtcbtbcbtcbbtcb');
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -320,9 +332,9 @@ const DashBoardBranchAsset = ({ match }) => {
               <Link
                 to={`/dashboard/earn/pool/${txnhash}/detail`}
                 className={
-                  activeLink === "Overview"
-                    ? "pool_lend_details_link_active"
-                    : "pool_lend_details_link"
+                  activeLink === 'Overview'
+                    ? 'pool_lend_details_link_active'
+                    : 'pool_lend_details_link'
                 }
               >
                 <DashboardIcon className="asset_overview_link_icon" />
@@ -332,9 +344,9 @@ const DashBoardBranchAsset = ({ match }) => {
               <Link
                 to={`/dashboard/earn/pool/detail/branch/${txnhash}/asset`}
                 className={
-                  activeLink === "Asset"
-                    ? "pool_lend_details_link_active"
-                    : "pool_lend_details_link"
+                  activeLink === 'Asset'
+                    ? 'pool_lend_details_link_active'
+                    : 'pool_lend_details_link'
                 }
               >
                 <InventoryIcon className="asset_overview_link_icon" />
@@ -344,9 +356,9 @@ const DashBoardBranchAsset = ({ match }) => {
               <Link
                 to={`/dashboard/earn/pool/detail/${txnhash}/transactions`}
                 className={
-                  activeLink === "transaction"
-                    ? "pool_lend_details_link_active"
-                    : "pool_lend_details_link"
+                  activeLink === 'transaction'
+                    ? 'pool_lend_details_link_active'
+                    : 'pool_lend_details_link'
                 }
               >
                 <ReceiptIcon className="asset_overview_link_icon" />
@@ -358,11 +370,11 @@ const DashBoardBranchAsset = ({ match }) => {
                 <img
                   src={
                     oyName === true
-                      ? "/img/oyigbo_icon.svg"
+                      ? '/img/oyigbo_icon.svg'
                       : agipName === true
-                      ? "/img/agip_icon.svg"
+                      ? '/img/agip_icon.svg'
                       : rumuName === true
-                      ? "/img/rumu_icon.svg"
+                      ? '/img/rumu_icon.svg'
                       : null
                   }
                   alt=""
@@ -392,7 +404,10 @@ const DashBoardBranchAsset = ({ match }) => {
                     Total Asset Value
                   </div>
                   <div className="pool_detail_assets_body_layer_1_cont1_heading_1">
-                    {numberWithCommas(parseInt(totalPoolValue).toFixed(2))} Engn
+                    {numberWithCommas(
+                      parseInt(totalPoolValue).toFixed(2)
+                    )}{' '}
+                    Engn
                   </div>
                 </div>
                 <div className="pool_detail_assets_body_layer_1_cont1_sub_heading">
@@ -420,7 +435,7 @@ const DashBoardBranchAsset = ({ match }) => {
                 </div>
                 <div
                   className="assets_chart_area1"
-                  style={{ width: "100%", height: 200 }}
+                  style={{ width: '100%', height: 200 }}
                 >
                   <ResponsiveContainer>
                     <AreaChart
@@ -471,7 +486,7 @@ const DashBoardBranchAsset = ({ match }) => {
                 </div>
                 <div
                   className="assets_chart_area2"
-                  style={{ width: "100%", height: 200 }}
+                  style={{ width: '100%', height: 200 }}
                 >
                   <ResponsiveContainer>
                     <AreaChart
@@ -587,9 +602,9 @@ const DashBoardBranchAsset = ({ match }) => {
                   <div
                     id="Ongoing"
                     className={
-                      activeBtn == "Ongoing"
-                        ? "filter_table_btn1_active"
-                        : "filter_table_btn1"
+                      activeBtn == 'Ongoing'
+                        ? 'filter_table_btn1_active'
+                        : 'filter_table_btn1'
                     }
                     onClick={toggleActiveBtn}
                   >
@@ -598,9 +613,9 @@ const DashBoardBranchAsset = ({ match }) => {
                   <div
                     id="All"
                     className={
-                      activeBtn == "All"
-                        ? "filter_table_btn1_active"
-                        : "filter_table_btn1"
+                      activeBtn == 'All'
+                        ? 'filter_table_btn1_active'
+                        : 'filter_table_btn1'
                     }
                     onClick={toggleActiveBtn}
                   >
@@ -609,9 +624,9 @@ const DashBoardBranchAsset = ({ match }) => {
                   <div
                     id="Closed"
                     className={
-                      activeBtn == "Closed"
-                        ? "filter_table_btn1_active"
-                        : "filter_table_btn1"
+                      activeBtn == 'Closed'
+                        ? 'filter_table_btn1_active'
+                        : 'filter_table_btn1'
                     }
                     onClick={toggleActiveBtn}
                   >
@@ -639,8 +654,12 @@ const DashBoardBranchAsset = ({ match }) => {
                       <th className="branch_asset_heading_titles">
                         Funding Left
                       </th>
-                      <th className="branch_asset_heading_titles ">APY</th>
-                      <th className="branch_asset_heading_titles ">Status</th>
+                      <th className="branch_asset_heading_titles ">
+                        APY
+                      </th>
+                      <th className="branch_asset_heading_titles ">
+                        Status
+                      </th>
                       <th className="branch_asset_heading_titles branch_asset_heading_titles_last"></th>
                     </tr>
                   </thead>
@@ -661,20 +680,22 @@ const DashBoardBranchAsset = ({ match }) => {
                       <div className="no_loans_div_cont">
                         <Nodata />
                         No Pools yet.
-                      </div>{" "}
+                      </div>{' '}
                     </div>
                   ) : (
                     <tbody
                       className="branch_asset_body"
                       id="popular-categories"
                     >
-                      {" "}
+                      {' '}
                       {/* =============== */}
                       {/* =============== */}
                       {/* =============== */}
-                      {activeBtn === "Ongoing"
+                      {activeBtn === 'Ongoing'
                         ? loans
-                            .filter((person) => person.state == "OPEN")
+                            .filter(
+                              (person) => person.state == 'OPEN'
+                            )
                             .map((asset) => {
                               var percentage =
                                 (asset.funded / asset.amount) * 100;
@@ -695,7 +716,8 @@ const DashBoardBranchAsset = ({ match }) => {
                                       />
 
                                       <div className="assets-data-pool_name">
-                                        {asset.title.substring(0, 8) + "..."}
+                                        {asset.title.substring(0, 8) +
+                                          '...'}
                                       </div>
                                     </div>
                                   </td>
@@ -703,7 +725,9 @@ const DashBoardBranchAsset = ({ match }) => {
                                     {/* <div className="assets-data-name_pool_invest_capcity"> */}
                                     <div className="asset_list_body_body_cont_1c">
                                       {numberWithCommas(
-                                        parseInt(asset.amount).toFixed(2)
+                                        parseInt(
+                                          asset.amount
+                                        ).toFixed(2)
                                       )}
                                     </div>
                                     {/* </div> */}
@@ -711,7 +735,9 @@ const DashBoardBranchAsset = ({ match }) => {
                                   <td className="branch_asset_body_row_data  ">
                                     <div className="assets-data-name_pool">
                                       {numberWithCommas(
-                                        parseInt(asset.funded).toFixed(2)
+                                        parseInt(
+                                          asset.funded
+                                        ).toFixed(2)
                                       )}
                                     </div>
                                   </td>
@@ -720,18 +746,22 @@ const DashBoardBranchAsset = ({ match }) => {
                                       <div className="asset_amount_progress_div">
                                         <div className="asset_amount_progress_div_txt"></div>
                                         <label for="file">
-                                          {parseInt(percentage).toFixed()}%
+                                          {parseInt(
+                                            percentage
+                                          ).toFixed()}
+                                          %
                                         </label>
                                         <progress
                                           className={
                                             percentage < 100
-                                              ? "progress_bar progress_bar_progress"
-                                              : "progress_bar"
+                                              ? 'progress_bar progress_bar_progress'
+                                              : 'progress_bar'
                                           }
                                           // "progress_bar"
                                           id="file"
                                           aria-valuenow={
-                                            asset.amount - asset.funded
+                                            asset.amount -
+                                            asset.funded
                                           }
                                           value={asset.funded}
                                           max={asset.amount}
@@ -768,11 +798,11 @@ const DashBoardBranchAsset = ({ match }) => {
                                     <div className="asset_list_body_body_cont_1g">
                                       <button
                                         className={
-                                          asset.state === "OPEN"
-                                            ? "status_btn_ongoing"
-                                            : asset.state === "FILLED"
-                                            ? "status_btn_closed"
-                                            : "status_btn"
+                                          asset.state === 'OPEN'
+                                            ? 'status_btn_ongoing'
+                                            : asset.state === 'FILLED'
+                                            ? 'status_btn_closed'
+                                            : 'status_btn'
                                         }
                                       >
                                         {asset.state}
@@ -785,7 +815,7 @@ const DashBoardBranchAsset = ({ match }) => {
                                 </tr>
                               );
                             })
-                        : activeBtn === "All"
+                        : activeBtn === 'All'
                         ? loans.map((asset) => {
                             var percentage =
                               (asset.funded / asset.amount) * 100;
@@ -805,7 +835,8 @@ const DashBoardBranchAsset = ({ match }) => {
                                     />
 
                                     <div className="assets-data-pool_name">
-                                      {asset.title.substring(0, 8) + "..."}
+                                      {asset.title.substring(0, 8) +
+                                        '...'}
                                     </div>
                                   </div>
                                 </td>
@@ -813,7 +844,9 @@ const DashBoardBranchAsset = ({ match }) => {
                                   {/* <div className="assets-data-name_pool_invest_capcity"> */}
                                   <div className="asset_list_body_body_cont_1c">
                                     {numberWithCommas(
-                                      parseInt(asset.amount).toFixed(2)
+                                      parseInt(asset.amount).toFixed(
+                                        2
+                                      )
                                     )}
                                   </div>
                                   {/* </div> */}
@@ -821,7 +854,9 @@ const DashBoardBranchAsset = ({ match }) => {
                                 <td className="branch_asset_body_row_data  ">
                                   <div className="assets-data-name_pool">
                                     {numberWithCommas(
-                                      parseInt(asset.funded).toFixed(2)
+                                      parseInt(asset.funded).toFixed(
+                                        2
+                                      )
                                     )}
                                   </div>
                                 </td>
@@ -830,13 +865,16 @@ const DashBoardBranchAsset = ({ match }) => {
                                     <div className="asset_amount_progress_div">
                                       <div className="asset_amount_progress_div_txt"></div>
                                       <label for="file">
-                                        {parseInt(percentage).toFixed()}%
+                                        {parseInt(
+                                          percentage
+                                        ).toFixed()}
+                                        %
                                       </label>
                                       <progress
                                         className={
                                           percentage < 100
-                                            ? "progress_bar progress_bar_progress"
-                                            : "progress_bar"
+                                            ? 'progress_bar progress_bar_progress'
+                                            : 'progress_bar'
                                         }
                                         // "progress_bar"
                                         id="file"
@@ -878,11 +916,11 @@ const DashBoardBranchAsset = ({ match }) => {
                                   <div className="asset_list_body_body_cont_1g">
                                     <button
                                       className={
-                                        asset.state === "OPEN"
-                                          ? "status_btn_ongoing"
-                                          : asset.state === "FILLED"
-                                          ? "status_btn_closed"
-                                          : "status_btn"
+                                        asset.state === 'OPEN'
+                                          ? 'status_btn_ongoing'
+                                          : asset.state === 'FILLED'
+                                          ? 'status_btn_closed'
+                                          : 'status_btn'
                                       }
                                     >
                                       {asset.state}
@@ -895,9 +933,11 @@ const DashBoardBranchAsset = ({ match }) => {
                               </tr>
                             );
                           })
-                        : activeBtn === "Closed"
+                        : activeBtn === 'Closed'
                         ? loans
-                            .filter((person) => person.state == "FILLED")
+                            .filter(
+                              (person) => person.state == 'FILLED'
+                            )
                             .map((asset) => {
                               var percentage =
                                 (asset.funded / asset.amount) * 100;
@@ -917,7 +957,8 @@ const DashBoardBranchAsset = ({ match }) => {
                                       />
 
                                       <div className="assets-data-pool_name">
-                                        {asset.title.substring(0, 8) + "..."}
+                                        {asset.title.substring(0, 8) +
+                                          '...'}
                                       </div>
                                     </div>
                                   </td>
@@ -925,7 +966,9 @@ const DashBoardBranchAsset = ({ match }) => {
                                     {/* <div className="assets-data-name_pool_invest_capcity"> */}
                                     <div className="asset_list_body_body_cont_1c">
                                       {numberWithCommas(
-                                        parseInt(asset.amount).toFixed(2)
+                                        parseInt(
+                                          asset.amount
+                                        ).toFixed(2)
                                       )}
                                     </div>
                                     {/* </div> */}
@@ -933,7 +976,9 @@ const DashBoardBranchAsset = ({ match }) => {
                                   <td className="branch_asset_body_row_data  ">
                                     <div className="assets-data-name_pool">
                                       {numberWithCommas(
-                                        parseInt(asset.funded).toFixed(2)
+                                        parseInt(
+                                          asset.funded
+                                        ).toFixed(2)
                                       )}
                                     </div>
                                   </td>
@@ -942,18 +987,22 @@ const DashBoardBranchAsset = ({ match }) => {
                                       <div className="asset_amount_progress_div">
                                         <div className="asset_amount_progress_div_txt"></div>
                                         <label for="file">
-                                          {parseInt(percentage).toFixed()}%
+                                          {parseInt(
+                                            percentage
+                                          ).toFixed()}
+                                          %
                                         </label>
                                         <progress
                                           className={
                                             percentage < 100
-                                              ? "progress_bar progress_bar_progress"
-                                              : "progress_bar"
+                                              ? 'progress_bar progress_bar_progress'
+                                              : 'progress_bar'
                                           }
                                           // "progress_bar"
                                           id="file"
                                           aria-valuenow={
-                                            asset.amount - asset.funded
+                                            asset.amount -
+                                            asset.funded
                                           }
                                           value={asset.funded}
                                           max={asset.amount}
@@ -990,11 +1039,11 @@ const DashBoardBranchAsset = ({ match }) => {
                                     <div className="asset_list_body_body_cont_1g">
                                       <button
                                         className={
-                                          asset.state === "OPEN"
-                                            ? "status_btn_ongoing"
-                                            : asset.state === "FILLED"
-                                            ? "status_btn_closed"
-                                            : "status_btn"
+                                          asset.state === 'OPEN'
+                                            ? 'status_btn_ongoing'
+                                            : asset.state === 'FILLED'
+                                            ? 'status_btn_closed'
+                                            : 'status_btn'
                                         }
                                       >
                                         {asset.state}
@@ -1060,21 +1109,24 @@ const DashBoardBranchAsset = ({ match }) => {
             {assetDetailModal == data.newLoanID ? (
               <div className="asset_detail_modal_div">
                 <div className="asset_detail_modal_div_conts">
-                  <div className="asset_detail_heading" style={{ margin: "0" }}>
+                  <div
+                    className="asset_detail_heading"
+                    style={{ margin: '0' }}
+                  >
                     <div className="pool_detail_heading_area1">
                       <img
                         src={meta.arrayImg}
                         alt=""
                         className="pool_detail_heading_area1_img"
                         onClick={toggleImgDiv}
-                        style={{ cursor: "pointer" }}
+                        style={{ cursor: 'pointer' }}
                       />
                       <div className="pool_detail_heading_area1_txt_cont">
                         <div className="pool_detail_heading_area1_txt_cont_1">
-                          {data.title.substring(0, 25) + "..."}
+                          {data.title.substring(0, 25) + '...'}
                         </div>
                         <div className="pool_detail_heading_area1_txt_cont_2">
-                          Assets {">"} Asset{data.newLoanID}
+                          Assets {'>'} Asset{data.newLoanID}
                         </div>
                       </div>
                     </div>
@@ -1084,15 +1136,15 @@ const DashBoardBranchAsset = ({ match }) => {
                   {/* ====== */}
                   <div className="asset_status_details_div1">
                     <div className="asset_status_details_div1_head">
-                      Status{" "}
+                      Status{' '}
                       <div className="staus_btn_div">
                         <button
                           className={
-                            data.state === "OPEN"
-                              ? "status_btn_ongoing"
-                              : data.state === "FILLED"
-                              ? "status_btn_closed"
-                              : "status_btn"
+                            data.state === 'OPEN'
+                              ? 'status_btn_ongoing'
+                              : data.state === 'FILLED'
+                              ? 'status_btn_closed'
+                              : 'status_btn'
                           }
                         >
                           {data.state}
@@ -1106,7 +1158,9 @@ const DashBoardBranchAsset = ({ match }) => {
                             Asset Value
                           </div>
                           <div className="asset_status_details_div1_body1_cont1_txt1">
-                            {numberWithCommas(parseInt(data.amount).toFixed())}{" "}
+                            {numberWithCommas(
+                              parseInt(data.amount).toFixed()
+                            )}{' '}
                             Engn
                           </div>
                         </div>
@@ -1137,8 +1191,8 @@ const DashBoardBranchAsset = ({ match }) => {
                               <progress
                                 className={
                                   percentage < 100
-                                    ? "progress_bar progress_bar_progress"
-                                    : "progress_bar"
+                                    ? 'progress_bar progress_bar_progress'
+                                    : 'progress_bar'
                                 }
                                 // className={
                                 //   data.funded < data.amount
@@ -1149,7 +1203,9 @@ const DashBoardBranchAsset = ({ match }) => {
                                 // }
                                 // "progress_bar"
                                 id="file"
-                                aria-valuenow={data.amount - data.funded}
+                                aria-valuenow={
+                                  data.amount - data.funded
+                                }
                                 value={data.funded}
                                 max={data.amount}
                               ></progress>
@@ -1170,7 +1226,10 @@ const DashBoardBranchAsset = ({ match }) => {
                             Funding left
                           </div>
                           <div className="asset_status_details_div1_body1_cont1_txt1">
-                            {numberWithCommas(data.amount - data.funded)} Engn
+                            {numberWithCommas(
+                              data.amount - data.funded
+                            )}{' '}
+                            Engn
                           </div>
                         </div>
                         <hr class="custom_hr"></hr>
@@ -1285,7 +1344,8 @@ const DashBoardBranchAsset = ({ match }) => {
                           className="transaction_id_link"
                           target="_blank"
                         >
-                          {data.transactionHash.substring(0, 28) + "..."}
+                          {data.transactionHash.substring(0, 28) +
+                            '...'}
                         </a>
                         <CopyAllIcon className="copy_all_tx_hash_icon" />
                       </div>
@@ -1305,7 +1365,7 @@ const DashBoardBranchAsset = ({ match }) => {
                       <img
                         src={meta.arrayImg}
                         alt=""
-                        style={{ width: "100%" }}
+                        style={{ width: '100%' }}
                       />
                     </div>
                     <div
