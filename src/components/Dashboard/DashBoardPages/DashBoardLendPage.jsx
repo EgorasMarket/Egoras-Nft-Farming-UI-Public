@@ -316,14 +316,14 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
       {/* Tokens Section Start */}
       <section className="collateral-assets-section no-bg no_pad">
         <div className="container">
-          {/* <div className="onboard_as_user_div">
+          <div className="onboard_as_user_div">
             <button
               className="onboard_as_user_btn"
               onClick={toggleOnBoardUserDiv}
             >
               Onboard as user
             </button>
-          </div> */}
+          </div>
           <div className="pool_container">
             <div className="lending_area1">
               <div className="lending_area1_cont1">
