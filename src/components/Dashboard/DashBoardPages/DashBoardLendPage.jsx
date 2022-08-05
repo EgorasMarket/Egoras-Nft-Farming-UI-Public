@@ -217,7 +217,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   };
 
   const updateKycDetails = async (e) => {
-    alert("welcome");
+    // alert("welcome");
 
     let postData;
 
