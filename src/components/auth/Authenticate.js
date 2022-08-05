@@ -138,7 +138,7 @@ export const Authenticate = (props) => {
     console.log("running");
     if (library && account) {
       console.log("running2");
-      localStorage.setItem("WA_ST", account);
+      // localStorage.setItem("WA_ST", account);
       let stale = false;
       if (clickedmodal) {
         setModal(!modal);

@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import "../../../css/dashBoardReferral.css";
 import Web3 from "web3";
+import { getAuthUserStats } from "../../../actions/token";
+
 import Sparkline2 from "../../static/Sparkline2";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
@@ -216,12 +218,7 @@ const DashboardReferral = ({ auth }) => {
   const web3 = new Web3(window.ethereum);
 
   useEffect(() => {
-    console.log(auth);
-
-    if (auth.user != null) {
-      // console.log(account, auth.user.payload.ref_code);
-      // setCopyValue("https://egoras.org/referal/" + auth.user.payload.ref_code);
-      localStorage.setItem("WA_ST", account);
+    if (account) {
       axios
         .get(api_url + "/api/user/fetch/my/referals/" + account, null, config)
         .then((data) => {
@@ -233,7 +230,21 @@ const DashboardReferral = ({ auth }) => {
           console.log(err); // "oh, no!"
         });
     }
-  }, [account, auth]);
+  }, [account]);
+  useEffect(
+    async (e) => {
+      if (account) {
+        let response = await getAuthUserStats("wewrwwrw");
+        console.log(response.message.data.payload);
+        if (response.message.data.payload == null) {
+          console.log("user does not exist");
+        } else {
+          console.log("user exists");
+        }
+      }
+    },
+    [account]
+  );
   // console.log(leaderBoard1);
   // console.log(leaderBoard);
 
@@ -253,7 +264,7 @@ const DashboardReferral = ({ auth }) => {
     tooltip.style.display = "none";
   }
 
-  console.log(library._network, "library , library");
+  // console.log(library._network.name, "library , library");
   useEffect(
     async (e) => {
       if (account) {
@@ -462,7 +473,7 @@ const DashboardReferral = ({ auth }) => {
                                 {data.referrals}
                               </div>
                               <div className="dashBoard_ref_area2_cont1_body_div1_cont1 dashBoard_ref_area2_cont1_body_div1_cont1_last">
-                                {/* ${data.amountEarned.toFixed(2)} */}${"1800"}
+                                {parseFloat(data.referrals * 2500).toFixed(2)}
                               </div>
                             </div>
                           ))

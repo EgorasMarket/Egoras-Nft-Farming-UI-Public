@@ -578,6 +578,9 @@ button.pool_detail_heading_area1_invest_btn {
   .finance_fee_details_page_row {
     display: none !important;
   }
+  .pool_status_Details_cont_body1 {
+    padding: 1em;
+  }
 }
 @media screen and (max-width: 645px) {
   .pool_lend_details_link_active {

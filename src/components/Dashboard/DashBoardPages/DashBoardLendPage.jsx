@@ -4,7 +4,7 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import "../../../css/dashboardLend.css";
 import CloseIcon from "@mui/icons-material/Close";
 import CircleIcon from "@mui/icons-material/Circle";
-
+import { loadUser } from "../../../actions/auth";
 import { connect } from "react-redux";
 import EastIcon from "@mui/icons-material/East";
 import { API_URL as api_url } from "../../../actions/types";
@@ -38,7 +38,7 @@ import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-
+import { getAuthUserStats } from "../../../actions/token";
 const DashBoardLendPage = ({ submitKyc, auth }) => {
   const context = useWeb3React();
   const {
@@ -58,6 +58,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   const [lockedValue, setLockedValue] = useState(0);
   const [verified, setVerified] = useState(true);
   const [connected, setConnected] = useState(true);
+  const [countryVerified, setCountryVerified] = useState(false);
   const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);
   const [totalLendingCount, setTotalLendingCount] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
@@ -107,16 +108,43 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
     }
   }, [auth]);
 
-  useEffect(() => {
-    if (account) {
-      setAddress(account);
-      setConnected(() => false);
-      setVerified(() => true);
-    } else {
-      setConnected(() => true);
-      setVerified(() => false);
-    }
-  }, [account, verified, connected]);
+  useEffect(
+    async (e) => {
+      if (account) {
+        let response = await getAuthUserStats(account);
+        // console.log(response.message.data.payload, "acct acct acct acct ");
+        const payload = response.message.data.payload;
+        console.log(payload, "acct acct acct acct ");
+
+        setAddress(account);
+        setConnected(() => false);
+        if (payload == null) {
+          setCountryVerified(() => true);
+          setVerified(() => false);
+        } else if (payload.stage == 1) {
+          setCountryVerified(() => false);
+          setVerified(() => true);
+        } else if (payload.stage == 2) {
+          setCountryVerified(() => false);
+          setVerified(() => false);
+        }
+      } else if (!account) {
+        setConnected(() => true);
+        setCountryVerified(() => false);
+        setVerified(() => false);
+      }
+    },
+    [account, verified, connected]
+  );
+  // useEffect(
+  //   async (e) => {
+  //     if (account) {
+  //       let response = await getAuthUserStats(account);
+  //       console.log(response.message.data);
+  //     }
+  //   },
+  //   [account]
+  // );
 
   //   useEffect(() => {
   //     const results = assets.filter((person) =>
@@ -142,6 +170,13 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
         console.log(err); // "oh, no!"
       });
   }, []);
+
+  // getAuthUserStats
+  useEffect(async () => {
+    if (account) {
+      console.log(account, auth, "res res res res res res ");
+    }
+  }, [account, auth]);
 
   useEffect(() => {
     axios
@@ -199,12 +234,19 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
         countryData,
         config
       );
-      console.log(res);
-      // window.location.href = res.data.session.redirectUrl;
-      // console.log(res.data.session.redirectUrl);
-      // console.log(res.data.status);
-
-      alert("Upladed successfully");
+      console.log(res.data.success == true);
+      if (res.data.success == true) {
+        let response = await getAuthUserStats(account);
+        const payload = response.message.data.payload;
+        console.log(payload, "check check check check");
+        if (payload.stage == 1) {
+          setCountryVerified(() => false);
+          setVerified(() => true);
+        } else if (payload.stage == 2) {
+          setCountryVerified(() => false);
+          setVerified(() => false);
+        }
+      }
     } catch (err) {
       console.log(err.response);
     }
@@ -252,9 +294,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
         postData,
         config
       );
-
-      alert("Upladed successfully");
-
+      console.log(res);
+      // alert("Upladed successfully");
       toggleOnBoardUserDiv();
     } catch (err) {
       console.log(err.response);
@@ -954,55 +995,55 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
               {/* ================= */}
               <div className="stepdiv1">
                 <span
-                // style={
-                //   verified === false
-                //     ? { color: "#a6a6a6" }
-                //     : { color: "black" }
-                // }
+                  style={
+                    countryVerified === false
+                      ? { color: "#a6a6a6" }
+                      : { color: "black" }
+                  }
                 >
                   Select Country
                 </span>
-                {/* {verified === true ? ( */}
-                <div className="stepDiv1_sub_content">
-                  <div className="subMitDetails_cont">
-                    Select your country of origin to continue with the
-                    verification
-                    <div className="subMitDetails_cont_input_body">
-                      <div className="subMitDetails_cont_input_body_cont1">
-                        Country
-                        <CountryDropdown
-                          id="country_id"
-                          className="country_select_input"
-                          preferredCountries={["gb", "us"]}
-                          value={country}
-                          handleChange={(e) => {
-                            setCountry(e.target.value);
-                            console.log(
-                              e.target.value.split("(", 1).toString()
-                            );
-                          }}
-                        ></CountryDropdown>
-                      </div>
-                      <div className="button_comply_cube_div">
-                        <button
-                          className="proceed_to_cube_btn"
-                          onClick={submitKycDetails}
-                        >
-                          Submit
-                        </button>
+                {countryVerified === true ? (
+                  <div className="stepDiv1_sub_content">
+                    <div className="subMitDetails_cont">
+                      Select your country of origin to continue with the
+                      verification
+                      <div className="subMitDetails_cont_input_body">
+                        <div className="subMitDetails_cont_input_body_cont1">
+                          Country
+                          <CountryDropdown
+                            id="country_id"
+                            className="country_select_input"
+                            preferredCountries={["gb", "us"]}
+                            value={country}
+                            handleChange={(e) => {
+                              setCountry(e.target.value);
+                              console.log(
+                                e.target.value.split("(", 1).toString()
+                              );
+                            }}
+                          ></CountryDropdown>
+                        </div>
+                        <div className="button_comply_cube_div">
+                          <button
+                            className="proceed_to_cube_btn"
+                            onClick={submitKycDetails}
+                          >
+                            Submit
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                {/* ) : null} */}
+                ) : null}
 
                 <div
                   className="rule_progress"
-                  // style={
-                  //   verified === false
-                  //     ? { background: "#a6a6a6" }
-                  //     : { background: "#229e54" }
-                  // }
+                  style={
+                    countryVerified === false
+                      ? { background: "#a6a6a6" }
+                      : { background: "#229e54" }
+                  }
                 ></div>
               </div>
               {/* ================= */}
