@@ -537,46 +537,46 @@ const AboutUs = () => {
                 gradientColor="[255, 255, 255]"
               >
                 {/* <div className="feauturedIn_area_body_cont1"> */}
-                <img
-                  src="/img/FeaturedInLogos/FeaturedInLogos_1.svg"
-                  alt=""
-                  className="featuredIn_logo_img"
-                />
+                <a href="https://finance.yahoo.com/news/egoras-protocol-promises-revolutionize-microfinance-145500324.html">
+                  <img
+                    src="/img/FeaturedInLogos/FeaturedInLogos_1.svg"
+                    alt=""
+                    className="featuredIn_logo_img"
+                  />
+                </a>
                 {/* </div> */}
                 {/* <div className="feauturedIn_area_body_cont1"> */}
-                <img
-                  src="/img/FeaturedInLogos/FeaturedInLogos_2.svg"
-                  alt=""
-                  className="featuredIn_logo_img"
-                />
+
                 {/* </div> */}
                 {/* <div className="feauturedIn_area_body_cont1"> */}
-                <img
-                  src="/img/FeaturedInLogos/FeaturedInLogos_3.svg"
-                  alt=""
-                  className="featuredIn_logo_img"
-                />
+                <a href="https://apnews.com/press-release/accesswire/business-small-business-corporate-news-microfinance-products-and-services-ee9eb494f14ea9ce6faa51d3f53a20c9">
+                  <img
+                    src="/img/FeaturedInLogos/FeaturedInLogos_3.svg"
+                    alt=""
+                    className="featuredIn_logo_img"
+                  />
+                </a>
                 {/* </div> */}
                 {/* <div className="feauturedIn_area_body_cont1"> */}
-                <img
-                  src="/img/FeaturedInLogos/FeaturedInLogos_4.svg"
-                  alt=""
-                  className="featuredIn_logo_img"
-                />
+
                 {/* </div> */}
                 {/* <div className="feauturedIn_area_body_cont1"> */}
-                <img
-                  src="/img/FeaturedInLogos/FeaturedInLogos_5.svg"
-                  alt=""
-                  className="featuredIn_logo_img"
-                />
+                <a href="https://cointelegraph.com/press-releases/egoras-raises-13m-in-private-round">
+                  <img
+                    src="/img/FeaturedInLogos/FeaturedInLogos_5.svg"
+                    alt=""
+                    className="featuredIn_logo_img"
+                  />
+                </a>
                 {/* </div> */}
                 {/* <div className="feauturedIn_area_body_cont1"> */}
-                <img
-                  src="/img/FeaturedInLogos/FeaturedInLogos_6.svg"
-                  alt=""
-                  className="featuredIn_logo_img"
-                />
+                <a href="https://www.newsbtc.com/press-releases/egoras-a-decentralized-finance-ecosystem-for-growing-markets/">
+                  <img
+                    src="/img/FeaturedInLogos/FeaturedInLogos_6.svg"
+                    alt=""
+                    className="featuredIn_logo_img"
+                  />
+                </a>
                 {/* </div> */}
               </Marquee>
             </div>

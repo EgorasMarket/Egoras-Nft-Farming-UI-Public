@@ -10,8 +10,9 @@ import TollIcon from "@mui/icons-material/Toll";
 import GroupsIcon from "@mui/icons-material/Groups";
 import { connect } from "react-redux";
 // import { UserContext } from "../context/Context";
+import Nodata from "./nodataComponent/Nodata";
 import { parseEther, formatEther } from "@ethersproject/units";
-
+import { numberWithCommas } from "../../../static";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -28,7 +29,7 @@ import {
 } from "../../../web3/index";
 const DashboardReferral = ({ auth }) => {
   const [activeLink, setActiveLink] = useState("");
-  const [comingSoon, setComingSoon] = useState(true);
+  const [comingSoon, setComingSoon] = useState(false);
   const [refEarnings, setRefEarnings] = useState(0.0);
   const [refCount, setRefCount] = useState(0);
   const [welcomeBonus, setWelcomeBonus] = useState(0.0);
@@ -251,6 +252,8 @@ const DashboardReferral = ({ auth }) => {
     tooltip.innerHTML = "Copy to clipboard";
     tooltip.style.display = "none";
   }
+
+  // console.log(library._network.name, "library , library");
   useEffect(
     async (e) => {
       if (account) {
@@ -326,7 +329,7 @@ const DashboardReferral = ({ auth }) => {
                   }
                 >
                   <DashboardIcon className="asset_overview_link_icon" />
-                  Pool Details
+                  User Details
                 </Link>
                 <Link
                   to="/dashboard/user/referral"
@@ -349,6 +352,9 @@ const DashboardReferral = ({ auth }) => {
                 </div>
               ) : (
                 <>
+                  {/* <button onClick={() => library.provider._handleDisconnect()}>
+                    Disconnect
+                  </button> */}
                   <div className="dashBoard_ref_area1">
                     <div className="dashBoard_ref_area1_cont1">
                       <div className="dashBoard_ref_area1_cont1_icon_div">
@@ -359,7 +365,9 @@ const DashboardReferral = ({ auth }) => {
                           Total Earnings
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          {welcomeBonus + refEarnings}{" "}
+                          {numberWithCommas(
+                            parseFloat(welcomeBonus + refEarnings).toFixed(2)
+                          )}{" "}
                           <span className="engn_symbol_sign">Engn</span>
                         </div>
                       </div>
@@ -368,7 +376,9 @@ const DashboardReferral = ({ auth }) => {
                           Welcome Bonus
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          {parseFloat(welcomeBonus).toFixed(2)}{" "}
+                          {numberWithCommas(
+                            parseFloat(welcomeBonus).toFixed(2)
+                          )}{" "}
                           <span className="engn_symbol_sign">Engn</span>
                         </div>
                       </div>
@@ -377,7 +387,7 @@ const DashboardReferral = ({ auth }) => {
                           Referral Earnings
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          {parseFloat(refEarnings).toFixed(2)}{" "}
+                          {numberWithCommas(parseFloat(refEarnings).toFixed(2))}{" "}
                           <span className="engn_symbol_sign">Engn</span>
                         </div>
                       </div>
@@ -427,28 +437,36 @@ const DashboardReferral = ({ auth }) => {
                             Amount Earned
                           </div>
                         </div>
-
-                        {leaderBoard1.slice(0, 8).map((data) => (
-                          <div className="dashBoard_ref_area2_cont1_body_div1">
-                            <div className="dashBoard_ref_area2_cont1_body_div1_cont1 dashBoard_ref_area2_cont1_body_div1_cont1_first">
-                              {"1"}
-                            </div>
-                            <div className="dashBoard_ref_area2_cont1_body_div1_cont1">
-                              {data.username}
-                            </div>
-                            <div className="dashBoard_ref_area2_cont1_body_div1_cont1">
-                              {data.address.substring(0, 5) +
-                                "..." +
-                                data.address.substring(20, 24)}
-                            </div>
-                            <div className="dashBoard_ref_area2_cont1_body_div1_cont1">
-                              {data.referrals}
-                            </div>
-                            <div className="dashBoard_ref_area2_cont1_body_div1_cont1 dashBoard_ref_area2_cont1_body_div1_cont1_last">
-                              {/* ${data.amountEarned.toFixed(2)} */}${"1800"}
-                            </div>
+                        {leaderBoard1.length <= 0 ? (
+                          <div className="no_loans_div">
+                            <div className="no_loans_div_cont">
+                              <Nodata />
+                              No Data yet.
+                            </div>{" "}
                           </div>
-                        ))}
+                        ) : (
+                          leaderBoard1.slice(0, 8).map((data) => (
+                            <div className="dashBoard_ref_area2_cont1_body_div1">
+                              <div className="dashBoard_ref_area2_cont1_body_div1_cont1 dashBoard_ref_area2_cont1_body_div1_cont1_first">
+                                {"1"}
+                              </div>
+                              <div className="dashBoard_ref_area2_cont1_body_div1_cont1">
+                                {data.username}
+                              </div>
+                              <div className="dashBoard_ref_area2_cont1_body_div1_cont1">
+                                {data.address.substring(0, 5) +
+                                  "..." +
+                                  data.address.substring(20, 24)}
+                              </div>
+                              <div className="dashBoard_ref_area2_cont1_body_div1_cont1">
+                                {data.referrals}
+                              </div>
+                              <div className="dashBoard_ref_area2_cont1_body_div1_cont1 dashBoard_ref_area2_cont1_body_div1_cont1_last">
+                                {/* ${data.amountEarned.toFixed(2)} */}${"1800"}
+                              </div>
+                            </div>
+                          ))
+                        )}
                       </div>
                       <div className="show_more_btn_div">
                         <button className="show_more_btn">Show more</button>
@@ -472,19 +490,27 @@ const DashboardReferral = ({ auth }) => {
                               Address
                             </div>
                           </div>
-
-                          {myReferrals.slice(0, 5).map((data) => (
-                            <div className="dashBoard_ref_area2_cont1_body_div1">
-                              <div className="dashBoard_ref_area2_cont1_body_div1_cont1_first">
-                                {data.username}
-                              </div>
-                              <div className="dashBoard_ref_area2_cont1_body_div1_cont1_last">
-                                {data.address.substring(0, 5) +
-                                  "..." +
-                                  data.address.substring(20, 24)}
-                              </div>
+                          {myReferrals.length <= 0 ? (
+                            <div className="no_loans_div">
+                              <div className="no_loans_div_cont">
+                                <Nodata />
+                                No Data yet.
+                              </div>{" "}
                             </div>
-                          ))}
+                          ) : (
+                            myReferrals.slice(0, 5).map((data) => (
+                              <div className="dashBoard_ref_area2_cont1_body_div1">
+                                <div className="dashBoard_ref_area2_cont1_body_div1_cont1_first">
+                                  {data.username}
+                                </div>
+                                <div className="dashBoard_ref_area2_cont1_body_div1_cont1_last">
+                                  {data.address.substring(0, 5) +
+                                    "..." +
+                                    data.address.substring(20, 24)}
+                                </div>
+                              </div>
+                            ))
+                          )}
                         </div>
                         <div className="show_more_btn_div">
                           <button className="show_more_btn">Show more</button>

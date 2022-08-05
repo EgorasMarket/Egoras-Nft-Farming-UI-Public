@@ -12,8 +12,8 @@ import {
   UnsupportedChainIdError,
 } from '@web3-react/core';
 import TollIcon from '@mui/icons-material/Toll';
-
-import { numberWithCommas } from '../../static/static';
+import { numberWithCommas } from '../../../static';
+// import { numberWithCommas } from "../../static/static";
 import CopyAllIcon from '@mui/icons-material/CopyAll';
 import '../../../css/dashboard_user_details.css';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -27,12 +27,13 @@ import axios from 'axios';
 import { config } from '../../../actions/Config';
 import {
   API_URL as api_url,
-  CANCELLED,
-  COMPLETED,
   PENDING,
+  COMPLETED,
+  CANCELLED,
 } from '../../../actions/types';
 // import { numberWithCommas } from "../../static/static";
 import { formatDuration, intervalToDuration } from 'date-fns';
+import { getUserStats } from '../../../web3/index';
 // import Web3 from "web3";
 import {
   checkAllowance,
@@ -52,6 +53,8 @@ const DashBoardUserDetails = ({ auth }) => {
   const [walletAddr, setWalletAddr] = useState(
     '0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
   );
+  const [welcomeBonus, setWelcomeBonus] = useState(0.0);
+
   const [conecttxt, setConnectTxt] = useState('Not Connected');
   const [seemore, setSeemore] = useState(false);
   const [assetDetailModal, setAssetDetailModal] = useState('');
@@ -110,49 +113,49 @@ const DashBoardUserDetails = ({ auth }) => {
   }, [account, avatarRef]);
   console.log('i am here');
   useEffect(() => {
-    // if (account) {
-    axios
-      .get(
-        api_url + '/api/lend/user/account/' + account,
-        null,
-        config
-      )
-      .then((data) => {
-        console.log(data.data.payload, 'powerful333333');
-        // console.log(txnhash);
-        // setBranches(data.data.payload);
-        setUserPoolsDetails({
-          lockedBalance: data.data.payload[0].balance,
-          pool: data.data.payload[0].pool,
+    if (account) {
+      axios
+        .get(
+          api_url + '/api/lend/user/account/' + account,
+          null,
+          config
+        )
+        .then((data) => {
+          console.log(data.data.payload, 'powerful333333');
+          // console.log(txnhash);
+          // setBranches(data.data.payload);
+          setUserPoolsDetails({
+            lockedBalance: data.data.payload[0].balance,
+            pool: data.data.payload[0].pool,
+          });
+        })
+        .catch((err) => {
+          console.log(err); // "oh, no!"
         });
-      })
-      .catch((err) => {
-        console.log(err); // "oh, no!"
-      });
-    //   return;
-    // }
-  }, []);
+      //   return;
+    }
+  }, [account]);
   useEffect(() => {
-    // if (account) {
-    axios
-      .get(
-        api_url + '/api/lend/user/transaction/' + account,
-        null,
-        config
-      )
-      .then((data) => {
-        console.log(data.data.payload, 'powerful333333');
-        console.log('/api/lend/user/transaction/' + account);
-        setLoanAsset(data.data.payload);
-        // console.log(txnhash);
-        // setBranches(data.data.payload);
-      })
-      .catch((err) => {
-        console.log(err); // "oh, no!"
-      });
-    //   return;
-    // }
-  }, []);
+    if (account) {
+      axios
+        .get(
+          api_url + '/api/lend/user/transaction/' + account,
+          null,
+          config
+        )
+        .then((data) => {
+          console.log(data.data.payload, 'powerful333333');
+          console.log('/api/lend/user/transaction/' + account);
+          setLoanAsset(data.data.payload);
+          // console.log(txnhash);
+          // setBranches(data.data.payload);
+        })
+        .catch((err) => {
+          console.log(err); // "oh, no!"
+        });
+      //   return;
+    }
+  }, [account]);
 
   const toggleSeemore = () => {
     setSeemore(!seemore);
@@ -244,6 +247,25 @@ const DashBoardUserDetails = ({ auth }) => {
         alert('you can proceed now');
     }
   };
+  useEffect(
+    async (e) => {
+      if (account) {
+        let response = await getUserStats(
+          account,
+          library.getSigner()
+        );
+        console.log(response);
+        if (response.status === true) {
+          const resAmnt = parseFloat(
+            formatEther(response.message._wB._hex)
+          );
+          setWelcomeBonus(resAmnt);
+          console.log(response.message._referral);
+        }
+      }
+    },
+    [account]
+  );
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -265,7 +287,7 @@ const DashBoardUserDetails = ({ auth }) => {
                 }
               >
                 <DashboardIcon className="asset_overview_link_icon" />
-                Pool Details
+                User Details
               </Link>
               <Link
                 to="/dashboard/user/referral"
@@ -297,15 +319,21 @@ const DashBoardUserDetails = ({ auth }) => {
                 </div>
               </div>
               <span className="hr_vertical"></span>
-              {/* <div className="welcome_bonus_div">
+              <div className="welcome_bonus_div">
                 <div className="welcome_bonus_div_head">
                   <div className="welcome_bonus_icon_div">
                     <StarRateIcon className="welcome_bonus_icon_div_icon" />
                   </div>
                   Welcome Bonus
                 </div>
-                <div className="welcome_bonus_div_body">$100.00</div>
-              </div> */}
+                <div className="welcome_bonus_div_body">
+                  {' '}
+                  {numberWithCommas(
+                    parseFloat(welcomeBonus).toFixed(2)
+                  )}
+                  <span className="engn_symbol_sign">Engn</span>
+                </div>
+              </div>
             </div>
             <div className="user_details_body1">
               <div className="user_details_body1_body_cont_area1">

@@ -16,7 +16,10 @@
   font-size: 24px;
   gap: 20px;
 }
-
+.marquee-container {
+  width: 60% !important;
+  margin: auto !important;
+}
 .about_us_section_hero_area_1_title {
   font-size: 50px;
   font-weight: 700;
@@ -651,6 +654,10 @@ button.join_community_area1_btn_btn {
     padding: 2em 0em;
     padding-top: 0;
   }
+
+  .roadmap_section {
+    background-attachment: fixed;
+  }
 }
 @media screen and (max-width: 650px) {
   .about_us_section_hero_area_1_title {
@@ -659,6 +666,7 @@ button.join_community_area1_btn_btn {
     line-height: 1.3;
   }
   .egoras_logos_cont {
+    width: 100%;
     justify-content: center;
   }
   .egoras_logos_cont_1 {
@@ -684,6 +692,12 @@ button.join_community_area1_btn_btn {
   .advantages_section_area_2 {
     width: 100%;
   }
+  .join_community_area {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1em;
+  }
 }
 @media screen and (max-width: 500px) {
   .egoras_logos_cont_1 {
@@ -691,9 +705,65 @@ button.join_community_area1_btn_btn {
     width: 30%;
   }
   .egoras_logos_cont_1_img {
-    width: 20px;
+    width: 25px;
   }
   .egoras_logos_cont_1_txt {
     font-size: 10px;
+  }
+  .about_us_section_hero {
+    padding: 2em 0em;
+  }
+  .egoras_logos_cont {
+    gap: 5px;
+    width: 100%;
+  }
+  .about_us_section_hero_area_2_txt_container_head {
+    font-size: 32px;
+    font-weight: 700;
+  }
+  .about_us_section_hero_area {
+    gap: 20px;
+  }
+  section.help_u_section {
+    padding: 2em 0em;
+  }
+  .join_community_section {
+    padding: 2em 0em;
+  }
+  .join_community_area1_head {
+    font-size: 36px;
+    font-weight: 700;
+  }
+
+  .egoras_logos_cont_1 {
+    padding: 5px;
+  }
+  .join_community_area1 {
+    width: 100%;
+  }
+  .road_map_head {
+    padding: 0.2em;
+    font-size: 36px;
+  }
+  .road_map_area_div3_txt_cont {
+    font-size: 28px;
+  }
+  .road_map_area_div_circle_blur {
+    width: 20px;
+    height: 20px;
+  }
+  .road_map_area_div_circle {
+    width: 12px;
+    height: 12px;
+  }
+  .road_map_area_div6_txt_cont {
+    font-size: 28px;
+  }
+  .road_map_area_div1_txt_cont {
+    font-size: 28px;
+  }
+
+  .mobile_road_map_line_div {
+    height: 75em;
   }
 }

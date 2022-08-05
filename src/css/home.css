@@ -617,7 +617,11 @@ a.visit_app_link_2 {
 .whyEgoras_body {
   display: flex;
   justify-content: space-between;
-  gap: 20px;
+  /* gap: 20px; */
+}
+.whyEgoras_body > * {
+  margin: 20px;
+  margin-left: 0;
 }
 .whyEgoras_body_cont1 {
   padding: 2em;
@@ -833,7 +837,10 @@ a.visit_app_link_2 {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  /* gap: 40px; */
+}
+.benefit_section_area1 > * {
+  margin: 20px 0px;
 }
 .benefit_section_are2 {
   width: 100%;
@@ -1308,6 +1315,9 @@ a.visit_app_link_2 {
   .stake-banner-blue {
     text-align: center;
     grid-row-gap: 20px;
+  }
+  .benefit_section_area1 > * {
+    margin: 10px 0px;
   }
 }
 

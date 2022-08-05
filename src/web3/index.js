@@ -508,6 +508,10 @@ const getReferrals = async (_upline, signer) => {
     };
   } catch (error) {
     console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
   }
 };
 // getMyReferralsCount(address _upline)
@@ -522,6 +526,10 @@ const getMyReferralsCount = async (_upline, signer) => {
     };
   } catch (error) {
     console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
   }
 };
 // getUserStats(address _user)
@@ -536,6 +544,10 @@ const getUserStats = async (_user, signer) => {
     };
   } catch (error) {
     console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
   }
 };
 
