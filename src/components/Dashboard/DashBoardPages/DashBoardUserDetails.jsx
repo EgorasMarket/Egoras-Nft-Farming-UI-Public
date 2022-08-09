@@ -25,6 +25,7 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import axios from "axios";
 import { config } from "../../../actions/Config";
+import { getAuthUserStats } from "../../../actions/token";
 import {
   API_URL as api_url,
   PENDING,
@@ -56,6 +57,8 @@ const DashBoardUserDetails = ({ auth }) => {
   const [welcomeBonus, setWelcomeBonus] = useState(0.0);
 
   const [conecttxt, setConnectTxt] = useState("Not Connected");
+  const [userName, setUserName] = useState("******");
+  const [kycStatus, setKycStatus] = useState("******");
   const [seemore, setSeemore] = useState(false);
   const [assetDetailModal, setAssetDetailModal] = useState("");
   const [loanAsset, setLoanAsset] = useState([]);
@@ -223,30 +226,28 @@ const DashBoardUserDetails = ({ auth }) => {
     },
     [account]
   );
-  const redeem = () => {
-    console.log(auth);
+  useEffect(
+    async (e) => {
+      if (account) {
+        let response = await getAuthUserStats(account);
+        // console.log(response.message.data.payload, "acct acct acct acct ");
+        const payload = response.message.data.payload;
+        if (payload.username == null) {
+          setUserName(() => "******");
+        } else {
+          setUserName(() => payload.username);
+        }
+        if (payload.kyc_status == null) {
+          setKycStatus(() => "******");
+        } else {
+          setKycStatus(() => payload.kyc_status);
+        }
 
-    if (!auth || !auth.user.payload.address) {
-      console.log("cannnot redeem , no address was parsed");
-      return;
-    }
-
-    const { kyc_status, status } = auth.user.payload;
-
-    switch (kyc_status) {
-      case PENDING:
-        console.log(
-          "You have to complete your KYC before you can make withdrawal"
-        );
-        break;
-
-      case CANCELLED:
-        alert("Your KYC process have been cancelled, Please contact support ");
-        break;
-      case COMPLETED:
-        alert("you can proceed now");
-    }
-  };
+        console.log(payload, "acct acct acct acct ");
+      }
+    },
+    [account]
+  );
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -281,6 +282,25 @@ const DashBoardUserDetails = ({ auth }) => {
                 <DashboardIcon className="asset_overview_link_icon" />
                 Refferal
               </Link>
+            </div>
+            <div className="userdAshboard_head">
+              <div className="userdAshboard_head_username">
+                <span className="userdAshboard_head_username_head">
+                  UserName:
+                </span>{" "}
+                <span className="userdAshboard_head_username_para">
+                  {userName}
+                </span>{" "}
+              </div>
+              <span className="hr_vertical"></span>
+              <div className="userdAshboard_head_username">
+                <span className="userdAshboard_head_username_head">
+                  KYC Status:
+                </span>{" "}
+                <span className="userdAshboard_head_username_para">
+                  {kycStatus}
+                </span>{" "}
+              </div>
             </div>
             <div className="userdAshboard_head">
               <div className="userdAshboard_head_area">
@@ -616,7 +636,7 @@ const DashBoardUserDetails = ({ auth }) => {
                         <button
                           className="reward_btn"
                           disabled={disable}
-                          onClick={redeem}
+                          // onClick={redeem}
                         >
                           Reedeem
                         </button>

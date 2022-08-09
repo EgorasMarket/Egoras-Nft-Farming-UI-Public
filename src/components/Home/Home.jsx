@@ -388,6 +388,9 @@ const Home = () => {
           const egr_usd_val = data["egoras"].usd;
           // console.log(egr_usd_val);
           setEgrUsd(() => egr_usd_val);
+        })
+        .catch((err) => {
+          console.log(err);
         });
       // ===============================
       let string2 =
@@ -398,6 +401,9 @@ const Home = () => {
           const egc_usd_val = data["egoras-credit"].usd;
           // console.log(egc_usd_val);
           setEgcUsd(() => egc_usd_val);
+        })
+        .catch((err) => {
+          console.log(err);
         });
       setSumVals(() => parseInt(egcVal) + parseInt(egcVal2));
       setSumVals2(() => parseInt(egrVal) + parseInt(egrVal2));
