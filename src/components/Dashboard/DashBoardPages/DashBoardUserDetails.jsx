@@ -70,6 +70,8 @@ const DashBoardUserDetails = ({ auth }) => {
     lockedBalance: '0.00',
     pool: '0',
   });
+  const [status, setStatus] = useState('');
+
   const context = useWeb3React();
   const {
     connector,
@@ -112,6 +114,14 @@ const DashBoardUserDetails = ({ auth }) => {
     }
   }, [account, avatarRef]);
   console.log('i am here');
+
+  useEffect(() => {
+    if (!auth.user || !auth.user.payload) {
+      setStatus('');
+      return;
+    }
+    setStatus(auth.user.payload.kyc_status);
+  }, [auth]);
   useEffect(() => {
     if (account) {
       axios
@@ -221,6 +231,25 @@ const DashBoardUserDetails = ({ auth }) => {
       setActiveLink('referral');
     }
   });
+  useEffect(
+    async (e) => {
+      if (account) {
+        let response = await getUserStats(
+          account,
+          library.getSigner()
+        );
+        console.log(response);
+        if (response.status === true) {
+          const resAmnt = parseFloat(
+            formatEther(response.message._wB._hex)
+          );
+          setWelcomeBonus(resAmnt);
+          console.log(response.message._referral);
+        }
+      }
+    },
+    [account]
+  );
   const redeem = () => {
     console.log(auth);
 
@@ -247,25 +276,6 @@ const DashBoardUserDetails = ({ auth }) => {
         alert('you can proceed now');
     }
   };
-  useEffect(
-    async (e) => {
-      if (account) {
-        let response = await getUserStats(
-          account,
-          library.getSigner()
-        );
-        console.log(response);
-        if (response.status === true) {
-          const resAmnt = parseFloat(
-            formatEther(response.message._wB._hex)
-          );
-          setWelcomeBonus(resAmnt);
-          console.log(response.message._referral);
-        }
-      }
-    },
-    [account]
-  );
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -300,6 +310,12 @@ const DashBoardUserDetails = ({ auth }) => {
                 <DashboardIcon className="asset_overview_link_icon" />
                 Refferal
               </Link>
+            </div>
+            <div className="pool_lending_pages_links container ">
+              <p>Verification status: </p>
+              <p>{status}</p>
+
+              <button> </button>
             </div>
             <div className="userdAshboard_head">
               <div className="userdAshboard_head_area">

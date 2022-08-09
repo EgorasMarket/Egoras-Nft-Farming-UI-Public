@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
+import { connect } from "react-redux";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Header from "./components/Home/Header";
 import "bootstrap/dist/css/bootstrap.css";
@@ -30,10 +30,28 @@ import "../src/App.css";
 import store from "./store";
 import Referal from "./components/Referral/Referal";
 function App() {
+  const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
+
   useEffect(() => {
     store.dispatch(loadUser());
   });
 
+  // useEffect(() => {
+  //   if (account) {
+  //     localStorage.setItem("WA_ST", account);
+  //     localStorage.setItem("myName", account);
+  //   }
+  // }, [account]);
   const [cClass, setCClass] = useState(false);
   // localStorage.setItem("uiMode", "dark");
   useEffect(() => {

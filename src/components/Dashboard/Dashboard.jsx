@@ -5,6 +5,11 @@ import DashBoardBranchAsset from "./DashBoardPages/DashBoardBranchAsset";
 import DashBoardLendingTransactions from "./DashBoardPages/DashBoardLendingTransactions";
 import Swap from "./DashBoardPages/Swap/Swap";
 import DashBoardUserDetails from "./DashBoardPages/DashBoardUserDetails";
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
 // dashboard components
 // import DashBoardHeader from "./DashBoardHeader";
 import DashboardSideBarMenu from "./DashboardSideBarMenu";
@@ -36,7 +41,18 @@ import DashBoardLendPage from "./DashBoardPages/DashBoardLendPage";
 //   margin: "0 auto",
 //   borderColor: "red",
 // };
-function Dashboard({ check, togglemakeDark }) {
+const Dashboard = ({ check, togglemakeDark }) => {
+  const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
   const [splashScreen, setSplashScreen] = useState(true);
   const currentPage = window.location.pathname;
   const urlArr = currentPage.split("/");
@@ -60,6 +76,17 @@ function Dashboard({ check, togglemakeDark }) {
       setSplashScreen(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (account) {
+      localStorage.setItem("myName", account);
+      localStorage.setItem("WA_ST", account);
+      console.log(account);
+      console.log(localStorage.getItem("myName"), "myName");
+      console.log(localStorage.getItem("WA_ST"), "wa_st");
+      // console.log("my Name");
+    }
+  }, [account]);
   return (
     <>
       {splashScreen === true ? (
@@ -168,6 +195,6 @@ function Dashboard({ check, togglemakeDark }) {
       )}
     </>
   );
-}
+};
 
 export default Dashboard;
