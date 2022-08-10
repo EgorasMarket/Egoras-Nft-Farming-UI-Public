@@ -152,6 +152,9 @@ const DashboardReferral = ({ auth }) => {
       if (account) {
         let response = await getAuthUserStats(account);
         const payload = response.message.data.payload;
+        if (!payload) {
+          return;
+        }
         if (payload.ref_code == "") {
           setRefLink(() => "*******");
         } else {

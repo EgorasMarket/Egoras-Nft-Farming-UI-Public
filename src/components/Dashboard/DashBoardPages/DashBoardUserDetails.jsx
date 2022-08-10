@@ -239,9 +239,12 @@ const DashBoardUserDetails = ({ auth }) => {
     async (e) => {
       if (account) {
         let response = await getAuthUserStats(account);
-        // console.log(response.message.data.payload, "acct acct acct acct ");
+        console.log(response.message.data.payload, "acct acct acct acct ");
         const payload = response.message.data.payload;
-        if (payload.username == null) {
+        if (!payload) {
+          return;
+        }
+        if (payload == null) {
           setUserName(() => "******");
         } else {
           setUserName(() => payload.username);
