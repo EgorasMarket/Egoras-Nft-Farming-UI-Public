@@ -113,6 +113,16 @@
   gap: 20px;
   align-items: center;
 }
+.userdAshboard_head_username {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 1em;
+}
+.userdAshboard_head_username_head {
+  font-size: 18px;
+  font-weight: 700;
+}
 .user_details_body1_body_cont1 {
   font-size: 14px;
   font-weight: 300;
