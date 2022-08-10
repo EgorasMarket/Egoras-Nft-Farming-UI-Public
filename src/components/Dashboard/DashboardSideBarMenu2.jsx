@@ -71,6 +71,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const [showHeader, setshowHeader] = useState(true);
   const [betaDiv, setBetaDiv] = useState(true);
   const [conecttxt, setConnectTxt] = useState("Not Connected");
+  const [nairaValue, setNairaValue] = useState(670);
   // const [darkMode, setDarkMode] = useState(null);
   const [walletAddr, setWalletAddr] = useState(
     "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -449,10 +450,12 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
       <div className="header_token_prices_div">
         <div className="container-fluid">
           <div className="header_token_prices_div_area">
-            <div className="header_token_prices_div_area1">720 NGN ~ 1 USD</div>
+            <div className="header_token_prices_div_area1">
+              {nairaValue} NGN ~ 1 USD
+            </div>
             <span class="vertical_rule2"></span>
             <div className="header_token_prices_div_area1">
-              720 ENGN ~ 1 USD
+              {nairaValue} ENGN ~ 1 USD
             </div>
             <span class="vertical_rule2"></span>
             <div className="header_token_prices_div_area1">
@@ -466,11 +469,12 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             <div className="header_token_prices_div_area1">1 ENGN ~ 1 NGN</div>
             <span class="vertical_rule2"></span>
             <div className="header_token_prices_div_area1">
-              1 EGC ~ {numberWithCommas((egcUsdVal * 720).toFixed(2))} NGN
+              1 EGC ~ {numberWithCommas((egcUsdVal * nairaValue).toFixed(2))}{" "}
+              NGN
             </div>
             <span class="vertical_rule2"></span>
             <div className="header_token_prices_div_area1">
-              1 EGR ~ {(egrUsdVal * 720).toFixed(2)} NGN
+              1 EGR ~ {(egrUsdVal * nairaValue).toFixed(2)} NGN
             </div>
           </div>
         </div>
