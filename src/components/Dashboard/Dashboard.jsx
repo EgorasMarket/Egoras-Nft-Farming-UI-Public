@@ -189,7 +189,7 @@ const Dashboard = ({ check, togglemakeDark }) => {
           </Route> */}
               </Switch>
             </>
-            <img src="/img/dash_boardBg.svg" alt="" className="dash_boardBg" />
+            {/* <img src="/img/dash_boardBg.svg" alt="" className="dash_boardBg" /> */}
           </div>
         </Router>
       )}
