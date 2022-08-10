@@ -685,7 +685,7 @@ const DashBoardUserDetails = ({ auth }) => {
                           <span className="reward_btn_div">
                             <button
                               className="reward_btn"
-                              // disabled={disable}
+                              disabled={disable}
                               onClick={redeem}
                             >
                               Reedeem
