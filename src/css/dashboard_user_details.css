@@ -258,6 +258,20 @@
   .welcome_bonus_div {
     align-items: flex-start;
   }
+  .userdAshboard_head_username {
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+    gap: 10px;
+    padding: 0em;
+  }
+  .hr_vertical {
+    border-bottom: solid 1px #efefef;
+    width: 100%;
+  }
+  .dark .hr_vertical {
+    border-bottom: solid 1px #4a6857;
+  }
 }
 @media screen and (max-width: 600px) {
   .user_details_body1 {

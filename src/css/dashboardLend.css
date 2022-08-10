@@ -437,6 +437,11 @@
 .dark .progress_bar::-webkit-progress-bar {
   border: solid 1px #ffffff;
 }
+
+.proceed_to_cube_btn:disabled {
+  background: #c7c7c7;
+  cursor: not-allowed;
+}
 /* .progress_bar::-webkit-progress-inner-element {
   box-sizing: inherit;
   -webkit-user-modify: read-only;

@@ -7,6 +7,8 @@ import CircleIcon from "@mui/icons-material/Circle";
 import { loadUser } from "../../../actions/auth";
 import { connect } from "react-redux";
 import EastIcon from "@mui/icons-material/East";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { API_URL as api_url } from "../../../actions/types";
 import { config } from "../../../actions/Config";
 import { Authenticate } from "../../auth/Authenticate";
@@ -57,6 +59,9 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   const [onBoardUserDiv, setOnBoardUserDiv] = useState(false);
   const [lockedValue, setLockedValue] = useState(0);
   const [verified, setVerified] = useState(true);
+  const [disable, setDisable] = React.useState(false);
+  const [disable2, setDisable2] = React.useState(false);
+
   const [connected, setConnected] = useState(true);
   const [countryVerified, setCountryVerified] = useState(false);
   const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);
@@ -73,6 +78,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   const [value, setValue] = React.useState(null);
   const [country, setCountry] = React.useState("");
   const [getRef, setGetRef] = React.useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading2, setIsLoading2] = useState(false);
 
   const [kyc, setKyc] = useState({
     email: "",
@@ -107,7 +114,20 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
       setRef_code(auth.user.payload.ref_code);
     }
   }, [auth]);
-
+  useEffect(() => {
+    if (email == "" || firstName == "" || lastName == "" || username == "") {
+      setDisable(true);
+    } else {
+      setDisable(false);
+    }
+  });
+  useEffect(() => {
+    if (country == "") {
+      setDisable2(true);
+    } else {
+      setDisable2(false);
+    }
+  });
   useEffect(
     async (e) => {
       if (account) {
@@ -115,7 +135,6 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
         // console.log(response.message.data.payload, "acct acct acct acct ");
         const payload = response.message.data.payload;
         console.log(payload, "acct acct acct acct ");
-
         setAddress(account);
         setConnected(() => false);
         if (payload == null) {
@@ -127,14 +146,37 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
         } else if (payload.stage == 2) {
           setCountryVerified(() => false);
           setVerified(() => false);
+        } else if (!account) {
+          setConnected(() => true);
+          setCountryVerified(() => false);
+          setVerified(() => false);
         }
-      } else if (!account) {
-        setConnected(() => true);
-        setCountryVerified(() => false);
-        setVerified(() => false);
+        if (response.message.data.payload !== null) {
+          if (
+            response.message.data.payload.email !== null ||
+            response.message.data.payload.firstname !== null ||
+            response.message.data.payload.lastname !== null ||
+            response.message.data.payload.username !== null
+          ) {
+            setKyc({
+              email: response.message.data.payload.email,
+              firstName: response.message.data.payload.firstname,
+              lastName: response.message.data.payload.lastname,
+              username: response.message.data.payload.username,
+            });
+          } else {
+            setKyc({
+              email: "",
+              firstName: "",
+              lastName: "",
+              username: "",
+            });
+          }
+          return;
+        }
       }
     },
-    [account, verified, connected]
+    [account, verified, connected, countryVerified]
   );
   // useEffect(
   //   async (e) => {
@@ -212,6 +254,14 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   };
 
   const submitKycDetails = async (e) => {
+    if (isLoading2 == true) {
+      setDisable2(true);
+    } else if (isLoading2 == false) {
+      setDisable2(false);
+    }
+    setIsLoading2(true);
+    setDisable2(true);
+    setIsLoading2(true);
     let postData;
     let countryData = {
       address: address,
@@ -261,8 +311,13 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
           setVerified(() => false);
         }
       }
+
+      setIsLoading2(false);
+      setDisable2(false);
     } catch (err) {
       console.log(err.response);
+      setIsLoading2(false);
+      setDisable2(false);
     }
   };
   const validateInputs = (input) => {
@@ -273,6 +328,14 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   };
 
   const submitKycDetails_bkp = async (e) => {
+    if (isLoading == true) {
+      setDisable(true);
+    } else if (isLoading == false) {
+      setDisable(false);
+    }
+    setIsLoading(true);
+    setDisable(true);
+    setIsLoading(true);
     let postData;
 
     if (typeof localStorage.referer != "undefined") {
@@ -315,8 +378,12 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
 
       window.location.href = res.data.redirect_url;
       console.log(res.data, "000000000000");
+      setIsLoading(false);
+      setDisable(false);
     } catch (err) {
       console.log(err);
+      setIsLoading(false);
+      setDisable(false);
     }
   };
 
@@ -997,8 +1064,20 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                           <button
                             className="proceed_to_cube_btn"
                             onClick={submitKycDetails}
+                            disabled={disable2}
                           >
-                            Submit
+                            {isLoading2 ? (
+                              <span>
+                                Submitting{" "}
+                                <FontAwesomeIcon
+                                  className="ml-2"
+                                  icon={faSpinner}
+                                  spin
+                                />
+                              </span>
+                            ) : (
+                              <span> Submit</span>
+                            )}
                           </button>
                         </div>
                       </div>
@@ -1089,8 +1168,20 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                           <button
                             className="proceed_to_cube_btn"
                             onClick={submitKycDetails_bkp}
+                            disabled={disable}
                           >
-                            Proceed to kyc
+                            {isLoading ? (
+                              <span>
+                                Please wait{" "}
+                                <FontAwesomeIcon
+                                  className="ml-2"
+                                  icon={faSpinner}
+                                  spin
+                                />
+                              </span>
+                            ) : (
+                              <span> Proceed to kyc</span>
+                            )}
                           </button>
                           {/* {country === "Nigeria" || country === "nigeria" ? (
                             <button
