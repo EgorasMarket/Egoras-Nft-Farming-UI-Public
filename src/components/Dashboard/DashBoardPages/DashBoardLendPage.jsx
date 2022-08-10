@@ -1005,7 +1005,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                       : { color: "black" }
                   }
                 >
-                  ConnectWallet
+                  {connected === false ? "Connected" : "ConnectWallet"}
                 </span>
                 {connected === true ? (
                   <div className="stepDiv1_sub_content">
@@ -1037,7 +1037,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                       : { color: "black" }
                   }
                 >
-                  Select Country
+                  {countryVerified === false ? "Selected" : "Select Country"}
                 </span>
                 {countryVerified === true ? (
                   <div className="stepDiv1_sub_content">
