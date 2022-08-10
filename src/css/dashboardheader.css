@@ -570,6 +570,7 @@ dark button.logout-btn {
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
+    /* transform: scale(0.8); */
   }
   .save_numb_div {
     margin-left: 5px;
