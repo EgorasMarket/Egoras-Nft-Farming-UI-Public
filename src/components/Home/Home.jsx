@@ -385,38 +385,38 @@ const Home = () => {
   // );
   useEffect(
     async (e) => {
-      try {
-        let string =
-          'https://api.coingecko.com/api/v3/simple/price?ids=egoras&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true';
-        await fetch(string)
-          .then((resp) => resp.json())
-          .then((data) => {
-            const egr_usd_val = data['egoras'].usd;
-            // console.log(egr_usd_val);
-            setEgrUsd(() => egr_usd_val);
-          });
-        // ===============================
-        let string2 =
-          'https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true';
-        await fetch(string2)
-          .then((resp) => resp.json())
-          .then((data) => {
-            const egc_usd_val = data['egoras-credit'].usd;
-            // console.log(egc_usd_val);
-            setEgcUsd(() => egc_usd_val);
-          });
-        setSumVals(() => parseInt(egcVal) + parseInt(egcVal2));
-        setSumVals2(() => parseInt(egrVal) + parseInt(egrVal2));
-        setValDisplay(() => egcUsd * sumVals);
-        setValDisplay2(() => egrUsd * sumVals2);
-        setTotalSum(() => valDisplay + valDisplay2);
-        setTotalAmountFrom(() => TotalSum * 0.95);
-        setTotu(() => Math.round(totalAmountFrom));
-
-        console.log(Math.round(totalAmountFrom), 'iiiiiiii');
-      } catch (error) {
-        console.log(error.message);
-      }
+      let string =
+        'https://api.coingecko.com/api/v3/simple/price?ids=egoras&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true';
+      await fetch(string)
+        .then((resp) => resp.json())
+        .then((data) => {
+          const egr_usd_val = data['egoras'].usd;
+          // console.log(egr_usd_val);
+          setEgrUsd(() => egr_usd_val);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      // ===============================
+      let string2 =
+        'https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true';
+      await fetch(string2)
+        .then((resp) => resp.json())
+        .then((data) => {
+          const egc_usd_val = data['egoras-credit'].usd;
+          // console.log(egc_usd_val);
+          setEgcUsd(() => egc_usd_val);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      setSumVals(() => parseInt(egcVal) + parseInt(egcVal2));
+      setSumVals2(() => parseInt(egrVal) + parseInt(egrVal2));
+      setValDisplay(() => egcUsd * sumVals);
+      setValDisplay2(() => egrUsd * sumVals2);
+      setTotalSum(() => valDisplay + valDisplay2);
+      setTotalAmountFrom(() => TotalSum * 0.95);
+      setTotu(() => Math.round(totalAmountFrom));
 
       // console.log(egcUsd, egrUsd);
       // console.log(totalAmountFrom);

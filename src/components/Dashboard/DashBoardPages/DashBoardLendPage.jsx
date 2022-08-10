@@ -158,6 +158,27 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
     setCategoryBtn('All');
   };
 
+  useEffect(() => {
+    if (account) {
+      axios
+        .get(
+          api_url + '/api/kyc/check/country/' + account,
+          null,
+          config
+        )
+        .then((data) => {
+          console.log(
+            data.data.payload.country,
+            'dat data data data'
+          );
+          setCountry(data.data.payload.country);
+        })
+        .catch((err) => {
+          console.log(err); // "oh, no!"
+        });
+    }
+  }, [country, account]);
+
   const { email, firstName, lastName, username } = kyc;
   useEffect(() => {
     axios
@@ -258,50 +279,6 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
     }
   };
 
-  const updateKycDetails = async (e) => {
-    // alert("welcome");
-
-    let postData;
-
-    if (!account) {
-      console.log('Please connect your wallet');
-      alert('Please connect your wallet');
-      return;
-    }
-
-    console.log(typeof localStorage.referer);
-
-    postData = JSON.stringify({
-      email: email,
-      firstName: firstName,
-      lastName: lastName,
-      address: address,
-      // ref_code: localStorage.getItem('referer'),
-      ref_code:
-        typeof localStorage.referer != 'undefined'
-          ? localStorage.getItem('referer')
-          : '',
-
-      username: username,
-    });
-
-    console.log('====================================');
-    console.log(postData);
-    console.log('====================================');
-    try {
-      const res = await axios.post(
-        api_url + '/api/kyc/initialize',
-        postData,
-        config
-      );
-      console.log(res);
-      // alert("Upladed successfully");
-      toggleOnBoardUserDiv();
-    } catch (err) {
-      console.log(err.response);
-    }
-  };
-
   const submitKycDetails_bkp = async (e) => {
     let postData;
 
@@ -328,7 +305,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
         firstName: firstName,
         lastName: lastName,
         address: address,
-        ref_code: '',
+        ref_code: getRef,
         username: username,
       });
     }
@@ -338,14 +315,13 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
     console.log('====================================');
     try {
       const res = await axios.post(
-        api_url + '/api/user/submit/users/country',
+        api_url + '/api/kyc/initialize',
         postData,
         config
       );
 
-      window.location.href = res.data.session.redirectUrl;
-      console.log(res.data.session.redirectUrl);
-      console.log(res.data.status);
+      window.location.href = res.data.redirect_url;
+      console.log(res.data, '000000000000');
     } catch (err) {
       console.log(err);
     }
@@ -1156,10 +1132,28 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                         <div className="button_comply_cube_div">
                           <button
                             className="proceed_to_cube_btn"
-                            onClick={updateKycDetails}
+                            onClick={submitKycDetails_bkp}
                           >
-                            Save Information
+                            Proceed to kyc
                           </button>
+                          {/* {country === "Nigeria" || country === "nigeria" ? (
+                            <button
+                              className="proceed_to_cube_btn"
+                              onClick={() =>
+                                (window.location.href =
+                                  "https://kyc.egoras.org")
+                              }
+                            >
+                              Procedd to Local Kyc
+                            </button>
+                          ) : country !== "Nigeria" || country !== "nigeria" ? (
+                            <button
+                              className="proceed_to_cube_btn"
+                              onClick={submitKycDetails_bkp}
+                            >
+                              Proceed to complycube
+                            </button>
+                          ) : null} */}
                         </div>
                       </div>
                     </div>

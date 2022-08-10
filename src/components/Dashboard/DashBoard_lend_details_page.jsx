@@ -7,13 +7,16 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import CloseIcon from "@mui/icons-material/Close";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import SwitchToggle from "./DashBoardPages/SwitchToggle/SwitchToggle";
 import { CopperLoading } from "respinner";
 import { parseEther, formatEther } from "@ethersproject/units";
 import LOAN from "../../web3/contracts/Loan.json";
 import SwapContract from "../../web3/contracts/Contract_Address.json";
 import Web3 from "web3";
+// import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import Nodata from "./DashBoardPages/nodataComponent/Nodata";
+import { Authenticate } from "../auth/Authenticate";
 import {
   SuccessModal,
   ErrorModal,
@@ -59,6 +62,8 @@ import {
   burnAccumulatedDividend,
   checkAllowance,
   unluckToken,
+  lend,
+  getUserStats,
   transactReceipt,
   getPrice,
   getTickerInfo,
@@ -85,6 +90,7 @@ const DashBoard_lend_details_page = ({ match }) => {
     funded: "",
   });
   const [activeLink, setActiveLink] = useState("");
+  const [viaEarnings, setViaEarnings] = useState(false);
   const [checkBox, setCheckBox] = useState(false);
   const [errMessage, setErrMessage] = useState("");
 
@@ -99,12 +105,16 @@ const DashBoard_lend_details_page = ({ match }) => {
     "Transacting with blockchain, please wait..."
   );
   const [rumuName, setRumuName] = useState(false);
+  const [lendType, setLendType] = useState(false);
   const [agipName, setAgipName] = useState(false);
   const [oyName, setOyName] = useState(false);
   const [assetDetailModal, setAssetDetailModal] = useState("");
   const [hash, setHash] = useState("");
   const [unlocking, setUnlocking] = useState(false);
   const [modal, setModal] = useState(false);
+  const [refEarnings, setRefEarnings] = useState(0.0);
+  const [welcomeBonus, setWelcomeBonus] = useState(0.0);
+
   const [task, setTask] = useState("collateral");
   const [stage, setStage] = useState("back");
   const [isLoading, setIsLoading] = useState(false);
@@ -144,7 +154,7 @@ const DashBoard_lend_details_page = ({ match }) => {
   //   setBackModal(!backModal);
   //   setAssetModal(!assetModal);
   // };
-
+  const toggleLendType = () => setLendType(!lendType);
   const ChangeAssetDetailModal = (e) => {
     let currentTarget = e.currentTarget.id;
     console.log(currentTarget);
@@ -179,6 +189,36 @@ const DashBoard_lend_details_page = ({ match }) => {
       setActiveLink("transaction");
     }
   });
+  useEffect(
+    async (e) => {
+      if (account) {
+        let response = await getUserStats(account, library.getSigner());
+        console.log(response);
+        if (response.status === true) {
+          const resAmnt = parseFloat(
+            formatEther(response.message._referral._hex)
+          );
+          setRefEarnings(resAmnt);
+          console.log(response.message._referral);
+        }
+      }
+    },
+    [account]
+  );
+  useEffect(
+    async (e) => {
+      if (account) {
+        let response = await getUserStats(account, library.getSigner());
+        console.log(response);
+        if (response.status === true) {
+          const resAmnt = parseFloat(formatEther(response.message._wB._hex));
+          setWelcomeBonus(resAmnt);
+          console.log(response.message._referral);
+        }
+      }
+    },
+    [account]
+  );
   useEffect(() => {
     axios
       .get(api_url + "/api/branch/transactions/" + txnhash, null, config)
@@ -336,6 +376,40 @@ const DashBoard_lend_details_page = ({ match }) => {
       setIsLoading(false);
     }
   };
+  const BackLoanBonus = async (e) => {
+    let currentTarget = e.currentTarget.id;
+    console.log(currentTarget);
+    console.log(BackAmount);
+    setStage("loading");
+    setIsLoading(true);
+    // setUnlocking(false);
+    // setStage("loading");
+    // setIsLoading(true);
+    setText("Lending, please wait...");
+
+    let response = await lend(
+      parseEther(formData.BackAmount.toString(), "wei").toString(),
+      txnhash,
+      currentTarget,
+      true,
+      library.getSigner()
+    );
+    console.log(response.status);
+    if (response.status == true) {
+      setText("Sending token please wait aleast 1/2 minutes");
+      setHash(response.message.hash);
+      // setStage("success");
+      console.log(response);
+    } else if (response.status == false) {
+      if (response.message.code < 0) {
+        setText(response.message.data.message);
+      } else if (response.message.code == 4001) {
+        setText(response.message.message);
+      }
+      setStage("error");
+      setIsLoading(false);
+    }
+  };
 
   setInterval(() => {
     if (localStorage.getItem("unlocking") == "true") {
@@ -481,7 +555,8 @@ const DashBoard_lend_details_page = ({ match }) => {
               <div className="pool_detail_heading_area1_invest_btn_div">
                 <button
                   className="pool_detail_heading_area1_invest_btn"
-                  onClick={toggleAssetModal}
+                  onClick={toggleLendType}
+                  // onClick={toggleAssetModal}
                 >
                   Lend
                 </button>
@@ -986,7 +1061,25 @@ const DashBoard_lend_details_page = ({ match }) => {
                           <div className="back_modal_input_amnt_head">
                             Input amount
                             <span className="base_balance">
-                              Balance: {parseFloat(baseBalance).toFixed(3)}Engn
+                              {viaEarnings === true ? (
+                                <span>
+                                  Earnings Balance:{" "}
+                                  {numberWithCommas(
+                                    parseFloat(
+                                      welcomeBonus + refEarnings
+                                    ).toFixed(2)
+                                  )}
+                                  Engn
+                                </span>
+                              ) : (
+                                <span>
+                                  Wallet Balance:{" "}
+                                  {numberWithCommas(
+                                    parseFloat(baseBalance).toFixed(3)
+                                  )}
+                                  Engn
+                                </span>
+                              )}
                             </span>
                           </div>
                           <span className="input_space">
@@ -1008,7 +1101,10 @@ const DashBoard_lend_details_page = ({ match }) => {
                           Expected APY:
                           <span className="amount_earned_mnthly_value">
                             {" "}
-                            13%
+                            {numberWithCommas(
+                              parseFloat(0.015 * BackAmount).toFixed(2)
+                            )}
+                            Engn
                           </span>
                         </div>
                         {/* <div className="unlock_check_div">
@@ -1017,26 +1113,53 @@ const DashBoard_lend_details_page = ({ match }) => {
                             // doUnluck={doUnluck}
                           />
                         </div> */}
-                        <div className="back_loan_btn_div">
-                          {BackAmount > amnt_remaining ? (
-                            <button
-                              className="back_loan_btn"
-                              id={data.newLoanID}
-                              disabled={true}
-                            >
-                              Amount exceeds funding amount
-                            </button>
-                          ) : (
-                            <button
-                              className="back_loan_btn"
-                              onClick={BackLoan}
-                              id={data.newLoanID}
-                              // disabled={disable}
-                            >
-                              Fund
-                            </button>
-                          )}
-                        </div>
+                        {!account ? (
+                          <div className="connect_div_dash_head">
+                            <Authenticate isHome="false" />
+                          </div>
+                        ) : viaEarnings === true ? (
+                          <div className="back_loan_btn_div">
+                            {BackAmount > amnt_remaining ? (
+                              <button
+                                className="back_loan_btn"
+                                id={data.newLoanID}
+                                disabled={true}
+                              >
+                                Amount exceeds funding amount
+                              </button>
+                            ) : (
+                              <button
+                                className="back_loan_btn"
+                                onClick={BackLoanBonus}
+                                id={data.newLoanID}
+                                // disabled={disable}
+                              >
+                                Fund with Earnings
+                              </button>
+                            )}
+                          </div>
+                        ) : (
+                          <div className="back_loan_btn_div">
+                            {BackAmount > amnt_remaining ? (
+                              <button
+                                className="back_loan_btn"
+                                id={data.newLoanID}
+                                disabled={true}
+                              >
+                                Amount exceeds funding amount
+                              </button>
+                            ) : (
+                              <button
+                                className="back_loan_btn"
+                                onClick={BackLoan}
+                                id={data.newLoanID}
+                                // disabled={disable}
+                              >
+                                Fund
+                              </button>
+                            )}
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -1141,6 +1264,84 @@ const DashBoard_lend_details_page = ({ match }) => {
               }}
               ErrorHead="Error"
             />
+          </div>
+        </div>
+      ) : null}
+      {lendType === true ? (
+        <div className="viaEarnings_modal_cont">
+          <div className="viaEarnings_modal_cont_div">
+            {/* <div className="close_viaEarning_div"> */}
+            <CloseIcon
+              className="close_viaEarning_div_btn"
+              onClick={toggleLendType}
+            />
+            {/* </div> */}
+            <div>
+              <div className="asset_originator_heading">
+                Assets Originator{" "}
+                <div className="asset_originator_body">
+                  <img
+                    src={
+                      oyName === true
+                        ? "/img/oyigbo_icon.svg"
+                        : agipName === true
+                        ? "/img/agip_icon.svg"
+                        : rumuName === true
+                        ? "/img/rumu_icon.svg"
+                        : null
+                    }
+                    alt=""
+                    className="pool_detail_heading_area1_img_2"
+                  />
+                  {BranchDetails.branchName} branch
+                </div>
+              </div>
+              <div className="viaEarnings_modal_cont_div1">
+                <div className="viaEarnings_modal_cont_div1_cont1">
+                  <span className="viaEarnings_modal_cont_div1_cont1_span1">
+                    Wallet Balance:
+                  </span>
+                  <span className="viaEarnings_modal_cont_div1_cont1_span2">
+                    {numberWithCommas(parseFloat(baseBalance).toFixed(3))} Engn
+                  </span>
+                </div>
+                <div className="viaEarnings_modal_cont_div1_cont1">
+                  <span className="viaEarnings_modal_cont_div1_cont1_span1">
+                    Earnings Balance:
+                  </span>
+                  <span className="viaEarnings_modal_cont_div1_cont1_span2">
+                    {numberWithCommas(
+                      parseFloat(welcomeBonus + refEarnings).toFixed(2)
+                    )}
+                    Engn
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <hr />
+              <div className="viaEarnings_modal_cont_div2">
+                <button
+                  className="viaEarnings_modal_cont_div_btn2"
+                  onClick={() => {
+                    toggleAssetModal();
+                    setViaEarnings(false);
+                  }}
+                >
+                  Lend via wallet
+                </button>
+
+                <button
+                  className="viaEarnings_modal_cont_div_btn"
+                  onClick={() => {
+                    toggleAssetModal();
+                    setViaEarnings(true);
+                  }}
+                >
+                  Lend via Earnings
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       ) : null}

@@ -43,6 +43,7 @@ const DashboardReferral = ({ auth }) => {
   const urlArr = currentPage.split("/");
   const [leaderBoard1, setLeaderBoard] = useState([]);
   const [myReferrals, setMyReferrals] = useState([]);
+  const [refLink, setRefLink] = useState("******");
   const context = useWeb3React();
 
   const {
@@ -117,92 +118,7 @@ const DashboardReferral = ({ auth }) => {
       value: 121600,
     },
   ];
-  const leaderBoard = [
-    {
-      sn: 1,
-      user: "@xamborg",
-      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      referrals: 60,
-      amountEarned: 200,
-    },
-    {
-      sn: 2,
-      user: "@xamborg",
-      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      referrals: 55,
-      amountEarned: 200,
-    },
-    {
-      sn: 3,
-      user: "@xamborg",
-      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      referrals: 50,
-      amountEarned: 200,
-    },
-    {
-      sn: 4,
-      user: "@xamborg",
-      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      referrals: 40,
-      amountEarned: 200,
-    },
-    {
-      sn: 5,
-      user: "@xamborg",
-      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      referrals: 38,
-      amountEarned: 200,
-    },
-    {
-      sn: 6,
-      user: "@xamborg",
-      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      referrals: 35,
-      amountEarned: 200,
-    },
-    {
-      sn: 7,
-      user: "@xamborg",
-      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      referrals: 30,
-      amountEarned: 200,
-    },
-    {
-      sn: 8,
-      user: "@xamborg",
-      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      referrals: 20,
-      amountEarned: 200,
-    },
-    {
-      sn: 9,
-      user: "@xamborg",
-      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      referrals: 10,
-      amountEarned: 200,
-    },
-    {
-      sn: 10,
-      user: "@xamborg",
-      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      referrals: 8,
-      amountEarned: 200,
-    },
-    {
-      sn: 11,
-      user: "@xamborg",
-      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      referrals: 7,
-      amountEarned: 200,
-    },
-    {
-      sn: 12,
-      user: "@xamborg",
-      address: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      referrals: 4,
-      amountEarned: 200,
-    },
-  ];
+
   useEffect(() => {
     axios
       .get(api_url + "/api/user/fetch/top/referals", null, config)
@@ -234,8 +150,15 @@ const DashboardReferral = ({ auth }) => {
   useEffect(
     async (e) => {
       if (account) {
-        let response = await getAuthUserStats("wewrwwrw");
-        console.log(response.message.data.payload);
+        let response = await getAuthUserStats(account);
+        const payload = response.message.data.payload;
+        if (payload.ref_code == "") {
+          setRefLink(() => "*******");
+        } else {
+          setRefLink(() => "http://localhost:3000/referal/" + payload.ref_code);
+        }
+
+        console.log(response.message.data);
         if (response.message.data.payload == null) {
           console.log("user does not exist");
         } else {
@@ -534,7 +457,7 @@ const DashboardReferral = ({ auth }) => {
                         </div>
                         <input
                           type="text"
-                          value={copyValue}
+                          value={refLink}
                           className="referral_default_value"
                           id="myInput"
                         />
