@@ -3,8 +3,13 @@ import jazzicon from '@metamask/jazzicon';
 import Timer from './Timer';
 import { addDays, format } from 'date-fns';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { CopperLoading } from 'respinner';
 
+import { connect } from 'react-redux';
+import {
+  SuccessModal,
+  ErrorModal,
+} from './Modal/Success_Error_Component';
 import StarRateIcon from '@mui/icons-material/StarRate';
 import {
   Web3ReactProvider,
@@ -41,6 +46,7 @@ import {
   unluckToken,
   transactReceipt,
   getPrice,
+  takeDividend,
   getTickerInfo,
   tokenBalance,
   open,
@@ -65,10 +71,16 @@ const DashBoardUserDetails = ({ auth }) => {
   const [disable, setDisable] = useState(true);
   const [activeLink, setActiveLink] = useState('');
   const [base, setBase] = useState('');
+  const [text, setText] = useState(
+    'Transacting with blockchain, please wait...'
+  );
+  const [hash, setHash] = useState('');
   const [asset, setAsset] = useState('');
   const [coinBalance2, setCoinBalance2] = React.useState(0.0);
   const [baseBalance, setBaseBalance] = useState(0.0);
   const [tokenBal, setTokenBal] = useState(0.0);
+  const [stage, setStage] = useState('redeem');
+  const [isLoading, setIsLoading] = useState(false);
   const [UserPoolsDetails, setUserPoolsDetails] = useState({
     lockedBalance: '0.00',
     pool: '0',
@@ -275,6 +287,12 @@ const DashBoardUserDetails = ({ auth }) => {
     },
     [account]
   );
+  const Continue = async (e) => {
+    setStage('redeem');
+    setText('');
+    // setModal(!modal);
+    // window.location.reload();
+  };
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -647,162 +665,195 @@ const DashBoardUserDetails = ({ auth }) => {
       {/* ============================= */}
       {/* ============================= */}
       {/* var ms = new Date().getTime() + 86400000; var tomorrow = new Date(ms); */}
-      {loanAsset.map((data) => {
-        var ms = new Date(data.updatedAt).getTime() + 86400000 * 30;
-        // console.log(ms);
-        var endDate = new Date(ms);
-        console.log(endDate);
-        if (new Date() === endDate) {
-          setDisable(false);
-        }
-        return (
-          <>
-            {assetDetailModal == data.rowNumber ? (
-              <div className="asset_detail_modal_div">
-                <div className="asset_detail_modal_div_conts">
-                  <div
-                    className="asset_detail_heading"
-                    style={{ margin: '0' }}
-                  >
-                    <div
-                      className="pool_detail_heading_area1"
-                      style={{ width: '100%' }}
-                    >
-                      {/* <img
+
+      {stage === 'redeem' ? (
+        <>
+          {' '}
+          {loanAsset.map((data) => {
+            var ms =
+              new Date(data.updatedAt).getTime() + 86400000 * 30;
+            // console.log(ms);
+            var endDate = new Date(ms);
+            console.log(endDate);
+            if (new Date() === endDate) {
+              setDisable(false);
+            }
+            const redeem = async () => {
+              if (account) {
+                setStage('loading');
+                setIsLoading(true);
+                setText('Redeeming, please wait...');
+                let response = await takeDividend(
+                  data.id,
+                  library.getSigner()
+                );
+                console.log(response);
+                if (response.status == true) {
+                  setText(
+                    'Sending token please wait aleast 1/2 minutes'
+                  );
+                  setHash(response.message.hash);
+                  console.log(response);
+                } else if (response.status == false) {
+                  if (response.message.code < 0) {
+                    setText(response.message.data.message);
+                  } else if (response.message.code == 4001) {
+                    setText(response.message.message);
+                  }
+                  setStage('error');
+                  setIsLoading(false);
+                }
+                return;
+              }
+            };
+            return (
+              <>
+                {assetDetailModal == data.rowNumber ? (
+                  <div className="asset_detail_modal_div">
+                    <div className="asset_detail_modal_div_conts">
+                      <div
+                        className="asset_detail_heading"
+                        style={{ margin: '0' }}
+                      >
+                        <div
+                          className="pool_detail_heading_area1"
+                          style={{ width: '100%' }}
+                        >
+                          {/* <img
                       src="/img/pool_asset_icon.png"
                       alt=""
                       className="pool_detail_heading_area1_img"
                       //   onClick={toggleImgDiv}
                       style={{ cursor: "pointer" }}
                     /> */}
-                      <div className="pool_detail_heading_area1_txt_cont">
-                        <div className="pool_detail_heading_area1_txt_cont_1">
-                          {data.title.substring(0, 45) + '...'}
-                        </div>
-                        <div className="pool_detail_heading_area1_txt_cont_2">
-                          Assets {'>'} Asset{data.id}
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="pool_detail_heading_area2"
-                      style={{ width: '100%' }}
-                    >
-                      <span className="reward_amount">
-                        <span className="reward_amount_title">
-                          Reward:
-                        </span>{' '}
-                        {numberWithCommas(
-                          parseFloat(data.lendAmount * 0.015).toFixed(
-                            2
-                          )
-                        )}{' '}
-                        Engn
-                      </span>
-                      <Timer deadline={new Date(endDate)} />
-                      {/* <span className="reward_txt">Redeem Reward In</span> */}
-
-                      <span className="reward_btn_div">
-                        <button
-                          className="reward_btn"
-                          disabled={disable}
-                          // onClick={redeem}
-                        >
-                          Reedeem
-                        </button>
-                      </span>
-                    </div>
-                  </div>
-                  {/* ====== */}
-                  {/* ====== */}
-                  {/* ====== */}
-                  <div className="asset_status_details_div1">
-                    <div className="asset_status_details_div1_head">
-                      Status{' '}
-                      <div className="staus_btn_div">
-                        <button
-                          className={
-                            data.state === 'OPEN'
-                              ? 'status_btn_ongoing'
-                              : data.state === 'FILLED'
-                              ? 'status_btn_closed'
-                              : 'status_btn'
-                          }
-                        >
-                          {data.state}
-                        </button>
-                      </div>
-                    </div>
-                    <div className="asset_status_details_div1_body">
-                      <div className="asset_status_details_div1_body1">
-                        <div className="asset_status_details_div1_body1_cont1">
-                          <div className="asset_status_details_div1_body1_cont1_txt1">
-                            Pool Amount
+                          <div className="pool_detail_heading_area1_txt_cont">
+                            <div className="pool_detail_heading_area1_txt_cont_1">
+                              {data.title.substring(0, 45) + '...'}
+                            </div>
+                            <div className="pool_detail_heading_area1_txt_cont_2">
+                              Assets {'>'} Asset{data.id}
+                            </div>
                           </div>
-                          <div className="asset_status_details_div1_body1_cont1_txt1">
+                        </div>
+                        <div
+                          className="pool_detail_heading_area2"
+                          style={{ width: '100%' }}
+                        >
+                          <span className="reward_amount">
+                            <span className="reward_amount_title">
+                              Reward:
+                            </span>{' '}
                             {numberWithCommas(
-                              parseInt(data.amount).toFixed()
+                              parseFloat(
+                                data.lendAmount * 0.015
+                              ).toFixed(2)
                             )}{' '}
                             Engn
-                          </div>
-                        </div>
-                        <hr class="custom_hr"></hr>
-                        <div className="asset_status_details_div1_body1_cont1">
-                          <div className="asset_status_details_div1_body1_cont1_txt1">
-                            Amount Funded
-                          </div>
-                          <div className="asset_status_details_div1_body1_cont1_txt1">
-                            {numberWithCommas(
-                              parseInt(data.lendAmount).toFixed()
-                            )}{' '}
-                            Engn
-                          </div>
-                        </div>
-                        <hr class="custom_hr"></hr>
+                          </span>
+                          <Timer deadline={new Date(endDate)} />
+                          {/* <span className="reward_txt">Redeem Reward In</span> */}
 
-                        <div className="asset_status_details_div1_body1_cont1">
-                          <div className="asset_status_details_div1_body1_cont1_txt1">
-                            Asset Duration
-                          </div>
-                          <div className="asset_status_details_div1_body1_cont1_txt1">
-                            {data.length} months
-                          </div>
-                        </div>
-                        <hr class="custom_hr"></hr>
-                        <div className="asset_status_details_div1_body1_cont1">
-                          <div className="asset_status_details_div1_body1_cont1_txt1">
-                            Date
-                          </div>
-                          <div className="asset_status_details_div1_body1_cont1_txt1">
-                            {data.createdAt.slice(0, 10)}
-                          </div>
+                          <span className="reward_btn_div">
+                            <button
+                              className="reward_btn"
+                              disabled={disable}
+                              onClick={redeem}
+                            >
+                              Reedeem
+                            </button>
+                          </span>
                         </div>
                       </div>
-                      {/* ======== */}
-                      {/* ======== */}
-                      {/* ======== */}
-                      {/* ======== */}
-                      <div className="asset_status_details_div1_body1">
-                        <div className="asset_status_details_div1_body1_cont1">
-                          <div className="asset_status_details_div1_body1_cont1_txt1">
-                            Monthly APY
-                          </div>
-                          <div className="asset_status_details_div1_body1_cont1_txt1">
-                            1.5%
-                          </div>
-                        </div>
-                        <hr class="custom_hr"></hr>
-                        <div className="asset_status_details_div1_body1_cont1">
-                          <div className="asset_status_details_div1_body1_cont1_txt1">
-                            Average APY
-                          </div>
-                          <div className="asset_status_details_div1_body1_cont1_txt1">
-                            13%
+                      {/* ====== */}
+                      {/* ====== */}
+                      {/* ====== */}
+                      <div className="asset_status_details_div1">
+                        <div className="asset_status_details_div1_head">
+                          Status{' '}
+                          <div className="staus_btn_div">
+                            <button
+                              className={
+                                data.state === 'OPEN'
+                                  ? 'status_btn_ongoing'
+                                  : data.state === 'FILLED'
+                                  ? 'status_btn_closed'
+                                  : 'status_btn'
+                              }
+                            >
+                              {data.state}
+                            </button>
                           </div>
                         </div>
-                        <hr class="custom_hr"></hr>
+                        <div className="asset_status_details_div1_body">
+                          <div className="asset_status_details_div1_body1">
+                            <div className="asset_status_details_div1_body1_cont1">
+                              <div className="asset_status_details_div1_body1_cont1_txt1">
+                                Pool Amount
+                              </div>
+                              <div className="asset_status_details_div1_body1_cont1_txt1">
+                                {numberWithCommas(
+                                  parseInt(data.amount).toFixed()
+                                )}{' '}
+                                Engn
+                              </div>
+                            </div>
+                            <hr class="custom_hr"></hr>
+                            <div className="asset_status_details_div1_body1_cont1">
+                              <div className="asset_status_details_div1_body1_cont1_txt1">
+                                Amount Funded
+                              </div>
+                              <div className="asset_status_details_div1_body1_cont1_txt1">
+                                {numberWithCommas(
+                                  parseInt(data.lendAmount).toFixed()
+                                )}{' '}
+                                Engn
+                              </div>
+                            </div>
+                            <hr class="custom_hr"></hr>
 
-                        {/* <div className="asset_status_details_div1_body1_cont1">
+                            <div className="asset_status_details_div1_body1_cont1">
+                              <div className="asset_status_details_div1_body1_cont1_txt1">
+                                Asset Duration
+                              </div>
+                              <div className="asset_status_details_div1_body1_cont1_txt1">
+                                {data.length} months
+                              </div>
+                            </div>
+                            <hr class="custom_hr"></hr>
+                            <div className="asset_status_details_div1_body1_cont1">
+                              <div className="asset_status_details_div1_body1_cont1_txt1">
+                                Date
+                              </div>
+                              <div className="asset_status_details_div1_body1_cont1_txt1">
+                                {data.createdAt.slice(0, 10)}
+                              </div>
+                            </div>
+                          </div>
+                          {/* ======== */}
+                          {/* ======== */}
+                          {/* ======== */}
+                          {/* ======== */}
+                          <div className="asset_status_details_div1_body1">
+                            <div className="asset_status_details_div1_body1_cont1">
+                              <div className="asset_status_details_div1_body1_cont1_txt1">
+                                Monthly APY
+                              </div>
+                              <div className="asset_status_details_div1_body1_cont1_txt1">
+                                1.5%
+                              </div>
+                            </div>
+                            <hr class="custom_hr"></hr>
+                            <div className="asset_status_details_div1_body1_cont1">
+                              <div className="asset_status_details_div1_body1_cont1_txt1">
+                                Average APY
+                              </div>
+                              <div className="asset_status_details_div1_body1_cont1_txt1">
+                                13%
+                              </div>
+                            </div>
+                            <hr class="custom_hr"></hr>
+
+                            {/* <div className="asset_status_details_div1_body1_cont1">
                           <div className="asset_status_details_div1_body1_cont1_txt1">
                             Financed by
                           </div>
@@ -810,52 +861,104 @@ const DashBoardUserDetails = ({ auth }) => {
                             Nov 13, 2024
                           </div>
                         </div> */}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  {/* ============ */}
-                  {/* ============ */}
-                  {/* ============ */}
-                  {/* ============ */}
+                      {/* ============ */}
+                      {/* ============ */}
+                      {/* ============ */}
+                      {/* ============ */}
 
-                  {/* ============ */}
-                  {/* ============ */}
-                  {/* ============ */}
-                  {/* ============ */}
-                  <div className="Asset_Originator_Details_cont">
-                    <div className="Asset_Originator_Details_cont_heading">
-                      Transaction Data
+                      {/* ============ */}
+                      {/* ============ */}
+                      {/* ============ */}
+                      {/* ============ */}
+                      <div className="Asset_Originator_Details_cont">
+                        <div className="Asset_Originator_Details_cont_heading">
+                          Transaction Data
+                        </div>
+                        <div className="transactionData_body">
+                          <div className="transactionData_body1">
+                            Transaction Id
+                          </div>
+                          <div className="transactionData_body1">
+                            <a
+                              href={`https://bscscan.com/tx/${data.transactionHash}`}
+                              className="transaction_id_link"
+                              target="_blank"
+                            >
+                              {data.transactionHash.substring(0, 28) +
+                                '...'}
+                            </a>
+                            <CopyAllIcon className="copy_all_tx_hash_icon" />
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="transactionData_body">
-                      <div className="transactionData_body1">
-                        Transaction Id
-                      </div>
-                      <div className="transactionData_body1">
-                        <a
-                          href={`https://bscscan.com/tx/${data.transactionHash}`}
-                          className="transaction_id_link"
-                          target="_blank"
-                        >
-                          {data.transactionHash.substring(0, 28) +
-                            '...'}
-                        </a>
-                        <CopyAllIcon className="copy_all_tx_hash_icon" />
-                      </div>
+                    <div
+                      className="close_asset_detail_modal"
+                      onClick={closeAssetDetailModal}
+                    >
+                      <CloseIcon className="close_asset_detail_modal_icon" />
+                      Close
                     </div>
                   </div>
-                </div>
-                <div
-                  className="close_asset_detail_modal"
-                  onClick={closeAssetDetailModal}
-                >
-                  <CloseIcon className="close_asset_detail_modal_icon" />
-                  Close
-                </div>
+                ) : null}
+              </>
+            );
+          })}
+        </>
+      ) : null}
+
+      {stage == 'loading' ? (
+        <div className="bacModal_div">
+          <div className="back_modal_container">
+            <div className="back_modal_cont_loading">
+              <CopperLoading
+                fill="#229e54"
+                borderRadius={4}
+                count={12}
+                size={200}
+              />
+              <div className="loading_title">
+                {text}
+
+                <span className="loaing_span_para">
+                  Confirm this transaction in your wallet.
+                </span>
               </div>
-            ) : null}
-          </>
-        );
-      })}
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      {stage == 'success' ? (
+        <div className="bacModal_div">
+          <div className="back_modal_container">
+            <SuccessModal
+              successMessage={'Transaction was successful'}
+              click={(e) => {
+                window.location.href = '/dashboard/user';
+              }}
+              SuccessHead="Success"
+              hash={hash}
+            />
+          </div>
+        </div>
+      ) : null}
+      {stage == 'error' ? (
+        <div className="bacModal_div">
+          <div className="back_modal_container">
+            <ErrorModal
+              errorMessage={text}
+              click={(e) => {
+                Continue(e);
+              }}
+              ErrorHead="Error"
+            />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

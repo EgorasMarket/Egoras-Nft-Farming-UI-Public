@@ -543,6 +543,7 @@ button.pool_detail_heading_area1_invest_btn {
   flex-direction: column;
   grid-gap: 10px;
   grid-gap: 10px;
+  grid-gap: 10px;
   gap: 10px;
   background: #fff;
   /* padding: 2em; */
@@ -554,6 +555,7 @@ button.pool_detail_heading_area1_invest_btn {
   justify-content: space-between;
   position: relative;
   animation: slideIn22 0.5s linear;
+  overflow: scroll;
 }
 .dark .viaEarnings_modal_cont_div {
   background: #365543;
@@ -691,7 +693,7 @@ button.pool_detail_heading_area1_invest_btn {
     flex-direction: column;
   }
   .no_paddd {
-    padding: 2em 0em !important;
+    padding: 1em 0em !important;
   }
   .pool_detail_sub_area1_area1 {
     align-items: flex-start;
@@ -730,7 +732,7 @@ button.pool_detail_heading_area1_invest_btn {
     font-size: 14px;
   }
   .pool_lending_pages_links {
-    top: 21px;
+    top: 0px;
   }
   .finance_fee_details_page {
     display: none !important;
