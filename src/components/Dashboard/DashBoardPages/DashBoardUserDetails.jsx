@@ -85,8 +85,6 @@ const DashBoardUserDetails = ({ auth }) => {
     lockedBalance: '0.00',
     pool: '0',
   });
-  const [status, setStatus] = useState('');
-
   const context = useWeb3React();
   const {
     connector,
@@ -129,14 +127,6 @@ const DashBoardUserDetails = ({ auth }) => {
     }
   }, [account, avatarRef]);
   console.log('i am here');
-
-  useEffect(() => {
-    if (!auth.user || !auth.user.payload) {
-      setStatus('');
-      return;
-    }
-    setStatus(auth.user.payload.kyc_status);
-  }, [auth]);
   useEffect(() => {
     if (account) {
       axios
@@ -269,9 +259,15 @@ const DashBoardUserDetails = ({ auth }) => {
     async (e) => {
       if (account) {
         let response = await getAuthUserStats(account);
-        // console.log(response.message.data.payload, "acct acct acct acct ");
+        console.log(
+          response.message.data.payload,
+          'acct acct acct acct '
+        );
         const payload = response.message.data.payload;
-        if (payload.username == null) {
+        if (!payload) {
+          return;
+        }
+        if (payload == null) {
           setUserName(() => '******');
         } else {
           setUserName(() => payload.username);
@@ -327,12 +323,6 @@ const DashBoardUserDetails = ({ auth }) => {
                 <DashboardIcon className="asset_overview_link_icon" />
                 Refferal
               </Link>
-            </div>
-            <div className="pool_lending_pages_links container ">
-              <p>Verification status: </p>
-              <p>{status}</p>
-
-              <button> </button>
             </div>
             <div className="userdAshboard_head">
               <div className="userdAshboard_head_username">
