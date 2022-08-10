@@ -241,15 +241,20 @@ const DashBoardUserDetails = ({ auth }) => {
         let response = await getAuthUserStats(account);
         // console.log(response.message.data.payload, "acct acct acct acct ");
         const payload = response.message.data.payload;
-        if (payload.username == null) {
+        if (payload == null) {
           setUserName(() => "******");
-        } else {
-          setUserName(() => payload.username);
-        }
-        if (payload.kyc_status == null) {
           setKycStatus(() => "******");
         } else {
-          setKycStatus(() => payload.kyc_status);
+          if (payload.username == null) {
+            setUserName(() => "******");
+          } else {
+            setUserName(() => payload.username);
+          }
+          if (payload.kyc_status == null) {
+            setKycStatus(() => "******");
+          } else {
+            setKycStatus(() => payload.kyc_status);
+          }
         }
 
         console.log(payload, "acct acct acct acct ");
@@ -680,7 +685,7 @@ const DashBoardUserDetails = ({ auth }) => {
                           <span className="reward_btn_div">
                             <button
                               className="reward_btn"
-                              disabled={disable}
+                              // disabled={disable}
                               onClick={redeem}
                             >
                               Reedeem
