@@ -13,6 +13,7 @@ import { CopperLoading } from "respinner";
 import { parseEther, formatEther } from "@ethersproject/units";
 import LOAN from "../../web3/contracts/Loan.json";
 import SwapContract from "../../web3/contracts/Contract_Address.json";
+import { getAuthUserStats } from "../../actions/token";
 import Web3 from "web3";
 // import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import Nodata from "./DashBoardPages/nodataComponent/Nodata";
@@ -96,6 +97,7 @@ const DashBoard_lend_details_page = ({ match }) => {
 
   // const [loanId, setLoanId] = useState();
   const [assetModal, setAssetModal] = React.useState(false);
+  const [kycDiv, setKycDiv] = React.useState(false);
   const [LoanId, setLoanId] = React.useState("");
   const [backModal, setBackModal] = React.useState(false);
   const [branch, setBranch] = React.useState("Branch");
@@ -114,6 +116,7 @@ const DashBoard_lend_details_page = ({ match }) => {
   const [modal, setModal] = useState(false);
   const [refEarnings, setRefEarnings] = useState(0.0);
   const [welcomeBonus, setWelcomeBonus] = useState(0.0);
+  const [status, setStatus] = useState("");
 
   const [task, setTask] = useState("collateral");
   const [stage, setStage] = useState("back");
@@ -475,6 +478,25 @@ const DashBoard_lend_details_page = ({ match }) => {
     borderColor: "red",
   };
   var percentage = (BranchDetails.funded / BranchDetails.amount) * 100;
+  useEffect(
+    async (e) => {
+      if (account) {
+        let response = await getAuthUserStats(account);
+        const payload = response.message.data.payload;
+        console.log(payload, "acct acct acct acct ");
+        if (payload == null) {
+          setStatus("");
+        } else {
+          setStatus(() => payload.kyc_status);
+        }
+      }
+    },
+    [account]
+  );
+
+  const toggleGoKycDiv = () => {
+    setKycDiv(!kycDiv);
+  };
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -553,13 +575,22 @@ const DashBoard_lend_details_page = ({ match }) => {
                 </div>
               </div>
               <div className="pool_detail_heading_area1_invest_btn_div">
-                <button
-                  className="pool_detail_heading_area1_invest_btn"
-                  onClick={toggleLendType}
-                  // onClick={toggleAssetModal}
-                >
-                  Lend
-                </button>
+                {status == "COMPLETED" ? (
+                  <button
+                    className="pool_detail_heading_area1_invest_btn"
+                    onClick={toggleLendType}
+                    // onClick={toggleAssetModal}
+                  >
+                    Lend
+                  </button>
+                ) : (
+                  <button
+                    className="pool_detail_heading_area1_invest_btn"
+                    onClick={toggleGoKycDiv}
+                  >
+                    Lend
+                  </button>
+                )}
               </div>
             </div>
             {/* ============== */}
@@ -1343,6 +1374,38 @@ const DashBoard_lend_details_page = ({ match }) => {
               </div>
             </div>
           </div>
+        </div>
+      ) : null}
+      {kycDiv == true ? (
+        <div className="goDoKycDiv">
+          <div className="goDoKycDiv_container">
+            <img
+              src="/img/sorry_icon.svg"
+              alt=""
+              className="goDoKycDiv_container_img"
+            />
+            <div className="goDoKycDiv_container_head">Sorry</div>
+            <div className="goDoKycDiv_container_para">
+              You can't lend to any pool at the moment.
+            </div>
+            <div className="goDoKycDiv_container_para2">
+              Complete your KYC to continue.
+            </div>
+            <div className="goDoKycDiv_container_btn_div">
+              <button
+                onClick={() => (window.location.href = "/dashboard")}
+                className="goDoKycDiv_container_btn"
+              >
+                Complete KYC
+              </button>
+            </div>
+            <CloseIcon
+              className="close_goDoKycDiv_cont"
+              onClick={toggleGoKycDiv}
+            />
+          </div>
+          {/* <div className="close_goDoKycDiv_cont"> */}
+          {/* </div> */}
         </div>
       ) : null}
     </div>

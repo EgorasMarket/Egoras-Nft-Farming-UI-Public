@@ -264,18 +264,20 @@ const DashBoardUserDetails = ({ auth }) => {
           'acct acct acct acct '
         );
         const payload = response.message.data.payload;
-        if (!payload) {
-          return;
-        }
         if (payload == null) {
           setUserName(() => '******');
-        } else {
-          setUserName(() => payload.username);
-        }
-        if (payload.kyc_status == null) {
           setKycStatus(() => '******');
         } else {
-          setKycStatus(() => payload.kyc_status);
+          if (payload.username == null) {
+            setUserName(() => '******');
+          } else {
+            setUserName(() => payload.username);
+          }
+          if (payload.kyc_status == null) {
+            setKycStatus(() => '******');
+          } else {
+            setKycStatus(() => payload.kyc_status);
+          }
         }
 
         console.log(payload, 'acct acct acct acct ');

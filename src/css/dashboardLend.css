@@ -187,7 +187,7 @@
   top: 0;
   width: 6px;
   height: 100%;
-  background: #acc3b5;
+  /* background: #acc3b5; */
   left: 0;
   border-radius: 20px;
 }
@@ -441,6 +441,31 @@
 .proceed_to_cube_btn:disabled {
   background: #c7c7c7;
   cursor: not-allowed;
+}
+
+.disabled_color {
+  color: #a6a6a6;
+}
+.dark .disabled_color {
+  color: #87b49a;
+}
+.disabled_bg {
+  background: #a6a6a6;
+}
+.dark .disabled_bg {
+  background: #87b49a;
+}
+.enabled_color {
+  color: #000000;
+}
+.dark .enabled_color {
+  color: #ffffff;
+}
+.enabled_bg {
+  background: #229e54;
+}
+.dark .enabled_bg {
+  background: #229e54;
 }
 /* .progress_bar::-webkit-progress-inner-element {
   box-sizing: inherit;
