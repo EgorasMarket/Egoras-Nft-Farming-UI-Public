@@ -97,7 +97,6 @@ const DashBoard_lend_details_page = ({ match }) => {
 
   // const [loanId, setLoanId] = useState();
   const [assetModal, setAssetModal] = React.useState(false);
-  const [kycDiv, setKycDiv] = React.useState(false);
   const [LoanId, setLoanId] = React.useState("");
   const [backModal, setBackModal] = React.useState(false);
   const [branch, setBranch] = React.useState("Branch");
@@ -494,9 +493,6 @@ const DashBoard_lend_details_page = ({ match }) => {
     [account]
   );
 
-  const toggleGoKycDiv = () => {
-    setKycDiv(!kycDiv);
-  };
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -575,22 +571,12 @@ const DashBoard_lend_details_page = ({ match }) => {
                 </div>
               </div>
               <div className="pool_detail_heading_area1_invest_btn_div">
-                {status == "COMPLETED" ? (
-                  <button
-                    className="pool_detail_heading_area1_invest_btn"
-                    onClick={toggleLendType}
-                    // onClick={toggleAssetModal}
-                  >
-                    Lend
-                  </button>
-                ) : (
-                  <button
-                    className="pool_detail_heading_area1_invest_btn"
-                    onClick={toggleGoKycDiv}
-                  >
-                    Lend
-                  </button>
-                )}
+                <button
+                  className="pool_detail_heading_area1_invest_btn"
+                  onClick={toggleLendType}
+                >
+                  Lend
+                </button>
               </div>
             </div>
             {/* ============== */}
@@ -1374,38 +1360,6 @@ const DashBoard_lend_details_page = ({ match }) => {
               </div>
             </div>
           </div>
-        </div>
-      ) : null}
-      {kycDiv == true ? (
-        <div className="goDoKycDiv">
-          <div className="goDoKycDiv_container">
-            <img
-              src="/img/sorry_icon.svg"
-              alt=""
-              className="goDoKycDiv_container_img"
-            />
-            <div className="goDoKycDiv_container_head">Sorry</div>
-            <div className="goDoKycDiv_container_para">
-              You can't lend to any pool at the moment.
-            </div>
-            <div className="goDoKycDiv_container_para2">
-              Complete your KYC to continue.
-            </div>
-            <div className="goDoKycDiv_container_btn_div">
-              <button
-                onClick={() => (window.location.href = "/dashboard")}
-                className="goDoKycDiv_container_btn"
-              >
-                Complete KYC
-              </button>
-            </div>
-            <CloseIcon
-              className="close_goDoKycDiv_cont"
-              onClick={toggleGoKycDiv}
-            />
-          </div>
-          {/* <div className="close_goDoKycDiv_cont"> */}
-          {/* </div> */}
         </div>
       ) : null}
     </div>
