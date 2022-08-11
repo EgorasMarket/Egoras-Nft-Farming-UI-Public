@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import DashBoard_lend_details_page from "./DashBoard_lend_details_page";
 import DashBoardBranchAsset from "./DashBoardPages/DashBoardBranchAsset";
 import DashBoardLendingTransactions from "./DashBoardPages/DashBoardLendingTransactions";
+import CloseIcon from "@mui/icons-material/Close";
+import Cookies from "universal-cookie";
 import Swap from "./DashBoardPages/Swap/Swap";
 import DashBoardUserDetails from "./DashBoardPages/DashBoardUserDetails";
 import {
@@ -10,6 +12,7 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+import { getAuthUserStats } from "../../actions/token";
 // dashboard components
 // import DashBoardHeader from "./DashBoardHeader";
 import DashboardSideBarMenu from "./DashboardSideBarMenu";
@@ -54,6 +57,7 @@ const Dashboard = ({ check, togglemakeDark }) => {
     error,
   } = context;
   const [splashScreen, setSplashScreen] = useState(true);
+  const [promptDiv, setPropmtDiv] = useState(false);
   const currentPage = window.location.pathname;
   const urlArr = currentPage.split("/");
 
@@ -87,6 +91,54 @@ const Dashboard = ({ check, togglemakeDark }) => {
       // console.log("my Name");
     }
   }, [account]);
+
+  const cookies = new Cookies();
+  // const current = new Date();
+  const nextMinute = new Date();
+  nextMinute.setSeconds(nextMinute.getSeconds() + 86400);
+  const togglePromptDiv = () => {
+    // check if the cookie still exist
+    setPropmtDiv(() => false);
+    if (cookies.get("myCookie")) {
+      return;
+    }
+    cookies.set("myCookie", true, {
+      path: "/",
+      expires: nextMinute,
+    });
+  };
+
+  const FirstCheckKyc = async () => {
+    // check if cookie get data for the variable
+    if (cookies.get("myCookie")) {
+      console.log("nothing to do yet");
+      return;
+    }
+
+    // check if the cookie have expired;
+
+    let response = await getAuthUserStats(account);
+    const payload = response.message.data.payload;
+    if (payload.kyc_staus !== "COMPLETED") {
+      setPropmtDiv(() => true);
+    }
+  };
+  useEffect(() => {
+    if (account) {
+      FirstCheckKyc();
+    }
+  }, [account]);
+  const relocateToOnborad = () => {
+    window.location.href = "/dashboard";
+    setPropmtDiv(() => false);
+    if (cookies.get("myCookie")) {
+      return;
+    }
+    cookies.set("myCookie", true, {
+      path: "/",
+      expires: nextMinute,
+    });
+  };
   return (
     <>
       {splashScreen === true ? (
@@ -190,6 +242,40 @@ const Dashboard = ({ check, togglemakeDark }) => {
               </Switch>
             </>
             {/* <img src="/img/dash_boardBg.svg" alt="" className="dash_boardBg" /> */}
+            {promptDiv == true ? (
+              <div className="goDoKycDiv">
+                <div className="goDoKycDiv_container">
+                  <img
+                    src="/img/sorry_icon.svg"
+                    alt=""
+                    className="goDoKycDiv_container_img"
+                  />
+                  <div className="goDoKycDiv_container_head">Welcome Bonus</div>
+                  <div className="goDoKycDiv_container_para">
+                    Onboard as a user and complete your kyc verification.
+                  </div>
+                  <div className="goDoKycDiv_container_para2">
+                    To access our welcome bonus and participate in the referral
+                    contest.
+                  </div>
+
+                  <div className="goDoKycDiv_container_btn_div">
+                    <button
+                      onClick={relocateToOnborad}
+                      className="goDoKycDiv_container_btn"
+                    >
+                      Onboard as a user
+                    </button>
+                  </div>
+                  <CloseIcon
+                    className="close_goDoKycDiv_cont"
+                    onClick={togglePromptDiv}
+                  />
+                </div>
+                {/* <div className="close_goDoKycDiv_cont"> */}
+                {/* </div> */}
+              </div>
+            ) : null}
           </div>
         </Router>
       )}
