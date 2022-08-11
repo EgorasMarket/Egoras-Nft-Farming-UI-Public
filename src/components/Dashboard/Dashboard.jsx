@@ -95,6 +95,7 @@ const Dashboard = ({ check, togglemakeDark }) => {
   const cookies = new Cookies();
   // const current = new Date();
   const nextMinute = new Date();
+  // nextMinute.setSeconds(nextMinute.getSeconds() + 20);
   nextMinute.setSeconds(nextMinute.getSeconds() + 86400);
   const togglePromptDiv = () => {
     // check if the cookie still exist
@@ -114,18 +115,22 @@ const Dashboard = ({ check, togglemakeDark }) => {
       console.log("nothing to do yet");
       return;
     }
-
-    // check if the cookie have expired;
-
     let response = await getAuthUserStats(account);
     const payload = response.message.data.payload;
-    if (payload.kyc_staus !== "COMPLETED") {
+    if (payload == null) {
       setPropmtDiv(() => true);
+    } else {
+      if (payload.kyc_staus !== "COMPLETED") {
+        setPropmtDiv(() => true);
+      } else {
+        setPropmtDiv(() => false);
+      }
     }
   };
   useEffect(() => {
     if (account) {
       FirstCheckKyc();
+    } else {
     }
   }, [account]);
   const relocateToOnborad = () => {
