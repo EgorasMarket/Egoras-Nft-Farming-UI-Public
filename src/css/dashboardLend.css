@@ -258,11 +258,12 @@
 .close_onBoardUserDiv_btn_cont {
   position: absolute;
   top: 1%;
-  left: 1%;
+  right: 1%;
   color: #fff;
   cursor: pointer;
   display: flex;
   align-items: center;
+  flex-direction: row-reverse;
 }
 .subMitDetails_cont {
   display: flex;
@@ -703,4 +704,7 @@
   .stepDiv1_sub_content {
     padding: 0.5em 0.5em;
   }
+}
+.dark .country-list {
+  color: #000;
 }
