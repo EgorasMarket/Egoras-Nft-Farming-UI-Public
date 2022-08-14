@@ -145,7 +145,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
         let response = await getAuthUserStats(account);
         // console.log(response.message.data.payload, "acct acct acct acct ");
         const payload = response.message.data.payload;
-        console.log(payload, 'acct acct acct acct ');
+
+        // console.log(payload, "acct acct acct acct ");
         setAddress(account);
         setConnected(() => false);
         if (payload == null) {
