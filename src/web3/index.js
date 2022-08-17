@@ -286,6 +286,7 @@ const lendUS = async (branch, amount, loanID, signer) => {
   }
 };
 const takeDividend = async (loanID, signer) => {
+  console.log(loanID, "9989i8789768970968578697968574");
   try {
     const instance = contractEgorasLoanV2Instance(signer);
     let result;

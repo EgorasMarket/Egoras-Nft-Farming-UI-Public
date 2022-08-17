@@ -6,7 +6,7 @@ import Header from "./components/Home/Header";
 import "bootstrap/dist/css/bootstrap.css";
 import Home from "./components/Home/Home";
 import { loadUser } from "./actions/auth";
-
+import Admin from "./components/Admin/Admin";
 import AboutUs from "./components/Home/AboutUs";
 import {
   Web3ReactProvider,
@@ -30,6 +30,8 @@ import "../src/App.css";
 import store from "./store";
 import Referal from "./components/Referral/Referal";
 function App() {
+  const [dashboard, setDashboard] = useState(false);
+  const [admin, setAdmin] = useState(false);
   const context = useWeb3React();
   const {
     connector,
@@ -41,7 +43,95 @@ function App() {
     active,
     error,
   } = context;
+  const linksActive = window.location.pathname;
+  const urlArr = linksActive.split("/");
 
+  useEffect(() => {
+    if (linksActive === "/dashboard") {
+      setDashboard(true);
+      return;
+    }
+    if (linksActive === "/dashboard/") {
+      setDashboard(true);
+      return;
+    }
+    if (linksActive === "/dashboard/stake") {
+      setDashboard(true);
+      return;
+    }
+    if (linksActive === "/dashboard/user") {
+      setDashboard(true);
+      return;
+    }
+    if (linksActive === "/dashboard/swap") {
+      setDashboard(true);
+      return;
+    }
+    if (linksActive === "/dashboard/earn/pool/detail") {
+      setDashboard(true);
+      return;
+    }
+    if (
+      linksActive ===
+      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
+    ) {
+      setDashboard(true);
+      return;
+    }
+    if (
+      linksActive ===
+      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
+    ) {
+      setDashboard(true);
+      return;
+    }
+    if (linksActive === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
+      setDashboard(true);
+      return;
+    }
+    if (linksActive === "/dashboard/earn/pool/detail/transactions") {
+      setDashboard(true);
+      return;
+    }
+    // if (linksActive === "/dashboard/add") {
+    //   setActiveMenuName("Liquidity");
+    // }
+    if (linksActive === "/dashboard/whitepaper") {
+      setDashboard(true);
+      return;
+    }
+    if (linksActive === "/dashboard/earn") {
+      setDashboard(true);
+      return;
+    }
+    if (linksActive === "/dashboard/stake/vault/" + urlArr[4] + "/ENGN") {
+      setDashboard(true);
+      return;
+    }
+    if (
+      linksActive ===
+      "/dashboard/stake/deposit_vault/" + urlArr[4] + "/ENGN"
+    ) {
+      setDashboard(true);
+      return;
+    }
+    if (linksActive === "/admin/") {
+      setAdmin(true);
+      return;
+    }
+    if (linksActive === "/admin") {
+      setAdmin(true);
+      return;
+    }
+    if (linksActive === "/admin/assets") {
+      setAdmin(true);
+      return;
+    }
+    if (linksActive === "/admin/transactions") {
+      setAdmin(true);
+      return;
+    }
+  });
   useEffect(() => {
     store.dispatch(loadUser());
   });
@@ -53,6 +143,7 @@ function App() {
   //   }
   // }, [account]);
   const [cClass, setCClass] = useState(false);
+
   // localStorage.setItem("uiMode", "dark");
   useEffect(() => {
     if (localStorage.getItem("uiMode") === "light") {
@@ -92,7 +183,13 @@ function App() {
               <Route exact path="/" component={Home} />
               <Route exact path="/referal/:ref" component={Referal} />
               <Route exact path="/about" component={AboutUs} />
-              <Dashboard check={cClass} togglemakeDark={togglemakeDark} />
+              {admin == true ? (
+                <Admin check={cClass} togglemakeDark={togglemakeDark} />
+              ) : null}
+              {dashboard == true ? (
+                <Dashboard check={cClass} togglemakeDark={togglemakeDark} />
+              ) : null}
+
               {/* <Route component={Dashboard} /> */}
             </Switch>
             <Footer />

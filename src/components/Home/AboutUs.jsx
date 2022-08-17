@@ -602,7 +602,7 @@ const AboutUs = () => {
               </div>
               <div className="join_community_area1_para">
                 To Get Support, Latest news, Announcement And Quick Updates on
-                Easyfi
+                Egoras
               </div>
               <a
                 href="https://t.me/egorasmarket"
