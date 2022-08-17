@@ -654,7 +654,7 @@ const AboutUs = () => {
                 Join our Community
               </div>
               <div className="join_community_area1_para">
-                To Get Support, Latest News, Announcement And Quick
+                To Get Support, Latest news, Announcement And Quick
                 Updates on Egoras
               </div>
               <a

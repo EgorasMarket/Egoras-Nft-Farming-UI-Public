@@ -161,14 +161,13 @@ const DashboardReferral = ({ auth }) => {
           setRefLink(() => '*******');
         } else {
           setRefLink(
-            () => 'http://localhost:3000/referal/' + payload.ref_code
+            () => 'https://egoras.org/referal/' + payload.ref_code
           );
           if (payload.ref_code == '') {
             setRefLink(() => '*******');
           } else {
             setRefLink(
-              () =>
-                'http://localhost:3000/referal/' + payload.ref_code
+              () => 'https://egoras.org/referal/' + payload.ref_code
             );
           }
         }

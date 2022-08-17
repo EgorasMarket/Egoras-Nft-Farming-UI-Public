@@ -1050,6 +1050,19 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
         </div>
       </section>
 
+      {/* <section className="how_to_earn_section">
+        <div className="container">
+          <div className="how_to_earn_div_area">
+            <div className="how_to_earn_div_area_head">How to earn</div>
+            <div className="how_to_earn_div_area_video_body">
+
+
+
+            </div>
+          </div>
+        </div>
+      </section> */}
+
       {onBoardUserDiv === true ? (
         <div className="onBoardUserDiv">
           <div className="onBoardUserDiv_head">Onboard as user</div>

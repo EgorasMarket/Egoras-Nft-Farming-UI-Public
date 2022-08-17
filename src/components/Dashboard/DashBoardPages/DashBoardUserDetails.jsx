@@ -162,13 +162,11 @@ const DashBoardUserDetails = ({ auth }) => {
           console.log(data.data.payload, 'powerful333333');
           console.log('/api/lend/user/transaction/' + account);
           setLoanAsset(data.data.payload);
-          // console.log(txnhash);
-          // setBranches(data.data.payload);
         })
         .catch((err) => {
           console.log(err); // "oh, no!"
         });
-      //   return;
+      return;
     }
   }, [account]);
 
@@ -662,24 +660,32 @@ const DashBoardUserDetails = ({ auth }) => {
         <>
           {' '}
           {loanAsset.map((data) => {
-            var ms =
+            const ms =
               new Date(data.updatedAt).getTime() + 86400000 * 30;
+            // const [anable, setanable] = useState(false);
             // console.log(ms);
-            var endDate = new Date(ms);
-            console.log(endDate);
-            if (new Date() === endDate) {
-              setDisable(false);
-            }
+            const endDate = new Date(ms);
+            const currentDate = new Date();
+            // console.log(endDate);
+            // if (currentDate == endDate) {
+            //   setDisable(false);
+            //   return;
+            // } else if (currentDate >= endDate) {
+            //   setDisable(false);
+            // }
+
             const redeem = async () => {
               if (account) {
                 setStage('loading');
                 setIsLoading(true);
+
                 setText('Redeeming, please wait...');
                 let response = await takeDividend(
-                  data.id,
+                  data.newLoanID,
                   library.getSigner()
                 );
                 console.log(response);
+                // console.log(response.message.code, "status stataus");
                 if (response.status == true) {
                   setText(
                     'Sending token please wait aleast 1/2 minutes'
@@ -688,6 +694,14 @@ const DashBoardUserDetails = ({ auth }) => {
                   console.log(response);
                 } else if (response.status == false) {
                   if (response.message.code < 0) {
+                    // if (
+                    //   response.message.data.message ==
+                    //   "execution reverted: dividend is not matured."
+                    // ) {
+                    //   setText("This Pool has not been fully funded.");
+                    // } else {
+                    //   setText(response.message.data.message);
+                    // // }
                     setText(response.message.data.message);
                   } else if (response.message.code == 4001) {
                     setText(response.message.message);
@@ -748,7 +762,9 @@ const DashBoardUserDetails = ({ auth }) => {
                           <span className="reward_btn_div">
                             <button
                               className="reward_btn"
-                              // disabled={disable}
+                              disabled={
+                                currentDate >= endDate ? false : true
+                              }
                               onClick={redeem}
                             >
                               Reedeem
