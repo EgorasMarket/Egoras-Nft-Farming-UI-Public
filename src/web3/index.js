@@ -291,6 +291,7 @@ const takeDividend = async (loanID, signer) => {
     const instance = contractEgorasLoanV2Instance(signer);
     let result;
     result = await instance.takeDividend(loanID);
+    console.log(result, "result, result,result,result,result");
     return {
       message: result,
       status: true,

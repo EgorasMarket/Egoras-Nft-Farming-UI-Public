@@ -64,60 +64,6 @@ const DashboardReferral = ({ auth }) => {
       setActiveLink("referral");
     }
   });
-  var btc = [
-    {
-      timestamp: "2022-07-16T09:37:07.000Z",
-      value: 225000,
-    },
-    {
-      timestamp: "2022-07-16T09:37:07.000Z",
-      value: 81900,
-    },
-    {
-      timestamp: "2022-07-16T15:09:00.000Z",
-      value: 15900,
-    },
-    {
-      timestamp: "2022-07-16T15:20:00.000Z",
-      value: 15900,
-    },
-    {
-      timestamp: "2022-07-16T15:44:01.000Z",
-      value: 31800,
-    },
-    {
-      timestamp: "2022-07-18T12:40:00.000Z",
-      value: 100000,
-    },
-    {
-      timestamp: "2022-07-18T13:56:00.000Z",
-      value: 183190,
-    },
-    {
-      timestamp: "2022-07-18T14:25:00.000Z",
-      value: 545200,
-    },
-    {
-      timestamp: "2022-07-18T14:59:01.000Z",
-      value: 131900,
-    },
-    {
-      timestamp: "2022-07-18T15:39:00.000Z",
-      value: 199900,
-    },
-    {
-      timestamp: "2022-07-18T16:11:01.000Z",
-      value: 181700,
-    },
-    {
-      timestamp: "2022-07-18T16:27:01.000Z",
-      value: 126700,
-    },
-    {
-      timestamp: "2022-07-18T16:46:00.000Z",
-      value: 121600,
-    },
-  ];
 
   useEffect(() => {
     axios
@@ -304,7 +250,7 @@ const DashboardReferral = ({ auth }) => {
                           <span className="engn_symbol_sign">Engn</span>
                         </div>
                       </div>
-                      <div className="dashBoard_ref_area1_cont1_div1">
+                      <div className="dashBoard_ref_area1_cont1_div1 welcome_bonus_div">
                         <div className="dashBoard_ref_area1_cont1_div1_cont1">
                           Welcome Bonus
                         </div>
@@ -312,15 +258,6 @@ const DashboardReferral = ({ auth }) => {
                           {numberWithCommas(
                             parseFloat(welcomeBonus).toFixed(2)
                           )}{" "}
-                          <span className="engn_symbol_sign">Engn</span>
-                        </div>
-                      </div>
-                      <div className="dashBoard_ref_area1_cont1_div1">
-                        <div className="dashBoard_ref_area1_cont1_div1_cont1">
-                          Referral Earnings
-                        </div>
-                        <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          {numberWithCommas(parseFloat(refEarnings).toFixed(2))}{" "}
                           <span className="engn_symbol_sign">Engn</span>
                         </div>
                       </div>
@@ -337,8 +274,14 @@ const DashboardReferral = ({ auth }) => {
                           {refCount}
                         </div>
                       </div>
-                      <div className="ref_chart_div">
-                        <Sparkline2 values={btc} />
+                      <div className="dashBoard_ref_area1_cont1_div1">
+                        <div className="dashBoard_ref_area1_cont1_div1_cont1">
+                          Referral Earnings
+                        </div>
+                        <div className="dashBoard_ref_area1_cont1_div1_cont2">
+                          {numberWithCommas(parseFloat(refEarnings).toFixed(2))}{" "}
+                          <span className="engn_symbol_sign">Engn</span>
+                        </div>
                       </div>
                     </div>
                   </div>

@@ -120,7 +120,7 @@ const AdminHome = () => {
         <div className="container relative">
           <div className="pool_deatail_area">
             <div className="userdAshboard_head withdraw_head">
-              <div className="userdAshboard_head_username">
+              <div className="userdAshboard_head_username admin_head_username">
                 <span className="userdAshboard_head_username_head">Admin:</span>{" "}
                 <span className="userdAshboard_head_username_para">
                   Agip Branch

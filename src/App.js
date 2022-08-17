@@ -100,6 +100,10 @@ function App() {
       setDashboard(true);
       return;
     }
+    if (linksActive === "/dashboard/user/referral") {
+      setDashboard(true);
+      return;
+    }
     if (linksActive === "/dashboard/earn") {
       setDashboard(true);
       return;

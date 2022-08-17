@@ -3,7 +3,9 @@
   top: 0;
   z-index: 1;
 }
-
+.admin_head_username {
+  width: 100% !important;
+}
 .withdraw_funds_btn {
   background: #229e54;
   color: #fff;
