@@ -137,6 +137,7 @@ const AdminHome = () => {
               </div> */}
               <div className="branch_withdraw_funds_div">
                 <button className="withdraw_funds_btn">Withdraw Funds</button>
+                <button className="withdraw_funds_btn">Pay Back Funds</button>
               </div>
             </div>
             <div className="userdAshboard_head">
