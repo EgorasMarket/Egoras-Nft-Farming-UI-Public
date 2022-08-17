@@ -289,6 +289,27 @@ const DashBoardUserDetails = ({ auth }) => {
     // setModal(!modal);
     // window.location.reload();
   };
+  setInterval(() => {
+    if (localStorage.getItem('unlocking') == 'true') {
+      transactReceipt(
+        localStorage.getItem('unlockingHash'),
+        library
+      ).then(function (env) {
+        // console.log("running Interval", env);
+        if (env.status == true && env.message !== null) {
+          if (env.message.confirmations > 2) {
+            setStage('success');
+            setHash(localStorage.getItem('unlockingHash'));
+            setIsLoading(false);
+
+            localStorage.setItem('unlocking', false);
+          }
+        }
+      });
+    } else {
+      // setStage("error");
+    }
+  }, 1000);
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -674,7 +695,7 @@ const DashBoardUserDetails = ({ auth }) => {
             //   setDisable(false);
             // }
 
-            const redeem = async () => {
+            const redeem = async (e) => {
               if (account) {
                 setStage('loading');
                 setIsLoading(true);
@@ -694,14 +715,6 @@ const DashBoardUserDetails = ({ auth }) => {
                   console.log(response);
                 } else if (response.status == false) {
                   if (response.message.code < 0) {
-                    // if (
-                    //   response.message.data.message ==
-                    //   "execution reverted: dividend is not matured."
-                    // ) {
-                    //   setText("This Pool has not been fully funded.");
-                    // } else {
-                    //   setText(response.message.data.message);
-                    // // }
                     setText(response.message.data.message);
                   } else if (response.message.code == 4001) {
                     setText(response.message.message);
@@ -712,6 +725,27 @@ const DashBoardUserDetails = ({ auth }) => {
                 return;
               }
             };
+            setInterval(() => {
+              if (localStorage.getItem('unlocking') == 'true') {
+                transactReceipt(
+                  localStorage.getItem('unlockingHash'),
+                  library
+                ).then(function (env) {
+                  // console.log("running Interval", env);
+                  if (env.status == true && env.message !== null) {
+                    if (env.message.confirmations > 2) {
+                      setStage('success');
+                      setHash(localStorage.getItem('unlockingHash'));
+                      setIsLoading(false);
+
+                      localStorage.setItem('unlocking', false);
+                    }
+                  }
+                });
+              } else {
+                // setStage("error");
+              }
+            }, 1000);
             return (
               <>
                 {assetDetailModal == data.rowNumber ? (
@@ -762,9 +796,8 @@ const DashBoardUserDetails = ({ auth }) => {
                           <span className="reward_btn_div">
                             <button
                               className="reward_btn"
-                              disabled={
-                                currentDate >= endDate ? false : true
-                              }
+                              // disabled={currentDate >= endDate ? false : true}
+                              disabled
                               onClick={redeem}
                             >
                               Reedeem

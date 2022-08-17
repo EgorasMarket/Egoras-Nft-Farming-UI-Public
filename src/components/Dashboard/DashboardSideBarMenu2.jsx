@@ -273,7 +273,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
       // const ethBalance2 = web3.utils.fromWei(getBalance2, "ether");
       console.log(ethBalance);
       // console.log(getBalance2);
-      setCoinBalance(parseFloat(ethBalance).toFixed(3));
+      setCoinBalance(parseFloat(ethBalance).toFixed(4));
     }
   }, [coinBalance, account]);
   const toggleDisconnectDiv = () => {
