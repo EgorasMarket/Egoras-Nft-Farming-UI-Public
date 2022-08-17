@@ -295,7 +295,7 @@ section.help_u_section {
   position: absolute;
   left: 1%;
   bottom: 21%;
-  top: 88%;
+  top: 84%;
   margin: auto;
 }
 .road_map_area_div2 {
@@ -309,7 +309,7 @@ section.help_u_section {
   position: absolute;
   left: 30%;
   bottom: 57%;
-  top: 85%;
+  top: 64%;
   margin: auto;
 }
 .road_map_area_div4 {
@@ -323,14 +323,14 @@ section.help_u_section {
   position: absolute;
   right: 35%;
   bottom: 88%;
-  top: 21%;
+  top: 16%;
   margin: auto;
 }
 .road_map_area_div6 {
   position: absolute;
   right: 5%;
   bottom: 93%;
-  top: 13%;
+  top: 10%;
   margin: auto;
 }
 .road_map_area_div_circle_bg {
@@ -765,5 +765,10 @@ button.join_community_area1_btn_btn {
 
   .mobile_road_map_line_div {
     height: 75em;
+  }
+}
+@media screen and (max-width: 400px) {
+  .egoras_logos_cont_1_txt {
+    font-size: 9px;
   }
 }

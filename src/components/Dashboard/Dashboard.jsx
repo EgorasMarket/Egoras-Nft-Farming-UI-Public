@@ -256,11 +256,10 @@ const Dashboard = ({ check, togglemakeDark }) => {
                     className="goDoKycDiv_container_img"
                   />
                   <div className="goDoKycDiv_container_head">Welcome Bonus</div>
-                  <div className="goDoKycDiv_container_para">
-                    Onboard as a user and complete your kyc verification.
-                  </div>
+
                   <div className="goDoKycDiv_container_para2">
-                    To access our welcome bonus and participate in the referral
+                    Onboard as a user and complete your kyc verification to
+                    access our welcome bonus and participate in the referral
                     contest.
                   </div>
 

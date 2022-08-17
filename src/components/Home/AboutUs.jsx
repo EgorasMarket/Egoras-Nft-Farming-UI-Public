@@ -1,8 +1,8 @@
-import React from "react";
-import "../../css/aboutus.css";
-import EastIcon from "@mui/icons-material/East";
-import TelegramIcon from "@mui/icons-material/Telegram";
-import Marquee from "react-fast-marquee";
+import React from 'react';
+import '../../css/aboutus.css';
+import EastIcon from '@mui/icons-material/East';
+import TelegramIcon from '@mui/icons-material/Telegram';
+import Marquee from 'react-fast-marquee';
 
 // import roadMap from "/img/road_map_street_bg.png";
 const AboutUs = () => {
@@ -13,8 +13,8 @@ const AboutUs = () => {
           <div className="about_us_section_hero_area">
             <div className="about_us_section_hero_area_1">
               <div className="about_us_section_hero_area_1_title">
-                For 4years, We have been providing liquidity and recommerce
-                services for Real- World Assets.
+                For 4years, We have been providing liquidity and
+                recommerce services for Real- World Assets.
               </div>
 
               <div className="egoras_logos_cont">
@@ -24,7 +24,9 @@ const AboutUs = () => {
                     alt=""
                     className="egoras_logos_cont_1_img"
                   />
-                  <div className="egoras_logos_cont_1_txt">Egoras Credit</div>
+                  <div className="egoras_logos_cont_1_txt">
+                    Egoras Credit
+                  </div>
                 </div>
                 <div className="egoras_logos_cont_1">
                   <img
@@ -32,7 +34,9 @@ const AboutUs = () => {
                     alt=""
                     className="egoras_logos_cont_1_img"
                   />
-                  <div className="egoras_logos_cont_1_txt">Egoras Naira</div>
+                  <div className="egoras_logos_cont_1_txt">
+                    Egoras Naira
+                  </div>
                 </div>
                 <div className="egoras_logos_cont_1">
                   <img
@@ -40,7 +44,9 @@ const AboutUs = () => {
                     alt=""
                     className="egoras_logos_cont_1_img"
                   />
-                  <div className="egoras_logos_cont_1_txt">Egoras Rights</div>
+                  <div className="egoras_logos_cont_1_txt">
+                    Egoras Rights
+                  </div>
                 </div>
               </div>
             </div>
@@ -62,13 +68,15 @@ const AboutUs = () => {
                   Egoras history
                 </div>
                 Egoras was founded in 2019 by a team of entrepreneurs,
-                ex-bankers, economist and engineers determined to distrupt the
-                financial & retail sector launched a decentralised liquidity
-                protocol on blockchain. Thousands of people have used egoras
-                liquidity service to convert real-world assets. Today we are
-                even more determined and have built liquidity protocol across
-                multiple blockchains. Our protocol can help you get access to
-                funding within 5mins for any real-world assets.
+                ex-bankers, economist and engineers determined to
+                distrupt the financial & retail sector launched a
+                decentralised liquidity protocol on blockchain.
+                Thousands of people have used egoras liquidity service
+                to convert real-world assets. Today we are even more
+                determined and have built liquidity protocol across
+                multiple blockchains. Our protocol can help you get
+                access to funding within 5mins for any real-world
+                assets.
               </div>
             </div>
           </div>
@@ -104,10 +112,10 @@ const AboutUs = () => {
                     className="about_step_icon"
                   />
                   STAKE
-                </div>{" "}
-                Staking EGC provides collaterals for the debt pool and holders
-                earn monthly rewards that are a combination of protocol fees and
-                inflationary supplies.
+                </div>{' '}
+                Staking EGC provides collaterals for the debt pool and
+                holders earn monthly rewards that are a combination of
+                protocol fees and inflationary supplies.
               </div>
               <div className="advantages_section_area_2_cont1">
                 <div className="advantages_section_area_2_cont1_head">
@@ -115,11 +123,11 @@ const AboutUs = () => {
                     src="/img/earn_about_icon.svg"
                     alt=""
                     className="about_step_icon"
-                  />{" "}
+                  />{' '}
                   EARN
-                </div>{" "}
-                Supply liquidity for real world assets to earn fees as you do
-                it.
+                </div>{' '}
+                Supply liquidity for real world assets to earn fees as
+                you do it.
               </div>
               <div className="advantages_section_area_2_cont1">
                 <div className="advantages_section_area_2_cont1_head">
@@ -127,11 +135,11 @@ const AboutUs = () => {
                     src="/img/swap_about_icon.svg"
                     alt=""
                     className="about_step_icon"
-                  />{" "}
+                  />{' '}
                   SWAP
-                </div>{" "}
-                Convert your earned eNGN to EGC or convert your EGC to eNGN so
-                as to provide liquidity to real world assets.
+                </div>{' '}
+                Convert your earned eNGN to EGC or convert your EGC to
+                eNGN so as to provide liquidity to real world assets.
               </div>
             </div>
           </div>
@@ -150,7 +158,9 @@ const AboutUs = () => {
       <section className="help_u_section">
         <div className="container">
           <div className="help_u_section_area">
-            <div className="help_u_section_area_head">How it works. </div>
+            <div className="help_u_section_area_head">
+              How it works.{' '}
+            </div>
             <div className="help_u_section_area_cont">
               <div className="help_u_section_area_cont1">
                 <div className="help_u_section_area_cont1_icon">
@@ -161,11 +171,11 @@ const AboutUs = () => {
                   />
                 </div>
                 <div className="help_u_section_area_cont1_head">
-                  Stake your token{" "}
+                  Stake your token{' '}
                 </div>
                 <div className="help_u_section_area_cont1_para">
-                  Browse by category and stake your EGR token to support an
-                  entrepreneur.
+                  Browse by category and stake your EGR token to
+                  support an entrepreneur.
                 </div>
               </div>
               <div className="help_u_section_area_cont1">
@@ -195,7 +205,8 @@ const AboutUs = () => {
                   Claim Interest weekly
                 </div>
                 <div className="help_u_section_area_cont1_para">
-                  Earn over 20% APR for approving/declining collaterals.
+                  Earn over 20% APR for approving/declining
+                  collaterals.
                 </div>
               </div>
             </div>
@@ -214,23 +225,29 @@ const AboutUs = () => {
       {/* =================== */}
       <section
         className="roadmap_section"
-        style={{ backgroundImage: "url(/img/road_map_street_bg.png)" }}
+        style={{
+          backgroundImage: 'url(/img/road_map_street_bg.png)',
+        }}
       >
         <div className="road_map_head">Road Map</div>
         {/* <div className="container"> */}
         <div className="road_map_area">
-          <img src="/img/road_route.svg" alt="" className="road_route" />
+          <img
+            src="/img/road_route.svg"
+            alt=""
+            className="road_route"
+          />
           <div className="road_map_area_div1">
             <div className="road_map_area_div_circle_bg">
               <div className="road_map_area_div_circle"></div>
               <div className="road_map_area_div_circle_blur"></div>
             </div>
             <div className="road_map_area_div1_txt_cont">
-              2019{" "}
+              2019{' '}
               <div className="road_map_area_div3_txt_cont_para">
                 <ul className="roadMap_list_area">
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Launch of Organisation.
                   </li>
                 </ul>
@@ -243,13 +260,19 @@ const AboutUs = () => {
               <div className="road_map_area_div_circle_blur"></div>
             </div>
             <div className="road_map_area_div3_txt_cont">
-              2020{" "}
+              2020{' '}
               <div className="road_map_area_div3_txt_cont_para">
                 <ul className="roadMap_list_area">
-                  <li className="roadMap_list_conts"> Pawnbroker License.</li>
-                  <li className="roadMap_list_conts"> Moneylender License.</li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
+                    Pawnbroker License.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {' '}
+                    Moneylender License.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {' '}
                     Onboard 5,000 borrowers.
                   </li>
                 </ul>
@@ -262,15 +285,27 @@ const AboutUs = () => {
               <div className="road_map_area_div_circle_blur"></div>
             </div>
             <div className="road_map_area_div3_txt_cont">
-              2021{" "}
+              2021{' '}
               <div className="road_map_area_div3_txt_cont_para">
                 <ul className="roadMap_list_area">
-                  <li className="roadMap_list_conts"> Launch of our token.</li>
-                  <li className="roadMap_list_conts"> Cooperative license.</li>
-                  <li className="roadMap_list_conts"> Onboard 20,000 users.</li>
-                  <li className="roadMap_list_conts"> List on exchanges.</li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
+                    Launch of our token.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {' '}
+                    Cooperative license.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {' '}
+                    Onboard 20,000 users.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {' '}
+                    List on exchanges.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {' '}
                     Expansion of offline locations.
                   </li>
                 </ul>
@@ -283,30 +318,30 @@ const AboutUs = () => {
               <div className="road_map_area_div_circle_blur"></div>
             </div>
             <div className="road_map_area_div3_txt_cont">
-              2022{" "}
+              2022{' '}
               <div className="road_map_area_div3_txt_cont_para">
                 <ul className="roadMap_list_area">
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Launch of liquidity services.
                   </li>
                   <li className="roadMap_list_conts">
                     Launch of refurbishing facility.
                   </li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Launch of decentralized debt marketplace.
                   </li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Expansion to all cities in Nigeria.
                   </li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Listing on top tier exchanges.
                   </li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Marketing campaign for debt marketplace.
                   </li>
                 </ul>
@@ -319,26 +354,26 @@ const AboutUs = () => {
               <div className="road_map_area_div_circle_blur"></div>
             </div>
             <div className="road_map_area_div3_txt_cont">
-              2023{" "}
+              2023{' '}
               <div className="road_map_area_div3_txt_cont_para">
                 <ul className="roadMap_list_area">
                   <li className="roadMap_list_conts">
                     Launch of liquidity services for vehicles.
                   </li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Launch of refurbishing facility cars.
                   </li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Launch on bigger exchanges.
                   </li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Expansion across Africa.
                   </li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Launch of V3 (DEBT MARKETPLACE).
                   </li>
                 </ul>
@@ -351,11 +386,11 @@ const AboutUs = () => {
               <div className="road_map_area_div_circle_blur"></div>
             </div>
             <div className="road_map_area_div6_txt_cont">
-              2024{" "}
+              2024{' '}
               <div className="road_map_area_div3_txt_cont_para">
                 <ul className="roadMap_list_area_last">
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Expansion across the globe
                   </li>
                   <li className="roadMap_list_conts">
@@ -379,11 +414,11 @@ const AboutUs = () => {
               <div className="road_map_area_div_circle_blur"></div>
             </div>
             <div className="road_map_area_div1_txt_cont">
-              2019{" "}
+              2019{' '}
               <div className="road_map_area_div3_txt_cont_para">
                 <ul className="roadMap_list_area">
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Launch of Organisation.
                   </li>
                 </ul>
@@ -396,13 +431,19 @@ const AboutUs = () => {
               <div className="road_map_area_div_circle_blur"></div>
             </div>
             <div className="road_map_area_div3_txt_cont">
-              2020{" "}
+              2020{' '}
               <div className="road_map_area_div3_txt_cont_para">
                 <ul className="roadMap_list_area">
-                  <li className="roadMap_list_conts"> Pawnbroker License.</li>
-                  <li className="roadMap_list_conts"> Moneylender License.</li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
+                    Pawnbroker License.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {' '}
+                    Moneylender License.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {' '}
                     Onboard 5,000 borrowers.
                   </li>
                 </ul>
@@ -415,15 +456,27 @@ const AboutUs = () => {
               <div className="road_map_area_div_circle_blur"></div>
             </div>
             <div className="road_map_area_div3_txt_cont">
-              2021{" "}
+              2021{' '}
               <div className="road_map_area_div3_txt_cont_para">
                 <ul className="roadMap_list_area">
-                  <li className="roadMap_list_conts"> Launch of our token.</li>
-                  <li className="roadMap_list_conts"> Cooperative license.</li>
-                  <li className="roadMap_list_conts"> Onboard 20,000 users.</li>
-                  <li className="roadMap_list_conts"> List on exchanges.</li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
+                    Launch of our token.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {' '}
+                    Cooperative license.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {' '}
+                    Onboard 20,000 users.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {' '}
+                    List on exchanges.
+                  </li>
+                  <li className="roadMap_list_conts">
+                    {' '}
                     Expansion of offline locations.
                   </li>
                 </ul>
@@ -436,30 +489,30 @@ const AboutUs = () => {
               <div className="road_map_area_div_circle_blur"></div>
             </div>
             <div className="road_map_area_div3_txt_cont">
-              2022{" "}
+              2022{' '}
               <div className="road_map_area_div3_txt_cont_para">
                 <ul className="roadMap_list_area">
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Launch of liquidity services.
                   </li>
                   <li className="roadMap_list_conts">
                     Launch of refurbishing facility.
                   </li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Launch of decentralized debt marketplace.
                   </li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Expansion to all cities in Nigeria.
                   </li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Listing on top tier exchanges.
                   </li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Marketing campaign for debt marketplace.
                   </li>
                 </ul>
@@ -472,26 +525,26 @@ const AboutUs = () => {
               <div className="road_map_area_div_circle_blur"></div>
             </div>
             <div className="road_map_area_div3_txt_cont">
-              2023{" "}
+              2023{' '}
               <div className="road_map_area_div3_txt_cont_para">
                 <ul className="roadMap_list_area">
                   <li className="roadMap_list_conts">
                     Launch of liquidity services for vehicles.
                   </li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Launch of refurbishing facility cars.
                   </li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Launch on bigger exchanges.
                   </li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Expansion across Africa.
                   </li>
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Launch of V3 (DEBT MARKETPLACE).
                   </li>
                 </ul>
@@ -504,11 +557,11 @@ const AboutUs = () => {
               <div className="road_map_area_div_circle_blur"></div>
             </div>
             <div className="road_map_area_div6_txt_cont">
-              2024{" "}
+              2024{' '}
               <div className="road_map_area_div3_txt_cont_para">
                 <ul className="roadMap_list_area_last">
                   <li className="roadMap_list_conts">
-                    {" "}
+                    {' '}
                     Expansion across the globe
                   </li>
                   <li className="roadMap_list_conts">
@@ -601,8 +654,8 @@ const AboutUs = () => {
                 Join our Community
               </div>
               <div className="join_community_area1_para">
-                To Get Support, Latest news, Announcement And Quick Updates on
-                Easyfi
+                To Get Support, Latest News, Announcement And Quick
+                Updates on Egoras
               </div>
               <a
                 href="https://t.me/egorasmarket"
@@ -610,7 +663,8 @@ const AboutUs = () => {
                 target="_blank"
               >
                 <button className="join_community_area1_btn_btn">
-                  Join Telegram <EastIcon className="arrow_join_icon" />
+                  Join Telegram{' '}
+                  <EastIcon className="arrow_join_icon" />
                 </button>
               </a>
             </div>
