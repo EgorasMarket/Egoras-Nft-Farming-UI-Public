@@ -4,6 +4,12 @@ import jazzicon from "@metamask/jazzicon";
 import { CopperLoading } from "respinner";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import CopyAllIcon from "@mui/icons-material/CopyAll";
+import { takeLoanByBranch } from "../../../web3/index";
+// import { SuccessModal, ErrorModal } from "./Modal/Success_Error_Component";
+import {
+  SuccessModal,
+  ErrorModal,
+} from "../../Dashboard/DashBoardPages/Modal/Success_Error_Component";
 import {
   AreaChart,
   Area,
@@ -19,9 +25,16 @@ import {
   UnsupportedChainIdError,
 } from "@web3-react/core";
 const AdminHome = () => {
+  const [stage, setStage] = useState("redeem");
+  const [isLoading, setIsLoading] = useState(false);
   const [conecttxt, setConnectTxt] = useState("Not Connected");
+  const [hash, setHash] = useState("");
+
   const [walletAddr, setWalletAddr] = useState(
     "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+  );
+  const [text, setText] = useState(
+    "Transacting with blockchain, please wait..."
   );
   const [graphData2, setGraphData2] = useState([]);
   const context = useWeb3React();
@@ -108,6 +121,7 @@ const AdminHome = () => {
       value: 121600,
     },
   ];
+
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -135,10 +149,10 @@ const AdminHome = () => {
                   {kycStatus}
                 </span>{" "}
               </div> */}
-              <div className="branch_withdraw_funds_div">
+              {/* <div className="branch_withdraw_funds_div">
                 <button className="withdraw_funds_btn">Withdraw Funds</button>
                 <button className="withdraw_funds_btn">Pay Back Funds</button>
-              </div>
+              </div> */}
             </div>
             <div className="userdAshboard_head">
               <div className="userdAshboard_head_area">

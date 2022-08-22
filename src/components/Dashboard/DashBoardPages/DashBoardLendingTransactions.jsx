@@ -151,62 +151,7 @@ const DashBoardLendingTransactions = ({ match }) => {
         console.log(err); // "oh, no!"
       });
   }, []);
-  const data = [
-    {
-      name: "Page A",
-      uv: 114000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: "Page B",
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: "Page C",
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: "Page D",
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: "Page E",
-      uv: 111890,
-      pv: 489999900,
-      amt: 2181,
-    },
-    {
-      name: "Page E",
-      uv: 1890,
-      pv: 48800,
-      amt: 2181,
-    },
-    {
-      name: "Page E",
-      uv: 1890,
-      pv: 483300,
-      amt: 2181,
-    },
-    {
-      name: "Page E",
-      uv: 11890,
-      pv: 483300,
-      amt: 2181,
-    },
-    {
-      name: "Page E",
-      uv: 1199991890,
-      pv: 483300,
-      amt: 2181,
-    },
-  ];
+
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -316,9 +261,6 @@ const DashBoardLendingTransactions = ({ match }) => {
                 <div className="pool_detail_assets_body_layer_1_cont1_heading">
                   <div className="pool_detail_assets_body_layer_1_cont1_heading_1">
                     Transactions
-                  </div>
-                  <div className="pool_detail_assets_body_layer_1_cont1_heading_1">
-                    per/day
                   </div>
                 </div>
                 <div

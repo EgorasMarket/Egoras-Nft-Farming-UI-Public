@@ -5,6 +5,7 @@ import EX from "./contracts/exchange.json";
 import erc20 from "./contracts/erc20.json";
 import erc22 from "./contracts/erc22.json";
 import EgorasLoanV2Facet from "./contracts/V2/EgorasLoanV2Facet.json";
+import EgorasLoanV2AdditionalFiles from "./contracts/V2/EgorasLoanV2AdditionalFiles.json";
 import EgorasLoanV2ReferralFacet from "./contracts/V2/EgorasLoanV2ReferralFacet.json";
 import EgorasPriceOracleFacet from "./contracts/EgorasPriceOracleFacet.json";
 
@@ -19,6 +20,13 @@ const contractInstance = (signer) => {
 };
 const contractEgorasLoanV2Instance = (signer) => {
   return new Contract(EgorasLoanV2Facet.address, EgorasLoanV2Facet.abi, signer);
+};
+const contractEgorasLoanV2AdditionalFilesInstance = (signer) => {
+  return new Contract(
+    EgorasLoanV2AdditionalFiles.address,
+    EgorasLoanV2AdditionalFiles.abi,
+    signer
+  );
 };
 const contractEgorasLoanV2ReferralFacet = (signer) => {
   return new Contract(
@@ -355,6 +363,7 @@ const getInvestorsDividend = async (loanID, user, signer) => {
     };
   }
 };
+
 const userStats = async (loanID, user, signer) => {
   try {
     const instance = contractEgorasLoanV2Instance(signer);
@@ -510,7 +519,91 @@ const getUserStats = async (_user, signer) => {
     };
   }
 };
-
+const getNextDate = async (_loanID, _user, signer) => {
+  try {
+    const instance = contractEgorasLoanV2AdditionalFilesInstance(signer);
+    let result;
+    result = await instance.getNextDate(_loanID, _user);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const takeLoanByBranch = async (_loanID, signer) => {
+  try {
+    const instance = contractEgorasLoanV2AdditionalFilesInstance(signer);
+    let result;
+    result = await instance.takeLoanByBranch(_loanID);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const repayOnlyLoan = async (_loanID, signer) => {
+  try {
+    const instance = contractEgorasLoanV2Instance(signer);
+    let result;
+    result = await instance.repayOnlyLoan(_loanID);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const repayDividendLoan = async (_loanID, signer) => {
+  try {
+    const instance = contractEgorasLoanV2Instance(signer);
+    let result;
+    result = await instance.repayDividendLoan(_loanID);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const burnNFT = async (_loanID, signer) => {
+  try {
+    const instance = contractEgorasLoanV2Instance(signer);
+    let result;
+    result = await instance.burnNFT(_loanID);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
 // =========================================
 
 // =======================================================================
@@ -951,5 +1044,10 @@ export {
   getReferrals,
   getMyReferralsCount,
   getUserStats,
+  takeLoanByBranch,
+  getNextDate,
   lend,
+  repayOnlyLoan,
+  repayDividendLoan,
+  burnNFT,
 };

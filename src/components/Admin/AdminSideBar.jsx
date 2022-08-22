@@ -533,7 +533,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 }
                 onClick={changeBg}
               >
-                Assets
+                Withdraw
               </a>
               <a
                 id="transactions"
@@ -687,7 +687,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
           onClick={changeBg}
         >
           <StorageIcon className="sidebarIcon" />
-          Assets
+          Withdraw
         </a>
         <a
           id="transactions"

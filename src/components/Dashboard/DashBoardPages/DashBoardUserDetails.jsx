@@ -47,6 +47,7 @@ import {
   getTickerInfo,
   tokenBalance,
   open,
+  getNextDate,
   getLatestLoan,
   repay,
   topup,
@@ -63,6 +64,7 @@ const DashBoardUserDetails = ({ auth }) => {
   const [userName, setUserName] = useState("******");
   const [kycStatus, setKycStatus] = useState("******");
   const [seemore, setSeemore] = useState(false);
+  const [loanEndDate, setLoanEndDate] = useState(new Date());
   const [assetDetailModal, setAssetDetailModal] = useState("");
   const [loanAsset, setLoanAsset] = useState([]);
   const [disable, setDisable] = useState(true);
@@ -151,6 +153,42 @@ const DashBoardUserDetails = ({ auth }) => {
           console.log(data.data.payload, "powerful333333");
           console.log("/api/lend/user/transaction/" + account);
           setLoanAsset(data.data.payload);
+          console.log("====================================");
+          console.log(data.data.payload);
+          console.log("====================================");
+
+          data.data.payload.map(async (data) => {
+            console.log(data.newLoanID);
+            let response = await getNextDate(
+              data.newLoanID,
+              account,
+              library.getSigner()
+            );
+            console.log(response);
+            const renst = response.message;
+            for (const data of Object.keys(renst)) {
+              console.log("okay");
+              // console.log(data);
+              console.log(renst[data][0]); // 👉️ 'Tom', 30
+              // data.message._hex = formatEther(data.message._hex).toString();
+            }
+            // console.log(response.message);
+            console.log(response);
+
+            if (response.status == true) {
+              // const resAmnt = parseFloat(formatEther(response.message._hex));
+              const resAmnt = formatEther(response.message._hex).toString();
+              const rest = response;
+              // for (const data of rest) {
+              //   data.message._hex = formatEther(data.message._hex).toString();
+              // }
+
+              const pasedResAmnt = parseEther(resAmnt, "wei").toString();
+              console.log(rest);
+              console.log(new Date(1636921519));
+            }
+            return data.newLoanID;
+          });
         })
         .catch((err) => {
           console.log(err); // "oh, no!"
@@ -167,11 +205,16 @@ const DashBoardUserDetails = ({ auth }) => {
     setAssetDetailModal("");
     console.log("i am not here");
   };
-  const ChangeAssetDetailModal = (e) => {
-    let currentTarget = e.currentTarget.id;
-    console.log(currentTarget);
-    setAssetDetailModal(currentTarget);
-  };
+  // const ChangeAssetDetailModal = (id) => {
+  //   let currentTarget = id;
+  //   // let currentTarget2 = e.currentTarget.id;
+  //   console.log(currentTarget);
+  //   // console.log(e);
+  //   // console.log(e.currentTarget);
+  //   // console.log(currentTarget2);
+  //   setAssetDetailModal(currentTarget);
+  // };
+
   useEffect(() => {
     let assetVal = "EGC";
     let baseVal = "ENGN";
@@ -456,11 +499,12 @@ const DashBoardUserDetails = ({ auth }) => {
                         Amount(Engn)
                       </th>
                       <th className="branch_asset_heading_titles">
-                        Funded(Engn)
-                      </th>
-                      <th className="branch_asset_heading_titles">
                         Funding Progess
                       </th>
+                      <th className="branch_asset_heading_titles">
+                        Funded(Engn)
+                      </th>
+
                       <th className="branch_asset_heading_titles">APY</th>
                       <th className="branch_asset_heading_titles branch_asset_heading_titles_last">
                         Txn Hash
@@ -501,12 +545,44 @@ const DashBoardUserDetails = ({ auth }) => {
                       ).map((asset) => {
                         var percentage = (asset.funded / asset.amount) * 100;
                         const meta = JSON.parse(asset.metadata);
-
+                        const ChangeAssetDetailModal2 = async () => {
+                          let response = await getNextDate(
+                            asset.newLoanID,
+                            account,
+                            library.getSigner()
+                          );
+                          if (response.status == true) {
+                            const resAmnt = formatEther(
+                              response.message._hex
+                            ).toString();
+                            const pasedResAmnt = parseEther(
+                              resAmnt,
+                              "wei"
+                            ).toString();
+                            console.log(pasedResAmnt, "jsjsjsjsj");
+                            console.log(
+                              new Date(parseInt(pasedResAmnt * 1000)),
+                              "gjgjg9fji"
+                            );
+                            const endDated = new Date(
+                              parseInt(pasedResAmnt * 1000)
+                            );
+                            setLoanEndDate(() => endDated);
+                            console.log(new Date(1636921519 * 1000));
+                          }
+                          console.log(
+                            asset.newLoanID,
+                            "loanId loanId loanId loanId"
+                          );
+                        };
                         return (
                           <tr
                             className="branch_asset_body_row "
                             id={asset.rowNumber}
-                            onClick={ChangeAssetDetailModal}
+                            onClick={() => {
+                              setAssetDetailModal(() => asset.rowNumber);
+                              ChangeAssetDetailModal2();
+                            }}
                           >
                             <td className="branch_asset_body_row_data branch_asset_body_row_data_first  ">
                               <div className="assets-data">
@@ -627,19 +703,31 @@ const DashBoardUserDetails = ({ auth }) => {
         <>
           {" "}
           {loanAsset.map((data) => {
-            const ms = new Date(data.updatedAt).getTime() + 86400000 * 30;
-            // const [anable, setanable] = useState(false);
-            // console.log(ms);
-            const endDate = new Date(ms);
-            const currentDate = new Date();
-            // console.log(endDate);
-            // if (currentDate == endDate) {
-            //   setDisable(false);
-            //   return;
-            // } else if (currentDate >= endDate) {
-            //   setDisable(false);
-            // }
+            // let response = await getNextDate(
+            //   data.newLoanID,
+            //   account,
+            //   library.getSigner()
+            // );
+            // const loanDate = async (id) => {
+            //   let response = await getNextDate(
+            //     id,
+            //     account,
+            //     library.getSigner()
+            //   );
+            //   if (response.status == true) {
+            //     const resAmnt = formatEther(response.message._hex).toString();
+            //     const pasedResAmnt = parseEther(resAmnt, "wei").toString();
+            //     console.log(pasedResAmnt, "jsjsjsjsj");
+            //     console.log(new Date(1636921519));
+            //   }
+            // };
 
+            console.log(loanEndDate);
+            // console.log(new Date(data.updatedAt));
+            // const ms = new Date(loanEndDate);
+            // const ms = new Date(data.updatedAt).getTime() + 86400000 * 30;
+            const endDate = new Date(loanEndDate);
+            const currentDate = new Date();
             const redeem = async (e) => {
               if (account) {
                 setStage("loading");
@@ -688,10 +776,15 @@ const DashBoardUserDetails = ({ auth }) => {
                 // setStage("error");
               }
             }, 1000);
+
             return (
               <>
                 {assetDetailModal == data.rowNumber ? (
-                  <div className="asset_detail_modal_div">
+                  <div
+                    className="asset_detail_modal_div"
+                    // onClick={ChangeAssetDetailModal2}
+                    id={data.newLoanID}
+                  >
                     <div className="asset_detail_modal_div_conts">
                       <div
                         className="asset_detail_heading"
@@ -734,11 +827,11 @@ const DashBoardUserDetails = ({ auth }) => {
                           <span className="reward_btn_div">
                             <button
                               className="reward_btn"
-                              // disabled={currentDate >= endDate ? false : true}
-                              disabled
+                              disabled={currentDate >= endDate ? false : true}
+                              // disabled
                               onClick={redeem}
                             >
-                              Reedeem
+                              Redeem
                             </button>
                           </span>
                         </div>
@@ -819,6 +912,15 @@ const DashBoardUserDetails = ({ auth }) => {
                               </div>
                               <div className="asset_status_details_div1_body1_cont1_txt1">
                                 1.5%
+                              </div>
+                            </div>
+                            <hr class="custom_hr"></hr>
+                            <div className="asset_status_details_div1_body1_cont1">
+                              <div className="asset_status_details_div1_body1_cont1_txt1">
+                                Total Times lended
+                              </div>
+                              <div className="asset_status_details_div1_body1_cont1_txt1">
+                                {data.nTime}x
                               </div>
                             </div>
                             <hr class="custom_hr"></hr>
