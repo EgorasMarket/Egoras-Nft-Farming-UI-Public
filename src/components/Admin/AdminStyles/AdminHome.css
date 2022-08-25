@@ -53,3 +53,23 @@
   width: 100%;
   justify-content: flex-end;
 }
+.unavailable_btn {
+  background: #d4d4d4;
+  cursor: not-allowed !important;
+}
+.dark .unavailable_btn {
+  background: #718b7b;
+  color: #466252;
+}
+.asset_detail_modal_cont_headings {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: flex-end;
+}
+.second_btns {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  justify-content: flex-end;
+}

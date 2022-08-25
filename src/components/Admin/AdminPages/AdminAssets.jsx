@@ -12,6 +12,16 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 // import CopyAllIcon from "@mui/icons-material/CopyAll";
 import Nodata from "../../Dashboard/DashBoardPages/nodataComponent/Nodata";
+import {
+  takeLoanByBranch,
+  repayOnlyLoan,
+  repayDividendLoan,
+  burnNFT,
+} from "../../../web3/index";
+import {
+  SuccessModal,
+  ErrorModal,
+} from "../../Dashboard/DashBoardPages/Modal/Success_Error_Component";
 import axios from "axios";
 
 import { config } from "../../../actions/Config";
@@ -35,9 +45,15 @@ const AdminAssets = () => {
   const [loans, setLoans] = useState([]);
   const [activeBtn, setActivrBtn] = useState("Ongoing");
   const [assetDetailModal, setAssetDetailModal] = useState("");
+  const [stage, setStage] = useState("redeem");
   const [imgDiv, setImgDiv] = useState(false);
   const [walletAddr, setWalletAddr] = useState(
     "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+  );
+  const [isLoading, setIsLoading] = useState(false);
+  const [hash, setHash] = useState("");
+  const [text, setText] = useState(
+    "Transacting with blockchain, please wait..."
   );
   const [graphData2, setGraphData2] = useState([]);
   const context = useWeb3React();
@@ -160,6 +176,13 @@ const AdminAssets = () => {
     console.log(currentTarget);
     setAssetDetailModal(currentTarget);
   };
+  const Continue = async (e) => {
+    // setStage("redeem");
+    setStage("");
+    setText("");
+    // setModal(!modal);
+    // window.location.reload();
+  };
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -208,17 +231,6 @@ const AdminAssets = () => {
                     onClick={toggleActiveBtn}
                   >
                     Ongoing
-                  </div>
-                  <div
-                    id="All"
-                    className={
-                      activeBtn == "All"
-                        ? "filter_table_btn1_active"
-                        : "filter_table_btn1"
-                    }
-                    onClick={toggleActiveBtn}
-                  >
-                    All Pools
                   </div>
                   <div
                     id="Closed"
@@ -399,116 +411,6 @@ const AdminAssets = () => {
                                 </tr>
                               );
                             })
-                        : activeBtn === "All"
-                        ? loans.map((asset) => {
-                            var percentage =
-                              (asset.funded / asset.amount) * 100;
-                            const meta = JSON.parse(asset.metadata);
-                            return (
-                              <tr
-                                className="branch_asset_body_row "
-                                id={asset.newLoanID}
-                                onClick={ChangeAssetDetailModal}
-                              >
-                                <td className="branch_asset_body_row_data branch_asset_body_row_data_first  ">
-                                  <div className="assets-data">
-                                    <img
-                                      src={meta.arrayImg}
-                                      alt=""
-                                      className="assets-list-icon_pool_icon"
-                                    />
-
-                                    <div className="assets-data-pool_name">
-                                      {asset.title.substring(0, 8) + "..."}
-                                    </div>
-                                  </div>
-                                </td>
-                                <td className="branch_asset_body_row_data  ">
-                                  {/* <div className="assets-data-name_pool_invest_capcity"> */}
-                                  <div className="asset_list_body_body_cont_1c">
-                                    {numberWithCommas(
-                                      parseInt(asset.amount).toFixed(2)
-                                    )}
-                                  </div>
-                                  {/* </div> */}
-                                </td>
-                                <td className="branch_asset_body_row_data  ">
-                                  <div className="assets-data-name_pool">
-                                    {numberWithCommas(
-                                      parseInt(asset.funded).toFixed(2)
-                                    )}
-                                  </div>
-                                </td>
-                                <td className="branch_asset_body_row_data  ">
-                                  <div className="assets-data-name_pool">
-                                    <div className="asset_amount_progress_div">
-                                      <div className="asset_amount_progress_div_txt"></div>
-                                      <label for="file">
-                                        {parseInt(percentage).toFixed()}%
-                                      </label>
-                                      <progress
-                                        className={
-                                          percentage < 100
-                                            ? "progress_bar progress_bar_progress"
-                                            : "progress_bar"
-                                        }
-                                        // "progress_bar"
-                                        id="file"
-                                        aria-valuenow={
-                                          asset.amount - asset.funded
-                                        }
-                                        value={asset.funded}
-                                        max={asset.amount}
-                                      ></progress>
-                                      {/* <div
-                                  role="progressbar"
-                                  aria-valuenow="20"
-                                  aria-valuemin="0"
-                                  aria-valuemax="100"
-                                >
-                                  20 %
-                                </div> */}
-                                      {/* <div className="asset_amount_progress_div_bar">
-                                  <div className="asset_amount_progress_div_bar_progress"></div>
-                                </div> */}
-                                    </div>
-                                  </div>
-                                </td>
-                                <td className="branch_asset_body_row_data  ">
-                                  <div className="assets-data-name_pool ">
-                                    {numberWithCommas(
-                                      parseInt(
-                                        asset.amount - asset.funded
-                                      ).toFixed(2)
-                                    )}
-                                  </div>
-                                </td>
-                                <td className="branch_asset_body_row_data   ">
-                                  <div className="asset_list_body_body_cont_1f body_cont1_f">
-                                    13%
-                                  </div>
-                                </td>
-                                <td className="branch_asset_body_row_data ">
-                                  <div className="asset_list_body_body_cont_1g">
-                                    <button
-                                      className={
-                                        asset.state === "OPEN"
-                                          ? "status_btn_ongoing"
-                                          : asset.state === "FILLED"
-                                          ? "status_btn_closed"
-                                          : "status_btn"
-                                      }
-                                    >
-                                      {asset.state}
-                                    </button>
-                                  </div>
-                                </td>
-                                <td className="branch_asset_body_row_data branch_asset_body_row_data_last">
-                                  <KeyboardArrowRightIcon className="arrow_right_arrow" />
-                                </td>
-                              </tr>
-                            );
-                          })
                         : activeBtn === "Closed"
                         ? loans
                             .filter((person) => person.state == "FILLED")
@@ -516,6 +418,12 @@ const AdminAssets = () => {
                               var percentage =
                                 (asset.funded / asset.amount) * 100;
                               const meta = JSON.parse(asset.metadata);
+
+                              // ===================
+                              // ===================
+                              // ===================
+                              // ===================
+
                               return (
                                 <tr
                                   className="branch_asset_body_row "
@@ -668,31 +576,188 @@ const AdminAssets = () => {
           return final.toString();
         };
         var percentage = (data.funded / data.amount) * 100;
+        const withdrawFunds = async (e) => {
+          if (account) {
+            setStage("loading");
+            setIsLoading(true);
+            setText("Withdrawing, please wait...");
+            let response = await takeLoanByBranch(
+              data.newLoanID,
+              library.getSigner()
+            );
+            console.log(response);
+            console.log(response.message.code, "status stataus");
+            if (response.status == true) {
+              setText("Sending token please wait aleast 1/2 minutes");
+              // setHash(response.message.hash);
+              console.log(response);
+            } else if (response.status == false) {
+              if (response.message.code < 0) {
+                setText(response.message.data.message);
+              } else if (response.message.code == 4001) {
+                setText(response.message.message);
+              }
+              setStage("error");
+              setIsLoading(false);
+            }
+            return;
+          }
+        };
+        const repayOnlyLoan = async (e) => {
+          if (account) {
+            setStage("loading");
+            setIsLoading(true);
+            setText("Repaying, please wait...");
+            let response = await repayOnlyLoan(
+              data.newLoanID,
+              library.getSigner()
+            );
+            console.log(response);
+            console.log(response.message.code, "status stataus");
+            if (response.status == true) {
+              setText("Sending token please wait aleast 1/2 minutes");
+              // setHash(response.message.hash);
+              console.log(response);
+            } else if (response.status == false) {
+              if (response.message.code < 0) {
+                setText(response.message.data.message);
+              } else if (response.message.code == 4001) {
+                setText(response.message.message);
+              }
+              setStage("error");
+              setIsLoading(false);
+            }
+            return;
+          }
+        };
+        const repayDividendLoan = async (e) => {
+          if (account) {
+            setStage("loading");
+            setIsLoading(true);
+            setText("Repaying, please wait...");
+            let response = await repayDividendLoan(
+              data.newLoanID,
+              library.getSigner()
+            );
+            console.log(response);
+            console.log(response.message.code, "status stataus");
+            if (response.status == true) {
+              setText("Sending token please wait aleast 1/2 minutes");
+              // setHash(response.message.hash);
+              console.log(response);
+            } else if (response.status == false) {
+              if (response.message.code < 0) {
+                setText(response.message.data.message);
+              } else if (response.message.code == 4001) {
+                setText(response.message.message);
+              }
+              setStage("error");
+              setIsLoading(false);
+            }
+            return;
+          }
+        };
+        const burnNFT = async (e) => {
+          if (account) {
+            setStage("loading");
+            setIsLoading(true);
+            setText("Burning, please wait...");
+            let response = await burnNFT(data.newLoanID, library.getSigner());
+            console.log(response);
+            console.log(response.message.code, "status stataus");
+            if (response.status == true) {
+              setText("Sending token please wait aleast 1/2 minutes");
+              // setHash(response.message.hash);
+              console.log(response);
+            } else if (response.status == false) {
+              if (response.message.code < 0) {
+                setText(response.message.data.message);
+              } else if (response.message.code == 4001) {
+                setText(response.message.message);
+              }
+              setStage("error");
+              setIsLoading(false);
+            }
+            return;
+          }
+        };
+        //        repayOnlyLoan,
+        // repayDividendLoan,
+        // burnNFT,
         return (
           <>
             {/* modal starts here */}
             {assetDetailModal == data.newLoanID ? (
               <div className="asset_detail_modal_div">
                 <div className="asset_detail_modal_div_conts">
-                  <div className="asset_detail_heading" style={{ margin: "0" }}>
-                    <div className="pool_detail_heading_area1">
-                      <img
-                        src={meta.arrayImg}
-                        alt=""
-                        className="pool_detail_heading_area1_img"
-                        onClick={toggleImgDiv}
-                        style={{ cursor: "pointer" }}
-                      />
-                      <div className="pool_detail_heading_area1_txt_cont">
-                        <div className="pool_detail_heading_area1_txt_cont_1">
-                          {data.title.substring(0, 25) + "..."}
-                        </div>
-                        <div className="pool_detail_heading_area1_txt_cont_2">
-                          Assets {">"} Asset{data.newLoanID}
+                  <div className="asset_detail_modal_cont_headings">
+                    <div
+                      className="asset_detail_heading"
+                      style={{ margin: "0" }}
+                    >
+                      <div className="pool_detail_heading_area1">
+                        <img
+                          src={meta.arrayImg}
+                          alt=""
+                          className="pool_detail_heading_area1_img"
+                          onClick={toggleImgDiv}
+                          style={{ cursor: "pointer" }}
+                        />
+                        <div className="pool_detail_heading_area1_txt_cont">
+                          <div className="pool_detail_heading_area1_txt_cont_1">
+                            {data.title.substring(0, 25) + "..."}
+                          </div>
+                          <div className="pool_detail_heading_area1_txt_cont_2">
+                            Assets {">"} Asset{data.newLoanID}
+                          </div>
                         </div>
                       </div>
+                      <div className="branch_withdraw_funds_div">
+                        {data.state === "OPEN" ? (
+                          <button
+                            className="withdraw_funds_btn unavailable_btn"
+                            // onClick={withdrawFunds}
+                          >
+                            Unavailable
+                          </button>
+                        ) : data.state === "FILLED" ? (
+                          <button
+                            className="withdraw_funds_btn"
+                            onClick={withdrawFunds}
+                          >
+                            Withdraw Funds
+                          </button>
+                        ) : null}
+                      </div>
+                    </div>
+                    <div className="second_btns">
+                      {data.state === "OPEN" ? null : data.state ===
+                        "FILLED" ? (
+                        <>
+                          <button
+                            className="withdraw_funds_btn   "
+                            onClick={repayOnlyLoan}
+                          >
+                            Payback Loan
+                          </button>
+                          <button
+                            className="withdraw_funds_btn   "
+                            onClick={repayDividendLoan}
+                          >
+                            Payback dividend
+                          </button>
+                          <button
+                            className="withdraw_funds_btn   "
+                            // unavailable_btn
+                            onClick={burnNFT}
+                          >
+                            Burn NFT
+                          </button>
+                        </>
+                      ) : null}
                     </div>
                   </div>
+
                   {/* ====== */}
                   {/* ====== */}
                   {/* ====== */}
@@ -936,6 +1001,56 @@ const AdminAssets = () => {
           </>
         );
       })}
+
+      {stage == "loading" ? (
+        <div className="bacModal_div">
+          <div className="back_modal_container">
+            <div className="back_modal_cont_loading">
+              <CopperLoading
+                fill="#229e54"
+                borderRadius={4}
+                count={12}
+                size={200}
+              />
+              <div className="loading_title">
+                {text}
+
+                <span className="loaing_span_para">
+                  Confirm this transaction in your wallet.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
+      {stage == "success" ? (
+        <div className="bacModal_div">
+          <div className="back_modal_container">
+            <SuccessModal
+              successMessage={"Transaction was successful"}
+              click={(e) => {
+                window.location.href = "/dashboard/user";
+              }}
+              SuccessHead="Success"
+              hash={hash}
+            />
+          </div>
+        </div>
+      ) : null}
+      {stage == "error" ? (
+        <div className="bacModal_div">
+          <div className="back_modal_container">
+            <ErrorModal
+              errorMessage={text}
+              click={(e) => {
+                Continue(e);
+              }}
+              ErrorHead="Error"
+            />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };
