@@ -567,6 +567,7 @@ const DashBoardUserDetails = ({ auth }) => {
                             const endDated = new Date(
                               parseInt(pasedResAmnt * 1000)
                             );
+                            console.log(endDated, "end date ennd date");
                             setLoanEndDate(() => endDated);
                             console.log(new Date(1636921519 * 1000));
                           }
@@ -740,7 +741,8 @@ const DashBoardUserDetails = ({ auth }) => {
                 console.log(response);
                 // console.log(response.message.code, "status stataus");
                 if (response.status == true) {
-                  setText("Sending token please wait aleast 1/2 minutes");
+                  setStage("success");
+                  // setText("Sending token please wait aleast 1/2 minutes");
                   setHash(response.message.hash);
                   console.log(response);
                 } else if (response.status == false) {
@@ -755,27 +757,27 @@ const DashBoardUserDetails = ({ auth }) => {
                 return;
               }
             };
-            setInterval(() => {
-              if (localStorage.getItem("unlocking") == "true") {
-                transactReceipt(
-                  localStorage.getItem("unlockingHash"),
-                  library
-                ).then(function (env) {
-                  // console.log("running Interval", env);
-                  if (env.status == true && env.message !== null) {
-                    if (env.message.confirmations > 2) {
-                      setStage("success");
-                      setHash(localStorage.getItem("unlockingHash"));
-                      setIsLoading(false);
+            // setInterval(() => {
+            //   if (localStorage.getItem("unlocking") == "true") {
+            //     transactReceipt(
+            //       localStorage.getItem("unlockingHash"),
+            //       library
+            //     ).then(function (env) {
+            //       // console.log("running Interval", env);
+            //       if (env.status == true && env.message !== null) {
+            //         if (env.message.confirmations > 2) {
+            //           setStage("success");
+            //           setHash(localStorage.getItem("unlockingHash"));
+            //           setIsLoading(false);
 
-                      localStorage.setItem("unlocking", false);
-                    }
-                  }
-                });
-              } else {
-                // setStage("error");
-              }
-            }, 1000);
+            //           localStorage.setItem("unlocking", false);
+            //         }
+            //       }
+            //     });
+            //   } else {
+            //     // setStage("error");
+            //   }
+            // }, 1000);
 
             return (
               <>
