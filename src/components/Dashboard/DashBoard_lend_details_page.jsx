@@ -398,9 +398,9 @@ const DashBoard_lend_details_page = ({ match }) => {
     );
     console.log(response.status);
     if (response.status == true) {
-      setText("Sending token please wait aleast 1/2 minutes");
+      // setText("Sending token please wait aleast 1/2 minutes");
+      setStage("success");
       setHash(response.message.hash);
-      // setStage("success");
       console.log(response);
     } else if (response.status == false) {
       if (response.message.code < 0) {
