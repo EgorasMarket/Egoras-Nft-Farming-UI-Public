@@ -39,6 +39,7 @@ import DashboardAddLiquidtyPage from "./DashBoardPages/DashboardAddLiquidtyPage"
 // dashboard styles
 import "../../css/dashboard.css";
 import DashBoardLendPage from "./DashBoardPages/DashBoardLendPage";
+import { KycStatusTypes } from "../../utils/StatusTypes";
 // const CSSProperties = {
 //   display: "block",
 //   margin: "0 auto",
@@ -117,20 +118,26 @@ const Dashboard = ({ check, togglemakeDark }) => {
     }
     let response = await getAuthUserStats(account);
     const payload = response.message.data.payload;
-    if (payload == null) {
+    console.log(payload, "pay=========");
+    console.log(payload.kyc_status, "pay=========");
+    //  if (payload == null) {
+    //    setPropmtDiv(() => true);
+    //  } else {
+    //    if (payload.kyc_staus === "COMPLETED") {
+    //      setPropmtDiv(() => false);
+    //    } else {
+    //      setPropmtDiv(() => true);
+    //    }
+    //  }
+    if (payload == null || payload.kyc_status !== KycStatusTypes.COMPLETED) {
       setPropmtDiv(() => true);
-    } else {
-      if (payload.kyc_staus !== "COMPLETED") {
-        setPropmtDiv(() => true);
-      } else {
-        setPropmtDiv(() => false);
-      }
+      return;
     }
+    setPropmtDiv(() => false);
   };
   useEffect(() => {
     if (account) {
       FirstCheckKyc();
-    } else {
     }
   }, [account]);
   const relocateToOnborad = () => {
