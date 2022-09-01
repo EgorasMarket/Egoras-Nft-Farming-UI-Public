@@ -1,0 +1,173 @@
+div#FooterId {
+  position: relative;
+}
+.footerSection {
+  padding: 2em 0em;
+  position: relative;
+  background-color: #f3f3f3;
+  overflow: hidden;
+}
+.law_write_up {
+  font-size: 12px;
+  color: #8f8f8f;
+}
+.footerArea {
+  display: flex;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.add_color {
+  color: #229e54;
+  font-weight: 700;
+}
+
+.dark .MuiPaper-root {
+  color: rgba(255, 255, 255, 0.87) !important;
+  /* transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    background-color: #fff; */
+}
+.dark .footer_hr_rule {
+  color: rgba(255, 255, 255, 0.87) !important;
+  /* transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    background-color: #fff; */
+}
+
+.dark .MuiIconButton-root {
+  color: rgb(255 255 255) !important;
+}
+.egr2-logo {
+  width: 150px;
+}
+.dark .egr2-logo {
+  display: none;
+}
+.egr2-logo2 {
+  width: 150px;
+  display: none;
+}
+.dark .egr2-logo2 {
+  display: inline-block;
+}
+
+.footerPara {
+  font-size: 12px;
+  margin: 20px 0px;
+}
+
+.footerCard1 {
+  padding: 2em;
+}
+
+.footerIcons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 50px;
+}
+.footerCard2 {
+  padding: 2em;
+}
+.footerCard3 {
+  display: none;
+}
+.footerCardTitle {
+  font-size: 16px;
+  font-weight: 500;
+}
+.footerLinks {
+  display: grid;
+  margin-top: 10px;
+}
+
+.twitter {
+  color: #55bc7e;
+  border-color: #55bc7e;
+  border: solid;
+  padding: 3px;
+  border-radius: 50px;
+  border-width: 0.5px;
+}
+
+.twitter:hover {
+  color: #000000;
+  border-color: #000000;
+}
+
+.c1link1 {
+  margin-top: 10px;
+  color: #525252;
+  font-size: 13px;
+  width: 100% !important;
+  text-align: left;
+}
+.c1link1:hover {
+  color: #55bc7e;
+}
+
+.c1linklast {
+  font-size: 13px;
+  margin-top: 10px;
+  color: #55bc7e;
+  text-decoration: #55bc7e underline;
+}
+.c1linklast:hover {
+  color: #525252;
+  text-decoration: #525252 underline;
+}
+
+.footerBottomPara {
+  text-align: center;
+  font-size: 12px;
+  line-height: 20px;
+  color: #8a8a8a;
+}
+
+.MuiTypography-body1 {
+  font-family: "Mulish" !important;
+  font-weight: 500 !important;
+}
+
+.MuiAccordionSummary-content.Mui-expanded {
+  margin: 0 !important;
+}
+.MuiAccordionDetails-root {
+  justify-content: flex-start !important;
+  padding: 8px 16px 16px;
+  padding-top: 0 !important;
+}
+.MuiAccordion-root:before {
+  background-color: rgb(164 164 164 / 12%) !important;
+}
+.MuiAccordion-root {
+  background: none !important;
+  /* outline: none; */
+  /* border: none; */
+  box-shadow: none !important;
+}
+/* ========================== */
+/* ========================== */
+/* ========================== */
+/* ========================== */
+/* ========================== */
+
+.dark .footerSection {
+  background-color: #365543;
+}
+.dark .footerCardTitle {
+  color: #fff;
+}
+.dark .c1link1 {
+  color: #b4cbbd;
+}
+.dark .footerBottomPara {
+  color: #ffffff;
+}
+
+/* ========================== */
+/* ========================== */
+/* ========================== */
+/* ========================== */
+/* ========================== */
+/* ========================== */
+/* ========================== */

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="6.64211in" height="2.44144in" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 1171.28 430.53"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:white;stroke-width:3.67;stroke-miterlimit:2.61313}
+    .fil3 {fill:none}
+    .fil2 {fill:#41BA71}
+    .fil0 {fill:#537A5D}
+    .fil1 {fill:white}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_105553135908672">
+   <path class="fil0" d="M1171.26 232.94c-162.51,123.96 -365.46,197.59 -585.63,197.59 -220.17,0 -423.14,-73.61 -585.63,-197.59l0 -232.94 1171.28 0 0 232.94 -0.02 0z"/>
+   <circle class="fil1" cx="585.61" cy="211.21" r="126.34"/>
+   <circle class="fil2" cx="585.61" cy="211.21" r="90.08"/>
+   <polyline class="fil3 str0" points="556.66,207.91 577.83,235.15 614.56,192.81 "/>
+  </g>
+ </g>
+</svg>
