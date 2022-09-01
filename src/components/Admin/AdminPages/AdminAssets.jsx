@@ -105,7 +105,8 @@ const AdminAssets = () => {
       .get(
         api_url +
           "/api/branch/transactions/" +
-          "0x4fc19963b769711c09da56b35B334E55c57fc9Ee",
+          // "0x4fc19963b769711c09da56b35B334E55c57fc9Ee",
+          account,
         null,
         config
       )
@@ -203,7 +204,8 @@ const AdminAssets = () => {
   useEffect(async () => {
     if (account) {
       let check = await checkAllowanceL(
-        "0x4fc19963b769711c09da56b35B334E55c57fc9Ee",
+        // "0x4fc19963b769711c09da56b35B334E55c57fc9Ee",
+        account,
         parseEther("180000000000000000000000000000000000", "wei").toString(),
         library.getSigner()
       );
