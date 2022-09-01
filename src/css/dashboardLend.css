@@ -378,6 +378,23 @@
   background: #fff;
   box-shadow: 0px 2px 6px #eaeaea;
 }
+.filter_table_area_2_admin {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+
+  align-items: center;
+  border: solid 1px #e4e4e4;
+  border-radius: 46px;
+  padding: 5px;
+  background: #fff;
+  box-shadow: 0px 2px 6px #eaeaea;
+}
+.dark .filter_table_area_2_admin {
+  border: solid 1px #667f71;
+  background: #365543;
+  box-shadow: 0px 2px 6px #000000;
+}
 
 .filter_table_btn1 {
   color: #708390;
