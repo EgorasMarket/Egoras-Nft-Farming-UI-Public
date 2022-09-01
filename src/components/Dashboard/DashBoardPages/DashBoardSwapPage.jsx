@@ -296,7 +296,109 @@ const File = () => {
       document.getElementById("send208").style.display = "none";
     }
   };
+  const onSwap = async (e) => {
+    e.preventDefault();
+    console.log(
+      toPrice,
+      fromPrice,
+      defaultPrice,
+      crossX,
+      xDefault,
+      speed4,
+      speed5
+    );
+    setStage("loading");
+    setModal(!modal);
+    setText("Swapping! Please wait....");
+    if (speed5 == "BNB") {
+      let ret = await exchangeDefault(
+        speed4 + "-" + speed5,
+        parseEther(changeShow1, "wei").toString(),
+        library.getSigner()
+      );
+      if (ret.status == true) {
+        localStorage.setItem("unlocking", true);
+        localStorage.setItem("unlockingHash", ret.message.hash);
+        setText("Disbursing tokens please wait aleast 1/2 minutes");
+        setHash(ret.message.hash);
+      } else if (ret.status == false) {
+        if (ret.message.code < 0) {
+          setText(ret.message.data.message);
+        } else if (ret.message.code == 4001) {
+          setText(ret.message.message);
+        }
+        setStage("error");
+        setIsLoading(false);
+      }
+    } else if (speed5 !== "BNB" && speed4 == "BNB") {
+      let check = await checkAllowance(
+        assetAddress,
+        account,
+        parseEther(changeShow1, "wei").toString(),
+        library.getSigner()
+      );
+      if (check.status == true) {
+        let ret = await getDefault(
+          speed5 + "-" + speed4,
+          parseEther(changeShow1, "wei").toString(),
+          library.getSigner()
+        );
+        if (ret.status == true) {
+          localStorage.setItem("unlocking", true);
+          localStorage.setItem("unlockingHash", ret.message.hash);
+          setText("Disbursing tokens please wait aleast 1/2 minutes");
+          setHash(ret.message.hash);
+        } else if (ret.status == false) {
+          if (ret.message.code < 0) {
+            setText(ret.message.data.message);
+          } else if (ret.message.code == 4001) {
+            setText(ret.message.message);
+          }
+          setStage("error");
+          setIsLoading(false);
+        }
+      } else {
+        setUnlocking(true);
+        setStage("unlock");
+        setIsLoading(false);
+      }
+    } else if (speed4 !== "BNB" && speed5 !== "BNB") {
+      let check = await checkAllowance(
+        assetAddress,
+        account,
+        parseEther(changeShow1, "wei").toString(),
+        library.getSigner()
+      );
+      if (check.status == true) {
+        let ret = await crossexchange(
+          speed5 + "-BNB",
+          speed4 + "-BNB",
+          parseEther(changeShow1, "wei").toString(),
+          library.getSigner()
+        );
+        if (ret.status == true) {
+          localStorage.setItem("unlocking", true);
+          localStorage.setItem("unlockingHash", ret.message.hash);
+          setText("Disbursing tokens please wait aleast 1/2 minutes");
+          setHash(ret.message.hash);
+        } else if (ret.status == false) {
+          if (ret.message.code < 0) {
+            setText(ret.message.data.message);
+          } else if (ret.message.code == 4001) {
+            setText(ret.message.message);
+          }
+          setStage("error");
+          setIsLoading(false);
+        }
+      } else {
+        setUnlocking(true);
+        setStage("unlock");
+        setIsLoading(false);
+      }
 
+      // crossexchange = async (from, to, amoumt, signer)
+    }
+  };
   //   let defe = (x)=>{
   //  return(x + x)
   //   }
@@ -591,7 +693,7 @@ const File = () => {
                 <div className="Enable">Enable Gas Token</div>
                 <button
                   className="logout-btn Enable1 btn-block"
-                  // onClick={(e) => onSwap(e)}
+                  onClick={(e) => onSwap(e)}
                 >
                   {" "}
                   Swap

@@ -247,50 +247,6 @@ const AddLiquidity = ({ match, closeModal, which }) => {
     }
   };
 
-  const doSwap = async () => {
-    console.log("baseVal", baseVal);
-
-    setText("Transacting with blockchain, please wait...");
-    setStage("loading");
-    console.log(baseVal.symbol, "baseVal.symbol");
-
-    let ckeckAllowance = await checkAllowance2(
-      account,
-      parseEther(inputVal.toString(), "wei").toString(),
-      library.getSigner(),
-      baseVal.symbol.toLowerCase()
-    );
-    // alert("Within the block chain 1: " + ckeckAllowance)
-
-    if (ckeckAllowance.status == true) {
-      let isBase = baseVal.symbol == "eNGN" ? false : true;
-
-      let ret = isBase
-        ? await swapImpl(
-            parseEther(inputVal.toString(), "wei").toString(),
-            isBase,
-            library.getSigner()
-          )
-        : await swapBase(
-            parseEther(inputVal.toString(), "wei").toString(),
-            isBase,
-            library.getSigner()
-          );
-
-      // alert("Within the block chain 2: " + ret)
-
-      if (ret.status == true) {
-        setHash(ret.message);
-        setStage("success");
-      } else if (ret.status == false) {
-        setText(ret.message);
-        setStage("error");
-      }
-    } else {
-      setStage("unlock");
-    }
-  };
-
   const toggleModal2 = () => {
     if (modal2 === true) {
       setModal2(false);
@@ -518,7 +474,7 @@ const AddLiquidity = ({ match, closeModal, which }) => {
                           }
                           style={{ marginTop: "50px" }}
                           class="jsx-4146495177 connect_btn d-flex align-items-center justify-content-center mx-auto  zIndex2"
-                          onClick={doSwap}
+                          // onClick={doSwap}
                         >
                           {inputVal === "" || inputVal2 === ""
                             ? "Enter an amount"
