@@ -1,45 +1,42 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
-import jazzicon from '@metamask/jazzicon';
-import Timer from './Timer';
-import { addDays, format } from 'date-fns';
-import { Link } from 'react-router-dom';
-import { CopperLoading } from 'respinner';
+import React, { useState, useEffect, useRef, useMemo } from "react";
+import jazzicon from "@metamask/jazzicon";
+import Timer from "./Timer";
+import { addDays, format } from "date-fns";
+import { Link } from "react-router-dom";
+import { CopperLoading } from "respinner";
 
-import { connect } from 'react-redux';
-import {
-  SuccessModal,
-  ErrorModal,
-} from './Modal/Success_Error_Component';
-import StarRateIcon from '@mui/icons-material/StarRate';
+import { connect } from "react-redux";
+import { SuccessModal, ErrorModal } from "./Modal/Success_Error_Component";
+import StarRateIcon from "@mui/icons-material/StarRate";
 import {
   Web3ReactProvider,
   useWeb3React,
   UnsupportedChainIdError,
-} from '@web3-react/core';
-import TollIcon from '@mui/icons-material/Toll';
-import { numberWithCommas } from '../../../static';
+} from "@web3-react/core";
+import TollIcon from "@mui/icons-material/Toll";
+import { numberWithCommas } from "../../../static";
 // import { numberWithCommas } from "../../static/static";
-import CopyAllIcon from '@mui/icons-material/CopyAll';
-import '../../../css/dashboard_user_details.css';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import Accordion from '../Accordion';
-import InventoryIcon from '@mui/icons-material/Inventory';
-import Nodata from './nodataComponent/Nodata';
-import CloseIcon from '@mui/icons-material/Close';
-import ReceiptIcon from '@mui/icons-material/Receipt';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import axios from 'axios';
-import { config } from '../../../actions/Config';
-import { getAuthUserStats } from '../../../actions/token';
+import CopyAllIcon from "@mui/icons-material/CopyAll";
+import "../../../css/dashboard_user_details.css";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import Accordion from "../Accordion";
+import InventoryIcon from "@mui/icons-material/Inventory";
+import Nodata from "./nodataComponent/Nodata";
+import CloseIcon from "@mui/icons-material/Close";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import axios from "axios";
+import { config } from "../../../actions/Config";
+import { getAuthUserStats } from "../../../actions/token";
 import {
   API_URL as api_url,
   PENDING,
   COMPLETED,
   CANCELLED,
-} from '../../../actions/types';
+} from "../../../actions/types";
 // import { numberWithCommas } from "../../static/static";
-import { formatDuration, intervalToDuration } from 'date-fns';
-import { getUserStats } from '../../../web3/index';
+import { formatDuration, intervalToDuration } from "date-fns";
+import { getUserStats } from "../../../web3/index";
 // import Web3 from "web3";
 import {
   checkAllowance,
@@ -55,37 +52,37 @@ import {
   repay,
   topup,
   draw,
-} from '../../../web3/index';
-import { parseEther, formatEther } from '@ethersproject/units';
+} from "../../../web3/index";
+import { parseEther, formatEther } from "@ethersproject/units";
 const DashBoardUserDetails = ({ auth }) => {
   const [walletAddr, setWalletAddr] = useState(
-    '0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
   );
   const [welcomeBonus, setWelcomeBonus] = useState(0.0);
 
-  const [conecttxt, setConnectTxt] = useState('Not Connected');
-  const [userName, setUserName] = useState('******');
-  const [kycStatus, setKycStatus] = useState('******');
+  const [conecttxt, setConnectTxt] = useState("Not Connected");
+  const [userName, setUserName] = useState("******");
+  const [kycStatus, setKycStatus] = useState("******");
   const [seemore, setSeemore] = useState(false);
   const [loanEndDate, setLoanEndDate] = useState(new Date());
-  const [assetDetailModal, setAssetDetailModal] = useState('');
+  const [assetDetailModal, setAssetDetailModal] = useState("");
   const [loanAsset, setLoanAsset] = useState([]);
   const [disable, setDisable] = useState(true);
-  const [activeLink, setActiveLink] = useState('');
-  const [base, setBase] = useState('');
+  const [activeLink, setActiveLink] = useState("");
+  const [base, setBase] = useState("");
   const [text, setText] = useState(
-    'Transacting with blockchain, please wait...'
+    "Transacting with blockchain, please wait..."
   );
-  const [hash, setHash] = useState('');
-  const [asset, setAsset] = useState('');
+  const [hash, setHash] = useState("");
+  const [asset, setAsset] = useState("");
   const [coinBalance2, setCoinBalance2] = React.useState(0.0);
   const [baseBalance, setBaseBalance] = useState(0.0);
   const [tokenBal, setTokenBal] = useState(0.0);
-  const [stage, setStage] = useState('redeem');
+  const [stage, setStage] = useState("redeem");
   const [isLoading, setIsLoading] = useState(false);
   const [UserPoolsDetails, setUserPoolsDetails] = useState({
-    lockedBalance: '0.00',
-    pool: '0',
+    lockedBalance: "0.00",
+    pool: "0",
   });
   const context = useWeb3React();
   const {
@@ -117,7 +114,7 @@ const DashBoardUserDetails = ({ auth }) => {
     const element = avatarRef.current;
     if (element && account) {
       setWalletAddr(account);
-      setConnectTxt('Connected');
+      setConnectTxt("Connected");
       const addr = account.slice(2, 10);
       const seed = parseInt(addr, 16);
       console.log(addr, seed);
@@ -128,17 +125,13 @@ const DashBoardUserDetails = ({ auth }) => {
       element.appendChild(icon);
     }
   }, [account, avatarRef]);
-  console.log('i am here');
+  console.log("i am here");
   useEffect(() => {
     if (account) {
       axios
-        .get(
-          api_url + '/api/lend/user/account/' + account,
-          null,
-          config
-        )
+        .get(api_url + "/api/lend/user/account/" + account, null, config)
         .then((data) => {
-          console.log(data.data.payload, 'powerful333333');
+          console.log(data.data.payload, "powerful333333");
           // console.log(txnhash);
           // setBranches(data.data.payload);
           setUserPoolsDetails({
@@ -155,18 +148,14 @@ const DashBoardUserDetails = ({ auth }) => {
   useEffect(() => {
     if (account) {
       axios
-        .get(
-          api_url + '/api/lend/user/transaction/' + account,
-          null,
-          config
-        )
+        .get(api_url + "/api/lend/user/transaction/" + account, null, config)
         .then((data) => {
-          console.log(data.data.payload, 'powerful333333');
-          console.log('/api/lend/user/transaction/' + account);
+          console.log(data.data.payload, "powerful333333");
+          console.log("/api/lend/user/transaction/" + account);
           setLoanAsset(data.data.payload);
-          console.log('====================================');
+          console.log("====================================");
           console.log(data.data.payload);
-          console.log('====================================');
+          console.log("====================================");
 
           data.data.payload.map(async (data) => {
             console.log(data.newLoanID);
@@ -178,7 +167,7 @@ const DashBoardUserDetails = ({ auth }) => {
             console.log(response);
             const renst = response.message;
             for (const data of Object.keys(renst)) {
-              console.log('okay');
+              console.log("okay");
               // console.log(data);
               console.log(renst[data][0]); // 👉️ 'Tom', 30
               // data.message._hex = formatEther(data.message._hex).toString();
@@ -188,18 +177,13 @@ const DashBoardUserDetails = ({ auth }) => {
 
             if (response.status == true) {
               // const resAmnt = parseFloat(formatEther(response.message._hex));
-              const resAmnt = formatEther(
-                response.message._hex
-              ).toString();
+              const resAmnt = formatEther(response.message._hex).toString();
               const rest = response;
               // for (const data of rest) {
               //   data.message._hex = formatEther(data.message._hex).toString();
               // }
 
-              const pasedResAmnt = parseEther(
-                resAmnt,
-                'wei'
-              ).toString();
+              const pasedResAmnt = parseEther(resAmnt, "wei").toString();
               console.log(rest);
               console.log(new Date(1636921519));
             }
@@ -218,8 +202,8 @@ const DashBoardUserDetails = ({ auth }) => {
   };
 
   const closeAssetDetailModal = () => {
-    setAssetDetailModal('');
-    console.log('i am not here');
+    setAssetDetailModal("");
+    console.log("i am not here");
   };
   // const ChangeAssetDetailModal = (id) => {
   //   let currentTarget = id;
@@ -232,23 +216,21 @@ const DashBoardUserDetails = ({ auth }) => {
   // };
 
   useEffect(() => {
-    let assetVal = 'EGC';
-    let baseVal = 'ENGN';
+    let assetVal = "EGC";
+    let baseVal = "ENGN";
     setAsset(assetVal);
     setBase(baseVal);
-    let ticker = assetVal + '-' + baseVal;
+    let ticker = assetVal + "-" + baseVal;
     if (account) {
       getTickerInfo(ticker, library.getSigner()).then((data) => {
         if (data.status) {
-          tokenBalance(
-            data.message.base,
-            account,
-            library.getSigner()
-          ).then((balance) => {
-            setBaseBalance(formatEther(balance.message));
-          });
+          tokenBalance(data.message.base, account, library.getSigner()).then(
+            (balance) => {
+              setBaseBalance(formatEther(balance.message));
+            }
+          );
 
-          if (asset == 'BNB' || asset == 'bnb') {
+          if (asset == "BNB" || asset == "bnb") {
             library
               .getBalance(account)
               .then((balance) => {
@@ -258,13 +240,11 @@ const DashBoardUserDetails = ({ auth }) => {
                 setCoinBalance2(null);
               });
           } else {
-            tokenBalance(
-              data.message.asset,
-              account,
-              library.getSigner()
-            ).then((balance) => {
-              setCoinBalance2(formatEther(balance.message));
-            });
+            tokenBalance(data.message.asset, account, library.getSigner()).then(
+              (balance) => {
+                setCoinBalance2(formatEther(balance.message));
+              }
+            );
           }
         }
       });
@@ -274,26 +254,21 @@ const DashBoardUserDetails = ({ auth }) => {
   console.log(baseBalance);
   console.log(coinBalance2);
   const currentPage = window.location.pathname;
-  const urlArr = currentPage.split('/');
+  const urlArr = currentPage.split("/");
   useEffect(() => {
-    if (currentPage === '/dashboard/user') {
-      setActiveLink('poolDetails');
-    } else if (currentPage === '/dashboard/user/referral') {
-      setActiveLink('referral');
+    if (currentPage === "/dashboard/user") {
+      setActiveLink("poolDetails");
+    } else if (currentPage === "/dashboard/user/referral") {
+      setActiveLink("referral");
     }
   });
   useEffect(
     async (e) => {
       if (account) {
-        let response = await getUserStats(
-          account,
-          library.getSigner()
-        );
+        let response = await getUserStats(account, library.getSigner());
         console.log(response);
         if (response.status === true) {
-          const resAmnt = parseFloat(
-            formatEther(response.message._wB._hex)
-          );
+          const resAmnt = parseFloat(formatEther(response.message._wB._hex));
           setWelcomeBonus(resAmnt);
           console.log(response.message._referral);
         }
@@ -308,49 +283,48 @@ const DashBoardUserDetails = ({ auth }) => {
         // console.log(response.message.data.payload, "acct acct acct acct ");
         const payload = response.message.data.payload;
         if (payload == null) {
-          setUserName(() => '******');
-          setKycStatus(() => '******');
+          setUserName(() => "******");
+          setKycStatus(() => "******");
         } else {
           if (payload.username == null) {
-            setUserName(() => '******');
+            setUserName(() => "******");
           } else {
             setUserName(() => payload.username);
           }
           if (payload.kyc_status == null) {
-            setKycStatus(() => '******');
+            setKycStatus(() => "******");
           } else {
             setKycStatus(() => payload.kyc_status);
           }
         }
 
-        console.log(payload, 'acct acct acct acct ');
+        console.log(payload, "acct acct acct acct ");
       }
     },
     [account]
   );
   const Continue = async (e) => {
-    setStage('redeem');
-    setText('');
+    setStage("redeem");
+    setText("");
     // setModal(!modal);
     // window.location.reload();
   };
   setInterval(() => {
-    if (localStorage.getItem('unlocking') == 'true') {
-      transactReceipt(
-        localStorage.getItem('unlockingHash'),
-        library
-      ).then(function (env) {
-        // console.log("running Interval", env);
-        if (env.status == true && env.message !== null) {
-          if (env.message.confirmations > 2) {
-            setStage('success');
-            setHash(localStorage.getItem('unlockingHash'));
-            setIsLoading(false);
+    if (localStorage.getItem("unlocking") == "true") {
+      transactReceipt(localStorage.getItem("unlockingHash"), library).then(
+        function (env) {
+          // console.log("running Interval", env);
+          if (env.status == true && env.message !== null) {
+            if (env.message.confirmations > 2) {
+              setStage("success");
+              setHash(localStorage.getItem("unlockingHash"));
+              setIsLoading(false);
 
-            localStorage.setItem('unlocking', false);
+              localStorage.setItem("unlocking", false);
+            }
           }
         }
-      });
+      );
     } else {
       // setStage("error");
     }
@@ -370,9 +344,9 @@ const DashBoardUserDetails = ({ auth }) => {
               <Link
                 to="/dashboard/user"
                 className={
-                  activeLink === 'poolDetails'
-                    ? 'pool_lend_details_link_active'
-                    : 'pool_lend_details_link'
+                  activeLink === "poolDetails"
+                    ? "pool_lend_details_link_active"
+                    : "pool_lend_details_link"
                 }
               >
                 <DashboardIcon className="asset_overview_link_icon" />
@@ -381,9 +355,9 @@ const DashBoardUserDetails = ({ auth }) => {
               <Link
                 to="/dashboard/user/referral"
                 className={
-                  activeLink === 'referral'
-                    ? 'pool_lend_details_link_active'
-                    : 'pool_lend_details_link'
+                  activeLink === "referral"
+                    ? "pool_lend_details_link_active"
+                    : "pool_lend_details_link"
                 }
               >
                 <DashboardIcon className="asset_overview_link_icon" />
@@ -394,32 +368,27 @@ const DashBoardUserDetails = ({ auth }) => {
               <div className="userdAshboard_head_username">
                 <span className="userdAshboard_head_username_head">
                   UserName:
-                </span>{' '}
+                </span>{" "}
                 <span className="userdAshboard_head_username_para">
                   {userName}
-                </span>{' '}
+                </span>{" "}
               </div>
               <span className="hr_vertical"></span>
               <div className="userdAshboard_head_username">
                 <span className="userdAshboard_head_username_head">
                   KYC Status:
-                </span>{' '}
+                </span>{" "}
                 <span className="userdAshboard_head_username_para">
                   {kycStatus}
-                </span>{' '}
+                </span>{" "}
               </div>
             </div>
             <div className="userdAshboard_head">
               <div className="userdAshboard_head_area">
-                <div
-                  className="metamask_prof_pic"
-                  ref={avatarRef}
-                ></div>
+                <div className="metamask_prof_pic" ref={avatarRef}></div>
                 <div className="user_walletAddress">
                   <div className="wallet_addr_cont">
-                    <div className="wallet_addr_cont_txt">
-                      {walletAddr}
-                    </div>
+                    <div className="wallet_addr_cont_txt">{walletAddr}</div>
 
                     <CopyAllIcon className="copy_all_tx_hash_icon" />
                   </div>
@@ -435,10 +404,8 @@ const DashBoardUserDetails = ({ auth }) => {
                   Welcome Bonus
                 </div>
                 <div className="welcome_bonus_div_body">
-                  {' '}
-                  {numberWithCommas(
-                    parseFloat(welcomeBonus).toFixed(2)
-                  )}
+                  {" "}
+                  {numberWithCommas(parseFloat(welcomeBonus).toFixed(2))}
                   <span className="engn_symbol_sign">Engn</span>
                 </div>
               </div>
@@ -451,9 +418,7 @@ const DashBoardUserDetails = ({ auth }) => {
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
                   <span>Your Balance</span>
-                  <span>
-                    {parseFloat(baseBalance).toFixed(3)} Engn
-                  </span>
+                  <span>{parseFloat(baseBalance).toFixed(3)} Engn</span>
                 </div>
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
@@ -464,10 +429,8 @@ const DashBoardUserDetails = ({ auth }) => {
                   ) : (
                     <span>
                       {numberWithCommas(
-                        parseInt(
-                          UserPoolsDetails.lockedBalance
-                        ).toFixed()
-                      )}{' '}
+                        parseInt(UserPoolsDetails.lockedBalance).toFixed()
+                      )}{" "}
                       Engn
                     </span>
                   )}
@@ -513,10 +476,7 @@ const DashBoardUserDetails = ({ auth }) => {
             </div>
 
             <div className="recent_transaction_body">
-              <div
-                className="recent_transaction_body_head"
-                id="transact_head"
-              >
+              <div className="recent_transaction_body_head" id="transact_head">
                 Backed Loans
               </div>
 
@@ -534,9 +494,7 @@ const DashBoardUserDetails = ({ auth }) => {
                       <th className="branch_asset_heading_titles branch_asset_heading_titles_first">
                         Pool
                       </th>
-                      <th className="branch_asset_heading_titles">
-                        Date
-                      </th>
+                      <th className="branch_asset_heading_titles">Date</th>
                       <th className="branch_asset_heading_titles">
                         Amount(Engn)
                       </th>
@@ -547,9 +505,7 @@ const DashBoardUserDetails = ({ auth }) => {
                         Funded(Engn)
                       </th>
 
-                      <th className="branch_asset_heading_titles">
-                        APY
-                      </th>
+                      <th className="branch_asset_heading_titles">APY</th>
                       <th className="branch_asset_heading_titles branch_asset_heading_titles_last">
                         Txn Hash
                       </th>
@@ -572,14 +528,14 @@ const DashBoardUserDetails = ({ auth }) => {
                       <div className="no_loans_div_cont">
                         <Nodata />
                         No funded pools yet.
-                      </div>{' '}
+                      </div>{" "}
                     </div>
                   ) : (
                     <tbody
                       className="branch_asset_body"
                       id="popular-categories"
                     >
-                      {' '}
+                      {" "}
                       {/* =============== */}
                       {/* =============== */}
                       {/* =============== */}
@@ -587,8 +543,7 @@ const DashBoardUserDetails = ({ auth }) => {
                         ? loanAsset.slice(0, 6)
                         : loanAsset
                       ).map((asset) => {
-                        var percentage =
-                          (asset.funded / asset.amount) * 100;
+                        var percentage = (asset.funded / asset.amount) * 100;
                         const meta = JSON.parse(asset.metadata);
                         const ChangeAssetDetailModal2 = async () => {
                           let response = await getNextDate(
@@ -602,26 +557,23 @@ const DashBoardUserDetails = ({ auth }) => {
                             ).toString();
                             const pasedResAmnt = parseEther(
                               resAmnt,
-                              'wei'
+                              "wei"
                             ).toString();
-                            console.log(pasedResAmnt, 'jsjsjsjsj');
+                            console.log(pasedResAmnt, "jsjsjsjsj");
                             console.log(
                               new Date(parseInt(pasedResAmnt * 1000)),
-                              'gjgjg9fji'
+                              "gjgjg9fji"
                             );
                             const endDated = new Date(
                               parseInt(pasedResAmnt * 1000)
                             );
-                            console.log(
-                              endDated,
-                              'end date ennd date'
-                            );
+                            console.log(endDated, "end date ennd date");
                             setLoanEndDate(() => endDated);
                             console.log(new Date(1636921519 * 1000));
                           }
                           console.log(
                             asset.newLoanID,
-                            'loanId loanId loanId loanId'
+                            "loanId loanId loanId loanId"
                           );
                         };
                         return (
@@ -629,9 +581,7 @@ const DashBoardUserDetails = ({ auth }) => {
                             className="branch_asset_body_row "
                             id={asset.rowNumber}
                             onClick={() => {
-                              setAssetDetailModal(
-                                () => asset.rowNumber
-                              );
+                              setAssetDetailModal(() => asset.rowNumber);
                               ChangeAssetDetailModal2();
                             }}
                           >
@@ -644,8 +594,7 @@ const DashBoardUserDetails = ({ auth }) => {
                                 />
 
                                 <div className="assets-data-pool_name">
-                                  {asset.title.substring(0, 15) +
-                                    '...'}
+                                  {asset.title.substring(0, 15) + "..."}
                                 </div>
                               </div>
                             </td>
@@ -673,14 +622,12 @@ const DashBoardUserDetails = ({ auth }) => {
                                   <progress
                                     className={
                                       percentage < 100
-                                        ? 'progress_bar progress_bar_progress'
-                                        : 'progress_bar'
+                                        ? "progress_bar progress_bar_progress"
+                                        : "progress_bar"
                                     }
                                     // "progress_bar"
                                     id="file"
-                                    aria-valuenow={
-                                      asset.amount - asset.funded
-                                    }
+                                    aria-valuenow={asset.amount - asset.funded}
                                     value={asset.funded}
                                     max={asset.amount}
                                   ></progress>
@@ -701,9 +648,7 @@ const DashBoardUserDetails = ({ auth }) => {
                             <td className="branch_asset_body_row_data  ">
                               <div className="assets-data-name_pool ">
                                 {numberWithCommas(
-                                  parseInt(asset.lendAmount).toFixed(
-                                    2
-                                  )
+                                  parseInt(asset.lendAmount).toFixed(2)
                                 )}
                               </div>
                             </td>
@@ -713,10 +658,7 @@ const DashBoardUserDetails = ({ auth }) => {
                               </div>
                             </td>
                             <td className="branch_asset_body_row_data branch_asset_body_row_data_last">
-                              {asset.transactionHash.substring(
-                                0,
-                                24
-                              ) + '...'}
+                              {asset.transactionHash.substring(0, 24) + "..."}
                             </td>
                           </tr>
                         );
@@ -741,11 +683,8 @@ const DashBoardUserDetails = ({ auth }) => {
 
               <div className="seemore_btn_div">
                 <a href="#transact_head">
-                  <button
-                    className="see_more_btn"
-                    onClick={toggleSeemore}
-                  >
-                    {seemore == false ? 'Expand' : 'Collapse'}
+                  <button className="see_more_btn" onClick={toggleSeemore}>
+                    {seemore == false ? "Expand" : "Collapse"}
                   </button>
                 </a>
               </div>
@@ -761,9 +700,9 @@ const DashBoardUserDetails = ({ auth }) => {
       {/* ============================= */}
       {/* var ms = new Date().getTime() + 86400000; var tomorrow = new Date(ms); */}
 
-      {stage === 'redeem' ? (
+      {stage === "redeem" ? (
         <>
-          {' '}
+          {" "}
           {loanAsset.map((data) => {
             // let response = await getNextDate(
             //   data.newLoanID,
@@ -792,9 +731,9 @@ const DashBoardUserDetails = ({ auth }) => {
             const currentDate = new Date();
             const redeem = async (e) => {
               if (account) {
-                setStage('loading');
+                setStage("loading");
                 setIsLoading(true);
-                setText('Redeeming, please wait...');
+                setText("Redeeming, please wait...");
                 let response = await takeDividend(
                   data.newLoanID,
                   library.getSigner()
@@ -802,7 +741,7 @@ const DashBoardUserDetails = ({ auth }) => {
                 console.log(response);
                 // console.log(response.message.code, "status stataus");
                 if (response.status == true) {
-                  setStage('success');
+                  setStage("success");
                   // setText("Sending token please wait aleast 1/2 minutes");
                   setHash(response.message.hash);
                   console.log(response);
@@ -812,7 +751,7 @@ const DashBoardUserDetails = ({ auth }) => {
                   } else if (response.message.code == 4001) {
                     setText(response.message.message);
                   }
-                  setStage('error');
+                  setStage("error");
                   setIsLoading(false);
                 }
                 return;
@@ -850,12 +789,12 @@ const DashBoardUserDetails = ({ auth }) => {
                   >
                     <div className="asset_detail_modal_div_conts">
                       <div
-                        className="asset_detail_heading"
-                        style={{ margin: '0' }}
+                        className="asset_detail_heading asset_detail_heading_user"
+                        style={{ margin: "0" }}
                       >
                         <div
                           className="pool_detail_heading_area1"
-                          style={{ width: '100%' }}
+                          style={{ width: "100%" }}
                         >
                           {/* <img
                       src="/img/pool_asset_icon.png"
@@ -866,26 +805,22 @@ const DashBoardUserDetails = ({ auth }) => {
                     /> */}
                           <div className="pool_detail_heading_area1_txt_cont">
                             <div className="pool_detail_heading_area1_txt_cont_1">
-                              {data.title.substring(0, 45) + '...'}
+                              {data.title.substring(0, 45) + "..."}
                             </div>
                             <div className="pool_detail_heading_area1_txt_cont_2">
-                              Assets {'>'} Asset{data.id}
+                              Assets {">"} Asset{data.id}
                             </div>
                           </div>
                         </div>
                         <div
                           className="pool_detail_heading_area2"
-                          style={{ width: '100%' }}
+                          style={{ width: "100%" }}
                         >
                           <span className="reward_amount">
-                            <span className="reward_amount_title">
-                              Reward:
-                            </span>{' '}
+                            <span className="reward_amount_title">Reward:</span>{" "}
                             {numberWithCommas(
-                              parseFloat(
-                                data.lendAmount * 0.015
-                              ).toFixed(2)
-                            )}{' '}
+                              parseFloat(data.lendAmount * 0.015).toFixed(2)
+                            )}{" "}
                             Engn
                           </span>
                           <Timer deadline={new Date(endDate)} />
@@ -894,9 +829,7 @@ const DashBoardUserDetails = ({ auth }) => {
                           <span className="reward_btn_div">
                             <button
                               className="reward_btn"
-                              disabled={
-                                currentDate >= endDate ? false : true
-                              }
+                              disabled={currentDate >= endDate ? false : true}
                               // disabled
                               onClick={redeem}
                             >
@@ -910,15 +843,15 @@ const DashBoardUserDetails = ({ auth }) => {
                       {/* ====== */}
                       <div className="asset_status_details_div1">
                         <div className="asset_status_details_div1_head">
-                          Status{' '}
+                          Status{" "}
                           <div className="staus_btn_div">
                             <button
                               className={
-                                data.state === 'OPEN'
-                                  ? 'status_btn_ongoing'
-                                  : data.state === 'FILLED'
-                                  ? 'status_btn_closed'
-                                  : 'status_btn'
+                                data.state === "OPEN"
+                                  ? "status_btn_ongoing"
+                                  : data.state === "FILLED"
+                                  ? "status_btn_closed"
+                                  : "status_btn"
                               }
                             >
                               {data.state}
@@ -934,7 +867,7 @@ const DashBoardUserDetails = ({ auth }) => {
                               <div className="asset_status_details_div1_body1_cont1_txt1">
                                 {numberWithCommas(
                                   parseInt(data.amount).toFixed()
-                                )}{' '}
+                                )}{" "}
                                 Engn
                               </div>
                             </div>
@@ -946,7 +879,7 @@ const DashBoardUserDetails = ({ auth }) => {
                               <div className="asset_status_details_div1_body1_cont1_txt1">
                                 {numberWithCommas(
                                   parseInt(data.lendAmount).toFixed()
-                                )}{' '}
+                                )}{" "}
                                 Engn
                               </div>
                             </div>
@@ -1018,7 +951,17 @@ const DashBoardUserDetails = ({ auth }) => {
                       {/* ============ */}
                       {/* ============ */}
                       {/* ============ */}
-
+                      <div className="transactionData_body transactionData_body_2">
+                        <div className="witdraw_funds_div_txt">
+                          <span className="witdraw_funds_div_txt_para">
+                            1,000,000.00 engn
+                          </span>
+                          :Available
+                        </div>
+                        <button className="witdraw_funds_div_btn">
+                          Withdraw Funds
+                        </button>
+                      </div>
                       {/* ============ */}
                       {/* ============ */}
                       {/* ============ */}
@@ -1037,8 +980,7 @@ const DashBoardUserDetails = ({ auth }) => {
                               className="transaction_id_link"
                               target="_blank"
                             >
-                              {data.transactionHash.substring(0, 28) +
-                                '...'}
+                              {data.transactionHash.substring(0, 28) + "..."}
                             </a>
                             <CopyAllIcon className="copy_all_tx_hash_icon" />
                           </div>
@@ -1060,7 +1002,7 @@ const DashBoardUserDetails = ({ auth }) => {
         </>
       ) : null}
 
-      {stage == 'loading' ? (
+      {stage == "loading" ? (
         <div className="bacModal_div">
           <div className="back_modal_container">
             <div className="back_modal_cont_loading">
@@ -1082,13 +1024,13 @@ const DashBoardUserDetails = ({ auth }) => {
         </div>
       ) : null}
 
-      {stage == 'success' ? (
+      {stage == "success" ? (
         <div className="bacModal_div">
           <div className="back_modal_container">
             <SuccessModal
-              successMessage={'Transaction was successful'}
+              successMessage={"Transaction was successful"}
               click={(e) => {
-                window.location.href = '/dashboard/user';
+                window.location.href = "/dashboard/user";
               }}
               SuccessHead="Success"
               hash={hash}
@@ -1096,7 +1038,7 @@ const DashBoardUserDetails = ({ auth }) => {
           </div>
         </div>
       ) : null}
-      {stage == 'error' ? (
+      {stage == "error" ? (
         <div className="bacModal_div">
           <div className="back_modal_container">
             <ErrorModal

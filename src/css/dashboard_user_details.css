@@ -17,7 +17,32 @@
   align-items: center;
   gap: 10px;
 }
-
+.witdraw_funds_div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+}
+.witdraw_funds_div_btn {
+  background: #229e54;
+  box-shadow: 0px 0px 5px #000000;
+  color: #fff;
+  padding: 20px 0px;
+  width: 200px;
+  border: none;
+  border-radius: 10px;
+}
+.witdraw_funds_div_txt {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  line-height: normal;
+}
+.witdraw_funds_div_txt_para {
+  margin-right: 5px;
+  font-size: 16px;
+  font-weight: 600;
+}
 .welcome_bonus_div {
   display: flex;
   flex-direction: column;
@@ -281,5 +306,16 @@
   }
   .user_details_body1_body_cont_area1 {
     padding: 1em;
+  }
+}
+@media screen and (max-width: 419px) {
+  .asset_detail_heading_user {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .pool_detail_heading_area2 {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
   }
 }

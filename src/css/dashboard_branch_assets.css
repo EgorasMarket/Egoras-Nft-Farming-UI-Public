@@ -457,6 +457,9 @@ svg.recharts-surface {
   font-size: 14px;
   font-weight: 300;
 }
+.transactionData_body_2 {
+  flex-direction: row-reverse;
+}
 .close_asset_detail_modal {
   display: flex;
   align-items: center;

@@ -461,6 +461,11 @@
     width: 100%;
   }
 }
+@media screen and (max-width: 767px) {
+  .welcome_bonus_div {
+    align-items: flex-start !important;
+  }
+}
 @media screen and (max-width: 500px) {
   .dashBoard_ref_area1_cont1 {
     gap: 8px;

@@ -698,7 +698,8 @@ const AdminAssets = () => {
             setIsLoading(true);
             setText("Paying back, please wait...");
             let check = await checkAllowanceL(
-              "0x4fc19963b769711c09da56b35B334E55c57fc9Ee",
+              // "0x4fc19963b769711c09da56b35B334E55c57fc9Ee",
+              account,
               parseEther(data.amount, "wei").toString(),
               library.getSigner()
             );
@@ -771,7 +772,8 @@ const AdminAssets = () => {
             setIsLoading(true);
             setText("Paying back, please wait...");
             let check = await checkAllowanceL(
-              "0x4fc19963b769711c09da56b35B334E55c57fc9Ee",
+              // "0x4fc19963b769711c09da56b35B334E55c57fc9Ee",
+              account,
               parseEther(data.amount, "wei").toString(),
               library.getSigner()
             );
