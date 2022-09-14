@@ -118,8 +118,8 @@ const Dashboard = ({ check, togglemakeDark }) => {
     }
     let response = await getAuthUserStats(account);
     const payload = response.message.data.payload;
-    console.log(payload, "pay=========");
-    console.log(payload.kyc_status, "pay=========");
+    // console.log(payload, "pay=========");
+    // console.log(payload.kyc_status, "pay=========");
     //  if (payload == null) {
     //    setPropmtDiv(() => true);
     //  } else {
