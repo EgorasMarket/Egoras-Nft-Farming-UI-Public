@@ -954,7 +954,7 @@ const DashBoardUserDetails = ({ auth }) => {
                       <div className="transactionData_body transactionData_body_2">
                         <div className="witdraw_funds_div_txt">
                           <span className="witdraw_funds_div_txt_para">
-                            1,000,000.00 engn
+                            0.00 engn
                           </span>
                           :Available
                         </div>
