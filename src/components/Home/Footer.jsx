@@ -56,6 +56,15 @@ const Footer = () => {
     if (currentPage === "/dashboard/earn/pool/detail/branch/asset") {
       setShowFooter(false);
     }
+    if (currentPage === "/admin") {
+      setShowFooter(false);
+    }
+    if (currentPage === "/admin/transactions") {
+      setShowFooter(false);
+    }
+    if (currentPage === "/admin/assets") {
+      setShowFooter(false);
+    }
     if (currentPage === "/dashboard/earning") {
       setShowFooter(false);
     }

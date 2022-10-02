@@ -801,3 +801,87 @@ button.pool_detail_heading_area1_invest_btn {
     font-size: 18px !important;
   }
 }
+/* ================kyc div==================== */
+/* ================kyc div==================== */
+/* ================kyc div==================== */
+.goDoKycDiv {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 1em;
+  background: #00000085;
+  width: 100vw;
+  height: 100vh;
+  overflow: scroll;
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(8px);
+}
+.goDoKycDiv_container {
+  width: 100%;
+  background: #fff;
+  max-width: 400px;
+  padding: 1em;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  text-align: center;
+  animation: slideFromTop 0.5s linear;
+  position: relative;
+}
+.dark .goDoKycDiv_container {
+  background: #365543;
+  border: solid 1px #667f71;
+  color: #fff;
+}
+.goDoKycDiv_container_head {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.goDoKycDiv_container_btn_div {
+  width: 100%;
+  margin-top: 0.5em;
+}
+.goDoKycDiv_container_btn {
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  background: #229e54;
+}
+.goDoKycDiv_container_para {
+  font-size: 14px;
+}
+.goDoKycDiv_container_para2 {
+  font-size: 14px;
+  font-weight: 700;
+}
+.goDoKycDiv_container_img {
+  width: 125px;
+}
+@keyframes slideFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+.close_goDoKycDiv_cont {
+  position: absolute;
+  right: 1%;
+  top: 1%;
+  cursor: pointer;
+}
+/* ================kyc div==================== */
+/* ================kyc div==================== */
+/* ================kyc div==================== */

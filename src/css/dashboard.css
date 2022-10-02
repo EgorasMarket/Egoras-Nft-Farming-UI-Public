@@ -4,11 +4,13 @@
   overflow: hidden;
   background: #e6e6e6;
   z-index: 1;
+  height: 100vh;
 }
 
 .dark .dashboard {
   background: #1e2822;
 }
+
 .dash_boardBg {
   position: absolute;
   width: 100vw;
@@ -17,9 +19,11 @@
   object-fit: cover;
   z-index: -1;
 }
+
 .dark .dash_boardBg {
   opacity: 0.04;
 }
+
 .Enable1.btn-block {
   width: 100% !important;
 }
@@ -37,6 +41,7 @@
   align-items: center;
   justify-content: center;
 }
+
 .hold_On_div_div_txt {
   display: flex;
   flex-direction: column;
@@ -45,6 +50,7 @@
   font-size: 32px;
   font-weight: 600;
 }
+
 .hold_On_div_div_txt_para {
   font-size: 16px;
   font-weight: 400;

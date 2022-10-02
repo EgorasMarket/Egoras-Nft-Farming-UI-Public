@@ -3,6 +3,9 @@
   justify-content: space-between;
   gap: 20px;
 }
+.welcome_bonus_div {
+  align-items: flex-end !important;
+}
 .dashBoard_ref_area1_cont1 {
   width: 100%;
   display: flex;
@@ -14,6 +17,7 @@
   border: solid 1px #dddddd;
   box-shadow: 0px 6px 10px #d5d5d5;
   overflow: scroll;
+  align-items: flex-end;
 }
 .dashBoard_ref_area1_cont2 {
   display: flex;

@@ -223,6 +223,18 @@ const Header = ({ togglemakeDark, check }) => {
       setshowHeader(false);
       setBetaDiv(false);
     }
+    if (currentPage === "/admin") {
+      setshowHeader(false);
+      setBetaDiv(false);
+    }
+    if (currentPage === "/admin/transactions") {
+      setshowHeader(false);
+      setBetaDiv(false);
+    }
+    if (currentPage === "/admin/assets") {
+      setshowHeader(false);
+      setBetaDiv(false);
+    }
     if (
       currentPage ===
       "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"

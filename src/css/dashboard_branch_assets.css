@@ -350,6 +350,7 @@ svg.recharts-surface {
   border-radius: 6px;
   padding: 1em;
   z-index: 1;
+  width: 100%;
 }
 .asset_status_details_div1_body {
   display: flex;

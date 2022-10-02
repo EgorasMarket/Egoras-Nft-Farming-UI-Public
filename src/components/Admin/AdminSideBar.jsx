@@ -4,6 +4,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 // import Web3 from "web3";
 import Web3 from "web3";
+import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import CloseIcon from "@material-ui/icons/Close";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TelegramIcon from "@mui/icons-material/Telegram";
@@ -11,6 +12,7 @@ import { Sling as Hamburger } from "hamburger-react";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import HomeIcon from "@mui/icons-material/Home";
+import StorageIcon from "@mui/icons-material/Storage";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import jazzicon from "@metamask/jazzicon";
 import StarsIcon from "@mui/icons-material/Stars";
@@ -33,7 +35,7 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import "../../css/dashboardheader.css";
 import "../../css/dashBoardSideBar.css";
 import { numberWithCommas } from "../../static";
-import SwitchToggle2 from "./DashBoardPages/SwitchToggle/SwitchToggle2";
+import SwitchToggle2 from "../Dashboard/DashBoardPages/SwitchToggle/SwitchToggle2";
 import {
   checkAllowance,
   unluckToken,
@@ -54,7 +56,7 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
-const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
+const AdminSideBar = ({ check, togglemakeDark }) => {
   const dddd = localStorage.getItem("smallSidetoken");
   const [connectId, setConnectId] = useState(false);
   const [activeBg, setActiveBg] = useState("market");
@@ -201,10 +203,16 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     if (linksActive === "/dashboard/stake") {
       setActiveBg("market");
     }
-    if (linksActive === "/dashboard") {
+    if (linksActive === "/admin") {
       setActiveBg("lend");
     }
-    if (linksActive === "/dashboard/") {
+    if (linksActive === "/admin/assets") {
+      setActiveBg("assets");
+    }
+    if (linksActive === "/admin/transactions") {
+      setActiveBg("transactions");
+    }
+    if (linksActive === "/admin/") {
       setActiveBg("lend");
     }
     if (linksActive === "/dashboard/earn") {
@@ -273,7 +281,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
       // const ethBalance2 = web3.utils.fromWei(getBalance2, "ether");
       console.log(ethBalance);
       // console.log(getBalance2);
-      setCoinBalance(parseFloat(ethBalance).toFixed(4));
+      setCoinBalance(parseFloat(ethBalance).toFixed(3));
     }
   }, [coinBalance, account]);
   const toggleDisconnectDiv = () => {
@@ -509,20 +517,38 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             <div className="header_tabs">
               <a
                 id="lend"
-                href="/dashboard/earn"
+                href="/admin"
                 className={
                   activeBg == "lend" ? "header_tab1_active " : "header_tab1"
                 }
                 onClick={changeBg}
               >
-                <span class="Ping -top-1">
-                  <span class="c-flashingPart"></span>
-                  <span class="c-basePart"></span>
-                </span>
-                Earn
+                Home
+              </a>
+              <a
+                id="assets"
+                href="/admin/assets"
+                className={
+                  activeBg == "assets" ? "header_tab1_active " : "header_tab1"
+                }
+                onClick={changeBg}
+              >
+                Withdraw
+              </a>
+              <a
+                id="transactions"
+                href="/admin/transactions"
+                className={
+                  activeBg == "transactions"
+                    ? "header_tab1_active "
+                    : "header_tab1"
+                }
+                onClick={changeBg}
+              >
+                Transactions
               </a>
 
-              <a
+              {/* <a
                 id="market"
                 href="/dashboard/stake"
                 className={
@@ -551,7 +577,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                 onClick={changeBg}
               >
                 Account
-              </a>
+              </a> */}
             </div>
             <div className="user_profile_icon_cont2">
               <div className="together">
@@ -641,32 +667,6 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
         </div>
       </section>
 
-      <div className="dash_board_links">
-        <div className="container">
-          <div className="dash_board_links_area">
-            <a href="" className="dash_board_links_tab">
-              {" "}
-              <FacebookRoundedIcon className="socail_links_icon2" />
-            </a>
-            <a href="" className="dash_board_links_tab">
-              {" "}
-              <TelegramIcon className="socail_links_icon2" />
-            </a>
-            <a href="" className="dash_board_links_tab">
-              {" "}
-              <TwitterIcon className="socail_links_icon2" />
-            </a>
-            <a href="" className="dash_board_links_tab">
-              {" "}
-              <span className="medium_icon2">M</span>
-            </a>
-            <a href="" className="dash_board_links_tab">
-              {" "}
-              <LinkedInIcon className="socail_links_icon2" />
-            </a>
-          </div>
-        </div>
-      </div>
       <div className="header_tabs2">
         <a
           id="lend"
@@ -674,41 +674,31 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           className={activeBg == "lend" ? "header_tab1_active " : "header_tab1"}
           onClick={changeBg}
         >
-          <StarsIcon className="sidebarIcon" />
-          Earn
+          <HomeIcon className="sidebarIcon" />
+          Home
         </a>
 
         <a
-          id="market"
-          href="/dashboard/stake"
+          id="assets"
+          href="/admin/assets"
           className={
-            activeBg == "market" ? "header_tab1_active " : "header_tab1"
+            activeBg == "assets" ? "header_tab1_active " : "header_tab1"
           }
           onClick={changeBg}
         >
-          <ApprovalIcon className="sidebarIcon" />
-          Stake
+          <StorageIcon className="sidebarIcon" />
+          Withdraw
         </a>
         <a
-          id="swap"
-          href="/dashboard/swap"
-          className={activeBg == "swap" ? "header_tab1_active " : "header_tab1"}
-          onClick={changeBg}
-        >
-          <SwapHorizontalCircleIcon className="sidebarIcon" />
-          Swap
-        </a>
-
-        <a
-          id="account"
-          href="/dashboard/user"
+          id="transactions"
+          href="/admin/transactions"
           className={
-            activeBg == "account" ? "header_tab1_active " : "header_tab1"
+            activeBg == "transactions" ? "header_tab1_active " : "header_tab1"
           }
           onClick={changeBg}
         >
-          <AccountCircleIcon className="sidebarIcon" />
-          Account
+          <ReceiptLongIcon className="sidebarIcon" />
+          Transactions
         </a>
       </div>
       {/* =============''''''''' */}
@@ -760,6 +750,6 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
 //   cart: state.shop.cart,
 // });
 
-export default DashboardSideBarMenu2;
+export default AdminSideBar;
 
 // export default connect(mapStateToProps, { retrieveCart })(DashboardSidebar);

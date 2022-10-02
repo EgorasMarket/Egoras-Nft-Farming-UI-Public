@@ -13,6 +13,7 @@ import { CopperLoading } from "respinner";
 import { parseEther, formatEther } from "@ethersproject/units";
 import LOAN from "../../web3/contracts/Loan.json";
 import SwapContract from "../../web3/contracts/Contract_Address.json";
+import { getAuthUserStats } from "../../actions/token";
 import Web3 from "web3";
 // import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import Nodata from "./DashBoardPages/nodataComponent/Nodata";
@@ -114,6 +115,7 @@ const DashBoard_lend_details_page = ({ match }) => {
   const [modal, setModal] = useState(false);
   const [refEarnings, setRefEarnings] = useState(0.0);
   const [welcomeBonus, setWelcomeBonus] = useState(0.0);
+  const [status, setStatus] = useState("");
 
   const [task, setTask] = useState("collateral");
   const [stage, setStage] = useState("back");
@@ -396,9 +398,9 @@ const DashBoard_lend_details_page = ({ match }) => {
     );
     console.log(response.status);
     if (response.status == true) {
-      setText("Sending token please wait aleast 1/2 minutes");
+      // setText("Sending token please wait aleast 1/2 minutes");
+      setStage("success");
       setHash(response.message.hash);
-      // setStage("success");
       console.log(response);
     } else if (response.status == false) {
       if (response.message.code < 0) {
@@ -475,6 +477,22 @@ const DashBoard_lend_details_page = ({ match }) => {
     borderColor: "red",
   };
   var percentage = (BranchDetails.funded / BranchDetails.amount) * 100;
+  useEffect(
+    async (e) => {
+      if (account) {
+        let response = await getAuthUserStats(account);
+        const payload = response.message.data.payload;
+        console.log(payload, "acct acct acct acct ");
+        if (payload == null) {
+          setStatus("");
+        } else {
+          setStatus(() => payload.kyc_status);
+        }
+      }
+    },
+    [account]
+  );
+
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -556,7 +574,6 @@ const DashBoard_lend_details_page = ({ match }) => {
                 <button
                   className="pool_detail_heading_area1_invest_btn"
                   onClick={toggleLendType}
-                  // onClick={toggleAssetModal}
                 >
                   Lend
                 </button>

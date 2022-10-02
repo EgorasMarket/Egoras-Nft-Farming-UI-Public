@@ -14,6 +14,8 @@ import { config } from "../../../actions/Config";
 import { Authenticate } from "../../auth/Authenticate";
 import axios from "axios";
 // import
+// import { CustomAlert } from "../../static/CustomAlert";
+import { CustomAlert } from "../../static/CustomAlert/CustomAlert";
 import CountryDropdown from "country-dropdown-with-flags-for-react";
 import {
   Stepper,
@@ -61,6 +63,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   const [verified, setVerified] = useState(true);
   const [disable, setDisable] = React.useState(false);
   const [disable2, setDisable2] = React.useState(false);
+  const [customAlert, setCustomAlert] = useState(false);
+  const [stage, setStage] = useState(null);
 
   const [connected, setConnected] = useState(true);
   const [countryVerified, setCountryVerified] = useState(false);
@@ -74,10 +78,12 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   const [address, setAddress] = useState("");
   const [oyName, setOyName] = useState(false);
   const [ref_code, setRef_code] = useState("");
+  const [alertTxt, setAlertTxt] = useState("");
   const { step, incrementStep, decrementStep } = useStepper(0, 3);
   const [value, setValue] = React.useState(null);
   const [country, setCountry] = React.useState("");
   const [getRef, setGetRef] = React.useState("");
+  const [alertType, setAlertType] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isLoading2, setIsLoading2] = useState(false);
 
@@ -134,7 +140,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
         let response = await getAuthUserStats(account);
         // console.log(response.message.data.payload, "acct acct acct acct ");
         const payload = response.message.data.payload;
-        console.log(payload, "acct acct acct acct ");
+        // console.log(payload, "acct acct acct acct ");
         setAddress(account);
         setConnected(() => false);
         if (payload == null) {
@@ -146,10 +152,12 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
         } else if (payload.stage == 2) {
           setCountryVerified(() => false);
           setVerified(() => false);
-        } else if (!account) {
-          setConnected(() => true);
-          setCountryVerified(() => false);
-          setVerified(() => false);
+          setStage(() => payload.stage);
+        }
+        if (payload == null) {
+          setStage(null);
+        } else {
+          setStage(() => payload.stage);
         }
         if (response.message.data.payload !== null) {
           if (
@@ -174,6 +182,10 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
           }
           return;
         }
+      } else {
+        setConnected(() => true);
+        setCountryVerified(() => false);
+        setVerified(() => false);
       }
     },
     [account, verified, connected, countryVerified]
@@ -254,14 +266,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   };
 
   const submitKycDetails = async (e) => {
-    if (isLoading2 == true) {
-      setDisable2(true);
-    } else if (isLoading2 == false) {
-      setDisable2(false);
-    }
     setIsLoading2(true);
     setDisable2(true);
-    setIsLoading2(true);
     let postData;
     let countryData = {
       address: address,
@@ -292,6 +298,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
     console.log("====================================");
     console.log(postData);
     console.log("====================================");
+    setIsLoading2(true);
+    setDisable2(true);
     try {
       const res = await axios.post(
         api_url + "/api/user/submit/users/country",
@@ -315,11 +323,17 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
       setIsLoading2(false);
       setDisable2(false);
     } catch (err) {
-      console.log(err.response);
+      console.log(err.response.data);
+      if (err.response.data.statusCode == "303") {
+        setAlertTxt(err.response.data.message);
+      }
       setIsLoading2(false);
       setDisable2(false);
+      setCustomAlert(true);
+      setAlertType("danger");
     }
   };
+
   const validateInputs = (input) => {
     //check firstname
     if (!input) {
@@ -328,16 +342,9 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   };
 
   const submitKycDetails_bkp = async (e) => {
-    if (isLoading == true) {
-      setDisable(true);
-    } else if (isLoading == false) {
-      setDisable(false);
-    }
     setIsLoading(true);
     setDisable(true);
-    setIsLoading(true);
     let postData;
-
     if (typeof localStorage.referer != "undefined") {
       // localStorage.getItem("referer");
       // setRef_auth(localStorage.getItem("referer"));
@@ -397,14 +404,17 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
       {/* Tokens Section Start */}
       <section className="collateral-assets-section no-bg no_pad">
         <div className="container">
-          <div className="onboard_as_user_div">
-            <button
-              className="onboard_as_user_btn"
-              onClick={toggleOnBoardUserDiv}
-            >
-              Onboard as user
-            </button>
-          </div>
+          {stage == 2 ? null : (
+            <div className="onboard_as_user_div">
+              <button
+                className="onboard_as_user_btn"
+                onClick={toggleOnBoardUserDiv}
+              >
+                Onboard as user
+              </button>
+            </div>
+          )}
+
           <div className="pool_container">
             <div className="lending_area1">
               <div className="lending_area1_cont1">
@@ -992,6 +1002,19 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
         </div>
       </section>
 
+      {/* <section className="how_to_earn_section">
+        <div className="container">
+          <div className="how_to_earn_div_area">
+            <div className="how_to_earn_div_area_head">How to earn</div>
+            <div className="how_to_earn_div_area_video_body">
+
+
+
+            </div>
+          </div>
+        </div>
+      </section> */}
+
       {onBoardUserDiv === true ? (
         <div className="onBoardUserDiv">
           <div className="onBoardUserDiv_head">Onboard as user</div>
@@ -999,13 +1022,11 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
             <div className="onBoardUserDiv_body_cont">
               <div className="stepdiv1">
                 <span
-                  style={
-                    connected === false
-                      ? { color: "#a6a6a6" }
-                      : { color: "black" }
+                  className={
+                    connected === false ? "disabled_color" : "enabled_color"
                   }
                 >
-                  ConnectWallet
+                  {connected === false ? "Connected" : "ConnectWallet"}
                 </span>
                 {connected === true ? (
                   <div className="stepDiv1_sub_content">
@@ -1017,11 +1038,10 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                 ) : null}
 
                 <div
-                  className="rule_progress"
-                  style={
+                  className={
                     connected === false
-                      ? { background: "#a6a6a6" }
-                      : { background: "#229e54" }
+                      ? "rule_progress disabled_bg"
+                      : " rule_progress enabled_bg"
                   }
                 ></div>
               </div>
@@ -1031,13 +1051,13 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
               {/* ================= */}
               <div className="stepdiv1">
                 <span
-                  style={
+                  className={
                     countryVerified === false
-                      ? { color: "#a6a6a6" }
-                      : { color: "black" }
+                      ? "disabled_color"
+                      : "enabled_color"
                   }
                 >
-                  Select Country
+                  {countryVerified === false ? "Selected" : "Select Country"}
                 </span>
                 {countryVerified === true ? (
                   <div className="stepDiv1_sub_content">
@@ -1086,11 +1106,10 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                 ) : null}
 
                 <div
-                  className="rule_progress"
-                  style={
+                  className={
                     countryVerified === false
-                      ? { background: "#a6a6a6" }
-                      : { background: "#229e54" }
+                      ? "rule_progress disabled_bg"
+                      : " rule_progress enabled_bg"
                   }
                 ></div>
               </div>
@@ -1100,10 +1119,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
               {/* ================= */}
               <div className="stepdiv1">
                 <span
-                  style={
-                    verified === false
-                      ? { color: "#a6a6a6" }
-                      : { color: "black" }
+                  className={
+                    verified === false ? "disabled_color" : "enabled_color"
                   }
                 >
                   Identity Verification
@@ -1208,11 +1225,10 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                 ) : null}
 
                 <div
-                  className="rule_progress"
-                  style={
+                  className={
                     verified === false
-                      ? { background: "#a6a6a6" }
-                      : { background: "#229e54" }
+                      ? "rule_progress disabled_bg"
+                      : " rule_progress enabled_bg"
                   }
                 ></div>
               </div>
@@ -1231,6 +1247,13 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
             Close
           </div>
         </div>
+      ) : null}
+      {customAlert === true ? (
+        <CustomAlert
+          alert={alertTxt}
+          alertType={alertType}
+          closeAlert={() => setCustomAlert(false)}
+        />
       ) : null}
     </div>
   );
