@@ -49,6 +49,7 @@ import {
   open,
   getNextDate,
   getLatestLoan,
+  takeBackLoan,
   repay,
   topup,
   draw,
@@ -757,6 +758,34 @@ const DashBoardUserDetails = ({ auth }) => {
                 return;
               }
             };
+            const takeCapital = async (e) => {
+              if (account) {
+                setStage("loading");
+                setIsLoading(true);
+                setText("Withdrawing, please wait...");
+                let response = await takeBackLoan(
+                  data.newLoanID,
+                  library.getSigner()
+                );
+                console.log(response);
+                // console.log(response.message.code, "status stataus");
+                if (response.status == true) {
+                  setStage("success");
+                  // setText("Sending token please wait aleast 1/2 minutes");
+                  setHash(response.message.hash);
+                  console.log(response);
+                } else if (response.status == false) {
+                  if (response.message.code < 0) {
+                    setText(response.message.data.message);
+                  } else if (response.message.code == 4001) {
+                    setText(response.message.message);
+                  }
+                  setStage("error");
+                  setIsLoading(false);
+                }
+                return;
+              }
+            };
             // setInterval(() => {
             //   if (localStorage.getItem("unlocking") == "true") {
             //     transactReceipt(
@@ -958,7 +987,10 @@ const DashBoardUserDetails = ({ auth }) => {
                           </span>
                           :Available
                         </div>
-                        <button className="witdraw_funds_div_btn">
+                        <button
+                          className="witdraw_funds_div_btn"
+                          onClick={takeCapital}
+                        >
                           Withdraw Funds
                         </button>
                       </div>

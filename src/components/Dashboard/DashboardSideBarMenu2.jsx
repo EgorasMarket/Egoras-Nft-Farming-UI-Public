@@ -71,7 +71,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const [showHeader, setshowHeader] = useState(true);
   const [betaDiv, setBetaDiv] = useState(true);
   const [conecttxt, setConnectTxt] = useState("Not Connected");
-  const [nairaValue, setNairaValue] = useState(670);
+  const [nairaValue, setNairaValue] = useState(750);
   // const [darkMode, setDarkMode] = useState(null);
   const [walletAddr, setWalletAddr] = useState(
     "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -521,7 +521,6 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                 </span>
                 Earn
               </a>
-
               <a
                 id="market"
                 href="/dashboard/stake"
