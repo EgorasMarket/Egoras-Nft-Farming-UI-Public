@@ -70,7 +70,7 @@ const DashBoardSellProduct = () => {
       <section className="collateral-assets-section no-bg no_pad">
         <div className="container">
           <div className="sell_container">
-            <div className="sell_container_header">Create New Item</div>
+            <div className="sell_container_header">Upload Item For Sale</div>
             <div className="sell_container_body">
               <div className="sell_container_body_cont1">
                 <div className="sell_container_body_cont1_txt">
@@ -197,9 +197,40 @@ const DashBoardSellProduct = () => {
                   </div>{" "}
                 </div>
                 <div className="sell_container_body_cont1_title_div">
-                  <input type="text" placeholder="Product name" />
+                  <input
+                    type="text"
+                    placeholder="Product name"
+                    className="sell_container_body_cont1_title_div_input"
+                  />
                 </div>
               </div>
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
+              <div className="sell_container_body_cont1">
+                <div className="sell_container_body_cont1_txt">
+                  <div className="sell_container_body_cont1_txt_heading">
+                    Brand Name*
+                  </div>{" "}
+                  The Brand of the product user uploads for sale.
+                </div>
+                <div className="sell_container_body_cont1_title_div">
+                  <input
+                    type="text"
+                    placeholder="Brand name"
+                    className="sell_container_body_cont1_title_div_input"
+                  />
+                </div>
+              </div>
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
               {/* ========================= */}
               {/* ========================= */}
               {/* ========================= */}
@@ -214,9 +245,20 @@ const DashBoardSellProduct = () => {
                   The amount of items that can be minted. No gas cost to you!
                 </div>
                 <div className="sell_container_body_cont1_title_div">
-                  <input type="text" placeholder="Product amount" />
+                  <input
+                    type="text"
+                    placeholder="Product amount"
+                    className="sell_container_body_cont1_title_div_input"
+                  />
                 </div>
               </div>
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
+
               {/* ========================= */}
               {/* ========================= */}
               {/* ========================= */}
@@ -226,24 +268,7 @@ const DashBoardSellProduct = () => {
               <div className="sell_container_body_cont1">
                 <div className="sell_container_body_cont1_txt">
                   <div className="sell_container_body_cont1_txt_heading">
-                    Unit Count*
-                  </div>{" "}
-                  The number of items that can be minted. No gas cost to you!
-                </div>
-                <div className="sell_container_body_cont1_title_div">
-                  <input type="number" placeholder="Product Count" />
-                </div>
-              </div>
-              {/* ========================= */}
-              {/* ========================= */}
-              {/* ========================= */}
-              {/* ========================= */}
-              {/* ========================= */}
-              {/* ========================= */}
-              <div className="sell_container_body_cont1">
-                <div className="sell_container_body_cont1_txt">
-                  <div className="sell_container_body_cont1_txt_heading">
-                    Product Description*
+                    Product Condition*
                   </div>{" "}
                   The description will be included on the item's detail page
                   underneath its image. Markdown syntax is supported.
@@ -254,9 +279,18 @@ const DashBoardSellProduct = () => {
                     id=""
                     cols="30"
                     rows="10"
-                    className="sell_container_body_cont1_title_div_txt_area"
+                    className="sell_container_body_cont1_title_div_input"
                   ></textarea>
                 </div>
+              </div>
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
+              <div className="sell_container_body_cont1">
+                <button className="sell_container_body_cont1_submit_btn">
+                  Upload Product
+                </button>
               </div>
             </div>
           </div>

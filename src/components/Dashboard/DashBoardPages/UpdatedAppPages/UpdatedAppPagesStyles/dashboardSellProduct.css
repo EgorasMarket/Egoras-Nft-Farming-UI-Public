@@ -10,11 +10,23 @@
 .sell_container_body {
   display: flex;
   flex-direction: column;
-  margin-top: 2em;
+  margin-top: 0em;
 }
 .sell_container_body_cont1 {
   display: flex;
   flex-direction: column;
+  margin-top: 2em;
+}
+.sell_container_body_cont1_title_div {
+  margin-top: 10px;
+}
+.sell_container_body_cont1_title_div_input {
+  width: 100%;
+  padding: 1em;
+  border-radius: 12px;
+  background: none;
+  border: solid 2px #425a4b;
+  color: #abc7b6;
 }
 .sell_container_body_cont1_txt {
   display: flex;
@@ -93,4 +105,15 @@ img.sell_container_body_cont1_img_display_cont_div2_img {
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
   box-shadow: 0px 0px 10px #8080805c;
+}
+.sell_container_body_cont1_submit_btn {
+  width: 100%;
+  max-width: 210px;
+  margin: auto;
+  padding: 15px 0px;
+  border-radius: 11px;
+  border: none;
+  background: #229e54;
+  color: #fff;
+  font-weight: 600;
 }
