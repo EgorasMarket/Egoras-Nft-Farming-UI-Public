@@ -1,22 +1,22 @@
-import React, { useState, useEffect, useContext } from 'react';
-import SearchIcon from '@mui/icons-material/Search';
-import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
-import '../../../css/dashboardLend.css';
-import CloseIcon from '@mui/icons-material/Close';
-import CircleIcon from '@mui/icons-material/Circle';
-import { loadUser } from '../../../actions/auth';
-import { connect } from 'react-redux';
-import EastIcon from '@mui/icons-material/East';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { API_URL as api_url } from '../../../actions/types';
-import { config } from '../../../actions/Config';
-import { Authenticate } from '../../auth/Authenticate';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+import "../../../css/dashboardLend.css";
+import CloseIcon from "@mui/icons-material/Close";
+import CircleIcon from "@mui/icons-material/Circle";
+import { loadUser } from "../../../actions/auth";
+import { connect } from "react-redux";
+import EastIcon from "@mui/icons-material/East";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { API_URL as api_url } from "../../../actions/types";
+import { config } from "../../../actions/Config";
+import { Authenticate } from "../../auth/Authenticate";
+import axios from "axios";
 // import
 // import { CustomAlert } from "../../static/CustomAlert";
-import { CustomAlert } from '../../static/CustomAlert/CustomAlert';
-import CountryDropdown from 'country-dropdown-with-flags-for-react';
+import { CustomAlert } from "../../static/CustomAlert/CustomAlert";
+import CountryDropdown from "country-dropdown-with-flags-for-react";
 import {
   Stepper,
   Step,
@@ -25,24 +25,24 @@ import {
   StepTitle,
   StepStatus,
   StepDescription,
-} from 'react-progress-stepper';
+} from "react-progress-stepper";
 // import { Context } from "../../context/Context";
-import { UserContext } from '../../context/Context';
-import Nodata from './nodataComponent/Nodata';
+import { UserContext } from "../../context/Context";
+import Nodata from "./nodataComponent/Nodata";
 
 // import PropTypes from "prop-types";
 // import YanProgress from "react-yan-progress";
-import { numberWithCommas } from '../../static/static';
+import { numberWithCommas } from "../../static/static";
 import {
   Web3ReactProvider,
   useWeb3React,
   UnsupportedChainIdError,
-} from '@web3-react/core';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import { getAuthUserStats } from '../../../actions/token';
+} from "@web3-react/core";
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import { getAuthUserStats } from "../../../actions/token";
 const DashBoardLendPage = ({ submitKyc, auth }) => {
   const context = useWeb3React();
   const {
@@ -56,8 +56,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
     error,
   } = context;
   const { Branches, BranchDetails } = useContext(UserContext);
-  const [categoryBtn, setCategoryBtn] = useState('All');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [categoryBtn, setCategoryBtn] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
   const [onBoardUserDiv, setOnBoardUserDiv] = useState(false);
   const [lockedValue, setLockedValue] = useState(0);
   const [verified, setVerified] = useState(true);
@@ -71,27 +71,27 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);
   const [totalLendingCount, setTotalLendingCount] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
-  const [activeBtn, setActivrBtn] = useState('Ongoing');
-  const [age, setAge] = React.useState('');
-  const [rumuName, setRumuName] = useState('R');
+  const [activeBtn, setActivrBtn] = useState("Ongoing");
+  const [age, setAge] = React.useState("");
+  const [rumuName, setRumuName] = useState("R");
   const [agipName, setAgipName] = useState(false);
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useState("");
   const [oyName, setOyName] = useState(false);
-  const [ref_code, setRef_code] = useState('');
-  const [alertTxt, setAlertTxt] = useState('');
+  const [ref_code, setRef_code] = useState("");
+  const [alertTxt, setAlertTxt] = useState("");
   const { step, incrementStep, decrementStep } = useStepper(0, 3);
   const [value, setValue] = React.useState(null);
-  const [country, setCountry] = React.useState('');
-  const [getRef, setGetRef] = React.useState('');
-  const [alertType, setAlertType] = useState('');
+  const [country, setCountry] = React.useState("");
+  const [getRef, setGetRef] = React.useState("");
+  const [alertType, setAlertType] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isLoading2, setIsLoading2] = useState(false);
 
   const [kyc, setKyc] = useState({
-    email: '',
-    firstName: '',
-    lastName: '',
-    username: '',
+    email: "",
+    firstName: "",
+    lastName: "",
+    username: "",
     // ref_code: "",
   });
   const handleChange = (event) => {
@@ -108,32 +108,27 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   };
 
   useEffect(() => {
-    if (typeof localStorage.referer != 'undefined') {
-      setGetRef(localStorage.getItem('referer'));
+    if (typeof localStorage.referer != "undefined") {
+      setGetRef(localStorage.getItem("referer"));
     }
     console.log(account, auth);
     if (auth.user == null || auth.user.payload == null) {
-      console.log('auth is empty');
-      setRef_code('');
+      console.log("auth is empty");
+      setRef_code("");
     } else {
-      console.log('auth is not empty');
+      console.log("auth is not empty");
       setRef_code(auth.user.payload.ref_code);
     }
   }, [auth]);
   useEffect(() => {
-    if (
-      email == '' ||
-      firstName == '' ||
-      lastName == '' ||
-      username == ''
-    ) {
+    if (email == "" || firstName == "" || lastName == "" || username == "") {
       setDisable(true);
     } else {
       setDisable(false);
     }
   });
   useEffect(() => {
-    if (country == '') {
+    if (country == "") {
       setDisable2(true);
     } else {
       setDisable2(false);
@@ -180,10 +175,10 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
             });
           } else {
             setKyc({
-              email: '',
-              firstName: '',
-              lastName: '',
-              username: '',
+              email: "",
+              firstName: "",
+              lastName: "",
+              username: "",
             });
           }
           return;
@@ -215,22 +210,15 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   //     setSearchResults(results);
   //   }, [searchTerm]);
   const triggerAll = () => {
-    setCategoryBtn('All');
+    setCategoryBtn("All");
   };
 
   useEffect(() => {
     if (account) {
       axios
-        .get(
-          api_url + '/api/kyc/check/country/' + account,
-          null,
-          config
-        )
+        .get(api_url + "/api/kyc/check/country/" + account, null, config)
         .then((data) => {
-          console.log(
-            data.data.payload.country,
-            'dat data data data'
-          );
+          console.log(data.data.payload.country, "dat data data data");
           setCountry(data.data.payload.country);
         })
         .catch((err) => {
@@ -242,9 +230,9 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   const { email, firstName, lastName, username } = kyc;
   useEffect(() => {
     axios
-      .get(api_url + '/api/branch/totalpools', null, config)
+      .get(api_url + "/api/branch/totalpools", null, config)
       .then((data) => {
-        console.log(data.data.payload[0].total, 'powerfulpools');
+        console.log(data.data.payload[0].total, "powerfulpools");
         setLockedValue(data.data.payload[0].total);
       })
       .catch((err) => {
@@ -255,15 +243,15 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
   // getAuthUserStats
   useEffect(async () => {
     if (account) {
-      console.log(account, auth, 'res res res res res res ');
+      console.log(account, auth, "res res res res res res ");
     }
   }, [account, auth]);
 
   useEffect(() => {
     axios
-      .get(api_url + '/api/branch/totalbranchvalue', null, config)
+      .get(api_url + "/api/branch/totalbranchvalue", null, config)
       .then((data) => {
-        console.log(data.data.payload, 'powerfulpools');
+        console.log(data.data.payload, "powerfulpools");
         setTotalLendingCapacity(data.data.payload[0].total);
         setTotalLendingCount(data.data.payload[0].count);
       })
@@ -288,8 +276,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
     };
 
     if (!account) {
-      console.log('Please connect your wallet');
-      alert('Please connect your wallet');
+      console.log("Please connect your wallet");
+      alert("Please connect your wallet");
       return;
     }
 
@@ -302,20 +290,20 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
       address: address,
       // ref_code: localStorage.getItem('referer'),
       ref_code:
-        typeof localStorage.referer != 'undefined'
-          ? localStorage.getItem('referer')
-          : '',
+        typeof localStorage.referer != "undefined"
+          ? localStorage.getItem("referer")
+          : "",
       username: username,
     });
 
-    console.log('====================================');
+    console.log("====================================");
     console.log(postData);
-    console.log('====================================');
+    console.log("====================================");
     setIsLoading2(true);
     setDisable2(true);
     try {
       const res = await axios.post(
-        api_url + '/api/user/submit/users/country',
+        api_url + "/api/user/submit/users/country",
         countryData,
         config
       );
@@ -323,7 +311,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
       if (res.data.success == true) {
         let response = await getAuthUserStats(account);
         const payload = response.message.data.payload;
-        console.log(payload, 'check check check check');
+        console.log(payload, "check check check check");
         if (payload.stage == 1) {
           setCountryVerified(() => false);
           setVerified(() => true);
@@ -337,13 +325,13 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
       setDisable2(false);
     } catch (err) {
       console.log(err.response.data);
-      if (err.response.data.statusCode == '303') {
+      if (err.response.data.statusCode == "303") {
         setAlertTxt(err.response.data.message);
       }
       setIsLoading2(false);
       setDisable2(false);
       setCustomAlert(true);
-      setAlertType('danger');
+      setAlertType("danger");
     }
   };
 
@@ -358,7 +346,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
     setIsLoading(true);
     setDisable(true);
     let postData;
-    if (typeof localStorage.referer != 'undefined') {
+    if (typeof localStorage.referer != "undefined") {
       // localStorage.getItem("referer");
       // setRef_auth(localStorage.getItem("referer"));
       console.log(typeof localStorage.referer);
@@ -370,9 +358,9 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
         address: address,
         // ref_code: localStorage.getItem('referer'),
         ref_code:
-          typeof localStorage.referer != 'undefined'
-            ? localStorage.getItem('referer')
-            : '',
+          typeof localStorage.referer != "undefined"
+            ? localStorage.getItem("referer")
+            : "",
         username: username,
       });
     } else {
@@ -386,18 +374,18 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
       });
     }
 
-    console.log('====================================');
+    console.log("====================================");
     console.log(postData);
-    console.log('====================================');
+    console.log("====================================");
     try {
       const res = await axios.post(
-        api_url + '/api/kyc/initialize',
+        api_url + "/api/kyc/initialize",
         postData,
         config
       );
 
       window.location.href = res.data.redirect_url;
-      console.log(res.data, '000000000000');
+      console.log(res.data, "000000000000");
       setIsLoading(false);
       setDisable(false);
     } catch (err) {
@@ -417,7 +405,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
       {/* Tokens Section Start */}
       <section className="collateral-assets-section no-bg no_pad">
         <div className="container">
-          {stage == 2 ? null : (
+          {/* {stage == 2 ? null : (
             <div className="onboard_as_user_div">
               <button
                 className="onboard_as_user_btn"
@@ -426,7 +414,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                 Onboard as user
               </button>
             </div>
-          )}
+          )} */}
 
           <div className="pool_container">
             <div className="lending_area1">
@@ -436,17 +424,15 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                     Total Amount Funded(in Pools)
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(
-                      parseInt(lockedValue).toFixed(2)
-                    )}{' '}
+                    {numberWithCommas(parseInt(lockedValue).toFixed(2))}{" "}
                     <span className="usd_sign">NGN</span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
                   <HelpOutlineIcon className="help_outline" />
                   <div className="helper_txt_div">
-                    This is the total Engn funded to all assets in the
-                    lending pool.
+                    This is the total Engn funded to all assets in the lending
+                    pool.
                   </div>
                 </div>
               </div>
@@ -456,17 +442,15 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                     Total Amount Funded(in Pools)
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(
-                      parseInt(lockedValue / 570).toFixed(2)
-                    )}{' '}
+                    {numberWithCommas(parseInt(lockedValue / 570).toFixed(2))}{" "}
                     <span className="usd_sign">USD</span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
                   <HelpOutlineIcon className="help_outline" />
                   <div className="helper_txt_div">
-                    This is the total Engn funded to all assets in the
-                    lending pool.
+                    This is the total Engn funded to all assets in the lending
+                    pool.
                   </div>
                 </div>
               </div>
@@ -479,15 +463,15 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                   <div className="lending_area1_cont1_body_txt">
                     {numberWithCommas(
                       parseInt(totalLendingCapacity).toFixed(2)
-                    )}{' '}
+                    )}{" "}
                     <span className="usd_sign">NGN</span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
                   <HelpOutlineIcon className="help_outline" />
                   <div className="helper_txt_div">
-                    This is the total value of all the assets in the
-                    lending pool.
+                    This is the total value of all the assets in the lending
+                    pool.
                   </div>
                 </div>
               </div>
@@ -495,10 +479,10 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
               <div className="lending_area1_cont1">
                 <div className="lending_area1_last_cont1_divs">
                   <span className="lending_area1_last_cont1_divs_cont1">
-                    {' '}
-                    Est.APY:{' '}
+                    {" "}
+                    Est.APY:{" "}
                     <span className="lending_area1_last_cont1_divs_cont_value">
-                      {' '}
+                      {" "}
                       13.0%
                     </span>
                   </span>
@@ -510,12 +494,12 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                     </span>{" "}
                   </span> */}
                   <span className="lending_area1_last_cont1_divs_cont3">
-                    {' '}
-                    Total Pool Assets:{' '}
+                    {" "}
+                    Total Pool Assets:{" "}
                     <span className="lending_area1_last_cont1_divs_cont_value">
-                      {' '}
+                      {" "}
                       {totalLendingCount}
-                    </span>{' '}
+                    </span>{" "}
                   </span>
                 </div>
               </div>
@@ -538,16 +522,14 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
 
             <div className="table_body">
               <div className="filter_table_area">
-                <div className="filter_table_area_1">
-                  All Branches
-                </div>
+                <div className="filter_table_area_1">All Branches</div>
                 <div className="filter_table_area_2">
                   <div
                     id="Ongoing"
                     className={
-                      activeBtn == 'Ongoing'
-                        ? 'filter_table_btn1_active'
-                        : 'filter_table_btn1'
+                      activeBtn == "Ongoing"
+                        ? "filter_table_btn1_active"
+                        : "filter_table_btn1"
                     }
                     onClick={toggleActiveBtn}
                   >
@@ -556,9 +538,9 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                   <div
                     id="All"
                     className={
-                      activeBtn == 'All'
-                        ? 'filter_table_btn1_active'
-                        : 'filter_table_btn1'
+                      activeBtn == "All"
+                        ? "filter_table_btn1_active"
+                        : "filter_table_btn1"
                     }
                     onClick={toggleActiveBtn}
                   >
@@ -567,9 +549,9 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                   <div
                     id="Closed"
                     className={
-                      activeBtn == 'Closed'
-                        ? 'filter_table_btn1_active'
-                        : 'filter_table_btn1'
+                      activeBtn == "Closed"
+                        ? "filter_table_btn1_active"
+                        : "filter_table_btn1"
                     }
                     onClick={toggleActiveBtn}
                   >
@@ -580,9 +562,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
               <table className="assets-table">
                 <thead className="assets-category-titles">
                   <tr className="assets">
-                    <th className="assets-category-titles-heading1">
-                      Pool
-                    </th>
+                    <th className="assets-category-titles-heading1">Pool</th>
                     <th className="assets-category-titles-heading1">
                       Funding Capacity
                     </th>
@@ -620,35 +600,34 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                     <div className="no_loans_div_cont">
                       <Nodata />
                       No Pools yet.
-                    </div>{' '}
+                    </div>{" "}
                   </div>
                 ) : (
                   <tbody
                     className="assets-table-body popular-categories transitionMe"
                     id="popular-categories"
                   >
-                    {' '}
+                    {" "}
                     {/* =============== */}
                     {/* =============== */}
                     {/* =============== */}
-                    {activeBtn === 'Ongoing'
+                    {activeBtn === "Ongoing"
                       ? Branches.filter(
-                          (person) => person.suspended == 'false'
+                          (person) => person.suspended == "false"
                         ).map((asset) => {
-                          var percentage =
-                            (asset.funded / asset.amount) * 100;
+                          var percentage = (asset.funded / asset.amount) * 100;
                           return (
                             <tr className="assets-category-row  transitionMe">
                               <td className="assets-category-data branch_name_title">
                                 <div className="assets-data">
                                   <img
                                     src={
-                                      asset.name === 'OYIGBO'
-                                        ? '/img/oyigbo_icon.svg'
-                                        : asset.name === 'AGIP'
-                                        ? '/img/agip_icon.svg'
-                                        : asset.name === 'Rumukwrushi'
-                                        ? '/img/rumu_icon.svg'
+                                      asset.name === "OYIGBO"
+                                        ? "/img/oyigbo_icon.svg"
+                                        : asset.name === "AGIP"
+                                        ? "/img/agip_icon.svg"
+                                        : asset.name === "Rumukwrushi"
+                                        ? "/img/rumu_icon.svg"
                                         : null
                                     }
                                     alt=""
@@ -668,12 +647,10 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                               <td className="assets-category-data1 branch_Lending_Capacity">
                                 <div className="assets-data-name_pool_invest_capcity">
                                   <div className="investmentcapacity_box">
-                                    {' '}
+                                    {" "}
                                     {numberWithCommas(
-                                      parseInt(asset.amount).toFixed(
-                                        0
-                                      )
-                                    )}{' '}
+                                      parseInt(asset.amount).toFixed(0)
+                                    )}{" "}
                                     Engn
                                   </div>
                                 </div>
@@ -682,11 +659,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                                 <div className="assets-data-name_pool">
                                   {numberWithCommas(
                                     parseInt(asset.funded).toFixed(2)
-                                  )}{' '}
-                                  <span className="asset_symbol">
-                                    {' '}
-                                    Engn
-                                  </span>
+                                  )}{" "}
+                                  <span className="asset_symbol"> Engn</span>
                                 </div>
                               </td>
                               <td className="assets-category-data1b branch_pool_value_progress">
@@ -694,14 +668,13 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                                   <div className="asset_amount_progress_div">
                                     <div className="asset_amount_progress_div_txt"></div>
                                     <label for="file">
-                                      {parseInt(percentage).toFixed()}
-                                      %
+                                      {parseInt(percentage).toFixed()}%
                                     </label>
                                     <progress
                                       className={
                                         percentage < 100
-                                          ? 'progress_bar progress_bar_progress'
-                                          : 'progress_bar'
+                                          ? "progress_bar progress_bar_progress"
+                                          : "progress_bar"
                                       }
                                       // "progress_bar"
                                       id="file"
@@ -728,25 +701,23 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                               <td className="assets-category-data1b stable-content branch_apy">
                                 <div className="assets-data-name_pool ">
                                   13.0
-                                  <span className="asset_symbol">
-                                    %
-                                  </span>
+                                  <span className="asset_symbol">%</span>
                                 </div>
                               </td>
                               <td className="assets-category-data1b ratio-content branch_loan_status">
                                 <div
                                   className="assets-data-name_pool2 "
                                   style={
-                                    asset.suspended === 'false'
-                                      ? { color: '#1fb73f ' }
-                                      : { color: '#e6a538' }
+                                    asset.suspended === "false"
+                                      ? { color: "#1fb73f " }
+                                      : { color: "#e6a538" }
                                   }
                                 >
                                   <div className="status_column">
                                     <div className="status_txt">
-                                      {asset.suspended === 'false'
-                                        ? 'Active'
-                                        : 'Inactive'}
+                                      {asset.suspended === "false"
+                                        ? "Active"
+                                        : "Inactive"}
                                     </div>
 
                                     <CircleIcon className="status_circle" />
@@ -755,32 +726,31 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                               </td>
                               <td className="assets-category-data-last branch_loan_action">
                                 <a
-                                  href={`/dashboard/earn/pool/${asset.branchAddress}/detail`}
+                                  href={`/app/earn/pool/${asset.branchAddress}/detail`}
                                   className="assets-btn"
                                 >
-                                  See details{' '}
+                                  See details{" "}
                                   <EastIcon className="see_more_icon" />
                                 </a>
                               </td>
                             </tr>
                           );
                         })
-                      : activeBtn === 'All'
+                      : activeBtn === "All"
                       ? Branches.map((asset) => {
-                          var percentage =
-                            (asset.funded / asset.amount) * 100;
+                          var percentage = (asset.funded / asset.amount) * 100;
                           return (
                             <tr className="assets-category-row  transitionMe">
                               <td className="assets-category-data branch_name_title">
                                 <div className="assets-data">
                                   <img
                                     src={
-                                      asset.name === 'OYIGBO'
-                                        ? '/img/oyigbo_icon.svg'
-                                        : asset.name === 'AGIP'
-                                        ? '/img/agip_icon.svg'
-                                        : asset.name === 'Rumukwrushi'
-                                        ? '/img/rumu_icon.svg'
+                                      asset.name === "OYIGBO"
+                                        ? "/img/oyigbo_icon.svg"
+                                        : asset.name === "AGIP"
+                                        ? "/img/agip_icon.svg"
+                                        : asset.name === "Rumukwrushi"
+                                        ? "/img/rumu_icon.svg"
                                         : null
                                     }
                                     alt=""
@@ -800,12 +770,10 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                               <td className="assets-category-data1 branch_Lending_Capacity">
                                 <div className="assets-data-name_pool_invest_capcity">
                                   <div className="investmentcapacity_box">
-                                    {' '}
+                                    {" "}
                                     {numberWithCommas(
-                                      parseInt(asset.amount).toFixed(
-                                        0
-                                      )
-                                    )}{' '}
+                                      parseInt(asset.amount).toFixed(0)
+                                    )}{" "}
                                     Engn
                                   </div>
                                 </div>
@@ -814,11 +782,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                                 <div className="assets-data-name_pool">
                                   {numberWithCommas(
                                     parseInt(asset.funded).toFixed(2)
-                                  )}{' '}
-                                  <span className="asset_symbol">
-                                    {' '}
-                                    Engn
-                                  </span>
+                                  )}{" "}
+                                  <span className="asset_symbol"> Engn</span>
                                 </div>
                               </td>
                               <td className="assets-category-data1b branch_pool_value_progress">
@@ -826,14 +791,13 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                                   <div className="asset_amount_progress_div">
                                     <div className="asset_amount_progress_div_txt"></div>
                                     <label for="file">
-                                      {parseInt(percentage).toFixed()}
-                                      %
+                                      {parseInt(percentage).toFixed()}%
                                     </label>
                                     <progress
                                       className={
                                         percentage < 100
-                                          ? 'progress_bar progress_bar_progress'
-                                          : 'progress_bar'
+                                          ? "progress_bar progress_bar_progress"
+                                          : "progress_bar"
                                       }
                                       // "progress_bar"
                                       id="file"
@@ -860,25 +824,23 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                               <td className="assets-category-data1b stable-content branch_apy">
                                 <div className="assets-data-name_pool ">
                                   13.0
-                                  <span className="asset_symbol">
-                                    %
-                                  </span>
+                                  <span className="asset_symbol">%</span>
                                 </div>
                               </td>
                               <td className="assets-category-data1b ratio-content branch_loan_status">
                                 <div
                                   className="assets-data-name_pool2 "
                                   style={
-                                    asset.suspended === 'false'
-                                      ? { color: '#1fb73f' }
-                                      : { color: '#e6a538' }
+                                    asset.suspended === "false"
+                                      ? { color: "#1fb73f" }
+                                      : { color: "#e6a538" }
                                   }
                                 >
                                   <div className="status_column">
                                     <div className="status_txt">
-                                      {asset.suspended === 'false'
-                                        ? 'Active'
-                                        : 'Inactive'}
+                                      {asset.suspended === "false"
+                                        ? "Active"
+                                        : "Inactive"}
                                     </div>
                                     <CircleIcon className="status_circle" />
                                   </div>
@@ -886,34 +848,33 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                               </td>
                               <td className="assets-category-data-last branch_loan_action">
                                 <a
-                                  href={`/dashboard/earn/pool/${asset.branchAddress}/detail`}
+                                  href={`/app/earn/pool/${asset.branchAddress}/detail`}
                                   className="assets-btn"
                                 >
-                                  See details{' '}
+                                  See details{" "}
                                   <EastIcon className="see_more_icon" />
                                 </a>
                               </td>
                             </tr>
                           );
                         })
-                      : activeBtn === 'Closed'
+                      : activeBtn === "Closed"
                       ? Branches.filter(
-                          (person) => person.suspended == 'true'
+                          (person) => person.suspended == "true"
                         ).map((asset) => {
-                          var percentage =
-                            (asset.funded / asset.amount) * 100;
+                          var percentage = (asset.funded / asset.amount) * 100;
                           return (
                             <tr className="assets-category-row  transitionMe">
                               <td className="assets-category-data branch_name_title">
                                 <div className="assets-data">
                                   <img
                                     src={
-                                      asset.name === 'OYIGBO'
-                                        ? '/img/oyigbo_icon.svg'
-                                        : asset.name === 'AGIP'
-                                        ? '/img/agip_icon.svg'
-                                        : asset.name === 'Rumukwrushi'
-                                        ? '/img/rumu_icon.svg'
+                                      asset.name === "OYIGBO"
+                                        ? "/img/oyigbo_icon.svg"
+                                        : asset.name === "AGIP"
+                                        ? "/img/agip_icon.svg"
+                                        : asset.name === "Rumukwrushi"
+                                        ? "/img/rumu_icon.svg"
                                         : null
                                     }
                                     alt=""
@@ -933,12 +894,10 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                               <td className="assets-category-data1 branch_Lending_Capacity">
                                 <div className="assets-data-name_pool_invest_capcity">
                                   <div className="investmentcapacity_box">
-                                    {' '}
+                                    {" "}
                                     {numberWithCommas(
-                                      parseInt(asset.amount).toFixed(
-                                        0
-                                      )
-                                    )}{' '}
+                                      parseInt(asset.amount).toFixed(0)
+                                    )}{" "}
                                     Engn
                                   </div>
                                 </div>
@@ -947,11 +906,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                                 <div className="assets-data-name_pool">
                                   {numberWithCommas(
                                     parseInt(asset.funded).toFixed(2)
-                                  )}{' '}
-                                  <span className="asset_symbol">
-                                    {' '}
-                                    Engn
-                                  </span>
+                                  )}{" "}
+                                  <span className="asset_symbol"> Engn</span>
                                 </div>
                               </td>
                               <td className="assets-category-data1b branch_pool_value_progress">
@@ -959,14 +915,13 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                                   <div className="asset_amount_progress_div">
                                     <div className="asset_amount_progress_div_txt"></div>
                                     <label for="file">
-                                      {parseInt(percentage).toFixed()}
-                                      %
+                                      {parseInt(percentage).toFixed()}%
                                     </label>
                                     <progress
                                       className={
                                         percentage < 100
-                                          ? 'progress_bar progress_bar_progress'
-                                          : 'progress_bar'
+                                          ? "progress_bar progress_bar_progress"
+                                          : "progress_bar"
                                       }
                                       // "progress_bar"
                                       id="file"
@@ -993,25 +948,23 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                               <td className="assets-category-data1b stable-content branch_apy">
                                 <div className="assets-data-name_pool ">
                                   13.0
-                                  <span className="asset_symbol">
-                                    %
-                                  </span>
+                                  <span className="asset_symbol">%</span>
                                 </div>
                               </td>
                               <td className="assets-category-data1b ratio-content branch_loan_status">
                                 <div
                                   className="assets-data-name_pool2 "
                                   style={
-                                    asset.suspended === 'false'
-                                      ? { color: '#1fb73f' }
-                                      : { color: '#e6a538' }
+                                    asset.suspended === "false"
+                                      ? { color: "#1fb73f" }
+                                      : { color: "#e6a538" }
                                   }
                                 >
                                   <div className="status_column">
                                     <div className="status_txt">
-                                      {asset.suspended === 'false'
-                                        ? 'Active'
-                                        : 'Inactive'}
+                                      {asset.suspended === "false"
+                                        ? "Active"
+                                        : "Inactive"}
                                     </div>
                                     <CircleIcon className="status_circle" />
                                   </div>
@@ -1019,10 +972,10 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                               </td>
                               <td className="assets-category-data-last branch_loan_action">
                                 <a
-                                  href={`/dashboard/earn/pool/${asset.branchAddress}/detail`}
+                                  href={`/app/earn/pool/${asset.branchAddress}/detail`}
                                   className="assets-btn"
                                 >
-                                  See details{' '}
+                                  See details{" "}
                                   <EastIcon className="see_more_icon" />
                                 </a>
                               </td>
@@ -1065,20 +1018,16 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
 
       {onBoardUserDiv === true ? (
         <div className="onBoardUserDiv">
-          <div className="onBoardUserDiv_head">Onboard as user</div>
+          {/* <div className="onBoardUserDiv_head">Onboard as user</div> */}
           <div className="onBoardUserDiv_body">
             <div className="onBoardUserDiv_body_cont">
               <div className="stepdiv1">
                 <span
                   className={
-                    connected === false
-                      ? 'disabled_color'
-                      : 'enabled_color'
+                    connected === false ? "disabled_color" : "enabled_color"
                   }
                 >
-                  {connected === false
-                    ? 'Connected'
-                    : 'ConnectWallet'}
+                  {connected === false ? "Connected" : "ConnectWallet"}
                 </span>
                 {connected === true ? (
                   <div className="stepDiv1_sub_content">
@@ -1092,8 +1041,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                 <div
                   className={
                     connected === false
-                      ? 'rule_progress disabled_bg'
-                      : ' rule_progress enabled_bg'
+                      ? "rule_progress disabled_bg"
+                      : " rule_progress enabled_bg"
                   }
                 ></div>
               </div>
@@ -1105,33 +1054,29 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                 <span
                   className={
                     countryVerified === false
-                      ? 'disabled_color'
-                      : 'enabled_color'
+                      ? "disabled_color"
+                      : "enabled_color"
                   }
                 >
-                  {countryVerified === false
-                    ? 'Selected'
-                    : 'Select Country'}
+                  {countryVerified === false ? "Selected" : "Select Country"}
                 </span>
                 {countryVerified === true ? (
                   <div className="stepDiv1_sub_content">
                     <div className="subMitDetails_cont">
-                      Select your country of origin to continue with
-                      the verification
+                      Select your country of origin to continue with the
+                      verification
                       <div className="subMitDetails_cont_input_body">
                         <div className="subMitDetails_cont_input_body_cont1">
                           Country
                           <CountryDropdown
                             id="country_id"
                             className="country_select_input"
-                            preferredCountries={['gb', 'us']}
+                            preferredCountries={["gb", "us"]}
                             value={country}
                             handleChange={(e) => {
                               setCountry(e.target.value);
                               console.log(
-                                e.target.value
-                                  .split('(', 1)
-                                  .toString()
+                                e.target.value.split("(", 1).toString()
                               );
                             }}
                           ></CountryDropdown>
@@ -1144,7 +1089,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                           >
                             {isLoading2 ? (
                               <span>
-                                Submitting{' '}
+                                Submitting{" "}
                                 <FontAwesomeIcon
                                   className="ml-2"
                                   icon={faSpinner}
@@ -1164,8 +1109,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                 <div
                   className={
                     countryVerified === false
-                      ? 'rule_progress disabled_bg'
-                      : ' rule_progress enabled_bg'
+                      ? "rule_progress disabled_bg"
+                      : " rule_progress enabled_bg"
                   }
                 ></div>
               </div>
@@ -1176,9 +1121,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
               <div className="stepdiv1">
                 <span
                   className={
-                    verified === false
-                      ? 'disabled_color'
-                      : 'enabled_color'
+                    verified === false ? "disabled_color" : "enabled_color"
                   }
                 >
                   Identity Verification
@@ -1186,12 +1129,12 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                 {verified === true ? (
                   <div className="stepDiv1_sub_content">
                     <div className="subMitDetails_cont">
-                      Submit your KYC information through Complycube
-                      for verification. This is a one time process to
-                      become an eligible user in all Egoras pools.
+                      Submit your KYC information through Complycube for
+                      verification. This is a one time process to become an
+                      eligible user in all Egoras pools.
                       <div className="subMitDetails_cont_input_body">
                         <div className="subMitDetails_cont_input_body_cont1">
-                          First Name{' '}
+                          First Name{" "}
                           <input
                             type="text"
                             className="submitDetails_cont_input_area"
@@ -1201,7 +1144,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                           />
                         </div>
                         <div className="subMitDetails_cont_input_body_cont1">
-                          Last Name{' '}
+                          Last Name{" "}
                           <input
                             type="text"
                             className="submitDetails_cont_input_area"
@@ -1211,7 +1154,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                           />
                         </div>
                         <div className="subMitDetails_cont_input_body_cont1">
-                          Email Address{' '}
+                          Email Address{" "}
                           <input
                             type="email"
                             className="submitDetails_cont_input_area"
@@ -1221,7 +1164,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                           />
                         </div>
                         <div className="subMitDetails_cont_input_body_cont1">
-                          UserName{' '}
+                          UserName{" "}
                           <input
                             type="email"
                             className="submitDetails_cont_input_area"
@@ -1231,7 +1174,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                           />
                         </div>
                         <div className="subMitDetails_cont_input_body_cont1">
-                          Referral Code{' '}
+                          Referral Code{" "}
                           <input
                             type="email"
                             className="submitDetails_cont_input_area"
@@ -1247,7 +1190,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                           >
                             {isLoading ? (
                               <span>
-                                Please wait{' '}
+                                Please wait{" "}
                                 <FontAwesomeIcon
                                   className="ml-2"
                                   icon={faSpinner}
@@ -1285,8 +1228,8 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                 <div
                   className={
                     verified === false
-                      ? 'rule_progress disabled_bg'
-                      : ' rule_progress enabled_bg'
+                      ? "rule_progress disabled_bg"
+                      : " rule_progress enabled_bg"
                   }
                 ></div>
               </div>

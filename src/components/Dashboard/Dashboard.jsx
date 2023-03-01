@@ -6,6 +6,7 @@ import DashBoardLendingTransactions from "./DashBoardPages/DashBoardLendingTrans
 import CloseIcon from "@mui/icons-material/Close";
 import Cookies from "universal-cookie";
 import Swap from "./DashBoardPages/Swap/Swap";
+import ProductDetailPage from "./DashBoardPages/UpdatedAppPages/DashboardMarket/ProductDetailPage";
 import DashBoardUserDetails from "./DashBoardPages/DashBoardUserDetails";
 import {
   Web3ReactProvider,
@@ -13,6 +14,7 @@ import {
   UnsupportedChainIdError,
 } from "@web3-react/core";
 import { getAuthUserStats } from "../../actions/token";
+import DashboardHome from "./DashBoardPages/DashboardHome";
 // dashboard components
 // import DashBoardHeader from "./DashBoardHeader";
 import DashboardSideBarMenu from "./DashboardSideBarMenu";
@@ -23,9 +25,13 @@ import DashboardReferral from "./DashBoardPages/DashboardReferral";
 import DashBoardAnalytics from "./DashBoardPages/DashBoardAnalytics";
 import DashBoardTransaction from "./DashBoardPages/DashBoardTransaction";
 import DashboardGovernance from "./DashBoardPages/DashboardGovernance";
+import StakingUpdate from "./DashBoardPages/UpdatedAppPages/StakingUpdate";
+import DashboardMarketHome from "./DashBoardPages/UpdatedAppPages/DashboardMarket/DashboardMarketHome";
+import { MarketHeader } from "./DashBoardPages/UpdatedAppPages/DashboardMarket/DashboardMarketHome";
 // import OpenVaultPage from "./OpenVaultPage.js";
 // import OpenVaultPage from "./DashBoardPages/OpenVaultPage";
 import OpenVaultPage from "./DashBoardPages/OpenVaultPage";
+import DashBoardSellProduct from "./DashBoardPages/UpdatedAppPages/DashBoardSellProduct";
 import Deposit_vault_form from "./DashBoardPages/Vault_forms/Deposit_vault_form";
 import Top_up_vault_form from "./DashBoardPages/Vault_forms/Top_up_vault_form";
 import Withdraw_vault_form from "./DashBoardPages/Vault_forms/Withdraw_vault_form";
@@ -71,13 +77,10 @@ const Dashboard = ({ check, togglemakeDark }) => {
     }, 3000);
   }, []);
   useEffect(() => {
-    if (currentPage === "/dashboard/stake/vault/" + urlArr[4] + "/ENGN") {
+    if (currentPage === "/app/stake/vault/" + urlArr[4] + "/ENGN") {
       setSplashScreen(false);
     }
-    if (
-      currentPage ===
-      "/dashboard/stake/deposit_vault/" + urlArr[4] + "/ENGN"
-    ) {
+    if (currentPage === "/app/stake/deposit_vault/" + urlArr[4] + "/ENGN") {
       setSplashScreen(false);
     }
   }, []);
@@ -141,7 +144,7 @@ const Dashboard = ({ check, togglemakeDark }) => {
     }
   }, [account]);
   const relocateToOnborad = () => {
-    window.location.href = "/dashboard";
+    window.location.href = "/app";
     setPropmtDiv(() => false);
     if (cookies.get("myCookie")) {
       return;
@@ -170,17 +173,24 @@ const Dashboard = ({ check, togglemakeDark }) => {
                 check={check}
                 togglemakeDark={togglemakeDark}
               />
+              {urlArr[2] === "market" ? <MarketHeader /> : null}
               <Switch>
+                <Route exact path="/app/stake" component={DashBoardAnalytics} />
+                {/* <Route exact path="/app/swap" component={DashBoardSwap} /> */}
+                {/* <Route exact path="/app/swap" component={DashBoardSwap} /> */}
                 <Route
                   exact
-                  path="/dashboard/stake"
-                  component={DashBoardAnalytics}
+                  path="/app/staking/egc"
+                  component={StakingUpdate}
                 />
-                {/* <Route exact path="/dashboard/swap" component={DashBoardSwap} /> */}
-                {/* <Route exact path="/dashboard/swap" component={DashBoardSwap} /> */}
                 <Route
                   exact
-                  path="/dashboard/stake/vault/:asset/:base"
+                  path="/app/sell"
+                  component={DashBoardSellProduct}
+                />
+                <Route
+                  exact
+                  path="/app/stake/vault/:asset/:base"
                   component={OpenVaultPage}
                 />
                 {/*  */}
@@ -191,64 +201,72 @@ const Dashboard = ({ check, togglemakeDark }) => {
           /> */}
                 {/* <Route
             exact
-            path="/dashboard/add"
+            path="/app/add"
             component={DashboardAddLiquidtyPage}
           /> */}
                 <Route
                   exact
-                  path="/dashboard/governance"
+                  path="/app/governance"
                   component={DashboardGovernance}
                 />
                 <Route
                   exact
-                  path="/dashboard/earn/pool/:branchAddress/detail"
+                  path="/app/market/product/details/:address/:name"
+                  component={ProductDetailPage}
+                />
+                <Route
+                  exact
+                  path="/app/earn/pool/:branchAddress/detail"
                   component={DashBoard_lend_details_page}
                 />
                 <Route
                   exact
-                  path="/dashboard/earn/pool/detail/branch/:branchAddress/asset"
+                  path="/app/earn/pool/detail/branch/:branchAddress/asset"
                   component={DashBoardBranchAsset}
                 />
-                <Route exact path="/dashboard/swap" component={Swap} />
+                <Route exact path="/app/swap" component={Swap} />
                 <Route
                   exact
-                  path="/dashboard/user"
+                  path="/app/user"
                   component={DashBoardUserDetails}
                 />
                 <Route
                   exact
-                  path="/dashboard/earn/pool/detail/:branchAddress/transactions"
+                  path="/app/earn/pool/detail/:branchAddress/transactions"
                   component={DashBoardLendingTransactions}
                 />
                 <Route
                   exact
-                  path="/dashboard/governance/details"
+                  path="/app/governance/details"
                   component={DashboardEgrBalancePage}
                 />
                 <Route
                   exact
-                  path="/dashboard/user/referral"
+                  path="/app/user/referral"
                   component={DashboardReferral}
                 />
+                <Route exact path="/app/earn" component={DashBoardLendPage} />
                 <Route
                   exact
-                  path="/dashboard/earn"
-                  component={DashBoardLendPage}
+                  path="/app/market"
+                  component={DashboardMarketHome}
                 />
-                <Route exact path="/dashboard" component={DashBoardLendPage} />
-                <Route exact path="/dashboard/" component={DashBoardLendPage} />
+                <Route exact path="/app" component={DashboardHome} />
+                <Route exact path="/app/" component={DashboardHome} />
+                {/* <Route exact path="/app" component={DashBoardLendPage} />
+                <Route exact path="/app/" component={DashBoardLendPage} /> */}
                 <Route
                   exact
-                  path="/dashboard/transaction"
+                  path="/app/transaction"
                   component={DashBoardTransaction}
                 />
                 <Route
                   exact
-                  path="/dashboard/whitepaper"
+                  path="/app/whitepaper"
                   component={DashBoardWhitePaper}
                 />
 
-                {/* <Route exact path="/dashboard/vault">
+                {/* <Route exact path="/app/vault">
             <OpenVaultPage />
           </Route> */}
               </Switch>

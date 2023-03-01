@@ -171,6 +171,12 @@ svg.recharts-surface {
 .dark .assets_chart_area1 {
   display: none;
 }
+.assets_chart_area1a {
+  display: block;
+}
+.dark .assets_chart_area1a {
+  display: none;
+}
 .asset_list_body_body_cont_1 {
   display: flex;
   justify-content: space-between;
@@ -803,7 +809,7 @@ svg.recharts-surface {
 }
 
 .dark .branch_asset_title_div {
-  background: #365543;
+  background: #1c2c22;
   /* color: #fff; */
   /* border: solid 1px #fff; */
 }
@@ -813,7 +819,7 @@ svg.recharts-surface {
 }
 .dark .branch_asset_body_row {
   box-shadow: rgb(0 0 0) 0px 0px 6px;
-  background: #365543;
+  background: #1c2c22;
   color: #fff;
 }
 

@@ -600,13 +600,13 @@ vl {
 /* ========== */
 
 .dark .headerSection {
-  background-color: #2d513cbd;
+  background-color: #2d513c12;
   -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(15px);
   border-bottom: solid 1px #3b5344;
 }
 .dark .we_on_beta_div {
-  background: #407555;
+  background: #2b4536;
   color: #ffffff;
 }
 

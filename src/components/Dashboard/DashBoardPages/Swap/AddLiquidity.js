@@ -128,12 +128,18 @@ const AddLiquidity = ({ match, closeModal, which }) => {
         setEgcToEngn(data["egoras-credit"].ngn);
         // console.log(data["egoras-credit"].ngn);
         // const {egorascredit} = data;
+      })
+      .catch((err) => {
+        console.log(err.response); // "oh, no!"
       });
     let string2 =
       "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=bnb&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
     await fetch(string2)
       .then((resp) => resp.json())
-      .then((data) => console.log(data));
+      .then((data) => console.log(data))
+      .catch((err) => {
+        console.log(err.response); // "oh, no!"
+      });
   };
 
   useEffect(() => {

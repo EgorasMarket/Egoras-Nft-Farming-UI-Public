@@ -1297,7 +1297,7 @@ const AdminAssets = () => {
                       <SuccessModal
                         successMessage={"Transaction was successful"}
                         click={(e) => {
-                          window.location.href = "/dashboard/admin";
+                          window.location.href = "/app/admin";
                         }}
                         SuccessHead="Success"
                         hash={hash}
@@ -1350,7 +1350,7 @@ const AdminAssets = () => {
             <SuccessModal
               successMessage={"Transaction was successful"}
               click={(e) => {
-                window.location.href = "/dashboard/user";
+                window.location.href = "/app/user";
               }}
               SuccessHead="Success"
               hash={hash}

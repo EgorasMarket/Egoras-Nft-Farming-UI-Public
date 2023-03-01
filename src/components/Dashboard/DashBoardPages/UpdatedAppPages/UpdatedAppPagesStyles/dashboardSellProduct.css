@@ -1,0 +1,96 @@
+.sell_container {
+  display: flex;
+  flex-direction: column;
+}
+.sell_container_header {
+  font-size: 42px;
+  color: #fff;
+  font-weight: 700;
+}
+.sell_container_body {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+}
+.sell_container_body_cont1 {
+  display: flex;
+  flex-direction: column;
+}
+.sell_container_body_cont1_txt {
+  display: flex;
+  flex-direction: column;
+  color: #83a28f;
+  font-size: 13px;
+}
+.sell_container_body_cont1_txt_heading {
+  font-size: 20px;
+  color: #fff;
+  font-weight: 700;
+}
+.sell_container_body_cont1_img_display_cont {
+  width: 100%;
+  margin-top: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sell_container_body_cont1_img_display_cont_1 {
+  width: 100%;
+  margin-right: 1em;
+}
+.sell_container_body_cont1_img_display_cont_divs {
+  border: solid 3px #abc7b6;
+  border-style: dashed;
+  height: 20em;
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.sell_container_body_cont1_img_display_cont_div1 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94af9f;
+  background: #101d15;
+  cursor: pointer;
+  transition: 0.1s linear;
+}
+.sell_container_body_cont1_img_display_cont_div1_icon {
+  font-size: 100px !important;
+}
+.sell_container_body_cont1_img_display_cont_div1:hover {
+  transition: 0.1s linear;
+  background: #000;
+}
+.sell_container_body_cont1_img_display_cont_div2 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+img.sell_container_body_cont1_img_display_cont_div2_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.sell_container_body_cont1_img_display_cont_divs_close_icon {
+  position: absolute;
+  cursor: pointer;
+  right: 3%;
+  top: 3%;
+  background: #0000005e;
+  color: #ffffff;
+  padding: 5px;
+  font-size: 33px !important;
+  border-radius: 10px;
+  z-index: 1;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  box-shadow: 0px 0px 10px #8080805c;
+}

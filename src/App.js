@@ -47,75 +47,85 @@ function App() {
   const urlArr = linksActive.split("/");
 
   useEffect(() => {
-    if (linksActive === "/dashboard") {
+    if (linksActive === "/app") {
       setDashboard(true);
       return;
     }
-    if (linksActive === "/dashboard/") {
+    console.log(urlArr);
+    if (urlArr[2] === "market") {
       setDashboard(true);
       return;
     }
-    if (linksActive === "/dashboard/stake") {
+    if (linksActive === "/app/staking/egc") {
       setDashboard(true);
       return;
     }
-    if (linksActive === "/dashboard/user") {
+    if (linksActive === "/app/") {
       setDashboard(true);
       return;
     }
-    if (linksActive === "/dashboard/swap") {
+    if (linksActive === "/app/stake") {
       setDashboard(true);
       return;
     }
-    if (linksActive === "/dashboard/earn/pool/detail") {
+    if (linksActive === "/app/user") {
+      setDashboard(true);
+      return;
+    }
+    if (linksActive === "/app/swap") {
+      setDashboard(true);
+      return;
+    }
+    if (linksActive === "/app/earn/pool/detail") {
+      setDashboard(true);
+      return;
+    }
+    if (linksActive === "/app/sell") {
       setDashboard(true);
       return;
     }
     if (
       linksActive ===
-      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/app/earn/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setDashboard(true);
       return;
     }
     if (
       linksActive ===
-      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
+      "/app/earn/pool/detail/" + urlArr[5] + "/transactions"
     ) {
       setDashboard(true);
       return;
     }
-    if (linksActive === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
+    if (linksActive === "/app/earn/pool/" + urlArr[4] + "/detail") {
       setDashboard(true);
       return;
     }
-    if (linksActive === "/dashboard/earn/pool/detail/transactions") {
+    if (linksActive === "/app/earn/pool/detail/transactions") {
       setDashboard(true);
       return;
     }
-    // if (linksActive === "/dashboard/add") {
+    // if (linksActive === "/app/add") {
     //   setActiveMenuName("Liquidity");
     // }
-    if (linksActive === "/dashboard/whitepaper") {
+    if (linksActive === "/app/whitepaper") {
       setDashboard(true);
       return;
     }
-    if (linksActive === "/dashboard/user/referral") {
+    if (linksActive === "/app/user/referral") {
       setDashboard(true);
       return;
     }
-    if (linksActive === "/dashboard/earn") {
+    if (linksActive === "/app/earn") {
       setDashboard(true);
       return;
     }
-    if (linksActive === "/dashboard/stake/vault/" + urlArr[4] + "/ENGN") {
+    if (linksActive === "/app/stake/vault/" + urlArr[4] + "/ENGN") {
       setDashboard(true);
       return;
     }
-    if (
-      linksActive ===
-      "/dashboard/stake/deposit_vault/" + urlArr[4] + "/ENGN"
-    ) {
+    if (linksActive === "/app/stake/deposit_vault/" + urlArr[4] + "/ENGN") {
       setDashboard(true);
       return;
     }

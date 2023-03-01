@@ -200,7 +200,7 @@ const DashboardGovernance = () => {
           <div className="coins_list_area">
             {/* //   key={bag.id} */}
             {lists.map((paste) => (
-              <Link to="/dashboard/governance/details" className="coins_card">
+              <Link to="/app/governance/details" className="coins_card">
                 <div className="coinsBg_area">
                   <img src={paste.img} alt="" className="coin-img" />
                 </div>
