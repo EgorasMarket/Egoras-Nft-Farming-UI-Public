@@ -163,6 +163,11 @@ const Dashboard = ({ check, togglemakeDark }) => {
           {/* <DashBoardHeader /> */}
           {/* <DashBoardHeader /> */}
           <div className="dashboard">
+            <img
+              src="/img/contourLinesLight.svg"
+              alt=""
+              className="joinCooperativeDiv_lines"
+            />
             <>
               {" "}
               {/* <DashboardSideBarMenu

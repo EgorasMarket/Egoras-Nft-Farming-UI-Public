@@ -2563,21 +2563,24 @@ a.visit_app_link_2 {
 }
 .dark .toggle_dark_mode_div {
   background: #0b110c;
-  border: solid 1px #62816e;
+  border: solid 1px #33453a;
 }
-.dark .connected_header_address {
+/* .dark .connected_header_address {
   border: solid 1px #64796d;
   border-radius: 6px;
   color: #fff;
   background: #0b110c;
-}
+} */
 .dark .wallet_addr_cont_txt_header {
   background: #0b110c;
   color: #ffffff;
+  border: solid 1px #33453a;
+  border-left: 0;
 }
 .dark .wallet_settings_icon_cont {
-  background: #41584a;
+  background: #0b110c;
   color: #ffffff;
+  border: solid 1px #33453a;
 }
 .dark .thumbnail_img2 {
   display: block;
@@ -2597,7 +2600,9 @@ a.visit_app_link_2 {
 }
 
 .dark .metamask_prof_pic_icon {
-  filter: drop-shadow(2px 2px 5px #000);
+  background: #0b110c;
+  border: solid 1px #33453a;
+  border-right: 0;
 }
 .dark .disconnect_button_div {
   background: #0b110c;

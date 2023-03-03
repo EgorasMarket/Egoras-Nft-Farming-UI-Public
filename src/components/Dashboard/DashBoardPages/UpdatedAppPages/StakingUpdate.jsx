@@ -1,11 +1,16 @@
 import React, { useState, useEffect, useRef, useContext } from "react";
 // import { createBlockies } from "ethereum-blockies";
+import { API_URL } from "../../../../actions/types";
+import axios from "axios";
+import { Connect } from "react-redux";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
 import "./UpdatedAppPagesStyles/StakingUpdate.css";
 import Blockies from "react-blockies";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Nodata from "../nodataComponent/Nodata";
+import { config } from "../../../../actions/Config";
+import { parseEther, formatEther } from "@ethersproject/units";
 import Web3 from "web3";
 import {
   AreaChart,
@@ -17,14 +22,43 @@ import {
   Line,
   ResponsiveContainer,
 } from "recharts";
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
+import {
+  annually,
+  monthly,
+  listProduct,
+  lendUS,
+  takeDividend,
+  takeBackLoan,
+  getTotalLended,
+  getInvestorsDividend,
+  userStats,
+  system,
+  burnAccumulatedDividend,
+  checkAllowance,
+  unluckToken,
+  lend,
+  getUserStats,
+  transactReceipt,
+  getPrice,
+  getTickerInfo,
+  tokenBalance,
+  open,
+  getLatestLoan,
+  repay,
+  topup,
+  draw,
+  checkAllowanceL,
+  unluckToken2,
+  getEgcSmartContractBalnce,
+} from "../../../../web3/index";
 import { getDate, getMonth } from "date-fns";
 
-export const DurationDiv = ({
-  addMonthly,
-  addSemiMonthly,
-  addYearly,
-  SelectedDuration,
-}) => {
+export const DurationDiv = ({ addMonthly, addYearly, SelectedDuration }) => {
   return (
     <div className="duration_dropDown_div">
       <div
@@ -37,7 +71,7 @@ export const DurationDiv = ({
       >
         Monthly (1 month)
       </div>
-      <div
+      {/* <div
         className={
           SelectedDuration === "semi_monthly"
             ? "duration_dropDown_div_cont1_selected"
@@ -46,7 +80,7 @@ export const DurationDiv = ({
         onClick={addSemiMonthly}
       >
         Semi-Monthly (6 months)
-      </div>
+      </div> */}
       <div
         className={
           SelectedDuration === "yearly"
@@ -61,14 +95,30 @@ export const DurationDiv = ({
   );
 };
 const StakingUpdate = () => {
+  const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
   const [durationDrop, setDurationDrop] = useState(false);
   const [Duration, setDuration] = useState(null);
   const [SelectedDuration, setSelectedDuration] = useState("");
   const [estimatedRewardDiv, setEstimatedRewardDiv] = useState(false);
+  const [baseBalance, setBaseBalance] = useState(0.0);
+  const [coinBalance2, setCoinBalance2] = React.useState(0.0);
+  const [base, setBase] = useState("");
+  const [asset, setAsset] = useState("");
   const [lockAmount, setLockAmount] = useState("");
   const [lockDate, setLockDate] = useState(null);
   const [activeTab, setActiveTab] = useState("lock");
   const [estimatedRewardAmnt, setEstimatedRewardAmnt] = useState(0);
+  const [tokenBal, setTokenBal] = useState(0.0);
 
   var btc = [
     {
@@ -1135,11 +1185,57 @@ const StakingUpdate = () => {
         "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
     },
   ];
-
+  const StakeMonthly = async () => {
+    const res = await monthly(lockAmount, library.getSigner());
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+  };
+  const StakeYearly = async () => {
+    const res = await annually(lockAmount, library.getSigner());
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+  };
   const toggleLockTabs = (e) => {
     let target = e.currentTarget.id;
     setActiveTab(target);
   };
+  useEffect(() => {
+    let assetVal = "EGC";
+    let baseVal = "ENGN";
+    setAsset(assetVal);
+    setBase(baseVal);
+    let ticker = assetVal + "-" + baseVal;
+    if (account) {
+      getTickerInfo(ticker, library.getSigner()).then((data) => {
+        console.log(data.status);
+        if (data.status) {
+          console.log(data.message);
+          tokenBalance(data.message.base, account, library.getSigner()).then(
+            (balance) => {
+              setBaseBalance(formatEther(balance.message));
+            }
+          );
+
+          if (asset == "BNB" || asset == "bnb") {
+            library
+              .getBalance(account)
+              .then((balance) => {
+                setCoinBalance2(formatEther(balance));
+              })
+              .catch(() => {
+                setCoinBalance2(null);
+              });
+          } else {
+            tokenBalance(data.message.asset, account, library.getSigner()).then(
+              (balance) => {
+                setCoinBalance2(formatEther(balance.message));
+              }
+            );
+          }
+        }
+      });
+    }
+  }, [chainId, account, connector, baseBalance, coinBalance2, tokenBal]);
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -1390,7 +1486,7 @@ const StakingUpdate = () => {
                           Amount
                         </span>
                         <span className="lock_container_cont1_div1_lock_div_lock_body_input_body_head_span2">
-                          Balance:0
+                          Balance:{parseFloat(baseBalance).toFixed(3)}
                         </span>
                       </div>
                       <div className="lock_container_cont1_div1_lock_div_lock_body_input_body_cont">
@@ -1417,8 +1513,6 @@ const StakingUpdate = () => {
                           Duration:{" "}
                           {SelectedDuration === "monthly" ? (
                             <> 1 month</>
-                          ) : SelectedDuration === "semi_monthly" ? (
-                            <> 6 months</>
                           ) : SelectedDuration === "yearly" ? (
                             <> 1 year</>
                           ) : null}
@@ -1431,6 +1525,7 @@ const StakingUpdate = () => {
                         <input
                           type="text"
                           value={Duration}
+                          onClick={toggleDurationDrop}
                           placeholder="MM/DD/YY"
                           className="lock_container_cont1_div1_lock_div_lock_body_input_body_input"
                         />
@@ -1441,7 +1536,7 @@ const StakingUpdate = () => {
                         {durationDrop ? (
                           <DurationDiv
                             addMonthly={addMonthly}
-                            addSemiMonthly={addSemiMonthly}
+                            // addSemiMonthly={addSemiMonthly}
                             addYearly={addYearly}
                             SelectedDuration={SelectedDuration}
                           />
@@ -1456,9 +1551,35 @@ const StakingUpdate = () => {
                         </span>
                       </div>
                     ) : null}
-                    <button className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn">
-                      Create Lock
-                    </button>
+                    {SelectedDuration === "monthly" && lockAmount != "" ? (
+                      <button
+                        onClick={StakeMonthly}
+                        className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                      >
+                        Create Lock
+                      </button>
+                    ) : SelectedDuration === "yearly" && lockAmount != "" ? (
+                      <button
+                        onClick={StakeYearly}
+                        className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                      >
+                        Create Lock
+                      </button>
+                    ) : lockAmount === "" ? (
+                      <button
+                        disabled
+                        className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                      >
+                        Enter an amount
+                      </button>
+                    ) : (
+                      <button
+                        disabled
+                        className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                      >
+                        Choose Duration
+                      </button>
+                    )}
                   </div>
                 ) : (
                   <div className="lock_container_cont1_div1_lock_div_lock_body">

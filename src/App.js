@@ -8,6 +8,7 @@ import Home from "./components/Home/Home";
 import { loadUser } from "./actions/auth";
 import Admin from "./components/Admin/Admin";
 import AboutUs from "./components/Home/AboutUs";
+import MemberShipPage from "./components/Home/MemberShip/MemberShipPage";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -197,6 +198,7 @@ function App() {
               <Route exact path="/" component={Home} />
               <Route exact path="/referal/:ref" component={Referal} />
               <Route exact path="/about" component={AboutUs} />
+              <Route exact path="/membership/sub" component={MemberShipPage} />
               {admin == true ? (
                 <Admin check={cClass} togglemakeDark={togglemakeDark} />
               ) : null}

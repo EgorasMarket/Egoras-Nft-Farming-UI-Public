@@ -466,9 +466,12 @@ const Home = () => {
                 <a href="/app" className="stake-hero-btn2">
                   Launch App <ExitToAppIcon className="exit-to-app" />
                 </a>
-                <a href="/app/whitepaper" className="stake-hero-btn1">
-                  Read Docs
+                <a href="/membership/sub" className="stake-hero-btn1">
+                  Become a member
                 </a>
+                {/* <a href="/app/whitepaper" className="stake-hero-btn1">
+                  Read Docs
+                </a> */}
               </div>
               {/* <FlipCountdown
                 className="flip-countdown"

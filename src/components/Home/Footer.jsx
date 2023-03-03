@@ -41,6 +41,9 @@ const Footer = () => {
     if (currentPage === "/app/earn") {
       setShowFooter(false);
     }
+    if (currentPage === "/membership/sub") {
+      setShowFooter(false);
+    }
     if (
       currentPage ===
       "/app/earn/pool/detail/branch/" + urlArr[6] + "/asset"

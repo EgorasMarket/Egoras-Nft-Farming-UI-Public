@@ -4,6 +4,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 // import Web3 from "web3";
 import Marquee from "react-fast-marquee";
+// import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
 import Web3 from "web3";
 import CloseIcon from "@material-ui/icons/Close";
@@ -389,7 +390,8 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     [egcUsdVal, egrUsdVal]
   );
 
-  const chainIdBsc = "56";
+  // const chainIdBsc = "56";
+  const chainIdBsc = "97";
 
   useEffect(() => {
     if (account) {
@@ -637,27 +639,18 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   <Hamburger toggled={isOpen} toggle={setIsOpen} />
                 </div>
                 <div className="toggle_dark_mode_div">
-                  <LightModeIcon
-                    className={
-                      check === false
-                        ? "lightMode_icon_active"
-                        : "lightMode_icon"
-                    }
-                  />
                   <SwitchToggle2
                     className="toggle_dark_mode"
                     darkMode={togglemakeDark}
                     checkBox={check}
                   />
-                  <DarkModeIcon
-                    className={
-                      check === false ? "darkMode_icon" : "darkMode_icon_active"
-                    }
-                  />
                 </div>
                 {account ? (
                   <div className="connected_header_address dash_connected_header_address">
-                    <p className="header_wllt_bal">{coinBalance} BNB</p>
+                    <p className="header_wllt_bal">
+                      <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
+                      {coinBalance} BNB
+                    </p>
                     <div
                       className="metamask_prof_pic_icon"
                       ref={avatarRef}
@@ -694,7 +687,10 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   Balance:
                 </div>
                 <div className="mobile_view_header_cont_head_body_cont1_para">
-                  <p className="header_wllt_bal">{coinBalance} BNB</p>
+                  <p className="header_wllt_bal">
+                    <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
+                    {coinBalance} BNB
+                  </p>
                 </div>
               </div>
 

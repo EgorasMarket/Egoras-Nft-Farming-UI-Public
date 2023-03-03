@@ -1,8 +1,87 @@
 import React, { useState, useRef } from "react";
 import "./UpdatedAppPagesStyles/dashboardSellProduct.css";
+import { API_URL } from "../../../../actions/types";
+import axios from "axios";
+import { Connect } from "react-redux";
 import ImageIcon from "@mui/icons-material/Image";
 import CloseIcon from "@mui/icons-material/Close";
+import { config } from "../../../../actions/Config";
+import { parseEther, formatEther } from "@ethersproject/units";
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
+import {
+  listProduct,
+  lendUS,
+  takeDividend,
+  takeBackLoan,
+  getTotalLended,
+  getInvestorsDividend,
+  userStats,
+  system,
+  burnAccumulatedDividend,
+  checkAllowance,
+  unluckToken,
+  lend,
+  getUserStats,
+  transactReceipt,
+  getPrice,
+  getTickerInfo,
+  tokenBalance,
+  open,
+  getLatestLoan,
+  repay,
+  topup,
+  draw,
+  checkAllowanceL,
+  unluckToken2,
+  getEgcSmartContractBalnce,
+} from "../../../../web3/index";
+// import {
+//   lendUS,
+//   takeDividend,
+//   takeBackLoan,
+//   getTotalLended,
+//   getInvestorsDividend,
+//   userStats,
+//   system,
+//   burnAccumulatedDividend,
+//   checkAllowance,
+//   unluckToken,
+//   lend,
+//   getUserStats,
+//   transactReceipt,
+//   getPrice,
+//   getTickerInfo,
+//   tokenBalance,
+//   open,
+//   getLatestLoan,
+//   repay,
+//   topup,
+//   draw,
+//   checkAllowanceL,
+//   unluckToken2,
+//   getEgcSmartContractBalnce,
+// } from "../../web3/index";
+
 const DashBoardSellProduct = () => {
+  const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
+  const [prodName, setProdName] = useState("");
+  const [brandName, setBrandName] = useState("");
+  const [saleAmount, setSaleAmount] = useState();
+  const [prodCondition, setProdCondition] = useState("");
   const [imageSrc, setImageSrc] = useState("");
   const [imageSrc2, setImageSrc2] = useState("");
   const [imageSrc3, setImageSrc3] = useState("");
@@ -58,6 +137,82 @@ const DashBoardSellProduct = () => {
   const handleRemoveClick3 = () => {
     setImageSrc3("");
   };
+  const sendProductToBlockchain = async (prodId) => {
+    const conCatProdName = ` ${prodName}_${prodId}`;
+    const res = await listProduct(
+      conCatProdName,
+      saleAmount,
+      library.getSigner()
+    );
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+
+    // if (check.status == true) {
+    //   let ret = await lendUS(
+    //     txnhash,
+    //     parseEther(formData.BackAmount.toString(), "wei").toString(),
+    //     currentTarget,
+    //     library.getSigner()
+    //   );
+    //   console.log(ret.status);
+    //   if (ret.status == true) {
+    //   } else if (ret.status == false) {
+    //   }
+    // } else {
+    // }
+  };
+  const UploadProduct = async () => {
+    const formData = new FormData();
+
+    const element = document.getElementById("product_image");
+    const element2 = document.getElementById("product_image2");
+    const element3 = document.getElementById("product_image3");
+    const file = element.files[0];
+    const file2 = element2.files[0];
+    const file3 = element3.files[0];
+    formData.append("product_image", file);
+    formData.append("product_image2", file2);
+    formData.append("product_image3", file3);
+    formData.append("product_name", prodName);
+    formData.append("product_brand", brandName);
+    formData.append("product_condition", prodCondition);
+    formData.append("amount", saleAmount);
+    console.log(formData);
+    try {
+      const res = await axios.post(
+        API_URL + "/product/initialize/add/product",
+        formData,
+        config
+      );
+      console.log(res, "somto");
+      if (res.status === 200) {
+        sendProductToBlockchain(res.data.data.product_id);
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleNameChange = (event) => {
+    setProdName(event.target.value);
+    console.log(event.target.value);
+    //console.log(event.target.value);
+  };
+  const handleBrandNameChange = (event) => {
+    setBrandName(event.target.value);
+    console.log(event.target.value);
+    //console.log(event.target.value);
+  };
+  const handleSaleAmountChange = (event) => {
+    setSaleAmount(event.target.value);
+    console.log(event.target.value);
+    //console.log(event.target.value);
+  };
+  const handleProdConditionChange = (event) => {
+    setProdCondition(event.target.value);
+    console.log(event.target.value);
+    //console.log(event.target.value);
+  };
 
   return (
     <div className="other2 asset_other2">
@@ -86,6 +241,7 @@ const DashBoardSellProduct = () => {
                       ref={fileInputRef}
                       style={{ display: "none" }}
                       onChange={handleImageSelect}
+                      id="product_image"
                     />
                     <div className="sell_container_body_cont1_img_display_cont_divs">
                       {imageSrc === "" ? (
@@ -120,6 +276,7 @@ const DashBoardSellProduct = () => {
                       ref={fileInputRef2}
                       style={{ display: "none" }}
                       onChange={handleImageSelect2}
+                      id="product_image2"
                     />
                     <div className="sell_container_body_cont1_img_display_cont_divs">
                       {imageSrc2 === "" ? (
@@ -154,6 +311,7 @@ const DashBoardSellProduct = () => {
                       ref={fileInputRef3}
                       style={{ display: "none" }}
                       onChange={handleImageSelect3}
+                      id="product_image3"
                     />
                     <div className="sell_container_body_cont1_img_display_cont_divs">
                       {imageSrc3 === "" ? (
@@ -198,9 +356,13 @@ const DashBoardSellProduct = () => {
                 </div>
                 <div className="sell_container_body_cont1_title_div">
                   <input
+                    onChange={handleNameChange}
+                    name="productName"
+                    id="productName"
                     type="text"
                     placeholder="Product name"
                     className="sell_container_body_cont1_title_div_input"
+                    value={prodName}
                   />
                 </div>
               </div>
@@ -220,9 +382,13 @@ const DashBoardSellProduct = () => {
                 </div>
                 <div className="sell_container_body_cont1_title_div">
                   <input
+                    id="brandName"
+                    name="brandName"
                     type="text"
                     placeholder="Brand name"
                     className="sell_container_body_cont1_title_div_input"
+                    onChange={handleBrandNameChange}
+                    value={brandName}
                   />
                 </div>
               </div>
@@ -240,15 +406,19 @@ const DashBoardSellProduct = () => {
               <div className="sell_container_body_cont1">
                 <div className="sell_container_body_cont1_txt">
                   <div className="sell_container_body_cont1_txt_heading">
-                    Amount*
+                    Sale Amount*
                   </div>{" "}
                   The amount of items that can be minted. No gas cost to you!
                 </div>
                 <div className="sell_container_body_cont1_title_div">
                   <input
+                    id="prodAmount"
+                    name="prodAmount"
                     type="text"
                     placeholder="Product amount"
                     className="sell_container_body_cont1_title_div_input"
+                    onChange={handleSaleAmountChange}
+                    value={saleAmount}
                   />
                 </div>
               </div>
@@ -275,11 +445,13 @@ const DashBoardSellProduct = () => {
                 </div>
                 <div className="sell_container_body_cont1_title_div">
                   <textarea
-                    name=""
-                    id=""
+                    name="productCondition"
+                    id="productCondition"
                     cols="30"
                     rows="10"
                     className="sell_container_body_cont1_title_div_input"
+                    onChange={handleProdConditionChange}
+                    value={prodCondition}
                   ></textarea>
                 </div>
               </div>
@@ -288,7 +460,10 @@ const DashBoardSellProduct = () => {
               {/* ========================= */}
               {/* ========================= */}
               <div className="sell_container_body_cont1">
-                <button className="sell_container_body_cont1_submit_btn">
+                <button
+                  className="sell_container_body_cont1_submit_btn"
+                  onClick={UploadProduct}
+                >
                   Upload Product
                 </button>
               </div>

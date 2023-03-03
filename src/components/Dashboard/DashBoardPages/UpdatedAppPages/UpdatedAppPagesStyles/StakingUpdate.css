@@ -110,6 +110,11 @@
   font-size: 14px;
   font-weight: 700;
 }
+.lock_container_cont1_div1_lock_div_lock_body_input_body_btn:disabled {
+  background: #4d6355;
+  color: #95b4a0;
+  cursor: not-allowed;
+}
 .lock_container_cont1_div1_lock_div_lock_body_input_body_input {
   padding: 10px 15px;
   border: solid 1px #3d4e44;

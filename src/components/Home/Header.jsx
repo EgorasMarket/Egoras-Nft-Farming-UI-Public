@@ -6,6 +6,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 // import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import CloseIcon from "@material-ui/icons/Close";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import clsx from "clsx";
 import Web3 from "web3";
 import { Authenticate } from "../auth/Authenticate";
@@ -468,7 +469,8 @@ const Header = ({ togglemakeDark, check }) => {
     setDisconnectDiv(!disconnetDiv);
   };
 
-  const chainIdBsc = "56";
+  // const chainIdBsc = "56";
+  const chainIdBsc = "97";
 
   useEffect(() => {
     if (account) {
@@ -587,34 +589,22 @@ const Header = ({ togglemakeDark, check }) => {
                 </ul>
 
                 <div
-                  style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                  style={{ display: "flex", alignItems: "center", gap: "0px" }}
                 >
-                  {/* <a href="/products">Products</a> */}
                   <div className="toggle_dark_mode_div">
-                    <LightModeIcon
-                      className={
-                        check === false
-                          ? "lightMode_icon_active"
-                          : "lightMode_icon"
-                      }
-                    />
                     <SwitchToggle2
                       className="toggle_dark_mode"
                       darkMode={togglemakeDark}
                       checkBox={check}
                     />
-                    <DarkModeIcon
-                      className={
-                        check === false
-                          ? "darkMode_icon"
-                          : "darkMode_icon_active"
-                      }
-                    />
                   </div>
                   <div className="desktop_view_cont">
                     {account ? (
                       <div className="connected_header_address">
-                        <p className="header_wllt_bal">{coinBalance} BNB</p>
+                        <p className="header_wllt_bal">
+                          <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
+                          {coinBalance} BNB
+                        </p>
                         <div
                           className="metamask_prof_pic_icon"
                           ref={avatarRef}
@@ -712,7 +702,11 @@ const Header = ({ togglemakeDark, check }) => {
                       Balance:
                     </div>
                     <div className="mobile_view_header_cont_head_body_cont1_para">
-                      <p className="header_wllt_bal">{coinBalance} BNB</p>
+                      <p className="header_wllt_bal">
+                        {" "}
+                        <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
+                        {coinBalance} BNB
+                      </p>
                     </div>
                   </div>
 

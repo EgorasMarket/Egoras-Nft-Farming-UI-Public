@@ -142,7 +142,7 @@
   display: flex;
   align-items: center;
   flex-direction: row;
-  gap: 10px;
+  /* gap: 10px; */
 }
 .account_numb_div {
   font-weight: 700;

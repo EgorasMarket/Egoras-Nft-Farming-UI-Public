@@ -4,6 +4,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import "../../../css/dashBoardReferral.css";
 import Web3 from "web3";
 import { getAuthUserStats } from "../../../actions/token";
+import CryptoJS from "crypto-js";
 
 import Sparkline2 from "../../static/Sparkline2";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
@@ -56,7 +57,31 @@ const DashboardReferral = ({ auth }) => {
     active,
     error,
   } = context;
+  const [plaintext, setPlaintext] = useState("");
+  const [key, setKey] = useState("");
+  const [encryptedText, setEncryptedText] = useState("");
+  const [decryptedText, setDecryptedText] = useState("");
 
+  const secretPass = "XkhZG4fW2t2W";
+  const handleEncrypt = () => {
+    const encryptedText = CryptoJS.AES.encrypt(
+      plaintext,
+      secretPass
+    ).toString();
+    setEncryptedText(encryptedText);
+    console.log(encryptedText);
+  };
+
+  const handleDecrypt = () => {
+    const decryptedBytes = CryptoJS.AES.decrypt(encryptedText, secretPass);
+    const decryptedText = decryptedBytes.toString(CryptoJS.enc.Utf8);
+    setDecryptedText(decryptedText);
+    console.log(decryptedText);
+  };
+  useEffect(() => {
+    setPlaintext("0x3dE79168402278C0DA2Bf9A209C3A91d755790FC");
+  }, [plaintext]);
+  console.log(plaintext);
   useEffect(() => {
     if (currentPage === "/app/user") {
       setActiveLink("poolDetails");
@@ -412,6 +437,12 @@ const DashboardReferral = ({ auth }) => {
                           >
                             Copy referral code
                             <span className="tooltiptext" id="myTooltip"></span>
+                          </button>
+                          <button onClick={handleEncrypt}>
+                            Encrypt address
+                          </button>
+                          <button onClick={handleDecrypt}>
+                            Decrypt address
                           </button>
                         </div>
                       </div>
