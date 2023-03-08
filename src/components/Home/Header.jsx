@@ -240,7 +240,7 @@ const Header = ({ togglemakeDark, check }) => {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/admin") {
+    if (urlArr[1] === "admin") {
       setshowHeader(false);
       setBetaDiv(false);
     }

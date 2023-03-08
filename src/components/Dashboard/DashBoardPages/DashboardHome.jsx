@@ -36,7 +36,7 @@ import {
   UnsupportedChainIdError,
 } from "@web3-react/core";
 import { getAuthUserStats } from "../../../actions/token";
-const DashboardHome = ({ submitKyc, auth }) => {
+const DashboardHome = () => {
   const context = useWeb3React();
   const [lockedValue, setLockedValue] = useState(0);
   const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);

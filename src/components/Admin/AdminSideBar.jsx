@@ -4,6 +4,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 // import Web3 from "web3";
 import Web3 from "web3";
+// import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import CloseIcon from "@material-ui/icons/Close";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -73,7 +74,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
   const [showHeader, setshowHeader] = useState(true);
   const [betaDiv, setBetaDiv] = useState(true);
   const [conecttxt, setConnectTxt] = useState("Not Connected");
-  const [nairaValue, setNairaValue] = useState(670);
+  const [nairaValue, setNairaValue] = useState(750);
   // const [darkMode, setDarkMode] = useState(null);
   const [walletAddr, setWalletAddr] = useState(
     "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -203,10 +204,10 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
     if (linksActive === "/admin") {
       setActiveBg("lend");
     }
-    if (linksActive === "/admin/assets") {
-      setActiveBg("assets");
+    if (linksActive === "/admin/sellers") {
+      setActiveBg("sellers");
     }
-    if (linksActive === "/admin/transactions") {
+    if (linksActive === "/admin/staff") {
       setActiveBg("transactions");
     }
     if (linksActive === "/admin/") {
@@ -524,18 +525,18 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 Home
               </a>
               <a
-                id="assets"
-                href="/admin/assets"
+                id="sellers"
+                href="/admin/sellers"
                 className={
-                  activeBg == "assets" ? "header_tab1_active " : "header_tab1"
+                  activeBg == "sellers" ? "header_tab1_active " : "header_tab1"
                 }
                 onClick={changeBg}
               >
-                Withdraw
+                Sellers
               </a>
               <a
                 id="transactions"
-                href="/admin/transactions"
+                href="/admin/staff"
                 className={
                   activeBg == "transactions"
                     ? "header_tab1_active "
@@ -543,7 +544,19 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 }
                 onClick={changeBg}
               >
-                Transactions
+                Staff
+              </a>
+              <a
+                id="membership"
+                href="/admin/modify/membership_plan"
+                className={
+                  activeBg == "membership"
+                    ? "header_tab1_active "
+                    : "header_tab1"
+                }
+                onClick={changeBg}
+              >
+                Membership
               </a>
 
               {/* <a
@@ -583,27 +596,19 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                   <Hamburger toggled={isOpen} toggle={setIsOpen} />
                 </div>
                 <div className="toggle_dark_mode_div">
-                  <LightModeIcon
-                    className={
-                      check === false
-                        ? "lightMode_icon_active"
-                        : "lightMode_icon"
-                    }
-                  />
                   <SwitchToggle2
                     className="toggle_dark_mode"
                     darkMode={togglemakeDark}
                     checkBox={check}
                   />
-                  <DarkModeIcon
-                    className={
-                      check === false ? "darkMode_icon" : "darkMode_icon_active"
-                    }
-                  />
                 </div>
                 {account ? (
                   <div className="connected_header_address dash_connected_header_address">
-                    <p className="header_wllt_bal">{coinBalance} BNB</p>
+                    <p className="header_wllt_bal">
+                      {" "}
+                      <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
+                      {coinBalance} BNB
+                    </p>
                     <div
                       className="metamask_prof_pic_icon"
                       ref={avatarRef}
@@ -640,7 +645,11 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                   Balance:
                 </div>
                 <div className="mobile_view_header_cont_head_body_cont1_para">
-                  <p className="header_wllt_bal">{coinBalance} BNB</p>
+                  <p className="header_wllt_bal">
+                    {" "}
+                    <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
+                    {coinBalance} BNB
+                  </p>
                 </div>
               </div>
 
@@ -668,7 +677,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
       <div className="header_tabs2">
         <a
           id="lend"
-          href="/app/earn"
+          href="/app"
           className={activeBg == "lend" ? "header_tab1_active " : "header_tab1"}
           onClick={changeBg}
         >
@@ -677,26 +686,37 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
         </a>
 
         <a
-          id="assets"
-          href="/admin/assets"
+          id="sellers"
+          href="/admin/sellers"
           className={
-            activeBg == "assets" ? "header_tab1_active " : "header_tab1"
+            activeBg == "sellers" ? "header_tab1_active " : "header_tab1"
           }
           onClick={changeBg}
         >
           <StorageIcon className="sidebarIcon" />
-          Withdraw
+          Sellers
         </a>
         <a
           id="transactions"
-          href="/admin/transactions"
+          href="/admin/staff"
           className={
             activeBg == "transactions" ? "header_tab1_active " : "header_tab1"
           }
           onClick={changeBg}
         >
           <ReceiptLongIcon className="sidebarIcon" />
-          Transactions
+          Staff
+        </a>
+        <a
+          id="membership"
+          href="/admin/modify/membership_plan"
+          className={
+            activeBg == "membership" ? "header_tab1_active " : "header_tab1"
+          }
+          onClick={changeBg}
+        >
+          <ReceiptLongIcon className="sidebarIcon" />
+          Membership
         </a>
       </div>
       {/* =============''''''''' */}

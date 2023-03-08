@@ -62,7 +62,7 @@ const Footer = () => {
     if (currentPage === "/app/earn/pool/detail/branch/asset") {
       setShowFooter(false);
     }
-    if (currentPage === "/admin") {
+    if (urlArr[1] === "admin") {
       setShowFooter(false);
     }
     if (currentPage === "/admin/transactions") {
@@ -110,6 +110,7 @@ const Footer = () => {
     if (currentPage === "/app/stake/deposit_vault/" + urlArr[4] + "/ENGN") {
       setShowFooter(false);
     }
+    console.log(urlArr);
   });
   const classes = useStyles();
 

@@ -258,8 +258,8 @@ const Dashboard = ({ check, togglemakeDark }) => {
                 />
                 <Route exact path="/app" component={DashboardHome} />
                 <Route exact path="/app/" component={DashboardHome} />
-                {/* <Route exact path="/app" component={DashBoardLendPage} />
-                <Route exact path="/app/" component={DashBoardLendPage} /> */}
+                {/* <Route exact path="/app" component={DashBoardLendPage} /> */}
+                <Route exact path="/app/lenddd" component={DashBoardLendPage} />
                 <Route
                   exact
                   path="/app/transaction"

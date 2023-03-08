@@ -126,6 +126,7 @@ function App() {
       setDashboard(true);
       return;
     }
+
     if (linksActive === "/app/stake/deposit_vault/" + urlArr[4] + "/ENGN") {
       setDashboard(true);
       return;
@@ -144,6 +145,14 @@ function App() {
     }
     if (linksActive === "/admin/transactions") {
       setAdmin(true);
+      return;
+    }
+    if (urlArr[1] === "admin") {
+      setAdmin(true);
+      return;
+    }
+    if (urlArr[1] === "app") {
+      setDashboard(true);
       return;
     }
   });

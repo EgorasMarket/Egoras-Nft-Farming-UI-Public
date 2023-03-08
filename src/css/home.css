@@ -1559,7 +1559,7 @@ a.visit_app_link_2 {
   padding-right: 16px;
   color: var(--theme-ui-colors-text-muted, #708390);
   font-size: 14px;
-  text-align: left;
+  text-align: center;
   font-weight: 400;
 }
 
@@ -1611,8 +1611,11 @@ a.visit_app_link_2 {
   display: table-cell;
   -webkit-box-pack: justify;
   justify-content: space-between;
-  text-align: right;
+  text-align: center;
   align-items: center;
+}
+.left {
+  text-align: left;
 }
 .right {
   text-align: right;
@@ -1622,9 +1625,10 @@ a.visit_app_link_2 {
   margin: 0px;
   min-width: 0px;
   padding: 16px;
-  display: flex;
-  -webkit-box-pack: justify;
+  display: table-cell;
   justify-content: flex-end;
+  height: 100%;
+  text-align: right;
 }
 .assets-category-data-last:last-child {
   border-radius: 0px 8px 8px 0px;
@@ -2427,6 +2431,9 @@ a.visit_app_link_2 {
   box-shadow: rgb(0 0 0) 0px 0px 6px;
   background: #1c2c22;
   color: #fff;
+}
+.dark .assets-category-row:hover {
+  background: #2b3f32;
 }
 .dark .assets-data-pool_name {
   color: #ffffff;
