@@ -117,3 +117,7 @@ button.PlaceBidDiv_Button {
   color: #fff;
   margin: auto;
 }
+.filter_table_area_1_search {
+  position: relative;
+  width: 45%;
+}

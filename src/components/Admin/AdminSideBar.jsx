@@ -207,6 +207,12 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
     if (linksActive === "/admin/sellers") {
       setActiveBg("sellers");
     }
+    if (linksActive === "/admin/modify/membership_plan") {
+      setActiveBg("membership");
+    }
+    if (linksActive === "/admin/all/products") {
+      setActiveBg("products");
+    }
     if (linksActive === "/admin/staff") {
       setActiveBg("transactions");
     }
@@ -545,6 +551,16 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 onClick={changeBg}
               >
                 Staff
+              </a>
+              <a
+                id="products"
+                href="/admin/all/products"
+                className={
+                  activeBg == "products" ? "header_tab1_active " : "header_tab1"
+                }
+                onClick={changeBg}
+              >
+                Products
               </a>
               <a
                 id="membership"

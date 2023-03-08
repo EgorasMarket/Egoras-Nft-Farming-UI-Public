@@ -12,6 +12,7 @@ import DashboardHome from "../Dashboard/DashBoardPages/DashboardHome";
 import AdminSeeSellers from "./AdminPages/AdminSeeSellers";
 import AdminStaffPage from "./AdminPages/AdminStaffPage";
 import AdminModifyMembership from "./AdminPages/AdminModifyMembership";
+import AdminProductsPage from "./AdminPages/AdminProductsPage";
 // import AdminMinorPage from "./AdminMinorPage";
 import DashBoardUserDetails from "../Dashboard/DashBoardPages/DashBoardUserDetails";
 const Admin = ({ check, togglemakeDark }) => {
@@ -36,6 +37,11 @@ const Admin = ({ check, togglemakeDark }) => {
               {/* <Route exact path="/admin/assets" component={AdminAssets} /> */}
               <Route exact path="/admin/sellers" component={AdminSeeSellers} />
               <Route exact path="/admin/staff" component={AdminStaffPage} />
+              <Route
+                exact
+                path="/admin/all/products"
+                component={AdminProductsPage}
+              />
               {/* <Route
                 exact
                 path="/admin/transactions"
