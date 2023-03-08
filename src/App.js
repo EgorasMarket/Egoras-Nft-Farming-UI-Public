@@ -51,6 +51,9 @@ function App() {
       setDashboard(true);
       return;
     }
+    if (linksActive === "/egc") {
+      window.location.href = "/";
+    }
     if (linksActive === "/dashboard/") {
       setDashboard(true);
       return;
@@ -185,6 +188,7 @@ function App() {
             <Header togglemakeDark={togglemakeDark} check={cClass} />
             <Switch>
               <Route exact path="/" component={Home} />
+
               <Route exact path="/referal/:ref" component={Referal} />
               <Route exact path="/about" component={AboutUs} />
               {admin == true ? (
