@@ -1,0 +1,28 @@
+.editProductDiv {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100000;
+  background: #00000069;
+  backdrop-filter: blur(10px);
+  display: flex;
+  /* align-items: center; */
+  justify-content: flex-end;
+}
+.editProductDiv_area {
+  width: 41em;
+  background: #1c2c22;
+  padding: 2em;
+  overflow: scroll;
+}
+.editProductDiv_area .sell_container_body_cont1_img_display_cont_divs {
+  height: 11em;
+}
+.editProductDiv_area .sell_container_body_cont1_img_display_cont_div1_icon {
+  font-size: 70px !important;
+}
+.sell_container_body_cont1_img_display_cont_1_last {
+  margin: 0;
+}

@@ -1,12 +1,17 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import CircleIcon from "@mui/icons-material/Circle";
 import "../AdminStyles/adminSellersPage.css";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import EastIcon from "@mui/icons-material/East";
 // import Nodata from "../../Dashboard/DashBoardPages/nodataComponent/Nodata";
+import "../AdminStyles/adminProductPage.css";
+import axios from "axios";
+import { API_URL } from "../../../actions/types";
+import { config } from "../../../actions/Config";
 import { numberWithCommas } from "../../../static";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-
+import ImageIcon from "@mui/icons-material/Image";
+import CloseIcon from "@mui/icons-material/Close";
 import Nodata from "../../Dashboard/DashBoardPages/nodataComponent/Nodata";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Accordion from "@material-ui/core/Accordion";
@@ -15,6 +20,39 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
+import { parseEther, formatEther } from "@ethersproject/units";
+import {
+  listProduct,
+  lendUS,
+  takeDividend,
+  takeBackLoan,
+  getTotalLended,
+  getInvestorsDividend,
+  userStats,
+  system,
+  burnAccumulatedDividend,
+  checkAllowance,
+  unluckToken,
+  lend,
+  getUserStats,
+  transactReceipt,
+  getPrice,
+  getTickerInfo,
+  tokenBalance,
+  open,
+  getLatestLoan,
+  repay,
+  topup,
+  draw,
+  checkAllowanceL,
+  unluckToken2,
+  getEgcSmartContractBalnce,
+} from "../../../web3";
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -25,13 +63,161 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const AdminProductsPage = () => {
+  const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
   const [lockedValue, setLockedValue] = useState(0);
   const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);
   const [totalLendingCount, setTotalLendingCount] = useState(0);
   const [activeBtn, setActivrBtn] = useState("Ongoing");
   const [saleDetails, setSaleDetails] = useState("");
+  const [editProductDiv, setEditProductDiv] = useState("");
   const [activeLink, setActiveLink] = useState("abstract-link");
   const [activeMenu, setActiveMenu] = useState("details-accord  ");
+  const [prodName, setProdName] = useState("");
+  const [brandName, setBrandName] = useState("");
+  const [saleAmount, setSaleAmount] = useState();
+  const [prodCondition, setProdCondition] = useState("");
+  const [imageSrc, setImageSrc] = useState("");
+  const [imageSrc2, setImageSrc2] = useState("");
+  const [imageSrc3, setImageSrc3] = useState("");
+  const fileInputRef = useRef();
+  const fileInputRef2 = useRef();
+  const fileInputRef3 = useRef();
+
+  const handleClick = () => {
+    fileInputRef.current.click();
+  };
+  const handleClick2 = () => {
+    fileInputRef2.current.click();
+  };
+  const handleClick3 = () => {
+    fileInputRef3.current.click();
+  };
+  const handleImageSelect = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      setImageSrc(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+  const handleRemoveClick = () => {
+    setImageSrc("");
+  };
+  const handleImageSelect2 = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      setImageSrc2(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+  const handleRemoveClick2 = () => {
+    setImageSrc2("");
+  };
+  const handleImageSelect3 = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      setImageSrc3(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+  };
+  const handleRemoveClick3 = () => {
+    setImageSrc3("");
+  };
+  const sendProductToBlockchain = async (prodId) => {
+    const conCatProdName = ` ${prodName}_${prodId}`;
+    const res = await listProduct(
+      conCatProdName,
+      saleAmount,
+      library.getSigner()
+    );
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+
+    // if (check.status == true) {
+    //   let ret = await lendUS(
+    //     txnhash,
+    //     parseEther(formData.BackAmount.toString(), "wei").toString(),
+    //     currentTarget,
+    //     library.getSigner()
+    //   );
+    //   console.log(ret.status);
+    //   if (ret.status == true) {
+    //   } else if (ret.status == false) {
+    //   }
+    // } else {
+    // }
+  };
+  const UploadProduct = async () => {
+    const formData = new FormData();
+
+    const element = document.getElementById("product_image");
+    const element2 = document.getElementById("product_image2");
+    const element3 = document.getElementById("product_image3");
+    const file = element.files[0];
+    const file2 = element2.files[0];
+    const file3 = element3.files[0];
+    formData.append("product_image", file);
+    formData.append("product_image2", file2);
+    formData.append("product_image3", file3);
+    formData.append("product_name", prodName);
+    formData.append("product_brand", brandName);
+    formData.append("product_condition", prodCondition);
+    formData.append("amount", saleAmount);
+    console.log(formData);
+    try {
+      const res = await axios.post(
+        API_URL + "/product/initialize/add/product",
+        formData,
+        config
+      );
+      console.log(res, "somto");
+      if (res.status === 200) {
+        sendProductToBlockchain(res.data.data.product_id);
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleNameChange = (event) => {
+    setProdName(event.target.value);
+    console.log(event.target.value);
+    //console.log(event.target.value);
+  };
+  const handleBrandNameChange = (event) => {
+    setBrandName(event.target.value);
+    console.log(event.target.value);
+    //console.log(event.target.value);
+  };
+  const handleSaleAmountChange = (event) => {
+    setSaleAmount(event.target.value);
+    console.log(event.target.value);
+    //console.log(event.target.value);
+  };
+  const handleProdConditionChange = (event) => {
+    setProdCondition(event.target.value);
+    console.log(event.target.value);
+    //console.log(event.target.value);
+  };
+
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);
   };
@@ -297,6 +483,10 @@ const AdminProductsPage = () => {
     setSaleDetails(e.currentTarget.id);
     console.log(e.currentTarget.id);
   };
+  const ToggleEditProduct = (e) => {
+    setEditProductDiv(e.currentTarget.id);
+    console.log(e.currentTarget.id);
+  };
   const toggleActive = (e) => {
     let link = e.currentTarget.id;
     setActiveLink(link);
@@ -447,7 +637,7 @@ const AdminProductsPage = () => {
                     </th>
                     <th className="assets-category-titles-heading1 ">Seller</th>
                     <th className="assets-category-titles-heading1  ">
-                      Uploading Status
+                      Upload Status
                     </th>
                     <th className="assets-category-titles-heading1  ">
                       Uploader
@@ -676,72 +866,7 @@ const AdminProductsPage = () => {
                     </div>
                   </div>
                 </div>
-                {/* ================ */}
-                {/* ================ */}
-                {/* ================ */}
-                {/* ================ */}
-                {/* ================ */}
-                {/* ================ */}
-                <div className="saleDetailsDiv_area_1">
-                  <div className="saleDetailsDiv_area_1_title">
-                    Bidding Action
-                  </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Bidding Status
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body">
-                      {data.BiddingStatus}
-                    </div>
-                  </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Bidding Amount
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body">
-                      {data.BiddingAmount}
-                    </div>
-                  </div>
-                  <div className="PlaceBidDiv">
-                    <Accordion>
-                      <AccordionSummary
-                        onClick={toggleActiveDrop}
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                      >
-                        <Typography
-                          className={classes.heading}
-                          onClick={toggleActiveDrop}
-                        >
-                          Place A Bid{" "}
-                        </Typography>
-                      </AccordionSummary>
-                      <div className={activeMenu}>
-                        <AccordionDetails>
-                          <div className="PlaceBidDiv_area">
-                            <div className="PlaceBidDiv_Body">
-                              <div className="PlaceBidDiv_Body_1">
-                                <div className="PlaceBidDiv_Body_1_title">
-                                  Bid Amount
-                                </div>
-                                <input
-                                  type="number"
-                                  className="PlaceBidDiv_Body_1_input"
-                                />
-                              </div>
-                              <div className="PlaceBidDiv_ButtonDiv">
-                                <button className="PlaceBidDiv_Button">
-                                  Place a Bid
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </AccordionDetails>
-                      </div>
-                    </Accordion>
-                  </div>
-                </div>
+
                 {/* ================ */}
                 {/* ================ */}
                 {/* ================ */}
@@ -749,7 +874,294 @@ const AdminProductsPage = () => {
                 {/* ================ */}
                 {/* ================ */}
                 <div className="approveProdButton">
-                  <button className="approveProdButton_btn">Approve</button>
+                  <button
+                    className="approveProdButton_btn"
+                    id={data.id}
+                    onClick={ToggleEditProduct}
+                  >
+                    Edit Product
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : null}
+        </>
+      ))}
+      {/* ====================== */}
+      {/* ====================== */}
+      {/* ====================== */}
+      {/* ====================== */}
+      {/* ====================== */}
+      {SalableProduct.map((data) => (
+        <>
+          {data.id === editProductDiv ? (
+            <div className="editProductDiv">
+              <div className="editProductDiv_area">
+                <div className="sell_container">
+                  <div className="sell_container_header">Edit Product</div>
+                  <div className="sell_container_body">
+                    <div className="sell_container_body_cont1">
+                      <div className="sell_container_body_cont1_txt">
+                        <div className="sell_container_body_cont1_txt_heading">
+                          Image*
+                        </div>{" "}
+                        File types supported: JPG, PNG, SVG. Max size: 2 MB
+                      </div>
+                      <div className="sell_container_body_cont1_img_display_cont">
+                        <div className="sell_container_body_cont1_img_display_cont_1">
+                          <input
+                            type="file"
+                            ref={fileInputRef}
+                            style={{ display: "none" }}
+                            onChange={handleImageSelect}
+                            id="product_image"
+                          />
+                          <div className="sell_container_body_cont1_img_display_cont_divs">
+                            {imageSrc === "" ? (
+                              <div
+                                onClick={handleClick}
+                                className="sell_container_body_cont1_img_display_cont_div1"
+                              >
+                                <ImageIcon className="sell_container_body_cont1_img_display_cont_div1_icon" />
+                              </div>
+                            ) : null}
+
+                            {imageSrc === "" ? null : (
+                              <div className="sell_container_body_cont1_img_display_cont_div2">
+                                <img
+                                  src={imageSrc}
+                                  alt="Selected image"
+                                  className="sell_container_body_cont1_img_display_cont_div2_img"
+                                />
+                              </div>
+                            )}
+                            {imageSrc === "" ? null : (
+                              <CloseIcon
+                                onClick={handleRemoveClick}
+                                className="sell_container_body_cont1_img_display_cont_divs_close_icon"
+                              />
+                            )}
+                          </div>
+                        </div>
+                        <div className="sell_container_body_cont1_img_display_cont_1">
+                          <input
+                            type="file"
+                            ref={fileInputRef2}
+                            style={{ display: "none" }}
+                            onChange={handleImageSelect2}
+                            id="product_image2"
+                          />
+                          <div className="sell_container_body_cont1_img_display_cont_divs">
+                            {imageSrc2 === "" ? (
+                              <div
+                                onClick={handleClick2}
+                                className="sell_container_body_cont1_img_display_cont_div1"
+                              >
+                                <ImageIcon className="sell_container_body_cont1_img_display_cont_div1_icon" />
+                              </div>
+                            ) : null}
+
+                            {imageSrc2 === "" ? null : (
+                              <div className="sell_container_body_cont1_img_display_cont_div2">
+                                <img
+                                  src={imageSrc2}
+                                  alt="Selected image"
+                                  className="sell_container_body_cont1_img_display_cont_div2_img"
+                                />
+                              </div>
+                            )}
+                            {imageSrc2 === "" ? null : (
+                              <CloseIcon
+                                onClick={handleRemoveClick2}
+                                className="sell_container_body_cont1_img_display_cont_divs_close_icon"
+                              />
+                            )}
+                          </div>
+                        </div>
+                        <div className="sell_container_body_cont1_img_display_cont_1 sell_container_body_cont1_img_display_cont_1_last">
+                          <input
+                            type="file"
+                            ref={fileInputRef3}
+                            style={{ display: "none" }}
+                            onChange={handleImageSelect3}
+                            id="product_image3"
+                          />
+                          <div className="sell_container_body_cont1_img_display_cont_divs">
+                            {imageSrc3 === "" ? (
+                              <div
+                                onClick={handleClick3}
+                                className="sell_container_body_cont1_img_display_cont_div1"
+                              >
+                                <ImageIcon className="sell_container_body_cont1_img_display_cont_div1_icon" />
+                              </div>
+                            ) : null}
+
+                            {imageSrc3 === "" ? null : (
+                              <div className="sell_container_body_cont1_img_display_cont_div2">
+                                <img
+                                  src={imageSrc3}
+                                  alt="Selected image"
+                                  className="sell_container_body_cont1_img_display_cont_div2_img"
+                                />
+                              </div>
+                            )}
+                            {imageSrc3 === "" ? null : (
+                              <CloseIcon
+                                onClick={handleRemoveClick3}
+                                className="sell_container_body_cont1_img_display_cont_divs_close_icon"
+                              />
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    <div className="sell_container_body_cont1">
+                      <div className="sell_container_body_cont1_txt">
+                        <div className="sell_container_body_cont1_txt_heading">
+                          Product Name*
+                        </div>{" "}
+                      </div>
+                      <div className="sell_container_body_cont1_title_div">
+                        <input
+                          onChange={handleNameChange}
+                          name="productName"
+                          id="productName"
+                          type="text"
+                          placeholder="Product name"
+                          className="sell_container_body_cont1_title_div_input"
+                          value={prodName}
+                        />
+                      </div>
+                    </div>
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    <div className="sell_container_body_cont1">
+                      <div className="sell_container_body_cont1_txt">
+                        <div className="sell_container_body_cont1_txt_heading">
+                          Brand Name*
+                        </div>{" "}
+                        The Brand of the product user uploads for sale.
+                      </div>
+                      <div className="sell_container_body_cont1_title_div">
+                        <input
+                          id="brandName"
+                          name="brandName"
+                          type="text"
+                          placeholder="Brand name"
+                          className="sell_container_body_cont1_title_div_input"
+                          onChange={handleBrandNameChange}
+                          value={brandName}
+                        />
+                      </div>
+                    </div>
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    <div className="sell_container_body_cont1">
+                      <div className="sell_container_body_cont1_txt">
+                        <div className="sell_container_body_cont1_txt_heading">
+                          Product Amount*
+                        </div>{" "}
+                        The amount of items that can be minted. No gas cost to
+                        you!
+                      </div>
+                      <div className="sell_container_body_cont1_title_div">
+                        <input
+                          id="prodAmount"
+                          name="prodAmount"
+                          type="text"
+                          placeholder="Product amount"
+                          className="sell_container_body_cont1_title_div_input"
+                          onChange={handleSaleAmountChange}
+                          value={saleAmount}
+                        />
+                      </div>
+                    </div>
+                    <div className="sell_container_body_cont1">
+                      <div className="sell_container_body_cont1_txt">
+                        <div className="sell_container_body_cont1_txt_heading">
+                          Product Category*
+                        </div>{" "}
+                        The amount of items that can be minted. No gas cost to
+                        you!
+                      </div>
+                      <div className="sell_container_body_cont1_title_div">
+                        <input
+                          id="prodAmount"
+                          name="prodAmount"
+                          type="text"
+                          placeholder="Product amount"
+                          className="sell_container_body_cont1_title_div_input"
+                          onChange={handleSaleAmountChange}
+                          value={saleAmount}
+                        />
+                      </div>
+                    </div>
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    <div className="sell_container_body_cont1">
+                      <div className="sell_container_body_cont1_txt">
+                        <div className="sell_container_body_cont1_txt_heading">
+                          Product Description*
+                        </div>{" "}
+                        The description will be included on the item's detail
+                        page underneath its image. Markdown syntax is supported.
+                      </div>
+                      <div className="sell_container_body_cont1_title_div">
+                        <textarea
+                          name="productCondition"
+                          id="productCondition"
+                          cols="30"
+                          rows="10"
+                          className="sell_container_body_cont1_title_div_input"
+                          onChange={handleProdConditionChange}
+                          value={prodCondition}
+                        ></textarea>
+                      </div>
+                    </div>
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    <div className="sell_container_body_cont1">
+                      <button
+                        className="sell_container_body_cont1_submit_btn"
+                        onClick={UploadProduct}
+                      >
+                        Upload Product
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
