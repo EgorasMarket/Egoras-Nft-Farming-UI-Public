@@ -19,6 +19,8 @@
 }
 .sell_container_body_cont1_title_div {
   margin-top: 10px;
+  display: flex;
+  align-items: center;
 }
 .sell_container_body_cont1_title_div_input {
   width: 100%;

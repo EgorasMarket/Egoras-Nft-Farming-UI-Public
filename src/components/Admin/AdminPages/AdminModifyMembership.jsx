@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-
+import "../AdminStyles/adminMemeberShip.css";
 import { numberWithCommas } from "../../../static";
 
 const AdminModifyMembership = () => {
@@ -16,7 +16,7 @@ const AdminModifyMembership = () => {
             <div className="lending_area1_cont1">
               <div className="lending_area1_cont1_body_1">
                 <div className="lending_area1_cont1_heading">
-                  Total Products uploaded for sale
+                  Total Subscribed Users
                 </div>
                 <div className="lending_area1_cont1_body_txt">
                   {numberWithCommas(parseInt(lockedValue).toFixed(2))}{" "}
@@ -34,7 +34,8 @@ const AdminModifyMembership = () => {
             <div className="lending_area1_cont1">
               <div className="lending_area1_cont1_body_1">
                 <div className="lending_area1_cont1_heading">
-                  Total Products Approved
+                  {" "}
+                  Total Subscribed Monthly Users
                 </div>
                 <div className="lending_area1_cont1_body_txt">
                   {numberWithCommas(parseInt(lockedValue / 570).toFixed(2))}{" "}
@@ -53,7 +54,7 @@ const AdminModifyMembership = () => {
             <div className="lending_area1_cont1">
               <div className="lending_area1_cont1_body_1">
                 <div className="lending_area1_cont1_heading">
-                  Total Funding Capacity
+                  Total Subscribed Semi-Annually Users
                 </div>
                 <div className="lending_area1_cont1_body_txt">
                   {numberWithCommas(parseInt(totalLendingCapacity).toFixed(2))}{" "}
@@ -67,32 +68,119 @@ const AdminModifyMembership = () => {
                 </div>
               </div>
             </div>
-
             <div className="lending_area1_cont1">
-              <div className="lending_area1_last_cont1_divs">
-                <span className="lending_area1_last_cont1_divs_cont1">
-                  {" "}
-                  Est.APY:{" "}
-                  <span className="lending_area1_last_cont1_divs_cont_value">
-                    {" "}
-                    13.0%
-                  </span>
-                </span>
-                {/* <span className="lending_area1_last_cont1_divs_cont2">
-                    Default Protection:{" "}
-                    <span className="lending_area1_last_cont1_divs_cont_value">
-                      {" "}
-                      2.26M ₦
-                    </span>{" "}
-                  </span> */}
-                <span className="lending_area1_last_cont1_divs_cont3">
-                  {" "}
-                  Total Pool Assets:{" "}
-                  <span className="lending_area1_last_cont1_divs_cont_value">
-                    {" "}
-                    {totalLendingCount}
-                  </span>{" "}
-                </span>
+              <div className="lending_area1_cont1_body_1">
+                <div className="lending_area1_cont1_heading">
+                  Total Subscribed Annual Users
+                </div>
+                <div className="lending_area1_cont1_body_txt">
+                  {numberWithCommas(parseInt(totalLendingCapacity).toFixed(2))}{" "}
+                  <span className="usd_sign">NGN</span>
+                </div>
+              </div>
+              <div className="lending_area1_cont1_body_1">
+                <HelpOutlineIcon className="help_outline" />
+                <div className="helper_txt_div">
+                  This is the total value of all the assets in the lending pool.
+                </div>
+              </div>
+            </div>
+          </div>
+          {/* =============== */}
+          {/* =============== */}
+          {/* =============== */}
+          {/* =============== */}
+          {/* =============== */}
+          <div className="modifyMembershipFeeDiv">
+            <div className="modifyMembershipFeeDiv_head">
+              Modify Membership Fees
+            </div>
+            <div className="modifyMembershipFeeDiv_body">
+              <div className="modifyMembershipFeeDiv_body_monthly">
+                <div className="modifyMembershipFeeDiv_body_monthly_head">
+                  Modify Monthly Plan
+                </div>
+                <div className="modifyMembershipFeeDiv_body_monthly_SubHead">
+                  Current Plan ~ 0egc
+                </div>
+                <div className="modifyMembershipFeeDiv_body_monthly_input_div">
+                  <div className="modifyMembershipFeeDiv_body_monthly_input_div_1">
+                    <div className="modifyMembershipFeeDiv_body_monthly_input_div_1_head">
+                      Amount
+                    </div>
+                    <input
+                      type="number"
+                      className="modifyMembershipFeeDiv_body_monthly_input_div_1_input"
+                    />
+                  </div>
+                  <div className="modifyMembershipFeeDiv_body_monthly_btn_div">
+                    <button className="modifyMembershipFeeDiv_body_monthly_btn_btn">
+                      Modify Plan
+                    </button>
+                  </div>
+                </div>
+              </div>
+              {/* ============ */}
+              {/* ============ */}
+              {/* ============ */}
+              {/* ============ */}
+              {/* ============ */}
+              {/* ============ */}
+              {/* ============ */}
+              <div className="modifyMembershipFeeDiv_body_monthly">
+                <div className="modifyMembershipFeeDiv_body_monthly_head">
+                  Modify Semi-Annually Plan
+                </div>
+                <div className="modifyMembershipFeeDiv_body_monthly_SubHead">
+                  Current Plan ~ 0egc
+                </div>
+                <div className="modifyMembershipFeeDiv_body_monthly_input_div">
+                  <div className="modifyMembershipFeeDiv_body_monthly_input_div_1">
+                    <div className="modifyMembershipFeeDiv_body_monthly_input_div_1_head">
+                      Amount
+                    </div>
+                    <input
+                      type="number"
+                      className="modifyMembershipFeeDiv_body_monthly_input_div_1_input"
+                    />
+                  </div>
+                  <div className="modifyMembershipFeeDiv_body_monthly_btn_div">
+                    <button className="modifyMembershipFeeDiv_body_monthly_btn_btn">
+                      Modify Plan
+                    </button>
+                  </div>
+                </div>
+              </div>
+              {/* ============ */}
+              {/* ============ */}
+              {/* ============ */}
+              {/* ============ */}
+              {/* ============ */}
+              {/* ============ */}
+              {/* ============ */}
+              <div className="modifyMembershipFeeDiv_body_monthly">
+                <div className="modifyMembershipFeeDiv_body_monthly_head">
+                  Modify Annual Plan
+                </div>
+                <div className="modifyMembershipFeeDiv_body_monthly_SubHead">
+                  Current Plan ~ 0egc
+                </div>
+                <div className="modifyMembershipFeeDiv_body_monthly_input_div">
+                  <div className="modifyMembershipFeeDiv_body_monthly_input_div_1">
+                    <div className="modifyMembershipFeeDiv_body_monthly_input_div_1_head">
+                      Amount
+                    </div>
+                    <input
+                      type="number"
+                      className="modifyMembershipFeeDiv_body_monthly_input_div_1_input"
+                    />
+                  </div>
+                  <div className="modifyMembershipFeeDiv_body_monthly_btn_div">
+                    <button className="modifyMembershipFeeDiv_body_monthly_btn_btn">
+                      Modify Plan
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

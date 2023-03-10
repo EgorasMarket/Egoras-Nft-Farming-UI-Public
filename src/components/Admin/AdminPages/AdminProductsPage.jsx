@@ -4,6 +4,10 @@ import "../AdminStyles/adminSellersPage.css";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import EastIcon from "@mui/icons-material/East";
 // import Nodata from "../../Dashboard/DashBoardPages/nodataComponent/Nodata";
+// import CloseIcon from "@mui/icons-material/Close";
+import { Editor } from "react-draft-wysiwyg";
+import { EditorState, convertToRaw } from "draft-js";
+import draftToHtml from "draftjs-to-html";
 import "../AdminStyles/adminProductPage.css";
 import axios from "axios";
 import { API_URL } from "../../../actions/types";
@@ -21,6 +25,7 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 import { parseEther, formatEther } from "@ethersproject/units";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import {
   listProduct,
   lendUS,
@@ -89,6 +94,12 @@ const AdminProductsPage = () => {
   const [imageSrc, setImageSrc] = useState("");
   const [imageSrc2, setImageSrc2] = useState("");
   const [imageSrc3, setImageSrc3] = useState("");
+  const [addCategory, setAddCategory] = useState(false);
+  const [addBrand, setAddBrand] = useState(false);
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+  const [formData, setFormData] = useState({
+    product_details: "",
+  });
   const fileInputRef = useRef();
   const fileInputRef2 = useRef();
   const fileInputRef3 = useRef();
@@ -499,7 +510,18 @@ const AdminProductsPage = () => {
   const toggleActiveDrop = () => {
     setActiveMenu("details-accord ");
   };
+  const toggleAddCategory = () => {
+    setAddCategory(!addCategory);
+  };
+  const toggleAddBrand = () => {
+    setAddBrand(!addBrand);
+  };
+  const onEditorStateChange = (editorState) => {
+    let text = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
+    setFormData({ ...formData, product_details: text });
+    setEditorState(editorState);
+  };
   const classes = useStyles();
   return (
     <div className="other2 asset_other2">
@@ -1036,6 +1058,7 @@ const AdminProductsPage = () => {
                           placeholder="Product name"
                           className="sell_container_body_cont1_title_div_input"
                           value={prodName}
+                          defaultValue={data.ProductName}
                         />
                       </div>
                     </div>
@@ -1049,20 +1072,33 @@ const AdminProductsPage = () => {
                     <div className="sell_container_body_cont1">
                       <div className="sell_container_body_cont1_txt">
                         <div className="sell_container_body_cont1_txt_heading">
-                          Brand Name*
+                          Product Brand*
                         </div>{" "}
                         The Brand of the product user uploads for sale.
                       </div>
                       <div className="sell_container_body_cont1_title_div">
-                        <input
-                          id="brandName"
-                          name="brandName"
-                          type="text"
-                          placeholder="Brand name"
+                        <select
+                          name=""
+                          id=""
                           className="sell_container_body_cont1_title_div_input"
-                          onChange={handleBrandNameChange}
-                          value={brandName}
-                        />
+                        >
+                          <option value="">Apple</option>
+                          <option value="">Samsung</option>
+                          <option value="">Oppo</option>
+                          <option value="">Huawei</option>
+                          <option value="">LG</option>
+                          <option value="">Hisense</option>
+                          <option value="">Redmi</option>
+                          <option value="">Tecno</option>
+                          <option value="">Infinix</option>
+                        </select>
+
+                        <button
+                          className="add_category_btn"
+                          onClick={toggleAddBrand}
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
                     {/* ========================= */}
@@ -1093,6 +1129,7 @@ const AdminProductsPage = () => {
                           className="sell_container_body_cont1_title_div_input"
                           onChange={handleSaleAmountChange}
                           value={saleAmount}
+                          defaultValue={data.Amount}
                         />
                       </div>
                     </div>
@@ -1105,15 +1142,22 @@ const AdminProductsPage = () => {
                         you!
                       </div>
                       <div className="sell_container_body_cont1_title_div">
-                        <input
-                          id="prodAmount"
-                          name="prodAmount"
-                          type="text"
-                          placeholder="Product amount"
+                        <select
+                          name=""
+                          id=""
                           className="sell_container_body_cont1_title_div_input"
-                          onChange={handleSaleAmountChange}
-                          value={saleAmount}
-                        />
+                        >
+                          <option value="">Mobile Phones</option>
+                          <option value="">Computing</option>
+                          <option value="">House Hold Appliances</option>
+                        </select>
+
+                        <button
+                          className="add_category_btn"
+                          onClick={toggleAddCategory}
+                        >
+                          +
+                        </button>
                       </div>
                     </div>
                     {/* ========================= */}
@@ -1132,7 +1176,7 @@ const AdminProductsPage = () => {
                     <div className="sell_container_body_cont1">
                       <div className="sell_container_body_cont1_txt">
                         <div className="sell_container_body_cont1_txt_heading">
-                          Product Description*
+                          Product Specifications*
                         </div>{" "}
                         The description will be included on the item's detail
                         page underneath its image. Markdown syntax is supported.
@@ -1154,6 +1198,38 @@ const AdminProductsPage = () => {
                     {/* ========================= */}
                     {/* ========================= */}
                     <div className="sell_container_body_cont1">
+                      <div className="sell_container_body_cont1_txt">
+                        <div className="sell_container_body_cont1_txt_heading">
+                          Product Details*
+                        </div>{" "}
+                        The description will be included on the item's detail
+                        page underneath its image. Markdown syntax is supported.
+                      </div>
+                      <div className="sell_container_body_cont1_title_div">
+                        {/* <textarea
+                          name="productCondition"
+                          id="productCondition"
+                          cols="30"
+                          rows="10"
+                          className="sell_container_body_cont1_title_div_input"
+                          onChange={handleProdConditionChange}
+                          value={prodCondition}
+                        ></textarea> */}
+
+                        <Editor
+                          editorState={editorState}
+                          wrapperClassName="demo-wrapper"
+                          editorClassName="demo-editor"
+                          onEditorStateChange={onEditorStateChange}
+                          placeholder="Begin Typing..."
+                        />
+                      </div>
+                    </div>
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    {/* ========================= */}
+                    <div className="sell_container_body_cont1">
                       <button
                         className="sell_container_body_cont1_submit_btn"
                         onClick={UploadProduct}
@@ -1164,6 +1240,44 @@ const AdminProductsPage = () => {
                   </div>
                 </div>
               </div>
+              {addCategory ? (
+                <div className="addCategoryDiv">
+                  <div className="addCategoryArea">
+                    <CloseIcon
+                      className="addCategoryArea_closeIcon"
+                      onClick={toggleAddCategory}
+                    />
+                    <div className="addCategoryArea1">Add Product Category</div>
+                    <div className="addCategoryArea2">
+                      <input type="text" className="addCategoryArea2_input" />
+                    </div>
+                    <div className="addCategoryAreaButtonDiv">
+                      <button className="addCategoryAreaButton_btn">
+                        Add Category
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+              {addBrand ? (
+                <div className="addCategoryDiv">
+                  <div className="addCategoryArea">
+                    <CloseIcon
+                      className="addCategoryArea_closeIcon"
+                      onClick={toggleAddBrand}
+                    />
+                    <div className="addCategoryArea1">Add Product Brand</div>
+                    <div className="addCategoryArea2">
+                      <input type="text" className="addCategoryArea2_input" />
+                    </div>
+                    <div className="addCategoryAreaButtonDiv">
+                      <button className="addCategoryAreaButton_btn">
+                        Add Brand
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
             </div>
           ) : null}
         </>
