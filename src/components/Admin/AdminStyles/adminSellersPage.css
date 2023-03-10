@@ -1,0 +1,123 @@
+.saleDetailsDiv {
+  z-index: 100000;
+  position: fixed;
+  background: #0000004d;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  padding: 2em;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  backdrop-filter: blur(10px);
+}
+.saleDetailsDiv_area {
+  width: 100%;
+  background: #0b110c;
+  box-shadow: 0px 0px 20px 0px #000;
+  padding: 1em;
+  border-radius: 10px;
+  max-width: 767px;
+  height: 100%;
+  overflow: scroll;
+  color: #fff;
+}
+.saleDetailsDiv_area_1 {
+  padding: 1em;
+  border: solid 1px #3d4e44;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+}
+.saleDetailsDiv_area_1_title {
+  font-size: 18px;
+  color: #7c9988;
+  margin-bottom: 0.5em;
+}
+.saleDetailsDiv_area_1_div1 {
+  padding: 1em;
+  background: #1c2c22;
+  margin-bottom: 0.5em;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+.saleDetailsDiv_area_1_div1_title {
+  color: #6d8677;
+}
+.PlaceBidDiv {
+  padding: 10px;
+  background: #1c2c22;
+  border-radius: 10px;
+  border: solid 1px #2f4738;
+  display: flex;
+  flex-direction: column;
+}
+.PlaceBidDiv_Body {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5em;
+}
+.PlaceBidDiv_Body_1 {
+  display: flex;
+  flex-direction: column;
+}
+.PlaceBidDiv_Body_1_title {
+  font-size: 14px;
+  color: #6d8677;
+  margin-bottom: 5px;
+}
+input.PlaceBidDiv_Body_1_input {
+  padding: 1em;
+  border-radius: 10px;
+  background: #0b110c;
+  color: #b0cebc;
+  border: solid 1px #2f4738;
+}
+.PlaceBidDiv_ButtonDiv {
+  width: 100%;
+  margin-top: 1em;
+}
+button.PlaceBidDiv_Button {
+  width: 100%;
+  padding: 1em;
+  border-radius: 10px;
+  background: #229e54;
+  background: #fff;
+  color: #000;
+  border: none;
+}
+.PlaceBidDiv .details-accord {
+  height: 100%;
+  overflow-y: scroll;
+  padding-bottom: 0px;
+}
+.PlaceBidDiv .MuiAccordionDetails-root {
+  display: flex;
+  padding: 8px 16px 16px;
+  padding: 0;
+  flex-direction: column;
+}
+.approveProdButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.approveProdButton_btn {
+  padding: 15px;
+  width: 200px;
+  border-radius: 10px;
+  border: none;
+  background: #229e54;
+  color: #fff;
+  margin: auto;
+}
+.filter_table_area_1_search {
+  position: relative;
+  width: 45%;
+}

@@ -6,6 +6,7 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 // import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import CloseIcon from "@material-ui/icons/Close";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import clsx from "clsx";
 import Web3 from "web3";
 import { Authenticate } from "../auth/Authenticate";
@@ -196,34 +197,50 @@ const Header = ({ togglemakeDark, check }) => {
 
   useEffect(() => {
     const urlArr = currentPage.split("/");
-    if (currentPage === "/dashboard/") {
+    if (currentPage === "/app/") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard") {
+    if (urlArr[2] === "market") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/earning") {
+    if (currentPage === "/app") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/user/referral") {
+    if (currentPage === "/app/earning") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
+    if (currentPage === "/app/user/referral") {
+      setshowHeader(false);
+      setBetaDiv(false);
+    }
+    if (currentPage === "/app/staking/egc") {
+      setshowHeader(false);
+      setBetaDiv(false);
+    }
+    if (currentPage === "/app/market") {
+      setshowHeader(false);
+      setBetaDiv(false);
+    }
+    if (currentPage === "/app/sell") {
+      setshowHeader(false);
+      setBetaDiv(false);
+    }
+    if (currentPage === "/app/earn/pool/" + urlArr[4] + "/detail") {
       setshowHeader(false);
       setBetaDiv(false);
     }
     if (
       currentPage ===
-      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/app/earn/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/admin") {
+    if (urlArr[1] === "admin") {
       setshowHeader(false);
       setBetaDiv(false);
     }
@@ -237,51 +254,48 @@ const Header = ({ togglemakeDark, check }) => {
     }
     if (
       currentPage ===
-      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
+      "/app/earn/pool/detail/" + urlArr[5] + "/transactions"
     ) {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/earn") {
+    if (currentPage === "/app/earn") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/earn/pool/detail") {
+    if (currentPage === "/app/earn/pool/detail") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/user") {
+    if (currentPage === "/app/user") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/swap") {
+    if (currentPage === "/app/swap") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/add") {
+    if (currentPage === "/app/add") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/earn/pool/detail/branch/asset") {
+    if (currentPage === "/app/earn/pool/detail/branch/asset") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/whitepaper") {
+    if (currentPage === "/app/whitepaper") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/stake") {
+    if (currentPage === "/app/stake") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (currentPage === "/dashboard/stake/vault/" + urlArr[4] + "/ENGN") {
+    if (currentPage === "/app/stake/vault/" + urlArr[4] + "/ENGN") {
       setshowHeader(false);
       setBetaDiv(false);
     }
-    if (
-      currentPage ===
-      "/dashboard/stake/deposit_vault/" + urlArr[4] + "/ENGN"
-    ) {
+    if (currentPage === "/app/stake/deposit_vault/" + urlArr[4] + "/ENGN") {
       setshowHeader(false);
       setBetaDiv(false);
     }
@@ -455,7 +469,8 @@ const Header = ({ togglemakeDark, check }) => {
     setDisconnectDiv(!disconnetDiv);
   };
 
-  const chainIdBsc = "56";
+  // const chainIdBsc = "56";
+  const chainIdBsc = "97";
 
   useEffect(() => {
     if (account) {
@@ -524,12 +539,12 @@ const Header = ({ togglemakeDark, check }) => {
   };
   return (
     <>
-      {betaDiv === true ? (
+      {/* {betaDiv === true ? (
         <div className="we_on_beta_div">
           Welcome to Egoras v2 Beta. If you find any issues please let us know.{" "}
           <a href="">cs@egoras.com</a>
         </div>
-      ) : null}
+      ) : null} */}
 
       {showHeader === true ? (
         <div id="Header" className="header_div">
@@ -564,7 +579,7 @@ const Header = ({ togglemakeDark, check }) => {
                     />
                   </a>
                   {/* <a
-                href="/dashboard"
+                href="/app"
                 className={page1 === "/" ? "docs activeLink" : "about"}
                 // onClick={clickMe1}
               >
@@ -574,34 +589,22 @@ const Header = ({ togglemakeDark, check }) => {
                 </ul>
 
                 <div
-                  style={{ display: "flex", alignItems: "center", gap: "10px" }}
+                  style={{ display: "flex", alignItems: "center", gap: "0px" }}
                 >
-                  {/* <a href="/products">Products</a> */}
                   <div className="toggle_dark_mode_div">
-                    <LightModeIcon
-                      className={
-                        check === false
-                          ? "lightMode_icon_active"
-                          : "lightMode_icon"
-                      }
-                    />
                     <SwitchToggle2
                       className="toggle_dark_mode"
                       darkMode={togglemakeDark}
                       checkBox={check}
                     />
-                    <DarkModeIcon
-                      className={
-                        check === false
-                          ? "darkMode_icon"
-                          : "darkMode_icon_active"
-                      }
-                    />
                   </div>
                   <div className="desktop_view_cont">
                     {account ? (
                       <div className="connected_header_address">
-                        <p className="header_wllt_bal">{coinBalance} BNB</p>
+                        <p className="header_wllt_bal">
+                          <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
+                          {coinBalance} BNB
+                        </p>
                         <div
                           className="metamask_prof_pic_icon"
                           ref={avatarRef}
@@ -645,7 +648,7 @@ const Header = ({ togglemakeDark, check }) => {
           </ul> */}
                 {/* 
             <ul className="headerButtons">
-              <a href="/dashboard" className="connect">
+              <a href="/app" className="connect">
                 {" "}
                 Launch App <ExitToAppIcon className="exit-to-app" />
               </a>
@@ -684,7 +687,7 @@ const Header = ({ togglemakeDark, check }) => {
                 </div>
                 <Divider />
                 <List>
-                  <a href="/dashboard" className="connect">
+                  <a href="/app" className="connect">
                     {" "}
                     Launch App <ExitToAppIcon className="exit-to-app" />
                   </a>
@@ -699,7 +702,11 @@ const Header = ({ togglemakeDark, check }) => {
                       Balance:
                     </div>
                     <div className="mobile_view_header_cont_head_body_cont1_para">
-                      <p className="header_wllt_bal">{coinBalance} BNB</p>
+                      <p className="header_wllt_bal">
+                        {" "}
+                        <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
+                        {coinBalance} BNB
+                      </p>
                     </div>
                   </div>
 

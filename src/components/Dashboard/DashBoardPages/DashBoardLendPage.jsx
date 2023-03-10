@@ -404,7 +404,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
       {/* Tokens Section Start */}
       <section className="collateral-assets-section no-bg no_pad">
         <div className="container">
-          {stage == 2 ? null : (
+          {/* {stage == 2 ? null : (
             <div className="onboard_as_user_div">
               <button
                 className="onboard_as_user_btn"
@@ -413,7 +413,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                 Onboard as user
               </button>
             </div>
-          )}
+          )} */}
 
           <div className="pool_container">
             <div className="lending_area1">
@@ -725,7 +725,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                               </td>
                               <td className="assets-category-data-last branch_loan_action">
                                 <a
-                                  href={`/dashboard/earn/pool/${asset.branchAddress}/detail`}
+                                  href={`/app/earn/pool/${asset.branchAddress}/detail`}
                                   className="assets-btn"
                                 >
                                   See details{" "}
@@ -847,7 +847,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                               </td>
                               <td className="assets-category-data-last branch_loan_action">
                                 <a
-                                  href={`/dashboard/earn/pool/${asset.branchAddress}/detail`}
+                                  href={`/app/earn/pool/${asset.branchAddress}/detail`}
                                   className="assets-btn"
                                 >
                                   See details{" "}
@@ -971,7 +971,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                               </td>
                               <td className="assets-category-data-last branch_loan_action">
                                 <a
-                                  href={`/dashboard/earn/pool/${asset.branchAddress}/detail`}
+                                  href={`/app/earn/pool/${asset.branchAddress}/detail`}
                                   className="assets-btn"
                                 >
                                   See details{" "}
@@ -1017,7 +1017,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
 
       {onBoardUserDiv === true ? (
         <div className="onBoardUserDiv">
-          <div className="onBoardUserDiv_head">Onboard as user</div>
+          {/* <div className="onBoardUserDiv_head">Onboard as user</div> */}
           <div className="onBoardUserDiv_body">
             <div className="onBoardUserDiv_body_cont">
               <div className="stepdiv1">

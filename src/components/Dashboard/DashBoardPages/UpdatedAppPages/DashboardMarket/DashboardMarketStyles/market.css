@@ -1,0 +1,81 @@
+.market_page_section {
+  padding: 8em 0em;
+  position: relative;
+  padding-bottom: 4em;
+  background: #f3f3f3;
+}
+.market_area {
+  margin-top: 0 !important;
+}
+.categories_page_area_non_dash {
+  margin-top: 0 !important;
+  gap: 10px !important;
+}
+
+.mobile_view_price_pop_up {
+  display: none;
+}
+@media (max-width: 900px) {
+  .mobile_view_price_pop_up {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    background: #fff;
+    width: 100vw;
+    left: 0;
+    right: 0;
+    padding: 0.5em 1em;
+    box-shadow: 0px 0px 5px #d6d6d6;
+  }
+  .mobile_view_price_pop_up_area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .mobile_view_price_pop_up_price_cont {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .slashed_detail_price {
+    color: #8b8b8b;
+    text-decoration: line-through 1px !important;
+    font-weight: 200;
+    font-size: 14px;
+  }
+  .full_detail_price {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .mobile_view_price_pop_up_price_btn_cont {
+    width: 100%;
+  }
+  .mobile_view_price_pop_up_price_button {
+    width: 100%;
+    padding: 1em;
+    border-radius: 6px;
+    background: #229e54;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+  }
+  .mobile_view_price_pop_up_price_button:disabled {
+    background: #d6d6d6;
+    color: #797979;
+    cursor: not-allowed;
+  }
+}
+@media (max-width: 422px) {
+  .market_page_section {
+    padding: 7em 0em;
+    position: relative;
+    padding-bottom: 4em;
+    background: #f3f3f3;
+  }
+  .market_page_section .custom_container {
+    padding: 0em 0em;
+  }
+}

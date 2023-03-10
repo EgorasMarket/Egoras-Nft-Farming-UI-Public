@@ -8,10 +8,34 @@ import EgorasLoanV2Facet from "./contracts/V2/EgorasLoanV2Facet.json";
 import EgorasLoanV2AdditionalFiles from "./contracts/V2/EgorasLoanV2AdditionalFiles.json";
 import EgorasLoanV2ReferralFacet from "./contracts/V2/EgorasLoanV2ReferralFacet.json";
 import EgorasPriceOracleFacet from "./contracts/EgorasPriceOracleFacet.json";
-
 import EgorasSwapFacet from "./contracts/EgorasSwapFacet.json";
 import COINS from "./contracts/V2/coins.json";
 import Contract_Address from "./contracts/Contract_Address.json";
+// ===============
+// ===============
+// ===============
+// ====================new v3 contracts =================
+import ProductFacet from "./contracts/V3/ProductFacet.json";
+import StakingFacet from "./contracts/V3/StakingFacet.json";
+// ====================new v3 contracts =================
+
+// ===============
+// ===============
+// ===============
+
+// =============================
+// =============================
+// ========new V3 instances =====================
+const contractProductFacetInstance = (signer) => {
+  return new Contract(ProductFacet.address, ProductFacet.abi, signer);
+};
+const contractStakingFacetInstance = (signer) => {
+  return new Contract(StakingFacet.address, StakingFacet.abi, signer);
+};
+// ========new V3 instances =====================
+// =============================
+// =============================
+// =============================
 const dynamicInstance = (signer, abi, address) => {
   return new Contract(address, abi, signer);
 };
@@ -1004,7 +1028,72 @@ const crossexchange = async (from, to, amoumt, signer) => {
     };
   }
 };
-
+// ===========================================
+// ===========================================
+// ===========================================
+// =========new V3 Functions==================================
+const listProduct = async (_title, _amount, signer) => {
+  console.log(_title, _amount);
+  try {
+    const instance = contractProductFacetInstance(signer);
+    let result;
+    result = await instance.listProduct(_title, _amount);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const monthly = async (amount, signer) => {
+  console.log(amount);
+  try {
+    const instance = contractStakingFacetInstance(signer);
+    let result;
+    result = await instance.monthly(amount);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const annually = async (amount, signer) => {
+  console.log(amount);
+  try {
+    const instance = contractStakingFacetInstance(signer);
+    let result;
+    result = await instance.annually(amount);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+// =========new V3 Functions==================================
+// ===========================================
+// ===========================================
+// ===========================================
+// ===========================================
 export {
   getPrice,
   unluckToken,
@@ -1050,4 +1139,7 @@ export {
   repayOnlyLoan,
   repayDividendLoan,
   burnNFT,
+  listProduct,
+  monthly,
+  annually,
 };

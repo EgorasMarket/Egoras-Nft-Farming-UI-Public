@@ -10,7 +10,8 @@ import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import WhyPeopleTrustUs from "./WhyPeopleTrustUs/WhyPeopleTrustUs";
 import { parseEther, formatEther } from "@ethersproject/units";
 import axios from "axios";
-
+// import Spline from "@splinetool/react-spline";
+import { Spline } from "react-spline";
 import { API_URL as api_url } from "../../actions/types";
 import { config } from "@fortawesome/fontawesome-svg-core";
 // import Carousel from "react-multi-carousel";
@@ -413,7 +414,6 @@ const Home = () => {
       setTotalAmountFrom(() => TotalSum * 0.95);
       setTotu(() => Math.round(totalAmountFrom));
 
-      console.log(Math.round(totalAmountFrom), "iiiiiiii");
       // console.log(egcUsd, egrUsd);
       // console.log(totalAmountFrom);
     },
@@ -444,7 +444,6 @@ const Home = () => {
     <div>
       {/* =================================================================================================================================================================================================================================================================== */}
       {/* Tokens Section Start */}
-
       {/* third section start */}
       <section className="earning-section">
         <div className="container">
@@ -452,21 +451,26 @@ const Home = () => {
             <div className="nft-txt-area2 " style={{ width: "100%" }}>
               <div className="span-txts">
                 <p className="span4a-txts">
-                  Unlocking Liquidity for{" "}
-                  <span className="real_life">Real-World</span> assets.
+                  The Power Behind
+                  <br />
+                  <span className="real_life">New Energy.</span>
                 </p>
                 <p className="span4b-txts">
-                  Egoras is a decentralized organization built to enable anyone
-                  to get funding or sell any real-world asset easily.
+                  Egoras develops software solutions for the tracking, tracing
+                  and trading of renewable energy. We believe in the
+                  democratisation of power, for a sustainable future.
                 </p>
               </div>
               <div className="stake-hero-btns">
-                <a href="/dashboard" className="stake-hero-btn2">
+                <a href="/app" className="stake-hero-btn2">
                   Launch App <ExitToAppIcon className="exit-to-app" />
                 </a>
-                <a href="/dashboard/whitepaper" className="stake-hero-btn1">
-                  Read Docs
+                <a href="/membership/sub" className="stake-hero-btn1">
+                  Become a member
                 </a>
+                {/* <a href="/app/whitepaper" className="stake-hero-btn1">
+                  Read Docs
+                </a> */}
               </div>
               {/* <FlipCountdown
                 className="flip-countdown"
@@ -483,214 +487,73 @@ const Home = () => {
                 endAt={"2022-07-03 08:00:00"}
               /> */}
             </div>
-            <div
-              className="nft-img-area2"
-              style={{ display: "inline-flex", width: "100%" }}
-            >
+            {/* <div className="hero_area2">
               <img
-                src="/img/liquidity-hero_bg_1.svg"
+                src="/img/hero_abstract_bg.svg"
                 alt=""
-                className="liquidity_hero_bg_1"
+                className="hero_area2_img"
               />
-              <img
-                src="/img/liquidity_hero_bg_base.svg"
-                alt=""
-                className="liquidity_hero_bg_base"
-              />
-              <img
-                src="/img/liquidity_hero_bg_logos1.svg"
-                alt=""
-                className={
-                  animate1 === true
-                    ? "liquidity_hero_bg_logos1 animate"
-                    : "liquidity_hero_bg_logos1"
-                }
-              />
-              <img
-                src="/img/liquidity_hero_bg_logos1.svg"
-                alt=""
-                className={
-                  animate3 === true
-                    ? "liquidity_hero_bg_logos3 animate"
-                    : "liquidity_hero_bg_logos3"
-                }
-              />
-              <img
-                src="/img/liquidity_hero_bg_logos2.svg"
-                alt=""
-                className={
-                  animate2 === true
-                    ? "liquidity_hero_bg_logos2 animate"
-                    : "liquidity_hero_bg_logos2"
-                }
-              />
-              <img
-                src="/img/liquidity_hero_bg_logos4.svg"
-                alt=""
-                className={
-                  animate4 === true
-                    ? "liquidity_hero_bg_logos4 animate"
-                    : "liquidity_hero_bg_logos4"
-                }
-              />
-              <img
-                src="/img/shooting_light.svg"
-                alt=""
-                // className="shooting_light1"
-                className={
-                  animate1 === true
-                    ? "shooting_light1 shoot"
-                    : "shooting_light1"
-                }
-              />
-              <img
-                src="/img/shooting_light.svg"
-                alt=""
-                // className="shooting_light3"
-                className={
-                  animate3 === true
-                    ? "shooting_light3 shoot3"
-                    : "shooting_light3"
-                }
-              />
-              <img
-                src="/img/shooting_light.svg"
-                alt=""
-                // className="shooting_light2"
-                className={
-                  animate2 === true
-                    ? "shooting_light2 shoot2"
-                    : "shooting_light2"
-                }
-              />
-              <img
-                src="/img/shooting_light.svg"
-                alt=""
-                // className="shooting_light2"
-                className={
-                  animate4 === true
-                    ? "shooting_light4 shoot4"
-                    : "shooting_light4"
-                }
-              />
-              <img
-                src="/img/asset_display_icon1.svg"
-                alt=""
-                className="asset_display_icon1"
-                className={
-                  animate1 === true
-                    ? "asset_display_icon1"
-                    : "asset_display_icon1_none"
-                }
-              />
-              <img
-                src="/img/asset_display_icon2.svg"
-                alt=""
-                className="asset_display_icon1"
-                className={
-                  animate2 === true
-                    ? "asset_display_icon1"
-                    : "asset_display_icon1_none"
-                }
-              />
-              <img
-                src="/img/asset_display_icon3.svg"
-                alt=""
-                className="asset_display_icon1"
-                className={
-                  animate3 === true
-                    ? "asset_display_icon1"
-                    : "asset_display_icon1_none"
-                }
-              />
-              <img
-                src="/img/asset_display_icon4.svg"
-                alt=""
-                className="asset_display_icon1"
-                className={
-                  animate4 === true
-                    ? "asset_display_icon1"
-                    : "asset_display_icon1_none"
-                }
-              />
-              <img
-                src="/img/liquidity_hero_center_turning_bg.svg"
-                alt=""
-                className="liquidity_hero_center_turning_bg"
-              />
-              <img
-                src="/img/liquidity_hero_center_asset_display_bg.svg"
-                alt=""
-                className="liquidity_hero_center_asset_display_bg"
-              />
-            </div>
-          </div>
-        </div>
-        {/* <img src="/img/blur-drop.png" alt="" className="blurDrop-token" /> */}
-        <img src="/img/hero_bg_bg.png" alt="" className="blurDrop-token2" />
-        {/* <img src="/img/banner-bg.png" alt="" className="blurDrop-token3" /> */}
-
-        <div className="floating_images_cont">
-          <img src="/img/floating_cube1.svg" alt="" className="float_cube1" />
-          <img src="/img/floating_cube2.svg" alt="" className="float_cube2" />
-          <img
-            src="/img/floating_layers_img.svg"
-            alt=""
-            className="float_layer1"
-          />
-          <img src="/img/floating_shadow.png" alt="" className="float_shadow" />
-          <img src="/img/floating_circle.png" alt="" className="float_circle" />
-          <img
-            src="/img/floating_circle2.png"
-            alt=""
-            className="float_circle2"
-          />
-        </div>
-        {/* <WaveAnimation /> */}
-
-        <div className="floating_absolute_div">
-          <div className="floating_div_cont_area">
-            {/* <div className="floating_div_cont_area1">
-              <div className="floating_div_cont_area1_cont1">
-                Total Transactions
-              </div>
-              <div className="floating_div_cont_area1_cont2">50 Txns</div>
-            </div>
-            <span class="vertical_rule"></span> */}
-            <div className="floating_div_cont_area1">
-              <div className="floating_div_cont_area1_cont1">Current TVL</div>
-              <div className="floating_div_cont_area1_cont2">
-                {totu == 0 ? (
-                  <p>Loading...</p>
-                ) : totu !== 0 ? (
-                  <div>{numberWithCommas(Math.round(TotalSum))} USD</div>
-                ) : null}
-                {/* <NumberScroller
-                  timeout={1000}
-                  from={totu === 0 ? 0 : totu}
-                  to={Math.ceil(TotalSum)}
-                  toLocaleStringProps={["en-US"]}
-                  // renderFrequency={1}
-                />{" "} */}
-                {/* <NumberScroller
-                  timeout={1000}
-                  from={totu === 0 ? 0 : totu}
-                  to={Math.ceil(TotalSum)}
-                  toLocaleStringProps={["en-US"]}
-                  // renderFrequency={1}
-                />{" "} */}
-              </div>
-            </div>
-            {/* <span class="vertical_rule"></span> */}
-            {/* <div className="floating_div_cont_area1">
-              <div className="floating_div_cont_area1_cont1">
-                Estimated APY:
-              </div>
-              <div className="floating_div_cont_area1_cont2">13%</div>
             </div> */}
+            <div className="nft_area2_stat_div_area">
+              <div className="nft_area2_stat_div_area_cont1">
+                <div className="nft_area2_stat_div_area_cont1_icon_cont">
+                  <img
+                    src="/img/stat_img_icon.svg"
+                    alt=""
+                    className="nft_area2_stat_div_area_cont1_icon"
+                  />
+                </div>
+                <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers">
+                  <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head">
+                    Total Trading Volume
+                  </div>
+                  <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
+                    $89,979,500,541
+                  </div>
+                </div>
+              </div>
+              <div className="nft_area2_stat_div_area_cont1">
+                <div className="nft_area2_stat_div_area_cont1_icon_cont">
+                  <img
+                    src="/img/stat_img_icon.svg"
+                    alt=""
+                    className="nft_area2_stat_div_area_cont1_icon"
+                  />
+                </div>
+                <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers">
+                  <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head">
+                    Total Trading Volume
+                  </div>
+                  <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
+                    $89,979,500,541
+                  </div>
+                </div>
+              </div>
+              <div className="nft_area2_stat_div_area_cont1">
+                <div className="nft_area2_stat_div_area_cont1_icon_cont">
+                  <img
+                    src="/img/stat_img_icon.svg"
+                    alt=""
+                    className="nft_area2_stat_div_area_cont1_icon"
+                  />
+                </div>
+                <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers">
+                  <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head">
+                    Total Trading Volume
+                  </div>
+                  <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
+                    $89,979,500,541
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+        <img src="/img/hero_bg_bg.png" alt="" className="blurDrop-token2" />
+
+        <img src="/img/hero_backdrop.png" alt="" className="hero_backdrop" />
       </section>
+
       {/* third section end */}
       {/* ========================== */}
       {/* ========================== */}
@@ -699,382 +562,356 @@ const Home = () => {
       {/* =================== */}
       {/* ========================== */}
       {/* ========================== */}
-
-      <section className="real_world_adoption">
+      <section className="how_it_works_section">
         <div className="container">
-          <div className="real_world_adoption_area">
-            <div className="real_world_adoption_area1">
-              {aboutVideoModal === true ? (
-                <div className="about_video_div">
-                  <div className="container">
-                    <CloseIcon
-                      className="close_About_video_modal"
-                      onClick={toggleAboutVideoModal}
-                    />
+          <div className="how_it_works_area">
+            <div className="how_it_works_area_head">How it works</div>
+            <div className="how_it_works_area_para">
+              Welcome to first open-source decentralized Egoras staking pool.
+              The smart-contract service guarantees
+            </div>
+            <div className="how_it_works_area_body">
+              <div className="how_it_works_area_body_area1">
+                <div className="how_it_works_area_body_area1_icon_div">
+                  <img
+                    src="/img/validate_image_dummy.png"
+                    alt=""
+                    className="how_it_works_area_body_area1_icon"
+                  />
+                </div>
+                <div className="how_it_works_area_body_area1_title">
+                  Who are Validators?
+                </div>
+                <div className="how_it_works_area_body_area1_para">
+                  Egoras uses the Proof of Stake consensus maintained by
+                  validators, network participants who validate blocks and earn
+                  EGC while contributing to network security.
+                </div>
+              </div>
+              <div className="how_it_works_area_body_area1">
+                <div className="how_it_works_area_body_area1_icon_div">
+                  <img
+                    src="/img/validate_image_dummy.png"
+                    alt=""
+                    className="how_it_works_area_body_area1_icon"
+                  />
+                </div>
+                <div className="how_it_works_area_body_area1_title">
+                  Who are Validators?
+                </div>
+                <div className="how_it_works_area_body_area1_para">
+                  Egoras uses the Proof of Stake consensus maintained by
+                  validators, network participants who validate blocks and earn
+                  EGC while contributing to network security.
+                </div>
+              </div>
+              <div className="how_it_works_area_body_area1 how_it_works_area_body_area1_last">
+                <div className="how_it_works_area_body_area1_icon_div">
+                  <img
+                    src="/img/validate_image_dummy.png"
+                    alt=""
+                    className="how_it_works_area_body_area1_icon"
+                  />
+                </div>
+                <div className="how_it_works_area_body_area1_title">
+                  Who are Validators?
+                </div>
+                <div className="how_it_works_area_body_area1_para">
+                  Egoras uses the Proof of Stake consensus maintained by
+                  validators, network participants who validate blocks and earn
+                  EGC while contributing to network security.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-                    <div className="about_video_player">
-                      <iframe
-                        src="https://player.vimeo.com/video/702600317?h=836afd9a85&amp;badge=0&amp;autopause=0&amp;autoplay=1&amp;player_id=0&amp;app_id=58479"
-                        frameborder="0"
-                        allow="autoplay; fullscreen; picture-in-picture"
-                        allowfullscreen
-                        style={{
-                          position: "absolute",
-                          top: "0",
-                          left: "0",
-                          width: "100%",
-                          height: "100%",
-                        }}
-                        // title="EGORAS TRILLER .MP4"
-                      />
+      {/* ============== */}
+      {/* ============== */}
+      {/* ============== */}
+      {/* ============== */}
+      <section className="how_it_works_section">
+        <div className="container">
+          <div className="what_we_offer_area">
+            <div className="how_it_works_area_head">
+              What’s possible with Egoras?
+            </div>
+            {/* ============== */}
+            {/* ============== */}
+            {/* ============== */}
+            {/* ============== */}
+            <div className="what_we_offer_area1">
+              <div className="what_we_offer_area1_cont1">
+                <div className="what_we_offer_area1_cont1_title">
+                  Staking on Egoras
+                </div>
+                <div className="what_we_offer_area1_cont1_para">
+                  Earn rewards by staking your eNGN to help secure the network.
+                  Choose your staking preference, start earning with a few
+                  clicks, and use your staked funds as voting power.
+                </div>
+                <button className="what_we_offer_area1_cont1_btn">
+                  Stake your eNGN now
+                </button>
+              </div>
+              <div className="what_we_offer_body_display_save_demo_app_card">
+                <div className="what_we_offer_body_display_save_demo_app_title">
+                  Estimate your reward.
+                </div>
+                <div className="what_we_offer_body_display_save_demo_app_card_area1">
+                  <div className="what_we_offer_body_display_save_demo_app_card_area1_cont1">
+                    You stake 10,000,000 eNGN
+                  </div>
+                  <div className="what_we_offer_body_display_save_demo_app_card_area1_range">
+                    <input
+                      type="range"
+                      name=""
+                      id=""
+                      className="what_we_offer_body_display_save_demo_app_card_area1_range_input"
+                    />
+                  </div>
+                  <div className="what_we_offer_body_display_save_demo_app_card_area1_max_min">
+                    <span>0</span> <span>200,000,000</span>
+                  </div>
+                </div>
+                <div className="what_we_offer_body_display_save_demo_app_card_area1">
+                  <div className="what_we_offer_body_display_save_demo_app_card_area1_cont1">
+                    Locking it for 365 days
+                  </div>
+                  <div className="what_we_offer_body_display_save_demo_app_card_area1_range">
+                    <input
+                      type="range"
+                      name=""
+                      id=""
+                      className="what_we_offer_body_display_save_demo_app_card_area1_range_input"
+                    />
+                  </div>
+                  <div className="what_we_offer_body_display_save_demo_app_card_area1_max_min">
+                    <span>min lock</span> <span>max lock</span>
+                  </div>
+                </div>
+                <div className="what_we_offer_body_display_save_demo_app_card_area2">
+                  <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1">
+                    <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1_head">
+                      Your estimated rewards
+                    </div>
+                    <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1_para">
+                      0 eNGN
+                    </div>
+                  </div>
+                  <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1">
+                    <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1_head">
+                      Current APR
+                    </div>
+                    <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1_para">
+                      0%
                     </div>
                   </div>
                 </div>
-              ) : null}
-              <div className="about_video_thumbnail_cont">
-                <div className="about_video_thumbnail_cont_bg">
-                  <img
-                    src="/img/logoVideoThumbnail.svg"
-                    alt=""
-                    className="thumbnail_img"
-                  />
-                  <img
-                    src="/img/egoras-logo.svg"
-                    alt=""
-                    className="thumbnail_img2"
-                  />
-                  {/* <div className="wrap"> */}
-                  <img
-                    src="/img/play_thumbnail_btn.svg"
-                    alt=""
-                    className="thumbnail_btn"
-                    onClick={toggleAboutVideoModal}
-                  />
-                  {/* </div> */}
-                </div>
               </div>
             </div>
-            <div className="real_world_adoption_area2">
-              <div className="real_world_adoption_area2_title">
-                Real World Adoption
+            {/* ============== */}
+            {/* ============== */}
+            {/* ============== */}
+            {/* ============== */}
+            <div className="what_we_offer_area1">
+              <div className="voting_on_egoras_dapp_sample_div">
+                <div className="voting_on_egoras_dapp_sample_div_cont1">
+                  <div className="voting_on_egoras_dapp_sample_div_cont1_head">
+                    Voting #5
+                  </div>
+                  <div className="voting_on_egoras_dapp_sample_div_cont1_para">
+                    Nupeng Limited
+                  </div>
+                </div>
+                <div className="voting_on_egoras_dapp_sample_div_cont1">
+                  <div className="voting_on_egoras_dapp_sample_div_cont1_head">
+                    Status
+                  </div>
+                  <div className="voting_on_egoras_dapp_sample_div_cont1_status">
+                    Pending
+                  </div>
+                </div>
+                <div className="voting_on_egoras_dapp_sample_div_cont1">
+                  <div className="voting_on_egoras_dapp_sample_div_cont1_head">
+                    Address
+                  </div>
+                  <div className="voting_on_egoras_dapp_sample_div_cont1_address">
+                    0x3dE79168402278C0DA2Bf9A209C3A91d755790FC
+                  </div>
+                </div>
+                <div className="voting_on_egoras_dapp_sample_div_cont1">
+                  <div className="voting_on_egoras_dapp_sample_div_cont1_head">
+                    Voting Duration{" "}
+                    <span className="voting_duration_span">
+                      28days:10hrs:20ms:00s
+                    </span>
+                  </div>
+                  <div className="voting_on_egoras_dapp_sample_div_cont1_progress_bar">
+                    <progress
+                      id="file"
+                      value="32"
+                      max="100"
+                      className="voting_progress_bar"
+                    >
+                      32%{" "}
+                    </progress>
+                  </div>
+                </div>
+                <div className="voting_on_egoras_dapp_sample_div_cont1_btn_vote_div">
+                  <button className="voting_on_egoras_dapp_sample_div_cont1_btn_vote">
+                    Vote
+                  </button>
+                </div>
+                <div className="voting_on_egoras_dapp_sample_div_cont1_btn_vote_details_div">
+                  <button className="voting_on_egoras_dapp_sample_div_cont1_btn_vote_details">
+                    Voting details
+                  </button>
+                </div>
               </div>
-              <div className="real_world_adoption_area2_para">
-                Egoras is the fastest growing decentralized organization in the
-                world with thousands of people using the protocol to access
-                liquidity to real world assets.
+              <div className="what_we_offer_area1_cont2">
+                <div className="what_we_offer_area1_cont1_title">
+                  Voting on Egoras
+                </div>
+                <div className="what_we_offer_area1_cont1_para">
+                  Earn rewards by staking your eNGN to help secure the network.
+                  Choose your staking preference, start earning with a few
+                  clicks, and use your staked funds as voting power.
+                </div>
+                <button className="what_we_offer_area1_cont1_btn">
+                  Vote now
+                </button>
+              </div>
+            </div>
+            {/* ============== */}
+            {/* ============== */}
+            {/* ============== */}
+            {/* ============== */}
+            <div className="what_we_offer_area1">
+              <div className="what_we_offer_area1_cont1">
+                <div className="what_we_offer_area1_cont1_title">
+                  Earning on Egoras
+                </div>
+                <div className="what_we_offer_area1_cont1_para">
+                  Earn rewards by staking your eNGN to help secure the network.
+                  Choose your staking preference, start earning with a few
+                  clicks, and use your staked funds as voting power.
+                </div>
+                <button className="what_we_offer_area1_cont1_btn">
+                  Claim your earnings
+                </button>
+              </div>
+              <div className="what_we_offer_body_display_save_demo_app_card">
+                <div className="what_we_offer_body_display_save_demo_app_title">
+                  Estimate your reward.
+                </div>
+                <div className="what_we_offer_body_display_save_demo_app_card_area1">
+                  <div className="what_we_offer_body_display_save_demo_app_card_area1_cont1">
+                    You stake 10,000,000 eNGN
+                  </div>
+                  <div className="what_we_offer_body_display_save_demo_app_card_area1_range">
+                    <input
+                      type="range"
+                      name=""
+                      id=""
+                      className="what_we_offer_body_display_save_demo_app_card_area1_range_input"
+                    />
+                  </div>
+                  <div className="what_we_offer_body_display_save_demo_app_card_area1_max_min">
+                    <span>0</span> <span>200,000,000</span>
+                  </div>
+                </div>
+                <div className="what_we_offer_body_display_save_demo_app_card_area1">
+                  <div className="what_we_offer_body_display_save_demo_app_card_area1_cont1">
+                    Locking it for 365 days
+                  </div>
+                  <div className="what_we_offer_body_display_save_demo_app_card_area1_range">
+                    <input
+                      type="range"
+                      name=""
+                      id=""
+                      className="what_we_offer_body_display_save_demo_app_card_area1_range_input"
+                    />
+                  </div>
+                  <div className="what_we_offer_body_display_save_demo_app_card_area1_max_min">
+                    <span>min lock</span> <span>max lock</span>
+                  </div>
+                </div>
+                <div className="what_we_offer_body_display_save_demo_app_card_area2">
+                  <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1">
+                    <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1_head">
+                      Your estimated rewards
+                    </div>
+                    <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1_para">
+                      0 eNGN
+                    </div>
+                  </div>
+                  <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1">
+                    <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1_head">
+                      Current APR
+                    </div>
+                    <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1_para">
+                      0%
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
-      {/* ========================== */}
-      {/* =================== */}
-      {/* =================== */}
-      {/* ========================== */}
-      {/* ========================== */}
-      {/* ========================== */}
-      {/* =================== */}
-      {/* =================== */}
-
-      {/* =================== */}
-      {/* <WhyPeopleTrustUs /> */}
-      {/* ==================== */}
-      {/* ==================== */}
-
-      <section className="whyEgorasSection">
+      {/* ============== */}
+      {/* ============== */}
+      {/* ============== */}
+      {/* ============== */}
+      {/* ============= */}
+      {/* ============= */}
+      {/* ============= */}
+      <section className="ecoSystem_section">
         <div className="container">
-          <div className="why_egoras_area">
-            <div className="whyEgoras_heading">Why Egoras?</div>
-            <div className="whyEgoras_body">
-              <div className="whyEgoras_body_cont1">
-                <div className="whyEgoras_body_cont1_text">
-                  Banks don't accept assets like electrical appliances as
-                  collateral to access loans.
-                </div>
-                <div className="whyEgoras_body_cont1_img">
-                  <img
-                    src="/img/dont_accept_img.svg"
-                    className="whyEgoras_body_cont1_img_image"
-                    alt=""
-                  />
-                </div>
-                <img
-                  src="/img/abstract_right_card_bg.png"
-                  alt=""
-                  className="abstract_right_card_bg"
-                />
+          <div className="ecoSystem_area">
+            <div className="ecoSystem_area1">
+              <div className="ecoSystem_area1_title">
+                The on-chain ecosystem for structured credit
               </div>
-              <div className="whyEgoras_body_cont1">
-                <div className="whyEgoras_body_cont1_text">
-                  Difficulty to sell real world assets like cars, electronics
-                  e.t.c.
-                </div>
-                <div className="whyEgoras_body_cont1_img">
-                  <img
-                    src="/img/dont_accept_img2.svg"
-                    className="whyEgoras_body_cont1_img_image"
-                    alt=""
-                  />
-                </div>
+              <div className="ecoSystem_area1_para">
+                As the first protocol to bring real-world assets on-chain, we’re
+                building a better financial system.
               </div>
-              <div className="whyEgoras_body_cont1">
-                <div className="whyEgoras_body_cont1_text">
-                  Banks use humulating measures to recover uncollateralized
-                  loans.
-                </div>
-                <div className="whyEgoras_body_cont1_img">
-                  <img
-                    src="/img/dont_accept_img3.svg"
-                    className="whyEgoras_body_cont1_img_image"
-                    alt=""
-                  />
-                </div>
-                <img
-                  src="/img/abstract_right_card_bg.png"
-                  alt=""
-                  className="abstract_right_card_bg"
-                />
-              </div>
+              <button className="ecoSystem_area1_btn">Get started</button>
+            </div>
+            <div className="ecoSystem_area2">
+              <img src="" alt="" className="ecoSystem_area2_img" />
             </div>
           </div>
         </div>
-        {/* <img
-          src="/img/right_cut_circle.svg"
-          alt=""
-          className="right_cut_circle"
-        /> */}
       </section>
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* =================================================================================================================================================================================================================================================================== */}
-      {/* Tokens Section Start */}
-
-      {/* third section start */}
-
-      {/* fourth section start */}
-
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      <section className="egoras_benefit_section">
+      {/* ============== */}
+      {/* ============== */}
+      {/* ============== */}
+      {/* ============== */}
+      {/* ============= */}
+      {/* ============= */}
+      {/* ============= */}
+      <section className="join_ecosystem_section">
         <div className="container">
-          <div className="benefit_section_area">
-            <div className="benefit_section_area1">
-              <div className="benefit_section_area1_layer1">
-                <div className="benefit_section_area1_layer1_icon">
-                  <img
-                    src="/img/bridge_icon.png"
-                    alt=""
-                    className="bridge_icon"
-                  />
-                </div>{" "}
-                Egoras bridges assets like cars, household electronics to
-                block-chain.
+          <div className="join_ecosystem_area">
+            <div className="join_ecosystem_area1">
+              <div className="join_ecosystem_area1_title">
+                Join the Ecosystem
               </div>
-              <div className="benefit_section_area1_layer1">
-                <div className="benefit_section_area1_layer1_icon">
-                  <img
-                    src="/img/wallet_icon.png"
-                    alt=""
-                    className="bridge_icon"
-                  />
-                </div>{" "}
-                Egoras enables anyone to get loans with any real-world assets
-                without banks or other intermediaries.
-              </div>
-              <div className="benefit_section_area1_layer1">
-                <div className="benefit_section_area1_layer1_icon">
-                  <img
-                    src="/img/sale_icon.svg"
-                    alt=""
-                    className="bridge_icon"
-                  />
-                </div>{" "}
-                Egoras enables anyone to sell any kind of asset easily in
-                minutes.
+              <div className="join_ecosystem_area1_para">
+                Join an ever expanding ecosystem of Egoras blockchains and
+                decentralized applications. From crypto novices to senior
+                developers, Egoras has something for everyone!
               </div>
             </div>
-            <div className="benefit_section_are2">
-              <img
-                src="/img/coin_layer.svg"
-                alt=""
-                className="benefit_section_are2_img"
-              />
-            </div>
-          </div>
-        </div>
-        {/* <img
-          src="/img/cube1_absolute.svg"
-          alt=""
-          className="benefit_section_circles"
-        /> */}
-        {/* <img
-          src="/img/right_cut_circle.svg"
-          alt=""
-          className="benefit_section_circles"
-        /> */}
-        <img
-          src="/img/abstract_right_card_bg.png"
-          alt=""
-          className="abstract_left_section_bg"
-        />
-      </section>
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* =================================================================================================================================================================================================================================================================== */}
-      {/* Tokens Section Start */}
-
-      {/* <section className="collateral-assets-section">
-        <div className="container"></div>
-      </section> */}
-
-      {/* third section start */}
-
-      {/* fourth section start */}
-
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* =================================================================================================================================================================================================================================================================== */}
-      {/* Tokens Section Start */}
-
-      {/* third section start */}
-
-      {/* fourth section start */}
-
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-
-      {/* <section className="governance_landing_section">
-        <div className="container">
-          <div className="governance">
-            <div className="how_it_works_title_cont">
-              <div className="how_it_works_title">
-                Governed by the community
-              </div>
-              <div className="how_it_works_para">
-                Aave is a fully decentralized, community governed protocol with
-                110,720 token holders.
+            <div className="join_ecosystem_area2">
+              <div className="join_ecosystem_area2_cont1">
+                <img src="" alt="" className="join_ecosystem_area2_cont1_img" />
               </div>
             </div>
-          </div>
-        </div>
-      </section> */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      <section className="featured_section">
-        <div className="custom_container">
-          <div className="featured_logos_area">
-            <div className="featured_in_head">Featured In</div>
-            {/* Carousel start==============================
-==============================================
-============================= */}
-            <Carousel
-              responsive={responsive}
-              className="featured_logos"
-              showDots={false}
-              //   infinite={false}
-              autoPlay={true}
-              // autoPlaySpeed={10000}
-              infinite={true}
-              draggable={true}
-              swipeable={true}
-            >
-              {FeaturedLogos.map((data) => (
-                <div className="featured_in_logos_cont">
-                  <a href={data.link} target="_blank">
-                    <img src={data.img} alt="" className="featured_logo" />
-                  </a>
-                </div>
-              ))}
-            </Carousel>
-            <div className="featured_logos_mobile">
-              {FeaturedLogos.map((data) => (
-                <div className="featured_in_logos_cont">
-                  <a href={data.link} target="_blank">
-                    <img src={data.img} alt="" className="featured_logo" />
-                  </a>
-                </div>
-              ))}
-            </div>
-            {/* Carousel end==============================
-==============================================
-============================= */}
-          </div>
-        </div>
-      </section>
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      <section className="getStartedSection">
-        <div className="container">
-          <div className="getStarted_area">
-            <div className="getStarted_title">Sounds Interesting?</div>
-            <a href="/dashboard" className="getStarted_btn">
-              <button className="get_started_button">Get started</button>
-            </a>
-            <img
-              src="/img/get_old_tech_bg.png"
-              alt=""
-              className="get_old_tech_bg"
-            />
           </div>
         </div>
       </section>
@@ -1082,12 +919,6 @@ const Home = () => {
       {/* ============== */}
       {/* ============== */}
       {/* ============== */}
-
-      {/* ============== */}
-      {/* ============== */}
-      {/* ============== */}
-      {/* ============== */}
-
       {/* ============= */}
       {/* ============= */}
       {/* ============= */}

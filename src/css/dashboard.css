@@ -5,10 +5,11 @@
   background: #e6e6e6;
   z-index: 1;
   height: 100vh;
+  flex-direction: column;
 }
 
 .dark .dashboard {
-  background: #1e2822;
+  background: #0b110c;
 }
 
 .dash_boardBg {

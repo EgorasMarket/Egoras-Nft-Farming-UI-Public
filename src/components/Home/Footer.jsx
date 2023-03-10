@@ -29,34 +29,40 @@ const Footer = () => {
   const currentPage = window.location.pathname;
   useEffect(() => {
     const urlArr = currentPage.split("/");
-    if (currentPage === "/dashboard/") {
+    if (currentPage === "/app/") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard") {
+    if (urlArr[2] === "market") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/earn") {
+    if (currentPage === "/app") {
       setShowFooter(false);
     }
-    if (
-      currentPage ===
-      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
-    ) {
+    if (currentPage === "/app/earn") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
+    if (currentPage === "/membership/sub") {
       setShowFooter(false);
     }
     if (
       currentPage ===
-      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
+      "/app/earn/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/earn/pool/detail/branch/asset") {
+    if (currentPage === "/app/earn/pool/" + urlArr[4] + "/detail") {
       setShowFooter(false);
     }
-    if (currentPage === "/admin") {
+    if (
+      currentPage ===
+      "/app/earn/pool/detail/" + urlArr[5] + "/transactions"
+    ) {
+      setShowFooter(false);
+    }
+    if (currentPage === "/app/earn/pool/detail/branch/asset") {
+      setShowFooter(false);
+    }
+    if (urlArr[1] === "admin") {
       setShowFooter(false);
     }
     if (currentPage === "/admin/transactions") {
@@ -65,39 +71,46 @@ const Footer = () => {
     if (currentPage === "/admin/assets") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/earning") {
+    if (currentPage === "/app/earning") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/swap") {
+    if (currentPage === "/app/swap") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/user/referral") {
+    if (currentPage === "/app/user/referral") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/user") {
+    if (currentPage === "/app/user") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/earn/pool/detail") {
+    if (currentPage === "/app/earn/pool/detail") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/add") {
+    if (currentPage === "/app/add") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/whitepaper") {
+    if (currentPage === "/app/whitepaper") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/stake") {
+    if (currentPage === "/app/sell") {
       setShowFooter(false);
     }
-    if (currentPage === "/dashboard/stake/vault/" + urlArr[4] + "/ENGN") {
+    if (currentPage === "/app/market") {
       setShowFooter(false);
     }
-    if (
-      currentPage ===
-      "/dashboard/stake/deposit_vault/" + urlArr[4] + "/ENGN"
-    ) {
+    if (currentPage === "/app/stake") {
       setShowFooter(false);
     }
+    if (currentPage === "/app/staking/egc") {
+      setShowFooter(false);
+    }
+    if (currentPage === "/app/stake/vault/" + urlArr[4] + "/ENGN") {
+      setShowFooter(false);
+    }
+    if (currentPage === "/app/stake/deposit_vault/" + urlArr[4] + "/ENGN") {
+      setShowFooter(false);
+    }
+    console.log(urlArr);
   });
   const classes = useStyles();
 
@@ -181,7 +194,7 @@ const Footer = () => {
                       About
                     </a>
                     <a
-                      href="/dashboard/whitepaper"
+                      href="/app/whitepaper"
                       className="c1link1"
                       target="_blank"
                     >
@@ -293,7 +306,7 @@ const Footer = () => {
                           About
                         </a>
                         <a
-                          href="/dashboard/whitepaper"
+                          href="/app/whitepaper"
                           className="c1link1"
                           target="_blank"
                         >

@@ -4,6 +4,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import "../../../css/dashBoardReferral.css";
 import Web3 from "web3";
 import { getAuthUserStats } from "../../../actions/token";
+import CryptoJS from "crypto-js";
 
 import Sparkline2 from "../../static/Sparkline2";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
@@ -56,11 +57,35 @@ const DashboardReferral = ({ auth }) => {
     active,
     error,
   } = context;
+  const [plaintext, setPlaintext] = useState("");
+  const [key, setKey] = useState("");
+  const [encryptedText, setEncryptedText] = useState("");
+  const [decryptedText, setDecryptedText] = useState("");
 
+  const secretPass = "XkhZG4fW2t2W";
+  const handleEncrypt = () => {
+    const encryptedText = CryptoJS.AES.encrypt(
+      plaintext,
+      secretPass
+    ).toString();
+    setEncryptedText(encryptedText);
+    console.log(encryptedText);
+  };
+
+  const handleDecrypt = () => {
+    const decryptedBytes = CryptoJS.AES.decrypt(encryptedText, secretPass);
+    const decryptedText = decryptedBytes.toString(CryptoJS.enc.Utf8);
+    setDecryptedText(decryptedText);
+    console.log(decryptedText);
+  };
   useEffect(() => {
-    if (currentPage === "/dashboard/user") {
+    setPlaintext("0x3dE79168402278C0DA2Bf9A209C3A91d755790FC");
+  }, [plaintext]);
+  console.log(plaintext);
+  useEffect(() => {
+    if (currentPage === "/app/user") {
       setActiveLink("poolDetails");
-    } else if (currentPage === "/dashboard/user/referral") {
+    } else if (currentPage === "/app/user/referral") {
       setActiveLink("referral");
     }
   });
@@ -200,7 +225,7 @@ const DashboardReferral = ({ auth }) => {
             <div className="pool_deatail_area">
               <div className="pool_lending_pages_links">
                 <Link
-                  to="/dashboard/user"
+                  to="/app/user"
                   className={
                     activeLink === "poolDetails"
                       ? "pool_lend_details_link_active"
@@ -211,7 +236,7 @@ const DashboardReferral = ({ auth }) => {
                   User Details
                 </Link>
                 <Link
-                  to="/dashboard/user/referral"
+                  to="/app/user/referral"
                   className={
                     activeLink === "referral"
                       ? "pool_lend_details_link_active"
@@ -411,6 +436,12 @@ const DashboardReferral = ({ auth }) => {
                           >
                             Copy referral code
                             <span className="tooltiptext" id="myTooltip"></span>
+                          </button>
+                          <button onClick={handleEncrypt}>
+                            Encrypt address
+                          </button>
+                          <button onClick={handleDecrypt}>
+                            Decrypt address
                           </button>
                         </div>
                       </div>

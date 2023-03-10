@@ -49,6 +49,7 @@ import {
   open,
   getNextDate,
   getLatestLoan,
+  takeBackLoan,
   repay,
   topup,
   draw,
@@ -256,9 +257,9 @@ const DashBoardUserDetails = ({ auth }) => {
   const currentPage = window.location.pathname;
   const urlArr = currentPage.split("/");
   useEffect(() => {
-    if (currentPage === "/dashboard/user") {
+    if (currentPage === "/app/user") {
       setActiveLink("poolDetails");
-    } else if (currentPage === "/dashboard/user/referral") {
+    } else if (currentPage === "/app/user/referral") {
       setActiveLink("referral");
     }
   });
@@ -280,7 +281,7 @@ const DashBoardUserDetails = ({ auth }) => {
     async (e) => {
       if (account) {
         let response = await getAuthUserStats(account);
-        console.log(response.message.data.payload, "acct acct acct acct ");
+        // console.log(response.message.data.payload, "acct acct acct acct ");
         const payload = response.message.data.payload;
         if (payload == null) {
           setUserName(() => "******");
@@ -342,7 +343,7 @@ const DashBoardUserDetails = ({ auth }) => {
           <div className="pool_deatail_area">
             <div className="pool_lending_pages_links">
               <Link
-                to="/dashboard/user"
+                to="/app/user"
                 className={
                   activeLink === "poolDetails"
                     ? "pool_lend_details_link_active"
@@ -353,7 +354,7 @@ const DashBoardUserDetails = ({ auth }) => {
                 User Details
               </Link>
               <Link
-                to="/dashboard/user/referral"
+                to="/app/user/referral"
                 className={
                   activeLink === "referral"
                     ? "pool_lend_details_link_active"
@@ -520,8 +521,6 @@ const DashBoardUserDetails = ({ auth }) => {
 // =====================
 // =====================
 // =====================
-
-                
               </div> */}
                   {loanAsset.length <= 0 ? (
                     <div className="no_loans_div">
@@ -757,6 +756,34 @@ const DashBoardUserDetails = ({ auth }) => {
                 return;
               }
             };
+            const takeCapital = async (e) => {
+              if (account) {
+                setStage("loading");
+                setIsLoading(true);
+                setText("Withdrawing, please wait...");
+                let response = await takeBackLoan(
+                  data.newLoanID,
+                  library.getSigner()
+                );
+                console.log(response);
+                // console.log(response.message.code, "status stataus");
+                if (response.status == true) {
+                  setStage("success");
+                  // setText("Sending token please wait aleast 1/2 minutes");
+                  setHash(response.message.hash);
+                  console.log(response);
+                } else if (response.status == false) {
+                  if (response.message.code < 0) {
+                    setText(response.message.data.message);
+                  } else if (response.message.code == 4001) {
+                    setText(response.message.message);
+                  }
+                  setStage("error");
+                  setIsLoading(false);
+                }
+                return;
+              }
+            };
             // setInterval(() => {
             //   if (localStorage.getItem("unlocking") == "true") {
             //     transactReceipt(
@@ -789,7 +816,7 @@ const DashBoardUserDetails = ({ auth }) => {
                   >
                     <div className="asset_detail_modal_div_conts">
                       <div
-                        className="asset_detail_heading"
+                        className="asset_detail_heading asset_detail_heading_user"
                         style={{ margin: "0" }}
                       >
                         <div
@@ -919,7 +946,7 @@ const DashBoardUserDetails = ({ auth }) => {
                             <hr class="custom_hr"></hr>
                             <div className="asset_status_details_div1_body1_cont1">
                               <div className="asset_status_details_div1_body1_cont1_txt1">
-                                Total Times lended
+                                No of times lended
                               </div>
                               <div className="asset_status_details_div1_body1_cont1_txt1">
                                 {data.nTime}x
@@ -951,7 +978,20 @@ const DashBoardUserDetails = ({ auth }) => {
                       {/* ============ */}
                       {/* ============ */}
                       {/* ============ */}
-
+                      <div className="transactionData_body transactionData_body_2">
+                        <div className="witdraw_funds_div_txt">
+                          <span className="witdraw_funds_div_txt_para">
+                            1,000,000.00 engn
+                          </span>
+                          :Available
+                        </div>
+                        <button
+                          className="witdraw_funds_div_btn"
+                          onClick={takeCapital}
+                        >
+                          Withdraw Funds
+                        </button>
+                      </div>
                       {/* ============ */}
                       {/* ============ */}
                       {/* ============ */}
@@ -1020,7 +1060,7 @@ const DashBoardUserDetails = ({ auth }) => {
             <SuccessModal
               successMessage={"Transaction was successful"}
               click={(e) => {
-                window.location.href = "/dashboard/user";
+                window.location.href = "/app/user";
               }}
               SuccessHead="Success"
               hash={hash}

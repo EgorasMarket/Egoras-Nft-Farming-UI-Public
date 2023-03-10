@@ -698,7 +698,8 @@ const AdminAssets = () => {
             setIsLoading(true);
             setText("Paying back, please wait...");
             let check = await checkAllowanceL(
-              "0x4fc19963b769711c09da56b35B334E55c57fc9Ee",
+              // "0x4fc19963b769711c09da56b35B334E55c57fc9Ee",
+              account,
               parseEther(data.amount, "wei").toString(),
               library.getSigner()
             );
@@ -771,7 +772,8 @@ const AdminAssets = () => {
             setIsLoading(true);
             setText("Paying back, please wait...");
             let check = await checkAllowanceL(
-              "0x4fc19963b769711c09da56b35B334E55c57fc9Ee",
+              // "0x4fc19963b769711c09da56b35B334E55c57fc9Ee",
+              account,
               parseEther(data.amount, "wei").toString(),
               library.getSigner()
             );
@@ -1295,7 +1297,7 @@ const AdminAssets = () => {
                       <SuccessModal
                         successMessage={"Transaction was successful"}
                         click={(e) => {
-                          window.location.href = "/dashboard/admin";
+                          window.location.href = "/app/admin";
                         }}
                         SuccessHead="Success"
                         hash={hash}
@@ -1348,7 +1350,11 @@ const AdminAssets = () => {
             <SuccessModal
               successMessage={"Transaction was successful"}
               click={(e) => {
+<<<<<<< HEAD
                 window.location.href = "/dashboard/user";
+=======
+                window.location.href = "/app/user";
+>>>>>>> origin/cyntax-v3
               }}
               SuccessHead="Success"
               hash={hash}

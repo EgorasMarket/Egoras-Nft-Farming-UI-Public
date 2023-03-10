@@ -8,6 +8,11 @@ import DashBoardLendPage from "../Dashboard/DashBoardPages/DashBoardLendPage";
 import AdminAssets from "./AdminPages/AdminAssets";
 import AdminHome from "./AdminPages/AdminHome.jsx";
 import AdminTransactions from "./AdminPages/AdminTransactions";
+import DashboardHome from "../Dashboard/DashBoardPages/DashboardHome";
+import AdminSeeSellers from "./AdminPages/AdminSeeSellers";
+import AdminStaffPage from "./AdminPages/AdminStaffPage";
+import AdminModifyMembership from "./AdminPages/AdminModifyMembership";
+import AdminProductsPage from "./AdminPages/AdminProductsPage";
 // import AdminMinorPage from "./AdminMinorPage";
 import DashBoardUserDetails from "../Dashboard/DashBoardPages/DashBoardUserDetails";
 const Admin = ({ check, togglemakeDark }) => {
@@ -28,12 +33,24 @@ const Admin = ({ check, togglemakeDark }) => {
             <AdminSideBar check={check} togglemakeDark={togglemakeDark} />
             {/* <AdminHome /> */}
             <Switch>
-              <Route exact path="/admin" component={AdminHome} />
-              <Route exact path="/admin/assets" component={AdminAssets} />
+              <Route exact path="/admin" component={DashboardHome} />
+              {/* <Route exact path="/admin/assets" component={AdminAssets} /> */}
+              <Route exact path="/admin/sellers" component={AdminSeeSellers} />
+              <Route exact path="/admin/staff" component={AdminStaffPage} />
               <Route
+                exact
+                path="/admin/all/products"
+                component={AdminProductsPage}
+              />
+              {/* <Route
                 exact
                 path="/admin/transactions"
                 component={AdminTransactions}
+              /> */}
+              <Route
+                exact
+                path="/admin/modify/membership_plan"
+                component={AdminModifyMembership}
               />
             </Switch>
           </div>

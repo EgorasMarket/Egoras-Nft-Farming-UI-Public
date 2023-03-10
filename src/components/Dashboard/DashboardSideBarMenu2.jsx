@@ -3,6 +3,9 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 // import Web3 from "web3";
+import Marquee from "react-fast-marquee";
+// import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+
 import Web3 from "web3";
 import CloseIcon from "@material-ui/icons/Close";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -57,7 +60,7 @@ import {
 const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const dddd = localStorage.getItem("smallSidetoken");
   const [connectId, setConnectId] = useState(false);
-  const [activeBg, setActiveBg] = useState("market");
+  const [activeBg, setActiveBg] = useState("home");
   const [catDiv, setCatDiv] = useState("not_home");
   const [smallSide, setSmallSide] = useState(dddd);
   const [isOpen, setIsOpen] = useState(false);
@@ -71,7 +74,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const [showHeader, setshowHeader] = useState(true);
   const [betaDiv, setBetaDiv] = useState(true);
   const [conecttxt, setConnectTxt] = useState("Not Connected");
-  const [nairaValue, setNairaValue] = useState(670);
+  const [nairaValue, setNairaValue] = useState(750);
   // const [darkMode, setDarkMode] = useState(null);
   const [walletAddr, setWalletAddr] = useState(
     "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -126,60 +129,63 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     }
   }, [account, avatarRef]);
   useEffect(() => {
-    if (linksActive === "/dashboard") {
-      setActiveMenuName("Earn");
+    if (linksActive === "/app") {
+      setActiveMenuName("home");
     }
-    if (linksActive === "/dashboard/stake") {
+    if (urlArr[2] === "market") {
+      setActiveMenuName("market");
+    }
+    if (linksActive === "/app/sell") {
+      setActiveMenuName("sell");
+    }
+    if (linksActive === "/app/staking/egc") {
       setActiveMenuName("Stake");
     }
-    if (linksActive === "/dashboard/user") {
+    if (linksActive === "/app/user") {
       setActiveMenuName("Account Details");
     }
-    if (linksActive === "/dashboard/swap") {
+    if (linksActive === "/app/swap") {
       setActiveMenuName("Swap");
     }
-    if (linksActive === "/dashboard/earn/pool/detail") {
+    if (linksActive === "/app/earn/pool/detail") {
       setActiveMenuName("Earn");
     }
     if (
       linksActive ===
-      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/app/earn/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setActiveMenuName("Earn");
     }
     if (
       linksActive ===
-      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
+      "/app/earn/pool/detail/" + urlArr[5] + "/transactions"
     ) {
       setActiveMenuName("Earn");
     }
-    if (linksActive === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
+    if (linksActive === "/app/earn/pool/" + urlArr[4] + "/detail") {
       setActiveMenuName("Earn");
     }
-    if (linksActive === "/dashboard/earn/pool/detail/transactions") {
+    if (linksActive === "/app/earn/pool/detail/transactions") {
       setActiveMenuName("Earn");
     }
-    // if (linksActive === "/dashboard/add") {
+    // if (linksActive === "/app/add") {
     //   setActiveMenuName("Liquidity");
     // }
-    if (linksActive === "/dashboard/whitepaper") {
+    if (linksActive === "/app/whitepaper") {
       setActiveMenuName("Whitepaper");
     }
-    if (linksActive === "/dashboard/earn") {
+    if (linksActive === "/app/earn") {
       setActiveMenuName("Earn");
     }
-    if (linksActive === "/dashboard/stake/vault/" + urlArr[4] + "/ENGN") {
+    if (linksActive === "/app/stake/vault/" + urlArr[4] + "/ENGN") {
       setActiveMenuName("Vault");
     }
-    if (
-      linksActive ===
-      "/dashboard/stake/deposit_vault/" + urlArr[4] + "/ENGN"
-    ) {
+    if (linksActive === "/app/stake/deposit_vault/" + urlArr[4] + "/ENGN") {
       setActiveMenuName("Vault");
     }
   });
   useEffect(() => {
-    if (linksActive == "/dashboard/products") {
+    if (linksActive == "/app/products") {
       setSearchBar(true);
     }
   });
@@ -188,61 +194,67 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const changeBg = (e) => {
     let currentId = e.currentTarget.id;
     setActiveBg(currentId);
-    if (linksActive === "/dashboard/products") {
+    if (linksActive === "/app/products") {
       setCatDiv("home");
     }
-    if (linksActive === "/dashboard/products/categories/id-phone") {
+    if (linksActive === "/app/products/categories/id-phone") {
       setActiveBg("products");
       setCatDiv("home");
     }
   };
 
   useEffect(() => {
-    if (linksActive === "/dashboard/stake") {
+    if (linksActive === "/app/staking/egc") {
+      setActiveBg("stake");
+    }
+    if (linksActive === "/app") {
+      setActiveBg("home");
+    }
+    if (urlArr[2] === "market") {
       setActiveBg("market");
     }
-    if (linksActive === "/dashboard") {
+    if (linksActive === "/app/sell") {
+      setActiveBg("sell");
+    }
+    if (linksActive === "/app/") {
       setActiveBg("lend");
     }
-    if (linksActive === "/dashboard/") {
+    if (linksActive === "/app/earn") {
       setActiveBg("lend");
     }
-    if (linksActive === "/dashboard/earn") {
-      setActiveBg("lend");
-    }
-    if (linksActive === "/dashboard/user") {
+    if (linksActive === "/app/user") {
       setActiveBg("account");
     }
-    if (linksActive === "/dashboard/user/referral") {
+    if (linksActive === "/app/user/referral") {
       setActiveBg("account");
     }
     if (
       linksActive ===
-      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/app/earn/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setActiveBg("lend");
     }
     if (
       linksActive ===
-      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
+      "/app/earn/pool/detail/" + urlArr[5] + "/transactions"
     ) {
       setActiveBg("lend");
     }
-    if (linksActive === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
+    if (linksActive === "/app/earn/pool/" + urlArr[4] + "/detail") {
       setActiveBg("lend");
     }
-    if (linksActive === "/dashboard/earn/pool/detail/transactions") {
+    if (linksActive === "/app/earn/pool/detail/transactions") {
       setActiveBg("lend");
     }
 
-    if (linksActive === "/dashboard/swap") {
+    if (linksActive === "/app/swap") {
       setActiveBg("swap");
     }
-    if (linksActive === "/dashboard/add") {
+    if (linksActive === "/app/add") {
       setActiveBg("pool");
     }
 
-    if (linksActive === "/dashboard/whitepaper") {
+    if (linksActive === "/app/whitepaper") {
       setActiveBg("whitepaper");
     }
 
@@ -378,7 +390,8 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     [egcUsdVal, egrUsdVal]
   );
 
-  const chainIdBsc = "56";
+  // const chainIdBsc = "56";
+  const chainIdBsc = "97";
 
   useEffect(() => {
     if (account) {
@@ -449,34 +462,63 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     <div className={smallSide == "not_small" ? "side" : "small_side"}>
       <div className="header_token_prices_div">
         <div className="container-fluid">
-          <div className="header_token_prices_div_area">
-            <div className="header_token_prices_div_area1">
-              {nairaValue} NGN ~ 1 USD
+          <Marquee
+            speed={50}
+            pauseOnHover={true}
+            gradientColor="[255, 255, 255]"
+          >
+            <div className="header_token_prices_div_area">
+              <div className="header_token_prices_div_area1">
+                {nairaValue} NGN ~ 1 USD
+              </div>
+              <span class="vertical_rule2"></span>
+              <div className="header_token_prices_div_area1">
+                {nairaValue} NGN ~ 1 eUSD
+              </div>
+              <span class="vertical_rule2"></span>
+              <div className="header_token_prices_div_area1">
+                {nairaValue} ENGN ~ 1 USD
+              </div>
+              <span class="vertical_rule2"></span>
+              <div className="header_token_prices_div_area1">
+                {nairaValue} ENGN ~ 1 eUSD
+              </div>
+              <span class="vertical_rule2"></span>
+              <div className="header_token_prices_div_area1">
+                1 EGC ~ {numberWithCommas(egcUsdVal.toFixed(2))} USD
+              </div>
+              <span class="vertical_rule2"></span>
+              <div className="header_token_prices_div_area1">
+                1 EGC ~ {numberWithCommas(egcUsdVal.toFixed(2))} eUSD
+              </div>
+              <span class="vertical_rule2"></span>
+              <div className="header_token_prices_div_area1">
+                1 EGR ~ {egrUsdVal.toFixed(3)} USD
+              </div>
+              <span class="vertical_rule2"></span>
+              <div className="header_token_prices_div_area1">
+                1 EGR ~ {egrUsdVal.toFixed(3)} eUSD
+              </div>
+              <span class="vertical_rule2"></span>
+              <div className="header_token_prices_div_area1">
+                1 eUSD ~ 1 USD
+              </div>
+              <span class="vertical_rule2"></span>
+              <div className="header_token_prices_div_area1">
+                1 ENGN ~ 1 NGN
+              </div>
+              <span class="vertical_rule2"></span>
+              <div className="header_token_prices_div_area1">
+                1 EGC ~ {numberWithCommas((egcUsdVal * nairaValue).toFixed(2))}{" "}
+                NGN
+              </div>
+              <span class="vertical_rule2"></span>
+              <div className="header_token_prices_div_area1">
+                1 EGR ~ {(egrUsdVal * nairaValue).toFixed(2)} NGN
+              </div>
+              <span class="vertical_rule2"></span>
             </div>
-            <span class="vertical_rule2"></span>
-            <div className="header_token_prices_div_area1">
-              {nairaValue} ENGN ~ 1 USD
-            </div>
-            <span class="vertical_rule2"></span>
-            <div className="header_token_prices_div_area1">
-              1 EGC ~ {numberWithCommas(egcUsdVal.toFixed(2))} USD
-            </div>
-            <span class="vertical_rule2"></span>
-            <div className="header_token_prices_div_area1">
-              1 EGR ~ {egrUsdVal.toFixed(3)} USD
-            </div>
-            <span class="vertical_rule2"></span>
-            <div className="header_token_prices_div_area1">1 ENGN ~ 1 NGN</div>
-            <span class="vertical_rule2"></span>
-            <div className="header_token_prices_div_area1">
-              1 EGC ~ {numberWithCommas((egcUsdVal * nairaValue).toFixed(2))}{" "}
-              NGN
-            </div>
-            <span class="vertical_rule2"></span>
-            <div className="header_token_prices_div_area1">
-              1 EGR ~ {(egrUsdVal * nairaValue).toFixed(2)} NGN
-            </div>
-          </div>
+          </Marquee>
         </div>
       </div>
       <section className="DashBoardHeaderSection">
@@ -508,8 +550,18 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             </div>
             <div className="header_tabs">
               <a
+                id="home"
+                href="/app"
+                className={
+                  activeBg == "home" ? "header_tab1_active " : "header_tab1"
+                }
+                onClick={changeBg}
+              >
+                Home
+              </a>
+              {/* <a
                 id="lend"
-                href="/dashboard/earn"
+                href="/app/earn"
                 className={
                   activeBg == "lend" ? "header_tab1_active " : "header_tab1"
                 }
@@ -520,21 +572,24 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   <span class="c-basePart"></span>
                 </span>
                 Earn
-              </a>
-
+              </a> */}
               <a
-                id="market"
-                href="/dashboard/stake"
+                id="stake"
+                href="/app/staking/egc"
                 className={
-                  activeBg == "market" ? "header_tab1_active " : "header_tab1"
+                  activeBg == "stake" ? "header_tab1_active " : "header_tab1"
                 }
                 onClick={changeBg}
               >
+                <span class="Ping -top-1">
+                  <span class="c-flashingPart"></span>
+                  <span class="c-basePart"></span>
+                </span>
                 Stake
               </a>
               <a
                 id="swap"
-                href="/dashboard/swap"
+                href="/app/swap"
                 className={
                   activeBg == "swap" ? "header_tab1_active " : "header_tab1"
                 }
@@ -543,8 +598,33 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                 Swap
               </a>
               <a
+                id="sell"
+                href="/app/sell"
+                className={
+                  activeBg == "sell" ? "header_tab1_active " : "header_tab1"
+                }
+                onClick={changeBg}
+              >
+                Sell
+              </a>
+              <a
+                id="market"
+                href="/app/market"
+                className={
+                  activeBg == "market" ? "header_tab1_active " : "header_tab1"
+                }
+                onClick={changeBg}
+              >
+                Market{" "}
+                <span class="Ping -top-1">
+                  <span class="c-flashingPart"></span>
+                  <span class="c-basePart"></span>
+                </span>
+              </a>
+
+              <a
                 id="account"
-                href="/dashboard/user"
+                href="/app/user"
                 className={
                   activeBg == "account" ? "header_tab1_active " : "header_tab1"
                 }
@@ -559,27 +639,18 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   <Hamburger toggled={isOpen} toggle={setIsOpen} />
                 </div>
                 <div className="toggle_dark_mode_div">
-                  <LightModeIcon
-                    className={
-                      check === false
-                        ? "lightMode_icon_active"
-                        : "lightMode_icon"
-                    }
-                  />
                   <SwitchToggle2
                     className="toggle_dark_mode"
                     darkMode={togglemakeDark}
                     checkBox={check}
                   />
-                  <DarkModeIcon
-                    className={
-                      check === false ? "darkMode_icon" : "darkMode_icon_active"
-                    }
-                  />
                 </div>
                 {account ? (
                   <div className="connected_header_address dash_connected_header_address">
-                    <p className="header_wllt_bal">{coinBalance} BNB</p>
+                    <p className="header_wllt_bal">
+                      <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
+                      {coinBalance} BNB
+                    </p>
                     <div
                       className="metamask_prof_pic_icon"
                       ref={avatarRef}
@@ -616,7 +687,10 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   Balance:
                 </div>
                 <div className="mobile_view_header_cont_head_body_cont1_para">
-                  <p className="header_wllt_bal">{coinBalance} BNB</p>
+                  <p className="header_wllt_bal">
+                    <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
+                    {coinBalance} BNB
+                  </p>
                 </div>
               </div>
 
@@ -670,7 +744,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
       <div className="header_tabs2">
         <a
           id="lend"
-          href="/dashboard/earn"
+          href="/app/earn"
           className={activeBg == "lend" ? "header_tab1_active " : "header_tab1"}
           onClick={changeBg}
         >
@@ -679,10 +753,10 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
         </a>
 
         <a
-          id="market"
-          href="/dashboard/stake"
+          id="stake"
+          href="/app/staking/egc"
           className={
-            activeBg == "market" ? "header_tab1_active " : "header_tab1"
+            activeBg == "stake" ? "header_tab1_active " : "header_tab1"
           }
           onClick={changeBg}
         >
@@ -691,7 +765,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
         </a>
         <a
           id="swap"
-          href="/dashboard/swap"
+          href="/app/swap"
           className={activeBg == "swap" ? "header_tab1_active " : "header_tab1"}
           onClick={changeBg}
         >
@@ -701,7 +775,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
 
         <a
           id="account"
-          href="/dashboard/user"
+          href="/app/user"
           className={
             activeBg == "account" ? "header_tab1_active " : "header_tab1"
           }

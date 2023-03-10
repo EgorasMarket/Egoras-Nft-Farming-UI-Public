@@ -214,7 +214,9 @@ const AboutUs = () => {
       {/* =================== */}
       <section
         className="roadmap_section"
-        style={{ backgroundImage: "url(/img/road_map_street_bg.png)" }}
+        style={{
+          backgroundImage: "url(/img/road_map_street_bg.png)",
+        }}
       >
         <div className="road_map_head">Road Map</div>
         {/* <div className="container"> */}

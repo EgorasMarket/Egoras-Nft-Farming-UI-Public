@@ -128,12 +128,18 @@ const AddLiquidity = ({ match, closeModal, which }) => {
         setEgcToEngn(data["egoras-credit"].ngn);
         // console.log(data["egoras-credit"].ngn);
         // const {egorascredit} = data;
+      })
+      .catch((err) => {
+        console.log(err.response); // "oh, no!"
       });
     let string2 =
       "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=bnb&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
     await fetch(string2)
       .then((resp) => resp.json())
-      .then((data) => console.log(data));
+      .then((data) => console.log(data))
+      .catch((err) => {
+        console.log(err.response); // "oh, no!"
+      });
   };
 
   useEffect(() => {
@@ -247,50 +253,6 @@ const AddLiquidity = ({ match, closeModal, which }) => {
     }
   };
 
-  const doSwap = async () => {
-    console.log("baseVal", baseVal);
-
-    setText("Transacting with blockchain, please wait...");
-    setStage("loading");
-    console.log(baseVal.symbol, "baseVal.symbol");
-
-    let ckeckAllowance = await checkAllowance2(
-      account,
-      parseEther(inputVal.toString(), "wei").toString(),
-      library.getSigner(),
-      baseVal.symbol.toLowerCase()
-    );
-    // alert("Within the block chain 1: " + ckeckAllowance)
-
-    if (ckeckAllowance.status == true) {
-      let isBase = baseVal.symbol == "eNGN" ? false : true;
-
-      let ret = isBase
-        ? await swapImpl(
-            parseEther(inputVal.toString(), "wei").toString(),
-            isBase,
-            library.getSigner()
-          )
-        : await swapBase(
-            parseEther(inputVal.toString(), "wei").toString(),
-            isBase,
-            library.getSigner()
-          );
-
-      // alert("Within the block chain 2: " + ret)
-
-      if (ret.status == true) {
-        setHash(ret.message);
-        setStage("success");
-      } else if (ret.status == false) {
-        setText(ret.message);
-        setStage("error");
-      }
-    } else {
-      setStage("unlock");
-    }
-  };
-
   const toggleModal2 = () => {
     if (modal2 === true) {
       setModal2(false);
@@ -380,6 +342,45 @@ const AddLiquidity = ({ match, closeModal, which }) => {
 
   console.log(baseBalance);
   console.log(coinBalance2);
+
+  const doSwap = async () => {
+    console.log("baseVal", baseVal);
+    setText("Transacting with blockchain, please wait...");
+    setStage("loading");
+    console.log(baseVal.symbol, "baseVal.symbol");
+    let ckeckAllowance = await checkAllowance2(
+      account,
+      parseEther(inputVal.toString(), "wei").toString(),
+      library.getSigner(),
+      baseVal.symbol.toLowerCase()
+    );
+    // alert("Within the block chain 1: " + ckeckAllowance)
+
+    if (ckeckAllowance.status == true) {
+      let isBase = baseVal.symbol == "eNGN" ? false : true;
+      let ret = isBase
+        ? await swapImpl(
+            parseEther(inputVal.toString(), "wei").toString(),
+            isBase,
+            library.getSigner()
+          )
+        : await swapBase(
+            parseEther(inputVal.toString(), "wei").toString(),
+            isBase,
+            library.getSigner()
+          );
+      // alert("Within the block chain 2: " + ret)
+      if (ret.status == true) {
+        setHash(ret.message);
+        setStage("success");
+      } else if (ret.status == false) {
+        setText(ret.message);
+        setStage("error");
+      }
+    } else {
+      setStage("unlock");
+    }
+  };
   return (
     // <div>
     <div className="other2">

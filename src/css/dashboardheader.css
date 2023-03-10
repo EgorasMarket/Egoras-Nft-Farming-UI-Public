@@ -24,8 +24,8 @@
   display: none;
 }
 .dark .header_token_prices_div {
-  background: #407555;
-  color: #fff;
+  background: #0b110c;
+  color: #97a099;
 }
 .dash_board_links_tab {
   display: flex;
@@ -63,7 +63,7 @@
   border-left: 1px solid rgb(168 168 168);
 }
 .dark .vertical_rule2 {
-  border-left: 1px solid rgb(238, 238, 238);
+  border-left: 1px solid #97a099;
 }
 .medium_icon2 {
   font-family: serif;
@@ -119,8 +119,8 @@
   font-size: 12px;
 }
 .dark .dash_board_links_area {
-  background: #4d705c;
-  background-color: #355743a8;
+  background: #32473b;
+  background-color: #122319ab;
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
   border: solid 1px #25392d;
@@ -142,7 +142,7 @@
   display: flex;
   align-items: center;
   flex-direction: row;
-  gap: 10px;
+  /* gap: 10px; */
 }
 .account_numb_div {
   font-weight: 700;
@@ -234,8 +234,8 @@
 }
 
 .dark .header_tabs {
-  border: solid 1px #64796d;
-  background: #212b25;
+  border: solid 1px #29332d;
+  background: #0b110c;
 }
 .header_tab1 {
   cursor: pointer;
@@ -251,11 +251,11 @@
 .Ping,
 .Ping .c-basePart {
   position: absolute;
-  height: 0.55rem;
-  width: 0.55rem;
+  height: 0.35rem;
+  width: 0.35rem;
   right: 23%;
-  left: 22%;
-  top: 9%;
+  left: 67%;
+  top: 12%;
 }
 
 .Ping .c-basePart,
@@ -270,7 +270,7 @@
   display: inline-flex;
   height: 100%;
   width: 100%;
-  left: 19%;
+  left: 74%;
   top: 8%;
   opacity: 0.75;
 }

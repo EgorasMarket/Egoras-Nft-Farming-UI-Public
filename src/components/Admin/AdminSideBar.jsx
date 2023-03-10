@@ -4,6 +4,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 // import Web3 from "web3";
 import Web3 from "web3";
+// import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import CloseIcon from "@material-ui/icons/Close";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -73,7 +74,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
   const [showHeader, setshowHeader] = useState(true);
   const [betaDiv, setBetaDiv] = useState(true);
   const [conecttxt, setConnectTxt] = useState("Not Connected");
-  const [nairaValue, setNairaValue] = useState(670);
+  const [nairaValue, setNairaValue] = useState(750);
   // const [darkMode, setDarkMode] = useState(null);
   const [walletAddr, setWalletAddr] = useState(
     "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -131,57 +132,54 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
     if (linksActive === "/dashboard") {
       setActiveMenuName("Earn");
     }
-    if (linksActive === "/dashboard/stake") {
+    if (linksActive === "/app/stake") {
       setActiveMenuName("Stake");
     }
-    if (linksActive === "/dashboard/user") {
+    if (linksActive === "/app/user") {
       setActiveMenuName("Account Details");
     }
-    if (linksActive === "/dashboard/swap") {
+    if (linksActive === "/app/swap") {
       setActiveMenuName("Swap");
     }
-    if (linksActive === "/dashboard/earn/pool/detail") {
+    if (linksActive === "/app/earn/pool/detail") {
       setActiveMenuName("Earn");
     }
     if (
       linksActive ===
-      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/app/earn/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setActiveMenuName("Earn");
     }
     if (
       linksActive ===
-      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
+      "/app/earn/pool/detail/" + urlArr[5] + "/transactions"
     ) {
       setActiveMenuName("Earn");
     }
-    if (linksActive === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
+    if (linksActive === "/app/earn/pool/" + urlArr[4] + "/detail") {
       setActiveMenuName("Earn");
     }
-    if (linksActive === "/dashboard/earn/pool/detail/transactions") {
+    if (linksActive === "/app/earn/pool/detail/transactions") {
       setActiveMenuName("Earn");
     }
-    // if (linksActive === "/dashboard/add") {
+    // if (linksActive === "/app/add") {
     //   setActiveMenuName("Liquidity");
     // }
-    if (linksActive === "/dashboard/whitepaper") {
+    if (linksActive === "/app/whitepaper") {
       setActiveMenuName("Whitepaper");
     }
-    if (linksActive === "/dashboard/earn") {
+    if (linksActive === "/app/earn") {
       setActiveMenuName("Earn");
     }
-    if (linksActive === "/dashboard/stake/vault/" + urlArr[4] + "/ENGN") {
+    if (linksActive === "/app/stake/vault/" + urlArr[4] + "/ENGN") {
       setActiveMenuName("Vault");
     }
-    if (
-      linksActive ===
-      "/dashboard/stake/deposit_vault/" + urlArr[4] + "/ENGN"
-    ) {
+    if (linksActive === "/app/stake/deposit_vault/" + urlArr[4] + "/ENGN") {
       setActiveMenuName("Vault");
     }
   });
   useEffect(() => {
-    if (linksActive == "/dashboard/products") {
+    if (linksActive == "/app/products") {
       setSearchBar(true);
     }
   });
@@ -190,67 +188,73 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
   const changeBg = (e) => {
     let currentId = e.currentTarget.id;
     setActiveBg(currentId);
-    if (linksActive === "/dashboard/products") {
+    if (linksActive === "/app/products") {
       setCatDiv("home");
     }
-    if (linksActive === "/dashboard/products/categories/id-phone") {
+    if (linksActive === "/app/products/categories/id-phone") {
       setActiveBg("products");
       setCatDiv("home");
     }
   };
 
   useEffect(() => {
-    if (linksActive === "/dashboard/stake") {
+    if (linksActive === "/app/stake") {
       setActiveBg("market");
     }
     if (linksActive === "/admin") {
       setActiveBg("lend");
     }
-    if (linksActive === "/admin/assets") {
-      setActiveBg("assets");
+    if (linksActive === "/admin/sellers") {
+      setActiveBg("sellers");
     }
-    if (linksActive === "/admin/transactions") {
+    if (linksActive === "/admin/modify/membership_plan") {
+      setActiveBg("membership");
+    }
+    if (linksActive === "/admin/all/products") {
+      setActiveBg("products");
+    }
+    if (linksActive === "/admin/staff") {
       setActiveBg("transactions");
     }
     if (linksActive === "/admin/") {
       setActiveBg("lend");
     }
-    if (linksActive === "/dashboard/earn") {
+    if (linksActive === "/app/earn") {
       setActiveBg("lend");
     }
-    if (linksActive === "/dashboard/user") {
+    if (linksActive === "/app/user") {
       setActiveBg("account");
     }
-    if (linksActive === "/dashboard/user/referral") {
+    if (linksActive === "/app/user/referral") {
       setActiveBg("account");
     }
     if (
       linksActive ===
-      "/dashboard/earn/pool/detail/branch/" + urlArr[6] + "/asset"
+      "/app/earn/pool/detail/branch/" + urlArr[6] + "/asset"
     ) {
       setActiveBg("lend");
     }
     if (
       linksActive ===
-      "/dashboard/earn/pool/detail/" + urlArr[5] + "/transactions"
+      "/app/earn/pool/detail/" + urlArr[5] + "/transactions"
     ) {
       setActiveBg("lend");
     }
-    if (linksActive === "/dashboard/earn/pool/" + urlArr[4] + "/detail") {
+    if (linksActive === "/app/earn/pool/" + urlArr[4] + "/detail") {
       setActiveBg("lend");
     }
-    if (linksActive === "/dashboard/earn/pool/detail/transactions") {
+    if (linksActive === "/app/earn/pool/detail/transactions") {
       setActiveBg("lend");
     }
 
-    if (linksActive === "/dashboard/swap") {
+    if (linksActive === "/app/swap") {
       setActiveBg("swap");
     }
-    if (linksActive === "/dashboard/add") {
+    if (linksActive === "/app/add") {
       setActiveBg("pool");
     }
 
-    if (linksActive === "/dashboard/whitepaper") {
+    if (linksActive === "/app/whitepaper") {
       setActiveBg("whitepaper");
     }
 
@@ -386,7 +390,8 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
     [egcUsdVal, egrUsdVal]
   );
 
-  const chainIdBsc = "56";
+  // const chainIdBsc = "56";
+  const chainIdBsc = "97";
 
   useEffect(() => {
     if (account) {
@@ -526,18 +531,18 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 Home
               </a>
               <a
-                id="assets"
-                href="/admin/assets"
+                id="sellers"
+                href="/admin/sellers"
                 className={
-                  activeBg == "assets" ? "header_tab1_active " : "header_tab1"
+                  activeBg == "sellers" ? "header_tab1_active " : "header_tab1"
                 }
                 onClick={changeBg}
               >
-                Withdraw
+                Sellers
               </a>
               <a
                 id="transactions"
-                href="/admin/transactions"
+                href="/admin/staff"
                 className={
                   activeBg == "transactions"
                     ? "header_tab1_active "
@@ -545,12 +550,34 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 }
                 onClick={changeBg}
               >
-                Transactions
+                Staff
+              </a>
+              <a
+                id="products"
+                href="/admin/all/products"
+                className={
+                  activeBg == "products" ? "header_tab1_active " : "header_tab1"
+                }
+                onClick={changeBg}
+              >
+                Products
+              </a>
+              <a
+                id="membership"
+                href="/admin/modify/membership_plan"
+                className={
+                  activeBg == "membership"
+                    ? "header_tab1_active "
+                    : "header_tab1"
+                }
+                onClick={changeBg}
+              >
+                Membership
               </a>
 
               {/* <a
                 id="market"
-                href="/dashboard/stake"
+                href="/app/stake"
                 className={
                   activeBg == "market" ? "header_tab1_active " : "header_tab1"
                 }
@@ -560,7 +587,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
               </a>
               <a
                 id="swap"
-                href="/dashboard/swap"
+                href="/app/swap"
                 className={
                   activeBg == "swap" ? "header_tab1_active " : "header_tab1"
                 }
@@ -570,7 +597,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
               </a>
               <a
                 id="account"
-                href="/dashboard/user"
+                href="/app/user"
                 className={
                   activeBg == "account" ? "header_tab1_active " : "header_tab1"
                 }
@@ -585,27 +612,19 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                   <Hamburger toggled={isOpen} toggle={setIsOpen} />
                 </div>
                 <div className="toggle_dark_mode_div">
-                  <LightModeIcon
-                    className={
-                      check === false
-                        ? "lightMode_icon_active"
-                        : "lightMode_icon"
-                    }
-                  />
                   <SwitchToggle2
                     className="toggle_dark_mode"
                     darkMode={togglemakeDark}
                     checkBox={check}
                   />
-                  <DarkModeIcon
-                    className={
-                      check === false ? "darkMode_icon" : "darkMode_icon_active"
-                    }
-                  />
                 </div>
                 {account ? (
                   <div className="connected_header_address dash_connected_header_address">
-                    <p className="header_wllt_bal">{coinBalance} BNB</p>
+                    <p className="header_wllt_bal">
+                      {" "}
+                      <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
+                      {coinBalance} BNB
+                    </p>
                     <div
                       className="metamask_prof_pic_icon"
                       ref={avatarRef}
@@ -642,7 +661,11 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                   Balance:
                 </div>
                 <div className="mobile_view_header_cont_head_body_cont1_para">
-                  <p className="header_wllt_bal">{coinBalance} BNB</p>
+                  <p className="header_wllt_bal">
+                    {" "}
+                    <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
+                    {coinBalance} BNB
+                  </p>
                 </div>
               </div>
 
@@ -670,7 +693,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
       <div className="header_tabs2">
         <a
           id="lend"
-          href="/dashboard/earn"
+          href="/app"
           className={activeBg == "lend" ? "header_tab1_active " : "header_tab1"}
           onClick={changeBg}
         >
@@ -679,26 +702,37 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
         </a>
 
         <a
-          id="assets"
-          href="/admin/assets"
+          id="sellers"
+          href="/admin/sellers"
           className={
-            activeBg == "assets" ? "header_tab1_active " : "header_tab1"
+            activeBg == "sellers" ? "header_tab1_active " : "header_tab1"
           }
           onClick={changeBg}
         >
           <StorageIcon className="sidebarIcon" />
-          Withdraw
+          Sellers
         </a>
         <a
           id="transactions"
-          href="/admin/transactions"
+          href="/admin/staff"
           className={
             activeBg == "transactions" ? "header_tab1_active " : "header_tab1"
           }
           onClick={changeBg}
         >
           <ReceiptLongIcon className="sidebarIcon" />
-          Transactions
+          Staff
+        </a>
+        <a
+          id="membership"
+          href="/admin/modify/membership_plan"
+          className={
+            activeBg == "membership" ? "header_tab1_active " : "header_tab1"
+          }
+          onClick={changeBg}
+        >
+          <ReceiptLongIcon className="sidebarIcon" />
+          Membership
         </a>
       </div>
       {/* =============''''''''' */}
