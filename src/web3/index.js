@@ -1090,6 +1090,25 @@ const annually = async (amount, signer) => {
     };
   }
 };
+const takeRoyalty = async (signer) => {
+  // console.log(amount);
+  try {
+    const instance = contractStakingFacetInstance(signer);
+    let result;
+    result = await instance.takeRoyalty();
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
 // =========new V3 Functions==================================
 // ===========================================
 // ===========================================
@@ -1143,4 +1162,5 @@ export {
   listProduct,
   monthly,
   annually,
+  takeRoyalty,
 };

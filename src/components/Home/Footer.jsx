@@ -71,6 +71,9 @@ const Footer = () => {
     if (currentPage === "/admin/assets") {
       setShowFooter(false);
     }
+    if (currentPage === "/app/user/sales") {
+      setShowFooter(false);
+    }
     if (currentPage === "/app/earning") {
       setShowFooter(false);
     }

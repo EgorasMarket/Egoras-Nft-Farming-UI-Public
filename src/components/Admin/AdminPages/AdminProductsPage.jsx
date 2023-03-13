@@ -771,6 +771,17 @@ const AdminProductsPage = () => {
         <>
           {data.id === saleDetails ? (
             <div className="saleDetailsDiv">
+              <div
+                className="saleDetailsDiv_close_div"
+                onClick={ToggleSaleDetails}
+              ></div>
+              <div
+                className="saleDetailsDiv_area_closeIcon_div"
+                onClick={ToggleSaleDetails}
+              >
+                <CloseIcon className="saleDetailsDiv_area_closeIcon" />
+                Close
+              </div>
               <div className="saleDetailsDiv_area">
                 <div className="saleDetailsDiv_area_1">
                   <div className="saleDetailsDiv_area_1_title">
@@ -918,7 +929,15 @@ const AdminProductsPage = () => {
         <>
           {data.id === editProductDiv ? (
             <div className="editProductDiv">
+              <div
+                className="editProductDiv_close_div"
+                onClick={ToggleEditProduct}
+              ></div>
               <div className="editProductDiv_area">
+                <CloseIcon
+                  className="editProductDiv_area_closeIcon"
+                  onClick={ToggleEditProduct}
+                />
                 <div className="sell_container">
                   <div className="sell_container_header">Edit Product</div>
                   <div className="sell_container_body">
