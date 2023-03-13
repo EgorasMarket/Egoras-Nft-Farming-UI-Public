@@ -90,6 +90,7 @@ const AdminProductsPage = () => {
   const [prodName, setProdName] = useState("");
   const [brandName, setBrandName] = useState("");
   const [saleAmount, setSaleAmount] = useState();
+  const [newProducts, setNewProducts] = useState([]);
   const [prodCondition, setProdCondition] = useState("");
   const [imageSrc, setImageSrc] = useState("");
   const [imageSrc2, setImageSrc2] = useState("");
@@ -522,6 +523,19 @@ const AdminProductsPage = () => {
     setFormData({ ...formData, product_details: text });
     setEditorState(editorState);
   };
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get(API_URL + "/product/new", null, config);
+
+      console.log(res.data.data);
+      setNewProducts(res.data.data);
+      // newProducts, setNewProducts
+    }
+
+    fetchData();
+  }, []);
+
   const classes = useStyles();
   return (
     <div className="other2 asset_other2">
@@ -681,7 +695,7 @@ const AdminProductsPage = () => {
 
                 
               </div> */}
-                {SalableProduct.length <= 0 ? (
+                {newProducts.length <= 0 ? (
                   <div className="no_loans_div">
                     <div className="no_loans_div_cont">
                       <Nodata />
@@ -697,7 +711,7 @@ const AdminProductsPage = () => {
                     {/* =============== */}
                     {/* =============== */}
                     {/* =============== */}
-                    {SalableProduct.map((asset) => {
+                    {newProducts.map((asset) => {
                       //   var percentage = (asset.funded / asset.amount) * 100;
                       return (
                         <tr
@@ -708,39 +722,41 @@ const AdminProductsPage = () => {
                           <td className="assets-category-data branch_name_title">
                             <div className="assets-data">
                               <div className="assets-data-pool_name">
-                                {asset.ProductName}
+                                {asset.product_name}
                               </div>
                             </div>
                           </td>
                           <td className="assets-category-data1b stable-content branch_apy">
                             {numberWithCommas(
-                              parseInt(asset.Amount).toFixed(0)
+                              parseInt(asset.user_amount).toFixed(0)
                             )}{" "}
                             Eusd
                           </td>
                           <td className="assets-category-data1b stable-content branch_apy">
-                            {`${asset.Seller.slice(
-                              0,
-                              6
-                            )}...${asset.Seller.slice(39, 42)}`}
-                          </td>
-                          <td className="assets-category-data1b stable-content branch_apy">
-                            {asset.UploadingStatus}
-                          </td>
-                          <td className="assets-category-data1b stable-content branch_apy">
-                            {asset.Uploader != "Nil" ? (
-                              <>
-                                {`${asset.Uploader.slice(
+                            {asset.user_wallet != null
+                              ? `${asset.user_wallet.slice(
                                   0,
                                   6
-                                )}...${asset.Uploader.slice(39, 42)}`}
+                                )}...${asset.user_wallet.slice(39, 42)}`
+                              : "N/A"}
+                          </td>
+                          <td className="assets-category-data1b stable-content branch_apy">
+                            {asset.status}
+                          </td>
+                          <td className="assets-category-data1b stable-content branch_apy">
+                            {asset.personnel != null ? (
+                              <>
+                                {`${asset.personnel.slice(
+                                  0,
+                                  6
+                                )}...${asset.personnel.slice(39, 42)}`}
                               </>
                             ) : (
-                              <>{asset.Uploader}</>
+                              <>{asset.personnel}</>
                             )}
                           </td>
                           <td className="assets-category-data1b stable-content branch_apy">
-                            {asset.UploadDate}
+                            {asset.createdAt}
                           </td>
                           <td className="assets-category-data-last branch_loan_action">
                             <ArrowForwardIosIcon />
