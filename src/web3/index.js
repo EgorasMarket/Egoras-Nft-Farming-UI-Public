@@ -17,6 +17,7 @@ import Contract_Address from "./contracts/Contract_Address.json";
 // ====================new v3 contracts =================
 import ProductFacet from "./contracts/V3/ProductFacet.json";
 import StakingFacet from "./contracts/V3/StakingFacet.json";
+import MembershipFacet from "./contracts/V3/MembershipFacet.json";
 // ====================new v3 contracts =================
 
 // ===============
@@ -31,6 +32,9 @@ const contractProductFacetInstance = (signer) => {
 };
 const contractStakingFacetInstance = (signer) => {
   return new Contract(StakingFacet.address, StakingFacet.abi, signer);
+};
+const contractMembershipFacetInstance = (signer) => {
+  return new Contract(MembershipFacet.address, MembershipFacet.abi, signer);
 };
 // ========new V3 instances =====================
 // =============================
@@ -1109,6 +1113,34 @@ const takeRoyalty = async (signer) => {
     };
   }
 };
+const configurePlan = async (
+  _monthlyPrice,
+  _semiAnnuallyPlan,
+  _annuallyPlan,
+  signer
+) => {
+  console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
+  try {
+    const instance = contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.configurePlan(
+      _monthlyPrice,
+      _semiAnnuallyPlan,
+      _annuallyPlan
+    );
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
 // =========new V3 Functions==================================
 // ===========================================
 // ===========================================
@@ -1163,4 +1195,5 @@ export {
   monthly,
   annually,
   takeRoyalty,
+  configurePlan,
 };

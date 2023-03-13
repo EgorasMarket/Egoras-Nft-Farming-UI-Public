@@ -14,7 +14,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { numberWithCommas } from "../../../static";
 import Nodata from "./nodataComponent/Nodata";
 import CloseIcon from "@mui/icons-material/Close";
-
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import { Link } from "react-router-dom";
