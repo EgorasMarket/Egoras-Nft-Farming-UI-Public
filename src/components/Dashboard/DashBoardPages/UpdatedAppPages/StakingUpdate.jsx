@@ -51,6 +51,7 @@ import {
   getLatestLoan,
   repay,
   topup,
+  takeRoyalty,
   draw,
   checkAllowanceL,
   unluckToken2,
@@ -1195,6 +1196,11 @@ const StakingUpdate = () => {
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
   };
+  const TakeReward = async () => {
+    const res = await takeRoyalty(library.getSigner());
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+  };
   const toggleLockTabs = (e) => {
     let target = e.currentTarget.id;
     setActiveTab(target);
@@ -1594,7 +1600,10 @@ const StakingUpdate = () => {
                         </div>
                       </div>
                     </div>
-                    <button className="lock_container_cont1_div1_lock_div_lock_body_claim_Div_button">
+                    <button
+                      className="lock_container_cont1_div1_lock_div_lock_body_claim_Div_button"
+                      onClick={TakeReward}
+                    >
                       Claim Reward
                     </button>
                   </div>

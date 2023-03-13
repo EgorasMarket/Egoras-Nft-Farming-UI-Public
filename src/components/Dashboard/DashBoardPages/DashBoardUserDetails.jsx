@@ -4,7 +4,8 @@ import Timer from "./Timer";
 import { addDays, format } from "date-fns";
 import { Link } from "react-router-dom";
 import { CopperLoading } from "respinner";
-
+import GroupAddIcon from "@mui/icons-material/GroupAdd";
+import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import { connect } from "react-redux";
 import { SuccessModal, ErrorModal } from "./Modal/Success_Error_Component";
 import StarRateIcon from "@mui/icons-material/StarRate";
@@ -259,8 +260,15 @@ const DashBoardUserDetails = ({ auth }) => {
   useEffect(() => {
     if (currentPage === "/app/user") {
       setActiveLink("poolDetails");
-    } else if (currentPage === "/app/user/referral") {
+      return;
+    }
+    if (currentPage === "/app/user/referral") {
       setActiveLink("referral");
+      return;
+    }
+    if (currentPage === "/app/user/sales") {
+      setActiveLink("sales");
+      return;
     }
   });
   useEffect(
@@ -361,29 +369,22 @@ const DashBoardUserDetails = ({ auth }) => {
                     : "pool_lend_details_link"
                 }
               >
-                <DashboardIcon className="asset_overview_link_icon" />
-                Refferal
+                <GroupAddIcon className="asset_overview_link_icon" />
+                Referral
+              </Link>
+              <Link
+                to="/app/user/sales"
+                className={
+                  activeLink === "sales"
+                    ? "pool_lend_details_link_active"
+                    : "pool_lend_details_link"
+                }
+              >
+                <TrendingDownIcon className="asset_overview_link_icon" />
+                Sales
               </Link>
             </div>
-            <div className="userdAshboard_head">
-              <div className="userdAshboard_head_username">
-                <span className="userdAshboard_head_username_head">
-                  UserName:
-                </span>{" "}
-                <span className="userdAshboard_head_username_para">
-                  {userName}
-                </span>{" "}
-              </div>
-              <span className="hr_vertical"></span>
-              <div className="userdAshboard_head_username">
-                <span className="userdAshboard_head_username_head">
-                  KYC Status:
-                </span>{" "}
-                <span className="userdAshboard_head_username_para">
-                  {kycStatus}
-                </span>{" "}
-              </div>
-            </div>
+
             <div className="userdAshboard_head">
               <div className="userdAshboard_head_area">
                 <div className="metamask_prof_pic" ref={avatarRef}></div>
@@ -394,20 +395,6 @@ const DashBoardUserDetails = ({ auth }) => {
                     <CopyAllIcon className="copy_all_tx_hash_icon" />
                   </div>
                   <span className="connected_txt">{conecttxt}</span>
-                </div>
-              </div>
-              <span className="hr_vertical"></span>
-              <div className="welcome_bonus_div">
-                <div className="welcome_bonus_div_head">
-                  <div className="welcome_bonus_icon_div">
-                    <StarRateIcon className="welcome_bonus_icon_div_icon" />
-                  </div>
-                  Welcome Bonus
-                </div>
-                <div className="welcome_bonus_div_body">
-                  {" "}
-                  {numberWithCommas(parseFloat(welcomeBonus).toFixed(2))}
-                  <span className="engn_symbol_sign">Engn</span>
                 </div>
               </div>
             </div>

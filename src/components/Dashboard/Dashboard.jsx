@@ -4,6 +4,7 @@ import DashBoard_lend_details_page from "./DashBoard_lend_details_page";
 import DashBoardBranchAsset from "./DashBoardPages/DashBoardBranchAsset";
 import DashBoardLendingTransactions from "./DashBoardPages/DashBoardLendingTransactions";
 import CloseIcon from "@mui/icons-material/Close";
+import DashBoardUserSales from "./DashBoardPages/DashBoardUserSales";
 import Cookies from "universal-cookie";
 import Swap from "./DashBoardPages/Swap/Swap";
 import ProductDetailPage from "./DashBoardPages/UpdatedAppPages/DashboardMarket/ProductDetailPage";
@@ -249,6 +250,11 @@ const Dashboard = ({ check, togglemakeDark }) => {
                   exact
                   path="/app/user/referral"
                   component={DashboardReferral}
+                />
+                <Route
+                  exact
+                  path="/app/user/sales"
+                  component={DashBoardUserSales}
                 />
                 <Route exact path="/app/earn" component={DashBoardLendPage} />
                 <Route

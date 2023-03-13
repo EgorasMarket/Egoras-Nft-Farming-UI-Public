@@ -6,20 +6,14 @@
       "inputs": [
         {
           "indexed": false,
-          "internalType": "uint256",
-          "name": "productID",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
           "internalType": "address",
-          "name": "approvedBy",
+          "name": "user",
           "type": "address"
         },
         {
           "indexed": false,
           "internalType": "uint256",
-          "name": "nowSelling",
+          "name": "amount",
           "type": "uint256"
         },
         {
@@ -29,7 +23,7 @@
           "type": "uint256"
         }
       ],
-      "name": "Approved",
+      "name": "Burn",
       "type": "event"
     },
     {
@@ -38,20 +32,51 @@
         {
           "indexed": false,
           "internalType": "uint256",
-          "name": "_productID",
+          "name": "_monthly",
           "type": "uint256"
         },
         {
           "indexed": false,
           "internalType": "uint256",
-          "name": "_amount",
+          "name": "_semiAnnually",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_Annually",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
           "type": "uint256"
         },
         {
           "indexed": false,
           "internalType": "address",
-          "name": "bidder",
+          "name": "intiator",
           "type": "address"
+        }
+      ],
+      "name": "PlansEdited",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
         },
         {
           "indexed": false,
@@ -60,7 +85,7 @@
           "type": "uint256"
         }
       ],
-      "name": "Bid",
+      "name": "Rewarded",
       "type": "event"
     },
     {
@@ -68,21 +93,27 @@
       "inputs": [
         {
           "indexed": false,
-          "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "_amount",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
           "internalType": "address",
-          "name": "bidder",
+          "name": "user",
           "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "expiryDate",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "plan",
+          "type": "uint256"
         },
         {
           "indexed": false,
@@ -91,113 +122,49 @@
           "type": "uint256"
         }
       ],
-      "name": "BidAccepted",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "string",
-          "name": "_title",
-          "type": "string"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "_amount",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "_creator",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "bool",
-          "name": "_tradable",
-          "type": "bool"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "_time",
-          "type": "uint256"
-        }
-      ],
-      "name": "ProductCreated",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "productID",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "address",
-          "name": "buyer",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "time",
-          "type": "uint256"
-        }
-      ],
-      "name": "Sold",
+      "name": "Subscribed",
       "type": "event"
     },
     {
       "inputs": [
         {
-          "internalType": "string",
-          "name": "_title",
-          "type": "string"
+          "internalType": "uint256",
+          "name": "_monthlyPrice",
+          "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "_amount",
+          "name": "_semiAnnuallyPlan",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_annuallyPlan",
           "type": "uint256"
         }
       ],
-      "name": "listProduct",
+      "name": "configurePlan",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        }
-      ],
-      "name": "productState",
+      "inputs": [],
+      "name": "getConfiguration",
       "outputs": [
         {
-          "internalType": "bool",
-          "name": "isBidding",
-          "type": "bool"
+          "internalType": "uint256",
+          "name": "_monthly",
+          "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "latestBid",
+          "name": "_semiAnnually",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_annually",
           "type": "uint256"
         }
       ],
@@ -206,10 +173,113 @@
       "constant": true
     },
     {
+      "inputs": [],
+      "name": "monthlyPlan",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
+          "internalType": "address",
+          "name": "_referral",
+          "type": "address"
+        }
+      ],
+      "name": "monthlyPlan",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_referral",
+          "type": "address"
+        }
+      ],
+      "name": "semiAnnuallyPlan",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "semiAnnuallyPlan",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "annually",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_referral",
+          "type": "address"
+        }
+      ],
+      "name": "annually",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renewMonthlyMembership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renewSemiAnnualMembership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renewAnnualMembership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "takeReferralReward",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "burn",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "referralStats",
+      "outputs": [
+        {
           "internalType": "uint256",
-          "name": "_productID",
+          "name": "_count",
           "type": "uint256"
         },
         {
@@ -218,89 +288,9 @@
           "type": "uint256"
         }
       ],
-      "name": "bid",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        }
-      ],
-      "name": "acceptBid",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        }
-      ],
-      "name": "approveProduct",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        }
-      ],
-      "name": "getSelling",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "_sellingAmount",
-          "type": "uint256"
-        }
-      ],
       "stateMutability": "view",
       "type": "function",
       "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        }
-      ],
-      "name": "isSelling",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "_isSelling",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        }
-      ],
-      "name": "buyProduct",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
     }
   ]
 }

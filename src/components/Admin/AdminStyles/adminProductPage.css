@@ -16,6 +16,8 @@
   background: #1c2c22;
   padding: 2em;
   overflow: scroll;
+  position: relative;
+  z-index: 1;
 }
 .editProductDiv_area .sell_container_body_cont1_img_display_cont_divs {
   height: 11em;
@@ -145,4 +147,15 @@
 }
 .dark .rdw-dropdownoption-default {
   color: #000000 !important;
+}
+.editProductDiv_area_closeIcon {
+  position: absolute;
+  right: 2%;
+  color: #fff;
+  background: black;
+  padding: 4px;
+  font-size: 31px !important;
+  top: 2%;
+  border-radius: 7px;
+  cursor: pointer;
 }
