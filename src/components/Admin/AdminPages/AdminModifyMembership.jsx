@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from "react";
-
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import "../AdminStyles/adminMemeberShip.css";
 import { numberWithCommas } from "../../../static";
@@ -11,6 +10,7 @@ import {
 } from "@web3-react/core";
 import Web3 from "web3";
 import { configurePlan } from "../../../web3";
+const { EGC_ADDRESS, EUSD_ADDRESS } = process.env;
 const AdminModifyMembership = () => {
   const context = useWeb3React();
   const {
@@ -29,6 +29,10 @@ const AdminModifyMembership = () => {
   const [monthlyPlan, setMonthlyPlan] = useState("");
   const [semiAnnuallyPlan, setSemiAnnuallyPlan] = useState("");
   const [AnnuallyPlan, setAnnuallyPlan] = useState("");
+
+  const egcAddress = "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19";
+  const eusdAddress = "0x58f66d0183615797940360a43c333a44215830ba";
+  console.log(EGC_ADDRESS, EUSD_ADDRESS);
   const monthlyPlanChange = (e) => {
     setMonthlyPlan(e.target.value);
     console.log(e.target.value);

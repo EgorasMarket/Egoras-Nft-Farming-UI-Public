@@ -1116,17 +1116,79 @@ const configurePlan = async (
   _monthlyPrice,
   _semiAnnuallyPlan,
   _annuallyPlan,
+  _egc,
+  _eusd,
   signer
 ) => {
-  console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
+  console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan, _egc, _eusd);
   try {
     const instance = contractMembershipFacetInstance(signer);
     let result;
     result = await instance.configurePlan(
       _monthlyPrice,
       _semiAnnuallyPlan,
-      _annuallyPlan
+      _annuallyPlan,
+      _egc,
+      _eusd
     );
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const getConfiguration = async (signer) => {
+  // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
+  try {
+    const instance = contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.getConfiguration();
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
+const monthlyPlan = async (_referral, signer) => {
+  console.log(_referral);
+  try {
+    const instance = contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.monthlyPlan(_referral);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
+const semiAnnuallyPlan = async (signer) => {
+  try {
+    const instance = contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.semiAnnuallyPlan();
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -1195,4 +1257,7 @@ export {
   annually,
   takeRoyalty,
   configurePlan,
+  getConfiguration,
+  monthlyPlan,
+  semiAnnuallyPlan,
 };
