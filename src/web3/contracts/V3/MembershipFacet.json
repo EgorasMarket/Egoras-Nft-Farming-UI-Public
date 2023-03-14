@@ -141,6 +141,16 @@
           "internalType": "uint256",
           "name": "_annuallyPlan",
           "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_egc",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_eusd",
+          "type": "address"
         }
       ],
       "name": "configurePlan",
