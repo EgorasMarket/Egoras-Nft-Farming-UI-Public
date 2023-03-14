@@ -91,11 +91,12 @@ const AdminProductsPage = () => {
   const [prodName, setProdName] = useState("");
   const [brandName, setBrandName] = useState("");
   const [new_brand, setNew_brand] = useState("");
+  const [new_category, setNew_category] = useState("");
   const [saleAmount, setSaleAmount] = useState();
   const [newProducts, setNewProducts] = useState([]);
   const [allBrands, setAllBrands] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
-  const [prodCondition, setProdCondition] = useState("");
+  const [prodSpecification, setProdSpecification] = useState("");
   const [imageSrc, setImageSrc] = useState("");
   const [imageSrc2, setImageSrc2] = useState("");
   const [imageSrc3, setImageSrc3] = useState("");
@@ -105,6 +106,7 @@ const AdminProductsPage = () => {
   const [formData, setFormData] = useState({
     product_details: "",
   });
+  const { product_details } = formData;
   const fileInputRef = useRef();
   const fileInputRef2 = useRef();
   const fileInputRef3 = useRef();
@@ -190,28 +192,43 @@ const AdminProductsPage = () => {
     const file = element.files[0];
     const file2 = element2.files[0];
     const file3 = element3.files[0];
+    formData.append("product_id", editProductDiv);
     formData.append("product_image", file);
     formData.append("product_image2", file2);
     formData.append("product_image3", file3);
     formData.append("product_name", prodName);
-    formData.append("product_brand", brandName);
-    formData.append("product_condition", prodCondition);
+    formData.append("product_brand", new_brand);
+    formData.append("product_category", new_category);
+    formData.append("product_spec", prodSpecification);
+    formData.append("product_details", product_details);
     formData.append("amount", saleAmount);
-    console.log(formData);
-    try {
-      const res = await axios.post(
-        API_URL + "/product/initialize/add/product",
-        formData,
-        config
-      );
-      console.log(res, "somto");
-      if (res.status === 200) {
-        sendProductToBlockchain(res.data.data.product_id);
-        return;
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    formData.append("adminAddr", saleAmount);
+    console.log(
+      editProductDiv,
+      file,
+      file2,
+      file3,
+      prodName,
+      new_brand,
+      new_category,
+      prodSpecification,
+      saleAmount,
+      product_details
+    );
+    // try {
+    //   const res = await axios.post(
+    //     API_URL + "/product/update/new/product",
+    //     formData,
+    //     config
+    //   );
+    //   console.log(res, "somto");
+    //   if (res.status === 200) {
+    //     sendProductToBlockchain(res.data.data.product_id);
+    //     return;
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    // }
   };
   const handleNameChange = (event) => {
     setProdName(event.target.value);
@@ -221,19 +238,20 @@ const AdminProductsPage = () => {
   const handleNewBrandChange = (event) => {
     setNew_brand(event.target.value);
     console.log(event.target.value);
-    // new_brand, setNew_brand
+  };
+  const handleNewCategoryChange = (event) => {
+    setNew_category(event.target.value);
+    console.log(event.target.value);
+    // new_category, setNew_category
   };
   const addNewBrand = () => {
     allBrands.push({ product_brand: new_brand });
-    // new_brand, setNew_brand
-  };
-  const handleNewCategoryChange = (event) => {
-    setNew_brand(event.target.value);
-    console.log(event.target.value);
+    setAddBrand(!addBrand);
     // new_brand, setNew_brand
   };
   const addNewCategory = () => {
-    allBrands.push({ product_brand: new_brand });
+    allCategories.push({ product_category: new_category });
+    setAddCategory(!addCategory);
     // new_brand, setNew_brand
   };
   const handleBrandNameChange = (event) => {
@@ -246,8 +264,8 @@ const AdminProductsPage = () => {
     console.log(event.target.value);
     //console.log(event.target.value);
   };
-  const handleProdConditionChange = (event) => {
-    setProdCondition(event.target.value);
+  const handleProdSpecChange = (event) => {
+    setProdSpecification(event.target.value);
     console.log(event.target.value);
     //console.log(event.target.value);
   };
@@ -598,7 +616,7 @@ const AdminProductsPage = () => {
   }, []);
 
   const handleCenter = (event) => {
-    // setProduct_category_code1(event.target.value || "");
+    setNew_brand(event.target.value || "");
     console.log(event.target.value);
   };
 
@@ -1265,9 +1283,17 @@ const AdminProductsPage = () => {
                               id=""
                               className="sell_container_body_cont1_title_div_input"
                             >
-                              <option value="">Mobile Phones</option>
-                              <option value="">Computing</option>
-                              <option value="">House Hold Appliances</option>
+                              {allCategories.map((option) => (
+                                <option
+                                  key={option.product_category}
+                                  value={option.product_category}
+                                  // onClick={(e) =>
+                                  //   getCatName(option.product_brand)
+                                  // }
+                                >
+                                  {option.product_category}
+                                </option>
+                              ))}
                             </select>
 
                             <button
@@ -1307,8 +1333,8 @@ const AdminProductsPage = () => {
                               cols="30"
                               rows="10"
                               className="sell_container_body_cont1_title_div_input"
-                              onChange={handleProdConditionChange}
-                              value={prodCondition}
+                              onChange={handleProdSpecChange}
+                              value={prodSpecification}
                             ></textarea>
                           </div>
                         </div>
@@ -1326,16 +1352,6 @@ const AdminProductsPage = () => {
                             supported.
                           </div>
                           <div className="sell_container_body_cont1_title_div">
-                            {/* <textarea
-                            name="productCondition"
-                            id="productCondition"
-                            cols="30"
-                            rows="10"
-                            className="sell_container_body_cont1_title_div_input"
-                            onChange={handleProdConditionChange}
-                            value={prodCondition}
-                          ></textarea> */}
-
                             <Editor
                               editorState={editorState}
                               wrapperClassName="demo-wrapper"
@@ -1374,10 +1390,17 @@ const AdminProductsPage = () => {
                           <input
                             type="text"
                             className="addCategoryArea2_input"
+                            name="new_category"
+                            id="new_category"
+                            value={new_category}
+                            onChange={handleNewCategoryChange}
                           />
                         </div>
                         <div className="addCategoryAreaButtonDiv">
-                          <button className="addCategoryAreaButton_btn">
+                          <button
+                            className="addCategoryAreaButton_btn"
+                            onClick={addNewCategory}
+                          >
                             Add Category
                           </button>
                         </div>
