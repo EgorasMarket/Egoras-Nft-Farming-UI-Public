@@ -201,8 +201,8 @@ const AdminProductsPage = () => {
     formData.append("product_category", new_category);
     formData.append("product_spec", prodSpecification);
     formData.append("product_details", product_details);
-    formData.append("amount", saleAmount);
-    formData.append("adminAddr", saleAmount);
+    formData.append("amount", parseInt(saleAmount));
+    formData.append("adminAddr", "0x02828942wqo22713563");
     console.log(
       editProductDiv,
       file,
@@ -215,20 +215,20 @@ const AdminProductsPage = () => {
       saleAmount,
       product_details
     );
-    // try {
-    //   const res = await axios.post(
-    //     API_URL + "/product/update/new/product",
-    //     formData,
-    //     config
-    //   );
-    //   console.log(res, "somto");
-    //   if (res.status === 200) {
-    //     sendProductToBlockchain(res.data.data.product_id);
-    //     return;
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    // }
+    try {
+      const res = await axios.put(
+        API_URL + "/product/update/new/product",
+        formData,
+        config
+      );
+      console.log(res, "somto");
+      // if (res.status === 200) {
+      //   sendProductToBlockchain(res.data.data.product_id);
+      //   return;
+      // }
+    } catch (err) {
+      console.log(err);
+    }
   };
   const handleNameChange = (event) => {
     setProdName(event.target.value);
@@ -617,6 +617,11 @@ const AdminProductsPage = () => {
 
   const handleCenter = (event) => {
     setNew_brand(event.target.value || "");
+    console.log(event.target.value);
+  };
+
+  const handleCenter2 = (event) => {
+    setNew_category(event.target.value || "");
     console.log(event.target.value);
   };
 
@@ -1282,6 +1287,7 @@ const AdminProductsPage = () => {
                               name=""
                               id=""
                               className="sell_container_body_cont1_title_div_input"
+                              onChange={handleCenter2}
                             >
                               {allCategories.map((option) => (
                                 <option
