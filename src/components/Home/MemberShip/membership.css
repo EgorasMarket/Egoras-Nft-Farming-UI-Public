@@ -6,7 +6,10 @@
   padding-top: 3em;
   background-image: linear-gradient(227deg, black, #080c0a, #21382a);
 }
-
+.selectPlanDiv2_area1_cont2_head_price_span {
+  font-size: 19px;
+  font-weight: 500;
+}
 .joinCooperativeModalDiv_area1 {
   transition: all 0.5s ease;
   /* transform: translateX(100%); */

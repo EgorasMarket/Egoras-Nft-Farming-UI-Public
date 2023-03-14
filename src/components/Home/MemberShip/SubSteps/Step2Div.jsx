@@ -19,6 +19,7 @@ export const Step2Div = ({
   semiAnnualAmount,
   monthAmount,
   AnnualAmount,
+  subscribe,
 }) => {
   return (
     <div className="selectPlanDiv">
@@ -63,7 +64,11 @@ export const Step2Div = ({
             <div className="selectPlanDiv2_area1_cont2_head">
               <div className="selectPlanDiv2_area1_cont2_head_txt">Monthly</div>
               <div className="selectPlanDiv2_area1_cont2_head_price">
-                {monthAmount}egc/mnth
+                {monthAmount}
+                {""}
+                <span className="selectPlanDiv2_area1_cont2_head_price_span">
+                  egc / mnth
+                </span>{" "}
               </div>
             </div>
             <div className="selectPlanDiv2_area1_cont2_body">
@@ -99,7 +104,11 @@ export const Step2Div = ({
                 Semi-Annually
               </div>
               <div className="selectPlanDiv2_area1_cont2_head_price">
-                {semiAnnualAmount}egc/6mnths
+                {semiAnnualAmount}
+                {""}
+                <span className="selectPlanDiv2_area1_cont2_head_price_span">
+                  egc / 6mnths
+                </span>
               </div>
             </div>
             <div className="selectPlanDiv2_area1_cont2_body">
@@ -134,7 +143,11 @@ export const Step2Div = ({
                 Annually
               </div>
               <div className="selectPlanDiv2_area1_cont2_head_price">
-                {AnnualAmount}egc/yr
+                {AnnualAmount}
+                {""}
+                <span className="selectPlanDiv2_area1_cont2_head_price_span">
+                  egc / yr
+                </span>
               </div>
             </div>
             <div className="selectPlanDiv2_area1_cont2_body">
@@ -163,7 +176,8 @@ export const Step2Div = ({
         </div>
         <button
           className="selectPlanDiv2_area1_checkout_btn"
-          disabled={fundDisable}
+          // disabled={fundDisable}
+          onClick={subscribe}
         >
           <span> Subscribe </span>
         </button>
