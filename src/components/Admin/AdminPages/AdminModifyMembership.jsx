@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import "../AdminStyles/adminMemeberShip.css";
 import { numberWithCommas } from "../../../static";
-import { parseEther, formatEther } from "@ethersproject/units";
+import { parseEther, formatEther, parseUnits } from "@ethersproject/units";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -43,9 +43,9 @@ const AdminModifyMembership = () => {
   };
   const StakeMonthly = async () => {
     const res = await configurePlan(
-      monthlyPlan,
-      semiAnnuallyPlan,
-      AnnuallyPlan,
+      parseEther(monthlyPlan.toString(), "wei").toString(),
+      parseEther(semiAnnuallyPlan.toString(), "wei").toString(),
+      parseEther(AnnuallyPlan.toString(), "wei").toString(),
       library.getSigner()
     );
     console.log(res, "somto8uhhhg");
