@@ -16,6 +16,7 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+// const { REACT_APP_EGC_ADDRESS, REACT_APP_EUSD_ADDRESS } = process.env;
 import Web3 from "web3";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { config } from "../../../actions/Config";
@@ -27,6 +28,9 @@ import {
   getConfiguration,
   monthlyPlan,
   semiAnnuallyPlan,
+  unlockMemberShipEgcToken,
+  checkAllowanceMembership,
+  transactReceipt,
 } from "../../../web3/index";
 const MemberShipPage = () => {
   const context = useWeb3React();
@@ -57,6 +61,11 @@ const MemberShipPage = () => {
   const [monthAmount, setMonthAmount] = useState("0");
   const [semiAnnualAmount, setSemiAnnualAmount] = useState("0");
   const [AnnualAmount, setAnnualAmount] = useState("0");
+  const [unlockBtn, setUnlockBtn] = useState(true);
+  const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
+  const [text, setText] = useState(
+    "Transacting with blockchain, please wait..."
+  );
   const checkMonthBox = () => {
     setCheckedMonth(true);
     setcheckedSemiAnnual(false);
@@ -101,13 +110,167 @@ const MemberShipPage = () => {
       setAnnualAmount(resAnnualAmount);
     }
   });
-  const subscribe = async () => {
-    const res = await monthlyPlan(
-      "0x1DEDA7AC812c8D5fe5cd39FcD520B8C8271F4768",
+
+  // const doUnluck = async (e) => {
+  //   setText("Transacting with blockchain, please wait...");
+  //   setStage("loading");
+  //   setIsLoading(true);
+  //   //formData.stateCollateral.toString()
+  //   let ret = await unluckToken2(
+  //     parseEther("180000000000000000000000000000000000", "wei").toString(),
+  //     library.getSigner()
+  //   );
+  //   if (ret.status == true) {
+  //     localStorage.setItem("unlocking", true);
+  //     localStorage.setItem("unlockingHash", ret.message);
+  //     setText("Unlocking please wait aleast 1/2 minutes");
+  //     // setCheckBox(true);
+  //     // setDisable(false);
+  //   } else {
+  //     if (ret.message.code == 4001) {
+  //       setText(ret.message.message);
+  //       // setCheckBox(false);
+  //       // setDisable(true);
+  //     }
+
+  //     setStage("error");
+  //     setIsLoading(false);
+  //     // setCheckBox(false);
+  //     // setDisable(true);
+  //   }
+  // };
+  // const BackLoan = async (e) => {
+  //   let currentTarget = e.currentTarget.id;
+  //   console.log(currentTarget);
+  //   console.log(BackAmount);
+  //   setStage("loading");
+  //   setIsLoading(true);
+  //   // setUnlocking(false);
+  //   // setStage("loading");
+  //   // setIsLoading(true);
+  //   setText("Lending, please wait...");
+  //   let check = await checkAllowanceL(
+  //     account,
+  //     parseEther(formData.BackAmount.toString(), "wei").toString(),
+  //     library.getSigner()
+  //   );
+  //   console.log(check);
+  //   if (check.status == true) {
+  //     let ret = await lendUS(
+  //       txnhash,
+  //       parseEther(formData.BackAmount.toString(), "wei").toString(),
+  //       currentTarget,
+  //       library.getSigner()
+  //     );
+  //     console.log(ret.status);
+  //     if (ret.status == true) {
+  //       localStorage.setItem("unlocking", true);
+  //       localStorage.setItem("unlockingHash", ret.message.hash);
+  //       setText("Sending token please wait aleast 1/2 minutes");
+  //       setHash(ret.message.hash);
+  //       // setStage("success");
+  //       console.log(ret);
+  //     } else if (ret.status == false) {
+  //       if (ret.message.code < 0) {
+  //         setText(ret.message.data.message);
+  //       } else if (ret.message.code == 4001) {
+  //         setText(ret.message.message);
+  //       }
+  //       setStage("error");
+  //       setIsLoading(false);
+  //     }
+  //   } else {
+  //     // setUnlocking(true);
+  //     setStage("unlock");
+  //     setIsLoading(false);
+  //   }
+  // };
+  const UnlockToken = async (e) => {
+    // setText("Transacting with blockchain, please wait...");
+    // setStage("loading");
+    // setIsLoading(true);
+    let ret = await unlockMemberShipEgcToken(
+      parseEther("180000000000000000000000000000000000", "wei").toString(),
       library.getSigner()
     );
-    console.log(res, "somto8uhhhg");
-    console.log(res.status, "somto8uhhhg");
+    console.log(ret);
+    if (ret.status == true) {
+      localStorage.setItem("unlocking", true);
+      localStorage.setItem("unlockingHash", ret.message);
+      // setText("Unlocking please wait aleast 1/2 minutes");
+    } else {
+      if (ret.message.code == 4001) {
+        // setText(ret.message.message);
+        console.log(ret);
+      }
+
+      console.log(ret);
+    }
+  };
+  setInterval(() => {
+    if (localStorage.getItem("unlocking") == "true") {
+      transactReceipt(localStorage.getItem("unlockingHash"), library).then(
+        function (env) {
+          console.log("running Interval", env);
+          if (env.status == true && env.message !== null) {
+            if (env.message.confirmations > 2) {
+              // setStage("success");
+              // setHash(localStorage.getItem("unlockingHash"));
+              // setIsLoading(false);
+
+              localStorage.setItem("unlocking", false);
+            }
+          }
+        }
+      );
+    } else {
+      // setStage("error");
+    }
+  }, 1000);
+  useEffect(
+    async (e) => {
+      if (account) {
+        let check = await checkAllowanceMembership(
+          account,
+          parseEther(monthAmount.toString(), "wei").toString(),
+          library.getSigner()
+        );
+        console.log(check);
+        setUnLockCheckStatus(check.status);
+        setUnlockBtn(check.status);
+      }
+    },
+    [account, unLockCheckStatus]
+  );
+  const subscribe = async () => {
+    if (unLockCheckStatus == true) {
+      let ret = await monthlyPlan(library.getSigner());
+      console.log(ret);
+      if (ret.status == true) {
+        localStorage.setItem("unlocking", true);
+        localStorage.setItem("unlockingHash", ret.message.hash);
+        // setText("Sending token please wait aleast 1/2 minutes");
+        // setHash(ret.message.hash);
+        console.log(ret);
+        return;
+      }
+      // else if (ret.status == false) {
+      //   // if (ret.message.code < 0) {
+      //   //   setText(ret.message.data.message);
+      //   // } else if (ret.message.code == 4001) {
+      //   //   setText(ret.message.message);
+      //   // }
+      //   // setStage("error");
+      //   // setIsLoading(false);
+      // }
+    } else {
+      // setUnlocking(true);
+      setUnlockBtn(false);
+      // setIsLoading(false);
+    }
+    // const res = await monthlyPlan(library.getSigner());
+    // console.log(res, "somto8uhhhg");
+    // console.log(res.status, "somto8uhhhg");
   };
   const subscribe2 = async () => {
     const res = await semiAnnuallyPlan(library.getSigner());
@@ -151,6 +314,12 @@ const MemberShipPage = () => {
               subscribe={subscribe}
             />
           </div>
+          {unlockBtn === false ? (
+            <button onClick={UnlockToken}>Unlock Token</button>
+          ) : (
+            <button>Token is unlocked</button>
+          )}
+
           {/* ) : null} */}
         </div>
       </div>
