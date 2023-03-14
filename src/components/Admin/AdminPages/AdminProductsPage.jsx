@@ -58,6 +58,7 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+import add from "date-fns/add/index";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -89,8 +90,11 @@ const AdminProductsPage = () => {
   const [activeMenu, setActiveMenu] = useState("details-accord  ");
   const [prodName, setProdName] = useState("");
   const [brandName, setBrandName] = useState("");
+  const [new_brand, setNew_brand] = useState("");
   const [saleAmount, setSaleAmount] = useState();
   const [newProducts, setNewProducts] = useState([]);
+  const [allBrands, setAllBrands] = useState([]);
+  const [allCategories, setAllCategories] = useState([]);
   const [prodCondition, setProdCondition] = useState("");
   const [imageSrc, setImageSrc] = useState("");
   const [imageSrc2, setImageSrc2] = useState("");
@@ -213,6 +217,24 @@ const AdminProductsPage = () => {
     setProdName(event.target.value);
     console.log(event.target.value);
     //console.log(event.target.value);
+  };
+  const handleNewBrandChange = (event) => {
+    setNew_brand(event.target.value);
+    console.log(event.target.value);
+    // new_brand, setNew_brand
+  };
+  const addNewBrand = () => {
+    allBrands.push({ product_brand: new_brand });
+    // new_brand, setNew_brand
+  };
+  const handleNewCategoryChange = (event) => {
+    setNew_brand(event.target.value);
+    console.log(event.target.value);
+    // new_brand, setNew_brand
+  };
+  const addNewCategory = () => {
+    allBrands.push({ product_brand: new_brand });
+    // new_brand, setNew_brand
   };
   const handleBrandNameChange = (event) => {
     setBrandName(event.target.value);
@@ -535,13 +557,50 @@ const AdminProductsPage = () => {
     async function fetchData() {
       const res = await axios.get(API_URL + "/product/new", null, config);
 
-      console.log(res.data.data);
+      // console.log(res.data.data);
       setNewProducts(res.data.data);
       // newProducts, setNewProducts
     }
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get(
+        API_URL + "/product/all-brands",
+        null,
+        config
+      );
+
+      console.log(res.data.data.allBrands);
+      setAllBrands(res.data.data.allBrands);
+      // allBrands, setAllBrands
+    }
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get(
+        API_URL + "/product/all-categories",
+        null,
+        config
+      );
+
+      console.log(res.data.data.allCategories);
+      setAllCategories(res.data.data.allCategories);
+      // allCategories, setAllCategories
+    }
+
+    fetchData();
+  }, []);
+
+  const handleCenter = (event) => {
+    // setProduct_category_code1(event.target.value || "");
+    console.log(event.target.value);
+  };
 
   const classes = useStyles();
   return (
@@ -826,7 +885,7 @@ const AdminProductsPage = () => {
                           Product Name
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.ProductName}
+                          {data.product_name}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -834,7 +893,10 @@ const AdminProductsPage = () => {
                           Product Amount
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.Amount} Eusd
+                          {numberWithCommas(
+                            parseInt(data.user_amount).toFixed(0)
+                          )}{" "}
+                          Eusd
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -842,7 +904,7 @@ const AdminProductsPage = () => {
                           Product Brand Name
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          Apple
+                          {data.product_brand}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -850,7 +912,7 @@ const AdminProductsPage = () => {
                           Product Condition
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          Cracked screen.
+                          {data.product_condition}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -858,7 +920,7 @@ const AdminProductsPage = () => {
                           Product Status
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.ProductStatus}
+                          {data.status}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -866,7 +928,8 @@ const AdminProductsPage = () => {
                           Product Txn Hash
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.txnHash}
+                          {/* {data.txnHash} */}
+                          N/A
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -874,7 +937,7 @@ const AdminProductsPage = () => {
                           Upload Date
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.Date}
+                          {data.createdAt}
                         </div>
                       </div>
                     </div>
@@ -1110,7 +1173,7 @@ const AdminProductsPage = () => {
                               placeholder="Product name"
                               className="sell_container_body_cont1_title_div_input"
                               value={prodName}
-                              defaultValue={data.ProductName}
+                              defaultValue={data.product_name}
                             />
                           </div>
                         </div>
@@ -1133,16 +1196,19 @@ const AdminProductsPage = () => {
                               name=""
                               id=""
                               className="sell_container_body_cont1_title_div_input"
+                              onChange={handleCenter}
                             >
-                              <option value="">Apple</option>
-                              <option value="">Samsung</option>
-                              <option value="">Oppo</option>
-                              <option value="">Huawei</option>
-                              <option value="">LG</option>
-                              <option value="">Hisense</option>
-                              <option value="">Redmi</option>
-                              <option value="">Tecno</option>
-                              <option value="">Infinix</option>
+                              {allBrands.map((option) => (
+                                <option
+                                  key={option.product_brand}
+                                  value={option.product_brand}
+                                  // onClick={(e) =>
+                                  //   getCatName(option.product_brand)
+                                  // }
+                                >
+                                  {option.product_brand}
+                                </option>
+                              ))}
                             </select>
 
                             <button
@@ -1181,7 +1247,7 @@ const AdminProductsPage = () => {
                               className="sell_container_body_cont1_title_div_input"
                               onChange={handleSaleAmountChange}
                               value={saleAmount}
-                              defaultValue={data.Amount}
+                              defaultValue={data.user_amount}
                             />
                           </div>
                         </div>
@@ -1332,10 +1398,17 @@ const AdminProductsPage = () => {
                           <input
                             type="text"
                             className="addCategoryArea2_input"
+                            name="new_brand"
+                            id="new_brand"
+                            value={new_brand}
+                            onChange={handleNewBrandChange}
                           />
                         </div>
                         <div className="addCategoryAreaButtonDiv">
-                          <button className="addCategoryAreaButton_btn">
+                          <button
+                            className="addCategoryAreaButton_btn"
+                            onClick={addNewBrand}
+                          >
                             Add Brand
                           </button>
                         </div>
