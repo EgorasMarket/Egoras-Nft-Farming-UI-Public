@@ -14,6 +14,8 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
+import AdminDashboardCard from "../../cards/AdminDashboardCard";
+import { POPULATE_ADMIN_PRODUCT_DASHBOARD } from "../../../services/adminServices";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -28,6 +30,7 @@ const AdminSeeSellers = () => {
   const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);
   const [totalLendingCount, setTotalLendingCount] = useState(0);
   const [activeBtn, setActivrBtn] = useState("Ongoing");
+  const [productValues, setProductValues] = useState({});
   const [saleDetails, setSaleDetails] = useState("");
   const [activeLink, setActiveLink] = useState("abstract-link");
   const [activeMenu, setActiveMenu] = useState("details-accord  ");
@@ -312,6 +315,14 @@ const AdminSeeSellers = () => {
     setActiveMenu("details-accord ");
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await POPULATE_ADMIN_PRODUCT_DASHBOARD();
+      setProductValues(response.data);
+    };
+    fetchData();
+  }, []);
+
   const classes = useStyles();
   return (
     <div className="other2 asset_other2">
@@ -319,84 +330,26 @@ const AdminSeeSellers = () => {
         <div className="container">
           <div className="sellers_overview_area">
             <div className="lending_area1">
-              <div className="lending_area1_cont1">
-                <div className="lending_area1_cont1_body_1">
-                  <div className="lending_area1_cont1_heading">
-                    Total Products uploaded for sale
-                  </div>
-                  <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(parseInt(lockedValue).toFixed(2))}{" "}
-                    <span className="usd_sign">NGN</span>
-                  </div>
-                </div>
-                <div className="lending_area1_cont1_body_1">
-                  <HelpOutlineIcon className="help_outline" />
-                  <div className="helper_txt_div">
-                    This is the total Engn funded to all assets in the lending
-                    pool.
-                  </div>
-                </div>
-              </div>
-              <div className="lending_area1_cont1">
-                <div className="lending_area1_cont1_body_1">
-                  <div className="lending_area1_cont1_heading">
-                    Total Products Approved
-                  </div>
-                  <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(parseInt(lockedValue / 570).toFixed(2))}{" "}
-                    <span className="usd_sign">USD</span>
-                  </div>
-                </div>
-                <div className="lending_area1_cont1_body_1">
-                  <HelpOutlineIcon className="help_outline" />
-                  <div className="helper_txt_div">
-                    This is the total Engn funded to all assets in the lending
-                    pool.
-                  </div>
-                </div>
-              </div>
-
-              <div className="lending_area1_cont1">
-                <div className="lending_area1_cont1_body_1">
-                  <div className="lending_area1_cont1_heading">
-                    Total Amount Products Uploaded
-                  </div>
-                  <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(
-                      parseInt(totalLendingCapacity).toFixed(2)
-                    )}{" "}
-                    <span className="usd_sign">NGN</span>
-                  </div>
-                </div>
-                <div className="lending_area1_cont1_body_1">
-                  <HelpOutlineIcon className="help_outline" />
-                  <div className="helper_txt_div">
-                    This is the total value of all the assets in the lending
-                    pool.
-                  </div>
-                </div>
-              </div>
-
-              <div className="lending_area1_cont1">
-                <div className="lending_area1_cont1_body_1">
-                  <div className="lending_area1_cont1_heading">
-                    Total Amount Products Approved
-                  </div>
-                  <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(
-                      parseInt(totalLendingCapacity).toFixed(2)
-                    )}{" "}
-                    <span className="usd_sign">NGN</span>
-                  </div>
-                </div>
-                <div className="lending_area1_cont1_body_1">
-                  <HelpOutlineIcon className="help_outline" />
-                  <div className="helper_txt_div">
-                    This is the total value of all the assets in the lending
-                    pool.
-                  </div>
-                </div>
-              </div>
+              <AdminDashboardCard
+                title={"Total Products Approved"}
+                value={productValues.approved}
+                currencySymbol={"NGN"}
+                detail=" This is the total Engn funded to all assets in the lendingpool."
+              />
+              <AdminDashboardCard
+                title={"Total Products Uploaded"}
+                value={productValues.uploaded}
+                currencySymbol={"NGN"}
+                detail="This is the total Engn funded to all assets in the lending
+                pool."
+              />
+              <AdminDashboardCard
+                title={"Total Products Awaiting upload"}
+                value={productValues.unapproved}
+                currencySymbol={"NGN"}
+                detail="This is the total value of all the assets in the lending
+                pool.."
+              />
             </div>
             {/* ============== */}
             {/* ============== */}

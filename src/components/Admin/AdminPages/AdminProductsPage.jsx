@@ -59,6 +59,8 @@ import {
   UnsupportedChainIdError,
 } from "@web3-react/core";
 import add from "date-fns/add/index";
+import AdminDashboardCard from "../../cards/AdminDashboardCard";
+import { POPULATE_ADMIN_PRODUCT_DASHBOARD } from "../../../services/adminServices";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -94,6 +96,7 @@ const AdminProductsPage = () => {
   const [new_category, setNew_category] = useState("");
   const [saleAmount, setSaleAmount] = useState();
   const [newProducts, setNewProducts] = useState([]);
+  const [productValues, setProductValues] = useState({});
   const [allBrands, setAllBrands] = useState([]);
   const [allCategories, setAllCategories] = useState([]);
   const [prodSpecification, setProdSpecification] = useState("");
@@ -223,6 +226,7 @@ const AdminProductsPage = () => {
       );
       console.log(res, "somto");
       // if (res.status === 200) {
+
       //   sendProductToBlockchain(res.data.data.product_id);
       //   return;
       // }
@@ -573,14 +577,27 @@ const AdminProductsPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await axios.get(API_URL + "/product/new", null, config);
+      const res = await axios.get(
+        API_URL + "/product/new/zero-tradable",
+        null,
+        config
+      );
 
       // console.log(res.data.data);
       setNewProducts(res.data.data);
-      // newProducts, setNewProducts
     }
 
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    const response = async () => {
+      const res = await POPULATE_ADMIN_PRODUCT_DASHBOARD();
+      setProductValues(res.data);
+      console.log(res);
+    };
+
+    response();
   }, []);
 
   useEffect(() => {
@@ -632,63 +649,26 @@ const AdminProductsPage = () => {
         <div className="container">
           <div className="sellers_overview_area">
             <div className="lending_area1">
-              <div className="lending_area1_cont1">
-                <div className="lending_area1_cont1_body_1">
-                  <div className="lending_area1_cont1_heading">
-                    Total Products Approved
-                  </div>
-                  <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(parseInt(lockedValue).toFixed(2))}{" "}
-                    <span className="usd_sign">NGN</span>
-                  </div>
-                </div>
-                <div className="lending_area1_cont1_body_1">
-                  <HelpOutlineIcon className="help_outline" />
-                  <div className="helper_txt_div">
-                    This is the total Engn funded to all assets in the lending
-                    pool.
-                  </div>
-                </div>
-              </div>
-              <div className="lending_area1_cont1">
-                <div className="lending_area1_cont1_body_1">
-                  <div className="lending_area1_cont1_heading">
-                    Total Products Uploaded
-                  </div>
-                  <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(parseInt(lockedValue / 570).toFixed(2))}{" "}
-                    <span className="usd_sign">USD</span>
-                  </div>
-                </div>
-                <div className="lending_area1_cont1_body_1">
-                  <HelpOutlineIcon className="help_outline" />
-                  <div className="helper_txt_div">
-                    This is the total Engn funded to all assets in the lending
-                    pool.
-                  </div>
-                </div>
-              </div>
-
-              <div className="lending_area1_cont1">
-                <div className="lending_area1_cont1_body_1">
-                  <div className="lending_area1_cont1_heading">
-                    Total Products Awaiting upload
-                  </div>
-                  <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(
-                      parseInt(totalLendingCapacity).toFixed(2)
-                    )}{" "}
-                    <span className="usd_sign">NGN</span>
-                  </div>
-                </div>
-                <div className="lending_area1_cont1_body_1">
-                  <HelpOutlineIcon className="help_outline" />
-                  <div className="helper_txt_div">
-                    This is the total value of all the assets in the lending
-                    pool.
-                  </div>
-                </div>
-              </div>
+              <AdminDashboardCard
+                title={"Total Products Approved"}
+                value={productValues.approved}
+                currencySymbol={"NGN"}
+                detail=" This is the total Engn funded to all assets in the lendingpool."
+              />
+              <AdminDashboardCard
+                title={"Total Products Uploaded"}
+                value={productValues.uploaded}
+                currencySymbol={"NGN"}
+                detail="This is the total Engn funded to all assets in the lending
+                pool."
+              />
+              <AdminDashboardCard
+                title={"Total Products Awaiting upload"}
+                value={productValues.unapproved}
+                currencySymbol={"NGN"}
+                detail="This is the total value of all the assets in the lending
+                pool.."
+              />
             </div>
             {/* ============== */}
             {/* ============== */}
