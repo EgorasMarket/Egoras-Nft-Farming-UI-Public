@@ -2532,7 +2532,7 @@ a.visit_app_link_2 {
   border: solid 1px #34493c;
 }
 .dark .amnt_input {
-  border: solid 1px #293d32;
+  /* border: solid 1px #293d32; */
   background: #111a12;
 }
 .dark .connect_btn:disabled {
@@ -2546,7 +2546,7 @@ a.visit_app_link_2 {
   color: #ffffff;
 }
 .dark .amnt_input_field {
-  color: #fff;
+  color: #aec6b7;
 }
 .dark .connect_btn {
   background: #ddf2e5;

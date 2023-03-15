@@ -1,0 +1,166 @@
+.Swap_icondropDownDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+.token_balances_span {
+  color: #fff;
+  font-size: 11px;
+  color: #bac4be;
+  margin-bottom: 6px;
+}
+.updatedSwapSwapBtn {
+  padding: 15px;
+  width: 100%;
+  border-radius: 15px;
+  font-size: 15px;
+  background: #229e54;
+  color: #ffff;
+  border: none;
+  font-weight: 500;
+}
+.amnt_input_layer1_input_div_dollar_value {
+  font-size: 14px;
+  color: #556957;
+}
+.amnt_input_layer1_input_div {
+  display: flex;
+  flex-direction: column;
+}
+.amnt_input_layer1 {
+  display: flex;
+}
+.amnt_input_layer2 {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+.amnt_input_layer2_cont1 {
+  width: 100%;
+  font-size: 12px;
+  border-radius: 6px;
+  border: none;
+  padding: 6px;
+  margin-right: 15px;
+  background: #243229;
+  color: #fff;
+  transition: 0.2s linear;
+}
+
+.amnt_input_layer2_cont1_last {
+  width: 100%;
+  font-size: 12px;
+  border-radius: 6px;
+  border: none;
+  padding: 6px;
+  margin-right: 0px;
+  background: #243229;
+  color: #fff;
+  transition: 0.2s linear;
+}
+.amnt_input_layer2_cont1:hover {
+  background: #455d4f;
+  transition: 0.2s linear;
+}
+.amnt_input_layer2_cont1_last:hover {
+  background: #455d4f;
+  transition: 0.2s linear;
+}
+.toggle_swap_inputs {
+  position: absolute;
+  background: #111a12;
+  padding: 5px;
+  font-size: 47px !important;
+  border-radius: 50%;
+  right: 0;
+  left: 0;
+  margin: auto;
+  /* border: solid 1px #293d32; */
+  color: #a8b9aa !important;
+  cursor: pointer;
+  top: 15%;
+  bottom: 0;
+  margin: auto;
+  border: solid 5px #1c2c22;
+}
+.liquidity_cont_body_conts_cont1 {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.swap_price_rate_div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  background: #152016;
+  color: #adbfaf;
+  font-size: 13px;
+  padding: 10px;
+  border-radius: 9px;
+}
+.swap_price_rate_div1 {
+  margin-right: 5px;
+}
+.swap_price_rate_div2 {
+  margin-left: 5px;
+}
+.swap_price_rate_div_swap_icon {
+  margin-left: 5px;
+  font-size: 17px !important;
+  background: #243229;
+  border-radius: 50%;
+  padding: 1px;
+  cursor: pointer;
+}
+.moreSwapInfoDiv {
+  margin-top: 10px;
+  color: #fff;
+  padding: 1em;
+  border: solid 1px #384f41;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 5px;
+}
+.moreSwapInfoDiv_div1 {
+  font-size: 12px;
+  border-bottom: solid 1px #384f41;
+  padding-bottom: 10px;
+}
+.moreSwapInfoDiv_div2 {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  margin-top: 10px;
+  color: #98b4a2;
+}
+.moreSwapInfoDiv_div2_area1 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.moreSwapInfoDiv_div2_area1_cont2 {
+  color: #fff;
+}
+.tradeViewAreaCont {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.tradeViewArea {
+  width: 100%;
+  height: 100%;
+  margin-left: 30px;
+  background: #0b110c;
+  padding: 2em;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.tradeViewAreaCont .analytics_container_1_Amount {
+  font-size: 34px;
+  margin-bottom: 0em;
+  color: #7c827d;
+}
