@@ -3,6 +3,10 @@ import CircleIcon from "@mui/icons-material/Circle";
 import "../AdminStyles/adminSellersPage.css";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import EastIcon from "@mui/icons-material/East";
+import axios from "axios";
+import { API_URL } from "../../../actions/types";
+import { config } from "../../../actions/Config";
+import { validateAdmin } from "../../../actions/admin";
 // import Nodata from "../../Dashboard/DashBoardPages/nodataComponent/Nodata";
 import { numberWithCommas } from "../../../static";
 import CloseIcon from "@mui/icons-material/Close";
@@ -14,6 +18,14 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
+import { placeBid } from "../../../web3";
+
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -24,9 +36,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const AdminSeeSellers = () => {
+  const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
   const [lockedValue, setLockedValue] = useState(0);
   const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);
   const [totalLendingCount, setTotalLendingCount] = useState(0);
+  const [adminStatus, setAdminStatus] = useState(null);
+  const [newProducts, setNewProducts] = useState([]);
   const [activeBtn, setActivrBtn] = useState("Ongoing");
   const [saleDetails, setSaleDetails] = useState("");
   const [activeLink, setActiveLink] = useState("abstract-link");
@@ -312,6 +337,52 @@ const AdminSeeSellers = () => {
     setActiveMenu("details-accord ");
   };
 
+  useEffect(
+    async (e) => {
+      if (account) {
+        let response = await validateAdmin(account);
+        const adminStatus = response.message.data.data.adminStatus;
+        console.log(adminStatus, "acct acct acct acct ");
+        setAdminStatus(adminStatus);
+        // if (payload == null) {
+        //   setStatus("");
+        // } else {
+        //   setStatus(() => payload.kyc_status);
+        // }
+      }
+    },
+    [account]
+  );
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await axios.get(
+        API_URL + "/product/new/zero-tradable",
+        null,
+        config
+      );
+
+      console.log(res.data.data);
+      setNewProducts(res.data.data);
+      // newProducts, setNewProducts
+    }
+
+    fetchData();
+  }, []);
+
+  const BidForProduct = async () => {
+    // const res = await placeBid(
+    //   parseEther(monthlyPlan.toString(), "wei").toString(),
+    //   parseEther(semiAnnuallyPlan.toString(), "wei").toString(),
+    //   parseEther(AnnuallyPlan.toString(), "wei").toString(),
+    //   REACT_APP_EGC_ADDRESS,
+    //   REACT_APP_EUSD_ADDRESS,
+    //   library.getSigner()
+    // );
+    // console.log(res, "somto8uhhhg");
+    // console.log(res.status, "somto8uhhhg");
+  };
+
   const classes = useStyles();
   return (
     <div className="other2 asset_other2">
@@ -480,7 +551,7 @@ const AdminSeeSellers = () => {
 
                 
               </div> */}
-                {SalableProduct.length <= 0 ? (
+                {newProducts.length <= 0 ? (
                   <div className="no_loans_div">
                     <div className="no_loans_div_cont">
                       <Nodata />
@@ -497,59 +568,60 @@ const AdminSeeSellers = () => {
                     {/* =============== */}
                     {/* =============== */}
                     {activeBtn === "Ongoing"
-                      ? SalableProduct.filter(
-                          (person) => person.ProductStatus == "Pending"
-                        ).map((asset) => {
-                          //   var percentage = (asset.funded / asset.amount) * 100;
-                          return (
-                            <tr
-                              className="assets-category-row  transitionMe"
-                              id={asset.id}
-                              onClick={ToggleSaleDetails}
-                            >
-                              <td className="assets-category-data branch_name_title">
-                                <div className="assets-data">
-                                  <div className="assets-data-pool_name">
-                                    {asset.ProductName}
-                                    <span className="poolName_txt">
-                                      {asset.Date}
-                                    </span>
+                      ? newProducts
+                          .filter((person) => person.status == "NEW")
+                          .map((asset) => {
+                            //   var percentage = (asset.funded / asset.amount) * 100;
+                            return (
+                              <tr
+                                className="assets-category-row  transitionMe"
+                                id={asset.id}
+                                onClick={ToggleSaleDetails}
+                              >
+                                <td className="assets-category-data branch_name_title">
+                                  <div className="assets-data">
+                                    <div className="assets-data-pool_name">
+                                      {asset.product_name}
+                                      <span className="poolName_txt">
+                                        {asset.createdAt}
+                                      </span>
+                                    </div>
                                   </div>
-                                </div>
-                              </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
-                                {numberWithCommas(
-                                  parseInt(asset.Amount).toFixed(0)
-                                )}{" "}
-                                Eusd
-                              </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
-                                {`${asset.Seller.slice(
+                                </td>
+                                <td className="assets-category-data1b stable-content branch_apy">
+                                  {numberWithCommas(
+                                    parseInt(asset.user_amount).toFixed(0)
+                                  )}{" "}
+                                  Eusd
+                                </td>
+                                <td className="assets-category-data1b stable-content branch_apy">
+                                  {`${asset.user_wallet.slice(
+                                    0,
+                                    6
+                                  )}...${asset.user_wallet.slice(39, 42)}`}
+                                </td>
+                                <td className="assets-category-data1b stable-content branch_apy">
+                                  {asset.BiddingStatus}
+                                </td>
+                                <td className="assets-category-data1b stable-content branch_apy">
+                                  {asset.user_amount} Eusd
+                                </td>
+                                <td className="assets-category-data1b stable-content branch_apy">
+                                  {asset.status}
+                                </td>
+                                <td className="assets-category-data1b stable-content branch_apy">
+                                  {/* {`${asset.txnHash.slice(
                                   0,
                                   6
-                                )}...${asset.Seller.slice(39, 42)}`}
-                              </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
-                                {asset.BiddingStatus}
-                              </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
-                                {asset.BiddingAmount} Eusd
-                              </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
-                                {asset.ProductStatus}
-                              </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
-                                {`${asset.txnHash.slice(
-                                  0,
-                                  6
-                                )}...${asset.txnHash.slice(63, 66)}`}
-                              </td>
-                              <td className="assets-category-data-last branch_loan_action">
-                                <ArrowForwardIosIcon />
-                              </td>
-                            </tr>
-                          );
-                        })
+                                )}...${asset.txnHash.slice(63, 66)}`} */}
+                                  {"Coming soon"}
+                                </td>
+                                <td className="assets-category-data-last branch_loan_action">
+                                  <ArrowForwardIosIcon />
+                                </td>
+                              </tr>
+                            );
+                          })
                       : activeBtn === "All"
                       ? SalableProduct.map((asset) => {
                           return (

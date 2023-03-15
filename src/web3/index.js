@@ -1202,6 +1202,27 @@ const semiAnnuallyPlan = async (signer) => {
     };
   }
 };
+
+// =============== Admin Action =======================
+const placeBid = async (_productID, _amount, signer) => {
+  console.log(_productID, _amount);
+  try {
+    const instance = contractProductFacetInstance(signer);
+    let result;
+    result = await instance.bid(_productID, _amount);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
 // =========new V3 Functions==================================
 // ===========================================
 // ===========================================
@@ -1260,4 +1281,5 @@ export {
   getConfiguration,
   monthlyPlan,
   semiAnnuallyPlan,
+  placeBid,
 };
