@@ -271,6 +271,10 @@ const Header = ({ togglemakeDark, check }) => {
       setshowHeader(false);
       setBetaDiv(false);
     }
+    if (currentPage === "/app/user/sales") {
+      setshowHeader(false);
+      setBetaDiv(false);
+    }
     if (currentPage === "/app/swap") {
       setshowHeader(false);
       setBetaDiv(false);

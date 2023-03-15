@@ -1350,7 +1350,11 @@ const AdminAssets = () => {
             <SuccessModal
               successMessage={"Transaction was successful"}
               click={(e) => {
+<<<<<<< HEAD
+                window.location.href = "/dashboard/user";
+=======
                 window.location.href = "/app/user";
+>>>>>>> origin/cyntax-v3
               }}
               SuccessHead="Success"
               hash={hash}

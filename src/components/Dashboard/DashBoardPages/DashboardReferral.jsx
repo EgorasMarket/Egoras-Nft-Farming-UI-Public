@@ -5,6 +5,7 @@ import "../../../css/dashBoardReferral.css";
 import Web3 from "web3";
 import { getAuthUserStats } from "../../../actions/token";
 import CryptoJS from "crypto-js";
+import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 
 import Sparkline2 from "../../static/Sparkline2";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
@@ -123,7 +124,6 @@ const DashboardReferral = ({ auth }) => {
       if (account) {
         let response = await getAuthUserStats(account);
         const payload = response.message.data.payload;
-
         if (payload == null) {
           setRefLink(() => "*******");
         } else {
@@ -211,6 +211,20 @@ const DashboardReferral = ({ auth }) => {
     },
     [account]
   );
+  useEffect(() => {
+    if (currentPage === "/app/user") {
+      setActiveLink("poolDetails");
+      return;
+    }
+    if (currentPage === "/app/user/referral") {
+      setActiveLink("referral");
+      return;
+    }
+    if (currentPage === "/app/user/sales") {
+      setActiveLink("sales");
+      return;
+    }
+  });
   return (
     <>
       <div className="other2 asset_other2">
@@ -244,8 +258,19 @@ const DashboardReferral = ({ auth }) => {
                       : "pool_lend_details_link"
                   }
                 >
-                  <DashboardIcon className="asset_overview_link_icon" />
-                  Refferal
+                  <GroupAddIcon className="asset_overview_link_icon" />
+                  Referral
+                </Link>
+                <Link
+                  to="/app/user/sales"
+                  className={
+                    activeLink === "sales"
+                      ? "pool_lend_details_link_active"
+                      : "pool_lend_details_link"
+                  }
+                >
+                  <TrendingDownIcon className="asset_overview_link_icon" />
+                  Sales
                 </Link>
               </div>
               {comingSoon == true ? (

@@ -5,6 +5,7 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import EastIcon from "@mui/icons-material/East";
 // import Nodata from "../../Dashboard/DashBoardPages/nodataComponent/Nodata";
 import { numberWithCommas } from "../../../static";
+import CloseIcon from "@mui/icons-material/Close";
 import Nodata from "../../Dashboard/DashBoardPages/nodataComponent/Nodata";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Accordion from "@material-ui/core/Accordion";
@@ -677,6 +678,17 @@ const AdminSeeSellers = () => {
         <>
           {data.id === saleDetails ? (
             <div className="saleDetailsDiv">
+              <div
+                className="saleDetailsDiv_close_div"
+                onClick={ToggleSaleDetails}
+              ></div>
+              <div
+                className="saleDetailsDiv_area_closeIcon_div"
+                onClick={ToggleSaleDetails}
+              >
+                <CloseIcon className="saleDetailsDiv_area_closeIcon" />
+                Close
+              </div>
               <div className="saleDetailsDiv_area">
                 <div className="saleDetailsDiv_area_1">
                   <div className="saleDetailsDiv_area_1_title">

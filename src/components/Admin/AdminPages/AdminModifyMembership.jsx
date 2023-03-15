@@ -1,13 +1,62 @@
 import React, { useState, useEffect, useContext } from "react";
-
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import "../AdminStyles/adminMemeberShip.css";
 import { numberWithCommas } from "../../../static";
-
+import { parseEther, formatEther, parseUnits } from "@ethersproject/units";
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
+import Web3 from "web3";
+import { configurePlan } from "../../../web3";
+const { REACT_APP_EGC_ADDRESS, REACT_APP_EUSD_ADDRESS } = process.env;
 const AdminModifyMembership = () => {
+  const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
   const [lockedValue, setLockedValue] = useState(0);
   const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);
   const [totalLendingCount, setTotalLendingCount] = useState(0);
+  const [monthlyPlan, setMonthlyPlan] = useState("");
+  const [semiAnnuallyPlan, setSemiAnnuallyPlan] = useState("");
+  const [AnnuallyPlan, setAnnuallyPlan] = useState("");
+
+  // const egcAddress = "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19";
+  // const eusdAddress = "0x58f66d0183615797940360a43c333a44215830ba";
+  console.log(REACT_APP_EGC_ADDRESS, REACT_APP_EUSD_ADDRESS);
+  const monthlyPlanChange = (e) => {
+    setMonthlyPlan(e.target.value);
+    console.log(e.target.value);
+  };
+  const semiAnnuallyPlanChange = (e) => {
+    setSemiAnnuallyPlan(e.target.value);
+    console.log(e.target.value);
+  };
+  const AnnuallyPlanChange = (e) => {
+    setAnnuallyPlan(e.target.value);
+    console.log(e.target.value);
+  };
+  const ConfigureMembershipPlan = async () => {
+    const res = await configurePlan(
+      parseEther(monthlyPlan.toString(), "wei").toString(),
+      parseEther(semiAnnuallyPlan.toString(), "wei").toString(),
+      parseEther(AnnuallyPlan.toString(), "wei").toString(),
+      REACT_APP_EGC_ADDRESS,
+      REACT_APP_EUSD_ADDRESS,
+      library.getSigner()
+    );
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+  };
   return (
     <div className="other2 asset_other2">
       <section className="collateral-assets-section no-bg no_pad">
@@ -110,13 +159,10 @@ const AdminModifyMembership = () => {
                     </div>
                     <input
                       type="number"
+                      value={monthlyPlan}
+                      onChange={monthlyPlanChange}
                       className="modifyMembershipFeeDiv_body_monthly_input_div_1_input"
                     />
-                  </div>
-                  <div className="modifyMembershipFeeDiv_body_monthly_btn_div">
-                    <button className="modifyMembershipFeeDiv_body_monthly_btn_btn">
-                      Modify Plan
-                    </button>
                   </div>
                 </div>
               </div>
@@ -141,13 +187,10 @@ const AdminModifyMembership = () => {
                     </div>
                     <input
                       type="number"
+                      value={semiAnnuallyPlan}
+                      onChange={semiAnnuallyPlanChange}
                       className="modifyMembershipFeeDiv_body_monthly_input_div_1_input"
                     />
-                  </div>
-                  <div className="modifyMembershipFeeDiv_body_monthly_btn_div">
-                    <button className="modifyMembershipFeeDiv_body_monthly_btn_btn">
-                      Modify Plan
-                    </button>
                   </div>
                 </div>
               </div>
@@ -171,17 +214,22 @@ const AdminModifyMembership = () => {
                       Amount
                     </div>
                     <input
+                      value={AnnuallyPlan}
+                      onChange={AnnuallyPlanChange}
                       type="number"
                       className="modifyMembershipFeeDiv_body_monthly_input_div_1_input"
                     />
                   </div>
-                  <div className="modifyMembershipFeeDiv_body_monthly_btn_div">
-                    <button className="modifyMembershipFeeDiv_body_monthly_btn_btn">
-                      Modify Plan
-                    </button>
-                  </div>
                 </div>
               </div>
+            </div>
+            <div className="modifyMembershipFeeDiv_body_monthly_btn_div">
+              <button
+                className="modifyMembershipFeeDiv_body_monthly_btn_btn"
+                onClick={ConfigureMembershipPlan}
+              >
+                Modify Plans
+              </button>
             </div>
           </div>
         </div>

@@ -164,6 +164,8 @@ const DashBoardSellProduct = () => {
   const UploadProduct = async () => {
     const formData = new FormData();
 
+    console.log(account);
+
     const element = document.getElementById("product_image");
     const element2 = document.getElementById("product_image2");
     const element3 = document.getElementById("product_image3");
@@ -176,6 +178,7 @@ const DashBoardSellProduct = () => {
     formData.append("product_name", prodName);
     formData.append("product_brand", brandName);
     formData.append("product_condition", prodCondition);
+    formData.append("userAddress", account);
     formData.append("amount", saleAmount);
     console.log(formData);
     try {

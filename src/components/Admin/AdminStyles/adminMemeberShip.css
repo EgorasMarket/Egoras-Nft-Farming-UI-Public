@@ -69,8 +69,9 @@
   width: 100%;
 }
 .modifyMembershipFeeDiv_body_monthly_btn_btn {
-  padding: 10px 0px;
+  padding: 15px 0px;
   width: 100%;
+  max-width: 200px;
   border-radius: 10px;
   border: none;
   background: #229e54;

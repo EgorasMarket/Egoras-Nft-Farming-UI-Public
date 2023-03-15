@@ -16,6 +16,7 @@ import Contract_Address from "./contracts/Contract_Address.json";
 // ====================new v3 contracts =================
 import ProductFacet from "./contracts/V3/ProductFacet.json";
 import StakingFacet from "./contracts/V3/StakingFacet.json";
+import MembershipFacet from "./contracts/V3/MembershipFacet.json";
 // ====================new v3 contracts =================
 // =============================
 // =============================
@@ -25,6 +26,9 @@ const contractProductFacetInstance = (signer) => {
 };
 const contractStakingFacetInstance = (signer) => {
   return new Contract(StakingFacet.address, StakingFacet.abi, signer);
+};
+const contractMembershipFacetInstance = (signer) => {
+  return new Contract(MembershipFacet.address, MembershipFacet.abi, signer);
 };
 // ========new V3 instances =====================
 // =============================
@@ -311,7 +315,6 @@ const lendUS = async (branch, amount, loanID, signer) => {
     }
   }
 };
-
 const takeDividend = async (loanID, signer) => {
   console.log(loanID, "9989i8789768970968578697968574");
   try {
@@ -1084,6 +1087,115 @@ const annually = async (amount, signer) => {
     };
   }
 };
+const takeRoyalty = async (signer) => {
+  // console.log(amount);
+  try {
+    const instance = contractStakingFacetInstance(signer);
+    let result;
+    result = await instance.takeRoyalty();
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const configurePlan = async (
+  _monthlyPrice,
+  _semiAnnuallyPlan,
+  _annuallyPlan,
+  _egc,
+  _eusd,
+  signer
+) => {
+  console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan, _egc, _eusd);
+  try {
+    const instance = contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.configurePlan(
+      _monthlyPrice,
+      _semiAnnuallyPlan,
+      _annuallyPlan,
+      _egc,
+      _eusd
+    );
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const getConfiguration = async (signer) => {
+  // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
+  try {
+    const instance = contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.getConfiguration();
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
+const monthlyPlan = async (_referral, signer) => {
+  console.log(_referral);
+  try {
+    const instance = contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.monthlyPlan(_referral);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
+const semiAnnuallyPlan = async (signer) => {
+  try {
+    const instance = contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.semiAnnuallyPlan();
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
 // =========new V3 Functions==================================
 // ===========================================
 // ===========================================
@@ -1137,4 +1249,9 @@ export {
   listProduct,
   monthly,
   annually,
+  takeRoyalty,
+  configurePlan,
+  getConfiguration,
+  monthlyPlan,
+  semiAnnuallyPlan,
 };
