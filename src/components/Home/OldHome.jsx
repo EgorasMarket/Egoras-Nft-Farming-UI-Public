@@ -699,7 +699,7 @@ const Home = () => {
       {/* =================== */}
       {/* ========================== */}
       {/* ========================== */}
-      <section className="real_world_adoption">
+      {/* <section className="real_world_adoption">
         <div className="container">
           <div className="real_world_adoption_area">
             <div className="real_world_adoption_area1">
@@ -743,14 +743,14 @@ const Home = () => {
                     className="thumbnail_img2"
                   />
                   {/* <div className="wrap"> */}
-                  <img
+      {/* <img
                     src="/img/play_thumbnail_btn.svg"
                     alt=""
                     className="thumbnail_btn"
                     onClick={toggleAboutVideoModal}
                   />
                   {/* </div> */}
-                </div>
+      {/* </div>
               </div>
             </div>
             <div className="real_world_adoption_area2">
@@ -765,7 +765,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* ========================== */}
       {/* =================== */}
       {/* =================== */}

@@ -3,8 +3,12 @@ import SwapVerticalCircleIcon from "@mui/icons-material/SwapVerticalCircle";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
+import AnimatedNumbers from "react-animated-numbers";
 import "./UpdatedSwap.css";
+import AnimatedNumber from "react-awesome-animated-number";
+import "react-awesome-animated-number/dist/index.css";
 import { UpdatedTokenModal } from "./TokenModal/UpdatedTokenModal";
+import moment from "moment/moment";
 import {
   AreaChart,
   Area,
@@ -12,6 +16,7 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
+  LineChart,
   Line,
   Bar,
   BarChart,
@@ -19,6 +24,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import data from "../../../../static/MockData";
+import { numberWithCommas } from "../../../../static/static";
 const UpdatedSwap = () => {
   const [tokenModal, setTokenModal] = useState(false);
   const [tokenModal2, setTokenModal2] = useState(false);
@@ -26,522 +32,128 @@ const UpdatedSwap = () => {
   const [id2, setId2] = useState("");
   const [ida, setIda] = useState("1");
   const [id2b, setId2b] = useState("");
+  const [idTicker, setIdTicker] = useState("");
+  const [idBase, setIdBase] = useState("1");
   const [initialId, setInitialId] = useState("");
   const [initialId2, setInitialId2] = useState("");
-  const [initialIda, setInitialIda] = useState("");
-  const [initialId2b, setInitialId2b] = useState("");
   const [SwapAmount, setSwapAmount] = useState("");
   const [swapBaseAmount, setSwapBaseAmount] = useState("");
   const [SwapBalance, setSwapBalance] = useState("");
-  var array = [
-    {
-      month: "Jan",
-      timestamp: "6:40 AM",
-      value: 188,
-    },
-    {
-      month: "Oct",
-      timestamp: "10:26 PM",
-      value: 262,
-    },
-    {
-      month: "May",
-      timestamp: "9:29 PM",
-      value: 609,
-    },
-    {
-      month: "Nov",
-      timestamp: "9:21 AM",
-      value: 712,
-    },
-    {
-      month: "Aug",
-      timestamp: "1:24 AM",
-      value: 866,
-    },
-    {
-      month: "Jan",
-      timestamp: "2:45 PM",
-      value: 887,
-    },
-    {
-      month: "Dec",
-      timestamp: "7:29 PM",
-      value: 1055,
-    },
-    {
-      month: "Feb",
-      timestamp: "4:20 PM",
-      value: 1070,
-    },
-    {
-      month: "Jul",
-      timestamp: "1:23 AM",
-      value: 1348,
-    },
-    {
-      month: "Jul",
-      timestamp: "12:23 AM",
-      value: 1386,
-    },
-    {
-      month: "Oct",
-      timestamp: "7:29 AM",
-      value: 1391,
-    },
-    {
-      month: "Sep",
-      timestamp: "1:36 AM",
-      value: 1635,
-    },
-    {
-      month: "Jul",
-      timestamp: "4:05 AM",
-      value: 1671,
-    },
-    {
-      month: "Sep",
-      timestamp: "11:59 PM",
-      value: 1749,
-    },
-    {
-      month: "Jan",
-      timestamp: "7:53 PM",
-      value: 1901,
-    },
-    {
-      month: "Sep",
-      timestamp: "8:46 PM",
-      value: 2047,
-    },
-    {
-      month: "Apr",
-      timestamp: "6:30 PM",
-      value: 2051,
-    },
-    {
-      month: "May",
-      timestamp: "3:18 PM",
-      value: 2200,
-    },
-    {
-      month: "Sep",
-      timestamp: "1:36 AM",
-      value: 1635,
-    },
-    {
-      month: "Jul",
-      timestamp: "4:05 AM",
-      value: 1671,
-    },
-    {
-      month: "Sep",
-      timestamp: "11:59 PM",
-      value: 1749,
-    },
-    {
-      month: "Jan",
-      timestamp: "7:53 PM",
-      value: 1901,
-    },
-    {
-      month: "Sep",
-      timestamp: "8:46 PM",
-      value: 2047,
-    },
-    {
-      month: "Apr",
-      timestamp: "6:30 PM",
-      value: 2051,
-    },
-    {
-      month: "May",
-      timestamp: "3:18 PM",
-      value: 2200,
-    },
-    {
-      month: "Aug",
-      timestamp: "3:18 AM",
-      value: 2220,
-    },
-    {
-      month: "Sep",
-      timestamp: "11:56 AM",
-      value: 2247,
-    },
-    {
-      month: "Jan",
-      timestamp: "7:31 PM",
-      value: 2288,
-    },
-    {
-      month: "Feb",
-      timestamp: "1:17 PM",
-      value: 2598,
-    },
-    {
-      month: "Jan",
-      timestamp: "10:19 PM",
-      value: 2656,
-    },
-    {
-      month: "Nov",
-      timestamp: "2:42 PM",
-      value: 2821,
-    },
-    {
-      month: "Feb",
-      timestamp: "1:15 AM",
-      value: 2898,
-    },
-    {
-      month: "Sep",
-      timestamp: "6:19 PM",
-      value: 2910,
-    },
-    {
-      month: "Aug",
-      timestamp: "12:19 AM",
-      value: 2942,
-    },
-    {
-      month: "Jan",
-      timestamp: "5:24 AM",
-      value: 2951,
-    },
-    {
-      month: "May",
-      timestamp: "10:53 PM",
-      value: 3059,
-    },
-    {
-      month: "Mar",
-      timestamp: "4:53 PM",
-      value: 3174,
-    },
-    {
-      month: "Apr",
-      timestamp: "9:56 PM",
-      value: 3253,
-    },
-    {
-      month: "Sep",
-      timestamp: "4:28 AM",
-      value: 3359,
-    },
-    {
-      month: "Nov",
-      timestamp: "6:08 AM",
-      value: 3596,
-    },
-    {
-      month: "Jan",
-      timestamp: "2:15 AM",
-      value: 3848,
-    },
-    {
-      month: "Apr",
-      timestamp: "11:51 PM",
-      value: 4088,
-    },
-    {
-      month: "Sep",
-      timestamp: "11:43 PM",
-      value: 4176,
-    },
-    {
-      month: "Feb",
-      timestamp: "5:57 AM",
-      value: 4328,
-    },
-    {
-      month: "Jan",
-      timestamp: "12:03 AM",
-      value: 4375,
-    },
-    {
-      month: "Mar",
-      timestamp: "5:23 AM",
-      value: 4443,
-    },
-    {
-      month: "Feb",
-      timestamp: "6:12 AM",
-      value: 4616,
-    },
-    {
-      month: "Jul",
-      timestamp: "3:40 PM",
-      value: 4719,
-    },
-    {
-      month: "Feb",
-      timestamp: "9:28 PM",
-      value: 4742,
-    },
-    {
-      month: "Feb",
-      timestamp: "3:58 PM",
-      value: 4972,
-    },
-    {
-      month: "May",
-      timestamp: "2:30 PM",
-      value: 4974,
-    },
-    {
-      month: "May",
-      timestamp: "3:04 AM",
-      value: 5019,
-    },
-    {
-      month: "Jul",
-      timestamp: "9:10 PM",
-      value: 5253,
-    },
-    {
-      month: "Sep",
-      timestamp: "3:06 AM",
-      value: 5331,
-    },
-    {
-      month: "May",
-      timestamp: "7:25 PM",
-      value: 5420,
-    },
-    {
-      month: "Jan",
-      timestamp: "8:19 PM",
-      value: 5441,
-    },
-    {
-      month: "Sep",
-      timestamp: "4:28 PM",
-      value: 5443,
-    },
-    {
-      month: "Jun",
-      timestamp: "12:54 PM",
-      value: 5521,
-    },
-    {
-      month: "Oct",
-      timestamp: "1:49 AM",
-      value: 5640,
-    },
-    {
-      month: "Oct",
-      timestamp: "5:16 PM",
-      value: 5678,
-    },
-    {
-      month: "Mar",
-      timestamp: "2:10 AM",
-      value: 5807,
-    },
-    {
-      month: "Jul",
-      timestamp: "10:26 AM",
-      value: 5984,
-    },
-    {
-      month: "May",
-      timestamp: "8:05 AM",
-      value: 6006,
-    },
-    {
-      month: "Apr",
-      timestamp: "4:48 PM",
-      value: 6150,
-    },
-    {
-      month: "Aug",
-      timestamp: "1:41 PM",
-      value: 6218,
-    },
-    {
-      month: "Aug",
-      timestamp: "6:23 PM",
-      value: 6655,
-    },
+  const [activeDuration, setActiveDuration] = useState("hr1");
 
+  const hour1Array = [
     {
-      month: "Jul",
-      timestamp: "9:10 PM",
-      value: 5253,
+      coin: "Ethereum",
+      base: "USDT",
+      time: "2023-03-16T00:00:00Z",
+      price: 2000.0,
+      change: "open",
+      percentage_change: 0,
+      type: "open",
+      price_difference: 0,
     },
     {
-      month: "Sep",
-      timestamp: "3:06 AM",
-      value: 5331,
+      coin: "Ethereum",
+      base: "USDT",
+      time: "2023-03-16T00:06:00Z",
+      price: 1995.5,
+      change: "decrease",
+      percentage_change: 0.225,
+      type: "close",
+      price_difference: -4.5,
     },
     {
-      month: "May",
-      timestamp: "7:25 PM",
-      value: 5420,
+      coin: "Ethereum",
+      base: "USDT",
+      time: "2023-03-16T00:12:00Z",
+      price: 1980.75,
+      change: "decrease",
+      percentage_change: 0.738,
+      type: "close",
+      price_difference: -14.75,
     },
     {
-      month: "Jan",
-      timestamp: "8:19 PM",
-      value: 5441,
+      coin: "Ethereum",
+      base: "USDT",
+      time: "2023-03-16T00:18:00Z",
+      price: 2025.0,
+      change: "increase",
+      percentage_change: 2.213,
+      type: "close",
+      price_difference: 44.25,
     },
     {
-      month: "Sep",
-      timestamp: "4:28 PM",
-      value: 5443,
+      coin: "Ethereum",
+      base: "USDT",
+      time: "2023-03-16T00:24:00Z",
+      price: 2032.75,
+      change: "increase",
+      percentage_change: 0.383,
+      type: "close",
+      price_difference: 7.75,
     },
     {
-      month: "Jun",
-      timestamp: "12:54 PM",
-      value: 5521,
+      coin: "Ethereum",
+      base: "USDT",
+      time: "2023-03-16T00:30:00Z",
+      price: 2050.25,
+      change: "increase",
+      percentage_change: 0.86,
+      type: "close",
+      price_difference: 17.5,
     },
     {
-      month: "Oct",
-      timestamp: "1:49 AM",
-      value: 5640,
+      coin: "Ethereum",
+      base: "USDT",
+      time: "2023-03-16T00:36:00Z",
+      price: 2065.5,
+      change: "increase",
+      percentage_change: 0.744,
+      type: "close",
+      price_difference: 15.25,
     },
     {
-      month: "Oct",
-      timestamp: "5:16 PM",
-      value: 5678,
+      coin: "Ethereum",
+      base: "USDT",
+      time: "2023-03-16T00:42:00Z",
+      price: 2045.25,
+      change: "decrease",
+      percentage_change: 0.977,
+      type: "close",
+      price_difference: -20.25,
     },
     {
-      month: "Mar",
-      timestamp: "2:10 AM",
-      value: 5807,
+      coin: "Ethereum",
+      base: "USDT",
+      time: "2023-03-16T00:48:00Z",
+      price: 2030.75,
+      change: "decrease",
+      percentage_change: 0.738,
+      type: "close",
+      price_difference: -14.75,
     },
     {
-      month: "Jul",
-      timestamp: "10:26 AM",
-      value: 5984,
+      coin: "Ethereum",
+      base: "USDT",
+      time: "2023-03-16T00:54:00Z",
+      price: 2022.5,
+      change: "decrease",
+      percentage_change: 0.407,
+      type: "close",
+      price_difference: -8.25,
     },
     {
-      month: "Oct",
-      timestamp: "5:16 PM",
-      value: 5678,
-    },
-    {
-      month: "Mar",
-      timestamp: "2:10 AM",
-      value: 5807,
-    },
-    {
-      month: "Jul",
-      timestamp: "10:26 AM",
-      value: 5984,
-    },
-    {
-      month: "May",
-      timestamp: "8:05 AM",
-      value: 6006,
-    },
-    {
-      month: "Apr",
-      timestamp: "4:48 PM",
-      value: 6150,
-    },
-    {
-      month: "Aug",
-      timestamp: "1:41 PM",
-      value: 6218,
-    },
-    {
-      month: "May",
-      timestamp: "12:24 AM",
-      value: 6799,
-    },
-    {
-      month: "Jul",
-      timestamp: "10:26 AM",
-      value: 5984,
-    },
-    {
-      month: "Oct",
-      timestamp: "5:16 PM",
-      value: 5678,
-    },
-
-    {
-      month: "Jun",
-      timestamp: "12:54 PM",
-      value: 5521,
-    },
-    {
-      month: "Sep",
-      timestamp: "4:28 PM",
-      value: 5443,
-    },
-    {
-      month: "Sep",
-      timestamp: "3:06 AM",
-      value: 5331,
-    },
-    {
-      month: "May",
-      timestamp: "7:25 PM",
-      value: 5420,
-    },
-    {
-      month: "Jan",
-      timestamp: "8:19 PM",
-      value: 5441,
-    },
-    {
-      month: "Sep",
-      timestamp: "4:28 PM",
-      value: 5443,
-    },
-    {
-      month: "Jun",
-      timestamp: "12:54 PM",
-      value: 5521,
-    },
-    {
-      month: "Mar",
-      timestamp: "5:23 AM",
-      value: 4443,
-    },
-    {
-      month: "Feb",
-      timestamp: "6:12 AM",
-      value: 4616,
-    },
-    {
-      month: "Jul",
-      timestamp: "3:40 PM",
-      value: 4719,
-    },
-    {
-      month: "Feb",
-      timestamp: "9:28 PM",
-      value: 4742,
-    },
-    {
-      month: "Feb",
-      timestamp: "6:12 AM",
-      value: 4616,
-    },
-    {
-      month: "Mar",
-      timestamp: "5:23 AM",
-      value: 4443,
-    },
-    {
-      month: "Jan",
-      timestamp: "12:03 AM",
-      value: 4375,
-    },
-    {
-      month: "Feb",
-      timestamp: "5:57 AM",
-      value: 4328,
-    },
-    {
-      month: "Sep",
-      timestamp: "11:43 PM",
-      value: 4176,
+      coin: "Ethereum",
+      base: "USDT",
+      time: "2023-03-16T01:00:00Z",
+      price: 2010.25,
+      change: "decrease",
+      percentage_change: 0.606,
+      type: "close",
+      price_difference: -12.25,
     },
   ];
+
   const assets = [
     {
       id: "1",
@@ -645,12 +257,14 @@ const UpdatedSwap = () => {
   const setAssetsId = (e) => {
     setId(e.currentTarget.id);
     setIda(e.currentTarget.id);
+    setIdTicker(e.currentTarget.id);
     ToggleTokenModal();
     console.log(e.currentTarget.id);
     if (e.currentTarget.id == id2) {
       console.log("id is equal id2");
       setId2(initialId);
       setId2b(initialId);
+      setIdBase(initialId);
       return;
     }
     setSwapBalance("");
@@ -658,12 +272,14 @@ const UpdatedSwap = () => {
   const setAssetsId2 = (e) => {
     setId2(e.currentTarget.id);
     setId2b(e.currentTarget.id);
+    setIdBase(e.currentTarget.id);
     ToggleTokenModal2();
     console.log(e.currentTarget.id);
     if (e.currentTarget.id == id) {
       console.log("id is equal id2");
       setId(initialId2);
       setIda(initialId2);
+      setIdTicker(initialId2);
       return;
     }
   };
@@ -682,6 +298,10 @@ const UpdatedSwap = () => {
   const ToggleSwapPrices = () => {
     setIda(id2b);
     setId2b(ida);
+  };
+  const ToggleSwapBase = () => {
+    setIdBase(idTicker);
+    setIdTicker(idBase);
   };
 
   const add25Per = (balance) => {
@@ -719,12 +339,29 @@ const UpdatedSwap = () => {
   // ================================
   // ================================
   // ================================
-  const lastIndex = array.length - 1;
-  const LastArray = array[lastIndex];
-  const [ChartValue, setChartValue] = useState(LastArray.value);
-  const [ChartTime, setChartTime] = useState(LastArray.timestamp);
-  const [ChartValue2, setChartValue2] = useState(LastArray.value);
-  const [ChartTime2, setChartTime2] = useState(LastArray.timestamp);
+  const formatTime = (time) => {
+    return moment(time).format("h:mm a");
+  };
+
+  const formattedData = hour1Array.map((obj) => {
+    return {
+      ...obj,
+      time: formatTime(obj.time),
+    };
+  });
+  const lastIndex = formattedData.length - 1;
+  const LastArray = formattedData[lastIndex];
+  const [ChartValue, setChartValue] = useState(LastArray.price);
+  const [ChartTime, setChartTime] = useState(LastArray.time);
+  const [ChartPercentChange, setChartPercentChange] = useState(
+    LastArray.percentage_change
+  );
+  const [ChartPriceDifference, setChartPriceDifference] = useState(
+    LastArray.price_difference
+  );
+  const [ChartChange, setChartChange] = useState(LastArray.change);
+  const [ChartValue2, setChartValue2] = useState(LastArray.price);
+  const [ChartTime2, setChartTime2] = useState(LastArray.time);
   function formatNumber(number) {
     const abbreviations = {
       k: 1000,
@@ -749,15 +386,37 @@ const UpdatedSwap = () => {
     return num.toLocaleString();
   }
   const CustomTooltip = ({ active, payload, label }) => {
+    console.log(payload);
     if (active && payload && payload.length) {
-      setChartValue(payload[0].value);
-      setChartTime(payload[0].payload.timestamp);
+      setChartValue(payload[0].payload.price);
+      setChartTime(payload[0].payload.time);
+      setChartPercentChange(payload[0].payload.percentage_change);
+      setChartPriceDifference(payload[0].payload.price_difference);
+      setChartChange(payload[0].payload.change);
     } else {
-      setChartValue(LastArray.value);
-      setChartTime(LastArray.timestamp);
+      setChartValue(LastArray.price);
+      setChartTime(LastArray.time);
+      setChartPercentChange(LastArray.percentage_change);
+      setChartPriceDifference(LastArray.price_difference);
+      setChartChange(LastArray.change);
     }
     return null;
   };
+  const ToggleDuration = (e) => {
+    let id = e.currentTarget.id;
+    setActiveDuration(id);
+    console.log(id);
+    console.log("me");
+  };
+
+  const numDataPoints = formattedData.length;
+  const interval = Math.ceil(numDataPoints / 6);
+
+  const minPrice =
+    formattedData.length > 0
+      ? Math.min(...formattedData.map((d) => d.price))
+      : null;
+  const priceOffset = minPrice ? minPrice : 0;
   return (
     <div className="other2">
       <section className=" no-bg no_paddd">
@@ -1087,86 +746,241 @@ const UpdatedSwap = () => {
             </div>
             <div className="tradeViewArea">
               <div className="tradeViewAreaCont">
-                <div
-                  className="analytics_container_1_Amount"
-                  onChange={CustomTooltip}
-                >
-                  ${formatNumber(ChartValue)}
-                </div>
-                <span className="analytics_container_1_Amount_span">
-                  {ChartTime}
-                </span>
-
-                <div className="analytics_container_1_chart">
-                  <div
-                    className="assets_chart_area1a "
-                    style={{ width: "100%", height: 220 }}
-                  >
-                    <ResponsiveContainer>
-                      <AreaChart
-                        width={130}
-                        height={10}
-                        data={array}
-                        margin={{
-                          top: 0,
-                          right: 0,
-                          left: 0,
-                          bottom: 0,
-                        }}
-                      >
-                        <defs>
-                          <linearGradient
-                            id="colorUv"
-                            x1="0"
-                            y1="0"
-                            x2="0"
-                            y2="1"
-                          >
-                            <stop
-                              offset="5%"
-                              stopColor="#60c589"
-                              stopOpacity={0.3}
-                            />
-                            <stop
-                              offset="100%"
-                              stopColor="#60c589"
-                              stopOpacity={0}
-                            />
-                          </linearGradient>
-                        </defs>
-                        {/* <CartesianGrid
-                            strokeDasharray="1 1"
-                            stroke="#d7d7d7"
-                          /> */}
-                        <XAxis dataKey="month" stroke="0" />
-                        {/* <YAxis stroke="#000" /> */}
-                        <Tooltip content={<CustomTooltip />} />
-                        <Area
-                          type="monotone"
-                          dataKey="value"
-                          stroke="#229e54"
-                          fillOpacity={1}
-                          fill="url(#colorUv)"
-                          strokeWidth={2}
-                        />
-                      </AreaChart>
-                    </ResponsiveContainer>
+                <div className="tradeViewAreaCont_pairs_cont">
+                  <div className="tradeViewAreaCont_pairs_cont_div">
+                    {idTicker == "" ? (
+                      <div className="tradeViewAreaCont_pairs_cont_div1">
+                        Nil
+                      </div>
+                    ) : (
+                      <>
+                        {assets.map((data) => {
+                          // setSwapBalance(data.balance);
+                          return (
+                            <>
+                              {data.id == idTicker ? (
+                                <div className="tradeViewAreaCont_pairs_cont_div1 moveCloser">
+                                  <img
+                                    src={data.img}
+                                    alt=""
+                                    className="tradeViewAreaCont_pairs_cont_div1_img"
+                                  />
+                                </div>
+                              ) : null}
+                            </>
+                          );
+                        })}
+                      </>
+                    )}
+                    {idBase == "" ? (
+                      <div className="tradeViewAreaCont_pairs_cont_div1">
+                        Nil
+                      </div>
+                    ) : (
+                      <>
+                        {assets.map((data) => {
+                          // setSwapBalance(data.balance);
+                          return (
+                            <>
+                              {data.id == idBase ? (
+                                <div className="tradeViewAreaCont_pairs_cont_div1">
+                                  <img
+                                    src={data.img}
+                                    alt=""
+                                    className="tradeViewAreaCont_pairs_cont_div1_img"
+                                  />
+                                </div>
+                              ) : null}
+                            </>
+                          );
+                        })}
+                      </>
+                    )}
+                    {idTicker == "" ? (
+                      <div className="tradeViewAreaCont_pairs_cont_div2">
+                        Nil
+                      </div>
+                    ) : (
+                      <>
+                        {assets.map((data) => {
+                          // setSwapBalance(data.balance);
+                          return (
+                            <>
+                              {data.id == idTicker ? (
+                                <div className="tradeViewAreaCont_pairs_cont_div2">
+                                  {data.symbol}
+                                </div>
+                              ) : null}
+                            </>
+                          );
+                        })}
+                      </>
+                    )}
+                    <div className="tradeViewAreaCont_pairs_cont_div2_slash">
+                      /
+                    </div>
+                    {idBase == "" ? (
+                      <div className="tradeViewAreaCont_pairs_cont_div2 base">
+                        Nil
+                      </div>
+                    ) : (
+                      <>
+                        {assets.map((data) => {
+                          // setSwapBalance(data.balance);
+                          return (
+                            <>
+                              {data.id == idBase ? (
+                                <div className="tradeViewAreaCont_pairs_cont_div2 base">
+                                  {data.symbol}
+                                </div>
+                              ) : null}
+                            </>
+                          );
+                        })}
+                      </>
+                    )}
+                    <SwapHorizIcon
+                      className="swap_base_ticker_price_change_icon"
+                      onClick={ToggleSwapBase}
+                    />
                   </div>
+                </div>
+                <div className="tradeViewAreaCont1">
+                  <div className="tradeViewAreaCont1_area1">
+                    <div
+                      className="analytics_container_1_Amount"
+                      onChange={CustomTooltip}
+                    >
+                      <span>
+                        <AnimatedNumber
+                          value={ChartValue}
+                          // hasComma={true}
+                          formatValue={(value) => value.toFixed(0)}
+                          size={28}
+                          duration={1000}
+                        />{" "}
+                        {idBase == "" ? (
+                          <>Nil</>
+                        ) : (
+                          <>
+                            {assets.map((data) => {
+                              return (
+                                <>{data.id == idBase ? data.symbol : null}</>
+                              );
+                            })}
+                          </>
+                        )}
+                      </span>
+                    </div>
+                    <span
+                      className="tradeViewAreaCont1_area1_priceChangeSpan"
+                      style={
+                        ChartChange == "decrease"
+                          ? { color: "#ff537b" }
+                          : ChartChange == "increase"
+                          ? { color: "#31cb9e" }
+                          : { color: "#31cb9e" }
+                      }
+                    >
+                      {ChartChange == "decrease" ? (
+                        <>
+                          {ChartPriceDifference} (
+                          {"-" +
+                            parseFloat(ChartPercentChange).toFixed(2) +
+                            "%"}
+                          )
+                        </>
+                      ) : (
+                        <>
+                          {"+" + ChartPriceDifference} (
+                          {"+" +
+                            parseFloat(ChartPercentChange).toFixed(2) +
+                            "%"}
+                          )
+                        </>
+                      )}
+                    </span>
+                  </div>
+                  <div className="tradeViewAreaCont1_area2">
+                    <div
+                      className={
+                        activeDuration == "hr1"
+                          ? "tradeViewAreaCont1_area2_cont1_active"
+                          : "tradeViewAreaCont1_area2_cont1"
+                      }
+                      onClick={ToggleDuration}
+                      id="hr1"
+                    >
+                      1H
+                    </div>
+                    <div
+                      className={
+                        activeDuration == "hr4"
+                          ? "tradeViewAreaCont1_area2_cont1_active"
+                          : "tradeViewAreaCont1_area2_cont1"
+                      }
+                      onClick={ToggleDuration}
+                      id="hr4"
+                    >
+                      4H
+                    </div>
+                    <div
+                      className={
+                        activeDuration == "day"
+                          ? "tradeViewAreaCont1_area2_cont1_active"
+                          : "tradeViewAreaCont1_area2_cont1"
+                      }
+                      onClick={ToggleDuration}
+                      id="day"
+                    >
+                      1D
+                    </div>
+                    <div
+                      className={
+                        activeDuration == "week"
+                          ? "tradeViewAreaCont1_area2_cont1_active"
+                          : "tradeViewAreaCont1_area2_cont1"
+                      }
+                      onClick={ToggleDuration}
+                      id="week"
+                    >
+                      1W
+                    </div>
+                    <div
+                      className={
+                        activeDuration == "month1"
+                          ? "tradeViewAreaCont1_area2_cont1_active"
+                          : "tradeViewAreaCont1_area2_cont1"
+                      }
+                      onClick={ToggleDuration}
+                      id="month1"
+                    >
+                      1M
+                    </div>
+                    <div
+                      className={
+                        activeDuration == "month6"
+                          ? "tradeViewAreaCont1_area2_cont1_active"
+                          : "tradeViewAreaCont1_area2_cont1"
+                      }
+                      onClick={ToggleDuration}
+                      id="month6"
+                    >
+                      6M
+                    </div>
+                  </div>
+                </div>
+                <div className="tradingView_container_1_chart">
                   <div
-                    className="assets_chart_area2 "
-                    style={{ width: "100%", height: 500 }}
+                    className="tradeViewAreaCont_chart_area2 "
+                    style={{ width: "100%", height: 400 }}
                   >
                     <ResponsiveContainer>
                       <AreaChart
-                        width={130}
-                        height={10}
-                        data={array}
-                        margin={{
-                          top: 0,
-                          right: 0,
-                          left: 0,
-                          bottom: 0,
-                        }}
+                        width={1000}
+                        height={100}
+                        data={formattedData}
+                        margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
                       >
                         <defs>
                           <linearGradient
@@ -1178,12 +992,12 @@ const UpdatedSwap = () => {
                           >
                             <stop
                               offset="5%"
-                              stopColor="#60c589"
+                              stopColor="#31cb9e"
                               stopOpacity={0.3}
                             />
                             <stop
                               offset="100%"
-                              stopColor="#60c589"
+                              stopColor="#31cb9e"
                               stopOpacity={0}
                             />
                           </linearGradient>
@@ -1192,12 +1006,27 @@ const UpdatedSwap = () => {
                             strokeDasharray="1 1"
                             stroke="#d7d7d7"
                           /> */}
-                        <XAxis dataKey="month" stroke="0" />
-                        {/* <YAxis stroke="#000" /> */}
+                        <XAxis
+                          dataKey="time"
+                          stroke="0"
+                          interval={interval - 1}
+                          ticks={formattedData
+                            .slice(1, -1)
+                            .map((dataPoint) => dataPoint.time)}
+                          // tick={false}
+                          tick={{ fontSize: 12 }}
+                          allowDuplicatedCategory={false}
+                        />
+                        {/* <YAxis
+                          domain={[minPrice, "auto"]}
+                          tick={false}
+                          axisLine={false}
+                        /> */}
                         <Tooltip content={<CustomTooltip />} />
+
                         <Area
                           type="monotone"
-                          dataKey="value"
+                          dataKey={(d) => d.price - priceOffset}
                           stroke="#31cb9e"
                           fillOpacity={1}
                           fill="url(#colorUv)"

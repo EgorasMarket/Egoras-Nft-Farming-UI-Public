@@ -152,15 +152,109 @@
 .tradeViewArea {
   width: 100%;
   height: 100%;
-  margin-left: 30px;
-  background: #0b110c;
-  padding: 2em;
+  margin-right: 3em;
+  background: #0b110c9e;
+  padding: 0;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+  backdrop-filter: blur(3px);
+  border: solid 1px #141e16;
 }
 .tradeViewAreaCont .analytics_container_1_Amount {
-  font-size: 34px;
+  font-size: 28px;
   margin-bottom: 0em;
-  color: #7c827d;
+  color: #a7bbaf;
+}
+.tradeViewAreaCont1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1em 2em;
+}
+.tradeViewAreaCont1_area2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+}
+.tradeViewAreaCont1_area2_cont1_active {
+  margin-right: 10px;
+  cursor: pointer;
+  width: 26px;
+  height: 24px;
+  border-radius: 4px;
+  line-height: 24px;
+  margin-right: 5px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease 0s;
+  background-color: #229e54;
+  color: #ffffff;
+}
+.tradeViewAreaCont1_area2_cont1 {
+  margin-right: 10px;
+  cursor: pointer;
+  width: 26px;
+  height: 24px;
+  border-radius: 4px;
+  line-height: 24px;
+  margin-right: 5px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease 0s;
+  color: #b0bbb2;
+}
+.tradeViewAreaCont_chart_area2 tspan {
+  fill: #a7bbaf;
+  font-size: 12px;
+  font-weight: 100;
+}
+span.tradeViewAreaCont1_area1_priceChangeSpan {
+  font-size: 12px;
+  /* color: #31cb9e; */
+}
+.tradeViewAreaCont_pairs_cont {
+  padding: 1em 2em;
+}
+.tradeViewAreaCont_pairs_cont_div {
+  display: flex;
+  align-items: center;
+}
+.tradeViewAreaCont_pairs_cont_div1 {
+  width: 25px;
+}
+
+.tradeViewAreaCont_pairs_cont_div1_img {
+  width: 100%;
+}
+.tradeViewAreaCont_pairs_cont_div1.moveCloser {
+  margin-right: -6px;
+  position: relative;
+  z-index: 1;
+}
+.tradeViewAreaCont_pairs_cont_div2 {
+  margin-left: 5px;
+  font-size: 24px;
+  color: #fff;
+}
+.tradeViewAreaCont_pairs_cont_div2_slash {
+  margin-left: 5px;
+  font-size: 18px;
+  color: #8a968c;
+}
+.tradeViewAreaCont_pairs_cont_div2.base {
+  font-size: 18px;
+  color: #8a968c;
+}
+.swap_base_ticker_price_change_icon {
+  color: #000000;
+  margin-left: 5px;
+  font-size: 16px !important;
+  background: #8a968c;
+  border-radius: 50%;
+  padding: 0px;
+  cursor: pointer;
 }
