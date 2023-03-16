@@ -22,6 +22,7 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+import { GET_ALL_UPLOADED_PRODUCTS } from "../../../services/productServices";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -303,6 +304,23 @@ const DashBoardUserSales = () => {
         "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
     },
   ];
+
+  const [uploadedProduct, setUploadedProducts] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await GET_ALL_UPLOADED_PRODUCTS();
+      console.log(response.data.getAllUploadedProduct, "goody");
+
+      if (response.data) {
+        setUploadedProducts(response.data.getAllUploadedProduct);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleAcceptBid = async () => {};
   const ToggleSaleDetails = (e) => {
     setSaleDetails(e.currentTarget.id);
     console.log(e.currentTarget.id);
@@ -548,7 +566,7 @@ const DashBoardUserSales = () => {
 
                 
               </div> */}
-                  {SalableProduct.length <= 0 ? (
+                  {uploadedProduct.length <= 0 ? (
                     <div className="no_loans_div">
                       <div className="no_loans_div_cont">
                         <Nodata />
@@ -565,61 +583,63 @@ const DashBoardUserSales = () => {
                       {/* =============== */}
                       {/* =============== */}
                       {activeBtn === "Ongoing"
-                        ? SalableProduct.filter(
-                            (person) => person.ProductStatus == "Pending"
-                          ).map((asset) => {
-                            //   var percentage = (asset.funded / asset.amount) * 100;
-                            return (
-                              <tr
-                                className="assets-category-row  transitionMe"
-                                id={asset.id}
-                                onClick={ToggleSaleDetails}
-                              >
-                                <td className="assets-category-data branch_name_title">
-                                  <div className="assets-data">
-                                    <div className="assets-data-pool_name">
-                                      {asset.ProductName}
-                                      <span className="poolName_txt">
-                                        {asset.Date}
-                                      </span>
+                        ? uploadedProduct
+                            .filter(
+                              (person) => person.ProductStatus == "Pending"
+                            )
+                            .map((asset) => {
+                              //   var percentage = (asset.funded / asset.amount) * 100;
+                              return (
+                                <tr
+                                  className="assets-category-row  transitionMe"
+                                  id={asset.id}
+                                  onClick={ToggleSaleDetails}
+                                >
+                                  <td className="assets-category-data branch_name_title">
+                                    <div className="assets-data">
+                                      <div className="assets-data-pool_name">
+                                        {asset.ProductName}
+                                        <span className="poolName_txt">
+                                          {asset.Date}
+                                        </span>
+                                      </div>
                                     </div>
-                                  </div>
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {numberWithCommas(
-                                    parseInt(asset.Amount).toFixed(0)
-                                  )}{" "}
-                                  Eusd
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {`${asset.Seller.slice(
-                                    0,
-                                    6
-                                  )}...${asset.Seller.slice(39, 42)}`}
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {asset.BiddingStatus}
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {asset.BiddingAmount} Eusd
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {asset.ProductStatus}
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {`${asset.txnHash.slice(
-                                    0,
-                                    6
-                                  )}...${asset.txnHash.slice(63, 66)}`}
-                                </td>
-                                <td className="assets-category-data-last branch_loan_action">
-                                  <ArrowForwardIosIcon />
-                                </td>
-                              </tr>
-                            );
-                          })
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {numberWithCommas(
+                                      parseInt(asset.Amount).toFixed(0)
+                                    )}{" "}
+                                    Eusd
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {`${asset.Seller.slice(
+                                      0,
+                                      6
+                                    )}...${asset.Seller.slice(39, 42)}`}
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {asset.BiddingStatus}
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {asset.BiddingAmount} Eusd
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {asset.ProductStatus}
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {`${asset.txnHash.slice(
+                                      0,
+                                      6
+                                    )}...${asset.txnHash.slice(63, 66)}`}
+                                  </td>
+                                  <td className="assets-category-data-last branch_loan_action">
+                                    <ArrowForwardIosIcon />
+                                  </td>
+                                </tr>
+                              );
+                            })
                         : activeBtn === "All"
-                        ? SalableProduct.map((asset) => {
+                        ? uploadedProduct.map((asset) => {
                             return (
                               <tr
                                 className="assets-category-row  transitionMe"
@@ -642,12 +662,12 @@ const DashBoardUserSales = () => {
                                   )}{" "}
                                   Eusd
                                 </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
+                                {/* <td className="assets-category-data1b stable-content branch_apy">
                                   {`${asset.Seller.slice(
                                     0,
                                     6
                                   )}...${asset.Seller.slice(39, 42)}`}
-                                </td>
+                                </td> */}
                                 <td className="assets-category-data1b stable-content branch_apy">
                                   {asset.BiddingStatus}
                                 </td>
@@ -670,58 +690,60 @@ const DashBoardUserSales = () => {
                             );
                           })
                         : activeBtn === "Closed"
-                        ? SalableProduct.filter(
-                            (person) => person.ProductStatus == "Approved"
-                          ).map((asset) => {
-                            return (
-                              <tr
-                                className="assets-category-row  transitionMe"
-                                id={asset.id}
-                                onClick={ToggleSaleDetails}
-                              >
-                                <td className="assets-category-data branch_name_title">
-                                  <div className="assets-data">
-                                    <div className="assets-data-pool_name">
-                                      {asset.ProductName}
-                                      <span className="poolName_txt">
-                                        {asset.Date}
-                                      </span>
+                        ? uploadedProduct
+                            .filter(
+                              (person) => person.ProductStatus == "Approved"
+                            )
+                            .map((asset) => {
+                              return (
+                                <tr
+                                  className="assets-category-row  transitionMe"
+                                  id={asset.id}
+                                  onClick={ToggleSaleDetails}
+                                >
+                                  <td className="assets-category-data branch_name_title">
+                                    <div className="assets-data">
+                                      <div className="assets-data-pool_name">
+                                        {asset.ProductName}
+                                        <span className="poolName_txt">
+                                          {asset.Date}
+                                        </span>
+                                      </div>
                                     </div>
-                                  </div>
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {numberWithCommas(
-                                    parseInt(asset.Amount).toFixed(0)
-                                  )}{" "}
-                                  Eusd
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {`${asset.Seller.slice(
-                                    0,
-                                    6
-                                  )}...${asset.Seller.slice(39, 42)}`}
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {asset.BiddingStatus}
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {asset.BiddingAmount} Eusd
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {asset.ProductStatus}
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {`${asset.txnHash.slice(
-                                    0,
-                                    6
-                                  )}...${asset.txnHash.slice(63, 66)}`}
-                                </td>
-                                <td className="assets-category-data-last branch_loan_action">
-                                  <ArrowForwardIosIcon />
-                                </td>
-                              </tr>
-                            );
-                          })
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {numberWithCommas(
+                                      parseInt(asset.Amount).toFixed(0)
+                                    )}{" "}
+                                    Eusd
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {`${asset.Seller.slice(
+                                      0,
+                                      6
+                                    )}...${asset.Seller.slice(39, 42)}`}
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {asset.BiddingStatus}
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {asset.BiddingAmount} Eusd
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {asset.ProductStatus}
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {`${asset.txnHash.slice(
+                                      0,
+                                      6
+                                    )}...${asset.txnHash.slice(63, 66)}`}
+                                  </td>
+                                  <td className="assets-category-data-last branch_loan_action">
+                                    <ArrowForwardIosIcon />
+                                  </td>
+                                </tr>
+                              );
+                            })
                         : null}
                       {/* =================== */}
                       {/* =================== */}
@@ -749,7 +771,7 @@ const DashBoardUserSales = () => {
       {/* ============================= */}
       {/* ============================= */}
       {/* ============================= */}
-      {SalableProduct.map((data) => (
+      {uploadedProduct.map((data) => (
         <>
           {data.id === saleDetails ? (
             <div className="saleDetailsDiv">
@@ -908,7 +930,10 @@ const DashBoardUserSales = () => {
                     </div>
                   </div>
                   <div className="acceptDeclineBidButtons">
-                    <button className="acceptDeclineBidButtons_accept">
+                    <button
+                      onClick={handleAcceptBid}
+                      className="acceptDeclineBidButtons_accept"
+                    >
                       Accept Bid
                     </button>
                     <button className="acceptDeclineBidButtons_decline">
