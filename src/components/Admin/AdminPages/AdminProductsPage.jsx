@@ -578,7 +578,7 @@ const AdminProductsPage = () => {
   useEffect(() => {
     async function fetchData() {
       const res = await axios.get(
-        API_URL + "/product/new/zero-tradable",
+        API_URL + "/product/approved/tradable-true",
         null,
         config
       );
