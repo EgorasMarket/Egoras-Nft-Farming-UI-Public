@@ -4,9 +4,35 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Context } from "./components/context/Context.jsx";
+import Zendesk from "react-zendesk";
+const zendesk_key = "9bbd80ba-d8a8-4423-bfe6-a048b22c0b8b";
+
+const setting = {
+  color: {
+    theme: "#000",
+  },
+  launcher: {
+    chatLabel: {
+      "en-US": "Need Help",
+    },
+  },
+  contactForm: {
+    fields: [
+      { id: "description", prefill: { "*": "My pre-filled description" } },
+    ],
+  },
+};
 ReactDOM.render(
   <Context>
     <React.StrictMode>
+      <Zendesk
+        defer
+        zendeskKey={zendesk_key}
+        {...setting}
+        onLoaded={() => {
+          console.log("zendesk is running, initiated by newnation");
+        }}
+      />
       <App />
     </React.StrictMode>
   </Context>,
@@ -19,3 +45,6 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+// <!-- Start of sharpman-tech Zendesk Widget script -->
+
+// <!-- End of sharpman-tech Zendesk Widget script -->

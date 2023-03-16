@@ -11,19 +11,13 @@ import EgorasPriceOracleFacet from "./contracts/EgorasPriceOracleFacet.json";
 import EgorasSwapFacet from "./contracts/EgorasSwapFacet.json";
 import COINS from "./contracts/V2/coins.json";
 import Contract_Address from "./contracts/Contract_Address.json";
-// ===============
-// ===============
+
 // ===============
 // ====================new v3 contracts =================
 import ProductFacet from "./contracts/V3/ProductFacet.json";
 import StakingFacet from "./contracts/V3/StakingFacet.json";
 import MembershipFacet from "./contracts/V3/MembershipFacet.json";
 // ====================new v3 contracts =================
-
-// ===============
-// ===============
-// ===============
-
 // =============================
 // =============================
 // ========new V3 instances =====================
