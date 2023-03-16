@@ -18,7 +18,8 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
-import { placeBid } from "../../../web3";
+import { placeBid, approveProduct } from "../../../web3";
+import { parseEther, formatEther, parseUnits } from "@ethersproject/units";
 
 import {
   Web3ReactProvider,
@@ -51,9 +52,11 @@ const AdminSeeSellers = () => {
   const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);
   const [totalLendingCount, setTotalLendingCount] = useState(0);
   const [adminStatus, setAdminStatus] = useState(null);
+  const [bidAmount, setBidAmount] = useState("");
   const [newProducts, setNewProducts] = useState([]);
   const [activeBtn, setActivrBtn] = useState("Ongoing");
   const [saleDetails, setSaleDetails] = useState("");
+  const [indexId, setIndexId] = useState(null);
   const [activeLink, setActiveLink] = useState("abstract-link");
   const [activeMenu, setActiveMenu] = useState("details-accord  ");
   const toggleActiveBtn = (event) => {
@@ -320,9 +323,14 @@ const AdminSeeSellers = () => {
         "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
     },
   ];
-  const ToggleSaleDetails = (e) => {
-    setSaleDetails(e.currentTarget.id);
-    console.log(e.currentTarget.id);
+  const ToggleSaleDetails = (product_id, index_id) => {
+    setSaleDetails(product_id);
+    setIndexId(index_id);
+    console.log(product_id, index_id);
+  };
+
+  const CloseSaleDetails = (e) => {
+    setSaleDetails("");
   };
   const toggleActive = (e) => {
     let link = e.currentTarget.id;
@@ -370,16 +378,29 @@ const AdminSeeSellers = () => {
     fetchData();
   }, []);
 
+  const changeBidValue = (event) => {
+    setBidAmount(event.target.value);
+    console.log(event.target.value);
+    // new_category, setNew_category
+  };
+
   const BidForProduct = async () => {
-    // const res = await placeBid(
-    //   parseEther(monthlyPlan.toString(), "wei").toString(),
-    //   parseEther(semiAnnuallyPlan.toString(), "wei").toString(),
-    //   parseEther(AnnuallyPlan.toString(), "wei").toString(),
-    //   REACT_APP_EGC_ADDRESS,
-    //   REACT_APP_EUSD_ADDRESS,
-    //   library.getSigner()
-    // );
-    // console.log(res, "somto8uhhhg");
+    console.log(indexId, parseEther(bidAmount.toString(), "wei").toString());
+
+    const res = await placeBid(
+      indexId,
+      parseEther(bidAmount.toString(), "wei").toString(),
+      library.getSigner()
+    );
+    console.log(res, "somto8uhhhg");
+    // console.log(res.status, "somto8uhhhg");
+  };
+
+  const ApproveProduct = async () => {
+    console.log(indexId);
+
+    const res = await approveProduct(indexId, library.getSigner());
+    console.log(res, "somto8uhhhg");
     // console.log(res.status, "somto8uhhhg");
   };
 
@@ -575,8 +596,14 @@ const AdminSeeSellers = () => {
                             return (
                               <tr
                                 className="assets-category-row  transitionMe"
-                                id={asset.id}
-                                onClick={ToggleSaleDetails}
+                                id={asset.product_id}
+                                // onClick={ToggleSaleDetails}
+                                onClick={() => {
+                                  ToggleSaleDetails(
+                                    asset.product_id,
+                                    asset.index_id
+                                  );
+                                }}
                               >
                                 <td className="assets-category-data branch_name_title">
                                   <div className="assets-data">
@@ -746,218 +773,238 @@ const AdminSeeSellers = () => {
           </div>
         </div>
       </section>
-      {SalableProduct.map((data) => (
-        <>
-          {data.id === saleDetails ? (
-            <div className="saleDetailsDiv">
-              <div
-                className="saleDetailsDiv_close_div"
-                onClick={ToggleSaleDetails}
-              ></div>
-              <div
-                className="saleDetailsDiv_area_closeIcon_div"
-                onClick={ToggleSaleDetails}
-              >
-                <CloseIcon className="saleDetailsDiv_area_closeIcon" />
-                Close
-              </div>
-              <div className="saleDetailsDiv_area">
-                <div className="saleDetailsDiv_area_1">
-                  <div className="saleDetailsDiv_area_1_title">
-                    Products Details
+      {saleDetails == ""
+        ? null
+        : newProducts.map((data) => (
+            <>
+              {data.product_id === saleDetails ? (
+                <div className="saleDetailsDiv">
+                  <div
+                    className="saleDetailsDiv_close_div"
+                    onClick={CloseSaleDetails}
+                  ></div>
+                  <div
+                    className="saleDetailsDiv_area_closeIcon_div"
+                    onClick={CloseSaleDetails}
+                  >
+                    <CloseIcon className="saleDetailsDiv_area_closeIcon" />
+                    Close
                   </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Product Images
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body"></div>
-                  </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Product Name
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body">
-                      {data.ProductName}
-                    </div>
-                  </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Product Amount
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body">
-                      {data.Amount} Eusd
-                    </div>
-                  </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Product Brand Name
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body">Apple</div>
-                  </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Product Condition
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body">
-                      Cracked screen.
-                    </div>
-                  </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Product Status
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body">
-                      {data.ProductStatus}
-                    </div>
-                  </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Product Txn Hash
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body">
-                      {data.txnHash}
-                    </div>
-                  </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Upload Date
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body">
-                      {data.Date}
-                    </div>
-                  </div>
-                </div>
-                {/* ================ */}
-                {/* ================ */}
-                {/* ================ */}
-                {/* ================ */}
-                {/* ================ */}
-                {/* ================ */}
-                <div className="saleDetailsDiv_area_1">
-                  <div className="saleDetailsDiv_area_1_title">
-                    Seller's Details
-                  </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Seller's Full name
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body">
-                      John Doe
-                    </div>
-                  </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Seller's Wallet Address
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body">
-                      {data.Seller}
-                    </div>
-                  </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Seller's Phone number
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body">
-                      +234 8164020234
-                    </div>
-                  </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Seller's Residential Address
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body">
-                      8b Lord emmanuel drive Port Harcourt Rivers State
-                    </div>
-                  </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Seller's Country opf Residence
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body">
-                      Nigeria
-                    </div>
-                  </div>
-                </div>
-                {/* ================ */}
-                {/* ================ */}
-                {/* ================ */}
-                {/* ================ */}
-                {/* ================ */}
-                {/* ================ */}
-                <div className="saleDetailsDiv_area_1">
-                  <div className="saleDetailsDiv_area_1_title">
-                    Bidding Action
-                  </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Bidding Status
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body">
-                      {data.BiddingStatus}
-                    </div>
-                  </div>
-                  <div className="saleDetailsDiv_area_1_div1">
-                    <div className="saleDetailsDiv_area_1_div1_title">
-                      Bidding Amount
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1_body">
-                      {data.BiddingAmount}
-                    </div>
-                  </div>
-                  <div className="PlaceBidDiv">
-                    <Accordion>
-                      <AccordionSummary
-                        onClick={toggleActiveDrop}
-                        expandIcon={<ExpandMoreIcon />}
-                        aria-controls="panel1a-content"
-                        id="panel1a-header"
-                      >
-                        <Typography
-                          className={classes.heading}
-                          onClick={toggleActiveDrop}
-                        >
-                          Place A Bid{" "}
-                        </Typography>
-                      </AccordionSummary>
-                      <div className={activeMenu}>
-                        <AccordionDetails>
-                          <div className="PlaceBidDiv_area">
-                            <div className="PlaceBidDiv_Body">
-                              <div className="PlaceBidDiv_Body_1">
-                                <div className="PlaceBidDiv_Body_1_title">
-                                  Bid Amount
-                                </div>
-                                <input
-                                  type="number"
-                                  className="PlaceBidDiv_Body_1_input"
-                                />
-                              </div>
-                              <div className="PlaceBidDiv_ButtonDiv">
-                                <button className="PlaceBidDiv_Button">
-                                  Place a Bid
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </AccordionDetails>
+                  <div className="saleDetailsDiv_area">
+                    <div className="saleDetailsDiv_area_1">
+                      <div className="saleDetailsDiv_area_1_title">
+                        Products Details
                       </div>
-                    </Accordion>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Images
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body"></div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Name
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.product_name}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Amount
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {numberWithCommas(
+                            parseInt(data.user_amount).toFixed(0)
+                          )}{" "}
+                          Eusd
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Brand Name
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.product_brand}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Condition
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.product_condition}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Status
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.status}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Txn Hash
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {/* {data.txnHash} */}
+                          N/A
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Upload Date
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.createdAt}
+                        </div>
+                      </div>
+                    </div>
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    <div className="saleDetailsDiv_area_1">
+                      <div className="saleDetailsDiv_area_1_title">
+                        Seller's Details
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Seller's Full name
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          John Doe
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Seller's Wallet Address
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.Seller}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Seller's Phone number
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          +234 8164020234
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Seller's Residential Address
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          8b Lord emmanuel drive Port Harcourt Rivers State
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Seller's Country opf Residence
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          Nigeria
+                        </div>
+                      </div>
+                    </div>
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    <div className="saleDetailsDiv_area_1">
+                      <div className="saleDetailsDiv_area_1_title">
+                        Bidding Action
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Bidding Status
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.BiddingStatus}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Bidding Amount
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.BiddingAmount}
+                        </div>
+                      </div>
+                      <div className="PlaceBidDiv">
+                        <Accordion>
+                          <AccordionSummary
+                            onClick={toggleActiveDrop}
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                          >
+                            <Typography
+                              className={classes.heading}
+                              onClick={toggleActiveDrop}
+                            >
+                              Place A Bid{" "}
+                            </Typography>
+                          </AccordionSummary>
+                          <div className={activeMenu}>
+                            <AccordionDetails>
+                              <div className="PlaceBidDiv_area">
+                                <div className="PlaceBidDiv_Body">
+                                  <div className="PlaceBidDiv_Body_1">
+                                    <div className="PlaceBidDiv_Body_1_title">
+                                      Bid Amount
+                                    </div>
+                                    <input
+                                      type="number"
+                                      className="PlaceBidDiv_Body_1_input"
+                                      name="bidAmount"
+                                      id="bidAmount"
+                                      value={bidAmount}
+                                      onChange={changeBidValue}
+                                    />
+                                  </div>
+                                  <div className="PlaceBidDiv_ButtonDiv">
+                                    <button
+                                      className="PlaceBidDiv_Button"
+                                      onClick={BidForProduct}
+                                    >
+                                      Place a Bid
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </AccordionDetails>
+                          </div>
+                        </Accordion>
+                      </div>
+                    </div>
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    <div className="approveProdButton">
+                      <button
+                        className="approveProdButton_btn"
+                        onClick={ApproveProduct}
+                      >
+                        Approve
+                      </button>
+                    </div>
                   </div>
                 </div>
-                {/* ================ */}
-                {/* ================ */}
-                {/* ================ */}
-                {/* ================ */}
-                {/* ================ */}
-                {/* ================ */}
-                <div className="approveProdButton">
-                  <button className="approveProdButton_btn">Approve</button>
-                </div>
-              </div>
-            </div>
-          ) : null}
-        </>
-      ))}
+              ) : null}
+            </>
+          ))}
     </div>
   );
 };
