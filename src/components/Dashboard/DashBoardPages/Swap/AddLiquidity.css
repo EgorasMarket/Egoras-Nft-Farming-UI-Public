@@ -3,8 +3,9 @@
   /* height: 100vh; */
   display: flex;
   position: relative;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: row-reverse;
+  justify-content: center;
 }
 .modal_bg {
   position: fixed;
@@ -21,7 +22,6 @@
 }
 .liquidity_cont {
   position: relative;
-  max-width: 425px;
   width: 100%;
   background: rgb(255, 255, 255);
   box-shadow: rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px,
