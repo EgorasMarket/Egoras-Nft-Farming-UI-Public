@@ -7,3 +7,4 @@ export const GET_ALL_APPROVED_PRODUCTS_ROUTE = `${API_URL}/product/approved/trad
 export const FETCH_PRODUCT_BRANDS = `${API_URL}/product/all-brands`;
 export const FETCH_PRODUCT_CATEGORIES = `${API_URL}/product/all-categories`;
 export const UPDATE_EXISTING_PRODUCT = `${API_URL}/product/update/new/product`;
+export const FETCH_TRADABLE_PRODUCTS_ROUTE = `${API_URL}/product/approved/tradable-true`;

@@ -64,6 +64,7 @@ import {
   POPULATE_ADMIN_PRODUCT_DASHBOARD,
   GET_ALL_APPROVED_PRODUCTS,
   CALL_UPDATE_EXISTING_PRODUCT,
+  ADMIN_FETCH_TRADABLE_PRODUCTS,
 } from "../../../services/adminServices";
 
 import { GET_BRANDS, GET_CATEGORIES } from "../../../services/productServices";
@@ -579,9 +580,11 @@ const AdminProductsPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await GET_ALL_APPROVED_PRODUCTS();
+      // const res = await GET_ALL_APPROVED_PRODUCTS();
 
       // console.log(res.data);
+      const res = await ADMIN_FETCH_TRADABLE_PRODUCTS();
+      // console.log(res.data.data);
       setNewProducts(res.data);
     }
 
@@ -949,7 +952,7 @@ const AdminProductsPage = () => {
                           Seller's Full name
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          John Doe
+                          {data.fullname}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -957,7 +960,7 @@ const AdminProductsPage = () => {
                           Seller's Wallet Address
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.Seller}
+                          {data.wallet}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -965,7 +968,7 @@ const AdminProductsPage = () => {
                           Seller's Phone number
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          +234 8164020234
+                          {data.phoneNumber}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -973,7 +976,7 @@ const AdminProductsPage = () => {
                           Seller's Residential Address
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          8b Lord emmanuel drive Port Harcourt Rivers State
+                          {data.userAddress}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
