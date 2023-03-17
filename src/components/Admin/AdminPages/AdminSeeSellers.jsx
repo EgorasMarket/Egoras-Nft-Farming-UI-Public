@@ -352,6 +352,7 @@ const AdminSeeSellers = () => {
     const fetchData = async () => {
       const response = await POPULATE_ADMIN_PRODUCT_DASHBOARD();
       setProductValues(response.data);
+      console.log(response.data);
     };
     fetchData();
   }, []);
@@ -374,6 +375,7 @@ const AdminSeeSellers = () => {
   );
 
   useEffect(() => {
+    console.log("dddddd");
     async function fetchData() {
       const res = await axios.get(
         API_URL + "/product/new/zero-tradable",
@@ -381,7 +383,7 @@ const AdminSeeSellers = () => {
         config
       );
 
-      console.log(res.data.data);
+      console.log(res.data.data, "dddddd");
       setNewProducts(res.data.data);
       // newProducts, setNewProducts
     }

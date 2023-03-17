@@ -10,7 +10,7 @@ const validateAdmin = async (account) => {
       null,
       config
     );
-    console.log(result);
+    // console.log(result);
     return {
       message: result,
       status: true,
