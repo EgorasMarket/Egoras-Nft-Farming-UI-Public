@@ -1218,12 +1218,34 @@ const semiAnnuallyPlan = async (signer) => {
 };
 
 // =============== Admin Action =======================
+// Bid For Product
 const placeBid = async (_productID, _amount, signer) => {
   console.log(_productID, _amount);
   try {
     const instance = contractProductFacetInstance(signer);
     let result;
     result = await instance.bid(_productID, _amount);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
+// Approve Product
+const approveProduct = async (_productID, signer) => {
+  console.log(_productID);
+  try {
+    const instance = contractProductFacetInstance(signer);
+    let result;
+    result = await instance.approveProduct(_productID);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -1297,4 +1319,5 @@ export {
   semiAnnuallyPlan,
   placeBid,
   AcceptBid,
+  approveProduct,
 };

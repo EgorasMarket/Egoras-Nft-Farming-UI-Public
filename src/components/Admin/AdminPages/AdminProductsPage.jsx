@@ -60,7 +60,10 @@ import {
 } from "@web3-react/core";
 import add from "date-fns/add/index";
 import AdminDashboardCard from "../../cards/AdminDashboardCard";
-import { POPULATE_ADMIN_PRODUCT_DASHBOARD } from "../../../services/adminServices";
+import {
+  ADMIN_FETCH_TRADABLE_PRODUCTS,
+  POPULATE_ADMIN_PRODUCT_DASHBOARD,
+} from "../../../services/adminServices";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -577,14 +580,9 @@ const AdminProductsPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await axios.get(
-        API_URL + "/product/approved/tradable-true",
-        null,
-        config
-      );
-
+      const res = await ADMIN_FETCH_TRADABLE_PRODUCTS();
       // console.log(res.data.data);
-      setNewProducts(res.data.data);
+      setNewProducts(res.data);
     }
 
     fetchData();
@@ -959,7 +957,7 @@ const AdminProductsPage = () => {
                           Seller's Full name
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          John Doe
+                          {data.fullname}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -967,7 +965,7 @@ const AdminProductsPage = () => {
                           Seller's Wallet Address
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.Seller}
+                          {data.wallet}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -975,7 +973,7 @@ const AdminProductsPage = () => {
                           Seller's Phone number
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          +234 8164020234
+                          {data.phoneNumber}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -983,7 +981,7 @@ const AdminProductsPage = () => {
                           Seller's Residential Address
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          8b Lord emmanuel drive Port Harcourt Rivers State
+                          {data.userAddress}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
