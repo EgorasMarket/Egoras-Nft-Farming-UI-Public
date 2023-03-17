@@ -832,7 +832,7 @@ const AdminSeeSellers = () => {
                           Seller's Full name
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          John Doe
+                          {data.fullname || "NOT PROVIDED"}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -848,7 +848,7 @@ const AdminSeeSellers = () => {
                           Seller's Phone number
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          +234 8164020234
+                          {data.phoneNumber}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -856,7 +856,7 @@ const AdminSeeSellers = () => {
                           Seller's Residential Address
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          8b Lord emmanuel drive Port Harcourt Rivers State
+                          {data.userAddress}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
