@@ -28,30 +28,30 @@ import { parseEther, formatEther } from "@ethersproject/units";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import {
   listProduct,
-  lendUS,
-  takeDividend,
-  takeBackLoan,
-  getTotalLended,
-  getInvestorsDividend,
-  userStats,
-  system,
-  burnAccumulatedDividend,
-  checkAllowance,
-  unluckToken,
-  lend,
-  getUserStats,
-  transactReceipt,
-  getPrice,
-  getTickerInfo,
-  tokenBalance,
-  open,
-  getLatestLoan,
-  repay,
-  topup,
-  draw,
-  checkAllowanceL,
-  unluckToken2,
-  getEgcSmartContractBalnce,
+  // lendUS,
+  // takeDividend,
+  // takeBackLoan,
+  // getTotalLended,
+  // getInvestorsDividend,
+  // userStats,
+  // system,
+  // burnAccumulatedDividend,
+  // checkAllowance,
+  // unluckToken,
+  // lend,
+  // getUserStats,
+  // transactReceipt,
+  // getPrice,
+  // getTickerInfo,
+  // tokenBalance,
+  // open,
+  // getLatestLoan,
+  // repay,
+  // topup,
+  // draw,
+  // checkAllowanceL,
+  // unluckToken2,
+  // getEgcSmartContractBalnce,
 } from "../../../web3";
 import {
   Web3ReactProvider,
@@ -60,7 +60,13 @@ import {
 } from "@web3-react/core";
 import add from "date-fns/add/index";
 import AdminDashboardCard from "../../cards/AdminDashboardCard";
-import { POPULATE_ADMIN_PRODUCT_DASHBOARD } from "../../../services/adminServices";
+import {
+  POPULATE_ADMIN_PRODUCT_DASHBOARD,
+  GET_ALL_APPROVED_PRODUCTS,
+  CALL_UPDATE_EXISTING_PRODUCT,
+} from "../../../services/adminServices";
+
+import { GET_BRANDS, GET_CATEGORIES } from "../../../services/productServices";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -219,11 +225,7 @@ const AdminProductsPage = () => {
       product_details
     );
     try {
-      const res = await axios.put(
-        API_URL + "/product/update/new/product",
-        formData,
-        config
-      );
+      const res = await CALL_UPDATE_EXISTING_PRODUCT(formData);
       console.log(res, "somto");
       // if (res.status === 200) {
 
@@ -577,14 +579,10 @@ const AdminProductsPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await axios.get(
-        API_URL + "/product/approved/tradable-true",
-        null,
-        config
-      );
+      const res = await GET_ALL_APPROVED_PRODUCTS();
 
-      // console.log(res.data.data);
-      setNewProducts(res.data.data);
+      // console.log(res.data);
+      setNewProducts(res.data);
     }
 
     fetchData();
@@ -594,7 +592,7 @@ const AdminProductsPage = () => {
     const response = async () => {
       const res = await POPULATE_ADMIN_PRODUCT_DASHBOARD();
       setProductValues(res.data);
-      console.log(res);
+      // console.log(res);
     };
 
     response();
@@ -602,14 +600,10 @@ const AdminProductsPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await axios.get(
-        API_URL + "/product/all-brands",
-        null,
-        config
-      );
+      const res = await GET_BRANDS();
 
-      console.log(res.data.data.allBrands);
-      setAllBrands(res.data.data.allBrands);
+      // console.log(res.data.allBrands);
+      setAllBrands(res.data.allBrands);
       // allBrands, setAllBrands
     }
 
@@ -618,14 +612,10 @@ const AdminProductsPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await axios.get(
-        API_URL + "/product/all-categories",
-        null,
-        config
-      );
+      const res = await GET_CATEGORIES();
 
-      console.log(res.data.data.allCategories);
-      setAllCategories(res.data.data.allCategories);
+      // console.log(res.data.allCategories);
+      setAllCategories(res.data.allCategories);
       // allCategories, setAllCategories
     }
 

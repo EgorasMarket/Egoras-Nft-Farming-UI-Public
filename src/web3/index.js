@@ -1158,6 +1158,26 @@ const getConfiguration = async (signer) => {
   }
 };
 
+const AcceptBid = async (_productID, signer) => {
+  // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
+  try {
+    const instance = contractProductFacetInstance(signer);
+    let result;
+    result = await instance.acceptBid(_productID);
+    console.log(result, "result from newnation");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
 const monthlyPlan = async (_referral, signer) => {
   console.log(_referral);
   try {
@@ -1299,4 +1319,5 @@ export {
   semiAnnuallyPlan,
   placeBid,
   approveProduct,
+  AcceptBid,
 };

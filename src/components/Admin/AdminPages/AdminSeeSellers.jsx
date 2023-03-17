@@ -41,18 +41,18 @@ const useStyles = makeStyles((theme) => ({
 const AdminSeeSellers = () => {
   const context = useWeb3React();
   const {
-    connector,
+    // connector,
     library,
-    chainId,
+    // chainId,
     account,
-    activate,
-    deactivate,
-    active,
-    error,
+    // activate,
+    // deactivate,
+    // active,
+    // error,
   } = context;
-  const [lockedValue, setLockedValue] = useState(0);
-  const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);
-  const [totalLendingCount, setTotalLendingCount] = useState(0);
+  // const [lockedValue, setLockedValue] = useState(0);
+  // const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);
+  // const [totalLendingCount, setTotalLendingCount] = useState(0);
   const [adminStatus, setAdminStatus] = useState(null);
   const [bidAmount, setBidAmount] = useState("");
   const [newProducts, setNewProducts] = useState([]);
@@ -838,7 +838,7 @@ const AdminSeeSellers = () => {
                           Seller's Wallet Address
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.Seller}
+                          {data.user_wallet}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">

@@ -2,6 +2,8 @@ import axios from "axios";
 import {
   GET_NEW_PRODUCTS_ROUTE,
   POPULATE_ADMIN_PRODUCT_DASHBOARD_ROUTE,
+  GET_ALL_APPROVED_PRODUCTS_ROUTE,
+  UPDATE_EXISTING_PRODUCT,
 } from "../core/ApiRoutes";
 export const config = {
   headers: {
@@ -12,7 +14,7 @@ export const config = {
 export const DISPLAY_NEW_PRODUCTS_CALL = async () => {
   try {
     const response = await axios.get(GET_NEW_PRODUCTS_ROUTE, null, config);
-
+    console.log(response.data);
     return response.data;
   } catch (err) {
     return err.repsonse;
@@ -26,6 +28,30 @@ export const POPULATE_ADMIN_PRODUCT_DASHBOARD = async () => {
       null,
       config
     );
+
+    return response.data;
+  } catch (err) {
+    return err.repsonse;
+  }
+};
+
+export const GET_ALL_APPROVED_PRODUCTS = async () => {
+  try {
+    const response = await axios.get(
+      GET_ALL_APPROVED_PRODUCTS_ROUTE,
+      null,
+      config
+    );
+
+    return response.data;
+  } catch (err) {
+    return err.repsonse;
+  }
+};
+
+export const CALL_UPDATE_EXISTING_PRODUCT = async (formData) => {
+  try {
+    const response = await axios.put(UPDATE_EXISTING_PRODUCT, formData, config);
 
     return response.data;
   } catch (err) {
