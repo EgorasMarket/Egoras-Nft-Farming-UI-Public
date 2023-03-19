@@ -19,7 +19,7 @@ export const Step2Div = ({
   semiAnnualAmount,
   monthAmount,
   AnnualAmount,
-  subscribe,
+  Subscribe,
 }) => {
   return (
     <div className="selectPlanDiv">
@@ -177,7 +177,7 @@ export const Step2Div = ({
         <button
           className="selectPlanDiv2_area1_checkout_btn"
           // disabled={fundDisable}
-          onClick={subscribe}
+          onClick={Subscribe}
         >
           <span> Subscribe </span>
         </button>

@@ -1,5 +1,4 @@
 {
-  "address": "0x3b9ADdfCB92F11c3F8b1afa5Bf1A7CD4B3C21C9E",
   "abi": [
     {
       "anonymous": false,
@@ -179,8 +178,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
@@ -299,8 +297,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -319,8 +316,7 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function",
-      "constant": true
+      "type": "function"
     }
   ]
 }

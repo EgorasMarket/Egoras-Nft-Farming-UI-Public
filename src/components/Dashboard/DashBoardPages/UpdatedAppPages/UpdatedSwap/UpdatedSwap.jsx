@@ -30,9 +30,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import data from "../../../../static/MockData";
-import { numberWithCommas } from "../../../../static/static";
-import { display } from "@mui/system";
+
 const UpdatedSwap = () => {
   const [tokenModal, setTokenModal] = useState(false);
   const [tokenModal2, setTokenModal2] = useState(false);

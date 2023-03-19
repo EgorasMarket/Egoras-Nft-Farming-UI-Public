@@ -26,12 +26,12 @@ import { Step1Div } from "./SubSteps/Step1Div";
 import { Step2Div } from "./SubSteps/Step2Div";
 import {
   getConfiguration,
-  monthlyPlan,
   semiAnnuallyPlan,
   unlockMemberShipEgcToken,
   checkAllowanceMembership,
   transactReceipt,
 } from "../../../web3/index";
+import { monthlyPlanSubScribe } from "../../../web3/index2.js";
 const MemberShipPage = () => {
   const context = useWeb3React();
   const {
@@ -207,26 +207,26 @@ const MemberShipPage = () => {
       console.log(ret);
     }
   };
-  setInterval(() => {
-    if (localStorage.getItem("unlocking") == "true") {
-      transactReceipt(localStorage.getItem("unlockingHash"), library).then(
-        function (env) {
-          console.log("running Interval", env);
-          if (env.status == true && env.message !== null) {
-            if (env.message.confirmations > 2) {
-              // setStage("success");
-              // setHash(localStorage.getItem("unlockingHash"));
-              // setIsLoading(false);
+  // setInterval(() => {
+  //   if (localStorage.getItem("unlocking") == "true") {
+  //     transactReceipt(localStorage.getItem("unlockingHash"), library).then(
+  //       function (env) {
+  //         console.log("running Interval", env);
+  //         if (env.status == true && env.message !== null) {
+  //           if (env.message.confirmations > 2) {
+  //             // setStage("success");
+  //             // setHash(localStorage.getItem("unlockingHash"));
+  //             // setIsLoading(false);
 
-              localStorage.setItem("unlocking", false);
-            }
-          }
-        }
-      );
-    } else {
-      // setStage("error");
-    }
-  }, 1000);
+  //             localStorage.setItem("unlocking", false);
+  //           }
+  //         }
+  //       }
+  //     );
+  //   } else {
+  //     // setStage("error");
+  //   }
+  // }, 1000);
   useEffect(
     async (e) => {
       if (account) {
@@ -242,35 +242,11 @@ const MemberShipPage = () => {
     },
     [account, unLockCheckStatus]
   );
-  const subscribe = async () => {
-    if (unLockCheckStatus == true) {
-      let ret = await monthlyPlan(library.getSigner());
-      console.log(ret);
-      if (ret.status == true) {
-        localStorage.setItem("unlocking", true);
-        localStorage.setItem("unlockingHash", ret.message.hash);
-        // setText("Sending token please wait aleast 1/2 minutes");
-        // setHash(ret.message.hash);
-        console.log(ret);
-        return;
-      }
-      // else if (ret.status == false) {
-      //   // if (ret.message.code < 0) {
-      //   //   setText(ret.message.data.message);
-      //   // } else if (ret.message.code == 4001) {
-      //   //   setText(ret.message.message);
-      //   // }
-      //   // setStage("error");
-      //   // setIsLoading(false);
-      // }
-    } else {
-      // setUnlocking(true);
-      setUnlockBtn(false);
-      // setIsLoading(false);
-    }
-    // const res = await monthlyPlan(library.getSigner());
-    // console.log(res, "somto8uhhhg");
-    // console.log(res.status, "somto8uhhhg");
+  const subsCribe = async () => {
+    // if (unlockBtn == true) {
+    let ret = await monthlyPlanSubScribe(library.getSigner());
+    // console.log(ret);
+    // }
   };
   const subscribe2 = async () => {
     const res = await semiAnnuallyPlan(library.getSigner());
@@ -311,7 +287,7 @@ const MemberShipPage = () => {
               semiAnnualAmount={semiAnnualAmount}
               monthAmount={monthAmount}
               AnnualAmount={AnnualAmount}
-              subscribe={subscribe}
+              Subscribe={subsCribe}
             />
           </div>
           {unlockBtn === false ? (
@@ -319,7 +295,6 @@ const MemberShipPage = () => {
           ) : (
             <button>Token is unlocked</button>
           )}
-
           {/* ) : null} */}
         </div>
       </div>

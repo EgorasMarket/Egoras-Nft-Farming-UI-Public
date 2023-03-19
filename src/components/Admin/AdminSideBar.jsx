@@ -303,8 +303,8 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
       //     setTickerPrice(parseFloat(formatEther(data.message)));
       //   }
       // });
-
       getTickerInfo(ticker, library.getSigner()).then((data) => {
+        console.log(data.status);
         if (data.status) {
           tokenBalance(data.message.base, account, library.getSigner()).then(
             (balance) => {

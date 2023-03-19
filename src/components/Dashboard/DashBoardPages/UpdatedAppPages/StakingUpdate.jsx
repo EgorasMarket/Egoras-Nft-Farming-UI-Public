@@ -1213,7 +1213,7 @@ const StakingUpdate = () => {
     let ticker = assetVal + "-" + baseVal;
     if (account) {
       getTickerInfo(ticker, library.getSigner()).then((data) => {
-        console.log(data.status);
+        console.log(data);
         if (data.status) {
           console.log(data.message);
           tokenBalance(data.message.base, account, library.getSigner()).then(
