@@ -1,5 +1,5 @@
 {
-  "abi": [
+ "abi": [
     {
       "anonymous": false,
       "inputs": [
@@ -182,7 +182,7 @@
     },
     {
       "inputs": [],
-      "name": "monthlyPlan",
+      "name": "membershipMonthlyPlan",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -195,7 +195,7 @@
           "type": "address"
         }
       ],
-      "name": "monthlyPlan",
+      "name": "monthlyPlanWithReferral",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -208,21 +208,14 @@
           "type": "address"
         }
       ],
-      "name": "semiAnnuallyPlan",
+      "name": "semiAnnuallyPlanWithReferral",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "inputs": [],
-      "name": "semiAnnuallyPlan",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "annually",
+      "name": "membershipSemiAnnuallyPlan",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -235,7 +228,14 @@
           "type": "address"
         }
       ],
-      "name": "annually",
+      "name": "annuallyWithReferral",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "membershipAnnually",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
