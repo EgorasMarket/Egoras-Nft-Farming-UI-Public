@@ -61,6 +61,29 @@ const DashboardMarketHome = () => {
       items: 1,
     },
   };
+  const responsiveHero = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 1,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1320 },
+      items: 1,
+    },
+    desktop2: {
+      breakpoint: { max: 1320, min: 990 },
+      items: 1,
+    },
+    tablet: {
+      breakpoint: { max: 990, min: 600 },
+      items: 1,
+    },
+    mobile: {
+      breakpoint: { max: 600, min: 0 },
+      items: 1,
+    },
+  };
   const Product = [
     {
       id: "1",
@@ -216,11 +239,39 @@ const DashboardMarketHome = () => {
             <div className="dashboardMarketPlaceBody">
               <div className="dashboardMarketPlaceBody1">
                 <div className="dashboardMarketPlaceBody1_cont1">
-                  <img
-                    src="/img/dummyMarketImages/2023_Family_KV_Horizontal_notxt_vF-1.webp"
-                    alt=""
-                    className="dashboardMarketPlaceBody1_cont1_img"
-                  />
+                  <Carousel
+                    responsive={responsiveHero}
+                    showDots={true}
+                    //   infinite={false}
+                    autoPlay={true}
+                    autoPlaySpeed={10000}
+                    pauseOnHover={true}
+                    infinite={true}
+                    draggable={true}
+                    swipeable={true}
+                    className="product_carousel"
+                  >
+                    <img
+                      src="/img/dummyMarketImages/2023_Family_KV_Horizontal_notxt_vF-1.webp"
+                      alt=""
+                      className="dashboardMarketPlaceBody1_cont1_img"
+                    />
+                    <img
+                      src="/img/dummyMarketImages/marketHeroBanner1.webp"
+                      alt=""
+                      className="dashboardMarketPlaceBody1_cont1_img"
+                    />
+                    <img
+                      src="/img/dummyMarketImages/marketHeroBanner2.webp"
+                      alt=""
+                      className="dashboardMarketPlaceBody1_cont1_img"
+                    />
+                    <img
+                      src="/img/dummyMarketImages/marketHeroBanner3.webp"
+                      alt=""
+                      className="dashboardMarketPlaceBody1_cont1_img"
+                    />
+                  </Carousel>
                 </div>
                 <div className="dashboardMarketPlaceBody1_cont2">
                   <div className="dashboardMarketPlaceBody1_cont2_head">
