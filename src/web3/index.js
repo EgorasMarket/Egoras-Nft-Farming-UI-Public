@@ -1183,7 +1183,7 @@ const monthlyPlan = async (_referral, signer) => {
   try {
     const instance = contractMembershipFacetInstance(signer);
     let result;
-    result = await instance.monthlyPlan(_referral);
+    result = await instance.monthlyPlan();
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -1238,6 +1238,25 @@ const placeBid = async (_productID, _amount, signer) => {
     };
   }
 };
+const unlockMemberShipEgcToken = async (amount, signer) => {
+  try {
+    const instance = erc20Instance(
+      "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+      signer
+    );
+    let result = await instance.approve(MembershipFacet.address, amount);
+    return {
+      message: result.hash,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
 
 // Approve Product
 const approveProduct = async (_productID, signer) => {
@@ -1252,9 +1271,30 @@ const approveProduct = async (_productID, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
+      status: false,
+    };
+  }
+};
+const checkAllowanceMembership = async (owner, amount, signer) => {
+  try {
+    const instance = erc20Instance(
+      "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+      signer
+    );
+    let result = await instance.allowance(owner, MembershipFacet.address);
+
+    if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
+      return {
+        status: true,
+      };
+    } else {
+      return {
+        status: false,
+      };
+    }
+  } catch (error) {
+    return {
       status: false,
     };
   }
@@ -1320,4 +1360,6 @@ export {
   placeBid,
   approveProduct,
   AcceptBid,
+  unlockMemberShipEgcToken,
+  checkAllowanceMembership,
 };

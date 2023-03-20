@@ -643,13 +643,22 @@ const DashBoardUserSales = () => {
                                     )}...${asset.user_wallet.slice(39, 42)}`}
                                   </td>
                                   <td className="assets-category-data1b stable-content branch_apy">
-                                    {asset.bidStatus}
+                                    {asset.bidAmount != null
+                                      ? asset.bidStatus
+                                      : "N/A"}
                                   </td>
                                   <td className="assets-category-data1b stable-content branch_apy">
-                                    {asset.bidAmount} Eusd
+                                    {asset.bidAmount != null
+                                      ? numberWithCommas(
+                                          parseInt(asset.bidAmount).toFixed(0) +
+                                            " Eusd"
+                                        )
+                                      : "N/A"}{" "}
                                   </td>
                                   <td className="assets-category-data1b stable-content branch_apy">
-                                    {asset.status}
+                                    {asset.status == "NEW"
+                                      ? "Pending Approval"
+                                      : asset.status}
                                   </td>
                                   <td className="assets-category-data1b stable-content branch_apy">
                                     {/* {`${asset.txnHash.slice(
@@ -901,7 +910,7 @@ const DashBoardUserSales = () => {
                           Seller's Full name
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          John Doe
+                          {data.fullName}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -917,7 +926,7 @@ const DashBoardUserSales = () => {
                           Seller's Phone number
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          +234 8164020234
+                          {data.phoneNumber}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -925,7 +934,7 @@ const DashBoardUserSales = () => {
                           Seller's Residential Address
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          8b Lord emmanuel drive Port Harcourt Rivers State
+                          {data.userAddress}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -947,33 +956,43 @@ const DashBoardUserSales = () => {
                       <div className="saleDetailsDiv_area_1_title">
                         Bidding Action
                       </div>
-                      <div className="saleDetailsDiv_area_1_div1">
-                        <div className="saleDetailsDiv_area_1_div1_title">
-                          Bidding Status
+                      {data.bidAmount != null ? (
+                        <>
+                          <div className="saleDetailsDiv_area_1_div1">
+                            <div className="saleDetailsDiv_area_1_div1_title">
+                              Bidding Status
+                            </div>
+                            <div className="saleDetailsDiv_area_1_div1_body">
+                              {data.bidStatus}
+                            </div>
+                          </div>
+                          <div className="saleDetailsDiv_area_1_div1">
+                            <div className="saleDetailsDiv_area_1_div1_title">
+                              Bidding Amount
+                            </div>
+                            <div className="saleDetailsDiv_area_1_div1_body">
+                              {data.bidAmount}
+                            </div>
+                          </div>
+                          <div className="acceptDeclineBidButtons">
+                            <button
+                              onClick={handleAcceptBid}
+                              className="acceptDeclineBidButtons_accept"
+                            >
+                              Accept Bid
+                            </button>
+                            <button className="acceptDeclineBidButtons_decline">
+                              Decline Bid
+                            </button>
+                          </div>
+                        </>
+                      ) : (
+                        <div className="saleDetailsDiv_area_1_div1">
+                          <div className="saleDetailsDiv_area_1_div1_title">
+                            No bidding for this product yet
+                          </div>
                         </div>
-                        <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.bidStatus}
-                        </div>
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1">
-                        <div className="saleDetailsDiv_area_1_div1_title">
-                          Bidding Amount
-                        </div>
-                        <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.bidAmount}
-                        </div>
-                      </div>
-                      <div className="acceptDeclineBidButtons">
-                        <button
-                          onClick={handleAcceptBid}
-                          className="acceptDeclineBidButtons_accept"
-                        >
-                          Accept Bid
-                        </button>
-                        <button className="acceptDeclineBidButtons_decline">
-                          Decline Bid
-                        </button>
-                      </div>
+                      )}
                     </div>
                     {/* ================ */}
                     {/* ================ */}

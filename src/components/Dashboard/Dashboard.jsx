@@ -9,6 +9,7 @@ import Cookies from "universal-cookie";
 import Swap from "./DashBoardPages/Swap/Swap";
 import ProductDetailPage from "./DashBoardPages/UpdatedAppPages/DashboardMarket/ProductDetailPage";
 import DashBoardUserDetails from "./DashBoardPages/DashBoardUserDetails";
+import UpdatedSwap from "./DashBoardPages/UpdatedAppPages/UpdatedSwap/UpdatedSwap";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -230,7 +231,8 @@ const Dashboard = ({ check, togglemakeDark }) => {
                   path="/app/earn/pool/detail/branch/:branchAddress/asset"
                   component={DashBoardBranchAsset}
                 />
-                <Route exact path="/app/swap" component={Swap} />
+                <Route exact path="/app/swap" component={UpdatedSwap} />
+                {/* <Route exact path="/app/swap" component={Swap} /> */}
                 <Route
                   exact
                   path="/app/user"
