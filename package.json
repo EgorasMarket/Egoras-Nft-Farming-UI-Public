@@ -39,6 +39,7 @@
     "faker": "^6.6.6",
     "font-awesome": "^4.7.0",
     "hamburger-react": "^2.5.0",
+    "immutable": "^4.3.0",
     "lottie-react": "^2.4.0",
     "moment": "^2.29.4",
     "prop-types": "^15.8.1",
