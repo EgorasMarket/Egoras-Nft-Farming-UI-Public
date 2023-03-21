@@ -12,6 +12,9 @@ import EgorasSwapFacet from "./contracts/EgorasSwapFacet.json";
 import COINS from "./contracts/V2/coins.json";
 import Contract_Address from "./contracts/Contract_Address.json";
 
+import V3ContractAddress from "./contracts/V3/V3ContractAddress.json";
+// ===============
+// ===============
 // ===============
 // ====================new v3 contracts =================
 import ProductFacet from "./contracts/V3/ProductFacet.json";
@@ -22,14 +25,16 @@ import MembershipFacet from "./contracts/V3/MembershipFacet.json";
 // =============================
 // ========new V3 instances =====================
 const contractProductFacetInstance = (signer) => {
-  return new Contract(ProductFacet.address, ProductFacet.abi, signer);
+  return new Contract(V3ContractAddress.address, ProductFacet.abi, signer);
 };
 const contractStakingFacetInstance = (signer) => {
-  return new Contract(StakingFacet.address, StakingFacet.abi, signer);
+  return new Contract(V3ContractAddress.address, StakingFacet.abi, signer);
 };
 const contractMembershipFacetInstance = (signer) => {
-  return new Contract(MembershipFacet.address, MembershipFacet.abi, signer);
+  console.log(V3ContractAddress.address, MembershipFacet.abi);
+  return new Contract(V3ContractAddress.address, MembershipFacet.abi, signer);
 };
+
 // ========new V3 instances =====================
 // =============================
 // =============================
@@ -1178,44 +1183,44 @@ const AcceptBid = async (_productID, signer) => {
   }
 };
 
-const monthlyPlan = async (_referral, signer) => {
-  console.log(_referral);
-  try {
-    const instance = contractMembershipFacetInstance(signer);
-    let result;
-    result = await instance.monthlyPlan();
-    console.log(result, "result, result,result,result,result");
-    return {
-      message: result,
-      status: true,
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      message: error,
-      status: false,
-    };
-  }
-};
+// const monthlyPlan = async (_referral, signer) => {
+//   console.log(_referral);
+//   try {
+//     const instance = contractMembershipFacetInstance(signer);
+//     let result;
+//     result = await instance.monthlyPlan();
+//     console.log(result, "result, result,result,result,result");
+//     return {
+//       message: result,
+//       status: true,
+//     };
+//   } catch (error) {
+//     console.log(error);
+//     return {
+//       message: error,
+//       status: false,
+//     };
+//   }
+// };
 
-const semiAnnuallyPlan = async (signer) => {
-  try {
-    const instance = contractMembershipFacetInstance(signer);
-    let result;
-    result = await instance.semiAnnuallyPlan();
-    console.log(result, "result, result,result,result,result");
-    return {
-      message: result,
-      status: true,
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      message: error,
-      status: false,
-    };
-  }
-};
+// const semiAnnuallyPlan = async (signer) => {
+//   try {
+//     const instance = contractMembershipFacetInstance(signer);
+//     let result;
+//     result = await instance.semiAnnuallyPlan();
+//     console.log(result, "result, result,result,result,result");
+//     return {
+//       message: result,
+//       status: true,
+//     };
+//   } catch (error) {
+//     console.log(error);
+//     return {
+//       message: error,
+//       status: false,
+//     };
+//   }
+// };
 
 // =============== Admin Action =======================
 // Bid For Product
@@ -1244,7 +1249,7 @@ const unlockMemberShipEgcToken = async (amount, signer) => {
       "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
       signer
     );
-    let result = await instance.approve(MembershipFacet.address, amount);
+    let result = await instance.approve(V3ContractAddress.address, amount);
     return {
       message: result.hash,
       status: true,
@@ -1282,7 +1287,7 @@ const checkAllowanceMembership = async (owner, amount, signer) => {
       "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
       signer
     );
-    let result = await instance.allowance(owner, MembershipFacet.address);
+    let result = await instance.allowance(owner, V3ContractAddress.address);
 
     if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
       return {
@@ -1299,6 +1304,7 @@ const checkAllowanceMembership = async (owner, amount, signer) => {
     };
   }
 };
+
 // =========new V3 Functions==================================
 // ===========================================
 // ===========================================
@@ -1355,8 +1361,8 @@ export {
   takeRoyalty,
   configurePlan,
   getConfiguration,
-  monthlyPlan,
-  semiAnnuallyPlan,
+  // monthlyPlan,
+  // semiAnnuallyPlan,
   placeBid,
   approveProduct,
   AcceptBid,

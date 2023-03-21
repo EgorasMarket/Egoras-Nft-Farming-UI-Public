@@ -11,6 +11,8 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Nodata from "../nodataComponent/Nodata";
 import { config } from "../../../../actions/Config";
 import { parseEther, formatEther } from "@ethersproject/units";
+import UpdatedSuccessModal from "./UpdatedSuccessErrorModals/UpdatedSuccessModal";
+import UpdatedErrorModal from "./UpdatedSuccessErrorModals/UpdatedErrorModal";
 import Web3 from "web3";
 import {
   AreaChart,
@@ -116,6 +118,10 @@ const StakingUpdate = () => {
   const [base, setBase] = useState("");
   const [asset, setAsset] = useState("");
   const [lockAmount, setLockAmount] = useState("");
+  const [successModal, setSuccessModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [lockDate, setLockDate] = useState(null);
   const [activeTab, setActiveTab] = useState("lock");
   const [estimatedRewardAmnt, setEstimatedRewardAmnt] = useState(0);
@@ -1187,14 +1193,38 @@ const StakingUpdate = () => {
     },
   ];
   const StakeMonthly = async () => {
-    const res = await monthly(lockAmount, library.getSigner());
+    const res = await monthly(
+      parseEther(lockAmount.toString(), "wei").toString(),
+      library.getSigner()
+    );
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
+    if (res.status == true) {
+    } else {
+      if (res.message.code == 4001) {
+        console.log(res);
+      }
+      console.log(res);
+      setErrorModal(true);
+      setErrorMessage(res.message.reason);
+    }
   };
   const StakeYearly = async () => {
-    const res = await annually(lockAmount, library.getSigner());
+    const res = await annually(
+      parseEther(lockAmount.toString(), "wei").toString(),
+      library.getSigner()
+    );
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
+    if (res.status == true) {
+    } else {
+      if (res.message.code == 4001) {
+        console.log(res);
+      }
+      console.log(res);
+      setErrorModal(true);
+      setErrorMessage(res.message.reason);
+    }
   };
   const TakeReward = async () => {
     const res = await takeRoyalty(library.getSigner());
@@ -1206,14 +1236,14 @@ const StakingUpdate = () => {
     setActiveTab(target);
   };
   useEffect(() => {
-    let assetVal = "EGC";
-    let baseVal = "ENGN";
+    let assetVal = "EGCT";
+    let baseVal = "EUSDT";
     setAsset(assetVal);
     setBase(baseVal);
     let ticker = assetVal + "-" + baseVal;
     if (account) {
       getTickerInfo(ticker, library.getSigner()).then((data) => {
-        console.log(data.status);
+        // console.log(data);
         if (data.status) {
           console.log(data.message);
           tokenBalance(data.message.base, account, library.getSigner()).then(
@@ -1242,6 +1272,12 @@ const StakingUpdate = () => {
       });
     }
   }, [chainId, account, connector, baseBalance, coinBalance2, tokenBal]);
+  const CloseSuccessModal = () => {
+    setSuccessModal(false);
+  };
+  const CloseErrorModal = () => {
+    setErrorModal(false);
+  };
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -1900,6 +1936,19 @@ const StakingUpdate = () => {
           </div>
         </div>
       </section>
+      {errorModal ? (
+        <UpdatedErrorModal
+          errorMessage={errorMessage}
+          closeModal={CloseErrorModal}
+        />
+      ) : null}
+      {successModal ? (
+        <UpdatedSuccessModal
+          btnRoute={true}
+          successMessage={successMessage}
+          route="/membership/sub"
+        />
+      ) : null}
     </div>
   );
 };

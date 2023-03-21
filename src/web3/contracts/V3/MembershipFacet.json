@@ -1,6 +1,5 @@
 {
-  "address": "0x3b9ADdfCB92F11c3F8b1afa5Bf1A7CD4B3C21C9E",
-  "abi": [
+ "abi": [
     {
       "anonymous": false,
       "inputs": [
@@ -179,12 +178,11 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [],
-      "name": "monthlyPlan",
+      "name": "membershipMonthlyPlan",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -197,7 +195,7 @@
           "type": "address"
         }
       ],
-      "name": "monthlyPlan",
+      "name": "monthlyPlanWithReferral",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -210,21 +208,14 @@
           "type": "address"
         }
       ],
-      "name": "semiAnnuallyPlan",
+      "name": "semiAnnuallyPlanWithReferral",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "inputs": [],
-      "name": "semiAnnuallyPlan",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "annually",
+      "name": "membershipSemiAnnuallyPlan",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -237,7 +228,14 @@
           "type": "address"
         }
       ],
-      "name": "annually",
+      "name": "annuallyWithReferral",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "membershipAnnually",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -299,8 +297,7 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
+      "type": "function"
     },
     {
       "inputs": [
@@ -319,8 +316,7 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function",
-      "constant": true
+      "type": "function"
     }
   ]
 }
