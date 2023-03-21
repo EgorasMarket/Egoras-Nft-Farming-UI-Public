@@ -22,7 +22,10 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
-import { GET_ALL_UPLOADED_PRODUCTS } from "../../../services/productServices";
+import {
+  GET_ALL_UPLOADED_PRODUCTS,
+  ACCEPT_BID,
+} from "../../../services/productServices";
 import { DISPLAY_NEW_PRODUCTS_CALL } from "../../../services/adminServices";
 import { AcceptBid } from "../../../web3";
 const useStyles = makeStyles((theme) => ({
@@ -334,11 +337,18 @@ const DashBoardUserSales = () => {
     fetchData();
   }, []);
 
-  const handleAcceptBid = async () => {
+  const handleAcceptBid = async (action) => {
     // AcceptBid
+    console.log(account, saleDetails, action);
 
-    const res = await AcceptBid(indexId, library.getSigner());
-    console.log(res, "somto8uhhhg");
+    if (action == 1) {
+      const res = await AcceptBid(indexId, library.getSigner());
+      console.log(res, "somto8uhhhg");
+    } else {
+      const offChainRes = await ACCEPT_BID(account, saleDetails, action);
+      console.log(offChainRes);
+    }
+
     // console.log(res.status, "somto8uhhhg");
   };
   const ToggleSaleDetails = (product_id, index_id) => {
@@ -976,12 +986,20 @@ const DashBoardUserSales = () => {
                           </div>
                           <div className="acceptDeclineBidButtons">
                             <button
-                              onClick={handleAcceptBid}
+                              // onClick={handleAcceptBid}
+                              onClick={() => {
+                                handleAcceptBid(1);
+                              }}
                               className="acceptDeclineBidButtons_accept"
                             >
                               Accept Bid
                             </button>
-                            <button className="acceptDeclineBidButtons_decline">
+                            <button
+                              onClick={() => {
+                                handleAcceptBid(0);
+                              }}
+                              className="acceptDeclineBidButtons_decline"
+                            >
                               Decline Bid
                             </button>
                           </div>

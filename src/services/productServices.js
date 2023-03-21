@@ -3,6 +3,7 @@ import {
   GET_ALL_UPLOADED_PRODUCTS_ROUTE,
   FETCH_PRODUCT_BRANDS,
   FETCH_PRODUCT_CATEGORIES,
+  ACCEPT_OR_DECLINE_BID,
 } from "../core/ApiRoutes";
 export const config = {
   headers: {
@@ -40,6 +41,25 @@ export const GET_CATEGORIES = async () => {
 
     return response.data;
   } catch (err) {
+    return err.repsonse;
+  }
+};
+
+export const ACCEPT_BID = async (account, saleDetails, action) => {
+  // console.log(account, saleDetails, action);
+  // console.log(`${ACCEPT_OR_DECLINE_BID}/${account}/${saleDetails}/${action}`);
+  try {
+    console.log("ffffssss");
+    const response = await axios.get(
+      ACCEPT_OR_DECLINE_BID + "/" + account + "/" + saleDetails + "/" + action,
+      null,
+      config
+    );
+    console.log(response);
+
+    return response.data;
+  } catch (err) {
+    console.log(err.repsonse);
     return err.repsonse;
   }
 };
