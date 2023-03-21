@@ -136,6 +136,7 @@ const MemberShipPage = () => {
     if (ret.status == true) {
       localStorage.setItem("unlocking", true);
       localStorage.setItem("unlockingHash", ret.message);
+      setUnlockBtn(true);
     } else {
       if (ret.message.code == 4001) {
         console.log(ret);
