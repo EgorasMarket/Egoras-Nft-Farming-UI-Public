@@ -28,36 +28,46 @@ import { parseEther, formatEther } from "@ethersproject/units";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import {
   listProduct,
-  lendUS,
-  takeDividend,
-  takeBackLoan,
-  getTotalLended,
-  getInvestorsDividend,
-  userStats,
-  system,
-  burnAccumulatedDividend,
-  checkAllowance,
-  unluckToken,
-  lend,
-  getUserStats,
-  transactReceipt,
-  getPrice,
-  getTickerInfo,
-  tokenBalance,
-  open,
-  getLatestLoan,
-  repay,
-  topup,
-  draw,
-  checkAllowanceL,
-  unluckToken2,
-  getEgcSmartContractBalnce,
+  // lendUS,
+  // takeDividend,
+  // takeBackLoan,
+  // getTotalLended,
+  // getInvestorsDividend,
+  // userStats,
+  // system,
+  // burnAccumulatedDividend,
+  // checkAllowance,
+  // unluckToken,
+  // lend,
+  // getUserStats,
+  // transactReceipt,
+  // getPrice,
+  // getTickerInfo,
+  // tokenBalance,
+  // open,
+  // getLatestLoan,
+  // repay,
+  // topup,
+  // draw,
+  // checkAllowanceL,
+  // unluckToken2,
+  // getEgcSmartContractBalnce,
 } from "../../../web3";
 import {
   Web3ReactProvider,
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+import add from "date-fns/add/index";
+import AdminDashboardCard from "../../cards/AdminDashboardCard";
+import {
+  POPULATE_ADMIN_PRODUCT_DASHBOARD,
+  GET_ALL_APPROVED_PRODUCTS,
+  CALL_UPDATE_EXISTING_PRODUCT,
+  ADMIN_FETCH_TRADABLE_PRODUCTS,
+} from "../../../services/adminServices";
+
+import { GET_BRANDS, GET_CATEGORIES } from "../../../services/productServices";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -89,9 +99,14 @@ const AdminProductsPage = () => {
   const [activeMenu, setActiveMenu] = useState("details-accord  ");
   const [prodName, setProdName] = useState("");
   const [brandName, setBrandName] = useState("");
+  const [new_brand, setNew_brand] = useState("");
+  const [new_category, setNew_category] = useState("");
   const [saleAmount, setSaleAmount] = useState();
   const [newProducts, setNewProducts] = useState([]);
-  const [prodCondition, setProdCondition] = useState("");
+  const [productValues, setProductValues] = useState({});
+  const [allBrands, setAllBrands] = useState([]);
+  const [allCategories, setAllCategories] = useState([]);
+  const [prodSpecification, setProdSpecification] = useState("");
   const [imageSrc, setImageSrc] = useState("");
   const [imageSrc2, setImageSrc2] = useState("");
   const [imageSrc3, setImageSrc3] = useState("");
@@ -101,6 +116,7 @@ const AdminProductsPage = () => {
   const [formData, setFormData] = useState({
     product_details: "",
   });
+  const { product_details } = formData;
   const fileInputRef = useRef();
   const fileInputRef2 = useRef();
   const fileInputRef3 = useRef();
@@ -186,25 +202,37 @@ const AdminProductsPage = () => {
     const file = element.files[0];
     const file2 = element2.files[0];
     const file3 = element3.files[0];
+    formData.append("product_id", editProductDiv);
     formData.append("product_image", file);
     formData.append("product_image2", file2);
     formData.append("product_image3", file3);
     formData.append("product_name", prodName);
-    formData.append("product_brand", brandName);
-    formData.append("product_condition", prodCondition);
-    formData.append("amount", saleAmount);
-    console.log(formData);
+    formData.append("product_brand", new_brand);
+    formData.append("product_category", new_category);
+    formData.append("product_spec", prodSpecification);
+    formData.append("product_details", product_details);
+    formData.append("amount", parseInt(saleAmount));
+    formData.append("adminAddr", "0x02828942wqo22713563");
+    console.log(
+      editProductDiv,
+      file,
+      file2,
+      file3,
+      prodName,
+      new_brand,
+      new_category,
+      prodSpecification,
+      saleAmount,
+      product_details
+    );
     try {
-      const res = await axios.post(
-        API_URL + "/product/initialize/add/product",
-        formData,
-        config
-      );
+      const res = await CALL_UPDATE_EXISTING_PRODUCT(formData);
       console.log(res, "somto");
-      if (res.status === 200) {
-        sendProductToBlockchain(res.data.data.product_id);
-        return;
-      }
+      // if (res.status === 200) {
+
+      //   sendProductToBlockchain(res.data.data.product_id);
+      //   return;
+      // }
     } catch (err) {
       console.log(err);
     }
@@ -213,6 +241,25 @@ const AdminProductsPage = () => {
     setProdName(event.target.value);
     console.log(event.target.value);
     //console.log(event.target.value);
+  };
+  const handleNewBrandChange = (event) => {
+    setNew_brand(event.target.value);
+    console.log(event.target.value);
+  };
+  const handleNewCategoryChange = (event) => {
+    setNew_category(event.target.value);
+    console.log(event.target.value);
+    // new_category, setNew_category
+  };
+  const addNewBrand = () => {
+    allBrands.push({ product_brand: new_brand });
+    setAddBrand(!addBrand);
+    // new_brand, setNew_brand
+  };
+  const addNewCategory = () => {
+    allCategories.push({ product_category: new_category });
+    setAddCategory(!addCategory);
+    // new_brand, setNew_brand
   };
   const handleBrandNameChange = (event) => {
     setBrandName(event.target.value);
@@ -224,8 +271,8 @@ const AdminProductsPage = () => {
     console.log(event.target.value);
     //console.log(event.target.value);
   };
-  const handleProdConditionChange = (event) => {
-    setProdCondition(event.target.value);
+  const handleProdSpecChange = (event) => {
+    setProdSpecification(event.target.value);
     console.log(event.target.value);
     //console.log(event.target.value);
   };
@@ -533,15 +580,60 @@ const AdminProductsPage = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const res = await axios.get(API_URL + "/product/new", null, config);
+      // const res = await GET_ALL_APPROVED_PRODUCTS();
 
-      console.log(res.data.data);
-      setNewProducts(res.data.data);
-      // newProducts, setNewProducts
+      // console.log(res.data);
+      const res = await ADMIN_FETCH_TRADABLE_PRODUCTS();
+      // console.log(res.data.data);
+      setNewProducts(res.data);
     }
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const response = async () => {
+      const res = await POPULATE_ADMIN_PRODUCT_DASHBOARD();
+      setProductValues(res.data);
+      // console.log(res);
+    };
+
+    response();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await GET_BRANDS();
+
+      // console.log(res.data.allBrands);
+      setAllBrands(res.data.allBrands);
+      // allBrands, setAllBrands
+    }
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await GET_CATEGORIES();
+
+      // console.log(res.data.allCategories);
+      setAllCategories(res.data.allCategories);
+      // allCategories, setAllCategories
+    }
+
+    fetchData();
+  }, []);
+
+  const handleCenter = (event) => {
+    setNew_brand(event.target.value || "");
+    console.log(event.target.value);
+  };
+
+  const handleCenter2 = (event) => {
+    setNew_category(event.target.value || "");
+    console.log(event.target.value);
+  };
 
   const classes = useStyles();
   return (
@@ -550,63 +642,26 @@ const AdminProductsPage = () => {
         <div className="container">
           <div className="sellers_overview_area">
             <div className="lending_area1">
-              <div className="lending_area1_cont1">
-                <div className="lending_area1_cont1_body_1">
-                  <div className="lending_area1_cont1_heading">
-                    Total Products Approved
-                  </div>
-                  <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(parseInt(lockedValue).toFixed(2))}{" "}
-                    <span className="usd_sign">NGN</span>
-                  </div>
-                </div>
-                <div className="lending_area1_cont1_body_1">
-                  <HelpOutlineIcon className="help_outline" />
-                  <div className="helper_txt_div">
-                    This is the total Engn funded to all assets in the lending
-                    pool.
-                  </div>
-                </div>
-              </div>
-              <div className="lending_area1_cont1">
-                <div className="lending_area1_cont1_body_1">
-                  <div className="lending_area1_cont1_heading">
-                    Total Products Uploaded
-                  </div>
-                  <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(parseInt(lockedValue / 570).toFixed(2))}{" "}
-                    <span className="usd_sign">USD</span>
-                  </div>
-                </div>
-                <div className="lending_area1_cont1_body_1">
-                  <HelpOutlineIcon className="help_outline" />
-                  <div className="helper_txt_div">
-                    This is the total Engn funded to all assets in the lending
-                    pool.
-                  </div>
-                </div>
-              </div>
-
-              <div className="lending_area1_cont1">
-                <div className="lending_area1_cont1_body_1">
-                  <div className="lending_area1_cont1_heading">
-                    Total Products Awaiting upload
-                  </div>
-                  <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(
-                      parseInt(totalLendingCapacity).toFixed(2)
-                    )}{" "}
-                    <span className="usd_sign">NGN</span>
-                  </div>
-                </div>
-                <div className="lending_area1_cont1_body_1">
-                  <HelpOutlineIcon className="help_outline" />
-                  <div className="helper_txt_div">
-                    This is the total value of all the assets in the lending
-                    pool.
-                  </div>
-                </div>
-              </div>
+              <AdminDashboardCard
+                title={"Total Products Approved"}
+                value={productValues.approved}
+                currencySymbol={"NGN"}
+                detail=" This is the total Engn funded to all assets in the lendingpool."
+              />
+              <AdminDashboardCard
+                title={"Total Products Uploaded"}
+                value={productValues.uploaded}
+                currencySymbol={"NGN"}
+                detail="This is the total Engn funded to all assets in the lending
+                pool."
+              />
+              <AdminDashboardCard
+                title={"Total Products Awaiting upload"}
+                value={productValues.unapproved}
+                currencySymbol={"NGN"}
+                detail="This is the total value of all the assets in the lending
+                pool.."
+              />
             </div>
             {/* ============== */}
             {/* ============== */}
@@ -826,7 +881,7 @@ const AdminProductsPage = () => {
                           Product Name
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.ProductName}
+                          {data.product_name}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -834,7 +889,10 @@ const AdminProductsPage = () => {
                           Product Amount
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.Amount} Eusd
+                          {numberWithCommas(
+                            parseInt(data.user_amount).toFixed(0)
+                          )}{" "}
+                          Eusd
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -842,7 +900,7 @@ const AdminProductsPage = () => {
                           Product Brand Name
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          Apple
+                          {data.product_brand}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -850,7 +908,7 @@ const AdminProductsPage = () => {
                           Product Condition
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          Cracked screen.
+                          {data.product_condition}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -858,7 +916,7 @@ const AdminProductsPage = () => {
                           Product Status
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.ProductStatus}
+                          {data.status}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -866,7 +924,8 @@ const AdminProductsPage = () => {
                           Product Txn Hash
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.txnHash}
+                          {/* {data.txnHash} */}
+                          N/A
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -874,7 +933,7 @@ const AdminProductsPage = () => {
                           Upload Date
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.Date}
+                          {data.createdAt}
                         </div>
                       </div>
                     </div>
@@ -893,7 +952,7 @@ const AdminProductsPage = () => {
                           Seller's Full name
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          John Doe
+                          {data.fullname}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -901,7 +960,7 @@ const AdminProductsPage = () => {
                           Seller's Wallet Address
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.Seller}
+                          {data.wallet}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -909,7 +968,7 @@ const AdminProductsPage = () => {
                           Seller's Phone number
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          +234 8164020234
+                          {data.phoneNumber}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -917,7 +976,7 @@ const AdminProductsPage = () => {
                           Seller's Residential Address
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          8b Lord emmanuel drive Port Harcourt Rivers State
+                          {data.userAddress}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -1110,7 +1169,7 @@ const AdminProductsPage = () => {
                               placeholder="Product name"
                               className="sell_container_body_cont1_title_div_input"
                               value={prodName}
-                              defaultValue={data.ProductName}
+                              defaultValue={data.product_name}
                             />
                           </div>
                         </div>
@@ -1133,16 +1192,19 @@ const AdminProductsPage = () => {
                               name=""
                               id=""
                               className="sell_container_body_cont1_title_div_input"
+                              onChange={handleCenter}
                             >
-                              <option value="">Apple</option>
-                              <option value="">Samsung</option>
-                              <option value="">Oppo</option>
-                              <option value="">Huawei</option>
-                              <option value="">LG</option>
-                              <option value="">Hisense</option>
-                              <option value="">Redmi</option>
-                              <option value="">Tecno</option>
-                              <option value="">Infinix</option>
+                              {allBrands.map((option) => (
+                                <option
+                                  key={option.product_brand}
+                                  value={option.product_brand}
+                                  // onClick={(e) =>
+                                  //   getCatName(option.product_brand)
+                                  // }
+                                >
+                                  {option.product_brand}
+                                </option>
+                              ))}
                             </select>
 
                             <button
@@ -1181,7 +1243,7 @@ const AdminProductsPage = () => {
                               className="sell_container_body_cont1_title_div_input"
                               onChange={handleSaleAmountChange}
                               value={saleAmount}
-                              defaultValue={data.Amount}
+                              defaultValue={data.user_amount}
                             />
                           </div>
                         </div>
@@ -1198,10 +1260,19 @@ const AdminProductsPage = () => {
                               name=""
                               id=""
                               className="sell_container_body_cont1_title_div_input"
+                              onChange={handleCenter2}
                             >
-                              <option value="">Mobile Phones</option>
-                              <option value="">Computing</option>
-                              <option value="">House Hold Appliances</option>
+                              {allCategories.map((option) => (
+                                <option
+                                  key={option.product_category}
+                                  value={option.product_category}
+                                  // onClick={(e) =>
+                                  //   getCatName(option.product_brand)
+                                  // }
+                                >
+                                  {option.product_category}
+                                </option>
+                              ))}
                             </select>
 
                             <button
@@ -1241,8 +1312,8 @@ const AdminProductsPage = () => {
                               cols="30"
                               rows="10"
                               className="sell_container_body_cont1_title_div_input"
-                              onChange={handleProdConditionChange}
-                              value={prodCondition}
+                              onChange={handleProdSpecChange}
+                              value={prodSpecification}
                             ></textarea>
                           </div>
                         </div>
@@ -1260,16 +1331,6 @@ const AdminProductsPage = () => {
                             supported.
                           </div>
                           <div className="sell_container_body_cont1_title_div">
-                            {/* <textarea
-                            name="productCondition"
-                            id="productCondition"
-                            cols="30"
-                            rows="10"
-                            className="sell_container_body_cont1_title_div_input"
-                            onChange={handleProdConditionChange}
-                            value={prodCondition}
-                          ></textarea> */}
-
                             <Editor
                               editorState={editorState}
                               wrapperClassName="demo-wrapper"
@@ -1308,10 +1369,17 @@ const AdminProductsPage = () => {
                           <input
                             type="text"
                             className="addCategoryArea2_input"
+                            name="new_category"
+                            id="new_category"
+                            value={new_category}
+                            onChange={handleNewCategoryChange}
                           />
                         </div>
                         <div className="addCategoryAreaButtonDiv">
-                          <button className="addCategoryAreaButton_btn">
+                          <button
+                            className="addCategoryAreaButton_btn"
+                            onClick={addNewCategory}
+                          >
                             Add Category
                           </button>
                         </div>
@@ -1332,10 +1400,17 @@ const AdminProductsPage = () => {
                           <input
                             type="text"
                             className="addCategoryArea2_input"
+                            name="new_brand"
+                            id="new_brand"
+                            value={new_brand}
+                            onChange={handleNewBrandChange}
                           />
                         </div>
                         <div className="addCategoryAreaButtonDiv">
-                          <button className="addCategoryAreaButton_btn">
+                          <button
+                            className="addCategoryAreaButton_btn"
+                            onClick={addNewBrand}
+                          >
                             Add Brand
                           </button>
                         </div>

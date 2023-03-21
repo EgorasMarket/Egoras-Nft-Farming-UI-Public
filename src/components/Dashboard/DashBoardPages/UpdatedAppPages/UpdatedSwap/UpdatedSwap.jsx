@@ -3,7 +3,6 @@ import SwapVerticalCircleIcon from "@mui/icons-material/SwapVerticalCircle";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
-import AnimatedNumbers from "react-animated-numbers";
 import "./UpdatedSwap.css";
 import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";

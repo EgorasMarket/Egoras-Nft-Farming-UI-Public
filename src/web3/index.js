@@ -11,6 +11,7 @@ import EgorasPriceOracleFacet from "./contracts/EgorasPriceOracleFacet.json";
 import EgorasSwapFacet from "./contracts/EgorasSwapFacet.json";
 import COINS from "./contracts/V2/coins.json";
 import Contract_Address from "./contracts/Contract_Address.json";
+
 import V3ContractAddress from "./contracts/V3/V3ContractAddress.json";
 // ===============
 // ===============
@@ -20,11 +21,6 @@ import ProductFacet from "./contracts/V3/ProductFacet.json";
 import StakingFacet from "./contracts/V3/StakingFacet.json";
 import MembershipFacet from "./contracts/V3/MembershipFacet.json";
 // ====================new v3 contracts =================
-
-// ===============
-// ===============
-// ===============
-
 // =============================
 // =============================
 // ========new V3 instances =====================
@@ -1167,6 +1163,86 @@ const getConfiguration = async (signer) => {
   }
 };
 
+const AcceptBid = async (_productID, signer) => {
+  // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
+  try {
+    const instance = contractProductFacetInstance(signer);
+    let result;
+    result = await instance.acceptBid(_productID);
+    console.log(result, "result from newnation");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
+// const monthlyPlan = async (_referral, signer) => {
+//   console.log(_referral);
+//   try {
+//     const instance = contractMembershipFacetInstance(signer);
+//     let result;
+//     result = await instance.monthlyPlan();
+//     console.log(result, "result, result,result,result,result");
+//     return {
+//       message: result,
+//       status: true,
+//     };
+//   } catch (error) {
+//     console.log(error);
+//     return {
+//       message: error,
+//       status: false,
+//     };
+//   }
+// };
+
+// const semiAnnuallyPlan = async (signer) => {
+//   try {
+//     const instance = contractMembershipFacetInstance(signer);
+//     let result;
+//     result = await instance.semiAnnuallyPlan();
+//     console.log(result, "result, result,result,result,result");
+//     return {
+//       message: result,
+//       status: true,
+//     };
+//   } catch (error) {
+//     console.log(error);
+//     return {
+//       message: error,
+//       status: false,
+//     };
+//   }
+// };
+
+// =============== Admin Action =======================
+// Bid For Product
+const placeBid = async (_productID, _amount, signer) => {
+  console.log(_productID, _amount);
+  try {
+    const instance = contractProductFacetInstance(signer);
+    let result;
+    result = await instance.bid(_productID, _amount);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
 const unlockMemberShipEgcToken = async (amount, signer) => {
   try {
     const instance = erc20Instance(
@@ -1182,6 +1258,25 @@ const unlockMemberShipEgcToken = async (amount, signer) => {
     console.log(error);
     return {
       message: error,
+      status: false,
+    };
+  }
+};
+
+// Approve Product
+const approveProduct = async (_productID, signer) => {
+  console.log(_productID);
+  try {
+    const instance = contractProductFacetInstance(signer);
+    let result;
+    result = await instance.approveProduct(_productID);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
       status: false,
     };
   }
@@ -1266,6 +1361,11 @@ export {
   takeRoyalty,
   configurePlan,
   getConfiguration,
+  // monthlyPlan,
+  // semiAnnuallyPlan,
+  placeBid,
+  approveProduct,
+  AcceptBid,
   unlockMemberShipEgcToken,
   checkAllowanceMembership,
 };
