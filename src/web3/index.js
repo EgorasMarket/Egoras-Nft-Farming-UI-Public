@@ -1166,55 +1166,7 @@ const getConfiguration = async (signer) => {
     };
   }
 };
-// let instance2;
 
-// const monthlyPlanSubScribe = async (signer) => {
-//   // try {
-//   //   instance2 = contractMembershipFacetInstance(signer);
-//   //   console.log(instance2);
-//   //   let result;
-//   //   result = await instance2.monthlyPlan();
-//   //   console.log(result, "result, result,result,result,result");
-//   //   return {
-//   //     message: result,
-//   //     status: true,
-//   //   };
-//   // } catch (error) {
-//   //   console.log(error);
-//   //   return {
-//   //     message: error,
-//   //     status: false,
-//   //   };
-//   // }
-//   try {
-//     const instance = contractMembershipFacetInstance(signer);
-//     instance.then((i) => {
-//       console.log(i);
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
-const semiAnnuallyPlan = async (signer) => {
-  // console.log(_referral);
-  try {
-    const instance = contractMembershipFacetInstance(signer);
-    let result;
-    result = await instance.semiAnnuallyPlan();
-    console.log(result, "result, result,result,result,result");
-    return {
-      message: result,
-      status: true,
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      message: error,
-      status: false,
-    };
-  }
-};
 const unlockMemberShipEgcToken = async (amount, signer) => {
   try {
     const instance = erc20Instance(
@@ -1314,7 +1266,6 @@ export {
   takeRoyalty,
   configurePlan,
   getConfiguration,
-  semiAnnuallyPlan,
   unlockMemberShipEgcToken,
   checkAllowanceMembership,
 };

@@ -24,14 +24,19 @@ import CheckIcon from "@mui/icons-material/Check";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { Step1Div } from "./SubSteps/Step1Div";
 import { Step2Div } from "./SubSteps/Step2Div";
+import UpdatedErrorModal from "../../Dashboard/DashBoardPages/UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedErrorModal";
+import UpdatedSuccessModal from "../../Dashboard/DashBoardPages/UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import {
   getConfiguration,
-  semiAnnuallyPlan,
   unlockMemberShipEgcToken,
   checkAllowanceMembership,
   transactReceipt,
 } from "../../../web3/index";
-import { monthlyPlanSubScribe } from "../../../web3/index2.js";
+import {
+  monthlyPlanSubScribe,
+  semiAnnuallyPlanSubScribe,
+  annuallyPlanSubScribe,
+} from "../../../web3/index2.js";
 const MemberShipPage = () => {
   const context = useWeb3React();
   const {
@@ -47,15 +52,19 @@ const MemberShipPage = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [subScription, setSubScription] = useState("inactive");
   const [fundSuccess, setFundSuccess] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+
   const [fundDisable, setFundDisable] = useState(false);
   const [fundError, setFundError] = useState(false);
   const [isLoading3, setIsLoading3] = useState(false);
   const [step1, setStep1] = useState(true);
   const [step2, setStep2] = useState(false);
   const [checkedMonth, setCheckedMonth] = useState(false);
+  const [successModal, setSuccessModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [checkedSemiAnnual, setcheckedSemiAnnual] = useState(false);
+  const [userConnected, setUserConnected] = useState(false);
   const [checkedYear, setCheckedYear] = useState(false);
   const [checkAgree, setCheckAgree] = useState(false);
   const [monthAmount, setMonthAmount] = useState("0");
@@ -110,85 +119,15 @@ const MemberShipPage = () => {
       setAnnualAmount(resAnnualAmount);
     }
   });
+  useEffect(() => {
+    if (account) {
+      setUserConnected(true);
+    } else {
+      setUserConnected(false);
+    }
+  }, [account]);
 
-  // const doUnluck = async (e) => {
-  //   setText("Transacting with blockchain, please wait...");
-  //   setStage("loading");
-  //   setIsLoading(true);
-  //   //formData.stateCollateral.toString()
-  //   let ret = await unluckToken2(
-  //     parseEther("180000000000000000000000000000000000", "wei").toString(),
-  //     library.getSigner()
-  //   );
-  //   if (ret.status == true) {
-  //     localStorage.setItem("unlocking", true);
-  //     localStorage.setItem("unlockingHash", ret.message);
-  //     setText("Unlocking please wait aleast 1/2 minutes");
-  //     // setCheckBox(true);
-  //     // setDisable(false);
-  //   } else {
-  //     if (ret.message.code == 4001) {
-  //       setText(ret.message.message);
-  //       // setCheckBox(false);
-  //       // setDisable(true);
-  //     }
-
-  //     setStage("error");
-  //     setIsLoading(false);
-  //     // setCheckBox(false);
-  //     // setDisable(true);
-  //   }
-  // };
-  // const BackLoan = async (e) => {
-  //   let currentTarget = e.currentTarget.id;
-  //   console.log(currentTarget);
-  //   console.log(BackAmount);
-  //   setStage("loading");
-  //   setIsLoading(true);
-  //   // setUnlocking(false);
-  //   // setStage("loading");
-  //   // setIsLoading(true);
-  //   setText("Lending, please wait...");
-  //   let check = await checkAllowanceL(
-  //     account,
-  //     parseEther(formData.BackAmount.toString(), "wei").toString(),
-  //     library.getSigner()
-  //   );
-  //   console.log(check);
-  //   if (check.status == true) {
-  //     let ret = await lendUS(
-  //       txnhash,
-  //       parseEther(formData.BackAmount.toString(), "wei").toString(),
-  //       currentTarget,
-  //       library.getSigner()
-  //     );
-  //     console.log(ret.status);
-  //     if (ret.status == true) {
-  //       localStorage.setItem("unlocking", true);
-  //       localStorage.setItem("unlockingHash", ret.message.hash);
-  //       setText("Sending token please wait aleast 1/2 minutes");
-  //       setHash(ret.message.hash);
-  //       // setStage("success");
-  //       console.log(ret);
-  //     } else if (ret.status == false) {
-  //       if (ret.message.code < 0) {
-  //         setText(ret.message.data.message);
-  //       } else if (ret.message.code == 4001) {
-  //         setText(ret.message.message);
-  //       }
-  //       setStage("error");
-  //       setIsLoading(false);
-  //     }
-  //   } else {
-  //     // setUnlocking(true);
-  //     setStage("unlock");
-  //     setIsLoading(false);
-  //   }
-  // };
   const UnlockToken = async (e) => {
-    // setText("Transacting with blockchain, please wait...");
-    // setStage("loading");
-    // setIsLoading(true);
     let ret = await unlockMemberShipEgcToken(
       parseEther("180000000000000000000000000000000000", "wei").toString(),
       library.getSigner()
@@ -197,14 +136,13 @@ const MemberShipPage = () => {
     if (ret.status == true) {
       localStorage.setItem("unlocking", true);
       localStorage.setItem("unlockingHash", ret.message);
-      // setText("Unlocking please wait aleast 1/2 minutes");
     } else {
       if (ret.message.code == 4001) {
-        // setText(ret.message.message);
         console.log(ret);
       }
-
       console.log(ret);
+      setErrorModal(true);
+      setErrorMessage(ret.message.reason);
     }
   };
   // setInterval(() => {
@@ -242,16 +180,29 @@ const MemberShipPage = () => {
     },
     [account, unLockCheckStatus]
   );
-  const subsCribe = async () => {
+  const subscribe = async () => {
     // if (unlockBtn == true) {
     let ret = await monthlyPlanSubScribe(library.getSigner());
-    // console.log(ret);
+    console.log(ret);
     // }
   };
   const subscribe2 = async () => {
-    const res = await semiAnnuallyPlan(library.getSigner());
-    console.log(res, "somto8uhhhg");
-    console.log(res.status, "somto8uhhhg");
+    // if (unlockBtn == true) {
+    let ret = await semiAnnuallyPlanSubScribe(library.getSigner());
+    console.log(ret);
+    // }
+  };
+  const subscribe3 = async () => {
+    // if (unlockBtn == true) {
+    let ret = await annuallyPlanSubScribe(library.getSigner());
+    console.log(ret);
+    // }
+  };
+  const CloseSuccessModal = () => {
+    setSuccessModal(false);
+  };
+  const CloseErrorModal = () => {
+    setErrorModal(false);
   };
   return (
     <section className="joinCooperativeDiv">
@@ -287,17 +238,27 @@ const MemberShipPage = () => {
               semiAnnualAmount={semiAnnualAmount}
               monthAmount={monthAmount}
               AnnualAmount={AnnualAmount}
-              Subscribe={subsCribe}
+              Subscribe={subscribe3}
+              unlockBtn={unlockBtn}
+              UnlockToken={UnlockToken}
+              account={userConnected}
             />
           </div>
-          {unlockBtn === false ? (
-            <button onClick={UnlockToken}>Unlock Token</button>
-          ) : (
-            <button>Token is unlocked</button>
-          )}
-          {/* ) : null} */}
         </div>
       </div>
+      {errorModal ? (
+        <UpdatedErrorModal
+          errorMessage={errorMessage}
+          closeModal={CloseErrorModal}
+        />
+      ) : null}
+      {successModal ? (
+        <UpdatedSuccessModal
+          btnRoute={true}
+          successMessage={successMessage}
+          route="/membership/sub"
+        />
+      ) : null}
     </section>
   );
 };
