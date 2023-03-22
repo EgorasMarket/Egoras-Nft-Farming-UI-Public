@@ -25,6 +25,7 @@ import {
 import {
   GET_ALL_UPLOADED_PRODUCTS,
   ACCEPT_BID,
+  DISPLAY_NEW_USER_PRODUCTS_CALL,
 } from "../../../services/productServices";
 import { DISPLAY_NEW_PRODUCTS_CALL } from "../../../services/adminServices";
 import { AcceptBid } from "../../../web3";
@@ -325,8 +326,9 @@ const DashBoardUserSales = () => {
   const [uploadedProduct, setUploadedProducts] = useState([]);
 
   useEffect(() => {
+    console.log("kddd_____");
     const fetchData = async () => {
-      const response = await DISPLAY_NEW_PRODUCTS_CALL();
+      const response = await DISPLAY_NEW_USER_PRODUCTS_CALL(account);
       console.log(response.data, "goody");
 
       if (response.data) {
