@@ -4,6 +4,7 @@ import {
   FETCH_PRODUCT_BRANDS,
   FETCH_PRODUCT_CATEGORIES,
   ACCEPT_OR_DECLINE_BID,
+  FETCH_USER_NEW_PRODUCT,
 } from "../core/ApiRoutes";
 export const config = {
   headers: {
@@ -38,6 +39,22 @@ export const GET_BRANDS = async () => {
 export const GET_CATEGORIES = async () => {
   try {
     const response = await axios.get(FETCH_PRODUCT_CATEGORIES, null, config);
+
+    return response.data;
+  } catch (err) {
+    return err.repsonse;
+  }
+};
+
+export const DISPLAY_NEW_USER_PRODUCTS_CALL = async (account) => {
+  console.log("____HHHH_____");
+  try {
+    const response = await axios.get(
+      FETCH_USER_NEW_PRODUCT + "/" + account,
+      null,
+      config
+    );
+    console.log(response);
 
     return response.data;
   } catch (err) {
