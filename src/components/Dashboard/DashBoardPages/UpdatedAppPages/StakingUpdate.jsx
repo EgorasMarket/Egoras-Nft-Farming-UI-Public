@@ -1200,6 +1200,8 @@ const StakingUpdate = () => {
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
     if (res.status == true) {
+      setSuccessModal(true);
+      setSuccessMessage("You've successfully Locked your egc for 1 month");
     } else {
       if (res.message.code == 4001) {
         console.log(res);
@@ -1217,6 +1219,8 @@ const StakingUpdate = () => {
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
     if (res.status == true) {
+      setSuccessModal(true);
+      setSuccessMessage("You've successfully Locked your egc for 1 year");
     } else {
       if (res.message.code == 4001) {
         console.log(res);
@@ -1946,7 +1950,7 @@ const StakingUpdate = () => {
         <UpdatedSuccessModal
           btnRoute={true}
           successMessage={successMessage}
-          route="/membership/sub"
+          route="/app/staking/egc"
         />
       ) : null}
     </div>
