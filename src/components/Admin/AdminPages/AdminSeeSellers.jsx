@@ -409,10 +409,10 @@ const AdminSeeSellers = () => {
     // console.log(res.status, "somto8uhhhg");
   };
 
-  const ApproveProduct = async () => {
-    console.log(indexId);
+  const ApproveProduct = async (id) => {
+    console.log(id);
 
-    const res = await approveProduct(indexId, library.getSigner());
+    const res = await approveProduct(id, library.getSigner());
     console.log(res, "somto8uhhhg");
     // console.log(res.status, "somto8uhhhg");
   };
@@ -602,7 +602,9 @@ const AdminSeeSellers = () => {
                                   <div className="approveProdButton">
                                     <button
                                       className="approveProdButton_btn"
-                                      onClick={ApproveProduct}
+                                      onClick={() =>
+                                        ApproveProduct(data.index_id)
+                                      }
                                     >
                                       Approve
                                     </button>
