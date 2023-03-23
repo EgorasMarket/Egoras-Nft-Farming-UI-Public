@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import "./UpdatedAppPagesStyles/dashboardSellProduct.css";
 import { API_URL } from "../../../../actions/types";
+import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { Connect } from "react-redux";
 import ImageIcon from "@mui/icons-material/Image";
@@ -39,32 +40,6 @@ import {
   unluckToken2,
   getEgcSmartContractBalnce,
 } from "../../../../web3/index";
-// import {
-//   lendUS,
-//   takeDividend,
-//   takeBackLoan,
-//   getTotalLended,
-//   getInvestorsDividend,
-//   userStats,
-//   system,
-//   burnAccumulatedDividend,
-//   checkAllowance,
-//   unluckToken,
-//   lend,
-//   getUserStats,
-//   transactReceipt,
-//   getPrice,
-//   getTickerInfo,
-//   tokenBalance,
-//   open,
-//   getLatestLoan,
-//   repay,
-//   topup,
-//   draw,
-//   checkAllowanceL,
-//   unluckToken2,
-//   getEgcSmartContractBalnce,
-// } from "../../web3/index";
 
 const DashBoardSellProduct = () => {
   const context = useWeb3React();
@@ -137,8 +112,9 @@ const DashBoardSellProduct = () => {
   const handleRemoveClick3 = () => {
     setImageSrc3("");
   };
-  const sendProductToBlockchain = async (prodId) => {
-    const conCatProdName = ` ${prodName}_${prodId}`;
+  const sendProductToBlockchain = async () => {
+    const product_uuid = uuidv4();
+    const conCatProdName = ` ${prodName}_${product_uuid}`;
     const res = await listProduct(
       conCatProdName,
       parseEther(saleAmount.toString(), "wei").toString(),
@@ -147,21 +123,12 @@ const DashBoardSellProduct = () => {
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
 
-    // if (check.status == true) {
-    //   let ret = await lendUS(
-    //     txnhash,
-    //     parseEther(formData.BackAmount.toString(), "wei").toString(),
-    //     currentTarget,
-    //     library.getSigner()
-    //   );
-    //   console.log(ret.status);
-    //   if (ret.status == true) {
-    //   } else if (ret.status == false) {
-    //   }
-    // } else {
-    // }
+    if (res.status == true) {
+      UploadProduct(product_uuid);
+    } else {
+    }
   };
-  const UploadProduct = async () => {
+  const UploadProduct = async (product_uuid) => {
     const formData = new FormData();
 
     console.log(account);
@@ -180,6 +147,7 @@ const DashBoardSellProduct = () => {
     formData.append("product_condition", prodCondition);
     formData.append("userAddress", account);
     formData.append("amount", saleAmount);
+    formData.append("product_uuid", product_uuid);
     console.log(formData);
     try {
       const res = await axios.post(
@@ -188,10 +156,10 @@ const DashBoardSellProduct = () => {
         config
       );
       console.log(res, "somto");
-      if (res.status === 200) {
-        sendProductToBlockchain(res.data.data.product_id);
-        return;
-      }
+      // if (res.status === 200) {
+      //   sendProductToBlockchain(res.data.data.product_id);
+      //   return;
+      // }
     } catch (err) {
       console.log(err);
     }
@@ -465,7 +433,7 @@ const DashBoardSellProduct = () => {
               <div className="sell_container_body_cont1">
                 <button
                   className="sell_container_body_cont1_submit_btn"
-                  onClick={UploadProduct}
+                  onClick={sendProductToBlockchain}
                 >
                   Upload Product
                 </button>
