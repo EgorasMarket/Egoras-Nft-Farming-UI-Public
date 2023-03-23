@@ -141,7 +141,7 @@ const DashBoardSellProduct = () => {
     const conCatProdName = ` ${prodName}_${prodId}`;
     const res = await listProduct(
       conCatProdName,
-      saleAmount,
+      parseEther(saleAmount.toString(), "wei").toString(),
       library.getSigner()
     );
     console.log(res, "somto8uhhhg");

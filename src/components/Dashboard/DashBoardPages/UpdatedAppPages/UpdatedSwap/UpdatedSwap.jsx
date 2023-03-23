@@ -33,11 +33,11 @@ import {
 const UpdatedSwap = () => {
   const [tokenModal, setTokenModal] = useState(false);
   const [tokenModal2, setTokenModal2] = useState(false);
-  const [id, setId] = useState("1");
+  const [id, setId] = useState("0");
   const [id2, setId2] = useState("");
-  const [ida, setIda] = useState("1");
+  const [ida, setIda] = useState("0");
   const [id2b, setId2b] = useState("");
-  const [idTicker, setIdTicker] = useState("1");
+  const [idTicker, setIdTicker] = useState("0");
   const [idBase, setIdBase] = useState("");
   const [initialId, setInitialId] = useState("");
   const [initialId2, setInitialId2] = useState("");
@@ -252,6 +252,16 @@ const UpdatedSwap = () => {
     },
   ];
 
+  const assetsBase = [
+    {
+      id: "0",
+      img: "/img/tokens-folder/eusd_dummy_icon.png",
+      name: "EUSD",
+      symbol: "EUSD",
+      favorite: "true",
+      balance: 1000,
+    },
+  ];
   const assets = [
     {
       id: "1",
@@ -642,33 +652,64 @@ const UpdatedSwap = () => {
                               </div>
                             ) : (
                               <>
-                                {assets.map((data) => {
-                                  // setSwapBalance(data.balance);
-                                  return (
-                                    <>
-                                      {data.id == id ? (
-                                        <div className="Swap_icondropDownDiv">
-                                          <span className="token_balances_span">
-                                            Balance:{data.balance}
-                                          </span>
+                                {id == "0" ? (
+                                  <>
+                                    {assetsBase.map((data) => {
+                                      // setSwapBalance(data.balance);
+                                      return (
+                                        <>
+                                          {data.id == id ? (
+                                            <div className="Swap_icondropDownDiv">
+                                              <span className="token_balances_span">
+                                                Balance:{data.balance}
+                                              </span>
 
-                                          <button
-                                            className="display_tokens_drop"
-                                            onClick={ToggleTokenModal}
-                                          >
-                                            <img
-                                              src={data.img}
-                                              alt=""
-                                              className="asset_icon"
-                                            />
-                                            {data.symbol}
-                                            <ArrowDropDownIcon className="drop_down_icon" />
-                                          </button>
-                                        </div>
-                                      ) : null}
-                                    </>
-                                  );
-                                })}
+                                              <button className="display_tokens_drop">
+                                                <img
+                                                  src={data.img}
+                                                  alt=""
+                                                  className="asset_icon"
+                                                />
+                                                {data.symbol}
+                                                {/* <ArrowDropDownIcon className="drop_down_icon" /> */}
+                                              </button>
+                                            </div>
+                                          ) : null}
+                                        </>
+                                      );
+                                    })}
+                                  </>
+                                ) : (
+                                  <>
+                                    {assets.map((data) => {
+                                      // setSwapBalance(data.balance);
+                                      return (
+                                        <>
+                                          {data.id == id ? (
+                                            <div className="Swap_icondropDownDiv">
+                                              <span className="token_balances_span">
+                                                Balance:{data.balance}
+                                              </span>
+
+                                              <button
+                                                className="display_tokens_drop"
+                                                onClick={ToggleTokenModal}
+                                              >
+                                                <img
+                                                  src={data.img}
+                                                  alt=""
+                                                  className="asset_icon"
+                                                />
+                                                {data.symbol}
+                                                <ArrowDropDownIcon className="drop_down_icon" />
+                                              </button>
+                                            </div>
+                                          ) : null}
+                                        </>
+                                      );
+                                    })}
+                                  </>
+                                )}
                               </>
                             )}
                           </div>
@@ -689,43 +730,99 @@ const UpdatedSwap = () => {
                             </div>
                           ) : (
                             <>
-                              {assets.map((data) => {
-                                // setSwapBalance(data.balance);
-                                return (
-                                  <>
-                                    {data.id == id ? (
-                                      <div className="amnt_input_layer2">
-                                        <button
-                                          className="amnt_input_layer2_cont1"
-                                          onClick={() => add25Per(data.balance)}
-                                        >
-                                          25%
-                                        </button>
-                                        <button
-                                          className="amnt_input_layer2_cont1"
-                                          onClick={() => add50Per(data.balance)}
-                                        >
-                                          50%
-                                        </button>
-                                        <button
-                                          className="amnt_input_layer2_cont1"
-                                          onClick={() => add75Per(data.balance)}
-                                        >
-                                          75%
-                                        </button>
-                                        <button
-                                          className="amnt_input_layer2_cont1_last"
-                                          onClick={() =>
-                                            add100Per(data.balance)
-                                          }
-                                        >
-                                          100%
-                                        </button>
-                                      </div>
-                                    ) : null}
-                                  </>
-                                );
-                              })}
+                              {id == "0" ? (
+                                <>
+                                  {assetsBase.map((data) => {
+                                    // setSwapBalance(data.balance);
+                                    return (
+                                      <>
+                                        {data.id == id ? (
+                                          <div className="amnt_input_layer2">
+                                            <button
+                                              className="amnt_input_layer2_cont1"
+                                              onClick={() =>
+                                                add25Per(data.balance)
+                                              }
+                                            >
+                                              25%
+                                            </button>
+                                            <button
+                                              className="amnt_input_layer2_cont1"
+                                              onClick={() =>
+                                                add50Per(data.balance)
+                                              }
+                                            >
+                                              50%
+                                            </button>
+                                            <button
+                                              className="amnt_input_layer2_cont1"
+                                              onClick={() =>
+                                                add75Per(data.balance)
+                                              }
+                                            >
+                                              75%
+                                            </button>
+                                            <button
+                                              className="amnt_input_layer2_cont1_last"
+                                              onClick={() =>
+                                                add100Per(data.balance)
+                                              }
+                                            >
+                                              100%
+                                            </button>
+                                          </div>
+                                        ) : null}
+                                      </>
+                                    );
+                                  })}
+                                </>
+                              ) : (
+                                <>
+                                  {assets.map((data) => {
+                                    // setSwapBalance(data.balance);
+                                    return (
+                                      <>
+                                        {data.id == id ? (
+                                          <div className="amnt_input_layer2">
+                                            <button
+                                              className="amnt_input_layer2_cont1"
+                                              onClick={() =>
+                                                add25Per(data.balance)
+                                              }
+                                            >
+                                              25%
+                                            </button>
+                                            <button
+                                              className="amnt_input_layer2_cont1"
+                                              onClick={() =>
+                                                add50Per(data.balance)
+                                              }
+                                            >
+                                              50%
+                                            </button>
+                                            <button
+                                              className="amnt_input_layer2_cont1"
+                                              onClick={() =>
+                                                add75Per(data.balance)
+                                              }
+                                            >
+                                              75%
+                                            </button>
+                                            <button
+                                              className="amnt_input_layer2_cont1_last"
+                                              onClick={() =>
+                                                add100Per(data.balance)
+                                              }
+                                            >
+                                              100%
+                                            </button>
+                                          </div>
+                                        ) : null}
+                                      </>
+                                    );
+                                  })}
+                                </>
+                              )}
                             </>
                           )}
                         </div>
@@ -777,30 +874,64 @@ const UpdatedSwap = () => {
                               </div>
                             ) : (
                               <>
-                                {assets.map((data) => (
+                                {id2 == "0" ? (
                                   <>
-                                    {data.id == id2 ? (
-                                      <div className="Swap_icondropDownDiv">
-                                        <span className="token_balances_span">
-                                          Balance:{data.balance}
-                                        </span>
+                                    {assetsBase.map((data) => {
+                                      // setSwapBalance(data.balance);
+                                      return (
+                                        <>
+                                          {data.id == id2 ? (
+                                            <div className="Swap_icondropDownDiv">
+                                              <span className="token_balances_span">
+                                                Balance:{data.balance}
+                                              </span>
 
-                                        <button
-                                          className="display_tokens_drop"
-                                          onClick={ToggleTokenModal2}
-                                        >
-                                          <img
-                                            src={data.img}
-                                            alt=""
-                                            className="asset_icon"
-                                          />
-                                          {data.symbol}
-                                          <ArrowDropDownIcon className="drop_down_icon" />
-                                        </button>
-                                      </div>
-                                    ) : null}
+                                              <button className="display_tokens_drop">
+                                                <img
+                                                  src={data.img}
+                                                  alt=""
+                                                  className="asset_icon"
+                                                />
+                                                {data.symbol}
+                                                {/* <ArrowDropDownIcon className="drop_down_icon" /> */}
+                                              </button>
+                                            </div>
+                                          ) : null}
+                                        </>
+                                      );
+                                    })}
                                   </>
-                                ))}
+                                ) : (
+                                  <>
+                                    {assets.map((data) => {
+                                      // setSwapBalance(data.balance);
+                                      return (
+                                        <>
+                                          {data.id == id2 ? (
+                                            <div className="Swap_icondropDownDiv">
+                                              <span className="token_balances_span">
+                                                Balance:{data.balance}
+                                              </span>
+
+                                              <button
+                                                className="display_tokens_drop"
+                                                onClick={ToggleTokenModal2}
+                                              >
+                                                <img
+                                                  src={data.img}
+                                                  alt=""
+                                                  className="asset_icon"
+                                                />
+                                                {data.symbol}
+                                                <ArrowDropDownIcon className="drop_down_icon" />
+                                              </button>
+                                            </div>
+                                          ) : null}
+                                        </>
+                                      );
+                                    })}
+                                  </>
+                                )}
                               </>
                             )}
                           </div>
@@ -829,37 +960,75 @@ const UpdatedSwap = () => {
                         <div className="swap_price_rate_div1">Nil</div>
                       ) : (
                         <>
-                          {assets.map((data) => {
-                            // setSwapBalance(data.balance);
-                            return (
-                              <>
-                                {data.id == ida ? (
-                                  <div className="swap_price_rate_div1">
-                                    1 {data.symbol}
-                                  </div>
-                                ) : null}
-                              </>
-                            );
-                          })}
+                          {ida == "0" ? (
+                            <>
+                              {assetsBase.map((data) => {
+                                // setSwapBalance(data.balance);
+                                return (
+                                  <>
+                                    {data.id == ida ? (
+                                      <div className="swap_price_rate_div1">
+                                        1 {data.symbol}
+                                      </div>
+                                    ) : null}
+                                  </>
+                                );
+                              })}
+                            </>
+                          ) : (
+                            <>
+                              {assets.map((data) => {
+                                // setSwapBalance(data.balance);
+                                return (
+                                  <>
+                                    {data.id == ida ? (
+                                      <div className="swap_price_rate_div1">
+                                        1 {data.symbol}
+                                      </div>
+                                    ) : null}
+                                  </>
+                                );
+                              })}
+                            </>
+                          )}
                         </>
                       )}
                       =
                       {id2b == "" ? (
-                        <div className="swap_price_rate_div2">Nil</div>
+                        <div className="swap_price_rate_div1">Nil</div>
                       ) : (
                         <>
-                          {assets.map((data) => {
-                            // setSwapBalance(data.balance);
-                            return (
-                              <>
-                                {data.id == id2b ? (
-                                  <div className="swap_price_rate_div2">
-                                    20 {data.symbol}
-                                  </div>
-                                ) : null}
-                              </>
-                            );
-                          })}
+                          {id2b == "0" ? (
+                            <>
+                              {assetsBase.map((data) => {
+                                // setSwapBalance(data.balance);
+                                return (
+                                  <>
+                                    {data.id == id2b ? (
+                                      <div className="swap_price_rate_div2">
+                                        20 {data.symbol}
+                                      </div>
+                                    ) : null}
+                                  </>
+                                );
+                              })}
+                            </>
+                          ) : (
+                            <>
+                              {assets.map((data) => {
+                                // setSwapBalance(data.balance);
+                                return (
+                                  <>
+                                    {data.id == id2b ? (
+                                      <div className="swap_price_rate_div2">
+                                        20 {data.symbol}
+                                      </div>
+                                    ) : null}
+                                  </>
+                                );
+                              })}
+                            </>
+                          )}
                         </>
                       )}
                       <SwapHorizIcon
@@ -884,27 +1053,50 @@ const UpdatedSwap = () => {
                             Minimum Received
                           </div>
                           {id2 == "" ? (
-                            <div className="moreSwapInfoDiv_div2_area1_cont2">
-                              Nil
-                            </div>
+                            <div className="swap_price_rate_div1">Nil</div>
                           ) : (
                             <>
-                              {assets.map((data) => {
-                                return (
-                                  <>
-                                    {data.id == id2 ? (
-                                      <div className="moreSwapInfoDiv_div2_area1_cont2">
-                                        {SwapAmount == ""
-                                          ? " "
-                                          : SwapAmount * 3.8}
-                                        <span>
-                                          {"  "} {data.symbol}
-                                        </span>
-                                      </div>
-                                    ) : null}
-                                  </>
-                                );
-                              })}
+                              {id2 == "0" ? (
+                                <>
+                                  {assetsBase.map((data) => {
+                                    // setSwapBalance(data.balance);
+                                    return (
+                                      <>
+                                        {data.id == id2 ? (
+                                          <div className="moreSwapInfoDiv_div2_area1_cont2">
+                                            {SwapAmount == ""
+                                              ? " "
+                                              : SwapAmount * 3.8}
+                                            <span>
+                                              {"  "} {data.symbol}
+                                            </span>
+                                          </div>
+                                        ) : null}
+                                      </>
+                                    );
+                                  })}
+                                </>
+                              ) : (
+                                <>
+                                  {assets.map((data) => {
+                                    // setSwapBalance(data.balance);
+                                    return (
+                                      <>
+                                        {data.id == id2 ? (
+                                          <div className="moreSwapInfoDiv_div2_area1_cont2">
+                                            {SwapAmount == ""
+                                              ? " "
+                                              : SwapAmount * 3.8}
+                                            <span>
+                                              {"  "} {data.symbol}
+                                            </span>
+                                          </div>
+                                        ) : null}
+                                      </>
+                                    );
+                                  })}
+                                </>
+                              )}
                             </>
                           )}
                         </div>
@@ -948,89 +1140,176 @@ const UpdatedSwap = () => {
                         </div>
                       ) : (
                         <>
-                          {assets.map((data) => {
-                            // setSwapBalance(data.balance);
-                            return (
-                              <>
-                                {data.id == idTicker ? (
-                                  <div className="tradeViewAreaCont_pairs_cont_div1 moveCloser">
-                                    <img
-                                      src={data.img}
-                                      alt=""
-                                      className="tradeViewAreaCont_pairs_cont_div1_img"
-                                    />
-                                  </div>
-                                ) : null}
-                              </>
-                            );
-                          })}
+                          {idTicker == "0" ? (
+                            <>
+                              {assetsBase.map((data) => {
+                                // setSwapBalance(data.balance);
+                                return (
+                                  <>
+                                    {data.id == idTicker ? (
+                                      <div className="tradeViewAreaCont_pairs_cont_div1 moveCloser">
+                                        <img
+                                          src={data.img}
+                                          alt=""
+                                          className="tradeViewAreaCont_pairs_cont_div1_img"
+                                        />
+                                      </div>
+                                    ) : null}
+                                  </>
+                                );
+                              })}
+                            </>
+                          ) : (
+                            <>
+                              {assets.map((data) => {
+                                // setSwapBalance(data.balance);
+                                return (
+                                  <>
+                                    {data.id == idTicker ? (
+                                      <div className="tradeViewAreaCont_pairs_cont_div1 moveCloser">
+                                        <img
+                                          src={data.img}
+                                          alt=""
+                                          className="tradeViewAreaCont_pairs_cont_div1_img"
+                                        />
+                                      </div>
+                                    ) : null}
+                                  </>
+                                );
+                              })}
+                            </>
+                          )}
                         </>
                       )}
+
                       {idBase == "" ? (
                         <div className="tradeViewAreaCont_pairs_cont_div1">
                           Nil
                         </div>
                       ) : (
                         <>
-                          {assets.map((data) => {
-                            // setSwapBalance(data.balance);
-                            return (
-                              <>
-                                {data.id == idBase ? (
-                                  <div className="tradeViewAreaCont_pairs_cont_div1">
-                                    <img
-                                      src={data.img}
-                                      alt=""
-                                      className="tradeViewAreaCont_pairs_cont_div1_img"
-                                    />
-                                  </div>
-                                ) : null}
-                              </>
-                            );
-                          })}
+                          {idBase == "0" ? (
+                            <>
+                              {assetsBase.map((data) => {
+                                // setSwapBalance(data.balance);
+                                return (
+                                  <>
+                                    {data.id == idBase ? (
+                                      <div className="tradeViewAreaCont_pairs_cont_div1">
+                                        <img
+                                          src={data.img}
+                                          alt=""
+                                          className="tradeViewAreaCont_pairs_cont_div1_img"
+                                        />
+                                      </div>
+                                    ) : null}
+                                  </>
+                                );
+                              })}
+                            </>
+                          ) : (
+                            <>
+                              {assets.map((data) => {
+                                // setSwapBalance(data.balance);
+                                return (
+                                  <>
+                                    {data.id == idBase ? (
+                                      <div className="tradeViewAreaCont_pairs_cont_div1">
+                                        <img
+                                          src={data.img}
+                                          alt=""
+                                          className="tradeViewAreaCont_pairs_cont_div1_img"
+                                        />
+                                      </div>
+                                    ) : null}
+                                  </>
+                                );
+                              })}
+                            </>
+                          )}
                         </>
                       )}
+
                       {idTicker == "" ? (
                         <div className="tradeViewAreaCont_pairs_cont_div2">
                           Nil
                         </div>
                       ) : (
                         <>
-                          {assets.map((data) => {
-                            // setSwapBalance(data.balance);
-                            return (
-                              <>
-                                {data.id == idTicker ? (
-                                  <div className="tradeViewAreaCont_pairs_cont_div2">
-                                    {data.symbol}
-                                  </div>
-                                ) : null}
-                              </>
-                            );
-                          })}
+                          {idTicker == "0" ? (
+                            <>
+                              {assetsBase.map((data) => {
+                                // setSwapBalance(data.balance);
+                                return (
+                                  <>
+                                    {data.id == idTicker ? (
+                                      <div className="tradeViewAreaCont_pairs_cont_div2">
+                                        {data.symbol}
+                                      </div>
+                                    ) : null}
+                                  </>
+                                );
+                              })}
+                            </>
+                          ) : (
+                            <>
+                              {assets.map((data) => {
+                                // setSwapBalance(data.balance);
+                                return (
+                                  <>
+                                    {data.id == idTicker ? (
+                                      <div className="tradeViewAreaCont_pairs_cont_div2">
+                                        {data.symbol}
+                                      </div>
+                                    ) : null}
+                                  </>
+                                );
+                              })}
+                            </>
+                          )}
                         </>
                       )}
                       <div className="tradeViewAreaCont_pairs_cont_div2_slash">
                         /
                       </div>
+
                       {idBase == "" ? (
                         <div className="tradeViewAreaCont_pairs_cont_div2 base">
                           Nil
                         </div>
                       ) : (
                         <>
-                          {assets.map((data) => {
-                            // setSwapBalance(data.balance);
-                            return (
-                              <>
-                                {data.id == idBase ? (
-                                  <div className="tradeViewAreaCont_pairs_cont_div2 base">
-                                    {data.symbol}
-                                  </div>
-                                ) : null}
-                              </>
-                            );
-                          })}
+                          {idBase == "0" ? (
+                            <>
+                              {assetsBase.map((data) => {
+                                // setSwapBalance(data.balance);
+                                return (
+                                  <>
+                                    {data.id == idBase ? (
+                                      <div className="tradeViewAreaCont_pairs_cont_div2 base">
+                                        {data.symbol}
+                                      </div>
+                                    ) : null}
+                                  </>
+                                );
+                              })}
+                            </>
+                          ) : (
+                            <>
+                              {assets.map((data) => {
+                                // setSwapBalance(data.balance);
+                                return (
+                                  <>
+                                    {data.id == idBase ? (
+                                      <div className="tradeViewAreaCont_pairs_cont_div2 base">
+                                        {data.symbol}
+                                      </div>
+                                    ) : null}
+                                  </>
+                                );
+                              })}
+                            </>
+                          )}
                         </>
                       )}
                       <SwapHorizIcon
@@ -1054,17 +1333,40 @@ const UpdatedSwap = () => {
                               size={28}
                               duration={1000}
                             />{" "}
+                            {/* ====== */}
+                            {/* ====== */}
+                            {/* ====== */}
                             {idBase == "" ? (
                               <>Nil</>
                             ) : (
                               <>
-                                {assets.map((data) => {
-                                  return (
-                                    <>
-                                      {data.id == idBase ? data.symbol : null}
-                                    </>
-                                  );
-                                })}
+                                {idBase == "0" ? (
+                                  <>
+                                    {assetsBase.map((data) => {
+                                      // setSwapBalance(data.balance);
+                                      return (
+                                        <>
+                                          {data.id == idBase
+                                            ? data.symbol
+                                            : null}
+                                        </>
+                                      );
+                                    })}
+                                  </>
+                                ) : (
+                                  <>
+                                    {assets.map((data) => {
+                                      // setSwapBalance(data.balance);
+                                      return (
+                                        <>
+                                          {data.id == idBase
+                                            ? data.symbol
+                                            : null}
+                                        </>
+                                      );
+                                    })}
+                                  </>
+                                )}
                               </>
                             )}
                           </span>
@@ -1116,13 +1418,33 @@ const UpdatedSwap = () => {
                               <>Nil</>
                             ) : (
                               <>
-                                {assets.map((data) => {
-                                  return (
-                                    <>
-                                      {data.id == idBase ? data.symbol : null}
-                                    </>
-                                  );
-                                })}
+                                {idBase == "0" ? (
+                                  <>
+                                    {assetsBase.map((data) => {
+                                      // setSwapBalance(data.balance);
+                                      return (
+                                        <>
+                                          {data.id == idBase
+                                            ? data.symbol
+                                            : null}
+                                        </>
+                                      );
+                                    })}
+                                  </>
+                                ) : (
+                                  <>
+                                    {assets.map((data) => {
+                                      // setSwapBalance(data.balance);
+                                      return (
+                                        <>
+                                          {data.id == idBase
+                                            ? data.symbol
+                                            : null}
+                                        </>
+                                      );
+                                    })}
+                                  </>
+                                )}
                               </>
                             )}
                           </span>

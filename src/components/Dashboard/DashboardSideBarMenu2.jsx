@@ -5,7 +5,8 @@ import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 // import Web3 from "web3";
 import Marquee from "react-fast-marquee";
 // import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
-
+// import NotificationsIcon from "@mui/icons-material/Notifications";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import Web3 from "web3";
 import CloseIcon from "@material-ui/icons/Close";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -86,12 +87,14 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const [coinBalance, setCoinBalance] = React.useState("0.00");
   const [coinBalance2, setCoinBalance2] = React.useState(0.0);
   const [baseBalance, setBaseBalance] = useState(0.0);
+  const [notifyDiv, setNotifyDiv] = useState(false);
 
   const [productNamesZ, setProductNamesZ] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   const linksActive = window.location.pathname;
   const urlArr = linksActive.split("/");
+  const wrapperRef = useRef(null);
   const context = useWeb3React();
   const {
     connector,
@@ -458,6 +461,55 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     //   setConnectNewAccountBtn(true);
     // }
   };
+
+  const NotifyArray = [
+    {
+      id: "1",
+      Title: "   Introducing MUI X v6.0.0",
+      paragraph:
+        "     Explore what's new and what's next in the new stable version of the advanced components.",
+    },
+    {
+      id: "2",
+      Title: "   Introducing MUI X v6.0.0",
+      paragraph:
+        "     Explore what's new and what's next in the new stable version of the advanced components.",
+    },
+    {
+      id: "3",
+      Title: "   Introducing MUI X v6.0.0",
+      paragraph:
+        "     Explore what's new and what's next in the new stable version of the advanced components.",
+    },
+    {
+      id: "4",
+      Title: "   Introducing MUI X v6.0.0",
+      paragraph:
+        "     Explore what's new and what's next in the new stable version of the advanced components.",
+    },
+    {
+      id: "5",
+      Title: "   Introducing MUI X v6.0.0",
+      paragraph:
+        "     Explore what's new and what's next in the new stable version of the advanced components.",
+    },
+  ];
+  const NotifyArray2 = [];
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setNotifyDiv(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [wrapperRef]);
+  const ToggleNotifyDiv = () => {
+    setNotifyDiv(!notifyDiv);
+  };
   return (
     <div className={smallSide == "not_small" ? "side" : "small_side"}>
       <div className="header_token_prices_div">
@@ -655,9 +707,49 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                       className="metamask_prof_pic_icon"
                       ref={avatarRef}
                     ></div>
-
                     <div className="wallet_addr_cont_txt_header">
                       <div className="wall_addr">{walletAddr}</div>
+                    </div>
+                    <div className="notify_icon_cont_div_cont" ref={wrapperRef}>
+                      <div
+                        className="wallet_settings_icon_cont notify_icon_cont"
+                        onClick={ToggleNotifyDiv}
+                      >
+                        <div className="notify_icon_cont_div">
+                          {NotifyArray.length <= 0 ? null : (
+                            <div className="notify_icon_cont_div_notifyCount">
+                              {NotifyArray.length}
+                            </div>
+                          )}
+                          <NotificationsNoneOutlinedIcon className="wallet_settings_icon" />
+                        </div>
+                      </div>
+
+                      {notifyDiv && (
+                        <div className="notifyDropDownDiv">
+                          {NotifyArray.length <= 0 ? (
+                            <div className="notifyDropDownDiv_emptyDiv">
+                              No notifications!
+                            </div>
+                          ) : (
+                            <>
+                              {NotifyArray.map((data, key) => (
+                                <div
+                                  className="notifyDropDownDiv_div1"
+                                  key={data.id}
+                                >
+                                  <div className="notifyDropDownDiv_div1_title">
+                                    {data.Title}
+                                  </div>
+                                  <div className="notifyDropDownDiv_div1_para">
+                                    {data.paragraph}
+                                  </div>
+                                </div>
+                              ))}
+                            </>
+                          )}
+                        </div>
+                      )}
                     </div>
                     <div
                       className="wallet_settings_icon_cont"
@@ -665,7 +757,6 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                     >
                       <SettingsOutlinedIcon className="wallet_settings_icon" />
                     </div>
-
                     {disconnetDiv === true ? (
                       <div className="disconnect_button_div">
                         <Authenticate isHome="false" />

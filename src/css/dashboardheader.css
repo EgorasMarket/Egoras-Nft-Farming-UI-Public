@@ -8,6 +8,66 @@
   position: fixed;
   width: 100%;
 }
+.notify_icon_cont_div_cont {
+  position: relative;
+}
+.notify_icon_cont {
+  margin-right: 5px;
+}
+.notifyDropDownDiv_emptyDiv {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  padding: 10px;
+}
+.notifyDropDownDiv {
+  position: absolute;
+  top: 124%;
+  background: #0b110c;
+  border: solid 1px #33453a;
+  width: 19em;
+  right: 0px;
+  border-radius: 11px;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  height: 20em;
+  box-shadow: -1px 9px 25px #0000008a;
+  color: #fff;
+}
+.notify_icon_cont_div {
+  position: relative;
+}
+.notify_icon_cont_div_notifyCount {
+  position: absolute;
+  right: -5px;
+  top: -4px;
+  font-size: 10px;
+  background: #c72f2f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  padding: 0px;
+  /* line-height: 1.5; */
+  color: #fff;
+  font-weight: 700;
+}
+.notifyDropDownDiv_div1 {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  border-bottom: solid 1px #33453a;
+}
+.notifyDropDownDiv_div1_para {
+  font-size: 14px;
+  margin-top: 7px;
+  color: #96a799;
+}
 .header_token_prices_div {
   background: #ebebeb;
   position: absolute;
@@ -140,7 +200,7 @@
 
 .together {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   flex-direction: row;
   /* gap: 10px; */
 }
@@ -568,7 +628,7 @@ dark button.logout-btn {
   }
   .together {
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     flex-direction: row-reverse;
     /* transform: scale(0.8); */
   }

@@ -586,7 +586,7 @@ const AdminSeeSellers = () => {
                                   {asset.BiddingStatus}
                                 </td>
                                 <td className="assets-category-data1b stable-content branch_apy">
-                                  {asset.user_amount} Eusd
+                                  {asset.bidAmount} Eusd
                                 </td>
                                 <td className="assets-category-data1b stable-content branch_apy">
                                   {asset.status}
@@ -597,6 +597,16 @@ const AdminSeeSellers = () => {
                                   6
                                 )}...${asset.txnHash.slice(63, 66)}`} */}
                                   {"Coming soon"}
+                                </td>
+                                <td className="assets-category-data1b stable-content branch_apy">
+                                  <div className="approveProdButton">
+                                    <button
+                                      className="approveProdButton_btn"
+                                      onClick={ApproveProduct}
+                                    >
+                                      Approve
+                                    </button>
+                                  </div>
                                 </td>
                                 <td className="assets-category-data-last branch_loan_action">
                                   <ArrowForwardIosIcon />
@@ -947,14 +957,6 @@ const AdminSeeSellers = () => {
                     {/* ================ */}
                     {/* ================ */}
                     {/* ================ */}
-                    <div className="approveProdButton">
-                      <button
-                        className="approveProdButton_btn"
-                        onClick={ApproveProduct}
-                      >
-                        Approve
-                      </button>
-                    </div>
                   </div>
                 </div>
               ) : null}

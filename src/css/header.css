@@ -150,15 +150,26 @@ div#Header {
 .wallet_settings_icon_cont {
   display: flex;
   align-items: center;
-  padding: 3px 10px;
+  padding: 3px 6px;
   background: #ececec;
-  color: #648772;
+  color: #404040;
   cursor: pointer;
   border-radius: 10px;
   border: solid 1px lightgrey;
+  position: relative;
+  transition: all 0.1s linear;
+  height: 100%;
+}
+.dark .wallet_settings_icon_cont:hover {
+  background: #1e2c21;
+  transition: all 0.1s linear;
+}
+.wallet_settings_icon_cont:hover {
+  background: #d4d4d4;
+  transition: all 0.1s linear;
 }
 .wallet_settings_icon {
-  font-size: 18px !important;
+  font-size: 21px !important;
 }
 
 .header_wllt_bal {
@@ -586,23 +597,20 @@ vl {
 } */
 
 .toggle_dark_mode_div {
-  display: flex;
-  align-items: center;
-  grid-gap: 5px px;
-  grid-gap: 5px;
-  grid-gap: 5px;
-  grid-gap: 5px;
-  gap: 5px;
   border: solid 1px #d3d3d3;
-  padding: 2px 5px;
+  padding: 1px 5px;
   border-radius: 10px;
   background: #ececec;
   margin-right: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1.1;
 }
 
 .lightMode_icon {
   position: absolute;
-  color: #648772 !important;
+  color: #444444 !important;
   font-size: 18px !important;
   height: 100%;
   top: 0;

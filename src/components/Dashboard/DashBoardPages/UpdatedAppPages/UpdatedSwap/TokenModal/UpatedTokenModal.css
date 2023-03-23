@@ -77,7 +77,11 @@
   color: #fff;
 }
 .updatedTokenModal_area1_favorites {
-  display: flex;
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  justify-content: flex-start;
 }
 .updatedFavoriteToken_cont {
   display: flex;
