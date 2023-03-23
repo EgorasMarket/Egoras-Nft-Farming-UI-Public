@@ -612,7 +612,7 @@ const AdminSeeSellers = () => {
                                     <button
                                       className="approveProdButton_btn"
                                       onClick={() =>
-                                        ApproveProduct(data.index_id)
+                                        ApproveProduct(asset.index_id)
                                       }
                                     >
                                       Approve
