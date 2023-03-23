@@ -21,7 +21,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { placeBid, approveProduct } from "../../../web3";
 import { parseEther, formatEther, parseUnits } from "@ethersproject/units";
 import AdminDashboardCard from "../../cards/AdminDashboardCard";
-import { POPULATE_ADMIN_PRODUCT_DASHBOARD } from "../../../services/adminServices";
+import {
+  POPULATE_ADMIN_PRODUCT_DASHBOARD,
+  CALL_ADMIN_PLACE_BID,
+} from "../../../services/adminServices";
 
 import {
   Web3ReactProvider,
@@ -398,15 +401,21 @@ const AdminSeeSellers = () => {
   };
 
   const BidForProduct = async () => {
-    console.log(indexId, parseEther(bidAmount.toString(), "wei").toString());
+    const response = await CALL_ADMIN_PLACE_BID(bidAmount, account, indexId);
+    console.log(response.data.success);
 
-    const res = await placeBid(
-      indexId,
-      parseEther(bidAmount.toString(), "wei").toString(),
-      library.getSigner()
-    );
-    console.log(res, "somto8uhhhg");
-    // console.log(res.status, "somto8uhhhg");
+    if (response.data.success == true) {
+      const res = await placeBid(
+        indexId,
+        parseEther(bidAmount.toString(), "wei").toString(),
+        library.getSigner()
+      );
+      console.log(res, "somto8uhhhg");
+    } else {
+      console.log("Error occured in the backend");
+    }
+
+    // console.log(indexId, parseEther(bidAmount.toString(), "wei").toString());
   };
 
   const ApproveProduct = async (id) => {
