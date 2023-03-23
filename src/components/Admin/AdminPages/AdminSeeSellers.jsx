@@ -592,7 +592,7 @@ const AdminSeeSellers = () => {
                                   )}...${asset.user_wallet.slice(39, 42)}`}
                                 </td>
                                 <td className="assets-category-data1b stable-content branch_apy">
-                                  {asset.BiddingStatus}
+                                  {asset.bidStatus}
                                 </td>
                                 <td className="assets-category-data1b stable-content branch_apy">
                                   {asset.bidAmount} Eusd
@@ -611,6 +611,9 @@ const AdminSeeSellers = () => {
                                   <div className="approveProdButton">
                                     <button
                                       className="approveProdButton_btn"
+                                      disabled={
+                                        asset.bidAmount === null ? true : false
+                                      }
                                       onClick={() =>
                                         ApproveProduct(asset.index_id)
                                       }

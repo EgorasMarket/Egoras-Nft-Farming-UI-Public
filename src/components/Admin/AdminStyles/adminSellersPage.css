@@ -160,6 +160,11 @@ button.PlaceBidDiv_Button {
   margin: auto;
   font-size: 14px;
 }
+.approveProdButton_btn:disabled {
+  background: #446250;
+  color: #7d9887;
+  cursor: not-allowed;
+}
 .filter_table_area_1_search {
   position: relative;
   width: 45%;
