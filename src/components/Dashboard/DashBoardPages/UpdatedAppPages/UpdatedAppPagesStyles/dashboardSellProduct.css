@@ -7,6 +7,11 @@
   color: #fff;
   font-weight: 700;
 }
+.sell_container_body_cont1_submit_btn:disabled {
+  background: #425a4b;
+  cursor: not-allowed;
+  color: #83a992;
+}
 .sell_container_body {
   display: flex;
   flex-direction: column;

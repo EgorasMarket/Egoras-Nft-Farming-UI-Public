@@ -5,7 +5,7 @@
   width: 100vw;
   height: 100vh;
   background: #00000029;
-  z-index: 100;
+  z-index: 100000;
   display: flex;
   align-items: center;
   justify-content: center;

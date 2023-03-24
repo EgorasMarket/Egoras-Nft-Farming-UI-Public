@@ -1608,7 +1608,6 @@ const StakingUpdate = () => {
                     ) : null}
                     {SelectedDuration === "monthly" && lockAmount != "" ? (
                       <button
-                        // disabled={true}
                         disabled={Disable}
                         onClick={StakeMonthly}
                         className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
@@ -1621,10 +1620,15 @@ const StakingUpdate = () => {
                       </button>
                     ) : SelectedDuration === "yearly" && lockAmount != "" ? (
                       <button
+                        disabled={Disable}
                         onClick={StakeYearly}
                         className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
                       >
-                        Create Lock
+                        {isLoading ? (
+                          <ScaleLoader color="#24382b" size={10} height={20} />
+                        ) : (
+                          <>Create Lock</>
+                        )}
                       </button>
                     ) : lockAmount === "" ? (
                       <button
