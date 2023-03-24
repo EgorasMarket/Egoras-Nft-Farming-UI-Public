@@ -5,6 +5,8 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { ContentLoading } from "react-content-loading";
 // import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ScaleLoader from "react-spinners/ScaleLoader";
+
 export const Step2Div = ({
   checkMonthBox,
   toggleSteps,
@@ -20,10 +22,14 @@ export const Step2Div = ({
   monthAmount,
   AnnualAmount,
   Subscribe,
+  Subscribe2,
+  Subscribe3,
   unlockBtn,
   UnlockToken,
   props,
   account,
+  disable,
+  isLoading,
 }) => {
   return (
     <div className="selectPlanDiv">
@@ -339,49 +345,66 @@ export const Step2Div = ({
             {/* ======= */}
           </>
         )}
-        {checkedMonth == true && checkAgree === true ? (
+
+        {unlockBtn === false ? (
           <button
-            className="selectPlanDiv2_area1_checkout_btn"
-            onClick={Subscribe}
-            // disabled={fundDisable}
-          >
-            {/* {isLoading3 ? (
-              <span>
-                Processing{" "}
-                <FontAwesomeIcon className="ml-2" icon={faSpinner} spin />
-              </span>
-            ) : (
-              <span> Pay via flutterwave </span>
-            )} */}
-            Subscribe Monthly
-          </button>
-        ) : checkedYear === true && checkAgree === true ? (
-          <button
-            className="selectPlanDiv2_area1_checkout_btn"
-            onClick={Subscribe}
-            // disabled={fundDisable}
-          >
-            {/* {isLoading3 ? (
-              <span>
-                Processing{" "}
-                <FontAwesomeIcon className="ml-2" icon={faSpinner} spin />
-              </span>
-            ) : (
-              <span> Pay via flutterwave </span>
-            )} */}
-            Subscribe Yearly
-          </button>
-        ) : unlockBtn === false ? (
-          <button
+            disabled={disable}
             className="selectPlanDiv2_area1_checkout_btn"
             onClick={UnlockToken}
           >
-            <span> Unlock EGC </span>
+            {isLoading ? (
+              <ScaleLoader color="#24382b" size={10} height={20} />
+            ) : (
+              <span> Approve EGC </span>
+            )}
           </button>
         ) : (
-          <button className="selectPlanDiv2_area1_checkout_btn" disabled>
-            <span> Subscribe </span>
-          </button>
+          <>
+            {checkedMonth == true && checkAgree === true ? (
+              <button
+                disabled={disable}
+                className="selectPlanDiv2_area1_checkout_btn"
+                onClick={Subscribe}
+                // disabled={fundDisable}
+              >
+                {isLoading ? (
+                  <ScaleLoader color="#24382b" size={10} height={20} />
+                ) : (
+                  <span> Subscribe Monthly </span>
+                )}
+              </button>
+            ) : checkedYear === true && checkAgree === true ? (
+              <button
+                disabled={disable}
+                className="selectPlanDiv2_area1_checkout_btn"
+                onClick={Subscribe3}
+                // disabled={fundDisable}
+              >
+                {isLoading ? (
+                  <ScaleLoader color="#24382b" size={10} height={20} />
+                ) : (
+                  <span> Subscribe Yearly </span>
+                )}
+              </button>
+            ) : checkedSemiAnnual === true && checkAgree === true ? (
+              <button
+                disabled={disable}
+                className="selectPlanDiv2_area1_checkout_btn"
+                onClick={Subscribe2}
+                // disabled={fundDisable}
+              >
+                {isLoading ? (
+                  <ScaleLoader color="#24382b" size={10} height={20} />
+                ) : (
+                  <span> Subscribe Semi-Annual </span>
+                )}
+              </button>
+            ) : (
+              <button className="selectPlanDiv2_area1_checkout_btn" disabled>
+                <span> Select a plan </span>
+              </button>
+            )}
+          </>
         )}
       </div>
     </div>

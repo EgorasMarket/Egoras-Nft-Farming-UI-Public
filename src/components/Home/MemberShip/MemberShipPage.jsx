@@ -59,10 +59,6 @@ const MemberShipPage = () => {
   const [step1, setStep1] = useState(true);
   const [step2, setStep2] = useState(false);
   const [checkedMonth, setCheckedMonth] = useState(false);
-  const [successModal, setSuccessModal] = useState(false);
-  const [errorModal, setErrorModal] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
   const [checkedSemiAnnual, setcheckedSemiAnnual] = useState(false);
   const [userConnected, setUserConnected] = useState(false);
   const [checkedYear, setCheckedYear] = useState(false);
@@ -72,6 +68,12 @@ const MemberShipPage = () => {
   const [AnnualAmount, setAnnualAmount] = useState("0");
   const [unlockBtn, setUnlockBtn] = useState(true);
   const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
+  const [successModal, setSuccessModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [Disable, setDisable] = useState(false);
   const [text, setText] = useState(
     "Transacting with blockchain, please wait..."
   );
@@ -128,12 +130,16 @@ const MemberShipPage = () => {
   }, [account]);
 
   const UnlockToken = async (e) => {
+    setIsLoading(true);
+    setDisable(true);
     let ret = await unlockMemberShipEgcToken(
       parseEther("180000000000000000000000000000000000", "wei").toString(),
       library.getSigner()
     );
     console.log(ret);
     if (ret.status == true) {
+      setIsLoading(false);
+      setDisable(false);
       localStorage.setItem("unlocking", true);
       localStorage.setItem("unlockingHash", ret.message);
       setUnlockBtn(true);
@@ -144,6 +150,8 @@ const MemberShipPage = () => {
       console.log(ret);
       setErrorModal(true);
       setErrorMessage(ret.message.reason);
+      setIsLoading(false);
+      setDisable(false);
     }
   };
   // setInterval(() => {
@@ -182,22 +190,67 @@ const MemberShipPage = () => {
     [account, unLockCheckStatus]
   );
   const subscribe = async () => {
-    // if (unlockBtn == true) {
-    let ret = await monthlyPlanSubScribe(library.getSigner());
-    console.log(ret);
-    // }
+    setIsLoading(true);
+    setDisable(true);
+    let res = await monthlyPlanSubScribe(library.getSigner());
+    console.log(res);
+    if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage("You've successfully Subscribed for 1 month");
+    } else {
+      if (res.message.code == 4001) {
+        console.log(res);
+      }
+      console.log(res);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message.reason);
+    }
   };
   const subscribe2 = async () => {
-    // if (unlockBtn == true) {
-    let ret = await semiAnnuallyPlanSubScribe(library.getSigner());
-    console.log(ret);
-    // }
+    setIsLoading(true);
+    setDisable(true);
+    let res = await semiAnnuallyPlanSubScribe(library.getSigner());
+    console.log(res);
+    if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage("You've successfully Subscribed for 6 months");
+    } else {
+      if (res.message.code == 4001) {
+        console.log(res);
+      }
+      console.log(res);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message.reason);
+    }
   };
   const subscribe3 = async () => {
-    // if (unlockBtn == true) {
-    let ret = await annuallyPlanSubScribe(library.getSigner());
-    console.log(ret);
-    // }
+    setIsLoading(true);
+    setDisable(true);
+    let res = await annuallyPlanSubScribe(library.getSigner());
+    console.log(res);
+    if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage("You've successfully Subscribed for 1 year");
+    } else {
+      if (res.message.code == 4001) {
+        console.log(res);
+      }
+      console.log(res);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message.reason);
+    }
   };
   const CloseSuccessModal = () => {
     setSuccessModal(false);
@@ -239,10 +292,14 @@ const MemberShipPage = () => {
               semiAnnualAmount={semiAnnualAmount}
               monthAmount={monthAmount}
               AnnualAmount={AnnualAmount}
-              Subscribe={subscribe3}
+              Subscribe={subscribe}
+              Subscribe2={subscribe2}
+              Subscribe3={subscribe3}
               unlockBtn={unlockBtn}
               UnlockToken={UnlockToken}
               account={userConnected}
+              disable={Disable}
+              isLoading={isLoading}
             />
           </div>
         </div>
@@ -257,7 +314,7 @@ const MemberShipPage = () => {
         <UpdatedSuccessModal
           btnRoute={true}
           successMessage={successMessage}
-          route="/membership/sub"
+          route="/app"
         />
       ) : null}
     </section>

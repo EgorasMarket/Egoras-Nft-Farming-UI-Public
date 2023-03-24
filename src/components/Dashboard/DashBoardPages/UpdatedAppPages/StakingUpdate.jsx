@@ -1221,6 +1221,8 @@ const StakingUpdate = () => {
     }
   };
   const StakeYearly = async () => {
+    setIsLoading(true);
+    setDisable(true);
     const res = await annually(
       parseEther(lockAmount.toString(), "wei").toString(),
       library.getSigner()
@@ -1228,6 +1230,8 @@ const StakingUpdate = () => {
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
     if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Locked your egc for 1 year");
     } else {
@@ -1235,6 +1239,8 @@ const StakingUpdate = () => {
         console.log(res);
       }
       console.log(res);
+      setIsLoading(false);
+      setDisable(false);
       setErrorModal(true);
       setErrorMessage(res.message.reason);
     }

@@ -648,6 +648,10 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                 onClick={changeBg}
               >
                 Swap
+                <span class="Ping -top-1">
+                  <span class="c-flashingPart"></span>
+                  <span class="c-basePart"></span>
+                </span>
               </a>
               <a
                 id="sell"
@@ -658,6 +662,10 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                 onClick={changeBg}
               >
                 Sell
+                <span class="Ping -top-1">
+                  <span class="c-flashingPart"></span>
+                  <span class="c-basePart"></span>
+                </span>
               </a>
               <a
                 id="market"
