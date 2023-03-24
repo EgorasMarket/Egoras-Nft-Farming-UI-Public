@@ -401,21 +401,21 @@ const AdminSeeSellers = () => {
   };
 
   const BidForProduct = async () => {
-    const response = await CALL_ADMIN_PLACE_BID(bidAmount, account, indexId);
-    console.log(response.data.success);
+    console.log(indexId, bidAmount);
+    const res = await placeBid(
+      indexId,
+      parseEther(bidAmount.toString(), "wei").toString(),
+      library.getSigner()
+    );
+    console.log(res);
+    if (res.status == true) {
+      const response = await CALL_ADMIN_PLACE_BID(bidAmount, account, indexId);
+      console.log(response.data.success);
 
-    if (response.data.success == true) {
-      const res = await placeBid(
-        indexId,
-        parseEther(bidAmount.toString(), "wei").toString(),
-        library.getSigner()
-      );
-      console.log(res, "somto8uhhhg");
+      console.log(response.data, "somto8uhhhg");
     } else {
       console.log("Error occured in the backend");
     }
-
-    // console.log(indexId, parseEther(bidAmount.toString(), "wei").toString());
   };
 
   const ApproveProduct = async (id) => {
@@ -856,7 +856,7 @@ const AdminSeeSellers = () => {
                           Seller's Full name
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          John Doe
+                          {data.fullName}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -872,7 +872,7 @@ const AdminSeeSellers = () => {
                           Seller's Phone number
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          +234 8164020234
+                          {data.phoneNumber}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -880,7 +880,7 @@ const AdminSeeSellers = () => {
                           Seller's Residential Address
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          8b Lord emmanuel drive Port Harcourt Rivers State
+                          {data.userAddress}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">
@@ -900,24 +900,35 @@ const AdminSeeSellers = () => {
                     {/* ================ */}
                     <div className="saleDetailsDiv_area_1">
                       <div className="saleDetailsDiv_area_1_title">
-                        Bidding Action
+                        Bidding Actions
                       </div>
-                      <div className="saleDetailsDiv_area_1_div1">
-                        <div className="saleDetailsDiv_area_1_div1_title">
-                          Bidding Status
+                      {data.bidStatus == null ? (
+                        <div className="saleDetailsDiv_area_1_div1">
+                          <div className="saleDetailsDiv_area_1_div1_title">
+                            No bidding record for this product
+                          </div>
                         </div>
-                        <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.BiddingStatus}
-                        </div>
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1">
-                        <div className="saleDetailsDiv_area_1_div1_title">
-                          Bidding Amount
-                        </div>
-                        <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.BiddingAmount}
-                        </div>
-                      </div>
+                      ) : (
+                        <>
+                          <div className="saleDetailsDiv_area_1_div1">
+                            <div className="saleDetailsDiv_area_1_div1_title">
+                              Bidding Status
+                            </div>
+                            <div className="saleDetailsDiv_area_1_div1_body">
+                              {data.bidStatus}
+                            </div>
+                          </div>
+                          <div className="saleDetailsDiv_area_1_div1">
+                            <div className="saleDetailsDiv_area_1_div1_title">
+                              Bidding Amount
+                            </div>
+                            <div className="saleDetailsDiv_area_1_div1_body">
+                              {data.bidAmount}
+                            </div>
+                          </div>
+                        </>
+                      )}
+
                       <div className="PlaceBidDiv">
                         <Accordion>
                           <AccordionSummary
