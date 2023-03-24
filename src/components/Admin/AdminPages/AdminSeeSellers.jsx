@@ -424,6 +424,7 @@ const AdminSeeSellers = () => {
     const res = await approveProduct(id, library.getSigner());
     console.log(res, "somto8uhhhg");
     // console.log(res.status, "somto8uhhhg");
+    setSaleDetails("");
   };
 
   const classes = useStyles();
@@ -558,74 +559,148 @@ const AdminSeeSellers = () => {
                           .map((asset) => {
                             //   var percentage = (asset.funded / asset.amount) * 100;
                             return (
-                              <tr
-                                className="assets-category-row  transitionMe"
-                                id={asset.product_id}
-                                // onClick={ToggleSaleDetails}
-                                onClick={() => {
-                                  ToggleSaleDetails(
-                                    asset.product_id,
-                                    asset.index_id
-                                  );
-                                }}
-                              >
-                                <td className="assets-category-data branch_name_title">
-                                  <div className="assets-data">
-                                    <div className="assets-data-pool_name">
-                                      {asset.product_name}
-                                      <span className="poolName_txt">
-                                        {asset.createdAt}
-                                      </span>
+                              <>
+                                <tr className="assets-category-row  transitionMe">
+                                  <td
+                                    className="assets-category-data branch_name_title"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
+                                    <div className="assets-data">
+                                      <div className="assets-data-pool_name">
+                                        {asset.product_name}
+                                        <span className="poolName_txt">
+                                          {asset.createdAt}
+                                        </span>
+                                      </div>
                                     </div>
-                                  </div>
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {numberWithCommas(
-                                    parseInt(asset.user_amount).toFixed(0)
-                                  )}{" "}
-                                  Eusd
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {`${asset.user_wallet.slice(
-                                    0,
-                                    6
-                                  )}...${asset.user_wallet.slice(39, 42)}`}
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {asset.bidStatus}
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {asset.bidAmount} Eusd
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {asset.status}
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {/* {`${asset.txnHash.slice(
+                                  </td>
+                                  <td
+                                    className="assets-category-data1b stable-content branch_apy"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
+                                    {numberWithCommas(
+                                      parseInt(asset.user_amount).toFixed(0)
+                                    )}{" "}
+                                    Eusd
+                                  </td>
+                                  <td
+                                    className="assets-category-data1b stable-content branch_apy"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
+                                    {`${asset.user_wallet.slice(
+                                      0,
+                                      6
+                                    )}...${asset.user_wallet.slice(39, 42)}`}
+                                  </td>
+                                  <td
+                                    className="assets-category-data1b stable-content branch_apy"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
+                                    {asset.bidStatus}
+                                  </td>
+                                  <td
+                                    className="assets-category-data1b stable-content branch_apy"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
+                                    {asset.bidAmount} Eusd
+                                  </td>
+                                  <td
+                                    className="assets-category-data1b stable-content branch_apy"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
+                                    {asset.status}
+                                  </td>
+                                  <td
+                                    className="assets-category-data1b stable-content branch_apy"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
+                                    {/* {`${asset.txnHash.slice(
                                   0,
                                   6
                                 )}...${asset.txnHash.slice(63, 66)}`} */}
-                                  {"Coming soon"}
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  <div className="approveProdButton">
-                                    <button
-                                      className="approveProdButton_btn"
-                                      disabled={
-                                        asset.bidAmount === null ? true : false
-                                      }
-                                      onClick={() =>
-                                        ApproveProduct(asset.index_id)
-                                      }
-                                    >
-                                      Approve
-                                    </button>
-                                  </div>
-                                </td>
-                                <td className="assets-category-data-last branch_loan_action">
-                                  <ArrowForwardIosIcon />
-                                </td>
-                              </tr>
+                                    {"Coming soon"}
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    <div className="approveProdButton">
+                                      <button
+                                        className="approveProdButton_btn"
+                                        disabled={
+                                          asset.bidAmount === null
+                                            ? true
+                                            : false
+                                        }
+                                        onClick={() =>
+                                          ApproveProduct(asset.index_id)
+                                        }
+                                      >
+                                        Approve
+                                      </button>
+                                    </div>
+                                  </td>
+                                  <td
+                                    className="assets-category-data-last branch_loan_action"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
+                                    <ArrowForwardIosIcon />
+                                  </td>
+                                </tr>
+                              </>
                             );
                           })
                       : activeBtn === "All"

@@ -11,6 +11,7 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Nodata from "../nodataComponent/Nodata";
 import { config } from "../../../../actions/Config";
 import { parseEther, formatEther } from "@ethersproject/units";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import UpdatedSuccessModal from "./UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import UpdatedErrorModal from "./UpdatedSuccessErrorModals/UpdatedErrorModal";
 import Web3 from "web3";
@@ -126,6 +127,8 @@ const StakingUpdate = () => {
   const [activeTab, setActiveTab] = useState("lock");
   const [estimatedRewardAmnt, setEstimatedRewardAmnt] = useState(0);
   const [tokenBal, setTokenBal] = useState(0.0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [Disable, setDisable] = useState(false);
 
   var btc = [
     {
@@ -1193,6 +1196,8 @@ const StakingUpdate = () => {
     },
   ];
   const StakeMonthly = async () => {
+    setIsLoading(true);
+    setDisable(true);
     const res = await monthly(
       parseEther(lockAmount.toString(), "wei").toString(),
       library.getSigner()
@@ -1200,6 +1205,8 @@ const StakingUpdate = () => {
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
     if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Locked your egc for 1 month");
     } else {
@@ -1209,6 +1216,8 @@ const StakingUpdate = () => {
       console.log(res);
       setErrorModal(true);
       setErrorMessage(res.message.reason);
+      setIsLoading(false);
+      setDisable(false);
     }
   };
   const StakeYearly = async () => {
@@ -1599,17 +1608,27 @@ const StakingUpdate = () => {
                     ) : null}
                     {SelectedDuration === "monthly" && lockAmount != "" ? (
                       <button
+                        disabled={Disable}
                         onClick={StakeMonthly}
                         className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
                       >
-                        Create Lock
+                        {isLoading ? (
+                          <ScaleLoader color="#24382b" size={10} height={20} />
+                        ) : (
+                          <>Create Lock</>
+                        )}
                       </button>
                     ) : SelectedDuration === "yearly" && lockAmount != "" ? (
                       <button
+                        disabled={Disable}
                         onClick={StakeYearly}
                         className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
                       >
-                        Create Lock
+                        {isLoading ? (
+                          <ScaleLoader color="#24382b" size={10} height={20} />
+                        ) : (
+                          <>Create Lock</>
+                        )}
                       </button>
                     ) : lockAmount === "" ? (
                       <button
