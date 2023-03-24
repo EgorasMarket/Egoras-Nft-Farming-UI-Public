@@ -409,12 +409,9 @@ const AdminSeeSellers = () => {
     );
     console.log(res);
     if (res.status == true) {
-      const response = await CALL_ADMIN_PLACE_BID(bidAmount, account, indexId);
-      console.log(response.data.success);
-
-      console.log(response.data, "somto8uhhhg");
+      console.log("Success message");
     } else {
-      console.log("Error occured in the backend");
+      console.log("Error occured from Blockchain");
     }
   };
 

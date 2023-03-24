@@ -1,16 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import "./UpdatedAppPagesStyles/dashboardSellProduct.css";
 import { API_URL } from "../../../../actions/types";
-import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { Connect } from "react-redux";
 import ImageIcon from "@mui/icons-material/Image";
 import CloseIcon from "@mui/icons-material/Close";
 import { config } from "../../../../actions/Config";
-import ScaleLoader from "react-spinners/ScaleLoader";
 import { parseEther, formatEther } from "@ethersproject/units";
-import UpdatedSuccessModal from "./UpdatedSuccessErrorModals/UpdatedSuccessModal";
-import UpdatedErrorModal from "./UpdatedSuccessErrorModals/UpdatedErrorModal";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -43,6 +39,32 @@ import {
   unluckToken2,
   getEgcSmartContractBalnce,
 } from "../../../../web3/index";
+// import {
+//   lendUS,
+//   takeDividend,
+//   takeBackLoan,
+//   getTotalLended,
+//   getInvestorsDividend,
+//   userStats,
+//   system,
+//   burnAccumulatedDividend,
+//   checkAllowance,
+//   unluckToken,
+//   lend,
+//   getUserStats,
+//   transactReceipt,
+//   getPrice,
+//   getTickerInfo,
+//   tokenBalance,
+//   open,
+//   getLatestLoan,
+//   repay,
+//   topup,
+//   draw,
+//   checkAllowanceL,
+//   unluckToken2,
+//   getEgcSmartContractBalnce,
+// } from "../../web3/index";
 
 const DashBoardSellProduct = () => {
   const context = useWeb3React();
@@ -63,12 +85,6 @@ const DashBoardSellProduct = () => {
   const [imageSrc, setImageSrc] = useState("");
   const [imageSrc2, setImageSrc2] = useState("");
   const [imageSrc3, setImageSrc3] = useState("");
-  const [successModal, setSuccessModal] = useState(false);
-  const [errorModal, setErrorModal] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const [Disable, setDisable] = useState(false);
   const fileInputRef = useRef();
   const fileInputRef2 = useRef();
   const fileInputRef3 = useRef();
@@ -105,30 +121,6 @@ const DashBoardSellProduct = () => {
 
     reader.readAsDataURL(file);
   };
-  useEffect(() => {
-    if (
-      prodName == "" ||
-      brandName == "" ||
-      saleAmount == "" ||
-      prodCondition == "" ||
-      imageSrc == "" ||
-      imageSrc2 == "" ||
-      imageSrc3 == ""
-    ) {
-      setDisable(true);
-    } else {
-      setDisable(false);
-    }
-  }, [
-    prodName,
-    brandName,
-    saleAmount,
-    prodCondition,
-    imageSrc,
-    imageSrc2,
-    imageSrc3,
-  ]);
-
   const handleRemoveClick2 = () => {
     setImageSrc2("");
   };
@@ -145,11 +137,8 @@ const DashBoardSellProduct = () => {
   const handleRemoveClick3 = () => {
     setImageSrc3("");
   };
-  const sendProductToBlockchain = async () => {
-    setIsLoading(true);
-    setDisable(true);
-    const product_uuid = uuidv4();
-    const conCatProdName = ` ${prodName}_${product_uuid}`;
+  const sendProductToBlockchain = async (prodId) => {
+    const conCatProdName = ` ${prodName}_${prodId}`;
     const res = await listProduct(
       conCatProdName,
       parseEther(saleAmount.toString(), "wei").toString(),
@@ -158,16 +147,21 @@ const DashBoardSellProduct = () => {
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
 
-    if (res.status == true) {
-      UploadProduct(product_uuid);
-    } else {
-      setErrorModal(true);
-      setErrorMessage(res.message.reason);
-      setIsLoading(false);
-      setDisable(false);
-    }
+    // if (check.status == true) {
+    //   let ret = await lendUS(
+    //     txnhash,
+    //     parseEther(formData.BackAmount.toString(), "wei").toString(),
+    //     currentTarget,
+    //     library.getSigner()
+    //   );
+    //   console.log(ret.status);
+    //   if (ret.status == true) {
+    //   } else if (ret.status == false) {
+    //   }
+    // } else {
+    // }
   };
-  const UploadProduct = async (product_uuid) => {
+  const UploadProduct = async () => {
     const formData = new FormData();
 
     console.log(account);
@@ -186,7 +180,6 @@ const DashBoardSellProduct = () => {
     formData.append("product_condition", prodCondition);
     formData.append("userAddress", account);
     formData.append("amount", saleAmount);
-    formData.append("product_uuid", product_uuid);
     console.log(formData);
     try {
       const res = await axios.post(
@@ -196,17 +189,11 @@ const DashBoardSellProduct = () => {
       );
       console.log(res, "somto");
       if (res.status === 200) {
-        setIsLoading(false);
-        setDisable(false);
-        setSuccessModal(true);
-        setSuccessMessage("You've successfully Locked your egc for 1 month");
+        sendProductToBlockchain(res.data.data.product_id);
+        return;
       }
     } catch (err) {
       console.log(err);
-      setErrorModal(true);
-      setErrorMessage(err.message);
-      setIsLoading(false);
-      setDisable(false);
     }
   };
   const handleNameChange = (event) => {
@@ -229,12 +216,7 @@ const DashBoardSellProduct = () => {
     console.log(event.target.value);
     //console.log(event.target.value);
   };
-  const CloseSuccessModal = () => {
-    setSuccessModal(false);
-  };
-  const CloseErrorModal = () => {
-    setErrorModal(false);
-  };
+
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -481,44 +463,17 @@ const DashBoardSellProduct = () => {
               {/* ========================= */}
               {/* ========================= */}
               <div className="sell_container_body_cont1">
-                {!account ? (
-                  <button
-                    disabled={true}
-                    className="sell_container_body_cont1_submit_btn"
-                  >
-                    Connect Wallet
-                  </button>
-                ) : (
-                  <button
-                    disabled={Disable}
-                    className="sell_container_body_cont1_submit_btn"
-                    onClick={sendProductToBlockchain}
-                  >
-                    {isLoading ? (
-                      <ScaleLoader color="#24382b" size={10} height={20} />
-                    ) : (
-                      <> Upload Product</>
-                    )}
-                  </button>
-                )}
+                <button
+                  className="sell_container_body_cont1_submit_btn"
+                  onClick={UploadProduct}
+                >
+                  Upload Product
+                </button>
               </div>
             </div>
           </div>
         </div>
       </section>
-      {errorModal ? (
-        <UpdatedErrorModal
-          errorMessage={errorMessage}
-          closeModal={CloseErrorModal}
-        />
-      ) : null}
-      {successModal ? (
-        <UpdatedSuccessModal
-          btnRoute={true}
-          successMessage={successMessage}
-          route="/app/user/sales"
-        />
-      ) : null}
     </div>
   );
 };
