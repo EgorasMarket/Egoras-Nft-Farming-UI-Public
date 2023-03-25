@@ -1,10 +1,27 @@
+@font-face {
+  font-family: "Sofia Pro";
+  src: url("./css/SofiaPro/SofiaProRegular.woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Sofia Pro Bold";
+  src: url("./css/SofiaPro/SofiaProBold.woff");
+  font-weight: 800;
+  font-style: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
-  font-family: "Proxima Nova", sans-serif !important;
+  font-family: "Sofia Pro", sans-serif;
+
+  /* font-family: "Proxima Nova", sans-serif !important; */
   text-decoration: none !important;
 }
-
+body {
+  font-family: "Sofia Pro", sans-serif;
+}
 html {
   scroll-behavior: smooth;
   transition: 2s ease-in;
@@ -165,7 +182,7 @@ button:focus {
   margin: 0;
   padding: 0;
   /* font-family: "Mulish", sans-serif; */
-  font-family: "Proxima Nova", sans-serif !important;
+  /* font-family: "Proxima Nova", sans-serif !important; */
   text-decoration: none !important;
 }
 

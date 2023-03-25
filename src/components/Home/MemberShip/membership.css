@@ -688,17 +688,17 @@ video.video-poster {
   background: #0b110c;
   /* background-image: linear-gradient(221deg, black, #080c0a, #21382a); */
 }
-.how_it_works_section {
+/* .how_it_works_section {
   position: relative;
   padding: 6em 0em;
   background: #f1f1f1;
   color: rgb(0, 0, 0);
-}
-.dark .how_it_works_section {
+} */
+/* .dark .how_it_works_section {
   background: #1e1e1e;
   background-image: linear-gradient(227deg, black, #080c0a, #21382a);
   color: #fff;
-}
+} */
 .egorasVideoSection {
   position: relative;
   padding: 4em 0em;
@@ -931,10 +931,7 @@ px
   font-weight: 600;
   margin-bottom: 1em;
 }
-.how_it_works_area_body {
-  display: flex;
-  gap: 25px;
-}
+
 .benefits_section1 {
   position: relative;
   padding: 6em 0em;

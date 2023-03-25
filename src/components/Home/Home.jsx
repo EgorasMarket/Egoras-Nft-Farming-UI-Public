@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-
+import "./stars.css";
 // import React from "react";
 import { Link } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
@@ -7,6 +7,8 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
 import CasinoIcon from "@mui/icons-material/Casino";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+// import Marquee from "react-fast-marquee";
 import WhyPeopleTrustUs from "./WhyPeopleTrustUs/WhyPeopleTrustUs";
 import { parseEther, formatEther } from "@ethersproject/units";
 import axios from "axios";
@@ -440,6 +442,12 @@ const Home = () => {
   const tOTU1 = 2041224;
   // const tOTU2 = tOTU;
   console.log(totu, "amount from utututututu");
+  const Partners = [
+    { img: "/img/FeaturedInLogos/FeaturedInLogos_1.svg" },
+    { img: "/img/FeaturedInLogos/FeaturedInLogos_3.svg" },
+    { img: "/img/FeaturedInLogos/FeaturedInLogos_6.svg" },
+    { img: "/img/FeaturedInLogos/FeaturedInLogos_5.svg" },
+  ];
   return (
     <div>
       {/* =================================================================================================================================================================================================================================================================== */}
@@ -451,14 +459,13 @@ const Home = () => {
             <div className="nft-txt-area2 " style={{ width: "100%" }}>
               <div className="span-txts">
                 <p className="span4a-txts">
-                  The Power Behind
+                  Decentralized sustainable finance
                   <br />
-                  <span className="real_life">New Energy.</span>
+                  <span className="real_life">for all humanity.</span>
                 </p>
                 <p className="span4b-txts">
-                  Egoras develops software solutions for the tracking, tracing
-                  and trading of renewable energy. We believe in the
-                  democratisation of power, for a sustainable future.
+                  We are building a world powered by sustainable fuel, reducing
+                  greenhouse gas emissions, and trust for renewed technology.
                 </p>
               </div>
               <div className="stake-hero-btns">
@@ -505,7 +512,7 @@ const Home = () => {
                 </div>
                 <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers">
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head">
-                    Total Trading Volume
+                    Total TVL
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
                     $89,979,500,541
@@ -539,33 +546,46 @@ const Home = () => {
                 </div>
                 <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers">
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head">
-                    Total Trading Volume
+                    Total Users
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
-                    $89,979,500,541
+                    10.00k
+                  </div>
+                </div>
+              </div>
+              <div className="nft_area2_stat_div_area_cont1">
+                <div className="nft_area2_stat_div_area_cont1_icon_cont">
+                  <img
+                    src="/img/stat_img_icon.svg"
+                    alt=""
+                    className="nft_area2_stat_div_area_cont1_icon"
+                  />
+                </div>
+                <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers">
+                  <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head">
+                    Est APY
+                  </div>
+                  <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
+                    12%
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <img src="/img/hero_bg_bg.png" alt="" className="blurDrop-token2" />
-
+        <div className="stars_div">
+          <div id="stars"></div>
+          <div id="stars2"></div>
+          <div id="stars3"></div>
+        </div>
+        {/* <img src="/img/hero_bg_bg.png" alt="" className="blurDrop-token2" /> */}
         <img src="/img/hero_backdrop.png" alt="" className="hero_backdrop" />
       </section>
 
-      {/* third section end */}
-      {/* ========================== */}
-      {/* ========================== */}
-      {/* ========================== */}
-      {/* =================== */}
-      {/* =================== */}
-      {/* ========================== */}
-      {/* ========================== */}
       <section className="how_it_works_section">
         <div className="container">
           <div className="how_it_works_area">
-            <div className="how_it_works_area_head">How it works</div>
+            <div className="how_it_works_area_head">Defi + Sustainablity</div>
             <div className="how_it_works_area_para">
               Welcome to first open-source decentralized Egoras staking pool.
               The smart-contract service guarantees
@@ -579,15 +599,25 @@ const Home = () => {
                     className="how_it_works_area_body_area1_icon"
                   />
                 </div>
-                <div className="how_it_works_area_body_area1_title">
-                  Who are Validators?
-                </div>
+                <div className="how_it_works_area_body_area1_title">Swap</div>
                 <div className="how_it_works_area_body_area1_para">
-                  Egoras uses the Proof of Stake consensus maintained by
-                  validators, network participants who validate blocks and earn
-                  EGC while contributing to network security.
+                  The technology developed by EGCDAO enables the connection of
+                  diversified sources of crypto liquidity, thereby providing the
+                  most favorable rates and optimal returns for all. With EGCDAO,
+                  users can exchange tokens, earn yields, and create top-tier
+                  Decentralized Finance (DeFi) applications.
+                </div>
+                <div className="how_it_works_area_body_area1_link_div">
+                  <a href="" className="how_it_works_area_body_area1_link">
+                    Explore
+                    <ArrowOutwardIcon />
+                  </a>
                 </div>
               </div>
+              {/* ======== */}
+              {/* ======== */}
+              {/* ======== */}
+              {/* ======== */}
               <div className="how_it_works_area_body_area1">
                 <div className="how_it_works_area_body_area1_icon_div">
                   <img
@@ -596,16 +626,26 @@ const Home = () => {
                     className="how_it_works_area_body_area1_icon"
                   />
                 </div>
-                <div className="how_it_works_area_body_area1_title">
-                  Who are Validators?
-                </div>
+                <div className="how_it_works_area_body_area1_title">Swap</div>
                 <div className="how_it_works_area_body_area1_para">
-                  Egoras uses the Proof of Stake consensus maintained by
-                  validators, network participants who validate blocks and earn
-                  EGC while contributing to network security.
+                  The technology developed by EGCDAO enables the connection of
+                  diversified sources of crypto liquidity, thereby providing the
+                  most favorable rates and optimal returns for all. With EGCDAO,
+                  users can exchange tokens, earn yields, and create top-tier
+                  Decentralized Finance (DeFi) applications.
+                </div>
+                <div className="how_it_works_area_body_area1_link_div">
+                  <a href="" className="how_it_works_area_body_area1_link">
+                    Explore
+                    <ArrowOutwardIcon />
+                  </a>
                 </div>
               </div>
-              <div className="how_it_works_area_body_area1 how_it_works_area_body_area1_last">
+              {/* ======== */}
+              {/* ======== */}
+              {/* ======== */}
+              {/* ======== */}
+              <div className="how_it_works_area_body_area1">
                 <div className="how_it_works_area_body_area1_icon_div">
                   <img
                     src="/img/validate_image_dummy.png"
@@ -613,13 +653,46 @@ const Home = () => {
                     className="how_it_works_area_body_area1_icon"
                   />
                 </div>
-                <div className="how_it_works_area_body_area1_title">
-                  Who are Validators?
-                </div>
+                <div className="how_it_works_area_body_area1_title">Swap</div>
                 <div className="how_it_works_area_body_area1_para">
-                  Egoras uses the Proof of Stake consensus maintained by
-                  validators, network participants who validate blocks and earn
-                  EGC while contributing to network security.
+                  The technology developed by EGCDAO enables the connection of
+                  diversified sources of crypto liquidity, thereby providing the
+                  most favorable rates and optimal returns for all. With EGCDAO,
+                  users can exchange tokens, earn yields, and create top-tier
+                  Decentralized Finance (DeFi) applications.
+                </div>
+                <div className="how_it_works_area_body_area1_link_div">
+                  <a href="" className="how_it_works_area_body_area1_link">
+                    Explore
+                    <ArrowOutwardIcon />
+                  </a>
+                </div>
+              </div>
+              {/* ======== */}
+              {/* ======== */}
+              {/* ======== */}
+              {/* ======== */}
+              <div className="how_it_works_area_body_area1">
+                <div className="how_it_works_area_body_area1_icon_div">
+                  <img
+                    src="/img/validate_image_dummy.png"
+                    alt=""
+                    className="how_it_works_area_body_area1_icon"
+                  />
+                </div>
+                <div className="how_it_works_area_body_area1_title">Swap</div>
+                <div className="how_it_works_area_body_area1_para">
+                  The technology developed by EGCDAO enables the connection of
+                  diversified sources of crypto liquidity, thereby providing the
+                  most favorable rates and optimal returns for all. With EGCDAO,
+                  users can exchange tokens, earn yields, and create top-tier
+                  Decentralized Finance (DeFi) applications.
+                </div>
+                <div className="how_it_works_area_body_area1_link_div">
+                  <a href="" className="how_it_works_area_body_area1_link">
+                    Explore
+                    <ArrowOutwardIcon />
+                  </a>
                 </div>
               </div>
             </div>
@@ -631,236 +704,7 @@ const Home = () => {
       {/* ============== */}
       {/* ============== */}
       {/* ============== */}
-      <section className="how_it_works_section">
-        <div className="container">
-          <div className="what_we_offer_area">
-            <div className="how_it_works_area_head">
-              What’s possible with Egoras?
-            </div>
-            {/* ============== */}
-            {/* ============== */}
-            {/* ============== */}
-            {/* ============== */}
-            <div className="what_we_offer_area1">
-              <div className="what_we_offer_area1_cont1">
-                <div className="what_we_offer_area1_cont1_title">
-                  Staking on Egoras
-                </div>
-                <div className="what_we_offer_area1_cont1_para">
-                  Earn rewards by staking your eNGN to help secure the network.
-                  Choose your staking preference, start earning with a few
-                  clicks, and use your staked funds as voting power.
-                </div>
-                <button className="what_we_offer_area1_cont1_btn">
-                  Stake your eNGN now
-                </button>
-              </div>
-              <div className="what_we_offer_body_display_save_demo_app_card">
-                <div className="what_we_offer_body_display_save_demo_app_title">
-                  Estimate your reward.
-                </div>
-                <div className="what_we_offer_body_display_save_demo_app_card_area1">
-                  <div className="what_we_offer_body_display_save_demo_app_card_area1_cont1">
-                    You stake 10,000,000 eNGN
-                  </div>
-                  <div className="what_we_offer_body_display_save_demo_app_card_area1_range">
-                    <input
-                      type="range"
-                      name=""
-                      id=""
-                      className="what_we_offer_body_display_save_demo_app_card_area1_range_input"
-                    />
-                  </div>
-                  <div className="what_we_offer_body_display_save_demo_app_card_area1_max_min">
-                    <span>0</span> <span>200,000,000</span>
-                  </div>
-                </div>
-                <div className="what_we_offer_body_display_save_demo_app_card_area1">
-                  <div className="what_we_offer_body_display_save_demo_app_card_area1_cont1">
-                    Locking it for 365 days
-                  </div>
-                  <div className="what_we_offer_body_display_save_demo_app_card_area1_range">
-                    <input
-                      type="range"
-                      name=""
-                      id=""
-                      className="what_we_offer_body_display_save_demo_app_card_area1_range_input"
-                    />
-                  </div>
-                  <div className="what_we_offer_body_display_save_demo_app_card_area1_max_min">
-                    <span>min lock</span> <span>max lock</span>
-                  </div>
-                </div>
-                <div className="what_we_offer_body_display_save_demo_app_card_area2">
-                  <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1">
-                    <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1_head">
-                      Your estimated rewards
-                    </div>
-                    <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1_para">
-                      0 eNGN
-                    </div>
-                  </div>
-                  <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1">
-                    <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1_head">
-                      Current APR
-                    </div>
-                    <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1_para">
-                      0%
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* ============== */}
-            {/* ============== */}
-            {/* ============== */}
-            {/* ============== */}
-            <div className="what_we_offer_area1">
-              <div className="voting_on_egoras_dapp_sample_div">
-                <div className="voting_on_egoras_dapp_sample_div_cont1">
-                  <div className="voting_on_egoras_dapp_sample_div_cont1_head">
-                    Voting #5
-                  </div>
-                  <div className="voting_on_egoras_dapp_sample_div_cont1_para">
-                    Nupeng Limited
-                  </div>
-                </div>
-                <div className="voting_on_egoras_dapp_sample_div_cont1">
-                  <div className="voting_on_egoras_dapp_sample_div_cont1_head">
-                    Status
-                  </div>
-                  <div className="voting_on_egoras_dapp_sample_div_cont1_status">
-                    Pending
-                  </div>
-                </div>
-                <div className="voting_on_egoras_dapp_sample_div_cont1">
-                  <div className="voting_on_egoras_dapp_sample_div_cont1_head">
-                    Address
-                  </div>
-                  <div className="voting_on_egoras_dapp_sample_div_cont1_address">
-                    0x3dE79168402278C0DA2Bf9A209C3A91d755790FC
-                  </div>
-                </div>
-                <div className="voting_on_egoras_dapp_sample_div_cont1">
-                  <div className="voting_on_egoras_dapp_sample_div_cont1_head">
-                    Voting Duration{" "}
-                    <span className="voting_duration_span">
-                      28days:10hrs:20ms:00s
-                    </span>
-                  </div>
-                  <div className="voting_on_egoras_dapp_sample_div_cont1_progress_bar">
-                    <progress
-                      id="file"
-                      value="32"
-                      max="100"
-                      className="voting_progress_bar"
-                    >
-                      32%{" "}
-                    </progress>
-                  </div>
-                </div>
-                <div className="voting_on_egoras_dapp_sample_div_cont1_btn_vote_div">
-                  <button className="voting_on_egoras_dapp_sample_div_cont1_btn_vote">
-                    Vote
-                  </button>
-                </div>
-                <div className="voting_on_egoras_dapp_sample_div_cont1_btn_vote_details_div">
-                  <button className="voting_on_egoras_dapp_sample_div_cont1_btn_vote_details">
-                    Voting details
-                  </button>
-                </div>
-              </div>
-              <div className="what_we_offer_area1_cont2">
-                <div className="what_we_offer_area1_cont1_title">
-                  Voting on Egoras
-                </div>
-                <div className="what_we_offer_area1_cont1_para">
-                  Earn rewards by staking your eNGN to help secure the network.
-                  Choose your staking preference, start earning with a few
-                  clicks, and use your staked funds as voting power.
-                </div>
-                <button className="what_we_offer_area1_cont1_btn">
-                  Vote now
-                </button>
-              </div>
-            </div>
-            {/* ============== */}
-            {/* ============== */}
-            {/* ============== */}
-            {/* ============== */}
-            <div className="what_we_offer_area1">
-              <div className="what_we_offer_area1_cont1">
-                <div className="what_we_offer_area1_cont1_title">
-                  Earning on Egoras
-                </div>
-                <div className="what_we_offer_area1_cont1_para">
-                  Earn rewards by staking your eNGN to help secure the network.
-                  Choose your staking preference, start earning with a few
-                  clicks, and use your staked funds as voting power.
-                </div>
-                <button className="what_we_offer_area1_cont1_btn">
-                  Claim your earnings
-                </button>
-              </div>
-              <div className="what_we_offer_body_display_save_demo_app_card">
-                <div className="what_we_offer_body_display_save_demo_app_title">
-                  Estimate your reward.
-                </div>
-                <div className="what_we_offer_body_display_save_demo_app_card_area1">
-                  <div className="what_we_offer_body_display_save_demo_app_card_area1_cont1">
-                    You stake 10,000,000 eNGN
-                  </div>
-                  <div className="what_we_offer_body_display_save_demo_app_card_area1_range">
-                    <input
-                      type="range"
-                      name=""
-                      id=""
-                      className="what_we_offer_body_display_save_demo_app_card_area1_range_input"
-                    />
-                  </div>
-                  <div className="what_we_offer_body_display_save_demo_app_card_area1_max_min">
-                    <span>0</span> <span>200,000,000</span>
-                  </div>
-                </div>
-                <div className="what_we_offer_body_display_save_demo_app_card_area1">
-                  <div className="what_we_offer_body_display_save_demo_app_card_area1_cont1">
-                    Locking it for 365 days
-                  </div>
-                  <div className="what_we_offer_body_display_save_demo_app_card_area1_range">
-                    <input
-                      type="range"
-                      name=""
-                      id=""
-                      className="what_we_offer_body_display_save_demo_app_card_area1_range_input"
-                    />
-                  </div>
-                  <div className="what_we_offer_body_display_save_demo_app_card_area1_max_min">
-                    <span>min lock</span> <span>max lock</span>
-                  </div>
-                </div>
-                <div className="what_we_offer_body_display_save_demo_app_card_area2">
-                  <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1">
-                    <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1_head">
-                      Your estimated rewards
-                    </div>
-                    <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1_para">
-                      0 eNGN
-                    </div>
-                  </div>
-                  <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1">
-                    <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1_head">
-                      Current APR
-                    </div>
-                    <div className="what_we_offer_body_display_save_demo_app_card_area2_cont1_para">
-                      0%
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+
       {/* ============== */}
       {/* ============== */}
       {/* ============== */}
@@ -922,6 +766,19 @@ const Home = () => {
       {/* ============= */}
       {/* ============= */}
       {/* ============= */}
+      {/*       <div className="what_we_offer_area1_cont1">
+                <div className="what_we_offer_area1_cont1_title">
+                  Staking on Egoras
+                </div>
+                <div className="what_we_offer_area1_cont1_para">
+                  Earn rewards by staking your eNGN to help secure the network.
+                  Choose your staking preference, start earning with a few
+                  clicks, and use your staked funds as voting power.
+                </div>
+                <button className="what_we_offer_area1_cont1_btn">
+                  Stake your eNGN now
+                </button>
+              </div> */}
     </div>
   );
 };
