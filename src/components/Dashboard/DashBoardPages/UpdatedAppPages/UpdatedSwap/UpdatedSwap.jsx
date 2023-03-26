@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import SwapVerticalCircleIcon from "@mui/icons-material/SwapVerticalCircle";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
+
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import "./UpdatedSwap.css";
@@ -36,6 +37,7 @@ import {
   checkAllowanceSwap,
   unlockSwapToken,
 } from "../../../../../web3/index2";
+import { tokenBalance } from "../../../../../web3/index";
 import {
   AreaChart,
   Area,
@@ -95,6 +97,9 @@ const UpdatedSwap = () => {
   const [Disable, setDisable] = useState(false);
   const [unlockBtn, setUnlockBtn] = useState(true);
   const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
+  const [coinBalance, setCoinBalance] = useState("");
+  const [baseBalance, setBaseBalance] = useState("");
+  const [txHash, setTxHash] = useState("");
   // const [eus, setIsAmountLoading] = useState(false);
 
   const hour1Array = [
@@ -311,7 +316,6 @@ const UpdatedSwap = () => {
       address: "0x58f66d0183615797940360a43c333a44215830ba",
       name: "EGC USD",
       favorite: "true",
-      balance: 1000,
     },
   ];
   const assets = [
@@ -322,8 +326,15 @@ const UpdatedSwap = () => {
       address: "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       symbol: "BNB",
       favorite: "true",
-      balance: 0.02,
     },
+    // {
+    //   id: "2",
+    //   img: "/img/egc-icon.svg",
+    //   name: "Egoras Credit",
+    //   address: "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+    //   symbol: "EGC",
+    //   favorite: "false",
+    // },
   ];
   useEffect(() => {
     setBaseFromAddress(assetsBase[0].PriceAddress);
@@ -353,7 +364,58 @@ const UpdatedSwap = () => {
     setInitialBaseToAddress(baseToAddress);
     setInitialSwapToAddress(SwapToAddress);
   };
+  useEffect(
+    async (e) => {
+      if (account) {
+        let res = await tokenBalance(
+          assetsBase[0].address,
+          account,
+          library.getSigner()
+        );
+        console.log(res);
+        console.log(formatEther(res.message._hex));
+        setCoinBalance(parseFloat(formatEther(res.message._hex)).toFixed(2));
+      }
+    },
+    [account]
+  );
+  const BaseBalance = async (address) => {
+    if (account) {
+      let res = await tokenBalance(address, account, library.getSigner());
+      console.log(res);
+      console.log(formatEther(res.message._hex));
+      setBaseBalance(parseFloat(formatEther(res.message._hex)).toFixed(2));
+    }
+  };
+  const CoinBalance = async (address) => {
+    if (account) {
+      let res = await tokenBalance(address, account, library.getSigner());
+      console.log(res);
+      console.log(formatEther(res.message._hex));
+      setCoinBalance(parseFloat(formatEther(res.message._hex)).toFixed(2));
+    }
+  };
+  const web3 = new Web3(window.ethereum);
+  const BnbBalance1 = async () => {
+    const getBalance = await web3.eth.getBalance(account);
+    const ethBalance = web3.utils.fromWei(getBalance, "ether");
+    console.log(ethBalance);
+    setCoinBalance(parseFloat(ethBalance).toFixed(4));
+  };
+  const BnbBalance2 = async () => {
+    const getBalance = await web3.eth.getBalance(account);
+    const ethBalance = web3.utils.fromWei(getBalance, "ether");
+    console.log(ethBalance);
+    setBaseBalance(parseFloat(ethBalance).toFixed(4));
+  };
   const setAssetsId = (e) => {
+    if (e.currentTarget.id == "1") {
+      BnbBalance1();
+      console.log("BNB");
+    } else {
+      CoinBalance(e.currentTarget.name);
+    }
+
     setId(e.currentTarget.id);
     setIda(e.currentTarget.id);
     setIdTicker(e.currentTarget.id);
@@ -366,20 +428,31 @@ const UpdatedSwap = () => {
     console.log(e);
     console.log(e.currentTarget.id);
     console.log(e.currentTarget.name);
-    setBaseToAddress(e.currentTarget.name);
+    // setBaseToAddress(e.currentTarget.name);
     // setInitialBaseFromAddress(e.currentTarget.name);
     if (e.currentTarget.id == id2) {
+      // setBaseFromAddress(e.currentTarget.name);
+      // setSwapFromAddress(e.currentTarget.name);
       console.log("id is equal id2");
       setId2(initialId);
-      setInitialBaseToAddress(baseFromAddress);
-      setInitialSwapToAddress(SwapFromAddress);
+      setBaseToAddress(initialBaseFromAddress);
+      setSwapToAddress(initialSwapFromAddress);
+      // setInitialBaseToAddress(baseFromAddress);
+      // setInitialSwapToAddress(SwapFromAddress);
       setId2b(initialId);
       setIdBase(initialId);
       return;
     }
     setSwapBalance("");
   };
+
   const setAssetsId2 = (e) => {
+    if (e.currentTarget.id == "1") {
+      BnbBalance2();
+      console.log("BNB");
+    } else {
+      BaseBalance(e.currentTarget.name);
+    }
     setId2(e.currentTarget.id);
     setId2b(e.currentTarget.id);
     setIdBase(e.currentTarget.id);
@@ -393,8 +466,10 @@ const UpdatedSwap = () => {
     if (e.currentTarget.id == id) {
       console.log("id is equal id2");
       setId(initialId2);
-      setInitialBaseFromAddress(baseToAddress);
-      setInitialSwapFromAddress(SwapToAddress);
+      setBaseFromAddress(initialBaseToAddress);
+      setSwapFromAddress(initialSwapToAddress);
+      // setInitialBaseFromAddress(baseToAddress);
+      // setInitialSwapFromAddress(SwapToAddress);
       setIda(initialId2);
       setIdTicker(initialId2);
       return;
@@ -413,6 +488,8 @@ const UpdatedSwap = () => {
     console.log(baseFromAddress, baseToAddress);
     console.log(SwapFromAddress, SwapToAddress);
     setSwapAmount("");
+    setCoinBalance(baseBalance);
+    setBaseBalance(coinBalance);
   };
   const ToggleSwapPrices = () => {
     setIda(id2b);
@@ -423,18 +500,83 @@ const UpdatedSwap = () => {
     setIdTicker(idBase);
   };
 
-  const add25Per = (balance) => {
+  const add25Per = async (balance) => {
+    setIsAmountLoading(true);
     setSwapAmount(balance * 0.25);
+    const response = await getAmountsOut(
+      parseEther((balance * 0.25).toString(), "wei").toString(),
+      [baseFromAddress, baseToAddress],
+      library.getSigner()
+    );
+    console.log(response);
+    if (response.status == true) {
+      setIsAmountLoading(false);
+      setAmountsOut(formatEther(response.message[1]._hex));
+      setMinAmountsOut(formatEther(response.message[1]._hex) * (1 - 0.005));
+      console.log(formatEther(response.message[1]._hex));
+    } else {
+      setIsAmountLoading(false);
+      console.log(response);
+    }
     // setSwapBaseAmount(SwapAmount * 4);
   };
-  const add50Per = (balance) => {
+  const add50Per = async (balance) => {
+    // setSwapAmount(balance * 0.5);
+    setIsAmountLoading(true);
     setSwapAmount(balance * 0.5);
+    const response = await getAmountsOut(
+      parseEther((balance * 0.5).toString(), "wei").toString(),
+      [baseFromAddress, baseToAddress],
+      library.getSigner()
+    );
+    console.log(response);
+    if (response.status == true) {
+      setIsAmountLoading(false);
+      setAmountsOut(formatEther(response.message[1]._hex));
+      setMinAmountsOut(formatEther(response.message[1]._hex) * (1 - 0.005));
+      console.log(formatEther(response.message[1]._hex));
+    } else {
+      setIsAmountLoading(false);
+      console.log(response);
+    }
   };
-  const add75Per = (balance) => {
+  const add75Per = async (balance) => {
+    setIsAmountLoading(true);
     setSwapAmount(balance * 0.75);
+    const response = await getAmountsOut(
+      parseEther((balance * 0.75).toString(), "wei").toString(),
+      [baseFromAddress, baseToAddress],
+      library.getSigner()
+    );
+    console.log(response);
+    if (response.status == true) {
+      setIsAmountLoading(false);
+      setAmountsOut(formatEther(response.message[1]._hex));
+      setMinAmountsOut(formatEther(response.message[1]._hex) * (1 - 0.005));
+      console.log(formatEther(response.message[1]._hex));
+    } else {
+      setIsAmountLoading(false);
+      console.log(response);
+    }
   };
-  const add100Per = (balance) => {
+  const add100Per = async (balance) => {
+    setIsAmountLoading(true);
     setSwapAmount(balance * 1);
+    const response = await getAmountsOut(
+      parseEther((balance * 1).toString(), "wei").toString(),
+      [baseFromAddress, baseToAddress],
+      library.getSigner()
+    );
+    console.log(response);
+    if (response.status == true) {
+      setIsAmountLoading(false);
+      setAmountsOut(formatEther(response.message[1]._hex));
+      setMinAmountsOut(formatEther(response.message[1]._hex) * (1 - 0.005));
+      console.log(formatEther(response.message[1]._hex));
+    } else {
+      setIsAmountLoading(false);
+      console.log(response);
+    }
   };
   // ================================
   // ================================
@@ -613,6 +755,7 @@ const UpdatedSwap = () => {
     async (e) => {
       if (account) {
         let check = await checkAllowanceSwap(
+          SwapFromAddress,
           account,
           parseEther(SwapAmount.toString(), "wei").toString(),
           library.getSigner()
@@ -623,7 +766,7 @@ const UpdatedSwap = () => {
       }
     },
 
-    [account, unLockCheckStatus]
+    [account, unLockCheckStatus, SwapAmount, SwapFromAddress]
   );
 
   const SwapEusdForBnb = async () => {
@@ -641,6 +784,7 @@ const UpdatedSwap = () => {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
+      setTxHash(response.message.hash);
       setSuccessMessage(
         "You've successfully swapped " +
           SwapAmount +
@@ -674,6 +818,7 @@ const UpdatedSwap = () => {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
+      setTxHash(response.message.hash);
       setSuccessMessage(
         "You've successfully swapped " +
           SwapAmount +
@@ -736,6 +881,7 @@ const UpdatedSwap = () => {
   const CloseErrorModal = () => {
     setErrorModal(false);
   };
+
   return (
     <div className="other2">
       <section className=" no-bg no_paddd">
@@ -805,7 +951,7 @@ const UpdatedSwap = () => {
                             {id == "" ? (
                               <div className="Swap_icondropDownDiv">
                                 <span className="token_balances_span">
-                                  Balance:0.00
+                                  Balance:{coinBalance}
                                 </span>
 
                                 <button
@@ -829,7 +975,7 @@ const UpdatedSwap = () => {
                                               // data-index={data.address}
                                             >
                                               <span className="token_balances_span">
-                                                Balance:{data.balance}
+                                                Balance:{coinBalance}
                                               </span>
 
                                               <button className="display_tokens_drop">
@@ -855,7 +1001,7 @@ const UpdatedSwap = () => {
                                           {data.id == id ? (
                                             <div className="Swap_icondropDownDiv">
                                               <span className="token_balances_span">
-                                                Balance:{data.balance}
+                                                Balance:{coinBalance}
                                               </span>
 
                                               <button
@@ -908,7 +1054,7 @@ const UpdatedSwap = () => {
                                             <button
                                               className="amnt_input_layer2_cont1"
                                               onClick={() =>
-                                                add25Per(data.balance)
+                                                add25Per(coinBalance)
                                               }
                                             >
                                               25%
@@ -916,7 +1062,7 @@ const UpdatedSwap = () => {
                                             <button
                                               className="amnt_input_layer2_cont1"
                                               onClick={() =>
-                                                add50Per(data.balance)
+                                                add50Per(coinBalance)
                                               }
                                             >
                                               50%
@@ -924,7 +1070,7 @@ const UpdatedSwap = () => {
                                             <button
                                               className="amnt_input_layer2_cont1"
                                               onClick={() =>
-                                                add75Per(data.balance)
+                                                add75Per(coinBalance)
                                               }
                                             >
                                               75%
@@ -932,7 +1078,7 @@ const UpdatedSwap = () => {
                                             <button
                                               className="amnt_input_layer2_cont1_last"
                                               onClick={() =>
-                                                add100Per(data.balance)
+                                                add100Per(coinBalance)
                                               }
                                             >
                                               100%
@@ -954,7 +1100,7 @@ const UpdatedSwap = () => {
                                             <button
                                               className="amnt_input_layer2_cont1"
                                               onClick={() =>
-                                                add25Per(data.balance)
+                                                add25Per(coinBalance)
                                               }
                                             >
                                               25%
@@ -962,7 +1108,7 @@ const UpdatedSwap = () => {
                                             <button
                                               className="amnt_input_layer2_cont1"
                                               onClick={() =>
-                                                add50Per(data.balance)
+                                                add50Per(coinBalance)
                                               }
                                             >
                                               50%
@@ -970,7 +1116,7 @@ const UpdatedSwap = () => {
                                             <button
                                               className="amnt_input_layer2_cont1"
                                               onClick={() =>
-                                                add75Per(data.balance)
+                                                add75Per(coinBalance)
                                               }
                                             >
                                               75%
@@ -978,7 +1124,7 @@ const UpdatedSwap = () => {
                                             <button
                                               className="amnt_input_layer2_cont1_last"
                                               onClick={() =>
-                                                add100Per(data.balance)
+                                                add100Per(coinBalance)
                                               }
                                             >
                                               100%
@@ -996,10 +1142,14 @@ const UpdatedSwap = () => {
                       </div>
 
                       {/* <div className="plus_icon_layer"> */}
-                      <SwapVertIcon
-                        className="toggle_swap_inputs"
-                        onClick={ToggleSwapInputs}
-                      />
+                      {coinBalance == "" || baseBalance == "" ? (
+                        <SwapVertIcon className="toggle_swap_inputs" />
+                      ) : (
+                        <SwapVertIcon
+                          className="toggle_swap_inputs"
+                          onClick={ToggleSwapInputs}
+                        />
+                      )}
 
                       <div className="input_amnt_layer">
                         <div className="amnt_input">
@@ -1049,7 +1199,7 @@ const UpdatedSwap = () => {
                             {id2 == "" ? (
                               <div className="Swap_icondropDownDiv">
                                 <span className="token_balances_span">
-                                  Balance:0.00
+                                  Balance:{baseBalance}
                                 </span>
 
                                 <button
@@ -1071,7 +1221,7 @@ const UpdatedSwap = () => {
                                           {data.id == id2 ? (
                                             <div className="Swap_icondropDownDiv">
                                               <span className="token_balances_span">
-                                                Balance:{data.balance}
+                                                Balance:{baseBalance}
                                               </span>
 
                                               <button className="display_tokens_drop">
@@ -1098,7 +1248,7 @@ const UpdatedSwap = () => {
                                           {data.id == id2 ? (
                                             <div className="Swap_icondropDownDiv">
                                               <span className="token_balances_span">
-                                                Balance:{data.balance}
+                                                Balance:{baseBalance}
                                               </span>
 
                                               <button
@@ -1123,26 +1273,12 @@ const UpdatedSwap = () => {
                               </>
                             )}
                           </div>
-                          {/* <div className="amnt_input_layer2">
-                          <button className="amnt_input_layer2_cont1">
-                            25%
-                          </button>
-                          <button className="amnt_input_layer2_cont1">
-                            50%
-                          </button>
-                          <button className="amnt_input_layer2_cont1">
-                            75%
-                          </button>
-                          <button className="amnt_input_layer2_cont1_last">
-                            100%
-                          </button>
-                        </div> */}
                         </div>
                       </div>
 
                       {/* </div> */}
                     </div>
-                    <div className="swap_price_rate_div">
+                    {/* <div className="swap_price_rate_div">
                       {ida == "" ? (
                         <div className="swap_price_rate_div1">Nil</div>
                       ) : (
@@ -1222,7 +1358,7 @@ const UpdatedSwap = () => {
                         className="swap_price_rate_div_swap_icon"
                         onClick={ToggleSwapPrices}
                       />
-                    </div>
+                    </div> */}
                     <div className="swap_price_slippage_div">
                       <div className="swap_price_slippage_div1">
                         Max Slippage{" "}
@@ -1243,7 +1379,7 @@ const UpdatedSwap = () => {
                             class="updatedSwapSwapBtn"
                             disabled
                           >
-                            Swap
+                            Select a token
                           </button>
                         ) : (
                           <>
@@ -1253,22 +1389,43 @@ const UpdatedSwap = () => {
                                   return (
                                     <>
                                       {data.id == id ? (
-                                        <button
-                                          id="generate"
-                                          disabled={Disable}
-                                          onClick={SwapEusdForBnb}
-                                          class="updatedSwapSwapBtn"
-                                        >
-                                          {isLoading ? (
-                                            <ScaleLoader
-                                              color="#24382b"
-                                              size={10}
-                                              height={20}
-                                            />
+                                        <>
+                                          {unlockBtn === false ? (
+                                            <button
+                                              id="generate"
+                                              disabled={Disable}
+                                              onClick={UnlockToken}
+                                              class="updatedSwapSwapBtn"
+                                            >
+                                              {isLoading ? (
+                                                <ScaleLoader
+                                                  color="#24382b"
+                                                  size={10}
+                                                  height={20}
+                                                />
+                                              ) : (
+                                                <> Approve {data.symbol}</>
+                                              )}
+                                            </button>
                                           ) : (
-                                            <> Swap {data.symbol}</>
+                                            <button
+                                              id="generate"
+                                              disabled={Disable}
+                                              onClick={SwapEusdForBnb}
+                                              class="updatedSwapSwapBtn"
+                                            >
+                                              {isLoading ? (
+                                                <ScaleLoader
+                                                  color="#24382b"
+                                                  size={10}
+                                                  height={20}
+                                                />
+                                              ) : (
+                                                <> Swap {data.symbol}</>
+                                              )}
+                                            </button>
                                           )}
-                                        </button>
+                                        </>
                                       ) : null}
                                     </>
                                   );
@@ -1280,22 +1437,34 @@ const UpdatedSwap = () => {
                                   return (
                                     <>
                                       {data.id == id ? (
-                                        <button
-                                          id="generate"
-                                          disabled={Disable}
-                                          onClick={SwapbnbForEusd}
-                                          class="updatedSwapSwapBtn"
-                                        >
-                                          {isLoading ? (
-                                            <ScaleLoader
-                                              color="#24382b"
-                                              size={10}
-                                              height={20}
-                                            />
+                                        <>
+                                          {SwapAmount > coinBalance ? (
+                                            <button
+                                              id="generate"
+                                              class="updatedSwapSwapBtn"
+                                              disabled
+                                            >
+                                              Insufficient balance
+                                            </button>
                                           ) : (
-                                            <> Swap {data.symbol}</>
+                                            <button
+                                              id="generate"
+                                              disabled={Disable}
+                                              onClick={SwapbnbForEusd}
+                                              class="updatedSwapSwapBtn"
+                                            >
+                                              {isLoading ? (
+                                                <ScaleLoader
+                                                  color="#24382b"
+                                                  size={10}
+                                                  height={20}
+                                                />
+                                              ) : (
+                                                <> Swap {data.symbol}</>
+                                              )}
+                                            </button>
                                           )}
-                                        </button>
+                                        </>
                                       ) : null}
                                     </>
                                   );
@@ -1307,22 +1476,43 @@ const UpdatedSwap = () => {
                                   return (
                                     <>
                                       {data.id == id ? (
-                                        <button
-                                          id="generate"
-                                          disabled={Disable}
-                                          onClick={UnlockToken}
-                                          class="updatedSwapSwapBtn"
-                                        >
-                                          {isLoading ? (
-                                            <ScaleLoader
-                                              color="#24382b"
-                                              size={10}
-                                              height={20}
-                                            />
+                                        <>
+                                          {unlockBtn === false ? (
+                                            <button
+                                              id="generate"
+                                              disabled={Disable}
+                                              onClick={UnlockToken}
+                                              class="updatedSwapSwapBtn"
+                                            >
+                                              {isLoading ? (
+                                                <ScaleLoader
+                                                  color="#24382b"
+                                                  size={10}
+                                                  height={20}
+                                                />
+                                              ) : (
+                                                <> Approve {data.symbol}</>
+                                              )}
+                                            </button>
                                           ) : (
-                                            <> Approve {data.symbol}</>
+                                            <button
+                                              id="generate"
+                                              disabled={Disable}
+                                              onClick={SwapEusdForBnb}
+                                              class="updatedSwapSwapBtn"
+                                            >
+                                              {isLoading ? (
+                                                <ScaleLoader
+                                                  color="#24382b"
+                                                  size={10}
+                                                  height={20}
+                                                />
+                                              ) : (
+                                                <> Swap {data.symbol}</>
+                                              )}
+                                            </button>
                                           )}
-                                        </button>
+                                        </>
                                       ) : null}
                                     </>
                                   );
@@ -1401,6 +1591,88 @@ const UpdatedSwap = () => {
                           </div>
                           <div className="moreSwapInfoDiv_div2_area1_cont2">
                             $0.005
+                          </div>
+                        </div>
+                        <div className="moreSwapInfoDiv_div2_area1">
+                          <div className="moreSwapInfoDiv_div2_area1_cont1">
+                            Route
+                          </div>
+                          <div className="moreSwapInfoDiv_div2_area1_cont2">
+                            {id == "" ? (
+                              <div className="swap_price_rate_div1">Nil</div>
+                            ) : (
+                              <>
+                                {id == "0" ? (
+                                  <>
+                                    {assetsBase.map((data) => {
+                                      // setSwapBalance(data.balance);
+                                      return (
+                                        <>
+                                          {data.id == id ? (
+                                            <div className="swap_price_rate_div1">
+                                              {data.symbol}
+                                            </div>
+                                          ) : null}
+                                        </>
+                                      );
+                                    })}
+                                  </>
+                                ) : (
+                                  <>
+                                    {assets.map((data) => {
+                                      // setSwapBalance(data.balance);
+                                      return (
+                                        <>
+                                          {data.id == id ? (
+                                            <div className="swap_price_rate_div1">
+                                              {data.symbol}
+                                            </div>
+                                          ) : null}
+                                        </>
+                                      );
+                                    })}
+                                  </>
+                                )}
+                              </>
+                            )}
+                            {">"}
+                            {id2 == "" ? (
+                              <div className="swap_price_rate_div1">Nil</div>
+                            ) : (
+                              <>
+                                {id2 == "0" ? (
+                                  <>
+                                    {assetsBase.map((data) => {
+                                      // setSwapBalance(data.balance);
+                                      return (
+                                        <>
+                                          {data.id == id2 ? (
+                                            <div className="swap_price_rate_div2">
+                                              {data.symbol}
+                                            </div>
+                                          ) : null}
+                                        </>
+                                      );
+                                    })}
+                                  </>
+                                ) : (
+                                  <>
+                                    {assets.map((data) => {
+                                      // setSwapBalance(data.balance);
+                                      return (
+                                        <>
+                                          {data.id == id2 ? (
+                                            <div className="swap_price_rate_div2">
+                                              {data.symbol}
+                                            </div>
+                                          ) : null}
+                                        </>
+                                      );
+                                    })}
+                                  </>
+                                )}
+                              </>
+                            )}
                           </div>
                         </div>
                         {/* <div className="moreSwapInfoDiv_div2_area1">
@@ -1988,6 +2260,7 @@ const UpdatedSwap = () => {
           setAsset={setAssetsId}
           tokenModal={tokenModal}
           assetId={id}
+          account={account}
         />
       ) : null}
       {tokenModal2 ? (
@@ -1997,6 +2270,7 @@ const UpdatedSwap = () => {
           tokenModal2={tokenModal2}
           setAsset2={setAssetsId2}
           assetId={id2}
+          account={account}
         />
       ) : null}
       {shareSwap ? (
@@ -2066,6 +2340,8 @@ const UpdatedSwap = () => {
           btnRoute={true}
           successMessage={successMessage}
           route="/app/swap"
+          txnHashDiv={true}
+          TxnHash={txHash}
         />
       ) : null}
     </div>

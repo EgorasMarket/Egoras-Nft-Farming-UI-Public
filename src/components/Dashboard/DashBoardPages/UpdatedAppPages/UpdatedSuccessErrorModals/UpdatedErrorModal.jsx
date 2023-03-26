@@ -12,7 +12,7 @@ const UpdatedErrorModal = ({ errorMessage, closeModal }) => {
             className="UpdatedSuccessModalDiv_Cont_img"
           />
         </div>
-        <div className="UpdatedSuccessModalDiv_Cont_title">Oops!</div>
+        <div className="UpdatedSuccessModalDiv_Cont_title">Error!</div>
         <div className="UpdatedSuccessModalDiv_Cont_body">{errorMessage}</div>
         <div className="UpdatedSuccessModalDiv_Cont_buttons">
           <button

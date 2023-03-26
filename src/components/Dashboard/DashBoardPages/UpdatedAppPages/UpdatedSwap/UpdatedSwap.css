@@ -154,6 +154,8 @@
 }
 .moreSwapInfoDiv_div2_area1_cont2 {
   color: #fff;
+  display: flex;
+  align-items: center;
 }
 .tradeViewAreaCont {
   width: 100%;

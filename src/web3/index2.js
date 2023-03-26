@@ -213,12 +213,9 @@ const adminAddMinter = async (account, signer) => {
     };
   }
 };
-const checkAllowanceSwap = async (owner, amount, signer) => {
+const checkAllowanceSwap = async (coinAddress, owner, amount, signer) => {
   try {
-    const instance = erc20Instance(
-      "0x58f66d0183615797940360a43c333a44215830ba",
-      signer
-    );
+    const instance = erc20Instance(coinAddress, signer);
     let result = await instance.allowance(owner, V3ContractAddress.address);
 
     if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {

@@ -12,7 +12,24 @@ export const UpdatedTokenModal = ({
   toggleTokenModal2,
   assetId,
   assetId2,
+  account,
 }) => {
+  // useEffect(
+  //   async (e) => {
+  //     if (account) {
+  //       let res = await tokenBalance(
+  //         assetsBase[0].address,
+  //         account,
+  //         library.getSigner()
+  //       );
+  //       console.log(res);
+  //       console.log(formatEther(res.message._hex));
+  //       setCoinBalance(formatEther(res.message._hex));
+  //     }
+  //   },
+  //   [account]
+  // );
+
   return (
     <div className="updatedTokenModal">
       <div
@@ -58,6 +75,7 @@ export const UpdatedTokenModal = ({
                 <button
                   id={data.id}
                   className="updatedFavoriteToken_cont"
+                  name={data.address}
                   disabled={data.id == assetId ? true : false}
                   onClick={
                     tokenModal2 == true
@@ -113,7 +131,7 @@ export const UpdatedTokenModal = ({
                   </div>
                 </div>
                 <div className="updatedTokenModal_area_body_area1_cont2">
-                  {data.balance}
+                  {/* {TokenBalance} */}
                 </div>
               </button>
             ))}
