@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SwapRouterAddress } from "../../../../web3/index2";
+import { SwapRouterAddress, adminAddMinter } from "../../../../web3/index2";
 import "./AdminRouter.css";
 import Web3 from "web3";
 import { parseEther, formatEther } from "@ethersproject/units";
@@ -31,6 +31,13 @@ const SetRouter = () => {
     const response = await SwapRouterAddress(
       CakeRouterAddress,
       BusdRouterAddress,
+      library.getSigner()
+    );
+    console.log(response);
+  };
+  const addMinter = async () => {
+    const response = await adminAddMinter(
+      "0x78192d41fdCA05Fd1a4EBc329734F6b64D3616a1",
       library.getSigner()
     );
     console.log(response);
@@ -71,6 +78,11 @@ const SetRouter = () => {
                 Set router
               </button>
             </div>
+          </div>
+          <div className="setRouterAddressButtonDiv">
+            <button onClick={addMinter} className="setRouterAddressBtn">
+              Add Minter
+            </button>
           </div>
         </div>
       </section>

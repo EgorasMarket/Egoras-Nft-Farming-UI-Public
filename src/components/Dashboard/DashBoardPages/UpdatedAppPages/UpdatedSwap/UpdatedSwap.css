@@ -26,9 +26,15 @@
 .amnt_input_layer1_input_div {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .amnt_input_layer1 {
   display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.amount_loading_div {
+  width: 100%;
 }
 .amnt_input_layer2 {
   display: flex;
@@ -93,7 +99,7 @@
 .swap_price_rate_div {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   background: #152016;
   color: #adbfaf;
   font-size: 12px;
@@ -528,4 +534,37 @@ input:checked + .ToggleChartDiv_checkBox_slider::before {
 .ToggleChartDiv_checkBox_slider.adjustFlex {
   justify-content: flex-end;
   color: #88a28b;
+}
+.swap_price_slippage_div {
+  display: flex;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  /* background: #152016; */
+  color: #adbfaf;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 9px;
+  border: solid 2px #324a34;
+}
+.swap_price_slippage_div1 {
+  display: flex;
+  align-items: center;
+  margin-right: 5px;
+}
+.swap_price_slippage_info_icon {
+  font-size: 12px !important;
+  margin: 0px 1px;
+  cursor: pointer;
+}
+.swap_price_slippage_div2 {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #fff;
+  cursor: pointer;
+}
+.swap_price_slippage_div2_icon {
+  /* background: grey; */
+  width: 18px !important;
 }
