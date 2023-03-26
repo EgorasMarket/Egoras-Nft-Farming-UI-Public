@@ -17,8 +17,10 @@ import CloseIcon from "@mui/icons-material/Close";
 import moment from "moment/moment";
 import Web3 from "web3";
 import PulseLoader from "react-spinners/PulseLoader";
-
+import UpdatedSuccessModal from "../UpdatedSuccessErrorModals/UpdatedSuccessModal";
+import UpdatedErrorModal from "../UpdatedSuccessErrorModals/UpdatedErrorModal";
 import { parseEther, formatEther } from "@ethersproject/units";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import { BigNumber } from "@ethersproject/bignumber";
 import {
   Web3ReactProvider,
@@ -85,6 +87,14 @@ const UpdatedSwap = () => {
   const [initialBaseToAddress, setInitialBaseToAddress] = useState("");
   const [initialSwapFromAddress, setInitialSwapFromAddress] = useState("");
   const [initialSwapToAddress, setInitialSwapToAddress] = useState("");
+  const [successModal, setSuccessModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [Disable, setDisable] = useState(false);
+  const [unlockBtn, setUnlockBtn] = useState(true);
+  const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
   // const [eus, setIsAmountLoading] = useState(false);
 
   const hour1Array = [
@@ -575,29 +585,29 @@ const UpdatedSwap = () => {
   //   }
   // }, []);
   const UnlockToken = async (e) => {
-    // setIsLoading(true);
-    // setDisable(true);
+    setIsLoading(true);
+    setDisable(true);
     let ret = await unlockSwapToken(
       parseEther("180000000000000000000000000000000000", "wei").toString(),
       library.getSigner()
     );
     console.log(ret);
-    // if (ret.status == true) {
-    //   setIsLoading(false);
-    //   setDisable(false);
-    //   localStorage.setItem("unlocking", true);
-    //   localStorage.setItem("unlockingHash", ret.message);
-    //   setUnlockBtn(true);
-    // } else {
-    //   if (ret.message.code == 4001) {
-    //     console.log(ret);
-    //   }
-    //   console.log(ret);
-    //   setErrorModal(true);
-    //   setErrorMessage(ret.message.reason);
-    //   setIsLoading(false);
-    //   setDisable(false);
-    // }
+    if (ret.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      localStorage.setItem("unlocking", true);
+      localStorage.setItem("unlockingHash", ret.message);
+      setUnlockBtn(true);
+    } else {
+      if (ret.message.code == 4001) {
+        console.log(ret);
+      }
+      console.log(ret);
+      setErrorModal(true);
+      setErrorMessage(ret.message.reason);
+      setIsLoading(false);
+      setDisable(false);
+    }
   };
   useEffect(
     async (e) => {
@@ -608,30 +618,18 @@ const UpdatedSwap = () => {
           library.getSigner()
         );
         console.log(check);
-        // setUnLockCheckStatus(check.status);
-        // setUnlockBtn(check.status);
+        setUnLockCheckStatus(check.status);
+        setUnlockBtn(check.status);
       }
     },
-    [account]
-    // [account, unLockCheckStatus]
+
+    [account, unLockCheckStatus]
   );
-  // const SwapEusdForBnb = async () => {
-  //   const response = await getAmountsIn(
-  //     parseEther("1000".toString(), "wei").toString(),
-  //     [
-  //       "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A",
-  //       "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
-  //     ],
-  //     library.getSigner()
-  //   );
-  //   console.log(response);
-  //   // console.log(formatEther(response.message[0]._hex));
-  //   // console.log(formatEther(response.message[1]._hex));
-  // };
 
   const SwapEusdForBnb = async () => {
+    setIsLoading(true);
+    setDisable(true);
     console.log(SwapFromAddress, SwapAmount, MinamountsOut);
-
     const response = await swapEusdForBnb(
       SwapFromAddress,
       parseEther(SwapAmount.toString(), "wei").toString(),
@@ -639,18 +637,32 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response);
+    if (response.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage(
+        "You've successfully swapped " +
+          SwapAmount +
+          "Eusd for " +
+          amountsOut +
+          "Bnb"
+      );
+    } else {
+      if (response.message.code == 4001) {
+        console.log(response);
+      }
+      console.log(response);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(response.message.reason);
+    }
   };
-  // const SwapEusdForBnb = async () => {
-  //   const response = await swapEusdForBnb(
-  //     parseEther(SwapAmount.toString(), "wei").toString(),
-  //     "0x58f66d0183615797940360a43c333a44215830ba",
-  //     parseEther(SwapAmount.toString(), "wei").toString(),
-  //     parseInt(MinamountsOut).toFixed(2),
-  //     library.getSigner()
-  //   );
-  //   console.log(response);
-  // };
+
   const SwapbnbForEusd = async () => {
+    setIsLoading(true);
+    setDisable(true);
     const response = await swapBnbForEusd(
       parseEther(SwapAmount.toString(), "wei").toString(),
       parseEther(MinamountsOut.toString(), "wei").toString(),
@@ -658,6 +670,27 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response);
+    if (response.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage(
+        "You've successfully swapped " +
+          SwapAmount +
+          "Bnb for " +
+          amountsOut +
+          "Eusd"
+      );
+    } else {
+      if (response.message.code == 4001) {
+        console.log(response);
+      }
+      console.log(response);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(response.message.reason);
+    }
   };
   // when swapping use the egoras eusd address
   // when getting price use the binance busd address
@@ -691,8 +724,18 @@ const UpdatedSwap = () => {
       setAmountsOut("");
       setIsAmountLoading(false);
     }
-  }, [SwapAmount]);
-
+    if (SwapAmount == "" || id2 == "" || id == "") {
+      setDisable(true);
+    } else {
+      setDisable(false);
+    }
+  }, [SwapAmount, id2, id]);
+  const CloseSuccessModal = () => {
+    setSuccessModal(false);
+  };
+  const CloseErrorModal = () => {
+    setErrorModal(false);
+  };
   return (
     <div className="other2">
       <section className=" no-bg no_paddd">
@@ -1191,61 +1234,110 @@ const UpdatedSwap = () => {
                         <ArrowDropDownIcon className="swap_price_slippage_div2_icon" />
                       </div>
                     </div>
-                    {id == "" ? (
-                      <button id="generate" class="updatedSwapSwapBtn">
-                        Swap
-                      </button>
-                    ) : (
+
+                    {account ? (
                       <>
-                        {id == "0" ? (
+                        {id == "" ? (
+                          <button
+                            id="generate"
+                            class="updatedSwapSwapBtn"
+                            disabled
+                          >
+                            Swap
+                          </button>
+                        ) : (
                           <>
-                            {assetsBase.map((data) => {
-                              return (
-                                <>
-                                  {data.id == id ? (
-                                    <button
-                                      id="generate"
-                                      // style={{ marginTop: "10px" }}
-                                      onClick={SwapEusdForBnb}
-                                      class="updatedSwapSwapBtn"
-                                    >
-                                      Swap Eusd for Bnb
-                                    </button>
-                                  ) : null}
-                                </>
-                              );
-                            })}
+                            {id == "0" ? (
+                              <>
+                                {assetsBase.map((data) => {
+                                  return (
+                                    <>
+                                      {data.id == id ? (
+                                        <button
+                                          id="generate"
+                                          disabled={Disable}
+                                          onClick={SwapEusdForBnb}
+                                          class="updatedSwapSwapBtn"
+                                        >
+                                          {isLoading ? (
+                                            <ScaleLoader
+                                              color="#24382b"
+                                              size={10}
+                                              height={20}
+                                            />
+                                          ) : (
+                                            <> Swap {data.symbol}</>
+                                          )}
+                                        </button>
+                                      ) : null}
+                                    </>
+                                  );
+                                })}
+                              </>
+                            ) : id == "1" ? (
+                              <>
+                                {assets.map((data) => {
+                                  return (
+                                    <>
+                                      {data.id == id ? (
+                                        <button
+                                          id="generate"
+                                          disabled={Disable}
+                                          onClick={SwapbnbForEusd}
+                                          class="updatedSwapSwapBtn"
+                                        >
+                                          {isLoading ? (
+                                            <ScaleLoader
+                                              color="#24382b"
+                                              size={10}
+                                              height={20}
+                                            />
+                                          ) : (
+                                            <> Swap {data.symbol}</>
+                                          )}
+                                        </button>
+                                      ) : null}
+                                    </>
+                                  );
+                                })}
+                              </>
+                            ) : (
+                              <>
+                                {assets.map((data) => {
+                                  return (
+                                    <>
+                                      {data.id == id ? (
+                                        <button
+                                          id="generate"
+                                          disabled={Disable}
+                                          onClick={UnlockToken}
+                                          class="updatedSwapSwapBtn"
+                                        >
+                                          {isLoading ? (
+                                            <ScaleLoader
+                                              color="#24382b"
+                                              size={10}
+                                              height={20}
+                                            />
+                                          ) : (
+                                            <> Approve {data.symbol}</>
+                                          )}
+                                        </button>
+                                      ) : null}
+                                    </>
+                                  );
+                                })}
+                              </>
+                            )}
                           </>
-                        ) : id == "1" ? (
-                          <>
-                            {assets.map((data) => {
-                              return (
-                                <>
-                                  {data.id == id ? (
-                                    <button
-                                      id="generate"
-                                      // style={{ marginTop: "10px" }}
-                                      onClick={SwapbnbForEusd}
-                                      class="updatedSwapSwapBtn"
-                                    >
-                                      Swap Bnb for Eusd
-                                    </button>
-                                  ) : null}
-                                </>
-                              );
-                            })}
-                          </>
-                        ):null}
+                        )}
                       </>
+                    ) : (
+                      <button id="generate" class="updatedSwapSwapBtn" disabled>
+                        Connect wallet
+                      </button>
                     )}
-                    <button
-                      id="generate"
-                      // style={{ marginTop: "10px" }}
-                      onClick={UnlockToken}
-                      class="updatedSwapSwapBtn"
-                    >
-                      Aprove Eusd Token
-                    </button>
+
                     <div className="moreSwapInfoDiv">
                       <div className="moreSwapInfoDiv_div1">
                         More Information
@@ -1305,10 +1397,10 @@ const UpdatedSwap = () => {
                         </div>
                         <div className="moreSwapInfoDiv_div2_area1">
                           <div className="moreSwapInfoDiv_div2_area1_cont1">
-                            Gas Fee
+                            Est Gas Fee
                           </div>
                           <div className="moreSwapInfoDiv_div2_area1_cont2">
-                            $7.75
+                            $0.005
                           </div>
                         </div>
                         {/* <div className="moreSwapInfoDiv_div2_area1">
@@ -1962,6 +2054,19 @@ const UpdatedSwap = () => {
             </div>
           </div>
         </div>
+      ) : null}
+      {errorModal ? (
+        <UpdatedErrorModal
+          errorMessage={errorMessage}
+          closeModal={CloseErrorModal}
+        />
+      ) : null}
+      {successModal ? (
+        <UpdatedSuccessModal
+          btnRoute={true}
+          successMessage={successMessage}
+          route="/app/swap"
+        />
       ) : null}
     </div>
   );
