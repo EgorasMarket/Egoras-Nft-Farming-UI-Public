@@ -11,37 +11,64 @@
 /* ========= */
 /* ========= */
 .how_it_works_area_body {
-  display: flex;
   justify-content: space-between;
   margin-top: 4em;
+  display: grid;
+  gap: 45px;
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-content: flex-start;
+}
+
+.partners_body {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 .how_it_works_area_body_area1 {
   background: #27332c5e;
-  margin-right: 4em;
-  padding: 2em;
+  margin-right: 0em;
+  padding: 40px;
   border: solid 1px #37483e;
-  box-shadow: 0px 10px 25px black;
-  border-radius: 25px;
+  /* box-shadow: 0px 10px 25px black; */
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   cursor: pointer;
+  height: 100%;
 }
 .how_it_works_area_body_area1_icon_div {
   width: 100%;
 }
 .how_it_works_area_body_area1_icon {
-  width: 130px;
+  width: 100px;
 }
 .how_it_works_area_body_area1_title {
-  font-size: 24px;
+  font-size: 42px;
   font-weight: 700;
   color: #ffff;
   margin-top: 10px;
+  font-family: "Sofia Pro Bold", sans-serif;
 }
 .how_it_works_area_body_area1_para {
   margin-top: 5px;
   color: #a7b4ad;
+  font-size: 19px;
+}
+.how_it_works_area_body_area1_link_div {
+  margin-top: 3em;
+}
+.how_it_works_area_body_area1_link {
+  padding: 15px 0px;
+  border: solid 1px white;
+  border-radius: 26px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .how_it_works_area_body_area1_last {
   margin-right: 0;
@@ -228,7 +255,7 @@
 .join_ecosystem_section {
   padding: 4em 0em;
   position: relative;
-  background: #1c2c23;
+  background: #112117;
   border-bottom: solid 1px #293c31;
 }
 .join_ecosystem_area {
@@ -378,9 +405,10 @@
   background: #0b110c;
 }
 .how_it_works_area_head {
-  font-size: 48px;
+  font-size: 75px;
   color: #fff;
   font-weight: 800;
+  font-family: "Sofia Pro Bold", sans-serif;
 }
 .how_it_works_area {
   display: flex;
@@ -389,9 +417,9 @@
 }
 .dark .hero_backdrop {
   position: absolute;
-  bottom: -7%;
+  bottom: -20%;
   width: 100%;
-  opacity: 0.6;
+  z-index: 1;
 }
 .hero_backdrop {
   position: absolute;
@@ -432,13 +460,15 @@
   position: relative;
 }
 .span4a-txts {
-  font-size: 64px;
+  font-size: 73px;
   width: 100%;
   font-weight: 800;
   line-height: 1.2;
+  font-family: "Sofia Pro Bold", sans-serif;
 }
 .real_life {
   color: #229e54;
+  font-family: "Sofia Pro Bold", sans-serif;
 }
 .nft-img-area2 {
   width: 100% !important;
@@ -706,12 +736,12 @@
   font-weight: 700;
 }
 .span4b-txts {
-  width: 60%;
+  width: 75%;
   /* margin-top: 20px; */
   box-sizing: border-box;
   /* margin: 20px 0px 0px; */
   min-width: 0px;
-  font-size: 18px;
+  font-size: 25px;
   color: #7a897f;
   font-weight: 400;
   margin: auto;
@@ -2918,3 +2948,8 @@ a.visit_app_link_2 {
 /* =================================== */
 /* =================================== */
 /* =================================== */
+/* html {
+  height: 100%;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  overflow: hidden;
+} */

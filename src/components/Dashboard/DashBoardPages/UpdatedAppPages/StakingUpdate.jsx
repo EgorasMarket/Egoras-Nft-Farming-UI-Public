@@ -33,32 +33,9 @@ import {
 import {
   annually,
   monthly,
-  listProduct,
-  lendUS,
-  takeDividend,
-  takeBackLoan,
-  getTotalLended,
-  getInvestorsDividend,
-  userStats,
-  system,
-  burnAccumulatedDividend,
-  checkAllowance,
-  unluckToken,
-  lend,
-  getUserStats,
-  transactReceipt,
-  getPrice,
   getTickerInfo,
   tokenBalance,
-  open,
-  getLatestLoan,
-  repay,
-  topup,
   takeRoyalty,
-  draw,
-  checkAllowanceL,
-  unluckToken2,
-  getEgcSmartContractBalnce,
 } from "../../../../web3/index";
 import { getDate, getMonth } from "date-fns";
 
@@ -129,6 +106,8 @@ const StakingUpdate = () => {
   const [tokenBal, setTokenBal] = useState(0.0);
   const [isLoading, setIsLoading] = useState(false);
   const [Disable, setDisable] = useState(false);
+  const [LockedTransactions, setLockedTransactions] = useState([]);
+  const [UniqueLockedTransactions, setUniqueLockedTransactions] = useState([]);
 
   var btc = [
     {
@@ -1297,6 +1276,30 @@ const StakingUpdate = () => {
   const CloseErrorModal = () => {
     setErrorModal(false);
   };
+  useEffect(async () => {
+    await axios
+      .get(API_URL + "/staking/all", null, config)
+      .then((data) => {
+        console.log(data);
+        console.log(data.data.data);
+        setLockedTransactions(data.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
+  useEffect(async () => {
+    await axios
+      .get(API_URL + "/staking/user/" + account, null, config)
+      .then((data) => {
+        console.log(data);
+        console.log(data.data.data);
+        setUniqueLockedTransactions(data.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -1884,7 +1887,7 @@ const StakingUpdate = () => {
 // =====================
 // =====================
               </div> */}
-                    {Transactions.length <= 0 ? (
+                    {LockedTransactions.length <= 0 ? (
                       <div className="no_loans_div">
                         <div className="no_loans_div_cont">
                           <Nodata />
@@ -1900,48 +1903,61 @@ const StakingUpdate = () => {
                         {/* =============== */}
                         {/* =============== */}
                         {/* =============== */}
-                        {Transactions.map((data) => {
+                        {LockedTransactions.map((data) => {
+                          const date = new Date(data.time);
+                          const day = date
+                            .getUTCDate()
+                            .toString()
+                            .padStart(2, "0");
+                          const month = (date.getUTCMonth() + 1)
+                            .toString()
+                            .padStart(2, "0");
+                          const year = date.getUTCFullYear();
+                          const formattedDate = `${day}/${month}/${year}`;
+                          console.log(formattedDate);
                           return (
                             <tr className="stakingTable_body_row ">
                               <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
                                 <div className="value_dolls_div">
-                                  {data.action}
+                                  Create Lock
                                   <div className="value_dolls_div_val">
-                                    {data.date}
+                                    {formattedDate}
+                                    {/* {data.time} */}
                                   </div>
                                 </div>
                               </td>
                               <td className="stakingTable_body_row_data">
                                 <div className="value_dolls_div2">
-                                  {data.action === "Create Lock" ? (
+                                  {/* {data.action === "Create Lock" ? (
                                     <>+ {data.amount} EGC</>
                                   ) : (
                                     <>- {data.amount} eUSD</>
-                                  )}
-                                  <div className="value_dolls_div_val">
+                                  )} */}
+                                  {parseFloat(data.amount).toFixed(2)} EGC
+                                  {/* <div className="value_dolls_div_val">
                                     $2,406.66
-                                  </div>
+                                  </div> */}
                                 </div>
                               </td>
                               <td className="stakingTable_body_row_data">
                                 <div className="stakingTable_body_row_data_blockies_">
                                   <Blockies
-                                    seed={data.address}
+                                    seed={data.user}
                                     size={8}
                                     scale={4}
                                     className="blockies_icon"
                                   />
-                                  {`${data.address.slice(
+                                  {`${data.user.slice(
                                     0,
                                     6
-                                  )}...${data.address.slice(39, 42)}`}
+                                  )}...${data.user.slice(39, 42)}`}
                                 </div>
                               </td>
                               <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
-                                {`${data.txnHash.slice(
-                                  0,
-                                  6
-                                )}...${data.txnHash.slice(63, 66)}`}
+                                {`${data.tx.slice(0, 6)}...${data.tx.slice(
+                                  63,
+                                  66
+                                )}`}
                                 <OpenInNewIcon className="tx_hash_link_icon" />
                               </td>
                             </tr>

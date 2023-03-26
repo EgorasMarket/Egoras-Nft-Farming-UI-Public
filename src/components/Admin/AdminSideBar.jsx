@@ -144,6 +144,12 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
     if (linksActive === "/app/earn/pool/detail") {
       setActiveMenuName("Earn");
     }
+    if (linksActive === "/admin/setRouter") {
+      setActiveMenuName("router");
+    }
+    if (linksActive === "/admin/priceOracle") {
+      setActiveMenuName("priceOracle");
+    }
     if (
       linksActive ===
       "/app/earn/pool/detail/branch/" + urlArr[6] + "/asset"
@@ -212,6 +218,12 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
     }
     if (linksActive === "/admin/all/products") {
       setActiveBg("products");
+    }
+    if (linksActive === "/admin/setRouter") {
+      setActiveBg("router");
+    }
+    if (linksActive === "/admin/priceOracle") {
+      setActiveBg("priceOracle");
     }
     if (linksActive === "/admin/staff") {
       setActiveBg("transactions");
@@ -573,6 +585,28 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 onClick={changeBg}
               >
                 Membership
+              </a>
+              <a
+                id="router"
+                href="/admin/setRouter"
+                className={
+                  activeBg == "router" ? "header_tab1_active " : "header_tab1"
+                }
+                onClick={changeBg}
+              >
+                Set Router
+              </a>
+              <a
+                id="priceOracle"
+                href="/admin/priceOracle"
+                className={
+                  activeBg == "priceOracle"
+                    ? "header_tab1_active "
+                    : "header_tab1"
+                }
+                onClick={changeBg}
+              >
+                Price Oracle
               </a>
 
               {/* <a
