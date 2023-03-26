@@ -422,6 +422,12 @@ const AdminSeeSellers = () => {
     console.log(res, "somto8uhhhg");
     // console.log(res.status, "somto8uhhhg");
     setSaleDetails("");
+    console.log(res);
+    if (res.status == true) {
+      console.log("Success message");
+    } else {
+      console.log("Error occured from Blockchain");
+    }
   };
 
   const classes = useStyles();
