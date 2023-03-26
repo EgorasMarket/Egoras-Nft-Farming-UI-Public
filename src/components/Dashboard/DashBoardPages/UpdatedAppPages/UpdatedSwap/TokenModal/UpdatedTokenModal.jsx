@@ -85,6 +85,7 @@ export const UpdatedTokenModal = ({
               <button
                 disabled={data.id == assetId ? true : false}
                 id={data.id}
+                name={data.address}
                 className="updatedTokenModal_area_body_area1"
                 onClick={
                   tokenModal2 == true
