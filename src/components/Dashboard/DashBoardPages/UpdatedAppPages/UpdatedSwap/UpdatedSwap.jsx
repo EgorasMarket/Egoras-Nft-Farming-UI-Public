@@ -15,6 +15,23 @@ import LinkOutlinedIcon from "@mui/icons-material/LinkOutlined";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import CloseIcon from "@mui/icons-material/Close";
 import moment from "moment/moment";
+import Web3 from "web3";
+import PulseLoader from "react-spinners/PulseLoader";
+
+import { parseEther, formatEther } from "@ethersproject/units";
+import { BigNumber } from "@ethersproject/bignumber";
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
+import {
+  getBNBAddress,
+  swapEusdForBnb,
+  swapBnbForEusd,
+  getAmountsIn,
+  getAmountsOut,
+} from "../../../../../web3/index2";
 import {
   AreaChart,
   Area,
@@ -31,6 +48,17 @@ import {
 } from "recharts";
 
 const UpdatedSwap = () => {
+  const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
   const [tokenModal, setTokenModal] = useState(false);
   const [tokenModal2, setTokenModal2] = useState(false);
   const [id, setId] = useState("0");
@@ -46,6 +74,7 @@ const UpdatedSwap = () => {
   const [SwapBalance, setSwapBalance] = useState("");
   const [activeDuration, setActiveDuration] = useState("hr1");
   const [shareSwap, setShareSwap] = useState(false);
+  const [isAmountLoading, setIsAmountLoading] = useState(false);
 
   const hour1Array = [
     {
@@ -256,9 +285,9 @@ const UpdatedSwap = () => {
     {
       id: "0",
       img: "/img/tokens-folder/busd_icon.png",
-      symbol: "BUSD",
-      address: "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A",
-      name: "Binance USD",
+      symbol: "EUSD",
+      address: "0x58f66d0183615797940360a43c333a44215830ba",
+      name: "EGC USD",
       favorite: "true",
       balance: 1000,
     },
@@ -268,6 +297,7 @@ const UpdatedSwap = () => {
       id: "1",
       img: "/img/tokens-folder/bnb_icon.png",
       name: "Binance Smart Chain",
+      address: "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       symbol: "BNB",
       favorite: "true",
       balance: 0.02,
@@ -406,14 +436,7 @@ const UpdatedSwap = () => {
       return;
     }
   };
-  const onChangeSwapAmount = (e) => {
-    setSwapAmount(e.target.value);
-    // setSwapBaseAmount(e.target.value * 4);
-    // if (e.target.value == 0) {
-    //   setSwapBaseAmount("");
-    // }
-    console.log(e.target.value);
-  };
+
   const ToggleSwapInputs = () => {
     setId(id2);
     setId2(id);
@@ -489,6 +512,8 @@ const UpdatedSwap = () => {
   const [ChartTime, setChartTime] = useState(LastArray.time);
   const [ChartTime2, setChartTime2] = useState(LastArray2.time);
   const [displayChart, setDisplayChart] = useState(true);
+  const [amountsOut, setAmountsOut] = useState("");
+  const [MinamountsOut, setMinAmountsOut] = useState("");
   const [ChartPercentChange, setChartPercentChange] = useState(
     LastArray.percentage_change
   );
@@ -581,6 +606,78 @@ const UpdatedSwap = () => {
   const ToggleDisplayChart = () => {
     setDisplayChart(!displayChart);
   };
+  // useEffect(async () => {
+  //   if (account) {
+  //     const response = await getBNBAddress(library.getSigner());
+  //     console.log(response);
+  //     return;
+  //   }
+  // }, []);
+  const getAmountIn = async () => {
+    const response = await getAmountsIn(
+      "100",
+      [
+        "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A",
+        "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+      ],
+      library.getSigner()
+    );
+    console.log(response);
+    console.log(formatEther(response.message[0]._hex));
+    console.log(formatEther(response.message[1]._hex));
+  };
+
+  // const SwapEusdForBnb = async () => {
+  //   const response = await swapEusdForBnb(
+  //     "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A",
+  //     parseEther(SwapAmount.toString(), "wei").toString(),
+  //     parseInt(MinamountsOut).toFixed(2),
+  //     library.getSigner()
+  //   );
+  //   console.log(response);
+  // };
+  const SwapbnbForEusd = async () => {
+    const response = await swapBnbForEusd(
+      parseEther("0.05".toString(), "wei").toString(),
+      parseEther("2106.024870898220781345".toString(), "wei").toString(),
+      "0x58f66d0183615797940360a43c333a44215830ba",
+      library.getSigner()
+    );
+    console.log(response);
+  };
+  // when swapping use the egoras eusd address
+  // when getting price use the binance busd address
+
+  const onChangeSwapAmount = async (e) => {
+    setIsAmountLoading(true);
+    setSwapAmount(e.target.value);
+    const response = await getAmountsOut(
+      parseEther(e.target.value.toString(), "wei").toString(),
+      [
+        "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+        "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A",
+      ],
+      library.getSigner()
+    );
+    console.log(response);
+    if (response.status == true) {
+      setIsAmountLoading(false);
+      setAmountsOut(formatEther(response.message[1]._hex));
+      setMinAmountsOut(formatEther(response.message[1]._hex) * (1 - 0.01));
+      console.log(formatEther(response.message[1]._hex));
+    } else {
+      setIsAmountLoading(false);
+      console.log(response);
+    }
+  };
+  useEffect(() => {
+    if (SwapAmount == "") {
+      console.log("it is gone");
+      setAmountsOut("");
+      setIsAmountLoading(false);
+    }
+  }, [SwapAmount]);
+
   return (
     <div className="other2">
       <section className=" no-bg no_paddd">
@@ -849,19 +946,40 @@ const UpdatedSwap = () => {
                         <div className="amnt_input">
                           <div className="amnt_input_layer1">
                             <div className="amnt_input_layer1_input_div">
-                              <input
-                                type="number"
-                                name="number"
-                                id="number"
-                                placeholder="0.00"
-                                className="amnt_input_field"
-                                autocomplete="off"
-                                value={
-                                  SwapAmount == "" || id2 == ""
-                                    ? " "
-                                    : SwapAmount * 4
-                                }
-                              />
+                              {id2 == "" ? (
+                                <input
+                                  type="number"
+                                  name="number"
+                                  id="number"
+                                  placeholder="0.00"
+                                  className="amnt_input_field"
+                                  autocomplete="off"
+                                  value=""
+                                />
+                              ) : (
+                                <>
+                                  {isAmountLoading ? (
+                                    <div className="amount_loading_div">
+                                      <PulseLoader
+                                        color="#24382b"
+                                        size={20}
+                                        height={20}
+                                      />
+                                    </div>
+                                  ) : (
+                                    <input
+                                      type="number"
+                                      name="number"
+                                      id="number"
+                                      placeholder="0.00"
+                                      className="amnt_input_field"
+                                      autocomplete="off"
+                                      value={amountsOut}
+                                    />
+                                  )}
+                                </>
+                              )}
+
                               <div className="amnt_input_layer1_input_div_dollar_value">
                                 ~$
                                 {SwapAmount == "" || id2 == ""
@@ -965,7 +1083,6 @@ const UpdatedSwap = () => {
 
                       {/* </div> */}
                     </div>
-
                     <div className="swap_price_rate_div">
                       {ida == "" ? (
                         <div className="swap_price_rate_div1">Nil</div>
@@ -1047,9 +1164,22 @@ const UpdatedSwap = () => {
                         onClick={ToggleSwapPrices}
                       />
                     </div>
+                    <div className="swap_price_slippage_div">
+                      <div className="swap_price_slippage_div1">
+                        Max Slippage{" "}
+                        <InfoOutlinedIcon className="swap_price_slippage_info_icon" />
+                        :
+                      </div>
+                      <div className="swap_price_slippage_div2">
+                        0.5%{" "}
+                        <ArrowDropDownIcon className="swap_price_slippage_div2_icon" />
+                      </div>
+                    </div>
+
                     <button
                       id="generate"
                       // style={{ marginTop: "10px" }}
+                      onClick={SwapbnbForEusd}
                       class="updatedSwapSwapBtn"
                     >
                       Enter an amount
@@ -1064,7 +1194,7 @@ const UpdatedSwap = () => {
                             Minimum Received
                           </div>
                           {id2 == "" ? (
-                            <div className="swap_price_rate_div1">Nil</div>
+                            <div className="swap_price_rate_div1">0</div>
                           ) : (
                             <>
                               {id2 == "0" ? (
@@ -1076,8 +1206,8 @@ const UpdatedSwap = () => {
                                         {data.id == id2 ? (
                                           <div className="moreSwapInfoDiv_div2_area1_cont2">
                                             {SwapAmount == ""
-                                              ? " "
-                                              : SwapAmount * 3.8}
+                                              ? 0
+                                              : MinamountsOut}
                                             <span>
                                               {"  "} {data.symbol}
                                             </span>
@@ -1096,8 +1226,8 @@ const UpdatedSwap = () => {
                                         {data.id == id2 ? (
                                           <div className="moreSwapInfoDiv_div2_area1_cont2">
                                             {SwapAmount == ""
-                                              ? " "
-                                              : SwapAmount * 3.8}
+                                              ? 0
+                                              : MinamountsOut}
                                             <span>
                                               {"  "} {data.symbol}
                                             </span>

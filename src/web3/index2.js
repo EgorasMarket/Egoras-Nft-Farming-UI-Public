@@ -2,11 +2,19 @@ import { Contract } from "@ethersproject/contracts";
 import MembershipFacet from "./contracts/V3/MembershipFacet.json";
 import V3ContractAddress from "./contracts/V3/V3ContractAddress.json";
 import PancakeSwapFaucet from "./contracts/V3/PancakeSwapFacet.json";
+import Minter from "./contracts/V3/Minter.json";
 const contractMembershipFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, MembershipFacet.abi, signer);
 };
 const contractPancakeSwapFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, PancakeSwapFaucet.abi, signer);
+};
+const contractAddMinterFacetInstance = async (signer) => {
+  return new Contract(
+    "0x58f66d0183615797940360a43c333a44215830ba",
+    Minter.abi,
+    signer
+  );
 };
 const monthlyPlanSubScribe = async (signer) => {
   try {
@@ -106,6 +114,45 @@ const getBNBAddress = async (signer) => {
     };
   }
 };
+const swapEusdForBnb = async (token, amountIn, amountOutMin, signer) => {
+  try {
+    const instance = await contractPancakeSwapFacetInstance(signer);
+    let result;
+    result = await instance.swapExactEUSDforBNB(token, amountIn, amountOutMin);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const swapBnbForEusd = async (value, amountOutMin, tokenOut, signer) => {
+  try {
+    const instance = await contractPancakeSwapFacetInstance(signer);
+    let result;
+    result = await instance.swapExactBNBForEUSD(amountOutMin, tokenOut, {
+      value,
+    });
+
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
 const getAmountsOut = async (amountIn, path, signer) => {
   try {
     const instance = await contractPancakeSwapFacetInstance(signer);
@@ -125,14 +172,30 @@ const getAmountsOut = async (amountIn, path, signer) => {
   }
 };
 const getAmountsIn = async (amountOut, path, signer) => {
+  console.log(amountOut, path);
   try {
-    const instance = await contractPancakeSwapFacetInstance(
-      amountOut,
-      path,
-      signer
-    );
+    const instance = await contractPancakeSwapFacetInstance(signer);
     let result;
     result = await instance.getAmountsIn(amountOut, path);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const adminAddMinter = async (account, signer) => {
+  console.log(account);
+  try {
+    const instance = await contractAddMinterFacetInstance(signer);
+    let result;
+    result = await instance.addMinter(account);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -155,4 +218,7 @@ export {
   getBNBAddress,
   getAmountsOut,
   getAmountsIn,
+  swapEusdForBnb,
+  adminAddMinter,
+  swapBnbForEusd,
 };
