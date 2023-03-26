@@ -626,13 +626,18 @@ const Home = () => {
                     className="how_it_works_area_body_area1_icon"
                   />
                 </div>
-                <div className="how_it_works_area_body_area1_title">Swap</div>
+                <div className="how_it_works_area_body_area1_title">
+                  Physically-Backed NFTs
+                </div>
                 <div className="how_it_works_area_body_area1_para">
-                  The technology developed by EGCDAO enables the connection of
-                  diversified sources of crypto liquidity, thereby providing the
-                  most favorable rates and optimal returns for all. With EGCDAO,
-                  users can exchange tokens, earn yields, and create top-tier
-                  Decentralized Finance (DeFi) applications.
+                  EGCDAO offers a platform that enables brands, collectors, and
+                  recyclers to create collections of physical assets as NFTs.
+                  The NFTs are generated upon receipt of the items by the
+                  decentralized network of storage Guardians. At any point in
+                  time, the NFTs can be redeemed for the physical assets. EGCDAO
+                  handles the legal, physical, and logistical aspects of this
+                  process, thereby allowing users to concentrate on their core
+                  business operations.
                 </div>
                 <div className="how_it_works_area_body_area1_link_div">
                   <a href="" className="how_it_works_area_body_area1_link">
@@ -653,13 +658,15 @@ const Home = () => {
                     className="how_it_works_area_body_area1_icon"
                   />
                 </div>
-                <div className="how_it_works_area_body_area1_title">Swap</div>
+                <div className="how_it_works_area_body_area1_title">DAO</div>
                 <div className="how_it_works_area_body_area1_para">
-                  The technology developed by EGCDAO enables the connection of
-                  diversified sources of crypto liquidity, thereby providing the
-                  most favorable rates and optimal returns for all. With EGCDAO,
-                  users can exchange tokens, earn yields, and create top-tier
-                  Decentralized Finance (DeFi) applications.
+                  staking EGC tokens allows the token holders to participate in
+                  voting on governance proposals, which can include decisions
+                  such as upgrades to the platform or changes to the rules
+                  governing the project. By staking their tokens and
+                  participating in the governance process, token holders can
+                  have a say in the direction of the project and help shape its
+                  future.
                 </div>
                 <div className="how_it_works_area_body_area1_link_div">
                   <a href="" className="how_it_works_area_body_area1_link">
@@ -680,13 +687,16 @@ const Home = () => {
                     className="how_it_works_area_body_area1_icon"
                   />
                 </div>
-                <div className="how_it_works_area_body_area1_title">Swap</div>
+                <div className="how_it_works_area_body_area1_title">Build</div>
                 <div className="how_it_works_area_body_area1_para">
-                  The technology developed by EGCDAO enables the connection of
-                  diversified sources of crypto liquidity, thereby providing the
-                  most favorable rates and optimal returns for all. With EGCDAO,
-                  users can exchange tokens, earn yields, and create top-tier
-                  Decentralized Finance (DeFi) applications.
+                  EGCDAO is currently seeking individuals who can serve as
+                  trusted storage Guardians. The role entails the responsibility
+                  of securely storing and safeguarding items that are sold on
+                  the EGCDAO platform. Given the nature of the items being
+                  stored, this position demands a high degree of trustworthiness
+                  and dependability. Those with relevant experience in either of
+                  these domains and an interest in partnering with EGCDAO may
+                  consider becoming certified refurbishers as well.
                 </div>
                 <div className="how_it_works_area_body_area1_link_div">
                   <a href="" className="how_it_works_area_body_area1_link">

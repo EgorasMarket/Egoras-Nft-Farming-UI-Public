@@ -15,6 +15,8 @@ import AdminModifyMembership from "./AdminPages/AdminModifyMembership";
 import AdminProductsPage from "./AdminPages/AdminProductsPage";
 // import AdminMinorPage from "./AdminMinorPage";
 import DashBoardUserDetails from "../Dashboard/DashBoardPages/DashBoardUserDetails";
+import PriceOracle from "./AdminPages/AdminSetRouter/PriceOracle";
+import SetRouter from "./AdminPages/AdminSetRouter/SetRouter";
 const Admin = ({ check, togglemakeDark }) => {
   const [splashScreen, setSplashScreen] = useState(true);
   useEffect(() => {
@@ -37,6 +39,8 @@ const Admin = ({ check, togglemakeDark }) => {
               {/* <Route exact path="/admin/assets" component={AdminAssets} /> */}
               <Route exact path="/admin/sellers" component={AdminSeeSellers} />
               <Route exact path="/admin/staff" component={AdminStaffPage} />
+              <Route exact path="/admin/priceOracle" component={PriceOracle} />
+              <Route exact path="/admin/setRouter" component={SetRouter} />
               <Route
                 exact
                 path="/admin/all/products"

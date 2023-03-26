@@ -543,12 +543,12 @@ const Header = ({ togglemakeDark, check }) => {
   };
   return (
     <>
-      {/* {betaDiv === true ? (
+      {betaDiv === true ? (
         <div className="we_on_beta_div">
-          Welcome to Egoras v2 Beta. If you find any issues please let us know.{" "}
-          <a href="">cs@egoras.com</a>
+          Welcome to EGCDAO Testnet v1. We will be releasing more versions until
+          the testnet is over.
         </div>
-      ) : null} */}
+      ) : null}
 
       {showHeader === true ? (
         <div id="Header" className="header_div">

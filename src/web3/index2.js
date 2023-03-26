@@ -1,8 +1,12 @@
 import { Contract } from "@ethersproject/contracts";
 import MembershipFacet from "./contracts/V3/MembershipFacet.json";
 import V3ContractAddress from "./contracts/V3/V3ContractAddress.json";
+import PancakeSwapFaucet from "./contracts/V3/PancakeSwapFacet.json";
 const contractMembershipFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, MembershipFacet.abi, signer);
+};
+const contractPancakeSwapFacetInstance = async (signer) => {
+  return new Contract(V3ContractAddress.address, PancakeSwapFaucet.abi, signer);
 };
 const monthlyPlanSubScribe = async (signer) => {
   try {
@@ -58,8 +62,97 @@ const annuallyPlanSubScribe = async (signer) => {
     };
   }
 };
+const SwapRouterAddress = async (
+  _pancakeRouterAddress,
+  _busdPancakeAddress,
+  signer
+) => {
+  console.log(_pancakeRouterAddress, _busdPancakeAddress);
+  try {
+    const instance = await contractPancakeSwapFacetInstance(signer);
+    let result;
+    result = await instance.setRouterAddress(
+      _pancakeRouterAddress,
+      _busdPancakeAddress
+    );
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const getBNBAddress = async (signer) => {
+  try {
+    const instance = await contractPancakeSwapFacetInstance(signer);
+    let result;
+    result = await instance.getWethAddress();
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const getAmountsOut = async (amountIn, path, signer) => {
+  try {
+    const instance = await contractPancakeSwapFacetInstance(signer);
+    let result;
+    result = await instance.getAmountsOut(amountIn, path);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const getAmountsIn = async (amountOut, path, signer) => {
+  try {
+    const instance = await contractPancakeSwapFacetInstance(
+      amountOut,
+      path,
+      signer
+    );
+    let result;
+    result = await instance.getAmountsIn(amountOut, path);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
 export {
   monthlyPlanSubScribe,
   semiAnnuallyPlanSubScribe,
   annuallyPlanSubScribe,
+  SwapRouterAddress,
+  getBNBAddress,
+  getAmountsOut,
+  getAmountsIn,
 };
