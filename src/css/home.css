@@ -10,6 +10,133 @@
 /* ========= */
 /* ========= */
 /* ========= */
+
+.mySwiperDiv_Power {
+  background: #0b110c;
+  padding: 10px;
+}
+.PowerSwiper {
+  height: 100vh;
+  cursor: grab;
+  /* padding-bottom: 2em; */
+  width: 100%;
+}
+.mySwiperDiv_Power {
+  display: flex;
+  flex-direction: column;
+  /* gap: 20em; */
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  height: 100vh !important;
+}
+.PowerComponent_body {
+  display: flex;
+  flex-direction: column;
+}
+.PowerSwiper {
+  height: 100vh;
+  cursor: grab;
+  /* padding-bottom: 2em; */
+  width: 100%;
+}
+.PowerComponent_body1_img {
+  width: 100%;
+}
+.whatPossible_body_area {
+  width: 100%;
+  margin-top: 1em;
+  /* height: 37em; */
+  /* overflow: hidden; */
+}
+.whatPossible_body_area_1 {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  margin-top: 3em;
+}
+.whatPossible_body_area_1_cont1 {
+  width: 66%;
+}
+.whatPossible_body_area_1_cont2 {
+  display: flex;
+  flex-direction: column;
+  width: 64%;
+  align-items: baseline;
+  margin-right: 4em;
+  text-align: left;
+}
+.whatPossible_body_area_1_cont2a {
+  display: flex;
+  flex-direction: column;
+  width: 64%;
+  align-items: baseline;
+  margin-left: 4em;
+  text-align: left;
+}
+.whatPossible_body_area_1_cont2_title {
+  font-size: 60px;
+  font-weight: 700;
+  margin-bottom: 9px;
+  line-height: 1.2;
+}
+.whatPossible_body_area_1_cont2_para {
+  color: #9bb3a5;
+  font-size: 18px;
+}
+.whatPossible_body_area_1_cont1_img {
+  width: 100%;
+}
+.whatPossible_body_area_1_cont2__btn_div {
+  width: 100%;
+  margin-top: 2em;
+}
+.whatPossible_body_area_1_cont2__btn {
+  padding: 14px 0px;
+  width: 160px;
+  border-radius: 10px;
+  background: #229e54;
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
 .how_it_works_area_body {
   justify-content: space-between;
   margin-top: 4em;
