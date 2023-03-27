@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../UpdatedAppPagesStyles/dashboardMarketHome.css";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Carousel from "react-multi-carousel";
+import { GET_ALL_UPLOADED_PRODUCTS } from "../../../../../services/productServices";
 export const MarketHeader = () => {
   return (
     <div className="dashboardMarketPlaceHeader no-bg">
@@ -38,6 +39,7 @@ export const MarketHeader = () => {
   );
 };
 const DashboardMarketHome = () => {
+  const [products, setProducts] = useState([]);
   const responsive1 = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -61,6 +63,14 @@ const DashboardMarketHome = () => {
       items: 1,
     },
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await GET_ALL_UPLOADED_PRODUCTS();
+      console.log(response.data);
+    };
+
+    fetchData();
+  }, []);
   const Product = [
     {
       id: "1",
