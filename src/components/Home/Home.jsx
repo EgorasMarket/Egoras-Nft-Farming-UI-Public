@@ -599,7 +599,7 @@ const Home = () => {
             <div className="how_it_works_area_title_area">
               <div className="how_it_works_area_title_area1">
                 <div className="how_it_works_area_head">
-                  What's possible with EGCDAO What's possible with EGCDAO
+                  What's possible with EGCDAO
                 </div>
                 <div className="how_it_works_area_para">
                   Welcome to first open-source decentralized Egoras staking
