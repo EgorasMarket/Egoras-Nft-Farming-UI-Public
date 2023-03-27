@@ -21,7 +21,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { placeBid, approveProduct } from "../../../web3";
 import { parseEther, formatEther, parseUnits } from "@ethersproject/units";
 import AdminDashboardCard from "../../cards/AdminDashboardCard";
-import { POPULATE_ADMIN_PRODUCT_DASHBOARD } from "../../../services/adminServices";
+import {
+  POPULATE_ADMIN_PRODUCT_DASHBOARD,
+  CALL_ADMIN_PLACE_BID,
+} from "../../../services/adminServices";
 
 import {
   Web3ReactProvider,
@@ -398,23 +401,33 @@ const AdminSeeSellers = () => {
   };
 
   const BidForProduct = async () => {
-    console.log(indexId, parseEther(bidAmount.toString(), "wei").toString());
-
+    console.log(indexId, bidAmount);
     const res = await placeBid(
       indexId,
       parseEther(bidAmount.toString(), "wei").toString(),
       library.getSigner()
     );
-    console.log(res, "somto8uhhhg");
-    // console.log(res.status, "somto8uhhhg");
+    console.log(res);
+    if (res.status == true) {
+      console.log("Success message");
+    } else {
+      console.log("Error occured from Blockchain");
+    }
   };
 
-  const ApproveProduct = async () => {
-    console.log(indexId);
+  const ApproveProduct = async (id) => {
+    console.log(id);
 
-    const res = await approveProduct(indexId, library.getSigner());
+    const res = await approveProduct(id, library.getSigner());
     console.log(res, "somto8uhhhg");
     // console.log(res.status, "somto8uhhhg");
+    setSaleDetails("");
+    console.log(res);
+    if (res.status == true) {
+      console.log("Success message");
+    } else {
+      console.log("Error occured from Blockchain");
+    }
   };
 
   const classes = useStyles();
@@ -549,59 +562,148 @@ const AdminSeeSellers = () => {
                           .map((asset) => {
                             //   var percentage = (asset.funded / asset.amount) * 100;
                             return (
-                              <tr
-                                className="assets-category-row  transitionMe"
-                                id={asset.product_id}
-                                // onClick={ToggleSaleDetails}
-                                onClick={() => {
-                                  ToggleSaleDetails(
-                                    asset.product_id,
-                                    asset.index_id
-                                  );
-                                }}
-                              >
-                                <td className="assets-category-data branch_name_title">
-                                  <div className="assets-data">
-                                    <div className="assets-data-pool_name">
-                                      {asset.product_name}
-                                      <span className="poolName_txt">
-                                        {asset.createdAt}
-                                      </span>
+                              <>
+                                <tr className="assets-category-row  transitionMe">
+                                  <td
+                                    className="assets-category-data branch_name_title"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
+                                    <div className="assets-data">
+                                      <div className="assets-data-pool_name">
+                                        {asset.product_name}
+                                        <span className="poolName_txt">
+                                          {asset.createdAt}
+                                        </span>
+                                      </div>
                                     </div>
-                                  </div>
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {numberWithCommas(
-                                    parseInt(asset.user_amount).toFixed(0)
-                                  )}{" "}
-                                  Eusd
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {`${asset.user_wallet.slice(
-                                    0,
-                                    6
-                                  )}...${asset.user_wallet.slice(39, 42)}`}
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {asset.BiddingStatus}
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {asset.user_amount} Eusd
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {asset.status}
-                                </td>
-                                <td className="assets-category-data1b stable-content branch_apy">
-                                  {/* {`${asset.txnHash.slice(
+                                  </td>
+                                  <td
+                                    className="assets-category-data1b stable-content branch_apy"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
+                                    {numberWithCommas(
+                                      parseInt(asset.user_amount).toFixed(0)
+                                    )}{" "}
+                                    Eusd
+                                  </td>
+                                  <td
+                                    className="assets-category-data1b stable-content branch_apy"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
+                                    {`${asset.user_wallet.slice(
+                                      0,
+                                      6
+                                    )}...${asset.user_wallet.slice(39, 42)}`}
+                                  </td>
+                                  <td
+                                    className="assets-category-data1b stable-content branch_apy"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
+                                    {asset.bidStatus}
+                                  </td>
+                                  <td
+                                    className="assets-category-data1b stable-content branch_apy"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
+                                    {asset.bidAmount} Eusd
+                                  </td>
+                                  <td
+                                    className="assets-category-data1b stable-content branch_apy"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
+                                    {asset.status}
+                                  </td>
+                                  <td
+                                    className="assets-category-data1b stable-content branch_apy"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
+                                    {/* {`${asset.txnHash.slice(
                                   0,
                                   6
                                 )}...${asset.txnHash.slice(63, 66)}`} */}
-                                  {"Coming soon"}
-                                </td>
-                                <td className="assets-category-data-last branch_loan_action">
-                                  <ArrowForwardIosIcon />
-                                </td>
-                              </tr>
+                                    {"Coming soon"}
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    <div className="approveProdButton">
+                                      <button
+                                        className="approveProdButton_btn"
+                                        disabled={
+                                          asset.bidAmount === null
+                                            ? true
+                                            : false
+                                        }
+                                        onClick={() =>
+                                          ApproveProduct(asset.index_id)
+                                        }
+                                      >
+                                        Approve
+                                      </button>
+                                    </div>
+                                  </td>
+                                  <td
+                                    className="assets-category-data-last branch_loan_action"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
+                                    <ArrowForwardIosIcon />
+                                  </td>
+                                </tr>
+                              </>
                             );
                           })
                       : activeBtn === "All"
@@ -876,24 +978,35 @@ const AdminSeeSellers = () => {
                     {/* ================ */}
                     <div className="saleDetailsDiv_area_1">
                       <div className="saleDetailsDiv_area_1_title">
-                        Bidding Action
+                        Bidding Actions
                       </div>
-                      <div className="saleDetailsDiv_area_1_div1">
-                        <div className="saleDetailsDiv_area_1_div1_title">
-                          Bidding Status
+                      {data.bidStatus == null ? (
+                        <div className="saleDetailsDiv_area_1_div1">
+                          <div className="saleDetailsDiv_area_1_div1_title">
+                            No bidding record for this product
+                          </div>
                         </div>
-                        <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.BiddingStatus}
-                        </div>
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1">
-                        <div className="saleDetailsDiv_area_1_div1_title">
-                          Bidding Amount
-                        </div>
-                        <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.BiddingAmount}
-                        </div>
-                      </div>
+                      ) : (
+                        <>
+                          <div className="saleDetailsDiv_area_1_div1">
+                            <div className="saleDetailsDiv_area_1_div1_title">
+                              Bidding Status
+                            </div>
+                            <div className="saleDetailsDiv_area_1_div1_body">
+                              {data.bidStatus}
+                            </div>
+                          </div>
+                          <div className="saleDetailsDiv_area_1_div1">
+                            <div className="saleDetailsDiv_area_1_div1_title">
+                              Bidding Amount
+                            </div>
+                            <div className="saleDetailsDiv_area_1_div1_body">
+                              {data.bidAmount}
+                            </div>
+                          </div>
+                        </>
+                      )}
+
                       <div className="PlaceBidDiv">
                         <Accordion>
                           <AccordionSummary
@@ -947,14 +1060,6 @@ const AdminSeeSellers = () => {
                     {/* ================ */}
                     {/* ================ */}
                     {/* ================ */}
-                    <div className="approveProdButton">
-                      <button
-                        className="approveProdButton_btn"
-                        onClick={ApproveProduct}
-                      >
-                        Approve
-                      </button>
-                    </div>
                   </div>
                 </div>
               ) : null}

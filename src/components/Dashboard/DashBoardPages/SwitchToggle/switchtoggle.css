@@ -76,8 +76,8 @@ input:focus + .slider2 {
 
 input:checked + .slider2:before {
   transform: translateX(24px);
-  top: 0;
-  left: -20%;
+  top: -1.5px;
+  left: -19%;
   /* right: -24px; */
   background: #ffffff;
   box-shadow: none;
@@ -115,28 +115,29 @@ input:checked + .slider2:before {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #648772;
+  background-color: #444444;
   transition: 0.4s;
   height: 100%;
   width: 100%;
   box-shadow: none;
-  border: solid 1px #648772;
+  border: solid 1px #313131;
   /* width: 20em; */
   display: block;
 }
 .slider2:before {
   position: absolute;
   content: "";
-  height: 100%;
+  height: 22px;
   width: 22px;
-  left: 0%;
+  left: -2%;
   background-color: white;
   transition: 0.5s;
   box-shadow: none;
+  top: -1.5px;
 }
 .switch2 {
   position: relative;
   display: inline-block;
   width: 2.5em;
-  height: 25px;
+  height: 21px;
 }

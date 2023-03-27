@@ -62,7 +62,6 @@ import add from "date-fns/add/index";
 import AdminDashboardCard from "../../cards/AdminDashboardCard";
 import {
   POPULATE_ADMIN_PRODUCT_DASHBOARD,
-  GET_ALL_APPROVED_PRODUCTS,
   CALL_UPDATE_EXISTING_PRODUCT,
   ADMIN_FETCH_TRADABLE_PRODUCTS,
 } from "../../../services/adminServices";
@@ -579,12 +578,10 @@ const AdminProductsPage = () => {
   };
 
   useEffect(() => {
+    // console.log("suik_____");
     async function fetchData() {
-      // const res = await GET_ALL_APPROVED_PRODUCTS();
-
-      // console.log(res.data);
       const res = await ADMIN_FETCH_TRADABLE_PRODUCTS();
-      // console.log(res.data.data);
+      console.log(res.data);
       setNewProducts(res.data);
     }
 

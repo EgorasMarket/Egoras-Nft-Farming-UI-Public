@@ -1,0 +1,33 @@
+.setRouterAddressDiv {
+  display: flex;
+  align-items: flex-end;
+  color: #fff;
+  width: 100%;
+  justify-content: center;
+  margin-top: 3em;
+  height: 100%;
+}
+.setRouterAddressDiv1 {
+  display: flex;
+  flex-direction: column;
+  color: #89a98e;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.setRouterAddressInput {
+  padding: 15px;
+  width: 376px;
+  border-radius: 13px;
+  background: none;
+  border: solid 2px #526555;
+  color: silver;
+}
+.setRouterAddressBtn {
+  height: 100%;
+  padding: 10px;
+  width: 119px;
+  border-radius: 10px;
+  border: none;
+  background: #229e54;
+  color: #fff;
+}

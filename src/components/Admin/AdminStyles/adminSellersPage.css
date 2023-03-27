@@ -151,12 +151,19 @@ button.PlaceBidDiv_Button {
 
 .approveProdButton_btn {
   padding: 15px;
-  width: 200px;
+  padding: 10px;
+  width: 89px;
   border-radius: 10px;
   border: none;
   background: #229e54;
   color: #fff;
   margin: auto;
+  font-size: 14px;
+}
+.approveProdButton_btn:disabled {
+  background: #446250;
+  color: #7d9887;
+  cursor: not-allowed;
 }
 .filter_table_area_1_search {
   position: relative;

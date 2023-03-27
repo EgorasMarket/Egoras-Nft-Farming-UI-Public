@@ -16,6 +16,7 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+// const { REACT_APP_EGC_ADDRESS, REACT_APP_EUSD_ADDRESS } = process.env;
 import Web3 from "web3";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { config } from "../../../actions/Config";
@@ -23,11 +24,19 @@ import CheckIcon from "@mui/icons-material/Check";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { Step1Div } from "./SubSteps/Step1Div";
 import { Step2Div } from "./SubSteps/Step2Div";
+import UpdatedErrorModal from "../../Dashboard/DashBoardPages/UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedErrorModal";
+import UpdatedSuccessModal from "../../Dashboard/DashBoardPages/UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import {
   getConfiguration,
-  monthlyPlan,
-  semiAnnuallyPlan,
+  unlockMemberShipEgcToken,
+  checkAllowanceMembership,
+  transactReceipt,
 } from "../../../web3/index";
+import {
+  monthlyPlanSubScribe,
+  semiAnnuallyPlanSubScribe,
+  annuallyPlanSubScribe,
+} from "../../../web3/index2.js";
 const MemberShipPage = () => {
   const context = useWeb3React();
   const {
@@ -43,8 +52,7 @@ const MemberShipPage = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [subScription, setSubScription] = useState("inactive");
   const [fundSuccess, setFundSuccess] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+
   const [fundDisable, setFundDisable] = useState(false);
   const [fundError, setFundError] = useState(false);
   const [isLoading3, setIsLoading3] = useState(false);
@@ -52,11 +60,23 @@ const MemberShipPage = () => {
   const [step2, setStep2] = useState(false);
   const [checkedMonth, setCheckedMonth] = useState(false);
   const [checkedSemiAnnual, setcheckedSemiAnnual] = useState(false);
+  const [userConnected, setUserConnected] = useState(false);
   const [checkedYear, setCheckedYear] = useState(false);
   const [checkAgree, setCheckAgree] = useState(false);
   const [monthAmount, setMonthAmount] = useState("0");
   const [semiAnnualAmount, setSemiAnnualAmount] = useState("0");
   const [AnnualAmount, setAnnualAmount] = useState("0");
+  const [unlockBtn, setUnlockBtn] = useState(true);
+  const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
+  const [successModal, setSuccessModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [Disable, setDisable] = useState(false);
+  const [text, setText] = useState(
+    "Transacting with blockchain, please wait..."
+  );
   const checkMonthBox = () => {
     setCheckedMonth(true);
     setcheckedSemiAnnual(false);
@@ -101,18 +121,142 @@ const MemberShipPage = () => {
       setAnnualAmount(resAnnualAmount);
     }
   });
-  const subscribe = async () => {
-    const res = await monthlyPlan(
-      "0x1DEDA7AC812c8D5fe5cd39FcD520B8C8271F4768",
+  useEffect(() => {
+    if (account) {
+      setUserConnected(true);
+    } else {
+      setUserConnected(false);
+    }
+  }, [account]);
+
+  const UnlockToken = async (e) => {
+    setIsLoading(true);
+    setDisable(true);
+    let ret = await unlockMemberShipEgcToken(
+      parseEther("180000000000000000000000000000000000", "wei").toString(),
       library.getSigner()
     );
-    console.log(res, "somto8uhhhg");
-    console.log(res.status, "somto8uhhhg");
+    console.log(ret);
+    if (ret.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      localStorage.setItem("unlocking", true);
+      localStorage.setItem("unlockingHash", ret.message);
+      setUnlockBtn(true);
+    } else {
+      if (ret.message.code == 4001) {
+        console.log(ret);
+      }
+      console.log(ret);
+      setErrorModal(true);
+      setErrorMessage(ret.message.reason);
+      setIsLoading(false);
+      setDisable(false);
+    }
+  };
+  // setInterval(() => {
+  //   if (localStorage.getItem("unlocking") == "true") {
+  //     transactReceipt(localStorage.getItem("unlockingHash"), library).then(
+  //       function (env) {
+  //         console.log("running Interval", env);
+  //         if (env.status == true && env.message !== null) {
+  //           if (env.message.confirmations > 2) {
+  //             // setStage("success");
+  //             // setHash(localStorage.getItem("unlockingHash"));
+  //             // setIsLoading(false);
+
+  //             localStorage.setItem("unlocking", false);
+  //           }
+  //         }
+  //       }
+  //     );
+  //   } else {
+  //     // setStage("error");
+  //   }
+  // }, 1000);
+  useEffect(
+    async (e) => {
+      if (account) {
+        let check = await checkAllowanceMembership(
+          account,
+          parseEther(monthAmount.toString(), "wei").toString(),
+          library.getSigner()
+        );
+        console.log(check);
+        setUnLockCheckStatus(check.status);
+        setUnlockBtn(check.status);
+      }
+    },
+    [account, unLockCheckStatus]
+  );
+  const subscribe = async () => {
+    setIsLoading(true);
+    setDisable(true);
+    let res = await monthlyPlanSubScribe(library.getSigner());
+    console.log(res);
+    if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage("You've successfully Subscribed for 1 month");
+    } else {
+      if (res.message.code == 4001) {
+        console.log(res);
+      }
+      console.log(res);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message.reason);
+    }
   };
   const subscribe2 = async () => {
-    const res = await semiAnnuallyPlan(library.getSigner());
-    console.log(res, "somto8uhhhg");
-    console.log(res.status, "somto8uhhhg");
+    setIsLoading(true);
+    setDisable(true);
+    let res = await semiAnnuallyPlanSubScribe(library.getSigner());
+    console.log(res);
+    if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage("You've successfully Subscribed for 6 months");
+    } else {
+      if (res.message.code == 4001) {
+        console.log(res);
+      }
+      console.log(res);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message.reason);
+    }
+  };
+  const subscribe3 = async () => {
+    setIsLoading(true);
+    setDisable(true);
+    let res = await annuallyPlanSubScribe(library.getSigner());
+    console.log(res);
+    if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage("You've successfully Subscribed for 1 year");
+    } else {
+      if (res.message.code == 4001) {
+        console.log(res);
+      }
+      console.log(res);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message.reason);
+    }
+  };
+  const CloseSuccessModal = () => {
+    setSuccessModal(false);
+  };
+  const CloseErrorModal = () => {
+    setErrorModal(false);
   };
   return (
     <section className="joinCooperativeDiv">
@@ -148,12 +292,31 @@ const MemberShipPage = () => {
               semiAnnualAmount={semiAnnualAmount}
               monthAmount={monthAmount}
               AnnualAmount={AnnualAmount}
-              subscribe={subscribe}
+              Subscribe={subscribe}
+              Subscribe2={subscribe2}
+              Subscribe3={subscribe3}
+              unlockBtn={unlockBtn}
+              UnlockToken={UnlockToken}
+              account={userConnected}
+              disable={Disable}
+              isLoading={isLoading}
             />
           </div>
-          {/* ) : null} */}
         </div>
       </div>
+      {errorModal ? (
+        <UpdatedErrorModal
+          errorMessage={errorMessage}
+          closeModal={CloseErrorModal}
+        />
+      ) : null}
+      {successModal ? (
+        <UpdatedSuccessModal
+          btnRoute={true}
+          successMessage={successMessage}
+          route="/app"
+        />
+      ) : null}
     </section>
   );
 };

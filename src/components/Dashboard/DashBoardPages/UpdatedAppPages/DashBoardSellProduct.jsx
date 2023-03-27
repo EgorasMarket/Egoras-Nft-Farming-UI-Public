@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./UpdatedAppPagesStyles/dashboardSellProduct.css";
 import { API_URL } from "../../../../actions/types";
 import axios from "axios";
@@ -7,6 +7,9 @@ import ImageIcon from "@mui/icons-material/Image";
 import CloseIcon from "@mui/icons-material/Close";
 import { config } from "../../../../actions/Config";
 import { parseEther, formatEther } from "@ethersproject/units";
+import ScaleLoader from "react-spinners/ScaleLoader";
+import UpdatedSuccessModal from "./UpdatedSuccessErrorModals/UpdatedSuccessModal";
+import UpdatedErrorModal from "./UpdatedSuccessErrorModals/UpdatedErrorModal";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -85,6 +88,12 @@ const DashBoardSellProduct = () => {
   const [imageSrc, setImageSrc] = useState("");
   const [imageSrc2, setImageSrc2] = useState("");
   const [imageSrc3, setImageSrc3] = useState("");
+  const [successModal, setSuccessModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [Disable, setDisable] = useState(false);
   const fileInputRef = useRef();
   const fileInputRef2 = useRef();
   const fileInputRef3 = useRef();
@@ -141,27 +150,27 @@ const DashBoardSellProduct = () => {
     const conCatProdName = ` ${prodName}_${prodId}`;
     const res = await listProduct(
       conCatProdName,
-      saleAmount,
+      parseEther(saleAmount.toString(), "wei").toString(),
       library.getSigner()
     );
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
 
-    // if (check.status == true) {
-    //   let ret = await lendUS(
-    //     txnhash,
-    //     parseEther(formData.BackAmount.toString(), "wei").toString(),
-    //     currentTarget,
-    //     library.getSigner()
-    //   );
-    //   console.log(ret.status);
-    //   if (ret.status == true) {
-    //   } else if (ret.status == false) {
-    //   }
-    // } else {
-    // }
+    if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage("You've successfully placed " + prodName + " for sale");
+    } else {
+      setErrorModal(true);
+      setErrorMessage(res.message.reason);
+      setIsLoading(false);
+      setDisable(false);
+    }
   };
   const UploadProduct = async () => {
+    setIsLoading(true);
+    setDisable(true);
     const formData = new FormData();
 
     console.log(account);
@@ -194,6 +203,11 @@ const DashBoardSellProduct = () => {
       }
     } catch (err) {
       console.log(err);
+      console.log(err);
+      setErrorModal(true);
+      setErrorMessage(err.message);
+      setIsLoading(false);
+      setDisable(false);
     }
   };
   const handleNameChange = (event) => {
@@ -216,7 +230,35 @@ const DashBoardSellProduct = () => {
     console.log(event.target.value);
     //console.log(event.target.value);
   };
-
+  useEffect(() => {
+    if (
+      prodName == "" ||
+      brandName == "" ||
+      saleAmount == "" ||
+      prodCondition == "" ||
+      imageSrc == "" ||
+      imageSrc2 == "" ||
+      imageSrc3 == ""
+    ) {
+      setDisable(true);
+    } else {
+      setDisable(false);
+    }
+  }, [
+    prodName,
+    brandName,
+    saleAmount,
+    prodCondition,
+    imageSrc,
+    imageSrc2,
+    imageSrc3,
+  ]);
+  const CloseSuccessModal = () => {
+    setSuccessModal(false);
+  };
+  const CloseErrorModal = () => {
+    setErrorModal(false);
+  };
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -463,17 +505,44 @@ const DashBoardSellProduct = () => {
               {/* ========================= */}
               {/* ========================= */}
               <div className="sell_container_body_cont1">
-                <button
-                  className="sell_container_body_cont1_submit_btn"
-                  onClick={UploadProduct}
-                >
-                  Upload Product
-                </button>
+                {!account ? (
+                  <button
+                    disabled={true}
+                    className="sell_container_body_cont1_submit_btn"
+                  >
+                    Connect Wallet
+                  </button>
+                ) : (
+                  <button
+                    disabled={Disable}
+                    className="sell_container_body_cont1_submit_btn"
+                    onClick={UploadProduct}
+                  >
+                    {isLoading ? (
+                      <ScaleLoader color="#24382b" size={10} height={20} />
+                    ) : (
+                      <> Upload Product</>
+                    )}
+                  </button>
+                )}
               </div>
             </div>
           </div>
         </div>
       </section>
+      {errorModal ? (
+        <UpdatedErrorModal
+          errorMessage={errorMessage}
+          closeModal={CloseErrorModal}
+        />
+      ) : null}
+      {successModal ? (
+        <UpdatedSuccessModal
+          btnRoute={true}
+          successMessage={successMessage}
+          route="/app/user/sales"
+        />
+      ) : null}
     </div>
   );
 };

@@ -6,6 +6,76 @@
   padding-top: 3em;
   background-image: linear-gradient(227deg, black, #080c0a, #21382a);
 }
+.dark .kuZfvr {
+  background: linear-gradient(
+    to right,
+    rgba(56, 98, 73, 0.1) 5%,
+    rgb(44 98 66 / 80%) 15%,
+    rgb(47 127 79 / 90%) 50%,
+    rgb(38 113 68 / 80%) 85%,
+    rgba(56, 98, 73, 0.1) 95%
+  ) !important;
+  -moz-animation: 0.5s ease-in-out 0.5s infinite loading !important;
+  -webkit-animation: 0.5s ease-in-out 0.5s infinite loading !important;
+  animation: 0.5s ease-in-out 0.5s infinite loading !important;
+}
+.dark .kScEZj {
+  background: linear-gradient(
+    to right,
+    rgba(56, 98, 73, 0.1) 5%,
+    rgb(44 98 66 / 80%) 15%,
+    rgb(47 127 79 / 90%) 50%,
+    rgb(38 113 68 / 80%) 85%,
+    rgba(56, 98, 73, 0.1) 95%
+  ) !important;
+  -moz-animation: 0.5s ease-in-out 0.5s infinite loading !important;
+  -webkit-animation: 0.5s ease-in-out 0.5s infinite loading !important;
+  animation: 0.5s ease-in-out 0.5s infinite loading !important;
+}
+.dark .ijJtva {
+  background: linear-gradient(
+    to right,
+    rgba(56, 98, 73, 0.1) 5%,
+    rgb(44 98 66 / 80%) 15%,
+    rgb(47 127 79 / 90%) 50%,
+    rgb(38 113 68 / 80%) 85%,
+    rgba(56, 98, 73, 0.1) 95%
+  ) !important;
+  -moz-animation: 0.5s ease-in-out 0.5s infinite loading !important;
+  -webkit-animation: 0.5s ease-in-out 0.5s infinite loading !important;
+  animation: 0.5s ease-in-out 0.5s infinite loading !important;
+}
+.dark .bpoGkz {
+  background: linear-gradient(
+    to right,
+    rgba(56, 98, 73, 0.1) 5%,
+    rgb(44 98 66 / 80%) 15%,
+    rgb(47 127 79 / 90%) 50%,
+    rgb(38 113 68 / 80%) 85%,
+    rgba(56, 98, 73, 0.1) 95%
+  ) !important;
+  -moz-animation: 0.5s ease-in-out 0.5s infinite loading !important;
+  -webkit-animation: 0.5s ease-in-out 0.5s infinite loading !important;
+  animation: 0.5s ease-in-out 0.5s infinite loading !important;
+}
+.selectPlanDiv2_area1_cont1 .sc-bdVaJa.jZjrmP {
+  border-radius: 50%;
+}
+.sc-bdVaJa {
+  border-radius: 8px;
+}
+.selectPlanDiv2_area1_cont2.contentLoad {
+  width: 100%;
+}
+.selectPlanDiv2_area1_cont2_head_txt.contentLoad {
+  width: 100px;
+}
+.selectPlanDiv2_area1_cont2_head_price.contentLoad {
+  width: 100px;
+}
+.selectPlanDiv2_area1_cont2_body.contentLoad {
+  margin-top: 1em;
+}
 .selectPlanDiv2_area1_cont2_head_price_span {
   font-size: 19px;
   font-weight: 500;
@@ -618,17 +688,17 @@ video.video-poster {
   background: #0b110c;
   /* background-image: linear-gradient(221deg, black, #080c0a, #21382a); */
 }
-.how_it_works_section {
+/* .how_it_works_section {
   position: relative;
   padding: 6em 0em;
   background: #f1f1f1;
   color: rgb(0, 0, 0);
-}
-.dark .how_it_works_section {
+} */
+/* .dark .how_it_works_section {
   background: #1e1e1e;
   background-image: linear-gradient(227deg, black, #080c0a, #21382a);
   color: #fff;
-}
+} */
 .egorasVideoSection {
   position: relative;
   padding: 4em 0em;
@@ -861,10 +931,7 @@ px
   font-weight: 600;
   margin-bottom: 1em;
 }
-.how_it_works_area_body {
-  display: flex;
-  gap: 25px;
-}
+
 .benefits_section1 {
   position: relative;
   padding: 6em 0em;

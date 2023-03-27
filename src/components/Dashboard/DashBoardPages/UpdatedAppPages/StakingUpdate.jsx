@@ -11,6 +11,9 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Nodata from "../nodataComponent/Nodata";
 import { config } from "../../../../actions/Config";
 import { parseEther, formatEther } from "@ethersproject/units";
+import ScaleLoader from "react-spinners/ScaleLoader";
+import UpdatedSuccessModal from "./UpdatedSuccessErrorModals/UpdatedSuccessModal";
+import UpdatedErrorModal from "./UpdatedSuccessErrorModals/UpdatedErrorModal";
 import Web3 from "web3";
 import {
   AreaChart,
@@ -30,34 +33,12 @@ import {
 import {
   annually,
   monthly,
-  listProduct,
-  lendUS,
-  takeDividend,
-  takeBackLoan,
-  getTotalLended,
-  getInvestorsDividend,
-  userStats,
-  system,
-  burnAccumulatedDividend,
-  checkAllowance,
-  unluckToken,
-  lend,
-  getUserStats,
-  transactReceipt,
-  getPrice,
   getTickerInfo,
   tokenBalance,
-  open,
-  getLatestLoan,
-  repay,
-  topup,
   takeRoyalty,
-  draw,
-  checkAllowanceL,
-  unluckToken2,
-  getEgcSmartContractBalnce,
 } from "../../../../web3/index";
 import { getDate, getMonth } from "date-fns";
+import { POPULATE_STAKE_INFO } from "../../../../services/stakeServices";
 
 export const DurationDiv = ({ addMonthly, addYearly, SelectedDuration }) => {
   return (
@@ -116,10 +97,21 @@ const StakingUpdate = () => {
   const [base, setBase] = useState("");
   const [asset, setAsset] = useState("");
   const [lockAmount, setLockAmount] = useState("");
+  const [successModal, setSuccessModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [lockDate, setLockDate] = useState(null);
   const [activeTab, setActiveTab] = useState("lock");
   const [estimatedRewardAmnt, setEstimatedRewardAmnt] = useState(0);
   const [tokenBal, setTokenBal] = useState(0.0);
+  const [isLoading, setIsLoading] = useState(false);
+  const [Disable, setDisable] = useState(false);
+  const [LockedTransactions, setLockedTransactions] = useState([]);
+  const [UniqueLockedTransactions, setUniqueLockedTransactions] = useState([]);
+
+  const [myAssetInfo, setMyAssetInfo] = useState({});
+  const [totalAssetInfo, setTotalAssetInfo] = useState({});
 
   var btc = [
     {
@@ -1187,14 +1179,54 @@ const StakingUpdate = () => {
     },
   ];
   const StakeMonthly = async () => {
-    const res = await monthly(lockAmount, library.getSigner());
+    setIsLoading(true);
+    setDisable(true);
+    const res = await monthly(
+      parseEther(lockAmount.toString(), "wei").toString(),
+      library.getSigner()
+    );
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
+    if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage("You've successfully Locked your egc for 1 month");
+    } else {
+      if (res.message.code == 4001) {
+        console.log(res);
+      }
+      console.log(res);
+      setErrorModal(true);
+      setErrorMessage(res.message.reason);
+      setIsLoading(false);
+      setDisable(false);
+    }
   };
   const StakeYearly = async () => {
-    const res = await annually(lockAmount, library.getSigner());
+    setIsLoading(true);
+    setDisable(true);
+    const res = await annually(
+      parseEther(lockAmount.toString(), "wei").toString(),
+      library.getSigner()
+    );
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
+    if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage("You've successfully Locked your egc for 1 year");
+    } else {
+      if (res.message.code == 4001) {
+        console.log(res);
+      }
+      console.log(res);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message.reason);
+    }
   };
   const TakeReward = async () => {
     const res = await takeRoyalty(library.getSigner());
@@ -1206,14 +1238,14 @@ const StakingUpdate = () => {
     setActiveTab(target);
   };
   useEffect(() => {
-    let assetVal = "EGC";
-    let baseVal = "ENGN";
+    let assetVal = "EGCT";
+    let baseVal = "EUSDT";
     setAsset(assetVal);
     setBase(baseVal);
     let ticker = assetVal + "-" + baseVal;
     if (account) {
       getTickerInfo(ticker, library.getSigner()).then((data) => {
-        console.log(data.status);
+        // console.log(data);
         if (data.status) {
           console.log(data.message);
           tokenBalance(data.message.base, account, library.getSigner()).then(
@@ -1242,6 +1274,50 @@ const StakingUpdate = () => {
       });
     }
   }, [chainId, account, connector, baseBalance, coinBalance2, tokenBal]);
+  const CloseSuccessModal = () => {
+    setSuccessModal(false);
+  };
+  const CloseErrorModal = () => {
+    setErrorModal(false);
+  };
+  useEffect(async () => {
+    await axios
+      .get(API_URL + "/staking/all", null, config)
+      .then((data) => {
+        console.log(data);
+        console.log(data.data.data);
+        setLockedTransactions(data.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
+  useEffect(async () => {
+    await axios
+      .get(API_URL + "/staking/user/" + account, null, config)
+      .then((data) => {
+        console.log(data);
+        console.log(data.data.data);
+        setUniqueLockedTransactions(data.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await POPULATE_STAKE_INFO(
+        "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC"
+      );
+      console.log(response);
+      if (response.success === true) {
+        setMyAssetInfo(response.data.user);
+        setTotalAssetInfo(response.data.general);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -1427,7 +1503,8 @@ const StakingUpdate = () => {
                     My Locked EGC
                   </div>
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
-                    <span>20.03egc</span>
+                    {/* populate with real data */}
+                    <span>{Number.parseFloat(myAssetInfo.amount)}egc </span>
                     <span style={{ fontSize: "10px" }}>
                       (Max Duration: 6months)
                     </span>
@@ -1438,7 +1515,7 @@ const StakingUpdate = () => {
                     My Total Rewards
                   </div>
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
-                    200 eusd
+                    {Number.parseFloat(myAssetInfo.dailyRoyalty)} eusd
                   </div>
                 </div>
                 <div
@@ -1449,7 +1526,7 @@ const StakingUpdate = () => {
                     Claimed Rewards
                   </div>
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
-                    50 eusd
+                    {Number.parseFloat(myAssetInfo.totalRoyalty)} eusd
                   </div>
                 </div>
               </div>
@@ -1559,17 +1636,27 @@ const StakingUpdate = () => {
                     ) : null}
                     {SelectedDuration === "monthly" && lockAmount != "" ? (
                       <button
+                        disabled={Disable}
                         onClick={StakeMonthly}
                         className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
                       >
-                        Create Lock
+                        {isLoading ? (
+                          <ScaleLoader color="#24382b" size={10} height={20} />
+                        ) : (
+                          <>Create Lock</>
+                        )}
                       </button>
                     ) : SelectedDuration === "yearly" && lockAmount != "" ? (
                       <button
+                        disabled={Disable}
                         onClick={StakeYearly}
                         className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
                       >
-                        Create Lock
+                        {isLoading ? (
+                          <ScaleLoader color="#24382b" size={10} height={20} />
+                        ) : (
+                          <>Create Lock</>
+                        )}
                       </button>
                     ) : lockAmount === "" ? (
                       <button
@@ -1627,7 +1714,9 @@ const StakingUpdate = () => {
                     <div className="lending_area1_cont1_heading">
                       Total EGC Locked
                     </div>
-                    <div className="lending_area1_cont1_body_txt">20,000</div>
+                    <div className="lending_area1_cont1_body_txt">
+                      {Number.parseFloat(totalAssetInfo.amount, 2)}egc
+                    </div>
                     <div className="lending_area1_cont1_heading">
                       (32.84% Of EGC Supply)
                     </div>
@@ -1819,7 +1908,7 @@ const StakingUpdate = () => {
 // =====================
 // =====================
               </div> */}
-                    {Transactions.length <= 0 ? (
+                    {LockedTransactions.length <= 0 ? (
                       <div className="no_loans_div">
                         <div className="no_loans_div_cont">
                           <Nodata />
@@ -1835,48 +1924,61 @@ const StakingUpdate = () => {
                         {/* =============== */}
                         {/* =============== */}
                         {/* =============== */}
-                        {Transactions.map((data) => {
+                        {LockedTransactions.map((data) => {
+                          const date = new Date(data.time);
+                          const day = date
+                            .getUTCDate()
+                            .toString()
+                            .padStart(2, "0");
+                          const month = (date.getUTCMonth() + 1)
+                            .toString()
+                            .padStart(2, "0");
+                          const year = date.getUTCFullYear();
+                          const formattedDate = `${day}/${month}/${year}`;
+                          console.log(formattedDate);
                           return (
                             <tr className="stakingTable_body_row ">
                               <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
                                 <div className="value_dolls_div">
-                                  {data.action}
+                                  Create Lock
                                   <div className="value_dolls_div_val">
-                                    {data.date}
+                                    {formattedDate}
+                                    {/* {data.time} */}
                                   </div>
                                 </div>
                               </td>
                               <td className="stakingTable_body_row_data">
                                 <div className="value_dolls_div2">
-                                  {data.action === "Create Lock" ? (
+                                  {/* {data.action === "Create Lock" ? (
                                     <>+ {data.amount} EGC</>
                                   ) : (
                                     <>- {data.amount} eUSD</>
-                                  )}
-                                  <div className="value_dolls_div_val">
+                                  )} */}
+                                  {parseFloat(data.amount).toFixed(2)} EGC
+                                  {/* <div className="value_dolls_div_val">
                                     $2,406.66
-                                  </div>
+                                  </div> */}
                                 </div>
                               </td>
                               <td className="stakingTable_body_row_data">
                                 <div className="stakingTable_body_row_data_blockies_">
                                   <Blockies
-                                    seed={data.address}
+                                    seed={data.user}
                                     size={8}
                                     scale={4}
                                     className="blockies_icon"
                                   />
-                                  {`${data.address.slice(
+                                  {`${data.user.slice(
                                     0,
                                     6
-                                  )}...${data.address.slice(39, 42)}`}
+                                  )}...${data.user.slice(39, 42)}`}
                                 </div>
                               </td>
                               <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
-                                {`${data.txnHash.slice(
-                                  0,
-                                  6
-                                )}...${data.txnHash.slice(63, 66)}`}
+                                {`${data.tx.slice(0, 6)}...${data.tx.slice(
+                                  63,
+                                  66
+                                )}`}
                                 <OpenInNewIcon className="tx_hash_link_icon" />
                               </td>
                             </tr>
@@ -1900,6 +2002,19 @@ const StakingUpdate = () => {
           </div>
         </div>
       </section>
+      {errorModal ? (
+        <UpdatedErrorModal
+          errorMessage={errorMessage}
+          closeModal={CloseErrorModal}
+        />
+      ) : null}
+      {successModal ? (
+        <UpdatedSuccessModal
+          btnRoute={true}
+          successMessage={successMessage}
+          route="/app/staking/egc"
+        />
+      ) : null}
     </div>
   );
 };
