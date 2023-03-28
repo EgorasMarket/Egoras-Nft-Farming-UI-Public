@@ -487,7 +487,7 @@ const Home = () => {
                 </p>
                 <p className="span4b-txts">
                   Convert new and used items to NFTs, trade physical-backed
-                  tokens earn money, and contribute to environmental
+                  NFTs, earn money, and contribute to environmental
                   sustainability.
                 </p>
               </div>
