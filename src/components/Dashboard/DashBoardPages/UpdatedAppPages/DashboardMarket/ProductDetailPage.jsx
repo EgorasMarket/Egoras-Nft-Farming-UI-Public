@@ -19,31 +19,21 @@ import { numberWithCommas } from "../../../../../static";
 // import Carousel from "react-multi-carousel";
 // import { UpdatedMarketCard } from "../UpdatedMarketPage/UpdatedMarketCard/UpdatedMarketCard";
 
+import { ShimmerText, ShimmerPostDetails } from "react-shimmer-effects";
 import "./DashboardMarketStyles/PowerDetailPage.css";
 import "./DashboardMarketStyles/updatedItemDetailPage.css";
+import { GET_UPLOADED_PRODUCT_BY_ID } from "../../../../../services/productServices";
 
-const ProductDetailPage = () => {
+const ProductDetailPage = ({ match }) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
     },
   };
-  // console.log(match.params.productName);
-  // const [payload, setPayload] = useState([]);
-  // const [quantity, setQuantity] = useState(1);
-  // const [loginSuccess, setLoginSuccess] = useState(false);
-  // const [purchaseCount, setPurchaseCount] = useState(0);
-  // const [shortId, setShortId] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [productDetail, setProductDetail] = useState({});
+  const [image, setProductImages] = useState([]);
 
-  // const [activeBg, setActiveBg] = useState("details");
-  // const [activeBg2, setActiveBg2] = useState("egoWallet");
-  // const [newSpec, setSpecification] = useState([]);
-  // const [componentLoading, setComponentLoading] = useState(false);
-  // const [moreImg, setMoreImg] = useState([]);
-  // const [authState, setAuthState] = useState({});
-  // const [loginModal, setLoginModal] = useState(false);
-
-  // console.log(match.params.productCategory)
   const images = [
     {
       original: "/img/dummyMarketImages/PhoneDummyImage.png",
@@ -59,70 +49,116 @@ const ProductDetailPage = () => {
     },
   ];
 
-  return (
-    <div className="other2 asset_other2">
-      <section className="collateral-assets-section no-bg no_pad">
-        <div className="container">
-          <div className="updated_itemdisplay">
-            <div className="updated_itemdisplay_area1">
-              {/* {moreImg.length === 0 ? (
+  useEffect(() => {
+    const { address, name } = match.params;
+
+    console.log(match.params, "goodluck ");
+
+    ///call the api to populate the data
+
+    const fetchData = async () => {
+      const response = await GET_UPLOADED_PRODUCT_BY_ID(address);
+
+      if (response.success) {
+        setLoading(false);
+        setProductDetail(response.data);
+        const img = JSON.parse(response.data.user_images);
+        for (const data of img) {
+          const payload = {
+            original: data,
+            thumbnail: data,
+          };
+          image.push(payload);
+        }
+
+        console.log(image);
+      }
+    };
+
+    fetchData();
+
+    //use the adress and make the API call
+  }, []);
+  if (loading)
+    return (
+      <div className="other2 asset_other2">
+        <div className="collateral-assets-section no-bg no_pad">
+          <div className="container">
+            <ShimmerPostDetails card cta variant="SIMPLE" />
+
+            <div className="updated_itemdisplay">
+              <div className="updated_itemdisplay_area1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+
+  if (loading === false)
+    return (
+      <div className="other2 asset_other2">
+        <section className="collateral-assets-section no-bg no_pad">
+          <div className="container">
+            <div className="updated_itemdisplay">
+              <div className="updated_itemdisplay_area1">
+                {/* {moreImg.length === 0 ? (
                                 <img src={payload.product_image} alt="" />
                             ) : ( */}
-              <ImageGallery
-                items={images}
-                thumbnailPosition="left"
-                showBullets={true}
-                showFullscreenButton={false}
-                autoPlay={true}
-              />
-              {/* )} */}
-            </div>
-            {/* ========================= */}
-            {/* ========================= */}
-            {/* ========================= */}
-            {/* ========================= */}
+                <ImageGallery
+                  items={image}
+                  thumbnailPosition="left"
+                  showBullets={true}
+                  showFullscreenButton={false}
+                  autoPlay={true}
+                />
+                {/* )} */}
+              </div>
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
 
-            {/* ========================= */}
-            {/* ========================= */}
-            {/* ========================= */}
-            {/* ========================= */}
-            <div className="updated_itemdisplay_area2">
-              <div className="updated_itemdisplay_area2_cont1" id="addItem">
-                <div className="updated_itemdisplay_area2_cont1_condition_tag_div">
-                  <a
-                    href=""
-                    className="updated_itemdisplay_area2_cont1_product_name_link"
-                  >
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
+              {/* ========================= */}
+              <div className="updated_itemdisplay_area2">
+                <div className="updated_itemdisplay_area2_cont1" id="addItem">
+                  <div className="updated_itemdisplay_area2_cont1_condition_tag_div">
+                    <a
+                      href=""
+                      className="updated_itemdisplay_area2_cont1_product_name_link"
+                    >
+                      {/* {match.params.productName} */}
+                      {productDetail.product_name}
+                    </a>
+                  </div>
+                  <div className="updated_itemdisplay_area2_cont1_product_name">
                     {/* {match.params.productName} */}
-                    Iphone 13pro max
-                  </a>
+                    {productDetail.product_name}
+                  </div>
+                  <div className="updated_itemdisplay_area2_cont1_rating_div">
+                    <span className="updated_itemdisplay_area2_cont1_rating_div1_productCode">
+                      {/* {payload.p_code} - {payload.product_category_code} */}
+                      5678g8
+                    </span>
+                    <StarRating
+                      rating={4.35}
+                      style={{ marginBottom: "0px !important" }}
+                    />
+                  </div>
+                  <div className="updated_itemdisplay_area2_cont1_rating_div">
+                    <span className="estimated_delivery">
+                      Est. Delivery: Within 14days
+                    </span>
+                  </div>
                 </div>
-                <div className="updated_itemdisplay_area2_cont1_product_name">
-                  {/* {match.params.productName} */}
-                  Iphone 13pro max
+                <div className="power_details_series">
+                  <div className="power_details_series_cont1">Series</div>
+                  <div className="power_details_series_cont2">Hybrid</div>
                 </div>
-                <div className="updated_itemdisplay_area2_cont1_rating_div">
-                  <span className="updated_itemdisplay_area2_cont1_rating_div1_productCode">
-                    {/* {payload.p_code} - {payload.product_category_code} */}
-                    5678g8
-                  </span>
-                  <StarRating
-                    rating={4.35}
-                    style={{ marginBottom: "0px !important" }}
-                  />
-                </div>
-                <div className="updated_itemdisplay_area2_cont1_rating_div">
-                  <span className="estimated_delivery">
-                    Est. Delivery: Within 14days
-                  </span>
-                </div>
-              </div>
-              <div className="power_details_series">
-                <div className="power_details_series_cont1">Series</div>
-                <div className="power_details_series_cont2">Hybrid</div>
-              </div>
-              {/* <hr /> */}
-              {/* <div className="add_quantity_div">
+                {/* <hr /> */}
+                {/* <div className="add_quantity_div">
                 <div className="add_quantity_div1">
                   <div className="quantity_div_title">Quantity:</div>
                   <div className="quantity_div_body">
@@ -177,11 +213,11 @@ const ProductDetailPage = () => {
                   </div>
                 </div>
               </div> */}
-              <div className="power_details_details_div">
-                <div className="power_details_details_div_Head">
-                  Specifications
-                </div>
-                {/* {newSpec.map((data) => {
+                <div className="power_details_details_div">
+                  <div className="power_details_details_div_Head">
+                    Specifications
+                  </div>
+                  {/* {newSpec.map((data) => {
                   let eee = data.split(":");
                   // console.log(eee);
                   return (
@@ -195,90 +231,90 @@ const ProductDetailPage = () => {
                     </div>
                   );
                 })} */}
-              </div>
-              {/* =========== */}
-              {/* =========== */}
-              {/* =========== */}
-              {/* =========== */}
-              {/* =========== */}
-              {/* =========== */}
+                </div>
+                {/* =========== */}
+                {/* =========== */}
+                {/* =========== */}
+                {/* =========== */}
+                {/* =========== */}
+                {/* =========== */}
 
-              {/* =========== */}
-              {/* =========== */}
-              {/* =========== */}
+                {/* =========== */}
+                {/* =========== */}
+                {/* =========== */}
 
-              {/* =========== */}
-              {/* =========== */}
-              {/* =========== */}
+                {/* =========== */}
+                {/* =========== */}
+                {/* =========== */}
 
-              <div className="Updated_itemdisplay_payment_proceed_div">
-                <div className="Updated_itemdisplay_payment_proceed_div_1">
-                  <Lottie
-                    animationData={walletIcon}
-                    loop={true}
-                    autoPlay={true}
-                    className="Updated_itemdisplay_payment_proceed_div_1_cont1_icon"
-                    preserveAspectRatio="xMidYMid meet"
-                  />
-                  <div className="Updated_itemdisplay_payment_proceed_div_1_cont1">
-                    <div className="Updated_itemdisplay_payment_proceed_div_1_cont1_txt">
-                      One-time payment
-                    </div>
-                    <div className="Updated_itemdisplay_payment_proceed_div_1_cont2">
-                      Pay via your Egoras wallet or Fort. Excludes taxes and
-                      shipping.
+                <div className="Updated_itemdisplay_payment_proceed_div">
+                  <div className="Updated_itemdisplay_payment_proceed_div_1">
+                    <Lottie
+                      animationData={walletIcon}
+                      loop={true}
+                      autoPlay={true}
+                      className="Updated_itemdisplay_payment_proceed_div_1_cont1_icon"
+                      preserveAspectRatio="xMidYMid meet"
+                    />
+                    <div className="Updated_itemdisplay_payment_proceed_div_1_cont1">
+                      <div className="Updated_itemdisplay_payment_proceed_div_1_cont1_txt">
+                        One-time payment
+                      </div>
+                      <div className="Updated_itemdisplay_payment_proceed_div_1_cont2">
+                        Pay via your Egoras wallet or Fort. Excludes taxes and
+                        shipping.
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* =========== */}
-              {/* =========== */}
-              {/* =========== */}
-              {/* =========== */}
-              {/* =========== */}
-              {/* =========== */}
+                {/* =========== */}
+                {/* =========== */}
+                {/* =========== */}
+                {/* =========== */}
+                {/* =========== */}
+                {/* =========== */}
 
-              {/* =========== */}
-              {/* =========== */}
-              {/* =========== */}
-              <div className="Updated_itemdisplay_payment_proceed_div_2">
-                <div className="Updated_itemdisplay_payment_proceed_div_2_area1">
-                  {/* {match.params.productName} */}
-                  Iphone 13pro max
-                </div>
-
-                <div className="Updated_itemdisplay_payment_proceed_div_2_area3">
-                  <Lottie
-                    animationData={storeIcon}
-                    loop={true}
-                    autoPlay={true}
-                    className="Updated_itemdisplay_payment_proceed_div_2_area3_icon"
-                    preserveAspectRatio="xMidYMid meet"
-                  />
-
-                  <span className="Updated_itemdisplay_payment_proceed_div_2_area3_txt">
-                    In-Store Pickup: Available
-                  </span>
-                </div>
-                <div className="Updated_itemdisplay_payment_proceed_div_2_area4">
-                  <Lottie
-                    animationData={deliveryIcon}
-                    loop={true}
-                    autoPlay={true}
-                    className="Updated_itemdisplay_payment_proceed_div_2_area4_icon"
-                    preserveAspectRatio="xMidYMid slice"
-                  />
-
-                  <span className="Updated_itemdisplay_payment_proceed_div_2_area4_txt">
-                    Payment on devilery: Available
-                  </span>
-                </div>
-                <div className="Updated_itemdisplay_payment_proceed_div_2_area5">
-                  <div className="Updated_itemdisplay_payment_proceed_div_2_area5_area1">
-                    Unit Price
+                {/* =========== */}
+                {/* =========== */}
+                {/* =========== */}
+                <div className="Updated_itemdisplay_payment_proceed_div_2">
+                  <div className="Updated_itemdisplay_payment_proceed_div_2_area1">
+                    {/* {match.params.productName} */}
+                    Iphone 13pro max
                   </div>
-                  {/* {authState.subscription_status === "INACTIVE" ||
+
+                  <div className="Updated_itemdisplay_payment_proceed_div_2_area3">
+                    <Lottie
+                      animationData={storeIcon}
+                      loop={true}
+                      autoPlay={true}
+                      className="Updated_itemdisplay_payment_proceed_div_2_area3_icon"
+                      preserveAspectRatio="xMidYMid meet"
+                    />
+
+                    <span className="Updated_itemdisplay_payment_proceed_div_2_area3_txt">
+                      In-Store Pickup: Available
+                    </span>
+                  </div>
+                  <div className="Updated_itemdisplay_payment_proceed_div_2_area4">
+                    <Lottie
+                      animationData={deliveryIcon}
+                      loop={true}
+                      autoPlay={true}
+                      className="Updated_itemdisplay_payment_proceed_div_2_area4_icon"
+                      preserveAspectRatio="xMidYMid slice"
+                    />
+
+                    <span className="Updated_itemdisplay_payment_proceed_div_2_area4_txt">
+                      Payment on devilery: Available
+                    </span>
+                  </div>
+                  <div className="Updated_itemdisplay_payment_proceed_div_2_area5">
+                    <div className="Updated_itemdisplay_payment_proceed_div_2_area5_area1">
+                      Unit Price
+                    </div>
+                    {/* {authState.subscription_status === "INACTIVE" ||
                   authState.subscription_status === undefined ? (
                     <div className="Updated_itemdisplay_payment_proceed_div_2_area5_area2">
                       ₦{numberWithCommas(parseFloat(payload.amount).toFixed(2))}
@@ -288,13 +324,13 @@ const ProductDetailPage = () => {
                       ₦{numberWithCommas(parseFloat(payload.amount).toFixed(2))}
                     </div>
                   )} */}
-                  ₦600,000
-                </div>
-                <div className="Updated_itemdisplay_payment_proceed_div_2_area5">
-                  <div className="Updated_itemdisplay_payment_proceed_div_2_area5_area1">
-                    Sub Total
+                    ₦600,000
                   </div>
-                  {/* {authState.subscription_status === "INACTIVE" ||
+                  <div className="Updated_itemdisplay_payment_proceed_div_2_area5">
+                    <div className="Updated_itemdisplay_payment_proceed_div_2_area5_area1">
+                      Sub Total
+                    </div>
+                    {/* {authState.subscription_status === "INACTIVE" ||
                   authState.subscription_status === undefined ? (
                     <div className="Updated_itemdisplay_payment_proceed_div_2_area5_area2">
                       ₦
@@ -310,14 +346,14 @@ const ProductDetailPage = () => {
                       )}
                     </div>
                   )} */}
-                  ₦600,000
-                </div>
-
-                <div className="Updated_itemdisplay_payment_proceed_div_payment_way_div">
-                  <div className="Updated_itemdisplay_payment_proceed_div_payment_way_div_head">
-                    Choose Payment Method
+                    ₦600,000
                   </div>
-                  {/* {auth.user === null ? (
+
+                  <div className="Updated_itemdisplay_payment_proceed_div_payment_way_div">
+                    <div className="Updated_itemdisplay_payment_proceed_div_payment_way_div_head">
+                      Choose Payment Method
+                    </div>
+                    {/* {auth.user === null ? (
                     <button
                       className="continue_to_checkout_btn"
                       onClick={() => {
@@ -367,32 +403,32 @@ const ProductDetailPage = () => {
                       </div>
                     </div>
                   )} */}
-                  <div
-                    className="Updated_itemdisplay_payment_proceed_div_payment_way_cont1_active"
-                    id="smart_pay"
-                  >
-                    <span className="pay_via_check_mark_div">
-                      Pay via Smart Balance
-                    </span>
+                    <div
+                      className="Updated_itemdisplay_payment_proceed_div_payment_way_cont1_active"
+                      id="smart_pay"
+                    >
+                      <span className="pay_via_check_mark_div">
+                        Pay via Smart Balance
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      <section className="collateral-assets-section no-bg no_pad">
-        <div className="container">
-          <div className="product_specifications_area">
-            <div className="product_specifications_area_head">
-              <div
-                className="product_specifications_area_head_tab_active"
-                // onClick={changeBg}
-                id="details"
-              >
-                Product details
-              </div>
-              {/* <div
+        </section>
+        <section className="collateral-assets-section no-bg no_pad">
+          <div className="container">
+            <div className="product_specifications_area">
+              <div className="product_specifications_area_head">
+                <div
+                  className="product_specifications_area_head_tab_active"
+                  // onClick={changeBg}
+                  id="details"
+                >
+                  Product details
+                </div>
+                {/* <div
                 className={
                   activeBg === "spec"
                     ? "product_specifications_area_head_tab_active"
@@ -403,16 +439,17 @@ const ProductDetailPage = () => {
               >
                 Specifications
               </div> */}
+              </div>
+              <div
+                className="product_specifications_area_body"
+                // dangerouslySetInnerHTML={{ __html: payload.product_details }}
+              />
+              {productDetail.product_details}
             </div>
-            <div
-              className="product_specifications_area_body"
-              // dangerouslySetInnerHTML={{ __html: payload.product_details }}
-            />
           </div>
-        </div>
-      </section>
-    </div>
-  );
+        </section>
+      </div>
+    );
 };
 
 // const mapStateToProps1 = (state) => ({

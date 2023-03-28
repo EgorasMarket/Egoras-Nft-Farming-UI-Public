@@ -199,6 +199,8 @@ const Dashboard = ({ check, togglemakeDark }) => {
                   exact
                   path="/app/stake/vault/:asset/:base"
                   component={OpenVaultPage}
+
+                  
                 />
                 {/*  */}
                 {/* <Route

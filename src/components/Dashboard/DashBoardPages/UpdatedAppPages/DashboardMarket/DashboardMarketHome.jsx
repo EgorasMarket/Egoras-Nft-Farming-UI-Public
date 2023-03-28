@@ -355,7 +355,7 @@ const DashboardMarketHome = () => {
                           id={data.product_id}
                           img={data.product_images}
                           title={data.product_name}
-                          txnHash={data.product_id}
+                          txnHash={data.transaction_hash}
                           numberWithCommas={numberWithCommas}
                         />
                       ))}
