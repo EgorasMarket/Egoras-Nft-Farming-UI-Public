@@ -9,3 +9,4 @@ export const CANCELLED = "CANCELLED";
 export const API_URL = "https://egoras-v3-staging.egoras.com";
 // export const API_URL = "https://egorasv2.egoras.com";
 // export const API_URL = "https://egorasv2.egoras.com";
+// export const API_URL = "https://egorasv2.egoras.com";
