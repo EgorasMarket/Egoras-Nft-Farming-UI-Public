@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import "./stars.css";
 // import React from "react";
 import { Link } from "react-router-dom";
@@ -41,6 +41,7 @@ import { Mousewheel, Keyboard, Pagination } from "swiper";
 import "swiper/swiper.min.css";
 import "swiper/swiper-bundle.css";
 import "swiper/swiper-bundle.min.css";
+import { animateScroll as scroll, Events, scrollSpy } from "react-scroll";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -71,6 +72,7 @@ import {
   unluckToken2,
   getEgcSmartContractBalnce,
 } from "../../web3/index";
+
 const Home = () => {
   const context = useWeb3React();
 
@@ -453,6 +455,17 @@ const Home = () => {
     { img: "/img/FeaturedInLogos/FeaturedInLogos_6.svg" },
     { img: "/img/FeaturedInLogos/FeaturedInLogos_5.svg" },
   ];
+  // ===============
+  // ===============
+  // ===============
+  // ===============
+
+  // ===============
+  // ===============
+  // ===============
+  // ===============
+  // ===============
+  // ===============
   return (
     <div>
       {/* =================================================================================================================================================================================================================================================================== */}
@@ -593,133 +606,151 @@ const Home = () => {
       {/* ============================= */}
       {/* ============================= */}
       {/* ============================= */}
-      <section className="how_it_works_section">
+      <section className="how_it_works_possibleb">
         <div className="custom_container">
-          <div className="how_it_works_area">
-            <div className="how_it_works_area_title_area">
-              <div className="how_it_works_area_title_area1">
-                <div className="how_it_works_area_head">
+          <div className="how_it_works_possible_area">
+            <div className="how_it_works_possible_area_title_area">
+              <div className="how_it_works_possible_area_title_area1">
+                <div className="how_it_works_possible_area_head">
                   What's possible with EGCDAO
                 </div>
-                <div className="how_it_works_area_para">
+                <div className="how_it_works_possible_area_para">
                   Welcome to first open-source decentralized Egoras staking
                   pool. The smart-contract service guarantees
                 </div>
               </div>
-              <div className="how_it_works_area_title_area2">
-                <div className="how_it_works_area_title_area2_cont1">
-                  <div className="how_it_works_area_title_area2_cont1_txt">
-                    Finance
-                  </div>
-                  <div className="how_it_works_area_title_area2_cont1_img_div">
-                    <img
-                      src="/img/arrowDown.svg"
-                      alt=""
-                      className="how_it_works_area_title_area2_cont1_img"
-                    />
-                  </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      <section className="how_it_works_possible">
+        <div className="custom_container">
+          <div className="how_it_works_possible_area">
+            <div className="whatPossible_body_area_1">
+              <div className="whatPossible_body_area_1_cont1">
+                <img
+                  src="/img/egcDaoStakeImage.png"
+                  alt=""
+                  className="whatPossible_body_area_1_cont1_img"
+                />
+              </div>
+              <div className="whatPossible_body_area_1_cont2">
+                <div className="whatPossible_body_area_1_cont2_title">
+                  High Yield Staking Platform
                 </div>
-                <div className="how_it_works_area_title_area2_cont1">
-                  <div className="how_it_works_area_title_area2_cont1_txt">
-                    Finance
-                  </div>
-                  <div className="how_it_works_area_title_area2_cont1_img_div">
-                    <img
-                      src="/img/arrowDown.svg"
-                      alt=""
-                      className="how_it_works_area_title_area2_cont1_img"
-                    />
-                  </div>
+                <div className="whatPossible_body_area_1_cont2_para">
+                  By locking your EGC tokens on the platform for a specific
+                  duration, you can earn rewards in the form of a higher yield
+                  or annual percentage yield (APY) on the staked tokens. The
+                  locked EGC serves as collateral and provides liquidity for
+                  trade-in purchases. The APY rate that users can earn by
+                  staking their tokens is subject to variation depending on
+                  several factors such as the amount of tokens staked, duration
+                  of staking, and market conditions. Typically, users can expect
+                  a higher APY for longer staking periods.
                 </div>
-                <div className="how_it_works_area_title_area2_cont1">
-                  <div className="how_it_works_area_title_area2_cont1_txt">
-                    Finance
-                  </div>
-                  <div className="how_it_works_area_title_area2_cont1_img_div">
-                    <img
-                      src="/img/arrowDown.svg"
-                      alt=""
-                      className="how_it_works_area_title_area2_cont1_img"
-                    />
-                  </div>
+                <div className="whatPossible_body_area_1_cont2__btn_div">
+                  <button className="whatPossible_body_area_1_cont2__btn">
+                    {" "}
+                    Explore
+                  </button>
                 </div>
               </div>
             </div>
-            <div className="whatPossible_body_area">
-              {/* <Swiper
-                direction={"vertical"}
-                slidesPerView={1}
-                spaceBetween={0}
-                mousewheel={true}
-                pagination={{
-                  clickable: true,
-                }}
-                keyboard={true}
-                speed={900}
-                updateOnWindowResize={true}
-                modules={[Mousewheel, Keyboard, Pagination]}
-                className="PowerSwiper"
-              >
-
-                <SwiperSlide className="mySwiperDiv_Power" id="egr3Man">
-                  <div className="whatPossible_body_area_1">
-                    <div className="whatPossible_body_area_1_cont2">
-                      <div className="whatPossible_body_area_1_cont2_title">
-                        High Yield Staking Platform
-                      </div>
-                      <div className="whatPossible_body_area_1_cont2_para">
-                        By locking your EGC tokens on the platform for a
-                        specific duration, you can earn rewards in the form of a
-                        higher yield or annual percentage yield (APY) on the
-                        staked tokens. The locked EGC serves as collateral and
-                        provides liquidity for trade-in purchases. The APY rate
-                        that users can earn by staking their tokens is subject
-                        to variation depending on several factors such as the
-                        amount of tokens staked, duration of staking, and market
-                        conditions. Typically, users can expect a higher APY for
-                        longer staking periods.
-                      </div>
-                    </div>
-                    <div className="whatPossible_body_area_1_cont1">
-                      <img
-                        src="/img/egcDaoStakeImage.png"
-                        alt=""
-                        className="whatPossible_body_area_1_cont1_img"
-                      />
-                    </div>
-                  </div>
-                </SwiperSlide>
-   
-              </Swiper> */}
-              <div className="whatPossible_body_area_1">
-                <div className="whatPossible_body_area_1_cont2">
-                  <div className="whatPossible_body_area_1_cont2_title">
-                    High Yield Staking Platform
-                  </div>
-                  <div className="whatPossible_body_area_1_cont2_para">
-                    By locking your EGC tokens on the platform for a specific
-                    duration, you can earn rewards in the form of a higher yield
-                    or annual percentage yield (APY) on the staked tokens. The
-                    locked EGC serves as collateral and provides liquidity for
-                    trade-in purchases. The APY rate that users can earn by
-                    staking their tokens is subject to variation depending on
-                    several factors such as the amount of tokens staked,
-                    duration of staking, and market conditions. Typically, users
-                    can expect a higher APY for longer staking periods.
-                  </div>
-                  <div className="whatPossible_body_area_1_cont2__btn_div">
-                    <button className="whatPossible_body_area_1_cont2__btn">
-                      {" "}
-                      Explore
-                    </button>
-                  </div>
+          </div>
+        </div>
+      </section>
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      <section className="how_it_works_possible">
+        <div className="custom_container">
+          <div className="how_it_works_possible_area">
+            <div className="whatPossible_body_area_1b">
+              <div className="whatPossible_body_area_1_cont2b">
+                <div className="whatPossible_body_area_1_cont2_title2">
+                  High Yield Staking Platform
                 </div>
-                <div className="whatPossible_body_area_1_cont1">
-                  <img
-                    src="/img/egcDaoStakeImage.png"
-                    alt=""
-                    className="whatPossible_body_area_1_cont1_img"
-                  />
+                <div className="whatPossible_body_area_1_cont2_para">
+                  By locking your EGC tokens on the platform for a specific
+                  duration, you can earn rewards in the form of a higher yield
+                  or annual percentage yield (APY) on the staked tokens. The
+                  locked EGC serves as collateral and provides liquidity for
+                  trade-in purchases. The APY rate that users can earn by
+                  staking their tokens is subject to variation depending on
+                  several factors such as the amount of tokens staked, duration
+                  of staking, and market conditions. Typically, users can expect
+                  a higher APY for longer staking periods.
+                </div>
+                <div className="whatPossible_body_area_1_cont2__btn_div">
+                  <button className="whatPossible_body_area_1_cont2__btn">
+                    {" "}
+                    Explore
+                  </button>
+                </div>
+              </div>
+              <div className="whatPossible_body_area_1_cont1b">
+                <img
+                  src="/img/egcDaoStakeImage.png"
+                  alt=""
+                  className="whatPossible_body_area_1_cont1_img2"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      <section className="how_it_works_possible">
+        <div className="custom_container">
+          <div className="how_it_works_possible_area">
+            <div className="whatPossible_body_area_1">
+              <div className="whatPossible_body_area_1_cont1">
+                <img
+                  src="/img/egcDaoStakeImage.png"
+                  alt=""
+                  className="whatPossible_body_area_1_cont1_img"
+                />
+              </div>
+              <div className="whatPossible_body_area_1_cont2">
+                <div className="whatPossible_body_area_1_cont2_title">
+                  High Yield Staking Platform
+                </div>
+                <div className="whatPossible_body_area_1_cont2_para">
+                  By locking your EGC tokens on the platform for a specific
+                  duration, you can earn rewards in the form of a higher yield
+                  or annual percentage yield (APY) on the staked tokens. The
+                  locked EGC serves as collateral and provides liquidity for
+                  trade-in purchases. The APY rate that users can earn by
+                  staking their tokens is subject to variation depending on
+                  several factors such as the amount of tokens staked, duration
+                  of staking, and market conditions. Typically, users can expect
+                  a higher APY for longer staking periods.
+                </div>
+                <div className="whatPossible_body_area_1_cont2__btn_div">
+                  <button className="whatPossible_body_area_1_cont2__btn">
+                    {" "}
+                    Explore
+                  </button>
                 </div>
               </div>
             </div>
