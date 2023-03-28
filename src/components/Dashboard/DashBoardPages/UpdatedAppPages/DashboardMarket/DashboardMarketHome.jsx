@@ -3,6 +3,7 @@ import "../UpdatedAppPagesStyles/dashboardMarketHome.css";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Carousel from "react-multi-carousel";
+import { numberWithCommas } from "../../../../static/static";
 import { GET_ALL_UPLOADED_PRODUCTS } from "../../../../../services/productServices";
 import ProductModel from "./ProductModel";
 export const MarketHeader = () => {
@@ -244,14 +245,6 @@ const DashboardMarketHome = () => {
     },
   ];
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await GET_ALL_UPLOADED_PRODUCTS();
-      console.log(response);
-    };
-
-    fetchData();
-  }, []);
   console.log(Product);
   return (
     <div className="other2 asset_other2">
@@ -363,6 +356,7 @@ const DashboardMarketHome = () => {
                           img={data.product_images}
                           title={data.product_name}
                           txnHash={data.product_id}
+                          numberWithCommas={numberWithCommas}
                         />
                       ))}
                     </Carousel>
@@ -411,7 +405,11 @@ const DashboardMarketHome = () => {
                               {data.title}
                             </div>
                             <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount">
-                              {data.amount} eUSD
+                              {/* {data.amount} eUSD */}
+                              {numberWithCommas(
+                                parseFloat(data.amount).toFixed(2)
+                              )}{" "}
+                              eUSD
                               <span className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount_span">
                                 {" "}
                                 ~ (₦{data.amount * 750})

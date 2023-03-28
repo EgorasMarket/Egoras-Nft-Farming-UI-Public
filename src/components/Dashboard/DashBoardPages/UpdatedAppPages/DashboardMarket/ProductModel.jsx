@@ -1,12 +1,22 @@
 import React from "react";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 
-const ProductModel = ({ id, img, title, amount, txnHash }) => {
+const ProductModel = ({
+  id,
+  img,
+  title,
+  amount,
+  txnHash,
+  numberWithCommas,
+}) => {
+  let fff = JSON.parse(img);
+  // console.log(img);
+  // console.log(fff[1]);
   return (
     <div className="dashboardMarketPlaceBody2_div1_body_card" key={id}>
       <div className="dashboardMarketPlaceBody2_div1_body_card_img_div">
         <img
-          src={img}
+          src={fff[0]}
           alt=""
           className="dashboardMarketPlaceBody2_div1_body_card_img"
         />
@@ -16,7 +26,8 @@ const ProductModel = ({ id, img, title, amount, txnHash }) => {
           {title}
         </div>
         <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount">
-          {amount} eUSD
+          {/* {amount} eUSD */}
+          {numberWithCommas(parseFloat(amount).toFixed(2))} eUSD
           <span className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount_span">
             {" "}
             ~ (₦{amount * 750})
