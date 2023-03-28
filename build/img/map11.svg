@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>img_swap_dl</title>
+    <defs>
+        <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#5EAFE7" offset="0%"></stop>
+            <stop stop-color="#6E5DE7" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="dForce-Trade" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Connect-Wallet---1" transform="translate(-1034.000000, -268.000000)">
+            <g id="编组-12" transform="translate(1054.000000, 288.000000) rotate(-270.000000) translate(-1054.000000, -288.000000) translate(1034.000000, 268.000000)">
+                <circle id="椭圆形" fill="url(#linearGradient-1)" cx="20" cy="20" r="20"></circle>
+                <path d="M27.6974049,25.4620031 L15.0934818,12.8571429 L22.4213834,12.8571429 L20.2227205,15.0558057 L29.1631614,23.9962466 C29.1631614,23.9962466 28.6745759,24.4848321 27.6974049,25.4620031 Z M18.3689336,27.2278652 L20.5666608,25.0301659 L11.4285715,15.8911106 C11.4283426,15.8915257 11.9169318,15.4029364 12.8943393,14.4253429 L25.696858,27.2278652 L18.3689336,27.2278652 Z" id="形状" fill="url(#linearGradient-2)" fill-rule="nonzero" transform="translate(20.295866, 20.042504) rotate(-45.000000) translate(-20.295866, -20.042504) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,4 +1,5 @@
 import React from "react";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import "./UpdatedSuccessErrorModal.css";
 const UpdatedSuccessModal = ({
   successMessage,
@@ -6,6 +7,8 @@ const UpdatedSuccessModal = ({
   closeModal,
   btnClose,
   btnRoute,
+  txnHashDiv,
+  TxnHash,
 }) => {
   return (
     <div className="UpdatedSuccessModalDiv">
@@ -19,6 +22,16 @@ const UpdatedSuccessModal = ({
         </div>
         <div className="UpdatedSuccessModalDiv_Cont_title">Successful</div>
         <div className="UpdatedSuccessModalDiv_Cont_body">{successMessage}</div>
+        {txnHashDiv == true ? (
+          <a
+            href={`https://testnet.bscscan.com/tx/${TxnHash}`}
+            className="UpdatedSuccessModalDiv_Cont_body_txnHash"
+            target={"_blank"}
+          >
+            View on bscscan{" "}
+            <ArrowOutwardIcon className="UpdatedSuccessModalDiv_Cont_body_txnHash_icon" />
+          </a>
+        ) : null}
         <div className="UpdatedSuccessModalDiv_Cont_buttons">
           {btnRoute == true ? (
             <a href={route}>

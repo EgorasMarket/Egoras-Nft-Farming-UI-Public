@@ -934,7 +934,7 @@ const AdminSeeSellers = () => {
                           Seller's Full name
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.fullName}
+                          {data.fullname || "NOT PROVIDED"}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">

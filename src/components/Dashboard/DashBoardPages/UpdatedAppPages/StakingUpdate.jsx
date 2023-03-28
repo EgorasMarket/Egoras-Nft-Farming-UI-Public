@@ -38,6 +38,7 @@ import {
   takeRoyalty,
 } from "../../../../web3/index";
 import { getDate, getMonth } from "date-fns";
+import { POPULATE_STAKE_INFO } from "../../../../services/stakeServices";
 
 export const DurationDiv = ({ addMonthly, addYearly, SelectedDuration }) => {
   return (
@@ -108,6 +109,11 @@ const StakingUpdate = () => {
   const [Disable, setDisable] = useState(false);
   const [LockedTransactions, setLockedTransactions] = useState([]);
   const [UniqueLockedTransactions, setUniqueLockedTransactions] = useState([]);
+  const [egcUsdVal, setEgcUsdVal] = useState(0);
+  const [graphData2, setGraphData2] = useState([]);
+
+  const [myAssetInfo, setMyAssetInfo] = useState({});
+  const [totalAssetInfo, setTotalAssetInfo] = useState({});
 
   var btc = [
     {
@@ -287,6 +293,23 @@ const StakingUpdate = () => {
     setDurationDrop(!durationDrop);
     setSelectedDuration("yearly");
   };
+  useEffect(
+    async (e) => {
+      let string2 =
+        "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
+      await fetch(string2)
+        .then((resp) => resp.json())
+        .then((data) => {
+          const egc_usd_val = data["egoras-credit"].usd;
+          console.log(egc_usd_val);
+          setEgcUsdVal(() => egc_usd_val);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    [egcUsdVal]
+  );
   const AmountChange = (e) => {
     setLockAmount(e.target.value);
     console.log(e.target.value);
@@ -295,7 +318,7 @@ const StakingUpdate = () => {
     } else {
       setEstimatedRewardDiv(true);
     }
-    setEstimatedRewardAmnt(e.target.value * 0.00033);
+    setEstimatedRewardAmnt(e.target.value * egcUsdVal * 0.000328767);
   };
 
   const MyTransactions = [
@@ -1233,43 +1256,7 @@ const StakingUpdate = () => {
     let target = e.currentTarget.id;
     setActiveTab(target);
   };
-  useEffect(() => {
-    let assetVal = "EGCT";
-    let baseVal = "EUSDT";
-    setAsset(assetVal);
-    setBase(baseVal);
-    let ticker = assetVal + "-" + baseVal;
-    if (account) {
-      getTickerInfo(ticker, library.getSigner()).then((data) => {
-        // console.log(data);
-        if (data.status) {
-          console.log(data.message);
-          tokenBalance(data.message.base, account, library.getSigner()).then(
-            (balance) => {
-              setBaseBalance(formatEther(balance.message));
-            }
-          );
 
-          if (asset == "BNB" || asset == "bnb") {
-            library
-              .getBalance(account)
-              .then((balance) => {
-                setCoinBalance2(formatEther(balance));
-              })
-              .catch(() => {
-                setCoinBalance2(null);
-              });
-          } else {
-            tokenBalance(data.message.asset, account, library.getSigner()).then(
-              (balance) => {
-                setCoinBalance2(formatEther(balance.message));
-              }
-            );
-          }
-        }
-      });
-    }
-  }, [chainId, account, connector, baseBalance, coinBalance2, tokenBal]);
   const CloseSuccessModal = () => {
     setSuccessModal(false);
   };
@@ -1283,6 +1270,15 @@ const StakingUpdate = () => {
         console.log(data);
         console.log(data.data.data);
         setLockedTransactions(data.data.data);
+        const temp = data.data.data;
+        for (const data of temp) {
+          data.amount = Number(parseInt(data.amount).toFixed(2));
+        }
+        setGraphData2(() => temp);
+        const array = temp.map((data) => {
+          return parseInt(data.amount);
+        });
+        console.log(array, "higi");
       })
       .catch((error) => {
         console.log(error.response);
@@ -1299,6 +1295,40 @@ const StakingUpdate = () => {
       .catch((error) => {
         console.log(error.response);
       });
+  }, []);
+  useEffect(
+    async (e) => {
+      if (account) {
+        let res = await tokenBalance(
+          "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+          account,
+          library.getSigner()
+        );
+        console.log(res);
+        console.log(formatEther(res.message._hex));
+        setCoinBalance2(parseFloat(formatEther(res.message._hex)).toFixed(2));
+      }
+    },
+    [account]
+  );
+  const maxAmount = () => {
+    setLockAmount(coinBalance2);
+    setEstimatedRewardAmnt(coinBalance2 * egcUsdVal * 0.033);
+    setEstimatedRewardDiv(true);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await POPULATE_STAKE_INFO(
+        "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC"
+      );
+      console.log(response);
+      if (response.success === true) {
+        setMyAssetInfo(response.data.user);
+        setTotalAssetInfo(response.data.general);
+      }
+    };
+    fetchData();
   }, []);
   return (
     <div className="other2 asset_other2">
@@ -1398,7 +1428,7 @@ const StakingUpdate = () => {
 // =====================
 // =====================
               </div> */}
-                    {MyTransactions.length <= 0 ? (
+                    {UniqueLockedTransactions.length <= 0 ? (
                       <div className="no_loans_div">
                         <div className="no_loans_div_cont">
                           <Nodata />
@@ -1414,48 +1444,43 @@ const StakingUpdate = () => {
                         {/* =============== */}
                         {/* =============== */}
                         {/* =============== */}
-                        {MyTransactions.map((data) => {
+                        {UniqueLockedTransactions.map((data) => {
+                          const date = new Date(data.time);
+                          const day = date
+                            .getUTCDate()
+                            .toString()
+                            .padStart(2, "0");
+                          const month = (date.getUTCMonth() + 1)
+                            .toString()
+                            .padStart(2, "0");
+                          const year = date.getUTCFullYear();
+                          const formattedDate = `${day}/${month}/${year}`;
+                          console.log(formattedDate);
                           return (
                             <tr className="stakingTable_body_row ">
                               <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
                                 <div className="value_dolls_div">
-                                  {data.action}
+                                  Create Lock
                                   <div className="value_dolls_div_val">
-                                    {data.date}
+                                    {formattedDate}
+                                    {/* {data.time} */}
                                   </div>
                                 </div>
                               </td>
                               <td className="stakingTable_body_row_data">
                                 <div className="value_dolls_div2">
-                                  {data.action === "Create Lock" ? (
-                                    <>+ {data.amount} EGC</>
-                                  ) : (
-                                    <>- {data.amount} eUSD</>
-                                  )}
+                                  {parseFloat(data.amount).toFixed(2)} EGC
                                   <div className="value_dolls_div_val">
                                     $2,406.66
                                   </div>
                                 </div>
                               </td>
-                              {/* <td className="stakingTable_body_row_data">
-                                <div className="stakingTable_body_row_data_blockies_">
-                                  <Blockies
-                                    seed={data.address}
-                                    size={8}
-                                    scale={4}
-                                    className="blockies_icon"
-                                  />
-                                  {`${data.address.slice(
-                                    0,
-                                    6
-                                  )}...${data.address.slice(39, 42)}`}
-                                </div>
-                              </td> */}
+
                               <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
-                                {`${data.txnHash.slice(
-                                  0,
-                                  6
-                                )}...${data.txnHash.slice(63, 66)}`}
+                                {`${data.tx.slice(0, 6)}...${data.tx.slice(
+                                  63,
+                                  66
+                                )}`}
                                 <OpenInNewIcon className="tx_hash_link_icon" />
                               </td>
                             </tr>
@@ -1485,7 +1510,8 @@ const StakingUpdate = () => {
                     My Locked EGC
                   </div>
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
-                    <span>20.03egc</span>
+                    {/* populate with real data */}
+                    <span>{Number.parseFloat(myAssetInfo.amount)}egc </span>
                     <span style={{ fontSize: "10px" }}>
                       (Max Duration: 6months)
                     </span>
@@ -1496,7 +1522,7 @@ const StakingUpdate = () => {
                     My Total Rewards
                   </div>
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
-                    200 eusd
+                    {Number.parseFloat(myAssetInfo.dailyRoyalty)} eusd
                   </div>
                 </div>
                 <div
@@ -1507,7 +1533,7 @@ const StakingUpdate = () => {
                     Claimed Rewards
                   </div>
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
-                    50 eusd
+                    {Number.parseFloat(myAssetInfo.totalRoyalty)} eusd
                   </div>
                 </div>
               </div>
@@ -1550,7 +1576,7 @@ const StakingUpdate = () => {
                           Amount
                         </span>
                         <span className="lock_container_cont1_div1_lock_div_lock_body_input_body_head_span2">
-                          Balance:{parseFloat(baseBalance).toFixed(3)}
+                          Balance:{parseFloat(coinBalance2).toFixed(3)}
                         </span>
                       </div>
                       <div className="lock_container_cont1_div1_lock_div_lock_body_input_body_cont">
@@ -1562,7 +1588,10 @@ const StakingUpdate = () => {
                           className="lock_container_cont1_div1_lock_div_lock_body_input_body_input"
                         />
                         <div className="lock_container_cont1_div1_lock_div_lock_body_input_body_cont_amount_div">
-                          <button className="lock_container_cont1_div1_lock_div_lock_body_input_body_cont_amount_div1_btn">
+                          <button
+                            className="lock_container_cont1_div1_lock_div_lock_body_input_body_cont_amount_div1_btn"
+                            onClick={maxAmount}
+                          >
                             MAX
                           </button>
                           <div className="lock_container_cont1_div1_lock_div_lock_body_input_body_cont_amount_div2">
@@ -1695,7 +1724,9 @@ const StakingUpdate = () => {
                     <div className="lending_area1_cont1_heading">
                       Total EGC Locked
                     </div>
-                    <div className="lending_area1_cont1_body_txt">20,000</div>
+                    <div className="lending_area1_cont1_body_txt">
+                      {Number.parseFloat(totalAssetInfo.amount, 2)}egc
+                    </div>
                     <div className="lending_area1_cont1_heading">
                       (32.84% Of EGC Supply)
                     </div>

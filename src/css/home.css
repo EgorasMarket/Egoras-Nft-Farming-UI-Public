@@ -10,6 +10,310 @@
 /* ========= */
 /* ========= */
 /* ========= */
+
+.mySwiperDiv_Power {
+  /* background: #0b110c; */
+  padding: 10px;
+}
+.PowerSwiper {
+  height: 100vh;
+  cursor: grab;
+  /* padding-bottom: 2em; */
+  width: 100%;
+}
+.mySwiperDiv_Power {
+  display: flex;
+  flex-direction: column;
+  /* gap: 20em; */
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  height: 100vh !important;
+}
+.PowerComponent_body {
+  display: flex;
+  flex-direction: column;
+}
+.PowerSwiper {
+  height: 100vh;
+  cursor: grab;
+  /* padding-bottom: 2em; */
+  width: 100%;
+}
+.PowerComponent_body1_img {
+  width: 100%;
+}
+.whatPossible_body_area {
+  width: 100%;
+  margin-top: 1em;
+  /* height: 37em; */
+  /* overflow: hidden; */
+}
+.whatPossible_body_area_1 {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  margin-top: 3em;
+}
+.whatPossible_body_area_1_cont1 {
+  width: 59em;
+  position: absolute;
+  left: -20%;
+  background: #256c421c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em 6em;
+  border-radius: 20em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.whatPossible_body_area_1_cont1b {
+  width: 59em;
+  position: absolute;
+  right: -20%;
+  background: #256c421c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em 6em;
+  border-radius: 20em;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.whatPossible_body_area_1_cont2 {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+  align-items: baseline;
+  margin-left: 4em;
+  text-align: left;
+}
+.whatPossible_body_area_1_cont2b {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
+  align-items: baseline;
+  margin-right: 4em;
+  text-align: left;
+}
+.whatPossible_body_area_1_cont2a {
+  display: flex;
+  flex-direction: column;
+  width: 64%;
+  align-items: baseline;
+  margin-left: 4em;
+  text-align: left;
+}
+.whatPossible_body_area_1_cont2_title {
+  font-size: 60px;
+  font-weight: 700;
+  margin-bottom: 9px;
+  line-height: 1.2;
+}
+.whatPossible_body_area_1_cont2_title2 {
+  font-size: 60px;
+  font-weight: 700;
+  margin-bottom: 9px;
+  line-height: 1.2;
+}
+.whatPossible_body_area_1_cont2_para {
+  color: #9bb3a5;
+  font-size: 18px;
+}
+.whatPossible_body_area_1_cont1_img {
+  width: 72%;
+  margin-left: auto;
+}
+.whatPossible_body_area_1_cont1_img2 {
+  width: 72%;
+  /* margin-right: auto; */
+}
+.whatPossible_body_area_1_cont2__btn_div {
+  width: 100%;
+  margin-top: 2em;
+}
+.whatPossible_body_area_1_cont2__btn {
+  padding: 14px 0px;
+  width: 160px;
+  border-radius: 10px;
+  background: #229e54;
+  color: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.how_it_works_area_title_area {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.how_it_works_area_title_area1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.how_it_works_area_para {
+  font-size: 18px;
+  width: 70% !important;
+  text-align: center;
+  color: #9bb3a5;
+}
+.how_it_works_area_title_area2 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 4em;
+}
+.how_it_works_area_title_area2_cont1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid 1px #202721;
+  margin-bottom: 1em;
+  color: #fff;
+  font-size: 54px;
+  padding: 0em 1em;
+  padding-bottom: 10px;
+  cursor: pointer;
+}
+.section {
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.section.active {
+  opacity: 1;
+}
+.how_it_works_possible {
+  /* height: 100vh; */
+  width: 100%;
+  background: #0b110c;
+  padding: 12em 0em;
+  position: relative;
+  background-image: radial-gradient(#141d15, #0d140e, #0b110c, #141d15);
+}
+.how_it_works_possibleb {
+  /* height: 100vh; */
+  width: 100%;
+  background: #0b110c;
+  padding: 12em 0em;
+  padding-bottom: 0em;
+  position: relative;
+  background-image: radial-gradient(#141d15, #0d140e, #0b110c, #141d15);
+}
+.how_it_works_possible_area {
+  align-items: center;
+  display: flex;
+  /* flex-direction: column; */
+  height: 100%;
+  /* justify-content: space-between; */
+}
+.how_it_works_possible_area_title_area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.how_it_works_possible_area_title_area1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2em;
+}
+.how_it_works_possible_area_head {
+  font-size: 72px;
+  color: #fff;
+  font-weight: 700;
+}
+.how_it_works_possible_area_para {
+  color: grey;
+  font-size: 22px;
+  width: 55%;
+  text-align: center;
+}
+.how_it_works_area_title_area2 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 4em;
+}
+.whatPossible_body_area {
+  width: 100%;
+  /* margin-top: 1em; */
+  height: 100%;
+  /* overflow: hidden; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.whatPossible_body_area_1 {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  /* margin-top: 3em; */
+  height: 100%;
+  justify-content: flex-end;
+  position: relative;
+}
+.whatPossible_body_area_1b {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  /* margin-top: 3em; */
+  height: 100%;
+  justify-content: flex-start;
+  position: relative;
+}
+.fade-in-from-bottom {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.fade-in-from-bottom--visible {
+  opacity: 1;
+  transform: none;
+}
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
+/* ========= */
 .how_it_works_area_body {
   justify-content: space-between;
   margin-top: 4em;
@@ -1214,6 +1518,7 @@ a.visit_app_link_2 {
 .nft_area2_stat_div_area {
   display: flex;
   align-items: center;
+  margin-bottom: 3em;
 }
 .nft_area2_stat_div_area_cont1 {
   display: flex;

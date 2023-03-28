@@ -19,6 +19,11 @@
   border: none;
   font-weight: 500;
 }
+.updatedSwapSwapBtn:disabled {
+  background: #2f5840;
+  color: #4d7b60;
+  cursor: not-allowed;
+}
 .amnt_input_layer1_input_div_dollar_value {
   font-size: 14px;
   color: #556957;
@@ -149,6 +154,8 @@
 }
 .moreSwapInfoDiv_div2_area1_cont2 {
   color: #fff;
+  display: flex;
+  align-items: center;
 }
 .tradeViewAreaCont {
   width: 100%;

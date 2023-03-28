@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Context } from "./components/context/Context.jsx";
 import Zendesk from "react-zendesk";
-const zendesk_key = "9bbd80ba-d8a8-4423-bfe6-a048b22c0b8b";
+const zendesk_key = "tcnJFYgY0Yngh4N5j505mVG0jBAukCiGAdrs48E1";
 
 const setting = {
   color: {

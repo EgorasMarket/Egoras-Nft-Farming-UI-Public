@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import "./stars.css";
 // import React from "react";
 import { Link } from "react-router-dom";
@@ -7,7 +7,11 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
 import CasinoIcon from "@mui/icons-material/Casino";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+
+// import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+
+import ArrowOutwardIcon from "@mui/icons-material/ArrowDownward";
+
 // import Marquee from "react-fast-marquee";
 import WhyPeopleTrustUs from "./WhyPeopleTrustUs/WhyPeopleTrustUs";
 import { parseEther, formatEther } from "@ethersproject/units";
@@ -36,6 +40,12 @@ import WaveAnimation from "./WaveAnimation/WaveAnimation";
 import "../../css/home.css";
 import { PersonTwoTone } from "@material-ui/icons";
 import { numberWithCommas } from "../../static";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Mousewheel, Keyboard, Pagination } from "swiper";
+import "swiper/swiper.min.css";
+import "swiper/swiper-bundle.css";
+import "swiper/swiper-bundle.min.css";
+import { animateScroll as scroll, Events, scrollSpy } from "react-scroll";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -66,6 +76,7 @@ import {
   unluckToken2,
   getEgcSmartContractBalnce,
 } from "../../web3/index";
+
 const Home = () => {
   const context = useWeb3React();
 
@@ -448,6 +459,17 @@ const Home = () => {
     { img: "/img/FeaturedInLogos/FeaturedInLogos_6.svg" },
     { img: "/img/FeaturedInLogos/FeaturedInLogos_5.svg" },
   ];
+  // ===============
+  // ===============
+  // ===============
+  // ===============
+
+  // ===============
+  // ===============
+  // ===============
+  // ===============
+  // ===============
+  // ===============
   return (
     <div>
       {/* =================================================================================================================================================================================================================================================================== */}
@@ -459,7 +481,7 @@ const Home = () => {
             <div className="nft-txt-area2 " style={{ width: "100%" }}>
               <div className="span-txts">
                 <p className="span4a-txts">
-                  Decentralized sustainable finance
+                  Decentralized sustainable commerce
                   <br />
                   <span className="real_life">for all humanity.</span>
                 </p>
@@ -581,9 +603,173 @@ const Home = () => {
         {/* <img src="/img/hero_bg_bg.png" alt="" className="blurDrop-token2" /> */}
         <img src="/img/hero_backdrop.png" alt="" className="hero_backdrop" />
       </section>
-
-      <section className="how_it_works_section">
-        <div className="container">
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* <section className="how_it_works_possibleb">
+        <div className="custom_container">
+          <div className="how_it_works_possible_area">
+            <div className="how_it_works_possible_area_title_area">
+              <div className="how_it_works_possible_area_title_area1">
+                <div className="how_it_works_possible_area_head">
+                  What's possible with EGCDAO
+                </div>
+                <div className="how_it_works_possible_area_para">
+                  Welcome to first open-source decentralized Egoras staking
+                  pool. The smart-contract service guarantees
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* <section className="how_it_works_possible">
+        <div className="custom_container">
+          <div className="how_it_works_possible_area">
+            <div className="whatPossible_body_area_1">
+              <div className="whatPossible_body_area_1_cont1">
+                <img
+                  src="/img/egcDaoStakeImage.png"
+                  alt=""
+                  className="whatPossible_body_area_1_cont1_img"
+                />
+              </div>
+              <div className="whatPossible_body_area_1_cont2">
+                <div className="whatPossible_body_area_1_cont2_title">
+                  High Yield Staking Platform
+                </div>
+                <div className="whatPossible_body_area_1_cont2_para">
+                  By locking your EGC tokens on the platform for a specific
+                  duration, you can earn rewards in the form of a higher yield
+                  or annual percentage yield (APY) on the staked tokens. The
+                  locked EGC serves as collateral and provides liquidity for
+                  trade-in purchases. The APY rate that users can earn by
+                  staking their tokens is subject to variation depending on
+                  several factors such as the amount of tokens staked, duration
+                  of staking, and market conditions. Typically, users can expect
+                  a higher APY for longer staking periods.
+                </div>
+                <div className="whatPossible_body_area_1_cont2__btn_div">
+                  <button className="whatPossible_body_area_1_cont2__btn">
+                    {" "}
+                    Explore
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* <section className="how_it_works_possible">
+        <div className="custom_container">
+          <div className="how_it_works_possible_area">
+            <div className="whatPossible_body_area_1b">
+              <div className="whatPossible_body_area_1_cont2b">
+                <div className="whatPossible_body_area_1_cont2_title2">
+                  High Yield Staking Platform
+                </div>
+                <div className="whatPossible_body_area_1_cont2_para">
+                  By locking your EGC tokens on the platform for a specific
+                  duration, you can earn rewards in the form of a higher yield
+                  or annual percentage yield (APY) on the staked tokens. The
+                  locked EGC serves as collateral and provides liquidity for
+                  trade-in purchases. The APY rate that users can earn by
+                  staking their tokens is subject to variation depending on
+                  several factors such as the amount of tokens staked, duration
+                  of staking, and market conditions. Typically, users can expect
+                  a higher APY for longer staking periods.
+                </div>
+                <div className="whatPossible_body_area_1_cont2__btn_div">
+                  <button className="whatPossible_body_area_1_cont2__btn">
+                    {" "}
+                    Explore
+                  </button>
+                </div>
+              </div>
+              <div className="whatPossible_body_area_1_cont1b">
+                <img
+                  src="/img/egcDaoStakeImage.png"
+                  alt=""
+                  className="whatPossible_body_area_1_cont1_img2"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* <section className="how_it_works_possible">
+        <div className="custom_container">
+          <div className="how_it_works_possible_area">
+            <div className="whatPossible_body_area_1">
+              <div className="whatPossible_body_area_1_cont1">
+                <img
+                  src="/img/egcDaoStakeImage.png"
+                  alt=""
+                  className="whatPossible_body_area_1_cont1_img"
+                />
+              </div>
+              <div className="whatPossible_body_area_1_cont2">
+                <div className="whatPossible_body_area_1_cont2_title">
+                  High Yield Staking Platform
+                </div>
+                <div className="whatPossible_body_area_1_cont2_para">
+                  By locking your EGC tokens on the platform for a specific
+                  duration, you can earn rewards in the form of a higher yield
+                  or annual percentage yield (APY) on the staked tokens. The
+                  locked EGC serves as collateral and provides liquidity for
+                  trade-in purchases. The APY rate that users can earn by
+                  staking their tokens is subject to variation depending on
+                  several factors such as the amount of tokens staked, duration
+                  of staking, and market conditions. Typically, users can expect
+                  a higher APY for longer staking periods.
+                </div>
+                <div className="whatPossible_body_area_1_cont2__btn_div">
+                  <button className="whatPossible_body_area_1_cont2__btn">
+                    {" "}
+                    Explore
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section> */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* <section className="how_it_works_section">
+        <div className="custom_container">
           <div className="how_it_works_area">
             <div className="how_it_works_area_head">Defi + Sustainablity</div>
             <div className="how_it_works_area_para">
@@ -614,10 +800,7 @@ const Home = () => {
                   </a>
                 </div>
               </div>
-              {/* ======== */}
-              {/* ======== */}
-              {/* ======== */}
-              {/* ======== */}
+      
               <div className="how_it_works_area_body_area1">
                 <div className="how_it_works_area_body_area1_icon_div">
                   <img
@@ -630,14 +813,11 @@ const Home = () => {
                   Physically-Backed NFTs
                 </div>
                 <div className="how_it_works_area_body_area1_para">
-                  EGCDAO offers a platform that enables brands, collectors, and
-                  recyclers to create collections of physical assets as NFTs.
-                  The NFTs are generated upon receipt of the items by the
-                  decentralized network of storage Guardians. At any point in
-                  time, the NFTs can be redeemed for the physical assets. EGCDAO
-                  handles the legal, physical, and logistical aspects of this
-                  process, thereby allowing users to concentrate on their core
-                  business operations.
+                  EGCDAO's platform lets brands, collectors, and recyclers turn
+                  physical assets into NFT collections. Guardians store the
+                  assets and generate NFTs that can be redeemed for the assets
+                  at any time. EGCDAO manages legal, physical, and logistical
+                  tasks, freeing users to focus on their core business.
                 </div>
                 <div className="how_it_works_area_body_area1_link_div">
                   <a href="" className="how_it_works_area_body_area1_link">
@@ -646,10 +826,7 @@ const Home = () => {
                   </a>
                 </div>
               </div>
-              {/* ======== */}
-              {/* ======== */}
-              {/* ======== */}
-              {/* ======== */}
+    
               <div className="how_it_works_area_body_area1">
                 <div className="how_it_works_area_body_area1_icon_div">
                   <img
@@ -675,10 +852,7 @@ const Home = () => {
                   </a>
                 </div>
               </div>
-              {/* ======== */}
-              {/* ======== */}
-              {/* ======== */}
-              {/* ======== */}
+      
               <div className="how_it_works_area_body_area1">
                 <div className="how_it_works_area_body_area1_icon_div">
                   <img
@@ -689,14 +863,12 @@ const Home = () => {
                 </div>
                 <div className="how_it_works_area_body_area1_title">Build</div>
                 <div className="how_it_works_area_body_area1_para">
-                  EGCDAO is currently seeking individuals who can serve as
-                  trusted storage Guardians. The role entails the responsibility
-                  of securely storing and safeguarding items that are sold on
-                  the EGCDAO platform. Given the nature of the items being
-                  stored, this position demands a high degree of trustworthiness
-                  and dependability. Those with relevant experience in either of
-                  these domains and an interest in partnering with EGCDAO may
-                  consider becoming certified refurbishers as well.
+                  EGCDAO seeks trustworthy individuals to serve as storage
+                  Guardians, responsible for securing and safeguarding items
+                  sold on the platform. The role demands high levels of
+                  dependability and trustworthiness. Those with experience and
+                  interest can consider certification as refurbishers for
+                  partnership opportunities.
                 </div>
                 <div className="how_it_works_area_body_area1_link_div">
                   <a href="" className="how_it_works_area_body_area1_link">
@@ -708,7 +880,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ============== */}
       {/* ============== */}
@@ -722,8 +894,8 @@ const Home = () => {
       {/* ============= */}
       {/* ============= */}
       {/* ============= */}
-      <section className="ecoSystem_section">
-        <div className="container">
+      {/* <section className="ecoSystem_section">
+        <div className="custom_container">
           <div className="ecoSystem_area">
             <div className="ecoSystem_area1">
               <div className="ecoSystem_area1_title">
@@ -740,7 +912,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* ============== */}
       {/* ============== */}
       {/* ============== */}
@@ -748,8 +920,8 @@ const Home = () => {
       {/* ============= */}
       {/* ============= */}
       {/* ============= */}
-      <section className="join_ecosystem_section">
-        <div className="container">
+      {/* <section className="join_ecosystem_section">
+        <div className="custom_container">
           <div className="join_ecosystem_area">
             <div className="join_ecosystem_area1">
               <div className="join_ecosystem_area1_title">
@@ -768,7 +940,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* ============== */}
       {/* ============== */}
       {/* ============== */}

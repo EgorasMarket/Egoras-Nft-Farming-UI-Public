@@ -41,6 +41,7 @@
 }
 .UpdatedSuccessModalDiv_Cont_buttons {
   width: 100%;
+  margin-top: 1em;
 }
 .UpdatedSuccessModalDiv_Cont_btn {
   width: 100%;
@@ -52,7 +53,6 @@
   box-shadow: 0px 10px 10px #0000006b;
 }
 .UpdatedSuccessModalDiv_Cont_body {
-  margin-bottom: 2em;
   width: 100%;
   color: #b4cab7;
 }
@@ -64,4 +64,18 @@
   background: #cf4d32;
   color: #fff;
   box-shadow: 0px 10px 10px #0000006b;
+}
+.UpdatedSuccessModalDiv_Cont_body_txnHash {
+  border: solid 1px #89a794;
+  padding: 10px 0px;
+  width: 155px;
+  font-size: 12px;
+  border-radius: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+}
+.UpdatedSuccessModalDiv_Cont_body_txnHash_icon {
+  font-size: 18px !important;
 }

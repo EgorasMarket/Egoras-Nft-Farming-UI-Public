@@ -54,9 +54,10 @@ export const ADMIN_FETCH_TRADABLE_PRODUCTS = async () => {
 export const CALL_UPDATE_EXISTING_PRODUCT = async (formData) => {
   try {
     const response = await axios.put(UPDATE_EXISTING_PRODUCT, formData, config);
-
+    console.log(response);
     return response.data;
   } catch (err) {
+    console.log(err);
     return err.repsonse;
   }
 };
@@ -74,10 +75,10 @@ export const CALL_ADMIN_PLACE_BID = async (
   // console.log(body);
   try {
     const response = await axios.post(ADMIN_PLACE_BID, body, config);
-    // console.log(response);
+    console.log(response);
     return response;
   } catch (err) {
-    // console.log(err);
+    console.log(err);
     return err.repsonse;
   }
 };
