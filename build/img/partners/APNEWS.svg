@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2018 (64-Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="19.7292in" height="5.45652in" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 19729.15 5456.51"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <font id="FontID0" horiz-adv-x="731" font-variant="normal" style="fill-rule:nonzero" font-weight="500">
+	<font-face 
+		font-family="Montserrat Medium">
+		<font-face-src>
+			<font-face-name name="Montserrat Medium"/>
+		</font-face-src>
+	</font-face>
+   <missing-glyph><path d="M0 0z"/></missing-glyph>
+   <glyph unicode="E" horiz-adv-x="669" d="M205.001 87.0005l0 225.999 350.999 0 0 84.9997 -350.999 0 0 215 393.999 0 0 87.0005 -494 0 0 -700 508 0 0 87.0005 -407.999 0z"/>
+   <glyph unicode="N" horiz-adv-x="812" d="M607 700l0 -522 -419.999 522 -82.0002 0 0 -700 100.001 0 0 522 419.999 -522 82.0002 0 0 700 -100.001 0z"/>
+   <glyph unicode="S" horiz-adv-x="620" d="M308.999 -7.99984c185,0 271.001,91.9997 271.001,198.833 0,256.833 -424.001,149.666 -424.001,321 0,61.1672 51.0007,111.167 170.001,111.167 62.0001,0 131,-18.0004 192,-57.0008l32.9992 80.0005c-57.9996,40.0003 -142.999,62.0001 -225,62.0001 -184.001,0 -268,-91.9997 -268,-200.167 0,-260.167 424,-152.333 424,-322.999 0,-61.0002 -51.9995,-107.833 -173,-107.833 -89.999,0 -178.999,33.8331 -231,80.8334l-36.9997 -77.8328c55.9999,-52.0005 161,-88.0003 267.999,-88.0003z"/>
+   <glyph unicode="W" horiz-adv-x="1125" d="M999 700l-193 -572.001 -193 572.001 -91.9997 0 -197 -569 -189.001 569 -102.999 0 233.999 -700 107.001 0 190.999 558.999 191.001 -558.999 105 0 234 700 -95.0003 0z"/>
+  </font>
+  <style type="text/css">
+   <![CDATA[
+    @font-face { font-family:"Montserrat Medium";font-variant:normal;font-weight:500;src:url("#FontID0") format(svg)}
+    .fil2 {fill:none}
+    .fil1 {fill:black}
+    .fil0 {fill:#FF322E}
+    .fnt0 {font-weight:500;font-size:3772.22px;font-family:'Montserrat Medium'}
+   ]]>
+  </style>
+   <clipPath id="id0">
+    <path d="M-0 0l19729.15 0 0 5456.51 -19729.15 0 0 -5456.51z"/>
+   </clipPath>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g>
+  </g>
+  <g style="clip-path:url(#id0)">
+   <g>
+    <polygon class="fil0" points="7426.66,4327.46 415.01,4327.46 415.01,5177.77 7426.66,5177.77 "/>
+    <path class="fil1" d="M851.87 3815.14l834.69 3.11c34.8,-9.94 97.63,-253.34 113.61,-300.23 33.93,-99.53 67.76,-207.96 99.6,-311.63l402.54 -1255.48c58.52,-192.76 128.08,-440.63 202.24,-621.95l400.34 1238.07 -515.96 1.9 -209.31 710.81 935.91 1.69c35.82,19.02 20.53,5.33 36.2,50.93l152.46 485.79 877.68 -0.09 -1174.95 -3534.46 -979.67 -0.76 -1175.37 3532.31 -0.01 -0.01z"/>
+    <path class="fil1" d="M4300.31 3818.14l847.28 -0.23 0.02 -2821.89c262.62,0 549.96,-27.43 750.63,100.34 167.1,106.4 272.89,352.17 181.76,624.11 -67.67,201.96 -258.85,318.35 -518.17,333.32 -153.4,8.86 -127.73,-66.62 -127.73,286.25 0,120.47 -11.45,315.43 3.21,426.77 484.35,54.31 1034.19,-163.9 1245.44,-407.57 300.5,-346.61 372.25,-880.98 217.44,-1307.81 -143.75,-396.34 -474.15,-645.78 -950.63,-732.2 -321.23,-58.27 -1266.84,-36.5 -1648.3,-36.5l-0.95 3535.42 -0 -0.01z"/>
+    <g transform="matrix(0.999999 0 0 0.999999 -1888.86 1320.28)">
+     <text x="9864.58" y="2728.26"  class="fil1 fnt0">N</text>
+    </g>
+    <g transform="matrix(0.999999 0 0 0.999999 1045.93 1320.28)">
+     <text x="9864.58" y="2728.26"  class="fil1 fnt0">E</text>
+    </g>
+    <g transform="matrix(0.999999 0 0 0.999999 3407.33 1320.28)">
+     <text x="9864.58" y="2728.26"  class="fil1 fnt0">W</text>
+    </g>
+    <g transform="matrix(0.999999 0 0 0.999999 7470.02 1320.28)">
+     <text x="9864.58" y="2728.26"  class="fil1 fnt0">S</text>
+    </g>
+   </g>
+  </g>
+  <polygon class="fil2" points="-0,0 19729.15,0 19729.15,5456.51 -0,5456.51 "/>
+ </g>
+</svg>

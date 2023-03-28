@@ -36,6 +36,11 @@ import WaveAnimation from "./WaveAnimation/WaveAnimation";
 import "../../css/home.css";
 import { PersonTwoTone } from "@material-ui/icons";
 import { numberWithCommas } from "../../static";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Mousewheel, Keyboard, Pagination } from "swiper";
+import "swiper/swiper.min.css";
+import "swiper/swiper-bundle.css";
+import "swiper/swiper-bundle.min.css";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -581,9 +586,155 @@ const Home = () => {
         {/* <img src="/img/hero_bg_bg.png" alt="" className="blurDrop-token2" /> */}
         <img src="/img/hero_backdrop.png" alt="" className="hero_backdrop" />
       </section>
-
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
       <section className="how_it_works_section">
-        <div className="container">
+        <div className="custom_container">
+          <div className="how_it_works_area">
+            <div className="how_it_works_area_title_area">
+              <div className="how_it_works_area_title_area1">
+                <div className="how_it_works_area_head">
+                  What's possible with EGCDAO
+                </div>
+                <div className="how_it_works_area_para">
+                  Welcome to first open-source decentralized Egoras staking
+                  pool. The smart-contract service guarantees
+                </div>
+              </div>
+              <div className="how_it_works_area_title_area2">
+                <div className="how_it_works_area_title_area2_cont1">
+                  <div className="how_it_works_area_title_area2_cont1_txt">
+                    Finance
+                  </div>
+                  <div className="how_it_works_area_title_area2_cont1_img_div">
+                    <img
+                      src="/img/arrowDown.svg"
+                      alt=""
+                      className="how_it_works_area_title_area2_cont1_img"
+                    />
+                  </div>
+                </div>
+                <div className="how_it_works_area_title_area2_cont1">
+                  <div className="how_it_works_area_title_area2_cont1_txt">
+                    Finance
+                  </div>
+                  <div className="how_it_works_area_title_area2_cont1_img_div">
+                    <img
+                      src="/img/arrowDown.svg"
+                      alt=""
+                      className="how_it_works_area_title_area2_cont1_img"
+                    />
+                  </div>
+                </div>
+                <div className="how_it_works_area_title_area2_cont1">
+                  <div className="how_it_works_area_title_area2_cont1_txt">
+                    Finance
+                  </div>
+                  <div className="how_it_works_area_title_area2_cont1_img_div">
+                    <img
+                      src="/img/arrowDown.svg"
+                      alt=""
+                      className="how_it_works_area_title_area2_cont1_img"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="whatPossible_body_area">
+              {/* <Swiper
+                direction={"vertical"}
+                slidesPerView={1}
+                spaceBetween={0}
+                mousewheel={true}
+                pagination={{
+                  clickable: true,
+                }}
+                keyboard={true}
+                speed={900}
+                updateOnWindowResize={true}
+                modules={[Mousewheel, Keyboard, Pagination]}
+                className="PowerSwiper"
+              >
+
+                <SwiperSlide className="mySwiperDiv_Power" id="egr3Man">
+                  <div className="whatPossible_body_area_1">
+                    <div className="whatPossible_body_area_1_cont2">
+                      <div className="whatPossible_body_area_1_cont2_title">
+                        High Yield Staking Platform
+                      </div>
+                      <div className="whatPossible_body_area_1_cont2_para">
+                        By locking your EGC tokens on the platform for a
+                        specific duration, you can earn rewards in the form of a
+                        higher yield or annual percentage yield (APY) on the
+                        staked tokens. The locked EGC serves as collateral and
+                        provides liquidity for trade-in purchases. The APY rate
+                        that users can earn by staking their tokens is subject
+                        to variation depending on several factors such as the
+                        amount of tokens staked, duration of staking, and market
+                        conditions. Typically, users can expect a higher APY for
+                        longer staking periods.
+                      </div>
+                    </div>
+                    <div className="whatPossible_body_area_1_cont1">
+                      <img
+                        src="/img/egcDaoStakeImage.png"
+                        alt=""
+                        className="whatPossible_body_area_1_cont1_img"
+                      />
+                    </div>
+                  </div>
+                </SwiperSlide>
+   
+              </Swiper> */}
+              <div className="whatPossible_body_area_1">
+                <div className="whatPossible_body_area_1_cont2">
+                  <div className="whatPossible_body_area_1_cont2_title">
+                    High Yield Staking Platform
+                  </div>
+                  <div className="whatPossible_body_area_1_cont2_para">
+                    By locking your EGC tokens on the platform for a specific
+                    duration, you can earn rewards in the form of a higher yield
+                    or annual percentage yield (APY) on the staked tokens. The
+                    locked EGC serves as collateral and provides liquidity for
+                    trade-in purchases. The APY rate that users can earn by
+                    staking their tokens is subject to variation depending on
+                    several factors such as the amount of tokens staked,
+                    duration of staking, and market conditions. Typically, users
+                    can expect a higher APY for longer staking periods.
+                  </div>
+                  <div className="whatPossible_body_area_1_cont2__btn_div">
+                    <button className="whatPossible_body_area_1_cont2__btn">
+                      {" "}
+                      Explore
+                    </button>
+                  </div>
+                </div>
+                <div className="whatPossible_body_area_1_cont1">
+                  <img
+                    src="/img/egcDaoStakeImage.png"
+                    alt=""
+                    className="whatPossible_body_area_1_cont1_img"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      {/* ============================= */}
+      <section className="how_it_works_section">
+        <div className="custom_container">
           <div className="how_it_works_area">
             <div className="how_it_works_area_head">Defi + Sustainablity</div>
             <div className="how_it_works_area_para">
@@ -630,14 +781,11 @@ const Home = () => {
                   Physically-Backed NFTs
                 </div>
                 <div className="how_it_works_area_body_area1_para">
-                  EGCDAO offers a platform that enables brands, collectors, and
-                  recyclers to create collections of physical assets as NFTs.
-                  The NFTs are generated upon receipt of the items by the
-                  decentralized network of storage Guardians. At any point in
-                  time, the NFTs can be redeemed for the physical assets. EGCDAO
-                  handles the legal, physical, and logistical aspects of this
-                  process, thereby allowing users to concentrate on their core
-                  business operations.
+                  EGCDAO's platform lets brands, collectors, and recyclers turn
+                  physical assets into NFT collections. Guardians store the
+                  assets and generate NFTs that can be redeemed for the assets
+                  at any time. EGCDAO manages legal, physical, and logistical
+                  tasks, freeing users to focus on their core business.
                 </div>
                 <div className="how_it_works_area_body_area1_link_div">
                   <a href="" className="how_it_works_area_body_area1_link">
@@ -689,14 +837,12 @@ const Home = () => {
                 </div>
                 <div className="how_it_works_area_body_area1_title">Build</div>
                 <div className="how_it_works_area_body_area1_para">
-                  EGCDAO is currently seeking individuals who can serve as
-                  trusted storage Guardians. The role entails the responsibility
-                  of securely storing and safeguarding items that are sold on
-                  the EGCDAO platform. Given the nature of the items being
-                  stored, this position demands a high degree of trustworthiness
-                  and dependability. Those with relevant experience in either of
-                  these domains and an interest in partnering with EGCDAO may
-                  consider becoming certified refurbishers as well.
+                  EGCDAO seeks trustworthy individuals to serve as storage
+                  Guardians, responsible for securing and safeguarding items
+                  sold on the platform. The role demands high levels of
+                  dependability and trustworthiness. Those with experience and
+                  interest can consider certification as refurbishers for
+                  partnership opportunities.
                 </div>
                 <div className="how_it_works_area_body_area1_link_div">
                   <a href="" className="how_it_works_area_body_area1_link">
@@ -723,7 +869,7 @@ const Home = () => {
       {/* ============= */}
       {/* ============= */}
       <section className="ecoSystem_section">
-        <div className="container">
+        <div className="custom_container">
           <div className="ecoSystem_area">
             <div className="ecoSystem_area1">
               <div className="ecoSystem_area1_title">
@@ -749,7 +895,7 @@ const Home = () => {
       {/* ============= */}
       {/* ============= */}
       <section className="join_ecosystem_section">
-        <div className="container">
+        <div className="custom_container">
           <div className="join_ecosystem_area">
             <div className="join_ecosystem_area1">
               <div className="join_ecosystem_area1_title">

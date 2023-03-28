@@ -3,11 +3,15 @@ import MembershipFacet from "./contracts/V3/MembershipFacet.json";
 import V3ContractAddress from "./contracts/V3/V3ContractAddress.json";
 import PancakeSwapFaucet from "./contracts/V3/PancakeSwapFacet.json";
 import Minter from "./contracts/V3/Minter.json";
+import erc20 from "./contracts/erc20.json";
 const contractMembershipFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, MembershipFacet.abi, signer);
 };
 const contractPancakeSwapFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, PancakeSwapFaucet.abi, signer);
+};
+const erc20Instance = (address, signer) => {
+  return new Contract(address, erc20.abi, signer);
 };
 const contractAddMinterFacetInstance = async (signer) => {
   return new Contract(
@@ -209,6 +213,45 @@ const adminAddMinter = async (account, signer) => {
     };
   }
 };
+const checkAllowanceSwap = async (coinAddress, owner, amount, signer) => {
+  try {
+    const instance = erc20Instance(coinAddress, signer);
+    let result = await instance.allowance(owner, V3ContractAddress.address);
+
+    if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
+      return {
+        status: true,
+      };
+    } else {
+      return {
+        status: false,
+      };
+    }
+  } catch (error) {
+    return {
+      status: false,
+    };
+  }
+};
+const unlockSwapToken = async (amount, signer) => {
+  try {
+    const instance = erc20Instance(
+      "0x58f66d0183615797940360a43c333a44215830ba",
+      signer
+    );
+    let result = await instance.approve(V3ContractAddress.address, amount);
+    return {
+      message: result.hash,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
 
 export {
   monthlyPlanSubScribe,
@@ -221,4 +264,6 @@ export {
   swapEusdForBnb,
   adminAddMinter,
   swapBnbForEusd,
+  checkAllowanceSwap,
+  unlockSwapToken,
 };
