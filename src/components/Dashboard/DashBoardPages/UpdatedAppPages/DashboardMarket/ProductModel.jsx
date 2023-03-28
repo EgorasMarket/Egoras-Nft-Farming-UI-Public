@@ -12,6 +12,8 @@ const ProductModel = ({
   let fff = JSON.parse(img);
   // console.log(img);
   // console.log(fff[1]);
+  // console.log(fff[1]);
+  // console.log(fff[1]);
   return (
     <div className="dashboardMarketPlaceBody2_div1_body_card" key={id}>
       <div className="dashboardMarketPlaceBody2_div1_body_card_img_div">
