@@ -1518,6 +1518,7 @@ a.visit_app_link_2 {
 .nft_area2_stat_div_area {
   display: flex;
   align-items: center;
+  margin-bottom: 3em;
 }
 .nft_area2_stat_div_area_cont1 {
   display: flex;

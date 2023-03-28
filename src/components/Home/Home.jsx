@@ -477,7 +477,7 @@ const Home = () => {
             <div className="nft-txt-area2 " style={{ width: "100%" }}>
               <div className="span-txts">
                 <p className="span4a-txts">
-                  Decentralized sustainable finance
+                  Decentralized sustainable commerce
                   <br />
                   <span className="real_life">for all humanity.</span>
                 </p>
@@ -606,7 +606,7 @@ const Home = () => {
       {/* ============================= */}
       {/* ============================= */}
       {/* ============================= */}
-      <section className="how_it_works_possibleb">
+      {/* <section className="how_it_works_possibleb">
         <div className="custom_container">
           <div className="how_it_works_possible_area">
             <div className="how_it_works_possible_area_title_area">
@@ -622,7 +622,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* ============================= */}
       {/* ============================= */}
       {/* ============================= */}
@@ -630,7 +630,7 @@ const Home = () => {
       {/* ============================= */}
       {/* ============================= */}
       {/* ============================= */}
-      <section className="how_it_works_possible">
+      {/* <section className="how_it_works_possible">
         <div className="custom_container">
           <div className="how_it_works_possible_area">
             <div className="whatPossible_body_area_1">
@@ -666,7 +666,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* ============================= */}
       {/* ============================= */}
       {/* ============================= */}
@@ -675,7 +675,7 @@ const Home = () => {
       {/* ============================= */}
       {/* ============================= */}
       {/* ============================= */}
-      <section className="how_it_works_possible">
+      {/* <section className="how_it_works_possible">
         <div className="custom_container">
           <div className="how_it_works_possible_area">
             <div className="whatPossible_body_area_1b">
@@ -711,7 +711,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* ============================= */}
       {/* ============================= */}
       {/* ============================= */}
@@ -720,7 +720,7 @@ const Home = () => {
       {/* ============================= */}
       {/* ============================= */}
       {/* ============================= */}
-      <section className="how_it_works_possible">
+      {/* <section className="how_it_works_possible">
         <div className="custom_container">
           <div className="how_it_works_possible_area">
             <div className="whatPossible_body_area_1">
@@ -756,7 +756,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* ============================= */}
       {/* ============================= */}
       {/* ============================= */}
@@ -764,7 +764,7 @@ const Home = () => {
       {/* ============================= */}
       {/* ============================= */}
       {/* ============================= */}
-      <section className="how_it_works_section">
+      {/* <section className="how_it_works_section">
         <div className="custom_container">
           <div className="how_it_works_area">
             <div className="how_it_works_area_head">Defi + Sustainablity</div>
@@ -796,10 +796,7 @@ const Home = () => {
                   </a>
                 </div>
               </div>
-              {/* ======== */}
-              {/* ======== */}
-              {/* ======== */}
-              {/* ======== */}
+      
               <div className="how_it_works_area_body_area1">
                 <div className="how_it_works_area_body_area1_icon_div">
                   <img
@@ -825,10 +822,7 @@ const Home = () => {
                   </a>
                 </div>
               </div>
-              {/* ======== */}
-              {/* ======== */}
-              {/* ======== */}
-              {/* ======== */}
+    
               <div className="how_it_works_area_body_area1">
                 <div className="how_it_works_area_body_area1_icon_div">
                   <img
@@ -854,10 +848,7 @@ const Home = () => {
                   </a>
                 </div>
               </div>
-              {/* ======== */}
-              {/* ======== */}
-              {/* ======== */}
-              {/* ======== */}
+      
               <div className="how_it_works_area_body_area1">
                 <div className="how_it_works_area_body_area1_icon_div">
                   <img
@@ -885,7 +876,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* ============== */}
       {/* ============== */}
@@ -899,7 +890,7 @@ const Home = () => {
       {/* ============= */}
       {/* ============= */}
       {/* ============= */}
-      <section className="ecoSystem_section">
+      {/* <section className="ecoSystem_section">
         <div className="custom_container">
           <div className="ecoSystem_area">
             <div className="ecoSystem_area1">
@@ -917,7 +908,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* ============== */}
       {/* ============== */}
       {/* ============== */}
@@ -925,7 +916,7 @@ const Home = () => {
       {/* ============= */}
       {/* ============= */}
       {/* ============= */}
-      <section className="join_ecosystem_section">
+      {/* <section className="join_ecosystem_section">
         <div className="custom_container">
           <div className="join_ecosystem_area">
             <div className="join_ecosystem_area1">
@@ -945,7 +936,7 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       {/* ============== */}
       {/* ============== */}
       {/* ============== */}
