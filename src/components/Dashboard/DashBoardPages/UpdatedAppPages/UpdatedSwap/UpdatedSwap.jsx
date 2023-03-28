@@ -327,14 +327,6 @@ const UpdatedSwap = () => {
       symbol: "BNB",
       favorite: "true",
     },
-    {
-      id: "2",
-      img: "/img/egc-icon.svg",
-      name: "Egoras Credit",
-      address: "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-      symbol: "EGC",
-      favorite: "false",
-    },
   ];
   useEffect(() => {
     setBaseFromAddress(assetsBase[0].PriceAddress);
@@ -719,13 +711,13 @@ const UpdatedSwap = () => {
   const ToggleDisplayChart = () => {
     setDisplayChart(!displayChart);
   };
-  // useEffect(async () => {
-  //   if (account) {
-  //     const response = await getBNBAddress(library.getSigner());
-  //     console.log(response);
-  //     return;
-  //   }
-  // }, []);
+  useEffect(async () => {
+    if (account) {
+      const response = await getBNBAddress(library.getSigner());
+      console.log(response, "bnb address");
+      return;
+    }
+  }, [account]);
   const UnlockToken = async (e) => {
     setIsLoading(true);
     setDisable(true);
@@ -843,6 +835,7 @@ const UpdatedSwap = () => {
   const onChangeSwapAmount = async (e) => {
     setIsAmountLoading(true);
     setSwapAmount(e.target.value);
+    console.log(baseFromAddress, baseToAddress);
     const response = await getAmountsOut(
       parseEther(e.target.value.toString(), "wei").toString(),
       [baseFromAddress, baseToAddress],
