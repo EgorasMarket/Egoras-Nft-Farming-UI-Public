@@ -453,6 +453,7 @@ const Home = () => {
   const tOTU1 = 2041224;
   // const tOTU2 = tOTU;
   console.log(totu, "amount from utututututu");
+  console.log(totu, "amount from utututututu");
   const Partners = [
     { img: "/img/FeaturedInLogos/FeaturedInLogos_1.svg" },
     { img: "/img/FeaturedInLogos/FeaturedInLogos_3.svg" },
