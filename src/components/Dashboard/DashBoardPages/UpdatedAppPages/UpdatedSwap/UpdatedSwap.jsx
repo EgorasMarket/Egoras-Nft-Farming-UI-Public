@@ -714,7 +714,7 @@ const UpdatedSwap = () => {
   useEffect(async () => {
     if (account) {
       const response = await getBNBAddress(library.getSigner());
-      console.log(response,"bnb address");
+      console.log(response, "bnb address");
       return;
     }
   }, [account]);

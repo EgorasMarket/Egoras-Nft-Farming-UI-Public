@@ -422,6 +422,12 @@ const AdminSeeSellers = () => {
     console.log(res, "somto8uhhhg");
     // console.log(res.status, "somto8uhhhg");
     setSaleDetails("");
+    console.log(res);
+    if (res.status == true) {
+      console.log("Success message");
+    } else {
+      console.log("Error occured from Blockchain");
+    }
   };
 
   const classes = useStyles();
@@ -928,7 +934,7 @@ const AdminSeeSellers = () => {
                           Seller's Full name
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {data.fullName}
+                          {data.fullname || "NOT PROVIDED"}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">

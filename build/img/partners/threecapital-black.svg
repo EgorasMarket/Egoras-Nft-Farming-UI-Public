@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="9.09628in" height="2.81243in" version="1.0" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 9096 2812"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <font id="FontID0" horiz-adv-x="785" font-variant="normal" style="fill-rule:nonzero" font-weight="800">
+	<font-face 
+		font-family="Montserrat ExtraBold">
+	</font-face>
+   <missing-glyph><path d="M0 0z"/></missing-glyph>
+   <glyph unicode="A" horiz-adv-x="785"><path d="M594.002 0l205.999 0 -310 699.999 -195 0 -309.005 -699.999 202.001 0 55.0038 135.998 295.997 0 55.0038 -135.998zm-293 282l89.9977 224 89.9977 -224 -179.995 0z"/></glyph>
+   <glyph unicode="R" horiz-adv-x="739"><path d="M502.997 0l212.006 0 -151.002 220.002c87.0009,41.9954 136.999,117.997 136.999,220.996 0,159.999 -119.999,259 -311.001,259l-319.998 0 0 -699.999 197.996 0 0 186.002 108.005 0 126.994 -186.002zm-1.99568 440.998c0,-64.0009 -41.0009,-101.998 -123.003,-101.998l-110.001 0 0 204.998 110.001 0c82.0018,0 123.003,-37.9974 123.003,-102.999z"/></glyph>
+   <glyph unicode="L" horiz-adv-x="610"><path d="M70.0012 0l531.997 0 0 157.002 -334.001 0 0 542.997 -197.996 0 0 -699.999z"/></glyph>
+   <glyph unicode="I" horiz-adv-x="338"><path d="M70.0012 0l197.996 0 0 699.999 -197.996 0 0 -699.999z"/></glyph>
+   <glyph unicode="C" horiz-adv-x="738"><path d="M418.999 -14.0029c129.003,0 233.004,47.0012 301.002,132l-125.999 114.006c-44.0043,-53.0015 -98.0003,-82.0018 -165.005,-82.0018 -115,0 -195,79.9995 -195,199.999 0,119.999 79.9995,199.999 195,199.999 67.0044,0 121,-29.0003 165.005,-81.9951l125.999 113.999c-67.9989,84.9986 -172,132 -301.002,132 -221.998,0 -385,-151.002 -385,-364.002 0,-213 163.002,-364.002 385,-364.002z"/></glyph>
+   <glyph unicode="T" horiz-adv-x="635"><path d="M219.001 0l197.996 0 0 543.003 214.002 0 0 156.995 -627.001 0 0 -156.995 215.003 0 0 -543.003z"/></glyph>
+   <glyph unicode="H" horiz-adv-x="806"><path d="M537.997 699.999l0 -262.998 -270 0 0 262.998 -197.996 0 0 -699.999 197.996 0 0 272.997 270 0 0 -272.997 198.003 0 0 699.999 -198.003 0z"/></glyph>
+   <glyph unicode="E" horiz-adv-x="671"><path d="M266.002 152.997l0 128.002 311.001 0 0 147.998 -311.001 0 0 118.004 352.996 0 0 152.997 -548.997 0 0 -699.999 561.999 0 0 152.997 -365.998 0z"/></glyph>
+   <glyph unicode=" " horiz-adv-x="290"></glyph>
+   <glyph unicode="P" horiz-adv-x="737"><path d="M389.999 699.999l-319.998 0 0 -699.999 197.996 0 0 182.999 122.002 0c191.002,0 311.001,99.0015 311.001,257.999 0,159.999 -119.999,259 -311.001,259zm-12.0006 -360.999l-110.001 0 0 204.998 110.001 0c82.0018,0 123.003,-37.9974 123.003,-102.999 0,-64.0009 -41.0009,-101.998 -123.003,-101.998z"/></glyph>
+   <glyph unicode="M" horiz-adv-x="953"><path d="M883.999 0l-1.99568 699.999 -163.002 0 -239.998 -404.002 -246.005 404.002 -162.996 0 0 -699.999 182.999 0 0 360.999 179.001 -291.999 88.0021 0 179.995 301.997 2.00231 -370.997 181.998 0z"/></glyph>
+  </font>
+  <style type="text/css">
+   <![CDATA[
+    @font-face { font-family:"Montserrat ExtraBold";src:url("#FontID0") format(svg)}
+    .fil0 {fill:black}
+    .fnt0 {font-weight:800;font-size:593.803px;font-family:'Montserrat ExtraBold'}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_348104360">
+   <path class="fil0" d="M1406 0c777,0 1406,630 1406,1406 0,777 -629,1406 -1406,1406 -776,0 -1406,-629 -1406,-1406 0,-776 630,-1406 1406,-1406zm0 122c710,0 1285,575 1285,1284 0,710 -575,1285 -1285,1285 -709,0 -1284,-575 -1284,-1285 0,-709 575,-1284 1284,-1284z"/>
+   <rect class="fil0" x="682" y="539" width="266" height="1734"/>
+   <rect class="fil0" x="1842" y="539" width="266" height="1734"/>
+   <rect class="fil0" x="1300" y="763" width="266" height="1287"/>
+   <text x="3380" y="1614"  class="fil0 fnt0">THREE M CAPITAL</text>
+  </g>
+ </g>
+</svg>
