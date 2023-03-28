@@ -481,13 +481,14 @@ const Home = () => {
             <div className="nft-txt-area2 " style={{ width: "100%" }}>
               <div className="span-txts">
                 <p className="span4a-txts">
-                  Decentralized sustainable commerce
+                  AI Powered Physically-Backed NFTs
                   <br />
-                  <span className="real_life">for all humanity.</span>
+                  <span className="real_life">For Web3.</span>
                 </p>
                 <p className="span4b-txts">
-                  We are building a world powered by sustainable fuel, reducing
-                  greenhouse gas emissions, and trust for renewed technology.
+                  Convert new and used items to NFTs, trade physical-backed
+                  tokens earn money, and contribute to environmental
+                  sustainability.
                 </p>
               </div>
               <div className="stake-hero-btns">
