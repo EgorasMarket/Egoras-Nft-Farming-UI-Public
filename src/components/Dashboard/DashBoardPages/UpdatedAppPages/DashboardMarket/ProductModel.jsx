@@ -10,7 +10,7 @@ const ProductModel = ({
   numberWithCommas,
 }) => {
   let fff = JSON.parse(img);
-  console.llog(fff);
+  console.log(fff);
   // console.log(img);
   // console.log(fff[1]);
   // console.log(fff[1]);
