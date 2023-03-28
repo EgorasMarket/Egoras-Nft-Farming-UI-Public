@@ -7,7 +7,11 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
 import CasinoIcon from "@mui/icons-material/Casino";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+
+// import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+
+import ArrowOutwardIcon from "@mui/icons-material/ArrowDownward";
+
 // import Marquee from "react-fast-marquee";
 import WhyPeopleTrustUs from "./WhyPeopleTrustUs/WhyPeopleTrustUs";
 import { parseEther, formatEther } from "@ethersproject/units";

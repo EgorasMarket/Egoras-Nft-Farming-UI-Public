@@ -38,6 +38,7 @@ import {
   takeRoyalty,
 } from "../../../../web3/index";
 import { getDate, getMonth } from "date-fns";
+import { POPULATE_STAKE_INFO } from "../../../../services/stakeServices";
 
 export const DurationDiv = ({ addMonthly, addYearly, SelectedDuration }) => {
   return (
@@ -110,6 +111,10 @@ const StakingUpdate = () => {
   const [UniqueLockedTransactions, setUniqueLockedTransactions] = useState([]);
   const [egcUsdVal, setEgcUsdVal] = useState(0);
   const [graphData2, setGraphData2] = useState([]);
+
+  const [myAssetInfo, setMyAssetInfo] = useState({});
+  const [totalAssetInfo, setTotalAssetInfo] = useState({});
+
   var btc = [
     {
       name: "Jan",
@@ -1311,6 +1316,20 @@ const StakingUpdate = () => {
     setEstimatedRewardAmnt(coinBalance2 * egcUsdVal * 0.033);
     setEstimatedRewardDiv(true);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await POPULATE_STAKE_INFO(
+        "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC"
+      );
+      console.log(response);
+      if (response.success === true) {
+        setMyAssetInfo(response.data.user);
+        setTotalAssetInfo(response.data.general);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -1491,7 +1510,8 @@ const StakingUpdate = () => {
                     My Locked EGC
                   </div>
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
-                    <span>20.03egc</span>
+                    {/* populate with real data */}
+                    <span>{Number.parseFloat(myAssetInfo.amount)}egc </span>
                     <span style={{ fontSize: "10px" }}>
                       (Max Duration: 6months)
                     </span>
@@ -1502,7 +1522,7 @@ const StakingUpdate = () => {
                     My Total Rewards
                   </div>
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
-                    200 eusd
+                    {Number.parseFloat(myAssetInfo.dailyRoyalty)} eusd
                   </div>
                 </div>
                 <div
@@ -1513,7 +1533,7 @@ const StakingUpdate = () => {
                     Claimed Rewards
                   </div>
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
-                    50 eusd
+                    {Number.parseFloat(myAssetInfo.totalRoyalty)} eusd
                   </div>
                 </div>
               </div>
@@ -1704,7 +1724,9 @@ const StakingUpdate = () => {
                     <div className="lending_area1_cont1_heading">
                       Total EGC Locked
                     </div>
-                    <div className="lending_area1_cont1_body_txt">20,000</div>
+                    <div className="lending_area1_cont1_body_txt">
+                      {Number.parseFloat(totalAssetInfo.amount, 2)}egc
+                    </div>
                     <div className="lending_area1_cont1_heading">
                       (32.84% Of EGC Supply)
                     </div>

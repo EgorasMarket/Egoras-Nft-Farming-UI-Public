@@ -58,7 +58,7 @@ export const DISPLAY_NEW_USER_PRODUCTS_CALL = async (account) => {
 
     return response.data;
   } catch (err) {
-    return err.repsonse;
+    return err.response;
   }
 };
 

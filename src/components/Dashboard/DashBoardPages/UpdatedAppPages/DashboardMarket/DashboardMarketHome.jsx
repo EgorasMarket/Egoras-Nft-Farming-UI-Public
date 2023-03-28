@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../UpdatedAppPagesStyles/dashboardMarketHome.css";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Carousel from "react-multi-carousel";
+import { GET_ALL_UPLOADED_PRODUCTS } from "../../../../../services/productServices";
+import ProductModel from "./ProductModel";
 export const MarketHeader = () => {
   return (
     <div className="dashboardMarketPlaceHeader no-bg">
@@ -38,6 +40,7 @@ export const MarketHeader = () => {
   );
 };
 const DashboardMarketHome = () => {
+  const [products, setProducts] = useState([]);
   const responsive1 = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -61,6 +64,16 @@ const DashboardMarketHome = () => {
       items: 1,
     },
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await GET_ALL_UPLOADED_PRODUCTS();
+      console.log(response.data);
+      setProducts(response.data.getAllUploadedProduct);
+    };
+
+    fetchData();
+  }, []);
+
   const responsiveHero = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -230,6 +243,15 @@ const DashboardMarketHome = () => {
         "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
     },
   ];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await GET_ALL_UPLOADED_PRODUCTS();
+      console.log(response);
+    };
+
+    fetchData();
+  }, []);
   console.log(Product);
   return (
     <div className="other2 asset_other2">
@@ -333,48 +355,15 @@ const DashboardMarketHome = () => {
                       swipeable={true}
                       className="product_carousel"
                     >
-                      {Product.slice(0.8).map((data) => (
-                        <div
-                          className="dashboardMarketPlaceBody2_div1_body_card"
-                          key={data.id}
-                        >
-                          <div className="dashboardMarketPlaceBody2_div1_body_card_img_div">
-                            <img
-                              src={data.img}
-                              alt=""
-                              className="dashboardMarketPlaceBody2_div1_body_card_img"
-                            />
-                          </div>
-                          <div className="dashboardMarketPlaceBody2_div1_body_card_body">
-                            <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_title">
-                              {data.title}
-                            </div>
-                            <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount">
-                              {data.amount} eUSD
-                              <span className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount_span">
-                                {" "}
-                                ~ (₦{data.amount * 750})
-                              </span>{" "}
-                            </div>
-                            <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash">
-                              {`${data.txnHash.slice(
-                                0,
-                                6
-                              )}...${data.txnHash.slice(63, 66)}`}
-                              <OpenInNewIcon className="tx_hash_link_icon" />
-                            </div>
-                            <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn_div">
-                              <a
-                                href={`/app/market/product/details/${data.txnHash}/${data.title}`}
-                              >
-                                {" "}
-                                <button className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn">
-                                  Purchase
-                                </button>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
+                      {products.map((data) => (
+                        <ProductModel
+                          key={data.product_id}
+                          amount={data.final_amount}
+                          id={data.product_id}
+                          img={data.product_images}
+                          title={data.product_name}
+                          txnHash={data.product_id}
+                        />
                       ))}
                     </Carousel>
                   </div>
