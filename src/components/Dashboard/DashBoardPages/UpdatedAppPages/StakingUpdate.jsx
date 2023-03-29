@@ -1319,13 +1319,12 @@ const StakingUpdate = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await POPULATE_STAKE_INFO(
-        "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC"
-      );
-      console.log(response);
+      const response = await POPULATE_STAKE_INFO(account);
+      // console.log(response, "oyibo");
       if (response.success === true) {
-        setMyAssetInfo(response.data.user);
+        console.log(response.data.user, "oyibo");
         setTotalAssetInfo(response.data.general);
+        setMyAssetInfo(response.data.user);
       }
     };
     fetchData();
@@ -1511,7 +1510,7 @@ const StakingUpdate = () => {
                   </div>
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
                     {/* populate with real data */}
-                    <span>{Number.parseFloat(myAssetInfo.amount)}egc </span>
+                    <span>{Number(myAssetInfo.amount)} egc </span>
                     <span style={{ fontSize: "10px" }}>
                       (Max Duration: 6months)
                     </span>
@@ -1725,7 +1724,7 @@ const StakingUpdate = () => {
                       Total EGC Locked
                     </div>
                     <div className="lending_area1_cont1_body_txt">
-                      {Number.parseFloat(totalAssetInfo.amount, 2)}egc
+                      {Number.parseFloat(totalAssetInfo.amount, 2)} egc
                     </div>
                     <div className="lending_area1_cont1_heading">
                       (32.84% Of EGC Supply)
@@ -1743,10 +1742,11 @@ const StakingUpdate = () => {
                 <div className="lending_area1_cont1">
                   <div className="lending_area1_cont1_body_1">
                     <div className="lending_area1_cont1_heading">
-                      Total Claimed Rewards
+                      Total Rewards
                     </div>
                     <div className="lending_area1_cont1_body_txt">
-                      6000 <span className="usd_sign">eUSD</span>
+                      {Number.parseFloat(totalAssetInfo.dailyRoyalty, 2)}{" "}
+                      <span className="usd_sign">eUSD</span>
                     </div>
                   </div>
                   <div className="lending_area1_cont1_body_1">

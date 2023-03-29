@@ -24,6 +24,11 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import jazzicon from "@metamask/jazzicon";
 import { Web3Provider } from "@ethersproject/providers";
+import {
+  CALL_CHECK_USER_AND_MEMBERSHIP,
+  CALL_ADD_USER_ADDRESS,
+} from "../../services/userServices";
+
 // =======================
 import { parseEther, formatEther } from "@ethersproject/units";
 import List from "@material-ui/core/List";
@@ -177,6 +182,20 @@ const Header = ({ togglemakeDark, check }) => {
     // // console.log(walletAddr.slice(0, 10));
     const element = avatarRef.current;
     if (element && account) {
+      const fetchData = async () => {
+        const response = await CALL_CHECK_USER_AND_MEMBERSHIP(account);
+        console.log(response.data);
+        if (response.data.userExists == false) {
+          const response2 = await CALL_ADD_USER_ADDRESS(account);
+          console.log(response2.data);
+          // if (response2.data.userExists == false) {
+          //   console.log("okkkk");
+          // }
+        }
+      };
+
+      fetchData();
+
       setWalletAddr(account);
       setConnectTxt("Connected");
       const addr = account.slice(2, 10);

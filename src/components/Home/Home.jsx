@@ -1,91 +1,93 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
 import "./stars.css";
 // import React from "react";
-import { Link } from "react-router-dom";
-import HomeIcon from "@mui/icons-material/Home";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import HowToVoteIcon from "@mui/icons-material/HowToVote";
-import CasinoIcon from "@mui/icons-material/Casino";
+// import { Link } from "react-router-dom";
+// import HomeIcon from "@mui/icons-material/Home";
+// import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+// import HowToVoteIcon from "@mui/icons-material/HowToVote";
+// import CasinoIcon from "@mui/icons-material/Casino";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import {
+  CALL_CHECK_USER_AND_MEMBERSHIP,
+  CALL_ADD_USER_ADDRESS,
+} from "../../services/userServices";
 
 // import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
-
-import ArrowOutwardIcon from "@mui/icons-material/ArrowDownward";
-
+// import ArrowOutwardIcon from "@mui/icons-material/ArrowDownward";
 // import Marquee from "react-fast-marquee";
-import WhyPeopleTrustUs from "./WhyPeopleTrustUs/WhyPeopleTrustUs";
-import { parseEther, formatEther } from "@ethersproject/units";
-import axios from "axios";
+// import WhyPeopleTrustUs from "./WhyPeopleTrustUs/WhyPeopleTrustUs";
+// import { parseEther, formatEther } from "@ethersproject/units";
+// import axios from "axios";
 // import Spline from "@splinetool/react-spline";
 // import { Spline } from "react-spline";
-import { API_URL as api_url } from "../../actions/types";
-import { config } from "@fortawesome/fontawesome-svg-core";
+// import { API_URL as api_url } from "../../actions/types";
+// import { config } from "@fortawesome/fontawesome-svg-core";
 // import Carousel from "react-multi-carousel";
 import Web3 from "web3";
 // import { numberWithCommas } from "../../static";
-import LOAN from "../../web3/contracts/Loan.json";
-import SwapContract from "../../web3/contracts/Contract_Address.json";
-import NumberScroller from "react-number-scroller";
-import CloseIcon from "@mui/icons-material/Close";
-import Carousel from "react-multi-carousel";
+// import LOAN from "../../web3/contracts/Loan.json";
+// import SwapContract from "../../web3/contracts/Contract_Address.json";
+// import NumberScroller from "react-number-scroller";
+// import CloseIcon from "@mui/icons-material/Close";
+// import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import Marquee from "react-fast-marquee";
-import NotInterestedIcon from "@mui/icons-material/NotInterested";
-import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
-import SearchIcon from "@mui/icons-material/Search";
-import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
+// import Marquee from "react-fast-marquee";
+// import NotInterestedIcon from "@mui/icons-material/NotInterested";
+// import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
+// import SearchIcon from "@mui/icons-material/Search";
+// import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 // import FlipCountdown from "@rumess/react-flip-countdown";
 import "./countdown.css";
-import WaveAnimation from "./WaveAnimation/WaveAnimation";
+// import WaveAnimation from "./WaveAnimation/WaveAnimation";
 import "../../css/home.css";
-import { PersonTwoTone } from "@material-ui/icons";
-import { numberWithCommas } from "../../static";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Mousewheel, Keyboard, Pagination } from "swiper";
+// import { PersonTwoTone } from "@material-ui/icons";
+// import { numberWithCommas } from "../../static";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import { Mousewheel, Keyboard, Pagination } from "swiper";
 import "swiper/swiper.min.css";
 import "swiper/swiper-bundle.css";
 import "swiper/swiper-bundle.min.css";
-import { animateScroll as scroll, Events, scrollSpy } from "react-scroll";
+// import { animateScroll as scroll, Events, scrollSpy } from "react-scroll";
 import {
   Web3ReactProvider,
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
 import "./Logos.css";
-import {
-  lendUS,
-  takeDividend,
-  takeBackLoan,
-  getTotalLended,
-  getInvestorsDividend,
-  userStats,
-  system,
-  burnAccumulatedDividend,
-  checkAllowance,
-  unluckToken,
-  transactReceipt,
-  getPrice,
-  getTickerInfo,
-  tokenBalance,
-  open,
-  getLatestLoan,
-  repay,
-  topup,
-  draw,
-  checkAllowanceL,
-  unluckToken2,
-  getEgcSmartContractBalnce,
-} from "../../web3/index";
+// import {
+//   lendUS,
+//   takeDividend,
+//   takeBackLoan,
+//   getTotalLended,
+//   getInvestorsDividend,
+//   userStats,
+//   system,
+//   burnAccumulatedDividend,
+//   checkAllowance,
+//   unluckToken,
+//   transactReceipt,
+//   getPrice,
+//   getTickerInfo,
+//   tokenBalance,
+//   open,
+//   getLatestLoan,
+//   repay,
+//   topup,
+//   draw,
+//   checkAllowanceL,
+//   unluckToken2,
+//   getEgcSmartContractBalnce,
+// } from "../../web3/index";
 
 const Home = () => {
   const context = useWeb3React();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  const [numberFrom, setNumberFrom] = useState(100);
-  const [numberTo, setNumberTo] = useState(8000000);
-  const [numberFromFund, setNumberFromFund] = useState(100);
-  const [numberToFund, setNumberToFund] = useState(100000);
+  // const [numberFrom, setNumberFrom] = useState(100);
+  // const [numberTo, setNumberTo] = useState(8000000);
+  // const [numberFromFund, setNumberFromFund] = useState(100);
+  // const [numberToFund, setNumberToFund] = useState(100000);
   const [aboutVideoModal, setAboutVideoModal] = useState(false);
   const [animate1, setAnimate1] = useState(true);
   const [animate2, setAnimate2] = useState(false);
@@ -101,6 +103,7 @@ const Home = () => {
   const [sumVals2, setSumVals2] = useState(0);
   const [valDisplay, setValDisplay] = useState(0);
   const [valDisplay2, setValDisplay2] = useState(0);
+  const [subscriptionStatus, setSubscriptionStatus] = useState(null);
   const [TotalSum, setTotalSum] = useState(0);
   const [lockedValue, setLockedValue] = useState(0);
   const [totalAmountFrom, setTotalAmountFrom] = useState(0);
@@ -141,138 +144,138 @@ const Home = () => {
   const toggleAboutVideoModal = () => {
     setAboutVideoModal(!aboutVideoModal);
   };
-  const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 600 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 600, min: 0 },
-      items: 1,
-    },
-  };
-  const FeaturedLogos = [
-    {
-      link: "https://finance.yahoo.com/news/egoras-protocol-promises-revolutionize-microfinance-145500324.html",
-      img: "/img/featured_logos/featured1.svg",
-    },
+  // const responsive = {
+  //   superLargeDesktop: {
+  //     // the naming can be any, depends on you.
+  //     breakpoint: { max: 4000, min: 3000 },
+  //     items: 5,
+  //   },
+  //   desktop: {
+  //     breakpoint: { max: 3000, min: 1024 },
+  //     items: 3,
+  //   },
+  //   tablet: {
+  //     breakpoint: { max: 1024, min: 600 },
+  //     items: 2,
+  //   },
+  //   mobile: {
+  //     breakpoint: { max: 600, min: 0 },
+  //     items: 1,
+  //   },
+  // };
+  // const FeaturedLogos = [
+  //   {
+  //     link: "https://finance.yahoo.com/news/egoras-protocol-promises-revolutionize-microfinance-145500324.html",
+  //     img: "/img/featured_logos/featured1.svg",
+  //   },
 
-    {
-      link: "https://cointelegraph.com/press-releases/egoras-raises-13m-in-private-round",
-      img: "/img/featured_logos/featured3.svg",
-    },
-    {
-      link: "https://www.newsbtc.com/press-releases/egoras-a-decentralized-finance-ecosystem-for-growing-markets/",
-      img: "/img/featured_logos/featured4.svg",
-    },
+  //   {
+  //     link: "https://cointelegraph.com/press-releases/egoras-raises-13m-in-private-round",
+  //     img: "/img/featured_logos/featured3.svg",
+  //   },
+  //   {
+  //     link: "https://www.newsbtc.com/press-releases/egoras-a-decentralized-finance-ecosystem-for-growing-markets/",
+  //     img: "/img/featured_logos/featured4.svg",
+  //   },
 
-    {
-      link: "https://apnews.com/press-release/accesswire/business-small-business-corporate-news-microfinance-products-and-services-ee9eb494f14ea9ce6faa51d3f53a20c9",
-      img: "/img/featured_logos/featured6.svg",
-    },
-  ];
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-  useEffect(() => {
-    axios
-      .get(api_url + "/api/branch/totalpools", null, config)
-      .then((data) => {
-        console.log(data.data.payload[0].total, "powerfulpools");
-        setLockedValue(() => parseInt(data.data.payload[0].total) / 618);
-      })
-      .catch((err) => {
-        console.log(err); // "oh, no!"
-      });
-  }, [lockedValue]);
-  useEffect(() => {
-    axios
-      .get(
-        api_url +
-          "/pub/loan/vault/balance/" +
-          LOAN.address +
-          "/" +
-          "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
-        null,
-        config
-      )
-      .then((data) => {
-        console.log(data.data.data.balance, "egc balnce vault");
-        setEgcVal(() => parseInt(data.data.data.balance));
-      })
-      .catch((err) => {
-        console.log(err); // "oh, no!"
-      });
-    // ============
-    // ============
-    // ============
-    axios
-      .get(
-        api_url +
-          "/pub/loan/vault/balance/" +
-          SwapContract.address +
-          "/" +
-          "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
-        null,
-        config
-      )
-      .then((data) => {
-        console.log(data.data.data.balance, "egc balnce swap");
-        setEgcVal2(() => parseInt(data.data.data.balance));
-      })
-      .catch((err) => {
-        console.log(err); // "oh, no!"
-      });
-    // ============
-    // ============
-    // ============
-    axios
-      .get(
-        api_url +
-          "/pub/loan/vault/balance/" +
-          SwapContract.address +
-          "/" +
-          "0x8e9a916b6920136110a77E9acAf878862358A467",
-        null,
-        config
-      )
-      .then((data) => {
-        console.log(data.data.data.balance, "egr balnce swap");
-        setEgrVal(() => parseInt(data.data.data.balance));
-      })
-      .catch((err) => {
-        console.log(err); // "oh, no!"
-      });
-    // ============
-    // ============
-    // ============
-    axios
-      .get(
-        api_url +
-          "/pub/loan/vault/balance/" +
-          SwapContract.address +
-          "/" +
-          "0x8e9a916b6920136110a77E9acAf878862358A467",
-        null,
-        config
-      )
-      .then((data) => {
-        console.log(data.data.data.balance, "egr balnce vault");
-        setEgrVal2(() => parseInt(data.data.data.balance));
-      })
-      .catch((err) => {
-        console.log(err); // "oh, no!"
-      });
-  }, []);
+  //   {
+  //     link: "https://apnews.com/press-release/accesswire/business-small-business-corporate-news-microfinance-products-and-services-ee9eb494f14ea9ce6faa51d3f53a20c9",
+  //     img: "/img/featured_logos/featured6.svg",
+  //   },
+  // ];
+  // const handleSearchChange = (event) => {
+  //   setSearchTerm(event.target.value);
+  // };
+  // useEffect(() => {
+  //   axios
+  //     .get(api_url + "/api/branch/totalpools", null, config)
+  //     .then((data) => {
+  //       console.log(data.data.payload[0].total, "powerfulpools");
+  //       setLockedValue(() => parseInt(data.data.payload[0].total) / 618);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err); // "oh, no!"
+  //     });
+  // }, [lockedValue]);
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       api_url +
+  //         "/pub/loan/vault/balance/" +
+  //         LOAN.address +
+  //         "/" +
+  //         "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
+  //       null,
+  //       config
+  //     )
+  //     .then((data) => {
+  //       console.log(data.data.data.balance, "egc balnce vault");
+  //       setEgcVal(() => parseInt(data.data.data.balance));
+  //     })
+  //     .catch((err) => {
+  //       console.log(err); // "oh, no!"
+  //     });
+  //   // ============
+  //   // ============
+  //   // ============
+  //   axios
+  //     .get(
+  //       api_url +
+  //         "/pub/loan/vault/balance/" +
+  //         SwapContract.address +
+  //         "/" +
+  //         "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
+  //       null,
+  //       config
+  //     )
+  //     .then((data) => {
+  //       console.log(data.data.data.balance, "egc balnce swap");
+  //       setEgcVal2(() => parseInt(data.data.data.balance));
+  //     })
+  //     .catch((err) => {
+  //       console.log(err); // "oh, no!"
+  //     });
+  //   // ============
+  //   // ============
+  //   // ============
+  //   axios
+  //     .get(
+  //       api_url +
+  //         "/pub/loan/vault/balance/" +
+  //         SwapContract.address +
+  //         "/" +
+  //         "0x8e9a916b6920136110a77E9acAf878862358A467",
+  //       null,
+  //       config
+  //     )
+  //     .then((data) => {
+  //       console.log(data.data.data.balance, "egr balnce swap");
+  //       setEgrVal(() => parseInt(data.data.data.balance));
+  //     })
+  //     .catch((err) => {
+  //       console.log(err); // "oh, no!"
+  //     });
+  //   // ============
+  //   // ============
+  //   // ============
+  //   axios
+  //     .get(
+  //       api_url +
+  //         "/pub/loan/vault/balance/" +
+  //         SwapContract.address +
+  //         "/" +
+  //         "0x8e9a916b6920136110a77E9acAf878862358A467",
+  //       null,
+  //       config
+  //     )
+  //     .then((data) => {
+  //       console.log(data.data.data.balance, "egr balnce vault");
+  //       setEgrVal2(() => parseInt(data.data.data.balance));
+  //     })
+  //     .catch((err) => {
+  //       console.log(err); // "oh, no!"
+  //     });
+  // }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -283,18 +286,33 @@ const Home = () => {
     setSearchResults(results);
   }, [searchTerm]);
 
-  const [categoryBtn, setCategoryBtn] = useState("All");
+  // const [categoryBtn, setCategoryBtn] = useState("All");
 
-  const triggerAll = () => {
-    setCategoryBtn("All");
-  };
+  // const triggerAll = () => {
+  //   setCategoryBtn("All");
+  // };
 
-  const triggerPopular = () => {
-    setCategoryBtn("Popular");
-  };
-  const triggerStable = () => {
-    setCategoryBtn("Stable");
-  };
+  // const triggerPopular = () => {
+  //   setCategoryBtn("Popular");
+  // };
+  // const triggerStable = () => {
+  //   setCategoryBtn("Stable");
+  // };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await CALL_CHECK_USER_AND_MEMBERSHIP(account);
+      console.log(response.data);
+      setSubscriptionStatus(response.data.userMembership);
+      // if (response.data.userMembership == false) {subscriptionStatus
+
+      // }
+    };
+
+    fetchData();
+
+    //use the adress and make the API call
+  }, [account]);
 
   useEffect(() => {
     // setAnimate1(true);
@@ -452,8 +470,8 @@ const Home = () => {
   // const tOTU = parseInt(amountFrom);
   const tOTU1 = 2041224;
   // const tOTU2 = tOTU;
-  console.log(totu, "amount from utututututu");
-  console.log(totu, "amount from utututututu");
+  // console.log(totu, "amount from utututututu");
+  // console.log(totu, "amount from utututututu");
   const Partners = [
     { img: "/img/FeaturedInLogos/FeaturedInLogos_1.svg" },
     { img: "/img/FeaturedInLogos/FeaturedInLogos_3.svg" },
@@ -500,9 +518,11 @@ const Home = () => {
                 <a href="/app" className="stake-hero-btn2">
                   Launch App <ExitToAppIcon className="exit-to-app" />
                 </a>
-                <a href="/membership/sub" className="stake-hero-btn1">
-                  Become a member
-                </a>
+                {!subscriptionStatus ? (
+                  <a href="/membership/sub" className="stake-hero-btn1">
+                    Become a member
+                  </a>
+                ) : null}
                 {/* <a href="/app/whitepaper" className="stake-hero-btn1">
                   Read Docs
                 </a> */}
