@@ -1,5 +1,5 @@
 import React from "react";
-import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import ArrowOutwardIcon from "@mui/icons-material/ArrowBackIosNew";
 import "./UpdatedSuccessErrorModal.css";
 const UpdatedSuccessModal = ({
   successMessage,

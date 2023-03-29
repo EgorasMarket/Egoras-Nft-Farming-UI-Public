@@ -68,6 +68,7 @@
     "react-scroll": "^1.8.9",
     "react-select": "^5.4.0",
     "react-select-country-list": "^2.2.3",
+    "react-shimmer-effects": "^1.0.2",
     "react-spinners": "^0.13.8",
     "react-star-rating": "^1.4.2",
     "react-zendesk": "^0.1.13",

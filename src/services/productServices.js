@@ -5,6 +5,7 @@ import {
   FETCH_PRODUCT_CATEGORIES,
   ACCEPT_OR_DECLINE_BID,
   FETCH_USER_NEW_PRODUCT,
+  GET_UPLOADED_PRODUCT_BY_ID_ROUTE,
 } from "../core/ApiRoutes";
 export const config = {
   headers: {
@@ -46,6 +47,19 @@ export const GET_CATEGORIES = async () => {
   }
 };
 
+export const GET_UPLOADED_PRODUCT_BY_ID = async (id) => {
+  try {
+    const response = await axios.get(
+      `${GET_UPLOADED_PRODUCT_BY_ID_ROUTE}/${id}`,
+      null,
+      config
+    );
+
+    return response.data;
+  } catch (err) {
+    return err.repsonse;
+  }
+};
 export const DISPLAY_NEW_USER_PRODUCTS_CALL = async (account) => {
   console.log("____HHHH_____");
   try {
