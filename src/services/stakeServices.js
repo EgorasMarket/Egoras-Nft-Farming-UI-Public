@@ -22,3 +22,16 @@ export const POPULATE_STAKE_INFO = async (user) => {
     return err.repsonse;
   }
 };
+
+export const POPULATE_STAKE_GENERAL_INFO = async () => {
+  try {
+    const response = await axios.get(
+      `${POPULATE_STAKE_INFO_ROUTE}`,
+      null,
+      config
+    );
+    return response.data;
+  } catch (err) {
+    return err.repsonse;
+  }
+};

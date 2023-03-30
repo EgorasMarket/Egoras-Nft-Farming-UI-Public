@@ -38,7 +38,10 @@ import {
   takeRoyalty,
 } from "../../../../web3/index";
 import { getDate, getMonth } from "date-fns";
-import { POPULATE_STAKE_INFO } from "../../../../services/stakeServices";
+import {
+  POPULATE_STAKE_INFO,
+  POPULATE_STAKE_GENERAL_INFO,
+} from "../../../../services/stakeServices";
 
 export const DurationDiv = ({ addMonthly, addYearly, SelectedDuration }) => {
   return (
@@ -1330,8 +1333,21 @@ const StakingUpdate = () => {
       // console.log(response, "oyibo");
       if (response.success === true) {
         console.log(response.data.user, "oyibo");
-        setTotalAssetInfo(response.data.general);
+        // setTotalAssetInfo(response.data.general);
         setMyAssetInfo(response.data.user);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await POPULATE_STAKE_GENERAL_INFO();
+      // console.log(response, "oyibo");
+      if (response.success === true) {
+        console.log(response.data.user, "oyibo");
+        setTotalAssetInfo(response.data);
+        // setMyAssetInfo(response.data.user);
       }
     };
     fetchData();
