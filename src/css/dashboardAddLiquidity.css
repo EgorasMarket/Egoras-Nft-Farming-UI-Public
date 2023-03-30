@@ -302,3 +302,10 @@
     opacity: 0;
   }
 }
+@media screen and (max-width: 991px) {
+  .liquidity_area {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+}

@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from "react";
-import { faker } from "@faker-js/faker";
 import sparkline from "@fnando/sparkline";
 import PropTypes from "prop-types"; // ES6
 const propTypes = {
@@ -35,7 +34,7 @@ const Sparkline2 = (props) => {
     } catch (err) {
       console.error(err);
     }
-  }, [sortedValues]);
+  }, []);
 
   const getText = (datapoint) => {
     const dateString = new Date(datapoint.timestamp).toLocaleString("en-US", {

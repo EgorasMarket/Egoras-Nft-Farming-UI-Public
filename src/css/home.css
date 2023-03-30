@@ -1291,7 +1291,6 @@ a.visit_app_link_2 {
   gap: 50px;
 }
 .stake-hero-btn1 {
-  margin-right: 15px;
   padding: 0em 1em;
   height: 50px;
   background: #ffffff;
@@ -1519,6 +1518,9 @@ a.visit_app_link_2 {
   display: flex;
   align-items: center;
   margin-bottom: 3em;
+  width: 100%;
+  position: relative;
+  z-index: 2;
 }
 .nft_area2_stat_div_area_cont1 {
   display: flex;
@@ -1528,9 +1530,10 @@ a.visit_app_link_2 {
   color: #fff;
   border-radius: 10px;
   box-shadow: 0px 10px 10px #0000008a;
+  -webkit-backdrop-filter: blur(11px);
   backdrop-filter: blur(11px);
-  width: 22em;
-  margin-right: 2em;
+  width: 100%;
+  margin-right: 1em;
   align-items: center;
 }
 .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers {
@@ -2120,6 +2123,35 @@ a.visit_app_link_2 {
   .benefit_section_area1 > * {
     margin: 10px 0px;
   }
+  .dark .hero_backdrop {
+    position: absolute;
+    bottom: 0%;
+    width: 133%;
+    z-index: 1;
+    margin: auto;
+    left: auto;
+    right: -16%;
+  }
+  .hero_backdrop {
+    position: absolute;
+    bottom: 0%;
+    width: 133%;
+    z-index: 1;
+    margin: auto;
+    left: auto;
+    right: -16%;
+  }
+  .nft_area2_stat_div_area {
+    display: grid;
+    align-items: center;
+    margin-bottom: 0em;
+    grid-gap: 10px;
+    grid-gap: 10px;
+    gap: 10px;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: flex-start;
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -2365,8 +2397,29 @@ a.visit_app_link_2 {
   .nft-area2 {
     flex-direction: column;
     grid-row-gap: 20px;
+    padding: 15px;
   }
-
+  .earning-section {
+    height: 55em;
+  }
+  .span4b-txts {
+    width: 100%;
+  }
+  .nft_area2_stat_div_area {
+    display: grid;
+    align-items: center;
+    margin-bottom: 0em;
+    grid-gap: 10px;
+    gap: 10px;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: flex-start;
+  }
+  .nft_area2_stat_div_area_cont1 {
+    padding: 1em 1em;
+    width: 100%;
+    margin-right: 0em;
+  }
   .nft-area3 {
     flex-direction: column;
     grid-row-gap: 20px;
@@ -2375,13 +2428,16 @@ a.visit_app_link_2 {
     text-align: center;
   }
   .span-txts {
-    text-align: left;
+    text-align: center;
   }
   .span2-txts {
     font-size: 33px;
   }
   .span4b-txts {
     width: 100%;
+  }
+  .span4a-txts {
+    font-size: 64px;
   }
 
   .key-features-cards-area-flex {
@@ -2405,6 +2461,9 @@ a.visit_app_link_2 {
     width: 100%;
     font-weight: 800;
     line-height: 44px;
+  }
+  .earning-section {
+    height: 46em;
   }
 }
 @media screen and (max-width: 600px) {
@@ -2506,14 +2565,16 @@ a.visit_app_link_2 {
     padding: 2em 1em;
     font-size: 12px;
     text-align: center;
-    width: 50%;
+  }
+  .stake-hero-btns {
+    display: flex;
+    margin-top: 27px;
   }
   .stake-hero-btn2 {
     padding: 2em 1em;
     font-size: 12px;
     margin: 0;
     text-align: center;
-    width: 50%;
   }
   .floating_div_cont_area1_cont1 {
     font-size: 14px;
@@ -2551,14 +2612,7 @@ a.visit_app_link_2 {
     gap: 0px;
   }
   .span4b-txts {
-    width: 85%;
-    /* margin-top: 20px; */
-    box-sizing: border-box;
-    margin: 16px 0px 0px;
-    min-width: 0px;
-    font-size: 14px;
-    color: #474d57;
-    font-weight: 400;
+    font-size: 15px;
   }
   .whyEgoras_body_cont1 {
     padding: 1em;
@@ -2596,6 +2650,27 @@ a.visit_app_link_2 {
   }
   .benefit_section_are2 {
     width: 70%;
+  }
+  .nft_area2_stat_div_area_cont1_icon {
+    width: 30px;
+  }
+  .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head {
+    color: #8fc4a4;
+    font-size: 12px;
+  }
+  .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para {
+    font-size: 18px;
+  }
+  .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers {
+    margin-left: 0.5em;
+  }
+  .nft_area2_stat_div_area_cont1 {
+    padding: 0.5em 0.5em;
+    width: 100%;
+    margin-right: 0em;
+  }
+  .earning-section {
+    height: 42em;
   }
 }
 @media screen and (max-width: 449px) {
@@ -3014,7 +3089,7 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark a {
-  color: #ffffff !important;
+  color: #ffffff;
 }
 .dark .recent_transaction_body {
   border: solid 1px #3d4e44;

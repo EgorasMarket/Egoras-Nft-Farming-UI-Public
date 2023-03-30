@@ -715,7 +715,6 @@ const getTickerInfo = async (ticker, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
       message: error,
       status: false,

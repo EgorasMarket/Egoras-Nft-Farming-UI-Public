@@ -1416,6 +1416,260 @@ const DashboardHome = () => {
           <div className="pool_container">
             <div className="analytics_container">
               <div className="analytics_container_head">Egoras Overview</div>
+              <div className="analytics_container_body_mobile">
+                <div className="analytics_container_1">
+                  <div className="analytics_container_1_head">TVL</div>
+                  <div
+                    className="analytics_container_1_Amount"
+                    onChange={CustomTooltip}
+                  >
+                    ${formatNumber(ChartValue)}
+                  </div>
+                  <span className="analytics_container_1_Amount_span">
+                    {ChartTime}
+                  </span>
+
+                  <div className="analytics_container_1_chart">
+                    <div
+                      className="assets_chart_area1a "
+                      style={{ width: "100%", height: 120 }}
+                    >
+                      <ResponsiveContainer>
+                        <AreaChart
+                          width={130}
+                          height={10}
+                          data={array}
+                          margin={{
+                            top: 0,
+                            right: 0,
+                            left: 0,
+                            bottom: 0,
+                          }}
+                        >
+                          <defs>
+                            <linearGradient
+                              id="colorUv"
+                              x1="0"
+                              y1="0"
+                              x2="0"
+                              y2="1"
+                            >
+                              <stop
+                                offset="5%"
+                                stopColor="#60c589"
+                                stopOpacity={0.3}
+                              />
+                              <stop
+                                offset="100%"
+                                stopColor="#60c589"
+                                stopOpacity={0}
+                              />
+                            </linearGradient>
+                          </defs>
+                          {/* <CartesianGrid
+                            strokeDasharray="1 1"
+                            stroke="#d7d7d7"
+                          /> */}
+                          <XAxis dataKey="month" stroke="0" />
+                          {/* <YAxis stroke="#000" /> */}
+                          <Tooltip content={<CustomTooltip />} />
+                          <Area
+                            type="monotone"
+                            dataKey="value"
+                            stroke="#229e54"
+                            fillOpacity={1}
+                            fill="url(#colorUv)"
+                            strokeWidth={2}
+                          />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </div>
+                    <div
+                      className="assets_chart_area2 "
+                      style={{ width: "100%", height: 120 }}
+                    >
+                      <ResponsiveContainer>
+                        <AreaChart
+                          width={130}
+                          height={10}
+                          data={array}
+                          margin={{
+                            top: 0,
+                            right: 0,
+                            left: 0,
+                            bottom: 0,
+                          }}
+                        >
+                          <defs>
+                            <linearGradient
+                              id="colorUv"
+                              x1="0"
+                              y1="0"
+                              x2="0"
+                              y2="1"
+                            >
+                              <stop
+                                offset="5%"
+                                stopColor="#60c589"
+                                stopOpacity={0.3}
+                              />
+                              <stop
+                                offset="100%"
+                                stopColor="#60c589"
+                                stopOpacity={0}
+                              />
+                            </linearGradient>
+                          </defs>
+                          {/* <CartesianGrid
+                            strokeDasharray="1 1"
+                            stroke="#d7d7d7"
+                          /> */}
+                          <XAxis dataKey="month" stroke="0" />
+                          {/* <YAxis stroke="#000" /> */}
+                          <Tooltip content={<CustomTooltip />} />
+                          <Area
+                            type="monotone"
+                            dataKey="value"
+                            stroke="#229e54"
+                            fillOpacity={1}
+                            fill="url(#colorUv)"
+                            strokeWidth={2}
+                          />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </div>
+                </div>
+                {/* ====== */}
+                {/* ====== */}
+                {/* ====== */}
+                {/* ====== */}
+                <div className="analytics_container_1">
+                  <div className="analytics_container_1_head">Volume 24H</div>
+                  <div
+                    className="analytics_container_1_Amount"
+                    onChange={CustomTooltip2}
+                  >
+                    ${formatNumber(ChartValue2)}
+                  </div>
+                  <span className="analytics_container_1_Amount_span">
+                    {ChartTime2}
+                  </span>
+                  <div className="analytics_container_1_chart">
+                    <div
+                      className="assets_chart_area1a"
+                      style={{ width: "100%", height: 120 }}
+                    >
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart
+                          width={130}
+                          height={10}
+                          data={array}
+                          margin={{
+                            top: 0,
+                            right: 0,
+                            left: 0,
+                            bottom: 0,
+                          }}
+                        >
+                          <defs>
+                            <linearGradient
+                              id="colorUvBar1"
+                              x1="0"
+                              y1="0"
+                              x2="0"
+                              y2="1"
+                            >
+                              <stop
+                                offset="5%"
+                                stopColor="#60c589"
+                                stopOpacity={0.7}
+                              />
+                              <stop
+                                offset="100%"
+                                stopColor="#60c589"
+                                stopOpacity={0.3}
+                              />
+                            </linearGradient>
+                          </defs>
+                          {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                          <XAxis dataKey="month" stroke="0" color="#fff" />
+                          {/* <YAxis /> */}
+                          <Tooltip content={<CustomTooltip2 />} />
+                          {/* <Legend /> */}
+                          <Bar
+                            // type="monotone"
+                            dataKey="value"
+                            // stroke="#60c589"
+                            // fillOpacity={1}
+                            fill="url(#colorUvBar1)"
+                            // strokeWidth={2}
+                          />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                    {/* ===== */}
+                    {/* ===== */}
+                    {/* ===== */}
+                    <div
+                      className="assets_chart_area2"
+                      style={{ width: "100%", height: 120 }}
+                    >
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart
+                          width={130}
+                          height={10}
+                          data={array}
+                          margin={{
+                            top: 0,
+                            right: 0,
+                            left: 0,
+                            bottom: 0,
+                          }}
+                        >
+                          <defs>
+                            <linearGradient
+                              id="colorUvBar2"
+                              x1="0"
+                              y1="0"
+                              x2="0"
+                              y2="1"
+                            >
+                              <stop
+                                offset="5%"
+                                stopColor="#60c589"
+                                stopOpacity={0.7}
+                              />
+                              <stop
+                                offset="100%"
+                                stopColor="#60c589"
+                                stopOpacity={0.3}
+                              />
+                            </linearGradient>
+                          </defs>
+                          {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                          <XAxis
+                            dataKey="month"
+                            stroke="0"
+                            fill="#fff"
+                            color="#fff"
+                          />
+                          {/* <YAxis /> */}
+                          <Tooltip content={<CustomTooltip2 />} />
+                          <Bar
+                            // type="monotone"
+                            dataKey="value"
+                            // stroke="#fff"
+                            // fillOpacity={1}
+                            fill="url(#colorUvBar2)"
+                            // strokeWidth={2}
+                          />
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div className="analytics_container_body">
                 <div className="analytics_container_1">
                   <div className="analytics_container_1_head">TVL</div>
@@ -1831,9 +2085,6 @@ const DashboardHome = () => {
                                 ) : (
                                   <>- {data.amount} eUSD</>
                                 )}
-                                <div className="value_dolls_div_val">
-                                  $2,406.66
-                                </div>
                               </div>
                             </td>
                             <td className="stakingTable_body_row_data">

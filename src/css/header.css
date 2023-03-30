@@ -37,7 +37,11 @@ div#Header {
   justify-content: center;
   backdrop-filter: blur(7px);
 }
-
+.header_token_prices_div .marquee-container {
+  width: 100% !important;
+  max-width: 340px !important;
+  margin: auto !important;
+}
 .right_network_id_modal_cont {
   padding: 2em;
   background: #fff;
