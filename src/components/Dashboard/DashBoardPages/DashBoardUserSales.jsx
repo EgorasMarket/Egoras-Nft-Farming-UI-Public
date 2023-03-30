@@ -673,11 +673,15 @@ const DashBoardUserSales = () => {
                                       : asset.status}
                                   </td>
                                   <td className="assets-category-data1b stable-content branch_apy">
-                                    {/* {`${asset.txnHash.slice(
-                                      0,
-                                      6
-                                    )}...${asset.txnHash.slice(63, 66)}`} */}
-                                    {"N/A"}
+                                    {asset.transaction_hash != null
+                                      ? `${asset.transaction_hash.slice(
+                                          0,
+                                          6
+                                        )}...${asset.transaction_hash.slice(
+                                          63,
+                                          66
+                                        )}`
+                                      : "N/A"}
                                   </td>
                                   <td className="assets-category-data-last branch_loan_action">
                                     <ArrowForwardIosIcon />
