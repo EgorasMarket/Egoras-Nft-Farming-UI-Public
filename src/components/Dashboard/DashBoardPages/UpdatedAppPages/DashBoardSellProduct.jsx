@@ -205,7 +205,7 @@ const DashBoardSellProduct = () => {
       console.log(err);
       console.log(err);
       setErrorModal(true);
-      setErrorMessage(err.message);
+      setErrorMessage(err.response.data.errorMessage);
       setIsLoading(false);
       setDisable(false);
     }
