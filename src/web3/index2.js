@@ -158,6 +158,7 @@ const swapBnbForEusd = async (value, amountOutMin, tokenOut, signer) => {
   }
 };
 const getAmountsOut = async (amountIn, path, signer) => {
+  console.log(amountIn, path, signer, "get amount out");
   try {
     const instance = await contractPancakeSwapFacetInstance(signer);
     let result;

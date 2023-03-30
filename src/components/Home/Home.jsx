@@ -471,7 +471,6 @@ const Home = () => {
   const tOTU1 = 2041224;
   // const tOTU2 = tOTU;
   // console.log(totu, "amount from utututututu");
-  // console.log(totu, "amount from utututututu");
   const Partners = [
     { img: "/img/FeaturedInLogos/FeaturedInLogos_1.svg" },
     { img: "/img/FeaturedInLogos/FeaturedInLogos_3.svg" },
@@ -563,7 +562,7 @@ const Home = () => {
                     Total TVL
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
-                    $89,979,500,541
+                    $100M+
                   </div>
                 </div>
               </div>
@@ -577,10 +576,10 @@ const Home = () => {
                 </div>
                 <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers">
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head">
-                    Total Trading Volume
+                    Volume
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
-                    $89,979,500,541
+                    $89M+
                   </div>
                 </div>
               </div>

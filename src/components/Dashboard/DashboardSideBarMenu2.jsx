@@ -7,6 +7,7 @@ import Marquee from "react-fast-marquee";
 // import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 // import NotificationsIcon from "@mui/icons-material/Notifications";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
+import HomeIcon from "@mui/icons-material/Home";
 import Web3 from "web3";
 import CloseIcon from "@material-ui/icons/Close";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -14,8 +15,10 @@ import TelegramIcon from "@mui/icons-material/Telegram";
 import { Sling as Hamburger } from "hamburger-react";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import HomeIcon from "@mui/icons-material/Home";
+import SellIcon from "@mui/icons-material/Sell";
+import StorefrontIcon from "@mui/icons-material/Storefront";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import LockClockIcon from "@mui/icons-material/LockClock";
 import jazzicon from "@metamask/jazzicon";
 import StarsIcon from "@mui/icons-material/Stars";
 import ApprovalIcon from "@mui/icons-material/Approval";
@@ -364,18 +367,18 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
 
   useEffect(
     async (e) => {
-      let string =
-        "https://api.coingecko.com/api/v3/simple/price?ids=egoras&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
-      await fetch(string)
-        .then((resp) => resp.json())
-        .then((data) => {
-          const egr_usd_val = data["egoras"].usd;
-          console.log(egr_usd_val);
-          setEgrUsdVal(() => egr_usd_val);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      // let string =
+      //   "https://api.coingecko.com/api/v3/simple/price?ids=egoras&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
+      // await fetch(string)
+      //   .then((resp) => resp.json())
+      //   .then((data) => {
+      //     const egr_usd_val = data["egoras"].usd;
+      //     console.log(egr_usd_val);
+      //     setEgrUsdVal(() => egr_usd_val);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
       // ===============================
       let string2 =
         "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
@@ -390,7 +393,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           console.log(error);
         });
     },
-    [egcUsdVal, egrUsdVal]
+    [egcUsdVal]
   );
 
   // const chainIdBsc = "56";
@@ -520,22 +523,22 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             gradientColor="[255, 255, 255]"
           >
             <div className="header_token_prices_div_area">
-              <div className="header_token_prices_div_area1">
+              {/* <div className="header_token_prices_div_area1">
                 {nairaValue} NGN ~ 1 USD
-              </div>
-              <span class="vertical_rule2"></span>
+              </div> */}
+              {/* <span class="vertical_rule2"></span>
               <div className="header_token_prices_div_area1">
                 {nairaValue} NGN ~ 1 eUSD
-              </div>
-              <span class="vertical_rule2"></span>
-              <div className="header_token_prices_div_area1">
+              </div> */}
+              {/* <span class="vertical_rule2"></span> */}
+              {/* <div className="header_token_prices_div_area1">
                 {nairaValue} ENGN ~ 1 USD
-              </div>
-              <span class="vertical_rule2"></span>
-              <div className="header_token_prices_div_area1">
+              </div> */}
+              {/* <span class="vertical_rule2"></span> */}
+              {/* <div className="header_token_prices_div_area1">
                 {nairaValue} ENGN ~ 1 eUSD
-              </div>
-              <span class="vertical_rule2"></span>
+              </div> */}
+              {/* <span class="vertical_rule2"></span> */}
               <div className="header_token_prices_div_area1">
                 1 EGC ~ {numberWithCommas(egcUsdVal.toFixed(2))} USD
               </div>
@@ -545,29 +548,17 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
               </div>
               <span class="vertical_rule2"></span>
               <div className="header_token_prices_div_area1">
-                1 EGR ~ {egrUsdVal.toFixed(3)} USD
-              </div>
-              <span class="vertical_rule2"></span>
-              <div className="header_token_prices_div_area1">
-                1 EGR ~ {egrUsdVal.toFixed(3)} eUSD
-              </div>
-              <span class="vertical_rule2"></span>
-              <div className="header_token_prices_div_area1">
                 1 eUSD ~ 1 USD
               </div>
-              <span class="vertical_rule2"></span>
+              {/* <span class="vertical_rule2"></span>
               <div className="header_token_prices_div_area1">
                 1 ENGN ~ 1 NGN
-              </div>
-              <span class="vertical_rule2"></span>
+              </div> */}
+              {/* <span class="vertical_rule2"></span>
               <div className="header_token_prices_div_area1">
                 1 EGC ~ {numberWithCommas((egcUsdVal * nairaValue).toFixed(2))}{" "}
                 NGN
-              </div>
-              <span class="vertical_rule2"></span>
-              <div className="header_token_prices_div_area1">
-                1 EGR ~ {(egrUsdVal * nairaValue).toFixed(2)} NGN
-              </div>
+              </div> */}
               <span class="vertical_rule2"></span>
             </div>
           </Marquee>
@@ -842,13 +833,13 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
       </div>
       <div className="header_tabs2">
         <a
-          id="lend"
-          href="/app/earn"
-          className={activeBg == "lend" ? "header_tab1_active " : "header_tab1"}
+          id="home"
+          href="/app"
+          className={activeBg == "home" ? "header_tab1_active " : "header_tab1"}
           onClick={changeBg}
         >
-          <StarsIcon className="sidebarIcon" />
-          Earn
+          <HomeIcon className="sidebarIcon" />
+          Home
         </a>
 
         <a
@@ -859,7 +850,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           }
           onClick={changeBg}
         >
-          <ApprovalIcon className="sidebarIcon" />
+          <LockClockIcon className="sidebarIcon" />
           Stake
         </a>
         <a
@@ -871,17 +862,26 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           <SwapHorizontalCircleIcon className="sidebarIcon" />
           Swap
         </a>
+        <a
+          id="sell"
+          href="/app/sell"
+          className={activeBg == "sell" ? "header_tab1_active " : "header_tab1"}
+          onClick={changeBg}
+        >
+          <SellIcon className="sidebarIcon" />
+          Sell
+        </a>
 
         <a
-          id="account"
-          href="/app/user"
+          id="market"
+          href="/app/market"
           className={
-            activeBg == "account" ? "header_tab1_active " : "header_tab1"
+            activeBg == "market" ? "header_tab1_active " : "header_tab1"
           }
           onClick={changeBg}
         >
-          <AccountCircleIcon className="sidebarIcon" />
-          Account
+          <StorefrontIcon className="sidebarIcon" />
+          Market
         </a>
       </div>
       {/* =============''''''''' */}

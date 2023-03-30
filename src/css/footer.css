@@ -57,13 +57,29 @@ div#FooterId {
 
 .footerCard1 {
   padding: 2em;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
 }
-
+.twitter_icon {
+  /* font-size: 14px; */
+  background: #d7ffe7;
+  border-radius: 50%;
+  padding: 5px;
+  font-size: 40px !important;
+  /* width: 28px; */
+}
+.dark .twitter_icon {
+  /* font-size: 14px; */
+  background: #26382c;
+}
 .footerIcons {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 50px;
+  margin-top: 0px;
 }
 .footerCard2 {
   padding: 2em;
@@ -82,11 +98,16 @@ div#FooterId {
 
 .twitter {
   color: #55bc7e;
-  border-color: #55bc7e;
-  border: solid;
-  padding: 3px;
-  border-radius: 50px;
-  border-width: 0.5px;
+  margin-right: 10px;
+}
+.FooterPageLinks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.FooterPageLinks_1 {
+  margin-right: 11px;
+  text-decoration: underline !important;
 }
 
 .twitter:hover {

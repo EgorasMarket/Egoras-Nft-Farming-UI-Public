@@ -3,6 +3,7 @@
   width: 100%;
   justify-content: space-between;
   align-items: flex-start;
+  margin-top: 2em;
 }
 .lock_container_cont1 {
   width: 55%;
@@ -325,7 +326,7 @@ svg.recharts-surface {
 }
 .lock_container_transactions_body_all {
   overflow: scroll;
-  height: 620px;
+  height: 422px;
   border: solid 1px #28372f;
   border-radius: 10px;
   margin-top: 10px;
@@ -490,7 +491,9 @@ svg.recharts-surface {
   background: #17201a;
   color: #fff;
 }
-
+.lock_container_cont1_div_contract_overview_div {
+  display: none;
+}
 @media screen and (max-width: 767px) {
   .stakingTable_body_row_data {
     padding: 8px;
@@ -513,3 +516,19 @@ svg.recharts-surface {
 /* ========================== */
 /* ========================== */
 /* ========================== */
+@media screen and (max-width: 991px) {
+  .lock_container {
+    flex-direction: column;
+  }
+  .lock_container_cont1 {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 1em;
+  }
+  .lock_container_cont2 {
+    width: 100%;
+  }
+  .lock_container_cont2_div2_chart_div {
+    padding: 1em;
+  }
+}

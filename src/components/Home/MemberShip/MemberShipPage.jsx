@@ -187,7 +187,7 @@ const MemberShipPage = () => {
         setUnlockBtn(check.status);
       }
     },
-    [account, unLockCheckStatus]
+    [account, unLockCheckStatus, unlockBtn]
   );
   const subscribe = async () => {
     setIsLoading(true);

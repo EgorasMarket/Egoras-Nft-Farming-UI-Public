@@ -693,7 +693,7 @@ button.pool_detail_heading_area1_invest_btn {
     flex-direction: column;
   }
   .no_paddd {
-    padding: 1em 0em !important;
+    padding: 0em 0em !important;
   }
   .pool_detail_sub_area1_area1 {
     align-items: flex-start;

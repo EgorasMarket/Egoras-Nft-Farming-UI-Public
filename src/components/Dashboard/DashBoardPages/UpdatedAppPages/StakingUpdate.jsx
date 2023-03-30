@@ -1270,9 +1270,16 @@ const StakingUpdate = () => {
         console.log(data);
         console.log(data.data.data);
         setLockedTransactions(data.data.data);
+
         const temp = data.data.data;
         for (const data of temp) {
           data.amount = Number(parseInt(data.amount).toFixed(2));
+          const date = new Date(data.time);
+          const day = date.getUTCDate().toString().padStart(2, "0");
+          const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+          const year = date.getUTCFullYear();
+          const formattedDated = `${day}/${month}/${year}`;
+          data.time = formattedDated;
         }
         setGraphData2(() => temp);
         const array = temp.map((data) => {
@@ -1469,9 +1476,6 @@ const StakingUpdate = () => {
                               <td className="stakingTable_body_row_data">
                                 <div className="value_dolls_div2">
                                   {parseFloat(data.amount).toFixed(2)} EGC
-                                  <div className="value_dolls_div_val">
-                                    $2,406.66
-                                  </div>
                                 </div>
                               </td>
 
@@ -1790,7 +1794,7 @@ const StakingUpdate = () => {
                       <AreaChart
                         width={130}
                         height={10}
-                        data={btc}
+                        data={graphData2}
                         margin={{
                           top: 0,
                           right: 0,
@@ -1819,12 +1823,12 @@ const StakingUpdate = () => {
                           </linearGradient>
                         </defs>
                         <CartesianGrid strokeDasharray="1 1" stroke="#d7d7d7" />
-                        <XAxis dataKey="name" stroke="#000" />
-                        <YAxis stroke="#000" />
+                        <XAxis dataKey="time" stroke="0" />
+                        {/* <YAxis stroke="#000" /> */}
                         <Tooltip />
                         <Area
                           type="monotone"
-                          dataKey="value"
+                          dataKey="amount"
                           stroke="#229e54"
                           fillOpacity={1}
                           fill="url(#colorUv)"
@@ -1841,7 +1845,7 @@ const StakingUpdate = () => {
                       <AreaChart
                         width={130}
                         height={10}
-                        data={btc}
+                        data={graphData2}
                         margin={{
                           top: 0,
                           right: 0,
@@ -1870,12 +1874,12 @@ const StakingUpdate = () => {
                           </linearGradient>
                         </defs>
                         <CartesianGrid strokeDasharray="1 1" stroke="#283b2f" />
-                        <XAxis dataKey="name" stroke="#fff" />
-                        <YAxis stroke="#fff" />
+                        <XAxis dataKey="time" stroke="0" />
+                        {/* <YAxis stroke="#fff" /> */}
                         <Tooltip />
                         <Area
                           type="monotone"
-                          dataKey="value"
+                          dataKey="amount"
                           stroke="#fff"
                           fillOpacity={1}
                           fill="url(#colorUv)"
@@ -1935,25 +1939,25 @@ const StakingUpdate = () => {
                         {/* =============== */}
                         {/* =============== */}
                         {LockedTransactions.map((data) => {
-                          const date = new Date(data.time);
-                          const day = date
-                            .getUTCDate()
-                            .toString()
-                            .padStart(2, "0");
-                          const month = (date.getUTCMonth() + 1)
-                            .toString()
-                            .padStart(2, "0");
-                          const year = date.getUTCFullYear();
-                          const formattedDate = `${day}/${month}/${year}`;
-                          console.log(formattedDate);
+                          // const date = new Date(data.time);
+                          // const day = date
+                          //   .getUTCDate()
+                          //   .toString()
+                          //   .padStart(2, "0");
+                          // const month = (date.getUTCMonth() + 1)
+                          //   .toString()
+                          //   .padStart(2, "0");
+                          // const year = date.getUTCFullYear();
+                          // const formattedDate = `${day}/${month}/${year}`;
+                          // console.log(formattedDate);
                           return (
                             <tr className="stakingTable_body_row ">
                               <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
                                 <div className="value_dolls_div">
                                   Create Lock
                                   <div className="value_dolls_div_val">
-                                    {formattedDate}
-                                    {/* {data.time} */}
+                                    {/* {formattedDate} */}
+                                    {data.time}
                                   </div>
                                 </div>
                               </td>
