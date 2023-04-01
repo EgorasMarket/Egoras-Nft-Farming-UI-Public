@@ -28,7 +28,6 @@
   overflow: hidden;
 }
 
-
 .coin-img {
   width: 212px;
   position: absolute;
@@ -61,7 +60,7 @@
 .coinName {
   margin: 0;
   padding: 0em 1em;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 18px;
   border-bottom: solid;
   border-width: 1px;

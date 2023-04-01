@@ -89,7 +89,7 @@
   font-size: 14px;
 }
 .tip_sub_head {
-  font-weight: 800;
+  font-weight: 600;
 }
 .amnt_input {
   width: 100%;
@@ -126,7 +126,7 @@
   border: none;
   background: none;
   width: 100%;
-  font-weight: 700;
+  font-weight: 600;
 }
 .amnt_input_field::placeholder {
   color: #526a55;

@@ -40,7 +40,7 @@
   justify-content: space-between;
 }
 .pool_detail_assets_body_layer_1_cont1_heading_1 {
-  font-weight: 700;
+  font-weight: 600;
 }
 .pool_detail_assets_body_layer_1_cont1_sub_heading {
   display: flex;
@@ -202,7 +202,7 @@ svg.recharts-surface {
   width: 100%;
   justify-content: flex-start;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   text-align: center;
   align-items: center;
   /* overflow: hidden; */
@@ -330,7 +330,7 @@ svg.recharts-surface {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .staus_btn_div {
   font-size: 12px;
@@ -616,7 +616,7 @@ svg.recharts-surface {
     gap: 10px;
   }
   .pool_detail_assets_body_layer_1_cont1_heading_1 {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 14px;
   }
 
@@ -676,7 +676,7 @@ svg.recharts-surface {
     font-size: 12px;
   }
   .pool_detail_assets_body_layer_1_cont1_heading_1 {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 13px;
   }
   .asset_list_div {

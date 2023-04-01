@@ -22,7 +22,7 @@
 }
 .about_us_section_hero_area_1_title {
   font-size: 50px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.3;
 }
 .about_us_section_hero_area {
@@ -97,7 +97,7 @@
 }
 .about_us_section_hero_area_2_txt_container_head {
   font-size: 38px;
-  font-weight: 800;
+  font-weight: 600;
 }
 section.advantages_section {
   padding: 4em 0em;
@@ -116,7 +116,7 @@ section.advantages_section {
 .advantages_section_area_1 {
   width: 70%;
   font-size: 38px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.2;
 }
 
@@ -137,7 +137,7 @@ section.advantages_section {
 
 .advantages_section_area_2_cont1_head {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
   color: #229e54;
   display: flex;
   align-items: center;
@@ -184,7 +184,7 @@ section.help_u_section {
   flex-direction: column;
   gap: 10px;
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 600;
   align-items: center;
   text-align: center;
 }
@@ -230,7 +230,7 @@ section.help_u_section {
 }
 .help_u_section_area_cont1_head {
   font-size: 22px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .to_help_section_lines {
   width: 100%;
@@ -267,7 +267,7 @@ section.help_u_section {
   color: rgb(0, 0, 0);
   padding: 0.5em;
   font-size: 48px;
-  font-weight: 700;
+  font-weight: 600;
   backdrop-filter: blur(23px);
 }
 .dark .road_map_head {
@@ -364,7 +364,7 @@ section.help_u_section {
   color: rgb(0, 0, 0);
   font-size: 38px;
   position: absolute;
-  font-weight: 800;
+  font-weight: 600;
   /* left: 25%; */
   /* right: -86px; */
   /* bottom: 13%; */
@@ -385,7 +385,7 @@ section.help_u_section {
   color: rgb(0, 0, 0);
   font-size: 38px;
   position: absolute;
-  font-weight: 800;
+  font-weight: 600;
   /* left: 25%; */
   /* right: -86px; */
   bottom: 0;
@@ -410,7 +410,7 @@ section.help_u_section {
   color: rgb(0, 0, 0);
   font-size: 38px;
   position: absolute;
-  font-weight: 800;
+  font-weight: 600;
   /* left: 25%; */
   right: 1px;
   /* bottom: 13%; */
@@ -503,7 +503,7 @@ section.featuredIn_section {
 }
 .join_community_area1_head {
   font-size: 42px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .join_community_area1_para {
   font-size: 18px;
@@ -640,7 +640,7 @@ button.join_community_area1_btn_btn {
     color: rgb(0, 0, 0);
     font-size: 38px;
     position: absolute;
-    font-weight: 800;
+    font-weight: 600;
     margin: auto;
     left: 0;
     width: 170px;
@@ -662,7 +662,7 @@ button.join_community_area1_btn_btn {
 @media screen and (max-width: 650px) {
   .about_us_section_hero_area_1_title {
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.3;
   }
   .egoras_logos_cont {
@@ -719,7 +719,7 @@ button.join_community_area1_btn_btn {
   }
   .about_us_section_hero_area_2_txt_container_head {
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 600;
   }
   .about_us_section_hero_area {
     gap: 20px;
@@ -732,7 +732,7 @@ button.join_community_area1_btn_btn {
   }
   .join_community_area1_head {
     font-size: 36px;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   .egoras_logos_cont_1 {

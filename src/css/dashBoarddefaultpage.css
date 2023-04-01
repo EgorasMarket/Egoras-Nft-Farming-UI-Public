@@ -54,7 +54,7 @@
   display: flex;
   align-items: center;
   padding: 2em;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 18px;
   justify-content: space-between;
   border-bottom: solid;
@@ -63,7 +63,7 @@
   padding-bottom: 1em;
 }
 .coin-display-amount {
-  font-weight: 700;
+  font-weight: 600;
   color: #229e54;
 }
 .eth-icon {
@@ -83,7 +83,7 @@
   background: none;
   border-radius: 8px;
   color: #989898;
-  font-weight: 700;
+  font-weight: 600;
   position: relative;
   font-size: 18px;
 }
@@ -92,7 +92,7 @@
   background: none;
   border-radius: 8px;
   color: #229e54;
-  font-weight: 700;
+  font-weight: 600;
   position: relative;
 }
 .supply-btn-active::after {
@@ -225,7 +225,7 @@ input.withdraw-input-box:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .column1 {
@@ -281,7 +281,7 @@ input.withdraw-input-box:hover {
 }
 .dash-area1-cont2-header1 {
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   color: #229e54;
 }
 .title1 {
@@ -303,7 +303,7 @@ input.withdraw-input-box:hover {
   text-decoration: underline !important;
 }
 .user {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 16px;
   color: #000;
   text-decoration: none !important;

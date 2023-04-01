@@ -6,7 +6,7 @@
 .sell_container_header {
   font-size: 42px;
   color: #fff;
-  font-weight: 700;
+  font-weight: 600;
 }
 .sell_container_body_cont1_submit_btn:disabled {
   background: #425a4b;
@@ -45,7 +45,7 @@
 .sell_container_body_cont1_txt_heading {
   font-size: 20px;
   color: #fff;
-  font-weight: 700;
+  font-weight: 600;
 }
 .sell_container_body_cont1_img_display_cont {
   width: 100%;
@@ -154,7 +154,7 @@ img.sell_container_body_cont1_img_display_cont_div2_img {
   .sell_container_header {
     font-size: 34px;
     color: #fff;
-    font-weight: 700;
+    font-weight: 600;
   }
   .sell_container_body_cont1 {
     display: flex;

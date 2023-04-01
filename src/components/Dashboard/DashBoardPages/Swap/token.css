@@ -81,7 +81,7 @@
 .tokenCardflex-txt {
   width: 100%;
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .mainTokenflex {
   width: 60px;
@@ -121,20 +121,20 @@
 
 .chartTitile {
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 600;
   color: #229e54;
   margin-bottom: 8px;
   text-align: left;
 }
 .stats-label {
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   color: #000;
   width: 100%;
 }
 .stats-value {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   color: #229e54;
   display: flex;
   align-items: flex-end;
@@ -164,7 +164,7 @@ tspan {
 }
 .staked-title {
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 600;
   color: #229e54;
   margin-bottom: 8px;
   text-align: left;
@@ -176,7 +176,7 @@ tspan {
 
 .locked-token-widget .title {
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 600;
   color: #229e54;
 }
 .locked-token-widget .value {
@@ -184,7 +184,7 @@ tspan {
   color: #229e54;
   display: flex;
   align-items: flex-end;
-  font-weight: 700;
+  font-weight: 600;
 }
 .locked-token-widget .ogn-label {
   font-size: 18px;
@@ -259,7 +259,7 @@ svg.recharts-surface {
 .stake-banner-blue .stake-content h1 {
   margin: 0px;
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 600;
   font-stretch: normal;
   color: #1b974d;
 }
@@ -370,13 +370,13 @@ span.recharts-legend-item-text {
   margin-top: 70px;
   opacity: 0.8;
   font-size: 30px;
-  font-weight: 800;
+  font-weight: 600;
   color: #000000;
 }
 
 .ticker-symbol.eusd-token-page {
   font-size: 3rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-top: 375px;
   color: #000000;
   width: 100%;
@@ -550,7 +550,7 @@ h1.eusd-token-page {
 
 .span1-txts {
   font-size: 32px;
-  font-weight: 700;
+  font-weight: 600;
   margin: 0;
 }
 .span4-txts {
@@ -563,7 +563,7 @@ h1.eusd-token-page {
 .span4a-txts {
   font-size: 30px;
   width: 100%;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 35px;
 }
 .span4b-txts {
@@ -575,7 +575,7 @@ h1.eusd-token-page {
 }
 .span2-txts {
   font-size: 38px;
-  font-weight: 800;
+  font-weight: 600;
   color: #229e54;
   margin: 0;
 }
@@ -674,7 +674,7 @@ h1.eusd-token-page {
   .tokenCardflex-txt {
     width: 100%;
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 600;
   }
 }
 @media screen and (max-width: 375px) {

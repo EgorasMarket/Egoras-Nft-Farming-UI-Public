@@ -64,7 +64,7 @@
 
 .h_update_hero_area1_title {
   font-size: 56px;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 60px;
 }
 
@@ -205,7 +205,7 @@
 }
 .quality_standards_cont1Txt {
   font-size: 32px;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 40px;
 }
 .qualityStandard_btn {
@@ -427,7 +427,7 @@
   opacity: 0;
 }
 .hover_color {
-  font-weight: 800;
+  font-weight: 600;
   font-size: 18px;
 }
 .operations_card1:hover .hover_color {
@@ -510,14 +510,14 @@
 .new_home_attributes_area1_txt_head {
   color: #239e54;
   font-size: 38px;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 40px;
   margin-bottom: 25px;
 }
 /* .new_home_attributes_area1_txt {
   color: black;
   font-size: 16px;
-  font-weight: 100;
+  font-weight: 400;
   animation-name: animation-1q2iz2l;
   animation-duration: 450ms;
   animation-timing-function: cubic-bezier(0.1, 0.6, 0.4, 1);
@@ -543,7 +543,7 @@
 .new_home_attributes_area1_link {
   color: #239e54;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: underline !important;
   transition: 0.3s ease-in-out;
 }
@@ -644,7 +644,7 @@
 .change_section {
   cursor: pointer;
   font-size: 20px;
-  font-weight: 100;
+  font-weight: 400;
   color: #96bda5;
   list-style: disc;
   direction: rtl;
@@ -653,7 +653,7 @@
 .change_section_active {
   cursor: pointer;
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 600;
   color: #208d4b;
   text-align: left;
 }
@@ -667,13 +667,13 @@
 }
 .review_txt {
   font-size: 14px;
-  font-weight: 100;
+  font-weight: 400;
   color: black;
   font-style: italic;
 }
 .review_name {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
   color: #6e957b;
 }
 .reviewer_img {
@@ -740,7 +740,7 @@
 }
 .build_savings_area2_conts1_box1_title {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 30px;
 }
 .card_compliment_style {
@@ -861,7 +861,7 @@
 
 .compliment_number_title {
   font-size: 42px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 42px;
 }
 .users_compliment_number {
@@ -940,7 +940,7 @@ button.compliment_btn {
 }
 .about_video_header_title {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
   color: #229e54;
 }
 .about_video_header_txt {
@@ -950,7 +950,7 @@ button.compliment_btn {
   color: #333333;
   line-height: 60px;
   /* font-size: 48px; */
-  /* font-weight: 800; */
+  /* font-weight: 600; */
   /* line-height: 54px;*/
 }
 
@@ -1104,7 +1104,7 @@ section.productsDisplaySection {
 }
 .trending_section_heading {
   font-size: 30px;
-  font-weight: 700;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -1148,7 +1148,7 @@ section.productsDisplaySection {
 }
 .category_switch_tab1_active {
   color: #229e54;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 21px;
   padding: 0.5em 2em;
   cursor: pointer;
@@ -1281,7 +1281,7 @@ section.productsDisplaySection {
   padding: 0.5em 1em;
   border-radius: 10px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1396,7 +1396,7 @@ section.productsDisplaySection {
 .featured_in_head {
   position: relative;
   margin-bottom: 25px;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 28px;
   line-height: 36px;
   color: #229e54;
@@ -1489,18 +1489,18 @@ section.productsDisplaySection {
   }
   .h_update_hero_area1_title {
     font-size: 36px;
-    font-weight: 800;
+    font-weight: 600;
     line-height: 40px;
   }
   .compliment_number_title {
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 42px;
   }
   .change_section {
     cursor: pointer;
     font-size: 12px;
-    font-weight: 100;
+    font-weight: 400;
     color: #96bda5;
     list-style: disc;
     direction: rtl;
@@ -1509,7 +1509,7 @@ section.productsDisplaySection {
   .change_section_active {
     cursor: pointer;
     font-size: 12px;
-    font-weight: 800;
+    font-weight: 600;
     color: #208d4b;
     text-align: left;
   }
@@ -1542,7 +1542,7 @@ section.productsDisplaySection {
   .new_home_attributes_area1_txt_head {
     color: #239e54;
     font-size: 32px;
-    font-weight: 800;
+    font-weight: 600;
     line-height: 38px;
     margin-bottom: 10px;
   }
@@ -1637,12 +1637,12 @@ section.productsDisplaySection {
   }
   .review_name {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 600;
     color: #6e957b;
   }
   .review_txt {
     font-size: 12px;
-    font-weight: 100;
+    font-weight: 400;
     color: black;
     font-style: italic;
   }
@@ -1782,7 +1782,7 @@ section.productsDisplaySection {
   .about_video_header_txt {
     font-size: 35px;
     text-align: center;
-    font-weight: 800;
+    font-weight: 600;
     color: #333333;
     line-height: 45px;
   }
@@ -1860,7 +1860,7 @@ section.productsDisplaySection {
   }
   .category_switch_tab1_active {
     color: #229e54;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 12px;
     padding: 0;
     cursor: pointer;
@@ -1965,18 +1965,18 @@ section.productsDisplaySection {
   }
   .h_update_hero_area1_title {
     font-size: 36px;
-    font-weight: 800;
+    font-weight: 600;
     line-height: 40px;
   }
   .compliment_number_title {
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 42px;
   }
   .change_section {
     cursor: pointer;
     font-size: 12px;
-    font-weight: 100;
+    font-weight: 400;
     color: #96bda5;
     list-style: disc;
     direction: rtl;
@@ -1985,7 +1985,7 @@ section.productsDisplaySection {
   .change_section_active {
     cursor: pointer;
     font-size: 12px;
-    font-weight: 800;
+    font-weight: 600;
     color: #208d4b;
     text-align: left;
   }
@@ -2017,7 +2017,7 @@ section.productsDisplaySection {
   .new_home_attributes_area1_txt_head {
     color: #239e54;
     font-size: 32px;
-    font-weight: 800;
+    font-weight: 600;
     line-height: 38px;
     margin-bottom: 10px;
   }
@@ -2125,7 +2125,7 @@ section.productsDisplaySection {
   .about_video_header_txt {
     font-size: 35px;
     text-align: center;
-    font-weight: 800;
+    font-weight: 600;
     color: #333333;
     line-height: 38px;
   }
@@ -2197,12 +2197,12 @@ section.productsDisplaySection {
   }
   .review_name {
     font-size: 18px;
-    font-weight: 700;
+    font-weight: 600;
     color: #6e957b;
   }
   .review_txt {
     font-size: 12px;
-    font-weight: 100;
+    font-weight: 400;
     color: black;
     font-style: italic;
   }
@@ -2216,7 +2216,7 @@ section.productsDisplaySection {
   }
   .h_update_hero_area1_title {
     font-size: 30px;
-    font-weight: 800;
+    font-weight: 600;
     line-height: 31px;
   }
   .h_update_hero_area1_para {
@@ -2246,13 +2246,13 @@ section.productsDisplaySection {
   }
   .about_video_header_title {
     font-size: 20px;
-    font-weight: 700;
+    font-weight: 600;
     color: #229e54;
   }
   .about_video_header_txt {
     font-size: 28px;
     text-align: center;
-    font-weight: 800;
+    font-weight: 600;
     color: #333333;
     line-height: 30px;
   }
@@ -2269,7 +2269,7 @@ section.productsDisplaySection {
   }
   .quality_standards_cont1Txt {
     font-size: 24px;
-    font-weight: 800;
+    font-weight: 600;
     line-height: 32px;
   }
   .quality_standards_cont1 {
@@ -2313,7 +2313,7 @@ section.productsDisplaySection {
   }
   .trending_section_heading {
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 30px;
     text-align: center;
   }
@@ -2359,7 +2359,7 @@ section.productsDisplaySection {
   .featured_in_head {
     position: relative;
     margin-bottom: 25px;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 21px;
     line-height: 36px;
     color: #229e54;
@@ -2403,7 +2403,7 @@ section.productsDisplaySection {
     border-radius: 10px;
   }
   .shop_arrow_div {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 20px;
     line-height: 36px;
     color: #229e54;

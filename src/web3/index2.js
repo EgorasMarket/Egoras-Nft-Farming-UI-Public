@@ -4,14 +4,22 @@ import V3ContractAddress from "./contracts/V3/V3ContractAddress.json";
 import PancakeSwapFaucet from "./contracts/V3/PancakeSwapFacet.json";
 import Minter from "./contracts/V3/Minter.json";
 import erc20 from "./contracts/erc20.json";
+import StakingFacet from "./contracts/V3/StakingFacet.json";
+import PriceOracleFacet from "./contracts/V3/PriceOracleFacet.json";
 const contractMembershipFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, MembershipFacet.abi, signer);
 };
 const contractPancakeSwapFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, PancakeSwapFaucet.abi, signer);
 };
+const contractPriceOracleFacetInstance = async (signer) => {
+  return new Contract(V3ContractAddress.address, PriceOracleFacet.abi, signer);
+};
 const erc20Instance = (address, signer) => {
   return new Contract(address, erc20.abi, signer);
+};
+const contractStakingFacetInstance = (signer) => {
+  return new Contract(V3ContractAddress.address, StakingFacet.abi, signer);
 };
 const contractAddMinterFacetInstance = async (signer) => {
   return new Contract(
@@ -253,6 +261,127 @@ const unlockSwapToken = async (amount, signer) => {
     };
   }
 };
+const setPriceOracle = async (_prices, _tickers, signer) => {
+  try {
+    const instance = await contractPriceOracleFacetInstance(signer);
+    let result = await instance.updateTickerPrices(_prices, _tickers);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+
+const setPythia = async (_pythia, signer) => {
+  try {
+    const instance = await contractPriceOracleFacetInstance(signer);
+    let result = await instance.setPythia(_pythia);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const setEGCUSDTicker = async (_ticker, signer) => {
+  try {
+    const instance = await contractPriceOracleFacetInstance(signer);
+    let result = await instance.setEGCUSDTicker(_ticker);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const getEGCEUSDTICKERPRICE = async (_ticker, signer) => {
+  try {
+    const instance = await contractPriceOracleFacetInstance(signer);
+    let result = await instance.price(_ticker);
+    console.log(result.toString(), "result");
+
+    return {
+      message: result.toString(),
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const getRoyaltyStats = async (user, signer) => {
+  try {
+    const instance = await contractStakingFacetInstance(signer);
+    let result = await instance.royaltyStats(user);
+    console.log(result.toString(), "result");
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const stakeConfig = async (signer) => {
+  try {
+    const instance = await contractStakingFacetInstance(signer);
+    let result = await instance.stakeConfig();
+    console.log(result, "result");
+
+    return {
+      message: result.toString(),
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const resetStakeTime = async (user, signer) => {
+  try {
+    const instance = await contractStakingFacetInstance(signer);
+    let result = await instance.resetTakeRoyaltyTime(user);
+    console.log(result, "result");
+
+    return {
+      message: result.toString(),
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
 
 export {
   monthlyPlanSubScribe,
@@ -267,4 +396,11 @@ export {
   swapBnbForEusd,
   checkAllowanceSwap,
   unlockSwapToken,
+  setPythia,
+  setPriceOracle,
+  setEGCUSDTicker,
+  getEGCEUSDTICKERPRICE,
+  getRoyaltyStats,
+  stakeConfig,
+  resetStakeTime,
 };

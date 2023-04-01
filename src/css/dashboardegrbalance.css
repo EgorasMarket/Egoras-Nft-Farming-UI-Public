@@ -35,7 +35,7 @@
 
 .governance_details_title {
   font-size: 56px;
-  font-weight: 700;
+  font-weight: 600;
   display: flex;
   align-items: center;
 }
@@ -121,7 +121,7 @@
 
 .key_metrics_heading {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .key_metrics_columns {
   display: flex;
@@ -147,7 +147,7 @@
 }
 
 .thick {
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .governance_details_link_cont {
@@ -223,7 +223,7 @@
   color: #239e54;
 }
 .side_nav_active {
-  font-weight: 800;
+  font-weight: 600;
   font-size: 14px;
   color: #239e54;
 }
@@ -233,7 +233,7 @@
 }
 .overview_txt1_heading {
   font-size: 30px;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .overview_txt_img {
@@ -250,7 +250,7 @@
 }
 
 .slider_percent1 {
-  font-weight: 700;
+  font-weight: 600;
   color: #239e54;
 }
 

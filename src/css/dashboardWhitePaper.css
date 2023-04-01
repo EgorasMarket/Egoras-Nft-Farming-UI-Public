@@ -164,13 +164,13 @@
 }
 .sidebar-link1-active {
   color: #229e54;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 16px;
 }
 .whitepaperHeading {
   color: #229e54;
   font-size: 32px;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 36px;
 }
 .whitepaper-layers {
@@ -187,7 +187,7 @@
 }
 .layer-header {
   color: black;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 24px;
 }
 
@@ -205,7 +205,7 @@ a.sidebar-link1 {
   margin-left: 0;
 }
 .sub-texts-indent {
-  font-weight: 800;
+  font-weight: 600;
 }
 
 /* 

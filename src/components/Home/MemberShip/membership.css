@@ -430,7 +430,7 @@ input[type="radio"]:checked + .selectPlanDiv2_area1_cont1_label:before {
 .selectPlanDiv2_area1_cont2_head {
   display: flex;
   justify-content: space-between;
-  font-weight: 800;
+  font-weight: 600;
   font-size: 24px;
 }
 .selectPlanDiv2_area1_cont2_body {

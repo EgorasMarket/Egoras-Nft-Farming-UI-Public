@@ -34,7 +34,7 @@ hr.hrr {
 .medium_icon {
   font-family: serif;
   font-size: 20px;
-  font-weight: 800;
+  font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -181,7 +181,7 @@ hr.hrr {
   position: relative;
   color: #239e54;
   margin-left: 41px;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
 }
 .link:hover {
@@ -247,7 +247,7 @@ hr.hrr {
   color: #319259;
   align-items: center;
   justify-content: flex-start;
-  font-weight: 800;
+  font-weight: 600;
   gap: 15px;
   cursor: pointer;
   overflow: hidden;

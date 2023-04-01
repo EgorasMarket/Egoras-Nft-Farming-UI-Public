@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CloseIcon from "@mui/icons-material/Close";
 import {
   faPlus,
   faSpinner,
@@ -29,12 +30,14 @@ import {
   injected,
   // network,
   walletconnect,
+  binanceWallet,
+  coinbaseWallet,
   // walletlink,
-  ledger,
-  trezor,
+  // ledger,
+  // trezor,
   // frame,
-  fortmatic,
-  portis,
+  // fortmatic,
+  // portis,
   // squarelink,
   // torus,
   // authereum
@@ -46,27 +49,37 @@ const connectorsByName = {
   Injected: injected,
   // Network: network,
   WalletConnect: walletconnect,
+  binanceWallet: binanceWallet,
+  coinbaseWallet: coinbaseWallet,
+
   // WalletLink: walletlink,
   // Ledger: ledger,
-  //  Trezor: trezor,
+  // Trezor: trezor,
   // Frame: frame,
-  //  Fortmatic: fortmatic,
+  // Fortmatic: fortmatic,
   // Portis: portis,
   // Squarelink: squarelink,
   // Torus: torus,
-  // Authereum: authereum
+  // Authereum: authereum,
 };
 
 export const Authenticate = (props) => {
   const [modal, setModal] = useState(false);
   const [clickedmodal, setClickedmodal] = useState(false);
+  const [modal2, setModal2] = useState(false);
+  // const [clickedmodal2, setClickedmodal2] = useState(false);
   const [backdrop, setBackdrop] = useState(true);
   const [keyboard, setKeyboard] = useState(false);
 
   const toggle = () => {
-    setModal(!modal);
+    // setModal(!modal);
+    setModal2(!modal2);
     setClickedmodal(true);
   };
+  // const toggle = () => {
+  //   setModal(!modal);
+  //   setClickedmodal(true);
+  // };
 
   const context = useWeb3React();
   const {
@@ -141,7 +154,7 @@ export const Authenticate = (props) => {
       // localStorage.setItem("WA_ST", account);
       let stale = false;
       if (clickedmodal) {
-        setModal(!modal);
+        setModal2(!modal);
       }
       //console.log(modal);
 
@@ -257,6 +270,77 @@ export const Authenticate = (props) => {
           Connect Wallet{" "}
         </button>
       )}
+      {/* ============= */}
+      {/* ============= */}
+      {/* ============= */}
+      {/* ============= */}
+      {/* ============= */}
+      {/* ============= */}
+      {modal2 ? (
+        <div className="Modal2_div">
+          <div className="Modal2_div_closeDiv" onClick={toggle}></div>
+          <div className="Modal2_div_area">
+            <div className="Modal2_div1_head">
+              Connect Wallet{" "}
+              <CloseIcon className="Modal2_div1_head_icon" onClick={toggle} />
+            </div>
+            <div className="Modal2_div2">
+              {Object.keys(connectorsByName).map((name) => {
+                const currentConnector = connectorsByName[name];
+                const activating = currentConnector === activatingConnector;
+                const connected = currentConnector === connector;
+                const disabled =
+                  !triedEager || !!activatingConnector || connected || !!error;
+                console.log(name, "name name name name");
+                return (
+                  <div className="Modal2_div2_div1_area">
+                    <button
+                      key={name}
+                      className="Modal2_div2_div1_area_btn"
+                      onClick={() => {
+                        setActivatingConnector(currentConnector);
+                        activate(connectorsByName[name]);
+                      }}
+                      disabled={
+                        name == "Injected"
+                          ? false
+                          : name == "WalletConnect"
+                          ? false
+                          : name == "binanceWallet"
+                          ? true
+                          : name == "coinbaseWallet"
+                          ? true
+                          : true
+                      }
+                    >
+                      <span className="Modal2_div2_div1_area_btn_area_txt">
+                        {name == "Injected"
+                          ? "MetaMask"
+                          : name == "WalletConnect"
+                          ? "WalletConnect"
+                          : name == "binanceWallet"
+                          ? "BinanceWallet"
+                          : name == "coinbaseWallet"
+                          ? "CoinbaseWallet"
+                          : name}
+                      </span>
+                      <img
+                        src={"/providers/" + name.toLowerCase() + ".png"}
+                        style={{ width: "32px" }}
+                        className="Modal2_div2_div1_area_btn_area_txt_icon"
+                      />
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+            <span className="Modal2_div_area_span">
+              By connecting a wallet, you agree to EGCDAO ' Terms of Service and
+              consent to its Privacy Policy.
+            </span>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

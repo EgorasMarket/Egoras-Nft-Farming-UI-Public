@@ -19,6 +19,6 @@ export const POPULATE_STAKE_INFO = async (user) => {
     );
     return response.data;
   } catch (err) {
-    return err.repsonse;
+    return err.response;
   }
 };

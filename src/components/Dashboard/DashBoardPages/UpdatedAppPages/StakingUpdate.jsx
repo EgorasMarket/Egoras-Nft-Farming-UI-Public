@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useContext } from "react";
 // import { createBlockies } from "ethereum-blockies";
 import { API_URL } from "../../../../actions/types";
 import axios from "axios";
+import { format, fromUnixTime } from "date-fns";
 import { Connect } from "react-redux";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
@@ -14,6 +15,7 @@ import { parseEther, formatEther } from "@ethersproject/units";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import UpdatedSuccessModal from "./UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import UpdatedErrorModal from "./UpdatedSuccessErrorModals/UpdatedErrorModal";
+import Timer from "../Timer";
 import Web3 from "web3";
 import {
   AreaChart,
@@ -37,6 +39,11 @@ import {
   tokenBalance,
   takeRoyalty,
 } from "../../../../web3/index";
+import {
+  getEGCEUSDTICKERPRICE,
+  getRoyaltyStats,
+  stakeConfig,
+} from "../../../../web3/index2";
 import { getDate, getMonth } from "date-fns";
 import { POPULATE_STAKE_INFO } from "../../../../services/stakeServices";
 
@@ -53,16 +60,7 @@ export const DurationDiv = ({ addMonthly, addYearly, SelectedDuration }) => {
       >
         Monthly (1 month)
       </div>
-      {/* <div
-        className={
-          SelectedDuration === "semi_monthly"
-            ? "duration_dropDown_div_cont1_selected"
-            : "duration_dropDown_div_cont1"
-        }
-        onClick={addSemiMonthly}
-      >
-        Semi-Monthly (6 months)
-      </div> */}
+
       <div
         className={
           SelectedDuration === "yearly"
@@ -111,89 +109,12 @@ const StakingUpdate = () => {
   const [UniqueLockedTransactions, setUniqueLockedTransactions] = useState([]);
   const [egcUsdVal, setEgcUsdVal] = useState(0);
   const [graphData2, setGraphData2] = useState([]);
+  const [availableClaimReward, setAvailableClaimReward] = useState("0.00");
+  const [nextRewardTakeTime, setNextRewardTakeTime] = useState("");
 
   const [myAssetInfo, setMyAssetInfo] = useState({});
   const [totalAssetInfo, setTotalAssetInfo] = useState({});
 
-  var btc = [
-    {
-      name: "Jan",
-      timestamp: "2022-07-16T09:37:07.000Z",
-      value: 225000,
-    },
-    {
-      name: "Jan",
-
-      timestamp: "2022-07-16T09:37:07.000Z",
-      value: 81900,
-    },
-    {
-      name: "Jan",
-
-      timestamp: "2022-07-16T15:09:00.000Z",
-      value: 15900,
-    },
-    {
-      name: "Jan",
-
-      timestamp: "2022-07-16T15:20:00.000Z",
-      value: 15900,
-    },
-    {
-      name: "Jan",
-
-      timestamp: "2022-07-16T15:44:01.000Z",
-      value: 31800,
-    },
-    {
-      name: "Jan",
-
-      timestamp: "2022-07-18T12:40:00.000Z",
-      value: 100000,
-    },
-    {
-      name: "Jan",
-
-      timestamp: "2022-07-18T13:56:00.000Z",
-      value: 183190,
-    },
-    {
-      name: "Jan",
-
-      timestamp: "2022-07-18T14:25:00.000Z",
-      value: 545200,
-    },
-    {
-      name: "Jan",
-
-      timestamp: "2022-07-18T14:59:01.000Z",
-      value: 131900,
-    },
-    {
-      name: "Jan",
-
-      timestamp: "2022-07-18T15:39:00.000Z",
-      value: 199900,
-    },
-    {
-      name: "Jan",
-
-      timestamp: "2022-07-18T16:11:01.000Z",
-      value: 181700,
-    },
-    {
-      name: "Jan",
-
-      timestamp: "2022-07-18T16:27:01.000Z",
-      value: 126700,
-    },
-    {
-      name: "Jan",
-
-      timestamp: "2022-07-18T16:46:00.000Z",
-      value: 121600,
-    },
-  ];
   const toggleDurationDrop = () => {
     setDurationDrop(!durationDrop);
   };
@@ -321,882 +242,6 @@ const StakingUpdate = () => {
     setEstimatedRewardAmnt(e.target.value * egcUsdVal * 0.000328767);
   };
 
-  const MyTransactions = [
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed358f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85re0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ee348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50edg48f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed248f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348785de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed343f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f95de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-  ];
-  const Transactions = [
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed358f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85re0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ee348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50edg48f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed248f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348785de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed343f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f95de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f852e0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-  ];
   const StakeMonthly = async () => {
     setIsLoading(true);
     setDisable(true);
@@ -1292,17 +337,19 @@ const StakingUpdate = () => {
       });
   }, []);
   useEffect(async () => {
-    await axios
-      .get(API_URL + "/staking/user/" + account, null, config)
-      .then((data) => {
-        console.log(data);
-        console.log(data.data.data);
-        setUniqueLockedTransactions(data.data.data);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-  }, []);
+    if (account) {
+      await axios
+        .get(API_URL + "/staking/user/" + account, null, config)
+        .then((data) => {
+          console.log(data);
+          console.log(data.data.data);
+          setUniqueLockedTransactions(data.data.data);
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    }
+  }, [account]);
   useEffect(
     async (e) => {
       if (account) {
@@ -1324,18 +371,63 @@ const StakingUpdate = () => {
     setEstimatedRewardDiv(true);
   };
 
+  const fetchData = async () => {
+    const response = await POPULATE_STAKE_INFO(account);
+    if (response.success === true) {
+      console.log(response.data.user, "oyibo");
+      setTotalAssetInfo(response.data.general);
+    }
+  };
+  const fetchData2 = async () => {
+    const response = await POPULATE_STAKE_INFO(account);
+    // console.log(response, "oyibo");
+    if (response.success === true) {
+      console.log(response.data.user, "oyibo");
+      setMyAssetInfo(response.data.user);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await POPULATE_STAKE_INFO(account);
-      // console.log(response, "oyibo");
-      if (response.success === true) {
-        console.log(response.data.user, "oyibo");
-        setTotalAssetInfo(response.data.general);
-        setMyAssetInfo(response.data.user);
-      }
-    };
     fetchData();
-  }, []);
+    if (account) {
+      fetchData2();
+    }
+  }, [account]);
+  useEffect(async () => {
+    if (account) {
+      const res = await getEGCEUSDTICKERPRICE("egceusd", library.getSigner());
+      console.log(res);
+    }
+  }, [account]);
+  useEffect(async () => {
+    if (account) {
+      const res = await getRoyaltyStats(account, library.getSigner());
+      console.log(res);
+      console.log(res.message._dailyRoyalty);
+      console.log(formatEther(res.message._dailyRoyalty).toString());
+      let formatted = res.message._nextRoyaltyTakePeriod.toString();
+      const endDate = parseInt(formatted);
+      console.log(new Date(1680454493));
+      console.log(new Date(endDate));
+      console.log(endDate);
+      const timestamp = 1680454493;
+      const date = fromUnixTime(timestamp);
+      const formattedDate = format(date, "yyyy-MM-dd HH:mm:ss");
+      console.log(formattedDate);
+      console.log(new Date("2023-10-02"));
+      setNextRewardTakeTime(formattedDate);
+      setAvailableClaimReward(
+        formatEther(res.message._dailyRoyalty).toString()
+      );
+      console.log(new Date(1636921519 * 1000));
+    }
+  }, [account]);
+  useEffect(async () => {
+    if (account) {
+      const res = await stakeConfig(library.getSigner());
+      console.log(res);
+    }
+  }, [account]);
+
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -1694,9 +786,11 @@ const StakingUpdate = () => {
                         Available Reward
                       </div>
                       <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount">
-                        159.00 eUsd
+                        {parseFloat(availableClaimReward).toFixed(2)} eUsd
                         <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv">
-                          ($159.00)
+                          Next Reward Time
+                          {/* ( <Timer deadline={new Date()} />) */}
+                          {nextRewardTakeTime}
                         </div>
                       </div>
                     </div>
@@ -1728,7 +822,7 @@ const StakingUpdate = () => {
                       Total EGC Locked
                     </div>
                     <div className="lending_area1_cont1_body_txt">
-                      {Number.parseFloat(totalAssetInfo.amount, 2)} egc
+                      {parseFloat(totalAssetInfo.amount, 2)} egc
                     </div>
                     <div className="lending_area1_cont1_heading">
                       (32.84% Of EGC Supply)
@@ -1749,7 +843,7 @@ const StakingUpdate = () => {
                       Total Rewards
                     </div>
                     <div className="lending_area1_cont1_body_txt">
-                      {Number.parseFloat(totalAssetInfo.dailyRoyalty, 2)}{" "}
+                      {parseFloat(totalAssetInfo.dailyRoyalty, 2)}{" "}
                       <span className="usd_sign">eUSD</span>
                     </div>
                   </div>

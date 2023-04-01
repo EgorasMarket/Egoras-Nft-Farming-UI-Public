@@ -1094,7 +1094,7 @@ const annually = async (amount, signer) => {
 const takeRoyalty = async (signer) => {
   // console.log(amount);
   try {
-    const instance = contractStakingFacetInstance(signer);
+    const instance = await contractStakingFacetInstance(signer);
     let result;
     result = await instance.takeRoyalty();
     console.log(result, "result, result,result,result,result");
