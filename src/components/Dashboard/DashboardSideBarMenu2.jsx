@@ -64,6 +64,7 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+import { socket } from "../../socket";
 const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const dddd = localStorage.getItem("smallSidetoken");
   const [connectId, setConnectId] = useState(false);
@@ -96,6 +97,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const [coinBalance2, setCoinBalance2] = React.useState(0.0);
   const [baseBalance, setBaseBalance] = useState(0.0);
   const [notifyDiv, setNotifyDiv] = useState(false);
+  const [notification, setNotification] = useState([]);
 
   const [productNamesZ, setProductNamesZ] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -433,6 +435,19 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
+
+    socket.connect();
+    console.log(account, "blunt");
+    socket.on(`${account}/notification`, (data) => {
+      console.log(data);
+      setUnreadNotifications(data);
+      const unreadNotifications = data.filter(
+        (notification) => notification.status === "unread"
+      );
+      const unreadCount = unreadNotifications.length;
+      setNotifyCount(unreadCount);
+      // setData(data);
+    });
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -640,34 +655,34 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                             </div>
                           ) : (
                             <>
-                                {UnreadNotifications.map((data, key) => (
+                              {UnreadNotifications.map((data, key) => (
                                 <>
-                                    
-                                    {data.status == "unread" ? (
-                                      <div
-                                  className="notifyDropDownDiv_div1 active"
-                                  key={data.id}
-                                >
-                                  <div className="notifyDropDownDiv_div1_title active">
-                                    {data.title}
-                                  </div>
-                                  <div className="notifyDropDownDiv_div1_para">
-                                    {data.message}
-                                  </div>
-                                </div>):(                   
-                                   <div
-                                  className="notifyDropDownDiv_div1"
-                                  key={data.id}
-                                >
-                                  <div className="notifyDropDownDiv_div1_title">
-                                    {data.title}
-                                  </div>
-                                  <div className="notifyDropDownDiv_div1_para">
-                                    {data.message}
-                                  </div>
-                                </div>)}
-                                    </>
-            
+                                  {data.status == "unread" ? (
+                                    <div
+                                      className="notifyDropDownDiv_div1 active"
+                                      key={data.id}
+                                    >
+                                      <div className="notifyDropDownDiv_div1_title active">
+                                        {data.title}
+                                      </div>
+                                      <div className="notifyDropDownDiv_div1_para">
+                                        {data.message}
+                                      </div>
+                                    </div>
+                                  ) : (
+                                    <div
+                                      className="notifyDropDownDiv_div1"
+                                      key={data.id}
+                                    >
+                                      <div className="notifyDropDownDiv_div1_title">
+                                        {data.title}
+                                      </div>
+                                      <div className="notifyDropDownDiv_div1_para">
+                                        {data.message}
+                                      </div>
+                                    </div>
+                                  )}
+                                </>
                               ))}
                             </>
                           )}
