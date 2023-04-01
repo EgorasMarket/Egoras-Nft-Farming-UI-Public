@@ -12,7 +12,7 @@
 .swapDivCont {
   display: flex;
   flex-direction: column;
-  margin-top: 2em;
+  margin-top: 1em;
 }
 .updatedSwapSwapBtn {
   padding: 15px;
@@ -228,7 +228,7 @@
 .tradeViewAreaCont_chart_area2 tspan {
   fill: #a7bbaf;
   font-size: 12px;
-  font-weight: 100;
+  font-weight: 400;
 }
 span.tradeViewAreaCont1_area1_priceChangeSpan {
   font-size: 12px;
@@ -402,7 +402,7 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
 }
 .shareSwapDiv_cont2_cont1_title {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
   text-align: left;
 }
 .shareSwapDiv_cont2_cont1_sub_title {
@@ -523,7 +523,7 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
 input:checked + .ToggleChartDiv_checkBox_slider {
   background-color: #b5d1b8;
   color: #000;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 input:checked + .ToggleChartDiv_checkBox_slider::before {

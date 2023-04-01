@@ -69,6 +69,38 @@
       "type": "event"
     },
     {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "dueStake",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "Unstaked",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "unstake",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "uint256",
@@ -102,6 +134,30 @@
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "stakeConfig",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_YEARLY_INTEREST_RATE",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_DAYS_IN_A_YEAR",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_egcusd",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -123,6 +179,11 @@
         },
         {
           "internalType": "uint256",
+          "name": "_totalStakeUSD",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
           "name": "_nextRoyaltyTakePeriod",
           "type": "uint256"
         },
@@ -140,6 +201,19 @@
       "stateMutability": "view",
       "type": "function",
       "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "resetTakeRoyaltyTime",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     }
   ]
 }

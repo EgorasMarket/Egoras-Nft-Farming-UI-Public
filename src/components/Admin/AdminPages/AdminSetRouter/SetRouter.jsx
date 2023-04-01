@@ -37,7 +37,7 @@ const SetRouter = () => {
   };
   const addMinter = async () => {
     const response = await adminAddMinter(
-      "0x78192d41fdCA05Fd1a4EBc329734F6b64D3616a1",
+      "0x09903D17e84bEAB2851260589F3e0aDDd4D1433c",
       library.getSigner()
     );
     console.log(response);

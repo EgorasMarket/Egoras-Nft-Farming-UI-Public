@@ -3,7 +3,7 @@
   width: 100%;
   justify-content: space-between;
   align-items: flex-start;
-  margin-top: 2em;
+  margin-top: 1em;
 }
 .lock_container_cont1 {
   width: 55%;
@@ -33,7 +33,7 @@
   font-size: 14px;
   border-bottom: solid 1px #5c6a62;
   padding-bottom: 0.5em;
-  font-weight: 100;
+  font-weight: 400;
 }
 .lock_container_cont1_div1_lock_div_tab1 {
   margin-right: 2em;
@@ -70,7 +70,7 @@
 }
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount {
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div_button {
   padding: 15px 0px;
@@ -79,7 +79,7 @@
   background: white;
   border-radius: 10px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv {
   font-size: 12px;
@@ -96,7 +96,7 @@
   margin-bottom: 6px;
   display: flex;
   justify-content: space-between;
-  font-weight: 100;
+  font-weight: 400;
 }
 
 .lock_container_cont1_div1_lock_div_lock_body_input_body_head_span2 {
@@ -109,7 +109,7 @@
   background: white;
   border-radius: 10px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .lock_container_cont1_div1_lock_div_lock_body_input_body_btn:disabled {
   background: #4d6355;
@@ -151,7 +151,7 @@ svg.recharts-surface {
 }
 .lock_container_cont1_lock_claim_header {
   margin-bottom: 1em;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 16px;
 }
 .lock_container_cont1_div1_lock_div_lock_body_input_body_cont {

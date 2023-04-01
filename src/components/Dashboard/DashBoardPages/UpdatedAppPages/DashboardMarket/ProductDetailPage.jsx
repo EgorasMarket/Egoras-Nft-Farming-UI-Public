@@ -62,7 +62,7 @@ const ProductDetailPage = ({ match }) => {
       if (response.success) {
         setLoading(false);
         setProductDetail(response.data);
-        const img = JSON.parse(response.data.user_images);
+        const img = JSON.parse(response.data.product_images);
         for (const data of img) {
           const payload = {
             original: data,
@@ -448,9 +448,11 @@ const ProductDetailPage = ({ match }) => {
               </div>
               <div
                 className="product_specifications_area_body"
-                // dangerouslySetInnerHTML={{ __html: payload.product_details }}
+                dangerouslySetInnerHTML={{
+                  __html: productDetail.product_details,
+                }}
               />
-              {productDetail.product_details}
+              {/* {productDetail.product_details} */}
             </div>
           </div>
         </section>

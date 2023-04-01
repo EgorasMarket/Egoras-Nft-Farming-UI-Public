@@ -3,6 +3,9 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 // import Web3 from "web3";
+import axios from "axios";
+import { API_URL } from "../../actions/types";
+import { config } from "../../actions/Config";
 import Marquee from "react-fast-marquee";
 // import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 // import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -80,6 +83,8 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const [betaDiv, setBetaDiv] = useState(true);
   const [conecttxt, setConnectTxt] = useState("Not Connected");
   const [nairaValue, setNairaValue] = useState(750);
+  const [UnreadNotifications, setUnreadNotifications] = useState([]);
+  const [noTifyCount, setNotifyCount] = useState(0);
   // const [darkMode, setDarkMode] = useState(null);
   const [walletAddr, setWalletAddr] = useState(
     "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -299,89 +304,12 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const toggleDisconnectDiv = () => {
     setDisconnectDiv(!disconnetDiv);
   };
-  useEffect(() => {
-    let assetVal = "EGC";
-    let baseVal = "ENGN";
-    setAsset(assetVal);
-    setBase(baseVal);
-    let ticker = assetVal + "-" + baseVal;
-    if (account) {
-      // getPrice(ticker, library.getSigner()).then((data) => {
-      //   if (data.status) {
-      //     setTickerPrice(parseFloat(formatEther(data.message)));
-      //   }
-      // });
-
-      getTickerInfo(ticker, library.getSigner()).then((data) => {
-        if (data.status) {
-          tokenBalance(data.message.base, account, library.getSigner()).then(
-            (balance) => {
-              setBaseBalance(formatEther(balance.message));
-            }
-          );
-
-          if (asset == "BNB" || asset == "bnb") {
-            library
-              .getBalance(account)
-              .then((balance) => {
-                setCoinBalance2(formatEther(balance));
-              })
-              .catch(() => {
-                setCoinBalance2(null);
-              });
-          } else {
-            tokenBalance(data.message.asset, account, library.getSigner()).then(
-              (balance) => {
-                setCoinBalance2(formatEther(balance.message));
-              }
-            );
-          }
-          // const checkUnlock = async () => {
-          //   let engn = await checkAllowance(
-          //     data.base,
-          //     account,
-          //     parseEther("5000000", "wei").toString(),
-          //     library.getSigner()
-          //   );
-
-          //   let egc = await checkAllowance(
-          //     data.asset,
-          //     account,
-          //     parseEther("5000000", "wei").toString(),
-          //     library.getSigner()
-          //   );
-          // };
-
-          // setLoanMetaData({
-          //   ...loanMetaData,
-          //   base: data.message.base,
-          //   asset: data.message.asset,
-          //   maxLoan: formatEther(data.message.maxLoan),
-          //   // maxLoan: formatEther(data.message.maxLoan),
-          // });
-        }
-      });
-    }
-  }, [chainId, account, connector, baseBalance, coinBalance2]);
 
   // console.log(baseBalance);
   // console.log(coinBalance2);
 
   useEffect(
     async (e) => {
-      // let string =
-      //   "https://api.coingecko.com/api/v3/simple/price?ids=egoras&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
-      // await fetch(string)
-      //   .then((resp) => resp.json())
-      //   .then((data) => {
-      //     const egr_usd_val = data["egoras"].usd;
-      //     console.log(egr_usd_val);
-      //     setEgrUsdVal(() => egr_usd_val);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
-      // ===============================
       let string2 =
         "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
       await fetch(string2)
@@ -499,7 +427,6 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
         "     Explore what's new and what's next in the new stable version of the advanced components.",
     },
   ];
-  const NotifyArray2 = [];
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -513,7 +440,12 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     console.log(account, "blunt");
     socket.on(`${account}/notification`, (data) => {
       console.log(data);
-      setNotification(data);
+      setUnreadNotifications(data);
+      const unreadNotifications = data.filter(
+        (notification) => notification.status === "unread"
+      );
+      const unreadCount = unreadNotifications.length;
+      setNotifyCount(unreadCount);
       // setData(data);
     });
     return () => {
@@ -522,7 +454,27 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   }, [wrapperRef]);
   const ToggleNotifyDiv = () => {
     setNotifyDiv(!notifyDiv);
+    // setNotifyCount(noTifyCount - 1);
   };
+  useEffect(async () => {
+    if (account) {
+      await axios
+        .get(API_URL + "/notifications/user/" + account, null, config)
+        .then((data) => {
+          console.log(data);
+          console.log(data.data.data, "data data data");
+          setUnreadNotifications(data.data.data);
+          const unreadNotifications = data.data.data.filter(
+            (notification) => notification.status === "unread"
+          );
+          const unreadCount = unreadNotifications.length;
+          setNotifyCount(unreadCount);
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    }
+  }, [account]);
   return (
     <div className={smallSide == "not_small" ? "side" : "small_side"}>
       <div className="header_token_prices_div">
@@ -533,22 +485,6 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             gradientColor="[255, 255, 255]"
           >
             <div className="header_token_prices_div_area">
-              {/* <div className="header_token_prices_div_area1">
-                {nairaValue} NGN ~ 1 USD
-              </div> */}
-              {/* <span class="vertical_rule2"></span>
-              <div className="header_token_prices_div_area1">
-                {nairaValue} NGN ~ 1 eUSD
-              </div> */}
-              {/* <span class="vertical_rule2"></span> */}
-              {/* <div className="header_token_prices_div_area1">
-                {nairaValue} ENGN ~ 1 USD
-              </div> */}
-              {/* <span class="vertical_rule2"></span> */}
-              {/* <div className="header_token_prices_div_area1">
-                {nairaValue} ENGN ~ 1 eUSD
-              </div> */}
-              {/* <span class="vertical_rule2"></span> */}
               <div className="header_token_prices_div_area1">
                 1 EGC ~ {numberWithCommas(egcUsdVal.toFixed(2))} USD
               </div>
@@ -560,15 +496,6 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
               <div className="header_token_prices_div_area1">
                 1 eUSD ~ 1 USD
               </div>
-              {/* <span class="vertical_rule2"></span>
-              <div className="header_token_prices_div_area1">
-                1 ENGN ~ 1 NGN
-              </div> */}
-              {/* <span class="vertical_rule2"></span>
-              <div className="header_token_prices_div_area1">
-                1 EGC ~ {numberWithCommas((egcUsdVal * nairaValue).toFixed(2))}{" "}
-                NGN
-              </div> */}
               <span class="vertical_rule2"></span>
             </div>
           </Marquee>
@@ -612,20 +539,6 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
               >
                 Home
               </a>
-              {/* <a
-                id="lend"
-                href="/app/earn"
-                className={
-                  activeBg == "lend" ? "header_tab1_active " : "header_tab1"
-                }
-                onClick={changeBg}
-              >
-                <span class="Ping -top-1">
-                  <span class="c-flashingPart"></span>
-                  <span class="c-basePart"></span>
-                </span>
-                Earn
-              </a> */}
               <a
                 id="stake"
                 href="/app/staking/egc"
@@ -727,7 +640,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                         <div className="notify_icon_cont_div">
                           {NotifyArray.length <= 0 ? null : (
                             <div className="notify_icon_cont_div_notifyCount">
-                              {notification.length}
+                              {noTifyCount}
                             </div>
                           )}
                           <NotificationsNoneOutlinedIcon className="wallet_settings_icon" />
@@ -736,24 +649,40 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
 
                       {notifyDiv && (
                         <div className="notifyDropDownDiv">
-                          {notification.length <= 0 ? (
+                          {UnreadNotifications.length <= 0 ? (
                             <div className="notifyDropDownDiv_emptyDiv">
                               No notifications!
                             </div>
                           ) : (
                             <>
-                              {notification.map((data, key) => (
-                                <div
-                                  className="notifyDropDownDiv_div1"
-                                  key={data.id}
-                                >
-                                  <div className="notifyDropDownDiv_div1_title">
-                                    {data.title}
-                                  </div>
-                                  <div className="notifyDropDownDiv_div1_para">
-                                    {data.message}
-                                  </div>
-                                </div>
+                              {UnreadNotifications.map((data, key) => (
+                                <>
+                                  {data.status == "unread" ? (
+                                    <div
+                                      className="notifyDropDownDiv_div1 active"
+                                      key={data.id}
+                                    >
+                                      <div className="notifyDropDownDiv_div1_title active">
+                                        {data.title}
+                                      </div>
+                                      <div className="notifyDropDownDiv_div1_para">
+                                        {data.message}
+                                      </div>
+                                    </div>
+                                  ) : (
+                                    <div
+                                      className="notifyDropDownDiv_div1"
+                                      key={data.id}
+                                    >
+                                      <div className="notifyDropDownDiv_div1_title">
+                                        {data.title}
+                                      </div>
+                                      <div className="notifyDropDownDiv_div1_para">
+                                        {data.message}
+                                      </div>
+                                    </div>
+                                  )}
+                                </>
                               ))}
                             </>
                           )}

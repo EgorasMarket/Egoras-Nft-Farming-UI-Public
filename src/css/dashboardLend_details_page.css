@@ -20,7 +20,7 @@
   font-weight: 400;
 }
 .fundin_amnt_left_amnt {
-  font-weight: 800;
+  font-weight: 600;
 }
 .pool_detail_heading_area1 {
   display: flex;
@@ -46,7 +46,7 @@
   width: 130px;
 }
 .pool_detail_heading_area1_txt_cont_2 {
-  font-weight: 700;
+  font-weight: 600;
 }
 .pool_detail_heading_area1_txt_cont_1 {
   display: flex;
@@ -98,7 +98,7 @@ button.pool_detail_heading_area1_invest_btn {
   align-items: center;
 }
 .pool_detail_sub_area1_area1_cont1 {
-  font-weight: 700;
+  font-weight: 600;
 }
 .pool_detail_sub_area1_area1_cont2 {
   font-size: 13px;
@@ -111,7 +111,7 @@ button.pool_detail_heading_area1_invest_btn {
   margin-top: 2em;
 }
 .Asset_Originator_Details_cont_heading {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 18px;
 }
 
@@ -148,7 +148,7 @@ button.pool_detail_heading_area1_invest_btn {
   font-weight: 600;
 }
 .pool_status_cont_heading {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 18px;
 }
 
@@ -185,13 +185,13 @@ button.pool_detail_heading_area1_invest_btn {
   gap: 15px;
 }
 .pool_status_Details_cont_body1_head {
-  font-weight: 700;
+  font-weight: 600;
 }
 .pool_status_Details_cont_body1_sub_conts {
   display: flex;
   justify-content: space-between;
   font-size: 14px;
-  font-weight: 100;
+  font-weight: 400;
   color: #3f3f3f;
   align-items: center;
 }
@@ -256,7 +256,7 @@ button.pool_detail_heading_area1_invest_btn {
   border-radius: 0;
   border: none;
   border-bottom: solid 1px;
-  font-weight: 700;
+  font-weight: 600;
   width: 15%;
   display: flex;
   justify-content: center;
@@ -377,7 +377,7 @@ button.pool_detail_heading_area1_invest_btn {
 }
 .loading_title {
   margin: 0;
-  font-weight: 700;
+  font-weight: 600;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -415,7 +415,7 @@ button.pool_detail_heading_area1_invest_btn {
 
 .back_modal_heading {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .back_Modal_input_area {
@@ -442,10 +442,10 @@ button.pool_detail_heading_area1_invest_btn {
   text-align: right;
   width: 100%;
   padding-left: 2em;
-  font-weight: 700;
+  font-weight: 600;
 }
 .back_modal_input::placeholder {
-  font-weight: 700;
+  font-weight: 600;
   color: #d4d4d4;
 }
 .back_loan_btn {
@@ -454,7 +454,7 @@ button.pool_detail_heading_area1_invest_btn {
   border-radius: 10px;
   background: #229e54;
   color: #fff;
-  font-weight: 700;
+  font-weight: 600;
   border: none;
   margin-top: 1em;
 }
@@ -564,7 +564,7 @@ button.pool_detail_heading_area1_invest_btn {
 }
 .viaEarnings_modal_cont_div1_cont1_span1 {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .viaEarnings_modal_cont_div1 {
   display: flex;
@@ -620,7 +620,7 @@ button.pool_detail_heading_area1_invest_btn {
   flex-direction: column;
   gap: 10px;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   align-items: center;
   padding-top: 4em;
 }
@@ -778,9 +778,6 @@ button.pool_detail_heading_area1_invest_btn {
   }
 }
 @media screen and (max-width: 500px) {
-  .asset_other2 {
-    padding-top: 55px !important;
-  }
   .date_duration_row22 {
     display: none !important;
   }
@@ -840,7 +837,7 @@ button.pool_detail_heading_area1_invest_btn {
 }
 .goDoKycDiv_container_head {
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .goDoKycDiv_container_btn_div {
@@ -860,7 +857,7 @@ button.pool_detail_heading_area1_invest_btn {
 }
 .goDoKycDiv_container_para2 {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .goDoKycDiv_container_img {
   width: 125px;

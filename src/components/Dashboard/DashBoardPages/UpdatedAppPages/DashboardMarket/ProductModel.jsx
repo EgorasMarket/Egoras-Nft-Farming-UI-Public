@@ -10,8 +10,8 @@ const ProductModel = ({
   txnHash,
 }) => {
   let fff = JSON.parse(img);
-  console.llog(fff);
-  // console.log(img);
+  console.log(fff);
+  console.log(id);
   // console.log(fff[1]);
   // console.log(fff[1]);
   // console.log(fff[1]);
@@ -24,7 +24,7 @@ const ProductModel = ({
           className="dashboardMarketPlaceBody2_div1_body_card_img"
         /> */}
         <img
-          src={img}
+          src={fff[0]}
           alt=""
           className="dashboardMarketPlaceBody2_div1_body_card_img"
         />
@@ -42,7 +42,9 @@ const ProductModel = ({
           </span>{" "}
         </div>
         <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash">
-          {`${txnHash.slice(0, 6)}...${txnHash.slice(63, 66)}`}
+          {txnHash == null
+            ? "N/A"
+            : `${txnHash.slice(0, 6)}...${txnHash.slice(63, 66)}`}
           <OpenInNewIcon className="tx_hash_link_icon" />
         </div>
         <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn_div">
