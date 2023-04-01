@@ -405,20 +405,14 @@ const StakingUpdate = () => {
       console.log(res.message._dailyRoyalty);
       console.log(formatEther(res.message._dailyRoyalty).toString());
       let formatted = res.message._nextRoyaltyTakePeriod.toString();
-      const endDate = parseInt(formatted);
-      console.log(new Date(1680454493));
-      console.log(new Date(endDate));
+      const endDate = formatted;
+      const newRewardDate = new Date(endDate * 1000);
       console.log(new Date(endDate * 1000), "tyury");
-      const timestamp = 1680454493;
-      const date = fromUnixTime(timestamp);
-      const formattedDate = format(date, "yyyy-MM-dd HH:mm:ss");
-      console.log(formattedDate);
-      console.log(new Date("2023-10-02"));
-      setNextRewardTakeTime(formattedDate);
+      console.log(newRewardDate, "tyury4444444");
+      // setNextRewardTakeTime(newRewardDate);
       setAvailableClaimReward(
         formatEther(res.message._dailyRoyalty).toString()
       );
-      console.log(new Date(1636921519 * 1000));
     }
   }, [account]);
   useEffect(async () => {
@@ -788,9 +782,15 @@ const StakingUpdate = () => {
                       <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount">
                         {parseFloat(availableClaimReward).toFixed(2)} eUsd
                         <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv">
-                          Next Reward Time
-                          {/* ( <Timer deadline={new Date()} />) */}
-                          {nextRewardTakeTime}
+                          Next Reward Time ({" "}
+                          <Timer
+                            deadline={
+                              new Date(
+                                "Sun Apr 02 2023 17:54:53 GMT+0100 (West Africa Standard Time)"
+                              )
+                            }
+                          />
+                          ){nextRewardTakeTime}
                         </div>
                       </div>
                     </div>
