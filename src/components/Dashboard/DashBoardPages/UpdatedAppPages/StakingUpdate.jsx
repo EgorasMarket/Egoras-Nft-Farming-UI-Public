@@ -408,7 +408,7 @@ const StakingUpdate = () => {
       const endDate = parseInt(formatted);
       console.log(new Date(1680454493));
       console.log(new Date(endDate));
-      console.log(endDate);
+      console.log(new Date(endDate * 1000), "tyury");
       const timestamp = 1680454493;
       const date = fromUnixTime(timestamp);
       const formattedDate = format(date, "yyyy-MM-dd HH:mm:ss");
