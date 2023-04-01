@@ -9,7 +9,8 @@ const ProductModel = ({
   numberWithCommas,
   txnHash,
 }) => {
-  // let fff = JSON.parse(img);
+  let fff = JSON.parse(img);
+  console.llog(fff);
   // console.log(img);
   // console.log(fff[1]);
   // console.log(fff[1]);

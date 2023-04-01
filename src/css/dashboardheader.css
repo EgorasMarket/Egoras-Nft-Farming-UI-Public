@@ -304,7 +304,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgb(0, 0, 0) !important;
+  color: #627a6b !important;
   position: relative;
 }
 
@@ -375,8 +375,9 @@
 }
 
 .dark .header_tab1_active {
-  background: #229e54;
+  background: #229e5452;
   box-shadow: 0px 0px 5px #000000;
+  color: #fff !important;
 }
 .welcome_user {
   display: flex;
@@ -484,16 +485,24 @@ dark button.logout-btn {
     color: rgb(33 170 97) !important;
     display: flex;
     flex-direction: column;
-    font-size: 14px;
+    font-size: 12px;
+    width: 100%;
+  }
+
+  .dark .header_tab1_active {
+    background: no-repeat;
+    box-shadow: none;
+    color: rgb(255 255 255) !important;
   }
   .header_tab1 {
     display: flex;
     flex-direction: column;
-    color: #acacac !important;
-    font-size: 14px;
+    color: #9c9c9c !important;
+    font-size: 12px;
+    width: 100%;
   }
-  .header_token_prices_div {
-    display: none;
+  .dark .header_tab1 {
+    color: #506a59 !important;
   }
 
   .connect_div_dash_head {
@@ -506,9 +515,6 @@ dark button.logout-btn {
     display: none;
   }
 
-  .DashBoardHeaderSection {
-    top: 0;
-  }
   .header_tabs2 {
     position: fixed;
     bottom: 0;
@@ -537,7 +543,7 @@ dark button.logout-btn {
   }
   .dark .header_tabs2 {
     /* border: solid 1px #64796d; */
-    background: #294635;
+    background: #101d15;
   }
   .dash_board_links {
     display: none;

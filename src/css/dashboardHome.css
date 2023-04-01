@@ -48,9 +48,31 @@
   font-size: 14px;
   font-weight: 100;
 }
+.analytics_container_body_mobile {
+  display: none;
+}
 /* .assets_chart_area1a path.recharts-rectangle {
   /* fill: #fff;
 } */
-path.recharts-rectangle {
-  /* fill: #fff; */
+@media screen and (max-width: 991px) {
+  .analytics_container_body_mobile {
+    display: flex;
+    align-items: center;
+    grid-gap: 0px;
+    gap: 0px;
+    flex-direction: column;
+  }
+  .analytics_container_body {
+    display: none;
+  }
+  .analytics_container_1 {
+    margin-bottom: 1px;
+  }
+  .analytics_container_1_chart {
+    padding: 0em 0em;
+    height: 100%;
+  }
+  .lending_area1 {
+    margin-top: 10px;
+  }
 }

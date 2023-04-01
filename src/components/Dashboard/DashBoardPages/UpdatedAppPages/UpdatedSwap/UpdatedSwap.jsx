@@ -22,7 +22,6 @@ import UpdatedSuccessModal from "../UpdatedSuccessErrorModals/UpdatedSuccessModa
 import UpdatedErrorModal from "../UpdatedSuccessErrorModals/UpdatedErrorModal";
 import { parseEther, formatEther } from "@ethersproject/units";
 import ScaleLoader from "react-spinners/ScaleLoader";
-import { BigNumber } from "@ethersproject/bignumber";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -326,14 +325,6 @@ const UpdatedSwap = () => {
       address: "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
       symbol: "BNB",
       favorite: "true",
-    },
-    {
-      id: "2",
-      img: "/img/egc-icon.svg",
-      name: "Egoras Credit",
-      address: "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-      symbol: "EGC",
-      favorite: "false",
     },
   ];
   useEffect(() => {
@@ -719,13 +710,13 @@ const UpdatedSwap = () => {
   const ToggleDisplayChart = () => {
     setDisplayChart(!displayChart);
   };
-  // useEffect(async () => {
-  //   if (account) {
-  //     const response = await getBNBAddress(library.getSigner());
-  //     console.log(response);
-  //     return;
-  //   }
-  // }, []);
+  useEffect(async () => {
+    if (account) {
+      const response = await getBNBAddress(library.getSigner());
+      console.log(response, "bnb address");
+      return;
+    }
+  }, [account]);
   const UnlockToken = async (e) => {
     setIsLoading(true);
     setDisable(true);
@@ -843,11 +834,20 @@ const UpdatedSwap = () => {
   const onChangeSwapAmount = async (e) => {
     setIsAmountLoading(true);
     setSwapAmount(e.target.value);
+    console.log(baseFromAddress, baseToAddress);
     const response = await getAmountsOut(
       parseEther(e.target.value.toString(), "wei").toString(),
       [baseFromAddress, baseToAddress],
       library.getSigner()
     );
+    // const response = await getAmountsOut(
+    //   parseEther("1000", "wei").toString(),
+    //   [
+    //     "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A",
+    //     "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+    //   ],
+    //   library.getSigner()
+    // );
     console.log(response);
     if (response.status == true) {
       setIsAmountLoading(false);
@@ -886,276 +886,54 @@ const UpdatedSwap = () => {
     <div className="other2">
       <section className=" no-bg no_paddd">
         <div className="container relative">
-          <div className="ToggleChartDiv">
-            <div className="ToggleChartDiv_txt">Live Chart</div>
-            {/* <div className="ToggleChartDiv_checkBox"> */}
-            <label class="ToggleChartDiv_checkBox_toggle">
-              <input
-                type="checkbox"
-                checked={displayChart}
-                onClick={ToggleDisplayChart}
-                // onChange={ToggleDisplayChart}
-              />
-              {displayChart == true ? (
-                <span class="ToggleChartDiv_checkBox_slider">On</span>
-              ) : (
-                <span class="ToggleChartDiv_checkBox_slider adjustFlex">
-                  Off
-                </span>
-              )}
-            </label>
-            {/* </div> */}
-          </div>
-          <div className="liquidity_area">
-            {/* =============== */}
-            {/* =============== */}
-            {/* =============== */}
-            {/* =============== */}
-            {/* =============== */}
-            {/* =============== */}
-            {/* =============== */}
-            <div className="liquidity_area1">
-              <div className="swap_container_settings_cont">
-                <div className="swap_container_settings_cont_area1">Swap</div>
-                <div className="swap_container_settings_cont_area2">
-                  <InfoOutlinedIcon className="swap_container_settings_cont_area2_icon" />
-                  <ShareOutlinedIcon
-                    className="swap_container_settings_cont_area2_icon2"
-                    onClick={ToggleShareSwap}
-                  />
+          <div className="swapDivCont">
+            <div className="ToggleChartDiv">
+              <div className="ToggleChartDiv_txt">Live Chart</div>
+              {/* <div className="ToggleChartDiv_checkBox"> */}
+              <label class="ToggleChartDiv_checkBox_toggle">
+                <input
+                  type="checkbox"
+                  checked={displayChart}
+                  onClick={ToggleDisplayChart}
+                  // onChange={ToggleDisplayChart}
+                />
+                {displayChart == true ? (
+                  <span class="ToggleChartDiv_checkBox_slider">On</span>
+                ) : (
+                  <span class="ToggleChartDiv_checkBox_slider adjustFlex">
+                    Off
+                  </span>
+                )}
+              </label>
+              {/* </div> */}
+            </div>
+            <div className="liquidity_area">
+              {/* =============== */}
+              {/* =============== */}
+              {/* =============== */}
+              {/* =============== */}
+              {/* =============== */}
+              {/* =============== */}
+              {/* =============== */}
+              <div className="liquidity_area1">
+                <div className="swap_container_settings_cont">
+                  <div className="swap_container_settings_cont_area1">Swap</div>
+                  <div className="swap_container_settings_cont_area2">
+                    <InfoOutlinedIcon className="swap_container_settings_cont_area2_icon" />
+                    <ShareOutlinedIcon
+                      className="swap_container_settings_cont_area2_icon2"
+                      onClick={ToggleShareSwap}
+                    />
+                  </div>
                 </div>
-              </div>
-              <div className="liquidity_cont">
-                <div className="liquidity_cont_body">
-                  <div className="liquidity_cont_body_conts">
-                    <div className="liquidity_cont_body_conts_cont1">
-                      <div className="input_amnt_layer">
-                        <div className="amnt_input">
-                          <div className="amnt_input_layer1">
-                            <div className="amnt_input_layer1_input_div">
-                              <input
-                                type="number"
-                                name="number"
-                                id="number"
-                                placeholder="0.00"
-                                className="amnt_input_field"
-                                autocomplete="off"
-                                onChange={onChangeSwapAmount}
-                                value={SwapAmount}
-                              />
-                              <div className="amnt_input_layer1_input_div_dollar_value">
-                                ~${SwapAmount * 750}
-                              </div>
-                            </div>
-
-                            {id == "" ? (
-                              <div className="Swap_icondropDownDiv">
-                                <span className="token_balances_span">
-                                  Balance:{coinBalance}
-                                </span>
-
-                                <button
-                                  className="display_tokens_drop"
-                                  onClick={ToggleTokenModal}
-                                >
-                                  Select a token
-                                  <ArrowDropDownIcon className="drop_down_icon" />
-                                </button>
-                              </div>
-                            ) : (
-                              <>
-                                {id == "0" ? (
-                                  <>
-                                    {assetsBase.map((data) => {
-                                      return (
-                                        <>
-                                          {data.id == id ? (
-                                            <div
-                                              className="Swap_icondropDownDiv"
-                                              // data-index={data.address}
-                                            >
-                                              <span className="token_balances_span">
-                                                Balance:{coinBalance}
-                                              </span>
-
-                                              <button className="display_tokens_drop">
-                                                <img
-                                                  src={data.img}
-                                                  alt=""
-                                                  className="asset_icon"
-                                                />
-                                                {data.symbol}
-                                                {/* <ArrowDropDownIcon className="drop_down_icon" /> */}
-                                              </button>
-                                            </div>
-                                          ) : null}
-                                        </>
-                                      );
-                                    })}
-                                  </>
-                                ) : (
-                                  <>
-                                    {assets.map((data) => {
-                                      return (
-                                        <>
-                                          {data.id == id ? (
-                                            <div className="Swap_icondropDownDiv">
-                                              <span className="token_balances_span">
-                                                Balance:{coinBalance}
-                                              </span>
-
-                                              <button
-                                                className="display_tokens_drop"
-                                                onClick={ToggleTokenModal}
-                                              >
-                                                <img
-                                                  src={data.img}
-                                                  alt=""
-                                                  className="asset_icon"
-                                                />
-                                                {data.symbol}
-                                                <ArrowDropDownIcon className="drop_down_icon" />
-                                              </button>
-                                            </div>
-                                          ) : null}
-                                        </>
-                                      );
-                                    })}
-                                  </>
-                                )}
-                              </>
-                            )}
-                          </div>
-                          {id == "" ? (
-                            <div className="amnt_input_layer2">
-                              <button className="amnt_input_layer2_cont1">
-                                25%
-                              </button>
-                              <button className="amnt_input_layer2_cont1">
-                                50%
-                              </button>
-                              <button className="amnt_input_layer2_cont1">
-                                75%
-                              </button>
-                              <button className="amnt_input_layer2_cont1_last">
-                                100%
-                              </button>
-                            </div>
-                          ) : (
-                            <>
-                              {id == "0" ? (
-                                <>
-                                  {assetsBase.map((data) => {
-                                    // setSwapBalance(data.balance);
-                                    return (
-                                      <>
-                                        {data.id == id ? (
-                                          <div className="amnt_input_layer2">
-                                            <button
-                                              className="amnt_input_layer2_cont1"
-                                              onClick={() =>
-                                                add25Per(coinBalance)
-                                              }
-                                            >
-                                              25%
-                                            </button>
-                                            <button
-                                              className="amnt_input_layer2_cont1"
-                                              onClick={() =>
-                                                add50Per(coinBalance)
-                                              }
-                                            >
-                                              50%
-                                            </button>
-                                            <button
-                                              className="amnt_input_layer2_cont1"
-                                              onClick={() =>
-                                                add75Per(coinBalance)
-                                              }
-                                            >
-                                              75%
-                                            </button>
-                                            <button
-                                              className="amnt_input_layer2_cont1_last"
-                                              onClick={() =>
-                                                add100Per(coinBalance)
-                                              }
-                                            >
-                                              100%
-                                            </button>
-                                          </div>
-                                        ) : null}
-                                      </>
-                                    );
-                                  })}
-                                </>
-                              ) : (
-                                <>
-                                  {assets.map((data) => {
-                                    // setSwapBalance(data.balance);
-                                    return (
-                                      <>
-                                        {data.id == id ? (
-                                          <div className="amnt_input_layer2">
-                                            <button
-                                              className="amnt_input_layer2_cont1"
-                                              onClick={() =>
-                                                add25Per(coinBalance)
-                                              }
-                                            >
-                                              25%
-                                            </button>
-                                            <button
-                                              className="amnt_input_layer2_cont1"
-                                              onClick={() =>
-                                                add50Per(coinBalance)
-                                              }
-                                            >
-                                              50%
-                                            </button>
-                                            <button
-                                              className="amnt_input_layer2_cont1"
-                                              onClick={() =>
-                                                add75Per(coinBalance)
-                                              }
-                                            >
-                                              75%
-                                            </button>
-                                            <button
-                                              className="amnt_input_layer2_cont1_last"
-                                              onClick={() =>
-                                                add100Per(coinBalance)
-                                              }
-                                            >
-                                              100%
-                                            </button>
-                                          </div>
-                                        ) : null}
-                                      </>
-                                    );
-                                  })}
-                                </>
-                              )}
-                            </>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* <div className="plus_icon_layer"> */}
-                      {coinBalance == "" || baseBalance == "" ? (
-                        <SwapVertIcon className="toggle_swap_inputs" />
-                      ) : (
-                        <SwapVertIcon
-                          className="toggle_swap_inputs"
-                          onClick={ToggleSwapInputs}
-                        />
-                      )}
-
-                      <div className="input_amnt_layer">
-                        <div className="amnt_input">
-                          <div className="amnt_input_layer1">
-                            <div className="amnt_input_layer1_input_div">
-                              {id2 == "" ? (
+                <div className="liquidity_cont">
+                  <div className="liquidity_cont_body">
+                    <div className="liquidity_cont_body_conts">
+                      <div className="liquidity_cont_body_conts_cont1">
+                        <div className="input_amnt_layer">
+                          <div className="amnt_input">
+                            <div className="amnt_input_layer1">
+                              <div className="amnt_input_layer1_input_div">
                                 <input
                                   type="number"
                                   name="number"
@@ -1163,75 +941,148 @@ const UpdatedSwap = () => {
                                   placeholder="0.00"
                                   className="amnt_input_field"
                                   autocomplete="off"
-                                  value=""
+                                  onChange={onChangeSwapAmount}
+                                  value={SwapAmount}
                                 />
+                                <div className="amnt_input_layer1_input_div_dollar_value">
+                                  ~${SwapAmount * 750}
+                                </div>
+                              </div>
+
+                              {id == "" ? (
+                                <div className="Swap_icondropDownDiv">
+                                  <span className="token_balances_span">
+                                    Balance:{coinBalance}
+                                  </span>
+
+                                  <button
+                                    className="display_tokens_drop"
+                                    onClick={ToggleTokenModal}
+                                  >
+                                    Select a token
+                                    <ArrowDropDownIcon className="drop_down_icon" />
+                                  </button>
+                                </div>
                               ) : (
                                 <>
-                                  {isAmountLoading ? (
-                                    <div className="amount_loading_div">
-                                      <PulseLoader
-                                        color="#24382b"
-                                        size={20}
-                                        height={20}
-                                      />
-                                    </div>
+                                  {id == "0" ? (
+                                    <>
+                                      {assetsBase.map((data) => {
+                                        return (
+                                          <>
+                                            {data.id == id ? (
+                                              <div
+                                                className="Swap_icondropDownDiv"
+                                                // data-index={data.address}
+                                              >
+                                                <span className="token_balances_span">
+                                                  Balance:{coinBalance}
+                                                </span>
+
+                                                <button className="display_tokens_drop">
+                                                  <img
+                                                    src={data.img}
+                                                    alt=""
+                                                    className="asset_icon"
+                                                  />
+                                                  {data.symbol}
+                                                  {/* <ArrowDropDownIcon className="drop_down_icon" /> */}
+                                                </button>
+                                              </div>
+                                            ) : null}
+                                          </>
+                                        );
+                                      })}
+                                    </>
                                   ) : (
-                                    <input
-                                      type="number"
-                                      name="number"
-                                      id="number"
-                                      placeholder="0.00"
-                                      className="amnt_input_field"
-                                      autocomplete="off"
-                                      value={amountsOut}
-                                    />
+                                    <>
+                                      {assets.map((data) => {
+                                        return (
+                                          <>
+                                            {data.id == id ? (
+                                              <div className="Swap_icondropDownDiv">
+                                                <span className="token_balances_span">
+                                                  Balance:{coinBalance}
+                                                </span>
+
+                                                <button
+                                                  className="display_tokens_drop"
+                                                  onClick={ToggleTokenModal}
+                                                >
+                                                  <img
+                                                    src={data.img}
+                                                    alt=""
+                                                    className="asset_icon"
+                                                  />
+                                                  {data.symbol}
+                                                  <ArrowDropDownIcon className="drop_down_icon" />
+                                                </button>
+                                              </div>
+                                            ) : null}
+                                          </>
+                                        );
+                                      })}
+                                    </>
                                   )}
                                 </>
                               )}
-
-                              <div className="amnt_input_layer1_input_div_dollar_value">
-                                ~$
-                                {SwapAmount == "" || id2 == ""
-                                  ? " "
-                                  : SwapAmount * 750}
-                              </div>
                             </div>
-                            {id2 == "" ? (
-                              <div className="Swap_icondropDownDiv">
-                                <span className="token_balances_span">
-                                  Balance:{baseBalance}
-                                </span>
-
-                                <button
-                                  className="display_tokens_drop"
-                                  onClick={ToggleTokenModal2}
-                                >
-                                  Select a token
-                                  <ArrowDropDownIcon className="drop_down_icon" />
+                            {id == "" ? (
+                              <div className="amnt_input_layer2">
+                                <button className="amnt_input_layer2_cont1">
+                                  25%
+                                </button>
+                                <button className="amnt_input_layer2_cont1">
+                                  50%
+                                </button>
+                                <button className="amnt_input_layer2_cont1">
+                                  75%
+                                </button>
+                                <button className="amnt_input_layer2_cont1_last">
+                                  100%
                                 </button>
                               </div>
                             ) : (
                               <>
-                                {id2 == "0" ? (
+                                {id == "0" ? (
                                   <>
                                     {assetsBase.map((data) => {
                                       // setSwapBalance(data.balance);
                                       return (
                                         <>
-                                          {data.id == id2 ? (
-                                            <div className="Swap_icondropDownDiv">
-                                              <span className="token_balances_span">
-                                                Balance:{baseBalance}
-                                              </span>
-
-                                              <button className="display_tokens_drop">
-                                                <img
-                                                  src={data.img}
-                                                  alt=""
-                                                  className="asset_icon"
-                                                />
-                                                {data.symbol}
-                                                {/* <ArrowDropDownIcon className="drop_down_icon" /> */}
+                                          {data.id == id ? (
+                                            <div className="amnt_input_layer2">
+                                              <button
+                                                className="amnt_input_layer2_cont1"
+                                                onClick={() =>
+                                                  add25Per(coinBalance)
+                                                }
+                                              >
+                                                25%
+                                              </button>
+                                              <button
+                                                className="amnt_input_layer2_cont1"
+                                                onClick={() =>
+                                                  add50Per(coinBalance)
+                                                }
+                                              >
+                                                50%
+                                              </button>
+                                              <button
+                                                className="amnt_input_layer2_cont1"
+                                                onClick={() =>
+                                                  add75Per(coinBalance)
+                                                }
+                                              >
+                                                75%
+                                              </button>
+                                              <button
+                                                className="amnt_input_layer2_cont1_last"
+                                                onClick={() =>
+                                                  add100Per(coinBalance)
+                                                }
+                                              >
+                                                100%
                                               </button>
                                             </div>
                                           ) : null}
@@ -1245,23 +1096,39 @@ const UpdatedSwap = () => {
                                       // setSwapBalance(data.balance);
                                       return (
                                         <>
-                                          {data.id == id2 ? (
-                                            <div className="Swap_icondropDownDiv">
-                                              <span className="token_balances_span">
-                                                Balance:{baseBalance}
-                                              </span>
-
+                                          {data.id == id ? (
+                                            <div className="amnt_input_layer2">
                                               <button
-                                                className="display_tokens_drop"
-                                                onClick={ToggleTokenModal2}
+                                                className="amnt_input_layer2_cont1"
+                                                onClick={() =>
+                                                  add25Per(coinBalance)
+                                                }
                                               >
-                                                <img
-                                                  src={data.img}
-                                                  alt=""
-                                                  className="asset_icon"
-                                                />
-                                                {data.symbol}
-                                                <ArrowDropDownIcon className="drop_down_icon" />
+                                                25%
+                                              </button>
+                                              <button
+                                                className="amnt_input_layer2_cont1"
+                                                onClick={() =>
+                                                  add50Per(coinBalance)
+                                                }
+                                              >
+                                                50%
+                                              </button>
+                                              <button
+                                                className="amnt_input_layer2_cont1"
+                                                onClick={() =>
+                                                  add75Per(coinBalance)
+                                                }
+                                              >
+                                                75%
+                                              </button>
+                                              <button
+                                                className="amnt_input_layer2_cont1_last"
+                                                onClick={() =>
+                                                  add100Per(coinBalance)
+                                                }
+                                              >
+                                                100%
                                               </button>
                                             </div>
                                           ) : null}
@@ -1274,11 +1141,145 @@ const UpdatedSwap = () => {
                             )}
                           </div>
                         </div>
-                      </div>
 
-                      {/* </div> */}
-                    </div>
-                    {/* <div className="swap_price_rate_div">
+                        {/* <div className="plus_icon_layer"> */}
+                        {coinBalance == "" || baseBalance == "" ? (
+                          <SwapVertIcon className="toggle_swap_inputs" />
+                        ) : (
+                          <SwapVertIcon
+                            className="toggle_swap_inputs"
+                            onClick={ToggleSwapInputs}
+                          />
+                        )}
+
+                        <div className="input_amnt_layer">
+                          <div className="amnt_input">
+                            <div className="amnt_input_layer1">
+                              <div className="amnt_input_layer1_input_div">
+                                {id2 == "" ? (
+                                  <input
+                                    type="number"
+                                    name="number"
+                                    id="number"
+                                    placeholder="0.00"
+                                    className="amnt_input_field"
+                                    autocomplete="off"
+                                    value=""
+                                  />
+                                ) : (
+                                  <>
+                                    {isAmountLoading ? (
+                                      <div className="amount_loading_div">
+                                        <PulseLoader
+                                          color="#24382b"
+                                          size={20}
+                                          height={20}
+                                        />
+                                      </div>
+                                    ) : (
+                                      <input
+                                        type="number"
+                                        name="number"
+                                        id="number"
+                                        placeholder="0.00"
+                                        className="amnt_input_field"
+                                        autocomplete="off"
+                                        value={amountsOut}
+                                      />
+                                    )}
+                                  </>
+                                )}
+
+                                <div className="amnt_input_layer1_input_div_dollar_value">
+                                  ~$
+                                  {SwapAmount == "" || id2 == ""
+                                    ? " "
+                                    : SwapAmount * 750}
+                                </div>
+                              </div>
+                              {id2 == "" ? (
+                                <div className="Swap_icondropDownDiv">
+                                  <span className="token_balances_span">
+                                    Balance:{baseBalance}
+                                  </span>
+
+                                  <button
+                                    className="display_tokens_drop"
+                                    onClick={ToggleTokenModal2}
+                                  >
+                                    Select a token
+                                    <ArrowDropDownIcon className="drop_down_icon" />
+                                  </button>
+                                </div>
+                              ) : (
+                                <>
+                                  {id2 == "0" ? (
+                                    <>
+                                      {assetsBase.map((data) => {
+                                        // setSwapBalance(data.balance);
+                                        return (
+                                          <>
+                                            {data.id == id2 ? (
+                                              <div className="Swap_icondropDownDiv">
+                                                <span className="token_balances_span">
+                                                  Balance:{baseBalance}
+                                                </span>
+
+                                                <button className="display_tokens_drop">
+                                                  <img
+                                                    src={data.img}
+                                                    alt=""
+                                                    className="asset_icon"
+                                                  />
+                                                  {data.symbol}
+                                                  {/* <ArrowDropDownIcon className="drop_down_icon" /> */}
+                                                </button>
+                                              </div>
+                                            ) : null}
+                                          </>
+                                        );
+                                      })}
+                                    </>
+                                  ) : (
+                                    <>
+                                      {assets.map((data) => {
+                                        // setSwapBalance(data.balance);
+                                        return (
+                                          <>
+                                            {data.id == id2 ? (
+                                              <div className="Swap_icondropDownDiv">
+                                                <span className="token_balances_span">
+                                                  Balance:{baseBalance}
+                                                </span>
+
+                                                <button
+                                                  className="display_tokens_drop"
+                                                  onClick={ToggleTokenModal2}
+                                                >
+                                                  <img
+                                                    src={data.img}
+                                                    alt=""
+                                                    className="asset_icon"
+                                                  />
+                                                  {data.symbol}
+                                                  <ArrowDropDownIcon className="drop_down_icon" />
+                                                </button>
+                                              </div>
+                                            ) : null}
+                                          </>
+                                        );
+                                      })}
+                                    </>
+                                  )}
+                                </>
+                              )}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* </div> */}
+                      </div>
+                      {/* <div className="swap_price_rate_div">
                       {ida == "" ? (
                         <div className="swap_price_rate_div1">Nil</div>
                       ) : (
@@ -1359,203 +1360,112 @@ const UpdatedSwap = () => {
                         onClick={ToggleSwapPrices}
                       />
                     </div> */}
-                    <div className="swap_price_slippage_div">
-                      <div className="swap_price_slippage_div1">
-                        Max Slippage{" "}
-                        <InfoOutlinedIcon className="swap_price_slippage_info_icon" />
-                        :
+                      <div className="swap_price_slippage_div">
+                        <div className="swap_price_slippage_div1">
+                          Max Slippage{" "}
+                          <InfoOutlinedIcon className="swap_price_slippage_info_icon" />
+                          :
+                        </div>
+                        <div className="swap_price_slippage_div2">
+                          0.5%{" "}
+                          <ArrowDropDownIcon className="swap_price_slippage_div2_icon" />
+                        </div>
                       </div>
-                      <div className="swap_price_slippage_div2">
-                        0.5%{" "}
-                        <ArrowDropDownIcon className="swap_price_slippage_div2_icon" />
-                      </div>
-                    </div>
 
-                    {account ? (
-                      <>
-                        {id == "" ? (
-                          <button
-                            id="generate"
-                            class="updatedSwapSwapBtn"
-                            disabled
-                          >
-                            Select a token
-                          </button>
-                        ) : (
-                          <>
-                            {id == "0" ? (
-                              <>
-                                {assetsBase.map((data) => {
-                                  return (
-                                    <>
-                                      {data.id == id ? (
-                                        <>
-                                          {unlockBtn === false ? (
-                                            <button
-                                              id="generate"
-                                              disabled={Disable}
-                                              onClick={UnlockToken}
-                                              class="updatedSwapSwapBtn"
-                                            >
-                                              {isLoading ? (
-                                                <ScaleLoader
-                                                  color="#24382b"
-                                                  size={10}
-                                                  height={20}
-                                                />
-                                              ) : (
-                                                <> Approve {data.symbol}</>
-                                              )}
-                                            </button>
-                                          ) : (
-                                            <button
-                                              id="generate"
-                                              disabled={Disable}
-                                              onClick={SwapEusdForBnb}
-                                              class="updatedSwapSwapBtn"
-                                            >
-                                              {isLoading ? (
-                                                <ScaleLoader
-                                                  color="#24382b"
-                                                  size={10}
-                                                  height={20}
-                                                />
-                                              ) : (
-                                                <> Swap {data.symbol}</>
-                                              )}
-                                            </button>
-                                          )}
-                                        </>
-                                      ) : null}
-                                    </>
-                                  );
-                                })}
-                              </>
-                            ) : id == "1" ? (
-                              <>
-                                {assets.map((data) => {
-                                  return (
-                                    <>
-                                      {data.id == id ? (
-                                        <>
-                                          {SwapAmount > coinBalance ? (
-                                            <button
-                                              id="generate"
-                                              class="updatedSwapSwapBtn"
-                                              disabled
-                                            >
-                                              Insufficient balance
-                                            </button>
-                                          ) : (
-                                            <button
-                                              id="generate"
-                                              disabled={Disable}
-                                              onClick={SwapbnbForEusd}
-                                              class="updatedSwapSwapBtn"
-                                            >
-                                              {isLoading ? (
-                                                <ScaleLoader
-                                                  color="#24382b"
-                                                  size={10}
-                                                  height={20}
-                                                />
-                                              ) : (
-                                                <> Swap {data.symbol}</>
-                                              )}
-                                            </button>
-                                          )}
-                                        </>
-                                      ) : null}
-                                    </>
-                                  );
-                                })}
-                              </>
-                            ) : (
-                              <>
-                                {assets.map((data) => {
-                                  return (
-                                    <>
-                                      {data.id == id ? (
-                                        <>
-                                          {unlockBtn === false ? (
-                                            <button
-                                              id="generate"
-                                              disabled={Disable}
-                                              onClick={UnlockToken}
-                                              class="updatedSwapSwapBtn"
-                                            >
-                                              {isLoading ? (
-                                                <ScaleLoader
-                                                  color="#24382b"
-                                                  size={10}
-                                                  height={20}
-                                                />
-                                              ) : (
-                                                <> Approve {data.symbol}</>
-                                              )}
-                                            </button>
-                                          ) : (
-                                            <button
-                                              id="generate"
-                                              disabled={Disable}
-                                              onClick={SwapEusdForBnb}
-                                              class="updatedSwapSwapBtn"
-                                            >
-                                              {isLoading ? (
-                                                <ScaleLoader
-                                                  color="#24382b"
-                                                  size={10}
-                                                  height={20}
-                                                />
-                                              ) : (
-                                                <> Swap {data.symbol}</>
-                                              )}
-                                            </button>
-                                          )}
-                                        </>
-                                      ) : null}
-                                    </>
-                                  );
-                                })}
-                              </>
-                            )}
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <button id="generate" class="updatedSwapSwapBtn" disabled>
-                        Connect wallet
-                      </button>
-                    )}
-
-                    <div className="moreSwapInfoDiv">
-                      <div className="moreSwapInfoDiv_div1">
-                        More Information
-                      </div>
-                      <div className="moreSwapInfoDiv_div2">
-                        <div className="moreSwapInfoDiv_div2_area1">
-                          <div className="moreSwapInfoDiv_div2_area1_cont1">
-                            Minimum Received
-                          </div>
-                          {id2 == "" ? (
-                            <div className="swap_price_rate_div1">0</div>
+                      {account ? (
+                        <>
+                          {id == "" ? (
+                            <button
+                              id="generate"
+                              class="updatedSwapSwapBtn"
+                              disabled
+                            >
+                              Select a token
+                            </button>
                           ) : (
                             <>
-                              {id2 == "0" ? (
+                              {id == "0" ? (
                                 <>
                                   {assetsBase.map((data) => {
-                                    // setSwapBalance(data.balance);
                                     return (
                                       <>
-                                        {data.id == id2 ? (
-                                          <div className="moreSwapInfoDiv_div2_area1_cont2">
-                                            {SwapAmount == ""
-                                              ? 0
-                                              : MinamountsOut}
-                                            <span>
-                                              {"  "} {data.symbol}
-                                            </span>
-                                          </div>
+                                        {data.id == id ? (
+                                          <>
+                                            {unlockBtn === false ? (
+                                              <button
+                                                id="generate"
+                                                disabled={Disable}
+                                                onClick={UnlockToken}
+                                                class="updatedSwapSwapBtn"
+                                              >
+                                                {isLoading ? (
+                                                  <ScaleLoader
+                                                    color="#24382b"
+                                                    size={10}
+                                                    height={20}
+                                                  />
+                                                ) : (
+                                                  <> Approve {data.symbol}</>
+                                                )}
+                                              </button>
+                                            ) : (
+                                              <button
+                                                id="generate"
+                                                disabled={Disable}
+                                                onClick={SwapEusdForBnb}
+                                                class="updatedSwapSwapBtn"
+                                              >
+                                                {isLoading ? (
+                                                  <ScaleLoader
+                                                    color="#24382b"
+                                                    size={10}
+                                                    height={20}
+                                                  />
+                                                ) : (
+                                                  <> Swap {data.symbol}</>
+                                                )}
+                                              </button>
+                                            )}
+                                          </>
+                                        ) : null}
+                                      </>
+                                    );
+                                  })}
+                                </>
+                              ) : id == "1" ? (
+                                <>
+                                  {assets.map((data) => {
+                                    return (
+                                      <>
+                                        {data.id == id ? (
+                                          <>
+                                            {SwapAmount > coinBalance ? (
+                                              <button
+                                                id="generate"
+                                                class="updatedSwapSwapBtn"
+                                                disabled
+                                              >
+                                                Insufficient balance
+                                              </button>
+                                            ) : (
+                                              <button
+                                                id="generate"
+                                                disabled={Disable}
+                                                onClick={SwapbnbForEusd}
+                                                class="updatedSwapSwapBtn"
+                                              >
+                                                {isLoading ? (
+                                                  <ScaleLoader
+                                                    color="#24382b"
+                                                    size={10}
+                                                    height={20}
+                                                  />
+                                                ) : (
+                                                  <> Swap {data.symbol}</>
+                                                )}
+                                              </button>
+                                            )}
+                                          </>
                                         ) : null}
                                       </>
                                     );
@@ -1564,18 +1474,46 @@ const UpdatedSwap = () => {
                               ) : (
                                 <>
                                   {assets.map((data) => {
-                                    // setSwapBalance(data.balance);
                                     return (
                                       <>
-                                        {data.id == id2 ? (
-                                          <div className="moreSwapInfoDiv_div2_area1_cont2">
-                                            {SwapAmount == ""
-                                              ? 0
-                                              : MinamountsOut}
-                                            <span>
-                                              {"  "} {data.symbol}
-                                            </span>
-                                          </div>
+                                        {data.id == id ? (
+                                          <>
+                                            {unlockBtn === false ? (
+                                              <button
+                                                id="generate"
+                                                disabled={Disable}
+                                                onClick={UnlockToken}
+                                                class="updatedSwapSwapBtn"
+                                              >
+                                                {isLoading ? (
+                                                  <ScaleLoader
+                                                    color="#24382b"
+                                                    size={10}
+                                                    height={20}
+                                                  />
+                                                ) : (
+                                                  <> Approve {data.symbol}</>
+                                                )}
+                                              </button>
+                                            ) : (
+                                              <button
+                                                id="generate"
+                                                disabled={Disable}
+                                                onClick={SwapEusdForBnb}
+                                                class="updatedSwapSwapBtn"
+                                              >
+                                                {isLoading ? (
+                                                  <ScaleLoader
+                                                    color="#24382b"
+                                                    size={10}
+                                                    height={20}
+                                                  />
+                                                ) : (
+                                                  <> Swap {data.symbol}</>
+                                                )}
+                                              </button>
+                                            )}
+                                          </>
                                         ) : null}
                                       </>
                                     );
@@ -1584,60 +1522,28 @@ const UpdatedSwap = () => {
                               )}
                             </>
                           )}
+                        </>
+                      ) : (
+                        <button
+                          id="generate"
+                          class="updatedSwapSwapBtn"
+                          disabled
+                        >
+                          Connect wallet
+                        </button>
+                      )}
+
+                      <div className="moreSwapInfoDiv">
+                        <div className="moreSwapInfoDiv_div1">
+                          More Information
                         </div>
-                        <div className="moreSwapInfoDiv_div2_area1">
-                          <div className="moreSwapInfoDiv_div2_area1_cont1">
-                            Est Gas Fee
-                          </div>
-                          <div className="moreSwapInfoDiv_div2_area1_cont2">
-                            $0.005
-                          </div>
-                        </div>
-                        <div className="moreSwapInfoDiv_div2_area1">
-                          <div className="moreSwapInfoDiv_div2_area1_cont1">
-                            Route
-                          </div>
-                          <div className="moreSwapInfoDiv_div2_area1_cont2">
-                            {id == "" ? (
-                              <div className="swap_price_rate_div1">Nil</div>
-                            ) : (
-                              <>
-                                {id == "0" ? (
-                                  <>
-                                    {assetsBase.map((data) => {
-                                      // setSwapBalance(data.balance);
-                                      return (
-                                        <>
-                                          {data.id == id ? (
-                                            <div className="swap_price_rate_div1">
-                                              {data.symbol}
-                                            </div>
-                                          ) : null}
-                                        </>
-                                      );
-                                    })}
-                                  </>
-                                ) : (
-                                  <>
-                                    {assets.map((data) => {
-                                      // setSwapBalance(data.balance);
-                                      return (
-                                        <>
-                                          {data.id == id ? (
-                                            <div className="swap_price_rate_div1">
-                                              {data.symbol}
-                                            </div>
-                                          ) : null}
-                                        </>
-                                      );
-                                    })}
-                                  </>
-                                )}
-                              </>
-                            )}
-                            {">"}
+                        <div className="moreSwapInfoDiv_div2">
+                          <div className="moreSwapInfoDiv_div2_area1">
+                            <div className="moreSwapInfoDiv_div2_area1_cont1">
+                              Minimum Received
+                            </div>
                             {id2 == "" ? (
-                              <div className="swap_price_rate_div1">Nil</div>
+                              <div className="swap_price_rate_div1">0</div>
                             ) : (
                               <>
                                 {id2 == "0" ? (
@@ -1647,8 +1553,13 @@ const UpdatedSwap = () => {
                                       return (
                                         <>
                                           {data.id == id2 ? (
-                                            <div className="swap_price_rate_div2">
-                                              {data.symbol}
+                                            <div className="moreSwapInfoDiv_div2_area1_cont2">
+                                              {SwapAmount == ""
+                                                ? 0
+                                                : MinamountsOut}
+                                              <span>
+                                                {"  "} {data.symbol}
+                                              </span>
                                             </div>
                                           ) : null}
                                         </>
@@ -1662,8 +1573,13 @@ const UpdatedSwap = () => {
                                       return (
                                         <>
                                           {data.id == id2 ? (
-                                            <div className="swap_price_rate_div2">
-                                              {data.symbol}
+                                            <div className="moreSwapInfoDiv_div2_area1_cont2">
+                                              {SwapAmount == ""
+                                                ? 0
+                                                : MinamountsOut}
+                                              <span>
+                                                {"  "} {data.symbol}
+                                              </span>
                                             </div>
                                           ) : null}
                                         </>
@@ -1674,8 +1590,97 @@ const UpdatedSwap = () => {
                               </>
                             )}
                           </div>
-                        </div>
-                        {/* <div className="moreSwapInfoDiv_div2_area1">
+                          <div className="moreSwapInfoDiv_div2_area1">
+                            <div className="moreSwapInfoDiv_div2_area1_cont1">
+                              Est Gas Fee
+                            </div>
+                            <div className="moreSwapInfoDiv_div2_area1_cont2">
+                              $0.005
+                            </div>
+                          </div>
+                          <div className="moreSwapInfoDiv_div2_area1">
+                            <div className="moreSwapInfoDiv_div2_area1_cont1">
+                              Route
+                            </div>
+                            <div className="moreSwapInfoDiv_div2_area1_cont2">
+                              {id == "" ? (
+                                <div className="swap_price_rate_div1">Nil</div>
+                              ) : (
+                                <>
+                                  {id == "0" ? (
+                                    <>
+                                      {assetsBase.map((data) => {
+                                        // setSwapBalance(data.balance);
+                                        return (
+                                          <>
+                                            {data.id == id ? (
+                                              <div className="swap_price_rate_div1">
+                                                {data.symbol}
+                                              </div>
+                                            ) : null}
+                                          </>
+                                        );
+                                      })}
+                                    </>
+                                  ) : (
+                                    <>
+                                      {assets.map((data) => {
+                                        // setSwapBalance(data.balance);
+                                        return (
+                                          <>
+                                            {data.id == id ? (
+                                              <div className="swap_price_rate_div1">
+                                                {data.symbol}
+                                              </div>
+                                            ) : null}
+                                          </>
+                                        );
+                                      })}
+                                    </>
+                                  )}
+                                </>
+                              )}
+                              {">"}
+                              {id2 == "" ? (
+                                <div className="swap_price_rate_div1">Nil</div>
+                              ) : (
+                                <>
+                                  {id2 == "0" ? (
+                                    <>
+                                      {assetsBase.map((data) => {
+                                        // setSwapBalance(data.balance);
+                                        return (
+                                          <>
+                                            {data.id == id2 ? (
+                                              <div className="swap_price_rate_div2">
+                                                {data.symbol}
+                                              </div>
+                                            ) : null}
+                                          </>
+                                        );
+                                      })}
+                                    </>
+                                  ) : (
+                                    <>
+                                      {assets.map((data) => {
+                                        // setSwapBalance(data.balance);
+                                        return (
+                                          <>
+                                            {data.id == id2 ? (
+                                              <div className="swap_price_rate_div2">
+                                                {data.symbol}
+                                              </div>
+                                            ) : null}
+                                          </>
+                                        );
+                                      })}
+                                    </>
+                                  )}
+                                </>
+                              )}
+                            </div>
+                          </div>
+                          {/* <div className="moreSwapInfoDiv_div2_area1">
                           <div className="moreSwapInfoDiv_div2_area1_cont1">
                             Price Impact
                           </div>
@@ -1683,573 +1688,575 @@ const UpdatedSwap = () => {
                             {"<0.22%"}
                           </div>
                         </div> */}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              {/* =============== */}
+              {/* =============== */}
+              {/* =============== */}
+              {/* =============== */}
+              {/* =============== */}
+              {/* =============== */}
+              {/* =============== */}
+              {displayChart === true ? (
+                <div className="tradeViewArea">
+                  <div className="tradeViewAreaCont">
+                    <div className="tradeViewAreaCont_pairs_cont">
+                      <div className="tradeViewAreaCont_pairs_cont_div">
+                        {idTicker == "" ? (
+                          <div className="tradeViewAreaCont_pairs_cont_div1">
+                            Nil
+                          </div>
+                        ) : (
+                          <>
+                            {idTicker == "0" ? (
+                              <>
+                                {assetsBase.map((data) => {
+                                  // setSwapBalance(data.balance);
+                                  return (
+                                    <>
+                                      {data.id == idTicker ? (
+                                        <div className="tradeViewAreaCont_pairs_cont_div1 moveCloser">
+                                          <img
+                                            src={data.img}
+                                            alt=""
+                                            className="tradeViewAreaCont_pairs_cont_div1_img"
+                                          />
+                                        </div>
+                                      ) : null}
+                                    </>
+                                  );
+                                })}
+                              </>
+                            ) : (
+                              <>
+                                {assets.map((data) => {
+                                  // setSwapBalance(data.balance);
+                                  return (
+                                    <>
+                                      {data.id == idTicker ? (
+                                        <div className="tradeViewAreaCont_pairs_cont_div1 moveCloser">
+                                          <img
+                                            src={data.img}
+                                            alt=""
+                                            className="tradeViewAreaCont_pairs_cont_div1_img"
+                                          />
+                                        </div>
+                                      ) : null}
+                                    </>
+                                  );
+                                })}
+                              </>
+                            )}
+                          </>
+                        )}
+
+                        {idBase == "" ? (
+                          <div className="tradeViewAreaCont_pairs_cont_div1">
+                            Nil
+                          </div>
+                        ) : (
+                          <>
+                            {idBase == "0" ? (
+                              <>
+                                {assetsBase.map((data) => {
+                                  // setSwapBalance(data.balance);
+                                  return (
+                                    <>
+                                      {data.id == idBase ? (
+                                        <div className="tradeViewAreaCont_pairs_cont_div1">
+                                          <img
+                                            src={data.img}
+                                            alt=""
+                                            className="tradeViewAreaCont_pairs_cont_div1_img"
+                                          />
+                                        </div>
+                                      ) : null}
+                                    </>
+                                  );
+                                })}
+                              </>
+                            ) : (
+                              <>
+                                {assets.map((data) => {
+                                  // setSwapBalance(data.balance);
+                                  return (
+                                    <>
+                                      {data.id == idBase ? (
+                                        <div className="tradeViewAreaCont_pairs_cont_div1">
+                                          <img
+                                            src={data.img}
+                                            alt=""
+                                            className="tradeViewAreaCont_pairs_cont_div1_img"
+                                          />
+                                        </div>
+                                      ) : null}
+                                    </>
+                                  );
+                                })}
+                              </>
+                            )}
+                          </>
+                        )}
+
+                        {idTicker == "" ? (
+                          <div className="tradeViewAreaCont_pairs_cont_div2">
+                            Nil
+                          </div>
+                        ) : (
+                          <>
+                            {idTicker == "0" ? (
+                              <>
+                                {assetsBase.map((data) => {
+                                  // setSwapBalance(data.balance);
+                                  return (
+                                    <>
+                                      {data.id == idTicker ? (
+                                        <div className="tradeViewAreaCont_pairs_cont_div2">
+                                          {data.symbol}
+                                        </div>
+                                      ) : null}
+                                    </>
+                                  );
+                                })}
+                              </>
+                            ) : (
+                              <>
+                                {assets.map((data) => {
+                                  // setSwapBalance(data.balance);
+                                  return (
+                                    <>
+                                      {data.id == idTicker ? (
+                                        <div className="tradeViewAreaCont_pairs_cont_div2">
+                                          {data.symbol}
+                                        </div>
+                                      ) : null}
+                                    </>
+                                  );
+                                })}
+                              </>
+                            )}
+                          </>
+                        )}
+                        <div className="tradeViewAreaCont_pairs_cont_div2_slash">
+                          /
+                        </div>
+
+                        {idBase == "" ? (
+                          <div className="tradeViewAreaCont_pairs_cont_div2 base">
+                            Nil
+                          </div>
+                        ) : (
+                          <>
+                            {idBase == "0" ? (
+                              <>
+                                {assetsBase.map((data) => {
+                                  // setSwapBalance(data.balance);
+                                  return (
+                                    <>
+                                      {data.id == idBase ? (
+                                        <div className="tradeViewAreaCont_pairs_cont_div2 base">
+                                          {data.symbol}
+                                        </div>
+                                      ) : null}
+                                    </>
+                                  );
+                                })}
+                              </>
+                            ) : (
+                              <>
+                                {assets.map((data) => {
+                                  // setSwapBalance(data.balance);
+                                  return (
+                                    <>
+                                      {data.id == idBase ? (
+                                        <div className="tradeViewAreaCont_pairs_cont_div2 base">
+                                          {data.symbol}
+                                        </div>
+                                      ) : null}
+                                    </>
+                                  );
+                                })}
+                              </>
+                            )}
+                          </>
+                        )}
+                        <SwapHorizIcon
+                          className="swap_base_ticker_price_change_icon"
+                          onClick={ToggleSwapBase}
+                        />
+                      </div>
+                    </div>
+                    <div className="tradeViewAreaCont1">
+                      {activeDuration == "hr1" ? (
+                        <div className="tradeViewAreaCont1_area1">
+                          <div
+                            className="analytics_container_1_Amount"
+                            onChange={CustomTooltip}
+                          >
+                            <span>
+                              <AnimatedNumber
+                                value={ChartValue}
+                                // hasComma={true}
+                                formatValue={(value) => value.toFixed(0)}
+                                size={28}
+                                duration={1000}
+                              />{" "}
+                              {/* ====== */}
+                              {/* ====== */}
+                              {/* ====== */}
+                              {idBase == "" ? (
+                                <>Nil</>
+                              ) : (
+                                <>
+                                  {idBase == "0" ? (
+                                    <>
+                                      {assetsBase.map((data) => {
+                                        // setSwapBalance(data.balance);
+                                        return (
+                                          <>
+                                            {data.id == idBase
+                                              ? data.symbol
+                                              : null}
+                                          </>
+                                        );
+                                      })}
+                                    </>
+                                  ) : (
+                                    <>
+                                      {assets.map((data) => {
+                                        // setSwapBalance(data.balance);
+                                        return (
+                                          <>
+                                            {data.id == idBase
+                                              ? data.symbol
+                                              : null}
+                                          </>
+                                        );
+                                      })}
+                                    </>
+                                  )}
+                                </>
+                              )}
+                            </span>
+                          </div>
+                          <span
+                            className="tradeViewAreaCont1_area1_priceChangeSpan"
+                            style={
+                              ChartChange == "decrease"
+                                ? { color: "#ff537b" }
+                                : ChartChange == "increase"
+                                ? { color: "#31cb9e" }
+                                : { color: "#31cb9e" }
+                            }
+                          >
+                            {ChartChange == "decrease" ? (
+                              <>
+                                {ChartPriceDifference} (
+                                {"-" +
+                                  parseFloat(ChartPercentChange).toFixed(2) +
+                                  "%"}
+                                )
+                              </>
+                            ) : (
+                              <>
+                                {"+" + ChartPriceDifference} (
+                                {"+" +
+                                  parseFloat(ChartPercentChange).toFixed(2) +
+                                  "%"}
+                                )
+                              </>
+                            )}
+                          </span>
+                        </div>
+                      ) : activeDuration == "hr4" ? (
+                        <div className="tradeViewAreaCont1_area1">
+                          <div
+                            className="analytics_container_1_Amount"
+                            onChange={CustomTooltip}
+                          >
+                            <span>
+                              <AnimatedNumber
+                                value={ChartValue2}
+                                // hasComma={true}
+                                formatValue={(value) => value.toFixed(0)}
+                                size={28}
+                                duration={1000}
+                              />{" "}
+                              {idBase == "" ? (
+                                <>Nil</>
+                              ) : (
+                                <>
+                                  {idBase == "0" ? (
+                                    <>
+                                      {assetsBase.map((data) => {
+                                        // setSwapBalance(data.balance);
+                                        return (
+                                          <>
+                                            {data.id == idBase
+                                              ? data.symbol
+                                              : null}
+                                          </>
+                                        );
+                                      })}
+                                    </>
+                                  ) : (
+                                    <>
+                                      {assets.map((data) => {
+                                        // setSwapBalance(data.balance);
+                                        return (
+                                          <>
+                                            {data.id == idBase
+                                              ? data.symbol
+                                              : null}
+                                          </>
+                                        );
+                                      })}
+                                    </>
+                                  )}
+                                </>
+                              )}
+                            </span>
+                          </div>
+                          <span
+                            className="tradeViewAreaCont1_area1_priceChangeSpan"
+                            style={
+                              ChartChange2 == "decrease"
+                                ? { color: "#ff537b" }
+                                : ChartChange2 == "increase"
+                                ? { color: "#31cb9e" }
+                                : { color: "#31cb9e" }
+                            }
+                          >
+                            {ChartChange2 == "decrease" ? (
+                              <>
+                                {ChartPriceDifference2} (
+                                {parseFloat(ChartPercentChange2).toFixed(2) +
+                                  "%"}
+                                )
+                              </>
+                            ) : (
+                              <>
+                                {"+" + ChartPriceDifference2} (
+                                {"+" +
+                                  parseFloat(ChartPercentChange2).toFixed(2) +
+                                  "%"}
+                                )
+                              </>
+                            )}
+                          </span>
+                        </div>
+                      ) : null}
+
+                      <div className="tradeViewAreaCont1_area2">
+                        <div
+                          className={
+                            activeDuration == "hr1"
+                              ? "tradeViewAreaCont1_area2_cont1_active"
+                              : "tradeViewAreaCont1_area2_cont1"
+                          }
+                          onClick={ToggleDuration}
+                          id="hr1"
+                        >
+                          1H
+                        </div>
+                        <div
+                          className={
+                            activeDuration == "hr4"
+                              ? "tradeViewAreaCont1_area2_cont1_active"
+                              : "tradeViewAreaCont1_area2_cont1"
+                          }
+                          onClick={ToggleDuration}
+                          id="hr4"
+                        >
+                          4H
+                        </div>
+                        <div
+                          className={
+                            activeDuration == "day"
+                              ? "tradeViewAreaCont1_area2_cont1_active"
+                              : "tradeViewAreaCont1_area2_cont1"
+                          }
+                          onClick={ToggleDuration}
+                          id="day"
+                        >
+                          1D
+                        </div>
+                        <div
+                          className={
+                            activeDuration == "week"
+                              ? "tradeViewAreaCont1_area2_cont1_active"
+                              : "tradeViewAreaCont1_area2_cont1"
+                          }
+                          onClick={ToggleDuration}
+                          id="week"
+                        >
+                          1W
+                        </div>
+                        <div
+                          className={
+                            activeDuration == "month1"
+                              ? "tradeViewAreaCont1_area2_cont1_active"
+                              : "tradeViewAreaCont1_area2_cont1"
+                          }
+                          onClick={ToggleDuration}
+                          id="month1"
+                        >
+                          1M
+                        </div>
+                        <div
+                          className={
+                            activeDuration == "month6"
+                              ? "tradeViewAreaCont1_area2_cont1_active"
+                              : "tradeViewAreaCont1_area2_cont1"
+                          }
+                          onClick={ToggleDuration}
+                          id="month6"
+                        >
+                          6M
+                        </div>
+                      </div>
+                    </div>
+                    <div className="tradingView_container_1_chart">
+                      {activeDuration == "hr1" ? (
+                        <div
+                          className="tradeViewAreaCont_chart_area2 "
+                          style={{ width: "100%", height: 400 }}
+                        >
+                          <ResponsiveContainer>
+                            <AreaChart
+                              width={1000}
+                              height={100}
+                              data={formattedData}
+                              margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
+                            >
+                              <defs>
+                                <linearGradient
+                                  id="colorUv"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#31cb9e"
+                                    stopOpacity={0.3}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#31cb9e"
+                                    stopOpacity={0}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid
+                            strokeDasharray="1 1"
+                            stroke="#d7d7d7"
+                          /> */}
+                              <XAxis
+                                dataKey="time"
+                                stroke="0"
+                                interval={interval - 1}
+                                ticks={formattedData
+                                  .slice(1, -1)
+                                  .map((dataPoint) => dataPoint.time)}
+                                // tick={false}
+                                tick={{ fontSize: 12 }}
+                                allowDuplicatedCategory={false}
+                              />
+                              {/* <YAxis
+                          domain={[minPrice, "auto"]}
+                          tick={false}
+                          axisLine={false}
+                        /> */}
+                              <Tooltip content={<CustomTooltip />} />
+
+                              <Area
+                                type="monotone"
+                                dataKey={(d) => d.price - priceOffset}
+                                stroke="#31cb9e"
+                                fillOpacity={1}
+                                fill="url(#colorUv)"
+                                strokeWidth={2}
+                              />
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                      ) : activeDuration == "hr4" ? (
+                        <div
+                          className="tradeViewAreaCont_chart_area2 "
+                          style={{ width: "100%", height: 400 }}
+                        >
+                          <ResponsiveContainer>
+                            <AreaChart
+                              width={1000}
+                              height={100}
+                              data={formattedData2}
+                              margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
+                            >
+                              <defs>
+                                <linearGradient
+                                  id="colorUv"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#ff537b"
+                                    stopOpacity={0.3}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#ff537b"
+                                    stopOpacity={0}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid
+                            strokeDasharray="1 1"
+                            stroke="#d7d7d7"
+                          /> */}
+                              <XAxis
+                                dataKey="time"
+                                stroke="0"
+                                interval={interval2 - 1}
+                                ticks={formattedData2
+                                  .slice(1, -1)
+                                  .map((dataPoint) => dataPoint.time)}
+                                // tick={false}
+                                tick={{ fontSize: 12 }}
+                                allowDuplicatedCategory={false}
+                              />
+                              {/* <YAxis
+                          domain={[minPrice, "auto"]}
+                          tick={false}
+                          axisLine={false}
+                        /> */}
+                              <Tooltip content={<CustomTooltip />} />
+
+                              <Area
+                                type="monotone"
+                                dataKey={(d) => d.price - priceOffset2}
+                                stroke="#ff537b"
+                                fillOpacity={1}
+                                fill="url(#colorUv)"
+                                strokeWidth={2}
+                              />
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+              ) : null}
             </div>
-            {/* =============== */}
-            {/* =============== */}
-            {/* =============== */}
-            {/* =============== */}
-            {/* =============== */}
-            {/* =============== */}
-            {/* =============== */}
-            {displayChart === true ? (
-              <div className="tradeViewArea">
-                <div className="tradeViewAreaCont">
-                  <div className="tradeViewAreaCont_pairs_cont">
-                    <div className="tradeViewAreaCont_pairs_cont_div">
-                      {idTicker == "" ? (
-                        <div className="tradeViewAreaCont_pairs_cont_div1">
-                          Nil
-                        </div>
-                      ) : (
-                        <>
-                          {idTicker == "0" ? (
-                            <>
-                              {assetsBase.map((data) => {
-                                // setSwapBalance(data.balance);
-                                return (
-                                  <>
-                                    {data.id == idTicker ? (
-                                      <div className="tradeViewAreaCont_pairs_cont_div1 moveCloser">
-                                        <img
-                                          src={data.img}
-                                          alt=""
-                                          className="tradeViewAreaCont_pairs_cont_div1_img"
-                                        />
-                                      </div>
-                                    ) : null}
-                                  </>
-                                );
-                              })}
-                            </>
-                          ) : (
-                            <>
-                              {assets.map((data) => {
-                                // setSwapBalance(data.balance);
-                                return (
-                                  <>
-                                    {data.id == idTicker ? (
-                                      <div className="tradeViewAreaCont_pairs_cont_div1 moveCloser">
-                                        <img
-                                          src={data.img}
-                                          alt=""
-                                          className="tradeViewAreaCont_pairs_cont_div1_img"
-                                        />
-                                      </div>
-                                    ) : null}
-                                  </>
-                                );
-                              })}
-                            </>
-                          )}
-                        </>
-                      )}
-
-                      {idBase == "" ? (
-                        <div className="tradeViewAreaCont_pairs_cont_div1">
-                          Nil
-                        </div>
-                      ) : (
-                        <>
-                          {idBase == "0" ? (
-                            <>
-                              {assetsBase.map((data) => {
-                                // setSwapBalance(data.balance);
-                                return (
-                                  <>
-                                    {data.id == idBase ? (
-                                      <div className="tradeViewAreaCont_pairs_cont_div1">
-                                        <img
-                                          src={data.img}
-                                          alt=""
-                                          className="tradeViewAreaCont_pairs_cont_div1_img"
-                                        />
-                                      </div>
-                                    ) : null}
-                                  </>
-                                );
-                              })}
-                            </>
-                          ) : (
-                            <>
-                              {assets.map((data) => {
-                                // setSwapBalance(data.balance);
-                                return (
-                                  <>
-                                    {data.id == idBase ? (
-                                      <div className="tradeViewAreaCont_pairs_cont_div1">
-                                        <img
-                                          src={data.img}
-                                          alt=""
-                                          className="tradeViewAreaCont_pairs_cont_div1_img"
-                                        />
-                                      </div>
-                                    ) : null}
-                                  </>
-                                );
-                              })}
-                            </>
-                          )}
-                        </>
-                      )}
-
-                      {idTicker == "" ? (
-                        <div className="tradeViewAreaCont_pairs_cont_div2">
-                          Nil
-                        </div>
-                      ) : (
-                        <>
-                          {idTicker == "0" ? (
-                            <>
-                              {assetsBase.map((data) => {
-                                // setSwapBalance(data.balance);
-                                return (
-                                  <>
-                                    {data.id == idTicker ? (
-                                      <div className="tradeViewAreaCont_pairs_cont_div2">
-                                        {data.symbol}
-                                      </div>
-                                    ) : null}
-                                  </>
-                                );
-                              })}
-                            </>
-                          ) : (
-                            <>
-                              {assets.map((data) => {
-                                // setSwapBalance(data.balance);
-                                return (
-                                  <>
-                                    {data.id == idTicker ? (
-                                      <div className="tradeViewAreaCont_pairs_cont_div2">
-                                        {data.symbol}
-                                      </div>
-                                    ) : null}
-                                  </>
-                                );
-                              })}
-                            </>
-                          )}
-                        </>
-                      )}
-                      <div className="tradeViewAreaCont_pairs_cont_div2_slash">
-                        /
-                      </div>
-
-                      {idBase == "" ? (
-                        <div className="tradeViewAreaCont_pairs_cont_div2 base">
-                          Nil
-                        </div>
-                      ) : (
-                        <>
-                          {idBase == "0" ? (
-                            <>
-                              {assetsBase.map((data) => {
-                                // setSwapBalance(data.balance);
-                                return (
-                                  <>
-                                    {data.id == idBase ? (
-                                      <div className="tradeViewAreaCont_pairs_cont_div2 base">
-                                        {data.symbol}
-                                      </div>
-                                    ) : null}
-                                  </>
-                                );
-                              })}
-                            </>
-                          ) : (
-                            <>
-                              {assets.map((data) => {
-                                // setSwapBalance(data.balance);
-                                return (
-                                  <>
-                                    {data.id == idBase ? (
-                                      <div className="tradeViewAreaCont_pairs_cont_div2 base">
-                                        {data.symbol}
-                                      </div>
-                                    ) : null}
-                                  </>
-                                );
-                              })}
-                            </>
-                          )}
-                        </>
-                      )}
-                      <SwapHorizIcon
-                        className="swap_base_ticker_price_change_icon"
-                        onClick={ToggleSwapBase}
-                      />
-                    </div>
-                  </div>
-                  <div className="tradeViewAreaCont1">
-                    {activeDuration == "hr1" ? (
-                      <div className="tradeViewAreaCont1_area1">
-                        <div
-                          className="analytics_container_1_Amount"
-                          onChange={CustomTooltip}
-                        >
-                          <span>
-                            <AnimatedNumber
-                              value={ChartValue}
-                              // hasComma={true}
-                              formatValue={(value) => value.toFixed(0)}
-                              size={28}
-                              duration={1000}
-                            />{" "}
-                            {/* ====== */}
-                            {/* ====== */}
-                            {/* ====== */}
-                            {idBase == "" ? (
-                              <>Nil</>
-                            ) : (
-                              <>
-                                {idBase == "0" ? (
-                                  <>
-                                    {assetsBase.map((data) => {
-                                      // setSwapBalance(data.balance);
-                                      return (
-                                        <>
-                                          {data.id == idBase
-                                            ? data.symbol
-                                            : null}
-                                        </>
-                                      );
-                                    })}
-                                  </>
-                                ) : (
-                                  <>
-                                    {assets.map((data) => {
-                                      // setSwapBalance(data.balance);
-                                      return (
-                                        <>
-                                          {data.id == idBase
-                                            ? data.symbol
-                                            : null}
-                                        </>
-                                      );
-                                    })}
-                                  </>
-                                )}
-                              </>
-                            )}
-                          </span>
-                        </div>
-                        <span
-                          className="tradeViewAreaCont1_area1_priceChangeSpan"
-                          style={
-                            ChartChange == "decrease"
-                              ? { color: "#ff537b" }
-                              : ChartChange == "increase"
-                              ? { color: "#31cb9e" }
-                              : { color: "#31cb9e" }
-                          }
-                        >
-                          {ChartChange == "decrease" ? (
-                            <>
-                              {ChartPriceDifference} (
-                              {"-" +
-                                parseFloat(ChartPercentChange).toFixed(2) +
-                                "%"}
-                              )
-                            </>
-                          ) : (
-                            <>
-                              {"+" + ChartPriceDifference} (
-                              {"+" +
-                                parseFloat(ChartPercentChange).toFixed(2) +
-                                "%"}
-                              )
-                            </>
-                          )}
-                        </span>
-                      </div>
-                    ) : activeDuration == "hr4" ? (
-                      <div className="tradeViewAreaCont1_area1">
-                        <div
-                          className="analytics_container_1_Amount"
-                          onChange={CustomTooltip}
-                        >
-                          <span>
-                            <AnimatedNumber
-                              value={ChartValue2}
-                              // hasComma={true}
-                              formatValue={(value) => value.toFixed(0)}
-                              size={28}
-                              duration={1000}
-                            />{" "}
-                            {idBase == "" ? (
-                              <>Nil</>
-                            ) : (
-                              <>
-                                {idBase == "0" ? (
-                                  <>
-                                    {assetsBase.map((data) => {
-                                      // setSwapBalance(data.balance);
-                                      return (
-                                        <>
-                                          {data.id == idBase
-                                            ? data.symbol
-                                            : null}
-                                        </>
-                                      );
-                                    })}
-                                  </>
-                                ) : (
-                                  <>
-                                    {assets.map((data) => {
-                                      // setSwapBalance(data.balance);
-                                      return (
-                                        <>
-                                          {data.id == idBase
-                                            ? data.symbol
-                                            : null}
-                                        </>
-                                      );
-                                    })}
-                                  </>
-                                )}
-                              </>
-                            )}
-                          </span>
-                        </div>
-                        <span
-                          className="tradeViewAreaCont1_area1_priceChangeSpan"
-                          style={
-                            ChartChange2 == "decrease"
-                              ? { color: "#ff537b" }
-                              : ChartChange2 == "increase"
-                              ? { color: "#31cb9e" }
-                              : { color: "#31cb9e" }
-                          }
-                        >
-                          {ChartChange2 == "decrease" ? (
-                            <>
-                              {ChartPriceDifference2} (
-                              {parseFloat(ChartPercentChange2).toFixed(2) + "%"}
-                              )
-                            </>
-                          ) : (
-                            <>
-                              {"+" + ChartPriceDifference2} (
-                              {"+" +
-                                parseFloat(ChartPercentChange2).toFixed(2) +
-                                "%"}
-                              )
-                            </>
-                          )}
-                        </span>
-                      </div>
-                    ) : null}
-
-                    <div className="tradeViewAreaCont1_area2">
-                      <div
-                        className={
-                          activeDuration == "hr1"
-                            ? "tradeViewAreaCont1_area2_cont1_active"
-                            : "tradeViewAreaCont1_area2_cont1"
-                        }
-                        onClick={ToggleDuration}
-                        id="hr1"
-                      >
-                        1H
-                      </div>
-                      <div
-                        className={
-                          activeDuration == "hr4"
-                            ? "tradeViewAreaCont1_area2_cont1_active"
-                            : "tradeViewAreaCont1_area2_cont1"
-                        }
-                        onClick={ToggleDuration}
-                        id="hr4"
-                      >
-                        4H
-                      </div>
-                      <div
-                        className={
-                          activeDuration == "day"
-                            ? "tradeViewAreaCont1_area2_cont1_active"
-                            : "tradeViewAreaCont1_area2_cont1"
-                        }
-                        onClick={ToggleDuration}
-                        id="day"
-                      >
-                        1D
-                      </div>
-                      <div
-                        className={
-                          activeDuration == "week"
-                            ? "tradeViewAreaCont1_area2_cont1_active"
-                            : "tradeViewAreaCont1_area2_cont1"
-                        }
-                        onClick={ToggleDuration}
-                        id="week"
-                      >
-                        1W
-                      </div>
-                      <div
-                        className={
-                          activeDuration == "month1"
-                            ? "tradeViewAreaCont1_area2_cont1_active"
-                            : "tradeViewAreaCont1_area2_cont1"
-                        }
-                        onClick={ToggleDuration}
-                        id="month1"
-                      >
-                        1M
-                      </div>
-                      <div
-                        className={
-                          activeDuration == "month6"
-                            ? "tradeViewAreaCont1_area2_cont1_active"
-                            : "tradeViewAreaCont1_area2_cont1"
-                        }
-                        onClick={ToggleDuration}
-                        id="month6"
-                      >
-                        6M
-                      </div>
-                    </div>
-                  </div>
-                  <div className="tradingView_container_1_chart">
-                    {activeDuration == "hr1" ? (
-                      <div
-                        className="tradeViewAreaCont_chart_area2 "
-                        style={{ width: "100%", height: 400 }}
-                      >
-                        <ResponsiveContainer>
-                          <AreaChart
-                            width={1000}
-                            height={100}
-                            data={formattedData}
-                            margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
-                          >
-                            <defs>
-                              <linearGradient
-                                id="colorUv"
-                                x1="0"
-                                y1="0"
-                                x2="0"
-                                y2="1"
-                              >
-                                <stop
-                                  offset="5%"
-                                  stopColor="#31cb9e"
-                                  stopOpacity={0.3}
-                                />
-                                <stop
-                                  offset="100%"
-                                  stopColor="#31cb9e"
-                                  stopOpacity={0}
-                                />
-                              </linearGradient>
-                            </defs>
-                            {/* <CartesianGrid
-                            strokeDasharray="1 1"
-                            stroke="#d7d7d7"
-                          /> */}
-                            <XAxis
-                              dataKey="time"
-                              stroke="0"
-                              interval={interval - 1}
-                              ticks={formattedData
-                                .slice(1, -1)
-                                .map((dataPoint) => dataPoint.time)}
-                              // tick={false}
-                              tick={{ fontSize: 12 }}
-                              allowDuplicatedCategory={false}
-                            />
-                            {/* <YAxis
-                          domain={[minPrice, "auto"]}
-                          tick={false}
-                          axisLine={false}
-                        /> */}
-                            <Tooltip content={<CustomTooltip />} />
-
-                            <Area
-                              type="monotone"
-                              dataKey={(d) => d.price - priceOffset}
-                              stroke="#31cb9e"
-                              fillOpacity={1}
-                              fill="url(#colorUv)"
-                              strokeWidth={2}
-                            />
-                          </AreaChart>
-                        </ResponsiveContainer>
-                      </div>
-                    ) : activeDuration == "hr4" ? (
-                      <div
-                        className="tradeViewAreaCont_chart_area2 "
-                        style={{ width: "100%", height: 400 }}
-                      >
-                        <ResponsiveContainer>
-                          <AreaChart
-                            width={1000}
-                            height={100}
-                            data={formattedData2}
-                            margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
-                          >
-                            <defs>
-                              <linearGradient
-                                id="colorUv"
-                                x1="0"
-                                y1="0"
-                                x2="0"
-                                y2="1"
-                              >
-                                <stop
-                                  offset="5%"
-                                  stopColor="#ff537b"
-                                  stopOpacity={0.3}
-                                />
-                                <stop
-                                  offset="100%"
-                                  stopColor="#ff537b"
-                                  stopOpacity={0}
-                                />
-                              </linearGradient>
-                            </defs>
-                            {/* <CartesianGrid
-                            strokeDasharray="1 1"
-                            stroke="#d7d7d7"
-                          /> */}
-                            <XAxis
-                              dataKey="time"
-                              stroke="0"
-                              interval={interval2 - 1}
-                              ticks={formattedData2
-                                .slice(1, -1)
-                                .map((dataPoint) => dataPoint.time)}
-                              // tick={false}
-                              tick={{ fontSize: 12 }}
-                              allowDuplicatedCategory={false}
-                            />
-                            {/* <YAxis
-                          domain={[minPrice, "auto"]}
-                          tick={false}
-                          axisLine={false}
-                        /> */}
-                            <Tooltip content={<CustomTooltip />} />
-
-                            <Area
-                              type="monotone"
-                              dataKey={(d) => d.price - priceOffset2}
-                              stroke="#ff537b"
-                              fillOpacity={1}
-                              fill="url(#colorUv)"
-                              strokeWidth={2}
-                            />
-                          </AreaChart>
-                        </ResponsiveContainer>
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
-              </div>
-            ) : null}
           </div>
         </div>
       </section>

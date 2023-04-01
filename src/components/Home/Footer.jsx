@@ -125,6 +125,22 @@ const Footer = () => {
             <div className="container">
               <div className="footerArea">
                 <div className="footerCard1">
+                  <div className="FooterPageLinks">
+                    <a
+                      href="/about"
+                      className="FooterPageLinks_1"
+                      target="_blank"
+                    >
+                      About Us
+                    </a>
+                    <a
+                      href="/whitepaper"
+                      className="FooterPageLinks_1"
+                      target="_blank"
+                    >
+                      White Paper
+                    </a>
+                  </div>
                   <a href="#">
                     {" "}
                     <img
@@ -145,154 +161,34 @@ const Footer = () => {
                       className="twitter"
                       target="_blank"
                     >
-                      <Twitter />
+                      <Twitter className="twitter_icon" />
                     </a>
                     <a
                       href="https://web.facebook.com/egorasmarket/"
                       className="twitter"
                       target="_blank"
                     >
-                      <Facebook />
+                      <Facebook className="twitter_icon" />
                     </a>
                     <a
                       href="https://instagram.com/egorasofficial"
                       className="twitter"
                       target="_blank"
                     >
-                      <Instagram />
+                      <Instagram className="twitter_icon" />
                     </a>
                     <a
                       href="https://www.youtube.com/channel/UCHfi5EwXig46xp5Dx8hVBHQ"
                       className="twitter"
                       target="_blank"
                     >
-                      <YouTube />
+                      <YouTube className="twitter_icon" />
                     </a>
                   </div>
                 </div>
-
-                <div className="footerCard2">
-                  <div className="footerCardTitle">General</div>
-                  <div className="footerLinks">
-                    {/* <a href="/" className="c1link1 a">
-                  Home
-                </a> */}
-
-                    <a href="#howitworks" className="c1link1 a">
-                      How it works
-                    </a>
-                    {/* <a href="#token" className="c1link1">
-                  Tokens
-                </a> */}
-                    <a href="#features" className="c1link1">
-                      Features
-                    </a>
-                  </div>
-                </div>
-
-                <div className="footerCard2">
-                  <div className="footerCardTitle">About Us</div>
-                  <div className="footerLinks">
-                    <a href="/about" className="c1link1" target="_blank">
-                      About
-                    </a>
-                    <a
-                      href="/app/whitepaper"
-                      className="c1link1"
-                      target="_blank"
-                    >
-                      White Paper
-                    </a>
-                  </div>
-                </div>
-
-                <div className="footerCard2">
-                  <div className="footerCardTitle">Legal</div>
-                  <div className="footerLinks">
-                    <a
-                      href="https://egoras.com/privacy"
-                      className="c1link1 a"
-                      target="_blank"
-                    >
-                      Privacy policy
-                    </a>
-                    <a
-                      href="https://egoras.com/terms-conditions"
-                      className="c1link1"
-                      target="_blank"
-                    >
-                      Terms & conditions
-                    </a>
-                    {/* <a href="#partners" className="c1link1" target="_blank">
-                  Partners
-                </a> */}
-                  </div>
-                </div>
-
-                <div className="footerCard2">
-                  <div className="footerCardTitle">Tokens</div>
-                  <div className="footerLinks">
-                    {/* <a href="/egr-token" className="c1link1" target="_blank">
-                  EGR
-                </a> */}
-                    <a
-                      href="https://egoras.com/engn-token"
-                      className="c1link1"
-                      target="_blank"
-                    >
-                      eNGN
-                    </a>
-                    <a
-                      href="https://egoras.com/egc_token"
-                      className="c1link1"
-                      target="_blank"
-                    >
-                      EGC
-                    </a>
-                  </div>
-                </div>
-
-                <div className="footerCard2">
-                  <div className="footerCardTitle">Contact Us</div>
-                  <div className="footerLinks">
-                    <a href="https://t.me/egorasmarket" className="c1link1 a">
-                      Get in Touch Today
-                    </a>
-                    <a href="" className="c1link1"></a>
-                    <a href="/" className="c1linklast">
-                      cs@egoras.com
-                    </a>
-                  </div>
-                </div>
-
                 {/* =================================
             ==================== */}
                 <div className="footerCard3">
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography className={classes.heading}>
-                        General{" "}
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <div className="footerLinks">
-                        {/* <a href="/" className="c1link1 a">
-                      Home
-                    </a> */}
-
-                        <a href="#howitworks" className="c1link1 a">
-                          How it works
-                        </a>
-                        <a href="#features" className="c1link1" target="_blank">
-                          Features
-                        </a>
-                      </div>
-                    </AccordionDetails>
-                  </Accordion>
                   <Accordion>
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -318,100 +214,12 @@ const Footer = () => {
                       </div>
                     </AccordionDetails>
                   </Accordion>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel2a-content"
-                      id="panel2a-header"
-                    >
-                      <Typography className={classes.heading}>Legal</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <div className="footerLinks">
-                        <a
-                          href="https://egoras.com/privacy"
-                          className="c1link1 a"
-                          target="_blank"
-                        >
-                          Privacy policy
-                        </a>
-                        <a
-                          href="https://egoras.com/terms-conditions"
-                          className="c1link1"
-                          target="_blank"
-                        >
-                          Terms & conditions
-                        </a>
-
-                        {/* <a href="#partners" className="c1link1" target="_blank">
-                      Partners
-                    </a> */}
-                      </div>
-                    </AccordionDetails>
-                  </Accordion>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel2a-content"
-                      id="panel2a-header"
-                    >
-                      <Typography className={classes.heading}>
-                        Tokens
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <div className="footerLinks">
-                        {/* <a href="/egr-token" className="c1link1 a" target="_blank">
-                      EGR
-                    </a> */}
-                        <a
-                          href="https://egoras.com/engn-token"
-                          className="c1link1"
-                          target="_blank"
-                        >
-                          eNGN
-                        </a>
-                        <a
-                          href="https://egoras.com/egc_token"
-                          className="c1link1"
-                          target="_blank"
-                        >
-                          EGC
-                        </a>
-                      </div>
-                    </AccordionDetails>
-                  </Accordion>
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel2a-content"
-                      id="panel2a-header"
-                    >
-                      <Typography className={classes.heading}>
-                        Contact Us
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <div className="footerLinks">
-                        <a
-                          href="https://t.me/egorasmarket"
-                          className="c1link1 a"
-                        >
-                          Get in Touch Today
-                        </a>
-                        <a href="" className="c1link1"></a>
-                        <a href="/" className="c1linklast">
-                          cs@egoras.com
-                        </a>
-                      </div>
-                    </AccordionDetails>
-                  </Accordion>
                 </div>
               </div>
 
               <hr className="footer_hr_rule"></hr>
               <h5 className="footerBottomPara">
-                ©️ 2022 Egoras. All rights reserved .
+                ©️ 2023 EGCDAO. All rights reserved .
               </h5>
             </div>
           </section>

@@ -9,6 +9,11 @@
   color: #bac4be;
   margin-bottom: 6px;
 }
+.swapDivCont {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+}
 .updatedSwapSwapBtn {
   padding: 15px;
   width: 100%;
@@ -574,4 +579,16 @@ input:checked + .ToggleChartDiv_checkBox_slider::before {
 .swap_price_slippage_div2_icon {
   /* background: grey; */
   width: 18px !important;
+}
+@media screen and (max-width: 991px) {
+  .tradeViewArea {
+    margin-top: 2em;
+    margin-right: 0;
+  }
+  .tradeViewAreaCont1 {
+    padding: 1em 1em;
+  }
+  .tradeViewAreaCont_pairs_cont {
+    padding: 1em 1em;
+  }
 }

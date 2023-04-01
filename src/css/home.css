@@ -12,7 +12,7 @@
 /* ========= */
 
 .mySwiperDiv_Power {
-  background: #0b110c;
+  /* background: #0b110c; */
   padding: 10px;
 }
 .PowerSwiper {
@@ -56,12 +56,43 @@
   margin-top: 3em;
 }
 .whatPossible_body_area_1_cont1 {
-  width: 66%;
+  width: 59em;
+  position: absolute;
+  left: -20%;
+  background: #256c421c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em 6em;
+  border-radius: 20em;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.whatPossible_body_area_1_cont1b {
+  width: 59em;
+  position: absolute;
+  right: -20%;
+  background: #256c421c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em 6em;
+  border-radius: 20em;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 .whatPossible_body_area_1_cont2 {
   display: flex;
   flex-direction: column;
-  width: 64%;
+  width: 48%;
+  align-items: baseline;
+  margin-left: 4em;
+  text-align: left;
+}
+.whatPossible_body_area_1_cont2b {
+  display: flex;
+  flex-direction: column;
+  width: 48%;
   align-items: baseline;
   margin-right: 4em;
   text-align: left;
@@ -80,12 +111,23 @@
   margin-bottom: 9px;
   line-height: 1.2;
 }
+.whatPossible_body_area_1_cont2_title2 {
+  font-size: 60px;
+  font-weight: 700;
+  margin-bottom: 9px;
+  line-height: 1.2;
+}
 .whatPossible_body_area_1_cont2_para {
   color: #9bb3a5;
   font-size: 18px;
 }
 .whatPossible_body_area_1_cont1_img {
-  width: 100%;
+  width: 72%;
+  margin-left: auto;
+}
+.whatPossible_body_area_1_cont1_img2 {
+  width: 72%;
+  /* margin-right: auto; */
 }
 .whatPossible_body_area_1_cont2__btn_div {
   width: 100%;
@@ -138,6 +180,104 @@
   padding: 0em 1em;
   padding-bottom: 10px;
   cursor: pointer;
+}
+.section {
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.section.active {
+  opacity: 1;
+}
+.how_it_works_possible {
+  /* height: 100vh; */
+  width: 100%;
+  background: #0b110c;
+  padding: 12em 0em;
+  position: relative;
+  background-image: radial-gradient(#141d15, #0d140e, #0b110c, #141d15);
+}
+.how_it_works_possibleb {
+  /* height: 100vh; */
+  width: 100%;
+  background: #0b110c;
+  padding: 12em 0em;
+  padding-bottom: 0em;
+  position: relative;
+  background-image: radial-gradient(#141d15, #0d140e, #0b110c, #141d15);
+}
+.how_it_works_possible_area {
+  align-items: center;
+  display: flex;
+  /* flex-direction: column; */
+  height: 100%;
+  /* justify-content: space-between; */
+}
+.how_it_works_possible_area_title_area {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.how_it_works_possible_area_title_area1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2em;
+}
+.how_it_works_possible_area_head {
+  font-size: 72px;
+  color: #fff;
+  font-weight: 700;
+}
+.how_it_works_possible_area_para {
+  color: grey;
+  font-size: 22px;
+  width: 55%;
+  text-align: center;
+}
+.how_it_works_area_title_area2 {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 4em;
+}
+.whatPossible_body_area {
+  width: 100%;
+  /* margin-top: 1em; */
+  height: 100%;
+  /* overflow: hidden; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.whatPossible_body_area_1 {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  /* margin-top: 3em; */
+  height: 100%;
+  justify-content: flex-end;
+  position: relative;
+}
+.whatPossible_body_area_1b {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  /* margin-top: 3em; */
+  height: 100%;
+  justify-content: flex-start;
+  position: relative;
+}
+.fade-in-from-bottom {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+.fade-in-from-bottom--visible {
+  opacity: 1;
+  transform: none;
 }
 /* ========= */
 /* ========= */
@@ -1151,7 +1291,6 @@ a.visit_app_link_2 {
   gap: 50px;
 }
 .stake-hero-btn1 {
-  margin-right: 15px;
   padding: 0em 1em;
   height: 50px;
   background: #ffffff;
@@ -1378,6 +1517,10 @@ a.visit_app_link_2 {
 .nft_area2_stat_div_area {
   display: flex;
   align-items: center;
+  margin-bottom: 3em;
+  width: 100%;
+  position: relative;
+  z-index: 2;
 }
 .nft_area2_stat_div_area_cont1 {
   display: flex;
@@ -1387,9 +1530,10 @@ a.visit_app_link_2 {
   color: #fff;
   border-radius: 10px;
   box-shadow: 0px 10px 10px #0000008a;
+  -webkit-backdrop-filter: blur(11px);
   backdrop-filter: blur(11px);
-  width: 22em;
-  margin-right: 2em;
+  width: 100%;
+  margin-right: 1em;
   align-items: center;
 }
 .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers {
@@ -1979,6 +2123,35 @@ a.visit_app_link_2 {
   .benefit_section_area1 > * {
     margin: 10px 0px;
   }
+  .dark .hero_backdrop {
+    position: absolute;
+    bottom: 0%;
+    width: 133%;
+    z-index: 1;
+    margin: auto;
+    left: auto;
+    right: -16%;
+  }
+  .hero_backdrop {
+    position: absolute;
+    bottom: 0%;
+    width: 133%;
+    z-index: 1;
+    margin: auto;
+    left: auto;
+    right: -16%;
+  }
+  .nft_area2_stat_div_area {
+    display: grid;
+    align-items: center;
+    margin-bottom: 0em;
+    grid-gap: 10px;
+    grid-gap: 10px;
+    gap: 10px;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: flex-start;
+  }
 }
 
 @media screen and (max-width: 900px) {
@@ -2224,8 +2397,29 @@ a.visit_app_link_2 {
   .nft-area2 {
     flex-direction: column;
     grid-row-gap: 20px;
+    padding: 15px;
   }
-
+  .earning-section {
+    height: 55em;
+  }
+  .span4b-txts {
+    width: 100%;
+  }
+  .nft_area2_stat_div_area {
+    display: grid;
+    align-items: center;
+    margin-bottom: 0em;
+    grid-gap: 10px;
+    gap: 10px;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: flex-start;
+  }
+  .nft_area2_stat_div_area_cont1 {
+    padding: 1em 1em;
+    width: 100%;
+    margin-right: 0em;
+  }
   .nft-area3 {
     flex-direction: column;
     grid-row-gap: 20px;
@@ -2234,13 +2428,16 @@ a.visit_app_link_2 {
     text-align: center;
   }
   .span-txts {
-    text-align: left;
+    text-align: center;
   }
   .span2-txts {
     font-size: 33px;
   }
   .span4b-txts {
     width: 100%;
+  }
+  .span4a-txts {
+    font-size: 64px;
   }
 
   .key-features-cards-area-flex {
@@ -2264,6 +2461,9 @@ a.visit_app_link_2 {
     width: 100%;
     font-weight: 800;
     line-height: 44px;
+  }
+  .earning-section {
+    height: 46em;
   }
 }
 @media screen and (max-width: 600px) {
@@ -2365,14 +2565,16 @@ a.visit_app_link_2 {
     padding: 2em 1em;
     font-size: 12px;
     text-align: center;
-    width: 50%;
+  }
+  .stake-hero-btns {
+    display: flex;
+    margin-top: 27px;
   }
   .stake-hero-btn2 {
     padding: 2em 1em;
     font-size: 12px;
     margin: 0;
     text-align: center;
-    width: 50%;
   }
   .floating_div_cont_area1_cont1 {
     font-size: 14px;
@@ -2410,14 +2612,7 @@ a.visit_app_link_2 {
     gap: 0px;
   }
   .span4b-txts {
-    width: 85%;
-    /* margin-top: 20px; */
-    box-sizing: border-box;
-    margin: 16px 0px 0px;
-    min-width: 0px;
-    font-size: 14px;
-    color: #474d57;
-    font-weight: 400;
+    font-size: 15px;
   }
   .whyEgoras_body_cont1 {
     padding: 1em;
@@ -2455,6 +2650,27 @@ a.visit_app_link_2 {
   }
   .benefit_section_are2 {
     width: 70%;
+  }
+  .nft_area2_stat_div_area_cont1_icon {
+    width: 30px;
+  }
+  .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head {
+    color: #8fc4a4;
+    font-size: 12px;
+  }
+  .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para {
+    font-size: 18px;
+  }
+  .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers {
+    margin-left: 0.5em;
+  }
+  .nft_area2_stat_div_area_cont1 {
+    padding: 0.5em 0.5em;
+    width: 100%;
+    margin-right: 0em;
+  }
+  .earning-section {
+    height: 42em;
   }
 }
 @media screen and (max-width: 449px) {
@@ -2873,7 +3089,7 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark a {
-  color: #ffffff !important;
+  color: #ffffff;
 }
 .dark .recent_transaction_body {
   border: solid 1px #3d4e44;

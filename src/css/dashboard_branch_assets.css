@@ -556,11 +556,11 @@ svg.recharts-surface {
     display: none;
   }
 }
-@media screen and (max-width: 991px) {
+/* @media screen and (max-width: 991px) {
   .asset_other2 {
     padding-top: 4em !important;
   }
-}
+} */
 
 @media screen and (max-width: 767px) {
   .pool_detail_assets_body_layer_1 {

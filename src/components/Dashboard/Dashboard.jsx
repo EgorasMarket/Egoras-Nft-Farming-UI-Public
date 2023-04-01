@@ -6,7 +6,7 @@ import DashBoardLendingTransactions from "./DashBoardPages/DashBoardLendingTrans
 import CloseIcon from "@mui/icons-material/Close";
 import DashBoardUserSales from "./DashBoardPages/DashBoardUserSales";
 import Cookies from "universal-cookie";
-import Swap from "./DashBoardPages/Swap/Swap";
+// import Swap from "./DashBoardPages/Swap/Swap";
 import ProductDetailPage from "./DashBoardPages/UpdatedAppPages/DashboardMarket/ProductDetailPage";
 import DashBoardUserDetails from "./DashBoardPages/DashBoardUserDetails";
 import UpdatedSwap from "./DashBoardPages/UpdatedAppPages/UpdatedSwap/UpdatedSwap";
@@ -37,7 +37,7 @@ import DashBoardSellProduct from "./DashBoardPages/UpdatedAppPages/DashBoardSell
 import Deposit_vault_form from "./DashBoardPages/Vault_forms/Deposit_vault_form";
 import Top_up_vault_form from "./DashBoardPages/Vault_forms/Top_up_vault_form";
 import Withdraw_vault_form from "./DashBoardPages/Vault_forms/Withdraw_vault_form";
-import DashBoardSwap from "./DashBoardPages/DashBoardSwapPage";
+
 import DashBoardWhitePaper from "./DashBoardPages/DashBoardWhitePaper";
 import { SplashScreen } from "./SplashScreen/SplashScreen";
 // import {spla}
@@ -183,8 +183,7 @@ const Dashboard = ({ check, togglemakeDark }) => {
               {urlArr[2] === "market" ? <MarketHeader /> : null}
               <Switch>
                 <Route exact path="/app/stake" component={DashBoardAnalytics} />
-                {/* <Route exact path="/app/swap" component={DashBoardSwap} /> */}
-                {/* <Route exact path="/app/swap" component={DashBoardSwap} /> */}
+
                 <Route
                   exact
                   path="/app/staking/egc"
