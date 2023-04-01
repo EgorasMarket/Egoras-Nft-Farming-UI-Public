@@ -13,3 +13,4 @@ export const ACCEPT_OR_DECLINE_BID = `${API_URL}/product/bid/accept/product/bid`
 export const ADMIN_PLACE_BID = `${API_URL}/product/bid/add`;
 export const FETCH_USER_NEW_PRODUCT = `${API_URL}/product/user/new/product`;
 export const POPULATE_STAKE_INFO_ROUTE = `${API_URL}/staking/summarize`;
+export const PROCESS_PRODUCT_ORDER_ROUTE = `${API_URL}/order/new`;

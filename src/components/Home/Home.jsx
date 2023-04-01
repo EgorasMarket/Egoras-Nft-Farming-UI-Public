@@ -75,6 +75,7 @@ import {
   unluckToken2,
   getEgcSmartContractBalnce,
 } from "../../web3/index";
+import { socket } from "../../socket";
 const Home = () => {
   const context = useWeb3React();
 
@@ -457,6 +458,7 @@ const Home = () => {
     { img: "/img/FeaturedInLogos/FeaturedInLogos_6.svg" },
     { img: "/img/FeaturedInLogos/FeaturedInLogos_5.svg" },
   ];
+
   return (
     <div>
       {/* =================================================================================================================================================================================================================================================================== */}

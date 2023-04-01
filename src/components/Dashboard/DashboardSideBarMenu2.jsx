@@ -58,6 +58,7 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+import { socket } from "../../socket";
 const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const dddd = localStorage.getItem("smallSidetoken");
   const [connectId, setConnectId] = useState(false);
@@ -88,6 +89,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const [coinBalance2, setCoinBalance2] = React.useState(0.0);
   const [baseBalance, setBaseBalance] = useState(0.0);
   const [notifyDiv, setNotifyDiv] = useState(false);
+  const [notification, setNotification] = useState([]);
 
   const [productNamesZ, setProductNamesZ] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -503,6 +505,14 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
+
+    socket.connect();
+    console.log(account, "blunt");
+    socket.on(`${account}/notification`, (data) => {
+      console.log(data);
+      setNotification(data);
+      // setData(data);
+    });
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -726,7 +736,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                         <div className="notify_icon_cont_div">
                           {NotifyArray.length <= 0 ? null : (
                             <div className="notify_icon_cont_div_notifyCount">
-                              {NotifyArray.length}
+                              {notification.length}
                             </div>
                           )}
                           <NotificationsNoneOutlinedIcon className="wallet_settings_icon" />
@@ -735,22 +745,22 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
 
                       {notifyDiv && (
                         <div className="notifyDropDownDiv">
-                          {NotifyArray.length <= 0 ? (
+                          {notification.length <= 0 ? (
                             <div className="notifyDropDownDiv_emptyDiv">
                               No notifications!
                             </div>
                           ) : (
                             <>
-                              {NotifyArray.map((data, key) => (
+                              {notification.map((data, key) => (
                                 <div
                                   className="notifyDropDownDiv_div1"
                                   key={data.id}
                                 >
                                   <div className="notifyDropDownDiv_div1_title">
-                                    {data.Title}
+                                    {data.title}
                                   </div>
                                   <div className="notifyDropDownDiv_div1_para">
-                                    {data.paragraph}
+                                    {data.message}
                                   </div>
                                 </div>
                               ))}
