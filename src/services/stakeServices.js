@@ -39,7 +39,7 @@ export const POPULATE_STAKE_GENERAL_INFO = async () => {
 export const GET_TVL = async () => {
   try {
     const response = await axios.get(`${GET_TVL_ROUTE}`, null, config);
-    return response.data.data.tvl;
+    return response.data.data;
   } catch (err) {
     return err.repsonse;
   }
