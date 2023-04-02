@@ -12,38 +12,14 @@ import {
   CALL_ADD_USER_ADDRESS,
 } from "../../services/userServices";
 
-// import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
-// import ArrowOutwardIcon from "@mui/icons-material/ArrowDownward";
-// import Marquee from "react-fast-marquee";
-// import WhyPeopleTrustUs from "./WhyPeopleTrustUs/WhyPeopleTrustUs";
-// import { parseEther, formatEther } from "@ethersproject/units";
-// import axios from "axios";
-// import Spline from "@splinetool/react-spline";
-// import { Spline } from "react-spline";
-// import { API_URL as api_url } from "../../actions/types";
-// import { config } from "@fortawesome/fontawesome-svg-core";
-// import Carousel from "react-multi-carousel";
 import Web3 from "web3";
-// import { numberWithCommas } from "../../static";
-// import LOAN from "../../web3/contracts/Loan.json";
-// import SwapContract from "../../web3/contracts/Contract_Address.json";
-// import NumberScroller from "react-number-scroller";
-// import CloseIcon from "@mui/icons-material/Close";
-// import Carousel from "react-multi-carousel";
+
 import "react-multi-carousel/lib/styles.css";
-// import Marquee from "react-fast-marquee";
-// import NotInterestedIcon from "@mui/icons-material/NotInterested";
-// import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
-// import SearchIcon from "@mui/icons-material/Search";
-// import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
-// import FlipCountdown from "@rumess/react-flip-countdown";
+
 import "./countdown.css";
 // import WaveAnimation from "./WaveAnimation/WaveAnimation";
 import "../../css/home.css";
-// import { PersonTwoTone } from "@material-ui/icons";
-// import { numberWithCommas } from "../../static";
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import { Mousewheel, Keyboard, Pagination } from "swiper";
+
 import "swiper/swiper.min.css";
 import "swiper/swiper-bundle.css";
 import "swiper/swiper-bundle.min.css";
@@ -59,40 +35,17 @@ import {
   GET_COIN_GEKO_PRICE,
   GET_COIN_GEKO_PRICE_IN_USD,
 } from "../../services/generalServices";
-// import {
-//   lendUS,
-//   takeDividend,
-//   takeBackLoan,
-//   getTotalLended,
-//   getInvestorsDividend,
-//   userStats,
-//   system,
-//   burnAccumulatedDividend,
-//   checkAllowance,
-//   unluckToken,
-//   transactReceipt,
-//   getPrice,
-//   getTickerInfo,
-//   tokenBalance,
-//   open,
-//   getLatestLoan,
-//   repay,
-//   topup,
-//   draw,
-//   checkAllowanceL,
-//   unluckToken2,
-//   getEgcSmartContractBalnce,
-// } from "../../web3/index";
 
 const Home = () => {
   const context = useWeb3React();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-  // const [numberFrom, setNumberFrom] = useState(100);
-  // const [numberTo, setNumberTo] = useState(8000000);
-  // const [numberFromFund, setNumberFromFund] = useState(100);
-  // const [numberToFund, setNumberToFund] = useState(100000);
+  const [homeData, setHomeData] = useState({
+    tvl: "",
+    volume: "",
+  });
+
   const [aboutVideoModal, setAboutVideoModal] = useState(false);
   const [animate1, setAnimate1] = useState(true);
   const [animate2, setAnimate2] = useState(false);
@@ -345,8 +298,13 @@ const Home = () => {
 
       const response = await GET_TVL();
 
-      const tvl = Number(Number(egc_usd) * Number(response), 2);
-      console.log(tvl, "google");
+      const tvl = egc_usd * response;
+      const main = parseFloat(tvl).toFixed(2);
+      console.log(main, "google");
+      setHomeData({
+        ...homeData,
+        volume: main,
+      });
     };
     fetchData();
   }, []);
@@ -485,7 +443,7 @@ const Home = () => {
                     Volume
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
-                    $89M+
+                    ${homeData.volume}
                   </div>
                 </div>
               </div>

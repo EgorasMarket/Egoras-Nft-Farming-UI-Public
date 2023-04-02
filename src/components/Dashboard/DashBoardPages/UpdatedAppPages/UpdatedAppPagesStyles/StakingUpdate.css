@@ -55,6 +55,11 @@
   bottom: -40%;
   left: 0;
 }
+.lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_span_span2_span {
+  margin-left: 5px;
+  color: #fff;
+  font-weight: 500;
+}
 .lock_container_cont1_div1_lock_div_lock_body {
   padding: 1em 0em;
   padding-bottom: 0em;
@@ -71,6 +76,20 @@
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount {
   font-size: 28px;
   font-weight: 600;
+  display: flex;
+  flex-direction: column;
+}
+.lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_span {
+  margin-bottom: 9px;
+  border-bottom: solid 1px #5c6a62;
+  padding-bottom: 9px;
+  display: flex;
+  flex-direction: column;
+}
+.lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_span_span2 {
+  font-size: 14px;
+  font-weight: 300;
+  color: #abc3b4;
 }
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div_button {
   padding: 15px 0px;
