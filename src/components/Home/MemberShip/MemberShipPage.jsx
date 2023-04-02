@@ -149,7 +149,7 @@ const MemberShipPage = () => {
       }
       console.log(ret);
       setErrorModal(true);
-      setErrorMessage(ret.message.data.message || ret.message.reason);
+      setErrorMessage(ret.message);
       setIsLoading(false);
       setDisable(false);
     }
@@ -207,7 +207,7 @@ const MemberShipPage = () => {
       setIsLoading(false);
       setDisable(false);
       setErrorModal(true);
-      setErrorMessage(res.message.data.message || res.message.reason);
+      setErrorMessage(res.message);
     }
   };
   const subscribe2 = async () => {
@@ -228,7 +228,7 @@ const MemberShipPage = () => {
       setIsLoading(false);
       setDisable(false);
       setErrorModal(true);
-      setErrorMessage(res.message.data.message || res.message.reason);
+      setErrorMessage(res.message);
     }
   };
   const subscribe3 = async () => {
@@ -249,7 +249,7 @@ const MemberShipPage = () => {
       setIsLoading(false);
       setDisable(false);
       setErrorModal(true);
-      setErrorMessage(res.message.data.message || res.message.reason);
+      setErrorMessage(res.message);
     }
   };
   const CloseSuccessModal = () => {

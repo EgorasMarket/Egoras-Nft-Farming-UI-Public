@@ -1,9 +1,11 @@
 import { Contract } from "@ethersproject/contracts";
+import { getParsedEthersError } from "@enzoferey/ethers-error-parser";
 import ORACLE from "./contracts/Price.json";
 import LOAN from "./contracts/Loan.json";
 import EX from "./contracts/exchange.json";
 import erc20 from "./contracts/erc20.json";
 import erc22 from "./contracts/erc22.json";
+import { formattedError } from "./FormattedError";
 import EgorasLoanV2Facet from "./contracts/V2/EgorasLoanV2Facet.json";
 import EgorasLoanV2AdditionalFiles from "./contracts/V2/EgorasLoanV2AdditionalFiles.json";
 import EgorasLoanV2ReferralFacet from "./contracts/V2/EgorasLoanV2ReferralFacet.json";
@@ -1046,10 +1048,9 @@ const listProduct = async (_title, _amount, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -1065,10 +1066,9 @@ const monthly = async (amount, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -1084,10 +1084,9 @@ const annually = async (amount, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -1103,10 +1102,9 @@ const takeRoyalty = async (signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -1135,10 +1133,9 @@ const configurePlan = async (
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -1154,10 +1151,9 @@ const getConfiguration = async (signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -1174,10 +1170,9 @@ const AcceptBid = async (_productID, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -1235,10 +1230,9 @@ const placeBid = async (_productID, _amount, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -1254,10 +1248,9 @@ const unlockMemberShipEgcToken = async (amount, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -1276,7 +1269,8 @@ const approveProduct = async (_productID, signer) => {
     };
   } catch (error) {
     return {
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -1299,7 +1293,8 @@ const checkAllowanceMembership = async (owner, amount, signer) => {
     }
   } catch (error) {
     return {
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };

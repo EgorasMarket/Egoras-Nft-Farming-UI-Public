@@ -3,7 +3,9 @@ import MembershipFacet from "./contracts/V3/MembershipFacet.json";
 import V3ContractAddress from "./contracts/V3/V3ContractAddress.json";
 import PancakeSwapFaucet from "./contracts/V3/PancakeSwapFacet.json";
 import Minter from "./contracts/V3/Minter.json";
+import { getParsedEthersError } from "@enzoferey/ethers-error-parser";
 import erc20 from "./contracts/erc20.json";
+import { formattedError } from "./FormattedError";
 import StakingFacet from "./contracts/V3/StakingFacet.json";
 import PriceOracleFacet from "./contracts/V3/PriceOracleFacet.json";
 const contractMembershipFacetInstance = async (signer) => {
@@ -39,10 +41,9 @@ const monthlyPlanSubScribe = async (signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -57,10 +58,9 @@ const semiAnnuallyPlanSubScribe = async (signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -75,10 +75,9 @@ const annuallyPlanSubScribe = async (signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -101,10 +100,9 @@ const SwapRouterAddress = async (
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -119,10 +117,9 @@ const getBNBAddress = async (signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -137,10 +134,9 @@ const swapEusdForBnb = async (token, amountIn, amountOutMin, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -158,10 +154,9 @@ const swapBnbForEusd = async (value, amountOutMin, tokenOut, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -177,10 +172,9 @@ const getAmountsOut = async (amountIn, path, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -196,10 +190,9 @@ const getAmountsIn = async (amountOut, path, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -215,10 +208,9 @@ const adminAddMinter = async (account, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -238,7 +230,8 @@ const checkAllowanceSwap = async (coinAddress, owner, amount, signer) => {
     }
   } catch (error) {
     return {
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -254,10 +247,9 @@ const unlockSwapToken = async (amount, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -270,10 +262,9 @@ const setPriceOracle = async (_prices, _tickers, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -287,10 +278,9 @@ const setPythia = async (_pythia, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -303,10 +293,9 @@ const setEGCUSDTicker = async (_ticker, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -321,10 +310,9 @@ const getEGCEUSDTICKERPRICE = async (_ticker, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -339,10 +327,9 @@ const getRoyaltyStats = async (user, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -357,10 +344,9 @@ const stakeConfig = async (signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -375,10 +361,9 @@ const resetStakeTime = async (user, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -394,10 +379,9 @@ const getCalculatedRoyalty = async (user, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };
@@ -412,10 +396,9 @@ const IncreaseRoyaltyTime = async (user, signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
-      message: error,
-      status: false,
+      message: formattedError(error).message,
+      status: formattedError(error).status,
     };
   }
 };

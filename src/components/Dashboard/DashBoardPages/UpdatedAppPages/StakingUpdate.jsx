@@ -15,6 +15,7 @@ import { parseEther, formatEther } from "@ethersproject/units";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import UpdatedSuccessModal from "./UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import UpdatedErrorModal from "./UpdatedSuccessErrorModals/UpdatedErrorModal";
+import { getParsedEthersError } from "@enzoferey/ethers-error-parser";
 import Timer from "../Timer";
 import Web3 from "web3";
 import {
@@ -50,6 +51,7 @@ import {
   POPULATE_STAKE_INFO,
   POPULATE_STAKE_GENERAL_INFO,
 } from "../../../../services/stakeServices";
+import { numberWithCommas } from "../../../../static";
 
 export const DurationDiv = ({ addMonthly, addYearly, SelectedDuration }) => {
   return (
@@ -108,6 +110,7 @@ const StakingUpdate = () => {
   const [estimatedRewardAmnt, setEstimatedRewardAmnt] = useState(0);
   const [tokenBal, setTokenBal] = useState(0.0);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoading2, setIsLoading2] = useState(false);
   const [Disable, setDisable] = useState(false);
   const [ClaimDisable, setClaimDisable] = useState(true);
   const [LockedTransactions, setLockedTransactions] = useState([]);
@@ -117,6 +120,9 @@ const StakingUpdate = () => {
   const [availableClaimReward, setAvailableClaimReward] = useState("0.00");
   const [nextRewardTakeTime, setNextRewardTakeTime] = useState("");
   const [TotalClaimedReward, setTotalClaimedReward] = useState("0.00");
+  const [dailyReward, setDailyReward] = useState("0.00");
+  const [myTotalStaked, setMyTotalStaked] = useState("0.00");
+  const [rewardCountDown, setRewardCountDown] = useState(false);
 
   const [myAssetInfo, setMyAssetInfo] = useState({});
   const [totalAssetInfo, setTotalAssetInfo] = useState({});
@@ -263,14 +269,12 @@ const StakingUpdate = () => {
       setSuccessModal(true);
       setSuccessMessage("You've successfully Locked your egc for 1 month");
     } else {
-      if (res.message.code == 4001) {
-        console.log(res);
-      }
       console.log(res);
-      setErrorModal(true);
-      setErrorMessage(res.message.data.message || res.message.reason);
+      console.log(res.message);
       setIsLoading(false);
       setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
     }
   };
   const StakeYearly = async () => {
@@ -288,20 +292,33 @@ const StakingUpdate = () => {
       setSuccessModal(true);
       setSuccessMessage("You've successfully Locked your egc for 1 year");
     } else {
-      if (res.message.code == 4001) {
-        console.log(res);
-      }
       console.log(res);
+      console.log(res.message);
       setIsLoading(false);
       setDisable(false);
       setErrorModal(true);
-      setErrorMessage(res.message.data.message || res.message.reason);
+      setErrorMessage(res.message);
     }
   };
   const TakeReward = async () => {
+    setIsLoading2(true);
+    setClaimDisable(true);
     const res = await takeRoyalty(library.getSigner());
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
+    if (res.status == true) {
+      setIsLoading2(false);
+      setClaimDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage("You've successfully Locked your egc for 1 year");
+    } else {
+      console.log(res);
+      console.log(res.message);
+      setIsLoading2(false);
+      setClaimDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
   };
   const toggleLockTabs = (e) => {
     let target = e.currentTarget.id;
@@ -413,9 +430,12 @@ const StakingUpdate = () => {
       console.log(res.message._dailyRoyalty);
       console.log(formatEther(res.message._dailyRoyalty).toString());
       console.log(formatEther(res.message._totalRoyaltyTaken).toString());
+
+      setDailyReward(formatEther(res.message._dailyRoyalty).toString());
       setTotalClaimedReward(
         formatEther(res.message._totalRoyaltyTaken).toString()
       );
+      setMyTotalStaked(formatEther(res.message._totalStake).toString());
       let formatted = res.message._nextRoyaltyTakePeriod.toString();
       const endDate = formatted;
       const newRewardDate = new Date(endDate * 1000);
@@ -424,8 +444,10 @@ const StakingUpdate = () => {
       setNextRewardTakeTime(newRewardDate);
       if (newRewardDate <= new Date()) {
         setClaimDisable(false);
+        setRewardCountDown(false);
       } else {
         setClaimDisable(true);
+        setRewardCountDown(true);
       }
     }
   }, [account]);
@@ -643,18 +665,22 @@ const StakingUpdate = () => {
                   </div>
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
                     {/* populate with real data */}
-                    <span>{Number(myAssetInfo.amount)} egc </span>
-                    <span style={{ fontSize: "10px" }}>
-                      (Max Duration: 6months)
+                    <span>
+                      {numberWithCommas(parseFloat(myTotalStaked).toFixed(2))}{" "}
+                      egc{" "}
                     </span>
+                    {/* <span style={{ fontSize: "10px" }}></span> */}
                   </div>
                 </div>
                 <div className="lock_container_cont1_div_locks_overview_cont1">
                   <div className="lock_container_cont1_div_locks_overview_cont1_head">
-                    My Total Rewards
+                    Daily Rewards
                   </div>
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
-                    {Number.parseFloat(myAssetInfo.dailyRoyalty)} eusd
+                    <span>
+                      {numberWithCommas(parseFloat(dailyReward).toFixed(2))}{" "}
+                      eusd / per day
+                    </span>
                   </div>
                 </div>
                 <div
@@ -665,7 +691,12 @@ const StakingUpdate = () => {
                     Claimed Rewards
                   </div>
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
-                    {parseFloat(TotalClaimedReward).toFixed(2)} eusd
+                    <span>
+                      {numberWithCommas(
+                        parseFloat(TotalClaimedReward).toFixed(2)
+                      )}{" "}
+                      eusd
+                    </span>
                   </div>
                 </div>
               </div>
@@ -824,10 +855,12 @@ const StakingUpdate = () => {
                       </div>
                       <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount">
                         {parseFloat(availableClaimReward).toFixed(2)} eUsd
-                        <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv">
-                          Claim In the next:
-                          <Timer deadline={nextRewardTakeTime} />
-                        </div>
+                        {rewardCountDown === true ? (
+                          <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv">
+                            Claim In the next:
+                            <Timer deadline={nextRewardTakeTime} />
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                     <button
@@ -835,7 +868,11 @@ const StakingUpdate = () => {
                       onClick={TakeReward}
                       disabled={ClaimDisable}
                     >
-                      Claim Reward
+                      {isLoading2 ? (
+                        <ScaleLoader color="#24382b" size={10} height={20} />
+                      ) : (
+                        <>Claim Reward</>
+                      )}
                     </button>
                   </div>
                 )}
