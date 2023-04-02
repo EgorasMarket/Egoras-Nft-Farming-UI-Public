@@ -626,6 +626,7 @@ const StakingUpdate = () => {
     }
   };
   const classes = useStyles();
+
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}

@@ -11,19 +11,19 @@ import {
   CALL_CHECK_USER_AND_MEMBERSHIP,
   CALL_ADD_USER_ADDRESS,
 } from "../../services/userServices";
-
+import { tokenBalance } from "../../web3";
 import Web3 from "web3";
 
 import "react-multi-carousel/lib/styles.css";
 
 import "./countdown.css";
-// import WaveAnimation from "./WaveAnimation/WaveAnimation";
 import "../../css/home.css";
 
 import "swiper/swiper.min.css";
 import "swiper/swiper-bundle.css";
 import "swiper/swiper-bundle.min.css";
-// import { animateScroll as scroll, Events, scrollSpy } from "react-scroll";
+import { parseEther, formatEther } from "@ethersproject/units";
+
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -69,6 +69,7 @@ const Home = () => {
   const [lockedValue, setLockedValue] = useState(0);
   const [totalAmountFrom, setTotalAmountFrom] = useState(0);
   const [totu, setTotu] = useState(0);
+  const [totalTVL, setTotalTVL] = useState(0);
 
   // const [uiMode, setUiMode] = useState(localStorage.getItem("uiMode"));
   // const []
@@ -377,7 +378,22 @@ const Home = () => {
     { img: "/img/FeaturedInLogos/FeaturedInLogos_6.svg" },
     { img: "/img/FeaturedInLogos/FeaturedInLogos_5.svg" },
   ];
-
+  useEffect(
+    async (e) => {
+      if (account) {
+        let res = await tokenBalance(
+          "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+          "0x3A81836b093f7f3D3ca271125CcD45c461409697",
+          library.getSigner()
+        );
+        console.log(res);
+        console.log(formatEther(res.message));
+        let tvl = formatEther(res.message);
+        setTotalTVL(tvl * egcUsd);
+      }
+    },
+    [account, egcUsd]
+  );
   return (
     <div>
       {/* =================================================================================================================================================================================================================================================================== */}
@@ -432,7 +448,7 @@ const Home = () => {
                     Total TVL
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
-                    $100M+
+                    ${totalTVL}
                   </div>
                 </div>
               </div>
