@@ -26,7 +26,7 @@ const PriceOracle = () => {
     error,
   } = context;
   const [tickerArray, setTickerArray] = useState(["egceusd"]);
-  const [priceArray, setPriceArray] = useState(["8600000000000000000"]);
+  const [priceArray, setPriceArray] = useState(["7790000000000000000"]);
   const setPythiaAddress = async () => {
     const response = await setPythia(
       "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",

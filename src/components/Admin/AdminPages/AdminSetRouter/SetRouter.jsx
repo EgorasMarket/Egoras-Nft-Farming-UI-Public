@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { SwapRouterAddress, adminAddMinter } from "../../../../web3/index2";
 import "./AdminRouter.css";
 import Web3 from "web3";
+import v3Contract from "../../../../web3/contracts/V3/V3ContractAddress.json";
 import { parseEther, formatEther } from "@ethersproject/units";
 import {
   Web3ReactProvider,
@@ -37,7 +38,7 @@ const SetRouter = () => {
   };
   const addMinter = async () => {
     const response = await adminAddMinter(
-      "0x09903D17e84bEAB2851260589F3e0aDDd4D1433c",
+      v3Contract.address,
       library.getSigner()
     );
     console.log(response);
