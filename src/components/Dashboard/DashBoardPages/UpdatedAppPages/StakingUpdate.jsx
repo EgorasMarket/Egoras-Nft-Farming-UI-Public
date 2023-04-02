@@ -268,7 +268,7 @@ const StakingUpdate = () => {
       }
       console.log(res);
       setErrorModal(true);
-      setErrorMessage(res.message.reason);
+      setErrorMessage(res.message.data.message || res.message.reason);
       setIsLoading(false);
       setDisable(false);
     }
@@ -295,7 +295,7 @@ const StakingUpdate = () => {
       setIsLoading(false);
       setDisable(false);
       setErrorModal(true);
-      setErrorMessage(res.message.reason);
+      setErrorMessage(res.message.data.message || res.message.reason);
     }
   };
   const TakeReward = async () => {
@@ -377,13 +377,6 @@ const StakingUpdate = () => {
     setEstimatedRewardDiv(true);
   };
 
-  const fetchData = async () => {
-    const response = await POPULATE_STAKE_INFO(account);
-    if (response.success === true) {
-      console.log(response.data.user, "oyibo");
-      setTotalAssetInfo(response.data.general);
-    }
-  };
   const fetchData2 = async () => {
     const response = await POPULATE_STAKE_INFO(account);
     // console.log(response, "oyibo");

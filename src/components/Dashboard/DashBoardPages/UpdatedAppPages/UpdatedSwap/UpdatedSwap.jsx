@@ -791,7 +791,7 @@ const UpdatedSwap = () => {
       setIsLoading(false);
       setDisable(false);
       setErrorModal(true);
-      setErrorMessage(response.message.reason);
+      setErrorMessage(response.message.data.message || response.message.reason);
     }
   };
 
@@ -825,7 +825,7 @@ const UpdatedSwap = () => {
       setIsLoading(false);
       setDisable(false);
       setErrorModal(true);
-      setErrorMessage(response.message.reason);
+      setErrorMessage(response.message.data.message || response.message.reason);
     }
   };
   // when swapping use the egoras eusd address

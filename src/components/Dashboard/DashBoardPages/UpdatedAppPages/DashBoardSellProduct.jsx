@@ -163,7 +163,7 @@ const DashBoardSellProduct = () => {
       setSuccessMessage("You've successfully placed " + prodName + " for sale");
     } else {
       setErrorModal(true);
-      setErrorMessage(res.message.reason);
+      setErrorMessage(res.message.data.message || res.message.reason);
       setIsLoading(false);
       setDisable(false);
     }
