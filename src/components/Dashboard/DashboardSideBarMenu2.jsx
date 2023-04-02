@@ -396,39 +396,6 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     // }
   };
 
-  const NotifyArray = [
-    {
-      id: "1",
-      Title: "   Introducing MUI X v6.0.0",
-      paragraph:
-        "     Explore what's new and what's next in the new stable version of the advanced components.",
-    },
-    {
-      id: "2",
-      Title: "   Introducing MUI X v6.0.0",
-      paragraph:
-        "     Explore what's new and what's next in the new stable version of the advanced components.",
-    },
-    {
-      id: "3",
-      Title: "   Introducing MUI X v6.0.0",
-      paragraph:
-        "     Explore what's new and what's next in the new stable version of the advanced components.",
-    },
-    {
-      id: "4",
-      Title: "   Introducing MUI X v6.0.0",
-      paragraph:
-        "     Explore what's new and what's next in the new stable version of the advanced components.",
-    },
-    {
-      id: "5",
-      Title: "   Introducing MUI X v6.0.0",
-      paragraph:
-        "     Explore what's new and what's next in the new stable version of the advanced components.",
-    },
-  ];
-
   useEffect(() => {
     function handleClickOutside(event) {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
@@ -643,7 +610,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                         onClick={ToggleNotifyDiv}
                       >
                         <div className="notify_icon_cont_div">
-                          {NotifyArray.length <= 0 ? null : (
+                          {UnreadNotifications.length <= 0 ? null : (
                             <div className="notify_icon_cont_div_notifyCount">
                               {noTifyCount}
                             </div>
