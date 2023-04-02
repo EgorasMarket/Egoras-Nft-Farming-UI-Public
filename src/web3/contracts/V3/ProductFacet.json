@@ -248,6 +248,25 @@
       "inputs": [
         {
           "indexed": false,
+          "internalType": "uint256",
+          "name": "_productID",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "ProductApproved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
           "internalType": "string",
           "name": "_title",
           "type": "string"
@@ -599,24 +618,6 @@
     {
       "inputs": [
         {
-          "internalType": "string",
-          "name": "_nftName",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_nftSymbol",
-          "type": "string"
-        }
-      ],
-      "name": "setupNFT",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
           "internalType": "bytes4",
           "name": "interfaceId",
           "type": "bytes4"
@@ -650,7 +651,7 @@
           "type": "string"
         }
       ],
-      "stateMutability": "view",
+      "stateMutability": "pure",
       "type": "function",
       "constant": true
     },
@@ -706,6 +707,21 @@
           "internalType": "address",
           "name": "_creator",
           "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_selling",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "eusd",
+          "type": "address"
         }
       ],
       "stateMutability": "view",
@@ -726,6 +742,19 @@
         }
       ],
       "name": "bid",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_productID",
+          "type": "uint256"
+        }
+      ],
+      "name": "approveDirectProduct",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

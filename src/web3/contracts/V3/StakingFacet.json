@@ -196,6 +196,11 @@
           "internalType": "uint256",
           "name": "_totalRoyaltyTaken",
           "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_penalty",
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -214,6 +219,52 @@
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "increaseTakeRoyaltyTime",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "increaseTakeRoyaltyTime2",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "calculateRoyalty",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_royalty",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
     }
   ]
 }
