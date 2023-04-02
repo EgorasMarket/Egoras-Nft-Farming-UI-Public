@@ -1,3 +1,7 @@
+import TimeAgo from "javascript-time-ago";
+
+import en from "javascript-time-ago/locale/en.json";
+import ru from "javascript-time-ago/locale/ru.json";
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
@@ -6,6 +10,8 @@ import reportWebVitals from "./reportWebVitals";
 import { Context } from "./components/context/Context.jsx";
 import Zendesk from "react-zendesk";
 const zendesk_key = "tcnJFYgY0Yngh4N5j505mVG0jBAukCiGAdrs48E1";
+
+TimeAgo.addDefaultLocale(en);
 
 const setting = {
   color: {

@@ -13,6 +13,9 @@ export const ACCEPT_OR_DECLINE_BID = `${API_URL}/product/bid/accept/product/bid`
 export const ADMIN_PLACE_BID = `${API_URL}/product/bid/add`;
 export const FETCH_USER_NEW_PRODUCT = `${API_URL}/product/user/new/product`;
 export const POPULATE_STAKE_INFO_ROUTE = `${API_URL}/staking/summarize`;
+export const GET_TVL_ROUTE = `${API_URL}/staking/tvl`;
 export const PROCESS_PRODUCT_ORDER_ROUTE = `${API_URL}/order/new`;
 export const CHECK_USER_AND_MEMBERSHIP = `${API_URL}/pub/check-user/check-subscription`;
 export const ADD_USER_ADDRESS = `${API_URL}/pub/register/user/address`;
+export const GET_EGC_PRICE_COINGEKO_ROUTE =
+  "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";

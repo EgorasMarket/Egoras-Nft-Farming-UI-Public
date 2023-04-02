@@ -149,7 +149,7 @@ const MemberShipPage = () => {
       }
       console.log(ret);
       setErrorModal(true);
-      setErrorMessage(ret.message.reason);
+      setErrorMessage(ret.message);
       setIsLoading(false);
       setDisable(false);
     }
@@ -194,7 +194,7 @@ const MemberShipPage = () => {
     setDisable(true);
     let res = await monthlyPlanSubScribe(library.getSigner());
     console.log(res);
-    if (res.status == true) {
+    if (res.status === true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
@@ -207,7 +207,7 @@ const MemberShipPage = () => {
       setIsLoading(false);
       setDisable(false);
       setErrorModal(true);
-      setErrorMessage(res.message.reason);
+      setErrorMessage(res.message);
     }
   };
   const subscribe2 = async () => {
@@ -228,7 +228,7 @@ const MemberShipPage = () => {
       setIsLoading(false);
       setDisable(false);
       setErrorModal(true);
-      setErrorMessage(res.message.reason);
+      setErrorMessage(res.message);
     }
   };
   const subscribe3 = async () => {
@@ -249,7 +249,7 @@ const MemberShipPage = () => {
       setIsLoading(false);
       setDisable(false);
       setErrorModal(true);
-      setErrorMessage(res.message.reason);
+      setErrorMessage(res.message);
     }
   };
   const CloseSuccessModal = () => {

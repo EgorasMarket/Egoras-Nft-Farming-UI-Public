@@ -4,6 +4,7 @@ import {
   setPriceOracle,
   setEGCUSDTicker,
   resetStakeTime,
+  IncreaseRoyaltyTime,
 } from "../../../../web3/index2";
 import Web3 from "web3";
 import { parseEther, formatEther } from "@ethersproject/units";
@@ -49,6 +50,10 @@ const PriceOracle = () => {
     const response = await resetStakeTime(account, library.getSigner());
     console.log(response);
   };
+  const IncreaseStakeTime = async () => {
+    const response = await IncreaseRoyaltyTime(account, library.getSigner());
+    console.log(response);
+  };
   return (
     <div className="other2 asset_other2">
       <section className="collateral-assets-section no-bg no_pad">
@@ -91,6 +96,12 @@ const PriceOracle = () => {
                 className="setRouterAddressBtn"
               >
                 Reset Time
+              </button>
+              <button
+                onClick={IncreaseStakeTime}
+                className="setRouterAddressBtn"
+              >
+                Increase Time
               </button>
             </div>
           </div>

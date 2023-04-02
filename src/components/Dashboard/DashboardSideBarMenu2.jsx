@@ -65,6 +65,7 @@ import {
   UnsupportedChainIdError,
 } from "@web3-react/core";
 import { socket } from "../../socket";
+import TimeAgoComponent from "../TimeAgoComponent";
 const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const dddd = localStorage.getItem("smallSidetoken");
   const [connectId, setConnectId] = useState(false);
@@ -440,6 +441,10 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     console.log(account, "blunt");
     socket.on(`${account}/notification`, (data) => {
       console.log(data);
+
+      const dd = data.sort((a, b) => {
+        return Number(b) - Number(a);
+      });
       setUnreadNotifications(data);
       const unreadNotifications = data.filter(
         (notification) => notification.status === "unread"
@@ -655,7 +660,11 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                             </div>
                           ) : (
                             <>
-                              {UnreadNotifications.map((data, key) => (
+                              {UnreadNotifications.sort(
+                                (a, b) =>
+                                  new Date(b.createdAt).getTime() -
+                                  new Date(a.createdAt).getTime()
+                              ).map((data, key) => (
                                 <>
                                   {data.status == "unread" ? (
                                     <div
@@ -663,7 +672,18 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                                       key={data.id}
                                     >
                                       <div className="notifyDropDownDiv_div1_title active">
-                                        {data.title}
+                                        {data.title}{" "}
+                                        <span
+                                          style={{
+                                            fontSize: "10px",
+                                          }}
+                                        >
+                                          - (
+                                          <TimeAgoComponent
+                                            date={data.createdAt}
+                                          />
+                                          )
+                                        </span>
                                       </div>
                                       <div className="notifyDropDownDiv_div1_para">
                                         {data.message}

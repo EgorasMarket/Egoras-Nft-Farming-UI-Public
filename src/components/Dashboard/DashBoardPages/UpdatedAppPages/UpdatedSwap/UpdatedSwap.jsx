@@ -737,7 +737,7 @@ const UpdatedSwap = () => {
       }
       console.log(ret);
       setErrorModal(true);
-      setErrorMessage(ret.message.reason);
+  setErrorMessage(ret.message);
       setIsLoading(false);
       setDisable(false);
     }
@@ -784,14 +784,11 @@ const UpdatedSwap = () => {
           "Bnb"
       );
     } else {
-      if (response.message.code == 4001) {
-        console.log(response);
-      }
       console.log(response);
       setIsLoading(false);
       setDisable(false);
       setErrorModal(true);
-      setErrorMessage(response.message.reason);
+      setErrorMessage(response.message);
     }
   };
 
@@ -818,14 +815,11 @@ const UpdatedSwap = () => {
           "Eusd"
       );
     } else {
-      if (response.message.code == 4001) {
-        console.log(response);
-      }
+      setErrorMessage(response.message);
       console.log(response);
       setIsLoading(false);
       setDisable(false);
       setErrorModal(true);
-      setErrorMessage(response.message.reason);
     }
   };
   // when swapping use the egoras eusd address
@@ -856,6 +850,7 @@ const UpdatedSwap = () => {
       console.log(formatEther(response.message[1]._hex));
     } else {
       setIsAmountLoading(false);
+      // setErrorMessage(response.message);
       console.log(response);
     }
   };
