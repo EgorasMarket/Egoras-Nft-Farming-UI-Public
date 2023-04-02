@@ -45,7 +45,10 @@ import {
   stakeConfig,
 } from "../../../../web3/index2";
 import { getDate, getMonth } from "date-fns";
-import { POPULATE_STAKE_INFO } from "../../../../services/stakeServices";
+import {
+  POPULATE_STAKE_INFO,
+  POPULATE_STAKE_GENERAL_INFO,
+} from "../../../../services/stakeServices";
 
 export const DurationDiv = ({ addMonthly, addYearly, SelectedDuration }) => {
   return (
@@ -387,47 +390,30 @@ const StakingUpdate = () => {
     }
   };
   useEffect(() => {
+    const fetchData = async () => {
+      const response = await POPULATE_STAKE_INFO(account);
+      // console.log(response, "oyibo");
+      if (response.success === true) {
+        console.log(response.data.user, "oyibo");
+        // setTotalAssetInfo(response.data.general);
+        setMyAssetInfo(response.data.user);
+      }
+    };
     fetchData();
-    if (account) {
-      fetchData2();
-    }
-  }, [account]);
-  useEffect(async () => {
-    if (account) {
-      const res = await getEGCEUSDTICKERPRICE("egceusd", library.getSigner());
-      console.log(res);
-    }
-  }, [account]);
-  useEffect(async () => {
-    if (account) {
-      const res = await getRoyaltyStats(account, library.getSigner());
-      console.log(res);
-      console.log(res.message._dailyRoyalty);
-      console.log(formatEther(res.message._dailyRoyalty).toString());
-      let formatted = res.message._nextRoyaltyTakePeriod.toString();
-      const endDate = parseInt(formatted);
-      console.log(new Date(1680454493));
-      console.log(new Date(endDate));
-      console.log(new Date(endDate * 1000), "tyury");
-      const timestamp = 1680454493;
-      const date = fromUnixTime(timestamp);
-      const formattedDate = format(date, "yyyy-MM-dd HH:mm:ss");
-      console.log(formattedDate);
-      console.log(new Date("2023-10-02"));
-      setNextRewardTakeTime(formattedDate);
-      setAvailableClaimReward(
-        formatEther(res.message._dailyRoyalty).toString()
-      );
-      console.log(new Date(1636921519 * 1000));
-    }
-  }, [account]);
-  useEffect(async () => {
-    if (account) {
-      const res = await stakeConfig(library.getSigner());
-      console.log(res);
-    }
-  }, [account]);
+  }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await POPULATE_STAKE_GENERAL_INFO();
+      // console.log(response, "oyibo");
+      if (response.success === true) {
+        console.log(response.data.user, "oyibo");
+        setTotalAssetInfo(response.data);
+        // setMyAssetInfo(response.data.user);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
