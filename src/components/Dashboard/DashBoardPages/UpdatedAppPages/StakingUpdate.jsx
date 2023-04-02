@@ -45,6 +45,7 @@ import {
   getRoyaltyStats,
   stakeConfig,
   getCalculatedRoyalty,
+  UnlockLockedStake,
 } from "../../../../web3/index2";
 import { getDate, getMonth } from "date-fns";
 import {
@@ -113,12 +114,15 @@ const StakingUpdate = () => {
   const [isLoading2, setIsLoading2] = useState(false);
   const [Disable, setDisable] = useState(false);
   const [ClaimDisable, setClaimDisable] = useState(true);
+  const [lockDisable, setLockDisable] = useState(false);
   const [LockedTransactions, setLockedTransactions] = useState([]);
   const [UniqueLockedTransactions, setUniqueLockedTransactions] = useState([]);
   const [egcUsdVal, setEgcUsdVal] = useState(0);
   const [graphData2, setGraphData2] = useState([]);
   const [availableClaimReward, setAvailableClaimReward] = useState("0.00");
   const [nextRewardTakeTime, setNextRewardTakeTime] = useState("");
+  const [unlockStakeTime, setUnlockStakeTime] = useState("");
+  const [unlockStakeDuration, setUnlockStakeDuration] = useState("");
   const [TotalClaimedReward, setTotalClaimedReward] = useState("0.00");
   const [dailyReward, setDailyReward] = useState("0.00");
   const [myTotalStaked, setMyTotalStaked] = useState("0.00");
@@ -126,7 +130,7 @@ const StakingUpdate = () => {
 
   const [myAssetInfo, setMyAssetInfo] = useState({});
   const [totalAssetInfo, setTotalAssetInfo] = useState({});
-
+  const [txHash, setTxHash] = useState("");
   const toggleDurationDrop = () => {
     setDurationDrop(!durationDrop);
   };
@@ -267,7 +271,10 @@ const StakingUpdate = () => {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
-      setSuccessMessage("You've successfully Locked your egc for 1 month");
+      setSuccessMessage(
+        "You've successfully Locked" + lockAmount + " egc for 1 month"
+      );
+      setTxHash(res.message.hash);
     } else {
       console.log(res);
       console.log(res.message);
@@ -290,12 +297,40 @@ const StakingUpdate = () => {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
-      setSuccessMessage("You've successfully Locked your egc for 1 year");
+      setTxHash(res.message.hash);
+      setSuccessMessage(
+        "You've successfully Locked" + lockAmount + " egc for 1 year"
+      );
     } else {
       console.log(res);
       console.log(res.message);
       setIsLoading(false);
       setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
+  };
+  const UnlockStake = async () => {
+    setIsLoading2(true);
+    setLockDisable(true);
+    const res = await UnlockLockedStake(library.getSigner());
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+    if (res.status == true) {
+      setIsLoading2(false);
+      setLockDisable(false);
+      setSuccessModal(true);
+      setTxHash(res.message.hash);
+      setSuccessMessage(
+        "You've successfully claimed " +
+          parseFloat(availableClaimReward).toFixed(2) +
+          " eusd"
+      );
+    } else {
+      console.log(res);
+      console.log(res.message);
+      setIsLoading2(false);
+      setLockDisable(false);
       setErrorModal(true);
       setErrorMessage(res.message);
     }
@@ -310,7 +345,12 @@ const StakingUpdate = () => {
       setIsLoading2(false);
       setClaimDisable(false);
       setSuccessModal(true);
-      setSuccessMessage("You've successfully Locked your egc for 1 year");
+      setTxHash(res.message.hash);
+      setSuccessMessage(
+        "You've successfully claimed " +
+          parseFloat(availableClaimReward).toFixed(2) +
+          " eusd"
+      );
     } else {
       console.log(res);
       console.log(res.message);
@@ -437,11 +477,22 @@ const StakingUpdate = () => {
       );
       setMyTotalStaked(formatEther(res.message._totalStake).toString());
       let formatted = res.message._nextRoyaltyTakePeriod.toString();
+      let formatted2 = res.message._lockPeriod.toString();
+      const endDate2 = formatted2;
+
       const endDate = formatted;
       const newRewardDate = new Date(endDate * 1000);
-      console.log(new Date(endDate * 1000), "tyury");
-      console.log(newRewardDate, "tyury4444444");
+      const newRewardDate2 = new Date(endDate2 * 1000);
+      console.log(newRewardDate2);
+      const date = newRewardDate2;
+      const day = date.getUTCDate().toString().padStart(2, "0");
+      const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+      const year = date.getUTCFullYear();
+      const formattedDate = `${day}/${month}/${year}`;
+      console.log(formattedDate);
+      setUnlockStakeDuration(formattedDate);
       setNextRewardTakeTime(newRewardDate);
+      setUnlockStakeTime(newRewardDate2);
       if (newRewardDate <= new Date()) {
         setClaimDisable(false);
         setRewardCountDown(false);
@@ -727,6 +778,17 @@ const StakingUpdate = () => {
                   >
                     Claim
                   </div>
+                  <div
+                    id="unlock"
+                    className={
+                      activeTab === "unlock"
+                        ? "lock_container_cont1_div1_lock_div_tab1_active"
+                        : "lock_container_cont1_div1_lock_div_tab1"
+                    }
+                    onClick={toggleLockTabs}
+                  >
+                    Unlock
+                  </div>
                 </div>
                 {/* ======= */}
                 {/* ======= */}
@@ -847,7 +909,7 @@ const StakingUpdate = () => {
                       </button>
                     )}
                   </div>
-                ) : (
+                ) : activeTab === "claim" ? (
                   <div className="lock_container_cont1_div1_lock_div_lock_body">
                     <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1">
                       <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_head">
@@ -875,7 +937,48 @@ const StakingUpdate = () => {
                       )}
                     </button>
                   </div>
-                )}
+                ) : activeTab === "unlock" ? (
+                  <div className="lock_container_cont1_div1_lock_div_lock_body">
+                    <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1">
+                      <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_head">
+                        My Locked EGC
+                      </div>
+                      <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount">
+                        <span className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_span">
+                          <span className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_span_span1">
+                            {numberWithCommas(
+                              parseFloat(myTotalStaked).toFixed(2)
+                            )}{" "}
+                            egc
+                          </span>
+                          <span className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_span_span2">
+                            Max Duration:
+                            <span className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_span_span2_span">
+                              ({unlockStakeDuration})
+                            </span>
+                          </span>
+                        </span>
+                        {rewardCountDown === true ? (
+                          <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv">
+                            Unlock In the next:
+                            <Timer deadline={unlockStakeTime} />
+                          </div>
+                        ) : null}
+                      </div>
+                    </div>
+                    <button
+                      className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                      onClick={UnlockStake}
+                      disabled={lockDisable}
+                    >
+                      {isLoading2 ? (
+                        <ScaleLoader color="#24382b" size={10} height={20} />
+                      ) : (
+                        <>Remove Lock </>
+                      )}
+                    </button>
+                  </div>
+                ) : null}
               </div>
             </div>
             {/* =========*******=========== */}
@@ -917,7 +1020,7 @@ const StakingUpdate = () => {
                       Total Rewards
                     </div>
                     <div className="lending_area1_cont1_body_txt">
-                      {parseFloat(totalAssetInfo.dailyRoyalty, 2)}{" "}
+                      {parseFloat(totalAssetInfo.dailyRoyalty).toFixed(2)}{" "}
                       <span className="usd_sign">eUSD</span>
                     </div>
                   </div>
@@ -1195,6 +1298,8 @@ const StakingUpdate = () => {
           btnRoute={true}
           successMessage={successMessage}
           route="/app/staking/egc"
+          txnHashDiv={true}
+          TxnHash={txHash}
         />
       ) : null}
     </div>

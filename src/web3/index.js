@@ -774,7 +774,7 @@ const getEgcSmartContractBalnce = async (
     const instance = erc20Instance(coinAddress, signer);
     let result = await instance.balanceOf(contractAddress);
     return {
-      message: result.toString(),
+      message: result,
       status: true,
     };
   } catch (error) {

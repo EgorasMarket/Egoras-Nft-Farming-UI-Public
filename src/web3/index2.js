@@ -306,7 +306,7 @@ const getEGCEUSDTICKERPRICE = async (_ticker, signer) => {
     console.log(result.toString(), "result");
 
     return {
-      message: result.toString(),
+      message: result,
       status: true,
     };
   } catch (error) {
@@ -340,7 +340,7 @@ const stakeConfig = async (signer) => {
     console.log(result, "result");
 
     return {
-      message: result.toString(),
+      message: result,
       status: true,
     };
   } catch (error) {
@@ -357,7 +357,7 @@ const resetStakeTime = async (user, signer) => {
     console.log(result, "result");
 
     return {
-      message: result.toString(),
+      message: result,
       status: true,
     };
   } catch (error) {
@@ -375,7 +375,7 @@ const getCalculatedRoyalty = async (user, signer) => {
     console.log(result, "result");
 
     return {
-      message: result.toString(),
+      message: result,
       status: true,
     };
   } catch (error) {
@@ -392,7 +392,24 @@ const IncreaseRoyaltyTime = async (user, signer) => {
     console.log(result, "result");
 
     return {
-      message: result.toString(),
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const UnlockLockedStake = async (signer) => {
+  try {
+    const instance = await contractStakingFacetInstance(signer);
+    let result = await instance.unstake();
+    console.log(result, "result");
+
+    return {
+      message: result,
       status: true,
     };
   } catch (error) {
@@ -425,4 +442,5 @@ export {
   resetStakeTime,
   getCalculatedRoyalty,
   IncreaseRoyaltyTime,
+  UnlockLockedStake,
 };
