@@ -382,6 +382,43 @@ const resetStakeTime = async (user, signer) => {
     };
   }
 };
+const getCalculatedRoyalty = async (user, signer) => {
+  console.log(user, signer, "getcalculatedRoyalty");
+  try {
+    const instance = contractStakingFacetInstance(signer);
+    let result = await instance.calculateRoyalty(user);
+    console.log(result, "result");
+
+    return {
+      message: result.toString(),
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
+const IncreaseRoyaltyTime = async (user, signer) => {
+  try {
+    const instance = await contractStakingFacetInstance(signer);
+    let result = await instance.increaseTakeRoyaltyTime(user);
+    console.log(result, "result");
+
+    return {
+      message: result.toString(),
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: error,
+      status: false,
+    };
+  }
+};
 
 export {
   monthlyPlanSubScribe,
@@ -403,4 +440,6 @@ export {
   getRoyaltyStats,
   stakeConfig,
   resetStakeTime,
+  getCalculatedRoyalty,
+  IncreaseRoyaltyTime,
 };

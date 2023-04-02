@@ -43,6 +43,7 @@ import {
   getEGCEUSDTICKERPRICE,
   getRoyaltyStats,
   stakeConfig,
+  getCalculatedRoyalty,
 } from "../../../../web3/index2";
 import { getDate, getMonth } from "date-fns";
 import {
@@ -108,12 +109,14 @@ const StakingUpdate = () => {
   const [tokenBal, setTokenBal] = useState(0.0);
   const [isLoading, setIsLoading] = useState(false);
   const [Disable, setDisable] = useState(false);
+  const [ClaimDisable, setClaimDisable] = useState(true);
   const [LockedTransactions, setLockedTransactions] = useState([]);
   const [UniqueLockedTransactions, setUniqueLockedTransactions] = useState([]);
   const [egcUsdVal, setEgcUsdVal] = useState(0);
   const [graphData2, setGraphData2] = useState([]);
   const [availableClaimReward, setAvailableClaimReward] = useState("0.00");
   const [nextRewardTakeTime, setNextRewardTakeTime] = useState("");
+  const [TotalClaimedReward, setTotalClaimedReward] = useState("0.00");
 
   const [myAssetInfo, setMyAssetInfo] = useState({});
   const [totalAssetInfo, setTotalAssetInfo] = useState({});
@@ -400,7 +403,62 @@ const StakingUpdate = () => {
       }
     };
     fetchData();
-  }, []);
+    if (account) {
+      fetchData2();
+    }
+  }, [account]);
+  useEffect(async () => {
+    if (account) {
+      const res = await getEGCEUSDTICKERPRICE("egceusd", library.getSigner());
+      console.log(res);
+    }
+  }, [account]);
+  useEffect(async () => {
+    if (account) {
+      const res = await getRoyaltyStats(account, library.getSigner());
+      console.log(res);
+      console.log(res.message._dailyRoyalty);
+      console.log(formatEther(res.message._dailyRoyalty).toString());
+      console.log(formatEther(res.message._totalRoyaltyTaken).toString());
+      setTotalClaimedReward(
+        formatEther(res.message._totalRoyaltyTaken).toString()
+      );
+      let formatted = res.message._nextRoyaltyTakePeriod.toString();
+      const endDate = formatted;
+      const newRewardDate = new Date(endDate * 1000);
+      console.log(new Date(endDate * 1000), "tyury");
+      console.log(newRewardDate, "tyury4444444");
+      setNextRewardTakeTime(newRewardDate);
+      if (newRewardDate <= new Date()) {
+        setClaimDisable(false);
+      } else {
+        setClaimDisable(true);
+      }
+    }
+  }, [account]);
+  useEffect(async () => {
+    if (account) {
+      const res = await stakeConfig(library.getSigner());
+      console.log(res);
+    }
+  }, [account]);
+  useEffect(async () => {
+    if (account) {
+      const res = await getCalculatedRoyalty(account, library.getSigner());
+      console.log(formatEther(res.message).toString());
+      setAvailableClaimReward(formatEther(res.message).toString());
+    }
+  }, [account]);
+  useEffect(() => {
+    if (account) {
+      console.log(availableClaimReward);
+      console.log(nextRewardTakeTime);
+      if (availableClaimReward == "0.0" || nextRewardTakeTime == "") {
+        setClaimDisable(true);
+        console.log(availableClaimReward);
+      }
+    }
+  }, [account, availableClaimReward, nextRewardTakeTime]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -614,7 +672,7 @@ const StakingUpdate = () => {
                     Claimed Rewards
                   </div>
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
-                    {Number.parseFloat(myAssetInfo.totalRoyalty)} eusd
+                    {parseFloat(TotalClaimedReward).toFixed(2)} eusd
                   </div>
                 </div>
               </div>
@@ -774,15 +832,15 @@ const StakingUpdate = () => {
                       <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount">
                         {parseFloat(availableClaimReward).toFixed(2)} eUsd
                         <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv">
-                          Next Reward Time
-                          {/* ( <Timer deadline={new Date()} />) */}
-                          {nextRewardTakeTime}
+                          Claim In the next:
+                          <Timer deadline={nextRewardTakeTime} />
                         </div>
                       </div>
                     </div>
                     <button
-                      className="lock_container_cont1_div1_lock_div_lock_body_claim_Div_button"
+                      className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
                       onClick={TakeReward}
+                      disabled={ClaimDisable}
                     >
                       Claim Reward
                     </button>
