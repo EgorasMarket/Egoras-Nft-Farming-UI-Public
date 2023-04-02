@@ -1037,9 +1037,9 @@ const crossexchange = async (from, to, amoumt, signer) => {
 // ===========================================
 // =========new V3 Functions==================================
 const listProduct = async (_title, _amount, signer) => {
-  console.log(_title, _amount);
-  let _isdirect = 0;
+  let _isdirect = false;
   let _qty = 1;
+  console.log(_title, _amount, _isdirect, _qty);
 
   try {
     const instance = contractProductFacetInstance(signer);
@@ -1048,8 +1048,8 @@ const listProduct = async (_title, _amount, signer) => {
     result = await instance.listProduct(
       _title,
       _amount.toString(),
-      _isdirect,
-      _qty
+      _qty,
+      _isdirect
     );
     console.log("second");
     console.log(result, "result, result,result,result,result");
@@ -1278,6 +1278,7 @@ const approveProduct = async (_productID, signer) => {
       status: true,
     };
   } catch (error) {
+    console.log(error);
     return {
       message: formattedError(error).message,
       status: formattedError(error).status,

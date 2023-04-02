@@ -15,6 +15,7 @@ import { parseEther, formatEther } from "@ethersproject/units";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import UpdatedSuccessModal from "./UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import UpdatedErrorModal from "./UpdatedSuccessErrorModals/UpdatedErrorModal";
+import UpdatedWarningModal from "./UpdatedSuccessErrorModals/UpdatedWarningModal";
 import { getParsedEthersError } from "@enzoferey/ethers-error-parser";
 import Timer from "../Timer";
 import Web3 from "web3";
@@ -46,6 +47,8 @@ import {
   stakeConfig,
   getCalculatedRoyalty,
   UnlockLockedStake,
+  unlockStakeEgcToken,
+  checkAllowanceStake,
 } from "../../../../web3/index2";
 import { getDate, getMonth } from "date-fns";
 import {
@@ -128,10 +131,14 @@ const StakingUpdate = () => {
   const [dailyReward, setDailyReward] = useState("0.00");
   const [myTotalStaked, setMyTotalStaked] = useState("0.00");
   const [rewardCountDown, setRewardCountDown] = useState(false);
+  const [notDueButton, setNotDueButton] = useState(false);
+  const [notDueDiv, setNotDueDiv] = useState(false);
 
   const [myAssetInfo, setMyAssetInfo] = useState({});
   const [totalAssetInfo, setTotalAssetInfo] = useState({});
   const [txHash, setTxHash] = useState("");
+  const [unlockBtn, setUnlockBtn] = useState(true);
+  const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
   const toggleDurationDrop = () => {
     setDurationDrop(!durationDrop);
   };
@@ -314,6 +321,7 @@ const StakingUpdate = () => {
   const UnlockStake = async () => {
     setIsLoading2(true);
     setLockDisable(true);
+    setNotDueDiv(!notDueDiv);
     const res = await UnlockLockedStake(library.getSigner());
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
@@ -323,9 +331,9 @@ const StakingUpdate = () => {
       setSuccessModal(true);
       setTxHash(res.message.hash);
       setSuccessMessage(
-        "You've successfully claimed " +
-          parseFloat(availableClaimReward).toFixed(2) +
-          " eusd"
+        "You've successfully unlocked " +
+          parseFloat(myTotalStaked).toFixed(2) +
+          " egc"
       );
     } else {
       console.log(res);
@@ -490,6 +498,7 @@ const StakingUpdate = () => {
       const newRewardDate = new Date(endDate * 1000);
       const newRewardDate2 = new Date(endDate2 * 1000);
       console.log(newRewardDate2);
+      console.log(newRewardDate);
       const date = newRewardDate2;
       const day = date.getUTCDate().toString().padStart(2, "0");
       const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
@@ -506,8 +515,14 @@ const StakingUpdate = () => {
         setClaimDisable(true);
         setRewardCountDown(true);
       }
+      if (myTotalStaked == "0.0") {
+        setClaimDisable(true);
+        setLockDisable(true);
+        return;
+      }
     }
-  }, [account]);
+    console.log(myTotalStaked);
+  }, [account, myTotalStaked]);
   useEffect(async () => {
     if (account) {
       const res = await stakeConfig(library.getSigner());
@@ -544,6 +559,57 @@ const StakingUpdate = () => {
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    if (unlockStakeTime !== new Date() || unlockStakeTime > new Date()) {
+      console.log("its not yet due");
+      setNotDueButton(true);
+    }
+  }, [unlockStakeTime]);
+
+  const toggleNotDueDiv = () => {
+    setNotDueDiv(!notDueDiv);
+  };
+  useEffect(
+    async (e) => {
+      if (account) {
+        let check = await checkAllowanceStake(
+          account,
+          parseEther(lockAmount.toString(), "wei").toString(),
+          library.getSigner()
+        );
+        console.log(check);
+        setUnLockCheckStatus(check.status);
+        setUnlockBtn(check.status);
+      }
+    },
+    [account, unLockCheckStatus, unlockBtn, lockAmount]
+  );
+  const UnlockToken = async (e) => {
+    setIsLoading(true);
+    setDisable(true);
+    let ret = await unlockStakeEgcToken(
+      parseEther("180000000000000000000000000000000000", "wei").toString(),
+      library.getSigner()
+    );
+    console.log(ret);
+    if (ret.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      localStorage.setItem("unlocking", true);
+      localStorage.setItem("unlockingHash", ret.message);
+      setUnlockBtn(true);
+    } else {
+      if (ret.message.code == 4001) {
+        console.log(ret);
+      }
+      console.log(ret);
+      setErrorModal(true);
+      setErrorMessage(ret.message);
+      setIsLoading(false);
+      setDisable(false);
+    }
+  };
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -674,7 +740,11 @@ const StakingUpdate = () => {
                             <tr className="stakingTable_body_row ">
                               <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
                                 <div className="value_dolls_div">
-                                  Create Lock
+                                  {data.status == "STAKE"
+                                    ? "Create Lock"
+                                    : data.status == "UNSTAKE"
+                                    ? "Unlock"
+                                    : null}
                                   <div className="value_dolls_div_val">
                                     {formattedDate}
                                     {/* {data.time} */}
@@ -683,7 +753,23 @@ const StakingUpdate = () => {
                               </td>
                               <td className="stakingTable_body_row_data">
                                 <div className="value_dolls_div2">
-                                  {parseFloat(data.amount).toFixed(2)} EGC
+                                  {data.status == "STAKE" ? (
+                                    <span style={{ display: "flex" }}>
+                                      {numberWithCommas(
+                                        parseFloat(data.amount).toFixed(2)
+                                      )}{" "}
+                                      EGC
+                                    </span>
+                                  ) : data.status == "UNSTAKE" ? (
+                                    <span style={{ display: "flex" }}>
+                                      {numberWithCommas(
+                                        parseFloat(data.unstake_amount).toFixed(
+                                          2
+                                        )
+                                      )}{" "}
+                                      EGC
+                                    </span>
+                                  ) : null}
                                 </div>
                               </td>
 
@@ -875,44 +961,69 @@ const StakingUpdate = () => {
                         </span>
                       </div>
                     ) : null}
-                    {SelectedDuration === "monthly" && lockAmount != "" ? (
+                    {unlockBtn === false ? (
                       <button
                         disabled={Disable}
-                        onClick={StakeMonthly}
+                        onClick={UnlockToken}
                         className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
                       >
                         {isLoading ? (
                           <ScaleLoader color="#24382b" size={10} height={20} />
                         ) : (
-                          <>Create Lock</>
+                          <>Approve EGC</>
                         )}
-                      </button>
-                    ) : SelectedDuration === "yearly" && lockAmount != "" ? (
-                      <button
-                        disabled={Disable}
-                        onClick={StakeYearly}
-                        className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
-                      >
-                        {isLoading ? (
-                          <ScaleLoader color="#24382b" size={10} height={20} />
-                        ) : (
-                          <>Create Lock</>
-                        )}
-                      </button>
-                    ) : lockAmount === "" ? (
-                      <button
-                        disabled
-                        className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
-                      >
-                        Enter an amount
                       </button>
                     ) : (
-                      <button
-                        disabled
-                        className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
-                      >
-                        Choose Duration
-                      </button>
+                      <>
+                        {SelectedDuration === "monthly" && lockAmount != "" ? (
+                          <button
+                            disabled={Disable}
+                            onClick={StakeMonthly}
+                            className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                          >
+                            {isLoading ? (
+                              <ScaleLoader
+                                color="#24382b"
+                                size={10}
+                                height={20}
+                              />
+                            ) : (
+                              <>Create Lock</>
+                            )}
+                          </button>
+                        ) : SelectedDuration === "yearly" &&
+                          lockAmount != "" ? (
+                          <button
+                            disabled={Disable}
+                            onClick={StakeYearly}
+                            className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                          >
+                            {isLoading ? (
+                              <ScaleLoader
+                                color="#24382b"
+                                size={10}
+                                height={20}
+                              />
+                            ) : (
+                              <>Create Lock</>
+                            )}
+                          </button>
+                        ) : lockAmount === "" ? (
+                          <button
+                            disabled
+                            className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                          >
+                            Enter an amount
+                          </button>
+                        ) : (
+                          <button
+                            disabled
+                            className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                          >
+                            Choose Duration
+                          </button>
+                        )}
+                      </>
                     )}
                   </div>
                 ) : activeTab === "claim" ? (
@@ -972,17 +1083,31 @@ const StakingUpdate = () => {
                         ) : null}
                       </div>
                     </div>
-                    <button
-                      className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
-                      onClick={UnlockStake}
-                      disabled={lockDisable}
-                    >
-                      {isLoading2 ? (
-                        <ScaleLoader color="#24382b" size={10} height={20} />
-                      ) : (
-                        <>Remove Lock </>
-                      )}
-                    </button>
+                    {notDueButton ? (
+                      <button
+                        className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                        onClick={toggleNotDueDiv}
+                        disabled={lockDisable}
+                      >
+                        {isLoading2 ? (
+                          <ScaleLoader color="#24382b" size={10} height={20} />
+                        ) : (
+                          <>Remove Lock </>
+                        )}
+                      </button>
+                    ) : (
+                      <button
+                        className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                        onClick={UnlockStake}
+                        disabled={lockDisable}
+                      >
+                        {isLoading2 ? (
+                          <ScaleLoader color="#24382b" size={10} height={20} />
+                        ) : (
+                          <>Remove Lock </>
+                        )}
+                      </button>
+                    )}
                   </div>
                 ) : null}
               </div>
@@ -1231,7 +1356,12 @@ const StakingUpdate = () => {
                             <tr className="stakingTable_body_row ">
                               <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
                                 <div className="value_dolls_div">
-                                  Create Lock
+                                  {data.status == "STAKE"
+                                    ? "Create Lock"
+                                    : data.status == "UNSTAKE"
+                                    ? "Unlock"
+                                    : null}
+
                                   <div className="value_dolls_div_val">
                                     {/* {formattedDate} */}
                                     {data.time}
@@ -1240,15 +1370,23 @@ const StakingUpdate = () => {
                               </td>
                               <td className="stakingTable_body_row_data">
                                 <div className="value_dolls_div2">
-                                  {/* {data.action === "Create Lock" ? (
-                                    <>+ {data.amount} EGC</>
-                                  ) : (
-                                    <>- {data.amount} eUSD</>
-                                  )} */}
-                                  {parseFloat(data.amount).toFixed(2)} EGC
-                                  {/* <div className="value_dolls_div_val">
-                                    $2,406.66
-                                  </div> */}
+                                  {data.status == "STAKE" ? (
+                                    <span style={{ display: "flex" }}>
+                                      {numberWithCommas(
+                                        parseFloat(data.amount).toFixed(2)
+                                      )}{" "}
+                                      EGC
+                                    </span>
+                                  ) : data.status == "UNSTAKE" ? (
+                                    <span style={{ display: "flex" }}>
+                                      {numberWithCommas(
+                                        parseFloat(data.unstake_amount).toFixed(
+                                          2
+                                        )
+                                      )}{" "}
+                                      EGC
+                                    </span>
+                                  ) : null}
                                 </div>
                               </td>
                               <td className="stakingTable_body_row_data">
@@ -1297,6 +1435,19 @@ const StakingUpdate = () => {
         <UpdatedErrorModal
           errorMessage={errorMessage}
           closeModal={CloseErrorModal}
+        />
+      ) : null}
+      {notDueDiv ? (
+        <UpdatedWarningModal
+          errorMessage={
+            <div>
+              An early withdrawal prior to the expiration of the lock-in period
+              will result in a penalty fee of{" "}
+              <span style={{ color: "#fff", fontWeight: "700" }}> 10%.</span>
+            </div>
+          }
+          continueFunc={UnlockStake}
+          closeModal={toggleNotDueDiv}
         />
       ) : null}
       {successModal ? (

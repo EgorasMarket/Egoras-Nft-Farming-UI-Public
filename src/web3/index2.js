@@ -419,6 +419,49 @@ const UnlockLockedStake = async (signer) => {
     };
   }
 };
+const unlockStakeEgcToken = async (amount, signer) => {
+  try {
+    const instance = erc20Instance(
+      "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+      signer
+    );
+    let result = await instance.approve(V3ContractAddress.address, amount);
+    return {
+      message: result.hash,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
+const checkAllowanceStake = async (owner, amount, signer) => {
+  try {
+    const instance = erc20Instance(
+      "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+      signer
+    );
+    let result = await instance.allowance(owner, V3ContractAddress.address);
+
+    if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
+      return {
+        status: true,
+      };
+    } else {
+      return {
+        status: false,
+      };
+    }
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 
 export {
   monthlyPlanSubScribe,
@@ -443,4 +486,6 @@ export {
   getCalculatedRoyalty,
   IncreaseRoyaltyTime,
   UnlockLockedStake,
+  unlockStakeEgcToken,
+  checkAllowanceStake,
 };

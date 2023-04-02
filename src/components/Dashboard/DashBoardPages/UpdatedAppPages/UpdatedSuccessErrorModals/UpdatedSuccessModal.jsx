@@ -34,7 +34,7 @@ const UpdatedSuccessModal = ({
         ) : null}
         <div className="UpdatedSuccessModalDiv_Cont_buttons">
           {btnRoute == true ? (
-            <a href={route}>
+            <a href={route} style={{ width: "100%" }}>
               <button className="UpdatedSuccessModalDiv_Cont_btn">
                 Continue
               </button>
