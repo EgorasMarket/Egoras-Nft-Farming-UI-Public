@@ -30,6 +30,9 @@ import Footer from "./components/Home/Footer.jsx";
 import "../src/App.css";
 import store from "./store";
 import Referal from "./components/Referral/Referal";
+
+import { socket } from "./socket";
+
 function App() {
   const [dashboard, setDashboard] = useState(false);
   const [admin, setAdmin] = useState(false);
@@ -44,8 +47,16 @@ function App() {
     active,
     error,
   } = context;
+  const [isConnected, setIsConnected] = useState(socket.connected);
   const linksActive = window.location.pathname;
   const urlArr = linksActive.split("/");
+
+  useEffect(() => {
+    // socket.connect();
+    // socket.on("testing", (data) => {
+    //   alert(JSON.stringify(data));
+    // });
+  }, []);
 
   useEffect(() => {
     if (linksActive === "/app") {
@@ -160,12 +171,6 @@ function App() {
     store.dispatch(loadUser());
   });
 
-  // useEffect(() => {
-  //   if (account) {
-  //     localStorage.setItem("WA_ST", account);
-  //     localStorage.setItem("myName", account);
-  //   }
-  // }, [account]);
   const [cClass, setCClass] = useState(false);
 
   // localStorage.setItem("uiMode", "dark");

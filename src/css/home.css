@@ -107,13 +107,13 @@
 }
 .whatPossible_body_area_1_cont2_title {
   font-size: 60px;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 9px;
   line-height: 1.2;
 }
 .whatPossible_body_area_1_cont2_title2 {
   font-size: 60px;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 9px;
   line-height: 1.2;
 }
@@ -229,7 +229,7 @@
 .how_it_works_possible_area_head {
   font-size: 72px;
   color: #fff;
-  font-weight: 700;
+  font-weight: 600;
 }
 .how_it_works_possible_area_para {
   color: grey;
@@ -352,10 +352,10 @@
 }
 .how_it_works_area_body_area1_title {
   font-size: 42px;
-  font-weight: 700;
+  font-weight: 600;
   color: #ffff;
   margin-top: 10px;
-  font-family: "Sofia Pro Bold", sans-serif;
+  /* font-family: "Sofia Pro Bold", sans-serif; */
 }
 .how_it_works_area_body_area1_para {
   margin-top: 5px;
@@ -533,7 +533,7 @@
   font-size: 38px;
   color: #fff;
   line-height: 1.2;
-  font-weight: 700;
+  font-weight: 600;
 }
 .ecoSystem_area1_para {
   margin: 0.5em 0em;
@@ -578,7 +578,7 @@
 .join_ecosystem_area1_title {
   font-size: 42px;
   color: #fff;
-  font-weight: 700;
+  font-weight: 600;
 }
 .join_ecosystem_area1_para {
   width: 42em;
@@ -617,7 +617,7 @@
 }
 .voting_on_egoras_dapp_sample_div_cont1_para {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .voting_on_egoras_dapp_sample_div_cont1 {
   display: flex;
@@ -637,7 +637,7 @@
   margin-top: 5px;
   background: #fece79;
   color: #44361f;
-  font-weight: 700;
+  font-weight: 600;
 }
 .voting_progress_bar {
   height: 25px;
@@ -711,8 +711,8 @@
 .how_it_works_area_head {
   font-size: 75px;
   color: #fff;
-  font-weight: 800;
-  font-family: "Sofia Pro Bold", sans-serif;
+  font-weight: 600;
+  /* font-family: "Sofia Pro Bold", sans-serif; */
 }
 .how_it_works_area {
   display: flex;
@@ -766,13 +766,13 @@
 .span4a-txts {
   font-size: 73px;
   width: 100%;
-  font-weight: 800;
+  font-weight: 600;
   line-height: 1.2;
-  font-family: "Sofia Pro Bold", sans-serif;
+  /* font-family: "Sofia Pro Bold", sans-serif; */
 }
 .real_life {
   color: #229e54;
-  font-family: "Sofia Pro Bold", sans-serif;
+  /* font-family: "Sofia Pro Bold", sans-serif; */
 }
 .nft-img-area2 {
   width: 100% !important;
@@ -1037,7 +1037,7 @@
 }
 .floating_div_cont_area1_cont2 {
   font-size: 54px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .span4b-txts {
   width: 75%;
@@ -1199,7 +1199,7 @@
 }
 .real_world_adoption_area2_title {
   font-size: 48px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .real_world_adoption_area2_para {
   font-size: 24px;
@@ -1248,7 +1248,7 @@
 
 .how_it_works_area_cont1_title {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 25px;
   color: #434343;
 }
@@ -1274,7 +1274,7 @@ a.visit_app_link_2 {
 }
 .how_it_works_title {
   font-size: 44px;
-  font-weight: 700;
+  font-weight: 600;
   position: relative;
   color: #464646;
 }
@@ -1372,7 +1372,7 @@ a.visit_app_link_2 {
 }
 .whyEgoras_heading {
   font-size: 48px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .whyEgoras_body {
@@ -1419,7 +1419,7 @@ a.visit_app_link_2 {
 }
 /* .span2-txts {
   font-size: 38px;
-  font-weight: 800;
+  font-weight: 600;
   color: #229e54;
   margin: 0;
 }
@@ -1476,7 +1476,7 @@ a.visit_app_link_2 {
 }
 
 .key-features-heading {
-  font-weight: 800;
+  font-weight: 600;
   text-align: center;
   position: relative;
 }
@@ -1585,7 +1585,7 @@ a.visit_app_link_2 {
   margin-top: 20px;
 }
 .btc-card-txt-weight {
-  font-weight: 800;
+  font-weight: 600;
 }
 .fees-figure {
   font-size: 12px;
@@ -1728,7 +1728,7 @@ a.visit_app_link_2 {
   /* display: flex; */
   /* text-align: center; */
   font-size: 24px;
-  font-weight: 700;
+  font-weight: 600;
   width: 100%;
   line-height: 29px;
 }
@@ -2064,7 +2064,7 @@ a.visit_app_link_2 {
 }
 .getStarted_title {
   font-size: 40px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .get_started_button {
   padding: 1em 3.5em;
@@ -2079,7 +2079,7 @@ a.visit_app_link_2 {
 }
 .key_features_section_title {
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 600;
   color: black;
 }
 /* collateral assets section end */
@@ -2351,7 +2351,7 @@ a.visit_app_link_2 {
   }
   .floating_div_cont_area1_cont2 {
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 600;
   }
 
   .vertical_rule2a {
@@ -2459,7 +2459,7 @@ a.visit_app_link_2 {
   .span4a-txts {
     font-size: 42px;
     width: 100%;
-    font-weight: 800;
+    font-weight: 600;
     line-height: 44px;
   }
   .earning-section {
@@ -2483,7 +2483,7 @@ a.visit_app_link_2 {
   }
   .getStarted_title {
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 600;
   }
   .get_started_button {
     padding: 1em 3.5em;
@@ -2500,7 +2500,7 @@ a.visit_app_link_2 {
 @media screen and (max-width: 500px) {
   .real_world_adoption_area2_title {
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 600;
   }
   .real_world_adoption_area2_para {
     font-size: 16px;
@@ -2510,7 +2510,7 @@ a.visit_app_link_2 {
   }
   .whyEgoras_heading {
     font-size: 32px;
-    font-weight: 700;
+    font-weight: 600;
   }
   .floating_absolute_div {
     position: absolute;
@@ -2582,12 +2582,12 @@ a.visit_app_link_2 {
   }
   .floating_div_cont_area1_cont2 {
     font-size: 26px;
-    font-weight: 700;
+    font-weight: 600;
   }
   .span4a-txts {
     font-size: 38px;
     width: 100%;
-    font-weight: 800;
+    font-weight: 600;
     line-height: 44px;
   }
   .key-features-cards-area1 {
@@ -2677,7 +2677,7 @@ a.visit_app_link_2 {
   .tokenCardflex-txt {
     width: 100%;
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 600;
   }
 }
 @media screen and (max-width: 390px) {
@@ -2687,7 +2687,7 @@ a.visit_app_link_2 {
   .span4a-txts {
     font-size: 34px;
     width: 100%;
-    font-weight: 800;
+    font-weight: 600;
     line-height: 44px;
   }
 }
@@ -2780,10 +2780,10 @@ a.visit_app_link_2 {
   background-color: #1c2c22;
 }
 .dark .DashBoardHeaderSection {
-  background-color: #122319ab;
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  border-bottom: solid 1px #1e2922;
+  background-color: #122119;
+  /* -webkit-backdrop-filter: blur(6px); */
+  /* backdrop-filter: blur(6px); */
+  border-bottom: solid 1px #2b3b30;
   box-shadow: 0px 5px 9px #000000;
 }
 
@@ -2896,7 +2896,7 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark .pool_lend_details_link {
-  color: #1b231e;
+  color: #8b9b91;
 }
 .dark .pool_lend_details_link .asset_overview_link_icon {
   background: #d5e1e9;

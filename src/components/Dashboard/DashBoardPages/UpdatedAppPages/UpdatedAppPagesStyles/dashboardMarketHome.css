@@ -52,7 +52,7 @@
 }
 .dashboardMarketPlaceHeader_div2_categories_cont1 {
   font-size: 14px;
-  font-weight: 100;
+  font-weight: 400;
   margin-right: 2em;
   padding: 10px;
   cursor: pointer;
@@ -205,7 +205,7 @@
 
 .dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount {
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
 }
 .dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash {
   font-size: 14px;

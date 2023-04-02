@@ -6,6 +6,7 @@ import {
   ACCEPT_OR_DECLINE_BID,
   FETCH_USER_NEW_PRODUCT,
   GET_UPLOADED_PRODUCT_BY_ID_ROUTE,
+  PROCESS_PRODUCT_ORDER_ROUTE,
 } from "../core/ApiRoutes";
 export const config = {
   headers: {
@@ -60,6 +61,23 @@ export const GET_UPLOADED_PRODUCT_BY_ID = async (id) => {
     return err.repsonse;
   }
 };
+export const PROCESS_PRODUCT_PURCHASE = async (user, productId) => {
+  try {
+    const response = await axios.post(
+      `${PROCESS_PRODUCT_ORDER_ROUTE}`,
+      {
+        user,
+        product_id: productId,
+      },
+      config
+    );
+
+    return response.data;
+  } catch (err) {
+    return err.repsonse;
+  }
+};
+
 export const DISPLAY_NEW_USER_PRODUCTS_CALL = async (account) => {
   console.log("____HHHH_____");
   try {

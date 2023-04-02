@@ -411,6 +411,12 @@ const ProductDetailPage = ({ match }) => {
                         Pay via Smart Balance
                       </span>
                     </div>
+
+                    <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn_div">
+                      <button className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn">
+                        Purchase
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

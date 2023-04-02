@@ -2,10 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 
 // import React from "react";
 import { Link } from "react-router-dom";
-import HomeIcon from "@mui/icons-material/Home";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import HowToVoteIcon from "@mui/icons-material/HowToVote";
-import CasinoIcon from "@mui/icons-material/Casino";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import WhyPeopleTrustUs from "./WhyPeopleTrustUs/WhyPeopleTrustUs";
 import { parseEther, formatEther } from "@ethersproject/units";
@@ -20,19 +16,10 @@ import Web3 from "web3";
 import LOAN from "../../web3/contracts/Loan.json";
 import SwapContract from "../../web3/contracts/Contract_Address.json";
 import NumberScroller from "react-number-scroller";
-import CloseIcon from "@mui/icons-material/Close";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import Marquee from "react-fast-marquee";
-import NotInterestedIcon from "@mui/icons-material/NotInterested";
-import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
-import SearchIcon from "@mui/icons-material/Search";
-import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
-import FlipCountdown from "@rumess/react-flip-countdown";
 import "./countdown.css";
-import WaveAnimation from "./WaveAnimation/WaveAnimation";
 import "../../css/home.css";
-import { PersonTwoTone } from "@material-ui/icons";
 import { numberWithCommas } from "../../static";
 import {
   Web3ReactProvider,

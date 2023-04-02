@@ -1036,10 +1036,20 @@ const crossexchange = async (from, to, amoumt, signer) => {
 // =========new V3 Functions==================================
 const listProduct = async (_title, _amount, signer) => {
   console.log(_title, _amount);
+  let _isdirect = 0;
+  let _qty = 1;
+
   try {
     const instance = contractProductFacetInstance(signer);
     let result;
-    result = await instance.listProduct(_title, _amount);
+    console.log("first");
+    result = await instance.listProduct(
+      _title,
+      _amount.toString(),
+      _isdirect,
+      _qty
+    );
+    console.log("second");
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -1094,7 +1104,7 @@ const annually = async (amount, signer) => {
 const takeRoyalty = async (signer) => {
   // console.log(amount);
   try {
-    const instance = contractStakingFacetInstance(signer);
+    const instance = await contractStakingFacetInstance(signer);
     let result;
     result = await instance.takeRoyalty();
     console.log(result, "result, result,result,result,result");

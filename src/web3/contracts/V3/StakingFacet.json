@@ -134,6 +134,30 @@
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "stakeConfig",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_YEARLY_INTEREST_RATE",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_DAYS_IN_A_YEAR",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_egcusd",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -155,6 +179,11 @@
         },
         {
           "internalType": "uint256",
+          "name": "_totalStakeUSD",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
           "name": "_nextRoyaltyTakePeriod",
           "type": "uint256"
         },
@@ -172,6 +201,19 @@
       "stateMutability": "view",
       "type": "function",
       "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        }
+      ],
+      "name": "resetTakeRoyaltyTime",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     }
   ]
 }

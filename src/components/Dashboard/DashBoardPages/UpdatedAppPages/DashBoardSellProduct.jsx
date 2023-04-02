@@ -148,9 +148,18 @@ const DashBoardSellProduct = () => {
   };
   const sendProductToBlockchain = async (prodId) => {
     const conCatProdName = ` ${prodName}_${prodId}`;
+    // Samsung Galaxy Note 12A_7bcf7fcc-4ce3-4e47-8c89-7b26cb89e06d 540000000000000000000000
+    // ("Samsung Galaxy Note 12A_7bcf7fcc-4ce3-4e47-8c89-7b26cb89e06d", "540000000000000000000000", "1", false);
+    // "Samsung Galaxy Note 12A_7bcf7fcc-4ce3-4e47-8c89-7b26cb89e06d",
+    //   "540000000000000000000000",
+    //   1,
+    //   false,
+    //   { from: accounts[0] };
     const res = await listProduct(
-      conCatProdName,
-      parseEther(saleAmount.toString(), "wei").toString(),
+      // conCatProdName,
+      "Samsung Galaxy Note 12A_38679697-ef70-472f-b7d8-451919e91155",
+      // parseEther(saleAmount.toString(), "wei").toString(),
+      "540000000000000000000000",
       library.getSigner()
     );
     console.log(res, "somto8uhhhg");
@@ -174,41 +183,42 @@ const DashBoardSellProduct = () => {
     const formData = new FormData();
 
     console.log(account);
+    sendProductToBlockchain("res.data.data.product_id");
 
-    const element = document.getElementById("product_image");
-    const element2 = document.getElementById("product_image2");
-    const element3 = document.getElementById("product_image3");
-    const file = element.files[0];
-    const file2 = element2.files[0];
-    const file3 = element3.files[0];
-    formData.append("product_image", file);
-    formData.append("product_image2", file2);
-    formData.append("product_image3", file3);
-    formData.append("product_name", prodName);
-    formData.append("product_brand", brandName);
-    formData.append("product_condition", prodCondition);
-    formData.append("userAddress", account);
-    formData.append("amount", saleAmount);
-    console.log(formData);
-    try {
-      const res = await axios.post(
-        API_URL + "/product/initialize/add/product",
-        formData,
-        config
-      );
-      console.log(res, "somto");
-      if (res.status === 200) {
-        sendProductToBlockchain(res.data.data.product_id);
-        return;
-      }
-    } catch (err) {
-      console.log(err);
-      console.log(err);
-      setErrorModal(true);
-      setErrorMessage(err.response.data.errorMessage);
-      setIsLoading(false);
-      setDisable(false);
-    }
+    // const element = document.getElementById("product_image");
+    // const element2 = document.getElementById("product_image2");
+    // const element3 = document.getElementById("product_image3");
+    // const file = element.files[0];
+    // const file2 = element2.files[0];
+    // const file3 = element3.files[0];
+    // formData.append("product_image", file);
+    // formData.append("product_image2", file2);
+    // formData.append("product_image3", file3);
+    // formData.append("product_name", prodName);
+    // formData.append("product_brand", brandName);
+    // formData.append("product_condition", prodCondition);
+    // formData.append("userAddress", account);
+    // formData.append("amount", saleAmount);
+    // console.log(formData);
+    // try {
+    //   const res = await axios.post(
+    //     API_URL + "/product/initialize/add/product",
+    //     formData,
+    //     config
+    //   );
+    //   console.log(res, "somto");
+    //   if (res.status === 200) {
+    //     sendProductToBlockchain(res.data.data.product_id);
+    //     return;
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    //   console.log(err);
+    //   setErrorModal(true);
+    //   setErrorMessage(err.response.data.errorMessage);
+    //   setIsLoading(false);
+    //   setDisable(false);
+    // }
   };
   const handleNameChange = (event) => {
     setProdName(event.target.value);

@@ -571,9 +571,9 @@ const Header = ({ togglemakeDark, check }) => {
 
       {showHeader === true ? (
         <div id="Header" className="header_div">
-          <section className="headerSection">
-            <div className="container header">
-              <div className="header-area">
+          <section className="DashBoardHeaderSection">
+            <div className="container-fluid">
+              <div className="dashboard-area">
                 <a href="/" className="egr_logo2_mobil">
                   <img
                     src="/img/egoras-logo.svg"
@@ -587,7 +587,7 @@ const Header = ({ togglemakeDark, check }) => {
                   />
                   <div className="on-mobile-navigators"></div>
                 </a>
-                <ul className="headerLinks">
+                <div className="egrLogo2Cont3">
                   <a href="/">
                     {" "}
                     <img
@@ -601,29 +601,22 @@ const Header = ({ togglemakeDark, check }) => {
                       className="egr-logodark"
                     />
                   </a>
-                  {/* <a
-                href="/app"
-                className={page1 === "/" ? "docs activeLink" : "about"}
-                // onClick={clickMe1}
-              >
-                App <ExitToAppIcon className="exit-to-app" />
-                {page1 === "/" ? <span className="Line"></span> : null}
-              </a> */}
-                </ul>
+                </div>
 
-                <div
-                  style={{ display: "flex", alignItems: "center", gap: "0px" }}
-                >
-                  <div className="toggle_dark_mode_div">
-                    <SwitchToggle2
-                      className="toggle_dark_mode"
-                      darkMode={togglemakeDark}
-                      checkBox={check}
-                    />
-                  </div>
-                  <div className="desktop_view_cont">
+                <div className="user_profile_icon_cont2">
+                  <div className="together">
+                    <div className="header_menu_icon_con_dash">
+                      <Hamburger toggled={isOpen} toggle={setIsOpen} />
+                    </div>
+                    <div className="toggle_dark_mode_div">
+                      <SwitchToggle2
+                        className="toggle_dark_mode"
+                        darkMode={togglemakeDark}
+                        checkBox={check}
+                      />
+                    </div>
                     {account ? (
-                      <div className="connected_header_address">
+                      <div className="connected_header_address dash_connected_header_address">
                         <p className="header_wllt_bal">
                           <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
                           {coinBalance} BNB
@@ -632,17 +625,16 @@ const Header = ({ togglemakeDark, check }) => {
                           className="metamask_prof_pic_icon"
                           ref={avatarRef}
                         ></div>
-
                         <div className="wallet_addr_cont_txt_header">
                           <div className="wall_addr">{walletAddr}</div>
                         </div>
+
                         <div
                           className="wallet_settings_icon_cont"
                           onClick={toggleDisconnectDiv}
                         >
                           <SettingsOutlinedIcon className="wallet_settings_icon" />
                         </div>
-
                         {disconnetDiv === true ? (
                           <div className="disconnect_button_div">
                             <Authenticate isHome="false" />
@@ -650,83 +642,21 @@ const Header = ({ togglemakeDark, check }) => {
                         ) : null}
                       </div>
                     ) : (
-                      <Authenticate isHome="false" />
+                      <div className="connect_div_dash_head">
+                        <Authenticate isHome="false" />
+                      </div>
                     )}
                   </div>
-                  <div className="header_menu_icon_cont">
-                    <Hamburger toggled={isOpen} toggle={setIsOpen} />
-                  </div>
-
-                  {/* <WalletConnector /> */}
                 </div>
-                {/* <ul className="headerLinks2">
-            <a href="/documents" className="docs">
-              Products
-            </a>
-
-            <a href="about" className="about">
-              Company
-              <ArrowDropDownIcon />
-            </a>
-          </ul> */}
-                {/* 
-            <ul className="headerButtons">
-              <a href="/app" className="connect">
-                {" "}
-                Launch App <ExitToAppIcon className="exit-to-app" />
-              </a>
-            </ul> */}
-                {/* <img
-              src="/img/hamburger-open.svg"
-              alt=""
-              className="hamburgerOpen"
-            /> */}
-                {/* <div className="onMobile">
-              <Toolbar className="hideNow">
-                <IconButton
-                  color="inherit"
-                  aria-label="open drawer"
-                  edge="end"
-                  onClick={handleDrawerOpen}
-                  className={clsx(open && classes.hide)}
-                  id="HideAgain"
-                >
-                  <MenuIcon />
-                </IconButton>
-              </Toolbar>
-              <Drawer
-                className={classes.drawer}
-                variant="persistent"
-                anchor="right"
-                open={open}
-                classes={{
-                  paper: classes.drawerPaper,
-                }}
-              >
-                <div className={classes.drawerHeader}>
-                  <IconButton onClick={handleDrawerClose}>
-                    {theme.direction === "rtl" ? <CloseIcon /> : <CloseIcon />}
-                  </IconButton>
-                </div>
-                <Divider />
-                <List>
-                  <a href="/app" className="connect">
-                    {" "}
-                    Launch App <ExitToAppIcon className="exit-to-app" />
-                  </a>
-                </List>
-              </Drawer>
-            </div> */}
               </div>
               {isOpen === true ? (
-                <div className="mobile_view_header_cont_head_body">
+                <div className="mobile_view_header_cont_head_body_dash">
                   <div className="mobile_view_header_cont_head_body_cont1">
                     <div className="mobile_view_header_cont_head_body_cont1_title">
                       Balance:
                     </div>
                     <div className="mobile_view_header_cont_head_body_cont1_para">
                       <p className="header_wllt_bal">
-                        {" "}
                         <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
                         {coinBalance} BNB
                       </p>

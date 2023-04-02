@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { SwapRouterAddress, adminAddMinter } from "../../../../web3/index2";
-import "./AdminRouter.css";
+import {
+  setPythia,
+  setPriceOracle,
+  setEGCUSDTicker,
+  resetStakeTime,
+} from "../../../../web3/index2";
 import Web3 from "web3";
 import { parseEther, formatEther } from "@ethersproject/units";
 import {
@@ -20,26 +24,29 @@ const PriceOracle = () => {
     active,
     error,
   } = context;
-  const [CakeRouterAddress, setCakeRouterAddress] = useState(
-    "0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3"
-  );
-  const [BusdRouterAddress, setBusdRouterAddress] = useState(
-    "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A"
-  );
-
-  const setRouterAddress = async () => {
-    const response = await SwapRouterAddress(
-      CakeRouterAddress,
-      BusdRouterAddress,
+  const [tickerArray, setTickerArray] = useState(["egceusd"]);
+  const [priceArray, setPriceArray] = useState(["8600000000000000000"]);
+  const setPythiaAddress = async () => {
+    const response = await setPythia(
+      "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
       library.getSigner()
     );
     console.log(response);
   };
-  const addMinter = async () => {
-    const response = await adminAddMinter(
-      "0x78192d41fdCA05Fd1a4EBc329734F6b64D3616a1",
+  const setPrice = async () => {
+    const response = await setPriceOracle(
+      priceArray,
+      tickerArray,
       library.getSigner()
     );
+    console.log(response);
+  };
+  const setTicker = async () => {
+    const response = await setEGCUSDTicker(tickerArray[0], library.getSigner());
+    console.log(response);
+  };
+  const resetStackedTime = async () => {
+    const response = await resetStakeTime(account, library.getSigner());
     console.log(response);
   };
   return (
@@ -48,41 +55,44 @@ const PriceOracle = () => {
         <div className="container">
           <div className="setRouterAddressDiv">
             <div className="setRouterAddressDiv1">
-              <div className="setRouterAddressDiv1_title">
-                Pancake Router Address
-              </div>
+              <div className="setRouterAddressDiv1_title">EGC</div>
               <input
                 type="text"
-                placeholder="0x0000000"
+                placeholder="Price"
                 className="setRouterAddressInput"
-                value={CakeRouterAddress}
+                // value={}
               />
             </div>
             --
             <div className="setRouterAddressDiv1">
-              <div className="setRouterAddressDiv1_title">
-                Busd Pancake Address
-              </div>
+              <div className="setRouterAddressDiv1_title">USD</div>
               <input
-                type="text"
-                placeholder="0x0000000"
+                type="Ticker"
+                placeholder="amount"
                 className="setRouterAddressInput"
-                value={BusdRouterAddress}
+                // value={}
               />
             </div>
             <div className="setRouterAddressButtonDiv">
+              <button onClick={setPrice} className="setRouterAddressBtn">
+                Set Price
+              </button>
               <button
-                onClick={setRouterAddress}
+                onClick={setPythiaAddress}
                 className="setRouterAddressBtn"
               >
-                Set router
+                Set Pythia
+              </button>
+              <button onClick={setTicker} className="setRouterAddressBtn">
+                Set Ticker
+              </button>
+              <button
+                onClick={resetStackedTime}
+                className="setRouterAddressBtn"
+              >
+                Reset Time
               </button>
             </div>
-          </div>
-          <div className="setRouterAddressButtonDiv">
-            <button onClick={addMinter} className="setRouterAddressBtn">
-              Add Minter
-            </button>
           </div>
         </div>
       </section>

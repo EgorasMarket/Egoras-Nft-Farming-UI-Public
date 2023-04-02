@@ -9,9 +9,8 @@ export function useEagerConnect() {
   const [tried, setTried] = useState(false);
 
   useEffect(() => {
-    injected.isAuthorized().then(isAuthorized => {
+    injected.isAuthorized().then((isAuthorized) => {
       if (isAuthorized) {
-        
         activate(injected, undefined, true).catch(() => {
           setTried(true);
         });
@@ -19,9 +18,10 @@ export function useEagerConnect() {
         setTried(true);
       }
     });
-  }, [activate]); // intentionally only running on mount (make sure it's only mounted once :))
+  }, [activate]);
+  // intentionally only running on mount (make sure it's only mounted once :))
 
-  // if the connection worked, wait until we get confirmation of that to flip the flag
+  // // if the connection worked, wait until we get confirmation of that to flip the flag
   useEffect(() => {
     if (!tried && active) {
       setTried(true);
@@ -37,19 +37,19 @@ export function useInactiveListener(suppress = false) {
   useEffect(() => {
     const { ethereum } = window;
     if (ethereum && ethereum.on && !active && !error && !suppress) {
-      const handleChainChanged = chainId => {
+      const handleChainChanged = (chainId) => {
         console.log("chainChanged", chainId);
         activate(injected);
       };
 
-      const handleAccountsChanged = accounts => {
+      const handleAccountsChanged = (accounts) => {
         console.log("accountsChanged", accounts);
         if (accounts.length > 0) {
           activate(injected);
         }
       };
 
-      const handleNetworkChanged = networkId => {
+      const handleNetworkChanged = (networkId) => {
         console.log("networkChanged", networkId);
         activate(injected);
       };

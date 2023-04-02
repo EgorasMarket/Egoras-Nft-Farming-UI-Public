@@ -143,7 +143,7 @@
 .nav-pills .show > .nav-link {
   background-color: #e1f7ea !important;
   color: #229e54 !important;
-  font-weight: 700;
+  font-weight: 600;
   border-bottom: solid 2px #229e54 !important;
   /* margin-bottom: 2em; */
   border-bottom-right-radius: 0;
@@ -151,7 +151,7 @@
 }
 .amount_withdraw_cont1_txt1 {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: #56bc7e;
 }
 .price_value_change.danger {
@@ -205,12 +205,12 @@
 .amount_withdraw_cont1_txt2 {
   font-size: 14px;
   color: #707070;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .openVault_heading {
   margin-bottom: 16px;
-  font-weight: 800;
+  font-weight: 600;
 }
 .vault_prices {
   box-sizing: border-box;
@@ -253,7 +253,7 @@ px
 .vault_percent {
   margin-left: 15px;
   color: #56bc7e;
-  font-weight: 800;
+  font-weight: 600;
 }
 .vault_prices1_cont1 {
   display: flex;
@@ -263,18 +263,18 @@ px
 .vault_prices1txt1 {
   color: #56bc7e;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   margin: 0;
 }
 .vault_prices1txt1aa {
   color: #56bc7e;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   margin: 0;
 }
 
 .vault_prices1amount {
-  font-weight: 800;
+  font-weight: 600;
   font-size: 32px;
   display: flex;
   flex-direction: column;
@@ -308,14 +308,14 @@ input.vault_input_vault:focus-visible {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 span.vault_input1 {
   color: #949494;
 }
 p.configure {
-  font-weight: 800;
+  font-weight: 600;
   color: #000;
   font-size: 16px;
 }
@@ -389,7 +389,7 @@ button.open_vault_input_btn_a:hover {
   align-items: center;
   justify-content: space-between;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   color: #7a7a7a;
 }
 .horizontal {
@@ -397,7 +397,7 @@ button.open_vault_input_btn_a:hover {
 }
 h3.valid_div_inner_div_heading {
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 600;
   display: flex;
   margin: 0;
 }
@@ -436,7 +436,7 @@ h3.valid_div_inner_div_heading {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   padding: 0.5em 1em;
   padding-bottom: 0;
   margin-top: 15px;
@@ -481,13 +481,13 @@ input.vault_input_vaulta:focus-visible {
 }
 @media screen and (max-width: 950px) {
   .vault_prices1amount {
-    font-weight: 800;
+    font-weight: 600;
     font-size: 24px;
   }
 
   .amount_withdraw_cont1_txt1 {
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
     color: #56bc7e;
   }
 }
@@ -532,7 +532,7 @@ input.vault_input_vaulta:focus-visible {
   .vault_percent {
     margin-left: 0;
     color: #56bc7e;
-    font-weight: 800;
+    font-weight: 600;
   }
   .vault_captions {
     display: grid;
@@ -571,14 +571,14 @@ input.vault_input_vaulta:focus-visible {
   }
 
   .vault_prices1amount {
-    font-weight: 800;
+    font-weight: 600;
     font-size: 18px;
   }
 
   .vault_prices1txt1 {
     color: #56bc7e;
     font-size: 11px;
-    font-weight: 700;
+    font-weight: 600;
     margin: 0;
   }
 }
