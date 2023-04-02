@@ -54,6 +54,11 @@ import {
   UnsupportedChainIdError,
 } from "@web3-react/core";
 import "./Logos.css";
+import { GET_TVL } from "../../services/stakeServices";
+import {
+  GET_COIN_GEKO_PRICE,
+  GET_COIN_GEKO_PRICE_IN_USD,
+} from "../../services/generalServices";
 // import {
 //   lendUS,
 //   takeDividend,
@@ -122,14 +127,6 @@ const Home = () => {
     error,
   } = context;
   const assets = [
-    // {
-    //   img: "/img/eusd-icon-dollar.svg",
-    //   name: "Egoras Naira",
-    //   type: "Engn",
-    //   eusd_Avail: "100M",
-    //   stable: "0.50%",
-    //   ratio: "170%",
-    // },
     {
       img: "/img/egc-icon.svg",
       name: "Egoras Credit",
@@ -139,12 +136,10 @@ const Home = () => {
       ratio: "120%",
     },
   ];
-  // console.log(localStorage.getItem("uiMode"), "homee local");
-  // var uiMode = localStorage.getItem("uiMode");
+
   const toggleAboutVideoModal = () => {
     setAboutVideoModal(!aboutVideoModal);
   };
-  // const responsive = {
   //   superLargeDesktop: {
   //     // the naming can be any, depends on you.
   //     breakpoint: { max: 4000, min: 3000 },
@@ -286,19 +281,6 @@ const Home = () => {
     setSearchResults(results);
   }, [searchTerm]);
 
-  // const [categoryBtn, setCategoryBtn] = useState("All");
-
-  // const triggerAll = () => {
-  //   setCategoryBtn("All");
-  // };
-
-  // const triggerPopular = () => {
-  //   setCategoryBtn("Popular");
-  // };
-  // const triggerStable = () => {
-  //   setCategoryBtn("Stable");
-  // };
-
   useEffect(() => {
     const fetchData = async () => {
       const response = await CALL_CHECK_USER_AND_MEMBERSHIP(account);
@@ -347,69 +329,28 @@ const Home = () => {
       setAnimate1(true);
     }, 4000);
   }, [animate4]);
-  // useEffect(() => {
 
-  // const timer3 = setTimeout(() => {
-  //   setAnimate3(false);
-  //   setAnimate4(true);
-  // }, 5000);
-  // }, []);
-  // useEffect(
-  //   async (e) => {
-  //     if (account) {
-  //       let check = await getEgcSmartContractBalnce(
-  //         "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
-  //         LOAN.address,
-  //         library.getSigner()
-  //       );
-  //       console.log(check);
-  //       const etherValue = Web3.utils.fromWei(check.message, "ether");
-  //       console.log(parseInt(etherValue), "egc_loan");
-  //       setEgcVal(() => parseInt(etherValue));
-  //       // =============
-  //       // =============
-  //       // =============
-  //       // =============
-  //       let check2 = await getEgcSmartContractBalnce(
-  //         "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
-  //         SwapContract.address,
-  //         library.getSigner()
-  //       );
-  //       console.log(check2);
-  //       const etherValue2 = Web3.utils.fromWei(check2.message, "ether");
-  //       console.log(parseInt(etherValue2), "egc_swap");
-  //       setEgcVal2(() => parseInt(etherValue2));
-  //       // =============
-  //       // =============
-  //       // =============
-  //       // =============
-  //       let check3 = await getEgcSmartContractBalnce(
-  //         "0x8e9a916b6920136110a77E9acAf878862358A467",
-  //         LOAN.address,
-  //         library.getSigner()
-  //       );
-  //       console.log(check3);
-  //       const etherValue3 = Web3.utils.fromWei(check3.message, "ether");
-  //       console.log(parseInt(etherValue3), "egr_loan");
-  //       setEgrVal(() => parseInt(etherValue3));
+  useEffect(() => {
+    const fetchData = async () => {
+      const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
+      // if (typeof egc_usd !== "number") {
+      //   console.log("cannot determine the price of EGC");
+      //   return;
+      // }
+      // if (typeof response !== "number") {
+      //   console.log("cannot determine the price of EGCs");
 
-  //       // =============
-  //       // =============
-  //       // =============
-  //       // =============
-  //       let check4 = await getEgcSmartContractBalnce(
-  //         "0x8e9a916b6920136110a77E9acAf878862358A467",
-  //         SwapContract.address,
-  //         library.getSigner()
-  //       );
-  //       console.log(check4);
-  //       const etherValue4 = Web3.utils.fromWei(check4.message, "ether");
-  //       console.log(parseInt(etherValue4), "egr_swap");
-  //       setEgrVal2(() => parseInt(etherValue4));
-  //     }
-  //   },
-  //   [account]
-  // );
+      //   return;
+      // }
+
+      const response = await GET_TVL();
+
+      const tvl = Number(Number(egc_usd) * Number(response), 2);
+      console.log(tvl, "google");
+    };
+    fetchData();
+  }, []);
+
   useEffect(
     async (e) => {
       let string =
@@ -462,12 +403,7 @@ const Home = () => {
       totalAmountFrom,
     ]
   );
-  // console.log(Math.round(totalAmountFrom));
-  // console.log(Math.round(TotalSum));
-  // let amountFrom = Math.round(totalAmountFrom);
-  // let amountTo = Math.round(TotalSum);
-  // console.log(parseInt(amountFrom));
-  // const tOTU = parseInt(amountFrom);
+
   const tOTU1 = 2041224;
   // const tOTU2 = tOTU;
   // console.log(totu, "amount from utututututu");
@@ -516,28 +452,8 @@ const Home = () => {
                   Read Docs
                 </a> */}
               </div>
-              {/* <FlipCountdown
-                className="flip-countdown"
-                titlePosition="bottom"
-                yearTitle="Year"
-                monthTitle="Months"
-                dayTitle="Days"
-                hourTitle="Hours"
-                minuteTitle="Minutes"
-                secondTitle="Seconds"
-                hideYear
-                // hideMonth
-                size="small"
-                endAt={"2022-07-03 08:00:00"}
-              /> */}
             </div>
-            {/* <div className="hero_area2">
-              <img
-                src="/img/hero_abstract_bg.svg"
-                alt=""
-                className="hero_area2_img"
-              />
-            </div> */}
+
             <div className="nft_area2_stat_div_area">
               <div className="nft_area2_stat_div_area_cont1">
                 <div className="nft_area2_stat_div_area_cont1_icon_cont">
@@ -618,364 +534,6 @@ const Home = () => {
         {/* <img src="/img/hero_bg_bg.png" alt="" className="blurDrop-token2" /> */}
         <img src="/img/hero_backdrop.png" alt="" className="hero_backdrop" />
       </section>
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* <section className="how_it_works_possibleb">
-        <div className="custom_container">
-          <div className="how_it_works_possible_area">
-            <div className="how_it_works_possible_area_title_area">
-              <div className="how_it_works_possible_area_title_area1">
-                <div className="how_it_works_possible_area_head">
-                  What's possible with EGCDAO
-                </div>
-                <div className="how_it_works_possible_area_para">
-                  Welcome to first open-source decentralized Egoras staking
-                  pool. The smart-contract service guarantees
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* <section className="how_it_works_possible">
-        <div className="custom_container">
-          <div className="how_it_works_possible_area">
-            <div className="whatPossible_body_area_1">
-              <div className="whatPossible_body_area_1_cont1">
-                <img
-                  src="/img/egcDaoStakeImage.png"
-                  alt=""
-                  className="whatPossible_body_area_1_cont1_img"
-                />
-              </div>
-              <div className="whatPossible_body_area_1_cont2">
-                <div className="whatPossible_body_area_1_cont2_title">
-                  High Yield Staking Platform
-                </div>
-                <div className="whatPossible_body_area_1_cont2_para">
-                  By locking your EGC tokens on the platform for a specific
-                  duration, you can earn rewards in the form of a higher yield
-                  or annual percentage yield (APY) on the staked tokens. The
-                  locked EGC serves as collateral and provides liquidity for
-                  trade-in purchases. The APY rate that users can earn by
-                  staking their tokens is subject to variation depending on
-                  several factors such as the amount of tokens staked, duration
-                  of staking, and market conditions. Typically, users can expect
-                  a higher APY for longer staking periods.
-                </div>
-                <div className="whatPossible_body_area_1_cont2__btn_div">
-                  <button className="whatPossible_body_area_1_cont2__btn">
-                    {" "}
-                    Explore
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* <section className="how_it_works_possible">
-        <div className="custom_container">
-          <div className="how_it_works_possible_area">
-            <div className="whatPossible_body_area_1b">
-              <div className="whatPossible_body_area_1_cont2b">
-                <div className="whatPossible_body_area_1_cont2_title2">
-                  High Yield Staking Platform
-                </div>
-                <div className="whatPossible_body_area_1_cont2_para">
-                  By locking your EGC tokens on the platform for a specific
-                  duration, you can earn rewards in the form of a higher yield
-                  or annual percentage yield (APY) on the staked tokens. The
-                  locked EGC serves as collateral and provides liquidity for
-                  trade-in purchases. The APY rate that users can earn by
-                  staking their tokens is subject to variation depending on
-                  several factors such as the amount of tokens staked, duration
-                  of staking, and market conditions. Typically, users can expect
-                  a higher APY for longer staking periods.
-                </div>
-                <div className="whatPossible_body_area_1_cont2__btn_div">
-                  <button className="whatPossible_body_area_1_cont2__btn">
-                    {" "}
-                    Explore
-                  </button>
-                </div>
-              </div>
-              <div className="whatPossible_body_area_1_cont1b">
-                <img
-                  src="/img/egcDaoStakeImage.png"
-                  alt=""
-                  className="whatPossible_body_area_1_cont1_img2"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* <section className="how_it_works_possible">
-        <div className="custom_container">
-          <div className="how_it_works_possible_area">
-            <div className="whatPossible_body_area_1">
-              <div className="whatPossible_body_area_1_cont1">
-                <img
-                  src="/img/egcDaoStakeImage.png"
-                  alt=""
-                  className="whatPossible_body_area_1_cont1_img"
-                />
-              </div>
-              <div className="whatPossible_body_area_1_cont2">
-                <div className="whatPossible_body_area_1_cont2_title">
-                  High Yield Staking Platform
-                </div>
-                <div className="whatPossible_body_area_1_cont2_para">
-                  By locking your EGC tokens on the platform for a specific
-                  duration, you can earn rewards in the form of a higher yield
-                  or annual percentage yield (APY) on the staked tokens. The
-                  locked EGC serves as collateral and provides liquidity for
-                  trade-in purchases. The APY rate that users can earn by
-                  staking their tokens is subject to variation depending on
-                  several factors such as the amount of tokens staked, duration
-                  of staking, and market conditions. Typically, users can expect
-                  a higher APY for longer staking periods.
-                </div>
-                <div className="whatPossible_body_area_1_cont2__btn_div">
-                  <button className="whatPossible_body_area_1_cont2__btn">
-                    {" "}
-                    Explore
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* ============================= */}
-      {/* <section className="how_it_works_section">
-        <div className="custom_container">
-          <div className="how_it_works_area">
-            <div className="how_it_works_area_head">Defi + Sustainablity</div>
-            <div className="how_it_works_area_para">
-              Welcome to first open-source decentralized Egoras staking pool.
-              The smart-contract service guarantees
-            </div>
-            <div className="how_it_works_area_body">
-              <div className="how_it_works_area_body_area1">
-                <div className="how_it_works_area_body_area1_icon_div">
-                  <img
-                    src="/img/validate_image_dummy.png"
-                    alt=""
-                    className="how_it_works_area_body_area1_icon"
-                  />
-                </div>
-                <div className="how_it_works_area_body_area1_title">Swap</div>
-                <div className="how_it_works_area_body_area1_para">
-                  The technology developed by EGCDAO enables the connection of
-                  diversified sources of crypto liquidity, thereby providing the
-                  most favorable rates and optimal returns for all. With EGCDAO,
-                  users can exchange tokens, earn yields, and create top-tier
-                  Decentralized Finance (DeFi) applications.
-                </div>
-                <div className="how_it_works_area_body_area1_link_div">
-                  <a href="" className="how_it_works_area_body_area1_link">
-                    Explore
-                    <ArrowOutwardIcon />
-                  </a>
-                </div>
-              </div>
-      
-              <div className="how_it_works_area_body_area1">
-                <div className="how_it_works_area_body_area1_icon_div">
-                  <img
-                    src="/img/validate_image_dummy.png"
-                    alt=""
-                    className="how_it_works_area_body_area1_icon"
-                  />
-                </div>
-                <div className="how_it_works_area_body_area1_title">
-                  Physically-Backed NFTs
-                </div>
-                <div className="how_it_works_area_body_area1_para">
-                  EGCDAO's platform lets brands, collectors, and recyclers turn
-                  physical assets into NFT collections. Guardians store the
-                  assets and generate NFTs that can be redeemed for the assets
-                  at any time. EGCDAO manages legal, physical, and logistical
-                  tasks, freeing users to focus on their core business.
-                </div>
-                <div className="how_it_works_area_body_area1_link_div">
-                  <a href="" className="how_it_works_area_body_area1_link">
-                    Explore
-                    <ArrowOutwardIcon />
-                  </a>
-                </div>
-              </div>
-    
-              <div className="how_it_works_area_body_area1">
-                <div className="how_it_works_area_body_area1_icon_div">
-                  <img
-                    src="/img/validate_image_dummy.png"
-                    alt=""
-                    className="how_it_works_area_body_area1_icon"
-                  />
-                </div>
-                <div className="how_it_works_area_body_area1_title">DAO</div>
-                <div className="how_it_works_area_body_area1_para">
-                  staking EGC tokens allows the token holders to participate in
-                  voting on governance proposals, which can include decisions
-                  such as upgrades to the platform or changes to the rules
-                  governing the project. By staking their tokens and
-                  participating in the governance process, token holders can
-                  have a say in the direction of the project and help shape its
-                  future.
-                </div>
-                <div className="how_it_works_area_body_area1_link_div">
-                  <a href="" className="how_it_works_area_body_area1_link">
-                    Explore
-                    <ArrowOutwardIcon />
-                  </a>
-                </div>
-              </div>
-      
-              <div className="how_it_works_area_body_area1">
-                <div className="how_it_works_area_body_area1_icon_div">
-                  <img
-                    src="/img/validate_image_dummy.png"
-                    alt=""
-                    className="how_it_works_area_body_area1_icon"
-                  />
-                </div>
-                <div className="how_it_works_area_body_area1_title">Build</div>
-                <div className="how_it_works_area_body_area1_para">
-                  EGCDAO seeks trustworthy individuals to serve as storage
-                  Guardians, responsible for securing and safeguarding items
-                  sold on the platform. The role demands high levels of
-                  dependability and trustworthiness. Those with experience and
-                  interest can consider certification as refurbishers for
-                  partnership opportunities.
-                </div>
-                <div className="how_it_works_area_body_area1_link_div">
-                  <a href="" className="how_it_works_area_body_area1_link">
-                    Explore
-                    <ArrowOutwardIcon />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-
-      {/* ============== */}
-      {/* ============== */}
-      {/* ============== */}
-      {/* ============== */}
-
-      {/* ============== */}
-      {/* ============== */}
-      {/* ============== */}
-      {/* ============== */}
-      {/* ============= */}
-      {/* ============= */}
-      {/* ============= */}
-      {/* <section className="ecoSystem_section">
-        <div className="custom_container">
-          <div className="ecoSystem_area">
-            <div className="ecoSystem_area1">
-              <div className="ecoSystem_area1_title">
-                The on-chain ecosystem for structured credit
-              </div>
-              <div className="ecoSystem_area1_para">
-                As the first protocol to bring real-world assets on-chain, we’re
-                building a better financial system.
-              </div>
-              <button className="ecoSystem_area1_btn">Get started</button>
-            </div>
-            <div className="ecoSystem_area2">
-              <img src="" alt="" className="ecoSystem_area2_img" />
-            </div>
-          </div>
-        </div>
-      </section> */}
-      {/* ============== */}
-      {/* ============== */}
-      {/* ============== */}
-      {/* ============== */}
-      {/* ============= */}
-      {/* ============= */}
-      {/* ============= */}
-      {/* <section className="join_ecosystem_section">
-        <div className="custom_container">
-          <div className="join_ecosystem_area">
-            <div className="join_ecosystem_area1">
-              <div className="join_ecosystem_area1_title">
-                Join the Ecosystem
-              </div>
-              <div className="join_ecosystem_area1_para">
-                Join an ever expanding ecosystem of Egoras blockchains and
-                decentralized applications. From crypto novices to senior
-                developers, Egoras has something for everyone!
-              </div>
-            </div>
-            <div className="join_ecosystem_area2">
-              <div className="join_ecosystem_area2_cont1">
-                <img src="" alt="" className="join_ecosystem_area2_cont1_img" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section> */}
-      {/* ============== */}
-      {/* ============== */}
-      {/* ============== */}
-      {/* ============== */}
-      {/* ============= */}
-      {/* ============= */}
-      {/* ============= */}
-      {/*       <div className="what_we_offer_area1_cont1">
-                <div className="what_we_offer_area1_cont1_title">
-                  Staking on Egoras
-                </div>
-                <div className="what_we_offer_area1_cont1_para">
-                  Earn rewards by staking your eNGN to help secure the network.
-                  Choose your staking preference, start earning with a few
-                  clicks, and use your staked funds as voting power.
-                </div>
-                <button className="what_we_offer_area1_cont1_btn">
-                  Stake your eNGN now
-                </button>
-              </div> */}
     </div>
   );
 };

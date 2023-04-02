@@ -50,6 +50,7 @@ import {
   POPULATE_STAKE_INFO,
   POPULATE_STAKE_GENERAL_INFO,
 } from "../../../../services/stakeServices";
+import { socket } from "../../../../socket";
 
 export const DurationDiv = ({ addMonthly, addYearly, SelectedDuration }) => {
   return (
@@ -341,6 +342,13 @@ const StakingUpdate = () => {
       .catch((error) => {
         console.log(error.response);
       });
+
+    socket.connect();
+    socket.on("staking", (stakings) => {
+
+      
+      // alert(JSON.stringify(stakings));
+    });
   }, []);
   useEffect(async () => {
     if (account) {
