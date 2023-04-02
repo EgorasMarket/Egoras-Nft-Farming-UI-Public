@@ -36,6 +36,8 @@ import {
   UnsupportedChainIdError,
 } from "@web3-react/core";
 import { getAuthUserStats } from "../../../actions/token";
+import { GET_CHART_TVL } from "../../../services/stakeServices";
+import { format } from "date-fns";
 const DashboardHome = () => {
   const context = useWeb3React();
   const [lockedValue, setLockedValue] = useState(0);
@@ -78,7 +80,7 @@ const DashboardHome = () => {
       timestamp: "7:29 PM",
       value: 1055,
     },
-    { 
+    {
       month: "Feb",
       timestamp: "4:20 PM",
       value: 1070,
@@ -551,6 +553,7 @@ const DashboardHome = () => {
       value: 4176,
     },
   ];
+
   const lastIndex = array.length - 1;
   const LastArray = array[lastIndex];
   const [ChartValue, setChartValue] = useState(LastArray.value);
@@ -558,6 +561,16 @@ const DashboardHome = () => {
   const [ChartValue2, setChartValue2] = useState(LastArray.value);
   const [ChartTime2, setChartTime2] = useState(LastArray.timestamp);
 
+  const [chartData, setChartData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await GET_CHART_TVL();
+
+      setChartData(response);
+    };
+    fetchData();
+  }, []);
   function formatNumber(number) {
     const abbreviations = {
       k: 1000,
@@ -1933,12 +1946,9 @@ const DashboardHome = () => {
             <div className="lending_area1">
               <div className="lending_area1_cont1">
                 <div className="lending_area1_cont1_body_1">
-                  <div className="lending_area1_cont1_heading">
-                    Total Amount Funded(in Pools)
-                  </div>
+                  <div className="lending_area1_cont1_heading">Total TVL</div>
                   <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(parseInt(lockedValue).toFixed(2))}{" "}
-                    <span className="usd_sign">NGN</span>
+                    0<span className="usd_sign"> USD</span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
@@ -1952,11 +1962,10 @@ const DashboardHome = () => {
               <div className="lending_area1_cont1">
                 <div className="lending_area1_cont1_body_1">
                   <div className="lending_area1_cont1_heading">
-                    Total Amount Funded(in Pools)
+                    Total Trading Volume
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(parseInt(lockedValue / 570).toFixed(2))}{" "}
-                    <span className="usd_sign">USD</span>
+                    0<span className="usd_sign"> USD</span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
@@ -1970,14 +1979,9 @@ const DashboardHome = () => {
 
               <div className="lending_area1_cont1">
                 <div className="lending_area1_cont1_body_1">
-                  <div className="lending_area1_cont1_heading">
-                    Total Funding Capacity
-                  </div>
+                  <div className="lending_area1_cont1_heading">Total Users</div>
                   <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(
-                      parseInt(totalLendingCapacity).toFixed(2)
-                    )}{" "}
-                    <span className="usd_sign">NGN</span>
+                    0<span className="usd_sign"></span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
@@ -1996,7 +2000,7 @@ const DashboardHome = () => {
                     Est.APY:{" "}
                     <span className="lending_area1_last_cont1_divs_cont_value">
                       {" "}
-                      13.0%
+                      12.0%
                     </span>
                   </span>
                   {/* <span className="lending_area1_last_cont1_divs_cont2">
@@ -2008,10 +2012,10 @@ const DashboardHome = () => {
                   </span> */}
                   <span className="lending_area1_last_cont1_divs_cont3">
                     {" "}
-                    Total Pool Assets:{" "}
+                    Total Transactions
                     <span className="lending_area1_last_cont1_divs_cont_value">
                       {" "}
-                      {totalLendingCount}
+                      0
                     </span>{" "}
                   </span>
                 </div>

@@ -26,6 +26,29 @@
   padding-bottom: 1em;
   margin-bottom: 1.5em;
 }
+.faq_container {
+  padding: 2em;
+  background: #1c2c22;
+  border-radius: 11px;
+  margin-top: 2em;
+  margin-bottom: 2em;
+  border: solid 1px #2d3d35;
+  display: flex;
+  flex-direction: column;
+}
+
+.faq_container_title {
+  font-size: 36px;
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+/* .faq_container_body.makeStyles-heading-23 {
+  font-size: 0.9375rem;
+  font-weight: 400;
+  font-size: 18px;
+  color: #99b4a3;
+} */
 
 .lock_container_cont1_div1_lock_div_tabs {
   display: flex;
