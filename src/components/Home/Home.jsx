@@ -34,7 +34,9 @@ import { GET_TVL } from "../../services/stakeServices";
 import {
   GET_COIN_GEKO_PRICE,
   GET_COIN_GEKO_PRICE_IN_USD,
+  GET_COIN_GEKO_PRICGET_TVLE_IN_USD,
 } from "../../services/generalServices";
+import { ConstructionSharp } from "@mui/icons-material";
 
 const Home = () => {
   const context = useWeb3React();
@@ -44,6 +46,7 @@ const Home = () => {
   const [homeData, setHomeData] = useState({
     tvl: "",
     volume: "",
+    users: 0,
   });
 
   const [aboutVideoModal, setAboutVideoModal] = useState(false);
@@ -298,12 +301,15 @@ const Home = () => {
 
       const response = await GET_TVL();
 
-      const tvl = egc_usd * response;
+      console.log(response, "google");
+      const tvl = egc_usd * response.tvl.tvl;
+      const numberOfUsers = response.users;
+
       const main = parseFloat(tvl).toFixed(2);
-      console.log(main, "google");
       setHomeData({
         ...homeData,
         volume: main,
+        users: numberOfUsers,
       });
     };
     fetchData();
@@ -460,7 +466,7 @@ const Home = () => {
                     Total Users
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
-                    10.00k
+                    {homeData.users}
                   </div>
                 </div>
               </div>

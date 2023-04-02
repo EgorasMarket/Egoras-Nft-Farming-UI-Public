@@ -78,7 +78,7 @@ const DashboardHome = () => {
       timestamp: "7:29 PM",
       value: 1055,
     },
-    {
+    { 
       month: "Feb",
       timestamp: "4:20 PM",
       value: 1070,
