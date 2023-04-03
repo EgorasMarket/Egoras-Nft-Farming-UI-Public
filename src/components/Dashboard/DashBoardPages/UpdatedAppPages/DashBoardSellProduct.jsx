@@ -146,12 +146,18 @@ const DashBoardSellProduct = () => {
   const handleRemoveClick3 = () => {
     setImageSrc3("");
   };
-  const sendProductToBlockchain = async (prodId) => {
+  const sendProductToBlockchain = async (
+    prodId,
+    productType,
+    productQuantity
+  ) => {
     const conCatProdName = ` ${prodName}_${prodId}`;
 
     const res = await listProduct(
       conCatProdName,
       parseEther(saleAmount.toString(), "wei").toString(),
+      productType,
+      productQuantity,
       library.getSigner()
     );
     console.log(res, "somto8uhhhg");
@@ -174,6 +180,17 @@ const DashBoardSellProduct = () => {
     setDisable(true);
     const formData = new FormData();
 
+    let productType = true;
+    let productQuantity = 1;
+
+    let setProductType = "";
+
+    if (productType == true) {
+      setProductType = "DIRECT";
+    } else {
+      setProductType = "INDIRECT";
+    }
+
     console.log(account);
 
     const element = document.getElementById("product_image");
@@ -190,6 +207,8 @@ const DashBoardSellProduct = () => {
     formData.append("product_condition", prodCondition);
     formData.append("userAddress", account);
     formData.append("amount", saleAmount);
+    formData.append("productType", setProductType);
+    formData.append("productQuantity", productQuantity);
     console.log(formData);
     try {
       const res = await axios.post(
@@ -199,7 +218,11 @@ const DashBoardSellProduct = () => {
       );
       console.log(res, "somto");
       if (res.status === 200) {
-        sendProductToBlockchain(res.data.data.product_id);
+        sendProductToBlockchain(
+          res.data.data.product_id,
+          productType,
+          productQuantity
+        );
         return;
       }
     } catch (err) {

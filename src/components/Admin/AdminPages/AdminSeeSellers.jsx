@@ -18,7 +18,7 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
-import { placeBid, approveProduct } from "../../../web3";
+import { placeBid, approveProduct1, approveProductDirect } from "../../../web3";
 import { parseEther, formatEther, parseUnits } from "@ethersproject/units";
 import AdminDashboardCard from "../../cards/AdminDashboardCard";
 import {
@@ -418,7 +418,7 @@ const AdminSeeSellers = () => {
   const ApproveProduct = async (id) => {
     console.log(id);
 
-    const res = await approveProduct(id, library.getSigner());
+    const res = await approveProductDirect(id, library.getSigner());
     console.log(res, "somto8uhhhg");
     // console.log(res.status, "somto8uhhhg");
     setSaleDetails("");
@@ -519,6 +519,9 @@ const AdminSeeSellers = () => {
                     </th>
                     <th className="assets-category-titles-heading1 ">
                       Bidding Amount
+                    </th>
+                    <th className="assets-category-titles-heading1  ">
+                      Product Type
                     </th>
                     <th className="assets-category-titles-heading1  ">
                       Product Status
@@ -653,6 +656,19 @@ const AdminSeeSellers = () => {
                                       );
                                     }}
                                   >
+                                    {asset.productType}
+                                  </td>
+                                  <td
+                                    className="assets-category-data1b stable-content branch_apy"
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
+                                  >
                                     {asset.status}
                                   </td>
                                   <td
@@ -666,27 +682,39 @@ const AdminSeeSellers = () => {
                                       );
                                     }}
                                   >
-                                    {/* {`${asset.txnHash.slice(
-                                  0,
-                                  6
-                                )}...${asset.txnHash.slice(63, 66)}`} */}
-                                    {"Coming soon"}
+                                    {`${asset.transaction_hash.slice(
+                                      0,
+                                      6
+                                    )}...${asset.transaction_hash.slice(
+                                      63,
+                                      66
+                                    )}`}
+                                    {/* {"Coming soon"} */}
                                   </td>
                                   <td className="assets-category-data1b stable-content branch_apy">
                                     <div className="approveProdButton">
-                                      <button
-                                        className="approveProdButton_btn"
-                                        disabled={
-                                          asset.bidAmount === null
-                                            ? true
-                                            : false
-                                        }
-                                        onClick={() =>
-                                          ApproveProduct(asset.index_id)
-                                        }
-                                      >
-                                        Approve
-                                      </button>
+                                      {asset.bidAmount === null &&
+                                      asset.productType !== "DIRECT" ? (
+                                        <button
+                                          className="approveProdButton_btn"
+                                          disabled={true}
+                                          onClick={() =>
+                                            ApproveProduct(asset.index_id)
+                                          }
+                                        >
+                                          Approve
+                                        </button>
+                                      ) : (
+                                        <button
+                                          className="approveProdButton_btn"
+                                          disabled={false}
+                                          onClick={() =>
+                                            ApproveProduct(asset.index_id)
+                                          }
+                                        >
+                                          Approve
+                                        </button>
+                                      )}
                                     </div>
                                   </td>
                                   <td
