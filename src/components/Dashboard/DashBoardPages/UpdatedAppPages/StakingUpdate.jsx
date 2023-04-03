@@ -8,7 +8,13 @@ import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
 import "./UpdatedAppPagesStyles/StakingUpdate.css";
 import Blockies from "react-blockies";
+import { makeStyles } from "@material-ui/core/styles";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import Typography from "@material-ui/core/Typography";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Nodata from "../nodataComponent/Nodata";
 import { config } from "../../../../actions/Config";
 import { parseEther, formatEther } from "@ethersproject/units";
@@ -85,6 +91,15 @@ export const DurationDiv = ({ addMonthly, addYearly, SelectedDuration }) => {
     </div>
   );
 };
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+}));
 const StakingUpdate = () => {
   const context = useWeb3React();
   const {
@@ -610,6 +625,8 @@ const StakingUpdate = () => {
       setDisable(false);
     }
   };
+  const classes = useStyles();
+
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -1427,6 +1444,67 @@ const StakingUpdate = () => {
                   </table>
                 </div>
               </div>
+            </div>
+          </div>
+          <div className="faq_container">
+            <div className="faq_container_title">
+              Frequently asked questions
+            </div>
+            <div className="faq_container_body">
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel2a-content"
+                  id="panel2a-header"
+                >
+                  <Typography className={classes.heading}>
+                    What happens to my tokens when I stake?
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <div className="faq_container_body_details">
+                    Upon staking, the smart contract utilizes the staked EGC
+                    tokens as collateral to generate EUSD, which can be utilized
+                    for purchasing items instantly on the protocol.
+                  </div>
+                </AccordionDetails>
+              </Accordion>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel2a-content"
+                  id="panel2a-header"
+                >
+                  <Typography className={classes.heading}>
+                    How much is my reward when I stake?
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <div className="faq_container_body_details">
+                    The protocol offers a fixed annual percentage yield of 12%
+                    (APY), which is computed based on the USD equivalent of the
+                    staked EGC.
+                  </div>
+                </AccordionDetails>
+              </Accordion>
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel2a-content"
+                  id="panel2a-header"
+                >
+                  <Typography className={classes.heading}>
+                    Can I unstake my token before the maturity date?
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <div className="faq_container_body_details">
+                    Yes, users are allowed to unstake their EGC tokens before
+                    the maturity date, but it incurs a penalty fee of 10% of the
+                    total staked amount.
+                  </div>
+                </AccordionDetails>
+              </Accordion>
             </div>
           </div>
         </div>

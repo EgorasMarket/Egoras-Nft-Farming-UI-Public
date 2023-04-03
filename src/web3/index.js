@@ -1036,9 +1036,15 @@ const crossexchange = async (from, to, amoumt, signer) => {
 // ===========================================
 // ===========================================
 // =========new V3 Functions==================================
-const listProduct = async (_title, _amount, signer) => {
-  let _isdirect = false;
-  let _qty = 1;
+const listProduct = async (
+  _title,
+  _amount,
+  productType,
+  productQuantity,
+  signer
+) => {
+  let _isdirect = productType;
+  let _qty = productQuantity;
   console.log(_title, _amount, _isdirect, _qty);
 
   try {
@@ -1266,8 +1272,8 @@ const unlockMemberShipEgcToken = async (amount, signer) => {
 };
 
 // Approve Product
-const approveProduct = async (_productID, signer) => {
-  console.log(_productID);
+const approveProduct1 = async (_productID, signer) => {
+  console.log(_productID, V3ContractAddress);
   try {
     const instance = contractProductFacetInstance(signer);
     let result;
@@ -1285,6 +1291,28 @@ const approveProduct = async (_productID, signer) => {
     };
   }
 };
+
+// Approve Product approveDirectProduct
+const approveProductDirect = async (_productID, signer) => {
+  console.log(_productID, V3ContractAddress);
+  try {
+    const instance = contractProductFacetInstance(signer);
+    let result;
+    result = await instance.approveDirectProduct(_productID);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
 const checkAllowanceMembership = async (owner, amount, signer) => {
   try {
     const instance = erc20Instance(
@@ -1369,7 +1397,8 @@ export {
   // monthlyPlan,
   // semiAnnuallyPlan,
   placeBid,
-  approveProduct,
+  approveProduct1,
+  approveProductDirect,
   AcceptBid,
   unlockMemberShipEgcToken,
   checkAllowanceMembership,

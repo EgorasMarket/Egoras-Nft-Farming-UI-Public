@@ -1946,12 +1946,9 @@ const DashboardHome = () => {
             <div className="lending_area1">
               <div className="lending_area1_cont1">
                 <div className="lending_area1_cont1_body_1">
-                  <div className="lending_area1_cont1_heading">
-                    Total Amount Funded(in Pools)
-                  </div>
+                  <div className="lending_area1_cont1_heading">Total TVL</div>
                   <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(parseInt(lockedValue).toFixed(2))}{" "}
-                    <span className="usd_sign">NGN</span>
+                    0<span className="usd_sign"> USD</span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
@@ -1965,11 +1962,10 @@ const DashboardHome = () => {
               <div className="lending_area1_cont1">
                 <div className="lending_area1_cont1_body_1">
                   <div className="lending_area1_cont1_heading">
-                    Total Amount Funded(in Pools)
+                    Total Trading Volume
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(parseInt(lockedValue / 570).toFixed(2))}{" "}
-                    <span className="usd_sign">USD</span>
+                    0<span className="usd_sign"> USD</span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
@@ -1983,14 +1979,9 @@ const DashboardHome = () => {
 
               <div className="lending_area1_cont1">
                 <div className="lending_area1_cont1_body_1">
-                  <div className="lending_area1_cont1_heading">
-                    Total Funding Capacity
-                  </div>
+                  <div className="lending_area1_cont1_heading">Total Users</div>
                   <div className="lending_area1_cont1_body_txt">
-                    {numberWithCommas(
-                      parseInt(totalLendingCapacity).toFixed(2)
-                    )}{" "}
-                    <span className="usd_sign">NGN</span>
+                    0<span className="usd_sign"></span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
@@ -2009,7 +2000,7 @@ const DashboardHome = () => {
                     Est.APY:{" "}
                     <span className="lending_area1_last_cont1_divs_cont_value">
                       {" "}
-                      13.0%
+                      12.0%
                     </span>
                   </span>
                   {/* <span className="lending_area1_last_cont1_divs_cont2">
@@ -2021,10 +2012,10 @@ const DashboardHome = () => {
                   </span> */}
                   <span className="lending_area1_last_cont1_divs_cont3">
                     {" "}
-                    Total Pool Assets:{" "}
+                    Total Transactions
                     <span className="lending_area1_last_cont1_divs_cont_value">
                       {" "}
-                      {totalLendingCount}
+                      0
                     </span>{" "}
                   </span>
                 </div>
