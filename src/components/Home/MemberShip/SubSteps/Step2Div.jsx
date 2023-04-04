@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
@@ -31,6 +31,23 @@ export const Step2Div = ({
   disable,
   isLoading,
 }) => {
+  const [egcUsd, setEgcUsd] = useState(0);
+  useEffect(
+    async (e) => {
+      let string2 =
+        "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
+      await fetch(string2)
+        .then((resp) => resp.json())
+        .then((data) => {
+          const egc_usd_val = data["egoras-credit"].usd;
+          setEgcUsd(() => egc_usd_val);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    [egcUsd]
+  );
   return (
     <div className="selectPlanDiv">
       <div onClick={toggleSteps} className="selectPlanDiv_backButton">
@@ -217,12 +234,18 @@ export const Step2Div = ({
                   <div className="selectPlanDiv2_area1_cont2_head_txt">
                     Monthly
                   </div>
-                  <div className="selectPlanDiv2_area1_cont2_head_price">
-                    {monthAmount}
-                    {""}
-                    <span className="selectPlanDiv2_area1_cont2_head_price_span">
-                      egc / mnth
-                    </span>{" "}
+                  <div className="selectPlanDiv2_area1_cont2_head_price_div">
+                    <div className="selectPlanDiv2_area1_cont2_head_price">
+                      {monthAmount}
+                      {""}
+                      <span className="selectPlanDiv2_area1_cont2_head_price_span">
+                        egc / mnth
+                      </span>{" "}
+                    </div>
+                    <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
+                      {" "}
+                      ${parseFloat(monthAmount * egcUsd).toFixed(2)}
+                    </span>
                   </div>
                 </div>
                 <div className="selectPlanDiv2_area1_cont2_body">
@@ -260,11 +283,16 @@ export const Step2Div = ({
                   <div className="selectPlanDiv2_area1_cont2_head_txt">
                     Semi-Annually
                   </div>
-                  <div className="selectPlanDiv2_area1_cont2_head_price">
-                    {semiAnnualAmount}
-                    {""}
-                    <span className="selectPlanDiv2_area1_cont2_head_price_span">
-                      egc / 6mnths
+                  <div className="selectPlanDiv2_area1_cont2_head_price_div">
+                    <div className="selectPlanDiv2_area1_cont2_head_price">
+                      {semiAnnualAmount}
+                      {""}
+                      <span className="selectPlanDiv2_area1_cont2_head_price_span">
+                        egc / 6mnths
+                      </span>
+                    </div>
+                    <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
+                      ${parseFloat(semiAnnualAmount * egcUsd).toFixed(2)}
                     </span>
                   </div>
                 </div>
@@ -302,11 +330,17 @@ export const Step2Div = ({
                   <div className="selectPlanDiv2_area1_cont2_head_txt">
                     Annually
                   </div>
-                  <div className="selectPlanDiv2_area1_cont2_head_price">
-                    {AnnualAmount}
-                    {""}
-                    <span className="selectPlanDiv2_area1_cont2_head_price_span">
-                      egc / yr
+
+                  <div className="selectPlanDiv2_area1_cont2_head_price_div">
+                    <div className="selectPlanDiv2_area1_cont2_head_price">
+                      {AnnualAmount}
+                      {""}
+                      <span className="selectPlanDiv2_area1_cont2_head_price_span">
+                        egc / yr
+                      </span>
+                    </div>
+                    <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
+                      ${parseFloat(AnnualAmount * egcUsd).toFixed(2)}
                     </span>
                   </div>
                 </div>

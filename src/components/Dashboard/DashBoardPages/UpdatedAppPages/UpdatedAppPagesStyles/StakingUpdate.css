@@ -42,6 +42,8 @@
   color: #fff;
   font-weight: 600;
   margin-bottom: 10px;
+  border-bottom: solid 1px #323c36;
+  padding-bottom: 10px;
 }
 /* .faq_container_body.makeStyles-heading-23 {
   font-size: 0.9375rem;
@@ -547,6 +549,12 @@ svg.recharts-surface {
 @media screen and (max-width: 767px) {
   .stakingTable_body_row_data {
     padding: 8px;
+  }
+  .faq_container_title {
+    font-size: 32px;
+  }
+  .faq_container {
+    padding: 1em;
   }
 }
 

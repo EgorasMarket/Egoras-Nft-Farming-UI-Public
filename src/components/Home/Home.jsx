@@ -7,6 +7,7 @@ import "./stars.css";
 // import HowToVoteIcon from "@mui/icons-material/HowToVote";
 // import CasinoIcon from "@mui/icons-material/Casino";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import formatNumber from "../Dashboard/DashBoardPages/FormatNumber";
 import {
   CALL_CHECK_USER_AND_MEMBERSHIP,
   CALL_ADD_USER_ADDRESS,
@@ -44,8 +45,8 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [homeData, setHomeData] = useState({
-    tvl: "",
-    volume: "",
+    tvl: "0",
+    volume: "0",
     users: 0,
   });
 
@@ -290,16 +291,6 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async () => {
       const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
-      // if (typeof egc_usd !== "number") {
-      //   console.log("cannot determine the price of EGC");
-      //   return;
-      // }
-      // if (typeof response !== "number") {
-      //   console.log("cannot determine the price of EGCs");
-
-      //   return;
-      // }
-
       const response = await GET_TVL();
 
       console.log(response, "google");
@@ -448,7 +439,7 @@ const Home = () => {
                     Total TVL
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
-                    ${totalTVL}
+                    ${formatNumber(totalTVL)}
                   </div>
                 </div>
               </div>
@@ -465,7 +456,7 @@ const Home = () => {
                     Volume
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
-                    ${homeData.volume}
+                    ${formatNumber(homeData.volume)}
                   </div>
                 </div>
               </div>
@@ -482,7 +473,7 @@ const Home = () => {
                     Total Users
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
-                    {homeData.users}
+                    {formatNumber(homeData.users)}
                   </div>
                 </div>
               </div>
