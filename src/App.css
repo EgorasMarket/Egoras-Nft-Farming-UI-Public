@@ -13,7 +13,18 @@ html {
   scroll-behavior: smooth;
   transition: 2s ease-in;
 }
-
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+body::-webkit-scrollbar {
+  display: block;
+}
+div::-webkit-scrollbar {
+  display: none;
+}
 a {
   text-decoration: none !important;
   color: #229e54;

@@ -254,6 +254,11 @@
   font-weight: 600;
   color: #313131;
 }
+.header_rule {
+  width: 100%;
+  height: 1px;
+  background: #111c16;
+}
 .search_button {
   position: absolute;
   right: 0;
@@ -548,7 +553,7 @@ dark button.logout-btn {
     left: 0;
     border-radius: 0;
     border: none;
-    padding: 0em 1em;
+    padding: 0em 0em;
     display: flex;
     z-index: 10000;
   }

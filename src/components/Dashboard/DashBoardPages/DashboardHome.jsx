@@ -61,10 +61,7 @@ const DashboardHome = () => {
     active,
     error,
   } = context;
-  const [lockedValue, setLockedValue] = useState(0);
   const [egcUsd, setEgcUsd] = useState(0);
-  const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);
-  const [totalLendingCount, setTotalLendingCount] = useState(0);
   const [graphData2, setGraphData2] = useState([]);
   const [ChartValue, setChartValue] = useState(0);
   const [ChartTime, setChartTime] = useState(0);
@@ -125,11 +122,7 @@ const DashboardHome = () => {
     //   // alert(JSON.stringify(stakings));
     // });
   }, []);
-  // console.log(LastArray);
-  // console.log(LastArray);
-  // console.log(ChartValue, ChartTime, "all values for tooltip");
   const CustomTooltip = ({ active, payload, label }) => {
-    // console.log(active, payload);
     if (active && payload && payload.length) {
       setChartValue(payload[0].payload.value);
       setChartTime(payload[0].payload.timestamp);
@@ -987,19 +980,19 @@ const DashboardHome = () => {
   );
   useEffect(
     async (e) => {
-      if (account) {
-        let res = await tokenBalance(
-          "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-          "0x3A81836b093f7f3D3ca271125CcD45c461409697",
-          library.getSigner()
-        );
-        console.log(res);
-        console.log(formatEther(res.message));
-        let tvl = formatEther(res.message);
-        setTotalTVL(tvl * egcUsd);
-      }
+      // if (account) {
+      let res = await tokenBalance(
+        "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+        "0x3A81836b093f7f3D3ca271125CcD45c461409697",
+        library.getSigner()
+      );
+      console.log(res);
+      console.log(formatEther(res.message));
+      let tvl = formatEther(res.message);
+      setTotalTVL(tvl * egcUsd);
+      // }
     },
-    [account, egcUsd]
+    [egcUsd]
   );
   return (
     <div className="other2 asset_other2">
