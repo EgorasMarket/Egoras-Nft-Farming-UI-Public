@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="1.59451in" height="1.59451in" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 31.16 31.16"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:black}
+    .fil2 {fill:#21A860}
+    .fil3 {fill:#53F19C}
+    .fil0 {fill:white}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <circle class="fil0" transform="matrix(-7.52328E-001 0.00350389 -3.50389E-003 -7.52328E-001 15.5809 15.5809)" r="20.71"/>
+  <g id="_105553157784224">
+   <path class="fil1" d="M15.56 4.96c5.8,0 10.49,4.69 10.49,10.49 0,5.8 -4.69,10.49 -10.49,10.49 -5.8,0 -10.49,-4.69 -10.49,-10.49 0,-5.8 4.69,-10.49 10.49,-10.49zm0 1.04c5.21,0 9.45,4.24 9.45,9.45 0,5.21 -4.24,9.45 -9.45,9.45 -5.21,0 -9.45,-4.24 -9.45,-9.45 0,-5.21 4.24,-9.45 9.45,-9.45z"/>
+   <circle class="fil2" cx="15.65" cy="15.36" r="9.61"/>
+   <circle class="fil1" cx="15.56" cy="15.45" r="9.04"/>
+   <path class="fil3" d="M15.56 25.25c-5.42,0 -9.8,-4.39 -9.8,-9.8 0,-5.42 4.39,-9.8 9.8,-9.8 5.42,0 9.8,4.39 9.8,9.8 0,5.42 -4.39,9.8 -9.8,9.8zm0.22 -0.6c-5.2,0 -9.4,-4.21 -9.4,-9.4 0,-5.2 4.21,-9.4 9.4,-9.4 5.2,0 9.4,4.21 9.4,9.4 0,5.2 -4.21,9.4 -9.4,9.4z"/>
+   <polygon class="fil3" points="18.72,19.45 17.05,19.44 16.61,19.01 13.76,16.19 13.46,15.88 10.55,12.98 10.55,15.88 10.55,15.88 10.55,16.63 10.55,19.37 10.55,19.93 10.55,20.46 11.02,20.46 11.32,20.46 13.37,20.46 13.76,20.46 13.78,17.69 16.28,20.15 20.9,20.4 12.36,11.45 14.08,11.44 14.45,11.86 16.88,14.29 18.49,15.89 20.55,17.92 20.5,10.68 20.5,10.43 17.32,10.43 17.32,13.23 14.88,10.76 9.98,10.57 "/>
+  </g>
+ </g>
+</svg>
