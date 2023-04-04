@@ -25,6 +25,10 @@ import {
   BuyIndirectProduct,
   BuyDirectProduct,
 } from "../../../../../web3/index";
+import {
+  checkAllowanceSwap,
+  unlockSwapToken,
+} from "../../../../../web3/index2";
 
 const ProductDetailPage = ({ match }) => {
   const context = useWeb3React();

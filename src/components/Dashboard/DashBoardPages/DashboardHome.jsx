@@ -79,6 +79,7 @@ const DashboardHome = () => {
     users: 0,
   });
   useEffect(async () => {
+    console.log("dddd");
     await axios
       .get(API_URL + "/staking/chart", null, config)
       .then((data) => {
@@ -140,6 +141,7 @@ const DashboardHome = () => {
     return null;
   };
   const CustomTooltip2 = ({ active, payload, label }) => {
+    console.log(active, payload);
     if (active && payload && payload.length) {
       setChartValue2(payload[0].payload.value);
       setChartTime2(payload[0].payload.timestamp);
@@ -1407,7 +1409,7 @@ const DashboardHome = () => {
                 {/* ====== */}
                 {/* ====== */}
                 <div className="analytics_container_1">
-                  <div className="analytics_container_1_head">Volume 24H</div>
+                  <div className="analytics_container_1_head">Volume 24Hs</div>
                   <div
                     className="analytics_container_1_Amount"
                     onChange={CustomTooltip2}
