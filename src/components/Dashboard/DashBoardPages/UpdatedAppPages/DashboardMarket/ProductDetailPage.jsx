@@ -90,29 +90,29 @@ const ProductDetailPage = ({ match }) => {
     let quantity = 1;
     let res;
 
-    if (productDetail.productType == "INDIRECT") {
-      res = await BuyIndirectProduct(
-        productDetail.index_id,
-        quantity,
-        library.getSigner()
-      );
-    } else {
-      res = await BuyDirectProduct(
-        productDetail.index_id,
-        quantity,
-        library.getSigner()
-      );
-    }
+    // if (productDetail.productType == "INDIRECT") {
+    //   res = await BuyIndirectProduct(
+    //     productDetail.index_id,
+    //     quantity,
+    //     library.getSigner()
+    //   );
+    // } else {
+    //   res = await BuyDirectProduct(
+    //     productDetail.index_id,
+    //     quantity,
+    //     library.getSigner()
+    //   );
+    // }
 
-    console.log(res, "somto8uhhhg");
-    // console.log(res.status, "somto8uhhhg");
-    // setSaleDetails("");
-    console.log(res);
-    if (res.status == true) {
-      console.log("Success message");
-    } else {
-      console.log("Error occured from Blockchain");
-    }
+    // console.log(res, "somto8uhhhg");
+    // // console.log(res.status, "somto8uhhhg");
+    // // setSaleDetails("");
+    // console.log(res);
+    // if (res.status == true) {
+    //   console.log("Success message");
+    // } else {
+    //   console.log("Error occured from Blockchain");
+    // }
 
     // const response = await GET_UPLOADED_PRODUCT_BY_ID(address);
 
@@ -521,8 +521,8 @@ const ProductDetailPage = ({ match }) => {
                       ) : (
                         <button
                           className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn"
-                          // onClick={PurchaseProduct}
-                          disabled={true}
+                          onClick={PurchaseProduct}
+                          // disabled={true}
                         >
                           Purchase
                         </button>
