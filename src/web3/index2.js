@@ -5,9 +5,12 @@ import PancakeSwapFaucet from "./contracts/V3/PancakeSwapFacet.json";
 import Minter from "./contracts/V3/Minter.json";
 import { getParsedEthersError } from "@enzoferey/ethers-error-parser";
 import erc20 from "./contracts/erc20.json";
+
 import { formattedError } from "./FormattedError";
 import StakingFacet from "./contracts/V3/StakingFacet.json";
 import PriceOracleFacet from "./contracts/V3/PriceOracleFacet.json";
+const { REACT_APP_PANCAKE_ROUTER_ADDRESS, REACT_APP_BUSD_ROUTER_ADDRESS } =
+  process.env;
 const contractMembershipFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, MembershipFacet.abi, signer);
 };
@@ -30,6 +33,10 @@ const contractAddMinterFacetInstance = async (signer) => {
     signer
   );
 };
+const routerAddressArray = [
+  REACT_APP_PANCAKE_ROUTER_ADDRESS,
+  REACT_APP_BUSD_ROUTER_ADDRESS,
+];
 const monthlyPlanSubScribe = async (signer) => {
   try {
     const instance = await contractMembershipFacetInstance(signer);
@@ -127,7 +134,12 @@ const swapEusdForBnb = async (token, amountIn, amountOutMin, signer) => {
   try {
     const instance = await contractPancakeSwapFacetInstance(signer);
     let result;
-    result = await instance.swapExactEUSDforBNB(token, amountIn, amountOutMin);
+    result = await instance.swapExactEUSDforBNB(
+      token,
+      amountIn,
+      amountOutMin,
+      routerAddressArray
+    );
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -144,9 +156,14 @@ const swapBnbForEusd = async (value, amountOutMin, tokenOut, signer) => {
   try {
     const instance = await contractPancakeSwapFacetInstance(signer);
     let result;
-    result = await instance.swapExactBNBForEUSD(amountOutMin, tokenOut, {
-      value,
-    });
+    result = await instance.swapExactBNBForEUSD(
+      amountOutMin,
+      tokenOut,
+      {
+        value,
+      },
+      routerAddressArray
+    );
 
     console.log(result, "result, result,result,result,result");
     return {
@@ -165,7 +182,7 @@ const getAmountsOut = async (amountIn, path, signer) => {
   try {
     const instance = await contractPancakeSwapFacetInstance(signer);
     let result;
-    result = await instance.getAmountsOut(amountIn, path);
+    result = await instance.getAmountsOut(amountIn, path, routerAddressArray);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -183,7 +200,7 @@ const getAmountsIn = async (amountOut, path, signer) => {
   try {
     const instance = await contractPancakeSwapFacetInstance(signer);
     let result;
-    result = await instance.getAmountsIn(amountOut, path);
+    result = await instance.getAmountsIn(amountOut, path, routerAddressArray);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,

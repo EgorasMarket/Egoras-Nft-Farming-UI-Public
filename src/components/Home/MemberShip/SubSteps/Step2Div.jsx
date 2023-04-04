@@ -27,7 +27,7 @@ export const Step2Div = ({
   unlockBtn,
   UnlockToken,
   props,
-  account,
+  priceLoaded,
   disable,
   isLoading,
 }) => {
@@ -65,7 +65,7 @@ export const Step2Div = ({
         </div>
       </div>
       <div className="selectPlanDiv2">
-        {account == false ? (
+        {priceLoaded == false ? (
           <div className="contentLoaders">
             <div className="selectPlanDiv2_area1 contentLoad">
               <div className="selectPlanDiv2_area1_cont1 contentLoad">
