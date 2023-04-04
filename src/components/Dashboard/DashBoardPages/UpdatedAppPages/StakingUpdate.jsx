@@ -459,7 +459,7 @@ const StakingUpdate = () => {
   );
   const maxAmount = () => {
     setLockAmount(coinBalance2);
-    setEstimatedRewardAmnt(coinBalance2 * egcUsdVal * 0.033);
+    setEstimatedRewardAmnt(coinBalance2 * egcUsdVal * 0.000328767);
     setEstimatedRewardDiv(true);
   };
 

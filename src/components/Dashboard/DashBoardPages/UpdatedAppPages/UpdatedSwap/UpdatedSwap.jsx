@@ -452,6 +452,7 @@ const UpdatedSwap = () => {
     setIdBase(e.currentTarget.id);
     setBaseToAddress(e.currentTarget.name);
     setSwapToAddress(e.currentTarget.name);
+    setSwapAmount("");
     // setInitialBaseToAddress(e.currentTarget.name);
     setIdTicker(id);
     setIda(id);
@@ -844,12 +845,12 @@ const UpdatedSwap = () => {
       setAmountsOut("");
       setIsAmountLoading(false);
     }
-    if (SwapAmount == "" || id2 == "" || id == "") {
+    if (SwapAmount == "" || id2 == "" || id == "" || amountsOut == "") {
       setDisable(true);
     } else {
       setDisable(false);
     }
-  }, [SwapAmount, id2, id]);
+  }, [SwapAmount, id2, id, amountsOut]);
   const CloseSuccessModal = () => {
     setSuccessModal(false);
   };
