@@ -415,10 +415,26 @@ const AdminSeeSellers = () => {
     }
   };
 
-  const ApproveProduct = async (id) => {
-    console.log(id);
+  const ApproveProductDirect = async (id) => {
+    console.log(id, "ApproveProductDirect");
 
+    // const res = await approveProductDirect(id, library.getSigner());
     const res = await approveProductDirect(id, library.getSigner());
+    console.log(res, "somto8uhhhg");
+    // console.log(res.status, "somto8uhhhg");
+    setSaleDetails("");
+    console.log(res);
+    if (res.status == true) {
+      console.log("Success message");
+    } else {
+      console.log("Error occured from Blockchain");
+    }
+  };
+
+  const ApproveProduct = async (id) => {
+    console.log(id, "ApproveProduct");
+
+    const res = await approveProduct1(id, library.getSigner());
     console.log(res, "somto8uhhhg");
     // console.log(res.status, "somto8uhhhg");
     setSaleDetails("");
@@ -693,8 +709,8 @@ const AdminSeeSellers = () => {
                                   </td>
                                   <td className="assets-category-data1b stable-content branch_apy">
                                     <div className="approveProdButton">
-                                      {asset.bidAmount === null &&
-                                      asset.productType !== "DIRECT" ? (
+                                      {asset.productType === "INDIRECT" &&
+                                      asset.bidAmount == null ? (
                                         <button
                                           className="approveProdButton_btn"
                                           disabled={true}
@@ -704,7 +720,8 @@ const AdminSeeSellers = () => {
                                         >
                                           Approve
                                         </button>
-                                      ) : (
+                                      ) : asset.productType === "INDIRECT" &&
+                                        asset.bidAmount !== null ? (
                                         <button
                                           className="approveProdButton_btn"
                                           disabled={false}
@@ -714,7 +731,18 @@ const AdminSeeSellers = () => {
                                         >
                                           Approve
                                         </button>
-                                      )}
+                                      ) : null}
+                                      {asset.productType === "DIRECT" ? (
+                                        <button
+                                          className="approveProdButton_btn"
+                                          disabled={false}
+                                          onClick={() =>
+                                            ApproveProductDirect(asset.index_id)
+                                          }
+                                        >
+                                          Approve
+                                        </button>
+                                      ) : null}
                                     </div>
                                   </td>
                                   <td

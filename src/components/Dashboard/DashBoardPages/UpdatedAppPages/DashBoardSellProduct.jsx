@@ -17,30 +17,30 @@ import {
 } from "@web3-react/core";
 import {
   listProduct,
-  lendUS,
-  takeDividend,
-  takeBackLoan,
-  getTotalLended,
-  getInvestorsDividend,
-  userStats,
-  system,
-  burnAccumulatedDividend,
-  checkAllowance,
-  unluckToken,
-  lend,
-  getUserStats,
-  transactReceipt,
-  getPrice,
-  getTickerInfo,
-  tokenBalance,
-  open,
-  getLatestLoan,
-  repay,
-  topup,
-  draw,
-  checkAllowanceL,
-  unluckToken2,
-  getEgcSmartContractBalnce,
+  // lendUS,
+  // takeDividend,
+  // takeBackLoan,
+  // getTotalLended,
+  // getInvestorsDividend,
+  // userStats,
+  // system,
+  // burnAccumulatedDividend,
+  // checkAllowance,
+  // unluckToken,
+  // lend,
+  // getUserStats,
+  // transactReceipt,
+  // getPrice,
+  // getTickerInfo,
+  // tokenBalance,
+  // open,
+  // getLatestLoan,
+  // repay,
+  // topup,
+  // draw,
+  // checkAllowanceL,
+  // unluckToken2,
+  // getEgcSmartContractBalnce,
 } from "../../../../web3/index";
 // import {
 //   lendUS,
@@ -180,7 +180,7 @@ const DashBoardSellProduct = () => {
     setDisable(true);
     const formData = new FormData();
 
-    let productType = true;
+    let productType = false;
     let productQuantity = 1;
 
     let setProductType = "";

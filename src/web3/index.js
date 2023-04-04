@@ -1193,6 +1193,46 @@ const AcceptBid = async (_productID, signer) => {
   }
 };
 
+const BuyIndirectProduct = async (_productID, _quantity, signer) => {
+  console.log(_productID, _quantity);
+  // _productID, qty
+  try {
+    const instance = contractProductFacetInstance(signer);
+    let result;
+    result = await instance.buyProduct(_productID, _quantity);
+    console.log(result, "result from newnation");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
+const BuyDirectProduct = async (_productID, _quantity, signer) => {
+  console.log(_productID, _quantity);
+  // _productID, qty
+  try {
+    const instance = contractProductFacetInstance(signer);
+    let result;
+    result = await instance.buyDirectProduct(_productID, _quantity);
+    console.log(result, "result from newnation");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
 // const monthlyPlan = async (_referral, signer) => {
 //   console.log(_referral);
 //   try {
@@ -1402,4 +1442,6 @@ export {
   AcceptBid,
   unlockMemberShipEgcToken,
   checkAllowanceMembership,
+  BuyIndirectProduct,
+  BuyDirectProduct,
 };
