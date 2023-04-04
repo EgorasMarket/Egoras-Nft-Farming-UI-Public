@@ -159,10 +159,10 @@ const swapBnbForEusd = async (value, amountOutMin, tokenOut, signer) => {
     result = await instance.swapExactBNBForEUSD(
       amountOutMin,
       tokenOut,
+      routerAddressArray,
       {
         value,
-      },
-      routerAddressArray
+      }
     );
 
     console.log(result, "result, result,result,result,result");
