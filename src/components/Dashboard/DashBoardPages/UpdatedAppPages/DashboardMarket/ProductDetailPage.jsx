@@ -46,7 +46,7 @@ const ProductDetailPage = ({ match }) => {
     // error,
   } = context;
   const [loading, setLoading] = useState(true);
-  const [productDetail, setProductDetail] = useState({});
+  const [productDetail, setProductDetail] = useState({ final_amount: "0" });
   const [image, setProductImages] = useState([]);
   const [unlockBtn, setUnlockBtn] = useState(true);
   const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
