@@ -100,6 +100,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const [baseBalance, setBaseBalance] = useState(0.0);
   const [notifyDiv, setNotifyDiv] = useState(false);
   const [notification, setNotification] = useState([]);
+  const [notificationDetails, setNotificationDetails] = useState("");
 
   const [productNamesZ, setProductNamesZ] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -448,242 +449,163 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
         });
     }
   }, [account]);
+  const ToggleNotifyDetails = (e) => {
+    const id = e.currentTarget.id;
+    setNotificationDetails(id);
+    setNotifyDiv(false);
+    console.log(id);
+  };
   return (
-    <div className={smallSide == "not_small" ? "side" : "small_side"}>
-      <div className="header_token_prices_div">
-        <div className="container-fluid">
-          <Marquee
-            speed={50}
-            pauseOnHover={true}
-            gradientColor="[255, 255, 255]"
-          >
-            <div className="header_token_prices_div_area">
-              <div className="header_token_prices_div_area1">
-                1 EGC ~ {numberWithCommas(egcUsdVal.toFixed(2))} USD
+    <>
+      <div className={smallSide == "not_small" ? "side" : "small_side"}>
+        <div className="header_token_prices_div">
+          <div className="container-fluid">
+            <Marquee
+              speed={50}
+              pauseOnHover={true}
+              gradientColor="[255, 255, 255]"
+            >
+              <div className="header_token_prices_div_area">
+                <div className="header_token_prices_div_area1">
+                  1 EGC ~ {numberWithCommas(egcUsdVal.toFixed(2))} USD
+                </div>
+                <span class="vertical_rule2"></span>
+                <div className="header_token_prices_div_area1">
+                  1 EGC ~ {numberWithCommas(egcUsdVal.toFixed(2))} eUSD
+                </div>
+                <span class="vertical_rule2"></span>
+                <div className="header_token_prices_div_area1">
+                  1 eUSD ~ 1 USD
+                </div>
+                <span class="vertical_rule2"></span>
               </div>
-              <span class="vertical_rule2"></span>
-              <div className="header_token_prices_div_area1">
-                1 EGC ~ {numberWithCommas(egcUsdVal.toFixed(2))} eUSD
-              </div>
-              <span class="vertical_rule2"></span>
-              <div className="header_token_prices_div_area1">
-                1 eUSD ~ 1 USD
-              </div>
-              <span class="vertical_rule2"></span>
-            </div>
-          </Marquee>
+            </Marquee>
+          </div>
         </div>
-      </div>
-      <section className="DashBoardHeaderSection">
-        <div className="container-fluid">
-          <div className="dashboard-area">
-            <a href="/" className="egr_logo2_mobil">
-              <img src="/img/egoras-logo.svg" alt="..." className="egr-logo2" />
-              <img
-                src="/img/logoVideoThumbnail.svg"
-                alt="..."
-                className="egr-logo2dark"
-              />
-              <div className="on-mobile-navigators"></div>
-            </a>
-            <div className="egrLogo2Cont3">
-              <a href="/">
-                {" "}
+        <section className="DashBoardHeaderSection">
+          <div className="container-fluid">
+            <div className="dashboard-area">
+              <a href="/" className="egr_logo2_mobil">
                 <img
                   src="/img/egoras-logo.svg"
                   alt="..."
-                  className="egr-logo"
+                  className="egr-logo2"
                 />
                 <img
                   src="/img/logoVideoThumbnail.svg"
                   alt="..."
-                  className="egr-logodark"
+                  className="egr-logo2dark"
                 />
+                <div className="on-mobile-navigators"></div>
               </a>
-            </div>
-            <div className="header_tabs">
-              <a
-                id="home"
-                href="/app"
-                className={
-                  activeBg == "home" ? "header_tab1_active " : "header_tab1"
-                }
-                onClick={changeBg}
-              >
-                Home
-              </a>
-              <a
-                id="stake"
-                href="/app/staking/egc"
-                className={
-                  activeBg == "stake" ? "header_tab1_active " : "header_tab1"
-                }
-                onClick={changeBg}
-              >
-                <span class="Ping -top-1">
-                  <span class="c-flashingPart"></span>
-                  <span class="c-basePart"></span>
-                </span>
-                Stake
-              </a>
-              <a
-                id="swap"
-                href="/app/swap"
-                className={
-                  activeBg == "swap" ? "header_tab1_active " : "header_tab1"
-                }
-                onClick={changeBg}
-              >
-                Swap
-                <span class="Ping -top-1">
-                  <span class="c-flashingPart"></span>
-                  <span class="c-basePart"></span>
-                </span>
-              </a>
-              <a
-                id="sell"
-                href="/app/sell"
-                className={
-                  activeBg == "sell" ? "header_tab1_active " : "header_tab1"
-                }
-                onClick={changeBg}
-              >
-                Sell
-                <span class="Ping -top-1">
-                  <span class="c-flashingPart"></span>
-                  <span class="c-basePart"></span>
-                </span>
-              </a>
-              <a
-                id="market"
-                href="/app/market"
-                className={
-                  activeBg == "market" ? "header_tab1_active " : "header_tab1"
-                }
-                onClick={changeBg}
-              >
-                Market{" "}
-                <span class="Ping -top-1">
-                  <span class="c-flashingPart"></span>
-                  <span class="c-basePart"></span>
-                </span>
-              </a>
+              <div className="egrLogo2Cont3">
+                <a href="/">
+                  {" "}
+                  <img
+                    src="/img/egoras-logo.svg"
+                    alt="..."
+                    className="egr-logo"
+                  />
+                  <img
+                    src="/img/logoVideoThumbnail.svg"
+                    alt="..."
+                    className="egr-logodark"
+                  />
+                </a>
+              </div>
+              <div className="header_tabs">
+                <a
+                  id="home"
+                  href="/app"
+                  className={
+                    activeBg == "home" ? "header_tab1_active " : "header_tab1"
+                  }
+                  onClick={changeBg}
+                >
+                  Home
+                </a>
+                <a
+                  id="stake"
+                  href="/app/staking/egc"
+                  className={
+                    activeBg == "stake" ? "header_tab1_active " : "header_tab1"
+                  }
+                  onClick={changeBg}
+                >
+                  <span class="Ping -top-1">
+                    <span class="c-flashingPart"></span>
+                    <span class="c-basePart"></span>
+                  </span>
+                  Stake
+                </a>
+                <a
+                  id="swap"
+                  href="/app/swap"
+                  className={
+                    activeBg == "swap" ? "header_tab1_active " : "header_tab1"
+                  }
+                  onClick={changeBg}
+                >
+                  Swap
+                  <span class="Ping -top-1">
+                    <span class="c-flashingPart"></span>
+                    <span class="c-basePart"></span>
+                  </span>
+                </a>
+                <a
+                  id="sell"
+                  href="/app/sell"
+                  className={
+                    activeBg == "sell" ? "header_tab1_active " : "header_tab1"
+                  }
+                  onClick={changeBg}
+                >
+                  Sell
+                  <span class="Ping -top-1">
+                    <span class="c-flashingPart"></span>
+                    <span class="c-basePart"></span>
+                  </span>
+                </a>
+                <a
+                  id="market"
+                  href="/app/market"
+                  className={
+                    activeBg == "market" ? "header_tab1_active " : "header_tab1"
+                  }
+                  onClick={changeBg}
+                >
+                  Market{" "}
+                  <span class="Ping -top-1">
+                    <span class="c-flashingPart"></span>
+                    <span class="c-basePart"></span>
+                  </span>
+                </a>
 
-              <a
-                id="account"
-                href="/app/user"
-                className={
-                  activeBg == "account" ? "header_tab1_active " : "header_tab1"
-                }
-                onClick={changeBg}
-              >
-                Account
-              </a>
-            </div>
-            <div className="user_profile_icon_cont2">
-              <div className="together">
-                <div className="header_menu_icon_con_dash">
-                  <Hamburger
-                    toggled={isOpen}
-                    toggle={setIsOpen}
-                    size={25}
-                    rounded={true}
-                  />
-                </div>
-                <div className="mobile_view_notifications" ref={wrapperRef}>
-                  <div className="notify_icon_cont_div_cont">
-                    <div
-                      className="wallet_settings_icon_cont notify_icon_cont"
-                      onClick={ToggleNotifyDiv}
-                    >
-                      <div className="notify_icon_cont_div">
-                        {UnreadNotifications.length <= 0 ? null : (
-                          <div className="notify_icon_cont_div_notifyCount">
-                            {noTifyCount}
-                          </div>
-                        )}
-                        <NotificationsNoneOutlinedIcon className="wallet_settings_icon" />
-                      </div>
-                    </div>
-                    {notifyDiv && (
-                      <div className="notifyDropDownDiv">
-                        {UnreadNotifications.length <= 0 ? (
-                          <div className="notifyDropDownDiv_emptyDiv">
-                            No notifications!
-                          </div>
-                        ) : (
-                          <>
-                            {UnreadNotifications.sort(
-                              (a, b) =>
-                                new Date(b.createdAt).getTime() -
-                                new Date(a.createdAt).getTime()
-                            ).map((data, key) => (
-                              <>
-                                {data.status == "unread" ? (
-                                  <div
-                                    className="notifyDropDownDiv_div1 active"
-                                    key={data.id}
-                                  >
-                                    <div className="notifyDropDownDiv_div1_title active">
-                                      {data.title}{" "}
-                                      <span
-                                        style={{
-                                          fontSize: "10px",
-                                        }}
-                                      >
-                                        - (
-                                        <TimeAgoComponent
-                                          date={data.createdAt}
-                                        />
-                                        )
-                                      </span>
-                                    </div>
-                                    <div className="notifyDropDownDiv_div1_para">
-                                      {data.message}
-                                    </div>
-                                  </div>
-                                ) : (
-                                  <div
-                                    className="notifyDropDownDiv_div1"
-                                    key={data.id}
-                                  >
-                                    <div className="notifyDropDownDiv_div1_title">
-                                      {data.title}
-                                    </div>
-                                    <div className="notifyDropDownDiv_div1_para">
-                                      {data.message}
-                                    </div>
-                                  </div>
-                                )}
-                              </>
-                            ))}
-                          </>
-                        )}
-                      </div>
-                    )}
+                <a
+                  id="account"
+                  href="/app/user"
+                  className={
+                    activeBg == "account"
+                      ? "header_tab1_active "
+                      : "header_tab1"
+                  }
+                  onClick={changeBg}
+                >
+                  Account
+                </a>
+              </div>
+              <div className="user_profile_icon_cont2">
+                <div className="together">
+                  <div className="header_menu_icon_con_dash">
+                    <Hamburger
+                      toggled={isOpen}
+                      toggle={setIsOpen}
+                      size={25}
+                      rounded={true}
+                    />
                   </div>
-                </div>
-                <div className="toggle_dark_mode_div">
-                  <SwitchToggle2
-                    className="toggle_dark_mode"
-                    darkMode={togglemakeDark}
-                    checkBox={check}
-                  />
-                </div>
-                {account ? (
-                  <div className="connected_header_address dash_connected_header_address">
-                    <p className="header_wllt_bal">
-                      <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
-                      {coinBalance} BNB
-                    </p>
-                    <div
-                      className="metamask_prof_pic_icon"
-                      ref={avatarRef}
-                    ></div>
-                    <div className="wallet_addr_cont_txt_header">
-                      <div className="wall_addr">{walletAddr}</div>
-                    </div>
-                    <div className="notify_icon_cont_div_cont" ref={wrapperRef}>
+                  <div className="mobile_view_notifications" ref={wrapperRef}>
+                    <div className="notify_icon_cont_div_cont">
                       <div
                         className="wallet_settings_icon_cont notify_icon_cont"
                         onClick={ToggleNotifyDiv}
@@ -697,7 +619,6 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                           <NotificationsNoneOutlinedIcon className="wallet_settings_icon" />
                         </div>
                       </div>
-
                       {notifyDiv && (
                         <div className="notifyDropDownDiv">
                           {UnreadNotifications.length <= 0 ? (
@@ -716,6 +637,8 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                                     <div
                                       className="notifyDropDownDiv_div1 active"
                                       key={data.id}
+                                      id={data.id}
+                                      onClick={ToggleNotifyDetails}
                                     >
                                       <div className="notifyDropDownDiv_div1_title active">
                                         {data.title}{" "}
@@ -755,167 +678,274 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                         </div>
                       )}
                     </div>
-                    <div
-                      className="wallet_settings_icon_cont"
-                      onClick={toggleDisconnectDiv}
-                    >
-                      <SettingsOutlinedIcon className="wallet_settings_icon" />
-                    </div>
-                    {disconnetDiv === true ? (
-                      <div className="disconnect_button_div">
-                        <Authenticate isHome="false" />
+                  </div>
+                  <div className="toggle_dark_mode_div">
+                    <SwitchToggle2
+                      className="toggle_dark_mode"
+                      darkMode={togglemakeDark}
+                      checkBox={check}
+                    />
+                  </div>
+                  {account ? (
+                    <div className="connected_header_address dash_connected_header_address">
+                      <p className="header_wllt_bal">
+                        <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
+                        {coinBalance} BNB
+                      </p>
+                      <div
+                        className="metamask_prof_pic_icon"
+                        ref={avatarRef}
+                      ></div>
+                      <div className="wallet_addr_cont_txt_header">
+                        <div className="wall_addr">{walletAddr}</div>
                       </div>
-                    ) : null}
-                  </div>
-                ) : (
-                  <div className="connect_div_dash_head">
-                    <Authenticate isHome="false" />
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-          {isOpen === true ? (
-            <div className="mobile_view_header_cont_head_body_dash">
-              <div className="mobile_view_header_cont_head_body_cont1">
-                <div className="mobile_view_header_cont_head_body_cont1_title">
-                  Balance:
-                </div>
-                <div className="mobile_view_header_cont_head_body_cont1_para">
-                  <p className="header_wllt_bal">
-                    <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
-                    {coinBalance} BNB
-                  </p>
-                </div>
-              </div>
+                      <div
+                        className="notify_icon_cont_div_cont"
+                        ref={wrapperRef}
+                      >
+                        <div
+                          className="wallet_settings_icon_cont notify_icon_cont"
+                          onClick={ToggleNotifyDiv}
+                        >
+                          <div className="notify_icon_cont_div">
+                            {UnreadNotifications.length <= 0 ? null : (
+                              <div className="notify_icon_cont_div_notifyCount">
+                                {noTifyCount}
+                              </div>
+                            )}
+                            <NotificationsNoneOutlinedIcon className="wallet_settings_icon" />
+                          </div>
+                        </div>
 
-              <span className="header_rule"></span>
-              <div className="mobile_view_header_cont_head_body_cont1">
-                <div className="mobile_view_header_cont_head_body_cont1_title">
-                  Account
-                </div>
-                <div className="mobile_view_header_cont_head_body_cont1_para">
-                  <div className="metamask_prof_pic_icon" ref={avatarRef}></div>
-                  <div className="wallet_addr_cont_txt_header">
-                    <div className="wall_addr">{walletAddr}</div>
-                  </div>
-                </div>
-              </div>
-              <span className="header_rule"></span>
-              <div className="mobile_view_header_cont_head_body_cont1">
-                <div className="mobile_view_header_cont_head_body_cont1_title">
-                  User
-                </div>
-                <div className="mobile_view_header_cont_head_body_cont1_para">
-                  <a
-                    href="/app/user"
-                    className="wallet_settings_icon_cont notify_icon_cont"
-                  >
-                    <div className="notify_icon_cont_div">
-                      <AccountCircleIcon className="wallet_settings_icon" />
+                        {notifyDiv && (
+                          <div className="notifyDropDownDiv">
+                            {UnreadNotifications.length <= 0 ? (
+                              <div className="notifyDropDownDiv_emptyDiv">
+                                No notifications!
+                              </div>
+                            ) : (
+                              <>
+                                {UnreadNotifications.sort(
+                                  (a, b) =>
+                                    new Date(b.createdAt).getTime() -
+                                    new Date(a.createdAt).getTime()
+                                ).map((data, key) => (
+                                  <>
+                                    {data.status == "unread" ? (
+                                      <div
+                                        className="notifyDropDownDiv_div1 active"
+                                        key={data.id}
+                                        id={data.id}
+                                        onClick={ToggleNotifyDetails}
+                                      >
+                                        <div className="notifyDropDownDiv_div1_title active">
+                                          {data.title}{" "}
+                                          <span
+                                            style={{
+                                              fontSize: "10px",
+                                            }}
+                                          >
+                                            - (
+                                            <TimeAgoComponent
+                                              date={data.createdAt}
+                                            />
+                                            )
+                                          </span>
+                                        </div>
+                                        <div className="notifyDropDownDiv_div1_para">
+                                          {data.message}
+                                        </div>
+                                      </div>
+                                    ) : (
+                                      <div
+                                        className="notifyDropDownDiv_div1"
+                                        key={data.id}
+                                      >
+                                        <div className="notifyDropDownDiv_div1_title">
+                                          {data.title}
+                                        </div>
+                                        <div className="notifyDropDownDiv_div1_para">
+                                          {data.message}
+                                        </div>
+                                      </div>
+                                    )}
+                                  </>
+                                ))}
+                              </>
+                            )}
+                          </div>
+                        )}
+                      </div>
+                      <div
+                        className="wallet_settings_icon_cont"
+                        onClick={toggleDisconnectDiv}
+                      >
+                        <SettingsOutlinedIcon className="wallet_settings_icon" />
+                      </div>
+                      {disconnetDiv === true ? (
+                        <div className="disconnect_button_div">
+                          <Authenticate isHome="false" />
+                        </div>
+                      ) : null}
                     </div>
-                  </a>
+                  ) : (
+                    <div className="connect_div_dash_head">
+                      <Authenticate isHome="false" />
+                    </div>
+                  )}
                 </div>
               </div>
-              <span className="header_rule"></span>
-              <div className="mobile_view_header_cont_head_body_cont1_btn">
-                <Authenticate isHome="false" />
-              </div>
             </div>
-          ) : null}
-        </div>
-      </section>
+            {isOpen === true ? (
+              <div className="mobile_view_header_cont_head_body_dash">
+                <div className="mobile_view_header_cont_head_body_cont1">
+                  <div className="mobile_view_header_cont_head_body_cont1_title">
+                    Balance:
+                  </div>
+                  <div className="mobile_view_header_cont_head_body_cont1_para">
+                    <p className="header_wllt_bal">
+                      <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
+                      {coinBalance} BNB
+                    </p>
+                  </div>
+                </div>
 
-      <div className="dash_board_links">
-        <div className="container">
-          <div className="dash_board_links_area">
-            <a href="" className="dash_board_links_tab">
-              {" "}
-              <FacebookRoundedIcon className="socail_links_icon2" />
-            </a>
-            <a href="" className="dash_board_links_tab">
-              {" "}
-              <TelegramIcon className="socail_links_icon2" />
-            </a>
-            <a href="" className="dash_board_links_tab">
-              {" "}
-              <TwitterIcon className="socail_links_icon2" />
-            </a>
-            <a href="" className="dash_board_links_tab">
-              {" "}
-              <span className="medium_icon2">M</span>
-            </a>
-            <a href="" className="dash_board_links_tab">
-              {" "}
-              <LinkedInIcon className="socail_links_icon2" />
-            </a>
+                <span className="header_rule"></span>
+                <div className="mobile_view_header_cont_head_body_cont1">
+                  <div className="mobile_view_header_cont_head_body_cont1_title">
+                    Account
+                  </div>
+                  <div className="mobile_view_header_cont_head_body_cont1_para">
+                    <div
+                      className="metamask_prof_pic_icon"
+                      ref={avatarRef}
+                    ></div>
+                    <div className="wallet_addr_cont_txt_header">
+                      <div className="wall_addr">{walletAddr}</div>
+                    </div>
+                  </div>
+                </div>
+                <span className="header_rule"></span>
+                <div className="mobile_view_header_cont_head_body_cont1">
+                  <div className="mobile_view_header_cont_head_body_cont1_title">
+                    User
+                  </div>
+                  <div className="mobile_view_header_cont_head_body_cont1_para">
+                    <a
+                      href="/app/user"
+                      className="wallet_settings_icon_cont notify_icon_cont"
+                    >
+                      <div className="notify_icon_cont_div">
+                        <AccountCircleIcon className="wallet_settings_icon" />
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <span className="header_rule"></span>
+                <div className="mobile_view_header_cont_head_body_cont1_btn">
+                  <Authenticate isHome="false" />
+                </div>
+              </div>
+            ) : null}
+          </div>
+        </section>
+
+        <div className="dash_board_links">
+          <div className="container">
+            <div className="dash_board_links_area">
+              <a href="" className="dash_board_links_tab">
+                {" "}
+                <FacebookRoundedIcon className="socail_links_icon2" />
+              </a>
+              <a href="" className="dash_board_links_tab">
+                {" "}
+                <TelegramIcon className="socail_links_icon2" />
+              </a>
+              <a href="" className="dash_board_links_tab">
+                {" "}
+                <TwitterIcon className="socail_links_icon2" />
+              </a>
+              <a href="" className="dash_board_links_tab">
+                {" "}
+                <span className="medium_icon2">M</span>
+              </a>
+              <a href="" className="dash_board_links_tab">
+                {" "}
+                <LinkedInIcon className="socail_links_icon2" />
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-      <div className="header_tabs2">
-        <a
-          id="home"
-          href="/app"
-          className={activeBg == "home" ? "header_tab1_active " : "header_tab1"}
-          onClick={changeBg}
-        >
-          <HomeIcon className="sidebarIcon" />
-          Home
-        </a>
+        <div className="header_tabs2">
+          <a
+            id="home"
+            href="/app"
+            className={
+              activeBg == "home" ? "header_tab1_active " : "header_tab1"
+            }
+            onClick={changeBg}
+          >
+            <HomeIcon className="sidebarIcon" />
+            Home
+          </a>
 
-        <a
-          id="stake"
-          href="/app/staking/egc"
-          className={
-            activeBg == "stake" ? "header_tab1_active " : "header_tab1"
-          }
-          onClick={changeBg}
-        >
-          <LockClockIcon className="sidebarIcon" />
-          Stake
-        </a>
-        <a
-          id="swap"
-          href="/app/swap"
-          className={activeBg == "swap" ? "header_tab1_active " : "header_tab1"}
-          onClick={changeBg}
-        >
-          <SwapHorizontalCircleIcon className="sidebarIcon" />
-          Swap
-        </a>
-        <a
-          id="sell"
-          href="/app/sell"
-          className={activeBg == "sell" ? "header_tab1_active " : "header_tab1"}
-          onClick={changeBg}
-        >
-          <SellIcon className="sidebarIcon" />
-          Sell
-        </a>
+          <a
+            id="stake"
+            href="/app/staking/egc"
+            className={
+              activeBg == "stake" ? "header_tab1_active " : "header_tab1"
+            }
+            onClick={changeBg}
+          >
+            <LockClockIcon className="sidebarIcon" />
+            Stake
+          </a>
+          <a
+            id="swap"
+            href="/app/swap"
+            className={
+              activeBg == "swap" ? "header_tab1_active " : "header_tab1"
+            }
+            onClick={changeBg}
+          >
+            <SwapHorizontalCircleIcon className="sidebarIcon" />
+            Swap
+          </a>
+          <a
+            id="sell"
+            href="/app/sell"
+            className={
+              activeBg == "sell" ? "header_tab1_active " : "header_tab1"
+            }
+            onClick={changeBg}
+          >
+            <SellIcon className="sidebarIcon" />
+            Sell
+          </a>
 
-        <a
-          id="market"
-          href="/app/market"
-          className={
-            activeBg == "market" ? "header_tab1_active " : "header_tab1"
-          }
-          onClick={changeBg}
-        >
-          <StorefrontIcon className="sidebarIcon" />
-          Market
-        </a>
-      </div>
-      {/* =============''''''''' */}
-      {/* =============''''''''' */}
-      {/* =============''''''''' */}
+          <a
+            id="market"
+            href="/app/market"
+            className={
+              activeBg == "market" ? "header_tab1_active " : "header_tab1"
+            }
+            onClick={changeBg}
+          >
+            <StorefrontIcon className="sidebarIcon" />
+            Market
+          </a>
+        </div>
+        {/* =============''''''''' */}
+        {/* =============''''''''' */}
+        {/* =============''''''''' */}
 
-      {/* ========== */}
-      {/* ========== */}
-      {/* ========== */}
-      {connectId == true ? (
-        <div className="right_network_id_modal_div">
-          <div className="right_network_id_modal_cont">
-            {/* <div className="close_chain_icon_cont">
+        {/* ========== */}
+        {/* ========== */}
+        {/* ========== */}
+        {connectId == true ? (
+          <div className="right_network_id_modal_div">
+            <div className="right_network_id_modal_cont">
+              {/* <div className="close_chain_icon_cont">
               <CloseIcon
                 className="close_chain_icon"
                 onClick={() => {
@@ -923,28 +953,67 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                 }}
               />
             </div> */}
-            <div className="change_network_img">
-              <img
-                src="/img/smart_chain_id_change_image.svg"
-                alt=""
-                className="chain_id_img"
-              />
-            </div>
-            Oops, your wallet is not on the right network.
-            <span className="right_network_id_modal_cont_para">
-              It seems your wallet is running on a different network from
-              Egoras.app. Please click the button below to change your network
-              or add the network if it's not added in your wallet.
-            </span>
-            <div className="change_network_btn_div">
-              <button className="changeNetworkBtn" onClick={switchNetwork}>
-                Switch Network
-              </button>
+              <div className="change_network_img">
+                <img
+                  src="/img/smart_chain_id_change_image.svg"
+                  alt=""
+                  className="chain_id_img"
+                />
+              </div>
+              Oops, your wallet is not on the right network.
+              <span className="right_network_id_modal_cont_para">
+                It seems your wallet is running on a different network from
+                Egoras.app. Please click the button below to change your network
+                or add the network if it's not added in your wallet.
+              </span>
+              <div className="change_network_btn_div">
+                <button className="changeNetworkBtn" onClick={switchNetwork}>
+                  Switch Network
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      ) : null}
-    </div>
+        ) : null}
+        {/* ========== */}
+        {/* ========== */}
+        {/* ========== */}
+      </div>
+      {notificationDetails == ""
+        ? null
+        : UnreadNotifications.map((data) => (
+            <>
+              {data.id === notificationDetails ? (
+                <div className="notifySeeMoreDiv">
+                  <div
+                    className="notifySeeMoreDiv_close_div"
+                    onClick={() => {
+                      setNotificationDetails("");
+                    }}
+                  ></div>
+                  <div className="notifySeeMoreDiv_container">
+                    <div className="notifySeeMoreDiv_container_head">
+                      {data.title}
+                    </div>
+                    <div className="notifySeeMoreDiv_container_para">
+                      {data.message}
+                    </div>
+                    <span className="notifySeeMoreDiv_container_time">
+                      <TimeAgoComponent date={data.createdAt} />
+                    </span>
+                    <button
+                      className="notifySeeMoreDiv_container_btn"
+                      onClick={() => {
+                        setNotificationDetails("");
+                      }}
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              ) : null}
+            </>
+          ))}
+    </>
   );
 };
 
