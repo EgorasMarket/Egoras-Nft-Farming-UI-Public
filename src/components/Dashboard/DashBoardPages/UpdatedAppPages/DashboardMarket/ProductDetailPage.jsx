@@ -11,6 +11,7 @@ import storeIcon from "../../../../../LottieFiles/loadingIcon/storeIcon.json";
 import walletIcon from "../../../../../LottieFiles/loadingIcon/walletIcon.json";
 
 import { numberWithCommas } from "../../../../../static";
+import { parseEther, formatEther } from "@ethersproject/units";
 
 import { ShimmerText, ShimmerPostDetails } from "react-shimmer-effects";
 import "./DashboardMarketStyles/PowerDetailPage.css";
@@ -24,6 +25,8 @@ import {
 import {
   BuyIndirectProduct,
   BuyDirectProduct,
+  checkAllowanceV3,
+  unlockTokenV3,
 } from "../../../../../web3/index";
 import {
   checkAllowanceSwap,
@@ -45,7 +48,8 @@ const ProductDetailPage = ({ match }) => {
   const [loading, setLoading] = useState(true);
   const [productDetail, setProductDetail] = useState({});
   const [image, setProductImages] = useState([]);
-
+  const [unlockBtn, setUnlockBtn] = useState(true);
+  const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
   useEffect(() => {
     const { address, name } = match.params;
 
@@ -129,7 +133,41 @@ const ProductDetailPage = ({ match }) => {
     //   console.log(image);
     // }
   };
+  const UnlockToken = async (e) => {
+    let ret = await unlockTokenV3(
+      "0x58f66d0183615797940360a43c333a44215830ba",
+      parseEther("180000000000000000000000000000000000", "wei").toString(),
+      library.getSigner()
+    );
+    console.log(ret);
+    if (ret.status == true) {
+      localStorage.setItem("unlocking", true);
+      localStorage.setItem("unlockingHash", ret.message);
+      setUnlockBtn(true);
+    } else {
+      if (ret.message.code == 4001) {
+        console.log(ret);
+      }
+      console.log(ret);
+    }
+  };
+  useEffect(
+    async (e) => {
+      if (account) {
+        let check = await checkAllowanceV3(
+          "0x58f66d0183615797940360a43c333a44215830ba",
+          account,
+          parseEther(productDetail.final_amount.toString(), "wei").toString(),
+          library.getSigner()
+        );
+        console.log(check);
+        setUnLockCheckStatus(check.status);
+        setUnlockBtn(check.status);
+      }
+    },
 
+    [account, unLockCheckStatus, productDetail]
+  );
   if (loading)
     return (
       <div className="other2 asset_other2">
