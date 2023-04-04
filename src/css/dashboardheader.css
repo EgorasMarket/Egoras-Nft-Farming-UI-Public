@@ -658,7 +658,7 @@ dark button.logout-btn {
   }
   .together {
     display: flex;
-    /* align-items: center; */
+    align-items: center;
     flex-direction: row-reverse;
     /* transform: scale(0.8); */
   }

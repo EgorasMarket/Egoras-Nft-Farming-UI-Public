@@ -6,14 +6,18 @@ import { loadUser } from "../../../actions/auth";
 import { connect } from "react-redux";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { API_URL as api_url } from "../../../actions/types";
+import { API_URL } from "../../../actions/types";
 import { config } from "../../../actions/Config";
 import { Authenticate } from "../../auth/Authenticate";
+import formatNumber from "./FormatNumber";
 // import { numberWithCommas } from "../../static/static";
 import Blockies from "react-blockies";
+import getMonthFromNumber from "./MonthFromNumber";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import "../../../css/dashboardHome.css";
+import { tokenBalance } from "../../../web3";
 import axios from "axios";
+
 import {
   AreaChart,
   Area,
@@ -37,566 +41,97 @@ import {
 } from "@web3-react/core";
 import { getAuthUserStats } from "../../../actions/token";
 import { GET_CHART_TVL } from "../../../services/stakeServices";
+import { GET_TVL } from "../../../services/stakeServices";
+import {
+  GET_COIN_GEKO_PRICE,
+  GET_COIN_GEKO_PRICE_IN_USD,
+  GET_COIN_GEKO_PRICGET_TVLE_IN_USD,
+} from "../../../services/generalServices";
 import { format } from "date-fns";
+import { parseEther, formatEther } from "@ethersproject/units";
 const DashboardHome = () => {
   const context = useWeb3React();
+  const {
+    connector,
+    library,
+    chainId,
+    account,
+    activate,
+    deactivate,
+    active,
+    error,
+  } = context;
   const [lockedValue, setLockedValue] = useState(0);
+  const [egcUsd, setEgcUsd] = useState(0);
   const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);
   const [totalLendingCount, setTotalLendingCount] = useState(0);
+  const [graphData2, setGraphData2] = useState([]);
+  const [ChartValue, setChartValue] = useState(0);
+  const [ChartTime, setChartTime] = useState(0);
+  const [ChartValue2, setChartValue2] = useState(0);
+  const [ChartTime2, setChartTime2] = useState(0);
+  const [LastArray, setLastArray] = useState(0);
+  const [lastIndex, setlastIndex] = useState(0);
+  const [totalTVL, setTotalTVL] = useState(0);
+  const [homeData, setHomeData] = useState({
+    tvl: "0",
+    volume: "0",
+    users: 0,
+  });
+  useEffect(async () => {
+    await axios
+      .get(API_URL + "/staking/chart", null, config)
+      .then((data) => {
+        console.log(data);
+        console.log(data.data.data);
+        const temp = data.data.data;
+        for (const data of temp) {
+          data.value = Number(parseInt(data.value).toFixed(2));
+          const date = new Date(data.timestamp);
+          const day = date.getUTCDate().toString().padStart(2, "0");
+          const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+          const year = date.getUTCFullYear();
+          const formattedDated = `${day}/${month}/${year}`;
+          const dateString = formattedDated;
+          const dateParts = dateString.split("/");
+          // new Date(year, monthIndex, day)
+          const dateObj = new Date(
+            dateParts[2],
+            dateParts[1] - 1,
+            dateParts[0]
+          );
+          // format the date using toLocaleDateString()
+          const formattedDate = dateObj.toLocaleDateString("en-US", {
+            month: "short",
+            day: "2-digit",
+            year: "numeric",
+          });
+          data.timestamp = formattedDate;
+          data.month = getMonthFromNumber(data.month);
+        }
+        console.log(temp);
+        setGraphData2(() => temp);
+        setlastIndex(temp.length - 1);
+        setLastArray(temp[temp.length - 1]);
+        setChartValue(() => temp[temp.length - 1].value);
+        setChartTime(() => temp[temp.length - 1].timestamp);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
 
-  var array = [
-    {
-      month: "Jan",
-      timestamp: "6:40 AM",
-      value: 188,
-    },
-    {
-      month: "Oct",
-      timestamp: "10:26 PM",
-      value: 262,
-    },
-    {
-      month: "May",
-      timestamp: "9:29 PM",
-      value: 609,
-    },
-    {
-      month: "Nov",
-      timestamp: "9:21 AM",
-      value: 712,
-    },
-    {
-      month: "Aug",
-      timestamp: "1:24 AM",
-      value: 866,
-    },
-    {
-      month: "Jan",
-      timestamp: "2:45 PM",
-      value: 887,
-    },
-    {
-      month: "Dec",
-      timestamp: "7:29 PM",
-      value: 1055,
-    },
-    {
-      month: "Feb",
-      timestamp: "4:20 PM",
-      value: 1070,
-    },
-    {
-      month: "Jul",
-      timestamp: "1:23 AM",
-      value: 1348,
-    },
-    {
-      month: "Jul",
-      timestamp: "12:23 AM",
-      value: 1386,
-    },
-    {
-      month: "Oct",
-      timestamp: "7:29 AM",
-      value: 1391,
-    },
-    {
-      month: "Sep",
-      timestamp: "1:36 AM",
-      value: 1635,
-    },
-    {
-      month: "Jul",
-      timestamp: "4:05 AM",
-      value: 1671,
-    },
-    {
-      month: "Sep",
-      timestamp: "11:59 PM",
-      value: 1749,
-    },
-    {
-      month: "Jan",
-      timestamp: "7:53 PM",
-      value: 1901,
-    },
-    {
-      month: "Sep",
-      timestamp: "8:46 PM",
-      value: 2047,
-    },
-    {
-      month: "Apr",
-      timestamp: "6:30 PM",
-      value: 2051,
-    },
-    {
-      month: "May",
-      timestamp: "3:18 PM",
-      value: 2200,
-    },
-    {
-      month: "Sep",
-      timestamp: "1:36 AM",
-      value: 1635,
-    },
-    {
-      month: "Jul",
-      timestamp: "4:05 AM",
-      value: 1671,
-    },
-    {
-      month: "Sep",
-      timestamp: "11:59 PM",
-      value: 1749,
-    },
-    {
-      month: "Jan",
-      timestamp: "7:53 PM",
-      value: 1901,
-    },
-    {
-      month: "Sep",
-      timestamp: "8:46 PM",
-      value: 2047,
-    },
-    {
-      month: "Apr",
-      timestamp: "6:30 PM",
-      value: 2051,
-    },
-    {
-      month: "May",
-      timestamp: "3:18 PM",
-      value: 2200,
-    },
-    {
-      month: "Aug",
-      timestamp: "3:18 AM",
-      value: 2220,
-    },
-    {
-      month: "Sep",
-      timestamp: "11:56 AM",
-      value: 2247,
-    },
-    {
-      month: "Jan",
-      timestamp: "7:31 PM",
-      value: 2288,
-    },
-    {
-      month: "Feb",
-      timestamp: "1:17 PM",
-      value: 2598,
-    },
-    {
-      month: "Jan",
-      timestamp: "10:19 PM",
-      value: 2656,
-    },
-    {
-      month: "Nov",
-      timestamp: "2:42 PM",
-      value: 2821,
-    },
-    {
-      month: "Feb",
-      timestamp: "1:15 AM",
-      value: 2898,
-    },
-    {
-      month: "Sep",
-      timestamp: "6:19 PM",
-      value: 2910,
-    },
-    {
-      month: "Aug",
-      timestamp: "12:19 AM",
-      value: 2942,
-    },
-    {
-      month: "Jan",
-      timestamp: "5:24 AM",
-      value: 2951,
-    },
-    {
-      month: "May",
-      timestamp: "10:53 PM",
-      value: 3059,
-    },
-    {
-      month: "Mar",
-      timestamp: "4:53 PM",
-      value: 3174,
-    },
-    {
-      month: "Apr",
-      timestamp: "9:56 PM",
-      value: 3253,
-    },
-    {
-      month: "Sep",
-      timestamp: "4:28 AM",
-      value: 3359,
-    },
-    {
-      month: "Nov",
-      timestamp: "6:08 AM",
-      value: 3596,
-    },
-    {
-      month: "Jan",
-      timestamp: "2:15 AM",
-      value: 3848,
-    },
-    {
-      month: "Apr",
-      timestamp: "11:51 PM",
-      value: 4088,
-    },
-    {
-      month: "Sep",
-      timestamp: "11:43 PM",
-      value: 4176,
-    },
-    {
-      month: "Feb",
-      timestamp: "5:57 AM",
-      value: 4328,
-    },
-    {
-      month: "Jan",
-      timestamp: "12:03 AM",
-      value: 4375,
-    },
-    {
-      month: "Mar",
-      timestamp: "5:23 AM",
-      value: 4443,
-    },
-    {
-      month: "Feb",
-      timestamp: "6:12 AM",
-      value: 4616,
-    },
-    {
-      month: "Jul",
-      timestamp: "3:40 PM",
-      value: 4719,
-    },
-    {
-      month: "Feb",
-      timestamp: "9:28 PM",
-      value: 4742,
-    },
-    {
-      month: "Feb",
-      timestamp: "3:58 PM",
-      value: 4972,
-    },
-    {
-      month: "May",
-      timestamp: "2:30 PM",
-      value: 4974,
-    },
-    {
-      month: "May",
-      timestamp: "3:04 AM",
-      value: 5019,
-    },
-    {
-      month: "Jul",
-      timestamp: "9:10 PM",
-      value: 5253,
-    },
-    {
-      month: "Sep",
-      timestamp: "3:06 AM",
-      value: 5331,
-    },
-    {
-      month: "May",
-      timestamp: "7:25 PM",
-      value: 5420,
-    },
-    {
-      month: "Jan",
-      timestamp: "8:19 PM",
-      value: 5441,
-    },
-    {
-      month: "Sep",
-      timestamp: "4:28 PM",
-      value: 5443,
-    },
-    {
-      month: "Jun",
-      timestamp: "12:54 PM",
-      value: 5521,
-    },
-    {
-      month: "Oct",
-      timestamp: "1:49 AM",
-      value: 5640,
-    },
-    {
-      month: "Oct",
-      timestamp: "5:16 PM",
-      value: 5678,
-    },
-    {
-      month: "Mar",
-      timestamp: "2:10 AM",
-      value: 5807,
-    },
-    {
-      month: "Jul",
-      timestamp: "10:26 AM",
-      value: 5984,
-    },
-    {
-      month: "May",
-      timestamp: "8:05 AM",
-      value: 6006,
-    },
-    {
-      month: "Apr",
-      timestamp: "4:48 PM",
-      value: 6150,
-    },
-    {
-      month: "Aug",
-      timestamp: "1:41 PM",
-      value: 6218,
-    },
-    {
-      month: "Aug",
-      timestamp: "6:23 PM",
-      value: 6655,
-    },
-
-    {
-      month: "Jul",
-      timestamp: "9:10 PM",
-      value: 5253,
-    },
-    {
-      month: "Sep",
-      timestamp: "3:06 AM",
-      value: 5331,
-    },
-    {
-      month: "May",
-      timestamp: "7:25 PM",
-      value: 5420,
-    },
-    {
-      month: "Jan",
-      timestamp: "8:19 PM",
-      value: 5441,
-    },
-    {
-      month: "Sep",
-      timestamp: "4:28 PM",
-      value: 5443,
-    },
-    {
-      month: "Jun",
-      timestamp: "12:54 PM",
-      value: 5521,
-    },
-    {
-      month: "Oct",
-      timestamp: "1:49 AM",
-      value: 5640,
-    },
-    {
-      month: "Oct",
-      timestamp: "5:16 PM",
-      value: 5678,
-    },
-    {
-      month: "Mar",
-      timestamp: "2:10 AM",
-      value: 5807,
-    },
-    {
-      month: "Jul",
-      timestamp: "10:26 AM",
-      value: 5984,
-    },
-    {
-      month: "Oct",
-      timestamp: "5:16 PM",
-      value: 5678,
-    },
-    {
-      month: "Mar",
-      timestamp: "2:10 AM",
-      value: 5807,
-    },
-    {
-      month: "Jul",
-      timestamp: "10:26 AM",
-      value: 5984,
-    },
-    {
-      month: "May",
-      timestamp: "8:05 AM",
-      value: 6006,
-    },
-    {
-      month: "Apr",
-      timestamp: "4:48 PM",
-      value: 6150,
-    },
-    {
-      month: "Aug",
-      timestamp: "1:41 PM",
-      value: 6218,
-    },
-    {
-      month: "May",
-      timestamp: "12:24 AM",
-      value: 6799,
-    },
-    {
-      month: "Jul",
-      timestamp: "10:26 AM",
-      value: 5984,
-    },
-    {
-      month: "Oct",
-      timestamp: "5:16 PM",
-      value: 5678,
-    },
-
-    {
-      month: "Jun",
-      timestamp: "12:54 PM",
-      value: 5521,
-    },
-    {
-      month: "Sep",
-      timestamp: "4:28 PM",
-      value: 5443,
-    },
-    {
-      month: "Sep",
-      timestamp: "3:06 AM",
-      value: 5331,
-    },
-    {
-      month: "May",
-      timestamp: "7:25 PM",
-      value: 5420,
-    },
-    {
-      month: "Jan",
-      timestamp: "8:19 PM",
-      value: 5441,
-    },
-    {
-      month: "Sep",
-      timestamp: "4:28 PM",
-      value: 5443,
-    },
-    {
-      month: "Jun",
-      timestamp: "12:54 PM",
-      value: 5521,
-    },
-    {
-      month: "Mar",
-      timestamp: "5:23 AM",
-      value: 4443,
-    },
-    {
-      month: "Feb",
-      timestamp: "6:12 AM",
-      value: 4616,
-    },
-    {
-      month: "Jul",
-      timestamp: "3:40 PM",
-      value: 4719,
-    },
-    {
-      month: "Feb",
-      timestamp: "9:28 PM",
-      value: 4742,
-    },
-    {
-      month: "Feb",
-      timestamp: "6:12 AM",
-      value: 4616,
-    },
-    {
-      month: "Mar",
-      timestamp: "5:23 AM",
-      value: 4443,
-    },
-    {
-      month: "Jan",
-      timestamp: "12:03 AM",
-      value: 4375,
-    },
-    {
-      month: "Feb",
-      timestamp: "5:57 AM",
-      value: 4328,
-    },
-    {
-      month: "Sep",
-      timestamp: "11:43 PM",
-      value: 4176,
-    },
-  ];
-
-  const lastIndex = array.length - 1;
-  const LastArray = array[lastIndex];
-  const [ChartValue, setChartValue] = useState(LastArray.value);
-  const [ChartTime, setChartTime] = useState(LastArray.timestamp);
-  const [ChartValue2, setChartValue2] = useState(LastArray.value);
-  const [ChartTime2, setChartTime2] = useState(LastArray.timestamp);
-
-  const [chartData, setChartData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await GET_CHART_TVL();
-
-      setChartData(response);
-    };
-    fetchData();
+    // socket.connect();
+    // socket.on("staking", (stakings) => {
+    //   // alert(JSON.stringify(stakings));
+    // });
   }, []);
-  function formatNumber(number) {
-    const abbreviations = {
-      k: 1000,
-      m: 1000000,
-      b: 1000000000,
-      t: 1000000000000,
-    };
-
-    const num = parseFloat(number);
-
-    for (const abbreviation in abbreviations) {
-      if (
-        num >= abbreviations[abbreviation] &&
-        num < abbreviations[abbreviation] * 1000
-      ) {
-        return `${(num / abbreviations[abbreviation]).toFixed(
-          1
-        )}${abbreviation}`;
-      }
-    }
-
-    return num.toLocaleString();
-  }
+  // console.log(LastArray);
+  // console.log(LastArray);
+  // console.log(ChartValue, ChartTime, "all values for tooltip");
   const CustomTooltip = ({ active, payload, label }) => {
+    // console.log(active, payload);
     if (active && payload && payload.length) {
-      setChartValue(payload[0].value);
+      setChartValue(payload[0].payload.value);
       setChartTime(payload[0].payload.timestamp);
     } else {
       setChartValue(LastArray.value);
@@ -606,7 +141,7 @@ const DashboardHome = () => {
   };
   const CustomTooltip2 = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
-      setChartValue2(payload[0].value);
+      setChartValue2(payload[0].payload.value);
       setChartTime2(payload[0].payload.timestamp);
     } else {
       setChartValue2(LastArray.value);
@@ -1416,6 +951,56 @@ const DashboardHome = () => {
         "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
     },
   ];
+  useEffect(() => {
+    const fetchData = async () => {
+      const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
+      const response = await GET_TVL();
+
+      console.log(response, "google");
+      const tvl = egc_usd * response.tvl.tvl;
+      const numberOfUsers = response.users;
+
+      const main = parseFloat(tvl).toFixed(2);
+      setHomeData({
+        ...homeData,
+        volume: main,
+        users: numberOfUsers,
+      });
+    };
+    fetchData();
+  }, []);
+  useEffect(
+    async (e) => {
+      let string2 =
+        "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
+      await fetch(string2)
+        .then((resp) => resp.json())
+        .then((data) => {
+          const egc_usd_val = data["egoras-credit"].usd;
+          setEgcUsd(() => egc_usd_val);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    [egcUsd]
+  );
+  useEffect(
+    async (e) => {
+      if (account) {
+        let res = await tokenBalance(
+          "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+          "0x3A81836b093f7f3D3ca271125CcD45c461409697",
+          library.getSigner()
+        );
+        console.log(res);
+        console.log(formatEther(res.message));
+        let tvl = formatEther(res.message);
+        setTotalTVL(tvl * egcUsd);
+      }
+    },
+    [account, egcUsd]
+  );
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -1436,7 +1021,7 @@ const DashboardHome = () => {
                     className="analytics_container_1_Amount"
                     onChange={CustomTooltip}
                   >
-                    ${formatNumber(ChartValue)}
+                    ${formatNumber(ChartValue * egcUsd)}
                   </div>
                   <span className="analytics_container_1_Amount_span">
                     {ChartTime}
@@ -1451,7 +1036,7 @@ const DashboardHome = () => {
                         <AreaChart
                           width={130}
                           height={10}
-                          data={array}
+                          data={graphData2}
                           margin={{
                             top: 0,
                             right: 0,
@@ -1505,7 +1090,7 @@ const DashboardHome = () => {
                         <AreaChart
                           width={130}
                           height={10}
-                          data={array}
+                          data={graphData2}
                           margin={{
                             top: 0,
                             right: 0,
@@ -1577,7 +1162,7 @@ const DashboardHome = () => {
                         <BarChart
                           width={130}
                           height={10}
-                          data={array}
+                          data={graphData2}
                           margin={{
                             top: 0,
                             right: 0,
@@ -1632,7 +1217,7 @@ const DashboardHome = () => {
                         <BarChart
                           width={130}
                           height={10}
-                          data={array}
+                          data={graphData2}
                           margin={{
                             top: 0,
                             right: 0,
@@ -1683,6 +1268,16 @@ const DashboardHome = () => {
                   </div>
                 </div>
               </div>
+              {/* =============================================== */}
+              {/* =============================================== */}
+              {/* =============================================== */}
+              {/* =============================================== */}
+              {/* =============================================== */}
+              {/* =============================================== */}
+              {/* =============================================== */}
+              {/* =============================================== */}
+              {/* =============================================== */}
+              {/* =============================================== */}
               <div className="analytics_container_body">
                 <div className="analytics_container_1">
                   <div className="analytics_container_1_head">TVL</div>
@@ -1690,7 +1285,7 @@ const DashboardHome = () => {
                     className="analytics_container_1_Amount"
                     onChange={CustomTooltip}
                   >
-                    ${formatNumber(ChartValue)}
+                    ${formatNumber(ChartValue * egcUsd)}
                   </div>
                   <span className="analytics_container_1_Amount_span">
                     {ChartTime}
@@ -1705,7 +1300,7 @@ const DashboardHome = () => {
                         <AreaChart
                           width={130}
                           height={10}
-                          data={array}
+                          data={graphData2}
                           margin={{
                             top: 0,
                             right: 0,
@@ -1759,7 +1354,7 @@ const DashboardHome = () => {
                         <AreaChart
                           width={130}
                           height={10}
-                          data={array}
+                          data={graphData2}
                           margin={{
                             top: 0,
                             right: 0,
@@ -1831,7 +1426,7 @@ const DashboardHome = () => {
                         <BarChart
                           width={130}
                           height={10}
-                          data={array}
+                          data={graphData2}
                           margin={{
                             top: 0,
                             right: 0,
@@ -1886,7 +1481,7 @@ const DashboardHome = () => {
                         <BarChart
                           width={130}
                           height={10}
-                          data={array}
+                          data={graphData2}
                           margin={{
                             top: 0,
                             right: 0,
@@ -1948,14 +1543,14 @@ const DashboardHome = () => {
                 <div className="lending_area1_cont1_body_1">
                   <div className="lending_area1_cont1_heading">Total TVL</div>
                   <div className="lending_area1_cont1_body_txt">
-                    0<span className="usd_sign"> USD</span>
+                    {formatNumber(totalTVL)}
+                    <span className="usd_sign">USD</span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
                   <HelpOutlineIcon className="help_outline" />
                   <div className="helper_txt_div">
-                    This is the total Engn funded to all assets in the lending
-                    pool.
+                    This is the total value of EGC locked in the smart-contract.
                   </div>
                 </div>
               </div>
@@ -1965,14 +1560,15 @@ const DashboardHome = () => {
                     Total Trading Volume
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    0<span className="usd_sign"> USD</span>
+                    {formatNumber(homeData.volume)}
+                    <span className="usd_sign"> USD</span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
                   <HelpOutlineIcon className="help_outline" />
                   <div className="helper_txt_div">
-                    This is the total Engn funded to all assets in the lending
-                    pool.
+                    This is the total trading volume carried out in the
+                    smart-contract every 24hours.
                   </div>
                 </div>
               </div>
@@ -1981,7 +1577,8 @@ const DashboardHome = () => {
                 <div className="lending_area1_cont1_body_1">
                   <div className="lending_area1_cont1_heading">Total Users</div>
                   <div className="lending_area1_cont1_body_txt">
-                    0<span className="usd_sign"></span>
+                    {formatNumber(homeData.users)}
+                    <span className="usd_sign"></span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">

@@ -426,15 +426,29 @@ input[type="radio"]:checked + .selectPlanDiv2_area1_cont1_label:before {
 .selectPlanDiv2_area1_cont2 {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 .selectPlanDiv2_area1_cont2_head {
   display: flex;
   justify-content: space-between;
   font-weight: 600;
   font-size: 24px;
+  width: 100%;
+}
+.selectPlanDiv2_area1_cont2_head_price_div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.selectPlanDiv2_area1_cont2_head_price_div_span {
+  font-size: 14px;
+  color: #a8c3b2;
 }
 .selectPlanDiv2_area1_cont2_body {
   color: #878787;
+  margin-top: 10px;
 }
 .dark .selectPlanDiv2_area1_cont2_body {
   color: #a3a3a3;
