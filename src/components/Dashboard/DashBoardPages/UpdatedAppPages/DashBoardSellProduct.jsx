@@ -17,30 +17,30 @@ import {
 } from "@web3-react/core";
 import {
   listProduct,
-  lendUS,
-  takeDividend,
-  takeBackLoan,
-  getTotalLended,
-  getInvestorsDividend,
-  userStats,
-  system,
-  burnAccumulatedDividend,
-  checkAllowance,
-  unluckToken,
-  lend,
-  getUserStats,
-  transactReceipt,
-  getPrice,
-  getTickerInfo,
-  tokenBalance,
-  open,
-  getLatestLoan,
-  repay,
-  topup,
-  draw,
-  checkAllowanceL,
-  unluckToken2,
-  getEgcSmartContractBalnce,
+  // lendUS,
+  // takeDividend,
+  // takeBackLoan,
+  // getTotalLended,
+  // getInvestorsDividend,
+  // userStats,
+  // system,
+  // burnAccumulatedDividend,
+  // checkAllowance,
+  // unluckToken,
+  // lend,
+  // getUserStats,
+  // transactReceipt,
+  // getPrice,
+  // getTickerInfo,
+  // tokenBalance,
+  // open,
+  // getLatestLoan,
+  // repay,
+  // topup,
+  // draw,
+  // checkAllowanceL,
+  // unluckToken2,
+  // getEgcSmartContractBalnce,
 } from "../../../../web3/index";
 // import {
 //   lendUS,
@@ -146,20 +146,18 @@ const DashBoardSellProduct = () => {
   const handleRemoveClick3 = () => {
     setImageSrc3("");
   };
-  const sendProductToBlockchain = async (prodId) => {
+  const sendProductToBlockchain = async (
+    prodId,
+    productType,
+    productQuantity
+  ) => {
     const conCatProdName = ` ${prodName}_${prodId}`;
-    // Samsung Galaxy Note 12A_7bcf7fcc-4ce3-4e47-8c89-7b26cb89e06d 540000000000000000000000
-    // ("Samsung Galaxy Note 12A_7bcf7fcc-4ce3-4e47-8c89-7b26cb89e06d", "540000000000000000000000", "1", false);
-    // "Samsung Galaxy Note 12A_7bcf7fcc-4ce3-4e47-8c89-7b26cb89e06d",
-    //   "540000000000000000000000",
-    //   1,
-    //   false,
-    //   { from: accounts[0] };
+
     const res = await listProduct(
-      // conCatProdName,
-      "Samsung Galaxy Note 12A_38679697-ef70-472f-b7d8-451919e91155",
-      // parseEther(saleAmount.toString(), "wei").toString(),
-      "540000000000000000000000",
+      conCatProdName,
+      parseEther(saleAmount.toString(), "wei").toString(),
+      productType,
+      productQuantity,
       library.getSigner()
     );
     console.log(res, "somto8uhhhg");
@@ -182,43 +180,59 @@ const DashBoardSellProduct = () => {
     setDisable(true);
     const formData = new FormData();
 
-    console.log(account);
-    sendProductToBlockchain("res.data.data.product_id");
+    let productType = false;
+    let productQuantity = 1;
 
-    // const element = document.getElementById("product_image");
-    // const element2 = document.getElementById("product_image2");
-    // const element3 = document.getElementById("product_image3");
-    // const file = element.files[0];
-    // const file2 = element2.files[0];
-    // const file3 = element3.files[0];
-    // formData.append("product_image", file);
-    // formData.append("product_image2", file2);
-    // formData.append("product_image3", file3);
-    // formData.append("product_name", prodName);
-    // formData.append("product_brand", brandName);
-    // formData.append("product_condition", prodCondition);
-    // formData.append("userAddress", account);
-    // formData.append("amount", saleAmount);
-    // console.log(formData);
-    // try {
-    //   const res = await axios.post(
-    //     API_URL + "/product/initialize/add/product",
-    //     formData,
-    //     config
-    //   );
-    //   console.log(res, "somto");
-    //   if (res.status === 200) {
-    //     sendProductToBlockchain(res.data.data.product_id);
-    //     return;
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    //   console.log(err);
-    //   setErrorModal(true);
-    //   setErrorMessage(err.response.data.errorMessage);
-    //   setIsLoading(false);
-    //   setDisable(false);
-    // }
+    let setProductType = "";
+
+    if (productType == true) {
+      setProductType = "DIRECT";
+    } else {
+      setProductType = "INDIRECT";
+    }
+
+    console.log(account);
+
+    const element = document.getElementById("product_image");
+    const element2 = document.getElementById("product_image2");
+    const element3 = document.getElementById("product_image3");
+    const file = element.files[0];
+    const file2 = element2.files[0];
+    const file3 = element3.files[0];
+    formData.append("product_image", file);
+    formData.append("product_image2", file2);
+    formData.append("product_image3", file3);
+    formData.append("product_name", prodName);
+    formData.append("product_brand", brandName);
+    formData.append("product_condition", prodCondition);
+    formData.append("userAddress", account);
+    formData.append("amount", saleAmount);
+    formData.append("productType", setProductType);
+    formData.append("productQuantity", productQuantity);
+    console.log(formData);
+    try {
+      const res = await axios.post(
+        API_URL + "/product/initialize/add/product",
+        formData,
+        config
+      );
+      console.log(res, "somto");
+      if (res.status === 200) {
+        sendProductToBlockchain(
+          res.data.data.product_id,
+          productType,
+          productQuantity
+        );
+        return;
+      }
+    } catch (err) {
+      console.log(err);
+      console.log(err);
+      setErrorModal(true);
+      setErrorMessage(err.response.data.errorMessage);
+      setIsLoading(false);
+      setDisable(false);
+    }
   };
   const handleNameChange = (event) => {
     setProdName(event.target.value);

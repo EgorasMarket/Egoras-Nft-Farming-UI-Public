@@ -738,6 +738,9 @@ const AdminProductsPage = () => {
                       Uploader
                     </th>
                     <th className="assets-category-titles-heading1  ">
+                      Product Type
+                    </th>
+                    <th className="assets-category-titles-heading1  ">
                       Upload Date
                     </th>
                   </tr>
@@ -816,6 +819,9 @@ const AdminProductsPage = () => {
                             ) : (
                               <>{asset.personnel}</>
                             )}
+                          </td>
+                          <td className="assets-category-data1b stable-content branch_apy">
+                            {asset.productType}
                           </td>
                           <td className="assets-category-data1b stable-content branch_apy">
                             {asset.createdAt}

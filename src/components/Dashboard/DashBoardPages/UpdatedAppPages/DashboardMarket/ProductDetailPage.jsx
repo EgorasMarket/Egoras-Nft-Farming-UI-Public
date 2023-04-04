@@ -3,51 +3,48 @@ import React, { useEffect, useState, useCallback } from "react";
 // import axios from "axios";
 import ImageGallery from "react-image-gallery";
 import Lottie from "lottie-react";
-// import SoldOutDiv from "../SoldOut/SoldOutDiv";
-// import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-// import LocalShippingRoundedIcon from "@mui/icons-material/LocalShippingRounded";
-// import StoreRoundedIcon from "@mui/icons-material/StoreRounded";
+
 import StarRating from "@rubenvara/react-star-rating";
-// import { connect, useDispatch } from "react-redux";
-// import UpdatedLoginComponent from "../Login/UpdatedLoginComponent";
+
 import deliveryIcon from "../../../../../LottieFiles/loadingIcon/deliveryIcon.json";
 import storeIcon from "../../../../../LottieFiles/loadingIcon/storeIcon.json";
 import walletIcon from "../../../../../LottieFiles/loadingIcon/walletIcon.json";
-// import Accordion from "../item_details_page/Accordion";
-// import { numberWithCommas } from "../../../../static";
+
 import { numberWithCommas } from "../../../../../static";
-// import Carousel from "react-multi-carousel";
-// import { UpdatedMarketCard } from "../UpdatedMarketPage/UpdatedMarketCard/UpdatedMarketCard";
 
 import { ShimmerText, ShimmerPostDetails } from "react-shimmer-effects";
 import "./DashboardMarketStyles/PowerDetailPage.css";
 import "./DashboardMarketStyles/updatedItemDetailPage.css";
 import { GET_UPLOADED_PRODUCT_BY_ID } from "../../../../../services/productServices";
+import {
+  Web3ReactProvider,
+  useWeb3React,
+  UnsupportedChainIdError,
+} from "@web3-react/core";
+import {
+  BuyIndirectProduct,
+  BuyDirectProduct,
+} from "../../../../../web3/index";
+import {
+  checkAllowanceSwap,
+  unlockSwapToken,
+} from "../../../../../web3/index2";
 
 const ProductDetailPage = ({ match }) => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  };
+  const context = useWeb3React();
+  const {
+    // connector,
+    library,
+    // chainId,
+    account,
+    // activate,
+    // deactivate,
+    // active,
+    // error,
+  } = context;
   const [loading, setLoading] = useState(true);
   const [productDetail, setProductDetail] = useState({});
   const [image, setProductImages] = useState([]);
-
-  const images = [
-    {
-      original: "/img/dummyMarketImages/PhoneDummyImage.png",
-      thumbnail: "/img/dummyMarketImages/PhoneDummyImage.png",
-    },
-    {
-      original: "/img/dummyMarketImages/PhoneDummyImage.png",
-      thumbnail: "/img/dummyMarketImages/PhoneDummyImage.png",
-    },
-    {
-      original: "/img/dummyMarketImages/PhoneDummyImage.png",
-      thumbnail: "/img/dummyMarketImages/PhoneDummyImage.png",
-    },
-  ];
 
   useEffect(() => {
     const { address, name } = match.params;
@@ -79,6 +76,60 @@ const ProductDetailPage = ({ match }) => {
 
     //use the adress and make the API call
   }, []);
+
+  const PurchaseProduct = async () => {
+    console.log(productDetail.productType, account, "PurchaseProduct");
+
+    let quantity = 1;
+    let res;
+
+    if (productDetail.productType == "INDIRECT") {
+      res = await BuyIndirectProduct(
+        productDetail.index_id,
+        quantity,
+        library.getSigner()
+      );
+    } else {
+      res = await BuyDirectProduct(
+        productDetail.index_id,
+        quantity,
+        library.getSigner()
+      );
+    }
+    // const res = await BuyIndirectProduct(
+    //   productDetail.index_id,
+    //   quantity,
+    //   library.getSigner()
+    // );
+
+    console.log(res, "somto8uhhhg");
+    // console.log(res.status, "somto8uhhhg");
+    // setSaleDetails("");
+    console.log(res);
+    if (res.status == true) {
+      console.log("Success message");
+    } else {
+      console.log("Error occured from Blockchain");
+    }
+
+    // const response = await GET_UPLOADED_PRODUCT_BY_ID(address);
+
+    // if (response.success) {
+    //   setLoading(false);
+    //   setProductDetail(response.data);
+    //   const img = JSON.parse(response.data.product_images);
+    //   for (const data of img) {
+    //     const payload = {
+    //       original: data,
+    //       thumbnail: data,
+    //     };
+    //     image.push(payload);
+    //   }
+
+    //   console.log(image);
+    // }
+  };
+
   if (loading)
     return (
       <div className="other2 asset_other2">
@@ -413,7 +464,11 @@ const ProductDetailPage = ({ match }) => {
                     </div>
 
                     <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn_div">
-                      <button className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn">
+                      <button
+                        className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn"
+                        // onClick={PurchaseProduct}
+                        disabled={true}
+                      >
                         Purchase
                       </button>
                     </div>

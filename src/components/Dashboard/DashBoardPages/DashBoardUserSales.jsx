@@ -76,7 +76,7 @@ const DashBoardUserSales = () => {
     };
 
     fetchData();
-  }, []);
+  }, [account]);
 
   const handleAcceptBid = async (action) => {
     // AcceptBid
