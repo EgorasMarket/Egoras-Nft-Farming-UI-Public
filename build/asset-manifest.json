@@ -1,20 +1,8 @@
 {
   "files": {
-<<<<<<< HEAD
-    "main.css": "/static/css/main.bca54ab7.chunk.css",
-    "main.js": "/static/js/main.6673f03d.chunk.js",
-    "main.js.map": "/static/js/main.6673f03d.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.cb0a9319.js",
-    "runtime-main.js.map": "/static/js/runtime-main.cb0a9319.js.map",
-    "static/css/2.85d8efbc.chunk.css": "/static/css/2.85d8efbc.chunk.css",
-    "static/js/2.63bd96a1.chunk.js": "/static/js/2.63bd96a1.chunk.js",
-    "static/js/2.63bd96a1.chunk.js.map": "/static/js/2.63bd96a1.chunk.js.map",
-    "static/js/3.072f50e6.chunk.js": "/static/js/3.072f50e6.chunk.js",
-    "static/js/3.072f50e6.chunk.js.map": "/static/js/3.072f50e6.chunk.js.map",
-=======
     "main.css": "/static/css/main.6922f904.chunk.css",
-    "main.js": "/static/js/main.a23e7054.chunk.js",
-    "main.js.map": "/static/js/main.a23e7054.chunk.js.map",
+    "main.js": "/static/js/main.afec2112.chunk.js",
+    "main.js.map": "/static/js/main.afec2112.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.c6abf244.js",
     "runtime-main.js.map": "/static/js/runtime-main.c6abf244.js.map",
     "static/css/2.85d8efbc.chunk.css": "/static/css/2.85d8efbc.chunk.css",
@@ -22,40 +10,25 @@
     "static/js/2.5a6869b3.chunk.js.map": "/static/js/2.5a6869b3.chunk.js.map",
     "static/js/3.1daad077.chunk.js": "/static/js/3.1daad077.chunk.js",
     "static/js/3.1daad077.chunk.js.map": "/static/js/3.1daad077.chunk.js.map",
->>>>>>> Ebrinix
     "static/js/4.432fd07b.chunk.js": "/static/js/4.432fd07b.chunk.js",
     "static/js/4.432fd07b.chunk.js.map": "/static/js/4.432fd07b.chunk.js.map",
     "static/js/5.c79603e4.chunk.js": "/static/js/5.c79603e4.chunk.js",
     "static/js/5.c79603e4.chunk.js.map": "/static/js/5.c79603e4.chunk.js.map",
     "index.html": "/index.html",
     "static/css/2.85d8efbc.chunk.css.map": "/static/css/2.85d8efbc.chunk.css.map",
-<<<<<<< HEAD
-    "static/css/main.bca54ab7.chunk.css.map": "/static/css/main.bca54ab7.chunk.css.map",
-    "static/js/2.63bd96a1.chunk.js.LICENSE.txt": "/static/js/2.63bd96a1.chunk.js.LICENSE.txt",
-    "static/js/3.072f50e6.chunk.js.LICENSE.txt": "/static/js/3.072f50e6.chunk.js.LICENSE.txt",
-=======
     "static/css/main.6922f904.chunk.css.map": "/static/css/main.6922f904.chunk.css.map",
     "static/js/2.5a6869b3.chunk.js.LICENSE.txt": "/static/js/2.5a6869b3.chunk.js.LICENSE.txt",
     "static/js/3.1daad077.chunk.js.LICENSE.txt": "/static/js/3.1daad077.chunk.js.LICENSE.txt",
->>>>>>> Ebrinix
     "static/media/customAlert.css": "/static/media/success_icon.d4bf8731.svg",
     "static/media/countrySelect.css": "/static/media/flags@2x.1ff49fd4.png",
     "static/media/montserrat.ttf": "/static/media/montserrat.e20d5327.ttf",
     "static/media/styles.css": "/static/media/revicons.e8746a62.woff"
   },
   "entrypoints": [
-<<<<<<< HEAD
-    "static/js/runtime-main.cb0a9319.js",
-    "static/css/2.85d8efbc.chunk.css",
-    "static/js/2.63bd96a1.chunk.js",
-    "static/css/main.bca54ab7.chunk.css",
-    "static/js/main.6673f03d.chunk.js"
-=======
     "static/js/runtime-main.c6abf244.js",
     "static/css/2.85d8efbc.chunk.css",
     "static/js/2.5a6869b3.chunk.js",
     "static/css/main.6922f904.chunk.css",
-    "static/js/main.a23e7054.chunk.js"
->>>>>>> Ebrinix
+    "static/js/main.afec2112.chunk.js"
   ]
 }
