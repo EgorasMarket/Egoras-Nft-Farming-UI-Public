@@ -7,6 +7,7 @@ import axios from "axios";
 import { API_URL } from "../../actions/types";
 import { config } from "../../actions/Config";
 import Marquee from "react-fast-marquee";
+// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 // import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 // import NotificationsIcon from "@mui/icons-material/Notifications";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
@@ -141,7 +142,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
       }
       element.appendChild(icon);
     }
-  }, [account, avatarRef]);
+  }, [account, avatarRef, isOpen]);
   useEffect(() => {
     if (linksActive === "/app") {
       setActiveMenuName("home");
@@ -582,7 +583,85 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             <div className="user_profile_icon_cont2">
               <div className="together">
                 <div className="header_menu_icon_con_dash">
-                  <Hamburger toggled={isOpen} toggle={setIsOpen} />
+                  <Hamburger
+                    toggled={isOpen}
+                    toggle={setIsOpen}
+                    size={25}
+                    rounded={true}
+                  />
+                </div>
+                <div className="mobile_view_notifications" ref={wrapperRef}>
+                  <div className="notify_icon_cont_div_cont">
+                    <div
+                      className="wallet_settings_icon_cont notify_icon_cont"
+                      onClick={ToggleNotifyDiv}
+                    >
+                      <div className="notify_icon_cont_div">
+                        {UnreadNotifications.length <= 0 ? null : (
+                          <div className="notify_icon_cont_div_notifyCount">
+                            {noTifyCount}
+                          </div>
+                        )}
+                        <NotificationsNoneOutlinedIcon className="wallet_settings_icon" />
+                      </div>
+                    </div>
+                    {notifyDiv && (
+                      <div className="notifyDropDownDiv">
+                        {UnreadNotifications.length <= 0 ? (
+                          <div className="notifyDropDownDiv_emptyDiv">
+                            No notifications!
+                          </div>
+                        ) : (
+                          <>
+                            {UnreadNotifications.sort(
+                              (a, b) =>
+                                new Date(b.createdAt).getTime() -
+                                new Date(a.createdAt).getTime()
+                            ).map((data, key) => (
+                              <>
+                                {data.status == "unread" ? (
+                                  <div
+                                    className="notifyDropDownDiv_div1 active"
+                                    key={data.id}
+                                  >
+                                    <div className="notifyDropDownDiv_div1_title active">
+                                      {data.title}{" "}
+                                      <span
+                                        style={{
+                                          fontSize: "10px",
+                                        }}
+                                      >
+                                        - (
+                                        <TimeAgoComponent
+                                          date={data.createdAt}
+                                        />
+                                        )
+                                      </span>
+                                    </div>
+                                    <div className="notifyDropDownDiv_div1_para">
+                                      {data.message}
+                                    </div>
+                                  </div>
+                                ) : (
+                                  <div
+                                    className="notifyDropDownDiv_div1"
+                                    key={data.id}
+                                  >
+                                    <div className="notifyDropDownDiv_div1_title">
+                                      {data.title}
+                                    </div>
+                                    <div className="notifyDropDownDiv_div1_para">
+                                      {data.message}
+                                    </div>
+                                  </div>
+                                )}
+                              </>
+                            ))}
+                          </>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <div className="toggle_dark_mode_div">
                   <SwitchToggle2
@@ -717,9 +796,25 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                 </div>
                 <div className="mobile_view_header_cont_head_body_cont1_para">
                   <div className="metamask_prof_pic_icon" ref={avatarRef}></div>
-                  {/* <div className="wallet_addr_cont_txt_header"> */}
-                  <div className="wall_addr2">{walletAddr}</div>
-                  {/* </div> */}
+                  <div className="wallet_addr_cont_txt_header">
+                    <div className="wall_addr">{walletAddr}</div>
+                  </div>
+                </div>
+              </div>
+              <span className="header_rule"></span>
+              <div className="mobile_view_header_cont_head_body_cont1">
+                <div className="mobile_view_header_cont_head_body_cont1_title">
+                  User
+                </div>
+                <div className="mobile_view_header_cont_head_body_cont1_para">
+                  <a
+                    href="/app/user"
+                    className="wallet_settings_icon_cont notify_icon_cont"
+                  >
+                    <div className="notify_icon_cont_div">
+                      <AccountCircleIcon className="wallet_settings_icon" />
+                    </div>
+                  </a>
                 </div>
               </div>
               <span className="header_rule"></span>

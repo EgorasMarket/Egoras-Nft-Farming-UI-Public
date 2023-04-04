@@ -609,7 +609,7 @@ vl {
   display: flex;
   align-items: center;
   justify-content: center;
-  line-height: 1.1;
+  /* line-height: 1.1; */
 }
 
 .lightMode_icon {
@@ -685,8 +685,11 @@ vl {
 }
 .mobile_view_header_cont_head_body_cont1_para {
   display: flex;
-  gap: 5px;
-  align-items: center;
+  /* gap: 5px; */
+  /* align-items: center; */
+}
+.mobile_view_notifications {
+  display: none;
 }
 .wall_addr2 {
   max-width: 100px;
@@ -708,7 +711,26 @@ vl {
 }
 /* ========== */
 /* ========== */
+@media screen and (max-width: 991px) {
+  .mobile_view_notifications {
+    display: block;
+  }
+}
 @media screen and (max-width: 767px) {
+  /* .hamburger-react {
+    height: 31px !important;
+    width: 38px !important;
+  } */
+  /*
+  .hamburger-react div {
+    left: 0 !important;
+    right: 0 !important;
+    margin: auto !important;
+    height: 4% !important;
+    width: 100% !important;
+    top: 0 !important;
+  } */
+
   .desktop_view_cont {
     display: none;
   }
