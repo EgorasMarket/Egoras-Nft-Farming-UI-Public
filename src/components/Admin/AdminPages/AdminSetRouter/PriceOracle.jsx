@@ -6,6 +6,7 @@ import {
   resetStakeTime,
   IncreaseRoyaltyTime,
 } from "../../../../web3/index2";
+import { unlockTokenV3 } from "../../../../web3";
 import Web3 from "web3";
 import { parseEther, formatEther } from "@ethersproject/units";
 import {
@@ -53,6 +54,24 @@ const PriceOracle = () => {
   const IncreaseStakeTime = async () => {
     const response = await IncreaseRoyaltyTime(account, library.getSigner());
     console.log(response);
+  };
+  const UnlockToken = async (e) => {
+    let ret = await unlockTokenV3(
+      "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+      parseEther("2000000000000000000000000000000", "wei").toString(),
+      library.getSigner()
+    );
+    console.log(ret);
+    if (ret.status == true) {
+      localStorage.setItem("unlocking", true);
+      localStorage.setItem("unlockingHash", ret.message);
+      // setUnlockBtn(true);
+    } else {
+      if (ret.message.code == 4001) {
+        console.log(ret);
+      }
+      console.log(ret);
+    }
   };
   return (
     <div className="other2 asset_other2">
@@ -102,6 +121,9 @@ const PriceOracle = () => {
                 className="setRouterAddressBtn"
               >
                 Increase Time
+              </button>
+              <button onClick={UnlockToken} className="setRouterAddressBtn">
+                Aprove EGC
               </button>
             </div>
           </div>

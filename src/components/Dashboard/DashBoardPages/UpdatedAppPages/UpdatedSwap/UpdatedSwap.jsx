@@ -99,6 +99,9 @@ const UpdatedSwap = () => {
   const [coinBalance, setCoinBalance] = useState("");
   const [baseBalance, setBaseBalance] = useState("");
   const [txHash, setTxHash] = useState("");
+  const [eusdSmartContractBal, setEusdSmartContractBal] = useState("");
+  const [insufficientLiquidityBtn, setInsufficientLiquidityBtn] =
+    useState(false);
   // const [eus, setIsAmountLoading] = useState(false);
 
   const hour1Array = [
@@ -449,6 +452,7 @@ const UpdatedSwap = () => {
     setIdBase(e.currentTarget.id);
     setBaseToAddress(e.currentTarget.name);
     setSwapToAddress(e.currentTarget.name);
+    setSwapAmount("");
     // setInitialBaseToAddress(e.currentTarget.name);
     setIdTicker(id);
     setIda(id);
@@ -632,29 +636,6 @@ const UpdatedSwap = () => {
   );
   const [ChartChange, setChartChange] = useState(LastArray.change);
   const [ChartChange2, setChartChange2] = useState(LastArray2.change);
-  function formatNumber(number) {
-    const abbreviations = {
-      k: 1000,
-      m: 1000000,
-      b: 1000000000,
-      t: 1000000000000,
-    };
-
-    const num = parseFloat(number);
-
-    for (const abbreviation in abbreviations) {
-      if (
-        num >= abbreviations[abbreviation] &&
-        num < abbreviations[abbreviation] * 1000
-      ) {
-        return `${(num / abbreviations[abbreviation]).toFixed(
-          1
-        )}${abbreviation}`;
-      }
-    }
-
-    return num.toLocaleString();
-  }
   const CustomTooltip = ({ active, payload, label }) => {
     console.log(payload);
     if (active && payload && payload.length) {
@@ -737,7 +718,7 @@ const UpdatedSwap = () => {
       }
       console.log(ret);
       setErrorModal(true);
-  setErrorMessage(ret.message);
+      setErrorMessage(ret.message);
       setIsLoading(false);
       setDisable(false);
     }
@@ -864,18 +845,42 @@ const UpdatedSwap = () => {
       setAmountsOut("");
       setIsAmountLoading(false);
     }
-    if (SwapAmount == "" || id2 == "" || id == "") {
+    if (SwapAmount == "" || id2 == "" || id == "" || amountsOut == "") {
       setDisable(true);
     } else {
       setDisable(false);
     }
-  }, [SwapAmount, id2, id]);
+  }, [SwapAmount, id2, id, amountsOut]);
   const CloseSuccessModal = () => {
     setSuccessModal(false);
   };
   const CloseErrorModal = () => {
     setErrorModal(false);
   };
+  useEffect(async (e) => {
+    // if (account) {
+    let res = await tokenBalance(
+      "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A",
+      "0x3A81836b093f7f3D3ca271125CcD45c461409697",
+      library.getSigner()
+    );
+    console.log(res);
+    console.log(formatEther(res.message));
+    let tvl = formatEther(res.message);
+    setEusdSmartContractBal(formatEther(res.message));
+  }, []);
+  useEffect(() => {
+    if (parseInt(SwapAmount) > parseInt(eusdSmartContractBal)) {
+      setInsufficientLiquidityBtn(true);
+      console.log("swap amount is greater");
+    } else {
+      setInsufficientLiquidityBtn(false);
+      console.log("swap amount is lesser");
+    }
+    console.log(insufficientLiquidityBtn);
+    console.log(SwapAmount);
+    console.log(eusdSmartContractBal);
+  }, [eusdSmartContractBal, SwapAmount]);
 
   return (
     <div className="other2">
@@ -1404,22 +1409,35 @@ const UpdatedSwap = () => {
                                                 )}
                                               </button>
                                             ) : (
-                                              <button
-                                                id="generate"
-                                                disabled={Disable}
-                                                onClick={SwapEusdForBnb}
-                                                class="updatedSwapSwapBtn"
-                                              >
-                                                {isLoading ? (
-                                                  <ScaleLoader
-                                                    color="#24382b"
-                                                    size={10}
-                                                    height={20}
-                                                  />
+                                              <>
+                                                {insufficientLiquidityBtn ? (
+                                                  <button
+                                                    id="generate"
+                                                    disabled={true}
+                                                    onClick={SwapEusdForBnb}
+                                                    class="updatedSwapSwapBtn"
+                                                  >
+                                                    Insufficient Eusd Liquidity
+                                                  </button>
                                                 ) : (
-                                                  <> Swap {data.symbol}</>
+                                                  <button
+                                                    id="generate"
+                                                    disabled={Disable}
+                                                    onClick={SwapEusdForBnb}
+                                                    class="updatedSwapSwapBtn"
+                                                  >
+                                                    {isLoading ? (
+                                                      <ScaleLoader
+                                                        color="#24382b"
+                                                        size={10}
+                                                        height={20}
+                                                      />
+                                                    ) : (
+                                                      <> Swap {data.symbol}</>
+                                                    )}
+                                                  </button>
                                                 )}
-                                              </button>
+                                              </>
                                             )}
                                           </>
                                         ) : null}
