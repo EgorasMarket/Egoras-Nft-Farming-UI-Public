@@ -88,6 +88,23 @@ const annuallyPlanSubScribe = async (signer) => {
     };
   }
 };
+const getRefStats = async (user, signer) => {
+  try {
+    const instance = await contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.referralStats(user);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 const SwapRouterAddress = async (
   _pancakeRouterAddress,
   _busdPancakeAddress,
@@ -505,4 +522,5 @@ export {
   UnlockLockedStake,
   unlockStakeEgcToken,
   checkAllowanceStake,
+  getRefStats,
 };

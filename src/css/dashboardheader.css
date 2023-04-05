@@ -18,6 +18,11 @@
   border-bottom: solid 1px #33453a;
   background: #122119;
   opacity: 1;
+  transition: 0.1s linear;
+}
+.notifyDropDownDiv_div1.active:hover {
+  background: #111b16;
+  transition: 0.1s linear;
 }
 .notifyDropDownDiv_div1_title {
   display: flex;
@@ -81,10 +86,16 @@
 .notifyDropDownDiv_div1 {
   display: flex;
   flex-direction: column;
+  background: #122119;
   padding: 1em;
   border-bottom: solid 1px #33453a;
   opacity: 0.6;
   cursor: pointer;
+  transition: 0.1s linear;
+}
+.notifyDropDownDiv_div1:hover {
+  background: #111b16;
+  transition: 0.1s linear;
 }
 .notifySeeMoreDiv {
   position: fixed;

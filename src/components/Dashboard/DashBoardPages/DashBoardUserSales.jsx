@@ -170,7 +170,7 @@ const DashBoardUserSales = () => {
                 }
               >
                 <TrendingDownIcon className="asset_overview_link_icon" />
-                Sales
+                Pending Sales
               </Link>
             </div>
             <div className="sellers_overview_area">

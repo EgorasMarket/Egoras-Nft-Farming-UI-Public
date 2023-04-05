@@ -1867,7 +1867,7 @@ a.visit_app_link_2 {
   width: 100%;
   /* max-width: 1232px; */
   /* display: flex; */
-  padding: 0px;
+  padding: 0px 5px;
   border-collapse: separate;
   border-spacing: 0px 9px;
   margin-top: 20px;
@@ -2803,6 +2803,12 @@ a.visit_app_link_2 {
   box-shadow: 0px 10px 20px #000000;
   color: #fff;
 }
+.dark .lending_area1_cont1_user {
+  background: #16251c;
+  border: solid 1px #41564a;
+  /* box-shadow: 0px 10px 20px #000000; */
+  color: #fff;
+}
 .dark .lending_area1_cont1_heading {
   font-size: 13px;
   color: #94ab9e;
@@ -2891,7 +2897,7 @@ a.visit_app_link_2 {
   border: solid 1px #3d4e44;
 }
 .dark .pool_lend_details_link_active {
-  background: #16221b;
+  background: #121d17;
   border-bottom: solid 1px #1c2c22;
   color: #fff;
 }
