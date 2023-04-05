@@ -287,7 +287,7 @@ const DashBoardSellProduct = () => {
               </div>
             </div>
             {activeSaleTab === "direct" ? (
-              <>
+              <div className="uploadDiv">
                 <div className="sell_container_header">
                   Upload Items Directly For Buying.
                 </div>
@@ -308,7 +308,9 @@ const DashBoardSellProduct = () => {
                         className="sell_container_body_cont1_title_div_input"
                         value={prodName}
                       />
-                      <button className="sell_container_body_cont1_title_div_btn">Generate Details</button>
+                      <button className="sell_container_body_cont1_title_div_btn">
+                        Generate Details
+                      </button>
                     </div>
                   </div>
                   {/* ========================= */}
@@ -485,7 +487,7 @@ const DashBoardSellProduct = () => {
                   <div className="sell_container_body_cont1">
                     <div className="sell_container_body_cont1_txt">
                       <div className="sell_container_body_cont1_txt_heading">
-                        Sale Amount*
+                        Product Amount*
                       </div>{" "}
                       The amount of items that can be minted. No gas cost to
                       you!
@@ -525,7 +527,7 @@ const DashBoardSellProduct = () => {
                         id="prodAmount"
                         name="prodAmount"
                         type="text"
-                        placeholder="Product amount"
+                        placeholder="Product count"
                         className="sell_container_body_cont1_title_div_input"
                         // onChange={handleSaleAmountChange}
                         // value={saleAmount}
@@ -571,7 +573,26 @@ const DashBoardSellProduct = () => {
                   {/* ========================= */}
                   {/* ========================= */}
                   {/* ========================= */}
-
+                  <div className="sell_container_body_cont1">
+                    <div className="sell_container_body_cont1_txt">
+                      <div className="sell_container_body_cont1_txt_heading">
+                        Product Condition*
+                      </div>{" "}
+                      The amount of items that can be minted. No gas cost to
+                      you!
+                    </div>
+                    <div className="sell_container_body_cont1_title_div">
+                      <select
+                        name=""
+                        id=""
+                        className="sell_container_body_cont1_title_div_input"
+                      >
+                        <option value="0"></option>
+                        <option value="1">Used</option>
+                        <option value="2">New</option>
+                      </select>
+                    </div>
+                  </div>
                   {/* ========================= */}
                   {/* ========================= */}
                   {/* ========================= */}
@@ -665,9 +686,9 @@ const DashBoardSellProduct = () => {
                     )}
                   </div>
                 </div>
-              </>
+              </div>
             ) : (
-              <>
+              <div className="uploadDiv">
                 <div className="sell_container_header">
                   Get Instant Cash After Evaluation.
                 </div>
@@ -928,7 +949,7 @@ const DashBoardSellProduct = () => {
                     )}
                   </div>
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>

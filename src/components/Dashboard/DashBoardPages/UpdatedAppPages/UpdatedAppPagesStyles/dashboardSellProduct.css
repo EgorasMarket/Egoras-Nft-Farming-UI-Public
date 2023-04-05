@@ -33,6 +33,13 @@
   background: #39915a;
   color: #fff;
 }
+.uploadDiv {
+  padding: 2em;
+  background: #14241b80;
+  border-radius: 13px;
+  border: solid 1px #425a4b;
+  backdrop-filter: blur(9px);
+}
 .addCategoryDiv_sales {
   position: fixed;
   top: 0;
