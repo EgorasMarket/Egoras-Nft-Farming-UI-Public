@@ -58,7 +58,9 @@ const semiAnnuallyPlanSubScribe = async (signer) => {
   try {
     const instance = await contractMembershipFacetInstance(signer);
     let result;
-    result = await instance.membershipSemiAnnuallyPlan();
+    result = await instance.semiAnnuallyPlanWithReferral(
+      "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC"
+    );
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -71,6 +73,23 @@ const semiAnnuallyPlanSubScribe = async (signer) => {
     };
   }
 };
+// const semiAnnuallyPlanSubScribe = async (signer) => {
+//   try {
+//     const instance = await contractMembershipFacetInstance(signer);
+//     let result;
+//     result = await instance.membershipSemiAnnuallyPlan();
+//     console.log(result, "result, result,result,result,result");
+//     return {
+//       message: result,
+//       status: true,
+//     };
+//   } catch (error) {
+//     return {
+//       message: formattedError(error).message,
+//       status: formattedError(error).status,
+//     };
+//   }
+// };
 const annuallyPlanSubScribe = async (signer) => {
   try {
     const instance = await contractMembershipFacetInstance(signer);

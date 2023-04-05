@@ -14,6 +14,7 @@ import TollIcon from "@mui/icons-material/Toll";
 import GroupsIcon from "@mui/icons-material/Groups";
 import { connect } from "react-redux";
 import { getRefStats } from "../../../web3/index2";
+import UserDetailsLinks from "./UserDetailsLinks";
 // import { UserContext } from "../context/Context";
 import Nodata from "./nodataComponent/Nodata";
 import { parseEther, formatEther } from "@ethersproject/units";
@@ -144,7 +145,7 @@ const DashboardReferral = ({ auth }) => {
     async (e) => {
       if (account) {
         let response = await getRefStats(
-          "0x0000000000000000000000000000000000000000",
+          "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
           library.getSigner()
         );
         console.log(response);
@@ -189,41 +190,7 @@ const DashboardReferral = ({ auth }) => {
         <section className=" no-bg no_paddd">
           <div className="container relative">
             <div className="pool_deatail_area">
-              <div className="pool_lending_pages_links">
-                <Link
-                  to="/app/user"
-                  className={
-                    activeLink === "poolDetails"
-                      ? "pool_lend_details_link_active"
-                      : "pool_lend_details_link"
-                  }
-                >
-                  <DashboardIcon className="asset_overview_link_icon" />
-                  User Details
-                </Link>
-                <Link
-                  to="/app/user/referral"
-                  className={
-                    activeLink === "referral"
-                      ? "pool_lend_details_link_active"
-                      : "pool_lend_details_link"
-                  }
-                >
-                  <GroupAddIcon className="asset_overview_link_icon" />
-                  Referral
-                </Link>
-                <Link
-                  to="/app/user/sales"
-                  className={
-                    activeLink === "sales"
-                      ? "pool_lend_details_link_active"
-                      : "pool_lend_details_link"
-                  }
-                >
-                  <TrendingDownIcon className="asset_overview_link_icon" />
-                  Pending Sales
-                </Link>
-              </div>
+              <UserDetailsLinks activeLink={activeLink} />
               {comingSoon == true ? (
                 <div className="comingSoon_div">
                   <div className="comingSoon_div_area">

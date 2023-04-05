@@ -28,11 +28,15 @@ const Footer = () => {
   const [showFooter, setShowFooter] = useState(true);
   const currentPage = window.location.pathname;
   useEffect(() => {
+    // console.log(urlArr[1]);
     const urlArr = currentPage.split("/");
     if (currentPage === "/app/") {
       setShowFooter(false);
     }
     if (urlArr[2] === "market") {
+      setShowFooter(false);
+    }
+    if (urlArr[1] === "app") {
       setShowFooter(false);
     }
     if (currentPage === "/app") {

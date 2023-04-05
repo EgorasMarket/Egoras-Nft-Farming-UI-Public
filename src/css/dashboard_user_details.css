@@ -325,6 +325,35 @@
   padding: 2em;
   color: #fff;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.BuyerSellerDiv_body_header {
+  font-size: 28px;
+  font-weight: 500;
+  color: #678a75;
+}
+.BuyerSellerDiv_body_Balance {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  border-top: solid 1px #344a3c;
+  border-bottom: solid 1px #344a3c;
+  padding-bottom: 1em;
+  padding-top: 1em;
+}
+.BuyerSellerDiv_body_Balance_body1 {
+  font-size: 40px;
+  font-weight: 500;
+}
+.BuyerSellerDiv_body_Balance_body2 {
+  color: #7aa18a;
+}
+.BuyerSellerDiv_body_Balance_body {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1e;
 }
 .BuyerSellerDiv_tab1 {
   padding: 10px;
