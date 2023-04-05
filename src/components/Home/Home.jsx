@@ -369,19 +369,22 @@ const Home = () => {
     { img: "/img/FeaturedInLogos/FeaturedInLogos_6.svg" },
     { img: "/img/FeaturedInLogos/FeaturedInLogos_5.svg" },
   ];
-  useEffect(async (e) => {
-    // if (account) {
-    let res = await tokenBalance(
-      "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-      "0x3A81836b093f7f3D3ca271125CcD45c461409697",
-      library.getSigner()
-    );
-    console.log(res);
-    console.log(formatEther(res.message));
-    let tvl = formatEther(res.message);
-    setTotalTVL(tvl * egcUsd);
-    // }
-  }, []);
+  useEffect(
+    async (e) => {
+      // if (account) {
+      let res = await tokenBalance(
+        "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+        "0x3A81836b093f7f3D3ca271125CcD45c461409697",
+        library.getSigner()
+      );
+      console.log(res);
+      console.log(formatEther(res.message));
+      let tvl = formatEther(res.message);
+      setTotalTVL(tvl * egcUsd);
+      // }
+    },
+    [totalTVL]
+  );
   return (
     <div>
       {/* =================================================================================================================================================================================================================================================================== */}

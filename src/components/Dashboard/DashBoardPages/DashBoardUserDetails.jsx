@@ -8,7 +8,9 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import { connect } from "react-redux";
 import { SuccessModal, ErrorModal } from "./Modal/Success_Error_Component";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import StarRateIcon from "@mui/icons-material/StarRate";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import Web3 from "web3";
 import {
   Web3ReactProvider,
@@ -75,7 +77,11 @@ const DashBoardUserDetails = ({ auth }) => {
   const [eusdUsdVal, setEusdUsdVal] = useState("0.00");
   const [BnbUsdVal, setBnbUsdVal] = useState("0.00");
   const [TotalPortfolio, setTotalPortfolio] = useState("0.00");
-
+  const [activeTab, setActiveTab] = useState("buyer");
+  const [activeBtn, setActiveBtn] = useState("Ongoing");
+  const toggleActiveBtn = (event) => {
+    setActiveBtn(event.currentTarget.id);
+  };
   const context = useWeb3React();
   const {
     connector,
@@ -214,6 +220,78 @@ const DashBoardUserDetails = ({ auth }) => {
     setTotalPortfolio(Portfolio);
   }, [coinBalance, egcBalance, eusdBalance, BnbUsdVal, egcUsdVal, eusdUsdVal]);
 
+  const toggleActiveTab = (e) => {
+    let active = e.currentTarget.id;
+    setActiveTab(active);
+  };
+  const buyOrders = [
+    {
+      id: "1",
+      img: "/img/img5.png",
+      name: "Hisense Tv",
+      amount: 10000,
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      status: "Pending",
+      time: "Apr-05-2023",
+      txHash:
+        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
+    },
+    {
+      id: "2",
+      img: "/img/img5.png",
+      name: "Lg Tv",
+      amount: 10000,
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      status: "Pending",
+      time: "Apr-05-2023",
+      txHash:
+        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
+    },
+    {
+      id: "3",
+      img: "/img/img5.png",
+      name: "Lg Tv",
+      amount: 10000,
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      status: "shipped",
+      time: "Apr-05-2023",
+      txHash:
+        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
+    },
+    {
+      id: "4",
+      img: "/img/img5.png",
+      name: "Lg Tv",
+      amount: 10000,
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      status: "Pending",
+      time: "Apr-05-2023",
+      txHash:
+        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
+    },
+    {
+      id: "5",
+      img: "/img/img5.png",
+      name: "Lg Tv",
+      amount: 10000,
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      status: "shipped",
+      time: "Apr-05-2023",
+      txHash:
+        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
+    },
+    {
+      id: "6",
+      img: "/img/img5.png",
+      name: "Samsung Tv",
+      amount: 10000,
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      status: "shipped",
+      time: "Apr-05-2023",
+      txHash:
+        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
+    },
+  ];
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -257,7 +335,7 @@ const DashBoardUserDetails = ({ auth }) => {
                 }
               >
                 <TrendingDownIcon className="asset_overview_link_icon" />
-                Sales
+                Pending Sales
               </Link>
             </div>
 
@@ -345,13 +423,374 @@ const DashBoardUserDetails = ({ auth }) => {
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
                   <span className="user_details_body1_body_cont1_span1">
-                    Sell:
+                    Sold:
+                  </span>
+                  <span className="user_details_body1_body_cont1_span2">0</span>
+                </div>
+                <hr class="custom_hr"></hr>
+                <div className="user_details_body1_body_cont1">
+                  <span className="user_details_body1_body_cont1_span1">
+                    Bought:
                   </span>
                   <span className="user_details_body1_body_cont1_span2">0</span>
                 </div>
               </div>
             </div>
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            <div className="BuyerSellerDiv">
+              <div className="BuyerSellerDiv_tabs">
+                <div
+                  id="buyer"
+                  className={
+                    activeTab === "buyer"
+                      ? "BuyerSellerDiv_tab1_active"
+                      : "BuyerSellerDiv_tab1"
+                  }
+                  onClick={toggleActiveTab}
+                >
+                  Buyer
+                </div>
+                <div
+                  id="seller"
+                  className={
+                    activeTab === "seller"
+                      ? "BuyerSellerDiv_tab1_active"
+                      : "BuyerSellerDiv_tab1"
+                  }
+                  onClick={toggleActiveTab}
+                >
+                  Seller
+                </div>
+              </div>
+              {activeTab === "buyer" ? (
+                <div className="BuyerSellerDiv_body">
+                  <div className="BuyerSellerDiv_body_div1">
+                    <div className="BuyerSellerDiv_body_div1_text">
+                      Buyer Overview
+                    </div>
+                    <div className="lending_area1">
+                      <div className="lending_area1_cont1_user">
+                        <div className="lending_area1_cont1_body_1">
+                          <div className="lending_area1_cont1_heading">
+                            Total amount of items bought
+                          </div>
+                          <div className="lending_area1_cont1_body_txt">
+                            180
+                            <span className="usd_sign"> items</span>
+                          </div>
+                        </div>
+                        <div className="lending_area1_cont1_body_1">
+                          <HelpOutlineIcon className="help_outline" />
+                          <div className="helper_txt_div">
+                            This is the total value of all the assets in the
+                            lending pool.
+                          </div>
+                        </div>
+                      </div>
 
+                      <div className="lending_area1_cont1_user">
+                        <div className="lending_area1_cont1_body_1">
+                          <div className="lending_area1_cont1_heading">
+                            Total price of items Bought
+                          </div>
+                          <div className="lending_area1_cont1_body_txt">
+                            100,000<span className="usd_sign"> eusd</span>
+                          </div>
+                        </div>
+                        <div className="lending_area1_cont1_body_1">
+                          <HelpOutlineIcon className="help_outline" />
+                          <div className="helper_txt_div">
+                            This is the total value of all the assets in the
+                            lending pool.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="BuyerSellerDiv_body_div2">
+                    <div className="BuyerSellerDiv_body_div2_tab_area">
+                      <div className="filter_table_area_1">Buy Orders</div>
+                      <div className="filter_table_area_2 filter_table_area_2b">
+                        <div
+                          id="Ongoing"
+                          className={
+                            activeBtn == "Ongoing"
+                              ? "filter_table_btn1_active"
+                              : "filter_table_btn1"
+                          }
+                          onClick={toggleActiveBtn}
+                        >
+                          Pending
+                        </div>
+                        <div
+                          id="All"
+                          className={
+                            activeBtn == "All"
+                              ? "filter_table_btn1_active"
+                              : "filter_table_btn1"
+                          }
+                          onClick={toggleActiveBtn}
+                        >
+                          All
+                        </div>
+                        <div
+                          id="Closed"
+                          className={
+                            activeBtn == "Closed"
+                              ? "filter_table_btn1_active"
+                              : "filter_table_btn1"
+                          }
+                          onClick={toggleActiveBtn}
+                        >
+                          Shipped
+                        </div>
+                        <div
+                          id="approve"
+                          className={
+                            activeBtn == "approve"
+                              ? "filter_table_btn1_active"
+                              : "filter_table_btn1"
+                          }
+                          onClick={toggleActiveBtn}
+                        >
+                          Approved
+                        </div>
+                      </div>
+                    </div>
+                    <div className="BuyerSellerDiv_body_div2_body">
+                      <table className="assets-table">
+                        <thead className="assets-category-titles">
+                          <tr className="assets">
+                            <th className="assets-category-titles-heading1 left">
+                              Product Name
+                            </th>
+                            <th className="assets-category-titles-heading1">
+                              Amount
+                            </th>
+                            <th className="assets-category-titles-heading1 ">
+                              Seller
+                            </th>
+                            <th className="assets-category-titles-heading1  ">
+                              Product Status
+                            </th>
+                            <th className="assets-category-titles-heading1 ">
+                              Txn hash
+                            </th>
+                          </tr>
+                        </thead>
+
+                        {/* <div className="table-body-content">
+
+// =====================
+// =====================
+// =====================
+// =====================
+// =====================
+// =====================
+
+                
+              </div> */}
+                        {buyOrders.length <= 0 ? (
+                          <div className="no_loans_div">
+                            <div className="no_loans_div_cont">
+                              <Nodata />
+                              No Pools yet.
+                            </div>{" "}
+                          </div>
+                        ) : (
+                          <tbody
+                            className="assets-table-body popular-categories transitionMe"
+                            id="popular-categories"
+                          >
+                            {" "}
+                            {/* =============== */}
+                            {/* =============== */}
+                            {/* =============== */}
+                            {activeBtn === "Ongoing"
+                              ? buyOrders
+                                  .filter(
+                                    (person) => person.status == "Pending"
+                                  )
+                                  .map((asset) => {
+                                    //   var percentage = (asset.funded / asset.amount) * 100;
+                                    return (
+                                      <tr
+                                        className="assets-category-row  transitionMe"
+                                        id={asset.product_id}
+                                      >
+                                        <td className="assets-category-data branch_name_title">
+                                          <div className="assets-data">
+                                            <div className="assets-data-pool_name">
+                                              {asset.name}
+                                              <span className="poolName_txt">
+                                                {asset.time}
+                                              </span>
+                                            </div>
+                                          </div>
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {numberWithCommas(
+                                            parseInt(asset.amount).toFixed(0)
+                                          )}{" "}
+                                          Eusd
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {`${asset.seller.slice(
+                                            0,
+                                            6
+                                          )}...${asset.seller.slice(39, 42)}`}
+                                        </td>
+
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {asset.status}
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {asset.txHash != null
+                                            ? `${asset.txHash.slice(
+                                                0,
+                                                6
+                                              )}...${asset.txHash.slice(
+                                                63,
+                                                66
+                                              )}`
+                                            : "N/A"}
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          <ArrowForwardIosIcon />
+                                        </td>
+                                      </tr>
+                                    );
+                                  })
+                              : activeBtn === "All"
+                              ? buyOrders.map((asset) => {
+                                  return (
+                                    <tr
+                                      className="assets-category-row  transitionMe"
+                                      id={asset.id}
+                                    >
+                                      <td className="assets-category-data branch_name_title">
+                                        <div className="assets-data">
+                                          <div className="assets-data-pool_name">
+                                            {asset.name}
+                                            <span className="poolName_txt">
+                                              {asset.time}
+                                            </span>
+                                          </div>
+                                        </div>
+                                      </td>
+                                      <td className="assets-category-data1b stable-content branch_apy">
+                                        {numberWithCommas(
+                                          parseInt(asset.amount).toFixed(0)
+                                        )}{" "}
+                                        Eusd
+                                      </td>
+                                      <td className="assets-category-data1b stable-content branch_apy">
+                                        {`${asset.seller.slice(
+                                          0,
+                                          6
+                                        )}...${asset.seller.slice(39, 42)}`}
+                                      </td>
+
+                                      <td className="assets-category-data1b stable-content branch_apy">
+                                        {asset.status}
+                                      </td>
+                                      <td className="assets-category-data1b stable-content branch_apy">
+                                        {`${asset.txHash.slice(
+                                          0,
+                                          6
+                                        )}...${asset.txHash.slice(63, 66)}`}
+                                      </td>
+                                      <td className="assets-category-data-last branch_loan_action">
+                                        <ArrowForwardIosIcon />
+                                      </td>
+                                    </tr>
+                                  );
+                                })
+                              : activeBtn === "Closed"
+                              ? buyOrders
+                                  .filter(
+                                    (person) => person.status == "shipped"
+                                  )
+                                  .map((asset) => {
+                                    return (
+                                      <tr
+                                        className="assets-category-row  transitionMe"
+                                        id={asset.id}
+                                      >
+                                        <td className="assets-category-data branch_name_title">
+                                          <div className="assets-data">
+                                            <div className="assets-data-pool_name">
+                                              {asset.name}
+                                              <span className="poolName_txt">
+                                                {asset.time}
+                                              </span>
+                                            </div>
+                                          </div>
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {numberWithCommas(
+                                            parseInt(asset.amount).toFixed(0)
+                                          )}{" "}
+                                          Eusd
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {`${asset.seller.slice(
+                                            0,
+                                            6
+                                          )}...${asset.seller.slice(39, 42)}`}
+                                        </td>
+
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {asset.status}
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {`${asset.txHash.slice(
+                                            0,
+                                            6
+                                          )}...${asset.txHash.slice(63, 66)}`}
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          <ArrowForwardIosIcon />
+                                        </td>
+                                      </tr>
+                                    );
+                                  })
+                              : null}
+                            {/* =================== */}
+                            {/* =================== */}
+                            {/* =================== */}
+                            {/* =================== */}
+                            {/* =================== */}
+                            {/* =================== */}
+                            {/* =================== */}
+                            {/* =================== */}
+                            {/* =================== */}
+                            {/* =================== */}
+                            {/* =================== */}
+                            {/* =================== */}
+                          </tbody>
+                        )}
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="BuyerSellerDiv_body">Seller Tab</div>
+              )}
+            </div>
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
             <div className="recent_transaction_body">
               <div className="recent_transaction_body_head" id="transact_head">
                 Transactions

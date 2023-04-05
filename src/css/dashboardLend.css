@@ -30,6 +30,21 @@
   justify-content: space-between;
   align-items: flex-start;
 }
+.lending_area1_cont1_user {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  border-right: 2px grey solid;
+  border: solid 1px #ebebeb;
+  padding: 1em 1em;
+  background: #fff;
+  border-radius: 5px;
+  grid-gap: 5px;
+  grid-gap: 10px;
+  gap: 10px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
 .dark .filter_table_area_1 {
   color: #fff;
 }
@@ -638,6 +653,9 @@
     gap: 10px;
   }
   .lending_area1_cont1 {
+    width: 100%;
+  }
+  .lending_area1_cont1_user {
     width: 100%;
   }
   .branch_name_title::before {
