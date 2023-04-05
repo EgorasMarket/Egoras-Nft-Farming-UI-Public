@@ -224,6 +224,10 @@ const Header = ({ togglemakeDark, check }) => {
       setshowHeader(false);
       setBetaDiv(false);
     }
+    if (urlArr[1] === "app") {
+      setshowHeader(false);
+      setBetaDiv(false);
+    }
     if (currentPage === "/app") {
       setshowHeader(false);
       setBetaDiv(false);

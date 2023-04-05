@@ -232,15 +232,15 @@ button.pool_detail_heading_area1_invest_btn {
   color: #8898a3;
   display: flex;
   /* align-items: center; */
-
   align-items: center;
+  grid-gap: 5px;
   gap: 5px;
   padding: 2px 10px;
   border-radius: 0;
-  width: 10%;
+  width: 15%;
   display: flex;
   justify-content: center;
-  padding: 1em;
+  padding: 1em 0em;
   transition: 0.3s ease-in-out;
 }
 .pool_lend_details_link:hover {
