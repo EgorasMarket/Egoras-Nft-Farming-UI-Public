@@ -161,7 +161,7 @@ const DashBoardP2PUserSales = () => {
       name: "Lg Tv",
       amount: 10000,
       seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      status: "delivered",
+      status: "Shipped",
       time: "Apr-05-2023",
       txHash:
         "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
@@ -183,7 +183,7 @@ const DashBoardP2PUserSales = () => {
       name: "Lg Tv",
       amount: 10000,
       seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      status: "delivered",
+      status: "Shipped",
       time: "Apr-05-2023",
       txHash:
         "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
@@ -194,7 +194,7 @@ const DashBoardP2PUserSales = () => {
       name: "Samsung Tv",
       amount: 10000,
       seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      status: "delivered",
+      status: "Shipped",
       time: "Apr-05-2023",
       txHash:
         "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
@@ -321,7 +321,7 @@ const DashBoardP2PUserSales = () => {
                           }
                           onClick={toggleActiveBtn}
                         >
-                          Delivered
+                          Shipped
                         </div>
                         <div
                           id="approve"
@@ -488,7 +488,7 @@ const DashBoardP2PUserSales = () => {
                               : activeBtn === "Closed"
                               ? buyOrders
                                   .filter(
-                                    (person) => person.status == "delivered"
+                                    (person) => person.status == "Shipped"
                                   )
                                   .map((asset) => {
                                     return (
@@ -684,6 +684,17 @@ const DashBoardP2PUserSales = () => {
                           Ordered
                         </div>
                         <div
+                          id="shipped"
+                          className={
+                            activeBtn == "shipped"
+                              ? "filter_table_btn1_active"
+                              : "filter_table_btn1"
+                          }
+                          onClick={toggleActiveBtn}
+                        >
+                          Shipped
+                        </div>
+                        <div
                           id="approve"
                           className={
                             activeBtn == "approve"
@@ -692,7 +703,7 @@ const DashBoardP2PUserSales = () => {
                           }
                           onClick={toggleActiveBtn}
                         >
-                          Delivered
+                          Approved
                         </div>
                       </div>
                     </div>
@@ -848,7 +859,7 @@ const DashBoardP2PUserSales = () => {
                               : activeBtn === "approve"
                               ? buyOrders
                                   .filter(
-                                    (person) => person.status == "delivered"
+                                    (person) => person.status == "Shipped"
                                   )
                                   .map((asset) => {
                                     return (
