@@ -38,7 +38,7 @@ const UserDetailsLinks = ({ activeLink }) => {
         }
       >
         <TrendingDownIcon className="asset_overview_link_icon" />
-        P2P Sales
+        Direct Sales
       </Link>
       <Link
         to="/app/user/sales"
@@ -49,7 +49,7 @@ const UserDetailsLinks = ({ activeLink }) => {
         }
       >
         <TrendingDownIcon className="asset_overview_link_icon" />
-        EGCDAO Sales
+        Express Sales
       </Link>
     </div>
   );

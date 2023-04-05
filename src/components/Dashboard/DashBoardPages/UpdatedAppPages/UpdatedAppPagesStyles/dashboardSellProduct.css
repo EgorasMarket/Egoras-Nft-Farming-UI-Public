@@ -3,6 +3,65 @@
   flex-direction: column;
   margin-top: 2em;
 }
+.sell_container_tabs {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2em;
+  border: solid 1px #1f3226;
+  padding: 1em;
+  border-radius: 13px;
+  background: #0b110c;
+}
+.sell_container_tabs_1_active {
+  background: #39915a;
+  color: #fff;
+  padding: 15px;
+  border-radius: 9px;
+  width: 172px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 1em;
+}
+.sell_container_body_cont1_title_div_btn {
+  width: 168px;
+  padding: 15px 0px;
+  margin-left: 10px;
+  border-radius: 9px;
+  border: none;
+  background: #39915a;
+  color: #fff;
+}
+.addCategoryDiv_sales {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #0000006b;
+  left: 0;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100000;
+}
+.demo-wrapper {
+  width: 100% !important;
+}
+.sell_container_tabs_1 {
+  background: #141f18;
+  color: #799985;
+  padding: 15px;
+  border-radius: 9px;
+  width: 172px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-right: 1em;
+}
 .sell_container_header {
   font-size: 42px;
   color: #fff;
