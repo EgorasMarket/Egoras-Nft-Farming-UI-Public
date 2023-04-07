@@ -8,6 +8,7 @@ import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { API_URL } from "../../../actions/types";
 import Paginate from "./Paginate";
+import abi from "../../../web3/contracts/erc20.json";
 // import TableWithPagination
 import TableWithPagination from "../../SmallerComponents/Tables/TableWithPagination/TableWithPagination";
 import { config } from "../../../actions/Config";
@@ -20,6 +21,7 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import "../../../css/dashboardHome.css";
 import { tokenBalance } from "../../../web3";
 import axios from "axios";
+import Web3 from "web3";
 
 import {
   AreaChart,
@@ -77,6 +79,10 @@ const DashboardHome = () => {
   const [lastIndex2, setlastIndex2] = useState(0);
   const [totalTVL, setTotalTVL] = useState(0);
   const [activeBtn, setActivrBtn] = useState("swap");
+  const [StakeData, setStakeData] = useState([]);
+  const [swapData, setSwapData] = useState([]);
+  const [productData, setProductsData] = useState([]);
+  const [TradeVolume, setTradeVolume] = useState(0);
   const [homeData, setHomeData] = useState({
     tvl: "0",
     volume: "0",
@@ -171,6 +177,11 @@ const DashboardHome = () => {
           data.timestamp = formattedDate;
           data.month = getMonthFromNumber(data.month);
         }
+        const totalValue = reversed.reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.value;
+        }, 0);
+        console.log(totalValue);
+        setTradeVolume(parseInt(totalValue).toFixed(2));
         console.log(temp);
         setGraphData(() => temp);
         setlastIndex2(temp.length - 1);
@@ -1063,22 +1074,48 @@ const DashboardHome = () => {
     setActivrBtn(event.currentTarget.id);
   };
   useEffect(async () => {
-    if (account) {
-      await axios
-        .get(API_URL + "/staking/transactions", null, config)
-        .then((data) => {
-          console.log(data);
-          console.log(data.data.data);
-        })
-        .catch((error) => {
-          console.log(error.response);
-        });
-    }
-  }, [account]);
+    // if (account) {
+    await axios
+      .get(API_URL + "/staking/transactions", null, config)
+      .then((data) => {
+        console.log(data);
+        console.log(data.data.data);
+        // const reversed = data.data.data.map((data) => {
+        //   return data;
+        // });
+        setStakeData(data.data.data.slice().reverse());
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+    // }
+  }, []);
+
+  useEffect(async () => {
+    // if (account) {
+    await axios
+      .get(API_URL + "/product/sold", null, config)
+      .then((data) => {
+        console.log(data);
+        console.log(data.data.data);
+        // const reversed = data.data.data.map((data) => {
+        //   return data;
+        // });
+        setProductsData(data.data.data.slice().reverse());
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+    // }
+  }, []);
   // const names = ["Name", "Quantity", "Amount", "OrderId", "Status"];
   // pagination state
   const [currentPage, setCurrentPage] = useState(0);
-  const PER_PAGE = 10;
+  const PER_PAGE = 8;
+  const [currentPage2, setCurrentPage2] = useState(0);
+  const PER_PAGE2 = 8;
+  const [currentPage3, setCurrentPage3] = useState(0);
+  const PER_PAGE3 = 8;
 
   // handle page click event
   function handlePageClick({ selected: selectedPage }) {
@@ -1086,10 +1123,95 @@ const DashboardHome = () => {
   }
 
   const offset = currentPage * PER_PAGE;
-  const pageCount = Math.ceil(Transactions.length / PER_PAGE);
+  const pageCount = Math.ceil(StakeData.length / PER_PAGE);
 
-  const currentTransactions = Transactions.slice(offset, offset + PER_PAGE);
+  const currentTransactions = StakeData.slice(offset, offset + PER_PAGE);
 
+  // ================
+  // ================
+  // ================
+  // ================
+  // ================
+  // ================
+  function handlePageClick2({ selected: selectedPage }) {
+    setCurrentPage2(selectedPage);
+  }
+
+  const offset2 = currentPage2 * PER_PAGE2;
+  const pageCount2 = Math.ceil(swapData.length / PER_PAGE2);
+  const currentTransactions2 = swapData.slice(offset2, offset2 + PER_PAGE2);
+
+  // ================
+  // ================
+  // ================
+  // ================
+  // ================
+  // ================
+  function handlePageClick3({ selected: selectedPage }) {
+    setCurrentPage3(selectedPage);
+  }
+
+  const offset3 = currentPage3 * PER_PAGE3;
+  const pageCount3 = Math.ceil(productData.length / PER_PAGE3);
+
+  const currentTransactions3 = productData.slice(offset3, offset3 + PER_PAGE3);
+
+  const tokenAddress = "0x58f66D0183615797940360A43c333A44215830BA";
+  const getTokenSymbol = async (address) => {
+    try {
+      const web3 = new Web3(window.ethereum);
+      const tokenContract = new web3.eth.Contract(abi.abi, address);
+      const symbol = await tokenContract.methods.symbol().call();
+      const name = await tokenContract.methods.name().call();
+      const totalSupply = await tokenContract.methods.totalSupply().call();
+      console.log("Symbol:", symbol);
+      console.log("Name:", name);
+      console.log("Total supply:", totalSupply);
+      return symbol;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(async () => {
+    if (account) {
+      const res = await getTokenSymbol(tokenAddress);
+      console.log(res);
+    }
+  }, [account]);
+  const assets = [
+    {
+      id: "1",
+      img: "/img/tokens-folder/bnb_icon.png",
+      name: "Binance Smart Chain",
+      address: "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+      symbol: "BNB",
+      favorite: "true",
+    },
+  ];
+  const ListedCoins = {
+    "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd": {
+      symbol: "BNB",
+    },
+    "0x58f66D0183615797940360A43c333A44215830BA": {
+      symbol: "EUSD",
+    },
+    "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A": {
+      symbol: "EUSD",
+    },
+  };
+
+  useEffect(async () => {
+    await axios
+      .get(API_URL + "/swap/transactions", null, config)
+      .then((data) => {
+        console.log(data);
+        console.log(data.data.data);
+        setSwapData(data.data.data.slice().reverse());
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -1649,7 +1771,7 @@ const DashboardHome = () => {
                     Total Trading Volume
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    {formatNumber(homeData.volume)}
+                    {formatNumber(TradeVolume.toString())}
                     <span className="usd_sign"> USD</span>
                   </div>
                 </div>
@@ -1712,6 +1834,7 @@ const DashboardHome = () => {
             {/* ========================== */}
             {/* ========================== */}
             {/* ========================== */}
+
             <div className="lock_container_transactions">
               <div className="BuyerSellerDiv_body_div2_tab_area">
                 <div className="filter_table_area_1">Latest Transactions</div>
@@ -1752,23 +1875,312 @@ const DashboardHome = () => {
                   </div>
                 </div>
               </div>
-              <div className="lock_container_transactions_body_all">
-                <table className="stakingTable_table">
-                  <thead className="stakingTable_titles">
-                    <tr className="stakingTable_title_div">
-                      <th className="stakingTable_heading_titles stakingTable_heading_titles_first">
-                        Action
-                      </th>
-                      <th className="stakingTable_heading_titles">Amount</th>
-                      <th className="stakingTable_heading_titles">Address</th>
+              {activeBtn == "swap" ? (
+                <div>
+                  <div className="lock_container_transactions_body_all">
+                    <table className="stakingTable_table">
+                      <thead className="stakingTable_titles">
+                        <tr className="stakingTable_title_div">
+                          <th className="stakingTable_heading_titles stakingTable_heading_titles_first">
+                            Action
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Amount In
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Amount Out
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Address
+                          </th>
 
-                      <th className="stakingTable_heading_titles stakingTable_heading_titles_last">
-                        Txn Hash
-                      </th>
-                    </tr>
-                  </thead>
+                          <th className="stakingTable_heading_titles stakingTable_heading_titles_last">
+                            Txn Hash
+                          </th>
+                        </tr>
+                      </thead>
+                      {currentTransactions2.length <= 0 ? (
+                        <div className="no_loans_div">
+                          <div className="no_loans_div_cont">
+                            <Nodata />
+                            No transaction yet.
+                          </div>{" "}
+                        </div>
+                      ) : (
+                        <tbody
+                          className="stakingTable_body"
+                          id="popular-categories"
+                        >
+                          {" "}
+                          {/* =============== */}
+                          {/* =============== */}
+                          {/* =============== */}
+                          {currentTransactions2.map((data) => {
+                            const date = new Date(data.createdAt);
+                            const day = date
+                              .getUTCDate()
+                              .toString()
+                              .padStart(2, "0");
+                            const month = (date.getUTCMonth() + 1)
+                              .toString()
+                              .padStart(2, "0");
+                            const year = date.getUTCFullYear();
+                            const formattedDate = `${day}/${month}/${year}`;
+                            console.log(formattedDate);
+                            const dateString = formattedDate;
+                            const date2 = new Date(dateString);
+                            const formattedDated = date.toLocaleDateString(
+                              "en-US",
+                              {
+                                year: "numeric",
+                                month: "short",
+                                day: "2-digit",
+                              }
+                            );
 
-                  {/* <div className="table-body-content">
+                            return (
+                              <tr className="stakingTable_body_row ">
+                                <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
+                                  <div className="value_dolls_div">
+                                    {`   Swap ${
+                                      ListedCoins[data.tokenIn].symbol
+                                    } For
+                                    ${ListedCoins[data.tokenOut].symbol}`}
+                                    {/* Swap For Me */}
+                                    <div className="value_dolls_div_val">
+                                      {formattedDated}
+                                    </div>
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="value_dolls_div2">
+                                    <span style={{ display: "flex" }}>
+                                      {numberWithCommas(
+                                        parseFloat(data.amountIn).toFixed(2)
+                                      )}{" "}
+                                    </span>
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="value_dolls_div2">
+                                    <span style={{ display: "flex" }}>
+                                      {numberWithCommas(
+                                        parseFloat(data.amountOut).toFixed(2)
+                                      )}{" "}
+                                    </span>
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="stakingTable_body_row_data_blockies_">
+                                    <Blockies
+                                      seed={data.to}
+                                      size={8}
+                                      scale={4}
+                                      className="blockies_icon"
+                                    />
+                                    {`${data.to.slice(0, 6)}...${data.to.slice(
+                                      39,
+                                      42
+                                    )}`}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
+                                  {`${data.tx.slice(0, 6)}...${data.tx.slice(
+                                    63,
+                                    66
+                                  )}`}
+                                  <OpenInNewIcon className="tx_hash_link_icon" />
+                                </td>
+                              </tr>
+                            );
+                          })}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                        </tbody>
+                      )}
+                    </table>
+                  </div>
+                  <Paginate
+                    pageCount={pageCount2}
+                    handlePageClick={handlePageClick2}
+                  />
+                </div>
+              ) : null}
+              {/* ======== */}
+              {/* ======== */}
+              {/* ======== */}
+              {activeBtn == "stake" ? (
+                <div>
+                  <div className="lock_container_transactions_body_all">
+                    <table className="stakingTable_table">
+                      <thead className="stakingTable_titles">
+                        <tr className="stakingTable_title_div">
+                          <th className="stakingTable_heading_titles stakingTable_heading_titles_first">
+                            Action
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Amount
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Address
+                          </th>
+
+                          <th className="stakingTable_heading_titles stakingTable_heading_titles_last">
+                            Txn Hash
+                          </th>
+                        </tr>
+                      </thead>
+                      {currentTransactions.length <= 0 ? (
+                        <div className="no_loans_div">
+                          <div className="no_loans_div_cont">
+                            <Nodata />
+                            No transaction yet.
+                          </div>{" "}
+                        </div>
+                      ) : (
+                        <tbody
+                          className="stakingTable_body"
+                          id="popular-categories"
+                        >
+                          {" "}
+                          {/* =============== */}
+                          {/* =============== */}
+                          {/* =============== */}
+                          {currentTransactions.map((data) => {
+                            const date = new Date(data.time);
+                            const day = date
+                              .getUTCDate()
+                              .toString()
+                              .padStart(2, "0");
+                            const month = (date.getUTCMonth() + 1)
+                              .toString()
+                              .padStart(2, "0");
+                            const year = date.getUTCFullYear();
+                            const formattedDate = `${day}/${month}/${year}`;
+                            console.log(formattedDate);
+                            const dateString = formattedDate;
+                            const date2 = new Date(dateString);
+                            const formattedDated = date.toLocaleDateString(
+                              "en-US",
+                              {
+                                year: "numeric",
+                                month: "short",
+                                day: "2-digit",
+                              }
+                            );
+                            return (
+                              <tr className="stakingTable_body_row ">
+                                <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
+                                  <div className="value_dolls_div">
+                                    {data.status == "STAKE"
+                                      ? "Create Lock"
+                                      : data.status == "UNSTAKE"
+                                      ? "Unlock"
+                                      : null}
+
+                                    <div className="value_dolls_div_val">
+                                      {/* {formattedDate} */}
+                                      {formattedDated}
+                                    </div>
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="value_dolls_div2">
+                                    {data.status == "STAKE" ? (
+                                      <span style={{ display: "flex" }}>
+                                        {numberWithCommas(
+                                          parseFloat(data.amount).toFixed(2)
+                                        )}{" "}
+                                        EGC
+                                      </span>
+                                    ) : data.status == "UNSTAKE" ? (
+                                      <span style={{ display: "flex" }}>
+                                        {numberWithCommas(
+                                          parseFloat(
+                                            data.unstake_amount
+                                          ).toFixed(2)
+                                        )}{" "}
+                                        EGC
+                                      </span>
+                                    ) : null}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="stakingTable_body_row_data_blockies_">
+                                    <Blockies
+                                      seed={data.user}
+                                      size={8}
+                                      scale={4}
+                                      className="blockies_icon"
+                                    />
+                                    {`${data.user.slice(
+                                      0,
+                                      6
+                                    )}...${data.user.slice(39, 42)}`}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
+                                  {`${data.tx.slice(0, 6)}...${data.tx.slice(
+                                    63,
+                                    66
+                                  )}`}
+                                  <OpenInNewIcon className="tx_hash_link_icon" />
+                                </td>
+                              </tr>
+                            );
+                          })}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                        </tbody>
+                      )}
+                    </table>
+                  </div>
+                  <Paginate
+                    pageCount={pageCount}
+                    handlePageClick={handlePageClick}
+                  />
+                </div>
+              ) : null}
+              {/* ======== */}
+              {/* ======== */}
+              {/* ======== */}
+              {activeBtn == "product" ? (
+                <div>
+                  <div className="lock_container_transactions_body_all">
+                    <table className="stakingTable_table">
+                      <thead className="stakingTable_titles">
+                        <tr className="stakingTable_title_div">
+                          <th className="stakingTable_heading_titles stakingTable_heading_titles_first">
+                            Action
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Amount
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Address
+                          </th>
+
+                          <th className="stakingTable_heading_titles stakingTable_heading_titles_last">
+                            Txn Hash
+                          </th>
+                        </tr>
+                      </thead>
+
+                      {/* <div className="table-body-content">
 
 // =====================
 // =====================
@@ -1777,83 +2189,127 @@ const DashboardHome = () => {
 // =====================
 // =====================
               </div> */}
-                  {currentTransactions.length <= 0 ? (
-                    <div className="no_loans_div">
-                      <div className="no_loans_div_cont">
-                        <Nodata />
-                        No funded pools yet.
-                      </div>{" "}
-                    </div>
-                  ) : (
-                    <tbody
-                      className="stakingTable_body"
-                      id="popular-categories"
-                    >
-                      {" "}
-                      {/* =============== */}
-                      {/* =============== */}
-                      {/* =============== */}
-                      {currentTransactions.map((data) => {
-                        return (
-                          <tr className="stakingTable_body_row ">
-                            <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
-                              <div className="value_dolls_div">
-                                {data.action}
-                                <div className="value_dolls_div_val">
-                                  {data.date}
-                                </div>
-                              </div>
-                            </td>
-                            <td className="stakingTable_body_row_data">
-                              <div className="value_dolls_div2">
-                                {data.action === "Create Lock" ? (
-                                  <>+ {data.amount} EGC</>
-                                ) : (
-                                  <>- {data.amount} eUSD</>
-                                )}
-                              </div>
-                            </td>
-                            <td className="stakingTable_body_row_data">
-                              <div className="stakingTable_body_row_data_blockies_">
-                                <Blockies
-                                  seed={data.address}
-                                  size={8}
-                                  scale={4}
-                                  className="blockies_icon"
-                                />
-                                {`${data.address.slice(
-                                  0,
-                                  6
-                                )}...${data.address.slice(39, 42)}`}
-                              </div>
-                            </td>
-                            <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
-                              {`${data.txnHash.slice(
-                                0,
-                                6
-                              )}...${data.txnHash.slice(63, 66)}`}
-                              <OpenInNewIcon className="tx_hash_link_icon" />
-                            </td>
-                          </tr>
-                        );
-                      })}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                    </tbody>
-                  )}
-                </table>
-              </div>
-              <Paginate
-                pageCount={PER_PAGE}
-                handlePageClick={handlePageClick}
-              />
+                      {currentTransactions3.length <= 0 ? (
+                        <div className="no_loans_div">
+                          <div className="no_loans_div_cont">
+                            <Nodata />
+                            No transaction yet.
+                          </div>{" "}
+                        </div>
+                      ) : (
+                        <tbody
+                          className="stakingTable_body"
+                          id="popular-categories"
+                        >
+                          {" "}
+                          {/* =============== */}
+                          {/* =============== */}
+                          {/* =============== */}
+                          {currentTransactions3.map((data) => {
+                            const date = new Date(data.time);
+                            const day = date
+                              .getUTCDate()
+                              .toString()
+                              .padStart(2, "0");
+                            const month = (date.getUTCMonth() + 1)
+                              .toString()
+                              .padStart(2, "0");
+                            const year = date.getUTCFullYear();
+                            const formattedDate = `${day}/${month}/${year}`;
+                            console.log(formattedDate);
+                            const dateString = formattedDate;
+                            const date2 = new Date(dateString);
+                            const formattedDated = date.toLocaleDateString(
+                              "en-US",
+                              {
+                                year: "numeric",
+                                month: "short",
+                                day: "2-digit",
+                              }
+                            );
+                            return (
+                              <tr className="stakingTable_body_row ">
+                                <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
+                                  <div className="value_dolls_div">
+                                    {data.status == "STAKE"
+                                      ? "Create Lock"
+                                      : data.status == "UNSTAKE"
+                                      ? "Unlock"
+                                      : null}
+
+                                    <div className="value_dolls_div_val">
+                                      {/* {formattedDate} */}
+                                      {formattedDated}
+                                    </div>
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="value_dolls_div2">
+                                    {data.status == "STAKE" ? (
+                                      <span style={{ display: "flex" }}>
+                                        {numberWithCommas(
+                                          parseFloat(data.amount).toFixed(2)
+                                        )}{" "}
+                                        EGC
+                                      </span>
+                                    ) : data.status == "UNSTAKE" ? (
+                                      <span style={{ display: "flex" }}>
+                                        {numberWithCommas(
+                                          parseFloat(
+                                            data.unstake_amount
+                                          ).toFixed(2)
+                                        )}{" "}
+                                        EGC
+                                      </span>
+                                    ) : null}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="stakingTable_body_row_data_blockies_">
+                                    <Blockies
+                                      seed={data.user}
+                                      size={8}
+                                      scale={4}
+                                      className="blockies_icon"
+                                    />
+                                    {`${data.user.slice(
+                                      0,
+                                      6
+                                    )}...${data.user.slice(39, 42)}`}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
+                                  {`${data.tx.slice(0, 6)}...${data.tx.slice(
+                                    63,
+                                    66
+                                  )}`}
+                                  <OpenInNewIcon className="tx_hash_link_icon" />
+                                </td>
+                              </tr>
+                            );
+                          })}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                        </tbody>
+                      )}
+                    </table>
+                  </div>
+                  <Paginate
+                    pageCount={pageCount3}
+                    handlePageClick={handlePageClick3}
+                  />
+                </div>
+              ) : null}
+              {/* ======== */}
+              {/* ======== */}
+              {/* ======== */}
             </div>
           </div>
         </div>
