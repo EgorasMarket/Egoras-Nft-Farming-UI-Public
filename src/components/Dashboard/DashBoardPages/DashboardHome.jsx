@@ -7,6 +7,9 @@ import { connect } from "react-redux";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { API_URL } from "../../../actions/types";
+import Paginate from "./Paginate";
+// import TableWithPagination
+import TableWithPagination from "../../SmallerComponents/Tables/TableWithPagination/TableWithPagination";
 import { config } from "../../../actions/Config";
 import { Authenticate } from "../../auth/Authenticate";
 import formatNumber from "./FormatNumber";
@@ -63,19 +66,24 @@ const DashboardHome = () => {
   } = context;
   const [egcUsd, setEgcUsd] = useState(0);
   const [graphData2, setGraphData2] = useState([]);
+  const [graphData, setGraphData] = useState([]);
   const [ChartValue, setChartValue] = useState(0);
   const [ChartTime, setChartTime] = useState(0);
   const [ChartValue2, setChartValue2] = useState(0);
   const [ChartTime2, setChartTime2] = useState(0);
   const [LastArray, setLastArray] = useState(0);
   const [lastIndex, setlastIndex] = useState(0);
+  const [LastArray2, setLastArray2] = useState(0);
+  const [lastIndex2, setlastIndex2] = useState(0);
   const [totalTVL, setTotalTVL] = useState(0);
+  const [activeBtn, setActivrBtn] = useState("swap");
   const [homeData, setHomeData] = useState({
     tvl: "0",
     volume: "0",
     users: 0,
   });
   useEffect(async () => {
+    const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
     console.log("dddd");
     await axios
       .get(API_URL + "/staking/chart", null, config)
@@ -83,8 +91,9 @@ const DashboardHome = () => {
         console.log(data);
         console.log(data.data.data);
         const temp = data.data.data;
+        console.log(temp);
         for (const data of temp) {
-          data.value = Number(parseInt(data.value).toFixed(2));
+          data.value = parseInt(data.value).toFixed(2) * egc_usd;
           const date = new Date(data.timestamp);
           const day = date.getUTCDate().toString().padStart(2, "0");
           const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
@@ -123,6 +132,61 @@ const DashboardHome = () => {
     //   // alert(JSON.stringify(stakings));
     // });
   }, []);
+  useEffect(async () => {
+    const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
+    console.log("dddd");
+    await axios
+      .get(API_URL + "/swap/all", null, config)
+      .then((data) => {
+        console.log(data);
+        console.log(data.data.data);
+        const reversed = data.data.data
+          .slice()
+          .reverse()
+          .map((data) => {
+            return data;
+          });
+        const temp = reversed;
+        for (const data of temp) {
+          data.value = parseInt(data.value).toFixed(2) * egc_usd;
+          const date = new Date(data.timestamp);
+          const day = date.getUTCDate().toString().padStart(2, "0");
+          const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+          const year = date.getUTCFullYear();
+          const formattedDated = `${day}/${month}/${year}`;
+          const dateString = formattedDated;
+          const dateParts = dateString.split("/");
+          // new Date(year, monthIndex, day)
+          const dateObj = new Date(
+            dateParts[2],
+            dateParts[1] - 1,
+            dateParts[0]
+          );
+          // format the date using toLocaleDateString()
+          const formattedDate = dateObj.toLocaleDateString("en-US", {
+            month: "short",
+            day: "2-digit",
+            year: "numeric",
+          });
+          data.timestamp = formattedDate;
+          data.month = getMonthFromNumber(data.month);
+        }
+        console.log(temp);
+        setGraphData(() => temp);
+        setlastIndex2(temp.length - 1);
+        setLastArray2(temp[temp.length - 1]);
+        setChartValue2(() => temp[temp.length - 1].value);
+        setChartTime2(() => temp[temp.length - 1].timestamp);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+
+    // socket.connect();
+    // socket.on("staking", (stakings) => {
+    //   // alert(JSON.stringify(stakings));
+    // });
+  }, []);
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       setChartValue(payload[0].payload.value);
@@ -139,8 +203,8 @@ const DashboardHome = () => {
       setChartValue2(payload[0].payload.value);
       setChartTime2(payload[0].payload.timestamp);
     } else {
-      setChartValue2(LastArray.value);
-      setChartTime2(LastArray.timestamp);
+      setChartValue2(LastArray2.value);
+      setChartTime2(LastArray2.timestamp);
     }
     return null;
   };
@@ -946,6 +1010,7 @@ const DashboardHome = () => {
         "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
     },
   ];
+
   useEffect(() => {
     const fetchData = async () => {
       const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
@@ -964,6 +1029,7 @@ const DashboardHome = () => {
     };
     fetchData();
   }, []);
+
   useEffect(
     async (e) => {
       let string2 =
@@ -981,7 +1047,7 @@ const DashboardHome = () => {
     [egcUsd]
   );
   useEffect(async (e) => {
-    // if (account) {
+    const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
     let res = await tokenBalance(
       "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
       "0x3A81836b093f7f3D3ca271125CcD45c461409697",
@@ -990,9 +1056,40 @@ const DashboardHome = () => {
     console.log(res);
     console.log(formatEther(res.message));
     let tvl = formatEther(res.message);
-    setTotalTVL(tvl * egcUsd);
-    // }
-  }, []);
+    setTotalTVL(tvl * egc_usd);
+  });
+
+  const toggleActiveBtn = (event) => {
+    setActivrBtn(event.currentTarget.id);
+  };
+  useEffect(async () => {
+    if (account) {
+      await axios
+        .get(API_URL + "/staking/transactions", null, config)
+        .then((data) => {
+          console.log(data);
+          console.log(data.data.data);
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    }
+  }, [account]);
+  // const names = ["Name", "Quantity", "Amount", "OrderId", "Status"];
+  // pagination state
+  const [currentPage, setCurrentPage] = useState(0);
+  const PER_PAGE = 10;
+
+  // handle page click event
+  function handlePageClick({ selected: selectedPage }) {
+    setCurrentPage(selectedPage);
+  }
+
+  const offset = currentPage * PER_PAGE;
+  const pageCount = Math.ceil(Transactions.length / PER_PAGE);
+
+  const currentTransactions = Transactions.slice(offset, offset + PER_PAGE);
+
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -1013,7 +1110,7 @@ const DashboardHome = () => {
                     className="analytics_container_1_Amount"
                     onChange={CustomTooltip}
                   >
-                    ${formatNumber(ChartValue * egcUsd)}
+                    ${formatNumber(ChartValue)}
                   </div>
                   <span className="analytics_container_1_Amount_span">
                     {ChartTime}
@@ -1154,7 +1251,7 @@ const DashboardHome = () => {
                         <BarChart
                           width={130}
                           height={10}
-                          data={graphData2}
+                          data={graphData}
                           margin={{
                             top: 0,
                             right: 0,
@@ -1209,7 +1306,7 @@ const DashboardHome = () => {
                         <BarChart
                           width={130}
                           height={10}
-                          data={graphData2}
+                          data={graphData}
                           margin={{
                             top: 0,
                             right: 0,
@@ -1277,7 +1374,7 @@ const DashboardHome = () => {
                     className="analytics_container_1_Amount"
                     onChange={CustomTooltip}
                   >
-                    ${formatNumber(ChartValue * egcUsd)}
+                    ${formatNumber(ChartValue)}
                   </div>
                   <span className="analytics_container_1_Amount_span">
                     {ChartTime}
@@ -1399,7 +1496,7 @@ const DashboardHome = () => {
                 {/* ====== */}
                 {/* ====== */}
                 <div className="analytics_container_1">
-                  <div className="analytics_container_1_head">Volume 24Hs</div>
+                  <div className="analytics_container_1_head">Volume 24H</div>
                   <div
                     className="analytics_container_1_Amount"
                     onChange={CustomTooltip2}
@@ -1418,7 +1515,7 @@ const DashboardHome = () => {
                         <BarChart
                           width={130}
                           height={10}
-                          data={graphData2}
+                          data={graphData}
                           margin={{
                             top: 0,
                             right: 0,
@@ -1473,7 +1570,7 @@ const DashboardHome = () => {
                         <BarChart
                           width={130}
                           height={10}
-                          data={graphData2}
+                          data={graphData}
                           margin={{
                             top: 0,
                             right: 0,
@@ -1535,7 +1632,7 @@ const DashboardHome = () => {
                 <div className="lending_area1_cont1_body_1">
                   <div className="lending_area1_cont1_heading">Total TVL</div>
                   <div className="lending_area1_cont1_body_txt">
-                    {formatNumber(totalTVL)}
+                    {formatNumber(homeData.volume)}
                     <span className="usd_sign">USD</span>
                   </div>
                 </div>
@@ -1616,8 +1713,44 @@ const DashboardHome = () => {
             {/* ========================== */}
             {/* ========================== */}
             <div className="lock_container_transactions">
-              <div className="lock_container_transactions_head">
-                Latest Transactions
+              <div className="BuyerSellerDiv_body_div2_tab_area">
+                <div className="filter_table_area_1">Latest Transactions</div>
+                <div className="filter_table_area_2 filter_table_area_2b">
+                  <div
+                    id="swap"
+                    className={
+                      activeBtn == "swap"
+                        ? "filter_table_btn1_active"
+                        : "filter_table_btn1"
+                    }
+                    onClick={toggleActiveBtn}
+                  >
+                    Swaps
+                  </div>
+                  <div
+                    id="stake"
+                    className={
+                      activeBtn == "stake"
+                        ? "filter_table_btn1_active"
+                        : "filter_table_btn1"
+                    }
+                    onClick={toggleActiveBtn}
+                  >
+                    Stakes
+                  </div>
+
+                  <div
+                    id="product"
+                    className={
+                      activeBtn == "product"
+                        ? "filter_table_btn1_active"
+                        : "filter_table_btn1"
+                    }
+                    onClick={toggleActiveBtn}
+                  >
+                    Products
+                  </div>
+                </div>
               </div>
               <div className="lock_container_transactions_body_all">
                 <table className="stakingTable_table">
@@ -1644,7 +1777,7 @@ const DashboardHome = () => {
 // =====================
 // =====================
               </div> */}
-                  {Transactions.length <= 0 ? (
+                  {currentTransactions.length <= 0 ? (
                     <div className="no_loans_div">
                       <div className="no_loans_div_cont">
                         <Nodata />
@@ -1660,7 +1793,7 @@ const DashboardHome = () => {
                       {/* =============== */}
                       {/* =============== */}
                       {/* =============== */}
-                      {Transactions.map((data) => {
+                      {currentTransactions.map((data) => {
                         return (
                           <tr className="stakingTable_body_row ">
                             <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
@@ -1717,6 +1850,10 @@ const DashboardHome = () => {
                   )}
                 </table>
               </div>
+              <Paginate
+                pageCount={PER_PAGE}
+                handlePageClick={handlePageClick}
+              />
             </div>
           </div>
         </div>

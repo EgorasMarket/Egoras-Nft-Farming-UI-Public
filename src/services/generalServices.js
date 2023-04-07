@@ -12,6 +12,7 @@ export const config = {
     "Content-Type": "application/json",
   },
 };
+let egc_usd;
 
 export const GET_COIN_GEKO_PRICE_IN_USD = async () => {
   try {
@@ -20,7 +21,8 @@ export const GET_COIN_GEKO_PRICE_IN_USD = async () => {
       null,
       config
     );
-
+    console.log(response);
+    console.log(response.data["egoras-credit"].usd);
     return response.data["egoras-credit"].usd;
   } catch (err) {
     return err.response;

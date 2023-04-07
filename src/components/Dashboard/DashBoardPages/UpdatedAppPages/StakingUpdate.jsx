@@ -523,7 +523,7 @@ const StakingUpdate = () => {
       setUnlockStakeDuration(formattedDate);
       setNextRewardTakeTime(newRewardDate);
       setUnlockStakeTime(newRewardDate2);
-      if (newRewardDate <= new Date()) {
+      if (newRewardDate <= new Date() && myTotalStaked !== "0.0") {
         setClaimDisable(false);
         setRewardCountDown(false);
       } else {
@@ -531,10 +531,17 @@ const StakingUpdate = () => {
         setRewardCountDown(true);
       }
       if (myTotalStaked == "0.0") {
-        setClaimDisable(true);
+        // setClaimDisable(true);
         setLockDisable(true);
-        return;
+      } else {
+        // setClaimDisable(false);
+        setLockDisable(false);
       }
+      // if (myTotalStaked !== "0.0") {
+      //   setClaimDisable(false);
+      //   setLockDisable(false);
+      //   return;
+      // }
     }
     console.log(myTotalStaked);
   }, [account, myTotalStaked]);
@@ -729,7 +736,7 @@ const StakingUpdate = () => {
                       <div className="no_loans_div">
                         <div className="no_loans_div_cont">
                           <Nodata />
-                          No funded pools yet.
+                          No Transaction Yet.
                         </div>{" "}
                       </div>
                     ) : (
@@ -741,65 +748,67 @@ const StakingUpdate = () => {
                         {/* =============== */}
                         {/* =============== */}
                         {/* =============== */}
-                        {UniqueLockedTransactions.map((data) => {
-                          const date = new Date(data.time);
-                          const day = date
-                            .getUTCDate()
-                            .toString()
-                            .padStart(2, "0");
-                          const month = (date.getUTCMonth() + 1)
-                            .toString()
-                            .padStart(2, "0");
-                          const year = date.getUTCFullYear();
-                          const formattedDate = `${day}/${month}/${year}`;
-                          console.log(formattedDate);
-                          return (
-                            <tr className="stakingTable_body_row ">
-                              <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
-                                <div className="value_dolls_div">
-                                  {data.status == "STAKE"
-                                    ? "Create Lock"
-                                    : data.status == "UNSTAKE"
-                                    ? "Unlock"
-                                    : null}
-                                  <div className="value_dolls_div_val">
-                                    {formattedDate}
-                                    {/* {data.time} */}
+                        {UniqueLockedTransactions.slice()
+                          .reverse()
+                          .map((data) => {
+                            const date = new Date(data.time);
+                            const day = date
+                              .getUTCDate()
+                              .toString()
+                              .padStart(2, "0");
+                            const month = (date.getUTCMonth() + 1)
+                              .toString()
+                              .padStart(2, "0");
+                            const year = date.getUTCFullYear();
+                            const formattedDate = `${day}/${month}/${year}`;
+                            console.log(formattedDate);
+                            return (
+                              <tr className="stakingTable_body_row ">
+                                <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
+                                  <div className="value_dolls_div">
+                                    {data.status == "STAKE"
+                                      ? "Create Lock"
+                                      : data.status == "UNSTAKE"
+                                      ? "Unlock"
+                                      : null}
+                                    <div className="value_dolls_div_val">
+                                      {formattedDate}
+                                      {/* {data.time} */}
+                                    </div>
                                   </div>
-                                </div>
-                              </td>
-                              <td className="stakingTable_body_row_data">
-                                <div className="value_dolls_div2">
-                                  {data.status == "STAKE" ? (
-                                    <span style={{ display: "flex" }}>
-                                      {numberWithCommas(
-                                        parseFloat(data.amount).toFixed(2)
-                                      )}{" "}
-                                      EGC
-                                    </span>
-                                  ) : data.status == "UNSTAKE" ? (
-                                    <span style={{ display: "flex" }}>
-                                      {numberWithCommas(
-                                        parseFloat(data.unstake_amount).toFixed(
-                                          2
-                                        )
-                                      )}{" "}
-                                      EGC
-                                    </span>
-                                  ) : null}
-                                </div>
-                              </td>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="value_dolls_div2">
+                                    {data.status == "STAKE" ? (
+                                      <span style={{ display: "flex" }}>
+                                        {numberWithCommas(
+                                          parseFloat(data.amount).toFixed(2)
+                                        )}{" "}
+                                        EGC
+                                      </span>
+                                    ) : data.status == "UNSTAKE" ? (
+                                      <span style={{ display: "flex" }}>
+                                        {numberWithCommas(
+                                          parseFloat(
+                                            data.unstake_amount
+                                          ).toFixed(2)
+                                        )}{" "}
+                                        EGC
+                                      </span>
+                                    ) : null}
+                                  </div>
+                                </td>
 
-                              <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
-                                {`${data.tx.slice(0, 6)}...${data.tx.slice(
-                                  63,
-                                  66
-                                )}`}
-                                <OpenInNewIcon className="tx_hash_link_icon" />
-                              </td>
-                            </tr>
-                          );
-                        })}
+                                <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
+                                  {`${data.tx.slice(0, 6)}...${data.tx.slice(
+                                    63,
+                                    66
+                                  )}`}
+                                  <OpenInNewIcon className="tx_hash_link_icon" />
+                                </td>
+                              </tr>
+                            );
+                          })}
                         {/* =================== */}
                         {/* =================== */}
                         {/* =================== */}
@@ -1345,7 +1354,7 @@ const StakingUpdate = () => {
                       <div className="no_loans_div">
                         <div className="no_loans_div_cont">
                           <Nodata />
-                          No funded pools yet.
+                          No Transaction Yet.
                         </div>{" "}
                       </div>
                     ) : (
@@ -1357,79 +1366,81 @@ const StakingUpdate = () => {
                         {/* =============== */}
                         {/* =============== */}
                         {/* =============== */}
-                        {LockedTransactions.map((data) => {
-                          // const date = new Date(data.time);
-                          // const day = date
-                          //   .getUTCDate()
-                          //   .toString()
-                          //   .padStart(2, "0");
-                          // const month = (date.getUTCMonth() + 1)
-                          //   .toString()
-                          //   .padStart(2, "0");
-                          // const year = date.getUTCFullYear();
-                          // const formattedDate = `${day}/${month}/${year}`;
-                          // console.log(formattedDate);
-                          return (
-                            <tr className="stakingTable_body_row ">
-                              <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
-                                <div className="value_dolls_div">
-                                  {data.status == "STAKE"
-                                    ? "Create Lock"
-                                    : data.status == "UNSTAKE"
-                                    ? "Unlock"
-                                    : null}
+                        {LockedTransactions.slice()
+                          .reverse()
+                          .map((data) => {
+                            // const date = new Date(data.time);
+                            // const day = date
+                            //   .getUTCDate()
+                            //   .toString()
+                            //   .padStart(2, "0");
+                            // const month = (date.getUTCMonth() + 1)
+                            //   .toString()
+                            //   .padStart(2, "0");
+                            // const year = date.getUTCFullYear();
+                            // const formattedDate = `${day}/${month}/${year}`;
+                            // console.log(formattedDate);
+                            return (
+                              <tr className="stakingTable_body_row ">
+                                <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
+                                  <div className="value_dolls_div">
+                                    {data.status == "STAKE"
+                                      ? "Create Lock"
+                                      : data.status == "UNSTAKE"
+                                      ? "Unlock"
+                                      : null}
 
-                                  <div className="value_dolls_div_val">
-                                    {/* {formattedDate} */}
-                                    {data.time}
+                                    <div className="value_dolls_div_val">
+                                      {/* {formattedDate} */}
+                                      {data.time}
+                                    </div>
                                   </div>
-                                </div>
-                              </td>
-                              <td className="stakingTable_body_row_data">
-                                <div className="value_dolls_div2">
-                                  {data.status == "STAKE" ? (
-                                    <span style={{ display: "flex" }}>
-                                      {numberWithCommas(
-                                        parseFloat(data.amount).toFixed(2)
-                                      )}{" "}
-                                      EGC
-                                    </span>
-                                  ) : data.status == "UNSTAKE" ? (
-                                    <span style={{ display: "flex" }}>
-                                      {numberWithCommas(
-                                        parseFloat(data.unstake_amount).toFixed(
-                                          2
-                                        )
-                                      )}{" "}
-                                      EGC
-                                    </span>
-                                  ) : null}
-                                </div>
-                              </td>
-                              <td className="stakingTable_body_row_data">
-                                <div className="stakingTable_body_row_data_blockies_">
-                                  <Blockies
-                                    seed={data.user}
-                                    size={8}
-                                    scale={4}
-                                    className="blockies_icon"
-                                  />
-                                  {`${data.user.slice(
-                                    0,
-                                    6
-                                  )}...${data.user.slice(39, 42)}`}
-                                </div>
-                              </td>
-                              <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
-                                {`${data.tx.slice(0, 6)}...${data.tx.slice(
-                                  63,
-                                  66
-                                )}`}
-                                <OpenInNewIcon className="tx_hash_link_icon" />
-                              </td>
-                            </tr>
-                          );
-                        })}
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="value_dolls_div2">
+                                    {data.status == "STAKE" ? (
+                                      <span style={{ display: "flex" }}>
+                                        {numberWithCommas(
+                                          parseFloat(data.amount).toFixed(2)
+                                        )}{" "}
+                                        EGC
+                                      </span>
+                                    ) : data.status == "UNSTAKE" ? (
+                                      <span style={{ display: "flex" }}>
+                                        {numberWithCommas(
+                                          parseFloat(
+                                            data.unstake_amount
+                                          ).toFixed(2)
+                                        )}{" "}
+                                        EGC
+                                      </span>
+                                    ) : null}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="stakingTable_body_row_data_blockies_">
+                                    <Blockies
+                                      seed={data.user}
+                                      size={8}
+                                      scale={4}
+                                      className="blockies_icon"
+                                    />
+                                    {`${data.user.slice(
+                                      0,
+                                      6
+                                    )}...${data.user.slice(39, 42)}`}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
+                                  {`${data.tx.slice(0, 6)}...${data.tx.slice(
+                                    63,
+                                    66
+                                  )}`}
+                                  <OpenInNewIcon className="tx_hash_link_icon" />
+                                </td>
+                              </tr>
+                            );
+                          })}
                         {/* =================== */}
                         {/* =================== */}
                         {/* =================== */}

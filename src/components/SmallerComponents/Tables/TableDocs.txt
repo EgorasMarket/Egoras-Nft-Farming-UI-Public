@@ -1,0 +1,20 @@
+
+ <tr className="tableStyle_body_row ">
+          <td className="tableStyle_body_row_data tableStyle_body_row_data_first  ">
+            <div className="assets-data334">
+              <img
+                src="/egoras-favicon.svg"
+                alt=""
+                className="assets-list-icon_pool_icon"
+              />
+
+              <div className="assets-data-pool_name">Egoras Favicon</div>
+            </div>
+          </td>
+          <td className="tableStyle_body_row_data   ">24</td>
+          <td className="tableStyle_body_row_data   ">5000</td>
+          <td className="tableStyle_body_row_data   ">24gf73</td>
+          <td className="tableStyle_body_row_data tableStyle_body_row_data_last  ">
+            Pending
+          </td>
+        </tr> 
