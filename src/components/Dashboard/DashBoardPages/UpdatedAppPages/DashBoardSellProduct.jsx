@@ -10,7 +10,7 @@ import { parseEther, formatEther } from "@ethersproject/units";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import UpdatedSuccessModal from "./UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import { Editor } from "react-draft-wysiwyg";
-import { EditorState, convertToRaw } from "draft-js";
+import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import UpdatedErrorModal from "./UpdatedSuccessErrorModals/UpdatedErrorModal";
 import {
@@ -18,6 +18,13 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+
+import {
+  CALL_AI_TEXT,
+  CALL_AI_IMAGES,
+  GET_CATEGORIES,
+  CALL_INITIALIZE_DIRECT_PRODUCT,
+} from "../../../../services/productServices";
 import { listProduct } from "../../../../web3/index";
 
 const DashBoardSellProduct = () => {
@@ -35,7 +42,10 @@ const DashBoardSellProduct = () => {
   const [prodName, setProdName] = useState("");
   const [brandName, setBrandName] = useState("");
   const [saleAmount, setSaleAmount] = useState();
+  const [prodAmount, setProdAmount] = useState();
   const [prodCondition, setProdCondition] = useState("");
+  const [prodSpec, setProdSpec] = useState("");
+  const [prodCount, setProdCount] = useState(1);
   const [imageSrc, setImageSrc] = useState("");
   const [imageSrc2, setImageSrc2] = useState("");
   const [imageSrc3, setImageSrc3] = useState("");
@@ -43,12 +53,21 @@ const DashBoardSellProduct = () => {
   const [errorModal, setErrorModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [new_category, setNew_category] = useState("");
+  const [prodState, setProdState] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoading2, setIsLoading2] = useState(false);
+  const [allCategories, setAllCategories] = useState([]);
   const [activeSaleTab, setActiveSaleTab] = useState("direct");
   const [Disable, setDisable] = useState(false);
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [addBrand, setAddBrand] = useState(false);
+  const [addCategory, setAddCategory] = useState(false);
 
+  const [formData, setFormData] = useState({
+    product_details: "",
+  });
+  const { product_details } = formData;
   const fileInputRef = useRef();
   const fileInputRef2 = useRef();
   const fileInputRef3 = useRef();
@@ -67,6 +86,7 @@ const DashBoardSellProduct = () => {
     const reader = new FileReader();
 
     reader.onload = () => {
+      console.log(reader.result);
       setImageSrc(reader.result);
     };
 
@@ -88,6 +108,10 @@ const DashBoardSellProduct = () => {
   const handleRemoveClick2 = () => {
     setImageSrc2("");
   };
+  const handleCenter2 = (event) => {
+    setNew_category(event.target.value || "");
+    console.log(event.target.value);
+  };
   const handleImageSelect3 = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
@@ -101,20 +125,29 @@ const DashBoardSellProduct = () => {
   const handleRemoveClick3 = () => {
     setImageSrc3("");
   };
-  const sendProductToBlockchain = async (
-    prodId,
-    productType,
-    productQuantity
-  ) => {
+  const sendProductToBlockchain = async (prodId, productType, prodCount) => {
     const conCatProdName = ` ${prodName}_${prodId}`;
 
-    const res = await listProduct(
-      conCatProdName,
-      parseEther(saleAmount.toString(), "wei").toString(),
-      productType,
-      productQuantity,
-      library.getSigner()
-    );
+    let res;
+
+    if (activeSaleTab == "direct") {
+      res = await listProduct(
+        conCatProdName,
+        parseEther(prodAmount.toString(), "wei").toString(),
+        productType,
+        prodCount,
+        library.getSigner()
+      );
+    } else {
+      res = await listProduct(
+        conCatProdName,
+        parseEther(saleAmount.toString(), "wei").toString(),
+        productType,
+        prodCount,
+        library.getSigner()
+      );
+    }
+
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
 
@@ -134,19 +167,7 @@ const DashBoardSellProduct = () => {
     setIsLoading(true);
     setDisable(true);
     const formData = new FormData();
-
-    let productType = false;
-    let productQuantity = 1;
-
-    let setProductType = "";
-
-    if (productType == true) {
-      setProductType = "DIRECT";
-    } else {
-      setProductType = "INDIRECT";
-    }
-
-    console.log(account);
+    console.log(activeSaleTab);
 
     const element = document.getElementById("product_image");
     const element2 = document.getElementById("product_image2");
@@ -159,39 +180,173 @@ const DashBoardSellProduct = () => {
     formData.append("product_image3", file3);
     formData.append("product_name", prodName);
     formData.append("product_brand", brandName);
-    formData.append("product_condition", prodCondition);
     formData.append("userAddress", account);
-    formData.append("amount", saleAmount);
-    formData.append("productType", setProductType);
-    formData.append("productQuantity", productQuantity);
-    console.log(formData);
-    try {
-      const res = await axios.post(
-        API_URL + "/product/initialize/add/product",
-        formData,
-        config
-      );
-      console.log(res, "somto");
-      if (res.status === 200) {
-        sendProductToBlockchain(
-          res.data.data.product_id,
-          productType,
-          productQuantity
+    formData.append("productQuantity", prodCount);
+
+    if (activeSaleTab == "direct") {
+      formData.append("product_category", new_category);
+      formData.append("product_details", product_details);
+      formData.append("prod_spec", prodSpec);
+      formData.append("product_state", prodState);
+      formData.append("product_amount", prodAmount);
+      formData.append("productType", "DIRECT");
+
+      try {
+        const res = await axios.post(
+          API_URL + "/product/initialize/add/product/direct",
+          formData,
+          config
         );
-        return;
+        console.log(res, "somto");
+        if (res.status === 200) {
+          sendProductToBlockchain(
+            res.data.data.product_id,
+            "DIRECT",
+            prodCount
+          );
+          return;
+        }
+      } catch (err) {
+        console.log(err.response);
+        setErrorModal(true);
+        setErrorMessage(err.response.data.errorMessage);
+        setIsLoading(false);
+        setDisable(false);
       }
-    } catch (err) {
-      console.log(err);
-      console.log(err);
-      setErrorModal(true);
-      setErrorMessage(err.response.data.errorMessage);
-      setIsLoading(false);
-      setDisable(false);
+    } else {
+      formData.append("product_condition", prodCondition);
+      formData.append("amount", saleAmount);
+      formData.append("productType", "INDIRECT");
+
+      try {
+        const res = await axios.post(
+          API_URL + "/product/initialize/add/product",
+          formData,
+          config
+        );
+        console.log(res, "somto");
+        if (res.status === 200) {
+          sendProductToBlockchain(
+            res.data.data.product_id,
+            "INDIRECT",
+            prodCount
+          );
+          return;
+        }
+      } catch (err) {
+        console.log(err);
+        console.log(err);
+        setErrorModal(true);
+        setErrorMessage(err.response.data.errorMessage);
+        setIsLoading(false);
+        setDisable(false);
+      }
+    }
+
+    // console.log(
+    //   prodName,
+    //   file,
+    //   file2,
+    //   file3,
+    //   brandName,
+    //   prodAmount,
+    //   prodCount,
+    //   new_category,
+    //   product_details,
+    //   prodSpec,
+    //   prodState + "sa"
+    // );
+  };
+
+  const generateAI = async () => {
+    console.log(prodName, prodCount);
+    setIsLoading2(true);
+
+    const response = await CALL_AI_TEXT(prodName);
+    console.log(response.data.choices.text, "goody");
+
+    const response1 = await CALL_AI_IMAGES(prodName);
+    console.log(response1.data.data, "goody");
+
+    if (response.data) {
+      setIsLoading2(false);
+      const content = {
+        entityMap: {},
+        blocks: [
+          {
+            key: "637gr",
+            text: response.data.choices[0].text,
+            type: "unstyled",
+            depth: 0,
+            inlineStyleRanges: [],
+            entityRanges: [],
+            data: {},
+          },
+        ],
+      };
+      const contentState = convertFromRaw(content);
+      console.log(contentState);
+      setEditorState(EditorState.createWithContent(contentState));
+      const targetSection = document.querySelector("#target-section");
+      targetSection.scrollIntoView({ behavior: "smooth" });
+    }
+
+    if (response1.data) {
+      async function AIimage1() {
+        fetch(response1.data.data[0].url)
+          .then((response) => response.blob())
+          .then((blob) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = () => {
+              const base64data = reader.result;
+              console.log(base64data);
+              setImageSrc(base64data);
+            };
+          });
+      }
+      async function AIimage2() {
+        fetch(response1.data.data[1].url)
+          .then((response) => response.blob())
+          .then((blob) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = () => {
+              const base64data = reader.result;
+              console.log(base64data);
+              setImageSrc2(base64data);
+            };
+          });
+      }
+      async function AIimage3() {
+        fetch(response1.data.data[3].url)
+          .then((response) => response.blob())
+          .then((blob) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = () => {
+              const base64data = reader.result;
+              console.log(base64data);
+              setImageSrc3(base64data);
+            };
+          });
+      }
+      AIimage1();
+      AIimage2();
+      AIimage3();
     }
   };
+
   const handleNameChange = (event) => {
     setProdName(event.target.value);
     console.log(event.target.value);
+    //console.log(event.target.value);
+  };
+
+  const handleProdStateChange = (event) => {
+    setProdState(event.target.value);
+    console.log(event.target.value);
+    // prodState, setProdState
     //console.log(event.target.value);
   };
   const handleBrandNameChange = (event) => {
@@ -200,7 +355,11 @@ const DashBoardSellProduct = () => {
     //console.log(event.target.value);
   };
   const handleSaleAmountChange = (event) => {
-    setSaleAmount(event.target.value);
+    if (activeSaleTab == "direct") {
+      setProdAmount(event.target.value);
+    } else {
+      setSaleAmount(event.target.value);
+    }
     console.log(event.target.value);
     //console.log(event.target.value);
   };
@@ -209,21 +368,66 @@ const DashBoardSellProduct = () => {
     console.log(event.target.value);
     //console.log(event.target.value);
   };
+  const handleProdSpecChange = (event) => {
+    setProdSpec(event.target.value);
+    console.log(event.target.value);
+    //console.log(event.target.value);
+  };
+  const handleProdCountChange = (event) => {
+    setProdCount(event.target.value);
+    console.log(event.target.value);
+    //console.log(event.target.value);
+  };
+
   useEffect(() => {
-    if (
-      prodName == "" ||
-      brandName == "" ||
-      saleAmount == "" ||
-      prodCondition == "" ||
-      imageSrc == "" ||
-      imageSrc2 == "" ||
-      imageSrc3 == ""
-    ) {
-      setDisable(true);
+    async function fetchData() {
+      const res = await GET_CATEGORIES();
+
+      // console.log(res.data.allCategories);
+      setAllCategories(res.data.allCategories);
+      // allCategories, setAllCategories
+    }
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    if (activeSaleTab == "direct") {
+      if (
+        prodName == "" ||
+        brandName == "" ||
+        prodAmount == "" ||
+        prodCount == 0 ||
+        new_category == "" ||
+        product_details == "" ||
+        prodSpec == "" ||
+        prodState == "" ||
+        imageSrc == "" ||
+        imageSrc2 == "" ||
+        imageSrc3 == ""
+      ) {
+        setDisable(true);
+      } else {
+        setDisable(false);
+      }
     } else {
-      setDisable(false);
+      if (
+        prodName == "" ||
+        brandName == "" ||
+        saleAmount == "" ||
+        prodCondition == "" ||
+        prodCount == 0 ||
+        imageSrc == "" ||
+        imageSrc2 == "" ||
+        imageSrc3 == ""
+      ) {
+        setDisable(true);
+      } else {
+        setDisable(false);
+      }
     }
   }, [
+    activeSaleTab,
     prodName,
     brandName,
     saleAmount,
@@ -245,11 +449,25 @@ const DashBoardSellProduct = () => {
   const onEditorStateChange = (editorState) => {
     let text = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
-    // setFormData({ ...formData, product_details: text });
+    setFormData({ ...formData, product_details: text });
     setEditorState(editorState);
   };
   const toggleAddBrand = () => {
     setAddBrand(!addBrand);
+  };
+
+  const toggleAddCategory = () => {
+    setAddCategory(!addCategory);
+  };
+  const addNewCategory = () => {
+    allCategories.push({ product_category: new_category });
+    setAddCategory(!addCategory);
+    // new_brand, setNew_brand
+  };
+  const handleNewCategoryChange = (event) => {
+    setNew_category(event.target.value);
+    console.log(event.target.value);
+    // new_category, setNew_category
   };
   return (
     <div className="other2 asset_other2">
@@ -308,8 +526,15 @@ const DashBoardSellProduct = () => {
                         className="sell_container_body_cont1_title_div_input"
                         value={prodName}
                       />
-                      <button className="sell_container_body_cont1_title_div_btn">
-                        Generate Details
+                      <button
+                        className="sell_container_body_cont1_title_div_btn"
+                        onClick={generateAI}
+                      >
+                        {isLoading2 ? (
+                          <ScaleLoader color="#24382b" size={10} height={20} />
+                        ) : (
+                          <span> Generate Details </span>
+                        )}
                       </button>
                     </div>
                   </div>
@@ -325,7 +550,7 @@ const DashBoardSellProduct = () => {
                       <div className="sell_container_body_cont1_txt_heading">
                         Image*
                       </div>{" "}
-                      File types supported: JPG, PNG, SVG. Max size: 2 MB
+                      File types supported: JPG, PNG. Max size: 2 MB
                     </div>
                     <div className="sell_container_body_cont1_img_display_cont">
                       <div className="sell_container_body_cont1_img_display_cont_1">
@@ -451,26 +676,20 @@ const DashBoardSellProduct = () => {
                   <div className="sell_container_body_cont1">
                     <div className="sell_container_body_cont1_txt">
                       <div className="sell_container_body_cont1_txt_heading">
-                        Product Brand*
+                        Brand Name*
                       </div>{" "}
                       The Brand of the product user uploads for sale.
                     </div>
                     <div className="sell_container_body_cont1_title_div">
-                      <select
-                        name=""
-                        id=""
+                      <input
+                        id="brandName"
+                        name="brandName"
+                        type="text"
+                        placeholder="Brand name"
                         className="sell_container_body_cont1_title_div_input"
-                      >
-                        <option value="0">Apple</option>
-                        <option value="1">Samsung</option>
-                        <option value="2">Xiaomi</option>
-                      </select>
-                      <button
-                        className="add_category_btn"
-                        onClick={toggleAddBrand}
-                      >
-                        +
-                      </button>
+                        onChange={handleBrandNameChange}
+                        value={brandName}
+                      />
                     </div>
                   </div>
                   {/* ========================= */}
@@ -500,7 +719,7 @@ const DashBoardSellProduct = () => {
                         placeholder="Product amount"
                         className="sell_container_body_cont1_title_div_input"
                         onChange={handleSaleAmountChange}
-                        value={saleAmount}
+                        value={prodAmount}
                       />
                     </div>
                   </div>
@@ -524,13 +743,13 @@ const DashBoardSellProduct = () => {
                     </div>
                     <div className="sell_container_body_cont1_title_div">
                       <input
-                        id="prodAmount"
-                        name="prodAmount"
-                        type="text"
+                        id="prodCount"
+                        name="prodCount"
+                        type="number"
                         placeholder="Product count"
                         className="sell_container_body_cont1_title_div_input"
-                        // onChange={handleSaleAmountChange}
-                        // value={saleAmount}
+                        onChange={handleProdCountChange}
+                        value={prodCount}
                       />
                     </div>
                   </div>
@@ -557,11 +776,27 @@ const DashBoardSellProduct = () => {
                         name=""
                         id=""
                         className="sell_container_body_cont1_title_div_input"
+                        onChange={handleCenter2}
                       >
-                        <option value="0">Mobile Phones</option>
-                        <option value="1">Computers & Laptops</option>
-                        <option value="2">Home Appliances</option>
+                        {allCategories.map((option) => (
+                          <option
+                            key={option.product_category}
+                            value={option.product_category}
+                            // onClick={(e) =>
+                            //   getCatName(option.product_brand)
+                            // }
+                          >
+                            {option.product_category}
+                          </option>
+                        ))}
                       </select>
+
+                      <button
+                        className="add_category_btn"
+                        onClick={toggleAddCategory}
+                      >
+                        +
+                      </button>
                     </div>
                   </div>
                   {/* ========================= */}
@@ -576,7 +811,7 @@ const DashBoardSellProduct = () => {
                   <div className="sell_container_body_cont1">
                     <div className="sell_container_body_cont1_txt">
                       <div className="sell_container_body_cont1_txt_heading">
-                        Product Condition*
+                        Product State*
                       </div>{" "}
                       The amount of items that can be minted. No gas cost to
                       you!
@@ -586,10 +821,11 @@ const DashBoardSellProduct = () => {
                         name=""
                         id=""
                         className="sell_container_body_cont1_title_div_input"
+                        onChange={handleProdStateChange}
                       >
-                        <option value="0"></option>
-                        <option value="1">Used</option>
-                        <option value="2">New</option>
+                        <option value=""></option>
+                        <option value="1">New</option>
+                        <option value="2">Refurbished</option>
                       </select>
                     </div>
                   </div>
@@ -602,7 +838,10 @@ const DashBoardSellProduct = () => {
                   {/* ========================= */}
                   {/* ========================= */}
                   {/* ========================= */}
-                  <div className="sell_container_body_cont1">
+                  <div
+                    className="sell_container_body_cont1"
+                    id="target-section"
+                  >
                     <div className="sell_container_body_cont1_txt">
                       <div className="sell_container_body_cont1_txt_heading">
                         Product Details*
@@ -636,13 +875,13 @@ const DashBoardSellProduct = () => {
                     </div>
                     <div className="sell_container_body_cont1_title_div">
                       <textarea
-                        name="productCondition"
-                        id="productCondition"
+                        name="prodSpec"
+                        id="prodSpec"
                         cols="30"
                         rows="10"
                         className="sell_container_body_cont1_title_div_input"
-                        onChange={handleProdConditionChange}
-                        value={prodCondition}
+                        onChange={handleProdSpecChange}
+                        value={prodSpec}
                       ></textarea>
                     </div>
                   </div>
@@ -698,7 +937,7 @@ const DashBoardSellProduct = () => {
                       <div className="sell_container_body_cont1_txt_heading">
                         Image*
                       </div>{" "}
-                      File types supported: JPG, PNG, SVG. Max size: 2 MB
+                      File types supported: JPG, PNG. Max size: 2 MB
                     </div>
                     <div className="sell_container_body_cont1_img_display_cont">
                       <div className="sell_container_body_cont1_img_display_cont_1">
@@ -872,6 +1111,34 @@ const DashBoardSellProduct = () => {
                   <div className="sell_container_body_cont1">
                     <div className="sell_container_body_cont1_txt">
                       <div className="sell_container_body_cont1_txt_heading">
+                        Product Count*
+                      </div>{" "}
+                      The amount of items that can be minted. No gas cost to
+                      you!
+                    </div>
+                    <div className="sell_container_body_cont1_title_div">
+                      <input
+                        id="prodCount"
+                        name="prodCount"
+                        type="number"
+                        placeholder="Product count"
+                        className="sell_container_body_cont1_title_div_input"
+                        onChange={handleProdCountChange}
+                        value={prodCount}
+                      />
+                    </div>
+                  </div>
+                  {/* ========================= */}
+                  {/* ========================= */}
+                  {/* ========================= */}
+                  {/* ========================= */}
+                  {/* ========================= */}
+                  {/* ========================= */}
+                  {/* ========================= */}
+                  {/* ========================= */}
+                  <div className="sell_container_body_cont1">
+                    <div className="sell_container_body_cont1_txt">
+                      <div className="sell_container_body_cont1_txt_heading">
                         Sale Amount*
                       </div>{" "}
                       The amount of items that can be minted. No gas cost to
@@ -991,6 +1258,35 @@ const DashBoardSellProduct = () => {
                 // onClick={addNewBrand}
               >
                 Add Brand
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : null}
+      {addCategory ? (
+        <div className="addCategoryDiv_sales">
+          <div className="addCategoryArea">
+            <CloseIcon
+              className="addCategoryArea_closeIcon"
+              onClick={toggleAddCategory}
+            />
+            <div className="addCategoryArea1">Add Product Category</div>
+            <div className="addCategoryArea2">
+              <input
+                type="text"
+                className="addCategoryArea2_input"
+                name="new_category"
+                id="new_category"
+                value={new_category}
+                onChange={handleNewCategoryChange}
+              />
+            </div>
+            <div className="addCategoryAreaButtonDiv">
+              <button
+                className="addCategoryAreaButton_btn"
+                onClick={addNewCategory}
+              >
+                Add Category
               </button>
             </div>
           </div>

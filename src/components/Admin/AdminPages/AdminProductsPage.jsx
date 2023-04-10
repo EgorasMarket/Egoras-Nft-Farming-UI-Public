@@ -168,30 +168,7 @@ const AdminProductsPage = () => {
   const handleRemoveClick3 = () => {
     setImageSrc3("");
   };
-  const sendProductToBlockchain = async (prodId) => {
-    const conCatProdName = ` ${prodName}_${prodId}`;
-    const res = await listProduct(
-      conCatProdName,
-      saleAmount,
-      library.getSigner()
-    );
-    console.log(res, "somto8uhhhg");
-    console.log(res.status, "somto8uhhhg");
 
-    // if (check.status == true) {
-    //   let ret = await lendUS(
-    //     txnhash,
-    //     parseEther(formData.BackAmount.toString(), "wei").toString(),
-    //     currentTarget,
-    //     library.getSigner()
-    //   );
-    //   console.log(ret.status);
-    //   if (ret.status == true) {
-    //   } else if (ret.status == false) {
-    //   }
-    // } else {
-    // }
-  };
   const UploadProduct = async () => {
     const formData = new FormData();
 

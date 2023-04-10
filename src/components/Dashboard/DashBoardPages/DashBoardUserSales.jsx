@@ -1,34 +1,35 @@
 import React, { useState, useEffect, useContext } from "react";
-import CircleIcon from "@mui/icons-material/Circle";
+// import CircleIcon from "@mui/icons-material/Circle";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import EastIcon from "@mui/icons-material/East";
+// import EastIcon from "@mui/icons-material/East";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import Accordion from "@material-ui/core/Accordion";
-import AccordionSummary from "@material-ui/core/AccordionSummary";
-import AccordionDetails from "@material-ui/core/AccordionDetails";
-import Typography from "@material-ui/core/Typography";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import CopyAllIcon from "@mui/icons-material/CopyAll";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+// import Accordion from "@material-ui/core/Accordion";
+// import AccordionSummary from "@material-ui/core/AccordionSummary";
+// import AccordionDetails from "@material-ui/core/AccordionDetails";
+// import Typography from "@material-ui/core/Typography";
+// import DashboardIcon from "@mui/icons-material/Dashboard";
+// import CopyAllIcon from "@mui/icons-material/CopyAll";
+// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { makeStyles } from "@material-ui/core/styles";
 import { numberWithCommas } from "../../../static";
 import Nodata from "./nodataComponent/Nodata";
 import UserDetailsLinks from "./UserDetailsLinks";
 import CloseIcon from "@mui/icons-material/Close";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
-import TrendingDownIcon from "@mui/icons-material/TrendingDown";
-import { Link } from "react-router-dom";
+// import GroupAddIcon from "@mui/icons-material/GroupAdd";
+// import TrendingDownIcon from "@mui/icons-material/TrendingDown";
+// import TrendingDownIcon from "@mui/icons-material/TrendingDown";
+// import { Link } from "react-router-dom";
 import {
-  Web3ReactProvider,
+  // Web3ReactProvider,
   useWeb3React,
-  UnsupportedChainIdError,
+  // UnsupportedChainIdError,
 } from "@web3-react/core";
 import {
-  GET_ALL_UPLOADED_PRODUCTS,
+  // GET_ALL_UPLOADED_PRODUCTS,
   ACCEPT_BID,
   DISPLAY_NEW_USER_PRODUCTS_CALL,
 } from "../../../services/productServices";
-import { DISPLAY_NEW_PRODUCTS_CALL } from "../../../services/adminServices";
+// import { DISPLAY_NEW_PRODUCTS_CALL } from "../../../services/adminServices";
 import { AcceptBid } from "../../../web3";
 const useStyles = makeStyles((theme) => ({
   root: {

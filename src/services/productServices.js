@@ -7,6 +7,9 @@ import {
   FETCH_USER_NEW_PRODUCT,
   GET_UPLOADED_PRODUCT_BY_ID_ROUTE,
   PROCESS_PRODUCT_ORDER_ROUTE,
+  AI_IMAGES,
+  AI_TEXT,
+  INITIALIZE_DIRECT_PRODUCT,
 } from "../core/ApiRoutes";
 export const config = {
   headers: {
@@ -61,6 +64,7 @@ export const GET_UPLOADED_PRODUCT_BY_ID = async (id) => {
     return err.repsonse;
   }
 };
+
 export const PROCESS_PRODUCT_PURCHASE = async (user, productId) => {
   try {
     const response = await axios.post(
@@ -74,6 +78,22 @@ export const PROCESS_PRODUCT_PURCHASE = async (user, productId) => {
 
     return response.data;
   } catch (err) {
+    return err.repsonse;
+  }
+};
+
+export const CALL_INITIALIZE_DIRECT_PRODUCT = async (formData) => {
+  console.log(formData);
+  try {
+    const response = await axios.post(
+      `${INITIALIZE_DIRECT_PRODUCT}`,
+      formData,
+      config
+    );
+    console.log(response);
+    return response.data;
+  } catch (err) {
+    console.log(err.repsonse);
     return err.repsonse;
   }
 };
@@ -110,5 +130,35 @@ export const ACCEPT_BID = async (account, saleDetails, action) => {
   } catch (err) {
     console.log(err.repsonse);
     return err.repsonse;
+  }
+};
+
+export const CALL_AI_TEXT = async (content) => {
+  console.log("____HHHH_____");
+  const body = JSON.stringify({
+    content,
+  });
+  try {
+    const response = await axios.post(AI_TEXT, body, config);
+    console.log(response);
+
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
+};
+
+export const CALL_AI_IMAGES = async (content) => {
+  console.log("____HHHH_____");
+  const body = JSON.stringify({
+    content,
+  });
+  try {
+    const response = await axios.post(AI_IMAGES, body, config);
+    console.log(response);
+
+    return response.data;
+  } catch (err) {
+    return err.response;
   }
 };
