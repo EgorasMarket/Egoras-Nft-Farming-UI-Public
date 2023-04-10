@@ -17,7 +17,10 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { ShimmerText, ShimmerPostDetails } from "react-shimmer-effects";
 import "./DashboardMarketStyles/PowerDetailPage.css";
 import "./DashboardMarketStyles/updatedItemDetailPage.css";
-import { GET_UPLOADED_PRODUCT_BY_ID } from "../../../../../services/productServices";
+import {
+  GET_UPLOADED_PRODUCT_BY_ID,
+  PROCESS_PRODUCT_PURCHASE,
+} from "../../../../../services/productServices";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -88,31 +91,42 @@ const ProductDetailPage = ({ match }) => {
     console.log(productDetail.productType, account, "PurchaseProduct");
 
     let quantity = 1;
-    let res;
+    let transactionHash = "0x6ED527b0a92f117f4a4E05a6dF9313CDd4a6aB412";
+    let product_id = productDetail.product_id;
 
-    if (productDetail.productType == "INDIRECT") {
-      res = await BuyIndirectProduct(
-        productDetail.index_id,
-        quantity,
-        library.getSigner()
-      );
-    } else {
-      res = await BuyDirectProduct(
-        productDetail.index_id,
-        quantity,
-        library.getSigner()
-      );
-    }
+    const res = await PROCESS_PRODUCT_PURCHASE({
+      quantity,
+      transactionHash,
+      product_id,
+      user: account,
+      order_type: "DIRECT",
+    });
 
-    console.log(res, "somto8uhhhg");
-    // console.log(res.status, "somto8uhhhg");
-    // setSaleDetails("");
-    console.log(res);
-    if (res.status == true) {
-      console.log("Success message");
-    } else {
-      console.log("Error occured from Blockchain");
+    if (res.success) {
+      alert("successful purchase");
     }
+    /// BUY WITH BLOCKCHAIN
+
+    // if (productDetail.productType == "INDIRECT") {
+    //   res = await BuyIndirectProduct(
+    //     productDetail.index_id,
+    //     quantity,
+    //     library.getSigner()
+    //   );
+    // } else {
+    //   res = await BuyDirectProduct(
+    //     productDetail.index_id,
+    //     quantity,
+    //     library.getSigner()
+    //   );
+    // }
+
+    // console.log(res);
+    // if (res.status == true) {
+    //   console.log("Success message");
+    // } else {
+    //   console.log("Error occured from Blockchain");
+    // }
 
     // const response = await GET_UPLOADED_PRODUCT_BY_ID(address);
 
@@ -521,8 +535,8 @@ const ProductDetailPage = ({ match }) => {
                       ) : (
                         <button
                           className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn"
-                          // onClick={PurchaseProduct}
-                          disabled={true}
+                          onClick={PurchaseProduct}
+                          // disabled={true}
                         >
                           Purchase
                         </button>

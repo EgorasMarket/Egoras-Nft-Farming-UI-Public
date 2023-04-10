@@ -10,6 +10,10 @@ import {
   AI_IMAGES,
   AI_TEXT,
   INITIALIZE_DIRECT_PRODUCT,
+  GET_USERS_BUY_ORDER_ROUTE,
+  GET_USERS_SELL_ORDER_ROUTE,
+  SELLER_MARK_AS_SHIPPED_ROUTE,
+  BUYER_MARK_PRODUCT_AS_RECIEVED,
 } from "../core/ApiRoutes";
 export const config = {
   headers: {
@@ -40,6 +44,44 @@ export const GET_BRANDS = async () => {
     return err.repsonse;
   }
 };
+export const FETCH_USER_BUY_ORDER = async (account) => {
+  try {
+    const response = await axios.get(`${GET_USERS_BUY_ORDER_ROUTE}/${account}`);
+    // console.log(response.data);
+    return response.data;
+  } catch (err) {
+    return err.repsonse;
+  }
+};
+export const FETCH_USER_SELL_ORDER = async (account) => {
+  try {
+    const response = await axios.get(
+      `${GET_USERS_SELL_ORDER_ROUTE}/${account}`
+    );
+    // console.log(response.data);
+    return response.data;
+  } catch (err) {
+    return err.repsonse;
+  }
+};
+export const MARK_PRODUCT_AS_SHIPPED = async (payload) => {
+  try {
+    const response = await axios.post(SELLER_MARK_AS_SHIPPED_ROUTE, payload);
+    console.log(response);
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
+export const MARK_PRODUCT_AS_RECIEVED = async (payload) => {
+  try {
+    const response = await axios.post(BUYER_MARK_PRODUCT_AS_RECIEVED, payload);
+    console.log(response);
+    return response;
+  } catch (err) {
+    return err.response;
+  }
+};
 
 export const GET_CATEGORIES = async () => {
   try {
@@ -51,6 +93,19 @@ export const GET_CATEGORIES = async () => {
   }
 };
 
+export const GET_USER_UPLOADED_PRODUCT = async (address) => {
+  try {
+    const response = await axios.get(
+      `${GET_ALL_UPLOADED_PRODUCTS_ROUTE}/${address}`,
+      null,
+      config
+    );
+
+    return response.data;
+  } catch (err) {
+    return err.repsonse;
+  }
+};
 export const GET_UPLOADED_PRODUCT_BY_ID = async (id) => {
   try {
     const response = await axios.get(
@@ -65,19 +120,17 @@ export const GET_UPLOADED_PRODUCT_BY_ID = async (id) => {
   }
 };
 
-export const PROCESS_PRODUCT_PURCHASE = async (user, productId) => {
+export const PROCESS_PRODUCT_PURCHASE = async (payload) => {
   try {
     const response = await axios.post(
       `${PROCESS_PRODUCT_ORDER_ROUTE}`,
-      {
-        user,
-        product_id: productId,
-      },
+      payload,
       config
     );
 
     return response.data;
   } catch (err) {
+    console.log(err.response);
     return err.repsonse;
   }
 };
