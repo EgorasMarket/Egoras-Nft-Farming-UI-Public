@@ -8,7 +8,10 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import { connect } from "react-redux";
 import { SuccessModal, ErrorModal } from "./Modal/Success_Error_Component";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import StarRateIcon from "@mui/icons-material/StarRate";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import UserDetailsLinks from "./UserDetailsLinks";
 import Web3 from "web3";
 import {
   Web3ReactProvider,
@@ -75,7 +78,11 @@ const DashBoardUserDetails = ({ auth }) => {
   const [eusdUsdVal, setEusdUsdVal] = useState("0.00");
   const [BnbUsdVal, setBnbUsdVal] = useState("0.00");
   const [TotalPortfolio, setTotalPortfolio] = useState("0.00");
-
+  const [activeTab, setActiveTab] = useState("buyer");
+  const [activeBtn, setActiveBtn] = useState("Ongoing");
+  const toggleActiveBtn = (event) => {
+    setActiveBtn(event.currentTarget.id);
+  };
   const context = useWeb3React();
   const {
     connector,
@@ -124,6 +131,10 @@ const DashBoardUserDetails = ({ auth }) => {
     }
     if (currentPage === "/app/user/sales") {
       setActiveLink("sales");
+      return;
+    }
+    if (currentPage === "/app/user/p2p_sales") {
+      setActiveLink("p2p");
       return;
     }
   });
@@ -214,6 +225,78 @@ const DashBoardUserDetails = ({ auth }) => {
     setTotalPortfolio(Portfolio);
   }, [coinBalance, egcBalance, eusdBalance, BnbUsdVal, egcUsdVal, eusdUsdVal]);
 
+  const toggleActiveTab = (e) => {
+    let active = e.currentTarget.id;
+    setActiveTab(active);
+  };
+  const buyOrders = [
+    {
+      id: "1",
+      img: "/img/img5.png",
+      name: "Hisense Tv",
+      amount: 10000,
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      status: "Pending",
+      time: "Apr-05-2023",
+      txHash:
+        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
+    },
+    {
+      id: "2",
+      img: "/img/img5.png",
+      name: "Lg Tv",
+      amount: 10000,
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      status: "Pending",
+      time: "Apr-05-2023",
+      txHash:
+        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
+    },
+    {
+      id: "3",
+      img: "/img/img5.png",
+      name: "Lg Tv",
+      amount: 10000,
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      status: "shipped",
+      time: "Apr-05-2023",
+      txHash:
+        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
+    },
+    {
+      id: "4",
+      img: "/img/img5.png",
+      name: "Lg Tv",
+      amount: 10000,
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      status: "Pending",
+      time: "Apr-05-2023",
+      txHash:
+        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
+    },
+    {
+      id: "5",
+      img: "/img/img5.png",
+      name: "Lg Tv",
+      amount: 10000,
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      status: "shipped",
+      time: "Apr-05-2023",
+      txHash:
+        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
+    },
+    {
+      id: "6",
+      img: "/img/img5.png",
+      name: "Samsung Tv",
+      amount: 10000,
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      status: "shipped",
+      time: "Apr-05-2023",
+      txHash:
+        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
+    },
+  ];
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -225,41 +308,7 @@ const DashBoardUserDetails = ({ auth }) => {
       <section className=" no-bg no_paddd ">
         <div className="container relative">
           <div className="pool_deatail_area">
-            <div className="pool_lending_pages_links">
-              <Link
-                to="/app/user"
-                className={
-                  activeLink === "poolDetails"
-                    ? "pool_lend_details_link_active"
-                    : "pool_lend_details_link"
-                }
-              >
-                <DashboardIcon className="asset_overview_link_icon" />
-                User Details
-              </Link>
-              <Link
-                to="/app/user/referral"
-                className={
-                  activeLink === "referral"
-                    ? "pool_lend_details_link_active"
-                    : "pool_lend_details_link"
-                }
-              >
-                <GroupAddIcon className="asset_overview_link_icon" />
-                Referral
-              </Link>
-              <Link
-                to="/app/user/sales"
-                className={
-                  activeLink === "sales"
-                    ? "pool_lend_details_link_active"
-                    : "pool_lend_details_link"
-                }
-              >
-                <TrendingDownIcon className="asset_overview_link_icon" />
-                Sales
-              </Link>
-            </div>
+            <UserDetailsLinks activeLink={activeLink} />
 
             <div className="userdAshboard_head">
               <div className="userdAshboard_head_area">
@@ -345,13 +394,34 @@ const DashBoardUserDetails = ({ auth }) => {
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
                   <span className="user_details_body1_body_cont1_span1">
-                    Sell:
+                    Sold:
+                  </span>
+                  <span className="user_details_body1_body_cont1_span2">0</span>
+                </div>
+                <hr class="custom_hr"></hr>
+                <div className="user_details_body1_body_cont1">
+                  <span className="user_details_body1_body_cont1_span1">
+                    Bought:
                   </span>
                   <span className="user_details_body1_body_cont1_span2">0</span>
                 </div>
               </div>
             </div>
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
 
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
+            {/* ================== */}
             <div className="recent_transaction_body">
               <div className="recent_transaction_body_head" id="transact_head">
                 Transactions

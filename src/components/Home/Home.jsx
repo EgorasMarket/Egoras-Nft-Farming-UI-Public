@@ -383,7 +383,7 @@ const Home = () => {
       setTotalTVL(tvl * egcUsd);
       // }
     },
-    [account, egcUsd]
+    [totalTVL]
   );
   return (
     <div>

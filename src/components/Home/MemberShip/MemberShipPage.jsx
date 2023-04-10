@@ -74,6 +74,7 @@ const MemberShipPage = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [Disable, setDisable] = useState(false);
+  const [priceLoaded, setPriceLoaded] = useState(false);
   const [text, setText] = useState(
     "Transacting with blockchain, please wait..."
   );
@@ -119,6 +120,8 @@ const MemberShipPage = () => {
       setMonthAmount(resMonthlyAmount);
       setSemiAnnualAmount(resSemi_MonthlyAmount);
       setAnnualAmount(resAnnualAmount);
+      setPriceLoaded(true);
+      return;
     }
   });
   useEffect(() => {
@@ -297,7 +300,7 @@ const MemberShipPage = () => {
               Subscribe3={subscribe3}
               unlockBtn={unlockBtn}
               UnlockToken={UnlockToken}
-              account={userConnected}
+              priceLoaded={priceLoaded}
               disable={Disable}
               isLoading={isLoading}
             />

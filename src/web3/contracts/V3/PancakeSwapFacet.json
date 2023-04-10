@@ -46,24 +46,6 @@
     {
       "inputs": [
         {
-          "internalType": "address",
-          "name": "_pancakeRouterAddress",
-          "type": "address"
-        },
-        {
-          "internalType": "address",
-          "name": "_busdPancakeAddress",
-          "type": "address"
-        }
-      ],
-      "name": "setRouterAddress",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
           "internalType": "uint256",
           "name": "amountOutMin",
           "type": "uint256"
@@ -72,6 +54,11 @@
           "internalType": "address",
           "name": "tokenOut",
           "type": "address"
+        },
+        {
+          "internalType": "address[]",
+          "name": "routerPath",
+          "type": "address[]"
         }
       ],
       "name": "swapExactBNBForEUSD",
@@ -96,6 +83,11 @@
           "internalType": "address[]",
           "name": "path",
           "type": "address[]"
+        },
+        {
+          "internalType": "address[]",
+          "name": "routerPath",
+          "type": "address[]"
         }
       ],
       "name": "swapExactTokensForEUSD",
@@ -118,6 +110,11 @@
         {
           "internalType": "address[]",
           "name": "path",
+          "type": "address[]"
+        },
+        {
+          "internalType": "address[]",
+          "name": "routerPath",
           "type": "address[]"
         }
       ],
@@ -142,6 +139,11 @@
           "internalType": "uint256",
           "name": "amountOutMin",
           "type": "uint256"
+        },
+        {
+          "internalType": "address[]",
+          "name": "routerPath",
+          "type": "address[]"
         }
       ],
       "name": "swapExactEUSDforBNB",
@@ -160,6 +162,11 @@
           "internalType": "address",
           "name": "tokenOut",
           "type": "address"
+        },
+        {
+          "internalType": "address[]",
+          "name": "routerPath",
+          "type": "address[]"
         }
       ],
       "name": "swapBNBForExactEUSD",
@@ -184,6 +191,11 @@
           "internalType": "address[]",
           "name": "path",
           "type": "address[]"
+        },
+        {
+          "internalType": "address[]",
+          "name": "routerPath",
+          "type": "address[]"
         }
       ],
       "name": "swapEUSDforExactToken",
@@ -206,6 +218,11 @@
         {
           "internalType": "address[]",
           "name": "path",
+          "type": "address[]"
+        },
+        {
+          "internalType": "address[]",
+          "name": "routerPath",
           "type": "address[]"
         }
       ],
@@ -230,6 +247,11 @@
           "internalType": "uint256",
           "name": "amountOut",
           "type": "uint256"
+        },
+        {
+          "internalType": "address[]",
+          "name": "routerPath",
+          "type": "address[]"
         }
       ],
       "name": "swapEUSDForExactBNB",
@@ -238,7 +260,13 @@
       "type": "function"
     },
     {
-      "inputs": [],
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "routerPath",
+          "type": "address[]"
+        }
+      ],
       "name": "getWethAddress",
       "outputs": [
         {
@@ -261,6 +289,11 @@
         {
           "internalType": "address[]",
           "name": "path",
+          "type": "address[]"
+        },
+        {
+          "internalType": "address[]",
+          "name": "routerPath",
           "type": "address[]"
         }
       ],
@@ -286,6 +319,11 @@
         {
           "internalType": "address[]",
           "name": "path",
+          "type": "address[]"
+        },
+        {
+          "internalType": "address[]",
+          "name": "routerPath",
           "type": "address[]"
         }
       ],

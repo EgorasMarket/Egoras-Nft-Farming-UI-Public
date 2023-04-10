@@ -37,7 +37,7 @@ import DashBoardSellProduct from "./DashBoardPages/UpdatedAppPages/DashBoardSell
 import Deposit_vault_form from "./DashBoardPages/Vault_forms/Deposit_vault_form";
 import Top_up_vault_form from "./DashBoardPages/Vault_forms/Top_up_vault_form";
 import Withdraw_vault_form from "./DashBoardPages/Vault_forms/Withdraw_vault_form";
-
+import DashBoardP2PUserSales from "./DashBoardPages/DashBoardP2PUserSales";
 import DashBoardWhitePaper from "./DashBoardPages/DashBoardWhitePaper";
 import { SplashScreen } from "./SplashScreen/SplashScreen";
 // import {spla}
@@ -256,6 +256,11 @@ const Dashboard = ({ check, togglemakeDark }) => {
                   exact
                   path="/app/user/sales"
                   component={DashBoardUserSales}
+                />
+                <Route
+                  exact
+                  path="/app/user/p2p_sales"
+                  component={DashBoardP2PUserSales}
                 />
                 <Route exact path="/app/earn" component={DashBoardLendPage} />
                 <Route

@@ -111,10 +111,8 @@
 .user_details_body1 {
   display: flex;
   /* flex-direction: column; */
-  grid-gap: 20px;
-  gap: 20px;
+  gap: 10px;
   justify-content: space-between;
-  gap: 50px;
 }
 
 .user_details_body1_body_cont_area1 {
@@ -288,10 +286,123 @@
   font-size: 14px;
   font-weight: 600;
 }
+/* ======================== */
+/* ======================== */
+/* ======================== */
+/* ======================== */
+/* ======================== */
+.BuyerSellerDiv {
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: solid 1px #3d4e44;
+  padding: 1em;
+}
+.BuyerSellerDiv_tabs {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  background: #1c2c22;
+  border-radius: 10px;
+  margin-bottom: 1em;
+}
+.BuyerSellerDiv_tab1_active {
+  padding: 10px;
+  color: #fff;
+  margin-right: 10px;
+  cursor: pointer;
+  width: 7em;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: #2f8a51;
+}
+.BuyerSellerDiv_body {
+  background: #1c2c22;
+  padding: 2em;
+  color: #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.BuyerSellerDiv_body_header {
+  font-size: 28px;
+  font-weight: 500;
+  color: #678a75;
+}
+.BuyerSellerDiv_body_Balance {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  border-top: solid 1px #344a3c;
+  border-bottom: solid 1px #344a3c;
+  padding-bottom: 1em;
+  padding-top: 1em;
+}
+.BuyerSellerDiv_body_Balance_body1 {
+  font-size: 40px;
+  font-weight: 500;
+}
+.BuyerSellerDiv_body_Balance_body2 {
+  color: #7aa18a;
+}
+.BuyerSellerDiv_body_Balance_body {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1e;
+}
+.BuyerSellerDiv_tab1 {
+  padding: 10px;
+  color: #688473;
+  margin-right: 10px;
+  cursor: pointer;
+  width: 7em;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+  background: #2a4838;
+}
+.BuyerSellerDiv_body_div1_text {
+  font-size: 24px;
+  margin-bottom: 11px;
+  font-weight: 600;
+}
+.BuyerSellerDiv_body_div2 {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  background: #16251c;
+  border-radius: 11px;
+}
+.filter_table_area_2b {
+  width: 38% !important;
+}
+.BuyerSellerDiv_body_div2_tab_area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #16251c;
+  padding: 15px;
+  border-radius: 10px;
+  border: solid 1px #41564a;
+}
+/* ======================== */
+/* ======================== */
+/* ======================== */
+/* ======================== */
+/* ======================== */
+/* ======================== */
 @media screen and (max-width: 991px) {
   .user_details_body1 {
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
   }
 }
 @media screen and (max-width: 767px) {
@@ -324,7 +435,7 @@
 @media screen and (max-width: 600px) {
   .user_details_body1 {
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
   }
   .user_details_body1_body_cont_area1 {
     padding: 1em;

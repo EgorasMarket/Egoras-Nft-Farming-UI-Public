@@ -13,6 +13,8 @@ import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
 import TollIcon from "@mui/icons-material/Toll";
 import GroupsIcon from "@mui/icons-material/Groups";
 import { connect } from "react-redux";
+import { getRefStats } from "../../../web3/index2";
+import UserDetailsLinks from "./UserDetailsLinks";
 // import { UserContext } from "../context/Context";
 import Nodata from "./nodataComponent/Nodata";
 import { parseEther, formatEther } from "@ethersproject/units";
@@ -45,7 +47,7 @@ const DashboardReferral = ({ auth }) => {
   const urlArr = currentPage.split("/");
   const [leaderBoard1, setLeaderBoard] = useState([]);
   const [myReferrals, setMyReferrals] = useState([]);
-  const [refLink, setRefLink] = useState("******");
+  const [refLink, setRefLink] = useState("........");
   const context = useWeb3React();
 
   const {
@@ -62,6 +64,11 @@ const DashboardReferral = ({ auth }) => {
   const [key, setKey] = useState("");
   const [encryptedText, setEncryptedText] = useState("");
   const [decryptedText, setDecryptedText] = useState("");
+  useEffect(() => {
+    if (account) {
+      setRefLink(`http://localhost:3000/referal/${account}`);
+    }
+  }, [account]);
 
   const secretPass = "XkhZG4fW2t2W";
   const handleEncrypt = () => {
@@ -96,8 +103,6 @@ const DashboardReferral = ({ auth }) => {
       .get(api_url + "/api/user/fetch/top/referals", null, config)
       .then((data) => {
         setLeaderBoard(data.data.allData);
-        // console.log(data.data.allData);
-        // console.log(leaderBoard);
       })
       .catch((err) => {
         console.log(err); // "oh, no!"
@@ -112,41 +117,12 @@ const DashboardReferral = ({ auth }) => {
         .then((data) => {
           setMyReferrals(data.data.data);
           console.log(data.data.data);
-          // console.log(leaderBoard);
         })
         .catch((err) => {
           console.log(err); // "oh, no!"
         });
     }
   }, [account]);
-  useEffect(
-    async (e) => {
-      if (account) {
-        let response = await getAuthUserStats(account);
-        const payload = response.message.data.payload;
-        if (payload == null) {
-          setRefLink(() => "*******");
-        } else {
-          setRefLink(() => "https://egoras.org/referal/" + payload.ref_code);
-          if (payload.ref_code == "") {
-            setRefLink(() => "*******");
-          } else {
-            setRefLink(() => "https://egoras.org/referal/" + payload.ref_code);
-          }
-        }
-
-        console.log(response.message.data);
-        if (response.message.data.payload == null) {
-          console.log("user does not exist");
-        } else {
-          console.log("user exists");
-        }
-      }
-    },
-    [account]
-  );
-  // console.log(leaderBoard1);
-  // console.log(leaderBoard);
 
   const copyText = () => {
     var copyText = document.getElementById("myInput");
@@ -168,49 +144,25 @@ const DashboardReferral = ({ auth }) => {
   useEffect(
     async (e) => {
       if (account) {
-        let response = await getUserStats(account, library.getSigner());
+        let response = await getRefStats(
+          "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+          library.getSigner()
+        );
         console.log(response);
-        if (response.status === true) {
-          const resAmnt = parseFloat(
-            formatEther(response.message._referral._hex)
-          );
-          setRefEarnings(resAmnt);
-          console.log(response.message._referral);
-        }
+        console.log(response.message._amount.toString(), "to string");
+        console.log(response.message._count.toString(), "to string");
+        // if (response.status === true) {
+        //   const resAmnt = parseFloat(
+        //     formatEther(response.message._referral._hex)
+        //   );
+        //   setRefEarnings(resAmnt);
+        //   console.log(response.message._referral);
+        // }
       }
     },
     [account]
   );
-  useEffect(
-    async (e) => {
-      if (account) {
-        let response = await getUserStats(account, library.getSigner());
-        console.log(response);
-        if (response.status === true) {
-          const resAmnt = parseFloat(formatEther(response.message._wB._hex));
-          setWelcomeBonus(resAmnt);
-          console.log(response.message._referral);
-        }
-      }
-    },
-    [account]
-  );
-  useEffect(
-    async (e) => {
-      if (account) {
-        let response = await getMyReferralsCount(account, library.getSigner());
-        console.log(response);
-        if (response.status === true) {
-          const resAmnt = formatEther(response.message._hex).toString();
-          const pasedResAmnt = parseEther(resAmnt, "wei").toString();
-          setRefCount(pasedResAmnt);
-          console.log(resAmnt);
-          console.log(parseEther(resAmnt, "wei").toString());
-        }
-      }
-    },
-    [account]
-  );
+
   useEffect(() => {
     if (currentPage === "/app/user") {
       setActiveLink("poolDetails");
@@ -238,41 +190,7 @@ const DashboardReferral = ({ auth }) => {
         <section className=" no-bg no_paddd">
           <div className="container relative">
             <div className="pool_deatail_area">
-              <div className="pool_lending_pages_links">
-                <Link
-                  to="/app/user"
-                  className={
-                    activeLink === "poolDetails"
-                      ? "pool_lend_details_link_active"
-                      : "pool_lend_details_link"
-                  }
-                >
-                  <DashboardIcon className="asset_overview_link_icon" />
-                  User Details
-                </Link>
-                <Link
-                  to="/app/user/referral"
-                  className={
-                    activeLink === "referral"
-                      ? "pool_lend_details_link_active"
-                      : "pool_lend_details_link"
-                  }
-                >
-                  <GroupAddIcon className="asset_overview_link_icon" />
-                  Referral
-                </Link>
-                <Link
-                  to="/app/user/sales"
-                  className={
-                    activeLink === "sales"
-                      ? "pool_lend_details_link_active"
-                      : "pool_lend_details_link"
-                  }
-                >
-                  <TrendingDownIcon className="asset_overview_link_icon" />
-                  Sales
-                </Link>
-              </div>
+              <UserDetailsLinks activeLink={activeLink} />
               {comingSoon == true ? (
                 <div className="comingSoon_div">
                   <div className="comingSoon_div_area">
@@ -463,12 +381,12 @@ const DashboardReferral = ({ auth }) => {
                             Copy referral code
                             <span className="tooltiptext" id="myTooltip"></span>
                           </button>
-                          <button onClick={handleEncrypt}>
+                          {/* <button onClick={handleEncrypt}>
                             Encrypt address
                           </button>
                           <button onClick={handleDecrypt}>
                             Decrypt address
-                          </button>
+                          </button> */}
                         </div>
                       </div>
                     </div>
