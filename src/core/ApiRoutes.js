@@ -26,5 +26,4 @@ export const CHECK_USER_AND_MEMBERSHIP = `${API_URL}/pub/check-user/check-subscr
 export const ADD_USER_ADDRESS = `${API_URL}/pub/register/user/address`;
 export const AI_TEXT = `${API_URL}/openai/text`;
 export const AI_IMAGES = `${API_URL}/openai/images`;
-export const GET_EGC_PRICE_COINGEKO_ROUTE =
-  "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
+export const GET_EGC_PRICE_COINGEKO_ROUTE = `${API_URL}/coingeko/egc`;

@@ -8,6 +8,9 @@ import "./stars.css";
 // import CasinoIcon from "@mui/icons-material/Casino";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import formatNumber from "../Dashboard/DashBoardPages/FormatNumber";
+import axios from "axios";
+import { config } from "../../actions/Config";
+import { API_URL } from "../../actions/types";
 import {
   CALL_CHECK_USER_AND_MEMBERSHIP,
   CALL_ADD_USER_ADDRESS,
@@ -71,7 +74,7 @@ const Home = () => {
   const [totalAmountFrom, setTotalAmountFrom] = useState(0);
   const [totu, setTotu] = useState(0);
   const [totalTVL, setTotalTVL] = useState(0);
-
+  const [TradeVolume, setTradeVolume] = useState(0);
   // const [uiMode, setUiMode] = useState(localStorage.getItem("uiMode"));
   // const []
   const {
@@ -359,6 +362,35 @@ const Home = () => {
   //   let tvl = formatEther(res.message);
   //   setTotalTVL(tvl * egc_usd);
   // }, []);
+  useEffect(async () => {
+    const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
+    console.log("dddd");
+    await axios
+      .get(API_URL + "/swap/all", null, config)
+      .then((data) => {
+        const myArray = data.data.data;
+        myArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        console.log(myArray);
+        const reversed = myArray
+          .slice()
+          .reverse()
+          .map((data) => {
+            return data;
+          });
+        const temp = reversed;
+        for (const data of temp) {
+          data.value = parseInt(data.value).toFixed(2) * egc_usd;
+        }
+        const totalValue = reversed.reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.value;
+        }, 0);
+        console.log(totalValue);
+        setTradeVolume(parseInt(totalValue).toFixed(2));
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
   return (
     <div>
       {/* =================================================================================================================================================================================================================================================================== */}
@@ -413,7 +445,7 @@ const Home = () => {
                     Total TVL
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
-                    ${formatNumber(totalTVL)}
+                    $ {formatNumber(homeData.volume)}
                   </div>
                 </div>
               </div>
@@ -430,7 +462,7 @@ const Home = () => {
                     Volume
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
-                    ${formatNumber(homeData.volume)}
+                    ${formatNumber(TradeVolume.toString())}
                   </div>
                 </div>
               </div>

@@ -40,6 +40,62 @@
   border: solid 1px #425a4b;
   backdrop-filter: blur(9px);
 }
+/* ================ */
+/* ================ */
+/* ================ */
+/* ================ */
+.sell_container_prod_spec_input_div_area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1em;
+}
+.sell_container_prod_spec_input_divs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1em;
+  color: #fff;
+  font-size: 36px;
+}
+
+.sell_container_prod_spec_input_div1 {
+  width: 100%;
+  margin: 0px 6px;
+  padding: 15px;
+  background: #0b110c;
+  border: solid 1px #425a4b;
+  border-radius: 11px;
+  color: #fff;
+  font-size: 16px;
+}
+.sell_container_prod_spec_input_div_btn {
+  width: 100%;
+  background: #123f23;
+  padding: 15px;
+  border-radius: 11px;
+  /* max-width: 227px; */
+  color: #fff;
+  border: none;
+  font-weight: 500;
+}
+.sell_container_prod_spec_input_div_area_title_area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  color: #7b9a89;
+  margin-bottom: 10px;
+}
+.sell_container_prod_spec_input_div_area_title_area1 {
+  padding: 0px 10px;
+}
+/* ================ */
+/* ================ */
+/* ================ */
+/* ================ */
+/* ================ */
 .addCategoryDiv_sales {
   position: fixed;
   top: 0;
