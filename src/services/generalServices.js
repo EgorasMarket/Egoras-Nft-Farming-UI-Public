@@ -22,9 +22,10 @@ export const GET_COIN_GEKO_PRICE_IN_USD = async () => {
       config
     );
     console.log(response);
-    console.log(response.data["egoras-credit"].usd);
-    return response.data["egoras-credit"].usd;
+    console.log(response.data.data, "egc_usd_price");
+    return response.data.data;
   } catch (err) {
+    console.log(err.response);
     return err.response;
   }
 };
