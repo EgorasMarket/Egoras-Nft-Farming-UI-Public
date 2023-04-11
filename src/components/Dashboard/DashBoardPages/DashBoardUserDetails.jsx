@@ -336,6 +336,12 @@ const DashBoardUserDetails = ({ auth }) => {
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
                   <span className="user_details_body1_body_cont1_span1">
+                    <img
+                      src="/providers/binanceWallet.png"
+                      alt=""
+                      className="user_details_body1_body_cont1_span1
+                      _img"
+                    />{" "}
                     BNB:
                   </span>
                   <span className="user_details_body1_body_cont1_span2">
@@ -348,6 +354,12 @@ const DashBoardUserDetails = ({ auth }) => {
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
                   <span className="user_details_body1_body_cont1_span1">
+                    <img
+                      src="/img/egc_icon2.svg"
+                      alt=""
+                      className="user_details_body1_body_cont1_span1
+                      _img"
+                    />{" "}
                     EGC:
                   </span>
                   <span className="user_details_body1_body_cont1_span2">
@@ -360,6 +372,12 @@ const DashBoardUserDetails = ({ auth }) => {
                 <hr class="custom_hr"></hr>
                 <div className="user_details_body1_body_cont1">
                   <span className="user_details_body1_body_cont1_span1">
+                    <img
+                      src="/img/binance-usd-busd-logo.webp"
+                      alt=""
+                      className="user_details_body1_body_cont1_span1
+                      _img"
+                    />{" "}
                     EUSD:{" "}
                   </span>
                   <span className="user_details_body1_body_cont1_span2">
@@ -414,7 +432,53 @@ const DashBoardUserDetails = ({ auth }) => {
             {/* ================== */}
             {/* ================== */}
             {/* ================== */}
-
+            <div className="userDetails_div">
+              <div className="user_details_div_head">User Information</div>
+              <div className="user_details_area">
+                <div className="user_details_area_div1">
+                  <div className="user_details_area_div1_head">First Name*</div>
+                  <input type="text" className="user_details_area_div1_input" />
+                </div>
+                <div className="user_details_area_div1">
+                  <div className="user_details_area_div1_head">Last Name*</div>
+                  <input type="text" className="user_details_area_div1_input" />
+                </div>
+                <div className="user_details_area_div1">
+                  <div className="user_details_area_div1_head">Phone No*</div>
+                  <input
+                    type="number"
+                    className="user_details_area_div1_input"
+                  />
+                </div>
+                <div className="user_details_area_div1">
+                  <div className="user_details_area_div1_head">
+                    Address Line 1*
+                  </div>
+                  <input type="text" className="user_details_area_div1_input" />
+                </div>
+                <div className="user_details_area_div1">
+                  <div className="user_details_area_div1_head">
+                    Address Line 2 (optional)
+                  </div>
+                  <input type="text" className="user_details_area_div1_input" />
+                </div>
+                <div className="user_details_area_div1">
+                  <div className="user_details_area_div1_head">State*</div>
+                  <input type="text" className="user_details_area_div1_input" />
+                </div>
+                <div className="user_details_area_div1">
+                  <div className="user_details_area_div1_head">Country*</div>
+                  <input type="text" className="user_details_area_div1_input" />
+                </div>
+                <div className="user_details_area_div1">
+                  <div className="user_details_area_div1_head">Zip Code*</div>
+                  <input type="text" className="user_details_area_div1_input" />
+                </div>
+              </div>
+              <div className="user_details_area_btn_div">
+                <button className="user_details_area_btn">Update</button>
+              </div>
+            </div>
             {/* ================== */}
             {/* ================== */}
             {/* ================== */}

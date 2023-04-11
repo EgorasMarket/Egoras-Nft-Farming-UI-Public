@@ -255,40 +255,6 @@ const Home = () => {
   }, [account]);
 
   useEffect(() => {
-    // setAnimate1(true);
-    const timer = setTimeout(() => {
-      setAnimate1(false);
-      setAnimate3(false);
-      setAnimate4(false);
-      setAnimate2(true);
-    }, 4000);
-  }, [animate1]);
-  useEffect(() => {
-    const timer2 = setTimeout(() => {
-      setAnimate2(false);
-      setAnimate1(false);
-      setAnimate4(false);
-      setAnimate3(true);
-    }, 4000);
-  }, [animate2]);
-  useEffect(() => {
-    const timer3 = setTimeout(() => {
-      setAnimate2(false);
-      setAnimate3(false);
-      setAnimate1(false);
-      setAnimate4(true);
-    }, 4000);
-  }, [animate3]);
-  useEffect(() => {
-    const timer4 = setTimeout(() => {
-      setAnimate4(false);
-      setAnimate3(false);
-      setAnimate2(false);
-      setAnimate1(true);
-    }, 4000);
-  }, [animate4]);
-
-  useEffect(() => {
     const fetchData = async () => {
       const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
       const response = await GET_TVL();
@@ -369,22 +335,30 @@ const Home = () => {
     { img: "/img/FeaturedInLogos/FeaturedInLogos_6.svg" },
     { img: "/img/FeaturedInLogos/FeaturedInLogos_5.svg" },
   ];
-  useEffect(
-    async (e) => {
-      // if (account) {
-      let res = await tokenBalance(
-        "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-        "0x3A81836b093f7f3D3ca271125CcD45c461409697",
-        library.getSigner()
-      );
-      console.log(res);
-      console.log(formatEther(res.message));
-      let tvl = formatEther(res.message);
-      setTotalTVL(tvl * egcUsd);
-      // }
-    },
-    [totalTVL]
-  );
+  useEffect(async (e) => {
+    // const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
+    let res = await tokenBalance(
+      "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+      "0x3A81836b093f7f3D3ca271125CcD45c461409697",
+      library.getSigner()
+    );
+    console.log(res);
+    console.log(formatEther(res.message));
+    let tvl = formatEther(res.message);
+    setTotalTVL(tvl * egcUsd);
+  });
+  // useEffect(async (e) => {
+  //   const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
+  //   let res = await tokenBalance(
+  //     "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+  //     "0x3A81836b093f7f3D3ca271125CcD45c461409697",
+  //     library.getSigner()
+  //   );
+  //   console.log(res);
+  //   console.log(formatEther(res.message));
+  //   let tvl = formatEther(res.message);
+  //   setTotalTVL(tvl * egc_usd);
+  // }, []);
   return (
     <div>
       {/* =================================================================================================================================================================================================================================================================== */}
