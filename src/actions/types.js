@@ -5,7 +5,4 @@ export const PENDING = "PENDING";
 export const COMPLETED = "COMPLETED";
 export const CANCELLED = "CANCELLED";
 
-export const API_URL = "http://localhost:5002";
-
-
-
+export const API_URL = "http://localhost:8000";
