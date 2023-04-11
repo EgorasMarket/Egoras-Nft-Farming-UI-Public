@@ -459,7 +459,7 @@ const DashBoardSellProduct = () => {
   ]);
   const CloseSuccessModal = () => {
     setSuccessModal(false);
-  };
+  };  
   const CloseErrorModal = () => {
     setErrorModal(false);
   };
