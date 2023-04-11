@@ -144,7 +144,7 @@ const DashboardHome = () => {
     await axios
       .get(API_URL + "/swap/all", null, config)
       .then((data) => {
-        console.log(data);
+        console.log(data, "hhhhh");
         console.log(data.data.data);
 
         const myArray = data.data.data;
