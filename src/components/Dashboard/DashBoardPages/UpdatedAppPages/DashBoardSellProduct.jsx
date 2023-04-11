@@ -42,7 +42,7 @@ const DashBoardSellProduct = () => {
   const [prodName, setProdName] = useState("");
   const [brandName, setBrandName] = useState("");
   const [saleAmount, setSaleAmount] = useState();
-  const [prodAmount, setProdAmount] = useState();
+  const [prodAmount, setProdAmount] = useState(null);
   const [prodCondition, setProdCondition] = useState("");
   const [prodSpec, setProdSpec] = useState("");
   const [prodCount, setProdCount] = useState(1);
@@ -392,12 +392,25 @@ const DashBoardSellProduct = () => {
   }, []);
 
   useEffect(() => {
+    console.log(
+      prodName,
+      brandName,
+      prodAmount,
+      prodCount,
+      new_category,
+      product_details,
+      prodSpec,
+      prodState
+      // imageSrc,
+      // imageSrc2,
+      // imageSrc3
+    );
     if (activeSaleTab == "direct") {
       if (
         prodName == "" ||
         brandName == "" ||
-        prodAmount == "" ||
-        prodCount == 0 ||
+        prodAmount == null ||
+        // prodCount == 0 ||
         new_category == "" ||
         product_details == "" ||
         prodSpec == "" ||
@@ -406,8 +419,10 @@ const DashBoardSellProduct = () => {
         imageSrc2 == "" ||
         imageSrc3 == ""
       ) {
+        console.log("okkkkk<<<<<<<<<<<<<");
         setDisable(true);
       } else {
+        console.log("______");
         setDisable(false);
       }
     } else {
@@ -431,10 +446,16 @@ const DashBoardSellProduct = () => {
     prodName,
     brandName,
     saleAmount,
+    prodAmount,
     prodCondition,
     imageSrc,
     imageSrc2,
     imageSrc3,
+    prodCount,
+    new_category,
+    product_details,
+    prodSpec,
+    prodState,
   ]);
   const CloseSuccessModal = () => {
     setSuccessModal(false);
