@@ -476,7 +476,7 @@ const DashBoardUserDetails = ({ auth }) => {
                 </div>
               </div>
               <div className="user_details_area_btn_div">
-                <button className="user_details_area_btn">Update</button>
+                <button className="user_details_area_btn">Submit</button>
               </div>
             </div>
             {/* ================== */}

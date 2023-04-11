@@ -184,6 +184,25 @@
     },
     {
       "inputs": [],
+      "name": "getAddresses",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "_egc",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_eusd",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
       "name": "getConfiguration",
       "outputs": [
         {

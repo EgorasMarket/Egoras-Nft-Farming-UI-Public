@@ -13,6 +13,7 @@ import { Editor } from "react-draft-wysiwyg";
 import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import UpdatedErrorModal from "./UpdatedSuccessErrorModals/UpdatedErrorModal";
+import DirectUpload from "./DirectUpload";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -42,7 +43,7 @@ const DashBoardSellProduct = () => {
   const [prodName, setProdName] = useState("");
   const [brandName, setBrandName] = useState("");
   const [saleAmount, setSaleAmount] = useState();
-  const [prodAmount, setProdAmount] = useState();
+  const [prodAmount, setProdAmount] = useState("");
   const [prodCondition, setProdCondition] = useState("");
   const [prodSpec, setProdSpec] = useState("");
   const [prodCount, setProdCount] = useState(1);
@@ -63,7 +64,7 @@ const DashBoardSellProduct = () => {
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
   const [addBrand, setAddBrand] = useState(false);
   const [addCategory, setAddCategory] = useState(false);
-
+  const [inputCount, setInputCount] = useState(1);
   const [formData, setFormData] = useState({
     product_details: "",
   });
@@ -263,7 +264,7 @@ const DashBoardSellProduct = () => {
     setIsLoading2(true);
 
     const response = await CALL_AI_TEXT(prodName);
-    console.log(response.data.choices.text, "goody");
+    console.log(response, "goody");
 
     const response1 = await CALL_AI_IMAGES(prodName);
     console.log(response1.data.data, "goody");
@@ -368,11 +369,11 @@ const DashBoardSellProduct = () => {
     console.log(event.target.value);
     //console.log(event.target.value);
   };
-  const handleProdSpecChange = (event) => {
-    setProdSpec(event.target.value);
-    console.log(event.target.value);
-    //console.log(event.target.value);
-  };
+  // const handleProdSpecChange = (event) => {
+  //   setProdSpec(event.target.value);
+  //   console.log(event.target.value);
+  //   //console.log(event.target.value);
+  // };
   const handleProdCountChange = (event) => {
     setProdCount(event.target.value);
     console.log(event.target.value);
@@ -392,12 +393,25 @@ const DashBoardSellProduct = () => {
   }, []);
 
   useEffect(() => {
+    console.log(
+      prodName,
+      brandName,
+      prodAmount,
+      prodCount,
+      new_category,
+      product_details,
+      prodSpec,
+      prodState
+      // imageSrc,
+      // imageSrc2,
+      // imageSrc3
+    );
     if (activeSaleTab == "direct") {
       if (
         prodName == "" ||
         brandName == "" ||
-        prodAmount == "" ||
-        prodCount == 0 ||
+        prodAmount == null ||
+        // prodCount == 0 ||
         new_category == "" ||
         product_details == "" ||
         prodSpec == "" ||
@@ -406,8 +420,10 @@ const DashBoardSellProduct = () => {
         imageSrc2 == "" ||
         imageSrc3 == ""
       ) {
+        console.log("okkkkk<<<<<<<<<<<<<");
         setDisable(true);
       } else {
+        console.log("______");
         setDisable(false);
       }
     } else {
@@ -431,10 +447,16 @@ const DashBoardSellProduct = () => {
     prodName,
     brandName,
     saleAmount,
+    prodAmount,
     prodCondition,
     imageSrc,
     imageSrc2,
     imageSrc3,
+    prodCount,
+    new_category,
+    product_details,
+    prodSpec,
+    prodState,
   ]);
   const CloseSuccessModal = () => {
     setSuccessModal(false);
@@ -468,6 +490,41 @@ const DashBoardSellProduct = () => {
     setNew_category(event.target.value);
     console.log(event.target.value);
     // new_category, setNew_category
+  };
+  const handleInputChange = (event, i) => {
+    const inputValues = [];
+    for (let j = 0; j < inputCount; j++) {
+      const name = document.getElementById(`name-${j}`).value;
+      const value = document.getElementById(`value-${j}`).value;
+      inputValues.push(`${name}:${value}`);
+    }
+    //  console.log();
+    let concatenatedValues = inputValues.join(",");
+    setProdSpec(concatenatedValues);
+  };
+
+  const inputDivs = [];
+  for (let i = 0; i < inputCount; i++) {
+    inputDivs.push(
+      <div className="sell_container_prod_spec_input_divs" key={i}>
+        <input
+          type="text"
+          className="sell_container_prod_spec_input_div1"
+          id={`name-${i}`}
+          onChange={(event) => handleInputChange(event, i)}
+        />
+        -
+        <input
+          type="text"
+          className="sell_container_prod_spec_input_div1"
+          id={`value-${i}`}
+          onChange={(event) => handleInputChange(event, i)}
+        />
+      </div>
+    );
+  }
+  const AddInputCount = () => {
+    setInputCount(inputCount + 1);
   };
   return (
     <div className="other2 asset_other2">
@@ -505,718 +562,49 @@ const DashBoardSellProduct = () => {
               </div>
             </div>
             {activeSaleTab === "direct" ? (
-              <div className="uploadDiv">
-                <div className="sell_container_header">
-                  Upload Items Directly For Buying.
-                </div>
-                <div className="sell_container_body">
-                  <div className="sell_container_body_cont1">
-                    <div className="sell_container_body_cont1_txt">
-                      <div className="sell_container_body_cont1_txt_heading">
-                        Product Name*
-                      </div>{" "}
-                    </div>
-                    <div className="sell_container_body_cont1_title_div">
-                      <input
-                        onChange={handleNameChange}
-                        name="productName"
-                        id="productName"
-                        type="text"
-                        placeholder="Product name"
-                        className="sell_container_body_cont1_title_div_input"
-                        value={prodName}
-                      />
-                      <button
-                        className="sell_container_body_cont1_title_div_btn"
-                        onClick={generateAI}
-                      >
-                        {isLoading2 ? (
-                          <ScaleLoader color="#24382b" size={10} height={20} />
-                        ) : (
-                          <span> Generate Details </span>
-                        )}
-                      </button>
-                    </div>
-                  </div>
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  <div className="sell_container_body_cont1">
-                    <div className="sell_container_body_cont1_txt">
-                      <div className="sell_container_body_cont1_txt_heading">
-                        Image*
-                      </div>{" "}
-                      File types supported: JPG, PNG. Max size: 2 MB
-                    </div>
-                    <div className="sell_container_body_cont1_img_display_cont">
-                      <div className="sell_container_body_cont1_img_display_cont_1">
-                        <input
-                          type="file"
-                          ref={fileInputRef}
-                          style={{ display: "none" }}
-                          onChange={handleImageSelect}
-                          id="product_image"
-                        />
-                        <div className="sell_container_body_cont1_img_display_cont_divs">
-                          {imageSrc === "" ? (
-                            <div
-                              onClick={handleClick}
-                              className="sell_container_body_cont1_img_display_cont_div1"
-                            >
-                              <ImageIcon className="sell_container_body_cont1_img_display_cont_div1_icon" />
-                            </div>
-                          ) : null}
-
-                          {imageSrc === "" ? null : (
-                            <div className="sell_container_body_cont1_img_display_cont_div2">
-                              <img
-                                src={imageSrc}
-                                alt="Selected image"
-                                className="sell_container_body_cont1_img_display_cont_div2_img"
-                              />
-                            </div>
-                          )}
-                          {imageSrc === "" ? null : (
-                            <CloseIcon
-                              onClick={handleRemoveClick}
-                              className="sell_container_body_cont1_img_display_cont_divs_close_icon"
-                            />
-                          )}
-                        </div>
-                      </div>
-                      <div className="sell_container_body_cont1_img_display_cont_1">
-                        <input
-                          type="file"
-                          ref={fileInputRef2}
-                          style={{ display: "none" }}
-                          onChange={handleImageSelect2}
-                          id="product_image2"
-                        />
-                        <div className="sell_container_body_cont1_img_display_cont_divs">
-                          {imageSrc2 === "" ? (
-                            <div
-                              onClick={handleClick2}
-                              className="sell_container_body_cont1_img_display_cont_div1"
-                            >
-                              <ImageIcon className="sell_container_body_cont1_img_display_cont_div1_icon" />
-                            </div>
-                          ) : null}
-
-                          {imageSrc2 === "" ? null : (
-                            <div className="sell_container_body_cont1_img_display_cont_div2">
-                              <img
-                                src={imageSrc2}
-                                alt="Selected image"
-                                className="sell_container_body_cont1_img_display_cont_div2_img"
-                              />
-                            </div>
-                          )}
-                          {imageSrc2 === "" ? null : (
-                            <CloseIcon
-                              onClick={handleRemoveClick2}
-                              className="sell_container_body_cont1_img_display_cont_divs_close_icon"
-                            />
-                          )}
-                        </div>
-                      </div>
-                      <div className="sell_container_body_cont1_img_display_cont_1">
-                        <input
-                          type="file"
-                          ref={fileInputRef3}
-                          style={{ display: "none" }}
-                          onChange={handleImageSelect3}
-                          id="product_image3"
-                        />
-                        <div className="sell_container_body_cont1_img_display_cont_divs">
-                          {imageSrc3 === "" ? (
-                            <div
-                              onClick={handleClick3}
-                              className="sell_container_body_cont1_img_display_cont_div1"
-                            >
-                              <ImageIcon className="sell_container_body_cont1_img_display_cont_div1_icon" />
-                            </div>
-                          ) : null}
-
-                          {imageSrc3 === "" ? null : (
-                            <div className="sell_container_body_cont1_img_display_cont_div2">
-                              <img
-                                src={imageSrc3}
-                                alt="Selected image"
-                                className="sell_container_body_cont1_img_display_cont_div2_img"
-                              />
-                            </div>
-                          )}
-                          {imageSrc3 === "" ? null : (
-                            <CloseIcon
-                              onClick={handleRemoveClick3}
-                              className="sell_container_body_cont1_img_display_cont_divs_close_icon"
-                            />
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  <div className="sell_container_body_cont1">
-                    <div className="sell_container_body_cont1_txt">
-                      <div className="sell_container_body_cont1_txt_heading">
-                        Brand Name*
-                      </div>{" "}
-                      The Brand of the product user uploads for sale.
-                    </div>
-                    <div className="sell_container_body_cont1_title_div">
-                      <input
-                        id="brandName"
-                        name="brandName"
-                        type="text"
-                        placeholder="Brand name"
-                        className="sell_container_body_cont1_title_div_input"
-                        onChange={handleBrandNameChange}
-                        value={brandName}
-                      />
-                    </div>
-                  </div>
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  <div className="sell_container_body_cont1">
-                    <div className="sell_container_body_cont1_txt">
-                      <div className="sell_container_body_cont1_txt_heading">
-                        Product Amount*
-                      </div>{" "}
-                      The amount of items that can be minted. No gas cost to
-                      you!
-                    </div>
-                    <div className="sell_container_body_cont1_title_div">
-                      <input
-                        id="prodAmount"
-                        name="prodAmount"
-                        type="text"
-                        placeholder="Product amount"
-                        className="sell_container_body_cont1_title_div_input"
-                        onChange={handleSaleAmountChange}
-                        value={prodAmount}
-                      />
-                    </div>
-                  </div>
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  <div className="sell_container_body_cont1">
-                    <div className="sell_container_body_cont1_txt">
-                      <div className="sell_container_body_cont1_txt_heading">
-                        Product Count*
-                      </div>{" "}
-                      The amount of items that can be minted. No gas cost to
-                      you!
-                    </div>
-                    <div className="sell_container_body_cont1_title_div">
-                      <input
-                        id="prodCount"
-                        name="prodCount"
-                        type="number"
-                        placeholder="Product count"
-                        className="sell_container_body_cont1_title_div_input"
-                        onChange={handleProdCountChange}
-                        value={prodCount}
-                      />
-                    </div>
-                  </div>
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  <div className="sell_container_body_cont1">
-                    <div className="sell_container_body_cont1_txt">
-                      <div className="sell_container_body_cont1_txt_heading">
-                        Product Category*
-                      </div>{" "}
-                      The amount of items that can be minted. No gas cost to
-                      you!
-                    </div>
-                    <div className="sell_container_body_cont1_title_div">
-                      <select
-                        name=""
-                        id=""
-                        className="sell_container_body_cont1_title_div_input"
-                        onChange={handleCenter2}
-                      >
-                        {allCategories.map((option) => (
-                          <option
-                            key={option.product_category}
-                            value={option.product_category}
-                            // onClick={(e) =>
-                            //   getCatName(option.product_brand)
-                            // }
-                          >
-                            {option.product_category}
-                          </option>
-                        ))}
-                      </select>
-
-                      <button
-                        className="add_category_btn"
-                        onClick={toggleAddCategory}
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  <div className="sell_container_body_cont1">
-                    <div className="sell_container_body_cont1_txt">
-                      <div className="sell_container_body_cont1_txt_heading">
-                        Product State*
-                      </div>{" "}
-                      The amount of items that can be minted. No gas cost to
-                      you!
-                    </div>
-                    <div className="sell_container_body_cont1_title_div">
-                      <select
-                        name=""
-                        id=""
-                        className="sell_container_body_cont1_title_div_input"
-                        onChange={handleProdStateChange}
-                      >
-                        <option value=""></option>
-                        <option value="1">New</option>
-                        <option value="2">Refurbished</option>
-                      </select>
-                    </div>
-                  </div>
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  <div
-                    className="sell_container_body_cont1"
-                    id="target-section"
-                  >
-                    <div className="sell_container_body_cont1_txt">
-                      <div className="sell_container_body_cont1_txt_heading">
-                        Product Details*
-                      </div>{" "}
-                      The description will be included on the item's detail page
-                      underneath its image. Markdown syntax is supported.
-                    </div>
-                    <div className="sell_container_body_cont1_title_div">
-                      <Editor
-                        editorState={editorState}
-                        wrapperClassName="demo-wrapper"
-                        editorClassName="demo-editor"
-                        onEditorStateChange={onEditorStateChange}
-                        placeholder="Begin Typing..."
-                      />
-                    </div>
-                  </div>
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  <div className="sell_container_body_cont1">
-                    <div className="sell_container_body_cont1_txt">
-                      <div className="sell_container_body_cont1_txt_heading">
-                        Product Specifications*
-                      </div>{" "}
-                      The description will be included on the item's detail page
-                      underneath its image. Markdown syntax is supported.
-                    </div>
-                    <div className="sell_container_body_cont1_title_div">
-                      <textarea
-                        name="prodSpec"
-                        id="prodSpec"
-                        cols="30"
-                        rows="10"
-                        className="sell_container_body_cont1_title_div_input"
-                        onChange={handleProdSpecChange}
-                        value={prodSpec}
-                      ></textarea>
-                    </div>
-                  </div>
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  <div className="sell_container_body_cont1">
-                    {!account ? (
-                      <button
-                        disabled={true}
-                        className="sell_container_body_cont1_submit_btn"
-                      >
-                        Connect Wallet
-                      </button>
-                    ) : (
-                      <button
-                        disabled={Disable}
-                        className="sell_container_body_cont1_submit_btn"
-                        onClick={UploadProduct}
-                      >
-                        {isLoading ? (
-                          <ScaleLoader color="#24382b" size={10} height={20} />
-                        ) : (
-                          <> Upload Product</>
-                        )}
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
+              <DirectUpload
+                Disable={Disable}
+                UploadProduct={UploadProduct}
+                isLoading={isLoading}
+                onEditorStateChange={onEditorStateChange}
+                // handleProdSpecChange={handleProdSpecChange}
+                account={account}
+                prodSpec={prodSpec}
+                toggleAddCategory={toggleAddCategory}
+                handleProdStateChange={handleProdStateChange}
+                prodCount={prodCount}
+                handleCenter2={handleCenter2}
+                allCategories={allCategories}
+                editorState={editorState}
+                brandName={brandName}
+                handleSaleAmountChange={handleSaleAmountChange}
+                handleProdCountChange={handleProdCountChange}
+                prodAmount={prodAmount}
+                imageSrc3={imageSrc3}
+                handleRemoveClick3={handleRemoveClick3}
+                handleBrandNameChange={handleBrandNameChange}
+                fileInputRef3={fileInputRef3}
+                handleImageSelect3={handleImageSelect3}
+                handleClick3={handleClick3}
+                imageSrc2={imageSrc2}
+                handleRemoveClick2={handleRemoveClick2}
+                handleRemoveClick={handleRemoveClick}
+                fileInputRef2={fileInputRef2}
+                handleImageSelect2={handleImageSelect2}
+                handleClick2={handleClick2}
+                handleClick={handleClick}
+                imageSrc={imageSrc}
+                generateAI={generateAI}
+                isLoading2={isLoading2}
+                fileInputRef={fileInputRef}
+                handleImageSelect={handleImageSelect}
+                handleNameChange={handleNameChange}
+                prodName={prodName}
+                inputDivs={inputDivs}
+                AddInputCount={AddInputCount}
+              />
             ) : (
-              <div className="uploadDiv">
-                <div className="sell_container_header">
-                  Get Instant Cash After Evaluation.
-                </div>
-                <div className="sell_container_body">
-                  <div className="sell_container_body_cont1">
-                    <div className="sell_container_body_cont1_txt">
-                      <div className="sell_container_body_cont1_txt_heading">
-                        Image*
-                      </div>{" "}
-                      File types supported: JPG, PNG. Max size: 2 MB
-                    </div>
-                    <div className="sell_container_body_cont1_img_display_cont">
-                      <div className="sell_container_body_cont1_img_display_cont_1">
-                        <input
-                          type="file"
-                          ref={fileInputRef}
-                          style={{ display: "none" }}
-                          onChange={handleImageSelect}
-                          id="product_image"
-                        />
-                        <div className="sell_container_body_cont1_img_display_cont_divs">
-                          {imageSrc === "" ? (
-                            <div
-                              onClick={handleClick}
-                              className="sell_container_body_cont1_img_display_cont_div1"
-                            >
-                              <ImageIcon className="sell_container_body_cont1_img_display_cont_div1_icon" />
-                            </div>
-                          ) : null}
-
-                          {imageSrc === "" ? null : (
-                            <div className="sell_container_body_cont1_img_display_cont_div2">
-                              <img
-                                src={imageSrc}
-                                alt="Selected image"
-                                className="sell_container_body_cont1_img_display_cont_div2_img"
-                              />
-                            </div>
-                          )}
-                          {imageSrc === "" ? null : (
-                            <CloseIcon
-                              onClick={handleRemoveClick}
-                              className="sell_container_body_cont1_img_display_cont_divs_close_icon"
-                            />
-                          )}
-                        </div>
-                      </div>
-                      <div className="sell_container_body_cont1_img_display_cont_1">
-                        <input
-                          type="file"
-                          ref={fileInputRef2}
-                          style={{ display: "none" }}
-                          onChange={handleImageSelect2}
-                          id="product_image2"
-                        />
-                        <div className="sell_container_body_cont1_img_display_cont_divs">
-                          {imageSrc2 === "" ? (
-                            <div
-                              onClick={handleClick2}
-                              className="sell_container_body_cont1_img_display_cont_div1"
-                            >
-                              <ImageIcon className="sell_container_body_cont1_img_display_cont_div1_icon" />
-                            </div>
-                          ) : null}
-
-                          {imageSrc2 === "" ? null : (
-                            <div className="sell_container_body_cont1_img_display_cont_div2">
-                              <img
-                                src={imageSrc2}
-                                alt="Selected image"
-                                className="sell_container_body_cont1_img_display_cont_div2_img"
-                              />
-                            </div>
-                          )}
-                          {imageSrc2 === "" ? null : (
-                            <CloseIcon
-                              onClick={handleRemoveClick2}
-                              className="sell_container_body_cont1_img_display_cont_divs_close_icon"
-                            />
-                          )}
-                        </div>
-                      </div>
-                      <div className="sell_container_body_cont1_img_display_cont_1">
-                        <input
-                          type="file"
-                          ref={fileInputRef3}
-                          style={{ display: "none" }}
-                          onChange={handleImageSelect3}
-                          id="product_image3"
-                        />
-                        <div className="sell_container_body_cont1_img_display_cont_divs">
-                          {imageSrc3 === "" ? (
-                            <div
-                              onClick={handleClick3}
-                              className="sell_container_body_cont1_img_display_cont_div1"
-                            >
-                              <ImageIcon className="sell_container_body_cont1_img_display_cont_div1_icon" />
-                            </div>
-                          ) : null}
-
-                          {imageSrc3 === "" ? null : (
-                            <div className="sell_container_body_cont1_img_display_cont_div2">
-                              <img
-                                src={imageSrc3}
-                                alt="Selected image"
-                                className="sell_container_body_cont1_img_display_cont_div2_img"
-                              />
-                            </div>
-                          )}
-                          {imageSrc3 === "" ? null : (
-                            <CloseIcon
-                              onClick={handleRemoveClick3}
-                              className="sell_container_body_cont1_img_display_cont_divs_close_icon"
-                            />
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  <div className="sell_container_body_cont1">
-                    <div className="sell_container_body_cont1_txt">
-                      <div className="sell_container_body_cont1_txt_heading">
-                        Name*
-                      </div>{" "}
-                    </div>
-                    <div className="sell_container_body_cont1_title_div">
-                      <input
-                        onChange={handleNameChange}
-                        name="productName"
-                        id="productName"
-                        type="text"
-                        placeholder="Product name"
-                        className="sell_container_body_cont1_title_div_input"
-                        value={prodName}
-                      />
-                    </div>
-                  </div>
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  <div className="sell_container_body_cont1">
-                    <div className="sell_container_body_cont1_txt">
-                      <div className="sell_container_body_cont1_txt_heading">
-                        Brand Name*
-                      </div>{" "}
-                      The Brand of the product user uploads for sale.
-                    </div>
-                    <div className="sell_container_body_cont1_title_div">
-                      <input
-                        id="brandName"
-                        name="brandName"
-                        type="text"
-                        placeholder="Brand name"
-                        className="sell_container_body_cont1_title_div_input"
-                        onChange={handleBrandNameChange}
-                        value={brandName}
-                      />
-                    </div>
-                  </div>
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  <div className="sell_container_body_cont1">
-                    <div className="sell_container_body_cont1_txt">
-                      <div className="sell_container_body_cont1_txt_heading">
-                        Product Count*
-                      </div>{" "}
-                      The amount of items that can be minted. No gas cost to
-                      you!
-                    </div>
-                    <div className="sell_container_body_cont1_title_div">
-                      <input
-                        id="prodCount"
-                        name="prodCount"
-                        type="number"
-                        placeholder="Product count"
-                        className="sell_container_body_cont1_title_div_input"
-                        onChange={handleProdCountChange}
-                        value={prodCount}
-                      />
-                    </div>
-                  </div>
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  <div className="sell_container_body_cont1">
-                    <div className="sell_container_body_cont1_txt">
-                      <div className="sell_container_body_cont1_txt_heading">
-                        Sale Amount*
-                      </div>{" "}
-                      The amount of items that can be minted. No gas cost to
-                      you!
-                    </div>
-                    <div className="sell_container_body_cont1_title_div">
-                      <input
-                        id="prodAmount"
-                        name="prodAmount"
-                        type="text"
-                        placeholder="Product amount"
-                        className="sell_container_body_cont1_title_div_input"
-                        onChange={handleSaleAmountChange}
-                        value={saleAmount}
-                      />
-                    </div>
-                  </div>
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  <div className="sell_container_body_cont1">
-                    <div className="sell_container_body_cont1_txt">
-                      <div className="sell_container_body_cont1_txt_heading">
-                        Product Condition*
-                      </div>{" "}
-                      The description will be included on the item's detail page
-                      underneath its image. Markdown syntax is supported.
-                    </div>
-                    <div className="sell_container_body_cont1_title_div">
-                      <textarea
-                        name="productCondition"
-                        id="productCondition"
-                        cols="30"
-                        rows="10"
-                        className="sell_container_body_cont1_title_div_input"
-                        onChange={handleProdConditionChange}
-                        value={prodCondition}
-                      ></textarea>
-                    </div>
-                  </div>
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  {/* ========================= */}
-                  <div className="sell_container_body_cont1">
-                    {!account ? (
-                      <button
-                        disabled={true}
-                        className="sell_container_body_cont1_submit_btn"
-                      >
-                        Connect Wallet
-                      </button>
-                    ) : (
-                      <button
-                        disabled={Disable}
-                        className="sell_container_body_cont1_submit_btn"
-                        onClick={UploadProduct}
-                      >
-                        {isLoading ? (
-                          <ScaleLoader color="#24382b" size={10} height={20} />
-                        ) : (
-                          <> Upload Product</>
-                        )}
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
+              <></>
             )}
           </div>
         </div>
