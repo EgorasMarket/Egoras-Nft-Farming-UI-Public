@@ -146,7 +146,11 @@ const DashboardHome = () => {
       .then((data) => {
         console.log(data);
         console.log(data.data.data);
-        const reversed = data.data.data
+
+        const myArray = data.data.data;
+        myArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        console.log(myArray);
+        const reversed = myArray
           .slice()
           .reverse()
           .map((data) => {
@@ -1083,7 +1087,10 @@ const DashboardHome = () => {
         // const reversed = data.data.data.map((data) => {
         //   return data;
         // });
-        setStakeData(data.data.data.slice().reverse());
+        const myArray = data.data.data;
+        myArray.sort((a, b) => new Date(b.time) - new Date(a.time));
+        console.log(myArray);
+        setStakeData(myArray);
       })
       .catch((error) => {
         console.log(error.response);
@@ -1206,7 +1213,10 @@ const DashboardHome = () => {
       .then((data) => {
         console.log(data);
         console.log(data.data.data);
-        setSwapData(data.data.data.slice().reverse());
+        const myArray = data.data.data;
+        myArray.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        console.log(myArray);
+        setSwapData(myArray);
       })
       .catch((error) => {
         console.log(error.response);

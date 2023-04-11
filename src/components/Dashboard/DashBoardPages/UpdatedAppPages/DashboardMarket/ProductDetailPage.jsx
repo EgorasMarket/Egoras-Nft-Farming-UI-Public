@@ -12,6 +12,7 @@ import walletIcon from "../../../../../LottieFiles/loadingIcon/walletIcon.json";
 
 import { numberWithCommas } from "../../../../../static";
 import { parseEther, formatEther } from "@ethersproject/units";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 import { ShimmerText, ShimmerPostDetails } from "react-shimmer-effects";
 import "./DashboardMarketStyles/PowerDetailPage.css";
@@ -49,6 +50,8 @@ const ProductDetailPage = ({ match }) => {
   const [productDetail, setProductDetail] = useState({ final_amount: "0" });
   const [image, setProductImages] = useState([]);
   const [unlockBtn, setUnlockBtn] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [disable, setDisable] = useState(false);
   const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
   useEffect(() => {
     const { address, name } = match.params;
@@ -100,11 +103,6 @@ const ProductDetailPage = ({ match }) => {
         library.getSigner()
       );
     }
-    // const res = await BuyIndirectProduct(
-    //   productDetail.index_id,
-    //   quantity,
-    //   library.getSigner()
-    // );
 
     console.log(res, "somto8uhhhg");
     // console.log(res.status, "somto8uhhhg");
@@ -134,6 +132,8 @@ const ProductDetailPage = ({ match }) => {
     // }
   };
   const UnlockToken = async (e) => {
+    setIsLoading(true);
+    setDisable(true);
     let ret = await unlockTokenV3(
       "0x58f66d0183615797940360a43c333a44215830ba",
       parseEther("180000000000000000000000000000000000", "wei").toString(),
@@ -502,13 +502,31 @@ const ProductDetailPage = ({ match }) => {
                     </div>
 
                     <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn_div">
-                      <button
-                        className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn"
-                        // onClick={PurchaseProduct}
-                        disabled={true}
-                      >
-                        Purchase
-                      </button>
+                      {unlockBtn === false ? (
+                        <button
+                          disabled={disable}
+                          className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn"
+                          onClick={UnlockToken}
+                        >
+                          {isLoading ? (
+                            <ScaleLoader
+                              color="#24382b"
+                              size={10}
+                              height={20}
+                            />
+                          ) : (
+                            <span> Approve EUSD </span>
+                          )}
+                        </button>
+                      ) : (
+                        <button
+                          className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn"
+                          // onClick={PurchaseProduct}
+                          disabled={true}
+                        >
+                          Purchase
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>

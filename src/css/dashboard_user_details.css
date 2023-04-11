@@ -247,7 +247,77 @@
   font-weight: 600;
   box-shadow: 0px 5px 15px #7cb994;
 }
-
+.user_details_div_head {
+  font-size: 36px;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.user_details_area {
+  display: grid;
+  gap: 10px;
+  grid-gap: 10px;
+  gap: 10px;
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-content: flex-start;
+}
+.user_details_area_div1 {
+  flex-direction: column;
+  display: flex;
+}
+.user_details_area_div1_head {
+  color: #6c8e79;
+  margin-bottom: 5px;
+}
+.user_details_area_div1_input {
+  padding: 15px;
+  border-radius: 10px;
+  background: #0b110c;
+  border: solid 1px #3d4e44;
+  color: #bfbfbf;
+}
+.user_details_area_btn_div {
+  margin-top: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user_details_area_btn {
+  padding: 15px;
+  width: 100%;
+  max-width: 200px;
+  border-radius: 13px;
+  background: #308651;
+  color: #fff;
+  font-weight: 500;
+  border: none;
+}
+.user_details_body1_body_cont1_span1._img {
+  width: 25px;
+  margin-right: 5px;
+  height: 25px;
+  object-fit: cover;
+}
+/* ============================================== */
+/* ============================================== */
+/* ============================================== */
+/* ============================================== */
+/* ============================================== */
+.userDetails_div {
+  padding: 2em;
+  background: #1c2c22;
+  border: solid 1px #3d4e44;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+/* ============================================== */
+/* ============================================== */
+/* ============================================== */
+/* ============================================== */
+/* ============================================== */
+/* ============================================== */
 .pool_detail_heading_area2 {
   display: flex;
   flex-direction: column;

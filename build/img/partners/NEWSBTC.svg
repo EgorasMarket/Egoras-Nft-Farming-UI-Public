@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2018 (64-Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="33.0625in" height="5.45652in" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 33062.5 5456.52"
+ xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <font id="FontID1" horiz-adv-x="786" font-variant="normal" style="fill-rule:nonzero" font-weight="800">
+	<font-face 
+		font-family="Montserrat ExtraBold">
+		<font-face-src>
+			<font-face-name name="Montserrat ExtraBold"/>
+		</font-face-src>
+	</font-face>
+   <missing-glyph><path d="M0 0z"/></missing-glyph>
+   <glyph unicode="B" horiz-adv-x="769" d="M608.001 365c60.0001,30.9995 93.9993,85.0001 93.9993,151.999 0,108 -90.0001,183 -274,183l-358 0 0 -700 378 0c188,0 288,70.9996 288,192.001 0,85.0001 -49.0006,144.999 -128,173zm-206.001 191.999c66.0009,0 100,-22.9998 100,-66.999 0,-45.0001 -33.9993,-68.0011 -100,-68.0011l-136 0 0 135 136 0zm30 -414l-166 0 0 142 166 0c68.0011,0 104.001,-22.9998 104.001,-71.0009 0,-47.9998 -35.9995,-70.9996 -104.001,-70.9996z"/>
+   <glyph unicode="C" horiz-adv-x="737" d="M419 -14.0005c129.001,0 233,47.0003 301,132l-126 114.001c-44.0006,-53.0011 -97.9999,-82.0004 -165,-82.0004 -115,0 -195,80.0001 -195,200 0,120 80.0001,199.999 195,199.999 67.0003,0 121,-28.9993 165,-81.9991l126 113.999c-67.9998,85.0001 -171.999,132 -301,132 -221.999,0 -384.999,-151 -384.999,-364 0,-213 163,-364.001 384.999,-364.001z"/>
+   <glyph unicode="T" horiz-adv-x="634" d="M219 0l198 0 0 543 214.001 0 0 156.999 -627 0 0 -156.999 214.999 0 0 -543z"/>
+  </font>
+  <font id="FontID0" horiz-adv-x="731" font-variant="normal" style="fill-rule:nonzero" font-style="normal" font-weight="500">
+	<font-face 
+		font-family="Montserrat Medium">
+		<font-face-src>
+			<font-face-name name="Montserrat Medium"/>
+		</font-face-src>
+	</font-face>
+   <missing-glyph><path d="M0 0z"/></missing-glyph>
+   <glyph unicode="E" horiz-adv-x="669" d="M205 87.0004l0 226 351 0 0 85.0001 -351 0 0 215 394 0 0 86.9991 -494 0 0 -700 508 0 0 87.0004 -408 0z"/>
+   <glyph unicode="N" horiz-adv-x="812" d="M607 700l0 -522 -419.999 522 -82.0004 0 0 -700 100 0 0 522 419.999 -522 82.0004 0 0 700 -100 0z"/>
+   <glyph unicode="S" horiz-adv-x="621" d="M309 -7.99975c185,0 271,92.0004 271,198.833 0,256.833 -424,149.666 -424,321 0,61.1672 51.0009,111.167 170,111.167 62.0003,0 131,-18.0011 192.001,-57.0003l32.9998 80.0001c-57.9998,40.0001 -143,61.999 -225,61.999 -183.999,0 -268,-91.9991 -268,-200.167 0,-260.167 424,-152.333 424,-322.999 0,-61.0009 -51.999,-107.834 -173,-107.834 -90.0001,0 -178.999,33.8329 -231,80.8332l-37.0003 -77.8335c56.0009,-52.0003 161.001,-87.9999 268,-87.9999z"/>
+   <glyph unicode="W" horiz-adv-x="1125" d="M999.001 700l-193 -572 -193 572 -92.0004 0 -197.001 -569 -188.999 569 -103 0 234 -700 107 0 191 559 191 -559 105 0 234.001 700 -95.0001 0z"/>
+  </font>
+  <style type="text/css">
+   <![CDATA[
+    @font-face { font-family:"Montserrat ExtraBold";font-variant:normal;font-weight:800;src:url("#FontID1") format(svg)}
+    @font-face { font-family:"Montserrat Medium";font-variant:normal;font-style:normal;font-weight:500;src:url("#FontID0") format(svg)}
+    .fil5 {fill:none}
+    .fil4 {fill:#18A4BD}
+    .fil3 {fill:#253D4B}
+    .fil1 {fill:#9FD6DE}
+    .fil2 {fill:white}
+    .fil0 {fill:url(#id1)}
+    .fnt0 {font-weight:500;font-size:3005.51px;font-family:'Montserrat Medium'}
+    .fnt1 {font-weight:800;font-size:3005.51px;font-family:'Montserrat ExtraBold'}
+   ]]>
+  </style>
+   <clipPath id="id0">
+    <path d="M-0 0l33062.5 0 0 5456.52 -33062.5 0 0 -5456.52z"/>
+   </clipPath>
+  <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="8888.9" y1="4689.51" x2="6855.64" y2="858.47">
+   <stop offset="0" style="stop-opacity:1; stop-color:#1482A3"/>
+   <stop offset="0.431373" style="stop-opacity:1; stop-color:#1B9DB4"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#3BBEBE"/>
+  </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g>
+  </g>
+  <g style="clip-path:url(#id0)">
+   <g>
+    <g id="_421858720368">
+     <g>
+      <polygon class="fil0" points="7952.77,235.2 9049.9,858.47 10147.02,1481.73 10147.02,2728.26 10147.02,3974.8 9049.9,4598.05 7952.77,5221.32 6855.64,4598.05 5758.51,3974.8 5758.51,2728.26 5758.51,1481.73 6855.64,858.47 "/>
+      <g>
+       <rect class="fil1" x="7591.83" y="1689.08" width="720.78" height="2083.25"/>
+       <polygon class="fil2" points="5799.02,3997.81 7395.4,1689.08 8312.61,1689.08 6424.7,4353.24 "/>
+       <polygon class="fil2" points="10105.41,1463.6 8509.04,3772.33 7591.83,3772.33 9479.74,1108.17 "/>
+      </g>
+     </g>
+     <text x="11609.22" y="3780.19"  class="fil3 fnt0">N</text>
+     <text x="13947.51" y="3780.19"  class="fil3 fnt0">E</text>
+     <text x="15828.95" y="3780.19"  class="fil3 fnt0">W</text>
+     <text x="19065.88" y="3780.19"  class="fil3 fnt0">S</text>
+     <text x="21311.51" y="3780.19"  class="fil4 fnt1">B</text>
+     <text x="23482.15" y="3780.19"  class="fil4 fnt1">T</text>
+     <text x="25250.04" y="3780.19"  class="fil4 fnt1">C</text>
+    </g>
+   </g>
+  </g>
+  <polygon class="fil5" points="-0,0 33062.5,0 33062.5,5456.52 -0,5456.52 "/>
+ </g>
+</svg>
