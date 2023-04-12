@@ -72,7 +72,7 @@ const DirectUpload = ({
               onClick={generateAI}
             >
               {isLoading2 ? (
-                <ScaleLoader color="#24382b" size={10} height={20} />
+                <ScaleLoader color="#12111b" size={10} height={20} />
               ) : (
                 <span> Generate Details </span>
               )}
@@ -467,7 +467,7 @@ const DirectUpload = ({
               onClick={UploadProduct}
             >
               {isLoading ? (
-                <ScaleLoader color="#24382b" size={10} height={20} />
+                <ScaleLoader color="#12111b" size={10} height={20} />
               ) : (
                 <> Upload Product</>
               )}

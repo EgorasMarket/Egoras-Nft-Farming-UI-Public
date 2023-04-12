@@ -3,7 +3,7 @@
   width: 100%;
   top: 6.3em;
   z-index: 1000;
-  background: #101d15 !important;
+  background: #0f0e1c !important;
   padding: 1em 0em;
 }
 .dashboardMarketPlaceHeader_area {
@@ -87,7 +87,7 @@
 }
 .dashboardMarketPlaceBody1_cont2 {
   padding: 2em;
-  background: #1c2c22;
+  background: #151422;
   margin-top: 2em;
   color: #fff;
   border-radius: 15px;
@@ -115,7 +115,7 @@
   height: 5em;
   border-radius: 10px;
   border: solid 1px #2b3b31;
-  box-shadow: 0px 5px 10px #0b110c;
+  box-shadow: 0px 5px 10px #0d0c14;
 }
 
 .dashboardMarketPlaceBody2_div1 {
@@ -167,7 +167,7 @@
   width: 95%;
   display: flex;
   flex-direction: column;
-  background: #1c2c22;
+  background: #151422;
   margin: auto;
   border: solid 1px #314d3c;
   border-radius: 15px;
@@ -200,7 +200,7 @@
 }
 .dashboardMarketPlaceBody2_div1_body_card_body_cont1_title {
   font-size: 20px;
-  color: #9ac1a9;
+  color: #787690;
 }
 
 .dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount {
@@ -209,7 +209,7 @@
 }
 .dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash {
   font-size: 14px;
-  color: #5d806a;
+  color: #787690;
 }
 .dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn_div {
   width: 100%;
@@ -220,13 +220,13 @@
   padding: 10px;
   border-radius: 10px;
   border: none;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
 }
 .dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount_span {
   font-weight: 400;
   font-size: 12px;
-  color: #8baf99;
+  color: #787690;
 }
 .dashboardMarketPlaceBody3 {
   display: flex;

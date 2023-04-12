@@ -51,7 +51,7 @@
 .notifyDropDownDiv {
   position: absolute;
   top: 124%;
-  background: #0b110c;
+  background: #0d0c14;
   border: solid 1px #33453a;
   width: 19em;
   right: 0px;
@@ -113,14 +113,14 @@
   overflow: scroll;
 }
 .notifySeeMoreDiv_container {
-  background: #1c2c22;
+  background: #151422;
   padding: 2em;
   border-radius: 14px;
   color: #fff;
   box-shadow: 0px 0px 36px #000000ab;
   width: 100%;
   max-width: 400px;
-  border: solid 1px #41564a;
+  border: solid 1px #1f1e2e;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -180,7 +180,7 @@
   display: none;
 }
 .dark .header_token_prices_div {
-  background: #0b110c;
+  background: #0d0c14;
   color: #97a099;
 }
 .dash_board_links_tab {
@@ -201,12 +201,12 @@
   display: none;
 }
 .dark .socail_links_icon2 {
-  background: #25392d !important;
+  background: #24233a !important;
   color: #ffffff !important;
   transition: 0.3s ease-in-out;
 }
 .socail_links_icon2:hover {
-  background: #229e54 !important;
+  background: #7a5fc0 !important;
   color: #ffffff !important;
   transition: 0.3s ease-in-out;
 }
@@ -237,12 +237,12 @@
   transition: 0.3s ease-in-out;
 }
 .dark .medium_icon2 {
-  background: #25392d;
+  background: #24233a;
   color: #ffffff;
   transition: 0.3s ease-in-out;
 }
 .medium_icon2:hover {
-  background: #229e54;
+  background: #7a5fc0;
 
   color: #ffffff;
   transition: 0.3s ease-in-out;
@@ -275,11 +275,10 @@
   font-size: 12px;
 }
 .dark .dash_board_links_area {
-  background: #32473b;
-  background-color: #122319ab;
+  background-color: #0f0e1cab;
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(6px);
-  border: solid 1px #25392d;
+  border: solid 1px #24233a;
   box-shadow: 0px 0px 9px #141b17;
 }
 .DashboardHeaderArea {
@@ -395,8 +394,8 @@
 }
 
 .dark .header_tabs {
-  border: solid 1px #29332d;
-  background: #0b110c;
+  border: solid 1px #1c1a29;
+  background: #0d0c14;
 }
 .header_tab1 {
   cursor: pointer;
@@ -405,7 +404,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #627a6b !important;
+  color: #787690 !important;
   position: relative;
 }
 
@@ -422,7 +421,7 @@
 .Ping .c-basePart,
 .Ping .c-flashingPart {
   border-radius: 9999px;
-  background-color: #229e54;
+  background-color: #7a5fc0;
 }
 
 .Ping .c-flashingPart {
@@ -437,7 +436,7 @@
 }
 .dark .c-basePart,
 .dark .c-flashingPart {
-  background-color: #e7b02e;
+  background-color: #dad1f0;
 }
 .animate-ping {
   -webkit-animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
@@ -476,7 +475,7 @@
 }
 
 .dark .header_tab1_active {
-  background: #229e5452;
+  background: #7a5fc052;
   box-shadow: 0px 0px 5px #000000;
   color: #fff !important;
 }
@@ -537,7 +536,7 @@ button.logout-btn {
   padding: 0.8em 2em;
   border: none;
   border-radius: 6px;
-  background: #229e54;
+  background: #7a5fc0;
   color: #ffff;
   font-weight: 400;
   box-shadow: 0px 5px 13px #cbcbcb;
@@ -603,7 +602,7 @@ dark button.logout-btn {
     width: 100%;
   }
   .dark .header_tab1 {
-    color: #506a59 !important;
+    color: #595772 !important;
   }
 
   .connect_div_dash_head {
@@ -644,7 +643,7 @@ dark button.logout-btn {
   }
   .dark .header_tabs2 {
     /* border: solid 1px #64796d; */
-    background: #101d15;
+    background: #0f0e1c;
   }
   .dash_board_links {
     display: none;
@@ -758,7 +757,7 @@ dark button.logout-btn {
     padding: 0.8em 1em;
     border: none;
     border-radius: 6px;
-    background: #229e54;
+    background: #7a5fc0;
     color: #ffff;
     font-weight: 400;
     box-shadow: 0px 5px 13px #cbcbcb;

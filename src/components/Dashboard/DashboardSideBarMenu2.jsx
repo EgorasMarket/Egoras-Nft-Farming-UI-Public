@@ -491,11 +491,17 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   alt="..."
                   className="egr-logo2"
                 />
-                <img
+                {/* <img
                   src="/img/logoVideoThumbnail.svg"
                   alt="..."
                   className="egr-logo2dark"
+                /> */}
+                <img
+                  src="/img/martgpt_logo.svg"
+                  alt="..."
+                  className="egr-logo2dark"
                 />
+
                 <div className="on-mobile-navigators"></div>
               </a>
               <div className="egrLogo2Cont3">
@@ -506,8 +512,13 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                     alt="..."
                     className="egr-logo"
                   />
-                  <img
+                  {/* <img
                     src="/img/logoVideoThumbnail.svg"
+                    alt="..."
+                    className="egr-logodark"
+                  /> */}
+                  <img
+                    src="/img/martgpt_logo.svg"
                     alt="..."
                     className="egr-logodark"
                   />

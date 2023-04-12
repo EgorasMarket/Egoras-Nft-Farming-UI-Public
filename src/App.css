@@ -25,7 +25,7 @@ div::-webkit-scrollbar {
 }
 a {
   text-decoration: none !important;
-  color: #229e54;
+  color: #7a5fc0;
 }
 li {
   list-style: none;
@@ -66,6 +66,10 @@ iframe {
   outline: none;
   border: thin;
 }
+::selection {
+  background-color: #7a5fc0;
+  color: #fff;
+}
 
 .image-wrapper .image {
   width: 150px;
@@ -91,14 +95,14 @@ button:focus {
   padding-top: 20px !important;
 }
 .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
-  color: #229e54 !important ;
+  color: #7a5fc0 !important ;
   background: #effff5 !important;
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
 }
 
 .css-1aquho2-MuiTabs-indicator {
-  background-color: #229e54 !important;
+  background-color: #7a5fc0 !important;
 }
 .custom_container {
   max-width: 1540px;
@@ -114,7 +118,7 @@ button:focus {
 }
 
 .uploadButton::-webkit-file-upload-button {
-  background-color: #229e54;
+  background-color: #7a5fc0;
   color: #fff;
   border: none;
   padding: 0.5em 1em;
@@ -146,12 +150,12 @@ button:focus {
   }
 }
 .css-1kty9di-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
-  color: #229e54 !important;
+  color: #7a5fc0 !important;
 }
 
 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
   .MuiOutlinedInput-notchedOutline {
-  border-color: #229e54 !important;
+  border-color: #7a5fc0 !important;
 }
 /* 
 .uploadButton::before {
@@ -210,7 +214,7 @@ input:-webkit-autofill:active {
 }
 a {
   text-decoration: none !important;
-  color: #229e54;
+  color: #7a5fc0;
 }
 li {
   list-style: none;
@@ -271,14 +275,14 @@ button:focus {
   padding-top: 20px !important;
 }
 .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
-  color: #229e54 !important ;
+  color: #7a5fc0 !important ;
   background: #effff5 !important;
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
 }
 
 .css-1aquho2-MuiTabs-indicator {
-  background-color: #229e54 !important;
+  background-color: #7a5fc0 !important;
 }
 
 .col-md-8 {
@@ -286,7 +290,7 @@ button:focus {
 }
 
 .uploadButton::-webkit-file-upload-button {
-  background-color: #229e54;
+  background-color: #7a5fc0;
   color: #fff;
   border: none;
   padding: 0.5em 1em;
@@ -325,12 +329,12 @@ button:focus {
   }
 }
 .css-1kty9di-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
-  color: #229e54 !important;
+  color: #7a5fc0 !important;
 }
 
 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
   .MuiOutlinedInput-notchedOutline {
-  border-color: #229e54 !important;
+  border-color: #7a5fc0 !important;
 }
 
 .for-des span {
@@ -346,13 +350,13 @@ html {
 input:focus-visible {
   outline: none;
   border: solid;
-  border-color: #4fcb81;
+  border-color: #8563cd;
   border-width: 1px;
-  box-shadow: 0px 0px 1px 4px #54bc7e2e;
+  box-shadow: 0px 0px 1px 4px #222035a8;
   transition: 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 input:-internal-autofill-selected {
-  background-color: #4fcb81 !important;
+  background-color: #8563cd !important;
 }
 
 .featured_logos .react-multi-carousel-track {
@@ -503,9 +507,9 @@ rect.sparkline--interaction-layer {
   border-radius: 7px;
 }
 .dark .recharts-default-tooltip {
-  background: #1e2822 !important;
+  background: #0f0e1c !important;
   color: #fff !important;
-  border: solid 1px #4e7a60 !important;
+  border: solid 1px #787690 !important;
 }
 @media screen and (max-width: 767px) {
   .custom_container {
@@ -554,7 +558,7 @@ rect.sparkline--interaction-layer {
   z-index: 1;
 }
 .dark .Modal2_div_area {
-  background: #1c2c22;
+  background: #151422;
 }
 
 @keyframes fadeShow {
@@ -609,8 +613,8 @@ rect.sparkline--interaction-layer {
   /* filter: grayscale(1); */
 }
 .dark .Modal2_div2_div1_area_btn {
-  background: #4d6355;
-  border: solid 1px #63806e;
+  background: #323147;
+  border: solid 1px #2d2c41;
   color: #fff;
 }
 .Modal2_div2_div1_area_btn_area {
@@ -627,7 +631,7 @@ rect.sparkline--interaction-layer {
   font-weight: 400;
 }
 .dark .Modal2_div_area_span {
-  color: #92ab9b;
+  color: #787690;
 }
 .Modal2_div1_head_icon {
   font-size: 33px !important;

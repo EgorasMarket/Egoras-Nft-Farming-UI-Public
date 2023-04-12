@@ -12,7 +12,7 @@
 /* ========= */
 
 .mySwiperDiv_Power {
-  /* background: #0b110c; */
+  /* background: #0d0c14; */
   padding: 10px;
 }
 .PowerSwiper {
@@ -137,7 +137,7 @@
   padding: 14px 0px;
   width: 160px;
   border-radius: 10px;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
   border: none;
   display: flex;
@@ -194,19 +194,19 @@
 .how_it_works_possible {
   /* height: 100vh; */
   width: 100%;
-  background: #0b110c;
+  background: #0d0c14;
   padding: 12em 0em;
   position: relative;
-  background-image: radial-gradient(#141d15, #0d140e, #0b110c, #141d15);
+  background-image: radial-gradient(#141d15, #0d140e, #0d0c14, #141d15);
 }
 .how_it_works_possibleb {
   /* height: 100vh; */
   width: 100%;
-  background: #0b110c;
+  background: #0d0c14;
   padding: 12em 0em;
   padding-bottom: 0em;
   position: relative;
-  background-image: radial-gradient(#141d15, #0d140e, #0b110c, #141d15);
+  background-image: radial-gradient(#141d15, #0d140e, #0d0c14, #141d15);
 }
 .how_it_works_possible_area {
   align-items: center;
@@ -429,7 +429,7 @@
   justify-content: center;
   font-size: 15px;
   font-weight: 600;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
 }
 .what_we_offer_body_display_save_demo_app_card_area1_range_input {
@@ -507,7 +507,7 @@
 /* ========= */
 /* ========= */
 .ecoSystem_section {
-  background: #0b110c;
+  background: #0d0c14;
   padding: 4em 0em;
   position: relative;
 }
@@ -657,7 +657,7 @@
   padding: 14px;
   border-radius: 10px;
   border: none;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
 }
 .voting_on_egoras_dapp_sample_div_cont1_btn_vote_details {
@@ -706,7 +706,7 @@
 }
 .dark .how_it_works_section {
   position: relative;
-  background: #0b110c;
+  background: #0d0c14;
 }
 .how_it_works_area_head {
   font-size: 75px;
@@ -771,7 +771,7 @@
   /* font-family: "Sofia Pro Bold", sans-serif; */
 }
 .real_life {
-  color: #229e54;
+  color: #7a5fc0;
   /* font-family: "Sofia Pro Bold", sans-serif; */
 }
 .nft-img-area2 {
@@ -1294,7 +1294,7 @@ a.visit_app_link_2 {
   padding: 0em 1em;
   height: 50px;
   background: #ffffff;
-  color: #229e54;
+  color: #7a5fc0;
   border-radius: 6px;
   cursor: pointer;
   position: relative;
@@ -1326,8 +1326,8 @@ a.visit_app_link_2 {
 }
 .stake-hero-btn1:hover {
   border: solid;
-  border-color: #e4a788;
-  background-color: #e4a788;
+  border-color: #dd8aa1;
+  background-color: #dd8aa1;
   border-width: 0.5px;
   color: #fff;
   transform: translate3d(0, -5px, 0);
@@ -1338,7 +1338,7 @@ a.visit_app_link_2 {
   margin-right: 15px;
   padding: 0em 1em;
   height: 50px;
-  background: #229e54;
+  background: #7a5fc0;
   color: #ffff;
   border-radius: 6px;
   cursor: pointer;
@@ -1353,7 +1353,7 @@ a.visit_app_link_2 {
 }
 
 .stake-hero-btn2:hover {
-  background: #e4a788;
+  background: #dd8aa1;
   color: #fff;
   transform: translate3d(0, -5px, 0);
   transition: 0.3s ease-in-out;
@@ -1420,7 +1420,7 @@ a.visit_app_link_2 {
 /* .span2-txts {
   font-size: 38px;
   font-weight: 600;
-  color: #229e54;
+  color: #7a5fc0;
   margin: 0;
 }
 .span3-txts {
@@ -1525,7 +1525,7 @@ a.visit_app_link_2 {
 .nft_area2_stat_div_area_cont1 {
   display: flex;
   border: solid 1px #2e3c34;
-  background: #0b110c9e;
+  background: #0d0c149e;
   padding: 1.5em 1.5em;
   color: #fff;
   border-radius: 10px;
@@ -1542,7 +1542,7 @@ a.visit_app_link_2 {
   flex-direction: column;
 }
 .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head {
-  color: #8fc4a4;
+  color: #787690;
 }
 .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para {
   font-size: 26px;
@@ -1718,7 +1718,7 @@ a.visit_app_link_2 {
   box-shadow: 0px 6px 10px #00602a;
 }
 .key-features-cards-area1:hover {
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
   box-shadow: 0px 11px 15px #9ec7af;
   transform: translate3d(0, -5px, 0);
@@ -1786,7 +1786,7 @@ a.visit_app_link_2 {
 }
 .hide-bg:hover {
   box-shadow: none !important;
-  color: #229e54;
+  color: #7a5fc0;
 }
 
 /* collateral assets section start */
@@ -1841,7 +1841,7 @@ a.visit_app_link_2 {
   font-size: 14px;
 }
 .assets-header3:focus-visible {
-  border-color: #229e54;
+  border-color: #7a5fc0;
   outline: none;
 }
 
@@ -1852,7 +1852,7 @@ a.visit_app_link_2 {
   top: 0;
   font-size: 39px !important;
   bottom: auto;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
   width: 43px !important;
   padding: 10px;
@@ -1874,7 +1874,7 @@ a.visit_app_link_2 {
 }
 .per-day {
   font-size: 12px;
-  color: #e4a788;
+  color: #dd8aa1;
 }
 .assets-category-titles {
   display: table-header-group;
@@ -2017,7 +2017,7 @@ a.visit_app_link_2 {
   color: #fff;
   white-space: nowrap;
   cursor: pointer;
-  background-color: #229e54;
+  background-color: #7a5fc0;
   border-radius: 5px;
   padding: 8px 32px;
   display: inline-block;
@@ -2070,7 +2070,7 @@ a.visit_app_link_2 {
   padding: 1em 3.5em;
   border-radius: 6px;
   border: none;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
   font-size: 14px;
   font-weight: 400;
@@ -2489,7 +2489,7 @@ a.visit_app_link_2 {
     padding: 1em 3.5em;
     border-radius: 6px;
     border: none;
-    background: #229e54;
+    background: #7a5fc0;
     color: #fff;
     font-size: 13px;
     font-weight: 400;
@@ -2655,7 +2655,7 @@ a.visit_app_link_2 {
     width: 30px;
   }
   .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head {
-    color: #8fc4a4;
+    color: #787690;
     font-size: 12px;
   }
   .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para {
@@ -2703,7 +2703,7 @@ a.visit_app_link_2 {
 /* =================================== */
 
 .dark .earning-section {
-  background: #0b110c;
+  background: #0d0c14;
 }
 .dark .span4a-txts {
   color: #fff;
@@ -2713,23 +2713,23 @@ a.visit_app_link_2 {
 }
 .dark .stake-hero-btn1 {
   border-color: #ffffff;
-  color: #229e54 !important;
+  color: #7a5fc0 !important;
   background: #fff;
 }
 .dark .floating_absolute_div {
-  background: #1c2c22;
+  background: #151422;
   box-shadow: 0px 0px 25px #000000;
 
-  border: solid 1px #0b110c;
+  border: solid 1px #0d0c14;
 }
 .dark .floating_div_cont_area1_cont1 {
   color: #ffffff;
 }
 .dark .whyEgorasSection {
-  background: #0b110c;
+  background: #0d0c14;
 }
 .dark .whyEgoras_body_cont1 {
-  background: #1c2c22;
+  background: #151422;
   border: solid 1px #475d50;
 
   box-shadow: 0px 10px 20px #000000;
@@ -2744,7 +2744,7 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark .real_world_adoption {
-  background: #0b110c;
+  background: #0d0c14;
 }
 .dark .real_world_adoption_area2_title {
   color: #fff;
@@ -2754,36 +2754,36 @@ a.visit_app_link_2 {
 }
 
 .dark .getStartedSection {
-  background: #0b110c;
+  background: #0d0c14;
 }
 .dark .getStarted_area {
-  background: #1c2c22;
-  border: solid 1px #3d4e44;
+  background: #151422;
+  border: solid 1px #262538;
   box-shadow: 0px 10px 20px #000000;
 }
 .dark .getStarted_title {
   color: #fff;
 }
 .dark .egoras_benefit_section {
-  background: #0b110c;
+  background: #0d0c14;
 }
 .dark .benefit_section_area1_layer1 {
-  border: solid 1px #3d4e44;
+  border: solid 1px #262538;
 
-  background: #1c2c22;
+  background: #151422;
 
   color: #fff;
   box-shadow: 0px 10px 20px #000000;
 }
 
 .dark .sidebar {
-  background-color: #1c2c22;
+  background-color: #151422;
 }
 .dark .DashBoardHeaderSection {
-  background-color: #122119;
+  background-color: #0f0e1c;
   /* -webkit-backdrop-filter: blur(6px); */
   /* backdrop-filter: blur(6px); */
-  border-bottom: solid 1px #2b3b30;
+  border-bottom: solid 1px #24233a;
   box-shadow: 0px 5px 9px #000000;
 }
 
@@ -2795,23 +2795,23 @@ a.visit_app_link_2 {
 }
 .dark .list-item-active {
   color: #ffffff;
-  background: #0b110c;
+  background: #0d0c14;
 }
 .dark .lending_area1_cont1 {
-  background: #1c2c22;
-  border: solid 1px #41564a;
+  background: #151422;
+  border: solid 1px #1f1e2e;
   box-shadow: 0px 10px 20px #000000;
   color: #fff;
 }
 .dark .lending_area1_cont1_user {
-  background: #16251c;
-  border: solid 1px #41564a;
+  background: #1c1b2c;
+  border: solid 1px #1f1e2e;
   /* box-shadow: 0px 10px 20px #000000; */
   color: #fff;
 }
 .dark .lending_area1_cont1_heading {
   font-size: 13px;
-  color: #94ab9e;
+  color: #787690;
 }
 .dark .help_outline {
   color: #ffffff !important;
@@ -2826,16 +2826,16 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark .table_body {
-  border: solid 1px #3d4e44;
+  border: solid 1px #262538;
 }
 .dark .assets-data-name {
   color: #ffffff;
 }
 .dark .filter_table_area_1 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
   color: #ffffff !important;
-  background: #1c2c22 !important;
+  background: #151422 !important;
   box-shadow: 0px 2px 4px #000000 !important;
-  border-color: #3d4e44 !important;
+  border-color: #262538 !important;
 }
 .dark .filter_table_area_1 .css-1kty9di-MuiFormLabel-root-MuiInputLabel-root {
   color: #ffffff !important;
@@ -2845,7 +2845,7 @@ a.visit_app_link_2 {
 }
 .dark .assets-category-row {
   box-shadow: rgb(0 0 0) 0px 0px 6px;
-  background: #1c2c22;
+  background: #151422;
   color: #fff;
 }
 .dark .assets-category-row:hover {
@@ -2884,21 +2884,21 @@ a.visit_app_link_2 {
   color: rgb(255 255 255 / 60%);
 }
 .dark .small_list-item-active {
-  color: #1c2c22;
+  color: #151422;
   background: #ffffff;
 
   box-shadow: 0px 0px 5px #39493f;
 }
 .dark .hold_On_div {
-  background: #0b110c;
+  background: #0d0c14;
 }
 .dark .pool_lending_pages_links {
-  background: #1c2c22;
-  border: solid 1px #3d4e44;
+  background: #151422;
+  border: solid 1px #262538;
 }
 .dark .pool_lend_details_link_active {
-  background: #121d17;
-  border-bottom: solid 1px #1c2c22;
+  background: #0f0e1c;
+  border-bottom: solid 1px #151422;
   color: #fff;
 }
 .dark .pool_lend_details_link {
@@ -2906,14 +2906,14 @@ a.visit_app_link_2 {
 }
 .dark .pool_lend_details_link .asset_overview_link_icon {
   background: #d5e1e9;
-  color: #1c2c22;
+  color: #151422;
 }
 .dark .pool_detail_heading {
   color: #fff;
 }
 .dark .pool_detail_sub_area1 {
-  background: #1c2c22;
-  border: solid 1px #3d4e44;
+  background: #151422;
+  border: solid 1px #262538;
   color: #fff;
 }
 .dark .pool_detail_sub_area1_area1_cont2 {
@@ -2923,8 +2923,8 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark .Asset_Originator_Details_cont_body {
-  background: #1c2c22;
-  border: solid 1px #3d4e44;
+  background: #151422;
+  border: solid 1px #262538;
   color: #fff;
 }
 .dark .Asset_Originator_Details_cont_body_issuer_cont_head {
@@ -2934,8 +2934,8 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark .pool_status_Details_cont_body1 {
-  border: solid 1px #3d4e44;
-  background: #1c2c22;
+  border: solid 1px #262538;
+  background: #151422;
 
   color: #fff;
 }
@@ -2943,13 +2943,13 @@ a.visit_app_link_2 {
   color: #e7e7e7;
 }
 .dark .liquidity_cont {
-  background: #1c2c22;
+  background: #151422;
   box-shadow: 0px 10px 20px #000;
-  border: solid 1px #34493c;
+  border: solid 1px #2d2c41;
 }
 .dark .amnt_input {
   /* border: solid 1px #293d32; */
-  background: #111a12;
+  background: #0f0e1c;
 }
 .dark .connect_btn:disabled {
   background: #85ab95;
@@ -2962,20 +2962,20 @@ a.visit_app_link_2 {
   color: #ffffff;
 }
 .dark .amnt_input_field {
-  color: #aec6b7;
+  color: #b1b0c4;
 }
 .dark .connect_btn {
   background: #ddf2e5;
   color: #26392d;
 }
 .dark .display_tokens_drop {
-  background: #455d4f;
+  background: #28263e;
   box-shadow: 0px 5px 15px #000;
   color: #fff;
 }
 .dark .pool_detail_assets_body_layer_1_cont1 {
-  background: #1c2c22;
-  border: solid 1px #3d4e44;
+  background: #151422;
+  border: solid 1px #262538;
   color: #fff;
 }
 .dark .pool_detail_assets_body_layer_1_cont1_sub_heading_1b {
@@ -2985,25 +2985,25 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark .toggle_dark_mode_div {
-  background: #0b110c;
-  border: solid 1px #33453a;
+  background: #0d0c14;
+  border: solid 1px #312e52;
 }
 /* .dark .connected_header_address {
   border: solid 1px #64796d;
   border-radius: 6px;
   color: #fff;
-  background: #0b110c;
+  background: #0d0c14;
 } */
 .dark .wallet_addr_cont_txt_header {
-  background: #0b110c;
+  background: #0d0c14;
   color: #ffffff;
-  border: solid 1px #33453a;
+  border: solid 1px #312e52;
   border-left: 0;
 }
 .dark .wallet_settings_icon_cont {
-  background: #0b110c;
+  background: #0d0c14;
   color: #ffffff;
-  border: solid 1px #33453a;
+  border: solid 1px #312e52;
 }
 .dark .thumbnail_img2 {
   display: block;
@@ -3023,12 +3023,12 @@ a.visit_app_link_2 {
 }
 
 .dark .metamask_prof_pic_icon {
-  background: #0b110c;
-  border: solid 1px #33453a;
+  background: #0d0c14;
+  border: solid 1px #312e52;
   border-right: 0;
 }
 .dark .disconnect_button_div {
-  background: #0b110c;
+  background: #0d0c14;
 
   box-shadow: 0px 0px 10px #000000;
 
@@ -3038,11 +3038,11 @@ a.visit_app_link_2 {
   box-shadow: 0px 5px 13px #000000;
 }
 .dark .disconnect_button_div:before {
-  border-bottom: 10px solid #0b110c;
+  border-bottom: 10px solid #0d0c14;
 }
 .dark .filter_table_area_2 {
-  border: solid 1px #3d4e44;
-  background: #1c2c22;
+  border: solid 1px #262538;
+  background: #151422;
   box-shadow: 0px 2px 6px #000000;
 }
 .dark .filter_table_btn1 {
@@ -3051,44 +3051,44 @@ a.visit_app_link_2 {
 .dark .filter_table_btn1_active {
   background: #ffffff;
 
-  color: #0b110c;
+  color: #0d0c14;
 }
 .dark .asset_list_body_head {
   color: white;
   background: #fff;
-  border: solid 1px #3d4e44;
-  background: #1c2c22;
+  border: solid 1px #262538;
+  background: #151422;
 }
 .dark .asset_list_body_body_cont_1 {
-  background: #1c2c22;
-  border: solid 1px #3d4e44;
+  background: #151422;
+  border: solid 1px #262538;
   box-shadow: 0px 0px 4px #000000;
   color: #fff;
 }
 .dark .asset_list_div {
-  border: solid 1px #3d4e44;
+  border: solid 1px #262538;
 }
 .dark .Asset_Originator_Details_cont_body_txt span {
-  background: #1c2c22 !important;
+  background: #151422 !important;
   color: #fff !important;
 }
 .dark .asset_detail_modal_div_conts {
-  background: #0b110c;
+  background: #0d0c14;
   box-shadow: 0px 0px 20px #000;
 }
 .dark .asset_detail_heading {
-  background: #1c2c22;
-  border: solid 1px #3d4e44;
+  background: #151422;
+  border: solid 1px #262538;
   color: #fff;
 }
 .dark .asset_status_details_div1 {
-  border: solid 1px #3d4e44;
-  background: #1c2c22;
+  border: solid 1px #262538;
+  background: #151422;
   color: #fff;
 }
 .dark .transactionData_body {
-  background: #1c2c22;
-  border: solid 1px #3d4e44;
+  background: #151422;
+  border: solid 1px #262538;
   color: #fff;
 }
 .dark .transaction_id_link {
@@ -3098,22 +3098,22 @@ a.visit_app_link_2 {
   color: #ffffff;
 }
 .dark .recent_transaction_body {
-  border: solid 1px #3d4e44;
+  border: solid 1px #262538;
   color: #fff;
 }
 .dark .see_more_btn {
   background: #ffffff;
-  color: #1c2c22;
+  color: #151422;
   box-shadow: 0px 5px 10px #000000;
 }
 .dark .user_details_body1_body_cont_area1 {
-  background: #1c2c22;
-  border: solid 1px #3d4e44;
+  background: #151422;
+  border: solid 1px #262538;
   color: #fff;
 }
 .dark .userdAshboard_head {
-  background: #1c2c22;
-  border: solid 1px #3d4e44;
+  background: #151422;
+  border: solid 1px #262538;
   color: #fff;
 }
 .dark .metamask_prof_pic {
@@ -3124,19 +3124,19 @@ a.visit_app_link_2 {
 }
 .dark .reward_btn:disabled {
   background: #8fb9a1;
-  box-shadow: 0px 10px 10px #1c2c22;
-  color: #1c2c22;
+  box-shadow: 0px 10px 10px #151422;
+  color: #151422;
 }
 .dark .pool_detail_heading_area2 span {
   color: #ffffff !important;
 }
 .dark .reward_btn {
   background: #ffffff;
-  color: #1c2c22;
+  color: #151422;
   box-shadow: 0px 5px 10px #000000;
 }
 .dark .asset_list_modal_container {
-  background: #0b110c;
+  background: #0d0c14;
   box-shadow: 0px 0px 15px #000000;
   color: #fff;
 }
@@ -3144,14 +3144,14 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark .asset_list_body_head2 {
-  border: solid 1px #3d4e44;
-  background: #1c2c22;
+  border: solid 1px #262538;
+  background: #151422;
   color: #fff;
 }
 .dark .back_modal_cont {
-  background: #1c2c22;
+  background: #151422;
   box-shadow: 0px 0px 20px #000;
-  border: solid 1px #3d4e44;
+  border: solid 1px #262538;
   color: #fff;
 }
 .dark .back_modal_input {
@@ -3174,16 +3174,16 @@ a.visit_app_link_2 {
 }
 .dark .back_loan_btn {
   background: #ffffff;
-  color: #1c2c22;
+  color: #151422;
 }
 .dark .assets-header1 {
   border-color: #82b597;
-  background: #1c2c22;
+  background: #151422;
   color: #fff;
 }
 .dark .assets-header3 {
   border-color: #73a888;
-  background: #1c2c22;
+  background: #151422;
   color: #fff;
 }
 .dark .assets-header3::placeholder {
@@ -3194,19 +3194,19 @@ a.visit_app_link_2 {
 }
 .dark .vault_prices1 {
   box-shadow: 0px 0px 15px #000000;
-  background: #1c2c22;
-  border: solid 1px #3d4e44;
+  background: #151422;
+  border: solid 1px #262538;
   color: #fff;
 }
 .dark .vault_tbd {
   color: #ffffff;
 }
 .dark .vault_amount_withdraw {
-  background: #1c2c22;
+  background: #151422;
   box-shadow: 0px 0px 15px #000000;
 
   color: #fff;
-  border: solid 1px #3d4e44;
+  border: solid 1px #262538;
 }
 .dark .amount_withdraw_cont1_txt2 {
   color: #ffffff;
@@ -3224,25 +3224,25 @@ a.visit_app_link_2 {
   color: #aeffce;
 }
 .dark .open_vault_area2ss {
-  background: #1c2c22;
+  background: #151422;
   box-shadow: 0px 0px 15px #000000;
-  border: solid 1px #3d4e44;
+  border: solid 1px #262538;
 }
 .dark .card {
-  background-color: #1c2c22;
+  background-color: #151422;
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 .dark .nav-pills .nav-link.active,
 .nav-pills .show > .nav-link {
-  background-color: #0b110c !important;
+  background-color: #0d0c14 !important;
   color: #ffffff !important;
   border-bottom: solid 2px #ffffff !important;
 }
 .dark .nav-tabs {
-  border-bottom: 1px solid #1c2c22 !important;
+  border-bottom: 1px solid #151422 !important;
 }
 .dark .card-header {
-  background-color: #1c2c22 !important;
+  background-color: #151422 !important;
 }
 .dark .vault_input0 {
   color: #fff;
@@ -3252,18 +3252,18 @@ a.visit_app_link_2 {
 }
 .dark input.vault_input_vaulta {
   border-color: #597865;
-  background: #0b110c;
+  background: #0d0c14;
   box-shadow: 0px 0px 10px #000;
   color: #fff;
 }
 .dark .vault_pay_back_btn {
   background: #ffffff;
-  color: #1c2c22;
+  color: #151422;
   box-shadow: 0px 5px 13px #28392f;
 }
 .dark input.vault_input_vault {
   border-color: #597865;
-  background: #0b110c;
+  background: #0d0c14;
   box-shadow: 0px 0px 10px #000;
   color: #fff;
 }
@@ -3275,7 +3275,7 @@ a.visit_app_link_2 {
 }
 .dark .open_vault_input_btn {
   background: #ffffff;
-  color: #1c2c22;
+  color: #151422;
   box-shadow: 0px 5px 13px #28392f;
 }
 .dark h3.valid_div_inner_div_heading {

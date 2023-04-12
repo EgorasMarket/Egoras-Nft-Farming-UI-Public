@@ -1192,7 +1192,7 @@ const DashBoard_lend_details_page = ({ match }) => {
           <div className="back_modal_container">
             <div className="back_modal_cont_loading">
               <CopperLoading
-                fill="#229e54"
+                fill="#7a5fc0"
                 borderRadius={4}
                 count={12}
                 size={200}

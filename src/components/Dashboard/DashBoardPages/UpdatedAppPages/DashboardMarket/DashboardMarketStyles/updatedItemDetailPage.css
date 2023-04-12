@@ -11,7 +11,7 @@
   background: #fff;
 }
 .dark .updatedItemDetailPageSection1 {
-  background: #1c2c22;
+  background: #151422;
   color: #fff;
 }
 .updatedItemDetailPageSection2 {
@@ -39,7 +39,7 @@
   flex-direction: column;
 }
 .buy_button {
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
   border: none;
   padding: 10px;
@@ -47,7 +47,7 @@
   border-radius: 150px;
 }
 .updatedItemDetailPageSection1_area_head_span1 {
-  color: #229e54;
+  color: #7a5fc0;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -96,7 +96,7 @@
   width: 100%;
 }
 .updated_itemdisplay_area2_cont1_condition_tag {
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
   width: 100px;
   padding: 5px;
@@ -179,7 +179,7 @@
   align-items: center;
 }
 .dark .Updated_itemdisplay_payment_proceed_div_1 {
-  background: #1c2c22;
+  background: #151422;
   color: #fff;
 }
 .Updated_itemdisplay_payment_proceed_div_1a {
@@ -376,7 +376,7 @@
   gap: 10px;
 }
 .dark .Updated_itemdisplay_payment_proceed_div_2 {
-  background: #1c2c22;
+  background: #151422;
   color: #fff;
 }
 .Updated_itemdisplay_payment_proceed_div_2_area1 {
@@ -415,7 +415,7 @@
   padding: 15px 0px;
   border-radius: 50px;
   border: none;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
   margin-top: 20px;
   font-size: 14px;
@@ -425,7 +425,7 @@
   padding: 15px 0px;
   border-radius: 50px;
   border: none;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
   font-size: 14px;
 }
@@ -480,7 +480,7 @@
 }
 .updated_itemdisplay_area2_cont2_choose_grade_select1_active {
   padding: 2em;
-  border: solid 1px #229e54;
+  border: solid 1px #7a5fc0;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
@@ -488,12 +488,12 @@
   justify-content: center;
   cursor: pointer;
   width: 100%;
-  background: #229e54;
+  background: #7a5fc0;
   color: white;
 }
 .updated_itemdisplay_area2_cont2_choose_grade_select1:hover {
-  border: solid 1px #229e54;
-  color: #229e54;
+  border: solid 1px #7a5fc0;
+  color: #7a5fc0;
 }
 .updated_itemdisplay_area2_cont1_rating_div {
   display: flex;
@@ -513,7 +513,7 @@
   background: white;
   padding: 1em;
   align-items: center;
-  border: solid 1px #229e54;
+  border: solid 1px #7a5fc0;
   border-radius: 10px;
   box-shadow: 0px 4px 10px #e2e2e2;
 }
@@ -540,7 +540,7 @@
   width: 50px;
   border: none;
   border-radius: 25px;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
 }
 .add_btn:disabled {
@@ -610,7 +610,7 @@ a.More_details_link {
   border: solid 1px #e5e5e5;
 }
 .dark .product_specifications_area {
-  background: #1c2c22;
+  background: #151422;
   border: solid 1px #304a3a;
 }
 .product_specifications_area_head {
@@ -625,7 +625,7 @@ a.More_details_link {
   top: 0;
 }
 .dark .product_specifications_area_head {
-  background: #1c2c22;
+  background: #151422;
 }
 .product_specifications_area_body {
   width: 100% !important;
@@ -633,7 +633,7 @@ a.More_details_link {
   padding: 20px;
 }
 .dark .product_specifications_area_body {
-  background: #1c2c22;
+  background: #151422;
   color: #fff;
 }
 .product_specifications_area_body > img {
@@ -651,7 +651,7 @@ a.More_details_link {
   font-weight: 500;
 }
 .dark .product_specifications_area_head_tab_active {
-  background: #1c2c22;
+  background: #151422;
   color: #ffffff;
 }
 .product_specifications_area_head_tab {
@@ -673,7 +673,7 @@ a.More_details_link {
   font-size: 14px;
   border-radius: 50px;
   border: none;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
 }
 .save_button_btn:disabled {
@@ -714,7 +714,7 @@ a.More_details_link {
 }
 .tagconditionDiv {
   font-size: 10px;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
   padding: 3px 7px;
   border-radius: 40px;
@@ -889,7 +889,7 @@ a.More_details_link {
   }
   .updated_itemdisplay_area2_cont2_choose_grade_select1_active {
     padding: 1em;
-    border: solid 1px #229e54;
+    border: solid 1px #7a5fc0;
     border-radius: 6px;
     display: flex;
     flex-direction: column;
@@ -897,7 +897,7 @@ a.More_details_link {
     justify-content: center;
     cursor: pointer;
     width: 100%;
-    background: #229e54;
+    background: #7a5fc0;
     color: white;
   }
   .updated_itemdisplay_area1_grades_display_area_2_cont1_deatil_area1_cont1_amount {
@@ -923,7 +923,7 @@ a.More_details_link {
   }
   .Updated_itemdisplay_payment_proceed_div_payment_way_cont1_active {
     width: 100%;
-    background: #229e54;
+    background: #7a5fc0;
     color: #fff;
     padding: 1em 0em;
     display: flex;

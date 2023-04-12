@@ -22,10 +22,10 @@
 .modifyMembershipFeeDiv_body_monthly {
   width: 100%;
   margin-right: 1em;
-  background: #1c2c22;
+  background: #151422;
   padding: 2em;
   border-radius: 10px;
-  border: solid 1px #41564a;
+  border: solid 1px #1f1e2e;
   display: flex;
   flex-direction: column;
   color: #fff;
@@ -42,7 +42,7 @@
   margin-top: 10px;
   display: flex;
   flex-direction: column;
-  border-top: solid 1px #41564a;
+  border-top: solid 1px #1f1e2e;
   padding-top: 10px;
 }
 .modifyMembershipFeeDiv_body_monthly_input_div_1 {
@@ -57,8 +57,8 @@
 .modifyMembershipFeeDiv_body_monthly_input_div_1_input {
   padding: 10px;
   border-radius: 10px;
-  border: solid 1px #41564a;
-  background: #0b110c;
+  border: solid 1px #1f1e2e;
+  background: #0d0c14;
   color: #fff;
 }
 .modifyMembershipFeeDiv_body_monthly_btn_div {
@@ -74,7 +74,7 @@
   max-width: 200px;
   border-radius: 10px;
   border: none;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
   font-size: 14px;
   font-weight: 600;

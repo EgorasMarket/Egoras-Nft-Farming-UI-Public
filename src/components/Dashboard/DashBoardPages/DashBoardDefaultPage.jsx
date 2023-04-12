@@ -115,10 +115,9 @@ const transactions = [
   },
 ];
 const DashBoardDefaultPage = () => {
-
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, []);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [active, setActive] = useState("supply");
   const [percentBtn, setPercentBtn] = useState("");
 
@@ -337,7 +336,7 @@ const DashBoardDefaultPage = () => {
                     <Line
                       type="monotone"
                       dataKey="APY"
-                      stroke="#229e54"
+                      stroke="#7a5fc0"
                       activeDot={{ r: 7 }}
                     />
                   </LineChart>

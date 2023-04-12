@@ -223,808 +223,6 @@ const DashboardHome = () => {
     }
     return null;
   };
-  const Transactions = [
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed358f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85re0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ee348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50edg48f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed248f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348785de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed343f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f95de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f852e0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Create Lock",
-      date: "2/19/2023",
-      amount: "6,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      action: "Claim Reward",
-      date: "2/19/2023",
-      amount: "1,257.54",
-      address: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-  ];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -1185,16 +383,7 @@ const DashboardHome = () => {
       console.log(res);
     }
   }, [account]);
-  const assets = [
-    {
-      id: "1",
-      img: "/img/tokens-folder/bnb_icon.png",
-      name: "Binance Smart Chain",
-      address: "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
-      symbol: "BNB",
-      favorite: "true",
-    },
-  ];
+
   const ListedCoins = {
     "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd": {
       symbol: "BNB",
@@ -1275,12 +464,12 @@ const DashboardHome = () => {
                             >
                               <stop
                                 offset="5%"
-                                stopColor="#60c589"
+                                stopColor="#827dc3"
                                 stopOpacity={0.3}
                               />
                               <stop
                                 offset="100%"
-                                stopColor="#60c589"
+                                stopColor="#827dc3"
                                 stopOpacity={0}
                               />
                             </linearGradient>
@@ -1295,7 +484,7 @@ const DashboardHome = () => {
                           <Area
                             type="monotone"
                             dataKey="value"
-                            stroke="#229e54"
+                            stroke="#7a5fc0"
                             fillOpacity={1}
                             fill="url(#colorUv)"
                             strokeWidth={2}
@@ -1329,12 +518,12 @@ const DashboardHome = () => {
                             >
                               <stop
                                 offset="5%"
-                                stopColor="#60c589"
+                                stopColor="#827dc3"
                                 stopOpacity={0.3}
                               />
                               <stop
                                 offset="100%"
-                                stopColor="#60c589"
+                                stopColor="#827dc3"
                                 stopOpacity={0}
                               />
                             </linearGradient>
@@ -1349,7 +538,7 @@ const DashboardHome = () => {
                           <Area
                             type="monotone"
                             dataKey="value"
-                            stroke="#229e54"
+                            stroke="#7a5fc0"
                             fillOpacity={1}
                             fill="url(#colorUv)"
                             strokeWidth={2}
@@ -1401,12 +590,12 @@ const DashboardHome = () => {
                             >
                               <stop
                                 offset="5%"
-                                stopColor="#60c589"
+                                stopColor="#827dc3"
                                 stopOpacity={0.7}
                               />
                               <stop
                                 offset="100%"
-                                stopColor="#60c589"
+                                stopColor="#827dc3"
                                 stopOpacity={0.3}
                               />
                             </linearGradient>
@@ -1419,7 +608,7 @@ const DashboardHome = () => {
                           <Bar
                             // type="monotone"
                             dataKey="value"
-                            // stroke="#60c589"
+                            // stroke="#827dc3"
                             // fillOpacity={1}
                             fill="url(#colorUvBar1)"
                             // strokeWidth={2}
@@ -1456,12 +645,12 @@ const DashboardHome = () => {
                             >
                               <stop
                                 offset="5%"
-                                stopColor="#60c589"
+                                stopColor="#827dc3"
                                 stopOpacity={0.7}
                               />
                               <stop
                                 offset="100%"
-                                stopColor="#60c589"
+                                stopColor="#827dc3"
                                 stopOpacity={0.3}
                               />
                             </linearGradient>
@@ -1539,12 +728,12 @@ const DashboardHome = () => {
                             >
                               <stop
                                 offset="5%"
-                                stopColor="#60c589"
+                                stopColor="#827dc3"
                                 stopOpacity={0.3}
                               />
                               <stop
                                 offset="100%"
-                                stopColor="#60c589"
+                                stopColor="#827dc3"
                                 stopOpacity={0}
                               />
                             </linearGradient>
@@ -1559,7 +748,7 @@ const DashboardHome = () => {
                           <Area
                             type="monotone"
                             dataKey="value"
-                            stroke="#229e54"
+                            stroke="#7a5fc0"
                             fillOpacity={1}
                             fill="url(#colorUv)"
                             strokeWidth={2}
@@ -1593,12 +782,12 @@ const DashboardHome = () => {
                             >
                               <stop
                                 offset="5%"
-                                stopColor="#60c589"
+                                stopColor="#827dc3"
                                 stopOpacity={0.3}
                               />
                               <stop
                                 offset="100%"
-                                stopColor="#60c589"
+                                stopColor="#827dc3"
                                 stopOpacity={0}
                               />
                             </linearGradient>
@@ -1613,7 +802,7 @@ const DashboardHome = () => {
                           <Area
                             type="monotone"
                             dataKey="value"
-                            stroke="#229e54"
+                            stroke="#7a5fc0"
                             fillOpacity={1}
                             fill="url(#colorUv)"
                             strokeWidth={2}
@@ -1665,12 +854,12 @@ const DashboardHome = () => {
                             >
                               <stop
                                 offset="5%"
-                                stopColor="#60c589"
+                                stopColor="#827dc3"
                                 stopOpacity={0.7}
                               />
                               <stop
                                 offset="100%"
-                                stopColor="#60c589"
+                                stopColor="#827dc3"
                                 stopOpacity={0.3}
                               />
                             </linearGradient>
@@ -1683,7 +872,7 @@ const DashboardHome = () => {
                           <Bar
                             // type="monotone"
                             dataKey="value"
-                            // stroke="#60c589"
+                            // stroke="#827dc3"
                             // fillOpacity={1}
                             fill="url(#colorUvBar1)"
                             // strokeWidth={2}
@@ -1720,12 +909,12 @@ const DashboardHome = () => {
                             >
                               <stop
                                 offset="5%"
-                                stopColor="#60c589"
+                                stopColor="#827dc3"
                                 stopOpacity={0.7}
                               />
                               <stop
                                 offset="100%"
-                                stopColor="#60c589"
+                                stopColor="#827dc3"
                                 stopOpacity={0.3}
                               />
                             </linearGradient>

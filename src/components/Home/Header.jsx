@@ -593,8 +593,13 @@ const Header = ({ togglemakeDark, check }) => {
                     alt="..."
                     className="egr-logo2"
                   />
-                  <img
+                  {/* <img
                     src="/img/logoVideoThumbnail.svg"
+                    alt="..."
+                    className="egr-logo2dark"
+                  /> */}
+                  <img
+                    src="/img/martgpt_logo.svg"
                     alt="..."
                     className="egr-logo2dark"
                   />
@@ -608,8 +613,13 @@ const Header = ({ togglemakeDark, check }) => {
                       alt="..."
                       className="egr-logo"
                     />
-                    <img
+                    {/* <img
                       src="/img/logoVideoThumbnail.svg"
+                      alt="..."
+                      className="egr-logodark"
+                    /> */}
+                    <img
+                      src="/img/martgpt_logo.svg"
                       alt="..."
                       className="egr-logodark"
                     />

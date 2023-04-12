@@ -150,25 +150,25 @@
   color: #e4a788;
 }
 .sidebar-link1:active {
-  color: #229e54;
+  color: #7a5fc0;
 }
 .sidebar-link1-active::before {
   content: "";
   width: 5px;
   height: 5px;
-  background: #229e54;
+  background: #7a5fc0;
   top: 10px;
   position: absolute;
   left: -8px;
   border-radius: 100%;
 }
 .sidebar-link1-active {
-  color: #229e54;
+  color: #7a5fc0;
   font-weight: 600;
   font-size: 16px;
 }
 .whitepaperHeading {
-  color: #229e54;
+  color: #7a5fc0;
   font-size: 32px;
   font-weight: 600;
   line-height: 36px;

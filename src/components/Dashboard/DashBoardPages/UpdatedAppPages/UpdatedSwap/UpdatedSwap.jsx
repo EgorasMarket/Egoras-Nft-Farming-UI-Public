@@ -1171,7 +1171,7 @@ const UpdatedSwap = () => {
                                     {isAmountLoading ? (
                                       <div className="amount_loading_div">
                                         <PulseLoader
-                                          color="#24382b"
+                                          color="#12111b"
                                           size={20}
                                           height={20}
                                         />
@@ -1400,7 +1400,7 @@ const UpdatedSwap = () => {
                                               >
                                                 {isLoading ? (
                                                   <ScaleLoader
-                                                    color="#24382b"
+                                                    color="#12111b"
                                                     size={10}
                                                     height={20}
                                                   />
@@ -1428,7 +1428,7 @@ const UpdatedSwap = () => {
                                                   >
                                                     {isLoading ? (
                                                       <ScaleLoader
-                                                        color="#24382b"
+                                                        color="#12111b"
                                                         size={10}
                                                         height={20}
                                                       />
@@ -1469,7 +1469,7 @@ const UpdatedSwap = () => {
                                               >
                                                 {isLoading ? (
                                                   <ScaleLoader
-                                                    color="#24382b"
+                                                    color="#12111b"
                                                     size={10}
                                                     height={20}
                                                   />
@@ -1500,7 +1500,7 @@ const UpdatedSwap = () => {
                                               >
                                                 {isLoading ? (
                                                   <ScaleLoader
-                                                    color="#24382b"
+                                                    color="#12111b"
                                                     size={10}
                                                     height={20}
                                                   />
@@ -1517,7 +1517,7 @@ const UpdatedSwap = () => {
                                               >
                                                 {isLoading ? (
                                                   <ScaleLoader
-                                                    color="#24382b"
+                                                    color="#12111b"
                                                     size={10}
                                                     height={20}
                                                   />

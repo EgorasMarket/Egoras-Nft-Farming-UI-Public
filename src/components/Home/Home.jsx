@@ -506,7 +506,12 @@ const Home = () => {
           <div id="stars3"></div>
         </div>
         {/* <img src="/img/hero_bg_bg.png" alt="" className="blurDrop-token2" /> */}
-        <img src="/img/hero_backdrop.png" alt="" className="hero_backdrop" />
+        {/* <img src="/img/hero_backdrop.png" alt="" className="hero_backdrop" /> */}
+        <img
+          src="/img/martgpt_logoand_hero_bg.png"
+          alt=""
+          className="hero_backdrop"
+        />
       </section>
     </div>
   );

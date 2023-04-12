@@ -994,7 +994,7 @@ const StakingUpdate = () => {
                         className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
                       >
                         {isLoading ? (
-                          <ScaleLoader color="#24382b" size={10} height={20} />
+                          <ScaleLoader color="#12111b" size={10} height={20} />
                         ) : (
                           <>Approve EGC</>
                         )}
@@ -1009,7 +1009,7 @@ const StakingUpdate = () => {
                           >
                             {isLoading ? (
                               <ScaleLoader
-                                color="#24382b"
+                                color="#12111b"
                                 size={10}
                                 height={20}
                               />
@@ -1026,7 +1026,7 @@ const StakingUpdate = () => {
                           >
                             {isLoading ? (
                               <ScaleLoader
-                                color="#24382b"
+                                color="#12111b"
                                 size={10}
                                 height={20}
                               />
@@ -1074,7 +1074,7 @@ const StakingUpdate = () => {
                       disabled={ClaimDisable}
                     >
                       {isLoading2 ? (
-                        <ScaleLoader color="#24382b" size={10} height={20} />
+                        <ScaleLoader color="#12111b" size={10} height={20} />
                       ) : (
                         <>Claim Reward</>
                       )}
@@ -1116,7 +1116,7 @@ const StakingUpdate = () => {
                         disabled={lockDisable}
                       >
                         {isLoading2 ? (
-                          <ScaleLoader color="#24382b" size={10} height={20} />
+                          <ScaleLoader color="#12111b" size={10} height={20} />
                         ) : (
                           <>Remove Lock </>
                         )}
@@ -1128,7 +1128,7 @@ const StakingUpdate = () => {
                         disabled={lockDisable}
                       >
                         {isLoading2 ? (
-                          <ScaleLoader color="#24382b" size={10} height={20} />
+                          <ScaleLoader color="#12111b" size={10} height={20} />
                         ) : (
                           <>Remove Lock </>
                         )}
@@ -1240,12 +1240,12 @@ const StakingUpdate = () => {
                           >
                             <stop
                               offset="5%"
-                              stopColor="#60c589"
+                              stopColor="#827dc3"
                               stopOpacity={0.3}
                             />
                             <stop
                               offset="100%"
-                              stopColor="#60c589"
+                              stopColor="#827dc3"
                               stopOpacity={0}
                             />
                           </linearGradient>
@@ -1257,7 +1257,7 @@ const StakingUpdate = () => {
                         <Area
                           type="monotone"
                           dataKey="amount"
-                          stroke="#229e54"
+                          stroke="#7a5fc0"
                           fillOpacity={1}
                           fill="url(#colorUv)"
                           strokeWidth={2}
@@ -1301,7 +1301,7 @@ const StakingUpdate = () => {
                             />
                           </linearGradient>
                         </defs>
-                        <CartesianGrid strokeDasharray="1 1" stroke="#283b2f" />
+                        <CartesianGrid strokeDasharray="1 1" stroke="#1d1c2c" />
                         <XAxis dataKey="time" stroke="0" />
                         {/* <YAxis stroke="#fff" /> */}
                         <Tooltip />

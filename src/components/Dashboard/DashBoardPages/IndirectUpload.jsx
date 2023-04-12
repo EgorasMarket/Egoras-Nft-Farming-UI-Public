@@ -309,7 +309,7 @@ const IndirectUpload = ({
               onClick={UploadProduct}
             >
               {isLoading ? (
-                <ScaleLoader color="#24382b" size={10} height={20} />
+                <ScaleLoader color="#12111b" size={10} height={20} />
               ) : (
                 <> Upload Product</>
               )}

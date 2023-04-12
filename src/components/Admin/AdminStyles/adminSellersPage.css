@@ -19,7 +19,7 @@
   position: relative;
   z-index: 1;
   cursor: pointer;
-  background: #1c2c22;
+  background: #151422;
   padding: 5px;
   width: 75px;
   font-size: 13px;
@@ -28,7 +28,7 @@
   justify-content: center;
   color: #fff;
   border-radius: 8px;
-  border: solid 1px #3d4e44;
+  border: solid 1px #262538;
   margin-bottom: 1em;
 }
 .saleDetailsDiv_area_closeIcon {
@@ -37,7 +37,7 @@
 }
 .saleDetailsDiv_area {
   width: 100%;
-  background: #0b110c;
+  background: #0d0c14;
   box-shadow: 0px 0px 20px 0px #000;
   padding: 1em;
   border-radius: 10px;
@@ -66,7 +66,7 @@
 }
 .saleDetailsDiv_area_1 {
   padding: 1em;
-  border: solid 1px #3d4e44;
+  border: solid 1px #262538;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -75,12 +75,12 @@
 }
 .saleDetailsDiv_area_1_title {
   font-size: 18px;
-  color: #7c9988;
+  color: #787690;
   margin-bottom: 0.5em;
 }
 .saleDetailsDiv_area_1_div1 {
   padding: 1em;
-  background: #1c2c22;
+  background: #151422;
   margin-bottom: 0.5em;
   border-radius: 7px;
   display: flex;
@@ -88,11 +88,11 @@
   font-size: 14px;
 }
 .saleDetailsDiv_area_1_div1_title {
-  color: #6d8677;
+  color: #787690;
 }
 .PlaceBidDiv {
   padding: 10px;
-  background: #1c2c22;
+  background: #151422;
   border-radius: 10px;
   border: solid 1px #2f4738;
   display: flex;
@@ -115,7 +115,7 @@
 input.PlaceBidDiv_Body_1_input {
   padding: 1em;
   border-radius: 10px;
-  background: #0b110c;
+  background: #0d0c14;
   color: #b0cebc;
   border: solid 1px #2f4738;
 }
@@ -127,7 +127,7 @@ button.PlaceBidDiv_Button {
   width: 100%;
   padding: 1em;
   border-radius: 10px;
-  background: #229e54;
+  background: #7a5fc0;
   background: #fff;
   color: #000;
   border: none;
@@ -155,7 +155,7 @@ button.PlaceBidDiv_Button {
   width: 89px;
   border-radius: 10px;
   border: none;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
   margin: auto;
   font-size: 14px;

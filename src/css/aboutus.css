@@ -5,7 +5,7 @@
   background-image: radial-gradient(white, #ececec);
 }
 .dark .about_us_section_hero {
-  background-image: radial-gradient(#274b35, #1e2822);
+  background-image: radial-gradient(#274b35, #0f0e1c);
   color: #fff;
 }
 .about_us_section_hero_area_1 {
@@ -138,7 +138,7 @@ section.advantages_section {
 .advantages_section_area_2_cont1_head {
   font-size: 24px;
   font-weight: 600;
-  color: #229e54;
+  color: #7a5fc0;
   display: flex;
   align-items: center;
   /* justify-content: space-between; */
@@ -460,7 +460,7 @@ section.featuredIn_section {
   width: 210px;
 }
 .feauturedIn_area_head {
-  background: #1c2c2287;
+  background: #15142287;
   padding: 0.5em;
   width: 165px;
   text-align: center;
@@ -584,7 +584,7 @@ button.join_community_area1_btn_btn {
   .mobile_road_map_line_div {
     width: 15px;
     height: 78em;
-    background: #229e54;
+    background: #7a5fc0;
     margin: auto;
     margin-left: 1em;
   }

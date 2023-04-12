@@ -24,7 +24,7 @@
   color: #fff;
 }
 .witdraw_funds_div_btn {
-  background: #229e54;
+  background: #7a5fc0;
   box-shadow: 0px 0px 5px #000000;
   color: #fff;
   padding: 20px 0px;
@@ -62,7 +62,7 @@
 }
 .welcome_bonus_icon_div {
   padding: 3px;
-  background: #d7f5e3;
+  background: #c6c5dc;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -74,8 +74,8 @@
   padding: 2px;
   font-size: 15px !important;
   border-radius: 50%;
-  box-shadow: 0px 3px 6px #79ae8e;
-  color: #229e54;
+  box-shadow: 0px 3px 6px #7c7a9c;
+  color: #7a5fc0;
 }
 .wallet_addr_cont_txt {
   white-space: nowrap;
@@ -165,7 +165,7 @@
 }
 .user_details_body1_body_cont1_span2_span {
   font-size: 11px;
-  color: #92ab9c;
+  color: #787690;
 }
 
 .user_details_body1_body_cont1_last_layer {
@@ -233,7 +233,7 @@
   font-size: 15px;
   border-radius: 8px;
   border: none;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
   font-weight: 600;
   box-shadow: 0px 5px 10px #88c7a1;
@@ -242,7 +242,7 @@
   padding: 15px 0px;
   border-radius: 10px;
   border: none;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
   font-weight: 600;
   box-shadow: 0px 5px 15px #7cb994;
@@ -267,14 +267,14 @@
   display: flex;
 }
 .user_details_area_div1_head {
-  color: #6c8e79;
+  color: #787690;
   margin-bottom: 5px;
 }
 .user_details_area_div1_input {
   padding: 15px;
   border-radius: 10px;
-  background: #0b110c;
-  border: solid 1px #3d4e44;
+  background: #0d0c14;
+  border: solid 1px #262538;
   color: #bfbfbf;
 }
 .user_details_area_btn_div {
@@ -288,7 +288,7 @@
   width: 100%;
   max-width: 200px;
   border-radius: 13px;
-  background: #308651;
+  background: #7a5fc0;
   color: #fff;
   font-weight: 500;
   border: none;
@@ -306,8 +306,8 @@
 /* ============================================== */
 .userDetails_div {
   padding: 2em;
-  background: #1c2c22;
-  border: solid 1px #3d4e44;
+  background: #151422;
+  border: solid 1px #262538;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -341,7 +341,7 @@
   padding: 0.5em 0em;
   border-radius: 6px;
   border: none;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
   font-weight: 600;
   box-shadow: 0px 10px 10px #cdeeda;
@@ -366,14 +366,14 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: solid 1px #3d4e44;
+  border: solid 1px #262538;
   padding: 1em;
 }
 .BuyerSellerDiv_tabs {
   display: flex;
   align-items: center;
   padding: 1em;
-  background: #1c2c22;
+  background: #151422;
   border-radius: 10px;
   margin-bottom: 1em;
 }
@@ -388,10 +388,10 @@
   align-items: center;
   justify-content: center;
   border-radius: 9px;
-  background: #2f8a51;
+  background: #7a5fc0;
 }
 .BuyerSellerDiv_body {
-  background: #1c2c22;
+  background: #151422;
   padding: 2em;
   color: #fff;
   border-radius: 10px;
@@ -427,7 +427,7 @@
 }
 .BuyerSellerDiv_tab1 {
   padding: 10px;
-  color: #688473;
+  color: #65637a;
   margin-right: 10px;
   cursor: pointer;
   width: 7em;
@@ -436,7 +436,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 9px;
-  background: #2a4838;
+  background: #28263e;
 }
 .BuyerSellerDiv_body_div1_text {
   font-size: 24px;
@@ -448,7 +448,7 @@
   display: flex;
   flex-direction: column;
   padding: 2em;
-  background: #16251c;
+  background: #1c1b2c;
   border-radius: 11px;
 }
 .filter_table_area_2b {
@@ -458,10 +458,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #0e1912;
+  background: #13121f;
   padding: 15px;
   border-radius: 10px;
-  border: solid 1px #41564a;
+  border: solid 1px #1f1e2e;
 }
 /* ======================== */
 /* ======================== */

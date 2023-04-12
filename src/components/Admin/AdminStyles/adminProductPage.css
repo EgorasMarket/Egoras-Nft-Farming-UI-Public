@@ -13,7 +13,7 @@
 }
 .editProductDiv_area {
   width: 41em;
-  background: #1c2c22;
+  background: #151422;
   padding: 2em;
   overflow: scroll;
   position: relative;
@@ -73,12 +73,12 @@
   align-items: center;
   width: 100%;
   padding: 1em 2em;
-  background: #1c2c22;
+  background: #151422;
   /* margin: 1em; */
   /* margin-right: 0em; */
   /* margin-left: 0em; */
   border-radius: 10px;
-  border: solid 1px #41564a;
+  border: solid 1px #1f1e2e;
   color: #fff;
   padding-top: 2em;
   position: relative;
@@ -98,7 +98,7 @@
   padding: 10px;
   width: 100%;
   border-radius: 10px;
-  border: solid 1px #41564a;
+  border: solid 1px #1f1e2e;
   background: #0e1611;
   color: #fff;
 }
@@ -135,12 +135,12 @@
   color: #fff;
 }
 .dark .rdw-editor-toolbar {
-  border: 1px solid #62846f !important;
-  background: #365241 !important;
+  border: 1px solid #4b4968 !important;
+  background: #33314e !important;
 }
 .dark .rdw-option-wrapper {
-  border: 1px solid #293f31 !important;
-  background: #a5c1b0 !important;
+  border: 1px solid #111018 !important;
+  background: #8f8bbc !important;
 }
 .dark .rdw-dropdown-selectedtext span {
   color: #000000 !important;

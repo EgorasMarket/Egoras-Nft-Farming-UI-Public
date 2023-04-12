@@ -524,7 +524,7 @@ const ProductDetailPage = ({ match }) => {
                         >
                           {isLoading ? (
                             <ScaleLoader
-                              color="#24382b"
+                              color="#12111b"
                               size={10}
                               height={20}
                             />
