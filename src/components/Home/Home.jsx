@@ -11,10 +11,7 @@ import formatNumber from "../Dashboard/DashBoardPages/FormatNumber";
 import axios from "axios";
 import { config } from "../../actions/Config";
 import { API_URL } from "../../actions/types";
-import {
-  CALL_CHECK_USER_AND_MEMBERSHIP,
-  CALL_ADD_USER_ADDRESS,
-} from "../../services/userServices";
+import { CALL_CHECK_USER_AND_MEMBERSHIP } from "../../services/userServices";
 import { tokenBalance } from "../../web3";
 import Web3 from "web3";
 

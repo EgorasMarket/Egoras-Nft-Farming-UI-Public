@@ -34,7 +34,7 @@ import {
   GET_USER_UPLOADED_PRODUCT,
 } from "../../../services/productServices";
 import { DISPLAY_NEW_PRODUCTS_CALL } from "../../../services/adminServices";
-import { AcceptBid } from "../../../web3";
+import { AcceptBid, releaseFundsToSeller } from "../../../web3";
 import {
   TOTAL_NUMBER_OF_ITEMS_BOUGHT,
   TotalAmountSold,
@@ -129,15 +129,30 @@ const DashBoardP2PUserSales = () => {
   const markProductAsShipped = async (order_id) => {
     const call = await MARK_PRODUCT_AS_SHIPPED({ user: account, order_id });
     console.log(call);
-    // if (res.success) {
-    //   alert("product shipped successfully");
-    // }
+
+    if (call.status == 200) {
+      var row = document.getElementById(order_id);
+      row.style.display = "none";
+      // alert("product shipped successfully");
+    }
   };
-  const markAsRecieved = async (order_id) => {
-    const call = await MARK_PRODUCT_AS_RECIEVED({ user: account, order_id });
-    console.log(call);
-    if (call.success) {
-      alert("product RECIEVED  successfully");
+  const markAsRecieved = async (order_id, product_id, tradeID) => {
+    // console.log(order_id, product_id, tradeID);
+    const res = await releaseFundsToSeller(
+      product_id,
+      tradeID,
+      library.getSigner()
+    );
+    console.log(res, "somto8uhhhg");
+    if (res.status == true) {
+      // alert("product RECIEVED successfully");
+      const call = await MARK_PRODUCT_AS_RECIEVED({ user: account, order_id });
+      console.log(call);
+      if (call.status == 200) {
+        var row = document.getElementById(order_id);
+        row.style.display = "none";
+        // alert("product shipped successfully");
+      }
     }
   };
 
@@ -564,7 +579,7 @@ const DashBoardP2PUserSales = () => {
                                   return (
                                     <tr
                                       className="assets-category-row  transitionMe"
-                                      id={asset.product_id}
+                                      id={asset.id}
                                     >
                                       <td className="assets-category-data branch_name_title">
                                         <div className="assets-data">
@@ -606,7 +621,11 @@ const DashBoardP2PUserSales = () => {
                                       <td className="assets-category-data-last branch_loan_action">
                                         <button
                                           onClick={() =>
-                                            markAsRecieved(asset.id)
+                                            markAsRecieved(
+                                              asset.id,
+                                              asset.product_id,
+                                              asset.tradeID
+                                            )
                                           }
                                         >
                                           Recieve Product
@@ -955,7 +974,7 @@ const DashBoardP2PUserSales = () => {
                                   return (
                                     <tr
                                       className="assets-category-row  transitionMe"
-                                      id={asset.product_id}
+                                      id={asset.id}
                                     >
                                       <td className="assets-category-data branch_name_title">
                                         <div className="assets-data">
@@ -995,7 +1014,15 @@ const DashBoardP2PUserSales = () => {
                                           : "N/A"}
                                       </td>
                                       <td className="assets-category-data-last branch_loan_action">
-                                        <ArrowForwardIosIcon />
+                                        <button
+                                          onClick={() =>
+                                            markProductAsShipped(asset.id)
+                                          }
+                                        >
+                                          {" "}
+                                          Mark As Shipped
+                                        </button>
+                                        {/* <ArrowForwardIosIcon /> */}
                                       </td>
                                     </tr>
                                   );
@@ -1045,15 +1072,15 @@ const DashBoardP2PUserSales = () => {
                                         : "N/A"}
                                     </td>
                                     <td className="assets-category-data-last branch_loan_action">
-                                      <button
+                                      {/* <button
                                         onClick={() =>
                                           markProductAsShipped(asset.id)
                                         }
                                       >
                                         {" "}
                                         Mark As Shipped
-                                      </button>
-                                      {/* <ArrowForwardIosIcon /> */}
+                                      </button> */}
+                                      <ArrowForwardIosIcon />
                                     </td>
                                   </tr>
                                 );
