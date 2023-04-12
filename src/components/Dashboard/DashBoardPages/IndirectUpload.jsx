@@ -1,6 +1,38 @@
-import React from "react";
-
-const IndirectUpload = () => {
+import React, { useState, useEffect } from "react";
+import ImageIcon from "@mui/icons-material/Image";
+import CloseIcon from "@mui/icons-material/Close";
+import ScaleLoader from "react-spinners/ScaleLoader";
+const IndirectUpload = ({
+  Disable,
+  UploadProduct,
+  isLoading,
+  saleAmount,
+  handleProdConditionChange,
+  prodCondition,
+  account,
+  brandName,
+  handleProdCountChange,
+  prodCount,
+  handleSaleAmountChange,
+  handleRemoveClick3,
+  handleNameChange,
+  prodName,
+  handleBrandNameChange,
+  handleClick3,
+  imageSrc3,
+  imageSrc2,
+  handleRemoveClick2,
+  fileInputRef3,
+  handleImageSelect3,
+  fileInputRef,
+  handleImageSelect,
+  imageSrc,
+  handleClick,
+  handleRemoveClick,
+  fileInputRef2,
+  handleImageSelect2,
+  handleClick2,
+}) => {
   return (
     <div className="uploadDiv">
       <div className="sell_container_header">

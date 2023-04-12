@@ -315,15 +315,18 @@ const DirectUpload = ({
               onChange={handleCenter2}
             >
               {allCategories.map((option) => (
-                <option
-                  key={option.product_category}
-                  value={option.product_category}
-                  // onClick={(e) =>
-                  //   getCatName(option.product_brand)
-                  // }
-                >
-                  {option.product_category}
-                </option>
+                <>
+                  <option value=""></option>
+                  <option
+                    key={option.product_category}
+                    value={option.product_category}
+                    // onClick={(e) =>
+                    //   getCatName(option.product_brand)
+                    // }
+                  >
+                    {option.product_category}
+                  </option>
+                </>
               ))}
             </select>
 

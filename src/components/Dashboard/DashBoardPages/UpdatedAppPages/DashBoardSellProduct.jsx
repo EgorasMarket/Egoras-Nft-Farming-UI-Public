@@ -14,6 +14,7 @@ import { EditorState, convertToRaw, convertFromRaw } from "draft-js";
 import draftToHtml from "draftjs-to-html";
 import UpdatedErrorModal from "./UpdatedSuccessErrorModals/UpdatedErrorModal";
 import DirectUpload from "./DirectUpload";
+import IndirectUpload from "../IndirectUpload";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -205,7 +206,9 @@ const DashBoardSellProduct = () => {
             "DIRECT",
             prodCount
           );
-          return;
+        } else {
+          setIsLoading(false);
+          setDisable(false);
         }
       } catch (err) {
         console.log(err.response);
@@ -232,15 +235,25 @@ const DashBoardSellProduct = () => {
             "INDIRECT",
             prodCount
           );
-          return;
+        } else {
+          setIsLoading(false);
+          setDisable(false);
         }
       } catch (err) {
+        console.log(err.response);
         console.log(err);
-        console.log(err);
-        setErrorModal(true);
-        setErrorMessage(err.response.data.errorMessage);
-        setIsLoading(false);
-        setDisable(false);
+        console.log(err.message);
+        if (err.message == "Network Error") {
+          setErrorModal(true);
+          setErrorMessage(err.message);
+          setIsLoading(false);
+          setDisable(false);
+        } else {
+          setErrorModal(true);
+          setErrorMessage(err.response.data.errorMessage);
+          setIsLoading(false);
+          setDisable(false);
+        }
       }
     }
 
@@ -286,10 +299,12 @@ const DashBoardSellProduct = () => {
         ],
       };
       const contentState = convertFromRaw(content);
-      console.log(contentState);
+      let text = draftToHtml(convertToRaw(contentState));
+      console.log(text);
       setEditorState(EditorState.createWithContent(contentState));
       const targetSection = document.querySelector("#target-section");
       targetSection.scrollIntoView({ behavior: "smooth" });
+      setFormData({ ...formData, product_details: text });
     }
 
     if (response1.data) {
@@ -384,7 +399,7 @@ const DashBoardSellProduct = () => {
     async function fetchData() {
       const res = await GET_CATEGORIES();
 
-      // console.log(res.data.allCategories);
+      console.log(res.data.allCategories);
       setAllCategories(res.data.allCategories);
       // allCategories, setAllCategories
     }
@@ -471,6 +486,8 @@ const DashBoardSellProduct = () => {
   const onEditorStateChange = (editorState) => {
     let text = draftToHtml(convertToRaw(editorState.getCurrentContent()));
 
+    console.log(editorState.getCurrentContent());
+
     setFormData({ ...formData, product_details: text });
     setEditorState(editorState);
   };
@@ -526,6 +543,10 @@ const DashBoardSellProduct = () => {
   const AddInputCount = () => {
     setInputCount(inputCount + 1);
   };
+  useEffect(() => {
+    console.log(prodSpec);
+  }, [prodSpec]);
+
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -604,7 +625,37 @@ const DashBoardSellProduct = () => {
                 AddInputCount={AddInputCount}
               />
             ) : (
-              <></>
+              <IndirectUpload
+                Disable={Disable}
+                UploadProduct={UploadProduct}
+                isLoading={isLoading}
+                saleAmount={saleAmount}
+                handleProdConditionChange={handleProdConditionChange}
+                prodCondition={prodCondition}
+                account={account}
+                brandName={brandName}
+                handleProdCountChange={handleProdCountChange}
+                prodCount={prodCount}
+                handleSaleAmountChange={handleSaleAmountChange}
+                handleRemoveClick3={handleRemoveClick3}
+                handleNameChange={handleNameChange}
+                prodName={prodName}
+                handleBrandNameChange={handleBrandNameChange}
+                handleClick3={handleClick3}
+                imageSrc3={imageSrc3}
+                imageSrc2={imageSrc2}
+                handleRemoveClick2={handleRemoveClick2}
+                fileInputRef3={fileInputRef3}
+                handleImageSelect3={handleImageSelect3}
+                fileInputRef={fileInputRef}
+                handleImageSelect={handleImageSelect}
+                imageSrc={imageSrc}
+                handleClick={handleClick}
+                handleRemoveClick={handleRemoveClick}
+                fileInputRef2={fileInputRef2}
+                handleImageSelect2={handleImageSelect2}
+                handleClick2={handleClick2}
+              />
             )}
           </div>
         </div>
