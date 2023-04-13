@@ -28,6 +28,7 @@ import {
   // GET_ALL_UPLOADED_PRODUCTS,
   ACCEPT_BID,
   DISPLAY_NEW_USER_PRODUCTS_CALL,
+  CALL_USER_INDIRECT_PRODUCTS_STATS,
 } from "../../../services/productServices";
 // import { DISPLAY_NEW_PRODUCTS_CALL } from "../../../services/adminServices";
 import { AcceptBid } from "../../../web3";
@@ -54,6 +55,7 @@ const DashBoardUserSales = () => {
   } = context;
   const [lockedValue, setLockedValue] = useState(0);
   const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);
+  const [approvedProdCount, setApprovedProdCount] = useState(0);
   // const [totalLendingCount, setTotalLendingCount] = useState(0);
   const [activeBtn, setActivrBtn] = useState("Ongoing");
   const [indexId, setIndexId] = useState(null);
@@ -79,7 +81,19 @@ const DashBoardUserSales = () => {
       }
     };
 
+    const fetchData2 = async () => {
+      const response = await CALL_USER_INDIRECT_PRODUCTS_STATS(account);
+      console.log(response.data, response.data[0].totalSum, "goody__");
+
+      if (response.data) {
+        setLockedValue(response.data[0].totalSum);
+        setApprovedProdCount(response.data[0].totalCOunt);
+        // setUploadedProducts(response.data);
+      }
+    };
+
     fetchData();
+    fetchData2();
   }, [account]);
 
   const handleAcceptBid = async (action) => {
@@ -568,10 +582,8 @@ const DashBoardUserSales = () => {
                           Total Products Approved
                         </div>
                         <div className="lending_area1_cont1_body_txt">
-                          {numberWithCommas(
-                            parseInt(lockedValue / 570).toFixed(2)
-                          )}{" "}
-                          <span className="usd_sign">USD</span>
+                          {approvedProdCount}{" "}
+                          {/* <span className="usd_sign">USD</span> */}
                         </div>
                       </div>
                       <div className="lending_area1_cont1_body_1">

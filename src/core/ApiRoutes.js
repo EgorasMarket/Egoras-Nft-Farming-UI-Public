@@ -27,3 +27,5 @@ export const ADD_USER_ADDRESS = `${API_URL}/pub/register/user/address`;
 export const AI_TEXT = `${API_URL}/openai/text`;
 export const AI_IMAGES = `${API_URL}/openai/images`;
 export const GET_EGC_PRICE_COINGEKO_ROUTE = `${API_URL}/coingeko/egc`;
+export const USER_INDIRECT_PRODUCTS_STATS = `${API_URL}/product/seller/dirct/product/stats`;
+// export const DIRECT_BUY_ORDER_STATS = `${API_URL}/order/buy/order/stats/direct`;
