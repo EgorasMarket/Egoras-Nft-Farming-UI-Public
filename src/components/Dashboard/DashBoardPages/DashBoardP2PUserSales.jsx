@@ -32,6 +32,7 @@ import {
   MARK_PRODUCT_AS_SHIPPED,
   MARK_PRODUCT_AS_RECIEVED,
   GET_USER_UPLOADED_PRODUCT,
+  CALL_SELLER_LOCKED_FUNDS,
 } from "../../../services/productServices";
 import { DISPLAY_NEW_PRODUCTS_CALL } from "../../../services/adminServices";
 import { AcceptBid, releaseFundsToSeller } from "../../../web3";
@@ -81,7 +82,7 @@ const DashBoardP2PUserSales = () => {
   const [uploadedProduct, setUploadedProducts] = useState([]);
 
   useEffect(() => {
-    console.log("kddd_____");
+    // console.log("kddd_____");
     const fetchData = async () => {
       const response = await DISPLAY_NEW_USER_PRODUCTS_CALL(account);
       console.log(response.data, "goody");
@@ -90,8 +91,17 @@ const DashBoardP2PUserSales = () => {
         setUploadedProducts(response.data);
       }
     };
+    const fetchData2 = async () => {
+      const response = await CALL_SELLER_LOCKED_FUNDS(account);
+      console.log(response.data, "goody");
+
+      if (response.data) {
+        setLockedValue(response.data.locked);
+      }
+    };
 
     fetchData();
+    fetchData2();
   }, [account]);
 
   const handleAcceptBid = async (action) => {
@@ -204,74 +214,7 @@ const DashBoardP2PUserSales = () => {
 
     //fetch buy orders for specific user
   }, []);
-  // const buyOrders = [
-  //   {
-  //     id: "1",
-  //     img: "/img/img5.png",
-  //     name: "Hisense Tv",
-  //     amount: 10000,
-  //     seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-  //     status: "Pending",
-  //     time: "Apr-05-2023",
-  //     txHash:
-  //       "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
-  //   },
-  //   {
-  //     id: "2",
-  //     img: "/img/img5.png",
-  //     name: "Lg Tv",
-  //     amount: 10000,
-  //     seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-  //     status: "Pending",
-  //     time: "Apr-05-2023",
-  //     txHash:
-  //       "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
-  //   },
-  //   {
-  //     id: "3",
-  //     img: "/img/img5.png",
-  //     name: "Lg Tv",
-  //     amount: 10000,
-  //     seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-  //     status: "Shipped",
-  //     time: "Apr-05-2023",
-  //     txHash:
-  //       "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
-  //   },
-  //   {
-  //     id: "4",
-  //     img: "/img/img5.png",
-  //     name: "Lg Tv",
-  //     amount: 10000,
-  //     seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-  //     status: "Pending",
-  //     time: "Apr-05-2023",
-  //     txHash:
-  //       "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
-  //   },
-  //   {
-  //     id: "5",
-  //     img: "/img/img5.png",
-  //     name: "Lg Tv",
-  //     amount: 10000,
-  //     seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-  //     status: "Shipped",
-  //     time: "Apr-05-2023",
-  //     txHash:
-  //       "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
-  //   },
-  //   {
-  //     id: "6",
-  //     img: "/img/img5.png",
-  //     name: "Samsung Tv",
-  //     amount: 10000,
-  //     seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-  //     status: "Shipped",
-  //     time: "Apr-05-2023",
-  //     txHash:
-  //       "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
-  //   },
-  // ];
+
   const toggleActiveTab = (e) => {
     let active = e.currentTarget.id;
     setActiveTab(active);
@@ -323,10 +266,14 @@ const DashBoardP2PUserSales = () => {
                       <div className="lending_area1_cont1_user">
                         <div className="lending_area1_cont1_body_1">
                           <div className="lending_area1_cont1_heading">
-                            Total amount of items bought
+                            Total number of items bought
                           </div>
                           <div className="lending_area1_cont1_body_txt">
-                            {buyOrders.length}
+                            {TOTAL_NUMBER_OF_ITEMS_BOUGHT(buyOrders)
+                              .prodCount != null
+                              ? TOTAL_NUMBER_OF_ITEMS_BOUGHT(buyOrders)
+                                  .prodCount
+                              : 0}{" "}
                             <span className="usd_sign"> item(s)</span>
                           </div>
                         </div>
@@ -345,7 +292,11 @@ const DashBoardP2PUserSales = () => {
                             Total price of items Bought
                           </div>
                           <div className="lending_area1_cont1_body_txt">
-                            {TOTAL_NUMBER_OF_ITEMS_BOUGHT(buyOrders)}{" "}
+                            {TOTAL_NUMBER_OF_ITEMS_BOUGHT(buyOrders)
+                              .sub_total != null
+                              ? TOTAL_NUMBER_OF_ITEMS_BOUGHT(buyOrders)
+                                  .sub_total
+                              : 0}{" "}
                             <span className="usd_sign"> eusd</span>
                           </div>
                         </div>
@@ -772,10 +723,10 @@ const DashBoardP2PUserSales = () => {
                     </div>
                     <div className="BuyerSellerDiv_body_Balance_body">
                       <div className="BuyerSellerDiv_body_Balance_body1">
-                        200,000.00 eusd
+                        {numberWithCommas(parseInt(lockedValue).toFixed(2))}{" "}
                       </div>{" "}
                       <div className="BuyerSellerDiv_body_Balance_body2">
-                        ~$ 200,000.00
+                        ~$ {numberWithCommas(parseInt(lockedValue).toFixed(2))}
                       </div>
                     </div>
                   </div>

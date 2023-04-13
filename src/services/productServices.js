@@ -14,6 +14,10 @@ import {
   GET_USERS_SELL_ORDER_ROUTE,
   SELLER_MARK_AS_SHIPPED_ROUTE,
   BUYER_MARK_PRODUCT_AS_RECIEVED,
+  USER_INDIRECT_PRODUCTS_STATS,
+  USER_INDIRECT_BUY_ORDER,
+  SELLER_LOCKED_FUNDS,
+  // DIRECT_BUY_ORDER_STATS,
 } from "../core/ApiRoutes";
 export const config = {
   headers: {
@@ -53,11 +57,40 @@ export const FETCH_USER_BUY_ORDER = async (account) => {
     return err.repsonse;
   }
 };
+export const CALL_USER_INDIRECT_PRODUCTS_STATS = async (account) => {
+  try {
+    const response = await axios.get(
+      `${USER_INDIRECT_PRODUCTS_STATS}/${account}`
+    );
+    // console.log(response.data);
+    return response.data;
+  } catch (err) {
+    return err.repsonse;
+  }
+};
 export const FETCH_USER_SELL_ORDER = async (account) => {
   try {
     const response = await axios.get(
       `${GET_USERS_SELL_ORDER_ROUTE}/${account}`
     );
+    // console.log(response.data);
+    return response.data;
+  } catch (err) {
+    return err.repsonse;
+  }
+};
+export const CALL_USER_INDIRECT_BUY_ORDER = async (account) => {
+  try {
+    const response = await axios.get(`${USER_INDIRECT_BUY_ORDER}/${account}`);
+    // console.log(response.data);
+    return response.data;
+  } catch (err) {
+    return err.repsonse;
+  }
+};
+export const CALL_SELLER_LOCKED_FUNDS = async (account) => {
+  try {
+    const response = await axios.get(`${SELLER_LOCKED_FUNDS}/${account}`);
     // console.log(response.data);
     return response.data;
   } catch (err) {
