@@ -87,7 +87,7 @@ const DashboardReferral = ({ auth }) => {
     console.log(decryptedText);
   };
   useEffect(() => {
-    setPlaintext("0x3dE79168402278C0DA2Bf9A209C3A91d755790FC");
+    setPlaintext(account);
   }, [plaintext]);
   console.log(plaintext);
   useEffect(() => {
@@ -144,10 +144,7 @@ const DashboardReferral = ({ auth }) => {
   useEffect(
     async (e) => {
       if (account) {
-        let response = await getRefStats(
-          "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-          library.getSigner()
-        );
+        let response = await getRefStats(account, library.getSigner());
         console.log(response);
         console.log(response.message._amount.toString(), "to string");
         console.log(response.message._count.toString(), "to string");

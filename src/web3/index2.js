@@ -54,13 +54,45 @@ const monthlyPlanSubScribe = async (signer) => {
     };
   }
 };
+const monthlyPlanSubScribeRef = async (_referral, signer) => {
+  try {
+    const instance = await contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.monthlyPlanWithReferral(_referral);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 const semiAnnuallyPlanSubScribe = async (signer) => {
   try {
     const instance = await contractMembershipFacetInstance(signer);
     let result;
-    result = await instance.semiAnnuallyPlanWithReferral(
-      "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC"
-    );
+    result = await instance.membershipSemiAnnuallyPlan();
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const semiAnnuallyPlanSubScribeRef = async (_referral, signer) => {
+  try {
+    const instance = await contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.semiAnnuallyPlanWithReferral(_referral);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -95,6 +127,23 @@ const annuallyPlanSubScribe = async (signer) => {
     const instance = await contractMembershipFacetInstance(signer);
     let result;
     result = await instance.membershipAnnually();
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const annuallyPlanSubScribeRef = async (_referral, signer) => {
+  try {
+    const instance = await contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.annuallyWithReferral(_referral);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -542,4 +591,7 @@ export {
   unlockStakeEgcToken,
   checkAllowanceStake,
   getRefStats,
+  monthlyPlanSubScribeRef,
+  semiAnnuallyPlanSubScribeRef,
+  annuallyPlanSubScribeRef,
 };

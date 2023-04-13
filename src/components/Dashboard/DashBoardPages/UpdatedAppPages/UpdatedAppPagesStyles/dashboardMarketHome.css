@@ -9,6 +9,7 @@
 .dashboardMarketPlaceHeader_area {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .dashboardMarketPlaceHeader_div1 {
   width: 45%;
@@ -24,15 +25,15 @@
 .dashboardMarketPlaceHeader_div1_search_input {
   width: 100%;
   padding: 12px;
-  border: solid 1px #264331;
-  background: #1a2b20;
+  border: solid 1px #262538;
+  background: #1c1b2a;
   color: #fff;
   border-radius: 10px;
   padding-left: 41px;
 }
 .dashboardMarketPlaceHeader_div1_search_input::placeholder {
   font-size: 14px;
-  color: #567261;
+  color: #636179;
 }
 .dashboardMarketPlaceHeader_div1_search_input_icon {
   position: absolute;
@@ -63,7 +64,7 @@
   justify-content: center;
 }
 .dashboardMarketPlaceHeader_div2_categories_cont1:hover {
-  background: #23392bc2;
+  background: #292339;
   transition: 0.3s ease-in;
   border-radius: 10px;
 }
@@ -93,28 +94,30 @@
   border-radius: 15px;
   display: flex;
   flex-direction: column;
-  border: solid 1px #314d3c;
+  border: solid 1px #2d2c41;
   box-shadow: 0px 10px 10px #000;
 }
 .dashboardMarketPlaceBody1_cont2_head {
   font-size: 28px;
-  color: #749b83;
+  color: #787690;
 }
 .dashboardMarketPlaceBody1_cont2_body {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  /* flex: initial; */
   margin-top: 1em;
+  align-items: center;
+  display: grid;
+  grid-gap: 10px;
+  gap: 10px;
+  width: 100%;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  justify-content: flex-start;
 }
 .dashboardMarketPlaceBody1_cont2_body_img {
-  width: 220px;
-  background: #0e1310;
+  width: 100%;
+  background: #0d0c14;
   padding: 20px;
   height: 5em;
   border-radius: 10px;
-  border: solid 1px #2b3b31;
+  border: solid 1px #2d2c41;
   box-shadow: 0px 5px 10px #0d0c14;
 }
 
@@ -132,7 +135,7 @@
 }
 .dashboardMarketPlaceBody2_div1_head_span {
   font-size: 15px;
-  border: solid 1px #314d3c;
+  border: solid 1px #2d2c41;
   padding: 10px;
   border-radius: 10px;
   width: 150px;
@@ -140,7 +143,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  background: #18231a;
+  background: #1a1929;
 }
 /* .dashboardMarketPlaceBody2_div1_body {
   display: flex;
@@ -156,8 +159,8 @@
   right: 0;
 }
 .dark .product_carousel .react-multiple-carousel__arrow {
-  background: rgb(36 97 61 / 82%) !important;
-  border: solid 1px #537a62 !important;
+  background: rgb(122 95 192 / 63%) !important;
+  border: solid 1px #7c7a98 !important;
 }
 .dark .dashboardMarketPlaceBody1_cont1 .react-multiple-carousel__arrow {
   background: rgb(0 0 0 / 82%) !important;
@@ -169,10 +172,46 @@
   flex-direction: column;
   background: #151422;
   margin: auto;
-  border: solid 1px #314d3c;
+  border: solid 1px #2d2c41;
   border-radius: 15px;
   overflow: hidden;
   transition: 0.3s cubic-bezier(0.39, 0.58, 0.57, 1);
+  height: 100%;
+  position: relative;
+}
+.prodState_div {
+  position: absolute;
+  right: 3%;
+  top: 1%;
+  padding: 2px 0px;
+  background: #7a5fc0;
+  width: 45px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #fff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash_span_img {
+  width: 25px;
+  background: #1a1929;
+  border-radius: 50%;
+  padding: 3px;
+  overflow: inherit;
+  height: 25px;
+  margin-right: 4px;
+}
+canvas.blockies_icon2 {
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+.dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash_span {
+  display: flex;
+  align-items: center;
 }
 .dashboardMarketPlaceBody2_div1_body_card:hover {
   transform: translateY(-15px);
@@ -185,7 +224,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #18231a;
+  background: #1a1929;
 }
 .dashboardMarketPlaceBody2_div1_body_card_img {
   width: 75%;
@@ -238,4 +277,101 @@
 }
 .dashboardMarketPlaceBody3_cont1_img {
   width: 100%;
+}
+.dashboardMarketPlaceHeader_div2_categories_icon {
+  display: none !important;
+}
+@media screen and (max-width: 991px) {
+  .dashboardMarketPlaceHeader_div2_categories {
+    display: none;
+  }
+  .dashboardMarketPlaceHeader_div2_categories_icon {
+    display: block !important;
+    font-size: 38px !important;
+    color: #a7a5c5;
+    background: #0d0c14;
+    border: solid 1px #312e52;
+    border-radius: 8px;
+    padding: 3px;
+  }
+  .dashboardMarketPlaceHeader_area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+  }
+  .dashboardMarketPlaceHeader_div1 {
+    width: 45%;
+    margin-left: 2em;
+    margin-right: 0em;
+    position: relative;
+  }
+  .dashboardMarketPlaceBody1_cont2_body {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .dashboardMarketPlaceBody3 {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 767px) {
+  .dashboardMarketPlaceBody1_cont2 {
+    padding: 1em;
+    margin-top: 1em;
+  }
+  .dashboardMarketPlaceBody1_cont2_head {
+    font-size: 21px;
+  }
+  .dashboardMarketPlaceHeader_div1 {
+    width: 75%;
+    margin-left: 2em;
+    margin-right: 0em;
+    position: relative;
+  }
+  .dashboardMarketPlaceBody1_cont1_img {
+    height: 15em;
+  }
+  .dashboardMarketPlaceBody1_cont2_body_img {
+    width: 100%;
+    padding: 6px 24px;
+    height: 2em;
+    border-radius: 6px;
+  }
+  .dashboardMarketPlaceBody2_div1_head {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+  .dashboardMarketPlaceBody1_cont2_body {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+  }
+  .dashboardMarketPlaceBody3 {
+    gap: 5px;
+  }
+  .dashboardMarketPlaceBody2_div1_body_card_body_cont1_title {
+    font-size: 16px;
+  }
+  .dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn {
+    padding: 7px;
+    font-size: 14px;
+  }
+  .dashboardMarketPlaceBody2_div1_body_card_body {
+    padding: 0.5em;
+  }
+  .dashboardMarketPlaceBody2_div1_body_card_img {
+    width: 65%;
+  }
+  .dashboardMarketPlaceBody2_div1_head_span {
+    font-size: 13px;
+    width: 110px;
+  }
+  .product_carousel .react-multi-carousel-track {
+    padding: 0em 0em;
+  }
+  .dashboardMarketPlaceBody2_div1 {
+    margin-bottom: 2em;
+  }
 }

@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import "../UpdatedAppPagesStyles/dashboardMarketHome.css";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import AppsIcon from "@mui/icons-material/Apps";
 import Carousel from "react-multi-carousel";
+import Blockies from "react-blockies";
 import { numberWithCommas } from "../../../../static/static";
 import { GET_ALL_UPLOADED_PRODUCTS } from "../../../../../services/productServices";
 import ProductModel from "./ProductModel";
@@ -21,6 +23,7 @@ export const MarketHeader = () => {
             />
             <SearchOutlinedIcon className="dashboardMarketPlaceHeader_div1_search_input_icon" />
           </div>
+          <AppsIcon className="dashboardMarketPlaceHeader_div2_categories_icon" />
           <div className="dashboardMarketPlaceHeader_div2_categories">
             <div className="dashboardMarketPlaceHeader_div2_categories_cont1">
               Mobile Phones
@@ -61,7 +64,11 @@ const DashboardMarketHome = () => {
       items: 2,
     },
     mobile: {
-      breakpoint: { max: 600, min: 0 },
+      breakpoint: { max: 600, min: 350 },
+      items: 2,
+    },
+    smallerMobile: {
+      breakpoint: { max: 350, min: 0 },
       items: 1,
     },
   };
@@ -104,144 +111,80 @@ const DashboardMarketHome = () => {
       img: "/img/dummyMarketImages/PhoneDummyImage.png",
       title: "Apple Iphone 13pro max",
       amount: 1200,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      prodState: "New",
     },
     {
       id: "2",
       img: "/img/dummyMarketImages/PhoneDummyImage2.png",
       title: "Samsung galaxy s22",
       amount: 800,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
+      seller: "MartGpt",
+      prodState: "Refurb",
     },
     {
       id: "1",
       img: "/img/dummyMarketImages/PhoneDummyImage.png",
       title: "Apple Iphone 13pro max",
       amount: 1200,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      prodState: "New",
     },
     {
       id: "2",
       img: "/img/dummyMarketImages/PhoneDummyImage2.png",
       title: "Samsung galaxy s22",
       amount: 800,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
+      seller: "MartGpt",
+      prodState: "Refurb",
     },
     {
       id: "1",
       img: "/img/dummyMarketImages/PhoneDummyImage.png",
       title: "Apple Iphone 13pro max",
       amount: 1200,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      prodState: "New",
     },
     {
       id: "2",
       img: "/img/dummyMarketImages/PhoneDummyImage2.png",
       title: "Samsung galaxy s22",
       amount: 800,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
+      seller: "MartGpt",
+      prodState: "Refurb",
     },
     {
       id: "1",
       img: "/img/dummyMarketImages/PhoneDummyImage.png",
       title: "Apple Iphone 13pro max",
       amount: 1200,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      prodState: "New",
     },
     {
       id: "2",
       img: "/img/dummyMarketImages/PhoneDummyImage2.png",
       title: "Samsung galaxy s22",
       amount: 800,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
+      seller: "MartGpt",
+      prodState: "Refurb",
     },
     {
       id: "1",
       img: "/img/dummyMarketImages/PhoneDummyImage.png",
       title: "Apple Iphone 13pro max",
       amount: 1200,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
+      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
+      prodState: "New",
     },
     {
       id: "2",
       img: "/img/dummyMarketImages/PhoneDummyImage2.png",
       title: "Samsung galaxy s22",
       amount: 800,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "1",
-      img: "/img/dummyMarketImages/PhoneDummyImage.png",
-      title: "Apple Iphone 13pro max",
-      amount: 1200,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "2",
-      img: "/img/dummyMarketImages/PhoneDummyImage2.png",
-      title: "Samsung galaxy s22",
-      amount: 800,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "1",
-      img: "/img/dummyMarketImages/PhoneDummyImage.png",
-      title: "Apple Iphone 13pro max",
-      amount: 1200,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "2",
-      img: "/img/dummyMarketImages/PhoneDummyImage2.png",
-      title: "Samsung galaxy s22",
-      amount: 800,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "1",
-      img: "/img/dummyMarketImages/PhoneDummyImage.png",
-      title: "Apple Iphone 13pro max",
-      amount: 1200,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "2",
-      img: "/img/dummyMarketImages/PhoneDummyImage2.png",
-      title: "Samsung galaxy s22",
-      amount: 800,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "1",
-      img: "/img/dummyMarketImages/PhoneDummyImage.png",
-      title: "Apple Iphone 13pro max",
-      amount: 1200,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "2",
-      img: "/img/dummyMarketImages/PhoneDummyImage2.png",
-      title: "Samsung galaxy s22",
-      amount: 800,
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
+      seller: "MartGpt",
+      prodState: "Refurb",
     },
   ];
 
@@ -393,6 +336,7 @@ const DashboardMarketHome = () => {
                           className="dashboardMarketPlaceBody2_div1_body_card"
                           key={data.id}
                         >
+                          <div className="prodState_div">{data.prodState}</div>
                           <div className="dashboardMarketPlaceBody2_div1_body_card_img_div">
                             <img
                               src={data.img}
@@ -410,21 +354,38 @@ const DashboardMarketHome = () => {
                                 parseFloat(data.amount).toFixed(2)
                               )}{" "}
                               eUSD
-                              <span className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount_span">
-                                {" "}
-                                ~ (₦{data.amount * 750})
-                              </span>{" "}
                             </div>
                             <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash">
-                              {`${data.txnHash.slice(
-                                0,
-                                6
-                              )}...${data.txnHash.slice(63, 66)}`}
-                              <OpenInNewIcon className="tx_hash_link_icon" />
+                              {data.seller !== "MartGpt" ? (
+                                <span className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash_span">
+                                  <Blockies
+                                    seed={data.seller}
+                                    size={8}
+                                    scale={4}
+                                    className="blockies_icon2"
+                                  />
+                                  {`${data.seller.slice(
+                                    0,
+                                    6
+                                  )}...${data.seller.slice(24, 26)}`}
+                                </span>
+                              ) : (
+                                <span className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash_span">
+                                  <img
+                                    src="/img/martgpt_logo_icon.svg"
+                                    alt=""
+                                    className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash_span_img"
+                                  />
+                                  {`${data.seller.slice(
+                                    0,
+                                    6
+                                  )}...${data.seller.slice(24, 26)}`}
+                                </span>
+                              )}
                             </div>
                             <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn_div">
                               <a
-                                href={`/app/market/product/details/${data.txnHash}/${data.title}`}
+                                href={`/app/market/product/details/${data.id}/${data.title}`}
                               >
                                 {" "}
                                 <button className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn">
@@ -444,216 +405,6 @@ const DashboardMarketHome = () => {
                 {/* =============================== */}
                 {/* =============================== */}
                 {/* =============================== */}
-                <div className="dashboardMarketPlaceBody2_div1">
-                  <div className="dashboardMarketPlaceBody2_div1_head">
-                    Computers
-                    <span className="dashboardMarketPlaceBody2_div1_head_span">
-                      View Category
-                    </span>
-                  </div>
-                  <div className="dashboardMarketPlaceBody2_div1_body">
-                    <Carousel
-                      responsive={responsive1}
-                      showDots={false}
-                      //   infinite={false}
-                      autoPlay={false}
-                      autoPlaySpeed={10000}
-                      pauseOnHover={true}
-                      infinite={false}
-                      draggable={true}
-                      swipeable={true}
-                      className="product_carousel"
-                    >
-                      {Product.slice(0.8).map((data) => (
-                        <div
-                          className="dashboardMarketPlaceBody2_div1_body_card"
-                          key={data.id}
-                        >
-                          <div className="dashboardMarketPlaceBody2_div1_body_card_img_div">
-                            <img
-                              src={data.img}
-                              alt=""
-                              className="dashboardMarketPlaceBody2_div1_body_card_img"
-                            />
-                          </div>
-                          <div className="dashboardMarketPlaceBody2_div1_body_card_body">
-                            <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_title">
-                              {data.title}
-                            </div>
-                            <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount">
-                              {data.amount} eUSD
-                              <span className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount_span">
-                                {" "}
-                                ~ (₦{data.amount * 750})
-                              </span>{" "}
-                            </div>
-                            <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash">
-                              {`${data.txnHash.slice(
-                                0,
-                                6
-                              )}...${data.txnHash.slice(63, 66)}`}
-                              <OpenInNewIcon className="tx_hash_link_icon" />
-                            </div>
-                            <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn_div">
-                              <a
-                                href={`/app/market/product/details/${data.txnHash}/${data.title}`}
-                              >
-                                {" "}
-                                <button className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn">
-                                  Purchase
-                                </button>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </Carousel>
-                  </div>
-                </div>
-                {/* =============================== */}
-                {/* =============================== */}
-                {/* =============================== */}
-                {/* =============================== */}
-                {/* =============================== */}
-                {/* =============================== */}
-                <div className="dashboardMarketPlaceBody2_div1">
-                  <div className="dashboardMarketPlaceBody2_div1_head">
-                    TVs & Audio{" "}
-                    <span className="dashboardMarketPlaceBody2_div1_head_span">
-                      View Category
-                    </span>
-                  </div>
-                  <div className="dashboardMarketPlaceBody2_div1_body">
-                    <Carousel
-                      responsive={responsive1}
-                      showDots={false}
-                      //   infinite={false}
-                      autoPlay={false}
-                      autoPlaySpeed={10000}
-                      pauseOnHover={true}
-                      infinite={false}
-                      draggable={true}
-                      swipeable={true}
-                      className="product_carousel"
-                    >
-                      {Product.slice(0.8).map((data) => (
-                        <div
-                          className="dashboardMarketPlaceBody2_div1_body_card"
-                          key={data.id}
-                        >
-                          <div className="dashboardMarketPlaceBody2_div1_body_card_img_div">
-                            <img
-                              src={data.img}
-                              alt=""
-                              className="dashboardMarketPlaceBody2_div1_body_card_img"
-                            />
-                          </div>
-                          <div className="dashboardMarketPlaceBody2_div1_body_card_body">
-                            <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_title">
-                              {data.title}
-                            </div>
-                            <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount">
-                              {data.amount} eUSD
-                              <span className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount_span">
-                                {" "}
-                                ~ (₦{data.amount * 750})
-                              </span>{" "}
-                            </div>
-                            <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash">
-                              {`${data.txnHash.slice(
-                                0,
-                                6
-                              )}...${data.txnHash.slice(63, 66)}`}
-                              <OpenInNewIcon className="tx_hash_link_icon" />
-                            </div>
-                            <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn_div">
-                              <a
-                                href={`/app/market/product/details/${data.txnHash}/${data.title}`}
-                              >
-                                {" "}
-                                <button className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn">
-                                  Purchase
-                                </button>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </Carousel>
-                  </div>
-                </div>
-                {/* =============================== */}
-                {/* =============================== */}
-                {/* =============================== */}
-                {/* =============================== */}
-                {/* =============================== */}
-                {/* =============================== */}
-                <div className="dashboardMarketPlaceBody2_div1">
-                  <div className="dashboardMarketPlaceBody2_div1_head">
-                    Home Appliances
-                    <span className="dashboardMarketPlaceBody2_div1_head_span">
-                      View Category
-                    </span>
-                  </div>
-                  <div className="dashboardMarketPlaceBody2_div1_body">
-                    <Carousel
-                      responsive={responsive1}
-                      showDots={false}
-                      //   infinite={false}
-                      autoPlay={false}
-                      autoPlaySpeed={10000}
-                      pauseOnHover={true}
-                      infinite={false}
-                      draggable={true}
-                      swipeable={true}
-                      className="product_carousel"
-                    >
-                      {Product.slice(0.8).map((data) => (
-                        <div
-                          className="dashboardMarketPlaceBody2_div1_body_card"
-                          key={data.id}
-                        >
-                          <div className="dashboardMarketPlaceBody2_div1_body_card_img_div">
-                            <img
-                              src={data.img}
-                              alt=""
-                              className="dashboardMarketPlaceBody2_div1_body_card_img"
-                            />
-                          </div>
-                          <div className="dashboardMarketPlaceBody2_div1_body_card_body">
-                            <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_title">
-                              {data.title}
-                            </div>
-                            <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount">
-                              {data.amount} eUSD
-                              <span className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount_span">
-                                {" "}
-                                ~ (₦{data.amount * 750})
-                              </span>{" "}
-                            </div>
-                            <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash">
-                              {`${data.txnHash.slice(
-                                0,
-                                6
-                              )}...${data.txnHash.slice(63, 66)}`}
-                              <OpenInNewIcon className="tx_hash_link_icon" />
-                            </div>
-                            <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn_div">
-                              <a
-                                href={`/app/market/product/details/${data.txnHash}/${data.title}`}
-                              >
-                                {" "}
-                                <button className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn">
-                                  Purchase
-                                </button>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </Carousel>
-                  </div>
-                </div>
               </div>
               {/* ==========-----------========== */}
               {/* ==========-----------========== */}

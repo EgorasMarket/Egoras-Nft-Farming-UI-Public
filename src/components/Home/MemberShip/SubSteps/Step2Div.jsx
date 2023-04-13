@@ -24,6 +24,9 @@ export const Step2Div = ({
   Subscribe,
   Subscribe2,
   Subscribe3,
+  SubscribeRef,
+  Subscribe2Ref,
+  Subscribe3Ref,
   unlockBtn,
   UnlockToken,
   props,
@@ -32,6 +35,7 @@ export const Step2Div = ({
   isLoading,
 }) => {
   const [egcUsd, setEgcUsd] = useState(0);
+  const [refButton, setRefButton] = useState(false);
   useEffect(
     async (e) => {
       let string2 =
@@ -48,6 +52,19 @@ export const Step2Div = ({
     },
     [egcUsd]
   );
+  useEffect(() => {
+    let LocalVariable = localStorage.getItem("referer");
+    if (LocalVariable == "") {
+      setRefButton(false);
+      console.log("local Variable is empty");
+    } else {
+      setRefButton(true);
+
+      console.log("local variable is " + LocalVariable);
+    }
+    console.log(LocalVariable, "LocalVariable");
+  }, []);
+
   return (
     <div className="selectPlanDiv">
       <div onClick={toggleSteps} className="selectPlanDiv_backButton">
@@ -380,63 +397,136 @@ export const Step2Div = ({
           </>
         )}
 
-        {unlockBtn === false ? (
-          <button
-            disabled={disable}
-            className="selectPlanDiv2_area1_checkout_btn"
-            onClick={UnlockToken}
-          >
-            {isLoading ? (
-              <ScaleLoader color="#12111b" size={10} height={20} />
+        {refButton === false ? (
+          <>
+            {unlockBtn === false ? (
+              <button
+                disabled={disable}
+                className="selectPlanDiv2_area1_checkout_btn"
+                onClick={UnlockToken}
+              >
+                {isLoading ? (
+                  <ScaleLoader color="#12111b" size={10} height={20} />
+                ) : (
+                  <span> Approve EGC </span>
+                )}
+              </button>
             ) : (
-              <span> Approve EGC </span>
+              <>
+                {checkedMonth == true && checkAgree === true ? (
+                  <button
+                    disabled={disable}
+                    className="selectPlanDiv2_area1_checkout_btn"
+                    onClick={Subscribe}
+                    // disabled={fundDisable}
+                  >
+                    {isLoading ? (
+                      <ScaleLoader color="#12111b" size={10} height={20} />
+                    ) : (
+                      <span> Subscribe Monthly </span>
+                    )}
+                  </button>
+                ) : checkedYear === true && checkAgree === true ? (
+                  <button
+                    disabled={disable}
+                    className="selectPlanDiv2_area1_checkout_btn"
+                    onClick={Subscribe3}
+                    // disabled={fundDisable}
+                  >
+                    {isLoading ? (
+                      <ScaleLoader color="#12111b" size={10} height={20} />
+                    ) : (
+                      <span> Subscribe Yearly </span>
+                    )}
+                  </button>
+                ) : checkedSemiAnnual === true && checkAgree === true ? (
+                  <button
+                    disabled={disable}
+                    className="selectPlanDiv2_area1_checkout_btn"
+                    onClick={Subscribe2}
+                    // disabled={fundDisable}
+                  >
+                    {isLoading ? (
+                      <ScaleLoader color="#12111b" size={10} height={20} />
+                    ) : (
+                      <span> Subscribe Semi-Annual </span>
+                    )}
+                  </button>
+                ) : (
+                  <button
+                    className="selectPlanDiv2_area1_checkout_btn"
+                    disabled
+                  >
+                    <span> Select a plan </span>
+                  </button>
+                )}
+              </>
             )}
-          </button>
+          </>
         ) : (
           <>
-            {checkedMonth == true && checkAgree === true ? (
+            {unlockBtn === false ? (
               <button
                 disabled={disable}
                 className="selectPlanDiv2_area1_checkout_btn"
-                onClick={Subscribe}
-                // disabled={fundDisable}
+                onClick={UnlockToken}
               >
                 {isLoading ? (
                   <ScaleLoader color="#12111b" size={10} height={20} />
                 ) : (
-                  <span> Subscribe Monthly </span>
-                )}
-              </button>
-            ) : checkedYear === true && checkAgree === true ? (
-              <button
-                disabled={disable}
-                className="selectPlanDiv2_area1_checkout_btn"
-                onClick={Subscribe3}
-                // disabled={fundDisable}
-              >
-                {isLoading ? (
-                  <ScaleLoader color="#12111b" size={10} height={20} />
-                ) : (
-                  <span> Subscribe Yearly </span>
-                )}
-              </button>
-            ) : checkedSemiAnnual === true && checkAgree === true ? (
-              <button
-                disabled={disable}
-                className="selectPlanDiv2_area1_checkout_btn"
-                onClick={Subscribe2}
-                // disabled={fundDisable}
-              >
-                {isLoading ? (
-                  <ScaleLoader color="#12111b" size={10} height={20} />
-                ) : (
-                  <span> Subscribe Semi-Annual </span>
+                  <span> Approve EGC </span>
                 )}
               </button>
             ) : (
-              <button className="selectPlanDiv2_area1_checkout_btn" disabled>
-                <span> Select a plan </span>
-              </button>
+              <>
+                {checkedMonth == true && checkAgree === true ? (
+                  <button
+                    disabled={disable}
+                    className="selectPlanDiv2_area1_checkout_btn"
+                    onClick={SubscribeRef}
+                    // disabled={fundDisable}
+                  >
+                    {isLoading ? (
+                      <ScaleLoader color="#12111b" size={10} height={20} />
+                    ) : (
+                      <span> Subscribe Monthly ref </span>
+                    )}
+                  </button>
+                ) : checkedYear === true && checkAgree === true ? (
+                  <button
+                    disabled={disable}
+                    className="selectPlanDiv2_area1_checkout_btn"
+                    onClick={Subscribe3Ref}
+                    // disabled={fundDisable}
+                  >
+                    {isLoading ? (
+                      <ScaleLoader color="#12111b" size={10} height={20} />
+                    ) : (
+                      <span> Subscribe Yearly ref </span>
+                    )}
+                  </button>
+                ) : checkedSemiAnnual === true && checkAgree === true ? (
+                  <button
+                    disabled={disable}
+                    className="selectPlanDiv2_area1_checkout_btn"
+                    onClick={Subscribe2Ref}
+                    // disabled={fundDisable}
+                  >
+                    {isLoading ? (
+                      <ScaleLoader color="#12111b" size={10} height={20} />
+                    ) : (
+                      <span> Subscribe Semi-Annual ref </span>
+                    )}
+                  </button>
+                ) : (
+                  <button
+                    className="selectPlanDiv2_area1_checkout_btn"
+                    disabled
+                  >
+                    <span> Select a plan </span>
+                  </button>
+                )}
+              </>
             )}
           </>
         )}

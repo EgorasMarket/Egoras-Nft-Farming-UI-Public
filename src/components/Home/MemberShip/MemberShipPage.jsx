@@ -16,7 +16,7 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
-// const { REACT_APP_EGC_ADDRESS, REACT_APP_EUSD_ADDRESS } = process.env;
+
 import Web3 from "web3";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { config } from "../../../actions/Config";
@@ -30,13 +30,18 @@ import {
   getConfiguration,
   unlockMemberShipEgcToken,
   checkAllowanceMembership,
-  transactReceipt,
+  checkAllowanceV3,
+  unlockTokenV3,
 } from "../../../web3/index";
 import {
   monthlyPlanSubScribe,
   semiAnnuallyPlanSubScribe,
   annuallyPlanSubScribe,
+  monthlyPlanSubScribeRef,
+  semiAnnuallyPlanSubScribeRef,
+  annuallyPlanSubScribeRef,
 } from "../../../web3/index2.js";
+const { REACT_APP_EGC_ADDRESS, REACT_APP_EUSD_ADDRESS } = process.env;
 const MemberShipPage = () => {
   const context = useWeb3React();
   const {
@@ -135,7 +140,8 @@ const MemberShipPage = () => {
   const UnlockToken = async (e) => {
     setIsLoading(true);
     setDisable(true);
-    let ret = await unlockMemberShipEgcToken(
+    let ret = await unlockTokenV3(
+      REACT_APP_EGC_ADDRESS,
       parseEther("180000000000000000000000000000000000", "wei").toString(),
       library.getSigner()
     );
@@ -157,30 +163,11 @@ const MemberShipPage = () => {
       setDisable(false);
     }
   };
-  // setInterval(() => {
-  //   if (localStorage.getItem("unlocking") == "true") {
-  //     transactReceipt(localStorage.getItem("unlockingHash"), library).then(
-  //       function (env) {
-  //         console.log("running Interval", env);
-  //         if (env.status == true && env.message !== null) {
-  //           if (env.message.confirmations > 2) {
-  //             // setStage("success");
-  //             // setHash(localStorage.getItem("unlockingHash"));
-  //             // setIsLoading(false);
-
-  //             localStorage.setItem("unlocking", false);
-  //           }
-  //         }
-  //       }
-  //     );
-  //   } else {
-  //     // setStage("error");
-  //   }
-  // }, 1000);
   useEffect(
     async (e) => {
       if (account) {
-        let check = await checkAllowanceMembership(
+        let check = await checkAllowanceV3(
+          REACT_APP_EGC_ADDRESS,
           account,
           parseEther(monthAmount.toString(), "wei").toString(),
           library.getSigner()
@@ -190,12 +177,38 @@ const MemberShipPage = () => {
         setUnlockBtn(check.status);
       }
     },
+
     [account, unLockCheckStatus, unlockBtn]
   );
+
   const subscribe = async () => {
     setIsLoading(true);
     setDisable(true);
     let res = await monthlyPlanSubScribe(library.getSigner());
+    console.log(res);
+    if (res.status === true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage("You've successfully Subscribed for 1 month");
+    } else {
+      if (res.message.code == 4001) {
+        console.log(res);
+      }
+      console.log(res);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
+  };
+  const subscribeRef = async () => {
+    setIsLoading(true);
+    setDisable(true);
+    let res = await monthlyPlanSubScribeRef(
+      localStorage.getItem("referer"),
+      library.getSigner()
+    );
     console.log(res);
     if (res.status === true) {
       setIsLoading(false);
@@ -234,10 +247,58 @@ const MemberShipPage = () => {
       setErrorMessage(res.message);
     }
   };
+  const subscribe2Ref = async () => {
+    setIsLoading(true);
+    setDisable(true);
+    let res = await semiAnnuallyPlanSubScribeRef(
+      localStorage.getItem("referer"),
+      library.getSigner()
+    );
+    console.log(res);
+    if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage("You've successfully Subscribed for 6 months");
+    } else {
+      if (res.message.code == 4001) {
+        console.log(res);
+      }
+      console.log(res);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
+  };
   const subscribe3 = async () => {
     setIsLoading(true);
     setDisable(true);
     let res = await annuallyPlanSubScribe(library.getSigner());
+    console.log(res);
+    if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage("You've successfully Subscribed for 1 year");
+    } else {
+      if (res.message.code == 4001) {
+        console.log(res);
+      }
+      console.log(res);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
+  };
+  const subscribe3Ref = async () => {
+    setIsLoading(true);
+    setDisable(true);
+    let res = await annuallyPlanSubScribeRef(
+      localStorage.getItem("referer"),
+      library.getSigner()
+    );
     console.log(res);
     if (res.status == true) {
       setIsLoading(false);
@@ -298,6 +359,9 @@ const MemberShipPage = () => {
               Subscribe={subscribe}
               Subscribe2={subscribe2}
               Subscribe3={subscribe3}
+              SubscribeRef={subscribeRef}
+              Subscribe2Ref={subscribe2Ref}
+              Subscribe3Ref={subscribe3Ref}
               unlockBtn={unlockBtn}
               UnlockToken={UnlockToken}
               priceLoaded={priceLoaded}
