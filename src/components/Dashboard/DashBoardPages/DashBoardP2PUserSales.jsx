@@ -32,6 +32,7 @@ import {
   MARK_PRODUCT_AS_SHIPPED,
   MARK_PRODUCT_AS_RECIEVED,
   GET_USER_UPLOADED_PRODUCT,
+  CALL_SELLER_LOCKED_FUNDS,
 } from "../../../services/productServices";
 import { DISPLAY_NEW_PRODUCTS_CALL } from "../../../services/adminServices";
 import { AcceptBid, releaseFundsToSeller } from "../../../web3";
@@ -81,7 +82,7 @@ const DashBoardP2PUserSales = () => {
   const [uploadedProduct, setUploadedProducts] = useState([]);
 
   useEffect(() => {
-    console.log("kddd_____");
+    // console.log("kddd_____");
     const fetchData = async () => {
       const response = await DISPLAY_NEW_USER_PRODUCTS_CALL(account);
       console.log(response.data, "goody");
@@ -90,8 +91,17 @@ const DashBoardP2PUserSales = () => {
         setUploadedProducts(response.data);
       }
     };
+    const fetchData2 = async () => {
+      const response = await CALL_SELLER_LOCKED_FUNDS(account);
+      console.log(response.data, "goody");
+
+      if (response.data) {
+        setLockedValue(response.data.locked);
+      }
+    };
 
     fetchData();
+    fetchData2();
   }, [account]);
 
   const handleAcceptBid = async (action) => {
@@ -713,10 +723,10 @@ const DashBoardP2PUserSales = () => {
                     </div>
                     <div className="BuyerSellerDiv_body_Balance_body">
                       <div className="BuyerSellerDiv_body_Balance_body1">
-                        200,000.00 eusd
+                        {numberWithCommas(parseInt(lockedValue).toFixed(2))}{" "}
                       </div>{" "}
                       <div className="BuyerSellerDiv_body_Balance_body2">
-                        ~$ 200,000.00
+                        ~$ {numberWithCommas(parseInt(lockedValue).toFixed(2))}
                       </div>
                     </div>
                   </div>
