@@ -101,7 +101,7 @@ const ProductDetailPage = ({ match }) => {
 
     let quantity = 1;
     let transactionHash = "0x6ED527b0a92f117f4a4E05a6dF9313CDd4a6aB412";
-    let product_id = productDetail.index_id;
+    let product_id = productDetail.product_id;
 
     const res = await PROCESS_PRODUCT_PURCHASE({
       quantity,
@@ -464,7 +464,7 @@ const ProductDetailPage = ({ match }) => {
                         >
                           {isLoading ? (
                             <ScaleLoader
-                              color="#12111b"
+                              color="#24382b"
                               size={10}
                               height={20}
                             />

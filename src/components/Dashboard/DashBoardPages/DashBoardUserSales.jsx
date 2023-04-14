@@ -30,6 +30,7 @@ import {
   DISPLAY_NEW_USER_PRODUCTS_CALL,
   CALL_USER_INDIRECT_PRODUCTS_STATS,
   CALL_USER_INDIRECT_BUY_ORDER,
+  CALL_EXPRESS_BUY_ORDER_STATS,
 } from "../../../services/productServices";
 // import { DISPLAY_NEW_PRODUCTS_CALL } from "../../../services/adminServices";
 import { AcceptBid } from "../../../web3";
@@ -63,6 +64,8 @@ const DashBoardUserSales = () => {
   // const [totalLendingCount, setTotalLendingCount] = useState(0);
   const [activeBtn, setActivrBtn] = useState("Ongoing");
   const [indexId, setIndexId] = useState(null);
+  const [totalItemBoughtCount, setTotalItemBoughtCount] = useState(0);
+  const [totalItemBoughtAmount, setTotalItemBoughtAmount] = useState(0);
   const [saleDetails, setSaleDetails] = useState("");
   const [activeLink, setActiveLink] = useState("abstract-link");
   const [activeMenu, setActiveMenu] = useState("details-accord  ");
@@ -108,9 +111,21 @@ const DashBoardUserSales = () => {
       }
     };
 
+    const fetchData4 = async () => {
+      const response = await CALL_EXPRESS_BUY_ORDER_STATS(account);
+      console.log(response.data, "goody__");
+      // setTotalItemBoughtCount] = useState(0);
+      // const [totalItemBoughtAmount, setTotalItemBoughtAmount] = useState(0);
+      if (response.data) {
+        setTotalItemBoughtCount(response.data.sumCount);
+        setTotalItemBoughtAmount(response.data.totalAmount);
+      }
+    };
+
     fetchData();
     fetchData2();
     fetchData3();
+    fetchData4();
   }, [account]);
 
   const handleAcceptBid = async (action) => {
@@ -284,7 +299,7 @@ const DashBoardUserSales = () => {
                             Total amount of items bought
                           </div>
                           <div className="lending_area1_cont1_body_txt">
-                            180
+                            {totalItemBoughtCount}
                             <span className="usd_sign"> items</span>
                           </div>
                         </div>
@@ -303,7 +318,10 @@ const DashBoardUserSales = () => {
                             Total price of items Bought
                           </div>
                           <div className="lending_area1_cont1_body_txt">
-                            100,000<span className="usd_sign"> eusd</span>
+                            {numberWithCommas(
+                              parseInt(totalItemBoughtAmount).toFixed(2)
+                            )}
+                            <span className="usd_sign"> eusd</span>
                           </div>
                         </div>
                         <div className="lending_area1_cont1_body_1">

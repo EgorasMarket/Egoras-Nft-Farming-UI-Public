@@ -17,6 +17,7 @@ import {
   USER_INDIRECT_PRODUCTS_STATS,
   USER_INDIRECT_BUY_ORDER,
   SELLER_LOCKED_FUNDS,
+  EXPRESS_BUY_ORDER_STATS,
   // DIRECT_BUY_ORDER_STATS,
 } from "../core/ApiRoutes";
 export const config = {
@@ -91,6 +92,15 @@ export const CALL_USER_INDIRECT_BUY_ORDER = async (account) => {
 export const CALL_SELLER_LOCKED_FUNDS = async (account) => {
   try {
     const response = await axios.get(`${SELLER_LOCKED_FUNDS}/${account}`);
+    // console.log(response.data);
+    return response.data;
+  } catch (err) {
+    return err.repsonse;
+  }
+};
+export const CALL_EXPRESS_BUY_ORDER_STATS = async (account) => {
+  try {
+    const response = await axios.get(`${EXPRESS_BUY_ORDER_STATS}/${account}`);
     // console.log(response.data);
     return response.data;
   } catch (err) {

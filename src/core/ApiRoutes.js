@@ -30,4 +30,5 @@ export const GET_EGC_PRICE_COINGEKO_ROUTE = `${API_URL}/coingeko/egc`;
 export const USER_INDIRECT_PRODUCTS_STATS = `${API_URL}/product/seller/direct/product/stats`;
 export const USER_INDIRECT_BUY_ORDER = `${API_URL}/order/indirect/buy/order`;
 export const SELLER_LOCKED_FUNDS = `${API_URL}/order/get/seller/locked/funds`;
+export const EXPRESS_BUY_ORDER_STATS = `${API_URL}/order/buy/order/stats`;
 // export const DIRECT_BUY_ORDER_STATS = `${API_URL}/order/buy/order/stats/direct`;
