@@ -240,6 +240,10 @@ canvas.blockies_icon2 {
 .dashboardMarketPlaceBody2_div1_body_card_body_cont1_title {
   font-size: 20px;
   color: #787690;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount {
