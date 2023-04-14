@@ -6,6 +6,3 @@ export const COMPLETED = "COMPLETED";
 export const CANCELLED = "CANCELLED";
 
 export const API_URL = "http://localhost:5002";
-
-
-

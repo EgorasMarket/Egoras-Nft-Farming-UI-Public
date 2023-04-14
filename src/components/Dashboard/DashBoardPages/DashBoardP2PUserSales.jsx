@@ -1109,7 +1109,7 @@ const DashBoardP2PUserSales = () => {
                                       </td>
                                     </tr>
                                   );
-                                })}
+                                })}t
                             {activeBtn === "shipped" &&
                               sellOrders
                                 .filter((person) => person.status == "SHIPPED")

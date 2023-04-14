@@ -1062,7 +1062,7 @@ const DashboardHome = () => {
                           /> */}
                           <XAxis dataKey="month" stroke="0" />
                           {/* <YAxis stroke="#000" /> */}
-                          <Tooltip content={<CustomTooltip />} />
+                          {/* <Tooltip content={<CustomTooltip />} /> */}
                           <Area
                             type="monotone"
                             dataKey="value"
@@ -1116,7 +1116,7 @@ const DashboardHome = () => {
                           /> */}
                           <XAxis dataKey="month" stroke="0" />
                           {/* <YAxis stroke="#000" /> */}
-                          <Tooltip content={<CustomTooltip />} />
+                          {/* <Tooltip content={<CustomTooltip />} /> */}
                           <Area
                             type="monotone"
                             dataKey="value"
@@ -1185,7 +1185,7 @@ const DashboardHome = () => {
                           {/* <CartesianGrid strokeDasharray="3 3" /> */}
                           <XAxis dataKey="month" stroke="0" color="#fff" />
                           {/* <YAxis /> */}
-                          <Tooltip content={<CustomTooltip2 />} />
+                          {/* <Tooltip content={<CustomTooltip2 />} /> */}
                           {/* <Legend /> */}
                           <Bar
                             // type="monotone"
@@ -1245,7 +1245,7 @@ const DashboardHome = () => {
                             color="#fff"
                           />
                           {/* <YAxis /> */}
-                          <Tooltip content={<CustomTooltip2 />} />
+                          {/* <Tooltip content={<CustomTooltip2 />} /> */}
                           <Bar
                             // type="monotone"
                             dataKey="value"
@@ -1326,7 +1326,7 @@ const DashboardHome = () => {
                           /> */}
                           <XAxis dataKey="month" stroke="0" />
                           {/* <YAxis stroke="#000" /> */}
-                          <Tooltip content={<CustomTooltip />} />
+                          {/* <Tooltip content={<CustomTooltip />} /> */}
                           <Area
                             type="monotone"
                             dataKey="value"
@@ -1380,7 +1380,7 @@ const DashboardHome = () => {
                           /> */}
                           <XAxis dataKey="month" stroke="0" />
                           {/* <YAxis stroke="#000" /> */}
-                          <Tooltip content={<CustomTooltip />} />
+                          {/* <Tooltip content={<CustomTooltip />} /> */}
                           <Area
                             type="monotone"
                             dataKey="value"
@@ -1449,7 +1449,7 @@ const DashboardHome = () => {
                           {/* <CartesianGrid strokeDasharray="3 3" /> */}
                           <XAxis dataKey="month" stroke="0" color="#fff" />
                           {/* <YAxis /> */}
-                          <Tooltip content={<CustomTooltip2 />} />
+                          {/* <Tooltip content={<CustomTooltip2 />} /> */}
                           {/* <Legend /> */}
                           <Bar
                             // type="monotone"
@@ -1509,7 +1509,7 @@ const DashboardHome = () => {
                             color="#fff"
                           />
                           {/* <YAxis /> */}
-                          <Tooltip content={<CustomTooltip2 />} />
+                          {/* <Tooltip content={<CustomTooltip2 />} /> */}
                           <Bar
                             // type="monotone"
                             dataKey="value"
