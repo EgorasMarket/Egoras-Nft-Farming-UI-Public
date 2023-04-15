@@ -58,6 +58,13 @@ const ProductDetailPage = ({ match }) => {
   const [disable, setDisable] = useState(false);
   const [newSpec, setSpecification] = useState([]);
   const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
+  const [quantity, setQuantity] = useState(1);
+  const IncreaseQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+  const decreaseQuantity = () => {
+    setQuantity(quantity - 1);
+  };
   useEffect(() => {
     const { address, name } = match.params;
     console.log(match.params, "goodluck ");
@@ -96,64 +103,53 @@ const ProductDetailPage = ({ match }) => {
     //use the adress and make the API call
   }, []);
 
-  const PurchaseProduct = async () => {
-    console.log(productDetail.productType, account, "PurchaseProduct");
+  // const PurchaseProduct = async () => {
+  //   console.log(productDetail.productType, account, "PurchaseProduct");
 
-    let quantity = 1;
-    let transactionHash = "0x6ED527b0a92f117f4a4E05a6dF9313CDd4a6aB412";
-    let product_id = productDetail.product_id;
+  //   let quantity = 1;
+  //   let transactionHash = "0x6ED527b0a92f117f4a4E05a6dF9313CDd4a6aB412";
+  //   let product_id = productDetail.index_id;
+  //   console.log(
+  //     quantity,
+  //     transactionHash,
+  //     product_id,
+  //     account,
+  //     productDetail.productType
+  //   );
+  //   const res = await PROCESS_PRODUCT_PURCHASE({
+  //     quantity,
+  //     transactionHash,
+  //     product_id,
+  //     user: account,
+  //     order_type: productDetail.productType,
+  //   });
+  //   console.log(res);
+  //   // if (res.success) {
+  //   //   alert("successful purchase");
+  //   // }
+  //   /// BUY WITH BLOCKCHAIN
 
-    const res = await PROCESS_PRODUCT_PURCHASE({
-      quantity,
-      transactionHash,
-      product_id,
-      user: account,
-      order_type: "DIRECT",
-    });
+  //   // if (productDetail.productType == "INDIRECT") {
+  //   //   res = await BuyIndirectProduct(
+  //   //     productDetail.index_id,
+  //   //     quantity,
+  //   //     library.getSigner()
+  //   //   );
+  //   // } else {
+  //   //   res = await BuyDirectProduct(
+  //   //     productDetail.index_id,
+  //   //     quantity,
+  //   //     library.getSigner()
+  //   //   );
+  //   // }
 
-    if (res.success) {
-      alert("successful purchase");
-    }
-    /// BUY WITH BLOCKCHAIN
-
-    // if (productDetail.productType == "INDIRECT") {
-    //   res = await BuyIndirectProduct(
-    //     productDetail.index_id,
-    //     quantity,
-    //     library.getSigner()
-    //   );
-    // } else {
-    //   res = await BuyDirectProduct(
-    //     productDetail.index_id,
-    //     quantity,
-    //     library.getSigner()
-    //   );
-    // }
-
-    // console.log(res);
-    // if (res.status == true) {
-    //   console.log("Success message");
-    // } else {
-    //   console.log("Error occured from Blockchain");
-    // }
-
-    // const response = await GET_UPLOADED_PRODUCT_BY_ID(address);
-
-    // if (response.success) {
-    //   setLoading(false);
-    //   setProductDetail(response.data);
-    //   const img = JSON.parse(response.data.product_images);
-    //   for (const data of img) {
-    //     const payload = {
-    //       original: data,
-    //       thumbnail: data,
-    //     };
-    //     image.push(payload);
-    //   }
-
-    //   console.log(image);
-    // }
-  };
+  //   // console.log(res);
+  //   // if (res.status == true) {
+  //   //   console.log("Success message");
+  //   // } else {
+  //   //   console.log("Error occured from Blockchain");
+  //   // }
+  // };
   const UnlockToken = async (e) => {
     setIsLoading(true);
     setDisable(true);
@@ -195,7 +191,7 @@ const ProductDetailPage = ({ match }) => {
   if (loading)
     return (
       <div className="other2 asset_other2">
-        <div className="collateral-assets-section no-bg no_pad">
+        <div className="product_detail_section no-bg no_pad">
           <div className="container">
             <ShimmerPostDetails card cta variant="SIMPLE" />
 
@@ -210,7 +206,7 @@ const ProductDetailPage = ({ match }) => {
   if (loading === false)
     return (
       <div className="other2 asset_other2">
-        <section className="collateral-assets-section no-bg no_pad">
+        <section className="product_detail_section no-bg no_pad">
           <div className="container">
             <div className="updated_itemdisplay">
               <div className="updated_itemdisplay_area1">
@@ -297,70 +293,72 @@ const ProductDetailPage = ({ match }) => {
                             alt=""
                             className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash_span_img"
                           />
-                          {`${productDetail.user_wallet.slice(
-                            0,
-                            6
-                          )}...${productDetail.user_wallet.slice(20, 24)}`}
+                          {`${"MartGpt".slice(0, 6)}...${"MartGpt".slice(
+                            20,
+                            24
+                          )}`}
                         </span>
                       ) : null}
                     </div>
                   </div>
                 </div>
-                {/* <div className="add_quantity_div">
-                <div className="add_quantity_div1">
-                  <div className="quantity_div_title">Quantity:</div>
-                  <div className="quantity_div_body">
-                    {payload.unitCount == 0 ? (
-                      <button
-                        className="quantity_div_body_btn_substract"
-                        onClick={decreaseQuantity}
-                        disabled={true}
-                      >
-                        -
-                      </button>
-                    ) : (
-                      <button
-                        className="quantity_div_body_btn_substract"
-                        onClick={decreaseQuantity}
-                        disabled={quantity === 1 ? true : false}
-                      >
-                        -
-                      </button>
-                    )}
+                <div className="add_quantity_div">
+                  <div className="add_quantity_div1">
+                    <div className="quantity_div_title">Quantity:</div>
+                    <div className="quantity_div_body">
+                      {productDetail.quantity == 0 ? (
+                        <button
+                          className="quantity_div_body_btn_substract"
+                          onClick={decreaseQuantity}
+                          disabled={true}
+                        >
+                          -
+                        </button>
+                      ) : (
+                        <button
+                          className="quantity_div_body_btn_substract"
+                          onClick={decreaseQuantity}
+                          disabled={quantity === 1 ? true : false}
+                        >
+                          -
+                        </button>
+                      )}
 
-                    <button className="quantity_div_body_btn_Amount">
-                      {payload.unitCount == 0 ? "0" : quantity}
-                    </button>
+                      <button className="quantity_div_body_btn_Amount">
+                        {productDetail.quantity == 0 ? "0" : quantity}
+                      </button>
 
-                    {payload.unitCount == 0 ? (
-                      <button
-                        className="quantity_div_body_btn_Add"
-                        onClick={IncreaseQuantity}
-                        disabled={true}
-                      >
-                        +
-                      </button>
-                    ) : (
-                      <button
-                        className="quantity_div_body_btn_Add"
-                        onClick={IncreaseQuantity}
-                        disabled={quantity === payload.unitCount ? true : false}
-                      >
-                        +
-                      </button>
-                    )}
+                      {productDetail.quantity == 0 ? (
+                        <button
+                          className="quantity_div_body_btn_Add"
+                          onClick={IncreaseQuantity}
+                          disabled={true}
+                        >
+                          +
+                        </button>
+                      ) : (
+                        <button
+                          className="quantity_div_body_btn_Add"
+                          onClick={IncreaseQuantity}
+                          disabled={
+                            quantity === productDetail.quantity ? true : false
+                          }
+                        >
+                          +
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  <div className="add_quantity_div2">
+                    <div className="quantity_div_item_avl_title">
+                      Items Available:
+                    </div>
+                    <div className="quantity_div_item_avl_para">
+                      {numberWithCommas(parseInt(productDetail.quantity))}
+                      item(s)
+                    </div>
                   </div>
                 </div>
-                <div className="add_quantity_div2">
-                  <div className="quantity_div_item_avl_title">
-                    Items Available:
-                  </div>
-                  <div className="quantity_div_item_avl_para">
-                    {numberWithCommas(parseInt(payload.unitCount))}
-                    item(s)
-                  </div>
-                </div>
-              </div> */}
                 <div className="power_details_details_div">
                   <div className="power_details_details_div_Head">
                     Specifications
@@ -456,7 +454,7 @@ const ProductDetailPage = ({ match }) => {
                   </div>
                   <div className="Updated_itemdisplay_payment_proceed_div_payment_way_div">
                     <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn_div">
-                      {unlockBtn === false ? (
+                      {/* {unlockBtn === false ? (
                         <button
                           disabled={disable}
                           className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn"
@@ -478,9 +476,19 @@ const ProductDetailPage = ({ match }) => {
                           onClick={PurchaseProduct}
                           // disabled={true}
                         >
-                          Purchase
+                          Proceed to checkout
                         </button>
-                      )}
+                      )} */}
+                      <a
+                        href={`/app/product/checkout/${productDetail.product_id}/${quantity}/${productDetail.product_name}`}
+                      >
+                        <button
+                          className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn"
+                          // onClick={PurchaseProduct}
+                        >
+                          Proceed to checkout
+                        </button>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -488,7 +496,7 @@ const ProductDetailPage = ({ match }) => {
             </div>
           </div>
         </section>
-        <section className="collateral-assets-section no-bg no_pad">
+        <section className="product_detail_section no-bg no_pad">
           <div className="container">
             <div className="product_specifications_area">
               <div className="product_specifications_area_head">

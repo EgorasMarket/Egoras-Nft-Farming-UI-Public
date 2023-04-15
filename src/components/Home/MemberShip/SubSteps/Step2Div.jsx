@@ -284,14 +284,14 @@ export const Step2Div = ({
               <div className="selectPlanDiv2_area1_cont1">
                 <input
                   type="radio"
-                  id="radio-1"
+                  id="radio-2"
                   name="radio"
                   checked={checkedSemiAnnual}
                   onChange={checkSemiAnnualBox}
                 />
                 <label
                   className="selectPlanDiv2_area1_cont1_label"
-                  for="radio-1"
+                  for="radio-2"
                 ></label>
               </div>
 
@@ -332,14 +332,14 @@ export const Step2Div = ({
               <div className="selectPlanDiv2_area1_cont1">
                 <input
                   type="radio"
-                  id="radio-2"
+                  id="radio-3"
                   name="radio"
                   checked={checkedYear}
                   onChange={checkYearBox}
                 />
                 <label
                   className="selectPlanDiv2_area1_cont1_label"
-                  for="radio-2"
+                  for="radio-3"
                 ></label>
               </div>
               <div className="selectPlanDiv2_area1_cont2">

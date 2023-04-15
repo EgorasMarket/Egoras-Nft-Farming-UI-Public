@@ -356,7 +356,7 @@ input[type="radio"] {
 
 input[type="radio"]:checked + .selectPlanDiv2_area1_cont1_label:before {
   background-color: #7a5fc0;
-  border-color: #005828;
+  border-color: #997fda;
   padding: 2px;
 }
 

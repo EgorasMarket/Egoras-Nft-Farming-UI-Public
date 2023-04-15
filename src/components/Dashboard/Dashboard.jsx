@@ -197,6 +197,11 @@ const Dashboard = ({ check, togglemakeDark }) => {
                 />
                 <Route
                   exact
+                  path="/app/product/checkout/:productId/:product_count/:productName"
+                  component={DashBoardMarketCheckoutPage}
+                />
+                <Route
+                  exact
                   path="/app/stake/vault/:asset/:base"
                   component={OpenVaultPage}
                 />

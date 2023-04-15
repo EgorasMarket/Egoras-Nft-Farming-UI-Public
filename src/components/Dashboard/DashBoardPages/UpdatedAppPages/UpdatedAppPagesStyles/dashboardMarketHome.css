@@ -260,7 +260,7 @@ canvas.blockies_icon2 {
 }
 .dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn {
   width: 100%;
-  padding: 10px;
+  padding: 15px;
   border-radius: 10px;
   border: none;
   background: #7a5fc0;
@@ -377,5 +377,8 @@ canvas.blockies_icon2 {
   }
   .dashboardMarketPlaceBody2_div1 {
     margin-bottom: 2em;
+  }
+  .dashboardMarketPlaceBody2_div1_body_card {
+    width: 98%;
   }
 }
