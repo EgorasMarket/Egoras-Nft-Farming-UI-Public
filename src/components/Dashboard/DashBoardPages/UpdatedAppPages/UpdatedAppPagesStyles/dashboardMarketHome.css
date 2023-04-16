@@ -22,6 +22,21 @@
   /* height: 100vh; */
   /* position: relative; */
 }
+.out_of_stock_div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #151422b0;
+  backdrop-filter: blur(1px);
+  color: #fff;
+  font-size: 24px;
+  z-index: 1;
+}
 .dashboardMarketPlaceHeader_div1_search_input {
   width: 100%;
   padding: 12px;
@@ -265,6 +280,12 @@ canvas.blockies_icon2 {
   border: none;
   background: #7a5fc0;
   color: #fff;
+}
+
+.dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn:disabled {
+  background: #3d315f;
+  color: #8683ae;
+  cursor: not-allowed;
 }
 .dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount_span {
   font-weight: 400;

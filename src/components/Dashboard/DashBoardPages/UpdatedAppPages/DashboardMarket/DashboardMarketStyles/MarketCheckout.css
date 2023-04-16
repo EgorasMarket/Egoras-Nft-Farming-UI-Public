@@ -28,6 +28,12 @@
   color: #a09eb8;
   font-size: 18px;
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.checkoutPage_body1_cont1_head_span {
+  width: 100%;
 }
 .checkoutPage_body1_cont1_body {
   display: flex;
@@ -111,6 +117,16 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   border-radius: 10px;
   width: 100%;
 }
+.payment_method_div_cont1_active {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  border: solid 2px #7a5fc0;
+  cursor: pointer;
+  margin: 0px 5px;
+  border-radius: 10px;
+  width: 100%;
+}
 .payment_method_div_cont1_div1 {
   display: flex;
   align-items: center;
@@ -157,6 +173,11 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   background: #7a5fc0;
   color: #fff;
 }
+.proceedToPayDiv_btn:disabled {
+  background: #362d4e;
+  color: #615978;
+  cursor: not-allowed;
+}
 .checkoutPage_body2 {
   width: 44%;
 }
@@ -199,7 +220,7 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   margin-bottom: 10px;
 }
 .checkoutPage_body2_area_body_cont1_image_div {
-  width: 125px;
+  width: 100%;
   background: #212036;
   padding: 10px 5px;
   border-radius: 11px;
@@ -218,11 +239,16 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   font-weight: 600;
   color: #fff;
   font-size: 20px;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .checkoutPage_body2_area_body_cont1_text_para1 {
   display: flex;
   color: #53526d;
   font-size: 12px;
+  align-items: center;
   /* justify-content: space-between; */
 }
 .checkoutPage_body2_area_body_cont1_text_para1_title {
@@ -255,4 +281,23 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   display: flex;
   align-items: center;
   font-weight: 500;
+}
+.remove_prod_btn {
+  width: 26px;
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  border: none;
+  background: #cc3939;
+  color: #fff;
+}
+.remove_prod_btn_icon {
+  font-size: 18px !important;
+}
+.remove_prod_btn:disabled {
+  background: #a85c5c;
+  color: #cfb0b0;
+  cursor: not-allowed;
 }

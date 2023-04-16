@@ -238,20 +238,19 @@ const Home = () => {
     );
     setSearchResults(results);
   }, [searchTerm]);
+  // const fetchData = async () => {
 
-  useEffect(() => {
-    const fetchData = async () => {
+  //   // if (response.data.userMembership == false) {subscriptionStatus
+
+  //   // }
+  // };
+  useEffect(async () => {
+    if (account) {
       const response = await CALL_CHECK_USER_AND_MEMBERSHIP(account);
       console.log(response.data);
       setSubscriptionStatus(response.data.userMembership);
-      // if (response.data.userMembership == false) {subscriptionStatus
-
-      // }
-    };
-
-    fetchData();
-
-    //use the adress and make the API call
+      return;
+    }
   }, [account]);
 
   useEffect(() => {

@@ -441,13 +441,19 @@ const ProductDetailPage = ({ match }) => {
                     </span>
                   </div>
                   <hr />
+                  <div className="proceedToPayDiv1">
+                    <div className="proceedToPayDiv1_title">Item(s)</div>
+                    <div className="proceedToPayDiv1_value">{quantity}</div>
+                  </div>
                   <div className="Updated_itemdisplay_payment_proceed_div_2_area5">
                     <div className="Updated_itemdisplay_payment_proceed_div_2_area5_area1">
-                      Amount
+                      Sub Total
                     </div>
                     <span>
                       {numberWithCommas(
-                        parseFloat(productDetail.final_amount).toFixed(0)
+                        parseFloat(
+                          quantity * productDetail.final_amount
+                        ).toFixed(0)
                       )}{" "}
                       eusd
                     </span>

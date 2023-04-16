@@ -301,6 +301,10 @@ const DashboardMarketHome = () => {
                             title={data.product_name}
                             txnHash={data.transaction_hash}
                             numberWithCommas={numberWithCommas}
+                            prodState={data.product_state}
+                            productType={data.productType}
+                            seller={data.user_wallet}
+                            productQuantity={data.quantity}
                           />
                         ))}
                       </Carousel>
