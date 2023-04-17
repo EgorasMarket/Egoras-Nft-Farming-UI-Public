@@ -30,7 +30,10 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
   const [numDivsToDuplicate, setNumDivsToDuplicate] = useState(0);
   const [checkedMetamask, setCheckedMetamask] = useState(false);
   const [checkedFort, setCheckedFort] = useState(false);
+  const [userDetails, setUserDetails] = useState({});
   const [txnHash, setTxnHash] = useState("");
+  const [updateProfile, setUpdateProfile] = useState(false);
+  const [updateProfileDiv, setUpdateProfileDiv] = useState(false);
   const { productId, product_count, productName } = match.params;
 
   console.log(productId, product_count, productName);
@@ -166,6 +169,14 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
     if (account) {
       const response = await CALL_CHECK_USER_AND_MEMBERSHIP(account);
       console.log(response.data);
+      console.log(response.data.users);
+
+      setUserDetails(response.data.users);
+      if (response.data.users.phoneNumber === null) {
+        setUpdateProfile(true);
+      } else {
+        setUpdateProfile(false);
+      }
       if (response.data.userMembership === true) {
         setNonMembershipFee(
           0 * parseInt(productDetail.final_amount * numDivsToDuplicate)
@@ -192,6 +203,9 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
     setCheckedFort(true);
     setCheckedMetamask(false);
   };
+  const ToggleUpdateProfileDiv = () => {
+    setUpdateProfileDiv(!updateProfileDiv);
+  };
   return (
     <div className="other2 asset_other2">
       <section className="product_detail_section ">
@@ -205,9 +219,21 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                     Billing Info{" "}
                   </span>
                   <div className="checkoutPage_body1_cont1_body_btn_div">
-                    <button className="checkoutPage_body1_cont1_body_btn">
-                      Update
-                    </button>
+                    {updateProfile ? (
+                      <button
+                        className="checkoutPage_body1_cont1_body_btn"
+                        onClick={ToggleUpdateProfileDiv}
+                      >
+                        Update
+                      </button>
+                    ) : (
+                      <button
+                        className="checkoutPage_body1_cont1_body_btn"
+                        disabled
+                      >
+                        Updated
+                      </button>
+                    )}
                   </div>
                 </div>
                 <div className="checkoutPage_body1_cont1_body">
@@ -217,10 +243,10 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                     </div>
                     <div className="checkoutPage_body1_cont1_body_cont1_body">
                       <span className="checkoutPage_body1_cont1_body_cont1_body_span">
-                        Name: John Doe{" "}
+                        Name: {userDetails.fullName}
                       </span>
                       <span className="checkoutPage_body1_cont1_body_cont1_body_span">
-                        Phone No: +234 816 402 0234
+                        Phone No: {userDetails.phoneNumber}
                       </span>
                     </div>
                   </div>
@@ -232,8 +258,10 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                     </div>
                     <div className="checkoutPage_body1_cont1_body_cont1_body">
                       <span>
-                        8b lord emmanuel drive Rumomasi Port-Harcourt Rivers
-                        State Nigeria
+                        Address: {userDetails.userAddress}, City:{" "}
+                        {userDetails.userAddress2}, State: {userDetails.state},{" "}
+                        Country: {userDetails.country}, Postal-Code:{" "}
+                        {userDetails.zipCode}
                       </span>
                     </div>
                   </div>
@@ -330,21 +358,29 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                       </div>
                     </div>
                     <div className="proceedToPayDiv_btn_div">
-                      {checkedMetamask === true ? (
-                        <button
-                          className="proceedToPayDiv_btn"
-                          onClick={PurchaseProduct}
-                        >
-                          Checkout Metamask
-                        </button>
-                      ) : checkedFort === true ? (
-                        <button className="proceedToPayDiv_btn">
-                          Checkout Fort
+                      {updateProfile === true ? (
+                        <button className="proceedToPayDiv_btn" disabled>
+                          Update Your Billing Info
                         </button>
                       ) : (
-                        <button className="proceedToPayDiv_btn" disabled>
-                          Select Payment Method
-                        </button>
+                        <>
+                          {checkedMetamask === true ? (
+                            <button
+                              className="proceedToPayDiv_btn"
+                              onClick={PurchaseProduct}
+                            >
+                              Checkout Metamask
+                            </button>
+                          ) : checkedFort === true ? (
+                            <button className="proceedToPayDiv_btn">
+                              Checkout Fort
+                            </button>
+                          ) : (
+                            <button className="proceedToPayDiv_btn" disabled>
+                              Select Payment Method
+                            </button>
+                          )}
+                        </>
                       )}
                     </div>
                   </div>
@@ -375,6 +411,97 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
           </div>
         </div>
       </section>
+      {updateProfileDiv ? (
+        <div className="updateProfileDivModal">
+          <div className="updateProfileDivModal_container">
+            <div className="updateProfileDivModal_container_title">
+              Update Your Profile
+            </div>
+            <div className="updateProfileDivModal_container_body">
+              <div className="updateProfileDivModal_container_body_cont1">
+                <div className="updateProfileDivModal_container_body_cont1_title">
+                  Full Name*
+                </div>
+                <input
+                  type="text"
+                  className="updateProfileDivModal_container_body_cont1_input"
+                />
+              </div>
+              <div className="updateProfileDivModal_container_body_cont1">
+                <div className="updateProfileDivModal_container_body_cont1_title">
+                  Phone No*
+                </div>
+                <input
+                  type="number"
+                  name="phone number"
+                  className="updateProfileDivModal_container_body_cont1_input"
+                />
+              </div>
+              <div className="updateProfileDivModal_container_body_cont1">
+                <div className="updateProfileDivModal_container_body_cont1_title">
+                  Address*
+                </div>
+                <input
+                  type="text"
+                  name="address"
+                  className="updateProfileDivModal_container_body_cont1_input"
+                />
+              </div>
+              <div className="updateProfileDivModal_container_body_cont1">
+                <div className="updateProfileDivModal_container_body_cont1_title">
+                  City*
+                </div>
+                <input
+                  type="text"
+                  name="city"
+                  className="updateProfileDivModal_container_body_cont1_input"
+                />
+              </div>
+              <div className="updateProfileDivModal_container_body_cont1">
+                <div className="updateProfileDivModal_container_body_cont1_title">
+                  State*
+                </div>
+                <input
+                  type="text"
+                  name="state"
+                  className="updateProfileDivModal_container_body_cont1_input"
+                />
+              </div>
+              <div className="updateProfileDivModal_container_body_cont1">
+                <div className="updateProfileDivModal_container_body_cont1_title">
+                  Country*
+                </div>
+                <input
+                  type="text"
+                  name="country"
+                  className="updateProfileDivModal_container_body_cont1_input"
+                />
+              </div>
+              <div className="updateProfileDivModal_container_body_cont1">
+                <div className="updateProfileDivModal_container_body_cont1_title">
+                  Zip Code*
+                </div>
+                <input
+                  type="text"
+                  name="zip code"
+                  className="updateProfileDivModal_container_body_cont1_input"
+                />
+              </div>
+              <div className="updateProfileDivModal_container_body_cont1_btns">
+                <button className="updateProfileDivModal_container_body_cont1_button1">
+                  Submit
+                </button>
+                <button
+                  className="updateProfileDivModal_container_body_cont1_button2"
+                  onClick={ToggleUpdateProfileDiv}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 };

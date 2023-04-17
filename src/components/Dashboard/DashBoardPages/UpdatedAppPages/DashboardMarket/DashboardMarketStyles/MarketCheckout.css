@@ -73,6 +73,11 @@
   border: none;
   font-size: 13px;
 }
+.checkoutPage_body1_cont1_body_btn:disabled {
+  background: #362d4e;
+  color: #615978;
+  cursor: not-allowed;
+}
 .checkoutPage_body1_cont1_body_cont1_body_span {
   margin-right: 11px;
 }
@@ -300,4 +305,83 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   background: #a85c5c;
   color: #cfb0b0;
   cursor: not-allowed;
+}
+.updateProfileDivModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0d0c1487;
+  backdrop-filter: blur(5px);
+  z-index: 100000;
+  overflow: scroll;
+  padding: 20px;
+}
+.updateProfileDivModal_container {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  background: #181621;
+  padding: 2em;
+  border-radius: 12px;
+  box-shadow: 0px 0px 15px #000;
+  border: solid 1px #2b2a41;
+  overflow: scroll;
+  /* height: 100vh; */
+  max-height: 100%;
+}
+.updateProfileDivModal_container_title {
+  font-size: 24px;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.updateProfileDivModal_container_body {
+  display: flex;
+  flex-direction: column;
+}
+.updateProfileDivModal_container_body_cont1 {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+.updateProfileDivModal_container_body_cont1_title {
+  font-size: 12px;
+  color: #827e95;
+  margin-bottom: 5px;
+}
+.updateProfileDivModal_container_body_cont1_input {
+  padding: 15px;
+  border-radius: 13px;
+  border: solid 1px #7a5fc0a6;
+  background: no-repeat;
+  color: #9e9cb6;
+}
+.updateProfileDivModal_container_body_cont1_btns {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+}
+.updateProfileDivModal_container_body_cont1_button1 {
+  width: 100%;
+  margin-right: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 11px;
+  color: #fff;
+  background: #7a5fc0;
+}
+.updateProfileDivModal_container_body_cont1_button2 {
+  width: 100%;
+  margin-left: 5px;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background: #c72f2f;
+  color: #fff;
 }
