@@ -31,4 +31,5 @@ export const USER_INDIRECT_PRODUCTS_STATS = `${API_URL}/product/seller/direct/pr
 export const USER_INDIRECT_BUY_ORDER = `${API_URL}/order/indirect/buy/order`;
 export const SELLER_LOCKED_FUNDS = `${API_URL}/order/get/seller/locked/funds`;
 export const EXPRESS_BUY_ORDER_STATS = `${API_URL}/order/buy/order/stats`;
+export const UPDATE_MY_PROFILE = `${API_URL}/pub/update/profile`;
 // export const DIRECT_BUY_ORDER_STATS = `${API_URL}/order/buy/order/stats/direct`;
