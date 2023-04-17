@@ -3,9 +3,13 @@ import "./DashboardMarketStyles/MarketCheckout.css";
 import Blockies from "react-blockies";
 import { GET_UPLOADED_PRODUCT_BY_ID } from "../../../../../services/productServices";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { CALL_CHECK_USER_AND_MEMBERSHIP } from "../../../../../services/userServices";
+import {
+  CALL_CHECK_USER_AND_MEMBERSHIP,
+  CALL_UPDATE_MY_PROFILE,
+} from "../../../../../services/userServices";
 import { numberWithCommas } from "../../../../static/static";
 import { PROCESS_PRODUCT_PURCHASE } from "../../../../../services/productServices";
+
 import { BuyIndirectProduct, BuyDirectProduct } from "../../../../../web3";
 import {
   Web3ReactProvider,
@@ -35,7 +39,18 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
   const [updateProfile, setUpdateProfile] = useState(false);
   const [updateProfileDiv, setUpdateProfileDiv] = useState(false);
   const { productId, product_count, productName } = match.params;
+  const [formData, setFormData] = useState({
+    fullName: "",
+    phoneNumber: "",
+    address: "",
+    city: "",
+    country: "",
+    state: "",
+    zipCode: "",
+  });
 
+  const { fullName, phoneNumber, address, city, country, state, zipCode } =
+    formData;
   console.log(productId, product_count, productName);
   const purchaseProductWeb2 = async () => {
     let product_id = productDetail.product_id;
@@ -205,6 +220,24 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
   };
   const ToggleUpdateProfileDiv = () => {
     setUpdateProfileDiv(!updateProfileDiv);
+  };
+  const onChangeUserDetails = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+  const updateProfileFunc = async () => {
+    const body = JSON.stringify({
+      fullname: fullName,
+      phoneNumber,
+      address,
+      address2: city,
+      country,
+      state,
+      zipCode,
+      walletAddress: account,
+    });
+
+    const response = await CALL_UPDATE_MY_PROFILE(body);
+    console.log(response);
   };
   return (
     <div className="other2 asset_other2">
@@ -424,6 +457,9 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                 </div>
                 <input
                   type="text"
+                  name="fullName"
+                  value={fullName}
+                  onChange={onChangeUserDetails}
                   className="updateProfileDivModal_container_body_cont1_input"
                 />
               </div>
@@ -433,7 +469,9 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                 </div>
                 <input
                   type="number"
-                  name="phone number"
+                  name="phoneNumber"
+                  value={phoneNumber}
+                  onChange={onChangeUserDetails}
                   className="updateProfileDivModal_container_body_cont1_input"
                 />
               </div>
@@ -444,6 +482,8 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                 <input
                   type="text"
                   name="address"
+                  value={address}
+                  onChange={onChangeUserDetails}
                   className="updateProfileDivModal_container_body_cont1_input"
                 />
               </div>
@@ -454,6 +494,8 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                 <input
                   type="text"
                   name="city"
+                  value={city}
+                  onChange={onChangeUserDetails}
                   className="updateProfileDivModal_container_body_cont1_input"
                 />
               </div>
@@ -464,6 +506,8 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                 <input
                   type="text"
                   name="state"
+                  value={state}
+                  onChange={onChangeUserDetails}
                   className="updateProfileDivModal_container_body_cont1_input"
                 />
               </div>
@@ -474,6 +518,8 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                 <input
                   type="text"
                   name="country"
+                  value={country}
+                  onChange={onChangeUserDetails}
                   className="updateProfileDivModal_container_body_cont1_input"
                 />
               </div>
@@ -483,12 +529,17 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                 </div>
                 <input
                   type="text"
-                  name="zip code"
+                  name="zipCode"
+                  value={zipCode}
+                  onChange={onChangeUserDetails}
                   className="updateProfileDivModal_container_body_cont1_input"
                 />
               </div>
               <div className="updateProfileDivModal_container_body_cont1_btns">
-                <button className="updateProfileDivModal_container_body_cont1_button1">
+                <button
+                  className="updateProfileDivModal_container_body_cont1_button1"
+                  onClick={updateProfileFunc}
+                >
                   Submit
                 </button>
                 <button

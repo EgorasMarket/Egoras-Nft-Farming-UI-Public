@@ -253,7 +253,7 @@ const DashBoardP2PUserSales = () => {
                   }
                   onClick={toggleActiveTab}
                 >
-                  Sell Orders
+                  Sale Uploads
                 </div>
               </div>
               {activeTab === "buyer" ? (
@@ -831,7 +831,7 @@ const DashBoardP2PUserSales = () => {
                           }
                           onClick={toggleActiveBtn}
                         >
-                          All
+                          Uploaded
                         </div>
                         <div
                           id="Closed"
@@ -842,7 +842,7 @@ const DashBoardP2PUserSales = () => {
                           }
                           onClick={toggleActiveBtn}
                         >
-                          Cancelled
+                          Decline
                         </div>
                         <div
                           id="shipped"
@@ -864,7 +864,7 @@ const DashBoardP2PUserSales = () => {
                           }
                           onClick={toggleActiveBtn}
                         >
-                          Approved
+                          Sold
                         </div>
                       </div>
                     </div>
