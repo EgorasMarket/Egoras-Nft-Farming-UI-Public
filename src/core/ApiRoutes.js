@@ -8,6 +8,7 @@ export const INITIALIZE_DIRECT_PRODUCT = `${API_URL}/product/initialize/add/prod
 export const FETCH_PRODUCT_CATEGORIES = `${API_URL}/product/all-categories`;
 export const GET_UPLOADED_PRODUCT_BY_ID_ROUTE = `${API_URL}/product/uploaded/check`;
 export const UPDATE_EXISTING_PRODUCT = `${API_URL}/product/update/new/product`;
+export const USER_DIRECT_PRODUCTS = `${API_URL}/product/user/direct/products`;
 export const GET_ALL_UPLOADED_PRODUCTS_FOR_USER_ROUTE = `${API_URL}/product/uploaded`;
 export const FETCH_TRADABLE_PRODUCTS_ROUTE = `${API_URL}/product/approved/tradable-true`;
 export const ACCEPT_OR_DECLINE_BID = `${API_URL}/product/bid/accept/product/bid`;

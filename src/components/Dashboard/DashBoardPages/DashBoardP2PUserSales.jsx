@@ -33,6 +33,7 @@ import {
   MARK_PRODUCT_AS_RECIEVED,
   GET_USER_UPLOADED_PRODUCT,
   CALL_SELLER_LOCKED_FUNDS,
+  CALL_USER_DIRECT_PRODUCTS,
 } from "../../../services/productServices";
 import { DISPLAY_NEW_PRODUCTS_CALL } from "../../../services/adminServices";
 import { AcceptBid, releaseFundsToSeller } from "../../../web3";
@@ -76,6 +77,7 @@ const DashBoardP2PUserSales = () => {
   const [buyOrders, setBuyOrders] = useState([]);
   const [sellOrders, setSellOrders] = useState([]);
   const [uploaded, setUploaded] = useState([]);
+  const [myDirectProducts, setMyDirectProducts] = useState([]);
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);
   };
@@ -99,9 +101,19 @@ const DashBoardP2PUserSales = () => {
         setLockedValue(response.data.locked);
       }
     };
+    const fetchData3 = async () => {
+      console.log(account);
+      const response = await CALL_USER_DIRECT_PRODUCTS(account);
+      console.log(response.data, "goody");
+
+      if (response.data) {
+        setMyDirectProducts(response.data);
+      }
+    };
 
     fetchData();
     fetchData2();
+    fetchData3();
   }, [account]);
 
   const handleAcceptBid = async (action) => {
@@ -405,6 +417,7 @@ const DashBoardP2PUserSales = () => {
 
                 
               </div> */}
+
                         {buyOrders.length <= 0 ? (
                           <div className="no_loans_div">
                             <div className="no_loans_div_cont">
@@ -812,6 +825,28 @@ const DashBoardP2PUserSales = () => {
                       </div>
                       <div className="filter_table_area_2 filter_table_area_2b">
                         <div
+                          id="pending_approval"
+                          className={
+                            activeBtn == "pending_approval"
+                              ? "filter_table_btn1_active"
+                              : "filter_table_btn1"
+                          }
+                          onClick={toggleActiveBtn}
+                        >
+                          Pending Approval
+                        </div>
+                        <div
+                          id="approved_products"
+                          className={
+                            activeBtn == "approved_products"
+                              ? "filter_table_btn1_active"
+                              : "filter_table_btn1"
+                          }
+                          onClick={toggleActiveBtn}
+                        >
+                          Approved Products
+                        </div>
+                        <div
                           id="Ongoing"
                           className={
                             activeBtn == "Ongoing"
@@ -901,7 +936,322 @@ const DashBoardP2PUserSales = () => {
 
                 
               </div> */}
-                        {sellOrders.length <= 0 ? (
+
+                        {activeBtn == "pending_approval" ||
+                        activeBtn == "approved_products" ? (
+                          myDirectProducts.length <= 0 ? (
+                            <div className="no_loans_div">
+                              <div className="no_loans_div_cont">
+                                <Nodata />
+                                No Pools yet.
+                              </div>
+                            </div>
+                          ) : (
+                            <tbody
+                              className="assets-table-body popular-categories transitionMe"
+                              id="popular-categories"
+                            >
+                              {" "}
+                              {/* =============== */}
+                              {/* =============== */}
+                              {/* =============== */}
+                              {activeBtn === "pending_approval" &&
+                                myDirectProducts
+                                  .filter((person) => person.status == "NEW")
+                                  .map((asset) => {
+                                    //   var percentage = (asset.funded / asset.amount) * 100;
+                                    console.log(asset);
+                                    return (
+                                      <tr
+                                        className="assets-category-row  transitionMe"
+                                        id={asset.id}
+                                      >
+                                        <td className="assets-category-data branch_name_title">
+                                          <div className="assets-data">
+                                            <div className="assets-data-pool_name">
+                                              {asset.product_name}
+                                              <span className="poolName_txt">
+                                                {asset.createdAt}
+                                              </span>
+                                            </div>
+                                          </div>
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {numberWithCommas(
+                                            parseInt(asset.user_amount).toFixed(
+                                              0
+                                            )
+                                          )}{" "}
+                                          Eusd
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {`${asset.user_wallet.slice(
+                                            0,
+                                            6
+                                          )}...${asset.user_wallet.slice(
+                                            39,
+                                            42
+                                          )}`}
+                                        </td>
+
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {asset.status}
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {asset.transaction_hash != null
+                                            ? `${asset.transaction_hash.slice(
+                                                0,
+                                                6
+                                              )}...${asset.transaction_hash.slice(
+                                                63,
+                                                66
+                                              )}`
+                                            : "N/A"}
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          <ArrowForwardIosIcon />
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
+                              {activeBtn === "approved_products" &&
+                                myDirectProducts
+                                  .filter(
+                                    (person) => person.status == "UPLOADED"
+                                  )
+                                  .map((asset) => {
+                                    return (
+                                      <tr
+                                        className="assets-category-row  transitionMe"
+                                        id={asset.product_id}
+                                      >
+                                        <td className="assets-category-data branch_name_title">
+                                          <div className="assets-data">
+                                            <div className="assets-data-pool_name">
+                                              {asset.product_name}
+                                              <span className="poolName_txt">
+                                                {asset.createdAt}
+                                              </span>
+                                            </div>
+                                          </div>
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {numberWithCommas(
+                                            parseInt(asset.user_amount).toFixed(
+                                              0
+                                            )
+                                          )}{" "}
+                                          Eusd
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {`${asset.user_wallet.slice(
+                                            0,
+                                            6
+                                          )}...${asset.user_wallet.slice(
+                                            39,
+                                            42
+                                          )}`}
+                                        </td>
+
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {asset.status}
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {asset.transaction_hash != null
+                                            ? `${asset.transaction_hash.slice(
+                                                0,
+                                                6
+                                              )}...${asset.transaction_hash.slice(
+                                                63,
+                                                66
+                                              )}`
+                                            : "N/A"}
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          {/* <button
+                                            onClick={() =>
+                                              markProductAsShipped(asset.id)
+                                            }
+                                          >
+                                            {" "}
+                                            Mark As Shipped
+                                          </button> */}
+                                          <ArrowForwardIosIcon />
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
+                              {activeBtn === "Closed" &&
+                                sellOrders
+                                  .filter(
+                                    (person) => person.status == "CANCELLED"
+                                  )
+                                  .map((asset) => {
+                                    return (
+                                      <tr
+                                        className="assets-category-row  transitionMe"
+                                        id={asset.id}
+                                      >
+                                        <td className="assets-category-data branch_name_title">
+                                          <div className="assets-data">
+                                            <div className="assets-data-pool_name">
+                                              {asset.item_name}
+                                              <span className="poolName_txt">
+                                                {asset.createdAt}
+                                              </span>
+                                            </div>
+                                          </div>
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {numberWithCommas(
+                                            parseInt(asset.sum_total).toFixed(0)
+                                          )}{" "}
+                                          Eusd
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {`${asset.seller.slice(
+                                            0,
+                                            6
+                                          )}...${asset.seller.slice(39, 42)}`}
+                                        </td>
+
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {asset.status}
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {`${asset.transactionHash.slice(
+                                            0,
+                                            6
+                                          )}...${asset.transactionHash.slice(
+                                            63,
+                                            66
+                                          )}`}
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          <ArrowForwardIosIcon />
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
+                              {activeBtn === "shipped" &&
+                                sellOrders
+                                  .filter(
+                                    (person) => person.status == "SHIPPED"
+                                  )
+                                  .map((asset) => {
+                                    return (
+                                      <tr
+                                        className="assets-category-row  transitionMe"
+                                        id={asset.id}
+                                      >
+                                        <td className="assets-category-data branch_name_title">
+                                          <div className="assets-data">
+                                            <div className="assets-data-pool_name">
+                                              {asset.item_name}
+                                              <span className="poolName_txt">
+                                                {asset.createdAt}
+                                              </span>
+                                            </div>
+                                          </div>
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {numberWithCommas(
+                                            parseInt(asset.sum_total).toFixed(0)
+                                          )}{" "}
+                                          Eusd
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {`${asset.seller.slice(
+                                            0,
+                                            6
+                                          )}...${asset.seller.slice(39, 42)}`}
+                                        </td>
+
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {asset.status}
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {`${asset.transactionHash.slice(
+                                            0,
+                                            6
+                                          )}...${asset.transactionHash.slice(
+                                            63,
+                                            66
+                                          )}`}
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          <ArrowForwardIosIcon />
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
+                              {activeBtn === "approve" &&
+                                sellOrders
+                                  .filter(
+                                    (person) => person.status == "APPROVED"
+                                  )
+                                  .map((asset) => {
+                                    return (
+                                      <tr
+                                        className="assets-category-row  transitionMe"
+                                        id={asset.id}
+                                      >
+                                        <td className="assets-category-data branch_name_title">
+                                          <div className="assets-data">
+                                            <div className="assets-data-pool_name">
+                                              {asset.item_name}
+                                              <span className="poolName_txt">
+                                                {asset.createdAt}
+                                              </span>
+                                            </div>
+                                          </div>
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {numberWithCommas(
+                                            parseInt(asset.sum_total).toFixed(0)
+                                          )}{" "}
+                                          Eusd
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {`${asset.seller.slice(
+                                            0,
+                                            6
+                                          )}...${asset.seller.slice(39, 42)}`}
+                                        </td>
+
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {asset.status}
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {`${asset.transactionHash.slice(
+                                            0,
+                                            6
+                                          )}...${asset.transactionHash.slice(
+                                            63,
+                                            66
+                                          )}`}
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          <ArrowForwardIosIcon />
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                            </tbody>
+                          )
+                        ) : sellOrders.length <= 0 ? (
                           <div className="no_loans_div">
                             <div className="no_loans_div_cont">
                               <Nodata />
@@ -1024,13 +1374,13 @@ const DashBoardP2PUserSales = () => {
                                     </td>
                                     <td className="assets-category-data-last branch_loan_action">
                                       {/* <button
-                                        onClick={() =>
-                                          markProductAsShipped(asset.id)
-                                        }
-                                      >
-                                        {" "}
-                                        Mark As Shipped
-                                      </button> */}
+                                          onClick={() =>
+                                            markProductAsShipped(asset.id)
+                                          }
+                                        >
+                                          {" "}
+                                          Mark As Shipped
+                                        </button> */}
                                       <ArrowForwardIosIcon />
                                     </td>
                                   </tr>

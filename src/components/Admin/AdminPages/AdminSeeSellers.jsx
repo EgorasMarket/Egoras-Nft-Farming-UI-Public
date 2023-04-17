@@ -580,6 +580,7 @@ const AdminSeeSellers = () => {
                           .filter((person) => person.status == "NEW")
                           .map((asset) => {
                             //   var percentage = (asset.funded / asset.amount) * 100;
+                            console.log(asset);
                             return (
                               <>
                                 <tr className="assets-category-row  transitionMe">
@@ -691,12 +692,12 @@ const AdminSeeSellers = () => {
                                     className="assets-category-data1b stable-content branch_apy"
                                     id={asset.product_id}
                                     // onClick={ToggleSaleDetails}
-                                    onClick={() => {
-                                      ToggleSaleDetails(
-                                        asset.product_id,
-                                        asset.index_id
-                                      );
-                                    }}
+                                    // onClick={() => {
+                                    //   ToggleSaleDetails(
+                                    //     asset.product_id,
+                                    //     asset.index_id
+                                    //   );
+                                    // }}
                                   >
                                     {`${asset.transaction_hash.slice(
                                       0,
