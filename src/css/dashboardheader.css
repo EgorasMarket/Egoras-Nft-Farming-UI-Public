@@ -83,6 +83,23 @@
   color: #fff;
   font-weight: 600;
 }
+.notify_icon_cont_div_notifyCount2 {
+    position: absolute;
+    right: 3px;
+    top: -3px;
+    font-size: 7px;
+    background: #c72f2f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    padding: 0px;
+    /* line-height: 1.5; */
+    color: #fff;
+    font-weight: 600;
+}
 .notifyDropDownDiv_div1 {
   display: flex;
   flex-direction: column;

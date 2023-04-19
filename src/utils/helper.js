@@ -48,7 +48,8 @@ export const TotalItemSold = (data = []) => {
 export const TotalAmountUploaded = (data = []) => {
   let result = 0;
   const op = data.forEach((i) => {
-    result += i.final_amount;
+    console.log(i.final_amount);
+    result += parseInt(i.final_amount);
   });
 
   return parseFloat(result).toFixed(2);
