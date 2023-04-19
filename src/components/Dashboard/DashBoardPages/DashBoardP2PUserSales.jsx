@@ -289,7 +289,7 @@ const DashBoardP2PUserSales = () => {
                             {TOTAL_NUMBER_OF_ITEMS_BOUGHT(buyOrders)
                               .prodCount != null
                               ? TOTAL_NUMBER_OF_ITEMS_BOUGHT(buyOrders)
-                                .prodCount
+                                  .prodCount
                               : 0}{" "}
                             <span className="usd_sign"> item(s)</span>
                           </div>
@@ -312,7 +312,7 @@ const DashBoardP2PUserSales = () => {
                             {TOTAL_NUMBER_OF_ITEMS_BOUGHT(buyOrders)
                               .sub_total != null
                               ? TOTAL_NUMBER_OF_ITEMS_BOUGHT(buyOrders)
-                                .sub_total
+                                  .sub_total
                               : 0}{" "}
                             <span className="usd_sign"> eusd</span>
                           </div>
@@ -478,12 +478,12 @@ const DashBoardP2PUserSales = () => {
                                       <td className="assets-category-data1b stable-content branch_apy">
                                         {asset.transactionHash != null
                                           ? `${asset.transactionHash.slice(
-                                            0,
-                                            6
-                                          )}...${asset.transactionHash.slice(
-                                            63,
-                                            66
-                                          )}`
+                                              0,
+                                              6
+                                            )}...${asset.transactionHash.slice(
+                                              63,
+                                              66
+                                            )}`
                                           : "N/A"}
                                       </td>
                                       <td className="assets-category-data-last branch_loan_action">
@@ -579,12 +579,12 @@ const DashBoardP2PUserSales = () => {
                                       <td className="assets-category-data1b stable-content branch_apy">
                                         {asset.transactionHash != null
                                           ? `${asset.transactionHash.slice(
-                                            0,
-                                            6
-                                          )}...${asset.transactionHash.slice(
-                                            63,
-                                            66
-                                          )}`
+                                              0,
+                                              6
+                                            )}...${asset.transactionHash.slice(
+                                              63,
+                                              66
+                                            )}`
                                           : "N/A"}
                                       </td>
                                       <td className="assets-category-data-last branch_loan_action">
@@ -644,12 +644,12 @@ const DashBoardP2PUserSales = () => {
                                       <td className="assets-category-data1b stable-content branch_apy">
                                         {asset.transactionHash != null
                                           ? `${asset.transactionHash.slice(
-                                            0,
-                                            6
-                                          )}...${asset.transactionHash.slice(
-                                            63,
-                                            66
-                                          )}`
+                                              0,
+                                              6
+                                            )}...${asset.transactionHash.slice(
+                                              63,
+                                              66
+                                            )}`
                                           : "N/A"}
                                       </td>
                                       <td className="assets-category-data-last branch_loan_action"></td>
@@ -697,12 +697,12 @@ const DashBoardP2PUserSales = () => {
                                       <td className="assets-category-data1b stable-content branch_apy">
                                         {asset.transactionHash != null
                                           ? `${asset.transactionHash.slice(
-                                            0,
-                                            6
-                                          )}...${asset.transactionHash.slice(
-                                            63,
-                                            66
-                                          )}`
+                                              0,
+                                              6
+                                            )}...${asset.transactionHash.slice(
+                                              63,
+                                              66
+                                            )}`
                                           : "N/A"}
                                       </td>
                                       <td className="assets-category-data-last branch_loan_action">
@@ -937,12 +937,12 @@ const DashBoardP2PUserSales = () => {
                                       <td className="assets-category-data1b stable-content branch_apy">
                                         {asset.transaction_hash != null
                                           ? `${asset.transaction_hash.slice(
-                                            0,
-                                            6
-                                          )}...${asset.transaction_hash.slice(
-                                            63,
-                                            66
-                                          )}`
+                                              0,
+                                              6
+                                            )}...${asset.transaction_hash.slice(
+                                              63,
+                                              66
+                                            )}`
                                           : "N/A"}
                                       </td>
                                       <td className="assets-category-data-last branch_loan_action">
@@ -1001,15 +1001,17 @@ const DashBoardP2PUserSales = () => {
                             }
                             onClick={toggleActiveBtn}
                           >
-                            {sellOrders
-                              .filter(
-                                (person) => person.status == "PENDING"
-                              ).length <= 0 ? null : <div className="notify_icon_cont_div_notifyCount2">
-                              {sellOrders
-                                .filter(
-                                  (person) => person.status == "PENDING"
-                                ).length}
-                            </div>}
+                            {sellOrders.filter(
+                              (person) => person.status == "PENDING"
+                            ).length <= 0 ? null : (
+                              <div className="notify_icon_cont_div_notifyCount2">
+                                {
+                                  sellOrders.filter(
+                                    (person) => person.status == "PENDING"
+                                  ).length
+                                }
+                              </div>
+                            )}
                             Ordered
                           </div>
                           <div
@@ -1021,15 +1023,17 @@ const DashBoardP2PUserSales = () => {
                             }
                             onClick={toggleActiveBtn}
                           >
-                            {sellOrders
-                              .filter(
-                                (person) => person.status == "CANCELLED"
-                              ).length <= 0 ? null : <div className="notify_icon_cont_div_notifyCount2">
-                              {sellOrders
-                                .filter(
-                                  (person) => person.status == "CANCELLED"
-                                ).length}
-                            </div>}
+                            {sellOrders.filter(
+                              (person) => person.status == "CANCELLED"
+                            ).length <= 0 ? null : (
+                              <div className="notify_icon_cont_div_notifyCount2">
+                                {
+                                  sellOrders.filter(
+                                    (person) => person.status == "CANCELLED"
+                                  ).length
+                                }
+                              </div>
+                            )}
                             Declined
                           </div>
                           <div
@@ -1041,15 +1045,17 @@ const DashBoardP2PUserSales = () => {
                             }
                             onClick={toggleActiveBtn}
                           >
-                            {sellOrders
-                              .filter(
-                                (person) => person.status == "SHIPPED"
-                              ).length <= 0 ? null : <div className="notify_icon_cont_div_notifyCount2">
-                              {sellOrders
-                                .filter(
-                                  (person) => person.status == "SHIPPED"
-                                ).length}
-                            </div>}
+                            {sellOrders.filter(
+                              (person) => person.status == "SHIPPED"
+                            ).length <= 0 ? null : (
+                              <div className="notify_icon_cont_div_notifyCount2">
+                                {
+                                  sellOrders.filter(
+                                    (person) => person.status == "SHIPPED"
+                                  ).length
+                                }
+                              </div>
+                            )}
                             Shipped
                           </div>
                           <div
@@ -1061,15 +1067,17 @@ const DashBoardP2PUserSales = () => {
                             }
                             onClick={toggleActiveBtn}
                           >
-                            {sellOrders
-                              .filter(
-                                (person) => person.status == "APPROVED"
-                              ).length <= 0 ? null : <div className="notify_icon_cont_div_notifyCount2">
-                              {sellOrders
-                                .filter(
-                                  (person) => person.status == "APPROVED"
-                                ).length}
-                            </div>}
+                            {sellOrders.filter(
+                              (person) => person.status == "APPROVED"
+                            ).length <= 0 ? null : (
+                              <div className="notify_icon_cont_div_notifyCount2">
+                                {
+                                  sellOrders.filter(
+                                    (person) => person.status == "APPROVED"
+                                  ).length
+                                }
+                              </div>
+                            )}
                             Sold
                           </div>
                         </div>
@@ -1137,8 +1145,7 @@ const DashBoardP2PUserSales = () => {
                                         Eusd
                                       </td>
                                       <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.quantity
-                                        }
+                                        {asset.quantity}
                                       </td>
                                       <td className="assets-category-data1b stable-content branch_apy">
                                         {`${asset.user_wallet.slice(
@@ -1156,12 +1163,12 @@ const DashBoardP2PUserSales = () => {
                                       <td className="assets-category-data1b stable-content branch_apy">
                                         {asset.transaction_hash != null
                                           ? `${asset.transaction_hash.slice(
-                                            0,
-                                            6
-                                          )}...${asset.transaction_hash.slice(
-                                            63,
-                                            66
-                                          )}`
+                                              0,
+                                              6
+                                            )}...${asset.transaction_hash.slice(
+                                              63,
+                                              66
+                                            )}`
                                           : "N/A"}
                                       </td>
                                       <td className="assets-category-data-last branch_loan_action">
@@ -1187,6 +1194,7 @@ const DashBoardP2PUserSales = () => {
                                 .filter((person) => person.status == "PENDING")
                                 .map((asset) => {
                                   //   var percentage = (asset.funded / asset.amount) * 100;
+                                  console.log(asset);
                                   return (
                                     <tr
                                       className="assets-category-row  transitionMe"
@@ -1209,8 +1217,7 @@ const DashBoardP2PUserSales = () => {
                                         Eusd
                                       </td>
                                       <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.quantity
-                                        }
+                                        {asset.quantity}
                                       </td>
                                       <td className="assets-category-data1b stable-content branch_apy">
                                         {`${asset.user_id.slice(
@@ -1225,12 +1232,12 @@ const DashBoardP2PUserSales = () => {
                                       <td className="assets-category-data1b stable-content branch_apy">
                                         {asset.transactionHash != null
                                           ? `${asset.transactionHash.slice(
-                                            0,
-                                            6
-                                          )}...${asset.transactionHash.slice(
-                                            63,
-                                            66
-                                          )}`
+                                              0,
+                                              6
+                                            )}...${asset.transactionHash.slice(
+                                              63,
+                                              66
+                                            )}`
                                           : "N/A"}
                                       </td>
 
@@ -1288,8 +1295,7 @@ const DashBoardP2PUserSales = () => {
                                         Eusd
                                       </td>
                                       <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.quantity
-                                        }
+                                        {asset.quantity}
                                       </td>
                                       <td className="assets-category-data1b stable-content branch_apy">
                                         {`${asset.user_id.slice(
@@ -1346,8 +1352,7 @@ const DashBoardP2PUserSales = () => {
                                         Eusd
                                       </td>
                                       <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.quantity
-                                        }
+                                        {asset.quantity}
                                       </td>
                                       <td className="assets-category-data1b stable-content branch_apy">
                                         {`${asset.user_id.slice(
@@ -1404,8 +1409,7 @@ const DashBoardP2PUserSales = () => {
                                         Eusd
                                       </td>
                                       <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.quantity
-                                        }
+                                        {asset.quantity}
                                       </td>
                                       <td className="assets-category-data1b stable-content branch_apy">
                                         {`${asset.user_id.slice(
@@ -1464,210 +1468,210 @@ const DashBoardP2PUserSales = () => {
       {saleDetails == ""
         ? null
         : uploadedProduct.map((data) => (
-          <>
-            {data.product_id === saleDetails ? (
-              <div className="saleDetailsDiv">
-                <div
-                  className="saleDetailsDiv_close_div"
-                  onClick={ToggleSaleDetails}
-                ></div>
-                <div
-                  className="saleDetailsDiv_area_closeIcon_div"
-                  onClick={ToggleSaleDetails}
-                >
-                  <CloseIcon className="saleDetailsDiv_area_closeIcon" />
-                  Close
-                </div>
-                <div className="saleDetailsDiv_area">
-                  <div className="saleDetailsDiv_area_1">
-                    <div className="saleDetailsDiv_area_1_title">
-                      Products Details
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Product Images
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body"></div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Product Name
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.product_name}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Product Amount
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {numberWithCommas(
-                          parseInt(data.user_amount).toFixed(0)
-                        )}{" "}
-                        Eusd
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Product Brand Name
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.product_brand}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Product Condition
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.product_condition}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Product Status
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.status}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Product Txn Hash
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {/* {data.txnHash} */}
-                        {"N/A"}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Upload Date
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.createdAt}
-                      </div>
-                    </div>
+            <>
+              {data.product_id === saleDetails ? (
+                <div className="saleDetailsDiv">
+                  <div
+                    className="saleDetailsDiv_close_div"
+                    onClick={ToggleSaleDetails}
+                  ></div>
+                  <div
+                    className="saleDetailsDiv_area_closeIcon_div"
+                    onClick={ToggleSaleDetails}
+                  >
+                    <CloseIcon className="saleDetailsDiv_area_closeIcon" />
+                    Close
                   </div>
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  <div className="saleDetailsDiv_area_1">
-                    <div className="saleDetailsDiv_area_1_title">
-                      Seller's Details
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Seller's Full name
+                  <div className="saleDetailsDiv_area">
+                    <div className="saleDetailsDiv_area_1">
+                      <div className="saleDetailsDiv_area_1_title">
+                        Products Details
                       </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.fullName}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Seller's Wallet Address
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.user_wallet}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Seller's Phone number
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.phoneNumber}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Seller's Residential Address
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.userAddress}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Seller's Country opf Residence
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        Nigeria
-                      </div>
-                    </div>
-                  </div>
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  <div className="saleDetailsDiv_area_1">
-                    <div className="saleDetailsDiv_area_1_title">
-                      Bidding Action
-                    </div>
-                    {data.bidAmount != null ? (
-                      <>
-                        <div className="saleDetailsDiv_area_1_div1">
-                          <div className="saleDetailsDiv_area_1_div1_title">
-                            Bidding Status
-                          </div>
-                          <div className="saleDetailsDiv_area_1_div1_body">
-                            {data.bidStatus}
-                          </div>
-                        </div>
-                        <div className="saleDetailsDiv_area_1_div1">
-                          <div className="saleDetailsDiv_area_1_div1_title">
-                            Bidding Amount
-                          </div>
-                          <div className="saleDetailsDiv_area_1_div1_body">
-                            {data.bidAmount}
-                          </div>
-                        </div>
-                        <div className="acceptDeclineBidButtons">
-                          <button
-                            // onClick={handleAcceptBid}
-                            onClick={() => {
-                              handleAcceptBid(1);
-                            }}
-                            className="acceptDeclineBidButtons_accept"
-                          >
-                            Accept Bid
-                          </button>
-                          <button
-                            onClick={() => {
-                              handleAcceptBid(0);
-                            }}
-                            className="acceptDeclineBidButtons_decline"
-                          >
-                            Decline Bid
-                          </button>
-                        </div>
-                      </>
-                    ) : (
                       <div className="saleDetailsDiv_area_1_div1">
                         <div className="saleDetailsDiv_area_1_div1_title">
-                          No bidding for this product yet
+                          Product Images
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body"></div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Name
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.product_name}
                         </div>
                       </div>
-                    )}
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Amount
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {numberWithCommas(
+                            parseInt(data.user_amount).toFixed(0)
+                          )}{" "}
+                          Eusd
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Brand Name
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.product_brand}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Condition
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.product_condition}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Status
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.status}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Txn Hash
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {/* {data.txnHash} */}
+                          {"N/A"}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Upload Date
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.createdAt}
+                        </div>
+                      </div>
+                    </div>
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    <div className="saleDetailsDiv_area_1">
+                      <div className="saleDetailsDiv_area_1_title">
+                        Seller's Details
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Seller's Full name
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.fullName}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Seller's Wallet Address
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.user_wallet}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Seller's Phone number
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.phoneNumber}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Seller's Residential Address
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.userAddress}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Seller's Country opf Residence
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          Nigeria
+                        </div>
+                      </div>
+                    </div>
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    <div className="saleDetailsDiv_area_1">
+                      <div className="saleDetailsDiv_area_1_title">
+                        Bidding Action
+                      </div>
+                      {data.bidAmount != null ? (
+                        <>
+                          <div className="saleDetailsDiv_area_1_div1">
+                            <div className="saleDetailsDiv_area_1_div1_title">
+                              Bidding Status
+                            </div>
+                            <div className="saleDetailsDiv_area_1_div1_body">
+                              {data.bidStatus}
+                            </div>
+                          </div>
+                          <div className="saleDetailsDiv_area_1_div1">
+                            <div className="saleDetailsDiv_area_1_div1_title">
+                              Bidding Amount
+                            </div>
+                            <div className="saleDetailsDiv_area_1_div1_body">
+                              {data.bidAmount}
+                            </div>
+                          </div>
+                          <div className="acceptDeclineBidButtons">
+                            <button
+                              // onClick={handleAcceptBid}
+                              onClick={() => {
+                                handleAcceptBid(1);
+                              }}
+                              className="acceptDeclineBidButtons_accept"
+                            >
+                              Accept Bid
+                            </button>
+                            <button
+                              onClick={() => {
+                                handleAcceptBid(0);
+                              }}
+                              className="acceptDeclineBidButtons_decline"
+                            >
+                              Decline Bid
+                            </button>
+                          </div>
+                        </>
+                      ) : (
+                        <div className="saleDetailsDiv_area_1_div1">
+                          <div className="saleDetailsDiv_area_1_div1_title">
+                            No bidding for this product yet
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
                   </div>
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
                 </div>
-              </div>
-            ) : null}
-          </>
-        ))}
+              ) : null}
+            </>
+          ))}
     </div>
   );
 };
