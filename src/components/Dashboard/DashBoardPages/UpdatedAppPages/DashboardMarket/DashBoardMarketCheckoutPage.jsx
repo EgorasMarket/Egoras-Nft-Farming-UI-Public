@@ -35,7 +35,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
   const [checkedMetamask, setCheckedMetamask] = useState(false);
   const [checkedFort, setCheckedFort] = useState(false);
   const [userDetails, setUserDetails] = useState({});
-  const [txnHash, setTxnHash] = useState("");
+  //   const [txnHash, setTxnHash] = useState("");
   const [updateProfile, setUpdateProfile] = useState(false);
   const [updateProfileDiv, setUpdateProfileDiv] = useState(false);
   const { productId, product_count, productName } = match.params;
@@ -52,15 +52,23 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
   const { fullName, phoneNumber, address, city, country, state, zipCode } =
     formData;
   console.log(productId, product_count, productName);
-  const purchaseProductWeb2 = async () => {
-    let product_id = productDetail.product_id;
-    const res = await PROCESS_PRODUCT_PURCHASE({
+  const purchaseProductWeb2 = async (txnHash) => {
+    let product_id = productDetail.index_id;
+    console.log(
       numDivsToDuplicate,
       txnHash,
+      product_id,
+      account,
+      productDetail.productType
+    );
+    const res = await PROCESS_PRODUCT_PURCHASE({
+      quantity: numDivsToDuplicate,
+      transactionHash: txnHash,
       product_id,
       user: account,
       order_type: productDetail.productType,
     });
+    console.log(res);
     if (res.success) {
       console.log(res);
     } else {
@@ -76,6 +84,10 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
         library.getSigner()
       );
       console.log(res, "indirect");
+      if (res.status === true) {
+        //   setTxnHash(res.message.hash);
+        purchaseProductWeb2(res.message.hash);
+      }
     } else {
       const res = await BuyDirectProduct(
         productDetail.index_id,
@@ -83,6 +95,10 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
         library.getSigner()
       );
       console.log(res, "direct");
+      if (res.status === true) {
+        // setTxnHash(res.message.hash);
+        purchaseProductWeb2(res.message.hash);
+      }
     }
   };
 

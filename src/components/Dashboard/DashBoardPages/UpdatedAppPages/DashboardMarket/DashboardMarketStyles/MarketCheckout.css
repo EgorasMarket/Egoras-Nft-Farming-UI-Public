@@ -225,10 +225,10 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   margin-bottom: 10px;
 }
 .checkoutPage_body2_area_body_cont1_image_div {
-  width: 100%;
+  width: 120px;
   background: #212036;
   padding: 10px 5px;
-  border-radius: 11px;
+  border-radius: 6px;
 }
 .checkoutPage_body2_area_body_cont1_image {
   width: 100%;
@@ -261,6 +261,8 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
 }
 .checkoutPage_body2_area_body_cont1_text_para1_para {
   color: #a09eb8;
+  align-items: center;
+  display: flex;
 }
 .checkoutPage_body2_area_body_cont1_text_amount {
   font-size: 15px;
