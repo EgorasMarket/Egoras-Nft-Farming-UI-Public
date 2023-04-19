@@ -362,7 +362,6 @@ const DashBoardSellProduct = () => {
   const handleProdStateChange = (event) => {
     setProdState(event.target.value);
     console.log(event.target.value);
-    // prodState, setProdState
     //console.log(event.target.value);
   };
   const handleBrandNameChange = (event) => {
