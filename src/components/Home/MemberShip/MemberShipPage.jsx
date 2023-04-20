@@ -215,6 +215,7 @@ const MemberShipPage = () => {
       setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Subscribed for 1 month");
+      localStorage.settItem("referer","")
     } else {
       if (res.message.code == 4001) {
         console.log(res);
@@ -260,6 +261,7 @@ const MemberShipPage = () => {
       setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Subscribed for 6 months");
+        localStorage.settItem("referer", "");
     } else {
       if (res.message.code == 4001) {
         console.log(res);
@@ -281,6 +283,7 @@ const MemberShipPage = () => {
       setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Subscribed for 1 year");
+      
     } else {
       if (res.message.code == 4001) {
         console.log(res);
@@ -305,6 +308,7 @@ const MemberShipPage = () => {
       setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Subscribed for 1 year");
+        localStorage.settItem("referer", "");
     } else {
       if (res.message.code == 4001) {
         console.log(res);
