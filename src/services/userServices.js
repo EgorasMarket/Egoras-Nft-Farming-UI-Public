@@ -41,7 +41,6 @@ export const CALL_UPDATE_MY_PROFILE = async (payload) => {
     const response = await axios.post(`${UPDATE_MY_PROFILE}`, payload, config);
     return response.data;
   } catch (err) {
-    console.log(err);
-    return err.repsonse;
+    return err.response;
   }
 };

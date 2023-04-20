@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./DashboardMarketStyles/MarketCheckout.css";
 import Blockies from "react-blockies";
 import { GET_UPLOADED_PRODUCT_BY_ID } from "../../../../../services/productServices";
+import ScaleLoader from "react-spinners/ScaleLoader";
+
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import {
   CALL_CHECK_USER_AND_MEMBERSHIP,
@@ -9,7 +11,8 @@ import {
 } from "../../../../../services/userServices";
 import { numberWithCommas } from "../../../../static/static";
 import { PROCESS_PRODUCT_PURCHASE } from "../../../../../services/productServices";
-
+import UpdatedErrorModal from "../UpdatedSuccessErrorModals/UpdatedErrorModal";
+import UpdatedSuccessModal from "../UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import { BuyIndirectProduct, BuyDirectProduct } from "../../../../../web3";
 import {
   Web3ReactProvider,
@@ -38,6 +41,15 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
   //   const [txnHash, setTxnHash] = useState("");
   const [updateProfile, setUpdateProfile] = useState(false);
   const [updateProfileDiv, setUpdateProfileDiv] = useState(false);
+  const [successModal, setSuccessModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successRoute, setSuccessRoute] = useState("");
+  const [profileLoading, setProfileLoading] = useState(false);
+  const [profileDisable, setProfileDisable] = useState(false);
+  const [Disabled, setDisabled] = useState(false);
+  const [isLoading, setIsLoaading] = useState(false);
   const { productId, product_count, productName } = match.params;
   const [formData, setFormData] = useState({
     fullName: "",
@@ -71,11 +83,22 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
     console.log(res);
     if (res.success) {
       console.log(res);
+      setIsLoaading(false);
+    setDisabled(false);
+      setSuccessModal(true);
+      setSuccessRoute("/app/user/p2p_sales");
+      setSuccessMessage(res.message);
     } else {
       console.log(res);
+          setErrorModal(true);
+      setErrorMessage(res.errorMessage);
+       setIsLoaading(false);
+    setDisabled(false);
     }
   };
   const PurchaseProduct = async () => {
+        setIsLoaading(true);
+    setDisabled(true);
     // / BUY WITH BLOCKCHAIN
     if (productDetail.productType == "INDIRECT") {
       const res = await BuyIndirectProduct(
@@ -87,6 +110,11 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
       if (res.status === true) {
         //   setTxnHash(res.message.hash);
         purchaseProductWeb2(res.message.hash);
+      }else{
+             setErrorModal(true);
+      setErrorMessage(res.message);
+        setIsLoaading(false);
+    setDisabled(false);
       }
     } else {
       const res = await BuyDirectProduct(
@@ -98,6 +126,12 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
       if (res.status === true) {
         // setTxnHash(res.message.hash);
         purchaseProductWeb2(res.message.hash);
+      }else{
+
+             setErrorModal(true);
+      setErrorMessage(res.message);
+         setIsLoaading(false);
+    setDisabled(false);
       }
     }
   };
@@ -241,6 +275,8 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   const updateProfileFunc = async () => {
+    setProfileDisable(true);
+    setProfileLoading(true);
     const body = JSON.stringify({
       fullname: fullName,
       phoneNumber,
@@ -254,6 +290,24 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
 
     const response = await CALL_UPDATE_MY_PROFILE(body);
     console.log(response);
+    if (response.success === true) {
+      setProfileDisable(false);
+      setProfileLoading(false);
+      setSuccessModal(true);
+      setSuccessRoute("");
+      setSuccessMessage(response.data.message);
+      console.log(response.data.message);
+    } else {
+      setErrorModal(true);
+      setErrorMessage(response.data.errorMessage);
+      setProfileDisable(false);
+      setProfileLoading(false);
+      console.log(response.data.errorMessage);
+      console.log(response);
+    }
+  };
+  const CloseErrorModal = () => {
+    setErrorModal(false);
   };
   return (
     <div className="other2 asset_other2">
@@ -417,8 +471,10 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                             <button
                               className="proceedToPayDiv_btn"
                               onClick={PurchaseProduct}
+                              disabled={Disabled}
                             >
-                              Checkout Metamask
+                              {isLoading?(<ScaleLoader color="#12111b" size={10} height={19} />):(<>  Checkout Metamask</>)}
+                            
                             </button>
                           ) : checkedFort === true ? (
                             <button className="proceedToPayDiv_btn">
@@ -554,9 +610,14 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
               <div className="updateProfileDivModal_container_body_cont1_btns">
                 <button
                   className="updateProfileDivModal_container_body_cont1_button1"
+                  disabled={profileDisable}
                   onClick={updateProfileFunc}
                 >
-                  Submit
+                  {profileLoading ? (
+                    <ScaleLoader color="#12111b" size={10} height={19} />
+                  ) : (
+                    <>Submit</>
+                  )}
                 </button>
                 <button
                   className="updateProfileDivModal_container_body_cont1_button2"
@@ -568,6 +629,19 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
             </div>
           </div>
         </div>
+      ) : null}
+      {errorModal ? (
+        <UpdatedErrorModal
+          errorMessage={errorMessage}
+          closeModal={CloseErrorModal}
+        />
+      ) : null}
+      {successModal ? (
+        <UpdatedSuccessModal
+          btnRoute={true}
+          successMessage={successMessage}
+          route={successRoute}
+        />
       ) : null}
     </div>
   );
