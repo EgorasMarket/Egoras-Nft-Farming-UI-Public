@@ -45,7 +45,12 @@ import {
   TotalItemsUploaded,
 } from "../../../utils/helper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSpinner, faCheck, faTruck,faTimes } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSpinner,
+  faCheck,
+  faTruck,
+  faTimes,
+} from "@fortawesome/free-solid-svg-icons";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -110,6 +115,27 @@ const DashBoardP2PUserSales = () => {
       console.log(response.data, "goody");
 
       if (response.data) {
+            const temp = response.data;
+            console.log(temp);
+            for (const data of temp) {
+              const timestamp = data.createdAt;
+              const dateObj = new Date(timestamp);
+              const formattedDate = new Intl.DateTimeFormat("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true,
+              }).format(dateObj);
+              console.log(formattedDate);
+              data.createdAt = formattedDate;
+            }
+            const myArray = response.data;
+            myArray.sort(
+              (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+            );
+            console.log(myArray);
         setMyDirectProducts(response.data);
       }
     };
@@ -207,11 +233,50 @@ const DashBoardP2PUserSales = () => {
     const fetchUserBuyOrder = async () => {
       const res = await FETCH_USER_BUY_ORDER(account);
       console.log(res);
+      console.log(res.data);
+           const temp = res.data;
+           console.log(temp);
+           for (const data of temp) {
+             const timestamp = data.createdAt;
+             const dateObj = new Date(timestamp);
+             const formattedDate = new Intl.DateTimeFormat("en-US", {
+               month: "short",
+               day: "numeric",
+               year: "numeric",
+               hour: "numeric",
+               minute: "numeric",
+               hour12: true,
+             }).format(dateObj);
+             console.log(formattedDate);
+             data.createdAt = formattedDate;
+           }
+      const myArray = res.data;
+      myArray.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      console.log(myArray);
       setBuyOrders(res.data);
     };
     const fetchUserSellOrder = async () => {
       const res = await FETCH_USER_SELL_ORDER(account);
       console.log(res);
+         const temp = res.data;
+         console.log(temp);
+      for (const data of temp) {
+           const timestamp = data.createdAt;
+           const dateObj = new Date(timestamp);
+           const formattedDate = new Intl.DateTimeFormat("en-US", {
+             month: "short",
+             day: "numeric",
+             year: "numeric",
+             hour: "numeric",
+             minute: "numeric",
+             hour12: true,
+           }).format(dateObj);
+           console.log(formattedDate);
+        data.createdAt = formattedDate;
+         }
+      const myArray = res.data;
+      myArray.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      console.log(myArray);
       setSellOrders(res.data);
     };
 
@@ -343,6 +408,9 @@ const DashBoardP2PUserSales = () => {
                             <th className="assets-category-titles-heading1">
                               Amount
                             </th>
+                            <th className="assets-category-titles-heading1">
+                              Quantity
+                            </th>
                             <th className="assets-category-titles-heading1 ">
                               Seller
                             </th>
@@ -390,6 +458,9 @@ const DashBoardP2PUserSales = () => {
                                       parseInt(asset.sub_total).toFixed(0)
                                     )}{" "}
                                     Eusd
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {asset.quantity}
                                   </td>
                                   <td className="assets-category-data1b stable-content branch_apy">
                                     {`${asset.seller.slice(

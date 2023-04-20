@@ -404,7 +404,7 @@
 }
 
 .dark .dashBoard_ref_area2_cont1_body_div1 {
-  border: solid 1px #678d77;
+  border: solid 1px #34334b;
 }
 
 .dark .dashBoard_ref_area2_cont1_body_div_head {
@@ -492,9 +492,8 @@
   }
   .dashBoard_ref_area2_cont1_body_div1_cont1 {
     width: 100%;
-    align-items: center;
     font-size: 12px;
-    justify-content: center;
+
   }
   .dashBoard_ref_area2_cont1_body_div1 {
     font-size: 12px;
@@ -503,11 +502,6 @@
   .dashBoard_ref_area1_cont2 {
     gap: 10px;
   }
-  .dashBoard_ref_area2_cont1_body_div_head_cont1 {
-    text-align: center;
-  }
-  .dashBoard_ref_area1_cont1_div1 {
-    align-items: center;
-    text-align: center;
-  }
+
+
 }

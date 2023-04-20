@@ -1542,7 +1542,7 @@ a.visit_app_link_2 {
   flex-direction: column;
 }
 .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head {
-  color: #787690;
+  color: #c8c6dd;
 }
 .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para {
   font-size: 26px;
@@ -2655,7 +2655,7 @@ a.visit_app_link_2 {
     width: 30px;
   }
   .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head {
-    color: #787690;
+    color: #c8c6dd;
     font-size: 12px;
   }
   .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para {
@@ -3032,7 +3032,7 @@ a.visit_app_link_2 {
 
   box-shadow: 0px 0px 10px #000000;
 
-  border: solid 1px #62816e;
+  border: solid 1px #34334b;
 }
 .dark .logout-btn {
   box-shadow: 0px 5px 13px #000000;

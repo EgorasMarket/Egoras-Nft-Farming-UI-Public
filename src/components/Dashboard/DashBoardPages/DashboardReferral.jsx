@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import { API_URL } from "../../../actions/types";
 import { Link } from "react-router-dom";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import "../../../css/dashBoardReferral.css";
@@ -98,31 +99,31 @@ const DashboardReferral = ({ auth }) => {
     }
   });
 
-  useEffect(() => {
-    axios
-      .get(api_url + "/api/user/fetch/top/referals", null, config)
-      .then((data) => {
-        setLeaderBoard(data.data.allData);
-      })
-      .catch((err) => {
-        console.log(err); // "oh, no!"
-      });
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get(api_url + "/api/user/fetch/top/referals", null, config)
+  //     .then((data) => {
+  //       setLeaderBoard(data.data.allData);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err); // "oh, no!"
+  //     });
+  // }, []);
   const web3 = new Web3(window.ethereum);
 
-  useEffect(() => {
-    if (account) {
-      axios
-        .get(api_url + "/api/user/fetch/my/referals/" + account, null, config)
-        .then((data) => {
-          setMyReferrals(data.data.data);
-          console.log(data.data.data);
-        })
-        .catch((err) => {
-          console.log(err); // "oh, no!"
-        });
-    }
-  }, [account]);
+  // useEffect(() => {
+  //   if (account) {
+  //     axios
+  //       .get(api_url + "/api/user/fetch/my/referals/" + account, null, config)
+  //       .then((data) => {
+  //         setMyReferrals(data.data.data);
+  //         console.log(data.data.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err); // "oh, no!"
+  //       });
+  //   }
+  // }, [account]);
 
   const copyText = () => {
     var copyText = document.getElementById("myInput");
@@ -146,15 +147,16 @@ const DashboardReferral = ({ auth }) => {
       if (account) {
         let response = await getRefStats(account, library.getSigner());
         console.log(response);
-        console.log(response.message._amount.toString(), "to string");
-        console.log(response.message._count.toString(), "to string");
-        // if (response.status === true) {
-        //   const resAmnt = parseFloat(
-        //     formatEther(response.message._referral._hex)
-        //   );
-        //   setRefEarnings(resAmnt);
-        //   console.log(response.message._referral);
-        // }
+        console.log(response.message._amount.toString(), "to string count");
+        console.log(response.message._count.toString(), "to string amount");
+        if (response.status === true) {
+          const resAmnt = parseFloat(formatEther(response.message._count.toString()));
+          const resAmnt2 = response.message._amount.toString();
+    
+          setRefEarnings(resAmnt);
+          setRefCount(resAmnt2);
+          // console.log(response.message._referral);
+        }
       }
     },
     [account]
@@ -174,6 +176,36 @@ const DashboardReferral = ({ auth }) => {
       return;
     }
   });
+
+useEffect(async () => {
+  if (account) {
+    await axios
+      .get(API_URL + "/referal/count/"+account, null, config)
+      .then((data) => {
+        console.log(data);
+        console.log(data.data.data);
+        setMyReferrals(data.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }
+}, [account]);
+useEffect(async () => {
+  if (account) {
+    await axios
+      .get(API_URL + "/referal/get/referral/leaderboard", null, config)
+      .then((data) => {
+        console.log(data);
+        console.log(data.data.data);
+        setLeaderBoard(data.data.data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }
+}, [account]);
+  
   return (
     <>
       <div className="other2 asset_other2">
@@ -253,16 +285,16 @@ const DashboardReferral = ({ auth }) => {
                       <div className="dashBoard_ref_area2_cont1_body">
                         <div className="dashBoard_ref_area2_cont1_body_div_head">
                           <div className="dashBoard_ref_area2_cont1_body_div_head_cont1 dashBoard_ref_area2_cont1_body_div_head_cont1_first">
-                            S/N
-                          </div>
-                          <div className="dashBoard_ref_area2_cont1_body_div_head_cont1">
                             Address
                           </div>
-                          <div className="dashBoard_ref_area2_cont1_body_div_head_cont1">
+                          {/* <div className="dashBoard_ref_area2_cont1_body_div_head_cont1">
+                            Address
+                          </div> */}
+                          {/* <div className="dashBoard_ref_area2_cont1_body_div_head_cont1">
                             Total Referrals
-                          </div>
+                          </div> */}
                           <div className="dashBoard_ref_area2_cont1_body_div_head_cont1 dashBoard_ref_area2_cont1_body_div_head_cont1_last">
-                            Amount Earned
+                            Total Referrals
                           </div>
                         </div>
                         {leaderBoard1.length <= 0 ? (
@@ -276,21 +308,19 @@ const DashboardReferral = ({ auth }) => {
                           leaderBoard1.slice(0, 8).map((data) => (
                             <div className="dashBoard_ref_area2_cont1_body_div1">
                               <div className="dashBoard_ref_area2_cont1_body_div1_cont1 dashBoard_ref_area2_cont1_body_div1_cont1_first">
-                                {"1"}
-                              </div>
-                              <div className="dashBoard_ref_area2_cont1_body_div1_cont1">
-                                {data.username}
-                              </div>
-                              <div className="dashBoard_ref_area2_cont1_body_div1_cont1">
-                                {data.address.substring(0, 5) +
+                                {data.referalId.substring(0, 5) +
                                   "..." +
-                                  data.address.substring(20, 24)}
+                                  data.referalId.substring(20, 24)}
                               </div>
-                              <div className="dashBoard_ref_area2_cont1_body_div1_cont1">
-                                {data.referrals}
-                              </div>
+
+                              {/* <div className="dashBoard_ref_area2_cont1_body_div1_cont1">
+                                {data.referalId.substring(0, 5) +
+                                  "..." +
+                                  data.referalId.substring(20, 24)}
+                              </div> */}
+
                               <div className="dashBoard_ref_area2_cont1_body_div1_cont1 dashBoard_ref_area2_cont1_body_div1_cont1_last">
-                                {parseFloat(data.referrals * 2500).toFixed(2)}
+                                {data.refCount}
                               </div>
                             </div>
                           ))
@@ -329,12 +359,12 @@ const DashboardReferral = ({ auth }) => {
                             myReferrals.slice(0, 5).map((data) => (
                               <div className="dashBoard_ref_area2_cont1_body_div1">
                                 <div className="dashBoard_ref_area2_cont1_body_div1_cont1_first">
-                                  {data.username}
+                                  {data.userId.substring(0, 5) +
+                                    "..." +
+                                    data.userId.substring(20, 24)}
                                 </div>
                                 <div className="dashBoard_ref_area2_cont1_body_div1_cont1_last">
-                                  {data.address.substring(0, 5) +
-                                    "..." +
-                                    data.address.substring(20, 24)}
+                                  Active
                                 </div>
                               </div>
                             ))
