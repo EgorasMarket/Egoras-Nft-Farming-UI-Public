@@ -349,7 +349,7 @@ const DashBoardP2PUserSales = () => {
                             <th className="assets-category-titles-heading1  ">
                               Product Status
                             </th>
-                            <th className="assets-category-titles-heading1 ">
+                            <th className="assets-category-titles-heading1 right">
                               Txn hash
                             </th>
                           </tr>
@@ -437,7 +437,7 @@ const DashBoardP2PUserSales = () => {
                                       </div>
                                     ) : null}
                                   </td>
-                                  <td className="assets-category-data1b stable-content branch_apy">
+                                  <td className="assets-category-data-last branch_loan_action">
                                     {`${asset.transactionHash.slice(
                                       0,
                                       6
@@ -447,7 +447,24 @@ const DashBoardP2PUserSales = () => {
                                     )}`}
                                   </td>
                                   <td className="assets-category-data-last branch_loan_action">
-                                    <ArrowForwardIosIcon />
+                                    <div className="markReceivedBtn_div">
+                                      {asset.status === "SHIPPED" ? (
+                                        <button
+                                          className="markReceivedBtn"
+                                          onClick={() =>
+                                            markAsRecieved(
+                                              asset.id,
+                                              asset.product_id,
+                                              asset.tradeID
+                                            )
+                                          }
+                                        >
+                                          Approve
+                                        </button>
+                                      ) : (
+                                        <ArrowForwardIosIcon />
+                                      )}
+                                    </div>
                                   </td>
                                 </tr>
                               );
