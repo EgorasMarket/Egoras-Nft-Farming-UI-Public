@@ -44,6 +44,8 @@ import {
   TotalItemSold,
   TotalItemsUploaded,
 } from "../../../utils/helper";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner, faCheck, faTruck,faTimes } from "@fortawesome/free-solid-svg-icons";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -131,10 +133,10 @@ const DashBoardP2PUserSales = () => {
 
     // console.log(res.status, "somto8uhhhg");
   };
-  const ToggleSaleDetails = (product_id, index_id) => {
-    setSaleDetails(product_id);
-    setIndexId(index_id);
-    console.log(product_id);
+  const ToggleSaleDetails = (e) => {
+    let id = e.currentTarget.id;
+    setSaleDetails(id);
+    console.log(id);
   };
   const toggleActive = (e) => {
     let link = e.currentTarget.id;
@@ -289,7 +291,7 @@ const DashBoardP2PUserSales = () => {
                             {TOTAL_NUMBER_OF_ITEMS_BOUGHT(buyOrders)
                               .prodCount != null
                               ? TOTAL_NUMBER_OF_ITEMS_BOUGHT(buyOrders)
-                                .prodCount
+                                  .prodCount
                               : 0}{" "}
                             <span className="usd_sign"> item(s)</span>
                           </div>
@@ -312,7 +314,7 @@ const DashBoardP2PUserSales = () => {
                             {TOTAL_NUMBER_OF_ITEMS_BOUGHT(buyOrders)
                               .sub_total != null
                               ? TOTAL_NUMBER_OF_ITEMS_BOUGHT(buyOrders)
-                                .sub_total
+                                  .sub_total
                               : 0}{" "}
                             <span className="usd_sign"> eusd</span>
                           </div>
@@ -327,67 +329,9 @@ const DashBoardP2PUserSales = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="BuyerSellerDiv_body_div2">
+                  <div className="BuyerSellerDiv_body_div2a">
                     <div className="BuyerSellerDiv_body_div2_tab_area">
                       <div className="filter_table_area_1">Buy Orders</div>
-                      <div className="filter_table_area_2 filter_table_area_2b">
-                        <div
-                          id="Ongoing"
-                          className={
-                            activeBtn == "Ongoing"
-                              ? "filter_table_btn1_active"
-                              : "filter_table_btn1"
-                          }
-                          onClick={toggleActiveBtn}
-                        >
-                          Pending
-                        </div>
-                        <div
-                          id="All"
-                          className={
-                            activeBtn == "All"
-                              ? "filter_table_btn1_active"
-                              : "filter_table_btn1"
-                          }
-                          onClick={toggleActiveBtn}
-                        >
-                          All
-                        </div>
-                        <div
-                          id="shipped"
-                          className={
-                            activeBtn == "shipped"
-                              ? "filter_table_btn1_active"
-                              : "filter_table_btn1"
-                          }
-                          onClick={toggleActiveBtn}
-                        >
-                          Shipped
-                        </div>
-                        <div
-                          id="approve"
-                          className={
-                            activeBtn == "approve"
-                              ? "filter_table_btn1_active"
-                              : "filter_table_btn1"
-                          }
-                          onClick={toggleActiveBtn}
-                        >
-                          Approved
-                        </div>
-
-                        <div
-                          id="cancelled"
-                          className={
-                            activeBtn == "cancelled"
-                              ? "filter_table_btn1_active"
-                              : "filter_table_btn1"
-                          }
-                          onClick={toggleActiveBtn}
-                        >
-                          Cancelled
-                        </div>
-                      </div>
                     </div>
                     <div className="BuyerSellerDiv_body_div2_body">
                       <table className="assets-table">
@@ -410,19 +354,6 @@ const DashBoardP2PUserSales = () => {
                             </th>
                           </tr>
                         </thead>
-
-                        {/* <div className="table-body-content">
-
-// =====================
-// =====================
-// =====================
-// =====================
-// =====================
-// =====================
-
-                
-              </div> */}
-
                         {buyOrders.length <= 0 ? (
                           <div className="no_loans_div">
                             <div className="no_loans_div_cont">
@@ -435,282 +366,93 @@ const DashBoardP2PUserSales = () => {
                             className="assets-table-body popular-categories transitionMe"
                             id="popular-categories"
                           >
-                            {" "}
                             {/* =============== */}
                             {/* =============== */}
                             {/* =============== */}
-                            {activeBtn === "Ongoing" &&
-                              buyOrders
-                                .filter((person) => person.status === "PENDING")
-                                .map((asset) => {
-                                  //   var percentage = (asset.funded / asset.amount) * 100;
-                                  return (
-                                    <tr
-                                      className="assets-category-row  transitionMe"
-                                      id={asset.product_id}
-                                    >
-                                      <td className="assets-category-data branch_name_title">
-                                        <div className="assets-data">
-                                          <div className="assets-data-pool_name">
-                                            {asset.item_name}
-                                            <span className="poolName_txt">
-                                              {asset.createdAt}
-                                            </span>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {numberWithCommas(
-                                          parseInt(asset.sub_total).toFixed(0)
-                                        )}
-                                        Eusd
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {`${asset.seller.slice(
-                                          0,
-                                          6
-                                        )}...${asset.seller.slice(39, 42)}`}
-                                      </td>
-
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.status}
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.transactionHash != null
-                                          ? `${asset.transactionHash.slice(
-                                            0,
-                                            6
-                                          )}...${asset.transactionHash.slice(
-                                            63,
-                                            66
-                                          )}`
-                                          : "N/A"}
-                                      </td>
-                                      <td className="assets-category-data-last branch_loan_action">
-                                        <ArrowForwardIosIcon />
-                                      </td>
-                                    </tr>
-                                  );
-                                })}
-                            {activeBtn === "All" &&
-                              buyOrders.map((asset) => {
-                                return (
-                                  <tr
-                                    className="assets-category-row  transitionMe"
-                                    id={asset.id}
-                                  >
-                                    <td className="assets-category-data branch_name_title">
-                                      <div className="assets-data">
-                                        <div className="assets-data-pool_name">
-                                          {asset.item_name}
-                                          <span className="poolName_txt">
-                                            {asset.createdAt}
-                                          </span>
-                                        </div>
+                            {buyOrders.map((asset) => {
+                              return (
+                                <tr
+                                  className="assets-category-row  transitionMe"
+                                  id={asset.id}
+                                >
+                                  <td className="assets-category-data branch_name_title">
+                                    <div className="assets-data">
+                                      <div className="assets-data-pool_name">
+                                        {asset.item_name}
+                                        <span className="poolName_txt">
+                                          {asset.createdAt}
+                                        </span>
                                       </div>
-                                    </td>
-                                    <td className="assets-category-data1b stable-content branch_apy">
-                                      {numberWithCommas(
-                                        parseInt(asset.sub_total).toFixed(0)
-                                      )}{" "}
-                                      Eusd
-                                    </td>
-                                    <td className="assets-category-data1b stable-content branch_apy">
-                                      {`${asset.seller.slice(
-                                        0,
-                                        6
-                                      )}...${asset.seller.slice(39, 42)}`}
-                                    </td>
+                                    </div>
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {numberWithCommas(
+                                      parseInt(asset.sub_total).toFixed(0)
+                                    )}{" "}
+                                    Eusd
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {`${asset.seller.slice(
+                                      0,
+                                      6
+                                    )}...${asset.seller.slice(39, 42)}`}
+                                  </td>
 
-                                    <td className="assets-category-data1b stable-content branch_apy">
-                                      {asset.status}
-                                    </td>
-                                    <td className="assets-category-data1b stable-content branch_apy">
-                                      {`${asset.transactionHash.slice(
-                                        0,
-                                        6
-                                      )}...${asset.transactionHash.slice(
-                                        63,
-                                        66
-                                      )}`}
-                                    </td>
-                                    <td className="assets-category-data-last branch_loan_action">
-                                      <ArrowForwardIosIcon />
-                                    </td>
-                                  </tr>
-                                );
-                              })}
-                            {activeBtn === "shipped" &&
-                              buyOrders
-                                .filter((person) => person.status === "SHIPPED")
-                                .map((asset) => {
-                                  //   var percentage = (asset.funded / asset.amount) * 100;
-                                  return (
-                                    <tr
-                                      className="assets-category-row  transitionMe"
-                                      id={asset.id}
-                                    >
-                                      <td className="assets-category-data branch_name_title">
-                                        <div className="assets-data">
-                                          <div className="assets-data-pool_name">
-                                            {asset.item_name}
-                                            <span className="poolName_txt">
-                                              {asset.createdAt}
-                                            </span>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {numberWithCommas(
-                                          parseInt(asset.sub_total).toFixed(0)
-                                        )}
-                                        Eusd
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {`${asset.seller.slice(
-                                          0,
-                                          6
-                                        )}...${asset.seller.slice(39, 42)}`}
-                                      </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {asset.status === "PENDING" ? (
+                                      <div className="pending_status_div">
+                                        {asset.status}{" "}
+                                        <FontAwesomeIcon
+                                          className="ml-2"
+                                          icon={faSpinner}
+                                          spin
+                                        />
+                                      </div>
+                                    ) : null}
+                                    {asset.status === "CANCELLED" ? (
+                                      <div className="declined_status_div">
+                                        {asset.status}{" "}
+                                        <FontAwesomeIcon
+                                          className="ml-2"
+                                          icon={faTimes}
+                                        />
+                                      </div>
+                                    ) : null}
+                                    {asset.status === "SHIPPED" ? (
+                                      <div className="shipped_status_div">
+                                        {asset.status}{" "}
+                                        <FontAwesomeIcon
+                                          className="ml-2"
+                                          icon={faTruck}
+                                        />
+                                      </div>
+                                    ) : null}
+                                    {asset.status === "APPROVED" ? (
+                                      <div className="sold_status_div">
+                                        {asset.status}{" "}
+                                        <FontAwesomeIcon
+                                          className="ml-2"
+                                          icon={faCheck}
+                                        />
+                                      </div>
+                                    ) : null}
+                                  </td>
+                                  <td className="assets-category-data1b stable-content branch_apy">
+                                    {`${asset.transactionHash.slice(
+                                      0,
+                                      6
+                                    )}...${asset.transactionHash.slice(
+                                      63,
+                                      66
+                                    )}`}
+                                  </td>
+                                  <td className="assets-category-data-last branch_loan_action">
+                                    <ArrowForwardIosIcon />
+                                  </td>
+                                </tr>
+                              );
+                            })}
 
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.status}
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.transactionHash != null
-                                          ? `${asset.transactionHash.slice(
-                                            0,
-                                            6
-                                          )}...${asset.transactionHash.slice(
-                                            63,
-                                            66
-                                          )}`
-                                          : "N/A"}
-                                      </td>
-                                      <td className="assets-category-data-last branch_loan_action">
-                                        <button
-                                          onClick={() =>
-                                            markAsRecieved(
-                                              asset.id,
-                                              asset.product_id,
-                                              asset.tradeID
-                                            )
-                                          }
-                                        >
-                                          Recieve Product
-                                        </button>
-                                      </td>
-                                    </tr>
-                                  );
-                                })}
-                            {activeBtn === "approve" &&
-                              buyOrders
-                                .filter(
-                                  (person) => person.status === "APPROVED"
-                                )
-                                .map((asset) => {
-                                  //   var percentage = (asset.funded / asset.amount) * 100;
-                                  return (
-                                    <tr
-                                      className="assets-category-row  transitionMe"
-                                      id={asset.product_id}
-                                    >
-                                      <td className="assets-category-data branch_name_title">
-                                        <div className="assets-data">
-                                          <div className="assets-data-pool_name">
-                                            {asset.item_name}
-                                            <span className="poolName_txt">
-                                              {asset.createdAt}
-                                            </span>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {numberWithCommas(
-                                          parseInt(asset.sub_total).toFixed(0)
-                                        )}
-                                        Eusd
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {`${asset.seller.slice(
-                                          0,
-                                          6
-                                        )}...${asset.seller.slice(39, 42)}`}
-                                      </td>
-
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.status}
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.transactionHash != null
-                                          ? `${asset.transactionHash.slice(
-                                            0,
-                                            6
-                                          )}...${asset.transactionHash.slice(
-                                            63,
-                                            66
-                                          )}`
-                                          : "N/A"}
-                                      </td>
-                                      <td className="assets-category-data-last branch_loan_action"></td>
-                                    </tr>
-                                  );
-                                })}
-                            {activeBtn === "cancelled" &&
-                              buyOrders
-                                .filter(
-                                  (person) => person.status === "CANCELLED"
-                                )
-                                .map((asset) => {
-                                  //   var percentage = (asset.funded / asset.amount) * 100;
-                                  return (
-                                    <tr
-                                      className="assets-category-row  transitionMe"
-                                      id={asset.product_id}
-                                    >
-                                      <td className="assets-category-data branch_name_title">
-                                        <div className="assets-data">
-                                          <div className="assets-data-pool_name">
-                                            {asset.item_name}
-                                            <span className="poolName_txt">
-                                              {asset.createdAt}
-                                            </span>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {numberWithCommas(
-                                          parseInt(asset.sub_total).toFixed(0)
-                                        )}
-                                        Eusd
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {`${asset.seller.slice(
-                                          0,
-                                          6
-                                        )}...${asset.seller.slice(39, 42)}`}
-                                      </td>
-
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.status}
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.transactionHash != null
-                                          ? `${asset.transactionHash.slice(
-                                            0,
-                                            6
-                                          )}...${asset.transactionHash.slice(
-                                            63,
-                                            66
-                                          )}`
-                                          : "N/A"}
-                                      </td>
-                                      <td className="assets-category-data-last branch_loan_action">
-                                        <ArrowForwardIosIcon />
-                                      </td>
-                                    </tr>
-                                  );
-                                })}
                             {/* =================== */}
                             {/* =================== */}
                             {/* =================== */}
@@ -730,6 +472,17 @@ const DashBoardP2PUserSales = () => {
                   </div>
                 </div>
               ) : (
+                // @todo -  sell orders
+                // @todo -  sell orders
+                // @todo -  sell orders
+                // @todo -  sell orders
+                // @todo -  sell orders
+                // @todo -  sell orders
+                // @todo -  sell orders
+                // @todo -  sell orders
+                // @todo -  sell orders
+                // @todo -  sell orders
+                // @todo -  sell orders
                 // @todo -  sell orders
                 <div className="BuyerSellerDiv_body">
                   <div className="BuyerSellerDiv_body_header">
@@ -879,7 +632,9 @@ const DashBoardP2PUserSales = () => {
                             </tr>
                           </thead>
 
-                          {myDirectProducts.length <= 0 ? (
+                          {myDirectProducts.filter(
+                            (person) => person.status == "NEW"
+                          ).length <= 0 ? (
                             <div className="no_loans_div">
                               <div className="no_loans_div_cont">
                                 <Nodata />
@@ -937,12 +692,12 @@ const DashBoardP2PUserSales = () => {
                                       <td className="assets-category-data1b stable-content branch_apy">
                                         {asset.transaction_hash != null
                                           ? `${asset.transaction_hash.slice(
-                                            0,
-                                            6
-                                          )}...${asset.transaction_hash.slice(
-                                            63,
-                                            66
-                                          )}`
+                                              0,
+                                              6
+                                            )}...${asset.transaction_hash.slice(
+                                              63,
+                                              66
+                                            )}`
                                           : "N/A"}
                                       </td>
                                       <td className="assets-category-data-last branch_loan_action">
@@ -993,46 +748,50 @@ const DashBoardP2PUserSales = () => {
                             Products
                           </div>
                           <div
-                            id="Ongoing"
+                            id="PENDING"
                             className={
-                              activeBtn == "Ongoing"
+                              activeBtn == "PENDING"
                                 ? "filter_table_btn1_active"
                                 : "filter_table_btn1"
                             }
                             onClick={toggleActiveBtn}
                           >
-                            {sellOrders
-                              .filter(
-                                (person) => person.status == "PENDING"
-                              ).length <= 0 ? null : <div className="notify_icon_cont_div_notifyCount2">
-                              {sellOrders
-                                .filter(
-                                  (person) => person.status == "PENDING"
-                                ).length}
-                            </div>}
-                            Ordered
+                            {sellOrders.filter(
+                              (person) => person.status == "PENDING"
+                            ).length <= 0 ? null : (
+                              <div className="notify_icon_cont_div_notifyCount2">
+                                {
+                                  sellOrders.filter(
+                                    (person) => person.status == "PENDING"
+                                  ).length
+                                }
+                              </div>
+                            )}
+                            Orders
                           </div>
                           <div
-                            id="Closed"
+                            id="CANCELLED"
                             className={
-                              activeBtn == "Closed"
+                              activeBtn == "CANCELLED"
                                 ? "filter_table_btn1_active"
                                 : "filter_table_btn1"
                             }
                             onClick={toggleActiveBtn}
                           >
-                            {sellOrders
-                              .filter(
-                                (person) => person.status == "CANCELLED"
-                              ).length <= 0 ? null : <div className="notify_icon_cont_div_notifyCount2">
-                              {sellOrders
-                                .filter(
-                                  (person) => person.status == "CANCELLED"
-                                ).length}
-                            </div>}
+                            {sellOrders.filter(
+                              (person) => person.status == "CANCELLED"
+                            ).length <= 0 ? null : (
+                              <div className="notify_icon_cont_div_notifyCount2">
+                                {
+                                  sellOrders.filter(
+                                    (person) => person.status == "CANCELLED"
+                                  ).length
+                                }
+                              </div>
+                            )}
                             Declined
                           </div>
-                          <div
+                          {/* <div
                             id="shipped"
                             className={
                               activeBtn == "shipped"
@@ -1041,35 +800,39 @@ const DashBoardP2PUserSales = () => {
                             }
                             onClick={toggleActiveBtn}
                           >
-                            {sellOrders
-                              .filter(
-                                (person) => person.status == "SHIPPED"
-                              ).length <= 0 ? null : <div className="notify_icon_cont_div_notifyCount2">
-                              {sellOrders
-                                .filter(
-                                  (person) => person.status == "SHIPPED"
-                                ).length}
-                            </div>}
+                            {sellOrders.filter(
+                              (person) => person.status == "SHIPPED"
+                            ).length <= 0 ? null : (
+                              <div className="notify_icon_cont_div_notifyCount2">
+                                {
+                                  sellOrders.filter(
+                                    (person) => person.status == "SHIPPED"
+                                  ).length
+                                }
+                              </div>
+                            )}
                             Shipped
-                          </div>
+                          </div> */}
                           <div
-                            id="approve"
+                            id="APPROVED"
                             className={
-                              activeBtn == "approve"
+                              activeBtn == "APPROVED"
                                 ? "filter_table_btn1_active"
                                 : "filter_table_btn1"
                             }
                             onClick={toggleActiveBtn}
                           >
-                            {sellOrders
-                              .filter(
-                                (person) => person.status == "APPROVED"
-                              ).length <= 0 ? null : <div className="notify_icon_cont_div_notifyCount2">
-                              {sellOrders
-                                .filter(
-                                  (person) => person.status == "APPROVED"
-                                ).length}
-                            </div>}
+                            {sellOrders.filter(
+                              (person) => person.status == "APPROVED"
+                            ).length <= 0 ? null : (
+                              <div className="notify_icon_cont_div_notifyCount2">
+                                {
+                                  sellOrders.filter(
+                                    (person) => person.status == "APPROVED"
+                                  ).length
+                                }
+                              </div>
+                            )}
                             Sold
                           </div>
                         </div>
@@ -1097,354 +860,411 @@ const DashBoardP2PUserSales = () => {
                                   ? " Order Status"
                                   : " Product Status"}
                               </th>
-                              <th className="assets-category-titles-heading1 ">
+                              <th className="assets-category-titles-heading1 right">
                                 Txn hash
                               </th>
                             </tr>
                           </thead>
 
-                          <tbody
-                            className="assets-table-body popular-categories transitionMe"
-                            id="popular-categories"
-                          >
-                            {" "}
-                            {/* =============== */}
-                            {/* =============== */}
-                            {/* =============== */}
-                            {activeBtn === "approved_products" &&
-                              myDirectProducts
-                                .filter((person) => person.status == "UPLOADED")
-                                .map((asset) => {
-                                  return (
-                                    <tr
-                                      className="assets-category-row  transitionMe"
-                                      id={asset.product_id}
-                                    >
-                                      <td className="assets-category-data branch_name_title">
-                                        <div className="assets-data">
-                                          <div className="assets-data-pool_name">
-                                            {asset.product_name}
-                                            <span className="poolName_txt">
-                                              {asset.createdAt}
-                                            </span>
+                          {activeBtn === "approved_products" &&
+                          myDirectProducts.filter(
+                            (person) => person.status == "UPLOADED"
+                          ).length <= 0 ? (
+                            <>
+                              <div className="no_loans_div">
+                                <div className="no_loans_div_cont">
+                                  <Nodata />
+                                  No Pools yet.
+                                </div>{" "}
+                              </div>
+                            </>
+                          ) : (
+                            <tbody
+                              className="assets-table-body popular-categories transitionMe"
+                              id="popular-categories"
+                            >
+                              {/* ========= */}
+                              {/* ========= */}
+                              {/* ========= */}
+                              {/* ========= */}
+                              {activeBtn === "approved_products" &&
+                                myDirectProducts
+                                  .filter(
+                                    (person) => person.status == "UPLOADED"
+                                  )
+                                  .map((asset) => {
+                                    return (
+                                      <tr
+                                        className="assets-category-row  transitionMe"
+                                        id={asset.product_id}
+                                      >
+                                        <td className="assets-category-data branch_name_title">
+                                          <div className="assets-data">
+                                            <div className="assets-data-pool_name">
+                                              {asset.product_name}
+                                              <span className="poolName_txt">
+                                                {asset.createdAt}
+                                              </span>
+                                            </div>
                                           </div>
-                                        </div>
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {numberWithCommas(
-                                          parseInt(asset.user_amount).toFixed(0)
-                                        )}{" "}
-                                        Eusd
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.quantity
-                                        }
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {`${asset.user_wallet.slice(
-                                          0,
-                                          6
-                                        )}...${asset.user_wallet.slice(
-                                          39,
-                                          42
-                                        )}`}
-                                      </td>
-
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.status}
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.transaction_hash != null
-                                          ? `${asset.transaction_hash.slice(
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {numberWithCommas(
+                                            parseInt(asset.user_amount).toFixed(
+                                              0
+                                            )
+                                          )}{" "}
+                                          Eusd
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {asset.quantity}
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {`${asset.user_wallet.slice(
                                             0,
                                             6
-                                          )}...${asset.transaction_hash.slice(
-                                            63,
-                                            66
-                                          )}`
-                                          : "N/A"}
-                                      </td>
-                                      <td className="assets-category-data-last branch_loan_action">
-                                        {/* <button
-                                            onClick={() =>
-                                              markProductAsShipped(asset.id)
-                                            }
-                                          >
-                                            {" "}
-                                            Mark As Shipped
-                                          </button> */}
-                                        <ArrowForwardIosIcon />
-                                      </td>
-                                    </tr>
-                                  );
-                                })}
-                            {/* ========= */}
-                            {/* ========= */}
-                            {/* ========= */}
-                            {/* ========= */}
-                            {activeBtn === "Ongoing" &&
-                              sellOrders
-                                .filter((person) => person.status == "PENDING")
-                                .map((asset) => {
-                                  //   var percentage = (asset.funded / asset.amount) * 100;
-                                  return (
-                                    <tr
-                                      className="assets-category-row  transitionMe"
-                                      id={asset.id}
-                                    >
-                                      <td className="assets-category-data branch_name_title">
-                                        <div className="assets-data">
-                                          <div className="assets-data-pool_name">
-                                            {asset.item_name}
-                                            <span className="poolName_txt">
-                                              {asset.createdAt}
-                                            </span>
-                                          </div>
-                                        </div>
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {numberWithCommas(
-                                          parseInt(asset.sub_total).toFixed(0)
-                                        )}{" "}
-                                        Eusd
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.quantity
-                                        }
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {`${asset.user_id.slice(
-                                          0,
-                                          6
-                                        )}...${asset.user_id.slice(39, 42)}`}
-                                      </td>
+                                          )}...${asset.user_wallet.slice(
+                                            39,
+                                            42
+                                          )}`}
+                                        </td>
 
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.status}
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.transactionHash != null
-                                          ? `${asset.transactionHash.slice(
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {asset.status}
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          {asset.transaction_hash != null
+                                            ? `${asset.transaction_hash.slice(
+                                                0,
+                                                6
+                                              )}...${asset.transaction_hash.slice(
+                                                63,
+                                                66
+                                              )}`
+                                            : "N/A"}
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          <ArrowForwardIosIcon />
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
+                              {/* ========= */}
+                              {/* ========= */}
+                              {/* ========= */}
+                              {/* ========= */}
+                            </tbody>
+                          )}
+                          {/* =========== */}
+                          {/* =========== */}
+                          {/* =========== */}
+                          {/* =========== */}
+                          {/* =========== */}
+                          {/* =========== */}
+                          {activeBtn &&
+                          sellOrders.filter(
+                            (person) => person.status == activeBtn
+                          ).length <= 0 ? (
+                            <>
+                              {activeBtn === "approved_products" ? null : (
+                                <div className="no_loans_div">
+                                  <div className="no_loans_div_cont">
+                                    <Nodata />
+                                    No Pools yet.
+                                  </div>{" "}
+                                </div>
+                              )}
+                            </>
+                          ) : (
+                            <tbody
+                              className="assets-table-body popular-categories transitionMe"
+                              id="popular-categories"
+                            >
+                              {" "}
+                              {/* =============== */}
+                              {/* =============== */}
+                              {/* =============== */}
+                              {/* ========= */}
+                              {/* ========= */}
+                              {/* ========= */}
+                              {/* ========= */}
+                              {activeBtn === "PENDING" &&
+                                sellOrders
+                                  .filter(
+                                    (person) => person.status == "PENDING"
+                                  )
+                                  .map((asset) => {
+                                    //   var percentage = (asset.funded / asset.amount) * 100;
+                                    return (
+                                      <tr
+                                        className="assets-category-row  transitionMe"
+                                        id={asset.id}
+                                        onClick={ToggleSaleDetails}
+                                      >
+                                        <td className="assets-category-data branch_name_title">
+                                          <div className="assets-data">
+                                            <div className="assets-data-pool_name">
+                                              {asset.item_name}
+                                              <span className="poolName_txt">
+                                                {asset.createdAt}
+                                              </span>
+                                            </div>
+                                          </div>
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {numberWithCommas(
+                                            parseInt(asset.sub_total).toFixed(0)
+                                          )}{" "}
+                                          Eusd
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {asset.quantity}
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {`${asset.user_id.slice(
+                                            0,
+                                            6
+                                          )}...${asset.user_id.slice(39, 42)}`}
+                                        </td>
+
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          <div className="pending_status_div">
+                                            {asset.status}{" "}
+                                            <FontAwesomeIcon
+                                              className="ml-2"
+                                              icon={faSpinner}
+                                              spin
+                                            />
+                                          </div>
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          {asset.transactionHash != null
+                                            ? `${asset.transactionHash.slice(
+                                                0,
+                                                6
+                                              )}...${asset.transactionHash.slice(
+                                                63,
+                                                66
+                                              )}`
+                                            : "N/A"}
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          <ArrowForwardIosIcon />
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
+                              {/* ========= */}
+                              {/* ========= */}
+                              {/* ========= */}
+                              {/* ========= */}
+                              {activeBtn === "CANCELLED" &&
+                                sellOrders
+                                  .filter(
+                                    (person) => person.status == "CANCELLED"
+                                  )
+                                  .map((asset) => {
+                                    return (
+                                      <tr
+                                        className="assets-category-row  transitionMe"
+                                        id={asset.id}
+                                      >
+                                        <td className="assets-category-data branch_name_title">
+                                          <div className="assets-data">
+                                            <div className="assets-data-pool_name">
+                                              {asset.item_name}
+                                              <span className="poolName_txt">
+                                                {asset.createdAt}
+                                              </span>
+                                            </div>
+                                          </div>
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {numberWithCommas(
+                                            parseInt(asset.sub_total).toFixed(0)
+                                          )}{" "}
+                                          Eusd
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {asset.quantity}
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {`${asset.user_id.slice(
+                                            0,
+                                            6
+                                          )}...${asset.user_id.slice(39, 42)}`}
+                                        </td>
+
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          <div className="declined_status_div">
+                                            {asset.status}{" "}
+                                            <FontAwesomeIcon
+                                              className="ml-2"
+                                              icon={faTimes}
+                                            />
+                                          </div>
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          {`${asset.transactionHash.slice(
                                             0,
                                             6
                                           )}...${asset.transactionHash.slice(
                                             63,
                                             66
-                                          )}`
-                                          : "N/A"}
-                                      </td>
-
-                                      <td className="assets-category-data-last branch_loan_action">
-                                        <button
-                                        // onClick={() =>
-                                        //   markProductAsShipped(asset.id)
-                                        // }
-                                        >
-                                          {" "}
-                                          Decline
-                                        </button>
-                                        <button
-                                          onClick={() =>
-                                            markProductAsShipped(asset.id)
-                                          }
-                                        >
-                                          {" "}
-                                          Mark As Shipped
-                                        </button>
-                                        {/* <ArrowForwardIosIcon /> */}
-                                      </td>
-                                    </tr>
-                                  );
-                                })}
-                            {/* ========= */}
-                            {/* ========= */}
-                            {/* ========= */}
-                            {/* ========= */}
-                            {activeBtn === "Closed" &&
-                              sellOrders
-                                .filter(
-                                  (person) => person.status == "CANCELLED"
-                                )
-                                .map((asset) => {
-                                  return (
-                                    <tr
-                                      className="assets-category-row  transitionMe"
-                                      id={asset.id}
-                                    >
-                                      <td className="assets-category-data branch_name_title">
-                                        <div className="assets-data">
-                                          <div className="assets-data-pool_name">
-                                            {asset.item_name}
-                                            <span className="poolName_txt">
-                                              {asset.createdAt}
-                                            </span>
+                                          )}`}
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          <ArrowForwardIosIcon />
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
+                              {/* ========= */}
+                              {/* ========= */}
+                              {/* ========= */}
+                              {/* ========= */}
+                              {activeBtn === "PENDING" &&
+                                sellOrders
+                                  .filter(
+                                    (person) => person.status == "SHIPPED"
+                                  )
+                                  .map((asset) => {
+                                    return (
+                                      <tr
+                                        className="assets-category-row  transitionMe"
+                                        id={asset.id}
+                                        onClick={ToggleSaleDetails}
+                                      >
+                                        <td className="assets-category-data branch_name_title">
+                                          <div className="assets-data">
+                                            <div className="assets-data-pool_name">
+                                              {asset.item_name}
+                                              <span className="poolName_txt">
+                                                {asset.createdAt}
+                                              </span>
+                                            </div>
                                           </div>
-                                        </div>
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {numberWithCommas(
-                                          parseInt(asset.sum_total).toFixed(0)
-                                        )}{" "}
-                                        Eusd
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.quantity
-                                        }
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {`${asset.user_id.slice(
-                                          0,
-                                          6
-                                        )}...${asset.user_id.slice(39, 42)}`}
-                                      </td>
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {numberWithCommas(
+                                            parseInt(asset.sub_total).toFixed(0)
+                                          )}{" "}
+                                          Eusd
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {asset.quantity}
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {`${asset.user_id.slice(
+                                            0,
+                                            6
+                                          )}...${asset.user_id.slice(39, 42)}`}
+                                        </td>
 
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.status}
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {`${asset.transactionHash.slice(
-                                          0,
-                                          6
-                                        )}...${asset.transactionHash.slice(
-                                          63,
-                                          66
-                                        )}`}
-                                      </td>
-                                      <td className="assets-category-data-last branch_loan_action">
-                                        <ArrowForwardIosIcon />
-                                      </td>
-                                    </tr>
-                                  );
-                                })}
-                            {/* ========= */}
-                            {/* ========= */}
-                            {/* ========= */}
-                            {/* ========= */}
-                            {activeBtn === "shipped" &&
-                              sellOrders
-                                .filter((person) => person.status == "SHIPPED")
-                                .map((asset) => {
-                                  return (
-                                    <tr
-                                      className="assets-category-row  transitionMe"
-                                      id={asset.id}
-                                    >
-                                      <td className="assets-category-data branch_name_title">
-                                        <div className="assets-data">
-                                          <div className="assets-data-pool_name">
-                                            {asset.item_name}
-                                            <span className="poolName_txt">
-                                              {asset.createdAt}
-                                            </span>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          <div className="shipped_status_div">
+                                            {asset.status}{" "}
+                                            <FontAwesomeIcon
+                                              className="ml-2"
+                                              icon={faTruck}
+                                            />
                                           </div>
-                                        </div>
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {numberWithCommas(
-                                          parseInt(asset.sum_total).toFixed(0)
-                                        )}{" "}
-                                        Eusd
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.quantity
-                                        }
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {`${asset.user_id.slice(
-                                          0,
-                                          6
-                                        )}...${asset.user_id.slice(39, 42)}`}
-                                      </td>
-
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.status}
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {`${asset.transactionHash.slice(
-                                          0,
-                                          6
-                                        )}...${asset.transactionHash.slice(
-                                          63,
-                                          66
-                                        )}`}
-                                      </td>
-                                      <td className="assets-category-data-last branch_loan_action">
-                                        <ArrowForwardIosIcon />
-                                      </td>
-                                    </tr>
-                                  );
-                                })}
-                            {/* ========= */}
-                            {/* ========= */}
-                            {/* ========= */}
-                            {/* ========= */}
-                            {activeBtn === "approve" &&
-                              sellOrders
-                                .filter((person) => person.status == "APPROVED")
-                                .map((asset) => {
-                                  return (
-                                    <tr
-                                      className="assets-category-row  transitionMe"
-                                      id={asset.id}
-                                    >
-                                      <td className="assets-category-data branch_name_title">
-                                        <div className="assets-data">
-                                          <div className="assets-data-pool_name">
-                                            {asset.item_name}
-                                            <span className="poolName_txt">
-                                              {asset.createdAt}
-                                            </span>
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          {`${asset.transactionHash.slice(
+                                            0,
+                                            6
+                                          )}...${asset.transactionHash.slice(
+                                            63,
+                                            66
+                                          )}`}
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          <ArrowForwardIosIcon />
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
+                              {/* ========= */}
+                              {/* ========= */}
+                              {/* ========= */}
+                              {/* ========= */}
+                              {activeBtn === "APPROVED" &&
+                                sellOrders
+                                  .filter(
+                                    (person) => person.status == "APPROVED"
+                                  )
+                                  .map((asset) => {
+                                    return (
+                                      <tr
+                                        className="assets-category-row  transitionMe"
+                                        id={asset.id}
+                                        onClick={ToggleSaleDetails}
+                                      >
+                                        <td className="assets-category-data branch_name_title">
+                                          <div className="assets-data">
+                                            <div className="assets-data-pool_name">
+                                              {asset.item_name}
+                                              <span className="poolName_txt">
+                                                {asset.createdAt}
+                                              </span>
+                                            </div>
                                           </div>
-                                        </div>
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {numberWithCommas(
-                                          parseInt(asset.sum_total).toFixed(0)
-                                        )}{" "}
-                                        Eusd
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.quantity
-                                        }
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {`${asset.user_id.slice(
-                                          0,
-                                          6
-                                        )}...${asset.user_id.slice(39, 42)}`}
-                                      </td>
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {numberWithCommas(
+                                            parseInt(asset.sub_total).toFixed(0)
+                                          )}{" "}
+                                          Eusd
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {asset.quantity}
+                                        </td>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          {`${asset.user_id.slice(
+                                            0,
+                                            6
+                                          )}...${asset.user_id.slice(39, 42)}`}
+                                        </td>
 
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {asset.status}
-                                      </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
-                                        {`${asset.transactionHash.slice(
-                                          0,
-                                          6
-                                        )}...${asset.transactionHash.slice(
-                                          63,
-                                          66
-                                        )}`}
-                                      </td>
-                                      <td className="assets-category-data-last branch_loan_action">
-                                        <ArrowForwardIosIcon />
-                                      </td>
-                                    </tr>
-                                  );
-                                })}
-                            {/* =================== */}
-                            {/* =================== */}
-                            {/* =================== */}
-                            {/* =================== */}
-                            {/* =================== */}
-                            {/* =================== */}
-                            {/* =================== */}
-                            {/* =================== */}
-                            {/* =================== */}
-                            {/* =================== */}
-                            {/* =================== */}
-                            {/* =================== */}
-                          </tbody>
+                                        <td className="assets-category-data1b stable-content branch_apy">
+                                          <div className="sold_status_div">
+                                            {asset.status}{" "}
+                                            <FontAwesomeIcon
+                                              className="ml-2"
+                                              icon={faCheck}
+                                            />
+                                          </div>
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          {`${asset.transactionHash.slice(
+                                            0,
+                                            6
+                                          )}...${asset.transactionHash.slice(
+                                            63,
+                                            66
+                                          )}`}
+                                        </td>
+                                        <td className="assets-category-data-last branch_loan_action">
+                                          <ArrowForwardIosIcon />
+                                        </td>
+                                      </tr>
+                                    );
+                                  })}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                              {/* =================== */}
+                            </tbody>
+                          )}
                         </table>
                       </div>
                     </div>
@@ -1463,211 +1283,210 @@ const DashBoardP2PUserSales = () => {
       {/* ============================= */}
       {saleDetails == ""
         ? null
-        : uploadedProduct.map((data) => (
-          <>
-            {data.product_id === saleDetails ? (
-              <div className="saleDetailsDiv">
-                <div
-                  className="saleDetailsDiv_close_div"
-                  onClick={ToggleSaleDetails}
-                ></div>
-                <div
-                  className="saleDetailsDiv_area_closeIcon_div"
-                  onClick={ToggleSaleDetails}
-                >
-                  <CloseIcon className="saleDetailsDiv_area_closeIcon" />
-                  Close
-                </div>
-                <div className="saleDetailsDiv_area">
-                  <div className="saleDetailsDiv_area_1">
-                    <div className="saleDetailsDiv_area_1_title">
-                      Products Details
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Product Images
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body"></div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Product Name
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.product_name}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Product Amount
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {numberWithCommas(
-                          parseInt(data.user_amount).toFixed(0)
-                        )}{" "}
-                        Eusd
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Product Brand Name
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.product_brand}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Product Condition
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.product_condition}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Product Status
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.status}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Product Txn Hash
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {/* {data.txnHash} */}
-                        {"N/A"}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Upload Date
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.createdAt}
-                      </div>
-                    </div>
+        : sellOrders.map((data) => (
+            <>
+              {data.id === saleDetails ? (
+                <div className="saleDetailsDiv">
+                  <div
+                    className="saleDetailsDiv_close_div"
+                    onClick={ToggleSaleDetails}
+                  ></div>
+                  <div
+                    className="saleDetailsDiv_area_closeIcon_div"
+                    onClick={ToggleSaleDetails}
+                  >
+                    <CloseIcon className="saleDetailsDiv_area_closeIcon" />
+                    Close
                   </div>
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  <div className="saleDetailsDiv_area_1">
-                    <div className="saleDetailsDiv_area_1_title">
-                      Seller's Details
+                  <div className="saleDetailsDiv_area">
+                    <div className="saleDetailsDiv_area_1">
+                      <div className="saleDetailsDiv_area_1_title">
+                        Order Details
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Images
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body"></div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Name
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.item_name}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Amount
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {numberWithCommas(parseInt(data.amount).toFixed(0))}{" "}
+                          Eusd
+                        </div>
+                      </div>
+
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Purchase Amount
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {numberWithCommas(
+                            parseInt(data.sub_total).toFixed(0)
+                          )}{" "}
+                          Eusd
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Purchase Quantity
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.quantity}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Status
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.status}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Order Txn Hash
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.transactionHash}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Order Date
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.createdAt}
+                        </div>
+                      </div>
                     </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Seller's Full name
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    <div className="saleDetailsDiv_area_1">
+                      <div className="saleDetailsDiv_area_1_title">
+                        Buyer's Details
                       </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.fullName}
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Buyer's Full name
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.fullName}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Buyer's Wallet Address
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.user_id}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Buyer's Phone number
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.phoneNumber}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Buyer's Residential Address
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.userAddress}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Buyer's City
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.userAddress}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Buyer's State of Residence
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.state}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Buyer's Country of Residence
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.country}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Buyer's Postal Code
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.zipCode}
+                        </div>
                       </div>
                     </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Seller's Wallet Address
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.user_wallet}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Seller's Phone number
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.phoneNumber}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Seller's Residential Address
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        {data.userAddress}
-                      </div>
-                    </div>
-                    <div className="saleDetailsDiv_area_1_div1">
-                      <div className="saleDetailsDiv_area_1_div1_title">
-                        Seller's Country opf Residence
-                      </div>
-                      <div className="saleDetailsDiv_area_1_div1_body">
-                        Nigeria
-                      </div>
-                    </div>
-                  </div>
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  <div className="saleDetailsDiv_area_1">
-                    <div className="saleDetailsDiv_area_1_title">
-                      Bidding Action
-                    </div>
-                    {data.bidAmount != null ? (
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {data.status === "PENDING" ? (
                       <>
-                        <div className="saleDetailsDiv_area_1_div1">
-                          <div className="saleDetailsDiv_area_1_div1_title">
-                            Bidding Status
-                          </div>
-                          <div className="saleDetailsDiv_area_1_div1_body">
-                            {data.bidStatus}
-                          </div>
-                        </div>
-                        <div className="saleDetailsDiv_area_1_div1">
-                          <div className="saleDetailsDiv_area_1_div1_title">
-                            Bidding Amount
-                          </div>
-                          <div className="saleDetailsDiv_area_1_div1_body">
-                            {data.bidAmount}
-                          </div>
-                        </div>
-                        <div className="acceptDeclineBidButtons">
-                          <button
-                            // onClick={handleAcceptBid}
-                            onClick={() => {
-                              handleAcceptBid(1);
-                            }}
-                            className="acceptDeclineBidButtons_accept"
-                          >
-                            Accept Bid
+                        <div className="decline_mark_button_div">
+                          <button className="decline_mark_button_div_decline">
+                            {" "}
+                            Decline
                           </button>
                           <button
-                            onClick={() => {
-                              handleAcceptBid(0);
-                            }}
-                            className="acceptDeclineBidButtons_decline"
+                            className="decline_mark_button_div_mark_shipped"
+                            onClick={() => markProductAsShipped(data.id)}
                           >
-                            Decline Bid
+                            {" "}
+                            Shipped
                           </button>
                         </div>
                       </>
-                    ) : (
-                      <div className="saleDetailsDiv_area_1_div1">
-                        <div className="saleDetailsDiv_area_1_div1_title">
-                          No bidding for this product yet
-                        </div>
+                    ) : null}
+                    {data.status === "SHIPPED" ? (
+                      <div className="awaiting_btn_div">
+                        <button className="awaiting_btn">
+                          Awaiting Approval from Buyer
+                        </button>
                       </div>
-                    )}
+                    ) : null}
                   </div>
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
-                  {/* ================ */}
                 </div>
-              </div>
-            ) : null}
-          </>
-        ))}
+              ) : null}
+            </>
+          ))}
     </div>
   );
 };

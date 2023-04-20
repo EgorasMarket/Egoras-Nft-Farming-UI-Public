@@ -12,17 +12,20 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .userdAshboard_head_area {
   display: flex;
   align-items: center;
   gap: 10px;
 }
+
 .witdraw_funds_div {
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: #fff;
 }
+
 .witdraw_funds_div_btn {
   background: #7a5fc0;
   box-shadow: 0px 0px 5px #000000;
@@ -32,27 +35,32 @@
   border: none;
   border-radius: 10px;
 }
+
 .witdraw_funds_div_txt {
   display: flex;
   align-items: center;
   font-size: 14px;
   line-height: normal;
 }
+
 .witdraw_funds_div_txt_para {
   margin-right: 5px;
   font-size: 16px;
   font-weight: 600;
 }
+
 .welcome_bonus_div {
   display: flex;
   flex-direction: column;
   gap: 0px;
   align-items: flex-end;
 }
+
 .welcome_bonus_div_body {
   font-size: 45px;
   font-weight: 600;
 }
+
 .welcome_bonus_div_head {
   display: flex;
   align-items: center;
@@ -60,6 +68,7 @@
   font-size: 14px;
   font-weight: 600;
 }
+
 .welcome_bonus_icon_div {
   padding: 3px;
   background: #c6c5dc;
@@ -77,12 +86,14 @@
   box-shadow: 0px 3px 6px #7c7a9c;
   color: #7a5fc0;
 }
+
 .wallet_addr_cont_txt {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 215px;
 }
+
 .wallet_addr_cont {
   display: flex;
   align-items: center;
@@ -93,16 +104,19 @@
   font-size: 14px;
   color: #a4a4a4;
 }
+
 .metamask_prof_pic {
   filter: drop-shadow(2px 2px 5px #b8b8b8);
   color: #b8b8b8;
 }
+
 .user_dashboard_area {
   display: flex;
   flex-direction: column;
   gap: 50px;
   margin-top: 2em;
 }
+
 /* .user_details_body1 {
   display: flex;
   flex-direction: column;
@@ -125,6 +139,7 @@
   gap: 20px;
   width: 100%;
 }
+
 .user_details_body1_body_cont_area2 {
   width: 100%;
   background: #fff;
@@ -136,6 +151,7 @@
   gap: 20px;
   align-items: center;
 }
+
 .userdAshboard_head_username {
   display: flex;
   align-items: center;
@@ -143,10 +159,12 @@
   padding: 1em;
   /* width: 100%; */
 }
+
 .userdAshboard_head_username_head {
   font-size: 18px;
   font-weight: 600;
 }
+
 .user_details_body1_body_cont1 {
   font-size: 14px;
   font-weight: 300;
@@ -156,6 +174,7 @@
   color: #c2c2c2;
   font-weight: 300;
 }
+
 .user_details_body1_body_cont1_span2 {
   color: #fff;
   font-weight: 400;
@@ -163,6 +182,7 @@
   flex-direction: column;
   align-items: flex-end;
 }
+
 .user_details_body1_body_cont1_span2_span {
   font-size: 11px;
   color: #787690;
@@ -181,18 +201,22 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .user_details_body1_body_cont1_head {
   font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .user_details_body1_body_cont1_head1 {
   color: #9bbca8;
 }
+
 .user_details_body1_body_cont1_head2 {
   font-size: 18px;
 }
+
 .user_details_body1_body_cont_area2_body {
   width: 230px;
   display: flex;
@@ -204,6 +228,7 @@
   font-size: 32px;
   font-weight: 600;
 }
+
 .recent_transaction_body {
   display: flex;
   flex-direction: column;
@@ -212,6 +237,7 @@
   border: solid 1px #ffffff;
   border-radius: 6px;
 }
+
 .list_body_head2 {
   position: sticky;
   top: 0px;
@@ -219,6 +245,7 @@
   font-weight: 600;
   z-index: 1;
 }
+
 .seemore_btn_div {
   display: flex;
   justify-content: center;
@@ -238,6 +265,7 @@
   font-weight: 600;
   box-shadow: 0px 5px 10px #88c7a1;
 }
+
 .redeem_btn {
   padding: 15px 0px;
   border-radius: 10px;
@@ -247,12 +275,14 @@
   font-weight: 600;
   box-shadow: 0px 5px 15px #7cb994;
 }
+
 .user_details_div_head {
   font-size: 36px;
   color: #fff;
   font-weight: 500;
   margin-bottom: 20px;
 }
+
 .user_details_area {
   display: grid;
   gap: 10px;
@@ -262,14 +292,17 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   justify-content: flex-start;
 }
+
 .user_details_area_div1 {
   flex-direction: column;
   display: flex;
 }
+
 .user_details_area_div1_head {
   color: #787690;
   margin-bottom: 5px;
 }
+
 .user_details_area_div1_input {
   padding: 15px;
   border-radius: 10px;
@@ -277,12 +310,14 @@
   border: solid 1px #262538;
   color: #bfbfbf;
 }
+
 .user_details_area_btn_div {
   margin-top: 1em;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .user_details_area_btn {
   padding: 15px;
   width: 100%;
@@ -293,12 +328,14 @@
   font-weight: 500;
   border: none;
 }
+
 .user_details_body1_body_cont1_span1._img {
   width: 25px;
   margin-right: 5px;
   height: 25px;
   object-fit: cover;
 }
+
 /* ============================================== */
 /* ============================================== */
 /* ============================================== */
@@ -312,6 +349,7 @@
   display: flex;
   flex-direction: column;
 }
+
 /* ============================================== */
 /* ============================================== */
 /* ============================================== */
@@ -330,12 +368,15 @@
   font-weight: 600;
   color: #9f9f9f;
 }
+
 .reward_countdown_div {
   font-size: 20px;
 }
+
 .reward_btn_div {
   width: 200px;
 }
+
 .reward_btn {
   width: 100%;
   padding: 0.5em 0em;
@@ -346,16 +387,19 @@
   font-weight: 600;
   box-shadow: 0px 10px 10px #cdeeda;
 }
+
 .reward_btn:disabled {
   background: #c6c6c6;
   cursor: not-allowed;
   box-shadow: 0px 10px 10px #d4d4d4;
   color: #878787;
 }
+
 .reward_amount_title {
   font-size: 14px;
   font-weight: 600;
 }
+
 /* ======================== */
 /* ======================== */
 /* ======================== */
@@ -369,6 +413,7 @@
   border: solid 1px #262538;
   padding: 1em;
 }
+
 .BuyerSellerDiv_tabs {
   display: flex;
   align-items: center;
@@ -377,6 +422,7 @@
   border-radius: 10px;
   margin-bottom: 1em;
 }
+
 .BuyerSellerDiv_tab1_active {
   padding: 10px;
   color: #fff;
@@ -391,6 +437,7 @@
   border-radius: 9px;
   background: #7a5fc0;
 }
+
 .BuyerSellerDiv_body {
   background: #151422;
   padding: 2em;
@@ -399,11 +446,13 @@
   display: flex;
   flex-direction: column;
 }
+
 .BuyerSellerDiv_body_header {
   font-size: 28px;
   font-weight: 500;
   color: #787690;
 }
+
 .BuyerSellerDiv_body_Balance {
   display: flex;
   flex-direction: column;
@@ -414,18 +463,22 @@
   padding-bottom: 1em;
   padding-top: 1em;
 }
+
 .BuyerSellerDiv_body_Balance_body1 {
   font-size: 40px;
   font-weight: 500;
 }
+
 .BuyerSellerDiv_body_Balance_body2 {
   color: #787690;
 }
+
 .BuyerSellerDiv_body_Balance_body {
   display: flex;
   flex-direction: column;
   margin-top: 1e;
 }
+
 .BuyerSellerDiv_tab1 {
   padding: 10px;
   color: #65637a;
@@ -440,17 +493,20 @@
   border-radius: 9px;
   background: #28263e;
 }
+
 .BuyerSellerDiv_body_div1_text {
   font-size: 24px;
   margin-bottom: 11px;
   font-weight: 600;
 }
+
 .BuyerSellerDiv_body_div2_tabs {
   /* float: initial; */
   display: flex;
   align-items: center;
   margin-top: 2em;
 }
+
 .BuyerSellerDiv_body_div2_tabs_active {
   padding: 1em 0em;
   background: #7a5fc0;
@@ -479,6 +535,94 @@
   align-items: center;
   justify-content: center;
 }
+
+.pending_status_div {
+  padding: 9px;
+  background: #3c2e05;
+  border-radius: 29px;
+  font-size: 12px;
+  width: 100%;
+  max-width: 100px;
+  margin: auto;
+  color: #ffcb3a;
+  font-weight: 500;
+}
+.sold_status_div {
+    padding: 9px;
+      background: #033318;
+      border-radius: 29px;
+      font-size: 12px;
+      width: 100%;
+      max-width: 100px;
+      margin: auto;
+      color: #11e66c;
+      font-weight: 500;
+}
+.declined_status_div {
+padding: 9px;
+  background: #320404;
+  border-radius: 29px;
+  font-size: 12px;
+  width: 100%;
+  max-width: 100px;
+  margin: auto;
+  color: #ff4848;
+  font-weight: 500;
+}
+.shipped_status_div {
+    padding: 9px;
+      background: #24233d;
+      border-radius: 29px;
+      font-size: 12px;
+      width: 100%;
+      max-width: 100px;
+      margin: auto;
+      color: #9c7bee;
+      font-weight: 500;
+}
+.decline_mark_button_div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1em;
+}
+.decline_mark_button_div_decline {
+    padding: 10px;
+    width: 100px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    margin-right: 10px;
+    background: #c72f2f;
+    color: #fff;
+}
+.decline_mark_button_div_mark_shipped {
+    padding: 10px;
+    width: 100px;
+    border-radius: 8px;
+    border: none;
+    font-size: 14px;
+    /* margin-right: 10px; */
+    background: #7a5fc0;
+    color: #fff;
+}
+.awaiting_btn_div {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+.awaiting_btn {
+    background: #2c2a41;
+    width: 100%;
+    padding: 15px;
+    border-radius: 13px;
+    border: none;
+    color: #656284;
+}
 .BuyerSellerDiv_body_div2 {
   margin: 0;
   margin-top: 0;
@@ -490,9 +634,20 @@
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
+.BuyerSellerDiv_body_div2a {
+  /* margin: 0; */
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  background: #1c1b2c;
+  border-radius: 11px;
+}
+
 .filter_table_area_2b {
   width: 38% !important;
 }
+
 .BuyerSellerDiv_body_div2_tab_area {
   display: flex;
   align-items: center;
@@ -502,6 +657,7 @@
   border-radius: 10px;
   border: solid 1px #1f1e2e;
 }
+
 /* ======================== */
 /* ======================== */
 /* ======================== */
@@ -514,18 +670,22 @@
     gap: 10px;
   }
 }
+
 @media screen and (max-width: 767px) {
   .user_dashboard_area {
     margin-top: 0em;
   }
+
   .userdAshboard_head {
     align-items: flex-start;
     flex-direction: column;
     gap: 15px;
   }
+
   .welcome_bonus_div {
     align-items: flex-start;
   }
+
   .userdAshboard_head_username {
     display: flex;
     align-items: center;
@@ -533,28 +693,34 @@
     gap: 10px;
     padding: 0em;
   }
+
   .hr_vertical {
     border-bottom: solid 1px #efefef;
     width: 100%;
   }
+
   .dark .hr_vertical {
     border-bottom: solid 1px #4a6857;
   }
 }
+
 @media screen and (max-width: 600px) {
   .user_details_body1 {
     flex-direction: column;
     gap: 10px;
   }
+
   .user_details_body1_body_cont_area1 {
     padding: 1em;
   }
 }
+
 @media screen and (max-width: 419px) {
   .asset_detail_heading_user {
     flex-direction: column;
     justify-content: space-between;
   }
+
   .pool_detail_heading_area2 {
     flex-direction: column;
     align-items: flex-start;
