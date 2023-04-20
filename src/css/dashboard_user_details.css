@@ -634,6 +634,23 @@ padding: 9px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
+.markReceivedBtn {
+  padding: 10px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 0;
+  font-size: 12px;
+  background: #7a5fc0;
+  color: #fff;
+}
+.markReceivedBtn_div {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
 .BuyerSellerDiv_body_div2a {
   /* margin: 0; */
   margin-top: 2em;
