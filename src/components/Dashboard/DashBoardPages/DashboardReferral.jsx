@@ -67,7 +67,7 @@ const DashboardReferral = ({ auth }) => {
   const [decryptedText, setDecryptedText] = useState("");
   useEffect(() => {
     if (account) {
-      setRefLink(`http://localhost:3000/referal/${account}`);
+      setRefLink(`martgpt.org/referal/${account}`);
     }
   }, [account]);
 
