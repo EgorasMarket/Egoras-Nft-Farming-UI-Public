@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/static/css/main.d928414f.chunk.css",
-    "main.js": "/static/js/main.935b326f.chunk.js",
-    "main.js.map": "/static/js/main.935b326f.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.820bc9f5.js",
-    "runtime-main.js.map": "/static/js/runtime-main.820bc9f5.js.map",
+    "main.js": "/static/js/main.64d59fde.chunk.js",
+    "main.js.map": "/static/js/main.64d59fde.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.0fb1f0c3.js",
+    "runtime-main.js.map": "/static/js/runtime-main.0fb1f0c3.js.map",
     "static/css/2.85d8efbc.chunk.css": "/static/css/2.85d8efbc.chunk.css",
-    "static/js/2.ac80aa98.chunk.js": "/static/js/2.ac80aa98.chunk.js",
-    "static/js/2.ac80aa98.chunk.js.map": "/static/js/2.ac80aa98.chunk.js.map",
-    "static/js/3.4fefb8fe.chunk.js": "/static/js/3.4fefb8fe.chunk.js",
-    "static/js/3.4fefb8fe.chunk.js.map": "/static/js/3.4fefb8fe.chunk.js.map",
+    "static/js/2.d6add148.chunk.js": "/static/js/2.d6add148.chunk.js",
+    "static/js/2.d6add148.chunk.js.map": "/static/js/2.d6add148.chunk.js.map",
+    "static/js/3.372deb06.chunk.js": "/static/js/3.372deb06.chunk.js",
+    "static/js/3.372deb06.chunk.js.map": "/static/js/3.372deb06.chunk.js.map",
     "static/js/4.db8d6855.chunk.js": "/static/js/4.db8d6855.chunk.js",
     "static/js/4.db8d6855.chunk.js.map": "/static/js/4.db8d6855.chunk.js.map",
     "static/js/5.2bab7f84.chunk.js": "/static/js/5.2bab7f84.chunk.js",
@@ -17,18 +17,18 @@
     "index.html": "/index.html",
     "static/css/2.85d8efbc.chunk.css.map": "/static/css/2.85d8efbc.chunk.css.map",
     "static/css/main.d928414f.chunk.css.map": "/static/css/main.d928414f.chunk.css.map",
-    "static/js/2.ac80aa98.chunk.js.LICENSE.txt": "/static/js/2.ac80aa98.chunk.js.LICENSE.txt",
-    "static/js/3.4fefb8fe.chunk.js.LICENSE.txt": "/static/js/3.4fefb8fe.chunk.js.LICENSE.txt",
+    "static/js/2.d6add148.chunk.js.LICENSE.txt": "/static/js/2.d6add148.chunk.js.LICENSE.txt",
+    "static/js/3.372deb06.chunk.js.LICENSE.txt": "/static/js/3.372deb06.chunk.js.LICENSE.txt",
     "static/media/customAlert.css": "/static/media/success_icon.d4bf8731.svg",
     "static/media/countrySelect.css": "/static/media/flags@2x.1ff49fd4.png",
     "static/media/montserrat.ttf": "/static/media/montserrat.e20d5327.ttf",
     "static/media/styles.css": "/static/media/revicons.e8746a62.woff"
   },
   "entrypoints": [
-    "static/js/runtime-main.820bc9f5.js",
+    "static/js/runtime-main.0fb1f0c3.js",
     "static/css/2.85d8efbc.chunk.css",
-    "static/js/2.ac80aa98.chunk.js",
+    "static/js/2.d6add148.chunk.js",
     "static/css/main.d928414f.chunk.css",
-    "static/js/main.935b326f.chunk.js"
+    "static/js/main.64d59fde.chunk.js"
   ]
 }
