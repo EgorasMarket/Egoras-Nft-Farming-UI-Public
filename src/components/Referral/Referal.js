@@ -8,7 +8,7 @@ export const Referal = ({ match }) => {
   useEffect(() => {
     //console.log(match.params);
 
-    localStorage.setItem("referer", match.params.ref);
+    localStorage.setItem("tank", match.params.ref);
   }, []);
 
   if (typeof localStorage.referer !== undefined) {

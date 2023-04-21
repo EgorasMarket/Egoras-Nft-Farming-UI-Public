@@ -53,13 +53,13 @@ export const Step2Div = ({
     [egcUsd]
   );
   useEffect(() => {
-    let LocalVariable = localStorage.getItem("referer");
-    if (LocalVariable == "") {
+    let LocalVariable = localStorage.getItem("tank");
+    console.log(typeof LocalVariable);
+    if (LocalVariable === "") {
       setRefButton(false);
       console.log("local Variable is empty");
     } else {
       setRefButton(true);
-
       console.log("local variable is " + LocalVariable);
     }
     console.log(LocalVariable, "LocalVariable");

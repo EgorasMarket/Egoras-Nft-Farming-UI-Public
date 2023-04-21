@@ -206,7 +206,7 @@ const MemberShipPage = () => {
     setIsLoading(true);
     setDisable(true);
     let res = await monthlyPlanSubScribeRef(
-      localStorage.getItem("referer"),
+      localStorage.getItem("tank"),
       library.getSigner()
     );
     console.log(res);
@@ -215,7 +215,7 @@ const MemberShipPage = () => {
       setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Subscribed for 1 month");
-         localStorage.removeItem("referer");
+         localStorage.setItem("tank","");
     } else {
       if (res.message.code == 4001) {
         console.log(res);
@@ -252,7 +252,7 @@ const MemberShipPage = () => {
     setIsLoading(true);
     setDisable(true);
     let res = await semiAnnuallyPlanSubScribeRef(
-      localStorage.getItem("referer"),
+      localStorage.getItem("tank"),
       library.getSigner()
     );
     console.log(res);
@@ -261,7 +261,7 @@ const MemberShipPage = () => {
       setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Subscribed for 6 months");
-          localStorage.removeItem("referer");
+          localStorage.setItem("tank","");
     } else {
       if (res.message.code == 4001) {
         console.log(res);
@@ -299,7 +299,7 @@ const MemberShipPage = () => {
     setIsLoading(true);
     setDisable(true);
     let res = await annuallyPlanSubScribeRef(
-      localStorage.getItem("referer"),
+      localStorage.getItem("tank"),
       library.getSigner()
     );
     console.log(res);
@@ -308,7 +308,7 @@ const MemberShipPage = () => {
       setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Subscribed for 1 year");
-        localStorage.removeItem("referer");
+        localStorage.setItem("tank","");
     } else {
       if (res.message.code == 4001) {
         console.log(res);
