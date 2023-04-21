@@ -57,6 +57,9 @@ function App() {
     //   alert(JSON.stringify(data));
     // });
   }, []);
+  useEffect(() => {
+ console.log(localStorage.tank)
+  }, []);
 
   useEffect(() => {
     if (linksActive === "/app") {
