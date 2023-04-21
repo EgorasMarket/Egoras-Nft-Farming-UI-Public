@@ -53,7 +53,6 @@ export const Step2Div = ({
     [egcUsd]
   );
   useEffect(() => {
-  
     console.log(localStorage.tank);
     if (localStorage.tank === undefined) {
       setRefButton(false);

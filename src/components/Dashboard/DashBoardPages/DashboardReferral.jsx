@@ -243,9 +243,9 @@ useEffect(async () => {
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
                           {numberWithCommas(
-                            parseFloat(welcomeBonus + refEarnings).toFixed(2)
+                            parseFloat(refEarnings).toFixed(2)
                           )}{" "}
-                          <span className="engn_symbol_sign">EUSD</span>
+                          <span className="engn_symbol_sign">EGC</span>
                         </div>
                       </div>
                       {/* <div className="dashBoard_ref_area1_cont1_div1 welcome_bonus_div">
