@@ -577,8 +577,8 @@ const Header = ({ togglemakeDark, check }) => {
     <>
       {betaDiv === true ? (
         <div className="we_on_beta_div">
-          Welcome to EGCDAO Testnet v1. We will be releasing more versions until
-          the testnet is over.
+          Welcome to MARTGPT Testnet v1. We will be releasing more versions
+          until the testnet is over.
         </div>
       ) : null}
 
