@@ -314,9 +314,9 @@ const DirectUpload = ({
               className="sell_container_body_cont1_title_div_input"
               onChange={handleCenter2}
             >
+              <option value=""></option>
               {allCategories.map((option) => (
                 <>
-                  <option value=""></option>
                   <option
                     key={option.product_category}
                     value={option.product_category}
