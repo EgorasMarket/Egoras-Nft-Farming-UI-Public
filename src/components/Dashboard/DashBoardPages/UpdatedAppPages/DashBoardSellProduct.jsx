@@ -132,7 +132,7 @@ const DashBoardSellProduct = () => {
     const conCatProdName = ` ${prodName}_${prodId}`;
     console.log(productType);
 
-
+    let res;
 
     if (activeSaleTab == "direct") {
       let setPass = true;
@@ -143,23 +143,23 @@ const DashBoardSellProduct = () => {
         prodCount,
         library.getSigner()
       );
-          console.log(res, "somto8uhhhg");
-          console.log(res.status, "somto8uhhhg");
+      console.log(res, "somto8uhhhg");
+      console.log(res.status, "somto8uhhhg");
 
-          if (res.status == true) {
-            setIsLoading(false);
-            setDisable(false);
-            setSuccessModal(true);
-            setRoute("/app/user/p2p_sales");
-            setSuccessMessage(
-              "You've successfully placed " + prodName + " for sale"
-            );
-          } else {
-            setErrorModal(true);
-            setErrorMessage(res.message);
-            setIsLoading(false);
-            setDisable(false);
-          }
+      if (res.status == true) {
+        setIsLoading(false);
+        setDisable(false);
+        setSuccessModal(true);
+        setRoute("/app/user/p2p_sales");
+        setSuccessMessage(
+          "You've successfully placed " + prodName + " for sale"
+        );
+      } else {
+        setErrorModal(true);
+        setErrorMessage(res.message);
+        setIsLoading(false);
+        setDisable(false);
+      }
     } else {
       let setPass = false;
       res = await listProduct(
@@ -169,28 +169,27 @@ const DashBoardSellProduct = () => {
         prodCount,
         library.getSigner()
       );
-          console.log(res, "somto8uhhhg");
-          console.log(res.status, "somto8uhhhg");
+      console.log(res, "somto8uhhhg");
+      console.log(res.status, "somto8uhhhg");
 
-          if (res.status == true) {
-            setIsLoading(false);
-            setDisable(false);
-            setSuccessModal(true);
-            setRoute("/app/user/sales");
-            setSuccessMessage(
-              "You've successfully placed " + prodName + " for sale"
-            );
-          } else {
-            setErrorModal(true);
-            setErrorMessage(res.message);
-            setIsLoading(false);
-            setDisable(false);
-          }
+      if (res.status == true) {
+        setIsLoading(false);
+        setDisable(false);
+        setSuccessModal(true);
+        setRoute("/app/user/sales");
+        setSuccessMessage(
+          "You've successfully placed " + prodName + " for sale"
+        );
+      } else {
+        setErrorModal(true);
+        setErrorMessage(res.message);
+        setIsLoading(false);
+        setDisable(false);
+      }
     }
 
     console.log(res, "somto8uhhhg");
     // console.log(res.status, "somto8uhhhg");
-
   };
 
   const UploadProduct = async () => {
