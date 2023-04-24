@@ -34,6 +34,7 @@ import {
   GET_USER_UPLOADED_PRODUCT,
   CALL_SELLER_LOCKED_FUNDS,
   CALL_USER_DIRECT_PRODUCTS,
+  DISPLAY_NEW_USER_DIRECT_PRODUCTS_CALL,
 } from "../../../services/productServices";
 import { DISPLAY_NEW_PRODUCTS_CALL } from "../../../services/adminServices";
 import { AcceptBid, releaseFundsToSeller } from "../../../web3";
@@ -86,6 +87,7 @@ const DashBoardP2PUserSales = () => {
   const [sellOrders, setSellOrders] = useState([]);
   const [uploaded, setUploaded] = useState([]);
   const [myDirectProducts, setMyDirectProducts] = useState([]);
+  const [myDirectProducts2, setMyDirectProducts2] = useState([]);
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);
   };
@@ -115,34 +117,62 @@ const DashBoardP2PUserSales = () => {
       console.log(response.data, "goody");
 
       if (response.data) {
-            const temp = response.data;
-            console.log(temp);
-            for (const data of temp) {
-              const timestamp = data.createdAt;
-              const dateObj = new Date(timestamp);
-              const formattedDate = new Intl.DateTimeFormat("en-US", {
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-                hour: "numeric",
-                minute: "numeric",
-                hour12: true,
-              }).format(dateObj);
-              console.log(formattedDate);
-              data.createdAt = formattedDate;
-            }
-            const myArray = response.data;
-            myArray.sort(
-              (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-            );
-            console.log(myArray);
+        const temp = response.data;
+        console.log(temp);
+        for (const data of temp) {
+          const timestamp = data.createdAt;
+          const dateObj = new Date(timestamp);
+          const formattedDate = new Intl.DateTimeFormat("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          }).format(dateObj);
+          console.log(formattedDate);
+          data.createdAt = formattedDate;
+        }
+        const myArray = response.data;
+        myArray.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        console.log(myArray);
         setMyDirectProducts(response.data);
+      }
+    };
+
+    const fetchData4 = async () => {
+      console.log(account);
+      const response = await DISPLAY_NEW_USER_DIRECT_PRODUCTS_CALL(account);
+      console.log(response.data, "goody");
+
+      if (response.data) {
+        const temp = response.data;
+        console.log(temp);
+        for (const data of temp) {
+          const timestamp = data.createdAt;
+          const dateObj = new Date(timestamp);
+          const formattedDate = new Intl.DateTimeFormat("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          }).format(dateObj);
+          console.log(formattedDate);
+          data.createdAt = formattedDate;
+        }
+        const myArray = response.data;
+        myArray.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+        console.log(myArray);
+        setMyDirectProducts2(response.data);
       }
     };
 
     fetchData();
     fetchData2();
     fetchData3();
+    fetchData4();
   }, [account]);
 
   const handleAcceptBid = async (action) => {
@@ -234,22 +264,22 @@ const DashBoardP2PUserSales = () => {
       const res = await FETCH_USER_BUY_ORDER(account);
       console.log(res);
       console.log(res.data);
-           const temp = res.data;
-           console.log(temp);
-           for (const data of temp) {
-             const timestamp = data.createdAt;
-             const dateObj = new Date(timestamp);
-             const formattedDate = new Intl.DateTimeFormat("en-US", {
-               month: "short",
-               day: "numeric",
-               year: "numeric",
-               hour: "numeric",
-               minute: "numeric",
-               hour12: true,
-             }).format(dateObj);
-             console.log(formattedDate);
-             data.createdAt = formattedDate;
-           }
+      const temp = res.data;
+      console.log(temp);
+      for (const data of temp) {
+        const timestamp = data.createdAt;
+        const dateObj = new Date(timestamp);
+        const formattedDate = new Intl.DateTimeFormat("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          hour12: true,
+        }).format(dateObj);
+        console.log(formattedDate);
+        data.createdAt = formattedDate;
+      }
       const myArray = res.data;
       myArray.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       console.log(myArray);
@@ -258,22 +288,22 @@ const DashBoardP2PUserSales = () => {
     const fetchUserSellOrder = async () => {
       const res = await FETCH_USER_SELL_ORDER(account);
       console.log(res);
-         const temp = res.data;
-         console.log(temp);
+      const temp = res.data;
+      console.log(temp);
       for (const data of temp) {
-           const timestamp = data.createdAt;
-           const dateObj = new Date(timestamp);
-           const formattedDate = new Intl.DateTimeFormat("en-US", {
-             month: "short",
-             day: "numeric",
-             year: "numeric",
-             hour: "numeric",
-             minute: "numeric",
-             hour12: true,
-           }).format(dateObj);
-           console.log(formattedDate);
+        const timestamp = data.createdAt;
+        const dateObj = new Date(timestamp);
+        const formattedDate = new Intl.DateTimeFormat("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+          hour: "numeric",
+          minute: "numeric",
+          hour12: true,
+        }).format(dateObj);
+        console.log(formattedDate);
         data.createdAt = formattedDate;
-         }
+      }
       const myArray = res.data;
       myArray.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       console.log(myArray);
@@ -720,7 +750,7 @@ const DashBoardP2PUserSales = () => {
                             </tr>
                           </thead>
 
-                          {myDirectProducts.filter(
+                          {myDirectProducts2.filter(
                             (person) => person.status == "NEW"
                           ).length <= 0 ? (
                             <div className="no_loans_div">
@@ -738,7 +768,7 @@ const DashBoardP2PUserSales = () => {
                               {/* =============== */}
                               {/* =============== */}
                               {/* =============== */}
-                              {myDirectProducts
+                              {myDirectProducts2
                                 .filter((person) => person.status == "NEW")
                                 .map((asset) => {
                                   //   var percentage = (asset.funded / asset.amount) * 100;
@@ -879,28 +909,7 @@ const DashBoardP2PUserSales = () => {
                             )}
                             Declined
                           </div>
-                          {/* <div
-                            id="shipped"
-                            className={
-                              activeBtn == "shipped"
-                                ? "filter_table_btn1_active"
-                                : "filter_table_btn1"
-                            }
-                            onClick={toggleActiveBtn}
-                          >
-                            {sellOrders.filter(
-                              (person) => person.status == "SHIPPED"
-                            ).length <= 0 ? null : (
-                              <div className="notify_icon_cont_div_notifyCount2">
-                                {
-                                  sellOrders.filter(
-                                    (person) => person.status == "SHIPPED"
-                                  ).length
-                                }
-                              </div>
-                            )}
-                            Shipped
-                          </div> */}
+
                           <div
                             id="APPROVED"
                             className={

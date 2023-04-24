@@ -84,20 +84,20 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
     if (res.success) {
       console.log(res);
       setIsLoaading(false);
-    setDisabled(false);
+      setDisabled(false);
       setSuccessModal(true);
       setSuccessRoute("/app/user/p2p_sales");
       setSuccessMessage(res.message);
     } else {
       console.log(res);
-          setErrorModal(true);
+      setErrorModal(true);
       setErrorMessage(res.errorMessage);
-       setIsLoaading(false);
-    setDisabled(false);
+      setIsLoaading(false);
+      setDisabled(false);
     }
   };
   const PurchaseProduct = async () => {
-        setIsLoaading(true);
+    setIsLoaading(true);
     setDisabled(true);
     // / BUY WITH BLOCKCHAIN
     if (productDetail.productType == "INDIRECT") {
@@ -110,11 +110,11 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
       if (res.status === true) {
         //   setTxnHash(res.message.hash);
         purchaseProductWeb2(res.message.hash);
-      }else{
-             setErrorModal(true);
-      setErrorMessage(res.message);
+      } else {
+        setErrorModal(true);
+        setErrorMessage(res.message);
         setIsLoaading(false);
-    setDisabled(false);
+        setDisabled(false);
       }
     } else {
       const res = await BuyDirectProduct(
@@ -126,12 +126,11 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
       if (res.status === true) {
         // setTxnHash(res.message.hash);
         purchaseProductWeb2(res.message.hash);
-      }else{
-
-             setErrorModal(true);
-      setErrorMessage(res.message);
-         setIsLoaading(false);
-    setDisabled(false);
+      } else {
+        setErrorModal(true);
+        setErrorMessage(res.message);
+        setIsLoaading(false);
+        setDisabled(false);
       }
     }
   };
@@ -473,8 +472,15 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                               onClick={PurchaseProduct}
                               disabled={Disabled}
                             >
-                              {isLoading?(<ScaleLoader color="#12111b" size={10} height={19} />):(<>  Checkout Metamask</>)}
-                            
+                              {isLoading ? (
+                                <ScaleLoader
+                                  color="#12111b"
+                                  size={10}
+                                  height={19}
+                                />
+                              ) : (
+                                <> Checkout Metamask</>
+                              )}
                             </button>
                           ) : checkedFort === true ? (
                             <button className="proceedToPayDiv_btn">
