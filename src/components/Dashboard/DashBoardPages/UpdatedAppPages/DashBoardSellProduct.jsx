@@ -132,7 +132,7 @@ const DashBoardSellProduct = () => {
     const conCatProdName = ` ${prodName}_${prodId}`;
     console.log(productType);
 
-    let res;
+    // let res;
 
     if (activeSaleTab == "direct") {
       let setPass = true;
