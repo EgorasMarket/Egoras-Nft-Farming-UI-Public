@@ -136,7 +136,7 @@ const DashBoardSellProduct = () => {
 
     if (activeSaleTab == "direct") {
       let setPass = true;
-      res = await listProduct(
+      const res = await listProduct(
         conCatProdName,
         parseEther(prodAmount.toString(), "wei").toString(),
         setPass,
@@ -162,7 +162,7 @@ const DashBoardSellProduct = () => {
           }
     } else {
       let setPass = false;
-      res = await listProduct(
+      const res = await listProduct(
         conCatProdName,
         parseEther(saleAmount.toString(), "wei").toString(),
         setPass,
@@ -188,7 +188,7 @@ const DashBoardSellProduct = () => {
           }
     }
 
-    console.log(res, "somto8uhhhg");
+    // console.log(res, "somto8uhhhg");
     // console.log(res.status, "somto8uhhhg");
 
   };
