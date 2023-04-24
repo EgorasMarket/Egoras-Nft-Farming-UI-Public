@@ -130,14 +130,16 @@ const DashBoardSellProduct = () => {
   };
   const sendProductToBlockchain = async (prodId, productType, prodCount) => {
     const conCatProdName = ` ${prodName}_${prodId}`;
+    console.log(productType);
 
 
 
     if (activeSaleTab == "direct") {
-     const res = await listProduct(
+      let setPass = true;
+      res = await listProduct(
         conCatProdName,
         parseEther(prodAmount.toString(), "wei").toString(),
-        productType,
+        setPass,
         prodCount,
         library.getSigner()
       );
@@ -159,10 +161,11 @@ const DashBoardSellProduct = () => {
             setDisable(false);
           }
     } else {
-     const  res = await listProduct(
+      let setPass = false;
+      res = await listProduct(
         conCatProdName,
         parseEther(saleAmount.toString(), "wei").toString(),
-        productType,
+        setPass,
         prodCount,
         library.getSigner()
       );
@@ -185,13 +188,16 @@ const DashBoardSellProduct = () => {
           }
     }
 
+    console.log(res, "somto8uhhhg");
+    // console.log(res.status, "somto8uhhhg");
 
   };
+
   const UploadProduct = async () => {
     setIsLoading(true);
     setDisable(true);
     const formData = new FormData();
-    console.log(activeSaleTab);
+    console.log(activeSaleTab, account, "______UUUUUU");
 
     const element = document.getElementById("product_image");
     const element2 = document.getElementById("product_image2");
@@ -384,7 +390,6 @@ const DashBoardSellProduct = () => {
   const handleProdStateChange = (event) => {
     setProdState(event.target.value);
     console.log(event.target.value);
-    // prodState, setProdState
     //console.log(event.target.value);
   };
   const handleBrandNameChange = (event) => {

@@ -1357,7 +1357,7 @@ const approveProduct1 = async (_productID, signer) => {
 
 // Approve Product approveDirectProduct
 const approveProductDirect = async (_productID, signer) => {
-  console.log(_productID, V3ContractAddress);
+  console.log(_productID, V3ContractAddress, "++++++");
   try {
     const instance = contractProductFacetInstance(signer);
     let result;

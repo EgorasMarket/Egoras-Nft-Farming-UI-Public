@@ -692,20 +692,22 @@ const AdminSeeSellers = () => {
                                     className="assets-category-data1b stable-content branch_apy"
                                     id={asset.product_id}
                                     // onClick={ToggleSaleDetails}
-                                    // onClick={() => {
-                                    //   ToggleSaleDetails(
-                                    //     asset.product_id,
-                                    //     asset.index_id
-                                    //   );
-                                    // }}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
                                   >
-                                    {`${asset.transaction_hash.slice(
-                                      0,
-                                      6
-                                    )}...${asset.transaction_hash.slice(
-                                      63,
-                                      66
-                                    )}`}
+                                    {asset.transaction_hash != null
+                                      ? `${asset.transaction_hash.slice(
+                                          0,
+                                          6
+                                        )}...${asset.transaction_hash.slice(
+                                          63,
+                                          66
+                                        )}`
+                                      : "N/A"}
                                     {/* {"Coming soon"} */}
                                   </td>
                                   <td className="assets-category-data1b stable-content branch_apy">

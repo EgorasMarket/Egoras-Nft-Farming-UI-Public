@@ -14,6 +14,7 @@ export const FETCH_TRADABLE_PRODUCTS_ROUTE = `${API_URL}/product/approved/tradab
 export const ACCEPT_OR_DECLINE_BID = `${API_URL}/product/bid/accept/product/bid`;
 export const ADMIN_PLACE_BID = `${API_URL}/product/bid/add`;
 export const FETCH_USER_NEW_PRODUCT = `${API_URL}/product/user/new/product`;
+export const FETCH_USER_NEW_DIRECT_PRODUCT = `${API_URL}/product/user/new/direct/product`;
 export const POPULATE_STAKE_INFO_ROUTE = `${API_URL}/staking/summarize`;
 export const GET_TVL_ROUTE = `${API_URL}/staking/tvl`;
 export const GET_TVL_CHART_ROUTE = `${API_URL}/staking/chart`;

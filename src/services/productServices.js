@@ -19,6 +19,7 @@ import {
   SELLER_LOCKED_FUNDS,
   EXPRESS_BUY_ORDER_STATS,
   USER_DIRECT_PRODUCTS,
+  FETCH_USER_NEW_DIRECT_PRODUCT,
   // DIRECT_BUY_ORDER_STATS,
 } from "../core/ApiRoutes";
 export const config = {
@@ -217,6 +218,23 @@ export const DISPLAY_NEW_USER_PRODUCTS_CALL = async (account) => {
 
     return response.data;
   } catch (err) {
+    return err.response;
+  }
+};
+
+export const DISPLAY_NEW_USER_DIRECT_PRODUCTS_CALL = async (account) => {
+  console.log("____HHHH_____");
+  try {
+    const response = await axios.get(
+      FETCH_USER_NEW_DIRECT_PRODUCT + "/" + account,
+      null,
+      config
+    );
+    console.log(response);
+
+    return response.data;
+  } catch (err) {
+    console.log(err);
     return err.response;
   }
 };

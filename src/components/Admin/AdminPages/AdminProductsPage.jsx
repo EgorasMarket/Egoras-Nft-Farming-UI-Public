@@ -917,16 +917,19 @@ const AdminProductsPage = () => {
                               className="sell_container_body_cont1_title_div_input"
                               onChange={handleCenter}
                             >
+                              <option value=""></option>
                               {allBrands.map((option) => (
-                                <option
-                                  key={option.product_brand}
-                                  value={option.product_brand}
-                                  // onClick={(e) =>
-                                  //   getCatName(option.product_brand)
-                                  // }
-                                >
-                                  {option.product_brand}
-                                </option>
+                                <>
+                                  <option
+                                    key={option.product_brand}
+                                    value={option.product_brand}
+                                    // onClick={(e) =>
+                                    //   getCatName(option.product_brand)
+                                    // }
+                                  >
+                                    {option.product_brand}
+                                  </option>
+                                </>
                               ))}
                             </select>
 
@@ -985,16 +988,19 @@ const AdminProductsPage = () => {
                               className="sell_container_body_cont1_title_div_input"
                               onChange={handleCenter2}
                             >
+                              <option value=""></option>
                               {allCategories.map((option) => (
-                                <option
-                                  key={option.product_category}
-                                  value={option.product_category}
-                                  // onClick={(e) =>
-                                  //   getCatName(option.product_brand)
-                                  // }
-                                >
-                                  {option.product_category}
-                                </option>
+                                <>
+                                  <option
+                                    key={option.product_category}
+                                    value={option.product_category}
+                                    // onClick={(e) =>
+                                    //   getCatName(option.product_brand)
+                                    // }
+                                  >
+                                    {option.product_category}
+                                  </option>
+                                </>
                               ))}
                             </select>
 
