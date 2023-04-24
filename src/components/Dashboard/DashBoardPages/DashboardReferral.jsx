@@ -198,6 +198,10 @@ useEffect(async () => {
       .then((data) => {
         console.log(data);
         console.log(data.data.data);
+             const myArray = data.data.data;
+             myArray.sort(
+               (a, b) => b.refCount - a.refCount
+             );
         setLeaderBoard(data.data.data);
       })
       .catch((error) => {
@@ -232,6 +236,13 @@ useEffect(async () => {
                   {/* <button onClick={() => library.provider._handleDisconnect()}>
                     Disconnect
                   </button> */}
+                    <div className="referral_banner_bg_div">
+                      <img
+                        src="/img/referral_bg.png"
+                        alt=""
+                        className="referral_banner_bg_img"
+                      />
+                    </div>
                   <div className="dashBoard_ref_area1">
                     <div className="dashBoard_ref_area1_cont1">
                       <div className="dashBoard_ref_area1_cont1_icon_div">
@@ -242,9 +253,7 @@ useEffect(async () => {
                           Referral Earnings
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          {numberWithCommas(
-                            parseFloat(refEarnings).toFixed(2)
-                          )}{" "}
+                          {numberWithCommas(parseFloat(refEarnings).toFixed(2))}{" "}
                           <span className="engn_symbol_sign">EGC</span>
                         </div>
                       </div>

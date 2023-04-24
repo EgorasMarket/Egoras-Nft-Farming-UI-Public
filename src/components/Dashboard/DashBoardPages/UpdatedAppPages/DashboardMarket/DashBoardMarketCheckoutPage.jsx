@@ -14,6 +14,8 @@ import { PROCESS_PRODUCT_PURCHASE } from "../../../../../services/productService
 import UpdatedErrorModal from "../UpdatedSuccessErrorModals/UpdatedErrorModal";
 import UpdatedSuccessModal from "../UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import { BuyIndirectProduct, BuyDirectProduct } from "../../../../../web3";
+import { parseEther, formatEther } from "@ethersproject/units";
+import { unlockTokenV3, checkAllowanceV3 } from "../../../../../web3";
 import {
   Web3ReactProvider,
   useWeb3React,
@@ -49,7 +51,10 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
   const [profileLoading, setProfileLoading] = useState(false);
   const [profileDisable, setProfileDisable] = useState(false);
   const [Disabled, setDisabled] = useState(false);
-  const [isLoading, setIsLoaading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [unlockBtn, setUnlockBtn] = useState(true);
+  // const [disable, setDisable] = useState(false);
+  const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
   const { productId, product_count, productName } = match.params;
   const [formData, setFormData] = useState({
     fullName: "",
@@ -64,7 +69,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
   const { fullName, phoneNumber, address, city, country, state, zipCode } =
     formData;
   console.log(productId, product_count, productName);
-  const purchaseProductWeb2 = async (txnHash) => {
+  const purchaseProductWeb2 = async (txnHash,route) => {
     let product_id = productDetail.index_id;
     console.log(
       numDivsToDuplicate,
@@ -83,21 +88,21 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
     console.log(res);
     if (res.success) {
       console.log(res);
-      setIsLoaading(false);
-    setDisabled(false);
+      setIsLoading(false);
+      setDisabled(false);
       setSuccessModal(true);
-      setSuccessRoute("/app/user/p2p_sales");
+      setSuccessRoute(route);
       setSuccessMessage(res.message);
     } else {
       console.log(res);
-          setErrorModal(true);
+      setErrorModal(true);
       setErrorMessage(res.errorMessage);
-       setIsLoaading(false);
-    setDisabled(false);
+      setIsLoading(false);
+      setDisabled(false);
     }
   };
   const PurchaseProduct = async () => {
-        setIsLoaading(true);
+    setIsLoading(true);
     setDisabled(true);
     // / BUY WITH BLOCKCHAIN
     if (productDetail.productType == "INDIRECT") {
@@ -109,12 +114,12 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
       console.log(res, "indirect");
       if (res.status === true) {
         //   setTxnHash(res.message.hash);
-        purchaseProductWeb2(res.message.hash);
-      }else{
-             setErrorModal(true);
-      setErrorMessage(res.message);
-        setIsLoaading(false);
-    setDisabled(false);
+        purchaseProductWeb2(res.message.hash, "/app/user/sales");
+      } else {
+        setErrorModal(true);
+        setErrorMessage(res.message);
+        setIsLoading(false);
+        setDisabled(false);
       }
     } else {
       const res = await BuyDirectProduct(
@@ -125,13 +130,12 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
       console.log(res, "direct");
       if (res.status === true) {
         // setTxnHash(res.message.hash);
-        purchaseProductWeb2(res.message.hash);
-      }else{
-
-             setErrorModal(true);
-      setErrorMessage(res.message);
-         setIsLoaading(false);
-    setDisabled(false);
+        purchaseProductWeb2(res.message.hash, "/app/user/p2p_sales");
+      } else {
+        setErrorModal(true);
+        setErrorMessage(res.message);
+        setIsLoading(false);
+        setDisabled(false);
       }
     }
   };
@@ -309,6 +313,49 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
   const CloseErrorModal = () => {
     setErrorModal(false);
   };
+  const UnlockToken = async (e) => {
+    setIsLoading(true);
+    setDisabled(true);
+    let ret = await unlockTokenV3(
+      "0x58f66d0183615797940360a43c333a44215830ba",
+      parseEther("180000000000000000000000000000000000", "wei").toString(),
+      library.getSigner()
+    );
+    console.log(ret);
+    if (ret.status == true) {
+      setIsLoading(false);
+      setDisabled(false);
+      localStorage.setItem("unlocking", true);
+      localStorage.setItem("unlockingHash", ret.message);
+      setUnlockBtn(true);
+    } else {
+      if (ret.message.code == 4001) {
+        console.log(ret);
+      }
+      setErrorModal(true);
+      setErrorMessage(ret.message);
+      setIsLoading(false);
+      setDisabled(false);
+      console.log(ret);
+    }
+  };
+  useEffect(
+    async (e) => {
+      if (account) {
+        let check = await checkAllowanceV3(
+          "0x58f66d0183615797940360a43c333a44215830ba",
+          account,
+          parseEther(productDetail.final_amount.toString(), "wei").toString(),
+          library.getSigner()
+        );
+        console.log(check);
+        setUnLockCheckStatus(check.status);
+        setUnlockBtn(check.status);
+      }
+    },
+
+    [account, unLockCheckStatus, productDetail]
+  );
   return (
     <div className="other2 asset_other2">
       <section className="product_detail_section ">
@@ -461,29 +508,59 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                       </div>
                     </div>
                     <div className="proceedToPayDiv_btn_div">
-                      {updateProfile === true ? (
-                        <button className="proceedToPayDiv_btn" disabled>
-                          Update Your Billing Info
+                      {unlockBtn === false ? (
+                        <button
+                          className="proceedToPayDiv_btn"
+                          disabled={Disabled}
+                          onClick={UnlockToken}
+                        >
+                          {isLoading ? (
+                            <ScaleLoader
+                              color="#12111b"
+                              size={10}
+                              height={20}
+                            />
+                          ) : (
+                            <span> Approve EUSD </span>
+                          )}
                         </button>
                       ) : (
                         <>
-                          {checkedMetamask === true ? (
-                            <button
-                              className="proceedToPayDiv_btn"
-                              onClick={PurchaseProduct}
-                              disabled={Disabled}
-                            >
-                              {isLoading?(<ScaleLoader color="#12111b" size={10} height={19} />):(<>  Checkout Metamask</>)}
-                            
-                            </button>
-                          ) : checkedFort === true ? (
-                            <button className="proceedToPayDiv_btn">
-                              Checkout Fort
+                          {updateProfile === true ? (
+                            <button className="proceedToPayDiv_btn" disabled>
+                              Update Your Billing Info
                             </button>
                           ) : (
-                            <button className="proceedToPayDiv_btn" disabled>
-                              Select Payment Method
-                            </button>
+                            <>
+                              {checkedMetamask === true ? (
+                                <button
+                                  className="proceedToPayDiv_btn"
+                                  onClick={PurchaseProduct}
+                                  disabled={Disabled}
+                                >
+                                  {isLoading ? (
+                                    <ScaleLoader
+                                      color="#12111b"
+                                      size={10}
+                                      height={19}
+                                    />
+                                  ) : (
+                                    <> Checkout Metamask</>
+                                  )}
+                                </button>
+                              ) : checkedFort === true ? (
+                                <button className="proceedToPayDiv_btn">
+                                  Checkout Fort
+                                </button>
+                              ) : (
+                                <button
+                                  className="proceedToPayDiv_btn"
+                                  disabled
+                                >
+                                  Select Payment Method
+                                </button>
+                              )}
+                            </>
                           )}
                         </>
                       )}

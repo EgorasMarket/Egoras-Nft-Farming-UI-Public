@@ -241,13 +241,13 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   gap: 1px;
 }
 .checkoutPage_body2_area_body_cont1_text_title {
-  font-weight: 600;
-  color: #fff;
-  font-size: 20px;
-  width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+    font-weight: 600;
+      color: #fff;
+      font-size: 20px;
+      width: 170px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
 }
 .checkoutPage_body2_area_body_cont1_text_para1 {
   display: flex;

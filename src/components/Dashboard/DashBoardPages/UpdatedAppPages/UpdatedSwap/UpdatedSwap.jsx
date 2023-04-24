@@ -104,6 +104,7 @@ const UpdatedSwap = () => {
   const [eusdSmartContractBal, setEusdSmartContractBal] = useState("");
   const [insufficientLiquidityBtn, setInsufficientLiquidityBtn] =
     useState(false);
+  const [insufficientBalance, setInsufficientBalance] = useState(false);
   // const [eus, setIsAmountLoading] = useState(false);
 
   const hour1Array = [
@@ -905,6 +906,13 @@ const UpdatedSwap = () => {
     console.log(SwapAmount);
     console.log(eusdSmartContractBal);
   }, [eusdSmartContractBal, SwapAmount]);
+useEffect(() => {
+  if (SwapAmount > coinBalance) {
+    setInsufficientBalance(true);
+  } else {
+    setInsufficientBalance(false);
+  }
+}, [SwapAmount, coinBalance]);
 
   return (
     <div className="other2">
@@ -968,9 +976,9 @@ const UpdatedSwap = () => {
                                   onChange={onChangeSwapAmount}
                                   value={SwapAmount}
                                 />
-                                <div className="amnt_input_layer1_input_div_dollar_value">
+                                {/* <div className="amnt_input_layer1_input_div_dollar_value">
                                   ~${SwapAmount * 750}
-                                </div>
+                                </div> */}
                               </div>
 
                               {id == "" ? (
@@ -1214,12 +1222,12 @@ const UpdatedSwap = () => {
                                   </>
                                 )}
 
-                                <div className="amnt_input_layer1_input_div_dollar_value">
+                                {/* <div className="amnt_input_layer1_input_div_dollar_value">
                                   ~$
                                   {SwapAmount == "" || id2 == ""
                                     ? " "
                                     : SwapAmount * 750}
-                                </div>
+                                </div> */}
                               </div>
                               {id2 == "" ? (
                                 <div className="Swap_icondropDownDiv">
@@ -1415,40 +1423,21 @@ const UpdatedSwap = () => {
                                       <>
                                         {data.id == id ? (
                                           <>
-                                            {unlockBtn === false ? (
+                                            {insufficientBalance? (
                                               <button
                                                 id="generate"
-                                                disabled={Disable}
-                                                onClick={UnlockToken}
+                                                disabled={true}
                                                 class="updatedSwapSwapBtn"
                                               >
-                                                {isLoading ? (
-                                                  <ScaleLoader
-                                                    color="#353250"
-                                                    size={10}
-                                                    height={20}
-                                                  />
-                                                ) : (
-                                                  <> Approve {data.symbol}</>
-                                                )}
+                                                Insufficient Balance
                                               </button>
                                             ) : (
                                               <>
-                                                {insufficientLiquidityBtn ? (
-                                                  <button
-                                                    id="generate"
-                                                    disabled={true}
-                                                    onClick={SwapEusdForBnb}
-                                                    class="updatedSwapSwapBtn"
-                                                  >
-                                                    Insufficient {data.symbol}{" "}
-                                                    Liquidity
-                                                  </button>
-                                                ) : (
+                                                {unlockBtn === false ? (
                                                   <button
                                                     id="generate"
                                                     disabled={Disable}
-                                                    onClick={SwapEusdForBnb}
+                                                    onClick={UnlockToken}
                                                     class="updatedSwapSwapBtn"
                                                   >
                                                     {isLoading ? (
@@ -1458,9 +1447,46 @@ const UpdatedSwap = () => {
                                                         height={20}
                                                       />
                                                     ) : (
-                                                      <> Swap {data.symbol}</>
+                                                      <>
+                                                        {" "}
+                                                        Approve {data.symbol}
+                                                      </>
                                                     )}
                                                   </button>
+                                                ) : (
+                                                  <>
+                                                    {insufficientLiquidityBtn ? (
+                                                      <button
+                                                        id="generate"
+                                                        disabled={true}
+                                                        onClick={SwapEusdForBnb}
+                                                        class="updatedSwapSwapBtn"
+                                                      >
+                                                        Insufficient{" "}
+                                                        {data.symbol} Liquidity
+                                                      </button>
+                                                    ) : (
+                                                      <button
+                                                        id="generate"
+                                                        disabled={Disable}
+                                                        onClick={SwapEusdForBnb}
+                                                        class="updatedSwapSwapBtn"
+                                                      >
+                                                        {isLoading ? (
+                                                          <ScaleLoader
+                                                            color="#353250"
+                                                            size={10}
+                                                            height={20}
+                                                          />
+                                                        ) : (
+                                                          <>
+                                                            {" "}
+                                                            Swap {data.symbol}
+                                                          </>
+                                                        )}
+                                                      </button>
+                                                    )}
+                                                  </>
                                                 )}
                                               </>
                                             )}
@@ -1477,7 +1503,7 @@ const UpdatedSwap = () => {
                                       <>
                                         {data.id == id ? (
                                           <>
-                                            {SwapAmount > coinBalance ? (
+                                            {insufficientBalance ? (
                                               <button
                                                 id="generate"
                                                 class="updatedSwapSwapBtn"

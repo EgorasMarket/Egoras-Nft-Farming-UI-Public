@@ -182,17 +182,18 @@
   border: solid 1px #000000 !important;
 }
 .dashboardMarketPlaceBody2_div1_body_card {
-  width: 95%;
-  display: flex;
-  flex-direction: column;
-  background: #151422;
-  margin: auto;
-  border: solid 1px #2d2c41;
-  border-radius: 15px;
-  overflow: hidden;
-  transition: 0.3s cubic-bezier(0.39, 0.58, 0.57, 1);
-  height: 100%;
-  position: relative;
+    width: 95%;
+      display: flex;
+      flex-direction: column;
+      background: #151422;
+      margin: auto;
+      border: solid 1px #2d2c41;
+      border-radius: 15px;
+      overflow: hidden;
+      transition: 0.3s cubic-bezier(0.39, 0.58, 0.57, 1);
+      height: 100%;
+      position: relative;
+      justify-content: space-between;
 }
 .prodState_div {
   position: absolute;
