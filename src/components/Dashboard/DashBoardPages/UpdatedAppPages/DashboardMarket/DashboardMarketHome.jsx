@@ -210,22 +210,22 @@ const DashboardMarketHome = () => {
                     className="product_carousel"
                   >
                     <img
-                      src="/img/dummyMarketImages/2023_Family_KV_Horizontal_notxt_vF-1.webp"
+                      src="/img/marketBanners/ABOUT IT.png"
                       alt=""
                       className="dashboardMarketPlaceBody1_cont1_img"
                     />
                     <img
-                      src="/img/dummyMarketImages/marketHeroBanner1.webp"
+                      src="/img/marketBanners/1p.png"
                       alt=""
                       className="dashboardMarketPlaceBody1_cont1_img"
                     />
                     <img
-                      src="/img/dummyMarketImages/marketHeroBanner2.webp"
+                      src="/img/marketBanners/2.png"
                       alt=""
                       className="dashboardMarketPlaceBody1_cont1_img"
                     />
                     <img
-                      src="/img/dummyMarketImages/marketHeroBanner3.webp"
+                      src="/img/marketBanners/2p.png"
                       alt=""
                       className="dashboardMarketPlaceBody1_cont1_img"
                     />
@@ -318,7 +318,6 @@ const DashboardMarketHome = () => {
                 {/* =============================== */}
                 {/* =============================== */}
                 {/* =============================== */}
-            
 
                 {/* =============================== */}
                 {/* =============================== */}

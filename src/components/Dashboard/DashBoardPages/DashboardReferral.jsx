@@ -236,13 +236,13 @@ useEffect(async () => {
                   {/* <button onClick={() => library.provider._handleDisconnect()}>
                     Disconnect
                   </button> */}
-                    <div className="referral_banner_bg_div">
+                  {/* <div className="referral_banner_bg_div">
                       <img
                         src="/img/referral_bg.png"
                         alt=""
                         className="referral_banner_bg_img"
                       />
-                    </div>
+                    </div> */}
                   <div className="dashBoard_ref_area1">
                     <div className="dashBoard_ref_area1_cont1">
                       <div className="dashBoard_ref_area1_cont1_icon_div">
@@ -257,15 +257,9 @@ useEffect(async () => {
                           <span className="engn_symbol_sign">EGC</span>
                         </div>
                       </div>
-                      {/* <div className="dashBoard_ref_area1_cont1_div1 welcome_bonus_div">
-                        <div className="dashBoard_ref_area1_cont1_div1_cont1">
-                          Referral Earnings
-                        </div>
-                        <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          {numberWithCommas(parseFloat(refEarnings).toFixed(2))}
-                          <span className="engn_symbol_sign">Engn</span>
-                        </div>
-                      </div> */}
+                      <button className="dashBoard_ref_area1_cont1_div1_cont1_withdraw_btn">
+                        Withdraw
+                      </button>
                     </div>
                     <div className="dashBoard_ref_area1_cont2">
                       <div className="dashBoard_ref_area1_cont1_icon_div">

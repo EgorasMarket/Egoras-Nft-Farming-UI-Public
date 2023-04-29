@@ -79,8 +79,8 @@
   margin-left: 3%;
 }
 .product_detail_section {
-  padding: 0em 0em;
-  padding-bottom: 2em;
+  padding: 0em 0em !important;
+  padding-bottom: 2em !important;
   position: relative;
   /* overflow: hidden; */
 }

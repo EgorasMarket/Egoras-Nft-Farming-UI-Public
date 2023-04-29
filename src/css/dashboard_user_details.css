@@ -57,7 +57,7 @@
 }
 
 .welcome_bonus_div_body {
-  font-size: 45px;
+font-size: 34px;
   font-weight: 600;
 }
 
@@ -547,19 +547,21 @@
   color: #ffcb3a;
   font-weight: 500;
 }
+
 .sold_status_div {
-    padding: 9px;
-      background: #033318;
-      border-radius: 29px;
-      font-size: 12px;
-      width: 100%;
-      max-width: 100px;
-      margin: auto;
-      color: #11e66c;
-      font-weight: 500;
+  padding: 9px;
+  background: #033318;
+  border-radius: 29px;
+  font-size: 12px;
+  width: 100%;
+  max-width: 100px;
+  margin: auto;
+  color: #11e66c;
+  font-weight: 500;
 }
+
 .declined_status_div {
-padding: 9px;
+  padding: 9px;
   background: #320404;
   border-radius: 29px;
   font-size: 12px;
@@ -569,60 +571,72 @@ padding: 9px;
   color: #ff4848;
   font-weight: 500;
 }
+
 .shipped_status_div {
-    padding: 9px;
-      background: #24233d;
-      border-radius: 29px;
-      font-size: 12px;
-      width: 100%;
-      max-width: 100px;
-      margin: auto;
-      color: #9c7bee;
-      font-weight: 500;
+  padding: 9px;
+  background: #24233d;
+  border-radius: 29px;
+  font-size: 12px;
+  width: 100%;
+  max-width: 100px;
+  margin: auto;
+  color: #9c7bee;
+  font-weight: 500;
 }
+
 .decline_mark_button_div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 1em;
 }
+
 .decline_mark_button_div_decline {
-    padding: 10px;
-    width: 100px;
-    border-radius: 8px;
-    border: none;
-    font-size: 14px;
-    margin-right: 10px;
-    background: #c72f2f;
-    color: #fff;
+  padding: 10px;
+  width: 100px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  margin-right: 10px;
+  background: #c72f2f;
+  color: #fff;
 }
+
 .decline_mark_button_div_mark_shipped {
-    padding: 10px;
-    width: 100px;
-    border-radius: 8px;
-    border: none;
-    font-size: 14px;
-    /* margin-right: 10px; */
-    background: #7a5fc0;
-    color: #fff;
+  padding: 10px;
+  width: 100px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  /* margin-right: 10px; */
+  background: #7a5fc0;
+  color: #fff;
 }
+.decline_mark_button_div_mark_shipped:disabled {
+background: #262439;
+  color: #4e4c6b;
+  cursor: not-allowed;
+}
+
 .awaiting_btn_div {
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1em;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1em;
 }
+
 .awaiting_btn {
-    background: #2c2a41;
-    width: 100%;
-    padding: 15px;
-    border-radius: 13px;
-    border: none;
-    color: #656284;
+  background: #2c2a41;
+  width: 100%;
+  padding: 15px;
+  border-radius: 13px;
+  border: none;
+  color: #656284;
 }
+
 .BuyerSellerDiv_body_div2 {
   margin: 0;
   margin-top: 0;
@@ -634,6 +648,7 @@ padding: 9px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
+
 .markReceivedBtn {
   padding: 10px;
   width: 100px;
@@ -646,11 +661,13 @@ padding: 9px;
   background: #7a5fc0;
   color: #fff;
 }
+
 .markReceivedBtn_div {
   display: flex;
   align-items: center;
   justify-content: flex-end;
 }
+
 .BuyerSellerDiv_body_div2a {
   /* margin: 0; */
   margin-top: 2em;
@@ -717,8 +734,55 @@ padding: 9px;
   }
 
   .dark .hr_vertical {
-    border-bottom: solid 1px #4a6857;
+    border-bottom: solid 1px #2c2a3f;
   }
+
+  .BuyerSellerDiv_body {
+    padding: 1em;
+  }
+
+  .lending_area1 {
+    flex-direction: column;
+  }
+
+  .BuyerSellerDiv_body_div2a {
+    padding: 1em;
+  }
+
+  .BuyerSellerDiv_body_div2 {
+    padding: 1em;
+  }
+
+  .BuyerSellerDiv_body_div2_tab_area {
+    padding: 10px;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .filter_table_area_1 {
+    width: 100% !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    /* margin-bottom: 10px !important; */
+  }
+
+  .filter_table_area_2 {
+    margin-top: 10px;
+  }
+
+  .user_details_area {
+
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+
+  }
+    .userDetails_div{
+      padding: 1em;
+    }
+        .user_details_area_btn {
+          width: 100%;
+          max-width: 100%;
+     
+        }
 }
 
 @media screen and (max-width: 600px) {

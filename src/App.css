@@ -9,6 +9,9 @@
 body {
   font-family: "Omnes", sans-serif;
 }
+hr{
+  width: 100%;
+}
 html {
   scroll-behavior: smooth;
   transition: 2s ease-in;

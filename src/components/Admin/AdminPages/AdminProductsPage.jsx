@@ -511,13 +511,13 @@ const AdminProductsPage = () => {
                               </div>
                             </div>
                           </td>
-                          <td className="assets-category-data1b stable-content branch_apy">
+                          <td className="assets-category-data1b branch_apy">
                             {numberWithCommas(
                               parseInt(asset.user_amount).toFixed(0)
                             )}{" "}
                             Eusd
                           </td>
-                          <td className="assets-category-data1b stable-content branch_apy">
+                          <td className="assets-category-data1b branch_apy">
                             {asset.user_wallet != null
                               ? `${asset.user_wallet.slice(
                                   0,
@@ -525,10 +525,10 @@ const AdminProductsPage = () => {
                                 )}...${asset.user_wallet.slice(39, 42)}`
                               : "N/A"}
                           </td>
-                          <td className="assets-category-data1b stable-content branch_apy">
+                          <td className="assets-category-data1b branch_apy">
                             {asset.status}
                           </td>
-                          <td className="assets-category-data1b stable-content branch_apy">
+                          <td className="assets-category-data1b branch_apy">
                             {asset.personnel != null ? (
                               <>
                                 {`${asset.personnel.slice(
@@ -540,10 +540,10 @@ const AdminProductsPage = () => {
                               <>{asset.personnel}</>
                             )}
                           </td>
-                          <td className="assets-category-data1b stable-content branch_apy">
+                          <td className="assets-category-data1b branch_apy">
                             {asset.productType}
                           </td>
-                          <td className="assets-category-data1b stable-content branch_apy">
+                          <td className="assets-category-data1b branch_apy">
                             {asset.createdAt}
                           </td>
                           <td className="assets-category-data-last branch_loan_action">

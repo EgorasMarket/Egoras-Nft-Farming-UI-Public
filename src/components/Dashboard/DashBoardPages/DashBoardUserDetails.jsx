@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import jazzicon from "@metamask/jazzicon";
+import { CALL_CHECK_USER_AND_MEMBERSHIP } from "../../../services/userServices";
 // import Timer from "./Timer";
 // import { addDays, format } from "date-fns";
 // import { Link } from "react-router-dom";
@@ -64,6 +65,7 @@ const DashBoardUserDetails = ({ auth }) => {
   const [eusdUsdVal, setEusdUsdVal] = useState("0.00");
   const [BnbUsdVal, setBnbUsdVal] = useState("0.00");
   const [TotalPortfolio, setTotalPortfolio] = useState("0.00");
+  const [memberStatus, setMemberStatus] = useState("N/A");
   const [activeTab, setActiveTab] = useState("buyer");
   const [activeBtn, setActiveBtn] = useState("Ongoing");
   const [formData, setFormData] = useState({
@@ -255,7 +257,49 @@ const DashBoardUserDetails = ({ auth }) => {
     const response = await CALL_UPDATE_MY_PROFILE(body);
     console.log(response);
   };
+  // useEffect(() => {
+  //   if (account) {
+  //     setMemberStatus("");
+  //   }
+  // }, [account]);
+  useEffect(async () => {
+    if (account) {
+      const response = await CALL_CHECK_USER_AND_MEMBERSHIP(account);
+      console.log(response.data);
+      console.log(response.data.userMembership);
+      if (response.data.userMembership === true) {
+        setMemberStatus("Active");
+      } else {
+        setMemberStatus("Inactive");
+      }
 
+      if (response.data.users.fullName !== null) {
+        const FullName = response.data.users.fullName.split(" ");
+        console.log(FullName, "FullName");
+        setFormData({
+          firstName: FullName[0],
+          lastName: FullName[1],
+          phoneNumber: response.data.users.phoneNumber,
+          address: response.data.users.userAddress,
+          address2: response.data.users.userAddress2,
+          country: response.data.users.country,
+          state: response.data.users.state,
+          zipCode: response.data.users.zipCode,
+        });
+      } else {
+             setFormData({
+               firstName: "",
+               lastName: "",
+               phoneNumber: "",
+               address: "",
+               address2: "",
+               country: "",
+               state: "",
+               zipCode: "",
+             });
+      }
+    }
+  }, [account]);
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -280,6 +324,16 @@ const DashBoardUserDetails = ({ auth }) => {
                   </div>
                   <span className="connected_txt">{conecttxt}</span>
                 </div>
+              </div>
+              <span className="hr_vertical"></span>
+              <div className="welcome_bonus_div">
+                <div className="welcome_bonus_div_head">
+                  {/* <div className="welcome_bonus_icon_div">
+                    <StarRateIcon className="welcome_bonus_icon_div_icon" />
+                  </div> */}
+                  Membership Status
+                </div>
+                <div className="welcome_bonus_div_body">{memberStatus}</div>
               </div>
             </div>
             <div className="user_details_body1">
@@ -495,93 +549,6 @@ const DashBoardUserDetails = ({ auth }) => {
             {/* ================== */}
             {/* ================== */}
             {/* ================== */}
-            <div className="recent_transaction_body">
-              <div className="recent_transaction_body_head" id="transact_head">
-                Transactions
-              </div>
-
-              {/* ================= */}
-              {/* ================= */}
-              {/* ================= */}
-              {/* ================= */}
-              {/* ================= */}
-              {/* ================= */}
-
-              <div className="asset_list_desktop_view2">
-                <table className="branch_asset_table">
-                  <thead className="branch_asset_titles">
-                    <tr className="branch_asset_title_div">
-                      <th className="branch_asset_heading_titles branch_asset_heading_titles_first">
-                        Type
-                      </th>
-                      <th className="branch_asset_heading_titles">Time</th>
-                      <th className="branch_asset_heading_titles">Amount</th>
-                      <th className="branch_asset_heading_titles branch_asset_heading_titles_last">
-                        Txn Hash
-                      </th>
-                    </tr>
-                  </thead>
-
-                  {/* <div className="table-body-content">
-
-// =====================
-// =====================
-// =====================
-// =====================
-// =====================
-// =====================
-              </div> */}
-                  {loanAsset.length <= 0 ? (
-                    <div className="no_loans_div">
-                      <div className="no_loans_div_cont">
-                        <Nodata />
-                        No funded pools yet.
-                      </div>{" "}
-                    </div>
-                  ) : (
-                    <tbody
-                      className="branch_asset_body"
-                      id="popular-categories"
-                    >
-                      {" "}
-                      {/* =============== */}
-                      {/* =============== */}
-                      {/* =============== */}
-                      {loanAsset.map((asset) => {
-                        return (
-                          <tr className="branch_asset_body_row ">
-                            <td className="branch_asset_body_row_data branch_asset_body_row_data_first  ">
-                              <div className="assets-data"></div>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                    </tbody>
-                  )}
-                </table>
-              </div>
-
-              {/* ================= */}
-              {/* ================= */}
-              {/* ================= */}
-
-              <div className="seemore_btn_div">
-                <a href="#transact_head">
-                  <button className="see_more_btn" onClick={toggleSeemore}>
-                    {seemore == false ? "Expand" : "Collapse"}
-                  </button>
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </section>

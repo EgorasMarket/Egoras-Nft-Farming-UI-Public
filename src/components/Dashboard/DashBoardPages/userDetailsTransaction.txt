@@ -1,0 +1,87 @@
+    <div className="recent_transaction_body">
+              <div className="recent_transaction_body_head" id="transact_head">
+                Transactions
+              </div>
+
+              {/* ================= */}
+              {/* ================= */}
+              {/* ================= */}
+              {/* ================= */}
+              {/* ================= */}
+              {/* ================= */}
+
+              <div className="asset_list_desktop_view2">
+                <table className="branch_asset_table">
+                  <thead className="branch_asset_titles">
+                    <tr className="branch_asset_title_div">
+                      <th className="branch_asset_heading_titles branch_asset_heading_titles_first">
+                        Type
+                      </th>
+                      <th className="branch_asset_heading_titles">Time</th>
+                      <th className="branch_asset_heading_titles">Amount</th>
+                      <th className="branch_asset_heading_titles branch_asset_heading_titles_last">
+                        Txn Hash
+                      </th>
+                    </tr>
+                  </thead>
+
+                  {/* <div className="table-body-content">
+
+// =====================
+// =====================
+// =====================
+// =====================
+// =====================
+// =====================
+              </div> */}
+                  {loanAsset.length <= 0 ? (
+                    <div className="no_loans_div">
+                      <div className="no_loans_div_cont">
+                        <Nodata />
+                        No funded pools yet.
+                      </div>{" "}
+                    </div>
+                  ) : (
+                    <tbody
+                      className="branch_asset_body"
+                      id="popular-categories"
+                    >
+                      {" "}
+                      {/* =============== */}
+                      {/* =============== */}
+                      {/* =============== */}
+                      {loanAsset.map((asset) => {
+                        return (
+                          <tr className="branch_asset_body_row ">
+                            <td className="branch_asset_body_row_data branch_asset_body_row_data_first  ">
+                              <div className="assets-data"></div>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                      {/* =================== */}
+                    </tbody>
+                  )}
+                </table>
+              </div>
+
+              {/* ================= */}
+              {/* ================= */}
+              {/* ================= */}
+
+              <div className="seemore_btn_div">
+                <a href="#transact_head">
+                  <button className="see_more_btn" onClick={toggleSeemore}>
+                    {seemore == false ? "Expand" : "Collapse"}
+                  </button>
+                </a>
+              </div>
+            </div>

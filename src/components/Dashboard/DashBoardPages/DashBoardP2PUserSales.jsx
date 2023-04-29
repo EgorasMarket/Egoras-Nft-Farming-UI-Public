@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import CopyAllIcon from "@mui/icons-material/CopyAll";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import { makeStyles } from "@material-ui/core/styles";
 import { numberWithCommas } from "../../../static";
 import Nodata from "./nodataComponent/Nodata";
@@ -52,6 +53,8 @@ import {
   faTruck,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
+import UpdatedErrorModal from "./UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedErrorModal";
+import UpdatedSuccessModal from "./UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedSuccessModal";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -84,10 +87,19 @@ const DashBoardP2PUserSales = () => {
   const [activeTab, setActiveTab] = useState("buyer");
   const [activeSubTab, setActiveSubTab] = useState("pending");
   const [buyOrders, setBuyOrders] = useState([]);
+  const [checkAgree, setCheckAgree] = useState(false);
   const [sellOrders, setSellOrders] = useState([]);
   const [uploaded, setUploaded] = useState([]);
   const [myDirectProducts, setMyDirectProducts] = useState([]);
   const [myDirectProducts2, setMyDirectProducts2] = useState([]);
+  const [ToggleAproveDiv, setToggleAproveDiv] = useState("");
+    const [successModal, setSuccessModal] = useState(false);
+    const [errorModal, setErrorModal] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+  const [successRoute, setSuccessRoute] = useState("");
+    const [Disabled, setDisabled] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);
   };
@@ -208,16 +220,33 @@ const DashBoardP2PUserSales = () => {
   };
 
   const markProductAsShipped = async (order_id) => {
+       setIsLoading(true);
+       setDisabled(true);
     const call = await MARK_PRODUCT_AS_SHIPPED({ user: account, order_id });
     console.log(call);
 
     if (call.status == 200) {
-      var row = document.getElementById(order_id);
-      row.style.display = "none";
+      // var row = document.getElementById(order_id);
+      // row.style.display = "none";
       // alert("product shipped successfully");
+                 setIsLoading(false);
+                 setDisabled(false);
+                 setSuccessModal(true);
+                 setSuccessRoute("");
+                 setSuccessMessage(
+                   "You have successfully marked this product as shipped"
+                 );
+    } else {
+            console.log(call);
+            setErrorModal(true);
+            setErrorMessage(call.errorMessage);
+            setIsLoading(false);
+            setDisabled(false);
     }
   };
   const markAsRecieved = async (order_id, product_id, tradeID) => {
+        setIsLoading(true);
+        setDisabled(true);
     // console.log(order_id, product_id, tradeID);
     const res = await releaseFundsToSeller(
       product_id,
@@ -230,10 +259,28 @@ const DashBoardP2PUserSales = () => {
       const call = await MARK_PRODUCT_AS_RECIEVED({ user: account, order_id });
       console.log(call);
       if (call.status == 200) {
-        var row = document.getElementById(order_id);
-        row.style.display = "none";
+        // var row = document.getElementById(order_id);
+        // row.style.display = "none";
         // alert("product shipped successfully");
+              setIsLoading(false);
+              setDisabled(false);
+              setSuccessModal(true);
+              setSuccessRoute("");
+              setSuccessMessage(
+            "You have successfully marked this product as received, your funds will now released to the seller"
+              );
+      } else {
+             console.log(call);
+             setErrorModal(true);
+             setErrorMessage(call.errorMessage);
+             setIsLoading(false);
+             setDisabled(false);
       }
+    } else {
+            setErrorModal(true);
+            setErrorMessage(res.message);
+            setIsLoading(false);
+            setDisabled(false);
     }
   };
 
@@ -330,9 +377,33 @@ const DashBoardP2PUserSales = () => {
     setActiveTab(active);
   };
   const toggleActiveSubTab = (e) => {
+
     let active = e.currentTarget.id;
     setActiveSubTab(active);
   };
+
+  useEffect(() => {
+    if (account) {
+      if (
+        myDirectProducts2.filter((person) => person.status == "NEW").length <= 0
+      ) {
+        setActiveSubTab("uploaded");
+      } else {
+        setActiveSubTab("pending");
+      }
+    }
+  }, [account]);
+  const toggleMarkAsReceivedDiv = (e) => {
+    let Divid = e.currentTarget.id;
+    setToggleAproveDiv(Divid);
+    console.log(Divid, "Divid");
+  };
+    const CloseErrorModal = () => {
+      setErrorModal(false);
+    };
+    const toggleCheckAgree = () => {
+      setCheckAgree(!checkAgree);
+    };
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -483,23 +554,23 @@ const DashBoardP2PUserSales = () => {
                                       </div>
                                     </div>
                                   </td>
-                                  <td className="assets-category-data1b stable-content branch_apy">
+                                  <td className="assets-category-data1b branch_apy">
                                     {numberWithCommas(
                                       parseInt(asset.sub_total).toFixed(0)
                                     )}{" "}
                                     Eusd
                                   </td>
-                                  <td className="assets-category-data1b stable-content branch_apy">
+                                  <td className="assets-category-data1b branch_apy">
                                     {asset.quantity}
                                   </td>
-                                  <td className="assets-category-data1b stable-content branch_apy">
+                                  <td className="assets-category-data1b branch_apy">
                                     {`${asset.seller.slice(
                                       0,
                                       6
                                     )}...${asset.seller.slice(39, 42)}`}
                                   </td>
 
-                                  <td className="assets-category-data1b stable-content branch_apy">
+                                  <td className="assets-category-data1b branch_apy">
                                     {asset.status === "PENDING" ? (
                                       <div className="pending_status_div">
                                         {asset.status}{" "}
@@ -551,14 +622,9 @@ const DashBoardP2PUserSales = () => {
                                     <div className="markReceivedBtn_div">
                                       {asset.status === "SHIPPED" ? (
                                         <button
+                                          id={asset.id}
                                           className="markReceivedBtn"
-                                          onClick={() =>
-                                            markAsRecieved(
-                                              asset.id,
-                                              asset.product_id,
-                                              asset.tradeID
-                                            )
-                                          }
+                                          onClick={toggleMarkAsReceivedDiv}
                                         >
                                           Approve
                                         </button>
@@ -788,13 +854,13 @@ const DashBoardP2PUserSales = () => {
                                           </div>
                                         </div>
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {numberWithCommas(
                                           parseInt(asset.user_amount).toFixed(0)
                                         )}{" "}
                                         Eusd
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {`${asset.user_wallet.slice(
                                           0,
                                           6
@@ -804,10 +870,10 @@ const DashBoardP2PUserSales = () => {
                                         )}`}
                                       </td>
 
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {asset.status}
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {asset.transaction_hash != null
                                           ? `${asset.transaction_hash.slice(
                                               0,
@@ -853,7 +919,7 @@ const DashBoardP2PUserSales = () => {
                         <div className="filter_table_area_1">
                           Uploaded Products
                         </div>
-                        <div className="filter_table_area_2 filter_table_area_2b">
+                        <div className="filter_table_area_2">
                           <div
                             id="approved_products"
                             className={
@@ -1005,7 +1071,7 @@ const DashBoardP2PUserSales = () => {
                                             </div>
                                           </div>
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {numberWithCommas(
                                             parseInt(asset.user_amount).toFixed(
                                               0
@@ -1013,10 +1079,10 @@ const DashBoardP2PUserSales = () => {
                                           )}{" "}
                                           Eusd
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {asset.quantity}
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {`${asset.user_wallet.slice(
                                             0,
                                             6
@@ -1026,7 +1092,7 @@ const DashBoardP2PUserSales = () => {
                                           )}`}
                                         </td>
 
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {asset.status}
                                         </td>
                                         <td className="assets-category-data-last branch_loan_action">
@@ -1108,23 +1174,23 @@ const DashBoardP2PUserSales = () => {
                                             </div>
                                           </div>
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {numberWithCommas(
                                             parseInt(asset.sub_total).toFixed(0)
                                           )}{" "}
                                           Eusd
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {asset.quantity}
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {`${asset.user_id.slice(
                                             0,
                                             6
                                           )}...${asset.user_id.slice(39, 42)}`}
                                         </td>
 
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           <div className="pending_status_div">
                                             {asset.status}{" "}
                                             <FontAwesomeIcon
@@ -1176,23 +1242,23 @@ const DashBoardP2PUserSales = () => {
                                             </div>
                                           </div>
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {numberWithCommas(
                                             parseInt(asset.sub_total).toFixed(0)
                                           )}{" "}
                                           Eusd
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {asset.quantity}
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {`${asset.user_id.slice(
                                             0,
                                             6
                                           )}...${asset.user_id.slice(39, 42)}`}
                                         </td>
 
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           <div className="declined_status_div">
                                             {asset.status}{" "}
                                             <FontAwesomeIcon
@@ -1242,23 +1308,23 @@ const DashBoardP2PUserSales = () => {
                                             </div>
                                           </div>
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {numberWithCommas(
                                             parseInt(asset.sub_total).toFixed(0)
                                           )}{" "}
                                           Eusd
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {asset.quantity}
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {`${asset.user_id.slice(
                                             0,
                                             6
                                           )}...${asset.user_id.slice(39, 42)}`}
                                         </td>
 
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           <div className="shipped_status_div">
                                             {asset.status}{" "}
                                             <FontAwesomeIcon
@@ -1308,23 +1374,23 @@ const DashBoardP2PUserSales = () => {
                                             </div>
                                           </div>
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {numberWithCommas(
                                             parseInt(asset.sub_total).toFixed(0)
                                           )}{" "}
                                           Eusd
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {asset.quantity}
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {`${asset.user_id.slice(
                                             0,
                                             6
                                           )}...${asset.user_id.slice(39, 42)}`}
                                         </td>
 
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           <div className="sold_status_div">
                                             {asset.status}{" "}
                                             <FontAwesomeIcon
@@ -1565,9 +1631,17 @@ const DashBoardP2PUserSales = () => {
                           <button
                             className="decline_mark_button_div_mark_shipped"
                             onClick={() => markProductAsShipped(data.id)}
+                            disabled={Disabled}
                           >
-                            {" "}
-                            Shipped
+                            {isLoading ? (
+                              <ScaleLoader
+                                color="#12111b"
+                                size={10}
+                                height={20}
+                              />
+                            ) : (
+                              <span> Shipped</span>
+                            )}
                           </button>
                         </div>
                       </>
@@ -1584,6 +1658,109 @@ const DashBoardP2PUserSales = () => {
               ) : null}
             </>
           ))}
+
+      {ToggleAproveDiv == ""
+        ? null
+        : buyOrders.map((asset) => (
+            <>
+              {asset.id === ToggleAproveDiv ? (
+                <div className="saleDetailsDiv">
+                  <div
+                    className="saleDetailsDiv_close_div"
+                    onClick={toggleMarkAsReceivedDiv}
+                  ></div>
+                  <div
+                    className="saleDetailsDiv_area_closeIcon_div"
+                    onClick={toggleMarkAsReceivedDiv}
+                  >
+                    <CloseIcon className="saleDetailsDiv_area_closeIcon" />
+                    Close
+                  </div>
+                  <div className="saleDetailsDiv_areab">
+                    <div className="saleDetailsDiv_area_body_div">
+                      <div className="saleDetailsDiv_area_title_div">
+                        Mark Product as received
+                      </div>
+                      <div className="saleDetailsDiv_area_body">
+                        Make sure you have received the product shipped by the
+                        seller, before releasing any funds to the seller.
+                      </div>
+                      <hr />
+                      <div className="checkBox_agree_div">
+                        <div className="checkBox_agree_div_bodyb ">
+                          <input
+                            type="checkbox"
+                            id="checkbox-1"
+                            name="checkbox"
+                            checked={checkAgree}
+                            onChange={toggleCheckAgree}
+                          />
+                          <label
+                            for="checkbox-1"
+                            className="checkBox_agree_div_body_label"
+                          >
+                            <div className="checkBox_agree_div_body_txt">
+                              I have received the Product shipped to me by{" "}
+                              {`${asset.seller.slice(
+                                0,
+                                6
+                              )}...${asset.seller.slice(39, 42)}`}
+                            </div>
+                          </label>
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_body_btn_div">
+                        {!checkAgree ? (
+                          <button
+                            className="saleDetailsDiv_area_body_btn"
+                            disabled={true}
+                          >
+                            Mark as received
+                          </button>
+                        ) : (
+                          <button
+                            className="saleDetailsDiv_area_body_btn"
+                            disabled={Disabled}
+                            onClick={() =>
+                              markAsRecieved(
+                                asset.id,
+                                asset.product_id,
+                                asset.tradeID
+                              )
+                            }
+                          >
+                            {isLoading ? (
+                              <ScaleLoader
+                                color="#12111b"
+                                size={10}
+                                height={20}
+                              />
+                            ) : (
+                              <span> Mark as received</span>
+                            )}
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ) : null}
+            </>
+          ))}
+
+      {errorModal ? (
+        <UpdatedErrorModal
+          errorMessage={errorMessage}
+          closeModal={CloseErrorModal}
+        />
+      ) : null}
+      {successModal ? (
+        <UpdatedSuccessModal
+          btnRoute={true}
+          successMessage={successMessage}
+          route={successRoute}
+        />
+      ) : null}
     </div>
   );
 };
