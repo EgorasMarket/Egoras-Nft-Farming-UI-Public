@@ -18,7 +18,7 @@ div#FooterId {
   align-items: baseline;
 }
 .add_color {
-  color: #229e54;
+  color: #7a5fc0;
   font-weight: 600;
 }
 
@@ -73,7 +73,7 @@ div#FooterId {
 }
 .dark .twitter_icon {
   /* font-size: 14px; */
-  background: #26382c;
+  background: #222037;
 }
 .footerIcons {
   display: flex;
@@ -173,7 +173,7 @@ div#FooterId {
 /* ========================== */
 
 .dark .footerSection {
-  background-color: #112117;
+  background-color: #0f0e1c;
 }
 .dark .footerCardTitle {
   color: #fff;

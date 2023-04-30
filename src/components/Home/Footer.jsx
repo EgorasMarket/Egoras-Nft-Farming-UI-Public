@@ -153,7 +153,7 @@ const Footer = () => {
                       className="egr2-logo"
                     />
                     <img
-                      src="/img/logoVideoThumbnail.svg"
+                      src="/img/martgpt_logo.svg"
                       alt="..."
                       className="egr2-logo2"
                     />
@@ -223,7 +223,7 @@ const Footer = () => {
 
               <hr className="footer_hr_rule"></hr>
               <h5 className="footerBottomPara">
-                ©️ 2023 EGCDAO. All rights reserved .
+                ©️ 2023 Martgpt. All rights reserved .
               </h5>
             </div>
           </section>

@@ -158,6 +158,30 @@
       "constant": true
     },
     {
+      "inputs": [],
+      "name": "stakeState",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_unStake",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_totalPenalty",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_totalStake",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
       "inputs": [
         {
           "internalType": "address",

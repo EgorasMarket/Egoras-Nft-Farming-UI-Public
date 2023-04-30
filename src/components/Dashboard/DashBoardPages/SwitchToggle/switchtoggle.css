@@ -65,8 +65,8 @@ input:checked + .slider:before {
   box-shadow: 0px 0px 5px #55a172;
 }
 input:checked + .slider2 {
-  background-color: #314a3c;
-  border: solid 1px #314a3c;
+  background-color: #2f2d4a;
+  border: solid 1px #2f2d4a;
   box-shadow: none;
 }
 

@@ -18,8 +18,8 @@
 }
 .lock_container_cont1_div1_lock_div {
   padding: 1em 1em;
-  background: #1c2c22;
-  border: solid 1px #41564a;
+  background: #151422;
+  border: solid 1px #1f1e2e;
   box-shadow: 0px 10px 20px #000000;
   color: #fff;
   border-radius: 10px;
@@ -28,11 +28,11 @@
 }
 .faq_container {
   padding: 2em;
-  background: #1c2c22;
+  background: #151422;
   border-radius: 11px;
   margin-top: 2em;
   margin-bottom: 2em;
-  border: solid 1px #2d3d35;
+  border: solid 1px #2d2c41;
   display: flex;
   flex-direction: column;
 }
@@ -42,7 +42,7 @@
   color: #fff;
   font-weight: 600;
   margin-bottom: 10px;
-  border-bottom: solid 1px #323c36;
+  border-bottom: solid 1px #2d2c41;
   padding-bottom: 10px;
 }
 /* .faq_container_body.makeStyles-heading-23 {
@@ -56,14 +56,14 @@
   display: flex;
   /* justify-content: space-between; */
   font-size: 14px;
-  border-bottom: solid 1px #5c6a62;
+  border-bottom: solid 1px #2d2c41;
   padding-bottom: 0.5em;
   font-weight: 400;
 }
 .lock_container_cont1_div1_lock_div_tab1 {
   margin-right: 2em;
   cursor: pointer;
-  color: #889d91;
+  color: #787690;
 }
 .lock_container_cont1_div1_lock_div_tab1_active {
   font-weight: 600;
@@ -95,7 +95,7 @@
   margin-bottom: 1em;
 }
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_head {
-  color: #94ab9e;
+  color: #787690;
   font-size: 18px;
 }
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount {
@@ -106,7 +106,7 @@
 }
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_span {
   margin-bottom: 9px;
-  border-bottom: solid 1px #5c6a62;
+  border-bottom: solid 1px #2d2c41;
   padding-bottom: 9px;
   display: flex;
   flex-direction: column;
@@ -114,7 +114,7 @@
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_span_span2 {
   font-size: 14px;
   font-weight: 300;
-  color: #abc3b4;
+  color: #787690;
 }
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div_button {
   padding: 15px 0px;
@@ -127,7 +127,7 @@
 }
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv {
   font-size: 12px;
-  color: #94ab9e;
+  color: #787690;
   display: flex;
   flex-direction: column;
   margin-top: 0.5em;
@@ -164,15 +164,15 @@
   font-weight: 600;
 }
 .lock_container_cont1_div1_lock_div_lock_body_input_body_btn:disabled {
-  background: #4d6355;
-  color: #95b4a0;
+  background: #323147;
+  color: #696781;
   cursor: not-allowed;
 }
 .lock_container_cont1_div1_lock_div_lock_body_input_body_input {
   padding: 10px 15px;
-  border: solid 1px #3d4e44;
+  border: solid 1px #262538;
   border-radius: 10px;
-  background: #17201a;
+  background: #1c1b2a;
   color: #fff;
   width: 100%;
 }
@@ -187,14 +187,14 @@ canvas.blockies_icon {
 }
 .lock_container_cont2_div2_chart_div {
   padding: 2em;
-  background: #1c2c22;
+  background: #151422;
   margin-top: 1.5em;
   border-radius: 10px;
-  border: solid 1px #3f5448;
+  border: solid 1px #2d2c41;
   padding-bottom: 1em;
 }
 .lock_container_cont2_div2_chart_div_text_area {
-  color: #97aea1;
+  color: #787690;
   margin-bottom: 2em;
 }
 svg.recharts-surface {
@@ -216,8 +216,8 @@ svg.recharts-surface {
   position: absolute;
   right: 2%;
   font-size: 32px !important;
-  color: #baddc7;
-  background: #375241;
+  color: #85849a;
+  background: #323147;
   padding: 4px;
   border-radius: 6px;
   cursor: pointer;
@@ -225,12 +225,12 @@ svg.recharts-surface {
 .duration_dropDown_div {
   position: absolute;
   top: 100%;
-  background: #17201a;
+  background: #1c1b2a;
   width: 100%;
   padding: 1em;
   border-radius: 10px;
   box-shadow: 0px 10px 20px #000000;
-  border: solid 1px #284132;
+  border: solid 1px #2d2c41;
   display: flex;
   flex-direction: column;
   padding-bottom: 10px;
@@ -253,7 +253,7 @@ svg.recharts-surface {
 }
 .duration_dropDown_div_cont1 {
   padding: 15px;
-  background: #375241;
+  background: #323147;
   margin-bottom: 10px;
   border-radius: 8px;
   cursor: pointer;
@@ -261,12 +261,12 @@ svg.recharts-surface {
 }
 .duration_dropDown_div_cont1_selected {
   padding: 15px;
-  background: #1c2c22;
+  background: #151422;
   margin-bottom: 10px;
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
-  border: solid 2px #229e54;
+  border: solid 2px #7a5fc0;
 }
 .lock_container_cont1_div1_lock_div_lock_body_input_body_cont_amount_div {
   display: flex;
@@ -286,13 +286,13 @@ svg.recharts-surface {
 .lock_container_cont1_div1_lock_div_lock_body_input_body_cont_amount_div2 {
   width: 4em;
   /* padding: 15px; */
-  background: #243429;
+  background: #323147;
   display: flex;
   align-items: center;
   justify-content: center;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  border-left: solid 1px #3d4e44;
+  border-left: solid 1px #262538;
   /* border: solid 1px #304438; */
   height: 44px;
 }
@@ -306,9 +306,9 @@ svg.recharts-surface {
 }
 .lock_container_cont1_div_locks_overview {
   padding: 1em;
-  background: #1c2c22;
-  color: #889d91;
-  border: solid 1px #3e5347;
+  background: #151422;
+  color: #787690;
+  border: solid 1px #2d2c41;
   margin-bottom: 0em;
   border-radius: 10px;
   display: flex;
@@ -325,9 +325,9 @@ svg.recharts-surface {
 }
 .lock_container_cont1_div_contract_overview_body {
   padding: 1em;
-  background: #1c2c22;
-  color: #889d91;
-  border: solid 1px #3e5347;
+  background: #151422;
+  color: #787690;
+  border: solid 1px #2d2c41;
   margin-top: 0.5em;
   border-radius: 10px;
   display: flex;
@@ -338,7 +338,7 @@ svg.recharts-surface {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5em;
-  border-bottom: solid 1px #3e5347;
+  border-bottom: solid 1px #2d2c41;
   padding-bottom: 1.5em;
 }
 .lock_container_cont1_div_contract_overview_body_div1_last {
@@ -352,7 +352,7 @@ svg.recharts-surface {
   display: flex;
   flex-direction: column;
   padding-bottom: 10px;
-  border-bottom: solid 1px #3e5347;
+  border-bottom: solid 1px #2d2c41;
   margin-bottom: 1em;
 }
 .lock_container_cont1_div_locks_overview_cont1_head {
@@ -372,14 +372,14 @@ svg.recharts-surface {
 .lock_container_transactions_body {
   overflow: scroll;
   height: 425px;
-  border: solid 1px #28372f;
+  border: solid 1px #262534;
   border-radius: 10px;
   margin-top: 10px;
 }
 .lock_container_transactions_body_all {
   overflow: scroll;
   height: 422px;
-  border: solid 1px #28372f;
+  border: solid 1px #262534;
   border-radius: 10px;
   margin-top: 10px;
 }
@@ -459,7 +459,7 @@ svg.recharts-surface {
   transition: transform 0.2s ease-in-out 0s, box-shadow 0.2s ease-in-out 0s;
   cursor: pointer;
   font-size: 13px;
-  border-bottom: solid 1px #28372f;
+  border-bottom: solid 1px #262534;
 }
 .stakingTable_body_row_data {
   box-sizing: border-box;
@@ -503,7 +503,7 @@ svg.recharts-surface {
 }
 .value_dolls_div_val {
   font-size: 11px;
-  color: #697e71;
+  color: #787690;
 }
 .value_dolls_div2 {
   display: flex;
@@ -530,7 +530,7 @@ svg.recharts-surface {
 }
 
 .dark .stakingTable_title_div {
-  background: #1c2c22;
+  background: #151422;
   /* color: #fff; */
   /* border: solid 1px #fff; */
 }
@@ -540,7 +540,7 @@ svg.recharts-surface {
 }
 .dark .stakingTable_body_row {
   /* box-shadow: rgb(0 0 0) 0px 0px 6px; */
-  background: #17201a;
+  background: #1c1b2a;
   color: #fff;
 }
 .lock_container_cont1_div_contract_overview_div {

@@ -306,7 +306,7 @@ const DashBoardLendingTransactions = ({ match }) => {
                       <Area
                         type="monotone"
                         dataKey="amount"
-                        stroke="#229e54"
+                        stroke="#7a5fc0"
                         fillOpacity={1}
                         fill="url(#colorUv)"
                         strokeWidth={2}

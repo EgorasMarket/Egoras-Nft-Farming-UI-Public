@@ -210,26 +210,24 @@ const DashboardReferral = ({ auth }) => {
                       </div>
                       <div className="dashBoard_ref_area1_cont1_div1">
                         <div className="dashBoard_ref_area1_cont1_div1_cont1">
-                          Total Earnings
+                          Referral Earnings
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
                           {numberWithCommas(
                             parseFloat(welcomeBonus + refEarnings).toFixed(2)
                           )}{" "}
-                          <span className="engn_symbol_sign">Engn</span>
+                          <span className="engn_symbol_sign">EUSD</span>
                         </div>
                       </div>
-                      <div className="dashBoard_ref_area1_cont1_div1 welcome_bonus_div">
+                      {/* <div className="dashBoard_ref_area1_cont1_div1 welcome_bonus_div">
                         <div className="dashBoard_ref_area1_cont1_div1_cont1">
-                          Welcome Bonus
+                          Referral Earnings
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          {numberWithCommas(
-                            parseFloat(welcomeBonus).toFixed(2)
-                          )}{" "}
+                          {numberWithCommas(parseFloat(refEarnings).toFixed(2))}
                           <span className="engn_symbol_sign">Engn</span>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                     <div className="dashBoard_ref_area1_cont2">
                       <div className="dashBoard_ref_area1_cont1_icon_div">
@@ -241,15 +239,6 @@ const DashboardReferral = ({ auth }) => {
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
                           {refCount}
-                        </div>
-                      </div>
-                      <div className="dashBoard_ref_area1_cont1_div1">
-                        <div className="dashBoard_ref_area1_cont1_div1_cont1">
-                          Referral Earnings
-                        </div>
-                        <div className="dashBoard_ref_area1_cont1_div1_cont2">
-                          {numberWithCommas(parseFloat(refEarnings).toFixed(2))}{" "}
-                          <span className="engn_symbol_sign">Engn</span>
                         </div>
                       </div>
                     </div>
@@ -268,9 +257,6 @@ const DashboardReferral = ({ auth }) => {
                         <div className="dashBoard_ref_area2_cont1_body_div_head">
                           <div className="dashBoard_ref_area2_cont1_body_div_head_cont1 dashBoard_ref_area2_cont1_body_div_head_cont1_first">
                             S/N
-                          </div>
-                          <div className="dashBoard_ref_area2_cont1_body_div_head_cont1">
-                            User
                           </div>
                           <div className="dashBoard_ref_area2_cont1_body_div_head_cont1">
                             Address
@@ -329,10 +315,10 @@ const DashboardReferral = ({ auth }) => {
                         <div className="dashBoard_ref_area2_cont1_body">
                           <div className="dashBoard_ref_area2_cont1_body_div_head">
                             <div className="dashBoard_ref_area2_cont1_body_div_head_cont1_first">
-                              User
+                              Address
                             </div>
                             <div className="dashBoard_ref_area2_cont1_body_div_head_cont1_last">
-                              Address
+                              Status
                             </div>
                           </div>
                           {myReferrals.length <= 0 ? (

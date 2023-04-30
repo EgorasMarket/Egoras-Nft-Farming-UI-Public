@@ -13,18 +13,18 @@
 .analytics_container_1 {
   width: 100%;
   padding: 1em;
-  background: #1c2c22;
+  background: #151422;
   margin: 1em;
   margin-right: 0em;
   margin-left: 0em;
   border-radius: 10px;
-  border: solid 1px #41564a;
+  border: solid 1px #1f1e2e;
   color: #fff;
   display: flex;
   flex-direction: column;
 }
 .analytics_container_1_head {
-  color: #70887a;
+  color: #787690;
 }
 .analytics_container_1_Amount {
   font-size: 34px;
@@ -36,10 +36,10 @@
 }
 .analytics_container_1_Amount_span {
   font-size: 16px;
-  color: #6e8979;
+  color: #787690;
 }
 .assets_chart_area2 tspan {
-  fill: #6e8979;
+  fill: #787690;
   font-size: 14px;
   font-weight: 400;
 }

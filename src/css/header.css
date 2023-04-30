@@ -89,7 +89,7 @@ div#Header {
   padding: 1em 1em;
   border-radius: 8px;
   border: none;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
 }
 .connected_header_address {
@@ -188,8 +188,8 @@ div#Header {
   border: solid 1px lightgrey;
 }
 .dark .header_wllt_bal {
-  background: #0b110c;
-  border: solid 1px #33453a;
+  background: #0d0c14;
+  border: solid 1px #312e52;
   color: #fff;
 }
 .dark .header_wllt_bal_icon {
@@ -261,7 +261,7 @@ div#Header {
   padding-left: 15px;
   margin: 0;
   box-shadow: 0px 6px 3px #f4f4f4;
-  color: #229e54;
+  color: #7a5fc0;
 }
 .wallet-id {
   display: flex;
@@ -275,7 +275,7 @@ div#Header {
   padding-left: 15px;
   margin: 0;
   box-shadow: 0px 6px 3px #f4f4f4;
-  color: #229e54;
+  color: #7a5fc0;
 }
 
 .borr {
@@ -384,18 +384,18 @@ div#Header {
   color: #000;
 }
 .drop-borrow-link:hover {
-  color: #229e54;
+  color: #7a5fc0;
 }
 .docs:hover,
 .about:hover {
-  color: #229e54;
+  color: #7a5fc0;
 }
 .product:hover,
 .company:hover {
-  color: #229e54;
+  color: #7a5fc0;
 }
 .activeLink {
-  color: #229e54;
+  color: #7a5fc0;
   font-size: 15px;
   font-weight: 600;
   position: relative;
@@ -407,7 +407,7 @@ div#Header {
   position: absolute;
   width: 65px;
   height: 2.5px;
-  background: #229e54;
+  background: #7a5fc0;
   bottom: -9px;
   left: -10px;
   border-radius: 100px;
@@ -436,8 +436,8 @@ vl {
   margin-right: 15px;
   padding: 1em 2em;
   border: solid;
-  border-color: #229e54;
-  color: #229e54;
+  border-color: #7a5fc0;
+  color: #7a5fc0;
   border-width: 0.5px;
   border-radius: 10px;
   cursor: pointer;
@@ -469,8 +469,8 @@ vl {
 
 .getLoan:hover {
   border: solid;
-  border-color: #e4a788;
-  background-color: #e4a788;
+  border-color: #dd8aa1;
+  background-color: #dd8aa1;
   border-width: 0.5px;
   color: #fff;
   transform: translate3d(0, -5px, 0);
@@ -479,7 +479,7 @@ vl {
 }
 .connect {
   padding: 1em 2em;
-  background: #229e54;
+  background: #7a5fc0;
   color: #ffff;
   border-radius: 10px;
   cursor: pointer;
@@ -489,7 +489,7 @@ vl {
 }
 
 .connect:hover {
-  background: #e4a788;
+  background: #dd8aa1;
   color: #fff;
   transform: translate3d(0, -5px, 0);
   transition: 0.3s ease-in-out;
@@ -515,7 +515,7 @@ vl {
 }
 .loanCatTitle,
 .loanStatusTitle {
-  color: #229e54;
+  color: #7a5fc0;
   font-weight: 500;
   margin-bottom: 20px;
   font-size: 14px;
@@ -527,7 +527,7 @@ vl {
 }
 .loanStatli1:hover,
 .loanCatli1:hover {
-  color: #229e54;
+  color: #7a5fc0;
   text-decoration: underline;
 }
 .onMobile {
@@ -548,7 +548,7 @@ vl {
 .validator {
   background: #ffff !important;
   /* box-shadow: 0px 6px 3px #f1f1f1; */
-  color: #229e54 !important;
+  color: #7a5fc0 !important;
   text-decoration: unset !important;
 }
 .DropLink {
@@ -557,7 +557,7 @@ vl {
   margin-left: 10px !important;
 }
 .DropLink:hover {
-  color: #229e54 !important;
+  color: #7a5fc0 !important;
 }
 
 .BorrowClass,
@@ -624,7 +624,7 @@ vl {
 }
 .darkMode_icon {
   position: absolute;
-  color: #314a3c !important;
+  color: #312e52 !important;
   font-size: 16px !important;
   right: 2%;
   top: 0;
@@ -658,13 +658,13 @@ vl {
 /* ========== */
 
 .dark .headerSection {
-  background-color: #122319ab;
+  background-color: #0f0e1cab;
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(15px);
   border-bottom: solid 1px #1e2922;
 }
 .dark .we_on_beta_div {
-  background: #2b4536;
+  background: #1f1d36;
   color: #ffffff;
 }
 

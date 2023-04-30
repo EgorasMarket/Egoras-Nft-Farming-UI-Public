@@ -90,9 +90,9 @@ svg.recharts-surface {
 .status_btn_ongoing {
   padding: 5px 20px;
   border-radius: 8px;
-  border: solid 1px #229e54;
+  border: solid 1px #7a5fc0;
   background: #edfff2;
-  color: #229e54;
+  color: #7a5fc0;
 }
 .status_btn_closed {
   padding: 5px 20px;
@@ -809,7 +809,7 @@ svg.recharts-surface {
 }
 
 .dark .branch_asset_title_div {
-  background: #1c2c22;
+  background: #151422;
   /* color: #fff; */
   /* border: solid 1px #fff; */
 }
@@ -819,7 +819,7 @@ svg.recharts-surface {
 }
 .dark .branch_asset_body_row {
   box-shadow: rgb(0 0 0) 0px 0px 6px;
-  background: #1c2c22;
+  background: #151422;
   color: #fff;
 }
 

@@ -1070,6 +1070,7 @@ const listProduct = async (
     };
   }
 };
+
 const monthly = async (amount, signer) => {
   console.log(amount);
   try {
@@ -1221,6 +1222,28 @@ const BuyDirectProduct = async (_productID, _quantity, signer) => {
     let result;
     result = await instance.buyDirectProduct(_productID, _quantity);
     console.log(result, "result from newnation");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
+const releaseFundsToSeller = async (productId, tradeId, signer) => {
+  console.log(productId, tradeId, signer);
+
+  try {
+    const instance = contractProductFacetInstance(signer);
+    let result;
+    console.log("first");
+    result = await instance.releaseProductFundToSeller(productId, tradeId);
+    console.log("second");
+    console.log(result, "result, result,result,result,result");
     return {
       message: result,
       status: true,
@@ -1479,6 +1502,7 @@ export {
   checkAllowanceMembership,
   BuyIndirectProduct,
   BuyDirectProduct,
+  releaseFundsToSeller,
   checkAllowanceV3,
   unlockTokenV3,
 };

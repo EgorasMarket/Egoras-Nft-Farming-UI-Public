@@ -178,10 +178,29 @@ const Header = ({ togglemakeDark, check }) => {
   const avatarRef = useRef();
 
   useEffect(() => {
+    console.log(account, avatarRef, walletAddr, "pppooooo");
     // setWalletAddr(account);
     // // console.log(walletAddr.slice(0, 10));
     const element = avatarRef.current;
     if (element && account) {
+      setWalletAddr(account);
+      setConnectTxt("Connected");
+      const addr = account.slice(2, 10);
+      const seed = parseInt(addr, 16);
+      console.log(addr, seed);
+      const icon = jazzicon(20, seed); //generates a size 20 icon
+      if (element.firstChild) {
+        element.removeChild(element.firstChild);
+      }
+      element.appendChild(icon);
+    }
+  }, [account, avatarRef, walletAddr]);
+
+  useEffect(() => {
+    console.log(account, "pppooooo");
+    // setWalletAddr(account);
+    // // console.log(walletAddr.slice(0, 10));
+    if (account) {
       const fetchData = async () => {
         const response = await CALL_CHECK_USER_AND_MEMBERSHIP(account);
         console.log(response.data);
@@ -195,19 +214,9 @@ const Header = ({ togglemakeDark, check }) => {
       };
 
       fetchData();
-
-      setWalletAddr(account);
-      setConnectTxt("Connected");
-      const addr = account.slice(2, 10);
-      const seed = parseInt(addr, 16);
-      console.log(addr, seed);
-      const icon = jazzicon(20, seed); //generates a size 20 icon
-      if (element.firstChild) {
-        element.removeChild(element.firstChild);
-      }
-      element.appendChild(icon);
     }
-  }, [account, avatarRef, walletAddr]);
+  }, [account]);
+
   const lightSet = () => {
     // if (darkMode)
     console.log("dark");
@@ -584,8 +593,13 @@ const Header = ({ togglemakeDark, check }) => {
                     alt="..."
                     className="egr-logo2"
                   />
-                  <img
+                  {/* <img
                     src="/img/logoVideoThumbnail.svg"
+                    alt="..."
+                    className="egr-logo2dark"
+                  /> */}
+                  <img
+                    src="/img/martgpt_logo.svg"
                     alt="..."
                     className="egr-logo2dark"
                   />
@@ -599,8 +613,13 @@ const Header = ({ togglemakeDark, check }) => {
                       alt="..."
                       className="egr-logo"
                     />
-                    <img
+                    {/* <img
                       src="/img/logoVideoThumbnail.svg"
+                      alt="..."
+                      className="egr-logodark"
+                    /> */}
+                    <img
+                      src="/img/martgpt_logo.svg"
                       alt="..."
                       className="egr-logodark"
                     />

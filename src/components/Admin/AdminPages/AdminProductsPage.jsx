@@ -100,7 +100,7 @@ const AdminProductsPage = () => {
   const [brandName, setBrandName] = useState("");
   const [new_brand, setNew_brand] = useState("");
   const [new_category, setNew_category] = useState("");
-  const [saleAmount, setSaleAmount] = useState();
+  // const [saleAmount, setSaleAmount] = useState();
   const [newProducts, setNewProducts] = useState([]);
   const [productValues, setProductValues] = useState({});
   const [allBrands, setAllBrands] = useState([]);
@@ -187,8 +187,8 @@ const AdminProductsPage = () => {
     formData.append("product_category", new_category);
     formData.append("product_spec", prodSpecification);
     formData.append("product_details", product_details);
-    formData.append("amount", parseInt(saleAmount));
-    formData.append("adminAddr", "0x02828942wqo22713563");
+    // formData.append("amount", parseInt(saleAmount));
+    formData.append("adminAddr", account);
     console.log(
       editProductDiv,
       file,
@@ -198,7 +198,7 @@ const AdminProductsPage = () => {
       new_brand,
       new_category,
       prodSpecification,
-      saleAmount,
+      // saleAmount,
       product_details
     );
     try {
@@ -242,11 +242,11 @@ const AdminProductsPage = () => {
     console.log(event.target.value);
     //console.log(event.target.value);
   };
-  const handleSaleAmountChange = (event) => {
-    setSaleAmount(event.target.value);
-    console.log(event.target.value);
-    //console.log(event.target.value);
-  };
+  // const handleSaleAmountChange = (event) => {
+  //   setSaleAmount(event.target.value);
+  //   console.log(event.target.value);
+  //   //console.log(event.target.value);
+  // };
   const handleProdSpecChange = (event) => {
     setProdSpecification(event.target.value);
     console.log(event.target.value);
@@ -256,264 +256,7 @@ const AdminProductsPage = () => {
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);
   };
-  const SalableProduct = [
-    {
-      id: "1",
-      ProductName: "Iphone 13pro max",
-      ProductStatus: "Pending",
-      Date: "2/19/2023",
-      Amount: 600,
-      BiddingStatus: "Nil",
-      BiddingAmount: 0,
-      Seller: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      Uploader: "Nil",
-      UploadDate: "Nil",
-      UploadingStatus: "Pending",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "2",
 
-      ProductName: "Hp Elite Book",
-      ProductStatus: "Approved",
-      Date: "2/19/2023",
-      Amount: 100,
-      BiddingStatus: "Nil",
-      BiddingAmount: 0,
-      Seller: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      Uploader: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      UploadingStatus: "Uploaded",
-      UploadDate: "2/19/2023",
-
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "3",
-      ProductName: "Iphone 13pro max",
-      ProductStatus: "Pending",
-      Date: "2/19/2023",
-      Amount: 600,
-      BiddingStatus: "Nil",
-      BiddingAmount: 0,
-      Seller: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      Uploader: "Nil",
-      UploadDate: "Nil",
-      UploadingStatus: "Pending",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "4",
-
-      ProductName: "Hp Elite Book",
-      ProductStatus: "Approved",
-      Date: "2/19/2023",
-      Amount: 100,
-      BiddingStatus: "Nil",
-      BiddingAmount: 0,
-      Seller: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      Uploader: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      UploadingStatus: "Uploaded",
-      UploadDate: "2/19/2023",
-
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "5",
-      ProductName: "Iphone 13pro max",
-      ProductStatus: "Pending",
-      Date: "2/19/2023",
-      Amount: 600,
-      BiddingStatus: "Nil",
-      BiddingAmount: 0,
-      Seller: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      Uploader: "Nil",
-      UploadDate: "Nil",
-      UploadingStatus: "Pending",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "6",
-
-      ProductName: "Hp Elite Book",
-      ProductStatus: "Approved",
-      Date: "2/19/2023",
-      Amount: 100,
-      BiddingStatus: "Nil",
-      BiddingAmount: 0,
-      Seller: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      Uploader: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      UploadingStatus: "Uploaded",
-      UploadDate: "2/19/2023",
-
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "7",
-      ProductName: "Iphone 13pro max",
-      ProductStatus: "Pending",
-      Date: "2/19/2023",
-      Amount: 600,
-      BiddingStatus: "Nil",
-      BiddingAmount: 0,
-      Seller: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      Uploader: "Nil",
-      UploadDate: "Nil",
-      UploadingStatus: "Pending",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "8",
-
-      ProductName: "Hp Elite Book",
-      ProductStatus: "Approved",
-      Date: "2/19/2023",
-      Amount: 100,
-      BiddingStatus: "Nil",
-      BiddingAmount: 0,
-      Seller: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      Uploader: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      UploadingStatus: "Uploaded",
-      UploadDate: "2/19/2023",
-
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "9",
-      ProductName: "Iphone 13pro max",
-      ProductStatus: "Pending",
-      Date: "2/19/2023",
-      Amount: 600,
-      BiddingStatus: "Nil",
-      BiddingAmount: 0,
-      Seller: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      Uploader: "Nil",
-      UploadDate: "Nil",
-      UploadingStatus: "Pending",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "10",
-
-      ProductName: "Hp Elite Book",
-      ProductStatus: "Approved",
-      Date: "2/19/2023",
-      Amount: 100,
-      BiddingStatus: "Nil",
-      BiddingAmount: 0,
-      Seller: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      Uploader: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      UploadingStatus: "Uploaded",
-      UploadDate: "2/19/2023",
-
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "11",
-      ProductName: "Iphone 13pro max",
-      ProductStatus: "Pending",
-      Date: "2/19/2023",
-      Amount: 600,
-      BiddingStatus: "Nil",
-      BiddingAmount: 0,
-      Seller: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      Uploader: "Nil",
-      UploadDate: "Nil",
-      UploadingStatus: "Pending",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "12",
-
-      ProductName: "Hp Elite Book",
-      ProductStatus: "Approved",
-      Date: "2/19/2023",
-      Amount: 100,
-      BiddingStatus: "Nil",
-      BiddingAmount: 0,
-      Seller: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      Uploader: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      UploadingStatus: "Uploaded",
-      UploadDate: "2/19/2023",
-
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "13",
-      ProductName: "Iphone 13pro max",
-      ProductStatus: "Pending",
-      Date: "2/19/2023",
-      Amount: 600,
-      BiddingStatus: "Nil",
-      BiddingAmount: 0,
-      Seller: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      Uploader: "Nil",
-      UploadDate: "Nil",
-      UploadingStatus: "Pending",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "14",
-
-      ProductName: "Hp Elite Book",
-      ProductStatus: "Approved",
-      Date: "2/19/2023",
-      Amount: 100,
-      BiddingStatus: "Nil",
-      BiddingAmount: 0,
-      Seller: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      Uploader: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      UploadingStatus: "Uploaded",
-      UploadDate: "2/19/2023",
-
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "15",
-      ProductName: "Iphone 13pro max",
-      ProductStatus: "Pending",
-      Date: "2/19/2023",
-      Amount: 600,
-      BiddingStatus: "Nil",
-      BiddingAmount: 0,
-      Seller: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      Uploader: "Nil",
-      UploadDate: "Nil",
-      UploadingStatus: "Pending",
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-    {
-      id: "16",
-
-      ProductName: "Hp Elite Book",
-      ProductStatus: "Approved",
-      Date: "2/19/2023",
-      Amount: 100,
-      BiddingStatus: "Nil",
-      BiddingAmount: 0,
-      Seller: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      Uploader: "0x50ed348f85de0772a61ff63bbe33df8db30de1b2",
-      UploadingStatus: "Uploaded",
-      UploadDate: "2/19/2023",
-
-      txnHash:
-        "0x7e0801a3b653d57e065dbacc13ede59ed01163e1d3582dbf07902da8eb3dc718",
-    },
-  ];
   const ToggleSaleDetails = (e) => {
     setSaleDetails(e.currentTarget.id);
     console.log(e.currentTarget.id);
@@ -1206,7 +949,7 @@ const AdminProductsPage = () => {
                         {/* ========================= */}
                         {/* ========================= */}
                         {/* ========================= */}
-                        <div className="sell_container_body_cont1">
+                        {/* <div className="sell_container_body_cont1">
                           <div className="sell_container_body_cont1_txt">
                             <div className="sell_container_body_cont1_txt_heading">
                               Product Amount*
@@ -1226,7 +969,7 @@ const AdminProductsPage = () => {
                               defaultValue={data.user_amount}
                             />
                           </div>
-                        </div>
+                        </div> */}
                         <div className="sell_container_body_cont1">
                           <div className="sell_container_body_cont1_txt">
                             <div className="sell_container_body_cont1_txt_heading">

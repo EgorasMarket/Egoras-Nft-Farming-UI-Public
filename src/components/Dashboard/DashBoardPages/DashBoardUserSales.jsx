@@ -28,6 +28,9 @@ import {
   // GET_ALL_UPLOADED_PRODUCTS,
   ACCEPT_BID,
   DISPLAY_NEW_USER_PRODUCTS_CALL,
+  CALL_USER_INDIRECT_PRODUCTS_STATS,
+  CALL_USER_INDIRECT_BUY_ORDER,
+  CALL_EXPRESS_BUY_ORDER_STATS,
 } from "../../../services/productServices";
 // import { DISPLAY_NEW_PRODUCTS_CALL } from "../../../services/adminServices";
 import { AcceptBid } from "../../../web3";
@@ -54,9 +57,15 @@ const DashBoardUserSales = () => {
   } = context;
   const [lockedValue, setLockedValue] = useState(0);
   const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);
+  const [approvedProdCount, setApprovedProdCount] = useState(0);
+  const [approvedProdSum, setApprovedProdSum] = useState(0);
+  const [uploadedProdCount, setUploadedProdCount] = useState(0);
+  const [uploadedProdSum, setUploadedProdSum] = useState(0);
   // const [totalLendingCount, setTotalLendingCount] = useState(0);
   const [activeBtn, setActivrBtn] = useState("Ongoing");
   const [indexId, setIndexId] = useState(null);
+  const [totalItemBoughtCount, setTotalItemBoughtCount] = useState(0);
+  const [totalItemBoughtAmount, setTotalItemBoughtAmount] = useState(0);
   const [saleDetails, setSaleDetails] = useState("");
   const [activeLink, setActiveLink] = useState("abstract-link");
   const [activeMenu, setActiveMenu] = useState("details-accord  ");
@@ -67,6 +76,7 @@ const DashBoardUserSales = () => {
   };
 
   const [uploadedProduct, setUploadedProducts] = useState([]);
+  const [expressBuyOrders, setExpressBuyOrders] = useState([]);
 
   useEffect(() => {
     console.log("kddd_____");
@@ -79,7 +89,43 @@ const DashBoardUserSales = () => {
       }
     };
 
+    const fetchData2 = async () => {
+      const response = await CALL_USER_INDIRECT_PRODUCTS_STATS(account);
+      console.log(response.data, "goody__");
+
+      if (response.data) {
+        setUploadedProdSum(response.data.uploaded[0].totalSum);
+        setUploadedProdCount(response.data.uploaded[0].totalCOunt);
+        setApprovedProdSum(response.data.approved[0].totalSum);
+        setApprovedProdCount(response.data.approved[0].totalCOunt);
+        // setUploadedProducts(response.data);
+      }
+    };
+
+    const fetchData3 = async () => {
+      const response = await CALL_USER_INDIRECT_BUY_ORDER(account);
+      console.log(response.data, "goody__");
+
+      if (response.data) {
+        setExpressBuyOrders(response.data);
+      }
+    };
+
+    const fetchData4 = async () => {
+      const response = await CALL_EXPRESS_BUY_ORDER_STATS(account);
+      console.log(response.data, "goody__");
+      // setTotalItemBoughtCount] = useState(0);
+      // const [totalItemBoughtAmount, setTotalItemBoughtAmount] = useState(0);
+      if (response.data) {
+        setTotalItemBoughtCount(response.data.sumCount);
+        setTotalItemBoughtAmount(response.data.totalAmount);
+      }
+    };
+
     fetchData();
+    fetchData2();
+    fetchData3();
+    fetchData4();
   }, [account]);
 
   const handleAcceptBid = async (action) => {
@@ -226,7 +272,7 @@ const DashBoardUserSales = () => {
                   }
                   onClick={toggleActiveTab}
                 >
-                  Sell Orders
+                  Sales Uploads
                 </div>
                 <div
                   id="buyer"
@@ -253,7 +299,7 @@ const DashBoardUserSales = () => {
                             Total amount of items bought
                           </div>
                           <div className="lending_area1_cont1_body_txt">
-                            180
+                            {totalItemBoughtCount}
                             <span className="usd_sign"> items</span>
                           </div>
                         </div>
@@ -272,7 +318,10 @@ const DashBoardUserSales = () => {
                             Total price of items Bought
                           </div>
                           <div className="lending_area1_cont1_body_txt">
-                            100,000<span className="usd_sign"> eusd</span>
+                            {numberWithCommas(
+                              parseInt(totalItemBoughtAmount).toFixed(2)
+                            )}
+                            <span className="usd_sign"> eusd</span>
                           </div>
                         </div>
                         <div className="lending_area1_cont1_body_1">
@@ -357,7 +406,7 @@ const DashBoardUserSales = () => {
 
                 
               </div> */}
-                        {buyOrders.length <= 0 ? (
+                        {expressBuyOrders.length <= 0 ? (
                           <div className="no_loans_div">
                             <div className="no_loans_div_cont">
                               <Nodata />
@@ -374,11 +423,12 @@ const DashBoardUserSales = () => {
                             {/* =============== */}
                             {/* =============== */}
                             {activeBtn === "Ongoing"
-                              ? buyOrders
+                              ? expressBuyOrders
                                   .filter(
-                                    (person) => person.status == "Pending"
+                                    (person) => person.status == "PENDING"
                                   )
                                   .map((asset) => {
+                                    console.log(asset);
                                     //   var percentage = (asset.funded / asset.amount) * 100;
                                     return (
                                       <tr
@@ -388,9 +438,9 @@ const DashBoardUserSales = () => {
                                         <td className="assets-category-data branch_name_title">
                                           <div className="assets-data">
                                             <div className="assets-data-pool_name">
-                                              {asset.name}
+                                              {asset.item_name}
                                               <span className="poolName_txt">
-                                                {asset.time}
+                                                {asset.createdAt}
                                               </span>
                                             </div>
                                           </div>
@@ -412,11 +462,11 @@ const DashBoardUserSales = () => {
                                           {asset.status}
                                         </td>
                                         <td className="assets-category-data1b stable-content branch_apy">
-                                          {asset.txHash != null
-                                            ? `${asset.txHash.slice(
+                                          {asset.transactionHash != null
+                                            ? `${asset.transactionHash.slice(
                                                 0,
                                                 6
-                                              )}...${asset.txHash.slice(
+                                              )}...${asset.transactionHash.slice(
                                                 63,
                                                 66
                                               )}`
@@ -429,7 +479,7 @@ const DashBoardUserSales = () => {
                                     );
                                   })
                               : activeBtn === "All"
-                              ? buyOrders.map((asset) => {
+                              ? expressBuyOrders.map((asset) => {
                                   return (
                                     <tr
                                       className="assets-category-row  transitionMe"
@@ -438,9 +488,9 @@ const DashBoardUserSales = () => {
                                       <td className="assets-category-data branch_name_title">
                                         <div className="assets-data">
                                           <div className="assets-data-pool_name">
-                                            {asset.name}
+                                            {asset.item_name}
                                             <span className="poolName_txt">
-                                              {asset.time}
+                                              {asset.createdAt}
                                             </span>
                                           </div>
                                         </div>
@@ -462,10 +512,13 @@ const DashBoardUserSales = () => {
                                         {asset.status}
                                       </td>
                                       <td className="assets-category-data1b stable-content branch_apy">
-                                        {`${asset.txHash.slice(
+                                        {`${asset.transactionHash.slice(
                                           0,
                                           6
-                                        )}...${asset.txHash.slice(63, 66)}`}
+                                        )}...${asset.transactionHash.slice(
+                                          63,
+                                          66
+                                        )}`}
                                       </td>
                                       <td className="assets-category-data-last branch_loan_action">
                                         <ArrowForwardIosIcon />
@@ -474,9 +527,9 @@ const DashBoardUserSales = () => {
                                   );
                                 })
                               : activeBtn === "Closed"
-                              ? buyOrders
+                              ? expressBuyOrders
                                   .filter(
-                                    (person) => person.status == "delivered"
+                                    (person) => person.status == "DELIVERED"
                                   )
                                   .map((asset) => {
                                     return (
@@ -487,9 +540,9 @@ const DashBoardUserSales = () => {
                                         <td className="assets-category-data branch_name_title">
                                           <div className="assets-data">
                                             <div className="assets-data-pool_name">
-                                              {asset.name}
+                                              {asset.item_name}
                                               <span className="poolName_txt">
-                                                {asset.time}
+                                                {asset.createdAt}
                                               </span>
                                             </div>
                                           </div>
@@ -511,10 +564,13 @@ const DashBoardUserSales = () => {
                                           {asset.status}
                                         </td>
                                         <td className="assets-category-data1b stable-content branch_apy">
-                                          {`${asset.txHash.slice(
+                                          {`${asset.transactionHash.slice(
                                             0,
                                             6
-                                          )}...${asset.txHash.slice(63, 66)}`}
+                                          )}...${asset.transactionHash.slice(
+                                            63,
+                                            66
+                                          )}`}
                                         </td>
                                         <td className="assets-category-data-last branch_loan_action">
                                           <ArrowForwardIosIcon />
@@ -550,8 +606,7 @@ const DashBoardUserSales = () => {
                           Total Products uploaded for sale
                         </div>
                         <div className="lending_area1_cont1_body_txt">
-                          {numberWithCommas(parseInt(lockedValue).toFixed(2))}{" "}
-                          <span className="usd_sign">NGN</span>
+                          {uploadedProdCount}{" "}
                         </div>
                       </div>
                       <div className="lending_area1_cont1_body_1">
@@ -568,10 +623,8 @@ const DashBoardUserSales = () => {
                           Total Products Approved
                         </div>
                         <div className="lending_area1_cont1_body_txt">
-                          {numberWithCommas(
-                            parseInt(lockedValue / 570).toFixed(2)
-                          )}{" "}
-                          <span className="usd_sign">USD</span>
+                          {approvedProdCount}{" "}
+                          {/* <span className="usd_sign">USD</span> */}
                         </div>
                       </div>
                       <div className="lending_area1_cont1_body_1">
@@ -590,7 +643,7 @@ const DashBoardUserSales = () => {
                         </div>
                         <div className="lending_area1_cont1_body_txt">
                           {numberWithCommas(
-                            parseInt(totalLendingCapacity).toFixed(2)
+                            parseInt(uploadedProdSum).toFixed(2)
                           )}{" "}
                           <span className="usd_sign">NGN</span>
                         </div>
@@ -611,7 +664,7 @@ const DashBoardUserSales = () => {
                         </div>
                         <div className="lending_area1_cont1_body_txt">
                           {numberWithCommas(
-                            parseInt(totalLendingCapacity).toFixed(2)
+                            parseInt(approvedProdSum).toFixed(2)
                           )}{" "}
                           <span className="usd_sign">NGN</span>
                         </div>
@@ -729,6 +782,7 @@ const DashBoardUserSales = () => {
                             ? uploadedProduct
                                 .filter((person) => person.status == "NEW")
                                 .map((asset) => {
+                                  // console.log(asset);
                                   //   var percentage = (asset.funded / asset.amount) * 100;
                                   return (
                                     <tr
@@ -805,48 +859,70 @@ const DashBoardUserSales = () => {
                                 })
                             : activeBtn === "All"
                             ? uploadedProduct.map((asset) => {
+                                console.log(uploadedProduct);
                                 return (
                                   <tr
                                     className="assets-category-row  transitionMe"
-                                    id={asset.id}
-                                    onClick={ToggleSaleDetails}
+                                    id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    onClick={() => {
+                                      ToggleSaleDetails(
+                                        asset.product_id,
+                                        asset.index_id
+                                      );
+                                    }}
                                   >
                                     <td className="assets-category-data branch_name_title">
                                       <div className="assets-data">
                                         <div className="assets-data-pool_name">
-                                          {asset.ProductName}
+                                          {asset.product_name}
                                           <span className="poolName_txt">
-                                            {asset.Date}
+                                            {asset.createdAt}
                                           </span>
                                         </div>
                                       </div>
                                     </td>
                                     <td className="assets-category-data1b stable-content branch_apy">
                                       {numberWithCommas(
-                                        parseInt(asset.Amount).toFixed(0)
+                                        parseInt(asset.user_amount).toFixed(0)
                                       )}{" "}
                                       Eusd
                                     </td>
-                                    {/* <td className="assets-category-data1b stable-content branch_apy">
-                                  {`${asset.Seller.slice(
-                                    0,
-                                    6
-                                  )}...${asset.Seller.slice(39, 42)}`}
-                                </td> */}
                                     <td className="assets-category-data1b stable-content branch_apy">
-                                      {asset.BiddingStatus}
-                                    </td>
-                                    <td className="assets-category-data1b stable-content branch_apy">
-                                      {asset.BiddingAmount} Eusd
-                                    </td>
-                                    <td className="assets-category-data1b stable-content branch_apy">
-                                      {asset.ProductStatus}
-                                    </td>
-                                    <td className="assets-category-data1b stable-content branch_apy">
-                                      {`${asset.txnHash.slice(
+                                      {`${asset.user_wallet.slice(
                                         0,
                                         6
-                                      )}...${asset.txnHash.slice(63, 66)}`}
+                                      )}...${asset.user_wallet.slice(39, 42)}`}
+                                    </td>
+                                    <td className="assets-category-data1b stable-content branch_apy">
+                                      {asset.bidAmount != null
+                                        ? asset.bidStatus
+                                        : "N/A"}
+                                    </td>
+                                    <td className="assets-category-data1b stable-content branch_apy">
+                                      {asset.bidAmount != null
+                                        ? numberWithCommas(
+                                            parseInt(asset.bidAmount).toFixed(
+                                              0
+                                            ) + " Eusd"
+                                          )
+                                        : "N/A"}{" "}
+                                    </td>
+                                    <td className="assets-category-data1b stable-content branch_apy">
+                                      {asset.status == "NEW"
+                                        ? "Pending Approval"
+                                        : asset.status}
+                                    </td>
+                                    <td className="assets-category-data1b stable-content branch_apy">
+                                      {asset.transaction_hash != null
+                                        ? `${asset.transaction_hash.slice(
+                                            0,
+                                            6
+                                          )}...${asset.transaction_hash.slice(
+                                            63,
+                                            66
+                                          )}`
+                                        : "N/A"}
                                     </td>
                                     <td className="assets-category-data-last branch_loan_action">
                                       <ArrowForwardIosIcon />
@@ -898,10 +974,13 @@ const DashBoardUserSales = () => {
                                         {asset.ProductStatus}
                                       </td>
                                       <td className="assets-category-data1b stable-content branch_apy">
-                                        {`${asset.txnHash.slice(
+                                        {`${asset.transaction_hash.slice(
                                           0,
                                           6
-                                        )}...${asset.txnHash.slice(63, 66)}`}
+                                        )}...${asset.transaction_hash.slice(
+                                          63,
+                                          66
+                                        )}`}
                                       </td>
                                       <td className="assets-category-data-last branch_loan_action">
                                         <ArrowForwardIosIcon />
@@ -1014,8 +1093,8 @@ const DashBoardUserSales = () => {
                           Product Txn Hash
                         </div>
                         <div className="saleDetailsDiv_area_1_div1_body">
-                          {/* {data.txnHash} */}
-                          {"N/A"}
+                          {data.transaction_hash}
+                          {/* {"N/A"} */}
                         </div>
                       </div>
                       <div className="saleDetailsDiv_area_1_div1">

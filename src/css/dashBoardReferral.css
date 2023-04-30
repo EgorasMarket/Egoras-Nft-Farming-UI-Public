@@ -34,7 +34,7 @@
 }
 .dashBoard_ref_area1_cont1_icon_div {
   padding: 10px;
-  background: #d7f5e3;
+  background: #c6c5dc;
   border-radius: 50%;
 }
 
@@ -43,8 +43,8 @@
   padding: 6px;
   font-size: 38px !important;
   border-radius: 50%;
-  box-shadow: 0px 3px 6px #79ae8e;
-  color: #229e54;
+  box-shadow: 0px 3px 6px #7c7a9c;
+  color: #7a5fc0;
 }
 .dashBoard_ref_area1_cont1_div1 {
   width: 100%;
@@ -186,7 +186,7 @@
 }
 .leaderBoard_icon_div {
   padding: 8px;
-  background: #d6f4e2;
+  background: #c6c5dc;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -197,8 +197,8 @@
   border-radius: 50%;
   padding: 2px;
   font-size: 24px !important;
-  color: #229e54 !important;
-  box-shadow: 0px 3px 6px #a5c2b0;
+  color: #7a5fc0 !important;
+  box-shadow: 0px 3px 6px #7c7a9c;
 }
 .show_more_btn_div {
   padding: 1em;
@@ -213,7 +213,7 @@
   border-radius: 6px;
   padding: 10px 0px;
   border: none;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
   box-shadow: 0px 6px 10px #a1c7b1;
 }
@@ -355,7 +355,7 @@
 
 .ref_btn {
   padding: 1em 0em;
-  background: #229e54;
+  background: #7a5fc0;
   color: #fff;
   font-weight: 600;
   border: none;
@@ -378,29 +378,29 @@
 /* ======================================= */
 
 .dark .dashBoard_ref_area1_cont1 {
-  background: #1c2c22;
-  border: solid 1px #3d4e44;
+  background: #151422;
+  border: solid 1px #262538;
   box-shadow: 0px 6px 10px #000000;
   color: #fff;
 }
 
 .dark .dashBoard_ref_area1_cont2 {
-  background: #1c2c22;
-  border: solid 1px #3d4e44;
+  background: #151422;
+  border: solid 1px #262538;
   box-shadow: 0px 6px 10px #000000;
   color: #fff;
 }
 
 .dark .dashBoard_ref_area2_cont1 {
-  background: #1c2c22;
-  border: solid 1px #3d4e44;
+  background: #151422;
+  border: solid 1px #262538;
   box-shadow: 0px 6px 10px #000000;
   color: #fff;
 }
 
 .dark .table_hr {
   width: 100%;
-  border-bottom: solid 1px #547d65;
+  border-bottom: solid 1px #262538;
 }
 
 .dark .dashBoard_ref_area2_cont1_body_div1 {
@@ -409,7 +409,7 @@
 
 .dark .dashBoard_ref_area2_cont1_body_div_head {
   color: #ffffff;
-  background: #2b4938;
+  background: #1c1b2a;
 }
 
 .dark .show_more_btn {
@@ -417,14 +417,14 @@
 }
 
 .dark .dashBoard_ref_area2_cont2_div1 {
-  background: #1c2c22;
-  border: solid 1px #3d4e44;
+  background: #151422;
+  border: solid 1px #262538;
   color: #fff;
 }
 
 .dark .dashBoard_ref_area2_cont2_div2 {
-  background: #1c2c22;
-  border: solid 1px #81ae93;
+  background: #151422;
+  border: solid 1px #262538;
   color: #fff;
 }
 
@@ -432,8 +432,8 @@
   box-shadow: 0px 5px 20px #0d1610;
 }
 .dark .referral_default_value {
-  border: solid 1px #668f76;
-  background: #1e2822;
+  border: solid 1px #262538;
+  background: #0f0e1c;
   color: #fff;
 }
 .dark .ref_btn .tooltiptext {
@@ -444,7 +444,7 @@
   border-color: #fff transparent transparent transparent;
 }
 .dark .dashBoard_ref_area1_cont1_div1_cont1 {
-  color: #a5d6ba;
+  color: #787690;
 }
 @media screen and (max-width: 991px) {
   .dashBoard_ref_area1 {

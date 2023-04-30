@@ -247,7 +247,7 @@ const AdminTransactions = () => {
                         <Area
                           type="monotone"
                           dataKey="value"
-                          stroke="#229e54"
+                          stroke="#7a5fc0"
                           fillOpacity={1}
                           fill="url(#colorUv)"
                           strokeWidth={2}

@@ -8,10 +8,10 @@ import "./stars.css";
 // import CasinoIcon from "@mui/icons-material/Casino";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import formatNumber from "../Dashboard/DashBoardPages/FormatNumber";
-import {
-  CALL_CHECK_USER_AND_MEMBERSHIP,
-  CALL_ADD_USER_ADDRESS,
-} from "../../services/userServices";
+import axios from "axios";
+import { config } from "../../actions/Config";
+import { API_URL } from "../../actions/types";
+import { CALL_CHECK_USER_AND_MEMBERSHIP } from "../../services/userServices";
 import { tokenBalance } from "../../web3";
 import Web3 from "web3";
 
@@ -71,7 +71,7 @@ const Home = () => {
   const [totalAmountFrom, setTotalAmountFrom] = useState(0);
   const [totu, setTotu] = useState(0);
   const [totalTVL, setTotalTVL] = useState(0);
-
+  const [TradeVolume, setTradeVolume] = useState(0);
   // const [uiMode, setUiMode] = useState(localStorage.getItem("uiMode"));
   // const []
   const {
@@ -255,40 +255,6 @@ const Home = () => {
   }, [account]);
 
   useEffect(() => {
-    // setAnimate1(true);
-    const timer = setTimeout(() => {
-      setAnimate1(false);
-      setAnimate3(false);
-      setAnimate4(false);
-      setAnimate2(true);
-    }, 4000);
-  }, [animate1]);
-  useEffect(() => {
-    const timer2 = setTimeout(() => {
-      setAnimate2(false);
-      setAnimate1(false);
-      setAnimate4(false);
-      setAnimate3(true);
-    }, 4000);
-  }, [animate2]);
-  useEffect(() => {
-    const timer3 = setTimeout(() => {
-      setAnimate2(false);
-      setAnimate3(false);
-      setAnimate1(false);
-      setAnimate4(true);
-    }, 4000);
-  }, [animate3]);
-  useEffect(() => {
-    const timer4 = setTimeout(() => {
-      setAnimate4(false);
-      setAnimate3(false);
-      setAnimate2(false);
-      setAnimate1(true);
-    }, 4000);
-  }, [animate4]);
-
-  useEffect(() => {
     const fetchData = async () => {
       const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
       const response = await GET_TVL();
@@ -369,22 +335,59 @@ const Home = () => {
     { img: "/img/FeaturedInLogos/FeaturedInLogos_6.svg" },
     { img: "/img/FeaturedInLogos/FeaturedInLogos_5.svg" },
   ];
-  useEffect(
-    async (e) => {
-      // if (account) {
-      let res = await tokenBalance(
-        "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-        "0x3A81836b093f7f3D3ca271125CcD45c461409697",
-        library.getSigner()
-      );
-      console.log(res);
-      console.log(formatEther(res.message));
-      let tvl = formatEther(res.message);
-      setTotalTVL(tvl * egcUsd);
-      // }
-    },
-    [totalTVL]
-  );
+  useEffect(async (e) => {
+    // const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
+    let res = await tokenBalance(
+      "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+      "0x3A81836b093f7f3D3ca271125CcD45c461409697",
+      library.getSigner()
+    );
+    console.log(res);
+    console.log(formatEther(res.message));
+    let tvl = formatEther(res.message);
+    setTotalTVL(tvl * egcUsd);
+  });
+  // useEffect(async (e) => {
+  //   const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
+  //   let res = await tokenBalance(
+  //     "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+  //     "0x3A81836b093f7f3D3ca271125CcD45c461409697",
+  //     library.getSigner()
+  //   );
+  //   console.log(res);
+  //   console.log(formatEther(res.message));
+  //   let tvl = formatEther(res.message);
+  //   setTotalTVL(tvl * egc_usd);
+  // }, []);
+  useEffect(async () => {
+    const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
+    console.log("dddd");
+    await axios
+      .get(API_URL + "/swap/all", null, config)
+      .then((data) => {
+        const myArray = data.data.data;
+        myArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        console.log(myArray);
+        const reversed = myArray
+          .slice()
+          .reverse()
+          .map((data) => {
+            return data;
+          });
+        const temp = reversed;
+        for (const data of temp) {
+          data.value = parseInt(data.value).toFixed(2) * egc_usd;
+        }
+        const totalValue = reversed.reduce((accumulator, currentValue) => {
+          return accumulator + currentValue.value;
+        }, 0);
+        console.log(totalValue);
+        setTradeVolume(parseInt(totalValue).toFixed(2));
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
   return (
     <div>
       {/* =================================================================================================================================================================================================================================================================== */}
@@ -439,7 +442,7 @@ const Home = () => {
                     Total TVL
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
-                    ${formatNumber(totalTVL)}
+                    $ {formatNumber(homeData.volume)}
                   </div>
                 </div>
               </div>
@@ -456,7 +459,7 @@ const Home = () => {
                     Volume
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
-                    ${formatNumber(homeData.volume)}
+                    ${formatNumber(TradeVolume.toString())}
                   </div>
                 </div>
               </div>
@@ -503,7 +506,12 @@ const Home = () => {
           <div id="stars3"></div>
         </div>
         {/* <img src="/img/hero_bg_bg.png" alt="" className="blurDrop-token2" /> */}
-        <img src="/img/hero_backdrop.png" alt="" className="hero_backdrop" />
+        {/* <img src="/img/hero_backdrop.png" alt="" className="hero_backdrop" /> */}
+        <img
+          src="/img/martgpt_logoand_hero_bg.png"
+          alt=""
+          className="hero_backdrop"
+        />
       </section>
     </div>
   );

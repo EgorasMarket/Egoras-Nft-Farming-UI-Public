@@ -6,6 +6,7 @@ import { ContentLoading } from "react-content-loading";
 // import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { Link } from "react-router-dom";
 
 export const Step2Div = ({
   checkMonthBox,
@@ -32,6 +33,7 @@ export const Step2Div = ({
   isLoading,
 }) => {
   const [egcUsd, setEgcUsd] = useState(0);
+
   useEffect(
     async (e) => {
       let string2 =
@@ -71,7 +73,7 @@ export const Step2Div = ({
               <div className="selectPlanDiv2_area1_cont1 contentLoad">
                 <ContentLoading
                   placeholderColor="#386249"
-                  loadingColor="#229e54"
+                  loadingColor="#7a5fc0"
                   height="20px"
                   width="20px"
                   borderRadius="10px"
@@ -83,7 +85,7 @@ export const Step2Div = ({
                   <div className="selectPlanDiv2_area1_cont2_head_txt contentLoad">
                     <ContentLoading
                       placeholderColor="#386249"
-                      loadingColor="#229e54"
+                      loadingColor="#7a5fc0"
                       height="40px"
                       width="100%"
                       borderRadius="10px"
@@ -92,7 +94,7 @@ export const Step2Div = ({
                   <div className="selectPlanDiv2_area1_cont2_head_price contentLoad">
                     <ContentLoading
                       placeholderColor="#386249"
-                      loadingColor="#229e54"
+                      loadingColor="#7a5fc0"
                       height="20px"
                       width="100%"
                       borderRadius="10px"
@@ -102,7 +104,7 @@ export const Step2Div = ({
                 <div className="selectPlanDiv2_area1_cont2_body contentLoad">
                   <ContentLoading
                     placeholderColor="#386249"
-                    loadingColor="#229e54"
+                    loadingColor="#7a5fc0"
                     height="20px"
                     width="100%"
                     borderRadius="10px"
@@ -118,7 +120,7 @@ export const Step2Div = ({
               <div className="selectPlanDiv2_area1_cont1 contentLoad">
                 <ContentLoading
                   placeholderColor="#386249"
-                  loadingColor="#229e54"
+                  loadingColor="#7a5fc0"
                   height="20px"
                   width="20px"
                   borderRadius="10px"
@@ -130,7 +132,7 @@ export const Step2Div = ({
                   <div className="selectPlanDiv2_area1_cont2_head_txt contentLoad">
                     <ContentLoading
                       placeholderColor="#386249"
-                      loadingColor="#229e54"
+                      loadingColor="#7a5fc0"
                       height="40px"
                       width="100%"
                       borderRadius="10px"
@@ -139,7 +141,7 @@ export const Step2Div = ({
                   <div className="selectPlanDiv2_area1_cont2_head_price contentLoad">
                     <ContentLoading
                       placeholderColor="#386249"
-                      loadingColor="#229e54"
+                      loadingColor="#7a5fc0"
                       height="20px"
                       width="100%"
                       borderRadius="10px"
@@ -149,7 +151,7 @@ export const Step2Div = ({
                 <div className="selectPlanDiv2_area1_cont2_body contentLoad">
                   <ContentLoading
                     placeholderColor="#386249"
-                    loadingColor="#229e54"
+                    loadingColor="#7a5fc0"
                     height="20px"
                     width="100%"
                     borderRadius="10px"
@@ -165,7 +167,7 @@ export const Step2Div = ({
               <div className="selectPlanDiv2_area1_cont1 contentLoad">
                 <ContentLoading
                   placeholderColor="#386249"
-                  loadingColor="#229e54"
+                  loadingColor="#7a5fc0"
                   height="20px"
                   width="20px"
                   borderRadius="10px"
@@ -177,7 +179,7 @@ export const Step2Div = ({
                   <div className="selectPlanDiv2_area1_cont2_head_txt contentLoad">
                     <ContentLoading
                       placeholderColor="#386249"
-                      loadingColor="#229e54"
+                      loadingColor="#7a5fc0"
                       height="40px"
                       width="100%"
                       borderRadius="10px"
@@ -186,7 +188,7 @@ export const Step2Div = ({
                   <div className="selectPlanDiv2_area1_cont2_head_price contentLoad">
                     <ContentLoading
                       placeholderColor="#386249"
-                      loadingColor="#229e54"
+                      loadingColor="#7a5fc0"
                       height="20px"
                       width="100%"
                       borderRadius="10px"
@@ -196,7 +198,7 @@ export const Step2Div = ({
                 <div className="selectPlanDiv2_area1_cont2_body contentLoad">
                   <ContentLoading
                     placeholderColor="#386249"
-                    loadingColor="#229e54"
+                    loadingColor="#7a5fc0"
                     height="20px"
                     width="100%"
                     borderRadius="10px"
@@ -387,7 +389,7 @@ export const Step2Div = ({
             onClick={UnlockToken}
           >
             {isLoading ? (
-              <ScaleLoader color="#24382b" size={10} height={20} />
+              <ScaleLoader color="#12111b" size={10} height={20} />
             ) : (
               <span> Approve EGC </span>
             )}
@@ -402,7 +404,7 @@ export const Step2Div = ({
                 // disabled={fundDisable}
               >
                 {isLoading ? (
-                  <ScaleLoader color="#24382b" size={10} height={20} />
+                  <ScaleLoader color="#12111b" size={10} height={20} />
                 ) : (
                   <span> Subscribe Monthly </span>
                 )}
@@ -415,28 +417,41 @@ export const Step2Div = ({
                 // disabled={fundDisable}
               >
                 {isLoading ? (
-                  <ScaleLoader color="#24382b" size={10} height={20} />
+                  <ScaleLoader color="#12111b" size={10} height={20} />
                 ) : (
                   <span> Subscribe Yearly </span>
                 )}
               </button>
             ) : checkedSemiAnnual === true && checkAgree === true ? (
-              <button
-                disabled={disable}
-                className="selectPlanDiv2_area1_checkout_btn"
-                onClick={Subscribe2}
-                // disabled={fundDisable}
-              >
-                {isLoading ? (
-                  <ScaleLoader color="#24382b" size={10} height={20} />
-                ) : (
-                  <span> Subscribe Semi-Annual </span>
-                )}
-              </button>
+              <>
+                <button
+                  disabled={disable}
+                  className="selectPlanDiv2_area1_checkout_btn"
+                  onClick={Subscribe2}
+                  // disabled={fundDisable}
+                >
+                  {isLoading ? (
+                    <ScaleLoader color="#12111b" size={10} height={20} />
+                  ) : (
+                    <>
+                      <span> Subscribe Semi-Annual </span>
+                    </>
+                  )}
+                </button>
+
+                <Link
+                  to={"/pay-with-fort"}
+                  className="selectPlanDiv2_area1_checkout_btn"
+                >
+                  <span> Pay with Fort App </span>
+                </Link>
+              </>
             ) : (
-              <button className="selectPlanDiv2_area1_checkout_btn" disabled>
-                <span> Select a plan </span>
-              </button>
+              <>
+                <button className="selectPlanDiv2_area1_checkout_btn">
+                  <span> Select a plan </span>
+                </button>
+              </>
             )}
           </>
         )}

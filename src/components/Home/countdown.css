@@ -39,7 +39,7 @@
   .flip-countdown-card-sec
   .card__back::after {
   color: #ffffff !important;
-  background: #229e54 !important;
+  background: #7a5fc0 !important;
 }
 
 .flip-countdown {
@@ -68,7 +68,7 @@
 .count-down-btn1 {
   border: none;
   padding: 1em 2.5em;
-  background: #229e54;
+  background: #7a5fc0;
   color: #ffff;
   font-weight: 700;
   font-size: 16px;
@@ -91,8 +91,8 @@
   font-size: 16px;
   border-radius: 10px;
   border: solid;
-  border-color: #229e54;
-  color: #229e54;
+  border-color: #7a5fc0;
+  color: #7a5fc0;
   border-width: 0.5px;
   transition: 0.3s ease-in-out;
 }
@@ -125,7 +125,7 @@
 }
 
 ::selection {
-  background-color: #4fcb81;
+  background-color: #8563cd;
   color: #fff;
 }
 

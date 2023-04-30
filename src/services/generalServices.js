@@ -4,6 +4,7 @@ import {
   GET_EGC_PRICE_COINGEKO,
   GET_EGC_PRICE_COINGEKO_ROUTE,
   GET_TVL_ROUTE,
+  GOOGLE_QRCODE_GENERATOR_LINK,
   POPULATE_ADMIN_PRODUCT_DASHBOARD_ROUTE,
   POPULATE_STAKE_INFO_ROUTE,
 } from "../core/ApiRoutes";
@@ -12,6 +13,7 @@ export const config = {
     "Content-Type": "application/json",
   },
 };
+let egc_usd;
 
 export const GET_COIN_GEKO_PRICE_IN_USD = async () => {
   try {
@@ -20,9 +22,31 @@ export const GET_COIN_GEKO_PRICE_IN_USD = async () => {
       null,
       config
     );
-
-    return response.data["egoras-credit"].usd;
+    console.log(response);
+    console.log(response.data.data, "egc_usd_price");
+    return response.data.data;
   } catch (err) {
+    console.log(err.response);
+    return err.response;
+  }
+};
+export const GENERATE_QR_CODE_DATA = async (payload) => {
+  try {
+    const response = await axios.get(
+      `${GOOGLE_QRCODE_GENERATOR_LINK}`,
+      {
+        params: {
+          cht: "qr",
+          chs: "100x100",
+          chl: "sample text",
+        },
+      },
+      config
+    );
+    console.log(response, "qr code");
+    return response.data;
+  } catch (err) {
+    console.log(err.response);
     return err.response;
   }
 };
