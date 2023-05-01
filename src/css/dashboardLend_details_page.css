@@ -727,13 +727,16 @@ button.pool_detail_heading_area1_invest_btn {
   .pool_lend_details_link {
     width: 20%;
     font-size: 14px;
+    white-space: nowrap;
   }
   .pool_lend_details_link_active {
     width: 20%;
     font-size: 14px;
+    white-space: nowrap;
   }
   .pool_lending_pages_links {
     top: 0px;
+    overflow: scroll;
   }
   .finance_fee_details_page {
     display: none !important;
@@ -749,10 +752,12 @@ button.pool_detail_heading_area1_invest_btn {
   .pool_lend_details_link_active {
     width: 25%;
     font-size: 14px;
+    white-space: nowrap;
   }
   .pool_lend_details_link {
     width: 25%;
     font-size: 14px;
+    white-space: nowrap;
   }
   .date_time_row {
     display: none !important;

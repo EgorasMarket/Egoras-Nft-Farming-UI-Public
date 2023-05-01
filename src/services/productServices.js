@@ -18,6 +18,7 @@ import {
   USER_INDIRECT_BUY_ORDER,
   SELLER_LOCKED_FUNDS,
   EXPRESS_BUY_ORDER_STATS,
+  NEW_QR_LINK_ROUTE,
   USER_DIRECT_PRODUCTS,
   FETCH_USER_NEW_DIRECT_PRODUCT,
   // DIRECT_BUY_ORDER_STATS,
@@ -47,6 +48,27 @@ export const GET_BRANDS = async () => {
     const response = await axios.get(FETCH_PRODUCT_BRANDS, null, config);
     // console.log(response.data);
     return response.data;
+  } catch (err) {
+    return err.repsonse;
+  }
+};
+export const GENERATE_QR_LINK = async (payload) => {
+  // const payload2 = {
+  //   type: "membership",
+  //   userWallet: "0x1eD8d75fbAb7Dc60d708c69fE0743396467a86F4",
+  //   data: JSON.stringify({
+  //     quantity: 1,
+  //     amount: 1000,
+  //     symbol: "EGC",
+  //     user: "0x1eD8d75fbAb7Dc60d708c69fE0743396467a86F4",
+  //     product_id: "c505c80e-5b41-4dd9-b9fc-798787866k86",
+  //   }),
+  // };
+  try {
+    const response = await axios.post(NEW_QR_LINK_ROUTE, payload, config);
+
+    // console.log(response, "manchi");
+    return response;
   } catch (err) {
     return err.repsonse;
   }

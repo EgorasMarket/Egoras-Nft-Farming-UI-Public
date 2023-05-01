@@ -57,6 +57,7 @@ const MemberShipPage = () => {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [subScription, setSubScription] = useState("inactive");
   const [fundSuccess, setFundSuccess] = useState(false);
+  const [payviaFort, setPayviaFort] = useState(false);
 
   const [fundDisable, setFundDisable] = useState(false);
   const [fundError, setFundError] = useState(false);
@@ -215,7 +216,7 @@ const MemberShipPage = () => {
       setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Subscribed for 1 month");
-         localStorage.removeItem("tank");
+      localStorage.removeItem("tank");
     } else {
       if (res.message.code == 4001) {
         console.log(res);
@@ -261,7 +262,7 @@ const MemberShipPage = () => {
       setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Subscribed for 6 months");
-          localStorage.removeItem("tank");
+      localStorage.removeItem("tank");
     } else {
       if (res.message.code == 4001) {
         console.log(res);
@@ -283,7 +284,6 @@ const MemberShipPage = () => {
       setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Subscribed for 1 year");
-      
     } else {
       if (res.message.code == 4001) {
         console.log(res);
@@ -308,7 +308,7 @@ const MemberShipPage = () => {
       setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Subscribed for 1 year");
-        localStorage.removeItem("tank");
+      localStorage.removeItem("tank");
     } else {
       if (res.message.code == 4001) {
         console.log(res);
@@ -325,6 +325,10 @@ const MemberShipPage = () => {
   };
   const CloseErrorModal = () => {
     setErrorModal(false);
+  };
+
+  const togglePayViaFortDiv = () => {
+    setPayviaFort(!payviaFort);
   };
   return (
     <section className="joinCooperativeDiv">
@@ -370,7 +374,10 @@ const MemberShipPage = () => {
               UnlockToken={UnlockToken}
               priceLoaded={priceLoaded}
               disable={Disable}
+              payviaFort={payviaFort}
+              togglePayViaFortDiv={togglePayViaFortDiv}
               isLoading={isLoading}
+              account={account}
             />
           </div>
         </div>

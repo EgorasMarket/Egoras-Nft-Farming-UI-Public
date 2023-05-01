@@ -31,6 +31,7 @@ import "../src/App.css";
 import store from "./store";
 import Referal from "./components/Referral/Referal";
 
+import PaywithFort from "./components/Home/MemberShip/SubSteps/PaywithFort";
 import { socket } from "./socket";
 
 function App() {
@@ -47,15 +48,26 @@ function App() {
     active,
     error,
   } = context;
-  const [isConnected, setIsConnected] = useState(socket.connected);
   const linksActive = window.location.pathname;
   const urlArr = linksActive.split("/");
 
   useEffect(() => {
-    // socket.connect();
+    socket.connect();
+
+    socket.on("connect", () => {
+      // alert("socket connected");
+
+      socket.on("second", (data) => {
+        alert(data);
+      });
+    });
     // socket.on("testing", (data) => {
     //   alert(JSON.stringify(data));
     // });
+
+    return () => {
+      // socket.disconnect();
+    };
   }, []);
   useEffect(() => {
  console.log(localStorage.tank)
@@ -215,6 +227,7 @@ function App() {
               <Route exact path="/" component={Home} />
               <Route exact path="/referal/:ref" component={Referal} />
               <Route exact path="/about" component={AboutUs} />
+              <Route exact path="/pay-with-fort" component={PaywithFort} />
               <Route exact path="/membership/sub" component={MemberShipPage} />
               {admin == true ? (
                 <Admin check={cClass} togglemakeDark={togglemakeDark} />

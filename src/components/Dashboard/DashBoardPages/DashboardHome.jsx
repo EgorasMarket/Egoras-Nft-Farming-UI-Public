@@ -480,7 +480,7 @@ const DashboardHome = () => {
                           /> */}
                           <XAxis dataKey="month" stroke="0" />
                           {/* <YAxis stroke="#000" /> */}
-                          <Tooltip content={<CustomTooltip />} />
+                          {/* <Tooltip content={<CustomTooltip />} /> */}
                           <Area
                             type="monotone"
                             dataKey="value"
@@ -534,7 +534,7 @@ const DashboardHome = () => {
                           /> */}
                           <XAxis dataKey="month" stroke="0" />
                           {/* <YAxis stroke="#000" /> */}
-                          <Tooltip content={<CustomTooltip />} />
+                          {/* <Tooltip content={<CustomTooltip />} /> */}
                           <Area
                             type="monotone"
                             dataKey="value"
@@ -603,7 +603,7 @@ const DashboardHome = () => {
                           {/* <CartesianGrid strokeDasharray="3 3" /> */}
                           <XAxis dataKey="month" stroke="0" color="#fff" />
                           {/* <YAxis /> */}
-                          <Tooltip content={<CustomTooltip2 />} />
+                          {/* <Tooltip content={<CustomTooltip2 />} /> */}
                           {/* <Legend /> */}
                           <Bar
                             // type="monotone"
@@ -663,7 +663,7 @@ const DashboardHome = () => {
                             color="#fff"
                           />
                           {/* <YAxis /> */}
-                          <Tooltip content={<CustomTooltip2 />} />
+                          {/* <Tooltip content={<CustomTooltip2 />} /> */}
                           <Bar
                             // type="monotone"
                             dataKey="value"
@@ -744,7 +744,7 @@ const DashboardHome = () => {
                           /> */}
                           <XAxis dataKey="month" stroke="0" />
                           {/* <YAxis stroke="#000" /> */}
-                          <Tooltip content={<CustomTooltip />} />
+                          {/* <Tooltip content={<CustomTooltip />} /> */}
                           <Area
                             type="monotone"
                             dataKey="value"
@@ -798,7 +798,7 @@ const DashboardHome = () => {
                           /> */}
                           <XAxis dataKey="month" stroke="0" />
                           {/* <YAxis stroke="#000" /> */}
-                          <Tooltip content={<CustomTooltip />} />
+                          {/* <Tooltip content={<CustomTooltip />} /> */}
                           <Area
                             type="monotone"
                             dataKey="value"
@@ -867,7 +867,7 @@ const DashboardHome = () => {
                           {/* <CartesianGrid strokeDasharray="3 3" /> */}
                           <XAxis dataKey="month" stroke="0" color="#fff" />
                           {/* <YAxis /> */}
-                          <Tooltip content={<CustomTooltip2 />} />
+                          {/* <Tooltip content={<CustomTooltip2 />} /> */}
                           {/* <Legend /> */}
                           <Bar
                             // type="monotone"
@@ -927,7 +927,7 @@ const DashboardHome = () => {
                             color="#fff"
                           />
                           {/* <YAxis /> */}
-                          <Tooltip content={<CustomTooltip2 />} />
+                          {/* <Tooltip content={<CustomTooltip2 />} /> */}
                           <Bar
                             // type="monotone"
                             dataKey="value"
@@ -1037,7 +1037,7 @@ const DashboardHome = () => {
             <div className="lock_container_transactions">
               <div className="BuyerSellerDiv_body_div2_tab_area">
                 <div className="filter_table_area_1">Latest Transactions</div>
-                <div className="filter_table_area_2 filter_table_area_2b">
+                <div className="filter_table_area_2">
                   <div
                     id="swap"
                     className={

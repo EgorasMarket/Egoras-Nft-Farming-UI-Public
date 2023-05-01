@@ -92,7 +92,16 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
       setDisabled(false);
       setSuccessModal(true);
       setSuccessRoute(route);
-      setSuccessMessage(res.message);
+      setSuccessMessage(
+        "You have successfully ordered " +
+          numDivsToDuplicate + 
+           productName +
+          " from " +
+       productDetail.user_wallet.slice(
+                0,
+                6
+              )+"..."+productDetail.user_wallet.slice(20, 24) +" check your buy orders for more info on shipping and delivery."
+      );
     } else {
       console.log(res);
       setErrorModal(true);

@@ -3,6 +3,7 @@
   font-weight: 500;
   color: #fff;
 }
+
 .checkoutPage_body {
   margin-top: 1em;
   display: flex;
@@ -14,13 +15,16 @@
   display: flex;
   flex-direction: column;
 }
+
 .checkoutPage_body2 {
   width: 44%;
 }
+
 .checkoutPage_body1_cont1 {
   display: flex;
   flex-direction: column;
 }
+
 .checkoutPage_body1_cont1_head {
   padding: 20px;
   background: #212036;
@@ -32,9 +36,11 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .checkoutPage_body1_cont1_head_span {
   width: 100%;
 }
+
 .checkoutPage_body1_cont1_body {
   display: flex;
   align-items: center;
@@ -45,23 +51,27 @@
   border-radius: 12px;
   background: #181621;
 }
+
 .checkoutPage_body1_cont1_body_body1 {
   display: flex;
   flex-direction: column;
   color: #53526d;
   width: 100%;
 }
+
 .checkoutPage_body1_cont1_body_cont1_body {
   color: #fff;
   margin-top: 10px;
   display: flex;
   align-items: center;
 }
+
 .checkoutPage_body1_cont1_body_btn_div {
   width: 100%;
   display: flex;
   justify-content: flex-end;
 }
+
 .checkoutPage_body1_cont1_body_btn {
   padding: 10px;
   width: 100%;
@@ -73,20 +83,24 @@
   border: none;
   font-size: 13px;
 }
+
 .checkoutPage_body1_cont1_body_btn:disabled {
   background: #362d4e;
   color: #615978;
   cursor: not-allowed;
 }
+
 .checkoutPage_body1_cont1_body_cont1_body_span {
   margin-right: 11px;
 }
+
 .payment_method_area1_cont1_label {
   display: inline-block;
   margin-right: 20px;
   position: relative;
   cursor: pointer;
 }
+
 .payment_method_area1_cont1_label:before {
   content: "";
   display: inline-block;
@@ -100,11 +114,13 @@
   bottom: 0;
   margin: auto;
 }
-input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
+
+input[type="radio"]:checked+.payment_method_area1_cont1_label:before {
   background-color: #7a5fc0;
   border-color: #997fda;
   padding: 2px;
 }
+
 .payment_method_div {
   padding: 2em 1.2em;
   background: #181621;
@@ -112,6 +128,7 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   border: solid 1px #2b2a41;
   display: flex;
 }
+
 .payment_method_div_cont1 {
   display: flex;
   align-items: center;
@@ -122,6 +139,7 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   border-radius: 10px;
   width: 100%;
 }
+
 .payment_method_div_cont1_active {
   display: flex;
   align-items: center;
@@ -132,16 +150,19 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   border-radius: 10px;
   width: 100%;
 }
+
 .payment_method_div_cont1_div1 {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .payment_method_div_cont1_div2 {
   margin-left: 10px;
   font-size: 18px;
   color: #fff;
 }
+
 .proceedToPayDiv {
   padding: 2em;
   background: #181621;
@@ -151,6 +172,7 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   display: flex;
   flex-direction: column;
 }
+
 .proceedToPayDiv1 {
   display: flex;
   align-items: center;
@@ -160,16 +182,19 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   color: #827e95;
   font-size: 14px;
 }
+
 .proceedToPayDiv1_value {
   color: #fff;
   font-size: 16px;
 }
+
 .proceedToPayDiv_btn_div {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 2em;
 }
+
 .proceedToPayDiv_btn {
   width: 100%;
   padding: 15px;
@@ -178,14 +203,17 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   background: #7a5fc0;
   color: #fff;
 }
+
 .proceedToPayDiv_btn:disabled {
   background: #362d4e;
   color: #615978;
   cursor: not-allowed;
 }
+
 .checkoutPage_body2 {
   width: 44%;
 }
+
 .checkoutPage_body2_area {
   width: 100%;
   display: flex;
@@ -195,6 +223,7 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   border-radius: 11px;
   border: solid 1px #2b2a41;
 }
+
 .checkoutPage_body2_area_title {
   color: #7e7c9c;
   font-size: 24px;
@@ -204,10 +233,12 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   align-items: center;
   justify-content: space-between;
 }
+
 .checkoutPage_body2_area_title_span {
   font-size: 18px;
   color: #fff;
 }
+
 .checkoutPage_body2_area_body {
   width: 100%;
   margin-top: 1em;
@@ -216,6 +247,7 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   max-height: 300px;
   overflow-x: scroll;
 }
+
 .checkoutPage_body2_area_body_cont1 {
   width: 100%;
   display: flex;
@@ -224,15 +256,18 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   padding-bottom: 10px;
   margin-bottom: 10px;
 }
+
 .checkoutPage_body2_area_body_cont1_image_div {
   width: 120px;
   background: #212036;
   padding: 10px 5px;
   border-radius: 6px;
 }
+
 .checkoutPage_body2_area_body_cont1_image {
   width: 100%;
 }
+
 .checkoutPage_body2_area_body_cont1_text {
   width: 100%;
   display: flex;
@@ -240,15 +275,17 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   margin-left: 15px;
   gap: 1px;
 }
+
 .checkoutPage_body2_area_body_cont1_text_title {
-    font-weight: 600;
-      color: #fff;
-      font-size: 20px;
-      width: 170px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+  font-weight: 600;
+  color: #fff;
+  font-size: 20px;
+  width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+
 .checkoutPage_body2_area_body_cont1_text_para1 {
   display: flex;
   color: #53526d;
@@ -256,18 +293,22 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   align-items: center;
   /* justify-content: space-between; */
 }
+
 .checkoutPage_body2_area_body_cont1_text_para1_title {
   margin-right: 10px;
 }
+
 .checkoutPage_body2_area_body_cont1_text_para1_para {
   color: #a09eb8;
   align-items: center;
   display: flex;
 }
+
 .checkoutPage_body2_area_body_cont1_text_amount {
   font-size: 15px;
   color: #fff;
 }
+
 .checkoutPage_body2_area_total {
   width: 100%;
   display: flex;
@@ -280,6 +321,7 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   font-size: 24px;
   align-items: center;
 }
+
 .checkoutPage_body2_area_total_title {
   font-size: 20px;
 }
@@ -289,6 +331,7 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   align-items: center;
   font-weight: 500;
 }
+
 .remove_prod_btn {
   width: 26px;
   padding: 3px;
@@ -300,14 +343,17 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   background: #cc3939;
   color: #fff;
 }
+
 .remove_prod_btn_icon {
   font-size: 18px !important;
 }
+
 .remove_prod_btn:disabled {
   background: #a85c5c;
   color: #cfb0b0;
   cursor: not-allowed;
 }
+
 .updateProfileDivModal {
   position: fixed;
   top: 0;
@@ -323,6 +369,7 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   overflow: scroll;
   padding: 20px;
 }
+
 .updateProfileDivModal_container {
   width: 100%;
   max-width: 500px;
@@ -337,26 +384,31 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   /* height: 100vh; */
   max-height: 100%;
 }
+
 .updateProfileDivModal_container_title {
   font-size: 24px;
   color: #fff;
   font-weight: 500;
   margin-bottom: 10px;
 }
+
 .updateProfileDivModal_container_body {
   display: flex;
   flex-direction: column;
 }
+
 .updateProfileDivModal_container_body_cont1 {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
 }
+
 .updateProfileDivModal_container_body_cont1_title {
   font-size: 12px;
   color: #827e95;
   margin-bottom: 5px;
 }
+
 .updateProfileDivModal_container_body_cont1_input {
   padding: 15px;
   border-radius: 13px;
@@ -364,11 +416,13 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   background: no-repeat;
   color: #9e9cb6;
 }
+
 .updateProfileDivModal_container_body_cont1_btns {
   margin-top: 15px;
   display: flex;
   align-items: center;
 }
+
 .updateProfileDivModal_container_body_cont1_button1 {
   width: 100%;
   margin-right: 5px;
@@ -378,6 +432,7 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   color: #fff;
   background: #7a5fc0;
 }
+
 .updateProfileDivModal_container_body_cont1_button2 {
   width: 100%;
   margin-left: 5px;
@@ -386,4 +441,32 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   border-radius: 10px;
   background: #c72f2f;
   color: #fff;
+}
+
+@media screen and (max-width: 767px) {
+  .checkoutPage_body {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .checkoutPage_body2 {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .payment_method_div {
+    padding: 1em 1em;
+    flex-direction: column;
+  }
+
+  .payment_method_div_cont1 {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  .payment_method_div_cont1_active {
+    margin: 0;
+    margin-bottom: 10px;
+  }
 }

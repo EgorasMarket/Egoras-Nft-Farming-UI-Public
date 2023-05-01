@@ -169,3 +169,57 @@ button.PlaceBidDiv_Button {
   position: relative;
   width: 45%;
 }
+.saleDetailsDiv_area_body_div {
+display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  /* text-align: center; */
+  padding: 10px;
+  height: 100%;
+}
+.saleDetailsDiv_area_title_div {
+  font-size: 32px;
+  font-weight: 600;
+}
+.saleDetailsDiv_area_body {
+  font-size: 22px;
+  color: #9694a3;
+}
+.saleDetailsDiv_area_body_btn_div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1em;
+}
+.saleDetailsDiv_area_body_btn {
+  width: 100%;
+  padding: 15px;
+  color: #fff;
+  background: #7a5fc0;
+  border: none;
+  border-radius: 11px;
+}
+.saleDetailsDiv_area_body_btn:disabled{
+    background: #362e4b;
+      color: #504962;
+      cursor: not-allowed;
+}
+.checkBox_agree_div_bodyb {
+  display: flex;
+  margin-top: 0em;
+}
+.saleDetailsDiv_areab {
+    width: 100%;
+      background: #0d0c14;
+      box-shadow: 0px 0px 20px 0px #000;
+      padding: 3em;
+      border-radius: 10px;
+      max-width: 767px;
+      /* height: 100%; */
+      overflow: scroll;
+      color: #fff;
+      position: relative;
+      z-index: 1;
+}
