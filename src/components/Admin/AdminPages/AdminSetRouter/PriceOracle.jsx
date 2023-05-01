@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   setPythia,
+  suspendPythia,
   setPriceOracle,
   setEGCUSDTicker,
   resetStakeTime,
@@ -28,13 +29,35 @@ const PriceOracle = () => {
   } = context;
   const [tickerArray, setTickerArray] = useState(["egceusd"]);
   const [priceArray, setPriceArray] = useState(["6090000000000000000"]);
-  const setPythiaAddress = async () => {
-    const response = await setPythia(
-      "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      library.getSigner()
-    );
-    console.log(response);
+  const [newWallet, setNewWallet] = useState([""]);
+  const [newWallet2, setNewWallet2] = useState([""]);
+
+  const handleNewWallet = (event) => {
+    setNewWallet(event.target.value);
+    console.log(event.target.value);
+    //console.log(event.target.value);
   };
+
+  const handleNewWallet2 = (event) => {
+    setNewWallet2(event.target.value);
+    console.log(event.target.value);
+    //console.log(event.target.value);
+  };
+
+  const setPythiaAddress = async () => {
+    if (newWallet != "") {
+      const response = await setPythia(newWallet, library.getSigner());
+      console.log(response);
+    }
+  };
+
+  const suspendPythiaAddress = async () => {
+    if (newWallet2 != "") {
+      const response = await suspendPythia(newWallet2, library.getSigner());
+      console.log(response);
+    }
+  };
+
   const setPrice = async () => {
     const response = await setPriceOracle(
       priceArray,
@@ -77,54 +100,124 @@ const PriceOracle = () => {
     <div className="other2 asset_other2">
       <section className="collateral-assets-section no-bg no_pad">
         <div className="container">
-          <div className="setRouterAddressDiv">
-            <div className="setRouterAddressDiv1">
-              <div className="setRouterAddressDiv1_title">EGC</div>
-              <input
-                type="text"
-                placeholder="Price"
-                className="setRouterAddressInput"
-                // value={}
-              />
+          <div className="RouterSection">
+            <div>
+              <h4 className="routerHeader">Set Price</h4>
             </div>
-            --
-            <div className="setRouterAddressDiv1">
-              <div className="setRouterAddressDiv1_title">USD</div>
-              <input
-                type="Ticker"
-                placeholder="amount"
-                className="setRouterAddressInput"
-                // value={}
-              />
+            <div className="setRouterAddressDiv">
+              <div className="setRouterAddressDiv1">
+                <div className="setRouterAddressDiv1_title">EGC</div>
+                <input
+                  type="text"
+                  placeholder="Price"
+                  className="setRouterAddressInput"
+                  // value={}
+                />
+              </div>
+              --
+              <div className="setRouterAddressDiv1">
+                <div className="setRouterAddressDiv1_title">USD</div>
+                <input
+                  type="Ticker"
+                  placeholder="amount"
+                  className="setRouterAddressInput"
+                  // value={}
+                />
+              </div>
+              <div className="setRouterAddressButtonDiv">
+                <button onClick={setPrice} className="setRouterAddressBtn">
+                  Set Price
+                </button>
+
+                <button onClick={setTicker} className="setRouterAddressBtn">
+                  Set Ticker
+                </button>
+                <button
+                  onClick={resetStackedTime}
+                  className="setRouterAddressBtn"
+                >
+                  Reset Time
+                </button>
+                <button
+                  onClick={IncreaseStakeTime}
+                  className="setRouterAddressBtn"
+                >
+                  Increase Time
+                </button>
+                <button onClick={UnlockToken} className="setRouterAddressBtn">
+                  Aprove EGC
+                </button>
+              </div>
             </div>
-            <div className="setRouterAddressButtonDiv">
-              <button onClick={setPrice} className="setRouterAddressBtn">
-                Set Price
-              </button>
-              <button
-                onClick={setPythiaAddress}
-                className="setRouterAddressBtn"
-              >
-                Set Pythia
-              </button>
-              <button onClick={setTicker} className="setRouterAddressBtn">
-                Set Ticker
-              </button>
-              <button
-                onClick={resetStackedTime}
-                className="setRouterAddressBtn"
-              >
-                Reset Time
-              </button>
-              <button
-                onClick={IncreaseStakeTime}
-                className="setRouterAddressBtn"
-              >
-                Increase Time
-              </button>
-              <button onClick={UnlockToken} className="setRouterAddressBtn">
-                Aprove EGC
-              </button>
+          </div>
+          <div className="RouterSection">
+            <div>
+              <h4 className="routerHeader">Set Pythia</h4>
+            </div>
+            <div className="setRouterAddressDiv">
+              <div className="setRouterAddressDiv1">
+                <div className="setRouterAddressDiv1_title">
+                  New Admin Address
+                </div>
+                <input
+                  type="text"
+                  placeholder="Wallet Address"
+                  className="setRouterAddressInput"
+                  value={newWallet}
+                  name="newWallet"
+                  onChange={handleNewWallet}
+                />
+              </div>
+              {/* <div className="setRouterAddressDiv1">
+                <div className="setRouterAddressDiv1_title">USD</div>
+                <input
+                  type="Ticker"
+                  placeholder="amount"
+                  className="setRouterAddressInput"
+                />
+              </div> */}
+              <div className="setRouterAddressButtonDiv">
+                <button
+                  onClick={setPythiaAddress}
+                  className="setRouterAddressBtn"
+                >
+                  Set Pythia
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="RouterSection">
+            <div>
+              <h4 className="routerHeader">Suspend Pythia</h4>
+            </div>
+            <div className="setRouterAddressDiv">
+              <div className="setRouterAddressDiv1">
+                <div className="setRouterAddressDiv1_title">Admin Address</div>
+                <input
+                  type="text"
+                  placeholder="Wallet Address"
+                  className="setRouterAddressInput"
+                  value={newWallet2}
+                  name="newWallet2"
+                  onChange={handleNewWallet2}
+                />
+              </div>
+              {/* <div className="setRouterAddressDiv1">
+                <div className="setRouterAddressDiv1_title">USD</div>
+                <input
+                  type="Ticker"
+                  placeholder="amount"
+                  className="setRouterAddressInput"
+                />
+              </div> */}
+              <div className="setRouterAddressButtonDiv">
+                <button
+                  onClick={suspendPythiaAddress}
+                  className="setRouterAddressBtn"
+                >
+                  Ban Pythia
+                </button>
+              </div>
             </div>
           </div>
         </div>
