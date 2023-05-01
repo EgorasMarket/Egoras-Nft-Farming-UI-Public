@@ -58,9 +58,11 @@ const PayViaFortModal = ({ togglePayViaFortDiv, message, code, data, account }) 
         onClick={togglePayViaFortDiv}
       ></div>
       <div className="payViaFortDiv_area">
-        <div className="payViaFortDiv_area_1">
+        <div className="payViaFortDiv_area_1" style={{ backgroundColor: "white", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
 
-          <QRCode value={`${JSON.stringify(data)}`} />
+          <QRCode value={`${JSON.stringify(data)}`}
+
+            size={250} />
           {/* <img
             src="/img/dummy_qrcode.png"
             alt=""
