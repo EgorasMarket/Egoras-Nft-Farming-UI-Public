@@ -7,7 +7,7 @@ export const Step1Div = ({ toggleSteps }) => {
   return (
     <>
       <div className="joinCooperativeModalDiv_area_head">
-        Egoras Cooperative Plan
+        MartGpt Cooperative Plan
       </div>
       <div className="joinCooperativeModalDiv_area_sub_head">
         Subscribe to our cooperative and get amazing value for your money.

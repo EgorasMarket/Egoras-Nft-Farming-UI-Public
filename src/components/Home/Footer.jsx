@@ -96,7 +96,7 @@ const Footer = () => {
     if (currentPage === "/app/add") {
       setShowFooter(false);
     }
-    if (currentPage === "/app/whitepaper") {
+    if (currentPage === "/app#") {
       setShowFooter(false);
     }
     if (currentPage === "/app/sell") {
@@ -131,14 +131,14 @@ const Footer = () => {
                 <div className="footerCard1">
                   <div className="FooterPageLinks">
                     <a
-                      href="/about"
+                      href="#"
                       className="FooterPageLinks_1"
                       target="_blank"
                     >
                       About Us
                     </a>
                     <a
-                      href="/whitepaper"
+                      href="#"
                       className="FooterPageLinks_1"
                       target="_blank"
                     >
@@ -205,11 +205,11 @@ const Footer = () => {
                     </AccordionSummary>
                     <AccordionDetails>
                       <div className="footerLinks">
-                        <a href="/about" className="c1link1" target="_blank">
+                        <a href="#" className="c1link1" target="_blank">
                           About
                         </a>
                         <a
-                          href="/app/whitepaper"
+                          href="/app#"
                           className="c1link1"
                           target="_blank"
                         >

@@ -511,13 +511,13 @@ const AdminProductsPage = () => {
                               </div>
                             </div>
                           </td>
-                          <td className="assets-category-data1b stable-content branch_apy">
+                          <td className="assets-category-data1b branch_apy">
                             {numberWithCommas(
                               parseInt(asset.user_amount).toFixed(0)
                             )}{" "}
                             Eusd
                           </td>
-                          <td className="assets-category-data1b stable-content branch_apy">
+                          <td className="assets-category-data1b branch_apy">
                             {asset.user_wallet != null
                               ? `${asset.user_wallet.slice(
                                   0,
@@ -525,10 +525,10 @@ const AdminProductsPage = () => {
                                 )}...${asset.user_wallet.slice(39, 42)}`
                               : "N/A"}
                           </td>
-                          <td className="assets-category-data1b stable-content branch_apy">
+                          <td className="assets-category-data1b branch_apy">
                             {asset.status}
                           </td>
-                          <td className="assets-category-data1b stable-content branch_apy">
+                          <td className="assets-category-data1b branch_apy">
                             {asset.personnel != null ? (
                               <>
                                 {`${asset.personnel.slice(
@@ -540,10 +540,10 @@ const AdminProductsPage = () => {
                               <>{asset.personnel}</>
                             )}
                           </td>
-                          <td className="assets-category-data1b stable-content branch_apy">
+                          <td className="assets-category-data1b branch_apy">
                             {asset.productType}
                           </td>
-                          <td className="assets-category-data1b stable-content branch_apy">
+                          <td className="assets-category-data1b branch_apy">
                             {asset.createdAt}
                           </td>
                           <td className="assets-category-data-last branch_loan_action">
@@ -917,16 +917,19 @@ const AdminProductsPage = () => {
                               className="sell_container_body_cont1_title_div_input"
                               onChange={handleCenter}
                             >
+                              <option value=""></option>
                               {allBrands.map((option) => (
-                                <option
-                                  key={option.product_brand}
-                                  value={option.product_brand}
-                                  // onClick={(e) =>
-                                  //   getCatName(option.product_brand)
-                                  // }
-                                >
-                                  {option.product_brand}
-                                </option>
+                                <>
+                                  <option
+                                    key={option.product_brand}
+                                    value={option.product_brand}
+                                    // onClick={(e) =>
+                                    //   getCatName(option.product_brand)
+                                    // }
+                                  >
+                                    {option.product_brand}
+                                  </option>
+                                </>
                               ))}
                             </select>
 
@@ -985,16 +988,19 @@ const AdminProductsPage = () => {
                               className="sell_container_body_cont1_title_div_input"
                               onChange={handleCenter2}
                             >
+                              <option value=""></option>
                               {allCategories.map((option) => (
-                                <option
-                                  key={option.product_category}
-                                  value={option.product_category}
-                                  // onClick={(e) =>
-                                  //   getCatName(option.product_brand)
-                                  // }
-                                >
-                                  {option.product_category}
-                                </option>
+                                <>
+                                  <option
+                                    key={option.product_category}
+                                    value={option.product_category}
+                                    // onClick={(e) =>
+                                    //   getCatName(option.product_brand)
+                                    // }
+                                  >
+                                    {option.product_category}
+                                  </option>
+                                </>
                               ))}
                             </select>
 

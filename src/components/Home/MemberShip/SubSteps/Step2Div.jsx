@@ -6,7 +6,7 @@ import { ContentLoading } from "react-content-loading";
 // import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ScaleLoader from "react-spinners/ScaleLoader";
-import { Link } from "react-router-dom";
+import PayViaFortModal from "../PayViaFortModal";
 
 export const Step2Div = ({
   checkMonthBox,
@@ -25,15 +25,24 @@ export const Step2Div = ({
   Subscribe,
   Subscribe2,
   Subscribe3,
+  SubscribeRef,
+  Subscribe2Ref,
+  Subscribe3Ref,
   unlockBtn,
   UnlockToken,
   props,
   priceLoaded,
   disable,
   isLoading,
+  payviaFort,
+  togglePayViaFortDiv,
+  account
 }) => {
   const [egcUsd, setEgcUsd] = useState(0);
+  const [refButton, setRefButton] = useState(false);
 
+
+  const [qr_data, setQrData] = useState({})
   useEffect(
     async (e) => {
       let string2 =
@@ -50,6 +59,21 @@ export const Step2Div = ({
     },
     [egcUsd]
   );
+  useEffect(() => {
+    console.log(localStorage.tank);
+    if (localStorage.tank === undefined) {
+      setRefButton(false);
+      console.log("local Variable is not here");
+    } else {
+      setRefButton(true);
+      console.log("local variable is " + localStorage.tank);
+    }
+    console.log(localStorage.tank, "LocalVariable");
+  }, []);
+
+
+
+
   return (
     <div className="selectPlanDiv">
       <div onClick={toggleSteps} className="selectPlanDiv_backButton">
@@ -269,14 +293,14 @@ export const Step2Div = ({
               <div className="selectPlanDiv2_area1_cont1">
                 <input
                   type="radio"
-                  id="radio-1"
+                  id="radio-2"
                   name="radio"
                   checked={checkedSemiAnnual}
                   onChange={checkSemiAnnualBox}
                 />
                 <label
                   className="selectPlanDiv2_area1_cont1_label"
-                  for="radio-1"
+                  for="radio-2"
                 ></label>
               </div>
 
@@ -317,14 +341,14 @@ export const Step2Div = ({
               <div className="selectPlanDiv2_area1_cont1">
                 <input
                   type="radio"
-                  id="radio-2"
+                  id="radio-3"
                   name="radio"
                   checked={checkedYear}
                   onChange={checkYearBox}
                 />
                 <label
                   className="selectPlanDiv2_area1_cont1_label"
-                  for="radio-2"
+                  for="radio-3"
                 ></label>
               </div>
               <div className="selectPlanDiv2_area1_cont2">
@@ -382,80 +406,263 @@ export const Step2Div = ({
           </>
         )}
 
-        {unlockBtn === false ? (
-          <button
-            disabled={disable}
-            className="selectPlanDiv2_area1_checkout_btn"
-            onClick={UnlockToken}
-          >
-            {isLoading ? (
-              <ScaleLoader color="#12111b" size={10} height={20} />
+        {refButton === false ? (
+          <>
+            {unlockBtn === false ? (
+              <button
+                disabled={disable}
+                className="selectPlanDiv2_area1_checkout_btn"
+                onClick={UnlockToken}
+              >
+                {isLoading ? (
+                  <ScaleLoader color="#12111b" size={10} height={20} />
+                ) : (
+                  <span> Approve EGC </span>
+                )}
+              </button>
             ) : (
-              <span> Approve EGC </span>
+              <>
+                {checkedMonth == true && checkAgree === true ? (
+                  <div className="subcribeMonthlyBtnsDiv">
+                    <button
+                      disabled={disable}
+                      className="selectPlanDiv2_area1_checkout_btn"
+                      onClick={Subscribe}
+                    // disabled={fundDisable}
+                    >
+                      {isLoading ? (
+                        <ScaleLoader color="#12111b" size={10} height={20} />
+                      ) : (
+                        <span> Subscribe Monthly </span>
+                      )}
+                    </button>
+                    <button
+                      disabled={disable}
+                      className="selectPlanDiv2_area1_checkout_btn_outline fort_left"
+                      onClick={() => {
+
+                        togglePayViaFortDiv();
+
+                        setQrData(
+                          {
+                            "type": "membership",
+                            "userWallet": account,
+                            "data": {
+                              "quantity": 1,
+                              "amount": 2,
+                              "symbol": "EGC",
+                              "user": account,
+                            }
+
+                          }
+                        )
+
+                      }}
+                    // disabled={fundDisable}
+                    >
+                      <span>Pay Via Fort Monthly </span>
+                    </button>
+                  </div>
+                ) : checkedYear === true && checkAgree === true ? (
+                  <div className="subcribeMonthlyBtnsDiv">
+                    <button
+                      disabled={disable}
+                      className="selectPlanDiv2_area1_checkout_btn"
+                      onClick={Subscribe3}
+                    // disabled={fundDisable}
+                    >
+                      {isLoading ? (
+                        <ScaleLoader color="#12111b" size={10} height={20} />
+                      ) : (
+                        <span> Subscribe Yearly </span>
+                      )}
+                    </button>
+                    <button
+                      disabled={disable}
+                      className="selectPlanDiv2_area1_checkout_btn_outline fort_left"
+                      onClick={() => {
+                        togglePayViaFortDiv();
+
+                        setQrData(
+                          {
+                            "type": "membership",
+                            "userWallet": account,
+                            "data": {
+                              "quantity": 1,
+                              "amount": 6,
+                              "symbol": "EGC",
+                              "user": account,
+                            }
+
+                          }
+                        )
+
+                      }}
+                    // disabled={fundDisable}
+                    >
+                      <span>Pay Via Fort Yearly </span>
+                    </button>
+                  </div>
+                ) : checkedSemiAnnual === true && checkAgree === true ? (
+                  <div className="subcribeMonthlyBtnsDiv">
+                    <button
+                      disabled={disable}
+                      className="selectPlanDiv2_area1_checkout_btn"
+                      onClick={Subscribe2}
+                    // disabled={fundDisable}
+                    >
+                      {isLoading ? (
+                        <ScaleLoader color="#12111b" size={10} height={20} />
+                      ) : (
+                        <span> Subscribe Semi-Annual </span>
+                      )}
+                    </button>
+                    <button
+                      disabled={disable}
+                      className="selectPlanDiv2_area1_checkout_btn_outline fort_left"
+                      onClick={() => {
+                        togglePayViaFortDiv();
+
+                        setQrData(
+                          {
+                            "type": "membership",
+                            "userWallet": account,
+                            "data": {
+                              "quantity": 1,
+                              "amount": 4,
+                              "symbol": "EGC",
+                              "user": account,
+                            }
+
+                          }
+                        )
+
+                      }}
+                    // disabled={fundDisable}
+                    >
+                      <span>Pay Via Fort Semi-Annual </span>
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    className="selectPlanDiv2_area1_checkout_btn"
+                    disabled
+                  >
+                    <span> Select a plan </span>
+                  </button>
+                )}
+              </>
             )}
-          </button>
+          </>
         ) : (
           <>
-            {checkedMonth == true && checkAgree === true ? (
+            {unlockBtn === false ? (
               <button
                 disabled={disable}
                 className="selectPlanDiv2_area1_checkout_btn"
-                onClick={Subscribe}
-                // disabled={fundDisable}
+                onClick={UnlockToken}
               >
                 {isLoading ? (
                   <ScaleLoader color="#12111b" size={10} height={20} />
                 ) : (
-                  <span> Subscribe Monthly </span>
+                  <span> Approve EGC </span>
                 )}
               </button>
-            ) : checkedYear === true && checkAgree === true ? (
-              <button
-                disabled={disable}
-                className="selectPlanDiv2_area1_checkout_btn"
-                onClick={Subscribe3}
-                // disabled={fundDisable}
-              >
-                {isLoading ? (
-                  <ScaleLoader color="#12111b" size={10} height={20} />
-                ) : (
-                  <span> Subscribe Yearly </span>
-                )}
-              </button>
-            ) : checkedSemiAnnual === true && checkAgree === true ? (
-              <>
-                <button
-                  disabled={disable}
-                  className="selectPlanDiv2_area1_checkout_btn"
-                  onClick={Subscribe2}
-                  // disabled={fundDisable}
-                >
-                  {isLoading ? (
-                    <ScaleLoader color="#12111b" size={10} height={20} />
-                  ) : (
-                    <>
-                      <span> Subscribe Semi-Annual </span>
-                    </>
-                  )}
-                </button>
-
-                <Link
-                  to={"/pay-with-fort"}
-                  className="selectPlanDiv2_area1_checkout_btn"
-                >
-                  <span> Pay with Fort App </span>
-                </Link>
-              </>
             ) : (
               <>
-                <button className="selectPlanDiv2_area1_checkout_btn">
-                  <span> Select a plan </span>
-                </button>
+                {checkedMonth == true && checkAgree === true ? (
+                  <div className="subcribeMonthlyBtnsDiv">
+                    <button
+                      disabled={disable}
+                      className="selectPlanDiv2_area1_checkout_btn"
+                      onClick={SubscribeRef}
+                    // disabled={fundDisable}
+                    >
+                      {isLoading ? (
+                        <ScaleLoader color="#12111b" size={10} height={20} />
+                      ) : (
+                        <span> Subscribe Monthly ref </span>
+                      )}
+                    </button>
+                    <button
+                      disabled={disable}
+                      className="selectPlanDiv2_area1_checkout_btn_outline fort_left"
+                      onClick={togglePayViaFortDiv}
+                    // disabled={fundDisable}
+                    >
+                      <span>Pay Via Fort Monthly ref </span>
+                    </button>
+                  </div>
+                ) : checkedYear === true && checkAgree === true ? (
+                  <div className="subcribeMonthlyBtnsDiv">
+                    <button
+                      disabled={disable}
+                      className="selectPlanDiv2_area1_checkout_btn"
+                      onClick={Subscribe3Ref}
+                    // disabled={fundDisable}
+                    >
+                      {isLoading ? (
+                        <ScaleLoader color="#12111b" size={10} height={20} />
+                      ) : (
+                        <span> Subscribe Yearly ref </span>
+                      )}
+                    </button>
+                    <button
+                      disabled={disable}
+                      className="selectPlanDiv2_area1_checkout_btn_outline fort_left"
+                      onClick={togglePayViaFortDiv}
+                    // disabled={fundDisable}
+                    >
+                      <span>Pay Via Fort Yearly ref</span>
+                    </button>
+                  </div>
+                ) : checkedSemiAnnual === true && checkAgree === true ? (
+                  <div className="subcribeMonthlyBtnsDiv">
+                    <button
+                      disabled={disable}
+                      className="selectPlanDiv2_area1_checkout_btn"
+                      onClick={Subscribe2Ref}
+                    // disabled={fundDisable}
+                    >
+                      {isLoading ? (
+                        <ScaleLoader color="#12111b" size={10} height={20} />
+                      ) : (
+                        <span> Subscribe Semi-Annual ref </span>
+                      )}
+                    </button>
+                    <button
+                      disabled={disable}
+                      className="selectPlanDiv2_area1_checkout_btn_outline fort_left"
+                      onClick={togglePayViaFortDiv}
+                    // disabled={fundDisable}
+                    >
+                      <span>Pay Via Fort Semi-Annual ref</span>
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    className="selectPlanDiv2_area1_checkout_btn"
+                    disabled
+                  >
+                    <span> Select a plan </span>
+                  </button>
+                )}
               </>
             )}
           </>
         )}
       </div>
+
+      {payviaFort ? (
+        <PayViaFortModal
+          togglePayViaFortDiv={togglePayViaFortDiv}
+          message="Scan this qrcode to subscribe for your membership via FORT app."
+          code="Qretyhgjhe6"
+          account = {account}
+
+          data={qr_data}
+        />
+      ) : null}
     </div>
   );
 };

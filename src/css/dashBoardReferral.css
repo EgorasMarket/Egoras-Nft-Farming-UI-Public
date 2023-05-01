@@ -3,6 +3,12 @@
   justify-content: space-between;
   gap: 20px;
 }
+.referral_banner_bg_div {
+  width: 100%;
+}
+.referral_banner_bg_img {
+  width: 100%;
+}
 .welcome_bonus_div {
   align-items: flex-end !important;
 }
@@ -17,7 +23,16 @@
   border: solid 1px #dddddd;
   box-shadow: 0px 6px 10px #d5d5d5;
   overflow: scroll;
-  align-items: flex-end;
+  align-items: center;
+}
+.dashBoard_ref_area1_cont1_div1_cont1_withdraw_btn {
+  padding: 10px;
+  width: 119px;
+  font-size: 14px;
+  border-radius: 7px;
+  border: none;
+  background: #7a5fc0;
+  color: #fff;
 }
 .dashBoard_ref_area1_cont2 {
   display: flex;
@@ -404,7 +419,7 @@
 }
 
 .dark .dashBoard_ref_area2_cont1_body_div1 {
-  border: solid 1px #678d77;
+  border: solid 1px #34334b;
 }
 
 .dark .dashBoard_ref_area2_cont1_body_div_head {
@@ -492,9 +507,8 @@
   }
   .dashBoard_ref_area2_cont1_body_div1_cont1 {
     width: 100%;
-    align-items: center;
     font-size: 12px;
-    justify-content: center;
+
   }
   .dashBoard_ref_area2_cont1_body_div1 {
     font-size: 12px;
@@ -503,11 +517,6 @@
   .dashBoard_ref_area1_cont2 {
     gap: 10px;
   }
-  .dashBoard_ref_area2_cont1_body_div_head_cont1 {
-    text-align: center;
-  }
-  .dashBoard_ref_area1_cont1_div1 {
-    align-items: center;
-    text-align: center;
-  }
+
+
 }

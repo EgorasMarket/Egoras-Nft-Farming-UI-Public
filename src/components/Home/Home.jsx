@@ -238,20 +238,19 @@ const Home = () => {
     );
     setSearchResults(results);
   }, [searchTerm]);
+  // const fetchData = async () => {
 
-  useEffect(() => {
-    const fetchData = async () => {
+  //   // if (response.data.userMembership == false) {subscriptionStatus
+
+  //   // }
+  // };
+  useEffect(async () => {
+    if (account) {
       const response = await CALL_CHECK_USER_AND_MEMBERSHIP(account);
       console.log(response.data);
       setSubscriptionStatus(response.data.userMembership);
-      // if (response.data.userMembership == false) {subscriptionStatus
-
-      // }
-    };
-
-    fetchData();
-
-    //use the adress and make the API call
+      return;
+    }
   }, [account]);
 
   useEffect(() => {
@@ -339,7 +338,7 @@ const Home = () => {
     // const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
     let res = await tokenBalance(
       "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-      "0x3A81836b093f7f3D3ca271125CcD45c461409697",
+      "0xdA337c23F71b1FFc7b7ED345890B5eBA9eb5b599",
       library.getSigner()
     );
     console.log(res);
@@ -351,7 +350,7 @@ const Home = () => {
   //   const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
   //   let res = await tokenBalance(
   //     "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-  //     "0x3A81836b093f7f3D3ca271125CcD45c461409697",
+  //     "0xdA337c23F71b1FFc7b7ED345890B5eBA9eb5b599",
   //     library.getSigner()
   //   );
   //   console.log(res);

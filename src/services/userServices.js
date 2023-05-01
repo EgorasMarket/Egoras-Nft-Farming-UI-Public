@@ -1,5 +1,9 @@
 import axios from "axios";
-import { CHECK_USER_AND_MEMBERSHIP, ADD_USER_ADDRESS } from "../core/ApiRoutes";
+import {
+  CHECK_USER_AND_MEMBERSHIP,
+  ADD_USER_ADDRESS,
+  UPDATE_MY_PROFILE,
+} from "../core/ApiRoutes";
 export const config = {
   headers: {
     "Content-Type": "application/json",
@@ -28,5 +32,15 @@ export const CALL_CHECK_USER_AND_MEMBERSHIP = async (user) => {
     return response.data;
   } catch (err) {
     return err.repsonse;
+  }
+};
+
+export const CALL_UPDATE_MY_PROFILE = async (payload) => {
+  console.log(payload);
+  try {
+    const response = await axios.post(`${UPDATE_MY_PROFILE}`, payload, config);
+    return response.data;
+  } catch (err) {
+    return err.response;
   }
 };

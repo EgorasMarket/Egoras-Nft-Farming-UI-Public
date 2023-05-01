@@ -337,7 +337,7 @@ const DashBoardUserSales = () => {
                   <div className="BuyerSellerDiv_body_div2">
                     <div className="BuyerSellerDiv_body_div2_tab_area">
                       <div className="filter_table_area_1">Buy Orders</div>
-                      <div className="filter_table_area_2 filter_table_area_2b">
+                      <div className="filter_table_area_2">
                         <div
                           id="Ongoing"
                           className={
@@ -445,23 +445,23 @@ const DashBoardUserSales = () => {
                                             </div>
                                           </div>
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {numberWithCommas(
                                             parseInt(asset.amount).toFixed(0)
                                           )}{" "}
                                           Eusd
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {`${asset.seller.slice(
                                             0,
                                             6
                                           )}...${asset.seller.slice(39, 42)}`}
                                         </td>
 
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {asset.status}
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {asset.transactionHash != null
                                             ? `${asset.transactionHash.slice(
                                                 0,
@@ -495,23 +495,23 @@ const DashBoardUserSales = () => {
                                           </div>
                                         </div>
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {numberWithCommas(
                                           parseInt(asset.amount).toFixed(0)
                                         )}{" "}
                                         Eusd
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {`${asset.seller.slice(
                                           0,
                                           6
                                         )}...${asset.seller.slice(39, 42)}`}
                                       </td>
 
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {asset.status}
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {`${asset.transactionHash.slice(
                                           0,
                                           6
@@ -547,23 +547,23 @@ const DashBoardUserSales = () => {
                                             </div>
                                           </div>
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {numberWithCommas(
                                             parseInt(asset.amount).toFixed(0)
                                           )}{" "}
                                           Eusd
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {`${asset.seller.slice(
                                             0,
                                             6
                                           )}...${asset.seller.slice(39, 42)}`}
                                         </td>
 
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {asset.status}
                                         </td>
-                                        <td className="assets-category-data1b stable-content branch_apy">
+                                        <td className="assets-category-data1b branch_apy">
                                           {`${asset.transactionHash.slice(
                                             0,
                                             6
@@ -806,13 +806,13 @@ const DashBoardUserSales = () => {
                                           </div>
                                         </div>
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {numberWithCommas(
                                           parseInt(asset.user_amount).toFixed(0)
                                         )}{" "}
                                         Eusd
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {`${asset.user_wallet.slice(
                                           0,
                                           6
@@ -821,12 +821,12 @@ const DashBoardUserSales = () => {
                                           42
                                         )}`}
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {asset.bidAmount != null
                                           ? asset.bidStatus
                                           : "N/A"}
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {asset.bidAmount != null
                                           ? numberWithCommas(
                                               parseInt(asset.bidAmount).toFixed(
@@ -835,12 +835,12 @@ const DashBoardUserSales = () => {
                                             )
                                           : "N/A"}{" "}
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {asset.status == "NEW"
                                           ? "Pending Approval"
                                           : asset.status}
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {asset.transaction_hash != null
                                           ? `${asset.transaction_hash.slice(
                                               0,
@@ -882,24 +882,24 @@ const DashBoardUserSales = () => {
                                         </div>
                                       </div>
                                     </td>
-                                    <td className="assets-category-data1b stable-content branch_apy">
+                                    <td className="assets-category-data1b branch_apy">
                                       {numberWithCommas(
                                         parseInt(asset.user_amount).toFixed(0)
                                       )}{" "}
                                       Eusd
                                     </td>
-                                    <td className="assets-category-data1b stable-content branch_apy">
+                                    <td className="assets-category-data1b branch_apy">
                                       {`${asset.user_wallet.slice(
                                         0,
                                         6
                                       )}...${asset.user_wallet.slice(39, 42)}`}
                                     </td>
-                                    <td className="assets-category-data1b stable-content branch_apy">
+                                    <td className="assets-category-data1b branch_apy">
                                       {asset.bidAmount != null
                                         ? asset.bidStatus
                                         : "N/A"}
                                     </td>
-                                    <td className="assets-category-data1b stable-content branch_apy">
+                                    <td className="assets-category-data1b branch_apy">
                                       {asset.bidAmount != null
                                         ? numberWithCommas(
                                             parseInt(asset.bidAmount).toFixed(
@@ -908,12 +908,12 @@ const DashBoardUserSales = () => {
                                           )
                                         : "N/A"}{" "}
                                     </td>
-                                    <td className="assets-category-data1b stable-content branch_apy">
+                                    <td className="assets-category-data1b branch_apy">
                                       {asset.status == "NEW"
                                         ? "Pending Approval"
                                         : asset.status}
                                     </td>
-                                    <td className="assets-category-data1b stable-content branch_apy">
+                                    <td className="assets-category-data1b branch_apy">
                                       {asset.transaction_hash != null
                                         ? `${asset.transaction_hash.slice(
                                             0,
@@ -952,28 +952,28 @@ const DashBoardUserSales = () => {
                                           </div>
                                         </div>
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {numberWithCommas(
                                           parseInt(asset.Amount).toFixed(0)
                                         )}{" "}
                                         Eusd
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {`${asset.Seller.slice(
                                           0,
                                           6
                                         )}...${asset.Seller.slice(39, 42)}`}
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {asset.BiddingStatus}
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {asset.BiddingAmount} Eusd
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {asset.ProductStatus}
                                       </td>
-                                      <td className="assets-category-data1b stable-content branch_apy">
+                                      <td className="assets-category-data1b branch_apy">
                                         {`${asset.transaction_hash.slice(
                                           0,
                                           6

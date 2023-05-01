@@ -263,7 +263,7 @@ const DashboardHome = () => {
     const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
     let res = await tokenBalance(
       "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-      "0x3A81836b093f7f3D3ca271125CcD45c461409697",
+      "0xdA337c23F71b1FFc7b7ED345890B5eBA9eb5b599",
       library.getSigner()
     );
     console.log(res);
@@ -1037,7 +1037,7 @@ const DashboardHome = () => {
             <div className="lock_container_transactions">
               <div className="BuyerSellerDiv_body_div2_tab_area">
                 <div className="filter_table_area_1">Latest Transactions</div>
-                <div className="filter_table_area_2 filter_table_area_2b">
+                <div className="filter_table_area_2">
                   <div
                     id="swap"
                     className={

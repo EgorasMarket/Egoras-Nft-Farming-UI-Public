@@ -580,6 +580,7 @@ const AdminSeeSellers = () => {
                           .filter((person) => person.status == "NEW")
                           .map((asset) => {
                             //   var percentage = (asset.funded / asset.amount) * 100;
+                            console.log(asset);
                             return (
                               <>
                                 <tr className="assets-category-row  transitionMe">
@@ -604,7 +605,7 @@ const AdminSeeSellers = () => {
                                     </div>
                                   </td>
                                   <td
-                                    className="assets-category-data1b stable-content branch_apy"
+                                    className="assets-category-data1b branch_apy"
                                     id={asset.product_id}
                                     // onClick={ToggleSaleDetails}
                                     onClick={() => {
@@ -620,7 +621,7 @@ const AdminSeeSellers = () => {
                                     Eusd
                                   </td>
                                   <td
-                                    className="assets-category-data1b stable-content branch_apy"
+                                    className="assets-category-data1b branch_apy"
                                     id={asset.product_id}
                                     // onClick={ToggleSaleDetails}
                                     onClick={() => {
@@ -636,7 +637,7 @@ const AdminSeeSellers = () => {
                                     )}...${asset.user_wallet.slice(39, 42)}`}
                                   </td>
                                   <td
-                                    className="assets-category-data1b stable-content branch_apy"
+                                    className="assets-category-data1b branch_apy"
                                     id={asset.product_id}
                                     // onClick={ToggleSaleDetails}
                                     onClick={() => {
@@ -649,7 +650,7 @@ const AdminSeeSellers = () => {
                                     {asset.bidStatus}
                                   </td>
                                   <td
-                                    className="assets-category-data1b stable-content branch_apy"
+                                    className="assets-category-data1b branch_apy"
                                     id={asset.product_id}
                                     // onClick={ToggleSaleDetails}
                                     onClick={() => {
@@ -662,7 +663,7 @@ const AdminSeeSellers = () => {
                                     {asset.bidAmount} Eusd
                                   </td>
                                   <td
-                                    className="assets-category-data1b stable-content branch_apy"
+                                    className="assets-category-data1b branch_apy"
                                     id={asset.product_id}
                                     // onClick={ToggleSaleDetails}
                                     onClick={() => {
@@ -675,7 +676,7 @@ const AdminSeeSellers = () => {
                                     {asset.productType}
                                   </td>
                                   <td
-                                    className="assets-category-data1b stable-content branch_apy"
+                                    className="assets-category-data1b branch_apy"
                                     id={asset.product_id}
                                     // onClick={ToggleSaleDetails}
                                     onClick={() => {
@@ -688,7 +689,7 @@ const AdminSeeSellers = () => {
                                     {asset.status}
                                   </td>
                                   <td
-                                    className="assets-category-data1b stable-content branch_apy"
+                                    className="assets-category-data1b branch_apy"
                                     id={asset.product_id}
                                     // onClick={ToggleSaleDetails}
                                     onClick={() => {
@@ -698,16 +699,18 @@ const AdminSeeSellers = () => {
                                       );
                                     }}
                                   >
-                                    {`${asset.transaction_hash.slice(
-                                      0,
-                                      6
-                                    )}...${asset.transaction_hash.slice(
-                                      63,
-                                      66
-                                    )}`}
+                                    {asset.transaction_hash != null
+                                      ? `${asset.transaction_hash.slice(
+                                          0,
+                                          6
+                                        )}...${asset.transaction_hash.slice(
+                                          63,
+                                          66
+                                        )}`
+                                      : "N/A"}
                                     {/* {"Coming soon"} */}
                                   </td>
-                                  <td className="assets-category-data1b stable-content branch_apy">
+                                  <td className="assets-category-data1b branch_apy">
                                     <div className="approveProdButton">
                                       {asset.productType === "INDIRECT" &&
                                       asset.bidAmount == null ? (
@@ -780,28 +783,28 @@ const AdminSeeSellers = () => {
                                   </div>
                                 </div>
                               </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
+                              <td className="assets-category-data1b branch_apy">
                                 {numberWithCommas(
                                   parseInt(asset.Amount).toFixed(0)
                                 )}{" "}
                                 Eusd
                               </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
+                              <td className="assets-category-data1b branch_apy">
                                 {`${asset.Seller.slice(
                                   0,
                                   6
                                 )}...${asset.Seller.slice(39, 42)}`}
                               </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
+                              <td className="assets-category-data1b branch_apy">
                                 {asset.BiddingStatus}
                               </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
+                              <td className="assets-category-data1b branch_apy">
                                 {asset.BiddingAmount} Eusd
                               </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
+                              <td className="assets-category-data1b branch_apy">
                                 {asset.ProductStatus}
                               </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
+                              <td className="assets-category-data1b branch_apy">
                                 {`${asset.txnHash.slice(
                                   0,
                                   6
@@ -833,28 +836,28 @@ const AdminSeeSellers = () => {
                                   </div>
                                 </div>
                               </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
+                              <td className="assets-category-data1b branch_apy">
                                 {numberWithCommas(
                                   parseInt(asset.Amount).toFixed(0)
                                 )}{" "}
                                 Eusd
                               </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
+                              <td className="assets-category-data1b branch_apy">
                                 {`${asset.Seller.slice(
                                   0,
                                   6
                                 )}...${asset.Seller.slice(39, 42)}`}
                               </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
+                              <td className="assets-category-data1b branch_apy">
                                 {asset.BiddingStatus}
                               </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
+                              <td className="assets-category-data1b branch_apy">
                                 {asset.BiddingAmount} Eusd
                               </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
+                              <td className="assets-category-data1b branch_apy">
                                 {asset.ProductStatus}
                               </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
+                              <td className="assets-category-data1b branch_apy">
                                 {`${asset.txnHash.slice(
                                   0,
                                   6

@@ -43,9 +43,10 @@ import {
 import {
   annually,
   monthly,
-  getTickerInfo,
   tokenBalance,
   takeRoyalty,
+  checkAllowanceV3,
+  unlockTokenV3,
 } from "../../../../web3/index";
 import {
   getEGCEUSDTICKERPRICE,
@@ -53,8 +54,6 @@ import {
   stakeConfig,
   getCalculatedRoyalty,
   UnlockLockedStake,
-  unlockStakeEgcToken,
-  checkAllowanceStake,
 } from "../../../../web3/index2";
 import { getDate, getMonth } from "date-fns";
 import {
@@ -100,6 +99,8 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: theme.typography.fontWeightRegular,
   },
 }));
+const { REACT_APP_EGC_ADDRESS, REACT_APP_EUSD_ADDRESS } = process.env;
+
 const StakingUpdate = () => {
   const context = useWeb3React();
   const {
@@ -592,25 +593,12 @@ const StakingUpdate = () => {
   const toggleNotDueDiv = () => {
     setNotDueDiv(!notDueDiv);
   };
-  useEffect(
-    async (e) => {
-      if (account) {
-        let check = await checkAllowanceStake(
-          account,
-          parseEther(lockAmount.toString(), "wei").toString(),
-          library.getSigner()
-        );
-        console.log(check);
-        setUnLockCheckStatus(check.status);
-        setUnlockBtn(check.status);
-      }
-    },
-    [account, unLockCheckStatus, unlockBtn, lockAmount]
-  );
+
   const UnlockToken = async (e) => {
     setIsLoading(true);
     setDisable(true);
-    let ret = await unlockStakeEgcToken(
+    let ret = await unlockTokenV3(
+      REACT_APP_EGC_ADDRESS,
       parseEther("180000000000000000000000000000000000", "wei").toString(),
       library.getSigner()
     );
@@ -632,6 +620,23 @@ const StakingUpdate = () => {
       setDisable(false);
     }
   };
+  useEffect(
+    async (e) => {
+      if (account) {
+        let check = await checkAllowanceV3(
+          REACT_APP_EGC_ADDRESS,
+          account,
+          parseEther(lockAmount.toString(), "wei").toString(),
+          library.getSigner()
+        );
+        console.log(check);
+        setUnLockCheckStatus(check.status);
+        setUnlockBtn(check.status);
+      }
+    },
+
+    [account, unLockCheckStatus, unlockBtn, lockAmount]
+  );
   const classes = useStyles();
 
   return (

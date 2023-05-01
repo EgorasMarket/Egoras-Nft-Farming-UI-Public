@@ -5,6 +5,7 @@ import {
   GET_EGC_PRICE_COINGEKO_ROUTE,
   GET_TVL_ROUTE,
   GOOGLE_QRCODE_GENERATOR_LINK,
+  NEW_QR_LINK_ROUTE,
   POPULATE_ADMIN_PRODUCT_DASHBOARD_ROUTE,
   POPULATE_STAKE_INFO_ROUTE,
 } from "../core/ApiRoutes";
@@ -30,6 +31,18 @@ export const GET_COIN_GEKO_PRICE_IN_USD = async () => {
     return err.response;
   }
 };
+
+export const GENERATE_QR_CODE_LINK = async (data) => {
+  try {
+    const response = await axios.post(
+      `${NEW_QR_LINK_ROUTE}`, data);
+    return response.data;
+  } catch (err) {
+    return err.response || err.message;
+  }
+};
+
+
 export const GENERATE_QR_CODE_DATA = async (payload) => {
   try {
     const response = await axios.get(

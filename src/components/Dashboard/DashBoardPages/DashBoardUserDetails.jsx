@@ -1,64 +1,51 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import jazzicon from "@metamask/jazzicon";
-import Timer from "./Timer";
-import { addDays, format } from "date-fns";
-import { Link } from "react-router-dom";
-import { CopperLoading } from "respinner";
-import GroupAddIcon from "@mui/icons-material/GroupAdd";
-import TrendingDownIcon from "@mui/icons-material/TrendingDown";
+import { CALL_CHECK_USER_AND_MEMBERSHIP } from "../../../services/userServices";
+// import Timer from "./Timer";
+// import { addDays, format } from "date-fns";
+// import { Link } from "react-router-dom";
+// import { CopperLoading } from "respinner";
+// import GroupAddIcon from "@mui/icons-material/GroupAdd";
+// import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import { connect } from "react-redux";
-import { SuccessModal, ErrorModal } from "./Modal/Success_Error_Component";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import StarRateIcon from "@mui/icons-material/StarRate";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+// import { SuccessModal, ErrorModal } from "./Modal/Success_Error_Component";
+// import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
+// import StarRateIcon from "@mui/icons-material/StarRate";
+// import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import UserDetailsLinks from "./UserDetailsLinks";
 import Web3 from "web3";
 import {
-  Web3ReactProvider,
+  // Web3ReactProvider,
   useWeb3React,
-  UnsupportedChainIdError,
+  // UnsupportedChainIdError,
 } from "@web3-react/core";
-import TollIcon from "@mui/icons-material/Toll";
+// import TollIcon from "@mui/icons-material/Toll";
 import { numberWithCommas } from "../../../static";
 // import { numberWithCommas } from "../../static/static";
 import CopyAllIcon from "@mui/icons-material/CopyAll";
 import "../../../css/dashboard_user_details.css";
-import DashboardIcon from "@mui/icons-material/Dashboard";
-import Accordion from "../Accordion";
-import InventoryIcon from "@mui/icons-material/Inventory";
+// import DashboardIcon from "@mui/icons-material/Dashboard";
+// import Accordion from "../Accordion";
+// import InventoryIcon from "@mui/icons-material/Inventory";
 import Nodata from "./nodataComponent/Nodata";
-import CloseIcon from "@mui/icons-material/Close";
-import ReceiptIcon from "@mui/icons-material/Receipt";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import axios from "axios";
-import { config } from "../../../actions/Config";
-import { getAuthUserStats } from "../../../actions/token";
-import {
-  API_URL as api_url,
-  PENDING,
-  COMPLETED,
-  CANCELLED,
-} from "../../../actions/types";
-// import { numberWithCommas } from "../../static/static";
-import { formatDuration, intervalToDuration } from "date-fns";
-import { getUserStats } from "../../../web3/index";
+// import CloseIcon from "@mui/icons-material/Close";
+// import ReceiptIcon from "@mui/icons-material/Receipt";
+// import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+// import axios from "axios";
+// import { config } from "../../../actions/Config";
+// import { getAuthUserStats } from "../../../actions/token";
+// import {
+//   API_URL as api_url,
+//   PENDING,
+//   COMPLETED,
+//   CANCELLED,
+// } from "../../../actions/types";
+// // import { numberWithCommas } from "../../static/static";
+// import { formatDuration, intervalToDuration } from "date-fns";
+// import { getUserStats } from "../../../web3/index";
 // import Web3 from "web3";
-import {
-  checkAllowance,
-  unluckToken,
-  transactReceipt,
-  getPrice,
-  takeDividend,
-  getTickerInfo,
-  tokenBalance,
-  open,
-  getNextDate,
-  getLatestLoan,
-  takeBackLoan,
-  repay,
-  topup,
-  draw,
-} from "../../../web3/index";
+import { CALL_UPDATE_MY_PROFILE } from "../../../services/userServices";
+import { tokenBalance } from "../../../web3/index";
 import { parseEther, formatEther } from "@ethersproject/units";
 const DashBoardUserDetails = ({ auth }) => {
   const [walletAddr, setWalletAddr] = useState(
@@ -78,8 +65,30 @@ const DashBoardUserDetails = ({ auth }) => {
   const [eusdUsdVal, setEusdUsdVal] = useState("0.00");
   const [BnbUsdVal, setBnbUsdVal] = useState("0.00");
   const [TotalPortfolio, setTotalPortfolio] = useState("0.00");
+  const [memberStatus, setMemberStatus] = useState("N/A");
   const [activeTab, setActiveTab] = useState("buyer");
   const [activeBtn, setActiveBtn] = useState("Ongoing");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    address: "",
+    address2: "",
+    country: "",
+    state: "",
+    zipCode: "",
+  });
+
+  const {
+    firstName,
+    lastName,
+    phoneNumber,
+    address,
+    address2,
+    country,
+    state,
+    zipCode,
+  } = formData;
   const toggleActiveBtn = (event) => {
     setActiveBtn(event.currentTarget.id);
   };
@@ -229,74 +238,68 @@ const DashBoardUserDetails = ({ auth }) => {
     let active = e.currentTarget.id;
     setActiveTab(active);
   };
-  const buyOrders = [
-    {
-      id: "1",
-      img: "/img/img5.png",
-      name: "Hisense Tv",
-      amount: 10000,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      status: "Pending",
-      time: "Apr-05-2023",
-      txHash:
-        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
-    },
-    {
-      id: "2",
-      img: "/img/img5.png",
-      name: "Lg Tv",
-      amount: 10000,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      status: "Pending",
-      time: "Apr-05-2023",
-      txHash:
-        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
-    },
-    {
-      id: "3",
-      img: "/img/img5.png",
-      name: "Lg Tv",
-      amount: 10000,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      status: "shipped",
-      time: "Apr-05-2023",
-      txHash:
-        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
-    },
-    {
-      id: "4",
-      img: "/img/img5.png",
-      name: "Lg Tv",
-      amount: 10000,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      status: "Pending",
-      time: "Apr-05-2023",
-      txHash:
-        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
-    },
-    {
-      id: "5",
-      img: "/img/img5.png",
-      name: "Lg Tv",
-      amount: 10000,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      status: "shipped",
-      time: "Apr-05-2023",
-      txHash:
-        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
-    },
-    {
-      id: "6",
-      img: "/img/img5.png",
-      name: "Samsung Tv",
-      amount: 10000,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      status: "shipped",
-      time: "Apr-05-2023",
-      txHash:
-        "0xa5c4bec11d4563d2ab163922b275d31e0b9b2c039082ba1afccc4c9180b51a37",
-    },
-  ];
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const updateProfile = async () => {
+    const body = JSON.stringify({
+      fullname: firstName + " " + lastName,
+      phoneNumber,
+      address,
+      address2,
+      country,
+      state,
+      zipCode,
+      walletAddress: walletAddr,
+    });
+
+    const response = await CALL_UPDATE_MY_PROFILE(body);
+    console.log(response);
+  };
+  // useEffect(() => {
+  //   if (account) {
+  //     setMemberStatus("");
+  //   }
+  // }, [account]);
+  useEffect(async () => {
+    if (account) {
+      const response = await CALL_CHECK_USER_AND_MEMBERSHIP(account);
+      console.log(response.data);
+      console.log(response.data.userMembership);
+      if (response.data.userMembership === true) {
+        setMemberStatus("Active");
+      } else {
+        setMemberStatus("Inactive");
+      }
+
+      if (response.data.users.fullName !== null) {
+        const FullName = response.data.users.fullName.split(" ");
+        console.log(FullName, "FullName");
+        setFormData({
+          firstName: FullName[0],
+          lastName: FullName[1],
+          phoneNumber: response.data.users.phoneNumber,
+          address: response.data.users.userAddress,
+          address2: response.data.users.userAddress2,
+          country: response.data.users.country,
+          state: response.data.users.state,
+          zipCode: response.data.users.zipCode,
+        });
+      } else {
+             setFormData({
+               firstName: "",
+               lastName: "",
+               phoneNumber: "",
+               address: "",
+               address2: "",
+               country: "",
+               state: "",
+               zipCode: "",
+             });
+      }
+    }
+  }, [account]);
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -321,6 +324,16 @@ const DashBoardUserDetails = ({ auth }) => {
                   </div>
                   <span className="connected_txt">{conecttxt}</span>
                 </div>
+              </div>
+              <span className="hr_vertical"></span>
+              <div className="welcome_bonus_div">
+                <div className="welcome_bonus_div_head">
+                  {/* <div className="welcome_bonus_icon_div">
+                    <StarRateIcon className="welcome_bonus_icon_div_icon" />
+                  </div> */}
+                  Membership Status
+                </div>
+                <div className="welcome_bonus_div_body">{memberStatus}</div>
               </div>
             </div>
             <div className="user_details_body1">
@@ -437,46 +450,96 @@ const DashBoardUserDetails = ({ auth }) => {
               <div className="user_details_area">
                 <div className="user_details_area_div1">
                   <div className="user_details_area_div1_head">First Name*</div>
-                  <input type="text" className="user_details_area_div1_input" />
+                  <input
+                    type="text"
+                    name="firstName"
+                    value={firstName}
+                    className="user_details_area_div1_input"
+                    onChange={(e) => onChange(e)}
+                  />
                 </div>
                 <div className="user_details_area_div1">
                   <div className="user_details_area_div1_head">Last Name*</div>
-                  <input type="text" className="user_details_area_div1_input" />
+                  <input
+                    type="text"
+                    name="lastName"
+                    value={lastName}
+                    className="user_details_area_div1_input"
+                    onChange={(e) => onChange(e)}
+                  />
                 </div>
                 <div className="user_details_area_div1">
                   <div className="user_details_area_div1_head">Phone No*</div>
                   <input
                     type="number"
+                    name="phoneNumber"
+                    value={phoneNumber}
                     className="user_details_area_div1_input"
+                    onChange={(e) => onChange(e)}
                   />
                 </div>
                 <div className="user_details_area_div1">
                   <div className="user_details_area_div1_head">
                     Address Line 1*
                   </div>
-                  <input type="text" className="user_details_area_div1_input" />
+                  <input
+                    type="text"
+                    name="address"
+                    value={address}
+                    className="user_details_area_div1_input"
+                    onChange={(e) => onChange(e)}
+                  />
                 </div>
                 <div className="user_details_area_div1">
                   <div className="user_details_area_div1_head">
                     Address Line 2 (optional)
                   </div>
-                  <input type="text" className="user_details_area_div1_input" />
+                  <input
+                    type="text"
+                    name="address2"
+                    value={address2}
+                    className="user_details_area_div1_input"
+                    onChange={(e) => onChange(e)}
+                  />
                 </div>
                 <div className="user_details_area_div1">
                   <div className="user_details_area_div1_head">State*</div>
-                  <input type="text" className="user_details_area_div1_input" />
+                  <input
+                    type="text"
+                    name="state"
+                    value={state}
+                    className="user_details_area_div1_input"
+                    onChange={(e) => onChange(e)}
+                  />
                 </div>
                 <div className="user_details_area_div1">
                   <div className="user_details_area_div1_head">Country*</div>
-                  <input type="text" className="user_details_area_div1_input" />
+                  <input
+                    type="text"
+                    name="country"
+                    value={country}
+                    className="user_details_area_div1_input"
+                    onChange={(e) => onChange(e)}
+                  />
                 </div>
                 <div className="user_details_area_div1">
                   <div className="user_details_area_div1_head">Zip Code*</div>
-                  <input type="text" className="user_details_area_div1_input" />
+                  <input
+                    type="text"
+                    name="zipCode"
+                    value={zipCode}
+                    className="user_details_area_div1_input"
+                    onChange={(e) => onChange(e)}
+                  />
                 </div>
               </div>
               <div className="user_details_area_btn_div">
-                <button className="user_details_area_btn">Submit</button>
+                <button
+                  className="user_details_area_btn"
+                  onClick={updateProfile}
+                >
+                  Submit
+                </button>
               </div>
             </div>
             {/* ================== */}
@@ -486,93 +549,6 @@ const DashBoardUserDetails = ({ auth }) => {
             {/* ================== */}
             {/* ================== */}
             {/* ================== */}
-            <div className="recent_transaction_body">
-              <div className="recent_transaction_body_head" id="transact_head">
-                Transactions
-              </div>
-
-              {/* ================= */}
-              {/* ================= */}
-              {/* ================= */}
-              {/* ================= */}
-              {/* ================= */}
-              {/* ================= */}
-
-              <div className="asset_list_desktop_view2">
-                <table className="branch_asset_table">
-                  <thead className="branch_asset_titles">
-                    <tr className="branch_asset_title_div">
-                      <th className="branch_asset_heading_titles branch_asset_heading_titles_first">
-                        Type
-                      </th>
-                      <th className="branch_asset_heading_titles">Time</th>
-                      <th className="branch_asset_heading_titles">Amount</th>
-                      <th className="branch_asset_heading_titles branch_asset_heading_titles_last">
-                        Txn Hash
-                      </th>
-                    </tr>
-                  </thead>
-
-                  {/* <div className="table-body-content">
-
-// =====================
-// =====================
-// =====================
-// =====================
-// =====================
-// =====================
-              </div> */}
-                  {loanAsset.length <= 0 ? (
-                    <div className="no_loans_div">
-                      <div className="no_loans_div_cont">
-                        <Nodata />
-                        No funded pools yet.
-                      </div>{" "}
-                    </div>
-                  ) : (
-                    <tbody
-                      className="branch_asset_body"
-                      id="popular-categories"
-                    >
-                      {" "}
-                      {/* =============== */}
-                      {/* =============== */}
-                      {/* =============== */}
-                      {loanAsset.map((asset) => {
-                        return (
-                          <tr className="branch_asset_body_row ">
-                            <td className="branch_asset_body_row_data branch_asset_body_row_data_first  ">
-                              <div className="assets-data"></div>
-                            </td>
-                          </tr>
-                        );
-                      })}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                      {/* =================== */}
-                    </tbody>
-                  )}
-                </table>
-              </div>
-
-              {/* ================= */}
-              {/* ================= */}
-              {/* ================= */}
-
-              <div className="seemore_btn_div">
-                <a href="#transact_head">
-                  <button className="see_more_btn" onClick={toggleSeemore}>
-                    {seemore == false ? "Expand" : "Collapse"}
-                  </button>
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </section>

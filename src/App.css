@@ -9,6 +9,9 @@
 body {
   font-family: "Omnes", sans-serif;
 }
+hr{
+  width: 100%;
+}
 html {
   scroll-behavior: smooth;
   transition: 2s ease-in;
@@ -19,7 +22,9 @@ input[type="number"]::-webkit-inner-spin-button {
   appearance: none;
   margin: 0;
 }
-
+.dark hr {
+  color: #605d6e;
+}
 div::-webkit-scrollbar {
   display: none;
 }

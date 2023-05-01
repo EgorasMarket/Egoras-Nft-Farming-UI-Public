@@ -697,7 +697,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                                   </div>
                                 </div>
                               </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
+                              <td className="assets-category-data1b branch_apy">
                                 <div className="assets-data-name_pool ">
                                   13.0
                                   <span className="asset_symbol">%</span>
@@ -820,7 +820,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                                   </div>
                                 </div>
                               </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
+                              <td className="assets-category-data1b branch_apy">
                                 <div className="assets-data-name_pool ">
                                   13.0
                                   <span className="asset_symbol">%</span>
@@ -944,7 +944,7 @@ const DashBoardLendPage = ({ submitKyc, auth }) => {
                                   </div>
                                 </div>
                               </td>
-                              <td className="assets-category-data1b stable-content branch_apy">
+                              <td className="assets-category-data1b branch_apy">
                                 <div className="assets-data-name_pool ">
                                   13.0
                                   <span className="asset_symbol">%</span>

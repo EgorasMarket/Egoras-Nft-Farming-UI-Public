@@ -66,6 +66,7 @@ const DashBoardSellProduct = () => {
   const [addBrand, setAddBrand] = useState(false);
   const [addCategory, setAddCategory] = useState(false);
   const [inputCount, setInputCount] = useState(1);
+  const [route, setRoute] = useState("");
   const [formData, setFormData] = useState({
     product_details: "",
   });
@@ -129,47 +130,74 @@ const DashBoardSellProduct = () => {
   };
   const sendProductToBlockchain = async (prodId, productType, prodCount) => {
     const conCatProdName = ` ${prodName}_${prodId}`;
+    console.log(productType);
 
-    let res;
+
 
     if (activeSaleTab == "direct") {
-      res = await listProduct(
+      let setPass = true;
+      const res = await listProduct(
         conCatProdName,
         parseEther(prodAmount.toString(), "wei").toString(),
-        productType,
+        setPass,
         prodCount,
         library.getSigner()
       );
+          console.log(res, "somto8uhhhg");
+          console.log(res.status, "somto8uhhhg");
+
+          if (res.status == true) {
+            setIsLoading(false);
+            setDisable(false);
+            setSuccessModal(true);
+            setRoute("/app/user/p2p_sales");
+            setSuccessMessage(
+              "You've successfully placed " + prodName + " for sale"
+            );
+          } else {
+            setErrorModal(true);
+            setErrorMessage(res.message);
+            setIsLoading(false);
+            setDisable(false);
+          }
     } else {
-      res = await listProduct(
+      let setPass = false;
+      const res = await listProduct(
         conCatProdName,
         parseEther(saleAmount.toString(), "wei").toString(),
-        productType,
+        setPass,
         prodCount,
         library.getSigner()
       );
+          console.log(res, "somto8uhhhg");
+          console.log(res.status, "somto8uhhhg");
+
+          if (res.status == true) {
+            setIsLoading(false);
+            setDisable(false);
+            setSuccessModal(true);
+            setRoute("/app/user/sales");
+            setSuccessMessage(
+              "You've successfully placed " + prodName + " for sale"
+            );
+          } else {
+            setErrorModal(true);
+            setErrorMessage(res.message);
+            setIsLoading(false);
+            setDisable(false);
+          }
     }
 
-    console.log(res, "somto8uhhhg");
-    console.log(res.status, "somto8uhhhg");
+    // console.log(res, "somto8uhhhg");
+    // console.log(res.status, "somto8uhhhg");
 
-    if (res.status == true) {
-      setIsLoading(false);
-      setDisable(false);
-      setSuccessModal(true);
-      setSuccessMessage("You've successfully placed " + prodName + " for sale");
-    } else {
-      setErrorModal(true);
-      setErrorMessage(res.message);
-      setIsLoading(false);
-      setDisable(false);
-    }
   };
+
   const UploadProduct = async () => {
     setIsLoading(true);
     setDisable(true);
     const formData = new FormData();
-    console.log(activeSaleTab);
+    console.log(activeSaleTab, account, "______UUUUUU");
 
     const element = document.getElementById("product_image");
     const element2 = document.getElementById("product_image2");
@@ -362,7 +390,6 @@ const DashBoardSellProduct = () => {
   const handleProdStateChange = (event) => {
     setProdState(event.target.value);
     console.log(event.target.value);
-    // prodState, setProdState
     //console.log(event.target.value);
   };
   const handleBrandNameChange = (event) => {
@@ -670,7 +697,7 @@ const DashBoardSellProduct = () => {
         <UpdatedSuccessModal
           btnRoute={true}
           successMessage={successMessage}
-          route="/app/user/sales"
+          route={route}
         />
       ) : null}
       {addBrand ? (

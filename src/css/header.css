@@ -13,6 +13,41 @@ div#Header {
   font-size: 20px !important;
   margin-right: 3px;
 }
+.notifications_headerTab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* padding: 10px; */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #252337;
+  box-shadow: 0px 6px 13px #0f0e18;
+}
+.notifications_headerTab1_active {
+  width: 100%;
+  padding: 8px;
+  background: #7a5fc0;
+  color: #ffffff;
+  /* border-radius: 10px; */
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.notifications_headerTab1 {
+  width: 100%;
+  padding: 8px;
+  /* background: #211f2d; */
+  color: #ffffff;
+  /* border-radius: 10px; */
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
 .headerSection {
   background-color: #fff;
   top: 0;
@@ -165,7 +200,7 @@ div#Header {
   height: 100%;
 }
 .dark .wallet_settings_icon_cont:hover {
-  background: #1e2c21;
+  background: #151422;
   transition: all 0.1s linear;
 }
 .wallet_settings_icon_cont:hover {
@@ -552,7 +587,7 @@ vl {
   text-decoration: unset !important;
 }
 .DropLink {
-  color: #424242 !important;
+  color: #2e2c47 !important;
   font-size: 14px !important;
   margin-left: 10px !important;
 }

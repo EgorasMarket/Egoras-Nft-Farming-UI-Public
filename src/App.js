@@ -69,6 +69,9 @@ function App() {
       // socket.disconnect();
     };
   }, []);
+  useEffect(() => {
+ console.log(localStorage.tank)
+  }, []);
 
   useEffect(() => {
     if (linksActive === "/app") {

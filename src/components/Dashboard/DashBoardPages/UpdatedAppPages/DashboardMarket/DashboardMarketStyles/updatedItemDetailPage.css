@@ -74,24 +74,31 @@
 .updated_itemdisplay_area2 {
   display: flex;
   flex-direction: column;
-  grid-gap: 20px;
-  grid-gap: 20px;
-  grid-gap: 20px;
-  gap: 20px;
+  gap: 10px;
   width: 100%;
-  margin-left: 7%;
+  margin-left: 3%;
+}
+.product_detail_section {
+  padding: 0em 0em !important;
+  padding-bottom: 2em !important;
+  position: relative;
+  /* overflow: hidden; */
 }
 .updated_itemdisplay_area2_cont1 {
   display: flex;
   flex-direction: column;
   grid-gap: 0px;
   gap: 0px;
-  border-bottom: solid 1px #d0d0d0;
+  /* border-bottom: solid 1px #d0d0d0; */
   padding: 1em 0em;
+  padding-bottom: 0;
 }
-.dark .updated_itemdisplay_area2_cont1 {
+.power_details_details_div_cont1_div1 {
+  color: #8a87a7;
+}
+/* .dark .updated_itemdisplay_area2_cont1 {
   border-bottom: solid 1px #414141;
-}
+} */
 .updated_itemdisplay_area2_cont1_condition_tag_div {
   width: 100%;
 }
@@ -290,7 +297,7 @@
   width: 30px !important;
 }
 .updated_itemdisplay_area1 {
-  width: 100%;
+  width: 84%;
   margin: auto;
   margin-top: 0;
   position: sticky;
@@ -399,7 +406,13 @@
 .Updated_itemdisplay_payment_proceed_div_2_area5 {
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 28px;
+  font-weight: 600;
+  align-items: center;
+}
+.Updated_itemdisplay_payment_proceed_div_2_area5_area1 {
+  font-weight: 400;
+  font-size: 18px;
 }
 .Updated_itemdisplay_payment_proceed_div_2_area6 {
   display: flex;
@@ -611,7 +624,7 @@ a.More_details_link {
 }
 .dark .product_specifications_area {
   background: #151422;
-  border: solid 1px #304a3a;
+  border: solid 1px #2e2c47;
 }
 .product_specifications_area_head {
   font-size: 17px;
@@ -641,6 +654,10 @@ a.More_details_link {
 }
 .product_specifications_area_body > p {
   width: 100% !important;
+  background: inherit !important;
+}
+.product_specifications_area_body > p span {
+  background: inherit !important;
 }
 .product_specifications_area_head_tab_active {
   padding: 18px;
@@ -793,11 +810,7 @@ a.More_details_link {
   .updated_itemdisplay_area2 {
     display: flex;
     flex-direction: column;
-    grid-gap: 20px;
-    grid-gap: 20px;
-    grid-gap: 20px;
-    grid-gap: 20px;
-    gap: 20px;
+    gap: 10px;
     width: 100%;
     margin-left: 0;
   }

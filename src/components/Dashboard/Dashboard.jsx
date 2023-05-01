@@ -7,6 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import DashBoardUserSales from "./DashBoardPages/DashBoardUserSales";
 import Cookies from "universal-cookie";
 // import Swap from "./DashBoardPages/Swap/Swap";
+import DashBoardMarketCheckoutPage from "./DashBoardPages/UpdatedAppPages/DashboardMarket/DashBoardMarketCheckoutPage";
 import ProductDetailPage from "./DashBoardPages/UpdatedAppPages/DashboardMarket/ProductDetailPage";
 import DashBoardUserDetails from "./DashBoardPages/DashBoardUserDetails";
 import UpdatedSwap from "./DashBoardPages/UpdatedAppPages/UpdatedSwap/UpdatedSwap";
@@ -193,6 +194,11 @@ const Dashboard = ({ check, togglemakeDark }) => {
                   exact
                   path="/app/sell"
                   component={DashBoardSellProduct}
+                />
+                <Route
+                  exact
+                  path="/app/product/checkout/:productId/:product_count/:productName"
+                  component={DashBoardMarketCheckoutPage}
                 />
                 <Route
                   exact

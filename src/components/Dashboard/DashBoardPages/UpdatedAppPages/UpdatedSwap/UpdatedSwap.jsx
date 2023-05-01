@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import SwapVerticalCircleIcon from "@mui/icons-material/SwapVerticalCircle";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
-
+import v3ContractAdress from "../../../../../web3/contracts/V3/V3ContractAddress.json";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import "./UpdatedSwap.css";
@@ -33,10 +33,12 @@ import {
   swapBnbForEusd,
   getAmountsIn,
   getAmountsOut,
-  checkAllowanceSwap,
-  unlockSwapToken,
 } from "../../../../../web3/index2";
-import { tokenBalance } from "../../../../../web3/index";
+import {
+  tokenBalance,
+  checkAllowanceV3,
+  unlockTokenV3,
+} from "../../../../../web3/index";
 import {
   AreaChart,
   Area,
@@ -102,6 +104,7 @@ const UpdatedSwap = () => {
   const [eusdSmartContractBal, setEusdSmartContractBal] = useState("");
   const [insufficientLiquidityBtn, setInsufficientLiquidityBtn] =
     useState(false);
+  const [insufficientBalance, setInsufficientBalance] = useState(false);
   // const [eus, setIsAmountLoading] = useState(false);
 
   const hour1Array = [
@@ -329,6 +332,22 @@ const UpdatedSwap = () => {
       symbol: "BNB",
       favorite: "true",
     },
+    // {
+    //   id: "2",
+    //   img: "/img/egc_icon2.svg",
+    //   name: "Martgpt",
+    //   address: "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+    //   symbol: "EGC",
+    //   favorite: "false",
+    // },
+    // {
+    //   id: "3",
+    //   img: "/img/vertiverse-token-logo-icon.svg",
+    //   name: "VertiVerseToken",
+    //   address: "0xA46ebC22Df7D73575b8680434A1E0ADB9a4A14C4",
+    //   symbol: "VTT",
+    //   favorite: "false",
+    // },
   ];
   useEffect(() => {
     setBaseFromAddress(assetsBase[0].PriceAddress);
@@ -415,6 +434,7 @@ const UpdatedSwap = () => {
     setIdTicker(e.currentTarget.id);
     setBaseFromAddress(e.currentTarget.name);
     setSwapFromAddress(e.currentTarget.name);
+    setSwapAmount("");
     // setInitialBaseFromAddress(e.currentTarget.name);
     setIdBase(id2);
     setId2b(id2);
@@ -698,10 +718,12 @@ const UpdatedSwap = () => {
       return;
     }
   }, [account]);
-  const UnlockToken = async (e) => {
+  const UnlockToken = async () => {
     setIsLoading(true);
     setDisable(true);
-    let ret = await unlockSwapToken(
+
+    let ret = await unlockTokenV3(
+      SwapFromAddress,
       parseEther("180000000000000000000000000000000000", "wei").toString(),
       library.getSigner()
     );
@@ -726,7 +748,7 @@ const UpdatedSwap = () => {
   useEffect(
     async (e) => {
       if (account) {
-        let check = await checkAllowanceSwap(
+        let check = await checkAllowanceV3(
           SwapFromAddress,
           account,
           parseEther(SwapAmount.toString(), "wei").toString(),
@@ -857,18 +879,21 @@ const UpdatedSwap = () => {
   const CloseErrorModal = () => {
     setErrorModal(false);
   };
-  useEffect(async (e) => {
-    // if (account) {
-    let res = await tokenBalance(
-      "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A",
-      "0x3A81836b093f7f3D3ca271125CcD45c461409697",
-      library.getSigner()
-    );
-    console.log(res);
-    console.log(formatEther(res.message));
-    let tvl = formatEther(res.message);
-    setEusdSmartContractBal(formatEther(res.message));
-  }, []);
+  useEffect(
+    async (e) => {
+      // if (account) {
+      let res = await tokenBalance(
+        baseFromAddress,
+        v3ContractAdress.address,
+        library.getSigner()
+      );
+      console.log(res);
+      console.log(formatEther(res.message));
+      let tvl = formatEther(res.message);
+      setEusdSmartContractBal(formatEther(res.message));
+    },
+    [baseFromAddress]
+  );
   useEffect(() => {
     if (parseInt(SwapAmount) > parseInt(eusdSmartContractBal)) {
       setInsufficientLiquidityBtn(true);
@@ -881,6 +906,13 @@ const UpdatedSwap = () => {
     console.log(SwapAmount);
     console.log(eusdSmartContractBal);
   }, [eusdSmartContractBal, SwapAmount]);
+useEffect(() => {
+  if (SwapAmount > coinBalance) {
+    setInsufficientBalance(true);
+  } else {
+    setInsufficientBalance(false);
+  }
+}, [SwapAmount, coinBalance]);
 
   return (
     <div className="other2">
@@ -944,9 +976,9 @@ const UpdatedSwap = () => {
                                   onChange={onChangeSwapAmount}
                                   value={SwapAmount}
                                 />
-                                <div className="amnt_input_layer1_input_div_dollar_value">
+                                {/* <div className="amnt_input_layer1_input_div_dollar_value">
                                   ~${SwapAmount * 750}
-                                </div>
+                                </div> */}
                               </div>
 
                               {id == "" ? (
@@ -1171,7 +1203,7 @@ const UpdatedSwap = () => {
                                     {isAmountLoading ? (
                                       <div className="amount_loading_div">
                                         <PulseLoader
-                                          color="#12111b"
+                                          color="#353250"
                                           size={20}
                                           height={20}
                                         />
@@ -1190,12 +1222,12 @@ const UpdatedSwap = () => {
                                   </>
                                 )}
 
-                                <div className="amnt_input_layer1_input_div_dollar_value">
+                                {/* <div className="amnt_input_layer1_input_div_dollar_value">
                                   ~$
                                   {SwapAmount == "" || id2 == ""
                                     ? " "
                                     : SwapAmount * 750}
-                                </div>
+                                </div> */}
                               </div>
                               {id2 == "" ? (
                                 <div className="Swap_icondropDownDiv">
@@ -1391,51 +1423,70 @@ const UpdatedSwap = () => {
                                       <>
                                         {data.id == id ? (
                                           <>
-                                            {unlockBtn === false ? (
+                                            {insufficientBalance? (
                                               <button
                                                 id="generate"
-                                                disabled={Disable}
-                                                onClick={UnlockToken}
+                                                disabled={true}
                                                 class="updatedSwapSwapBtn"
                                               >
-                                                {isLoading ? (
-                                                  <ScaleLoader
-                                                    color="#12111b"
-                                                    size={10}
-                                                    height={20}
-                                                  />
-                                                ) : (
-                                                  <> Approve {data.symbol}</>
-                                                )}
+                                                Insufficient Balance
                                               </button>
                                             ) : (
                                               <>
-                                                {insufficientLiquidityBtn ? (
-                                                  <button
-                                                    id="generate"
-                                                    disabled={true}
-                                                    onClick={SwapEusdForBnb}
-                                                    class="updatedSwapSwapBtn"
-                                                  >
-                                                    Insufficient Eusd Liquidity
-                                                  </button>
-                                                ) : (
+                                                {unlockBtn === false ? (
                                                   <button
                                                     id="generate"
                                                     disabled={Disable}
-                                                    onClick={SwapEusdForBnb}
+                                                    onClick={UnlockToken}
                                                     class="updatedSwapSwapBtn"
                                                   >
                                                     {isLoading ? (
                                                       <ScaleLoader
-                                                        color="#12111b"
+                                                        color="#353250"
                                                         size={10}
                                                         height={20}
                                                       />
                                                     ) : (
-                                                      <> Swap {data.symbol}</>
+                                                      <>
+                                                        {" "}
+                                                        Approve {data.symbol}
+                                                      </>
                                                     )}
                                                   </button>
+                                                ) : (
+                                                  <>
+                                                    {insufficientLiquidityBtn ? (
+                                                      <button
+                                                        id="generate"
+                                                        disabled={true}
+                                                        onClick={SwapEusdForBnb}
+                                                        class="updatedSwapSwapBtn"
+                                                      >
+                                                        Insufficient{" "}
+                                                        {data.symbol} Liquidity
+                                                      </button>
+                                                    ) : (
+                                                      <button
+                                                        id="generate"
+                                                        disabled={Disable}
+                                                        onClick={SwapEusdForBnb}
+                                                        class="updatedSwapSwapBtn"
+                                                      >
+                                                        {isLoading ? (
+                                                          <ScaleLoader
+                                                            color="#353250"
+                                                            size={10}
+                                                            height={20}
+                                                          />
+                                                        ) : (
+                                                          <>
+                                                            {" "}
+                                                            Swap {data.symbol}
+                                                          </>
+                                                        )}
+                                                      </button>
+                                                    )}
+                                                  </>
                                                 )}
                                               </>
                                             )}
@@ -1452,7 +1503,7 @@ const UpdatedSwap = () => {
                                       <>
                                         {data.id == id ? (
                                           <>
-                                            {SwapAmount > coinBalance ? (
+                                            {insufficientBalance ? (
                                               <button
                                                 id="generate"
                                                 class="updatedSwapSwapBtn"
@@ -1469,7 +1520,7 @@ const UpdatedSwap = () => {
                                               >
                                                 {isLoading ? (
                                                   <ScaleLoader
-                                                    color="#12111b"
+                                                    color="#353250"
                                                     size={10}
                                                     height={20}
                                                   />
@@ -1500,7 +1551,7 @@ const UpdatedSwap = () => {
                                               >
                                                 {isLoading ? (
                                                   <ScaleLoader
-                                                    color="#12111b"
+                                                    color="#353250"
                                                     size={10}
                                                     height={20}
                                                   />
@@ -1517,7 +1568,7 @@ const UpdatedSwap = () => {
                                               >
                                                 {isLoading ? (
                                                   <ScaleLoader
-                                                    color="#12111b"
+                                                    color="#353250"
                                                     size={10}
                                                     height={20}
                                                   />

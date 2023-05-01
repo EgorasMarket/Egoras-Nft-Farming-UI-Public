@@ -1542,7 +1542,7 @@ a.visit_app_link_2 {
   flex-direction: column;
 }
 .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head {
-  color: #787690;
+  color: #c8c6dd;
 }
 .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para {
   font-size: 26px;
@@ -1899,6 +1899,7 @@ a.visit_app_link_2 {
   font-size: 14px;
   text-align: center;
   font-weight: 400;
+white-space: nowrap;
 }
 
 .assets-table-body {
@@ -1931,6 +1932,18 @@ a.visit_app_link_2 {
   display: table-cell;
   -webkit-box-pack: justify;
   justify-content: space-between;
+      white-space: nowrap;
+      position: sticky;
+        left: 0;
+            background: inherit;
+            z-index: 1;
+}
+.BuyerSellerDiv_body_div2_body {
+  overflow: scroll;
+}
+.assets-category-titles-heading1.left{
+        position: sticky;
+          left: 0;
 }
 .assets-category-data1 {
   box-sizing: border-box;
@@ -1940,6 +1953,7 @@ a.visit_app_link_2 {
   display: table-cell;
   -webkit-box-pack: justify;
   justify-content: space-between;
+      white-space: nowrap;
 }
 .assets-category-data1b {
   box-sizing: border-box;
@@ -1951,6 +1965,7 @@ a.visit_app_link_2 {
   justify-content: space-between;
   text-align: center;
   align-items: center;
+      white-space: nowrap;
 }
 .left {
   text-align: left;
@@ -1967,6 +1982,7 @@ a.visit_app_link_2 {
   justify-content: flex-end;
   height: 100%;
   text-align: right;
+      white-space: nowrap;
 }
 .assets-category-data-last:last-child {
   border-radius: 0px 8px 8px 0px;
@@ -2185,71 +2201,6 @@ a.visit_app_link_2 {
     bottom: 68px;
     left: 45px;
     animation: topMove2 5s linear infinite;
-  }
-  .assets-cont-header-arae-btns {
-    width: 100%;
-    display: flex;
-  }
-
-  .assets-header1 {
-    width: 50%;
-  }
-  .assets-header2 {
-    width: 50%;
-  }
-  .assets-category-data {
-    display: flex;
-    font-size: 14px;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  td.assets-category-data::before {
-    font-family: Inter, "Helvetica Neue", sans-serif;
-    font-weight: 600;
-    line-height: 1.5;
-    font-size: 14px;
-    color: var(--theme-ui-colors-text-muted, #708390);
-    content: "Asset";
-    display: block;
-  }
-
-  .assets-collateralize-button {
-    width: 100%;
-  }
-  .assets-category-titles {
-    display: none;
-  }
-  .assets-category-row {
-    width: 100%;
-    display: flex !important;
-  }
-  .assets-category-data1 {
-    display: flex;
-    font-size: 14px;
-  }
-  .assets-category-data1::before {
-    font-family: Inter, "Helvetica Neue", sans-serif;
-    font-weight: 600;
-    line-height: 1.5;
-    font-size: 14px;
-    color: var(--theme-ui-colors-text-muted, #708390);
-    content: "Type";
-    display: block;
-  }
-  .assets-category-data1b {
-    display: flex;
-    font-size: 14px;
-  }
-
-  .assets-category-data1b::before {
-    font-family: Inter, "Helvetica Neue", sans-serif;
-    font-weight: 600;
-    line-height: 1.5;
-    font-size: 14px;
-    color: var(--theme-ui-colors-text-muted, #708390);
-    content: "EUSD Avail.";
-    display: block;
   }
   .stable-content::before {
     font-family: Inter, "Helvetica Neue", sans-serif;
@@ -2655,7 +2606,7 @@ a.visit_app_link_2 {
     width: 30px;
   }
   .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head {
-    color: #787690;
+    color: #c8c6dd;
     font-size: 12px;
   }
   .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para {
@@ -2849,7 +2800,7 @@ a.visit_app_link_2 {
   color: #fff;
 }
 .dark .assets-category-row:hover {
-  background: #2b3f32;
+  background: #2a283c;
 }
 .dark .assets-data-pool_name {
   color: #ffffff;
@@ -3032,7 +2983,7 @@ a.visit_app_link_2 {
 
   box-shadow: 0px 0px 10px #000000;
 
-  border: solid 1px #62816e;
+  border: solid 1px #34334b;
 }
 .dark .logout-btn {
   box-shadow: 0px 5px 13px #000000;
