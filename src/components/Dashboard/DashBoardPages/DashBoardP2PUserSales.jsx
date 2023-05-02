@@ -82,6 +82,8 @@ const DashBoardP2PUserSales = () => {
   const [activeBtn, setActivrBtn] = useState("approved_products");
   const [indexId, setIndexId] = useState(null);
   const [saleDetails, setSaleDetails] = useState("");
+  const [buyDetails, setBuyDetails] = useState("");
+  const [viewReceipt, setViewReceipt] = useState(false);
   const [activeLink, setActiveLink] = useState("abstract-link");
   const [activeMenu, setActiveMenu] = useState("details-accord  ");
   const [activeTab, setActiveTab] = useState("buyer");
@@ -93,13 +95,13 @@ const DashBoardP2PUserSales = () => {
   const [myDirectProducts, setMyDirectProducts] = useState([]);
   const [myDirectProducts2, setMyDirectProducts2] = useState([]);
   const [ToggleAproveDiv, setToggleAproveDiv] = useState("");
-    const [successModal, setSuccessModal] = useState(false);
-    const [errorModal, setErrorModal] = useState(false);
-    const [successMessage, setSuccessMessage] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
+  const [successModal, setSuccessModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [successRoute, setSuccessRoute] = useState("");
-    const [Disabled, setDisabled] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+  const [Disabled, setDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);
   };
@@ -206,6 +208,7 @@ const DashBoardP2PUserSales = () => {
     setSaleDetails(id);
     console.log(id);
   };
+
   const toggleActive = (e) => {
     let link = e.currentTarget.id;
     setActiveLink(link);
@@ -220,8 +223,8 @@ const DashBoardP2PUserSales = () => {
   };
 
   const markProductAsShipped = async (order_id) => {
-       setIsLoading(true);
-       setDisabled(true);
+    setIsLoading(true);
+    setDisabled(true);
     const call = await MARK_PRODUCT_AS_SHIPPED({ user: account, order_id });
     console.log(call);
 
@@ -229,24 +232,22 @@ const DashBoardP2PUserSales = () => {
       // var row = document.getElementById(order_id);
       // row.style.display = "none";
       // alert("product shipped successfully");
-                 setIsLoading(false);
-                 setDisabled(false);
-                 setSuccessModal(true);
-                 setSuccessRoute("");
-                 setSuccessMessage(
-                   "You have successfully marked this product as shipped"
-                 );
+      setIsLoading(false);
+      setDisabled(false);
+      setSuccessModal(true);
+      setSuccessRoute("");
+      setSuccessMessage("You have successfully marked this product as shipped");
     } else {
-            console.log(call);
-            setErrorModal(true);
-            setErrorMessage(call.errorMessage);
-            setIsLoading(false);
-            setDisabled(false);
+      console.log(call);
+      setErrorModal(true);
+      setErrorMessage(call.errorMessage);
+      setIsLoading(false);
+      setDisabled(false);
     }
   };
   const markAsRecieved = async (order_id, product_id, tradeID) => {
-        setIsLoading(true);
-        setDisabled(true);
+    setIsLoading(true);
+    setDisabled(true);
     // console.log(order_id, product_id, tradeID);
     const res = await releaseFundsToSeller(
       product_id,
@@ -262,25 +263,25 @@ const DashBoardP2PUserSales = () => {
         // var row = document.getElementById(order_id);
         // row.style.display = "none";
         // alert("product shipped successfully");
-              setIsLoading(false);
-              setDisabled(false);
-              setSuccessModal(true);
-              setSuccessRoute("");
-              setSuccessMessage(
-            "You have successfully marked this product as received, your funds will now released to the seller"
-              );
+        setIsLoading(false);
+        setDisabled(false);
+        setSuccessModal(true);
+        setSuccessRoute("");
+        setSuccessMessage(
+          "You have successfully marked this product as received, your funds will now released to the seller"
+        );
       } else {
-             console.log(call);
-             setErrorModal(true);
-             setErrorMessage(call.errorMessage);
-             setIsLoading(false);
-             setDisabled(false);
+        console.log(call);
+        setErrorModal(true);
+        setErrorMessage(call.errorMessage);
+        setIsLoading(false);
+        setDisabled(false);
       }
     } else {
-            setErrorModal(true);
-            setErrorMessage(res.message);
-            setIsLoading(false);
-            setDisabled(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+      setIsLoading(false);
+      setDisabled(false);
     }
   };
 
@@ -377,7 +378,6 @@ const DashBoardP2PUserSales = () => {
     setActiveTab(active);
   };
   const toggleActiveSubTab = (e) => {
-
     let active = e.currentTarget.id;
     setActiveSubTab(active);
   };
@@ -398,12 +398,30 @@ const DashBoardP2PUserSales = () => {
     setToggleAproveDiv(Divid);
     console.log(Divid, "Divid");
   };
-    const CloseErrorModal = () => {
-      setErrorModal(false);
-    };
-    const toggleCheckAgree = () => {
-      setCheckAgree(!checkAgree);
-    };
+  const CloseErrorModal = () => {
+    setErrorModal(false);
+  };
+  const toggleCheckAgree = () => {
+    setCheckAgree(!checkAgree);
+  };
+  const ToggleBuyDetails = (e) => {
+    let id = e.currentTarget.id;
+    setBuyDetails(id);
+    console.log(id);
+  };
+  const ToggleViewReceipt = () => {
+    // let id = e.currentTarget.id;
+    setViewReceipt(!viewReceipt);
+    // console.log(id);
+  };
+
+  function handlePrint() {
+    const printContents = document.getElementById("print-content").innerHTML;
+    const originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+  }
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -543,6 +561,7 @@ const DashBoardP2PUserSales = () => {
                                 <tr
                                   className="assets-category-row  transitionMe"
                                   id={asset.id}
+                                  onClick={ToggleBuyDetails}
                                 >
                                   <td className="assets-category-data branch_name_title">
                                     <div className="assets-data">
@@ -1761,6 +1780,237 @@ const DashBoardP2PUserSales = () => {
           route={successRoute}
         />
       ) : null}
+      {buyDetails == ""
+        ? null
+        : buyOrders.map((data) => (
+            <>
+              {data.id === buyDetails ? (
+                <div className="saleDetailsDiv">
+                  <div
+                    className="saleDetailsDiv_close_div"
+                    onClick={ToggleBuyDetails}
+                  ></div>
+                  <div
+                    className="saleDetailsDiv_area_closeIcon_div"
+                    onClick={ToggleBuyDetails}
+                  >
+                    <CloseIcon className="saleDetailsDiv_area_closeIcon" />
+                    Close
+                  </div>
+                  <div className="saleDetailsDiv_area">
+                    <div className="saleDetailsDiv_area_1">
+                      <div className="saleDetailsDiv_area_1_title">
+                        Order Details
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Images
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body"></div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Name
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.item_name}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Amount
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {numberWithCommas(parseInt(data.amount).toFixed(0))}{" "}
+                          Eusd
+                        </div>
+                      </div>
+
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Purchase Amount
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {numberWithCommas(
+                            parseInt(data.sub_total).toFixed(0)
+                          )}{" "}
+                          Eusd
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Purchase Quantity
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.quantity}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Product Status
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.status}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Order Txn Hash
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.transactionHash}
+                        </div>
+                      </div>
+                      <div className="saleDetailsDiv_area_1_div1">
+                        <div className="saleDetailsDiv_area_1_div1_title">
+                          Order Date
+                        </div>
+                        <div className="saleDetailsDiv_area_1_div1_body">
+                          {data.createdAt}
+                        </div>
+                      </div>
+                    </div>
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+                    {/* ================ */}
+
+                    <div className="awaiting_btn_div">
+                      <button
+                        className="view_receipt_btn"
+                        // id={data.id}
+                        onClick={ToggleViewReceipt}
+                      >
+                        View Receipt
+                      </button>
+                    </div>
+                  </div>
+                  {viewReceipt ? (
+                    <div className="viewReceiptDiv">
+                      <div
+                        className="saleDetailsDiv_close_div"
+                        onClick={ToggleViewReceipt}
+                      ></div>
+                      <div className="viewReceiptDiv_area">
+                        <img
+                          src="/img/receipt_svg_dark.svg"
+                          alt=""
+                          className="receiptBg"
+                        />
+                        <div className="recipt_details_cont" id="print-content">
+                          <div className="recipt_details_cont1">
+                            <img
+                              src="/img/martgpt_logo.svg"
+                              alt=""
+                              className="recipt_details_cont1_img"
+                            />
+                          </div>
+                          <hr />
+                          <div className="recipt_details_cont2">
+                            <div className="recipt_details_cont2_title">
+                              Successful Purchase
+                            </div>
+                            <div className="recipt_details_cont2_amount">
+                              3,600 eusd
+                            </div>
+                          </div>
+                          <hr />
+                          <div className="recipt_details_cont3">
+                            <div className="recipt_details_cont3_div1">
+                              <div className="recipt_details_cont3_div1_title">
+                                Ref Number
+                              </div>
+                              <div className="recipt_details_cont3_div1_value">
+                                000085752257
+                              </div>
+                            </div>
+                            <div className="recipt_details_cont3_div1">
+                              <div className="recipt_details_cont3_div1_title">
+                                Date
+                              </div>
+                              <div className="recipt_details_cont3_div1_value">
+                                April 25, 2023 10:18 am
+                              </div>
+                            </div>
+                            <div className="recipt_details_cont3_div1">
+                              <div className="recipt_details_cont3_div1_title">
+                                Payment Method
+                              </div>
+                              <div className="recipt_details_cont3_div1_value">
+                                Fort
+                              </div>
+                            </div>
+                            <div className="recipt_details_cont3_div1">
+                              <div className="recipt_details_cont3_div1_title">
+                                Seller
+                              </div>
+                              <div className="recipt_details_cont3_div1_value">
+                                Samuel Ifeanyi
+                              </div>
+                            </div>
+                          </div>
+                          <hr />
+                          <div className="recipt_details_cont4">
+                            <div className="recipt_details_cont3_div1">
+                              <div className="recipt_details_cont3_div1_title">
+                                Amount
+                              </div>
+                              <div className="recipt_details_cont3_div1_value">
+                                3,600 eusd
+                              </div>
+                            </div>
+                            <div className="recipt_details_cont3_div1">
+                              <div className="recipt_details_cont3_div1_title">
+                                MartGpt Fee
+                              </div>
+                              <div className="recipt_details_cont3_div1_value">
+                                0 eusd
+                              </div>
+                            </div>
+                          </div>
+                          <hr />
+                          <div className="recipt_details_cont5">
+                            powered by{" "}
+                            <img
+                              src="/img/egoras-logo.svg"
+                              alt=""
+                              className="recipt_details_cont5_img"
+                            />
+                          </div>
+                        </div>
+                        <cont></cont>
+                      </div>
+                      <button
+                        onClick={handlePrint}
+                        className="viewReceiptDiv_print_button"
+                      >
+                        Print Receipt
+                      </button>
+                    </div>
+                  ) : null}
+                </div>
+              ) : null}
+            </>
+          ))}
+      {/* {viewReceipt == ""
+        ? null
+        : buyOrders.map((data) => (
+            <>{data.id === viewReceipt ? <div>Receipt</div> : null}</>
+          ))} */}
     </div>
   );
 };

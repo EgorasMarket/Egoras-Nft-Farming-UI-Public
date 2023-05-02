@@ -230,6 +230,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
 }
 
 section.popularProductsSection {
@@ -580,6 +581,13 @@ input[type="checkbox"]:checked+.checkBox_agree_div_body_label:before {
   /* line-height: 1.1; */
 }
 
+.sub_btn_div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2em;
+}
+
 .selectPlanDiv2_area1_checkout_btn {
   padding: 15px;
   border-radius: 10px;
@@ -587,7 +595,7 @@ input[type="checkbox"]:checked+.checkBox_agree_div_body_label:before {
   font-weight: 600;
   background: #7a5fc0;
   color: #fff;
-  margin-top: 2em;
+  margin-top: 0em;
   width: 100%;
 }
 
@@ -598,7 +606,7 @@ input[type="checkbox"]:checked+.checkBox_agree_div_body_label:before {
   border: solid 1px #7a5fc0;
   background: no-repeat;
   color: #fff;
-  margin-top: 2em;
+  margin-top: 0em;
   width: 100%;
   transition: all .3s linear;
 }
@@ -2014,6 +2022,11 @@ x .benefits_section1_area2_body1_cont2 {
   border: solid 1px #35344f;
 }
 
+#react-qrcode-logo {
+  height: 100% !important;
+  width: 100% !important;
+}
+
 .payViaFortDiv_area_1 {
   width: 100%;
   overflow: hidden;
@@ -2071,6 +2084,7 @@ x .benefits_section1_area2_body1_cont2 {
   color: #ffffff;
   font-size: 14px;
   font-weight: 500;
+  position: relative;
 }
 
 @media screen and (max-width: 1024px) {

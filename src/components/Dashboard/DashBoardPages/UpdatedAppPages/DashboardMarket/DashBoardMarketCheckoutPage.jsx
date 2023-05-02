@@ -69,7 +69,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
   const { fullName, phoneNumber, address, city, country, state, zipCode } =
     formData;
   console.log(productId, product_count, productName);
-  const purchaseProductWeb2 = async (txnHash,route) => {
+  const purchaseProductWeb2 = async (txnHash, route) => {
     let product_id = productDetail.index_id;
     console.log(
       numDivsToDuplicate,
@@ -94,13 +94,13 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
       setSuccessRoute(route);
       setSuccessMessage(
         "You have successfully ordered " +
-          numDivsToDuplicate + 
-           productName +
+          numDivsToDuplicate +
+          productName +
           " from " +
-       productDetail.user_wallet.slice(
-                0,
-                6
-              )+"..."+productDetail.user_wallet.slice(20, 24) +" check your buy orders for more info on shipping and delivery."
+          productDetail.user_wallet.slice(0, 6) +
+          "..." +
+          productDetail.user_wallet.slice(20, 24) +
+          " check your buy orders for more info on shipping and delivery."
       );
     } else {
       console.log(res);
@@ -517,31 +517,35 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                       </div>
                     </div>
                     <div className="proceedToPayDiv_btn_div">
-                      {unlockBtn === false ? (
-                        <button
-                          className="proceedToPayDiv_btn"
-                          disabled={Disabled}
-                          onClick={UnlockToken}
-                        >
-                          {isLoading ? (
-                            <ScaleLoader
-                              color="#12111b"
-                              size={10}
-                              height={20}
-                            />
-                          ) : (
-                            <span> Approve EUSD </span>
-                          )}
+                      {updateProfile === true ? (
+                        <button className="proceedToPayDiv_btn" disabled>
+                          Update Your Billing Info
                         </button>
                       ) : (
                         <>
-                          {updateProfile === true ? (
-                            <button className="proceedToPayDiv_btn" disabled>
-                              Update Your Billing Info
+                          {checkedFort === true ? (
+                            <button className="proceedToPayDiv_btn">
+                              Checkout Fort
                             </button>
-                          ) : (
+                          ) : checkedMetamask === true ? (
                             <>
-                              {checkedMetamask === true ? (
+                              {unlockBtn === false ? (
+                                <button
+                                  className="proceedToPayDiv_btn"
+                                  disabled={Disabled}
+                                  onClick={UnlockToken}
+                                >
+                                  {isLoading ? (
+                                    <ScaleLoader
+                                      color="#12111b"
+                                      size={10}
+                                      height={20}
+                                    />
+                                  ) : (
+                                    <span> Approve EUSD </span>
+                                  )}
+                                </button>
+                              ) : (
                                 <button
                                   className="proceedToPayDiv_btn"
                                   onClick={PurchaseProduct}
@@ -557,19 +561,12 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                                     <> Checkout Metamask</>
                                   )}
                                 </button>
-                              ) : checkedFort === true ? (
-                                <button className="proceedToPayDiv_btn">
-                                  Checkout Fort
-                                </button>
-                              ) : (
-                                <button
-                                  className="proceedToPayDiv_btn"
-                                  disabled
-                                >
-                                  Select Payment Method
-                                </button>
                               )}
                             </>
+                          ) : (
+                            <button className="proceedToPayDiv_btn" disabled>
+                              Select Payment Method
+                            </button>
                           )}
                         </>
                       )}
