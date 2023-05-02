@@ -517,6 +517,11 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                       </div>
                     </div>
                     <div className="proceedToPayDiv_btn_div">
+                      {checkedFort === true ? (
+                        <button className="proceedToPayDiv_btn">
+                          Checkout Fort
+                        </button>
+                      ) : null}
                       {unlockBtn === false ? (
                         <button
                           className="proceedToPayDiv_btn"
