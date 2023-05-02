@@ -69,7 +69,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
   const { fullName, phoneNumber, address, city, country, state, zipCode } =
     formData;
   console.log(productId, product_count, productName);
-  const purchaseProductWeb2 = async (txnHash,route) => {
+  const purchaseProductWeb2 = async (txnHash, route) => {
     let product_id = productDetail.index_id;
     console.log(
       numDivsToDuplicate,
@@ -94,13 +94,13 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
       setSuccessRoute(route);
       setSuccessMessage(
         "You have successfully ordered " +
-          numDivsToDuplicate + 
-           productName +
+          numDivsToDuplicate +
+          productName +
           " from " +
-       productDetail.user_wallet.slice(
-                0,
-                6
-              )+"..."+productDetail.user_wallet.slice(20, 24) +" check your buy orders for more info on shipping and delivery."
+          productDetail.user_wallet.slice(0, 6) +
+          "..." +
+          productDetail.user_wallet.slice(20, 24) +
+          " check your buy orders for more info on shipping and delivery."
       );
     } else {
       console.log(res);
@@ -556,10 +556,6 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                                   ) : (
                                     <> Checkout Metamask</>
                                   )}
-                                </button>
-                              ) : checkedFort === true ? (
-                                <button className="proceedToPayDiv_btn">
-                                  Checkout Fort
                                 </button>
                               ) : (
                                 <button
