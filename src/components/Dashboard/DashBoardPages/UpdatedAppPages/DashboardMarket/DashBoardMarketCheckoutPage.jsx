@@ -283,29 +283,16 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
   const checkedFortBox = () => {
     setQrData({
       type: "product",
-      userWallet: account,
+      // userWallet: account,
       data: {
-        // quantity: numDivsToDuplicate,
+        quantity: numDivsToDuplicate,
         amount: SubTotal,
         logo: productImage,
         symbol: "eusd",
-        // user: account,
-        // product_id: productDetail.index_id,
+        product_id: productDetail.index_id,
+        user: account,
       },
     });
-    // setQrData({
-
-    //   type: "product",
-    //   userWallet: account,
-    //   data: {
-    //     quantity: numDivsToDuplicate,
-    //     amount: SubTotal,
-    //     logo: productImage,
-    //     symbol: "eusd",
-    //     product_id: productDetail.index_id,
-    //     user: account,
-    //   },
-    // });
     setCheckedFort(true);
     setCheckedMetamask(false);
   };

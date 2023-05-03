@@ -95,7 +95,8 @@ const PayViaFortModal = ({
       ></div>
       <div className="payViaFortDiv_area">
         <div className="payViaFortDiv_area_1">
-          <QRCode quietZone={10} value={`${JSON.stringify(data)}`} />
+          <QRCode quietZone={10} value={qr_link} />
+          {/* <QRCode quietZone={10} value={`${JSON.stringify(data)}`} /> */}
           {/* <img
             src="/img/dummy_qrcode.png"
             alt=""
