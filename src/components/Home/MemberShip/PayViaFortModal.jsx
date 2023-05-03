@@ -20,7 +20,7 @@ const PayViaFortModal = ({
       user: account,
     };
 
-    if (data.type === "membership") {
+    if (data.type === "membership" && account !== null) {
       socket.emit("subscribe_membership", payload);
       return;
     }
@@ -30,6 +30,11 @@ const PayViaFortModal = ({
     }
   };
   const fetchShortCode = async () => {
+    if (!data.account) {
+      //handle uninitialized account
+      return;
+    }
+
     const res = await GENERATE_QR_CODE_LINK(data);
     console.log(res, "nabb");
 
@@ -40,8 +45,17 @@ const PayViaFortModal = ({
       return;
     }
   };
+
+  useEffect(() => {
+    socket.on("0x6ED527b0a92f117f4a4E05a6dF9313CDd4a6aB41", (data) => {
+      console.log(data);
+      alert(data);
+    });
+  }, [account]);
+
   useEffect(() => {
     listener();
+
     if (data.type === "membership") {
       socket.on("membership", (data) => {
         // alert(data);

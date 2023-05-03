@@ -544,7 +544,6 @@ export const Step2Div = ({
                         data: {
                           quantity: 1,
                           logo: "https://i.imgur.com/kxL8s2g.png",
-
                           amount: 4,
                           symbol: "EGC",
                           user: account,
