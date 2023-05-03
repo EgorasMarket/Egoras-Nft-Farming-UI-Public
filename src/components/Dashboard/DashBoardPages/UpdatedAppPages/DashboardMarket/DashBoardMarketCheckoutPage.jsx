@@ -21,6 +21,7 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+import PayViaFortModal from "../../../../Home/MemberShip/PayViaFortModal";
 const DashBoardMarketCheckoutPage = ({ match }) => {
   const context = useWeb3React();
   const {
@@ -53,6 +54,8 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
   const [Disabled, setDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [unlockBtn, setUnlockBtn] = useState(true);
+  const [qr_data, setQrData] = useState({});
+
   // const [disable, setDisable] = useState(false);
   const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
   const { productId, product_count, productName } = match.params;
@@ -278,6 +281,31 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
     setCheckedFort(false);
   };
   const checkedFortBox = () => {
+    setQrData({
+      type: "product",
+      userWallet: account,
+      data: {
+        // quantity: numDivsToDuplicate,
+        amount: SubTotal,
+        logo: productImage,
+        symbol: "eusd",
+        // user: account,
+        // product_id: productDetail.index_id,
+      },
+    });
+    // setQrData({
+
+    //   type: "product",
+    //   userWallet: account,
+    //   data: {
+    //     quantity: numDivsToDuplicate,
+    //     amount: SubTotal,
+    //     logo: productImage,
+    //     symbol: "eusd",
+    //     product_id: productDetail.index_id,
+    //     user: account,
+    //   },
+    // });
     setCheckedFort(true);
     setCheckedMetamask(false);
   };
@@ -517,36 +545,35 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                       </div>
                     </div>
                     <div className="proceedToPayDiv_btn_div">
-                      {checkedFort === true ? (
-                        <button className="proceedToPayDiv_btn">
-                          Checkout Fort
-                        </button>
-                      ) : null}
-                      {unlockBtn === false ? (
-                        <button
-                          className="proceedToPayDiv_btn"
-                          disabled={Disabled}
-                          onClick={UnlockToken}
-                        >
-                          {isLoading ? (
-                            <ScaleLoader
-                              color="#12111b"
-                              size={10}
-                              height={20}
-                            />
-                          ) : (
-                            <span> Approve EUSD </span>
-                          )}
+                      {updateProfile === true ? (
+                        <button className="proceedToPayDiv_btn" disabled>
+                          Update Your Billing Info
                         </button>
                       ) : (
                         <>
-                          {updateProfile === true ? (
-                            <button className="proceedToPayDiv_btn" disabled>
-                              Update Your Billing Info
+                          {checkedFort === true ? (
+                            <button className="proceedToPayDiv_btn">
+                              Checkout Fort
                             </button>
-                          ) : (
+                          ) : checkedMetamask === true ? (
                             <>
-                              {checkedMetamask === true ? (
+                              {unlockBtn === false ? (
+                                <button
+                                  className="proceedToPayDiv_btn"
+                                  disabled={Disabled}
+                                  onClick={UnlockToken}
+                                >
+                                  {isLoading ? (
+                                    <ScaleLoader
+                                      color="#12111b"
+                                      size={10}
+                                      height={20}
+                                    />
+                                  ) : (
+                                    <span> Approve EUSD </span>
+                                  )}
+                                </button>
+                              ) : (
                                 <button
                                   className="proceedToPayDiv_btn"
                                   onClick={PurchaseProduct}
@@ -562,15 +589,12 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                                     <> Checkout Metamask</>
                                   )}
                                 </button>
-                              ) : (
-                                <button
-                                  className="proceedToPayDiv_btn"
-                                  disabled
-                                >
-                                  Select Payment Method
-                                </button>
                               )}
                             </>
+                          ) : (
+                            <button className="proceedToPayDiv_btn" disabled>
+                              Select Payment Method
+                            </button>
                           )}
                         </>
                       )}
@@ -730,6 +754,16 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
           route={successRoute}
         />
       ) : null}
+
+      {checkedFort && (
+        <PayViaFortModal
+          togglePayViaFortDiv={() => setCheckedFort(!checkedFort)}
+          message="Scan this qrcode to subscribe for your membership via FORT app."
+          code="Qretyhgjhe6"
+          account={account}
+          data={qr_data}
+        />
+      )}
     </div>
   );
 };

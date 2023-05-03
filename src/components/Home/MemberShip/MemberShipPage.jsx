@@ -107,7 +107,7 @@ const MemberShipPage = () => {
     setStep1(!step1);
     setStep2(!step2);
   };
-  useEffect(async (e) => {
+  useEffect(async () => {
     let response = await getConfiguration(library.getSigner());
     console.log(response);
     console.log(formatEther(response.message._annually._hex));
@@ -127,7 +127,6 @@ const MemberShipPage = () => {
       setSemiAnnualAmount(resSemi_MonthlyAmount);
       setAnnualAmount(resAnnualAmount);
       setPriceLoaded(true);
-      return;
     }
   });
   useEffect(() => {

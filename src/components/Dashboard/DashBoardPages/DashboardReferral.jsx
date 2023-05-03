@@ -150,9 +150,11 @@ const DashboardReferral = ({ auth }) => {
         console.log(response.message._amount.toString(), "to string count");
         console.log(response.message._count.toString(), "to string amount");
         if (response.status === true) {
-          const resAmnt = parseFloat(formatEther(response.message._count.toString()));
+          const resAmnt = parseFloat(
+            formatEther(response.message._count.toString())
+          );
           const resAmnt2 = response.message._amount.toString();
-    
+
           setRefEarnings(resAmnt);
           setRefCount(resAmnt2);
           // console.log(response.message._referral);
@@ -177,39 +179,37 @@ const DashboardReferral = ({ auth }) => {
     }
   });
 
-useEffect(async () => {
-  if (account) {
-    await axios
-      .get(API_URL + "/referal/count/"+account, null, config)
-      .then((data) => {
-        console.log(data);
-        console.log(data.data.data);
-        setMyReferrals(data.data.data);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-  }
-}, [account]);
-useEffect(async () => {
-  if (account) {
-    await axios
-      .get(API_URL + "/referal/get/referral/leaderboard", null, config)
-      .then((data) => {
-        console.log(data);
-        console.log(data.data.data);
-             const myArray = data.data.data;
-             myArray.sort(
-               (a, b) => b.refCount - a.refCount
-             );
-        setLeaderBoard(data.data.data);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-  }
-}, [account]);
-  
+  useEffect(async () => {
+    if (account) {
+      await axios
+        .get(API_URL + "/referal/count/" + account, null, config)
+        .then((data) => {
+          console.log(data);
+          console.log(data.data.data);
+          setMyReferrals(data.data.data);
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    }
+  }, [account]);
+  useEffect(async () => {
+    if (account) {
+      await axios
+        .get(API_URL + "/referal/get/referral/leaderboard", null, config)
+        .then((data) => {
+          console.log(data);
+          console.log(data.data.data);
+          const myArray = data.data.data;
+          myArray.sort((a, b) => b.refCount - a.refCount);
+          setLeaderBoard(data.data.data);
+        })
+        .catch((error) => {
+          console.log(error.response);
+        });
+    }
+  }, [account]);
+
   return (
     <>
       <div className="other2 asset_other2">
@@ -236,13 +236,13 @@ useEffect(async () => {
                   {/* <button onClick={() => library.provider._handleDisconnect()}>
                     Disconnect
                   </button> */}
-                  {/* <div className="referral_banner_bg_div">
-                      <img
-                        src="/img/referral_bg.png"
-                        alt=""
-                        className="referral_banner_bg_img"
-                      />
-                    </div> */}
+                  <div className="referral_banner_bg_div">
+                    <img
+                      src="/img/referralBanner.png"
+                      alt=""
+                      className="referral_banner_bg_img"
+                    />
+                  </div>
                   <div className="dashBoard_ref_area1">
                     <div className="dashBoard_ref_area1_cont1">
                       <div className="dashBoard_ref_area1_cont1_icon_div">
