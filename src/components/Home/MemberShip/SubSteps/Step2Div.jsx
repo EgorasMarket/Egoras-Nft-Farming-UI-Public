@@ -501,7 +501,7 @@ export const Step2Div = ({
                           logo: "https://i.imgur.com/kxL8s2g.png",
                           amount: 2,
                           symbol: "EGC",
-                          // user: account,
+                          user: account,
                         },
                       });
                     }}
@@ -524,7 +524,7 @@ export const Step2Div = ({
                           quantity: 1,
                           amount: 6,
                           symbol: "EGC",
-                          // user: account,
+                          user: account,
                         },
                       });
                     }}
@@ -547,7 +547,7 @@ export const Step2Div = ({
 
                           amount: 4,
                           symbol: "EGC",
-                          // user: account,
+                          user: account,
                         },
                       });
                     }}
@@ -658,7 +658,7 @@ export const Step2Div = ({
 
                           amount: 2,
                           symbol: "EGC",
-                          // user: account,
+                          user: account,
                         },
                       });
                     }}
@@ -681,7 +681,7 @@ export const Step2Div = ({
                           quantity: 1,
                           amount: 6,
                           symbol: "EGC",
-                          // user: account,
+                          user: account,
                         },
                       });
                     }}
@@ -702,9 +702,8 @@ export const Step2Div = ({
                           quantity: 1,
                           amount: 4,
                           logo: "https://i.imgur.com/kxL8s2g.png",
-
                           symbol: "EGC",
-                          // user: account,
+                          user: account,
                         },
                       });
                     }}
