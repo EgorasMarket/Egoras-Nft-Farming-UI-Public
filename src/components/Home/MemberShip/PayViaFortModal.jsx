@@ -62,7 +62,7 @@ const PayViaFortModal = ({
           alert("Payment made");
           setStatus("Payment made");
         } else {
-          alert("Payment incompletee");
+          alert("Payment incomplete");
           setStatus("Payment failed couldn't complete payment");
         }
       });
