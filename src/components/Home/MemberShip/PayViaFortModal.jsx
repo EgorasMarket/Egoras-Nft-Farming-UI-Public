@@ -31,6 +31,7 @@ const PayViaFortModal = ({
   };
   const fetchShortCode = async () => {
     if (!data.account) {
+      alert("Please connect wallet first");
       //handle uninitialized account
       return;
     }
