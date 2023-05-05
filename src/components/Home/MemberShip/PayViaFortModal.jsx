@@ -48,13 +48,6 @@ const PayViaFortModal = ({
   };
 
   useEffect(() => {
-    socket.on("0x6ED527b0a92f117f4a4E05a6dF9313CDd4a6aB41", (data) => {
-      console.log(data);
-      alert(data);
-    });
-  }, [account]);
-
-  useEffect(() => {
     listener();
 
     if (data.type === "membership") {
@@ -83,8 +76,6 @@ const PayViaFortModal = ({
       });
     }
 
-    // alert(JSON.stringify(data));
-    //  call the api and generate a qr data
     fetchShortCode();
   }, []);
   const copyText = () => {
