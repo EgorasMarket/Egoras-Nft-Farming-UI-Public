@@ -100,6 +100,8 @@ const PayViaFortModal = ({
             alt=""
             className="payViaFortDiv_area_1_img"
           /> */}
+
+          {/* comment here */}
         </div>
         <div className="payViaFortDiv_area_2">{message}</div>
         <div className="payViaFortDiv_area_3_input_div">
