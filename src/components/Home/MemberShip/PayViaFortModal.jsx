@@ -15,6 +15,12 @@ const PayViaFortModal = ({
   const [status, setStatus] = useState("");
 
   const fetchShortCode = async () => {
+    // if (!data.account) {
+    //   alert("Please connect wallet first");
+    //   //handle uninitialized account
+    //   return;
+    // }
+
     const res = await GENERATE_QR_CODE_LINK(data);
     console.log(res, "nabb");
 
@@ -25,6 +31,14 @@ const PayViaFortModal = ({
       return;
     }
   };
+
+  useEffect(() => {
+    socket.on("0x6ED527b0a92f117f4a4E05a6dF9313CDd4a6aB41", (data) => {
+      console.log(data);
+      alert(data);
+    });
+  }, [account]);
+
   useEffect(() => {
 
     socket.on(`${account}/${data.type}`, (data) => {
@@ -79,7 +93,8 @@ const PayViaFortModal = ({
       ></div>
       <div className="payViaFortDiv_area">
         <div className="payViaFortDiv_area_1">
-          <QRCode quietZone={10} value={`${JSON.stringify(data)}`} />
+          <QRCode quietZone={10} value={qr_link} />
+          {/* <QRCode quietZone={10} value={`${JSON.stringify(data)}`} /> */}
           {/* <img
             src="/img/dummy_qrcode.png"
             alt=""
