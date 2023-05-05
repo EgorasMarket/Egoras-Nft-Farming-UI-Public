@@ -6,6 +6,7 @@ on:
   pull_request:
     branches: [deploy]
 
+
 jobs:
   build:
     runs-on: self-hosted
@@ -15,7 +16,25 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-    # - run: npm i
-    # - name: 'Create env file'
-    #   run: |
-    #       npm run build
+      - name: Install dev dependencies
+        run: npm ci
+      - name: Prepare build
+        run: npm run build --if-present
+        env:
+          CI: false
+      - run: |
+          # npm run build
+
+# jobs:
+#   build:
+#     runs-on: self-hosted
+
+#     steps:
+#       - uses: actions/checkout@v3
+#       - uses: actions/setup-node@v3
+#         with:
+#           node-version: ${{ matrix.node-version }}
+#     # - run: npm i
+#     # - name: 'Create env file'
+#     #   run: |
+#     #       npm run build
