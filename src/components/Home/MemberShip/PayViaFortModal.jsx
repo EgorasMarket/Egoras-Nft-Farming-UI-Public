@@ -15,12 +15,7 @@ const PayViaFortModal = ({
   const [status, setStatus] = useState("");
 
   const listener = () => {
-    const payload = {
-      initiator: "web-app",
-      user: account,
-    };
 
-    socket.emit("subscribe_membership", payload);
   };
   const fetchShortCode = async () => {
     const res = await GENERATE_QR_CODE_LINK(data);
@@ -34,10 +29,9 @@ const PayViaFortModal = ({
     }
   };
   useEffect(() => {
-    listener();
-    socket.on("membership", (data) => {
-      // alert(data);
-      if (data === 1) {
+    socket.on("subscribe_membership", (data) => {
+      alert(data);
+      if (data.response === 1) {
         alert("Payment made");
         setStatus("Payment made");
       } else {
