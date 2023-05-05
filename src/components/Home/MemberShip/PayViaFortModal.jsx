@@ -101,7 +101,7 @@ const PayViaFortModal = ({
             className="payViaFortDiv_area_1_img"
           /> */}
 
-          {/* comment here */}
+          {/* comment here again */}
         </div>
         <div className="payViaFortDiv_area_2">{message}</div>
         <div className="payViaFortDiv_area_3_input_div">
@@ -118,7 +118,7 @@ const PayViaFortModal = ({
               onClick={copyText}
               onMouseOut={outFunc}
             >
-              Copys
+              Copyss
               <span className="tooltiptext2" id="myTooltip"></span>
             </button>
           </div>
