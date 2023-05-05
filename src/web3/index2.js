@@ -386,6 +386,23 @@ const setPythia = async (_pythia, signer) => {
     };
   }
 };
+
+const suspendPythia = async (_pythia, signer) => {
+  try {
+    const instance = await contractPriceOracleFacetInstance(signer);
+    let result = await instance.suspendPythia(_pythia);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
 const setEGCUSDTicker = async (_ticker, signer) => {
   try {
     const instance = await contractPriceOracleFacetInstance(signer);
@@ -579,6 +596,7 @@ export {
   checkAllowanceSwap,
   unlockSwapToken,
   setPythia,
+  suspendPythia,
   setPriceOracle,
   setEGCUSDTicker,
   getEGCEUSDTICKERPRICE,

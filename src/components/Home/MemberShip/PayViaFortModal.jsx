@@ -14,9 +14,6 @@ const PayViaFortModal = ({
   const [qr_link, setQrLink] = useState("");
   const [status, setStatus] = useState("");
 
-  const listener = () => {
-
-  };
   const fetchShortCode = async () => {
     const res = await GENERATE_QR_CODE_LINK(data);
     console.log(res, "nabb");
@@ -29,9 +26,10 @@ const PayViaFortModal = ({
     }
   };
   useEffect(() => {
-    socket.on("subscribe_membership", (data) => {
+
+    socket.on(`${account}/${data.type}`, (data) => {
       alert(data);
-      if (data.response === 1) {
+      if (data === 1) {
         alert("Payment made");
         setStatus("Payment made");
       } else {
@@ -39,6 +37,21 @@ const PayViaFortModal = ({
         setStatus("Payment failed couldn't complete payment");
       }
     });
+
+
+    // if (data.type === "product") {
+    //   socket.on("purchase-status", (data) => {
+    //     // alert(data);
+    //     if (data === 1) {
+    //       alert("Payment made");
+    //       setStatus("Payment made");
+    //     } else {
+    //       alert("Payment incomplete");
+    //       setStatus("Payment failed couldn't complete payment");
+    //     }
+    //   });
+    // }
+
     // alert(JSON.stringify(data));
     //  call the api and generate a qr data
     fetchShortCode();
@@ -66,7 +79,7 @@ const PayViaFortModal = ({
       ></div>
       <div className="payViaFortDiv_area">
         <div className="payViaFortDiv_area_1">
-          <QRCode value={`${JSON.stringify(data)}`} />
+          <QRCode quietZone={10} value={`${JSON.stringify(data)}`} />
           {/* <img
             src="/img/dummy_qrcode.png"
             alt=""

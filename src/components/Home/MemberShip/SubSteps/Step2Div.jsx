@@ -499,7 +499,7 @@ export const Step2Div = ({
                           quantity: 1,
                           amount: 2,
                           symbol: "EGC",
-                          user: account,
+                          // user: account,
                         },
                       });
                     }}
@@ -520,7 +520,7 @@ export const Step2Div = ({
                           quantity: 1,
                           amount: 6,
                           symbol: "EGC",
-                          user: account,
+                          // user: account,
                         },
                       });
                     }}
@@ -541,7 +541,7 @@ export const Step2Div = ({
                           quantity: 1,
                           amount: 4,
                           symbol: "EGC",
-                          user: account,
+                          // user: account,
                         },
                       });
                     }}
@@ -650,7 +650,7 @@ export const Step2Div = ({
                           quantity: 1,
                           amount: 2,
                           symbol: "EGC",
-                          user: account,
+                          // user: account,
                         },
                       });
                     }}
@@ -671,7 +671,7 @@ export const Step2Div = ({
                           quantity: 1,
                           amount: 6,
                           symbol: "EGC",
-                          user: account,
+                          // user: account,
                         },
                       });
                     }}
@@ -692,7 +692,7 @@ export const Step2Div = ({
                           quantity: 1,
                           amount: 4,
                           symbol: "EGC",
-                          user: account,
+                          // user: account,
                         },
                       });
                     }}

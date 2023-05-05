@@ -21,6 +21,7 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+import PayViaFortModal from "../../../../Home/MemberShip/PayViaFortModal";
 const DashBoardMarketCheckoutPage = ({ match }) => {
   const context = useWeb3React();
   const {
@@ -53,6 +54,8 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
   const [Disabled, setDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [unlockBtn, setUnlockBtn] = useState(true);
+  const [qr_data, setQrData] = useState({});
+
   // const [disable, setDisable] = useState(false);
   const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
   const { productId, product_count, productName } = match.params;
@@ -278,6 +281,31 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
     setCheckedFort(false);
   };
   const checkedFortBox = () => {
+    setQrData({
+      type: "product",
+      userWallet: account,
+      data: {
+        // quantity: numDivsToDuplicate,
+        amount: SubTotal,
+        logo: productImage,
+        symbol: "eusd",
+        // user: account,
+        // product_id: productDetail.index_id,
+      },
+    });
+    // setQrData({
+
+    //   type: "product",
+    //   userWallet: account,
+    //   data: {
+    //     quantity: numDivsToDuplicate,
+    //     amount: SubTotal,
+    //     logo: productImage,
+    //     symbol: "eusd",
+    //     product_id: productDetail.index_id,
+    //     user: account,
+    //   },
+    // });
     setCheckedFort(true);
     setCheckedMetamask(false);
   };
@@ -726,6 +754,16 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
           route={successRoute}
         />
       ) : null}
+
+      {checkedFort && (
+        <PayViaFortModal
+          togglePayViaFortDiv={() => setCheckedFort(!checkedFort)}
+          message="Scan this qrcode to subscribe for your membership via FORT app."
+          code="Qretyhgjhe6"
+          account={account}
+          data={qr_data}
+        />
+      )}
     </div>
   );
 };
