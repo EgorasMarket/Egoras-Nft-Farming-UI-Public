@@ -118,7 +118,7 @@ const PayViaFortModal = ({
               onClick={copyText}
               onMouseOut={outFunc}
             >
-              Copy
+              Copys
               <span className="tooltiptext2" id="myTooltip"></span>
             </button>
           </div>
