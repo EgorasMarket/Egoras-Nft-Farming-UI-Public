@@ -5,10 +5,28 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import AppsIcon from "@mui/icons-material/Apps";
 import Carousel from "react-multi-carousel";
 import Blockies from "react-blockies";
+import { API_URL } from "../../../../../actions/types";
+import axios from "axios";
+import { config } from "../../../../../actions/Config";
 import { numberWithCommas } from "../../../../static/static";
 import { GET_ALL_UPLOADED_PRODUCTS } from "../../../../../services/productServices";
 import ProductModel from "./ProductModel";
 export const MarketHeader = () => {
+  const [categories, setCategories] = useState([]);
+  useEffect(async () => {
+    try {
+      const response = await axios.get(
+        API_URL + "/product/all-categories",
+        null,
+        config
+      );
+      console.log(response);
+      console.log(response.data.data.allCategories);
+      setCategories(response.data.data.allCategories);
+    } catch (error) {
+      console.log(error.response);
+    }
+  }, []);
   return (
     <div className="dashboardMarketPlaceHeader no-bg">
       <div className="container">
@@ -25,18 +43,11 @@ export const MarketHeader = () => {
           </div>
           <AppsIcon className="dashboardMarketPlaceHeader_div2_categories_icon" />
           <div className="dashboardMarketPlaceHeader_div2_categories">
-            <div className="dashboardMarketPlaceHeader_div2_categories_cont1">
-              Mobile Phones
-            </div>
-            <div className="dashboardMarketPlaceHeader_div2_categories_cont1">
-              Computers
-            </div>
-            <div className="dashboardMarketPlaceHeader_div2_categories_cont1">
-              TVs & Audio
-            </div>
-            <div className="dashboardMarketPlaceHeader_div2_categories_cont1">
-              Home Appliances
-            </div>
+            {categories.map((data) => (
+              <div className="dashboardMarketPlaceHeader_div2_categories_cont1">
+                {data.product_category}
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -45,6 +56,7 @@ export const MarketHeader = () => {
 };
 const DashboardMarketHome = () => {
   const [products, setProducts] = useState([]);
+
   const responsive1 = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -187,7 +199,19 @@ const DashboardMarketHome = () => {
       prodState: "Refurb",
     },
   ];
-
+  useEffect(async () => {
+    try {
+      const response = await axios.get(
+        API_URL + "/product/new/Phones & Tablets",
+        null,
+        config
+      );
+      console.log(response);
+      // console.log(response.getAllUploadedProduct);
+    } catch (error) {
+      console.log(error.response);
+    }
+  }, []);
   console.log(Product);
   return (
     <div className="other2 asset_other2">
@@ -219,11 +243,11 @@ const DashboardMarketHome = () => {
                       alt=""
                       className="dashboardMarketPlaceBody1_cont1_img"
                     />
-                    <img
+                    {/* <img
                       src="/img/marketBanners/2.png"
                       alt=""
                       className="dashboardMarketPlaceBody1_cont1_img"
-                    />
+                    /> */}
                     <img
                       src="/img/marketBanners/2p.png"
                       alt=""
