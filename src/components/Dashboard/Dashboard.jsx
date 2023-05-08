@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import DashBoard_lend_details_page from "./DashBoard_lend_details_page";
 import DashBoardBranchAsset from "./DashBoardPages/DashBoardBranchAsset";
 import DashBoardLendingTransactions from "./DashBoardPages/DashBoardLendingTransactions";
+import ProductsCategoryPage from "./DashBoardPages/UpdatedAppPages/DashboardMarket/ProductsCategoryPage";
 import CloseIcon from "@mui/icons-material/Close";
 import DashBoardUserSales from "./DashBoardPages/DashBoardUserSales";
 import Cookies from "universal-cookie";
@@ -225,6 +226,11 @@ const Dashboard = ({ check, togglemakeDark }) => {
                   exact
                   path="/app/market/product/details/:address/:name"
                   component={ProductDetailPage}
+                />
+                <Route
+                  exact
+                  path="/app/market/product/category"
+                  component={ProductsCategoryPage}
                 />
                 <Route
                   exact
