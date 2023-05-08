@@ -2025,7 +2025,19 @@ x .benefits_section1_area2_body1_cont2 {
 
 #react-qrcode-logo {
   height: 100% !important;
+  border-radius: 10px;
   width: 100% !important;
+}
+
+.qr_amount_area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 11px;
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
 }
 
 .payViaFortDiv_area_1 {
@@ -2034,7 +2046,10 @@ x .benefits_section1_area2_body1_cont2 {
   border: solid 1px #7a5fc0;
   border-radius: 11px;
   padding: 1em;
-  background: #151422;
+  background: #140f22;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .payViaFortDiv_area_1_img {

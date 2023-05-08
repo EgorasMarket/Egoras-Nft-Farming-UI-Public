@@ -57,6 +57,14 @@ function App() {
     socket.on("connect", () => {
       // alert("socket connected");
 
+      socket.on("goodluck", (data) => {
+        alert(JSON.stringify(data));
+        // if (data === 1) {
+        //   alert("Payment made");
+        // } else {
+        //   alert("Payment incompletee");
+        // }
+      });
       socket.on("second", (data) => {
         alert(data);
       });

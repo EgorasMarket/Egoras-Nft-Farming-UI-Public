@@ -756,6 +756,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
           code="Qretyhgjhe6"
           account={account}
           data={qr_data}
+          prodType={productDetail.productType}
         />
       )}
     </div>
