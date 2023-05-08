@@ -416,7 +416,7 @@ const DashBoardP2PUserSales = () => {
   };
 
   function handlePrint() {
-    const printContents = document.getElementById("print-content").innerHTML;
+    const printContents = document.getElementById("print-xcontent").innerHTML;
     const originalContents = document.body.innerHTML;
     document.body.innerHTML = printContents;
     window.print();
@@ -1912,6 +1912,90 @@ const DashBoardP2PUserSales = () => {
                           className="receiptBg"
                         />
                         <div className="recipt_details_cont" id="print-content">
+                          <div className="recipt_details_cont1">
+                            <img
+                              src="/img/martgpt_logo.svg"
+                              alt=""
+                              className="recipt_details_cont1_img"
+                            />
+                          </div>
+                          <hr />
+                          <div className="recipt_details_cont2">
+                            <div className="recipt_details_cont2_title">
+                              Successful Purchase
+                            </div>
+                            <div className="recipt_details_cont2_amount">
+                              3,600 eusd
+                            </div>
+                          </div>
+                          <hr />
+                          <div className="recipt_details_cont3">
+                            <div className="recipt_details_cont3_div1">
+                              <div className="recipt_details_cont3_div1_title">
+                                Ref Number
+                              </div>
+                              <div className="recipt_details_cont3_div1_value">
+                                000085752257
+                              </div>
+                            </div>
+                            <div className="recipt_details_cont3_div1">
+                              <div className="recipt_details_cont3_div1_title">
+                                Date
+                              </div>
+                              <div className="recipt_details_cont3_div1_value">
+                                April 25, 2023 10:18 am
+                              </div>
+                            </div>
+                            <div className="recipt_details_cont3_div1">
+                              <div className="recipt_details_cont3_div1_title">
+                                Payment Method
+                              </div>
+                              <div className="recipt_details_cont3_div1_value">
+                                Fort
+                              </div>
+                            </div>
+                            <div className="recipt_details_cont3_div1">
+                              <div className="recipt_details_cont3_div1_title">
+                                Seller
+                              </div>
+                              <div className="recipt_details_cont3_div1_value">
+                                Samuel Ifeanyi
+                              </div>
+                            </div>
+                          </div>
+                          <hr />
+                          <div className="recipt_details_cont4">
+                            <div className="recipt_details_cont3_div1">
+                              <div className="recipt_details_cont3_div1_title">
+                                Amount
+                              </div>
+                              <div className="recipt_details_cont3_div1_value">
+                                3,600 eusd
+                              </div>
+                            </div>
+                            <div className="recipt_details_cont3_div1">
+                              <div className="recipt_details_cont3_div1_title">
+                                MartGpt Fee
+                              </div>
+                              <div className="recipt_details_cont3_div1_value">
+                                0 eusd
+                              </div>
+                            </div>
+                          </div>
+                          <hr />
+                          <div className="recipt_details_cont5">
+                            powered by{" "}
+                            <img
+                              src="/img/egoras-logo.svg"
+                              alt=""
+                              className="recipt_details_cont5_img"
+                            />
+                          </div>
+                        </div>
+                        <div
+                          className="recipt_details_cont hide-section"
+                          id="print-xcontent"
+                        >
                           <div className="recipt_details_cont1">
                             <img
                               src="/img/martgpt_logo.svg"

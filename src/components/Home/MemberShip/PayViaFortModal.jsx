@@ -76,6 +76,8 @@ const PayViaFortModal = ({
       });
     }
 
+    // alert(JSON.stringify(data));
+    //  call the api and generate a qr data
     fetchShortCode();
   }, []);
   const copyText = () => {
