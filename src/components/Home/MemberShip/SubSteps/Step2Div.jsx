@@ -494,9 +494,11 @@ export const Step2Div = ({
 
                       setQrData({
                         type: "membership",
+
                         userWallet: account,
                         data: {
                           quantity: 1,
+                          logo: "https://i.imgur.com/kxL8s2g.png",
                           amount: 2,
                           symbol: "EGC",
                           // user: account,
@@ -517,6 +519,8 @@ export const Step2Div = ({
                         type: "membership",
                         userWallet: account,
                         data: {
+                          logo: "https://i.imgur.com/kxL8s2g.png",
+
                           quantity: 1,
                           amount: 6,
                           symbol: "EGC",
@@ -539,6 +543,8 @@ export const Step2Div = ({
                         userWallet: account,
                         data: {
                           quantity: 1,
+                          logo: "https://i.imgur.com/kxL8s2g.png",
+
                           amount: 4,
                           symbol: "EGC",
                           // user: account,
@@ -648,6 +654,8 @@ export const Step2Div = ({
                         userWallet: account,
                         data: {
                           quantity: 1,
+                          logo: "https://i.imgur.com/kxL8s2g.png",
+
                           amount: 2,
                           symbol: "EGC",
                           // user: account,
@@ -668,6 +676,8 @@ export const Step2Div = ({
                         type: "membership",
                         userWallet: account,
                         data: {
+                          logo: "https://i.imgur.com/kxL8s2g.png",
+
                           quantity: 1,
                           amount: 6,
                           symbol: "EGC",
@@ -691,6 +701,8 @@ export const Step2Div = ({
                         data: {
                           quantity: 1,
                           amount: 4,
+                          logo: "https://i.imgur.com/kxL8s2g.png",
+
                           symbol: "EGC",
                           // user: account,
                         },
