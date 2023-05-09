@@ -24,11 +24,12 @@ const PayViaFortModal = ({
   const [successRoute, setSuccessRoute] = useState("");
   const [qr_dataObj, setQr_dataObj] = useState("");
   const fetchShortCode = async () => {
-    if (!data.account) {
-      alert("Please connect wallet first");
-      //handle uninitialized account
-      return;
-    }
+    console.log(data);
+    // if (!data.account) {
+    //   alert("Please connect wallet first");
+    //   //handle uninitialized account
+    //   return;
+    // }
 
     const res = await GENERATE_QR_CODE_LINK(data);
     console.log(res, "nabb");
@@ -121,7 +122,7 @@ const PayViaFortModal = ({
     tooltip.innerHTML = "Copy to clipboard";
     tooltip.style.display = "none";
   }
-  console.log(data, "data,data,data");
+  // console.log(data, "data,data,data");
   return (
     <>
       <div className="payViaFortDiv">
