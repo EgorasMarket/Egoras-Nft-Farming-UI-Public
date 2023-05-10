@@ -28,15 +28,13 @@ import {
   UnsupportedChainIdError,
 } from "@web3-react/core";
 import {
-  BuyIndirectProduct,
-  BuyDirectProduct,
   checkAllowanceV3,
   unlockTokenV3,
 } from "../../../../../web3/index";
-import {
-  checkAllowanceSwap,
-  unlockSwapToken,
-} from "../../../../../web3/index2";
+// import {
+//   checkAllowanceSwap,
+//   unlockSwapToken,
+// } from "../../../../../web3/index2";
 
 const ProductDetailPage = ({ match }) => {
   const context = useWeb3React();
@@ -129,19 +127,6 @@ const ProductDetailPage = ({ match }) => {
   //   // }
   //   /// BUY WITH BLOCKCHAIN
 
-  //   // if (productDetail.productType == "INDIRECT") {
-  //   //   res = await BuyIndirectProduct(
-  //   //     productDetail.index_id,
-  //   //     quantity,
-  //   //     library.getSigner()
-  //   //   );
-  //   // } else {
-  //   //   res = await BuyDirectProduct(
-  //   //     productDetail.index_id,
-  //   //     quantity,
-  //   //     library.getSigner()
-  //   //   );
-  //   // }
 
   //   // console.log(res);
   //   // if (res.status == true) {

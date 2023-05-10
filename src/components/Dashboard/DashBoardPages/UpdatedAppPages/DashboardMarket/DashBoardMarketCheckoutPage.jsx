@@ -120,6 +120,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
     // / BUY WITH BLOCKCHAIN
     if (productDetail.productType == "INDIRECT") {
       const res = await BuyIndirectProduct(
+        account,
         productDetail.index_id,
         numDivsToDuplicate,
         library.getSigner()
@@ -136,6 +137,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
       }
     } else {
       const res = await BuyDirectProduct(
+        account,
         productDetail.index_id,
         numDivsToDuplicate,
         library.getSigner()
