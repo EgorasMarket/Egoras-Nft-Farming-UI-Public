@@ -24,6 +24,7 @@ const PayViaFortModal = ({
   const [successRoute, setSuccessRoute] = useState("");
   const [qr_dataObj, setQr_dataObj] = useState("");
   const fetchShortCode = async () => {
+    console.log(data);
     // if (!data.account) {
     //   alert("Please connect wallet first");
     //   //handle uninitialized account
@@ -121,7 +122,7 @@ const PayViaFortModal = ({
     tooltip.innerHTML = "Copy to clipboard";
     tooltip.style.display = "none";
   }
-  console.log(data, "data,data,data");
+  // console.log(data, "data,data,data");
   return (
     <>
       <div className="payViaFortDiv">

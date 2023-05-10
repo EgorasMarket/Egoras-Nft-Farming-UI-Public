@@ -184,7 +184,7 @@ const MemberShipPage = () => {
   const subscribe = async () => {
     setIsLoading(true);
     setDisable(true);
-    let res = await monthlyPlanSubScribe(library.getSigner());
+    let res = await monthlyPlanSubScribe(account, library.getSigner());
     console.log(res);
     if (res.status === true) {
       setIsLoading(false);
@@ -206,6 +206,7 @@ const MemberShipPage = () => {
     setIsLoading(true);
     setDisable(true);
     let res = await monthlyPlanSubScribeRef(
+      account,
       localStorage.tank,
       library.getSigner()
     );
@@ -230,7 +231,7 @@ const MemberShipPage = () => {
   const subscribe2 = async () => {
     setIsLoading(true);
     setDisable(true);
-    let res = await semiAnnuallyPlanSubScribe(library.getSigner());
+    let res = await semiAnnuallyPlanSubScribe(account, library.getSigner());
     console.log(res);
     if (res.status == true) {
       setIsLoading(false);
@@ -252,6 +253,7 @@ const MemberShipPage = () => {
     setIsLoading(true);
     setDisable(true);
     let res = await semiAnnuallyPlanSubScribeRef(
+      account,
       localStorage.tank,
       library.getSigner()
     );
@@ -276,7 +278,7 @@ const MemberShipPage = () => {
   const subscribe3 = async () => {
     setIsLoading(true);
     setDisable(true);
-    let res = await annuallyPlanSubScribe(library.getSigner());
+    let res = await annuallyPlanSubScribe(account, library.getSigner());
     console.log(res);
     if (res.status == true) {
       setIsLoading(false);
@@ -298,6 +300,7 @@ const MemberShipPage = () => {
     setIsLoading(true);
     setDisable(true);
     let res = await annuallyPlanSubScribeRef(
+      account,
       localStorage.tank,
       library.getSigner()
     );

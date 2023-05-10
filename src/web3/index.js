@@ -1194,13 +1194,13 @@ const AcceptBid = async (_productID, signer) => {
   }
 };
 
-const BuyIndirectProduct = async (_productID, _quantity, signer) => {
+const BuyIndirectProduct = async (account, _productID, _quantity, signer) => {
   console.log(_productID, _quantity);
   // _productID, qty
   try {
     const instance = contractProductFacetInstance(signer);
     let result;
-    result = await instance.buyProduct(_productID, _quantity);
+    result = await instance.buyProduct(account, _productID, _quantity);
     console.log(result, "result from newnation");
     return {
       message: result,
@@ -1214,13 +1214,13 @@ const BuyIndirectProduct = async (_productID, _quantity, signer) => {
   }
 };
 
-const BuyDirectProduct = async (_productID, _quantity, signer) => {
-  console.log(_productID, _quantity);
+const BuyDirectProduct = async (account, _productID, _quantity, signer) => {
+  console.log(account, _productID, _quantity);
   // _productID, qty
   try {
     const instance = contractProductFacetInstance(signer);
     let result;
-    result = await instance.buyDirectProduct(_productID, _quantity);
+    result = await instance.buyDirectProduct(account, _productID, _quantity);
     console.log(result, "result from newnation");
     return {
       message: result,

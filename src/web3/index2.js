@@ -37,11 +37,12 @@ const routerAddressArray = [
   REACT_APP_PANCAKE_ROUTER_ADDRESS,
   REACT_APP_BUSD_ROUTER_ADDRESS,
 ];
-const monthlyPlanSubScribe = async (signer) => {
+const monthlyPlanSubScribe = async (account, signer) => {
+  console.log(account);
   try {
     const instance = await contractMembershipFacetInstance(signer);
     let result;
-    result = await instance.membershipMonthlyPlan();
+    result = await instance.membershipMonthlyPlan(account);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -54,11 +55,11 @@ const monthlyPlanSubScribe = async (signer) => {
     };
   }
 };
-const monthlyPlanSubScribeRef = async (_referral, signer) => {
+const monthlyPlanSubScribeRef = async (account, _referral, signer) => {
   try {
     const instance = await contractMembershipFacetInstance(signer);
     let result;
-    result = await instance.monthlyPlanWithReferral(_referral);
+    result = await instance.monthlyPlanWithReferral(account, _referral);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -71,11 +72,11 @@ const monthlyPlanSubScribeRef = async (_referral, signer) => {
     };
   }
 };
-const semiAnnuallyPlanSubScribe = async (signer) => {
+const semiAnnuallyPlanSubScribe = async (account, signer) => {
   try {
     const instance = await contractMembershipFacetInstance(signer);
     let result;
-    result = await instance.membershipSemiAnnuallyPlan();
+    result = await instance.membershipSemiAnnuallyPlan(account);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -88,11 +89,11 @@ const semiAnnuallyPlanSubScribe = async (signer) => {
     };
   }
 };
-const semiAnnuallyPlanSubScribeRef = async (_referral, signer) => {
+const semiAnnuallyPlanSubScribeRef = async (account, _referral, signer) => {
   try {
     const instance = await contractMembershipFacetInstance(signer);
     let result;
-    result = await instance.semiAnnuallyPlanWithReferral(_referral);
+    result = await instance.semiAnnuallyPlanWithReferral(account, _referral);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -122,11 +123,11 @@ const semiAnnuallyPlanSubScribeRef = async (_referral, signer) => {
 //     };
 //   }
 // };
-const annuallyPlanSubScribe = async (signer) => {
+const annuallyPlanSubScribe = async (account, signer) => {
   try {
     const instance = await contractMembershipFacetInstance(signer);
     let result;
-    result = await instance.membershipAnnually();
+    result = await instance.membershipAnnually(account);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -139,11 +140,11 @@ const annuallyPlanSubScribe = async (signer) => {
     };
   }
 };
-const annuallyPlanSubScribeRef = async (_referral, signer) => {
+const annuallyPlanSubScribeRef = async (account, _referral, signer) => {
   try {
     const instance = await contractMembershipFacetInstance(signer);
     let result;
-    result = await instance.annuallyWithReferral(_referral);
+    result = await instance.annuallyWithReferral(account, _referral);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
