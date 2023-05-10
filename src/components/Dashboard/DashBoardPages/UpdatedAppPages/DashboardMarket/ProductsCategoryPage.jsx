@@ -1,167 +1,28 @@
 import React, { useEffect, useState } from "react";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import WidgetsIcon from "@mui/icons-material/Widgets";
+import { API_URL } from "../../../../../actions/types";
+import axios from "axios";
+import { config } from "../../../../../actions/Config";
 import { numberWithCommas } from "../../../../../static";
-import { ProductModel2 } from "./ProductModel";
+import Paginate from "../../Paginate";
+import ProductModel from "./ProductModel";
 import "./DashboardMarketStyles/ProductCategoryPage.css";
-const ProductsCategoryPage = () => {
+const ProductsCategoryPage = ({ match }) => {
   const [toggleList, setToggleList] = useState("grid");
+  const [allBrands, setAllBrands] = useState([]);
+  const [Product, setProduct] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
+  const [showMartGptProducts, setShowMartGptProducts] = useState(false);
+  const [sortOrder, setSortOrder] = useState("");
 
+  const { category } = match.params;
+  console.log(category);
   const ToggleProductList = (e) => {
     let activeIcon = e.currentTarget.id;
     setToggleList(activeIcon);
   };
-  const Product = [
-    {
-      id: "1",
-      img: "/img/dummyMarketImages/PhoneDummyImage.png",
-      title: "Apple Iphone 13pro max",
-      amount: 1200,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      prodState: "New",
-      brand: "Apple",
-    },
-    {
-      id: "2",
-      img: "/img/dummyMarketImages/PhoneDummyImage2.png",
-      title: "Samsung galaxy s22",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-      brand: "Samsung",
-    },
-    {
-      id: "3",
-      img: "/img/dummyMarketImages/xiaomi_dummy_phone.webp",
-      title: "Xiaomi 12 Pro 5G - 6.73",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-      brand: "Xiaomi",
-    },
-    {
-      id: "4",
-      img: "/img/dummyMarketImages/tecno_dummy_phone.jpeg",
-      title: "Tecno Phantom V Fold",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-      brand: "Tecno",
-    },
-    {
-      id: "5",
-      img: "/img/dummyMarketImages/infinix_dummy_phone.webp",
-      title: "Infinix Zero X Pro - 6.67",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-      brand: "Infinix",
-    },
-    {
-      id: "6",
-      img: "/img/dummyMarketImages/dummy_huwei.jpeg",
-      title: "Huawei P50 Pro 8GB RAM 256GB ROM",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-      brand: "Huawei",
-    },
-    {
-      id: "7",
-      img: "/img/dummyMarketImages/oraimo_headset.jpeg",
-      title: "Oraimo Headphone OEB-H65D",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-      brand: "Oraimo",
-    },
-    {
-      id: "8",
-      img: "/img/dummyMarketImages/PhoneDummyImage.png",
-      title: "Apple Iphone 13pro max",
-      amount: 1200,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      prodState: "New",
-      brand: "Apple",
-    },
-    {
-      id: "9",
-      img: "/img/dummyMarketImages/PhoneDummyImage2.png",
-      title: "Samsung galaxy s22",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-      brand: "Samsung",
-    },
-    {
-      id: "10",
-      img: "/img/dummyMarketImages/xiaomi_dummy_phone.webp",
-      title: "Xiaomi 12 Pro 5G - 6.73",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-      brand: "Xiaomi",
-    },
-    {
-      id: "11",
-      img: "/img/dummyMarketImages/tecno_dummy_phone.jpeg",
-      title: "Tecno Phantom V Fold",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-      brand: "Tecno",
-    },
-    {
-      id: "12",
-      img: "/img/dummyMarketImages/infinix_dummy_phone.webp",
-      title: "Infinix Zero X Pro - 6.67",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-      brand: "Infinix",
-    },
-    {
-      id: "13",
-      img: "/img/dummyMarketImages/dummy_huwei.jpeg",
-      title: "Huawei P50 Pro 8GB RAM 256GB ROM",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-      brand: "Huawei",
-    },
-    {
-      id: "14",
-      img: "/img/dummyMarketImages/oraimo_headset.jpeg",
-      title: "Oraimo Headphone OEB-H65D",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-      brand: "Oraimo",
-    },
-  ];
-  const brands = [
-    { id: 1, brand: "Samsung", items: "2,729" },
-    { id: 2, brand: "Apple", items: "2,158" },
-    { id: 3, brand: "Oraimo", items: "1,461" },
-    { id: 4, brand: "Otter Box", items: "737" },
-    { id: 5, brand: "Xiaomi", items: "672" },
-    { id: 6, brand: "Baseus", items: "670" },
-    { id: 7, brand: "Tecno", items: "625" },
-    { id: 8, brand: "Baofeng", items: "576" },
-    { id: 9, brand: "Xundd", items: "572" },
-    { id: 10, brand: "Huawei", items: "570" },
-    { id: 11, brand: "A&S", items: "522" },
-    { id: 12, brand: "Budi", items: "479" },
-    { id: 13, brand: "SanDisk", items: "476" },
-    { id: 14, brand: "Infinix", items: "458" },
-    { id: 15, brand: "New Age", items: "432" },
-    { id: 16, brand: "Nillkin", items: "385" },
-    { id: 17, brand: "Nokia", items: "376" },
-    { id: 18, brand: "Itel", items: "355" },
-    { id: 19, brand: "ScreenGuard", items: "344" },
-    { id: 20, brand: "Zealot", items: "309" },
-  ];
+
   const handleBrandCheckboxChange = (event) => {
     const brand = event.target.value;
     setSelectedBrands((prevSelectedBrands) => {
@@ -174,11 +35,85 @@ const ProductsCategoryPage = () => {
       }
     });
   };
+  const handleMartGptCheckboxChange = (event) => {
+    setShowMartGptProducts(event.target.checked);
+  };
+  const handleSort = (event) => {
+    const order = event.target.value;
+    setSortOrder(order);
+  };
 
-  const filteredProducts =
-    selectedBrands.length > 0
-      ? Product.filter((product) => selectedBrands.includes(product.brand))
-      : Product;
+  let filteredProducts = Product;
+
+  if (selectedBrands.length > 0) {
+    filteredProducts = filteredProducts.filter((product) =>
+      selectedBrands.includes(product.product_brand)
+    );
+  }
+
+  if (showMartGptProducts) {
+    filteredProducts = filteredProducts.filter(
+      (product) => product.productType === "INDIRECT"
+    );
+  }
+  // if (sortByAmount === "highToLow") {
+  //   filteredProducts = filteredProducts.sort(
+  //     (a, b) => b.final_amount - a.final_amount
+  //   );
+  // } else if (sortByAmount === "lowToHigh") {
+  //   filteredProducts = filteredProducts.sort(
+  //     (a, b) => a.final_amount - b.final_amount
+  //   );
+  // }
+  if (sortOrder === "asc") {
+    filteredProducts = filteredProducts.sort(
+      (a, b) => a.final_amount - b.final_amount
+    );
+  } else if (sortOrder === "desc") {
+    filteredProducts = filteredProducts.sort(
+      (a, b) => b.final_amount - a.final_amount
+    );
+  }
+  useEffect(async () => {
+    try {
+      const response = await axios.get(
+        API_URL + `/product/product-by-category/${category}`,
+        null,
+        config
+      );
+      console.log(response);
+      console.log(response.data.data);
+      setProduct(response.data.data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  }, []);
+  useEffect(async () => {
+    try {
+      const response = await axios.get(
+        API_URL + `/product/all-brands-by-category/${category}`,
+        null,
+        config
+      );
+      console.log(response);
+      console.log(response.data.data.allBrands);
+      setAllBrands(response.data.data.allBrands);
+    } catch (error) {
+      console.log(error.response);
+    }
+  }, []);
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const PER_PAGE = 15;
+
+  function handlePageClick({ selected: selectedPage }) {
+    setCurrentPage(selectedPage);
+  }
+
+  const offset = currentPage * PER_PAGE;
+  const pageCount = Math.ceil(filteredProducts.length / PER_PAGE);
+  const currentTransactions = filteredProducts.slice(offset, offset + PER_PAGE);
+
   return (
     <div className="other2 asset_other2">
       <div className="productCategoryPageDiv">
@@ -192,7 +127,7 @@ const ProductsCategoryPage = () => {
           </div>
         </div>
         <div className=" productCategoryPageDiv_cont2">
-          <div className="productCategoryPageDiv_cont2 no-bg">
+          <div className="productCategoryPageDiv_cont2 no-bg no_paddd">
             <div className="container">
               <div className="productCategoryPageDiv_cont2_div">
                 <div className="productCategoryPageDiv_cont2_div_cont1">
@@ -209,28 +144,66 @@ const ProductsCategoryPage = () => {
                         />
                       </div>
                       <div className="productCategoryPageDiv_cont2_div_cont1_body_1_body_brands_display">
-                        {brands.map((data) => (
+                        {allBrands.map((data) => (
                           <div className="productCategoryPageDiv_cont2_div_cont1_body_1_body_brands_cont1">
                             <div className="checkBox_agree_div_bodyb ">
                               <input
                                 type="checkbox"
-                                id={data.brand}
-                                name={data.brand}
-                                value={data.brand}
-                                checked={selectedBrands.includes(data.brand)}
+                                id={data.product_brand}
+                                name={data.product_brand}
+                                value={data.product_brand}
+                                checked={selectedBrands.includes(
+                                  data.product_brand
+                                )}
                                 onChange={handleBrandCheckboxChange}
                               />
                               <label
-                                htmlFor={data.brand}
+                                htmlFor={data.product_brand}
                                 className="checkBox_agree_div_body_label"
                               >
                                 <span className="checkBox_agree_div_body_label_span">
-                                  {data.brand}
+                                  {data.product_brand}
                                 </span>
                               </label>
                             </div>
                           </div>
                         ))}
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="productCategoryPageDiv_cont2_div_cont1_body_1">
+                    <div className="productCategoryPageDiv_cont2_div_cont1_body_1_title">
+                      Sort By Price
+                    </div>
+                    <div className="productCategoryPageDiv_cont2_div_cont1_body_1_body">
+                      <div className="productCategoryPageDiv_cont2_div_cont1_body_1_body_brands_display">
+                        <div className="productCategoryPageDiv_cont2_div_cont1_body_1_body_brands_cont1">
+                          <div className="checkBox_agree_div_bodyb radio-button">
+                            <input
+                              type="radio"
+                              id="asc"
+                              name="radio-group"
+                              value="asc"
+                              onChange={handleSort}
+                            />
+                            <label for="asc"> Low to High</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="productCategoryPageDiv_cont2_div_cont1_body_1_body_brands_display">
+                        <div className="productCategoryPageDiv_cont2_div_cont1_body_1_body_brands_cont1">
+                          <div className="checkBox_agree_div_bodyb radio-button">
+                            <input
+                              type="radio"
+                              id="desc"
+                              name="radio-group"
+                              value="desc"
+                              onChange={handleSort}
+                            />
+                            <label for="desc"> High to Low</label>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -244,17 +217,17 @@ const ProductsCategoryPage = () => {
                         <div className="checkBox_agree_div_bodyb ">
                           <input
                             type="checkbox"
-                            id="1"
+                            id="martGpt"
                             name="checkbox"
-                            // checked={checkAgree}
-                            // onChange={toggleCheckAgree}
+                            checked={showMartGptProducts}
+                            onChange={handleMartGptCheckboxChange}
                           />
                           <label
-                            for="1"
+                            for="martGpt"
                             className="checkBox_agree_div_body_label"
                           >
                             <span className="checkBox_agree_div_body_label_span">
-                              Sold By MartGpt
+                              MartGpt
                             </span>
                           </label>
                         </div>
@@ -266,7 +239,7 @@ const ProductsCategoryPage = () => {
                   <div className="productCategoryPageDiv_cont2_div_cont2_head">
                     <div className="productCategoryPageDiv_cont2_div_cont2_div1">
                       <div className="productCategoryPageDiv_cont2_div_cont2_div1_title">
-                        Phones & Tablets
+                        {category}
                       </div>
                       <div className="productCategoryPageDiv_cont2_div_cont2_div1_toggle">
                         <WidgetsIcon
@@ -294,21 +267,27 @@ const ProductsCategoryPage = () => {
                     </div>
                   </div>
                   <div className="productCategoryPageDiv_cont2_div_cont2_div3">
-                    {filteredProducts.map((data) => (
-                      <ProductModel2
-                        key={data.id}
-                        amount={data.amount}
-                        id={data.id}
-                        img={data.img}
-                        title={data.title}
-                        txnHash={data.seller}
+                    {currentTransactions.map((data) => (
+                      <ProductModel
+                        key={data.product_id}
+                        amount={data.final_amount}
+                        id={data.product_id}
+                        img={data.product_images}
+                        title={data.product_name}
+                        txnHash={data.transaction_hash}
                         numberWithCommas={numberWithCommas}
-                        prodState={data.prodState}
-                        productType="DIRECT"
-                        seller={data.seller}
-                        productQuantity={20}
+                        prodState={data.product_state}
+                        productType={data.productType}
+                        seller={data.user_wallet}
+                        productQuantity={data.quantity}
                       />
                     ))}
+                  </div>
+                  <div className="productCategoryPageDiv_cont2_div_cont2_div3_paginate">
+                    <Paginate
+                      pageCount={pageCount}
+                      handlePageClick={handlePageClick}
+                    />
                   </div>
                 </div>
               </div>

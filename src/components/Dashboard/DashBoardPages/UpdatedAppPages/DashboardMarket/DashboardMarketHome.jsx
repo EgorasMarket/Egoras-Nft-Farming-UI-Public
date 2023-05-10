@@ -27,6 +27,7 @@ export const MarketHeader = () => {
       console.log(error.response);
     }
   }, []);
+
   return (
     <div className="dashboardMarketPlaceHeader no-bg">
       <div className="container">
@@ -44,9 +45,11 @@ export const MarketHeader = () => {
           <AppsIcon className="dashboardMarketPlaceHeader_div2_categories_icon" />
           <div className="dashboardMarketPlaceHeader_div2_categories">
             {categories.map((data) => (
-              <div className="dashboardMarketPlaceHeader_div2_categories_cont1">
-                {data.product_category}
-              </div>
+              <a href={`/app/market/product/category/${data.product_category}`}>
+                <div className="dashboardMarketPlaceHeader_div2_categories_cont1">
+                  {data.product_category}
+                </div>
+              </a>
             ))}
           </div>
         </div>
@@ -117,88 +120,7 @@ const DashboardMarketHome = () => {
       items: 1,
     },
   };
-  const Product = [
-    {
-      id: "1",
-      img: "/img/dummyMarketImages/PhoneDummyImage.png",
-      title: "Apple Iphone 13pro max",
-      amount: 1200,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      prodState: "New",
-    },
-    {
-      id: "2",
-      img: "/img/dummyMarketImages/PhoneDummyImage2.png",
-      title: "Samsung galaxy s22",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-    },
-    {
-      id: "1",
-      img: "/img/dummyMarketImages/PhoneDummyImage.png",
-      title: "Apple Iphone 13pro max",
-      amount: 1200,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      prodState: "New",
-    },
-    {
-      id: "2",
-      img: "/img/dummyMarketImages/PhoneDummyImage2.png",
-      title: "Samsung galaxy s22",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-    },
-    {
-      id: "1",
-      img: "/img/dummyMarketImages/PhoneDummyImage.png",
-      title: "Apple Iphone 13pro max",
-      amount: 1200,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      prodState: "New",
-    },
-    {
-      id: "2",
-      img: "/img/dummyMarketImages/PhoneDummyImage2.png",
-      title: "Samsung galaxy s22",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-    },
-    {
-      id: "1",
-      img: "/img/dummyMarketImages/PhoneDummyImage.png",
-      title: "Apple Iphone 13pro max",
-      amount: 1200,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      prodState: "New",
-    },
-    {
-      id: "2",
-      img: "/img/dummyMarketImages/PhoneDummyImage2.png",
-      title: "Samsung galaxy s22",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-    },
-    {
-      id: "1",
-      img: "/img/dummyMarketImages/PhoneDummyImage.png",
-      title: "Apple Iphone 13pro max",
-      amount: 1200,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      prodState: "New",
-    },
-    {
-      id: "2",
-      img: "/img/dummyMarketImages/PhoneDummyImage2.png",
-      title: "Samsung galaxy s22",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-    },
-  ];
+
   useEffect(async () => {
     try {
       const response = await axios.get(
@@ -212,7 +134,20 @@ const DashboardMarketHome = () => {
       console.log(error.response);
     }
   }, []);
-  console.log(Product);
+
+  useEffect(async () => {
+    try {
+      const response = await axios.get(
+        API_URL + "/product/product-by-category/Phones & Tablets",
+        null,
+        config
+      );
+      console.log(response);
+      console.log(response.data.data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  }, []);
   return (
     <div className="other2 asset_other2">
       <section className="collateral-assets-section no-bg no_pad">
@@ -342,7 +277,46 @@ const DashboardMarketHome = () => {
                 {/* =============================== */}
                 {/* =============================== */}
                 {/* =============================== */}
-
+                {products.length <= 0 ? null : (
+                  <div className="dashboardMarketPlaceBody2_div1">
+                    <div className="dashboardMarketPlaceBody2_div1_head">
+                      Phones & Tablets
+                      <span className="dashboardMarketPlaceBody2_div1_head_span">
+                        View Category
+                      </span>
+                    </div>
+                    <div className="dashboardMarketPlaceBody2_div1_body">
+                      <Carousel
+                        responsive={responsive1}
+                        showDots={false}
+                        //   infinite={false}
+                        autoPlay={false}
+                        autoPlaySpeed={10000}
+                        pauseOnHover={true}
+                        infinite={false}
+                        draggable={true}
+                        swipeable={true}
+                        className="product_carousel"
+                      >
+                        {products.map((data) => (
+                          <ProductModel
+                            key={data.product_id}
+                            amount={data.final_amount}
+                            id={data.product_id}
+                            img={data.product_images}
+                            title={data.product_name}
+                            txnHash={data.transaction_hash}
+                            numberWithCommas={numberWithCommas}
+                            prodState={data.product_state}
+                            productType={data.productType}
+                            seller={data.user_wallet}
+                            productQuantity={data.quantity}
+                          />
+                        ))}
+                      </Carousel>
+                    </div>
+                  </div>
+                )}
                 {/* =============================== */}
                 {/* =============================== */}
                 {/* =============================== */}

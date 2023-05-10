@@ -229,7 +229,7 @@ const Dashboard = ({ check, togglemakeDark }) => {
                 />
                 <Route
                   exact
-                  path="/app/market/product/category"
+                  path="/app/market/product/category/:category"
                   component={ProductsCategoryPage}
                 />
                 <Route
