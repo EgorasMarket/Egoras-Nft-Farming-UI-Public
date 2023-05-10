@@ -9,53 +9,17 @@ import { API_URL } from "../../../../../actions/types";
 import axios from "axios";
 import { config } from "../../../../../actions/Config";
 import { numberWithCommas } from "../../../../static/static";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { GET_ALL_UPLOADED_PRODUCTS } from "../../../../../services/productServices";
 import ProductModel from "./ProductModel";
-export const MarketHeader = () => {
-  const [categories, setCategories] = useState([]);
-  useEffect(async () => {
-    try {
-      const response = await axios.get(
-        API_URL + "/product/all-categories",
-        null,
-        config
-      );
-      console.log(response);
-      console.log(response.data.data.allCategories);
-      setCategories(response.data.data.allCategories);
-    } catch (error) {
-      console.log(error.response);
-    }
-  }, []);
-  return (
-    <div className="dashboardMarketPlaceHeader no-bg">
-      <div className="container">
-        <div className="dashboardMarketPlaceHeader_area">
-          <div className="dashboardMarketPlaceHeader_div1">
-            <input
-              type="search"
-              placeholder="Search products"
-              name=""
-              id=""
-              className="dashboardMarketPlaceHeader_div1_search_input"
-            />
-            <SearchOutlinedIcon className="dashboardMarketPlaceHeader_div1_search_input_icon" />
-          </div>
-          <AppsIcon className="dashboardMarketPlaceHeader_div2_categories_icon" />
-          <div className="dashboardMarketPlaceHeader_div2_categories">
-            {categories.map((data) => (
-              <div className="dashboardMarketPlaceHeader_div2_categories_cont1">
-                {data.product_category}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
 const DashboardMarketHome = () => {
   const [products, setProducts] = useState([]);
+  const [products2, setProduct2] = useState([]);
+  const [products3, setProducts3] = useState([]);
+  const [products4, setProducts4] = useState([]);
 
   const responsive1 = {
     superLargeDesktop: {
@@ -117,102 +81,45 @@ const DashboardMarketHome = () => {
       items: 1,
     },
   };
-  const Product = [
-    {
-      id: "1",
-      img: "/img/dummyMarketImages/PhoneDummyImage.png",
-      title: "Apple Iphone 13pro max",
-      amount: 1200,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      prodState: "New",
-    },
-    {
-      id: "2",
-      img: "/img/dummyMarketImages/PhoneDummyImage2.png",
-      title: "Samsung galaxy s22",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-    },
-    {
-      id: "1",
-      img: "/img/dummyMarketImages/PhoneDummyImage.png",
-      title: "Apple Iphone 13pro max",
-      amount: 1200,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      prodState: "New",
-    },
-    {
-      id: "2",
-      img: "/img/dummyMarketImages/PhoneDummyImage2.png",
-      title: "Samsung galaxy s22",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-    },
-    {
-      id: "1",
-      img: "/img/dummyMarketImages/PhoneDummyImage.png",
-      title: "Apple Iphone 13pro max",
-      amount: 1200,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      prodState: "New",
-    },
-    {
-      id: "2",
-      img: "/img/dummyMarketImages/PhoneDummyImage2.png",
-      title: "Samsung galaxy s22",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-    },
-    {
-      id: "1",
-      img: "/img/dummyMarketImages/PhoneDummyImage.png",
-      title: "Apple Iphone 13pro max",
-      amount: 1200,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      prodState: "New",
-    },
-    {
-      id: "2",
-      img: "/img/dummyMarketImages/PhoneDummyImage2.png",
-      title: "Samsung galaxy s22",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-    },
-    {
-      id: "1",
-      img: "/img/dummyMarketImages/PhoneDummyImage.png",
-      title: "Apple Iphone 13pro max",
-      amount: 1200,
-      seller: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
-      prodState: "New",
-    },
-    {
-      id: "2",
-      img: "/img/dummyMarketImages/PhoneDummyImage2.png",
-      title: "Samsung galaxy s22",
-      amount: 800,
-      seller: "MartGpt",
-      prodState: "Refurb",
-    },
-  ];
+
   useEffect(async () => {
     try {
       const response = await axios.get(
-        API_URL + "/product/new/Phones & Tablets",
+        API_URL + "/product/product-by-category/Phones & Tablets",
         null,
         config
       );
       console.log(response);
-      // console.log(response.getAllUploadedProduct);
+      console.log(response.data.data);
+      setProduct2(response.data.data);
+    } catch (error) {
+      console.log(error.response);
+    }
+    try {
+      const response2 = await axios.get(
+        API_URL + "/product/product-by-category/Computers",
+        null,
+        config
+      );
+      console.log(response2);
+      console.log(response2.data.data);
+      setProducts3(response2.data.data);
+    } catch (error) {
+      console.log(error.response);
+    }
+    try {
+      const response3 = await axios.get(
+        API_URL + "/product/product-by-category/Electronics",
+        null,
+        config
+      );
+      console.log(response3);
+      console.log(response3.data.data);
+      setProducts4(response3.data.data);
     } catch (error) {
       console.log(error.response);
     }
   }, []);
-  console.log(Product);
   return (
     <div className="other2 asset_other2">
       <section className="collateral-assets-section no-bg no_pad">
@@ -316,7 +223,7 @@ const DashboardMarketHome = () => {
                         swipeable={true}
                         className="product_carousel"
                       >
-                        {products.map((data) => (
+                        {products.slice(0, 6).map((data) => (
                           <ProductModel
                             key={data.product_id}
                             amount={data.final_amount}
@@ -342,8 +249,145 @@ const DashboardMarketHome = () => {
                 {/* =============================== */}
                 {/* =============================== */}
                 {/* =============================== */}
-
+                {products2.length <= 0 ? null : (
+                  <div className="dashboardMarketPlaceBody2_div1">
+                    <div className="dashboardMarketPlaceBody2_div1_head">
+                      Phones & Tablets
+                      <a href={`/app/market/product/category/Phones & Tablets`}>
+                        <span className="dashboardMarketPlaceBody2_div1_head_span">
+                          View Category
+                        </span>
+                      </a>
+                    </div>
+                    <div className="dashboardMarketPlaceBody2_div1_body">
+                      <Carousel
+                        responsive={responsive1}
+                        showDots={false}
+                        //   infinite={false}
+                        autoPlay={false}
+                        autoPlaySpeed={10000}
+                        pauseOnHover={true}
+                        infinite={false}
+                        draggable={true}
+                        swipeable={true}
+                        className="product_carousel"
+                      >
+                        {products2.slice(0, 6).map((data) => (
+                          <ProductModel
+                            key={data.product_id}
+                            amount={data.final_amount}
+                            id={data.product_id}
+                            img={data.product_images}
+                            title={data.product_name}
+                            txnHash={data.transaction_hash}
+                            numberWithCommas={numberWithCommas}
+                            prodState={data.product_state}
+                            productType={data.productType}
+                            seller={data.user_wallet}
+                            productQuantity={data.quantity}
+                          />
+                        ))}
+                      </Carousel>
+                    </div>
+                  </div>
+                )}
                 {/* =============================== */}
+                {/* =============================== */}
+                {/* =============================== */}
+                {/* =============================== */}
+                {/* =============================== */}
+                {/* =============================== */}
+                {products3.length <= 0 ? null : (
+                  <div className="dashboardMarketPlaceBody2_div1">
+                    <div className="dashboardMarketPlaceBody2_div1_head">
+                      Computers
+                      <a href={`/app/market/product/category/Computers`}>
+                        <span className="dashboardMarketPlaceBody2_div1_head_span">
+                          View Category
+                        </span>
+                      </a>
+                    </div>
+                    <div className="dashboardMarketPlaceBody2_div1_body">
+                      <Carousel
+                        responsive={responsive1}
+                        showDots={false}
+                        //   infinite={false}
+                        autoPlay={false}
+                        autoPlaySpeed={10000}
+                        pauseOnHover={true}
+                        infinite={false}
+                        draggable={true}
+                        swipeable={true}
+                        className="product_carousel"
+                      >
+                        {products3.slice(0, 6).map((data) => (
+                          <ProductModel
+                            key={data.product_id}
+                            amount={data.final_amount}
+                            id={data.product_id}
+                            img={data.product_images}
+                            title={data.product_name}
+                            txnHash={data.transaction_hash}
+                            numberWithCommas={numberWithCommas}
+                            prodState={data.product_state}
+                            productType={data.productType}
+                            seller={data.user_wallet}
+                            productQuantity={data.quantity}
+                          />
+                        ))}
+                      </Carousel>
+                    </div>
+                  </div>
+                )}
+                {/* =============================== */}
+                {/* =============================== */}
+                {/* =============================== */}
+                {/* =============================== */}
+                {/* =============================== */}
+                {/* =============================== */}
+                {/* =============================== */}
+                {products4.length <= 0 ? null : (
+                  <div className="dashboardMarketPlaceBody2_div1">
+                    <div className="dashboardMarketPlaceBody2_div1_head">
+                      Electronics
+                      <a href={`/app/market/product/category/Electronics`}>
+                        <span className="dashboardMarketPlaceBody2_div1_head_span">
+                          View Category
+                        </span>
+                      </a>
+                    </div>
+                    <div className="dashboardMarketPlaceBody2_div1_body">
+                      <Carousel
+                        responsive={responsive1}
+                        showDots={false}
+                        //   infinite={false}
+                        autoPlay={false}
+                        autoPlaySpeed={10000}
+                        pauseOnHover={true}
+                        infinite={false}
+                        draggable={true}
+                        swipeable={true}
+                        className="product_carousel"
+                      >
+                        {products4.slice(0, 6).map((data) => (
+                          <ProductModel
+                            key={data.product_id}
+                            amount={data.final_amount}
+                            id={data.product_id}
+                            img={data.product_images}
+                            title={data.product_name}
+                            txnHash={data.transaction_hash}
+                            numberWithCommas={numberWithCommas}
+                            prodState={data.product_state}
+                            productType={data.productType}
+                            seller={data.user_wallet}
+                            productQuantity={data.quantity}
+                          />
+                        ))}
+                      </Carousel>
+                    </div>
+                  </div>
+                )}
                 {/* =============================== */}
                 {/* =============================== */}
                 {/* =============================== */}

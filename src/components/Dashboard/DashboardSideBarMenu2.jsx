@@ -7,6 +7,11 @@ import axios from "axios";
 import { API_URL } from "../../actions/types";
 import { config } from "../../actions/Config";
 import Marquee from "react-fast-marquee";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import AppsIcon from "@mui/icons-material/Apps";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 // import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 // import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 // import NotificationsIcon from "@mui/icons-material/Notifications";
@@ -67,6 +72,62 @@ import {
 } from "@web3-react/core";
 import { socket } from "../../socket";
 import TimeAgoComponent from "../TimeAgoComponent";
+export const MarketHeader = ({
+  setCategories,
+  ToggleMobile_cat,
+  categories,
+  ToggleOtherCategory,
+}) => {
+  useEffect(async () => {
+    try {
+      const response = await axios.get(
+        API_URL + "/product/all-categories",
+        null,
+        config
+      );
+      console.log(response);
+      console.log(response.data.data.allCategories);
+      setCategories(response.data.data.allCategories);
+    } catch (error) {
+      console.log(error.response);
+    }
+  }, []);
+
+  return (
+    <div className="dashboardMarketPlaceHeader no-bg">
+      <div className="container">
+        <div className="dashboardMarketPlaceHeader_area">
+          <div className="dashboardMarketPlaceHeader_div1">
+            <input
+              type="search"
+              placeholder="Search products"
+              name=""
+              id=""
+              className="dashboardMarketPlaceHeader_div1_search_input"
+            />
+            <SearchOutlinedIcon className="dashboardMarketPlaceHeader_div1_search_input_icon" />
+          </div>
+          <AppsIcon
+            className="dashboardMarketPlaceHeader_div2_categories_icon"
+            onClick={ToggleMobile_cat}
+          />
+          <div className="dashboardMarketPlaceHeader_div2_categories">
+            {categories.slice(0, 4).map((data) => (
+              <a href={`/app/market/product/category/${data.product_category}`}>
+                <div className="dashboardMarketPlaceHeader_div2_categories_cont1">
+                  {data.product_category}
+                </div>
+              </a>
+            ))}
+            <div className="more_cat_icon" onClick={ToggleOtherCategory}>
+              <MoreHorizIcon className="more_cat_icon_icon" /> Others
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const dddd = localStorage.getItem("smallSidetoken");
   const [connectId, setConnectId] = useState(false);
@@ -86,6 +147,9 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const [conecttxt, setConnectTxt] = useState("Not Connected");
   const [nairaValue, setNairaValue] = useState(750);
   const [UnreadNotifications, setUnreadNotifications] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [otherCategory, setOtherCategory] = useState(false);
+  const [mobile_cat, setMobile_cat] = useState(false);
   const [noTifyCount, setNotifyCount] = useState(0);
   // const [darkMode, setDarkMode] = useState(null);
   const [walletAddr, setWalletAddr] = useState(
@@ -495,6 +559,12 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     let id = e.currentTarget.id;
 
     setActiveNotifyTab(id);
+  };
+  const ToggleOtherCategory = () => {
+    setOtherCategory(!otherCategory);
+  };
+  const ToggleMobile_cat = () => {
+    setMobile_cat(!mobile_cat);
   };
   return (
     <>
@@ -1037,7 +1107,14 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             ) : null}
           </div>
         </section>
-
+        {urlArr[2] === "market" ? (
+          <MarketHeader
+            setCategories={setCategories}
+            ToggleMobile_cat={ToggleMobile_cat}
+            categories={categories}
+            ToggleOtherCategory={ToggleOtherCategory}
+          />
+        ) : null}
         <div className="dash_board_links">
           <div className="container">
             <div className="dash_board_links_area">
@@ -1201,6 +1278,51 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
               ) : null}
             </>
           ))}
+      {otherCategory ? (
+        <div className="otherCategoryDiv">
+          <div className="otherCategoryDiv_cont">
+            <div
+              className="otherCategoryDiv_cont_1"
+              onClick={ToggleOtherCategory}
+            >
+              <ArrowBackIcon className="otherCategoryDiv_cont_1_icon" /> Back
+            </div>
+            <div className="otherCategoryDiv_cont_2_body">
+              {categories.slice(4).map((data) => (
+                <a
+                  href={`/app/market/product/category/${data.product_category}`}
+                >
+                  <div className="otherCategoryDiv_cont_2_body_category">
+                    {data.product_category}
+                    <ArrowForwardIcon className="otherCategoryDiv_cont_2_body_category_icon" />
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
+      {mobile_cat ? (
+        <div className="otherCategoryDiv2">
+          <div className="otherCategoryDiv_cont">
+            <div className="otherCategoryDiv_cont_1" onClick={ToggleMobile_cat}>
+              <ArrowBackIcon className="otherCategoryDiv_cont_1_icon" /> Back
+            </div>
+            <div className="otherCategoryDiv_cont_2_body">
+              {categories.map((data) => (
+                <a
+                  href={`/app/market/product/category/${data.product_category}`}
+                >
+                  <div className="otherCategoryDiv_cont_2_body_category">
+                    {data.product_category}
+                    <ArrowForwardIcon className="otherCategoryDiv_cont_2_body_category_icon" />
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      ) : null}
     </>
   );
 };
