@@ -31,7 +31,7 @@ import DashBoardTransaction from "./DashBoardPages/DashBoardTransaction";
 import DashboardGovernance from "./DashBoardPages/DashboardGovernance";
 import StakingUpdate from "./DashBoardPages/UpdatedAppPages/StakingUpdate";
 import DashboardMarketHome from "./DashBoardPages/UpdatedAppPages/DashboardMarket/DashboardMarketHome";
-import { MarketHeader } from "./DashBoardPages/UpdatedAppPages/DashboardMarket/DashboardMarketHome";
+
 // import OpenVaultPage from "./OpenVaultPage.js";
 // import OpenVaultPage from "./DashBoardPages/OpenVaultPage";
 import OpenVaultPage from "./DashBoardPages/OpenVaultPage";
@@ -182,7 +182,6 @@ const Dashboard = ({ check, togglemakeDark }) => {
                 check={check}
                 togglemakeDark={togglemakeDark}
               />
-              {urlArr[2] === "market" ? <MarketHeader /> : null}
               <Switch>
                 <Route exact path="/app/stake" component={DashBoardAnalytics} />
 
