@@ -190,9 +190,9 @@ function App() {
       return;
     }
   });
-  useEffect(() => {
-    store.dispatch(loadUser());
-  });
+  // useEffect(() => {
+  //   store.dispatch(loadUser());
+  // });
 
   const [cClass, setCClass] = useState(false);
 

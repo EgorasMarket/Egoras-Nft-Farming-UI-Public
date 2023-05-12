@@ -88,120 +88,120 @@ const DashboardHome = () => {
     volume: "0",
     users: 0,
   });
-  useEffect(async () => {
-    const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
-    console.log("dddd");
-    await axios
-      .get(API_URL + "/staking/chart", null, config)
-      .then((data) => {
-        console.log(data);
-        console.log(data.data.data);
-        const temp = data.data.data;
-        console.log(temp);
-        for (const data of temp) {
-          data.value = parseInt(data.value).toFixed(2) * egc_usd;
-          const date = new Date(data.timestamp);
-          const day = date.getUTCDate().toString().padStart(2, "0");
-          const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
-          const year = date.getUTCFullYear();
-          const formattedDated = `${day}/${month}/${year}`;
-          const dateString = formattedDated;
-          const dateParts = dateString.split("/");
-          // new Date(year, monthIndex, day)
-          const dateObj = new Date(
-            dateParts[2],
-            dateParts[1] - 1,
-            dateParts[0]
-          );
-          // format the date using toLocaleDateString()
-          const formattedDate = dateObj.toLocaleDateString("en-US", {
-            month: "short",
-            day: "2-digit",
-            year: "numeric",
-          });
-          data.timestamp = formattedDate;
-          data.month = getMonthFromNumber(data.month);
-        }
-        console.log(temp);
-        setGraphData2(() => temp);
-        setlastIndex(temp.length - 1);
-        setLastArray(temp[temp.length - 1]);
-        setChartValue(() => temp[temp.length - 1].value);
-        setChartTime(() => temp[temp.length - 1].timestamp);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
+  // useEffect(async () => {
+  //   const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
+  //   console.log("dddd");
+  //   await axios
+  //     .get(API_URL + "/staking/chart", null, config)
+  //     .then((data) => {
+  //       console.log(data);
+  //       console.log(data.data.data);
+  //       const temp = data.data.data;
+  //       console.log(temp);
+  //       for (const data of temp) {
+  //         data.value = parseInt(data.value).toFixed(2) * egc_usd;
+  //         const date = new Date(data.timestamp);
+  //         const day = date.getUTCDate().toString().padStart(2, "0");
+  //         const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+  //         const year = date.getUTCFullYear();
+  //         const formattedDated = `${day}/${month}/${year}`;
+  //         const dateString = formattedDated;
+  //         const dateParts = dateString.split("/");
+  //         // new Date(year, monthIndex, day)
+  //         const dateObj = new Date(
+  //           dateParts[2],
+  //           dateParts[1] - 1,
+  //           dateParts[0]
+  //         );
+  //         // format the date using toLocaleDateString()
+  //         const formattedDate = dateObj.toLocaleDateString("en-US", {
+  //           month: "short",
+  //           day: "2-digit",
+  //           year: "numeric",
+  //         });
+  //         data.timestamp = formattedDate;
+  //         data.month = getMonthFromNumber(data.month);
+  //       }
+  //       console.log(temp);
+  //       setGraphData2(() => temp);
+  //       setlastIndex(temp.length - 1);
+  //       setLastArray(temp[temp.length - 1]);
+  //       setChartValue(() => temp[temp.length - 1].value);
+  //       setChartTime(() => temp[temp.length - 1].timestamp);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.response);
+  //     });
 
-    // socket.connect();
-    // socket.on("staking", (stakings) => {
-    //   // alert(JSON.stringify(stakings));
-    // });
-  }, []);
-  useEffect(async () => {
-    const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
-    console.log("dddd");
-    await axios
-      .get(API_URL + "/swap/all", null, config)
-      .then((data) => {
-        console.log(data, "hhhhh");
-        console.log(data.data.data);
+  //   // socket.connect();
+  //   // socket.on("staking", (stakings) => {
+  //   //   // alert(JSON.stringify(stakings));
+  //   // });
+  // }, []);
+  // useEffect(async () => {
+  //   const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
+  //   console.log("dddd");
+  //   await axios
+  //     .get(API_URL + "/swap/all", null, config)
+  //     .then((data) => {
+  //       console.log(data, "hhhhh");
+  //       console.log(data.data.data);
 
-        const myArray = data.data.data;
-        myArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-        console.log(myArray);
-        const reversed = myArray
-          .slice()
-          .reverse()
-          .map((data) => {
-            return data;
-          });
-        const temp = reversed;
-        for (const data of temp) {
-          data.value = parseInt(data.value).toFixed(2) * egc_usd;
-          const date = new Date(data.timestamp);
-          const day = date.getUTCDate().toString().padStart(2, "0");
-          const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
-          const year = date.getUTCFullYear();
-          const formattedDated = `${day}/${month}/${year}`;
-          const dateString = formattedDated;
-          const dateParts = dateString.split("/");
-          // new Date(year, monthIndex, day)
-          const dateObj = new Date(
-            dateParts[2],
-            dateParts[1] - 1,
-            dateParts[0]
-          );
-          // format the date using toLocaleDateString()
-          const formattedDate = dateObj.toLocaleDateString("en-US", {
-            month: "short",
-            day: "2-digit",
-            year: "numeric",
-          });
-          data.timestamp = formattedDate;
-          data.month = getMonthFromNumber(data.month);
-        }
-        const totalValue = reversed.reduce((accumulator, currentValue) => {
-          return accumulator + currentValue.value;
-        }, 0);
-        console.log(totalValue);
-        setTradeVolume(parseInt(totalValue).toFixed(2));
-        console.log(temp);
-        setGraphData(() => temp);
-        setlastIndex2(temp.length - 1);
-        setLastArray2(temp[temp.length - 1]);
-        setChartValue2(() => temp[temp.length - 1].value);
-        setChartTime2(() => temp[temp.length - 1].timestamp);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
+  //       const myArray = data.data.data;
+  //       myArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+  //       console.log(myArray);
+  //       const reversed = myArray
+  //         .slice()
+  //         .reverse()
+  //         .map((data) => {
+  //           return data;
+  //         });
+  //       const temp = reversed;
+  //       for (const data of temp) {
+  //         data.value = parseInt(data.value).toFixed(2) * egc_usd;
+  //         const date = new Date(data.timestamp);
+  //         const day = date.getUTCDate().toString().padStart(2, "0");
+  //         const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+  //         const year = date.getUTCFullYear();
+  //         const formattedDated = `${day}/${month}/${year}`;
+  //         const dateString = formattedDated;
+  //         const dateParts = dateString.split("/");
+  //         // new Date(year, monthIndex, day)
+  //         const dateObj = new Date(
+  //           dateParts[2],
+  //           dateParts[1] - 1,
+  //           dateParts[0]
+  //         );
+  //         // format the date using toLocaleDateString()
+  //         const formattedDate = dateObj.toLocaleDateString("en-US", {
+  //           month: "short",
+  //           day: "2-digit",
+  //           year: "numeric",
+  //         });
+  //         data.timestamp = formattedDate;
+  //         data.month = getMonthFromNumber(data.month);
+  //       }
+  //       const totalValue = reversed.reduce((accumulator, currentValue) => {
+  //         return accumulator + currentValue.value;
+  //       }, 0);
+  //       console.log(totalValue);
+  //       setTradeVolume(parseInt(totalValue).toFixed(2));
+  //       console.log(temp);
+  //       setGraphData(() => temp);
+  //       setlastIndex2(temp.length - 1);
+  //       setLastArray2(temp[temp.length - 1]);
+  //       setChartValue2(() => temp[temp.length - 1].value);
+  //       setChartTime2(() => temp[temp.length - 1].timestamp);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.response);
+  //     });
 
-    // socket.connect();
-    // socket.on("staking", (stakings) => {
-    //   // alert(JSON.stringify(stakings));
-    // });
-  }, []);
+  //   // socket.connect();
+  //   // socket.on("staking", (stakings) => {
+  //   //   // alert(JSON.stringify(stakings));
+  //   // });
+  // }, []);
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       setChartValue(payload[0].payload.value);

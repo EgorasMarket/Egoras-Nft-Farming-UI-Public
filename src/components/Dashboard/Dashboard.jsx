@@ -117,36 +117,37 @@ const Dashboard = ({ check, togglemakeDark }) => {
     });
   };
 
-  const FirstCheckKyc = async () => {
-    // check if cookie get data for the variable
-    if (cookies.get("myCookie")) {
-      console.log("nothing to do yet");
-      return;
-    }
-    let response = await getAuthUserStats(account);
-    const payload = response.message.data.payload;
-    console.log(payload, "pay=========");
-    console.log(payload.kyc_status, "pay=========");
-    //  if (payload == null) {
-    //    setPropmtDiv(() => true);
-    //  } else {
-    //    if (payload.kyc_staus === "COMPLETED") {
-    //      setPropmtDiv(() => false);
-    //    } else {
-    //      setPropmtDiv(() => true);
-    //    }
-    //  }
-    if (payload == null || payload.kyc_status !== KycStatusTypes.COMPLETED) {
-      setPropmtDiv(() => true);
-      return;
-    }
-    setPropmtDiv(() => false);
-  };
-  useEffect(() => {
-    if (account) {
-      FirstCheckKyc();
-    }
-  }, [account]);
+  // const FirstCheckKyc = async () => {
+  //   // check if cookie get data for the variable
+  //   if (cookies.get("myCookie")) {
+  //     console.log("nothing to do yet");
+  //     return;
+  //   }
+  //   let response = await getAuthUserStats(account);
+  //   console.log(response);
+  //   const payload = response.message.data.payload;
+  //   console.log(payload, "pay=========");
+  //   console.log(payload.kyc_status, "pay=========");
+  //   //  if (payload == null) {
+  //   //    setPropmtDiv(() => true);
+  //   //  } else {
+  //   //    if (payload.kyc_staus === "COMPLETED") {
+  //   //      setPropmtDiv(() => false);
+  //   //    } else {
+  //   //      setPropmtDiv(() => true);
+  //   //    }
+  //   //  }
+  //   if (payload == null || payload.kyc_status !== KycStatusTypes.COMPLETED) {
+  //     setPropmtDiv(() => true);
+  //     return;
+  //   }
+  //   setPropmtDiv(() => false);
+  // };
+  // useEffect(() => {
+  //   if (account) {
+  //     FirstCheckKyc();
+  //   }
+  // }, [account]);
   const relocateToOnborad = () => {
     window.location.href = "/app";
     setPropmtDiv(() => false);
