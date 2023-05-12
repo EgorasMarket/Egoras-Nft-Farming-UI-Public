@@ -65,7 +65,7 @@ const DashboardHome = () => {
     active,
     error,
   } = context;
-  const [egc_usd, setEgc_usd] = useState(0);
+  const [egc_usd, setEgc_usd] = useState(0.0);
   const [graphData2, setGraphData2] = useState([]);
   const [graphData, setGraphData] = useState([]);
   const [ChartValue, setChartValue] = useState(0);
@@ -82,126 +82,139 @@ const DashboardHome = () => {
   const [swapData, setSwapData] = useState([]);
   const [productData, setProductsData] = useState([]);
   const [TradeVolume, setTradeVolume] = useState(0);
+  const [chartloaded, setChartLoaded] = useState(false);
   const [homeData, setHomeData] = useState({
     tvl: "0",
     volume: "0",
     users: 0,
   });
   useEffect(async () => {
-    try {
-      const egc_usd2 = await GET_COIN_GEKO_PRICE_IN_USD();
-      console.log(egc_usd2);
-      setEgc_usd(() => egc_usd2);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-  useEffect(async () => {
-    try {
-      const data = await axios.get(API_URL + "/staking/chart", null, config);
-      console.log(data);
-      if (data.data.data.length !== 0) {
-        console.log(data.data.data);
-        const temp = data.data.data;
-        console.log(temp);
-        for (const data of temp) {
-          data.value = parseInt(data.value).toFixed(2) * egc_usd;
-          const date = new Date(data.timestamp);
-          const day = date.getUTCDate().toString().padStart(2, "0");
-          const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
-          const year = date.getUTCFullYear();
-          const formattedDated = `${day}/${month}/${year}`;
-          const dateString = formattedDated;
-          const dateParts = dateString.split("/");
-          // new Date(year, monthIndex, day)
-          const dateObj = new Date(
-            dateParts[2],
-            dateParts[1] - 1,
-            dateParts[0]
-          );
-          // format the date using toLocaleDateString()
-          const formattedDate = dateObj.toLocaleDateString("en-US", {
-            month: "short",
-            day: "2-digit",
-            year: "numeric",
-          });
-          data.timestamp = formattedDate;
-          data.month = getMonthFromNumber(data.month);
-        }
-        console.log(temp);
-        setGraphData2(() => temp);
-        setlastIndex(temp.length - 1);
-        setLastArray(temp[temp.length - 1]);
-        setChartValue(() => temp[temp.length - 1].value);
-        setChartTime(() => temp[temp.length - 1].timestamp);
-        return;
-      }
-    } catch (error) {
-      console.log(error.response);
-    }
+    const egc_usd2 = await GET_COIN_GEKO_PRICE_IN_USD();
+    // if
+    console.log(parseFloat(egc_usd2));
+    setEgc_usd(parseFloat(egc_usd2));
   }, []);
 
   useEffect(async () => {
-    try {
-      const data = await axios.get(
-        API_URL + "/staking/transactions",
-        null,
-        config
-      );
-      console.log(data, "hhhhh");
-      // console.log(data.data.data);
-      if (data.data.data.length !== 0) {
-        const myArray = data.data.data;
-        myArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-        console.log(myArray);
-        const reversed = myArray
-          .slice()
-          .reverse()
-          .map((data) => {
-            return data;
-          });
-        const temp = reversed;
-        for (const data of temp) {
-          data.value = parseInt(data.value).toFixed(2) * egc_usd;
-          const date = new Date(data.timestamp);
-          const day = date.getUTCDate().toString().padStart(2, "0");
-          const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
-          const year = date.getUTCFullYear();
-          const formattedDated = `${day}/${month}/${year}`;
-          const dateString = formattedDated;
-          const dateParts = dateString.split("/");
-          // new Date(year, monthIndex, day)
-          const dateObj = new Date(
-            dateParts[2],
-            dateParts[1] - 1,
-            dateParts[0]
-          );
-          // format the date using toLocaleDateString()
-          const formattedDate = dateObj.toLocaleDateString("en-US", {
-            month: "short",
-            day: "2-digit",
-            year: "numeric",
-          });
-          data.timestamp = formattedDate;
-          data.month = getMonthFromNumber(data.month);
+    setChartLoaded(true);
+    const fetchData = async () => {
+      try {
+        const data = await axios.get(API_URL + "/staking/chart", null, config);
+        console.log(data);
+        console.log(data.data.data);
+        if (data.data.data.length !== 0) {
+          const temp = data.data.data;
+          // const temp = data.data.data;
+          console.log(temp);
+          for (const data of temp) {
+            data.value = parseInt(data.value).toFixed(2) * egc_usd;
+            const date = new Date(data.timestamp);
+            const day = date.getUTCDate().toString().padStart(2, "0");
+            const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+            const year = date.getUTCFullYear();
+            const formattedDated = `${day}/${month}/${year}`;
+            const dateString = formattedDated;
+            const dateParts = dateString.split("/");
+            // new Date(year, monthIndex, day)
+            const dateObj = new Date(
+              dateParts[2],
+              dateParts[1] - 1,
+              dateParts[0]
+            );
+            // format the date using toLocaleDateString()
+            const formattedDate = dateObj.toLocaleDateString("en-US", {
+              month: "short",
+              day: "2-digit",
+              year: "numeric",
+            });
+            data.timestamp = formattedDate;
+            data.month = getMonthFromNumber(data.month);
+          }
+          console.log(temp);
+          setGraphData2(() => temp);
+          setlastIndex(temp.length - 1);
+          setLastArray(temp[temp.length - 1]);
+          setChartValue(() => temp[temp.length - 1].value);
+          setChartTime(() => temp[temp.length - 1].timestamp);
+          return;
         }
-        const totalValue = reversed.reduce((accumulator, currentValue) => {
-          return accumulator + currentValue.value;
-        }, 0);
-        console.log(totalValue);
-        setTradeVolume(parseInt(totalValue).toFixed(2));
-        console.log(temp);
-        setGraphData(() => temp);
-        setlastIndex2(temp.length - 1);
-        setLastArray2(temp[temp.length - 1]);
-        setChartValue2(() => temp[temp.length - 1].value);
-        setChartTime2(() => temp[temp.length - 1].timestamp);
-        return;
+      } catch (error) {
+        console.log(error.response);
       }
-    } catch (error) {
-      console.log(error.response);
-    }
-  }, []);
+    };
+    const timer = setTimeout(async () => {
+      setChartLoaded(false);
+      fetchData();
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [egc_usd]);
+
+  useEffect(async () => {
+    const fetchData = async () => {
+      try {
+        const data = await axios.get(API_URL + "/swap/all", null, config);
+        console.log(data, "hhhhh");
+        // console.log(data.data.data);
+        if (data.data.data.length !== 0) {
+          const myArray = data.data.data;
+          myArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+          console.log(myArray);
+          const reversed = myArray
+            .slice()
+            .reverse()
+            .map((data) => {
+              return data;
+            });
+          const temp = reversed;
+          for (const data of temp) {
+            data.value = parseInt(data.value).toFixed(2) * egc_usd;
+            const date = new Date(data.timestamp);
+            const day = date.getUTCDate().toString().padStart(2, "0");
+            const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+            const year = date.getUTCFullYear();
+            const formattedDated = `${day}/${month}/${year}`;
+            const dateString = formattedDated;
+            const dateParts = dateString.split("/");
+            // new Date(year, monthIndex, day)
+            const dateObj = new Date(
+              dateParts[2],
+              dateParts[1] - 1,
+              dateParts[0]
+            );
+            // format the date using toLocaleDateString()
+            const formattedDate = dateObj.toLocaleDateString("en-US", {
+              month: "short",
+              day: "2-digit",
+              year: "numeric",
+            });
+            data.timestamp = formattedDate;
+            data.month = getMonthFromNumber(data.month);
+          }
+          console.log(reversed);
+          const totalValue = reversed.reduce((accumulator, currentValue) => {
+            console.log(accumulator, currentValue);
+            return accumulator + currentValue.value;
+          }, 0);
+          console.log(totalValue);
+          setTradeVolume(parseInt(totalValue).toFixed(2));
+          console.log(temp);
+          setGraphData(() => temp);
+          setlastIndex2(temp.length - 1);
+          setLastArray2(temp[temp.length - 1]);
+          setChartValue2(() => temp[temp.length - 1].value);
+          setChartTime2(() => temp[temp.length - 1].timestamp);
+          return;
+        }
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
+    const timer = setTimeout(async () => {
+      setChartLoaded(false);
+      fetchData();
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [egc_usd]);
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       setChartValue(payload[0].payload.value);
@@ -239,7 +252,7 @@ const DashboardHome = () => {
       });
     };
     fetchData();
-  }, []);
+  }, [egc_usd]);
 
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);
@@ -389,126 +402,132 @@ const DashboardHome = () => {
               <div className="analytics_container_body_mobile">
                 <div className="analytics_container_1">
                   <div className="analytics_container_1_head">TVL</div>
-                  <div
-                    className="analytics_container_1_Amount"
-                    onChange={CustomTooltip}
-                  >
-                    ${formatNumber(ChartValue)}
-                  </div>
-                  <span className="analytics_container_1_Amount_span">
-                    {ChartTime}
-                  </span>
+                  {chartloaded ? (
+                    <div>Chart is loading...</div>
+                  ) : (
+                    <>
+                      <div
+                        className="analytics_container_1_Amount"
+                        onChange={CustomTooltip}
+                      >
+                        ${formatNumber(ChartValue)}
+                      </div>
+                      <span className="analytics_container_1_Amount_span">
+                        {ChartTime}
+                      </span>
 
-                  <div className="analytics_container_1_chart">
-                    <div
-                      className="assets_chart_area1a "
-                      style={{ width: "100%", height: 120 }}
-                    >
-                      <ResponsiveContainer>
-                        <AreaChart
-                          width={130}
-                          height={10}
-                          data={graphData2}
-                          margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                          }}
+                      <div className="analytics_container_1_chart">
+                        <div
+                          className="assets_chart_area1a "
+                          style={{ width: "100%", height: 120 }}
                         >
-                          <defs>
-                            <linearGradient
-                              id="colorUv"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
+                          <ResponsiveContainer>
+                            <AreaChart
+                              width={130}
+                              height={10}
+                              data={graphData2}
+                              margin={{
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                              }}
                             >
-                              <stop
-                                offset="5%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.3}
-                              />
-                              <stop
-                                offset="100%"
-                                stopColor="#827dc3"
-                                stopOpacity={0}
-                              />
-                            </linearGradient>
-                          </defs>
-                          {/* <CartesianGrid
+                              <defs>
+                                <linearGradient
+                                  id="colorUv"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.3}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid
                             strokeDasharray="1 1"
                             stroke="#d7d7d7"
                           /> */}
-                          <XAxis dataKey="month" stroke="0" />
-                          {/* <YAxis stroke="#000" /> */}
-                          {/* <Tooltip content={<CustomTooltip />} /> */}
-                          <Area
-                            type="monotone"
-                            dataKey="value"
-                            stroke="#7a5fc0"
-                            fillOpacity={1}
-                            fill="url(#colorUv)"
-                            strokeWidth={2}
-                          />
-                        </AreaChart>
-                      </ResponsiveContainer>
-                    </div>
-                    <div
-                      className="assets_chart_area2 "
-                      style={{ width: "100%", height: 120 }}
-                    >
-                      <ResponsiveContainer>
-                        <AreaChart
-                          width={130}
-                          height={10}
-                          data={graphData2}
-                          margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                          }}
+                              <XAxis dataKey="month" stroke="0" />
+                              {/* <YAxis stroke="#000" /> */}
+                              <Tooltip content={<CustomTooltip />} />
+                              <Area
+                                type="monotone"
+                                dataKey="value"
+                                stroke="#7a5fc0"
+                                fillOpacity={1}
+                                fill="url(#colorUv)"
+                                strokeWidth={2}
+                              />
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                        <div
+                          className="assets_chart_area2 "
+                          style={{ width: "100%", height: 120 }}
                         >
-                          <defs>
-                            <linearGradient
-                              id="colorUv"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
+                          <ResponsiveContainer>
+                            <AreaChart
+                              width={130}
+                              height={10}
+                              data={graphData2}
+                              margin={{
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                              }}
                             >
-                              <stop
-                                offset="5%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.3}
-                              />
-                              <stop
-                                offset="100%"
-                                stopColor="#827dc3"
-                                stopOpacity={0}
-                              />
-                            </linearGradient>
-                          </defs>
-                          {/* <CartesianGrid
+                              <defs>
+                                <linearGradient
+                                  id="colorUv"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.3}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid
                             strokeDasharray="1 1"
                             stroke="#d7d7d7"
                           /> */}
-                          <XAxis dataKey="month" stroke="0" />
-                          {/* <YAxis stroke="#000" /> */}
-                          {/* <Tooltip content={<CustomTooltip />} /> */}
-                          <Area
-                            type="monotone"
-                            dataKey="value"
-                            stroke="#7a5fc0"
-                            fillOpacity={1}
-                            fill="url(#colorUv)"
-                            strokeWidth={2}
-                          />
-                        </AreaChart>
-                      </ResponsiveContainer>
-                    </div>
-                  </div>
+                              <XAxis dataKey="month" stroke="0" />
+                              {/* <YAxis stroke="#000" /> */}
+                              <Tooltip content={<CustomTooltip />} />
+                              <Area
+                                type="monotone"
+                                dataKey="value"
+                                stroke="#7a5fc0"
+                                fillOpacity={1}
+                                fill="url(#colorUv)"
+                                strokeWidth={2}
+                              />
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
                 {/* ====== */}
                 {/* ====== */}
@@ -516,128 +535,134 @@ const DashboardHome = () => {
                 {/* ====== */}
                 <div className="analytics_container_1">
                   <div className="analytics_container_1_head">Volume 24H</div>
-                  <div
-                    className="analytics_container_1_Amount"
-                    onChange={CustomTooltip2}
-                  >
-                    ${formatNumber(ChartValue2)}
-                  </div>
-                  <span className="analytics_container_1_Amount_span">
-                    {ChartTime2}
-                  </span>
-                  <div className="analytics_container_1_chart">
-                    <div
-                      className="assets_chart_area1a"
-                      style={{ width: "100%", height: 120 }}
-                    >
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart
-                          width={130}
-                          height={10}
-                          data={graphData}
-                          margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                          }}
+                  {chartloaded ? (
+                    <div>Chart is Loading...</div>
+                  ) : (
+                    <>
+                      <div
+                        className="analytics_container_1_Amount"
+                        onChange={CustomTooltip2}
+                      >
+                        ${formatNumber(ChartValue2)}
+                      </div>
+                      <span className="analytics_container_1_Amount_span">
+                        {ChartTime2}
+                      </span>
+                      <div className="analytics_container_1_chart">
+                        <div
+                          className="assets_chart_area1a"
+                          style={{ width: "100%", height: 120 }}
                         >
-                          <defs>
-                            <linearGradient
-                              id="colorUvBar1"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart
+                              width={130}
+                              height={10}
+                              data={graphData}
+                              margin={{
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                              }}
                             >
-                              <stop
-                                offset="5%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.7}
+                              <defs>
+                                <linearGradient
+                                  id="colorUvBar1"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.7}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.3}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                              <XAxis dataKey="month" stroke="0" color="#fff" />
+                              {/* <YAxis /> */}
+                              <Tooltip content={<CustomTooltip2 />} />
+                              {/* <Legend /> */}
+                              <Bar
+                                // type="monotone"
+                                dataKey="value"
+                                // stroke="#827dc3"
+                                // fillOpacity={1}
+                                fill="url(#colorUvBar1)"
+                                // strokeWidth={2}
                               />
-                              <stop
-                                offset="100%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.3}
-                              />
-                            </linearGradient>
-                          </defs>
-                          {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                          <XAxis dataKey="month" stroke="0" color="#fff" />
-                          {/* <YAxis /> */}
-                          {/* <Tooltip content={<CustomTooltip2 />} /> */}
-                          {/* <Legend /> */}
-                          <Bar
-                            // type="monotone"
-                            dataKey="value"
-                            // stroke="#827dc3"
-                            // fillOpacity={1}
-                            fill="url(#colorUvBar1)"
-                            // strokeWidth={2}
-                          />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </div>
-                    {/* ===== */}
-                    {/* ===== */}
-                    {/* ===== */}
-                    <div
-                      className="assets_chart_area2"
-                      style={{ width: "100%", height: 120 }}
-                    >
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart
-                          width={130}
-                          height={10}
-                          data={graphData}
-                          margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                          }}
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                        {/* ===== */}
+                        {/* ===== */}
+                        {/* ===== */}
+                        <div
+                          className="assets_chart_area2"
+                          style={{ width: "100%", height: 120 }}
                         >
-                          <defs>
-                            <linearGradient
-                              id="colorUvBar2"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart
+                              width={130}
+                              height={10}
+                              data={graphData}
+                              margin={{
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                              }}
                             >
-                              <stop
-                                offset="5%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.7}
+                              <defs>
+                                <linearGradient
+                                  id="colorUvBar2"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.7}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.3}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                              <XAxis
+                                dataKey="month"
+                                stroke="0"
+                                fill="#fff"
+                                color="#fff"
                               />
-                              <stop
-                                offset="100%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.3}
+                              {/* <YAxis /> */}
+                              <Tooltip content={<CustomTooltip2 />} />
+                              <Bar
+                                // type="monotone"
+                                dataKey="value"
+                                // stroke="#fff"
+                                // fillOpacity={1}
+                                fill="url(#colorUvBar2)"
+                                // strokeWidth={2}
                               />
-                            </linearGradient>
-                          </defs>
-                          {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                          <XAxis
-                            dataKey="month"
-                            stroke="0"
-                            fill="#fff"
-                            color="#fff"
-                          />
-                          {/* <YAxis /> */}
-                          {/* <Tooltip content={<CustomTooltip2 />} /> */}
-                          <Bar
-                            // type="monotone"
-                            dataKey="value"
-                            // stroke="#fff"
-                            // fillOpacity={1}
-                            fill="url(#colorUvBar2)"
-                            // strokeWidth={2}
-                          />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </div>
-                  </div>
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
               {/* =============================================== */}
@@ -653,126 +678,131 @@ const DashboardHome = () => {
               <div className="analytics_container_body">
                 <div className="analytics_container_1">
                   <div className="analytics_container_1_head">TVL</div>
-                  <div
-                    className="analytics_container_1_Amount"
-                    onChange={CustomTooltip}
-                  >
-                    ${formatNumber(ChartValue)}
-                  </div>
-                  <span className="analytics_container_1_Amount_span">
-                    {ChartTime}
-                  </span>
-
-                  <div className="analytics_container_1_chart">
-                    <div
-                      className="assets_chart_area1a "
-                      style={{ width: "100%", height: 220 }}
-                    >
-                      <ResponsiveContainer>
-                        <AreaChart
-                          width={130}
-                          height={10}
-                          data={graphData2}
-                          margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                          }}
+                  {chartloaded ? (
+                    <div>Chart is Loading...</div>
+                  ) : (
+                    <>
+                      <div
+                        className="analytics_container_1_Amount"
+                        onChange={CustomTooltip}
+                      >
+                        ${formatNumber(ChartValue)}
+                      </div>
+                      <span className="analytics_container_1_Amount_span">
+                        {ChartTime}
+                      </span>
+                      <div className="analytics_container_1_chart">
+                        <div
+                          className="assets_chart_area1a "
+                          style={{ width: "100%", height: 220 }}
                         >
-                          <defs>
-                            <linearGradient
-                              id="colorUv"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
+                          <ResponsiveContainer>
+                            <AreaChart
+                              width={130}
+                              height={10}
+                              data={graphData2}
+                              margin={{
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                              }}
                             >
-                              <stop
-                                offset="5%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.3}
+                              <defs>
+                                <linearGradient
+                                  id="colorUv"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.3}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid
+                              strokeDasharray="1 1"
+                              stroke="#d7d7d7"
+                            /> */}
+                              <XAxis dataKey="month" stroke="0" />
+                              {/* <YAxis stroke="#000" /> */}
+                              <Tooltip content={<CustomTooltip />} />
+                              <Area
+                                type="monotone"
+                                dataKey="value"
+                                stroke="#7a5fc0"
+                                fillOpacity={1}
+                                fill="url(#colorUv)"
+                                strokeWidth={2}
                               />
-                              <stop
-                                offset="100%"
-                                stopColor="#827dc3"
-                                stopOpacity={0}
-                              />
-                            </linearGradient>
-                          </defs>
-                          {/* <CartesianGrid
-                            strokeDasharray="1 1"
-                            stroke="#d7d7d7"
-                          /> */}
-                          <XAxis dataKey="month" stroke="0" />
-                          {/* <YAxis stroke="#000" /> */}
-                          {/* <Tooltip content={<CustomTooltip />} /> */}
-                          <Area
-                            type="monotone"
-                            dataKey="value"
-                            stroke="#7a5fc0"
-                            fillOpacity={1}
-                            fill="url(#colorUv)"
-                            strokeWidth={2}
-                          />
-                        </AreaChart>
-                      </ResponsiveContainer>
-                    </div>
-                    <div
-                      className="assets_chart_area2 "
-                      style={{ width: "100%", height: 220 }}
-                    >
-                      <ResponsiveContainer>
-                        <AreaChart
-                          width={130}
-                          height={10}
-                          data={graphData2}
-                          margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                          }}
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                        <div
+                          className="assets_chart_area2 "
+                          style={{ width: "100%", height: 220 }}
                         >
-                          <defs>
-                            <linearGradient
-                              id="colorUv"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
+                          <ResponsiveContainer>
+                            <AreaChart
+                              width={130}
+                              height={10}
+                              data={graphData2}
+                              margin={{
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                              }}
                             >
-                              <stop
-                                offset="5%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.3}
+                              <defs>
+                                <linearGradient
+                                  id="colorUv"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.3}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid
+                              strokeDasharray="1 1"
+                              stroke="#d7d7d7"
+                            /> */}
+                              <XAxis dataKey="month" stroke="0" />
+                              {/* <YAxis stroke="#000" /> */}
+                              <Tooltip content={<CustomTooltip />} />
+                              <Area
+                                type="monotone"
+                                dataKey="value"
+                                stroke="#7a5fc0"
+                                fillOpacity={1}
+                                fill="url(#colorUv)"
+                                strokeWidth={2}
                               />
-                              <stop
-                                offset="100%"
-                                stopColor="#827dc3"
-                                stopOpacity={0}
-                              />
-                            </linearGradient>
-                          </defs>
-                          {/* <CartesianGrid
-                            strokeDasharray="1 1"
-                            stroke="#d7d7d7"
-                          /> */}
-                          <XAxis dataKey="month" stroke="0" />
-                          {/* <YAxis stroke="#000" /> */}
-                          {/* <Tooltip content={<CustomTooltip />} /> */}
-                          <Area
-                            type="monotone"
-                            dataKey="value"
-                            stroke="#7a5fc0"
-                            fillOpacity={1}
-                            fill="url(#colorUv)"
-                            strokeWidth={2}
-                          />
-                        </AreaChart>
-                      </ResponsiveContainer>
-                    </div>
-                  </div>
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
                 {/* ====== */}
                 {/* ====== */}
@@ -780,128 +810,135 @@ const DashboardHome = () => {
                 {/* ====== */}
                 <div className="analytics_container_1">
                   <div className="analytics_container_1_head">Volume 24H</div>
-                  <div
-                    className="analytics_container_1_Amount"
-                    onChange={CustomTooltip2}
-                  >
-                    ${formatNumber(ChartValue2)}
-                  </div>
-                  <span className="analytics_container_1_Amount_span">
-                    {ChartTime2}
-                  </span>
-                  <div className="analytics_container_1_chart">
-                    <div
-                      className="assets_chart_area1a"
-                      style={{ width: "100%", height: 220 }}
-                    >
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart
-                          width={130}
-                          height={10}
-                          data={graphData}
-                          margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                          }}
+
+                  {chartloaded ? (
+                    <div>Chart is Loading...</div>
+                  ) : (
+                    <>
+                      <div
+                        className="analytics_container_1_Amount"
+                        onChange={CustomTooltip2}
+                      >
+                        ${formatNumber(ChartValue2)}
+                      </div>
+                      <span className="analytics_container_1_Amount_span">
+                        {ChartTime2}
+                      </span>
+                      <div className="analytics_container_1_chart">
+                        <div
+                          className="assets_chart_area1a"
+                          style={{ width: "100%", height: 220 }}
                         >
-                          <defs>
-                            <linearGradient
-                              id="colorUvBar1"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart
+                              width={130}
+                              height={10}
+                              data={graphData}
+                              margin={{
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                              }}
                             >
-                              <stop
-                                offset="5%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.7}
+                              <defs>
+                                <linearGradient
+                                  id="colorUvBar1"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.7}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.3}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                              <XAxis dataKey="month" stroke="0" color="#fff" />
+                              {/* <YAxis /> */}
+                              <Tooltip content={<CustomTooltip2 />} />
+                              {/* <Legend /> */}
+                              <Bar
+                                // type="monotone"
+                                dataKey="value"
+                                // stroke="#827dc3"
+                                // fillOpacity={1}
+                                fill="url(#colorUvBar1)"
+                                // strokeWidth={2}
                               />
-                              <stop
-                                offset="100%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.3}
-                              />
-                            </linearGradient>
-                          </defs>
-                          {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                          <XAxis dataKey="month" stroke="0" color="#fff" />
-                          {/* <YAxis /> */}
-                          {/* <Tooltip content={<CustomTooltip2 />} /> */}
-                          {/* <Legend /> */}
-                          <Bar
-                            // type="monotone"
-                            dataKey="value"
-                            // stroke="#827dc3"
-                            // fillOpacity={1}
-                            fill="url(#colorUvBar1)"
-                            // strokeWidth={2}
-                          />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </div>
-                    {/* ===== */}
-                    {/* ===== */}
-                    {/* ===== */}
-                    <div
-                      className="assets_chart_area2"
-                      style={{ width: "100%", height: 220 }}
-                    >
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart
-                          width={130}
-                          height={10}
-                          data={graphData}
-                          margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                          }}
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                        {/* ===== */}
+                        {/* ===== */}
+                        {/* ===== */}
+                        <div
+                          className="assets_chart_area2"
+                          style={{ width: "100%", height: 220 }}
                         >
-                          <defs>
-                            <linearGradient
-                              id="colorUvBar2"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart
+                              width={130}
+                              height={10}
+                              data={graphData}
+                              margin={{
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                              }}
                             >
-                              <stop
-                                offset="5%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.7}
+                              <defs>
+                                <linearGradient
+                                  id="colorUvBar2"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.7}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.3}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                              <XAxis
+                                dataKey="month"
+                                stroke="0"
+                                fill="#fff"
+                                color="#fff"
                               />
-                              <stop
-                                offset="100%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.3}
+                              {/* <YAxis /> */}
+                              <Tooltip content={<CustomTooltip2 />} />
+                              <Bar
+                                // type="monotone"
+                                dataKey="value"
+                                // stroke="#fff"
+                                // fillOpacity={1}
+                                fill="url(#colorUvBar2)"
+                                // strokeWidth={2}
                               />
-                            </linearGradient>
-                          </defs>
-                          {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                          <XAxis
-                            dataKey="month"
-                            stroke="0"
-                            fill="#fff"
-                            color="#fff"
-                          />
-                          {/* <YAxis /> */}
-                          {/* <Tooltip content={<CustomTooltip2 />} /> */}
-                          <Bar
-                            // type="monotone"
-                            dataKey="value"
-                            // stroke="#fff"
-                            // fillOpacity={1}
-                            fill="url(#colorUvBar2)"
-                            // strokeWidth={2}
-                          />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </div>
-                  </div>
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -988,6 +1025,48 @@ const DashboardHome = () => {
                     </span>{" "}
                   </span>
                 </div>
+              </div>
+            </div>
+            {/* ========================== */}
+            {/* ========================== */}
+            {/* ========================== */}
+            {/* ========================== */}
+            {/* ========================== */}
+
+            <div className="burn_egc_div">
+              <div className="burn_egc_div_1">
+                <div className="burn_egc_div_1_cont1">
+                  Accumulated Egc{" "}
+                  <div className="burn_egc_div_1_cont1_1">
+                    <HelpOutlineIcon className="help_outline" />
+                    <div className="helper_txt_div">
+                      This is the total value of EGC locked in the
+                      smart-contract.
+                    </div>
+                  </div>
+                  :
+                  <div className="burn_egc_div_1_cont1_div1">
+                    <span className="burn_egc_div_1_cont1_div1_span">100</span>{" "}
+                  </div>
+                </div>
+                <span className="vertical_line"></span>
+                <div className="burn_egc_div_1_cont1">
+                  Burned Egc{" "}
+                  <div className="burn_egc_div_1_cont1_1">
+                    <HelpOutlineIcon className="help_outline" />
+                    <div className="helper_txt_div">
+                      This is the total value of EGC locked in the
+                      smart-contract.
+                    </div>
+                  </div>
+                  :
+                  <div className="burn_egc_div_1_cont1_div1">
+                    <span className="burn_egc_div_1_cont1_div1_span">20</span>{" "}
+                  </div>
+                </div>
+              </div>
+              <div className="burn_egc_div__button">
+                <button className="burn_egc_div__button_burn">Burn</button>
               </div>
             </div>
             {/* ========================== */}
