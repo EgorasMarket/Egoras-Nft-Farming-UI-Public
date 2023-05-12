@@ -1033,6 +1033,48 @@ const DashboardHome = () => {
             {/* ========================== */}
             {/* ========================== */}
 
+            <div className="burn_egc_div">
+              <div className="burn_egc_div_1">
+                <div className="burn_egc_div_1_cont1">
+                  Accumulated Egc{" "}
+                  <div className="burn_egc_div_1_cont1_1">
+                    <HelpOutlineIcon className="help_outline" />
+                    <div className="helper_txt_div">
+                      This is the total value of EGC locked in the
+                      smart-contract.
+                    </div>
+                  </div>
+                  :
+                  <div className="burn_egc_div_1_cont1_div1">
+                    <span className="burn_egc_div_1_cont1_div1_span">100</span>{" "}
+                  </div>
+                </div>
+                <span className="vertical_line"></span>
+                <div className="burn_egc_div_1_cont1">
+                  Burned Egc{" "}
+                  <div className="burn_egc_div_1_cont1_1">
+                    <HelpOutlineIcon className="help_outline" />
+                    <div className="helper_txt_div">
+                      This is the total value of EGC locked in the
+                      smart-contract.
+                    </div>
+                  </div>
+                  :
+                  <div className="burn_egc_div_1_cont1_div1">
+                    <span className="burn_egc_div_1_cont1_div1_span">20</span>{" "}
+                  </div>
+                </div>
+              </div>
+              <div className="burn_egc_div__button">
+                <button className="burn_egc_div__button_burn">Burn</button>
+              </div>
+            </div>
+            {/* ========================== */}
+            {/* ========================== */}
+            {/* ========================== */}
+            {/* ========================== */}
+            {/* ========================== */}
+
             <div className="lock_container_transactions">
               <div className="BuyerSellerDiv_body_div2_tab_area">
                 <div className="filter_table_area_1">Latest Transactions</div>
