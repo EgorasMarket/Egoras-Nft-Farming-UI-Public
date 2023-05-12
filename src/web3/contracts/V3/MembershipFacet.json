@@ -378,6 +378,34 @@
       "type": "function"
     },
     {
+      "inputs": [],
+      "name": "getBurnableAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "totalBurn",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -415,6 +443,11 @@
         {
           "internalType": "uint256",
           "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_totalTaken",
           "type": "uint256"
         }
       ],
@@ -508,19 +541,6 @@
       "stateMutability": "view",
       "type": "function",
       "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "user",
-          "type": "address"
-        }
-      ],
-      "name": "pushMembers",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
     }
   ]
 }

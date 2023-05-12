@@ -1194,6 +1194,46 @@ const getReferralBonus = async (account, signer) => {
   }
 };
 
+const callGetBurnableAmount = async (signer) => {
+  // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
+  try {
+    const instance = contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.getBurnableAmount();
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error.response);
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
+const burnToken = async (signer) => {
+  // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
+  try {
+    const instance = contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.burn();
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error.response);
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
 const AcceptBid = async (_productID, signer) => {
   // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
   try {
@@ -1512,6 +1552,8 @@ export {
   configurePlan,
   getConfiguration,
   getReferralBonus,
+  callGetBurnableAmount,
+  burnToken,
   // monthlyPlan,
   // semiAnnuallyPlan,
   placeBid,

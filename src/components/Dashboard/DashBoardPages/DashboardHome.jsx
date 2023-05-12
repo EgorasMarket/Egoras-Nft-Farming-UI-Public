@@ -51,6 +51,11 @@ import {
   GET_COIN_GEKO_PRICE_IN_USD,
   GET_COIN_GEKO_PRICGET_TVLE_IN_USD,
 } from "../../../services/generalServices";
+
+import {
+  callGetBurnableAmount,
+  burnToken
+} from "../../../web3/index";
 import { format } from "date-fns";
 import { parseEther, formatEther } from "@ethersproject/units";
 const DashboardHome = () => {
@@ -83,6 +88,8 @@ const DashboardHome = () => {
   const [productData, setProductsData] = useState([]);
   const [TradeVolume, setTradeVolume] = useState(0);
   const [chartloaded, setChartLoaded] = useState(false);
+  const [accumEgc, setAccumEgc] = useState(0);
+  const [burntEgc, setBurntEgc] = useState(0);
   const [homeData, setHomeData] = useState({
     tvl: "0",
     volume: "0",
@@ -93,6 +100,16 @@ const DashboardHome = () => {
     // if
     console.log(parseFloat(egc_usd2));
     setEgc_usd(parseFloat(egc_usd2));
+  }, []);
+
+
+  useEffect(async () => {
+    let check = await callGetBurnableAmount(
+      library.getSigner()
+    );
+    console.log(check);
+    // setUnLockCheckStatus(check.status);
+    // setUnlockBtn(check.status);
   }, []);
 
   useEffect(async () => {
@@ -386,6 +403,15 @@ const DashboardHome = () => {
         console.log(error.response);
       });
   }, []);
+
+
+  const BurnToken = async () => {
+    let res = await burnToken(
+      library.getSigner()
+    );
+
+    console.log(res);
+  }
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -1046,7 +1072,7 @@ const DashboardHome = () => {
                   </div>
                   :
                   <div className="burn_egc_div_1_cont1_div1">
-                    <span className="burn_egc_div_1_cont1_div1_span">100</span>{" "}
+                    <span className="burn_egc_div_1_cont1_div1_span">{accumEgc}</span>{" "}
                   </div>
                 </div>
                 <span className="vertical_line"></span>
@@ -1061,12 +1087,12 @@ const DashboardHome = () => {
                   </div>
                   :
                   <div className="burn_egc_div_1_cont1_div1">
-                    <span className="burn_egc_div_1_cont1_div1_span">20</span>{" "}
+                    <span className="burn_egc_div_1_cont1_div1_span">{burntEgc}</span>{" "}
                   </div>
                 </div>
               </div>
               <div className="burn_egc_div__button">
-                <button className="burn_egc_div__button_burn">Burn</button>
+                <button className="burn_egc_div__button_burn" onClick={BurnToken}>Burn</button>
               </div>
             </div>
             {/* ========================== */}
