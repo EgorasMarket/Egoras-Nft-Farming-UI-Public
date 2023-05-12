@@ -22,7 +22,6 @@ import "../../../css/dashboardHome.css";
 import { tokenBalance } from "../../../web3";
 import axios from "axios";
 import Web3 from "web3";
-
 import {
   AreaChart,
   Area,
@@ -66,7 +65,7 @@ const DashboardHome = () => {
     active,
     error,
   } = context;
-  const [egcUsd, setEgcUsd] = useState(0);
+  const [egc_usd, setEgc_usd] = useState(0);
   const [graphData2, setGraphData2] = useState([]);
   const [graphData, setGraphData] = useState([]);
   const [ChartValue, setChartValue] = useState(0);
@@ -89,12 +88,19 @@ const DashboardHome = () => {
     users: 0,
   });
   useEffect(async () => {
-    const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
-    console.log("dddd");
-    await axios
-      .get(API_URL + "/staking/chart", null, config)
-      .then((data) => {
-        console.log(data);
+    try {
+      const egc_usd2 = await GET_COIN_GEKO_PRICE_IN_USD();
+      console.log(egc_usd2);
+      setEgc_usd(() => egc_usd2);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+  useEffect(async () => {
+    try {
+      const data = await axios.get(API_URL + "/staking/chart", null, config);
+      console.log(data);
+      if (data.data.data.length !== 0) {
         console.log(data.data.data);
         const temp = data.data.data;
         console.log(temp);
@@ -128,25 +134,23 @@ const DashboardHome = () => {
         setLastArray(temp[temp.length - 1]);
         setChartValue(() => temp[temp.length - 1].value);
         setChartTime(() => temp[temp.length - 1].timestamp);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-
-    // socket.connect();
-    // socket.on("staking", (stakings) => {
-    //   // alert(JSON.stringify(stakings));
-    // });
+        return;
+      }
+    } catch (error) {
+      console.log(error.response);
+    }
   }, []);
-  useEffect(async () => {
-    const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
-    console.log("dddd");
-    await axios
-      .get(API_URL + "/swap/all", null, config)
-      .then((data) => {
-        console.log(data, "hhhhh");
-        console.log(data.data.data);
 
+  useEffect(async () => {
+    try {
+      const data = await axios.get(
+        API_URL + "/staking/transactions",
+        null,
+        config
+      );
+      console.log(data, "hhhhh");
+      // console.log(data.data.data);
+      if (data.data.data.length !== 0) {
         const myArray = data.data.data;
         myArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
         console.log(myArray);
@@ -192,15 +196,11 @@ const DashboardHome = () => {
         setLastArray2(temp[temp.length - 1]);
         setChartValue2(() => temp[temp.length - 1].value);
         setChartTime2(() => temp[temp.length - 1].timestamp);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-
-    // socket.connect();
-    // socket.on("staking", (stakings) => {
-    //   // alert(JSON.stringify(stakings));
-    // });
+        return;
+      }
+    } catch (error) {
+      console.log(error.response);
+    }
   }, []);
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -226,13 +226,11 @@ const DashboardHome = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
+      // const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
       const response = await GET_TVL();
-
       console.log(response, "google");
       const tvl = egc_usd * response.tvl.tvl;
       const numberOfUsers = response.users;
-
       const main = parseFloat(tvl).toFixed(2);
       setHomeData({
         ...homeData,
@@ -243,57 +241,25 @@ const DashboardHome = () => {
     fetchData();
   }, []);
 
-  useEffect(
-    async (e) => {
-      let string2 =
-        "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
-      await fetch(string2)
-        .then((resp) => resp.json())
-        .then((data) => {
-          const egc_usd_val = data["egoras-credit"].usd;
-          setEgcUsd(() => egc_usd_val);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    [egcUsd]
-  );
-  useEffect(async (e) => {
-    const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
-    let res = await tokenBalance(
-      "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-      "0xdA337c23F71b1FFc7b7ED345890B5eBA9eb5b599",
-      library.getSigner()
-    );
-    console.log(res);
-    console.log(formatEther(res.message));
-    let tvl = formatEther(res.message);
-    setTotalTVL(tvl * egc_usd);
-  });
-
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);
   };
   useEffect(async () => {
-    // if (account) {
-    await axios
-      .get(API_URL + "/staking/transactions", null, config)
-      .then((data) => {
-        console.log(data);
-        console.log(data.data.data);
-        // const reversed = data.data.data.map((data) => {
-        //   return data;
-        // });
-        const myArray = data.data.data;
-        myArray.sort((a, b) => new Date(b.time) - new Date(a.time));
-        console.log(myArray);
-        setStakeData(myArray);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-    // }
+    try {
+      const response = await axios.get(
+        API_URL + "/staking/transactions",
+        null,
+        config
+      );
+      console.log(response);
+      console.log(response.data.data);
+      const myArray = response.data.data;
+      myArray.sort((a, b) => new Date(b.time) - new Date(a.time));
+      console.log(myArray);
+      setStakeData(myArray);
+    } catch (error) {
+      console.log(error.response);
+    }
   }, []);
 
   useEffect(async () => {
@@ -303,15 +269,11 @@ const DashboardHome = () => {
       .then((data) => {
         console.log(data);
         console.log(data.data.data);
-        // const reversed = data.data.data.map((data) => {
-        //   return data;
-        // });
         setProductsData(data.data.data.slice().reverse());
       })
       .catch((error) => {
         console.log(error.response);
       });
-    // }
   }, []);
   // const names = ["Name", "Quantity", "Amount", "OrderId", "Status"];
   // pagination state
