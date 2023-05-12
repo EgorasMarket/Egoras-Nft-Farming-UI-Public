@@ -2,55 +2,72 @@
   display: flex;
   flex-direction: column;
 }
+
 .analytics_container_head {
   color: #fff;
 }
+
 .analytics_container_body {
   display: flex;
   align-items: center;
   gap: 20px;
 }
+
 .analytics_container_1 {
   width: 100%;
   padding: 1em;
-  background: #151422;
+  background: #ffffff;
   margin: 1em;
   margin-right: 0em;
   margin-left: 0em;
   border-radius: 10px;
-  border: solid 1px #1f1e2e;
-  color: #fff;
+  border: solid 1px #b0afbc;
+  color: #13121f;
   display: flex;
   flex-direction: column;
 }
+
+.dark .analytics_container_1 {
+  background: #151422;
+  border: solid 1px #1f1e2e;
+  color: #fff;
+}
+
 .analytics_container_1_head {
   color: #787690;
 }
+
 .analytics_container_1_Amount {
   font-size: 34px;
   margin-bottom: 0em;
 }
+
 .analytics_container_1_chart {
   padding: 0em 1em;
   height: 100%;
 }
+
 .analytics_container_1_Amount_span {
   font-size: 16px;
   color: #787690;
 }
+
 .assets_chart_area2 tspan {
   fill: #787690;
   font-size: 14px;
   font-weight: 400;
 }
+
 .assets_chart_area1a tspan {
   fill: #707070;
   font-size: 14px;
   font-weight: 400;
 }
+
 .analytics_container_body_mobile {
   display: none;
 }
+
 /* .assets_chart_area1a path.recharts-rectangle {
   /* fill: #fff;
 } */
@@ -62,16 +79,20 @@
     gap: 0px;
     flex-direction: column;
   }
+
   .analytics_container_body {
     display: none;
   }
+
   .analytics_container_1 {
     margin-bottom: 1px;
   }
+
   .analytics_container_1_chart {
     padding: 0em 0em;
     height: 100%;
   }
+
   .lending_area1 {
     margin-top: 10px;
   }

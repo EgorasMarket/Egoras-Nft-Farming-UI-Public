@@ -128,7 +128,7 @@ const MemberShipPage = () => {
       setAnnualAmount(resAnnualAmount);
       setPriceLoaded(true);
     }
-  });
+  }, [step1, step2]);
   useEffect(() => {
     if (account) {
       setUserConnected(true);
@@ -169,7 +169,12 @@ const MemberShipPage = () => {
         let check = await checkAllowanceV3(
           REACT_APP_EGC_ADDRESS,
           account,
-          parseEther(monthAmount.toString(), "wei").toString(),
+          parseEther(
+            monthAmount.toString() ||
+              semiAnnualAmount.toString() ||
+              AnnualAmount.toString(),
+            "wei"
+          ).toString(),
           library.getSigner()
         );
         console.log(check);
@@ -178,7 +183,14 @@ const MemberShipPage = () => {
       }
     },
 
-    [account, unLockCheckStatus, unlockBtn]
+    [
+      account,
+      unLockCheckStatus,
+      unlockBtn,
+      monthAmount,
+      semiAnnualAmount,
+      AnnualAmount,
+    ]
   );
 
   const subscribe = async () => {

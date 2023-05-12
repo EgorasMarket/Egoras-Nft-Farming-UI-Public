@@ -33,6 +33,7 @@ import {
   getUserStats,
   getReferrals,
   getMyReferralsCount,
+  getReferralBonus,
 } from "../../../web3/index";
 const DashboardReferral = ({ auth }) => {
   const [activeLink, setActiveLink] = useState("");
@@ -210,6 +211,24 @@ const DashboardReferral = ({ auth }) => {
     }
   }, [account]);
 
+  const withdrawRefBonus = async () => {
+    
+    let res = await getReferralBonus(account, library.getSigner());
+    console.log(res);
+    if (res.status == true) {
+      // setIsLoading(false);
+      // setDisable(false);
+      // setSuccessModal(true);
+      // setSuccessMessage("You've successfully Subscribed for 6 months");
+    } else {
+      // if (res.message.code == 4001) {
+      //   console.log(res);
+      // }
+      console.log(res);
+      
+    }
+  };
+
   return (
     <>
       <div className="other2 asset_other2">
@@ -257,7 +276,7 @@ const DashboardReferral = ({ auth }) => {
                           <span className="engn_symbol_sign">EGC</span>
                         </div>
                       </div>
-                      <button className="dashBoard_ref_area1_cont1_div1_cont1_withdraw_btn">
+                      <button className="dashBoard_ref_area1_cont1_div1_cont1_withdraw_btn" onClick={withdrawRefBonus}>
                         Withdraw
                       </button>
                     </div>

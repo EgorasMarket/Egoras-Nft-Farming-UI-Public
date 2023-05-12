@@ -1175,6 +1175,25 @@ const getConfiguration = async (signer) => {
   }
 };
 
+const getReferralBonus = async (account, signer) => {
+  // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
+  try {
+    const instance = contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.takeReferralReward(account);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
 const AcceptBid = async (_productID, signer) => {
   // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
   try {
@@ -1492,6 +1511,7 @@ export {
   takeRoyalty,
   configurePlan,
   getConfiguration,
+  getReferralBonus,
   // monthlyPlan,
   // semiAnnuallyPlan,
   placeBid,
