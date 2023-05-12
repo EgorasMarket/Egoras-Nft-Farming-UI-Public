@@ -575,16 +575,6 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 Products
               </a>
               <a
-                id="orders"
-                href="/admin/all/orders"
-                className={
-                  activeBg == "orders" ? "header_tab1_active " : "header_tab1"
-                }
-                onClick={changeBg}
-              >
-                Orders
-              </a>
-              <a
                 id="membership"
                 href="/admin/modify/membership_plan"
                 className={

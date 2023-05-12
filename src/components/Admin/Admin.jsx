@@ -13,7 +13,6 @@ import AdminSeeSellers from "./AdminPages/AdminSeeSellers";
 import AdminStaffPage from "./AdminPages/AdminStaffPage";
 import AdminModifyMembership from "./AdminPages/AdminModifyMembership";
 import AdminProductsPage from "./AdminPages/AdminProductsPage";
-import AdminProductOrder from "./AdminPages/AdminProductOrder";
 // import AdminMinorPage from "./AdminMinorPage";
 import DashBoardUserDetails from "../Dashboard/DashBoardPages/DashBoardUserDetails";
 import PriceOracle from "./AdminPages/AdminSetRouter/PriceOracle";
@@ -46,11 +45,6 @@ const Admin = ({ check, togglemakeDark }) => {
                 exact
                 path="/admin/all/products"
                 component={AdminProductsPage}
-              />
-              <Route
-                exact
-                path="/admin/all/orders"
-                component={AdminProductOrder}
               />
               {/* <Route
                 exact
