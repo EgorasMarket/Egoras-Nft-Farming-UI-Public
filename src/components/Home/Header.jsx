@@ -589,7 +589,7 @@ const Header = ({ togglemakeDark, check }) => {
               <div className="dashboard-area">
                 <a href="/" className="egr_logo2_mobil">
                   <img
-                    src="/img/egoras-logo.svg"
+                    src="/img/martgpt_logo_dark.svg"
                     alt="..."
                     className="egr-logo2"
                   />
@@ -609,7 +609,7 @@ const Header = ({ togglemakeDark, check }) => {
                   <a href="/">
                     {" "}
                     <img
-                      src="/img/egoras-logo.svg"
+                      src="/img/martgpt_logo_dark.svg"
                       alt="..."
                       className="egr-logo"
                     />

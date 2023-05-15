@@ -171,16 +171,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #c2c2c2;
+  color: #837e91;
   font-weight: 300;
 }
 
 .user_details_body1_body_cont1_span2 {
-  color: #fff;
+  color: rgb(0, 0, 0);
   font-weight: 400;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+}
+
+.dark .user_details_body1_body_cont1_span2 {
+  color: #fff;
 }
 
 .user_details_body1_body_cont1_span2_span {
@@ -210,7 +214,7 @@
 }
 
 .user_details_body1_body_cont1_head1 {
-  color: #9bbca8;
+  color: #7a5fc0;
 }
 
 .user_details_body1_body_cont1_head2 {
@@ -278,9 +282,13 @@
 
 .user_details_div_head {
   font-size: 36px;
-  color: #fff;
+  color: #7a5fc0;
   font-weight: 500;
   margin-bottom: 20px;
+}
+
+.dark .user_details_div_head {
+  color: #fff;
 }
 
 .user_details_area {
@@ -306,6 +314,12 @@
 .user_details_area_div1_input {
   padding: 15px;
   border-radius: 10px;
+  background: #ece8f4;
+  border: solid 1px #c0bee0;
+  color: #655b78;
+}
+
+.dark .user_details_area_div1_input {
   background: #0d0c14;
   border: solid 1px #262538;
   color: #bfbfbf;
@@ -343,11 +357,16 @@
 /* ============================================== */
 .userDetails_div {
   padding: 2em;
-  background: #151422;
-  border: solid 1px #262538;
+  background: #ffffff;
+  border: solid 1px #d9d9d9;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+}
+
+.dark .userDetails_div {
+  background: #151422;
+  border: solid 1px #262538;
 }
 
 /* ============================================== */
@@ -410,17 +429,19 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: solid 1px #262538;
-  padding: 1em;
 }
 
 .BuyerSellerDiv_tabs {
   display: flex;
   align-items: center;
   padding: 1em;
-  background: #151422;
+  background: #ffffff;
   border-radius: 10px;
   margin-bottom: 1em;
+}
+
+.dark .BuyerSellerDiv_tabs {
+  background: #151422;
 }
 
 .BuyerSellerDiv_tab1_active {
@@ -439,12 +460,17 @@
 }
 
 .BuyerSellerDiv_body {
-  background: #151422;
+  background: #ffffff;
   padding: 2em;
-  color: #fff;
+  color: #000;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
+}
+
+.dark .BuyerSellerDiv_body {
+  background: #151422;
+  color: #fff;
 }
 
 .BuyerSellerDiv_body_header {
@@ -458,10 +484,15 @@
   flex-direction: column;
   margin-top: 1em;
   margin-bottom: 2em;
-  border-top: solid 1px #262538;
-  border-bottom: solid 1px #262538;
+  border-top: solid 1px #edecf6;
+  border-bottom: solid 1px #edecf6;
   padding-bottom: 1em;
   padding-top: 1em;
+}
+
+.dark .BuyerSellerDiv_body_Balance {
+  border-top: solid 1px #262538;
+  border-bottom: solid 1px #262538;
 }
 
 .BuyerSellerDiv_body_Balance_body1 {
@@ -481,7 +512,7 @@
 
 .BuyerSellerDiv_tab1 {
   padding: 10px;
-  color: #65637a;
+  color: #e5e4ea;
   margin-right: 10px;
   cursor: pointer;
   width: 100%;
@@ -491,6 +522,11 @@
   align-items: center;
   justify-content: center;
   border-radius: 9px;
+  background: #c1c0cb;
+}
+
+.dark .BuyerSellerDiv_tab1 {
+  color: #65637a;
   background: #28263e;
 }
 
@@ -513,27 +549,39 @@
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   border: none;
-  border-bottom: solid 1px #ffffff;
+  border-bottom: solid 1px #3d3553;
   cursor: pointer;
   /* margin-right: 10px; */
   width: 190px;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #fff;
+}
+
+.dark .BuyerSellerDiv_body_div2_tabs_active {
+  background: #7a5fc0;
+  border-bottom: solid 1px #ffffff;
+  color: #fff;
 }
 
 .BuyerSellerDiv_body_div2_tabs1 {
-  margin-right: 10px;
+  /* margin-right: 10px; */
   padding: 1em 0em;
-  background: #1c1b2c;
+  background: #f2f2f2;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
-  border-bottom: solid 1px #1c1b2c;
+  border-bottom: solid 1px #f2f2f2;
   cursor: pointer;
   width: 190px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.dark .BuyerSellerDiv_body_div2_tabs1 {
+  background: #1c1b2c;
+  border-bottom: solid 1px #1c1b2c;
 }
 
 .pending_status_div {
@@ -630,11 +678,16 @@
 }
 
 .awaiting_btn {
-  background: #2c2a41;
+  background: #c6c4db;
   width: 100%;
   padding: 15px;
   border-radius: 13px;
   border: none;
+  color: #ffffff;
+}
+
+.dark .awaiting_btn {
+  background: #2c2a41;
   color: #656284;
 }
 
@@ -770,10 +823,14 @@
   display: flex;
   flex-direction: column;
   padding: 2em;
-  background: #1c1b2c;
+  background: #f2f2f2;
   border-radius: 11px;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
+}
+
+.dark .BuyerSellerDiv_body_div2 {
+  background: #1c1b2c;
 }
 
 .markReceivedBtn {
@@ -801,8 +858,12 @@
   display: flex;
   flex-direction: column;
   padding: 2em;
-  background: #1c1b2c;
+  background: #f2f2f2;
   border-radius: 11px;
+}
+
+.dark .BuyerSellerDiv_body_div2a {
+  background: #1c1b2c;
 }
 
 .filter_table_area_2b {
@@ -882,7 +943,7 @@
   }
 
   .BuyerSellerDiv_body_div2 {
-    padding: 1em;
+    padding: .5em;
   }
 
   .BuyerSellerDiv_body_div2_tab_area {

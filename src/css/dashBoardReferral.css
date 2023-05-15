@@ -40,6 +40,17 @@
   color: #fff;
 }
 
+.dashBoard_ref_area1_cont1_div1_cont1_withdraw_btn:disabled {
+  background: #c5c4d6;
+  color: #fbfbff;
+  cursor: not-allowed;
+}
+
+.dark .dashBoard_ref_area1_cont1_div1_cont1_withdraw_btn:disabled {
+  background: #3b3959;
+  color: #676588;
+}
+
 .dashBoard_ref_area1_cont2 {
   display: flex;
   width: 50%;

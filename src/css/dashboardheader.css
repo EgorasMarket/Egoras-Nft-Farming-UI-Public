@@ -17,13 +17,23 @@
   display: flex;
   flex-direction: column;
   padding: 1em;
-  border-bottom: solid 1px #24233a;
-  background: #151422;
+  border-bottom: solid 1px #d7d7d7;
+  background: #dcdcdc;
   opacity: 1;
   transition: 0.1s linear;
 }
 
+.dark .notifyDropDownDiv_div1.active {
+  border-bottom: solid 1px #24233a;
+  background: #151422;
+}
+
 .notifyDropDownDiv_div1.active:hover {
+  background: #d0cee1;
+  transition: 0.1s linear;
+}
+
+.dark .notifyDropDownDiv_div1.active:hover {
   background: #222043;
   transition: 0.1s linear;
 }
@@ -59,8 +69,8 @@
 .notifyDropDownDiv {
   position: absolute;
   top: 124%;
-  background: #0d0c14;
-  border: solid 1px #24233a;
+  background: #ffffff;
+  border: solid 1px #c0bee4;
   width: 19em;
   right: 0px;
   border-radius: 11px;
@@ -68,6 +78,13 @@
   flex-direction: column;
   overflow: scroll;
   height: 20em;
+  box-shadow: -1px 9px 25px #0000008a;
+  color: #000;
+}
+
+.dark .notifyDropDownDiv {
+  background: #0d0c14;
+  border: solid 1px #24233a;
   box-shadow: -1px 9px 25px #0000008a;
   color: #fff;
 }
@@ -115,15 +132,25 @@
 .notifyDropDownDiv_div1 {
   display: flex;
   flex-direction: column;
-  background: #151422;
+  background: #d6d6dd;
   padding: 1em;
-  border-bottom: solid 1px #24233a;
+  border-bottom: solid 1px #b9b8c9;
   opacity: 0.6;
   cursor: pointer;
   transition: 0.1s linear;
 }
 
+.dark .notifyDropDownDiv_div1 {
+  background: #151422;
+  border-bottom: solid 1px #24233a;
+}
+
 .notifyDropDownDiv_div1:hover {
+  background: #c0bed7;
+  transition: 0.1s linear;
+}
+
+.dark .notifyDropDownDiv_div1:hover {
   background: #222043;
   transition: 0.1s linear;
 }
@@ -145,18 +172,25 @@
 }
 
 .notifySeeMoreDiv_container {
-  background: #151422;
+  background: #ffffff;
   padding: 2em;
   border-radius: 14px;
-  color: #fff;
+  color: #000;
   box-shadow: 0px 0px 36px #000000ab;
   width: 100%;
   max-width: 400px;
-  border: solid 1px #1f1e2e;
+  border: solid 1px #9593b4;
   display: flex;
   flex-direction: column;
   position: relative;
   z-index: 1;
+}
+
+.dark .notifySeeMoreDiv_container {
+  background: #151422;
+  color: #fff;
+  box-shadow: 0px 0px 36px #000000ab;
+  border: solid 1px #1f1e2e;
 }
 
 .notifySeeMoreDiv_container_head {
@@ -391,6 +425,10 @@
 .header_rule {
   width: 100%;
   height: 1px;
+  background: #e2dcf0;
+}
+
+.dark .header_rule {
   background: #111c16;
 }
 
@@ -668,7 +706,7 @@ dark button.logout-btn {
   .header_tab1_active {
     background: none;
     box-shadow: none;
-    color: rgb(33 170 97) !important;
+    color: rgb(122 95 192) !important;
     display: flex;
     flex-direction: column;
     font-size: 12px;

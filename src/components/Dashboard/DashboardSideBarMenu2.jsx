@@ -598,7 +598,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             <div className="dashboard-area">
               <a href="/" className="egr_logo2_mobil">
                 <img
-                  src="/img/egoras-logo.svg"
+                  src="/img/martgpt_logo_dark.svg"
                   alt="..."
                   className="egr-logo2"
                 />
@@ -619,7 +619,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                 <a href="/">
                   {" "}
                   <img
-                    src="/img/egoras-logo.svg"
+                    src="/img/martgpt_logo_dark.svg"
                     alt="..."
                     className="egr-logo"
                   />

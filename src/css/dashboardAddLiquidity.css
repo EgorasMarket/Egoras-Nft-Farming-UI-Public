@@ -7,6 +7,7 @@
   flex-direction: row-reverse;
   justify-content: center;
 }
+
 .liquidity_cont {
   position: relative;
   width: 100%;
@@ -16,6 +17,7 @@
   border-radius: 20px;
   z-index: 1;
 }
+
 .liquidity_cont_head {
   display: flex;
   justify-content: flex-end;
@@ -24,6 +26,7 @@
   align-items: center;
   gap: 20px;
 }
+
 .Unloc_btn_div {
   width: 100%;
 }
@@ -31,6 +34,7 @@
 .unlock_input_div {
   width: 100%;
 }
+
 .unlock_input {
   padding: 0.5em 1em;
   width: 100%;
@@ -53,6 +57,7 @@
   margin: auto;
   margin-top: 5em;
 }
+
 .liquidity_cont_head_text {
   width: 100%;
   display: flex;
@@ -61,6 +66,7 @@
   font-size: 20px;
   font-weight: 600;
 }
+
 .settings_icon {
   color: black;
   cursor: pointer;
@@ -69,12 +75,14 @@
 .liquidity_cont_body {
   padding: 1em;
 }
+
 .liquidity_cont_body_conts {
   display: flex;
   flex-direction: column;
   /* gap: 10px; */
   position: relative;
 }
+
 .tips_layer {
   padding: 20px;
   border-radius: 20px;
@@ -85,12 +93,15 @@
   flex-direction: column;
   justify-content: center;
 }
+
 .tips_writeUp {
   font-size: 14px;
 }
+
 .tip_sub_head {
   font-weight: 600;
 }
+
 .amnt_input {
   width: 100%;
   border-radius: 20px;
@@ -114,6 +125,7 @@
   margin-bottom: 7px;
   padding-bottom: 0.7em;
 }
+
 /* .amnt_input:hover {
   border: solid 1px #d2d2d2;
 } */
@@ -122,15 +134,22 @@
   outline: none;
   box-shadow: none;
 }
+
 .amnt_input_field {
   border: none;
   background: none;
   width: 100%;
   font-weight: 600;
 }
+
 .amnt_input_field::placeholder {
+  color: #b5b4bf;
+}
+
+.dark .amnt_input_field::placeholder {
   color: #3e3c59;
 }
+
 .display_tokens_drop {
   font-size: 16px;
   font-weight: 400;
@@ -145,16 +164,19 @@
   /* width: 65%; */
   white-space: nowrap;
 }
+
 .display_tokens_drop_not_select {
   background: #7a5fc0;
   color: #fff;
 }
+
 .asset_icon {
   width: 24px;
   /* height: 24px; */
   border-radius: 50%;
   margin-right: 3px;
 }
+
 .plus_icon_layer {
   align-items: center;
   width: 100%;
@@ -166,6 +188,7 @@
   margin-bottom: -1.2em;
   position: relative;
 }
+
 .plus_icon_layer_icon {
   background: #f3f3f3 !important;
   border-radius: 8px !important;
@@ -173,11 +196,13 @@
   font-size: 32px !important;
   color: #7c7c7c !important;
 }
+
 .connect_btn_div {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .connect_btn {
   width: 100%;
   padding: 1em 0em;
@@ -187,10 +212,12 @@
   background: #ddf2e5;
   color: #1a7e42;
 }
+
 .connect_btn:hover {
   background: #c5e6d2;
   color: #1a7e42;
 }
+
 .disabled {
   filter: grayscale(1);
   cursor: not-allowed;
@@ -223,6 +250,7 @@
   -ms-transform: scale(1.1);
   transform: scale(1.1);
 }
+
 .sk-folding-cube .sk-cube:before {
   content: "";
   position: absolute;
@@ -237,43 +265,53 @@
   -ms-transform-origin: 100% 100%;
   transform-origin: 100% 100%;
 }
+
 .sk-folding-cube .sk-cube2 {
   -webkit-transform: scale(1.1) rotateZ(90deg);
   transform: scale(1.1) rotateZ(90deg);
 }
+
 .sk-folding-cube .sk-cube3 {
   -webkit-transform: scale(1.1) rotateZ(180deg);
   transform: scale(1.1) rotateZ(180deg);
 }
+
 .sk-folding-cube .sk-cube4 {
   -webkit-transform: scale(1.1) rotateZ(270deg);
   transform: scale(1.1) rotateZ(270deg);
 }
+
 .sk-folding-cube .sk-cube2:before {
   -webkit-animation-delay: 0.3s;
   animation-delay: 0.3s;
 }
+
 .sk-folding-cube .sk-cube3:before {
   -webkit-animation-delay: 0.6s;
   animation-delay: 0.6s;
 }
+
 .sk-folding-cube .sk-cube4:before {
   -webkit-animation-delay: 0.9s;
   animation-delay: 0.9s;
 }
+
 @-webkit-keyframes sk-foldCubeAngle {
+
   0%,
   10% {
     -webkit-transform: perspective(140px) rotateX(-180deg);
     transform: perspective(140px) rotateX(-180deg);
     opacity: 0;
   }
+
   25%,
   75% {
     -webkit-transform: perspective(140px) rotateX(0deg);
     transform: perspective(140px) rotateX(0deg);
     opacity: 1;
   }
+
   90%,
   100% {
     -webkit-transform: perspective(140px) rotateY(180deg);
@@ -283,18 +321,21 @@
 }
 
 @keyframes sk-foldCubeAngle {
+
   0%,
   10% {
     -webkit-transform: perspective(140px) rotateX(-180deg);
     transform: perspective(140px) rotateX(-180deg);
     opacity: 0;
   }
+
   25%,
   75% {
     -webkit-transform: perspective(140px) rotateX(0deg);
     transform: perspective(140px) rotateX(0deg);
     opacity: 1;
   }
+
   90%,
   100% {
     -webkit-transform: perspective(140px) rotateY(180deg);
@@ -302,6 +343,7 @@
     opacity: 0;
   }
 }
+
 @media screen and (max-width: 991px) {
   .liquidity_area {
     width: 100%;

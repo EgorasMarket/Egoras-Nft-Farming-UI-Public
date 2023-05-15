@@ -1,22 +1,26 @@
 div#FooterId {
   position: relative;
 }
+
 .footerSection {
   padding: 2em 0em;
   position: relative;
   background-color: #f3f3f3;
   overflow: hidden;
 }
+
 .law_write_up {
   font-size: 12px;
   color: #8f8f8f;
 }
+
 .footerArea {
   display: flex;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
 }
+
 .add_color {
   color: #7a5fc0;
   font-weight: 600;
@@ -27,6 +31,7 @@ div#FooterId {
   /* transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     background-color: #fff; */
 }
+
 .dark .footer_hr_rule {
   color: rgba(255, 255, 255, 0.87) !important;
   /* transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
@@ -36,16 +41,20 @@ div#FooterId {
 .dark .MuiIconButton-root {
   color: rgb(255 255 255) !important;
 }
+
 .egr2-logo {
   width: 150px;
 }
+
 .dark .egr2-logo {
   display: none;
 }
+
 .egr2-logo2 {
   width: 150px;
   display: none;
 }
+
 .dark .egr2-logo2 {
   display: inline-block;
 }
@@ -63,34 +72,42 @@ div#FooterId {
   width: 100%;
   align-items: center;
 }
+
 .twitter_icon {
   /* font-size: 14px; */
-  background: #d7ffe7;
+  background: #d6cdeb;
   border-radius: 50%;
   padding: 5px;
   font-size: 40px !important;
   /* width: 28px; */
+  color: #7a5fc0;
 }
+
 .dark .twitter_icon {
   /* font-size: 14px; */
   background: #222037;
 }
+
 .footerIcons {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: 0px;
 }
+
 .footerCard2 {
   padding: 2em;
 }
+
 .footerCard3 {
   display: none;
 }
+
 .footerCardTitle {
   font-size: 16px;
   font-weight: 500;
 }
+
 .footerLinks {
   display: grid;
   margin-top: 10px;
@@ -100,11 +117,13 @@ div#FooterId {
   color: #55bc7e;
   margin-right: 10px;
 }
+
 .FooterPageLinks {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .FooterPageLinks_1 {
   margin-right: 11px;
   text-decoration: underline !important;
@@ -122,6 +141,7 @@ div#FooterId {
   width: 100% !important;
   text-align: left;
 }
+
 .c1link1:hover {
   color: #55bc7e;
 }
@@ -132,6 +152,7 @@ div#FooterId {
   color: #55bc7e;
   text-decoration: #55bc7e underline;
 }
+
 .c1linklast:hover {
   color: #525252;
   text-decoration: #525252 underline;
@@ -152,20 +173,24 @@ div#FooterId {
 .MuiAccordionSummary-content.Mui-expanded {
   margin: 0 !important;
 }
+
 .MuiAccordionDetails-root {
   justify-content: flex-start !important;
   padding: 8px 16px 16px;
   padding-top: 0 !important;
 }
+
 .MuiAccordion-root:before {
   background-color: rgb(164 164 164 / 12%) !important;
 }
+
 .MuiAccordion-root {
   background: none !important;
   /* outline: none; */
   /* border: none; */
   box-shadow: none !important;
 }
+
 /* ========================== */
 /* ========================== */
 /* ========================== */
@@ -175,12 +200,15 @@ div#FooterId {
 .dark .footerSection {
   background-color: #0f0e1c;
 }
+
 .dark .footerCardTitle {
   color: #fff;
 }
+
 .dark .c1link1 {
   color: #b4cbbd;
 }
+
 .dark .footerBottomPara {
   color: #ffffff;
 }
