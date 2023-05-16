@@ -92,6 +92,7 @@ const DashboardHome = () => {
   const [productData, setProductsData] = useState([]);
   const [TradeVolume, setTradeVolume] = useState(0);
   const [chartloaded, setChartLoaded] = useState(false);
+  const [burntEgcLoaded, setBurntEgcLoaded] = useState(false);
   const [accumEgc, setAccumEgc] = useState(0);
   const [burntEgc, setBurntEgc] = useState(0);
   const [burnTransact, setBurnTransact] = useState([]);
@@ -116,6 +117,7 @@ const DashboardHome = () => {
 
   useEffect(async () => {
     setChartLoaded(true);
+    // setBurntEgcLoaded(true);
     const fetchData = async () => {
       try {
         const data = await axios.get(API_URL + "/staking/chart", null, config);
@@ -457,20 +459,36 @@ const DashboardHome = () => {
   };
 
   useEffect(async () => {
-    let check = await callGetBurnableAmount(library.getSigner());
-    console.log(check);
-    console.log(check.message);
-    console.log(formatEther(check.message).toString());
-    const converted = parseInt(formatEther(check.message).toString());
-    setAccumEgc(converted * egc_usd);
+    setBurntEgcLoaded(true);
+    const fetchData = async () => {
+      let check = await callGetBurnableAmount(library.getSigner());
+      console.log(check);
+      console.log(check.message);
+      console.log(formatEther(check.message).toString());
+      const converted = parseInt(formatEther(check.message).toString());
+      setAccumEgc(converted * egc_usd);
+    };
+    const timer = setTimeout(async () => {
+      setBurntEgcLoaded(false);
+      fetchData();
+    }, 3000);
+    return () => clearTimeout(timer);
   }, [egc_usd]);
   useEffect(async () => {
-    let check = await callGetBurntAmount(library.getSigner());
-    console.log(check);
-    console.log(check.message);
-    console.log(formatEther(check.message).toString());
-    const converted = parseInt(formatEther(check.message).toString());
-    setBurntEgc(converted * egc_usd);
+    setBurntEgcLoaded(true);
+    const fetchData = async () => {
+      let check = await callGetBurntAmount(library.getSigner());
+      console.log(check);
+      console.log(check.message);
+      console.log(formatEther(check.message).toString());
+      const converted = parseInt(formatEther(check.message).toString());
+      setBurntEgc(converted * egc_usd);
+    };
+    const timer = setTimeout(async () => {
+      setBurntEgcLoaded(false);
+      fetchData();
+    }, 3000);
+    return () => clearTimeout(timer);
   }, [egc_usd]);
   const CloseErrorModal = () => {
     setErrorModal(false);
@@ -1145,11 +1163,15 @@ const DashboardHome = () => {
                     :
                   </div>
 
-                  <div className="burn_egc_div_1_cont1_div1">
-                    <span className="burn_egc_div_1_cont1_div1_span">
-                      $ {formatNumber(accumEgc)}
-                    </span>{" "}
-                  </div>
+                  {burntEgcLoaded ? (
+                    <div className="burntEgcLoading">Stats Loading...</div>
+                  ) : (
+                    <div className="burn_egc_div_1_cont1_div1">
+                      <span className="burn_egc_div_1_cont1_div1_span">
+                        $ {formatNumber(accumEgc)}
+                      </span>{" "}
+                    </div>
+                  )}
                 </div>
                 <span className="vertical_line"></span>
                 <div className="burn_egc_div_1_cont1">
@@ -1164,11 +1186,15 @@ const DashboardHome = () => {
                     </div>
                     :
                   </div>
-                  <div className="burn_egc_div_1_cont1_div1">
-                    <span className="burn_egc_div_1_cont1_div1_span">
-                      $ {formatNumber(burntEgc)}
-                    </span>{" "}
-                  </div>
+                  {burntEgcLoaded ? (
+                    <div className="burntEgcLoading">Stats Loading...</div>
+                  ) : (
+                    <div className="burn_egc_div_1_cont1_div1">
+                      <span className="burn_egc_div_1_cont1_div1_span">
+                        $ {formatNumber(burntEgc)}
+                      </span>{" "}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="burn_egc_div__button">
@@ -1832,8 +1858,8 @@ const DashboardHome = () => {
                     </table>
                   </div>
                   <Paginate
-                    pageCount={pageCount3}
-                    handlePageClick={handlePageClick3}
+                    pageCount={pageCount4}
+                    handlePageClick={handlePageClick4}
                   />
                 </div>
               ) : null}
