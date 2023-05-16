@@ -394,8 +394,8 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     [egcUsdVal]
   );
 
-  const chainIdBsc = "56";
-  // const chainIdBsc = "97";
+  // const chainIdBsc = "56";
+  const chainIdBsc = "97";
 
   useEffect(() => {
     if (account) {
