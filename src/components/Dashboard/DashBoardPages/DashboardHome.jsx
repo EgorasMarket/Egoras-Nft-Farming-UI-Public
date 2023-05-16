@@ -1379,7 +1379,7 @@ const DashboardHome = () => {
                                 </td>
                                 <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
                                   <a
-                                    href={`https://bscscan.com/tx/${data.transactionHash}`}
+                                    href={`https://bscscan.com/tx/${data.tx}`}
                                     target={"_blank"}
                                   >
                                     {`${data.tx.slice(0, 6)}...${data.tx.slice(
@@ -1526,7 +1526,7 @@ const DashboardHome = () => {
                                 </td>
                                 <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
                                   <a
-                                    href={`https://bscscan.com/tx/${data.transactionHash}`}
+                                    href={`https://bscscan.com/tx/${data.tx}`}
                                     target={"_blank"}
                                   >
                                     {`${data.tx.slice(0, 6)}...${data.tx.slice(
