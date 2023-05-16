@@ -263,7 +263,7 @@ const DashboardHome = () => {
     const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
     let res = await tokenBalance(
       "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-      "0xdA337c23F71b1FFc7b7ED345890B5eBA9eb5b599",
+      "0x46A20e7d4F9A0ac61DBd752A619031C0026aB78B",
       library.getSigner()
     );
     console.log(res);

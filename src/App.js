@@ -74,11 +74,11 @@ function App() {
     // });
 
     return () => {
-      // socket.disconnect();
+      socket.disconnect();
     };
   }, []);
   useEffect(() => {
- console.log(localStorage.tank)
+    console.log(localStorage.tank);
   }, []);
 
   useEffect(() => {
