@@ -130,25 +130,17 @@ const Footer = () => {
               <div className="footerArea">
                 <div className="footerCard1">
                   <div className="FooterPageLinks">
-                    <a
-                      href="#"
-                      className="FooterPageLinks_1"
-                      target="_blank"
-                    >
+                    <a href="#" className="FooterPageLinks_1" target="_blank">
                       About Us
                     </a>
-                    <a
-                      href="#"
-                      className="FooterPageLinks_1"
-                      target="_blank"
-                    >
+                    <a href="#" className="FooterPageLinks_1" target="_blank">
                       White Paper
                     </a>
                   </div>
                   <a href="#">
                     {" "}
                     <img
-                      src="/img/egoras-logo.svg"
+                      src="/img/martgpt_logo_dark.svg"
                       alt="..."
                       className="egr2-logo"
                     />
@@ -208,11 +200,7 @@ const Footer = () => {
                         <a href="#" className="c1link1" target="_blank">
                           About
                         </a>
-                        <a
-                          href="/app#"
-                          className="c1link1"
-                          target="_blank"
-                        >
+                        <a href="/app#" className="c1link1" target="_blank">
                           White Paper
                         </a>
                       </div>

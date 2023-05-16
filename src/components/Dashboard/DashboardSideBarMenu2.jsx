@@ -394,8 +394,8 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     [egcUsdVal]
   );
 
-  // const chainIdBsc = "56";
-  const chainIdBsc = "97";
+  const chainIdBsc = "56";
+  // const chainIdBsc = "97";
 
   useEffect(() => {
     if (account) {
@@ -598,7 +598,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             <div className="dashboard-area">
               <a href="/" className="egr_logo2_mobil">
                 <img
-                  src="/img/egoras-logo.svg"
+                  src="/img/martgpt_logo_dark.svg"
                   alt="..."
                   className="egr-logo2"
                 />
@@ -619,7 +619,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                 <a href="/">
                   {" "}
                   <img
-                    src="/img/egoras-logo.svg"
+                    src="/img/martgpt_logo_dark.svg"
                     alt="..."
                     className="egr-logo"
                   />
@@ -1228,8 +1228,8 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
               Oops, your wallet is not on the right network.
               <span className="right_network_id_modal_cont_para">
                 It seems your wallet is running on a different network from
-                Egoras.app. Please click the button below to change your network
-                or add the network if it's not added in your wallet.
+                MartGpt.app. Please click the button below to change your
+                network or add the network if it's not added in your wallet.
               </span>
               <div className="change_network_btn_div">
                 <button className="changeNetworkBtn" onClick={switchNetwork}>

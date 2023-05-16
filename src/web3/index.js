@@ -1213,6 +1213,25 @@ const callGetBurnableAmount = async (signer) => {
     };
   }
 };
+const callGetBurntAmount = async (signer) => {
+  // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
+  try {
+    const instance = contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.totalBurn();
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error.response);
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 
 const burnToken = async (signer) => {
   // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
@@ -1567,4 +1586,5 @@ export {
   releaseFundsToSeller,
   checkAllowanceV3,
   unlockTokenV3,
+  callGetBurntAmount,
 };

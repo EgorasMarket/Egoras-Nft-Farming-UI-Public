@@ -6,49 +6,65 @@
   /* font-family: "Proxima Nova", sans-serif !important; */
   text-decoration: none !important;
 }
+
 body {
   font-family: "Omnes", sans-serif;
 }
-hr{
+
+hr {
   width: 100%;
 }
+
 html {
   scroll-behavior: smooth;
   transition: 2s ease-in;
 }
+
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   appearance: none;
   margin: 0;
 }
+
+hr {
+  color: #aaa6ba;
+}
+
 .dark hr {
   color: #605d6e;
 }
+
 div::-webkit-scrollbar {
   display: none;
 }
+
 a {
   text-decoration: none !important;
   color: #7a5fc0;
 }
+
 li {
   list-style: none;
 }
+
 .dark {
   background: #212b25;
 }
+
 iframe {
   border: 0;
   position: relative !important;
   display: none;
 }
+
 .btn-black.i {
   padding: 1em 2em;
   border: none;
   background: none;
   color: white;
 }
+
 .image-wrapper {
   position: relative;
   width: 150px;
@@ -56,6 +72,7 @@ iframe {
   float: left;
   margin: 10px;
 }
+
 .image-wrapper button {
   position: absolute;
   border: none;
@@ -71,6 +88,7 @@ iframe {
   outline: none;
   border: thin;
 }
+
 ::selection {
   background-color: #7a5fc0;
   color: #fff;
@@ -84,6 +102,7 @@ iframe {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 button:focus {
   outline: unset !important;
 }
@@ -95,12 +114,14 @@ button:focus {
 .jss8 {
   width: 100% !important;
 }
+
 .css-19kzrtu {
   padding: 0 !important;
   padding-top: 20px !important;
 }
+
 .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
-  color: #7a5fc0 !important ;
+  color: #7a5fc0 !important;
   background: #effff5 !important;
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
@@ -109,6 +130,7 @@ button:focus {
 .css-1aquho2-MuiTabs-indicator {
   background-color: #7a5fc0 !important;
 }
+
 .custom_container {
   max-width: 1540px;
   margin: auto;
@@ -131,6 +153,7 @@ button:focus {
   cursor: pointer;
   transition: 0.3s ease-in-out;
 }
+
 .uploadButton::-webkit-file-upload-button:hover {
   background-color: #e4a788;
   color: #fff;
@@ -154,14 +177,15 @@ button:focus {
     padding: 0 !important;
   }
 }
+
 .css-1kty9di-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
   color: #7a5fc0 !important;
 }
 
-.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
-  .MuiOutlinedInput-notchedOutline {
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
   border-color: #7a5fc0 !important;
 }
+
 /* 
 .uploadButton::before {
   content: "Select some files";
@@ -189,6 +213,7 @@ button:focus {
   background: none !important;
   padding: 0.5em;
 }
+
 /* @import "~react-image-gallery/styles/css/image-gallery.css"; */
 
 * {
@@ -203,6 +228,7 @@ html {
   scroll-behavior: smooth;
   transition: 2s ease-in;
 }
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -217,22 +243,27 @@ input:-webkit-autofill:active {
   padding: 0em 2em;
   min-width: 0px;
 }
+
 a {
   text-decoration: none !important;
   color: #7a5fc0;
 }
+
 li {
   list-style: none;
 }
+
 .connect {
   padding: 0 !important;
 }
+
 .btn-black.i {
   padding: 1em 2em;
   border: none;
   background: none;
   color: white;
 }
+
 .image-wrapper {
   position: relative;
   width: 150px;
@@ -240,6 +271,7 @@ li {
   float: left;
   margin: 10px;
 }
+
 .image-wrapper button {
   position: absolute;
   border: none;
@@ -264,6 +296,7 @@ li {
   background-size: cover;
   background-repeat: no-repeat;
 }
+
 button:focus {
   outline: unset !important;
 }
@@ -275,12 +308,14 @@ button:focus {
 .jss8 {
   width: 100% !important;
 }
+
 .css-19kzrtu {
   padding: 0 !important;
   padding-top: 20px !important;
 }
+
 .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
-  color: #7a5fc0 !important ;
+  color: #7a5fc0 !important;
   background: #effff5 !important;
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
@@ -303,6 +338,7 @@ button:focus {
   cursor: pointer;
   transition: 0.3s ease-in-out;
 }
+
 .uploadButton::-webkit-file-upload-button:hover {
   background-color: #e4a788;
   color: #fff;
@@ -324,8 +360,9 @@ button:focus {
 .MuiSelect-root {
   width: 60% !important;
 }
-@media screen and (max-width: 991px) {
-}
+
+@media screen and (max-width: 991px) {}
+
 @media (min-width: 768px) {
   .col-md-6 {
     flex: 0 0 50%;
@@ -333,12 +370,12 @@ button:focus {
     padding: 0 !important;
   }
 }
+
 .css-1kty9di-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
   color: #7a5fc0 !important;
 }
 
-.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
-  .MuiOutlinedInput-notchedOutline {
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
   border-color: #7a5fc0 !important;
 }
 
@@ -360,6 +397,7 @@ input:focus-visible {
   box-shadow: 0px 0px 1px 4px #222035a8;
   transition: 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
+
 input:-internal-autofill-selected {
   background-color: #8563cd !important;
 }
@@ -371,7 +409,7 @@ input:-internal-autofill-selected {
 .eHUcDD {
   width: 64px;
   height: 64px;
-  border-radius: 50% !important ;
+  border-radius: 50% !important;
   box-shadow: rgb(36 36 36 / 10%) 0px 8px 16px 0px,
     rgb(36 36 36 / 4%) 0px 1px 4px 0px;
   display: flex;
@@ -430,6 +468,7 @@ input:-internal-autofill-selected {
   height: 100%;
   background-color: #093f1f;
 }
+
 @media screen and (max-width: 1055px) {
   .alert_cont {
     position: fixed;
@@ -441,6 +480,7 @@ input:-internal-autofill-selected {
     animation: opacity 0.3s linear;
   }
 }
+
 @media screen and (max-width: 767px) {
   .alert_cont {
     position: fixed;
@@ -452,11 +492,13 @@ input:-internal-autofill-selected {
     animation: opacity 0.3s linear;
   }
 }
+
 @media screen and (max-width: 700px) {
   .featured_logos .react-multi-carousel-track {
     gap: 0px;
   }
 }
+
 @media screen and (max-width: 590px) {
   .featured_logos .react-multi-carousel-track {
     gap: 0px;
@@ -473,6 +515,7 @@ input:-internal-autofill-selected {
     animation: opacity 0.3s linear;
   }
 }
+
 @media screen and (max-width: 550px) {
   .custom_container {
     max-width: 1440px;
@@ -482,6 +525,7 @@ input:-internal-autofill-selected {
     min-width: 0px;
   }
 }
+
 .chart_svg {
   stroke: #238c4e;
   fill: #edfaf2;
@@ -491,6 +535,7 @@ input:-internal-autofill-selected {
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
 .sparkline--cursor {
   /* stroke: orange; */
   stroke-width: 0.5;
@@ -501,26 +546,32 @@ input:-internal-autofill-selected {
   /* stroke: red; */
   stroke-width: 0.5px;
 }
+
 rect.sparkline--interaction-layer {
   height: 100%;
   width: 100%;
 }
+
 .recharts-tooltip-wrapper {
   border-radius: 7px;
 }
+
 .recharts-default-tooltip {
   border-radius: 7px;
 }
+
 .dark .recharts-default-tooltip {
   background: #0f0e1c !important;
   color: #fff !important;
   border: solid 1px #787690 !important;
 }
+
 @media screen and (max-width: 767px) {
   .custom_container {
     padding: 0em 1em;
   }
 }
+
 @media screen and (max-width: 550px) {
   .custom_container {
     max-width: 1440px;
@@ -531,6 +582,7 @@ rect.sparkline--interaction-layer {
     height: 100%;
   }
 }
+
 .Modal2_div {
   position: fixed;
   top: 0%;
@@ -548,6 +600,7 @@ rect.sparkline--interaction-layer {
 
   backdrop-filter: blur(6px);
 }
+
 .Modal2_div_area {
   background: #fff;
   padding: 2em;
@@ -562,6 +615,7 @@ rect.sparkline--interaction-layer {
   position: relative;
   z-index: 1;
 }
+
 .dark .Modal2_div_area {
   background: #151422;
 }
@@ -571,11 +625,13 @@ rect.sparkline--interaction-layer {
     transform: scale(1.5);
     opacity: 0;
   }
+
   100% {
     transform: scale(1);
     opacity: 1;
   }
 }
+
 .Modal2_div1_head {
   font-size: 24px;
   font-weight: 500;
@@ -586,9 +642,11 @@ rect.sparkline--interaction-layer {
   justify-content: space-between;
   margin-bottom: 12px;
 }
+
 .dark .Modal2_div1_head {
   color: #fff;
 }
+
 .Modal2_div2 {
   display: grid;
   width: 100%;
@@ -598,9 +656,11 @@ rect.sparkline--interaction-layer {
   gap: 10px;
   margin-top: 10px;
 }
+
 .Modal2_div2_div1_area {
   width: 100%;
 }
+
 .Modal2_div2_div1_area_btn {
   width: 100%;
   padding: 15px;
@@ -612,36 +672,44 @@ rect.sparkline--interaction-layer {
   background: #e8e8e8;
   border: solid 1px #d0d0d0;
 }
+
 .Modal2_div2_div1_area_btn:disabled {
   cursor: not-allowed;
   opacity: 0.3;
   /* filter: grayscale(1); */
 }
+
 .dark .Modal2_div2_div1_area_btn {
   background: #323147;
   border: solid 1px #2d2c41;
   color: #fff;
 }
+
 .Modal2_div2_div1_area_btn_area {
   display: flex;
   align-items: center;
 }
+
 .Modal2_div2_div1_area_btn_area_txt {
   margin-right: 4px;
 }
+
 .Modal2_div_area_span {
   margin-top: 1em;
   font-size: 12px;
   color: #747474;
   font-weight: 400;
 }
+
 .dark .Modal2_div_area_span {
   color: #787690;
 }
+
 .Modal2_div1_head_icon {
   font-size: 33px !important;
   cursor: pointer;
 }
+
 .Modal2_div_closeDiv {
   position: absolute;
   width: 100%;

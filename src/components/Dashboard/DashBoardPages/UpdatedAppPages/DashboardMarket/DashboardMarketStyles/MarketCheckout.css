@@ -1,6 +1,10 @@
 .checkoutPage_header {
   font-size: 32px;
   font-weight: 500;
+  color: #4b4b4b;
+}
+
+.dark .checkoutPage_header {
   color: #fff;
 }
 
@@ -27,14 +31,19 @@
 
 .checkoutPage_body1_cont1_head {
   padding: 20px;
-  background: #212036;
+  background: #c2c2c2;
   border-radius: 8px;
-  color: #a09eb8;
+  color: #000000;
   font-size: 18px;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.dark .checkoutPage_body1_cont1_head {
+  background: #212036;
+  color: #a09eb8;
 }
 
 .checkoutPage_body1_cont1_head_span {
@@ -46,9 +55,14 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
-  border: solid 1px #2b2a41;
+  border: solid 1px #dbdbed;
   padding: 30px;
   border-radius: 12px;
+  background: #ffffff;
+}
+
+.dark .checkoutPage_body1_cont1_body {
+  border: solid 1px #2b2a41;
   background: #181621;
 }
 
@@ -60,10 +74,14 @@
 }
 
 .checkoutPage_body1_cont1_body_cont1_body {
-  color: #fff;
+  color: rgb(0, 0, 0);
   margin-top: 10px;
   display: flex;
   align-items: center;
+}
+
+.dark .checkoutPage_body1_cont1_body_cont1_body {
+  color: #fff;
 }
 
 .checkoutPage_body1_cont1_body_btn_div {
@@ -85,6 +103,12 @@
 }
 
 .checkoutPage_body1_cont1_body_btn:disabled {
+  background: #9d95b5;
+  color: #bdb7ce;
+  cursor: not-allowed;
+}
+
+.dark .checkoutPage_body1_cont1_body_btn:disabled {
   background: #362d4e;
   color: #615978;
   cursor: not-allowed;
@@ -123,21 +147,30 @@ input[type="radio"]:checked+.payment_method_area1_cont1_label:before {
 
 .payment_method_div {
   padding: 2em 1.2em;
-  background: #181621;
+  background: #ffffff;
   border-radius: 10px;
-  border: solid 1px #2b2a41;
+  border: solid 1px #dbdbed;
   display: flex;
+}
+
+.dark .payment_method_div {
+  background: #181621;
+  border: solid 1px #2b2a41;
 }
 
 .payment_method_div_cont1 {
   display: flex;
   align-items: center;
   padding: 1em;
-  border: solid 1px #2e2c38;
+  border: solid 1px #c9c9d4;
   cursor: pointer;
   margin: 0px 5px;
   border-radius: 10px;
   width: 100%;
+}
+
+.dark .payment_method_div_cont1 {
+  border: solid 1px #2e2c38;
 }
 
 .payment_method_div_cont1_active {
@@ -160,17 +193,26 @@ input[type="radio"]:checked+.payment_method_area1_cont1_label:before {
 .payment_method_div_cont1_div2 {
   margin-left: 10px;
   font-size: 18px;
+  color: rgb(0, 0, 0);
+}
+
+.dark .payment_method_div_cont1_div2 {
   color: #fff;
 }
 
 .proceedToPayDiv {
   padding: 2em;
-  background: #181621;
+  background: #ffffff;
   border-radius: 10px;
   margin-top: 10px;
-  border: solid 1px #2b2a41;
+  border: solid 1px #e6e5ef;
   display: flex;
   flex-direction: column;
+}
+
+.dark .proceedToPayDiv {
+  background: #181621;
+  border: solid 1px #2b2a41;
 }
 
 .proceedToPayDiv1 {
@@ -178,14 +220,23 @@ input[type="radio"]:checked+.payment_method_area1_cont1_label:before {
   align-items: center;
   justify-content: space-between;
   padding: 10px 0em;
-  border-bottom: solid 1px #2e2c38;
+  border-bottom: solid 1px #dddaeb;
   color: #827e95;
   font-size: 14px;
 }
 
+.dark .proceedToPayDiv1 {
+  border-bottom: solid 1px #2e2c38;
+  color: #827e95;
+}
+
 .proceedToPayDiv1_value {
-  color: #fff;
+  color: #000;
   font-size: 16px;
+}
+
+.dark .proceedToPayDiv1_value {
+  color: #fff;
 }
 
 .proceedToPayDiv_btn_div {
@@ -205,6 +256,12 @@ input[type="radio"]:checked+.payment_method_area1_cont1_label:before {
 }
 
 .proceedToPayDiv_btn:disabled {
+  background: #c2c2c2;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
+.dark .proceedToPayDiv_btn:disabled {
   background: #362d4e;
   color: #615978;
   cursor: not-allowed;
@@ -218,24 +275,38 @@ input[type="radio"]:checked+.payment_method_area1_cont1_label:before {
   width: 100%;
   display: flex;
   flex-direction: column;
-  background: #181621;
+  background: #ffffff;
   padding: 1em;
   border-radius: 11px;
+  border: solid 1px #dbdbe0;
+}
+
+.dark .checkoutPage_body2_area {
+  background: #181621;
   border: solid 1px #2b2a41;
 }
 
 .checkoutPage_body2_area_title {
   color: #7e7c9c;
   font-size: 24px;
-  border-bottom: solid 1px #2b2a41;
+  border-bottom: solid 1px #e9e9ef;
   padding-bottom: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
+.dark .checkoutPage_body2_area_title {
+  color: #7e7c9c;
+  border-bottom: solid 1px #2b2a41;
+}
+
 .checkoutPage_body2_area_title_span {
   font-size: 18px;
+  color: rgb(0, 0, 0);
+}
+
+.dark .checkoutPage_body2_area_title_span {
   color: #fff;
 }
 
@@ -252,16 +323,24 @@ input[type="radio"]:checked+.payment_method_area1_cont1_label:before {
   width: 100%;
   display: flex;
   align-items: center;
-  border-bottom: solid 1px #2b2a41;
+  border-bottom: solid 1px #e7e7f1;
   padding-bottom: 10px;
   margin-bottom: 10px;
 }
 
+.dark .checkoutPage_body2_area_body_cont1 {
+  border-bottom: solid 1px #2b2a41;
+}
+
 .checkoutPage_body2_area_body_cont1_image_div {
   width: 120px;
-  background: #212036;
+  background: #d6d6d6;
   padding: 10px 5px;
   border-radius: 6px;
+}
+
+.dark .checkoutPage_body2_area_body_cont1_image_div {
+  background: #212036;
 }
 
 .checkoutPage_body2_area_body_cont1_image {
@@ -278,12 +357,16 @@ input[type="radio"]:checked+.payment_method_area1_cont1_label:before {
 
 .checkoutPage_body2_area_body_cont1_text_title {
   font-weight: 600;
-  color: #fff;
+  color: rgb(0, 0, 0);
   font-size: 20px;
   width: 170px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.dark .checkoutPage_body2_area_body_cont1_text_title {
+  color: #fff;
 }
 
 .checkoutPage_body2_area_body_cont1_text_para1 {
@@ -306,6 +389,10 @@ input[type="radio"]:checked+.payment_method_area1_cont1_label:before {
 
 .checkoutPage_body2_area_body_cont1_text_amount {
   font-size: 15px;
+  color: rgb(0, 0, 0);
+}
+
+.dark .checkoutPage_body2_area_body_cont1_text_amount {
   color: #fff;
 }
 
@@ -314,12 +401,17 @@ input[type="radio"]:checked+.payment_method_area1_cont1_label:before {
   display: flex;
   justify-content: space-between;
   padding: 1em;
-  background: #212036;
+  background: #e3e3e3;
   margin-top: 1em;
   border-radius: 10px;
-  color: #fff;
+  color: #000;
   font-size: 24px;
   align-items: center;
+}
+
+.dark .checkoutPage_body2_area_total {
+  background: #212036;
+  color: #fff;
 }
 
 .checkoutPage_body2_area_total_title {

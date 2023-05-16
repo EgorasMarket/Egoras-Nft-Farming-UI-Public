@@ -9,6 +9,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { API_URL } from "../../../actions/types";
 import Paginate from "./Paginate";
 import abi from "../../../web3/contracts/erc20.json";
+import UpdatedErrorModal from "./UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedErrorModal";
+import UpdatedSuccessModal from "./UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedSuccessModal";
+import ScaleLoader from "react-spinners/ScaleLoader";
 // import TableWithPagination
 import TableWithPagination from "../../SmallerComponents/Tables/TableWithPagination/TableWithPagination";
 import { config } from "../../../actions/Config";
@@ -54,7 +57,8 @@ import {
 
 import {
   callGetBurnableAmount,
-  burnToken
+  burnToken,
+  callGetBurntAmount,
 } from "../../../web3/index";
 import { format } from "date-fns";
 import { parseEther, formatEther } from "@ethersproject/units";
@@ -88,13 +92,22 @@ const DashboardHome = () => {
   const [productData, setProductsData] = useState([]);
   const [TradeVolume, setTradeVolume] = useState(0);
   const [chartloaded, setChartLoaded] = useState(false);
+  const [burntEgcLoaded, setBurntEgcLoaded] = useState(false);
   const [accumEgc, setAccumEgc] = useState(0);
   const [burntEgc, setBurntEgc] = useState(0);
+  const [burnTransact, setBurnTransact] = useState([]);
   const [homeData, setHomeData] = useState({
     tvl: "0",
     volume: "0",
     users: 0,
   });
+  const [successModal, setSuccessModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [Disable, setDisable] = useState(false);
+  const [txHash, setTxHash] = useState("");
   useEffect(async () => {
     const egc_usd2 = await GET_COIN_GEKO_PRICE_IN_USD();
     // if
@@ -102,18 +115,9 @@ const DashboardHome = () => {
     setEgc_usd(parseFloat(egc_usd2));
   }, []);
 
-
-  useEffect(async () => {
-    let check = await callGetBurnableAmount(
-      library.getSigner()
-    );
-    console.log(check);
-    // setUnLockCheckStatus(check.status);
-    // setUnlockBtn(check.status);
-  }, []);
-
   useEffect(async () => {
     setChartLoaded(true);
+    // setBurntEgcLoaded(true);
     const fetchData = async () => {
       try {
         const data = await axios.get(API_URL + "/staking/chart", null, config);
@@ -295,11 +299,24 @@ const DashboardHome = () => {
   useEffect(async () => {
     // if (account) {
     await axios
-      .get(API_URL + "/product/sold", null, config)
+      .get(API_URL + "/order/all/completed/buy/orders", null, config)
       .then((data) => {
         console.log(data);
         console.log(data.data.data);
         setProductsData(data.data.data.slice().reverse());
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
+  useEffect(async () => {
+    // if (account) {
+    await axios
+      .get(API_URL + "/web3/get/all/burn/record", null, config)
+      .then((data) => {
+        console.log(data);
+        console.log(data.data.data.burnRecord);
+        setBurnTransact(data.data.data.burnRecord.slice().reverse());
       })
       .catch((error) => {
         console.log(error.response);
@@ -313,6 +330,8 @@ const DashboardHome = () => {
   const PER_PAGE2 = 8;
   const [currentPage3, setCurrentPage3] = useState(0);
   const PER_PAGE3 = 8;
+  const [currentPage4, setCurrentPage4] = useState(0);
+  const PER_PAGE4 = 8;
 
   // handle page click event
   function handlePageClick({ selected: selectedPage }) {
@@ -352,6 +371,21 @@ const DashboardHome = () => {
   const pageCount3 = Math.ceil(productData.length / PER_PAGE3);
 
   const currentTransactions3 = productData.slice(offset3, offset3 + PER_PAGE3);
+
+  // ================
+  // ================
+  // ================
+  // ================
+  // ================
+  // ================
+  function handlePageClick4({ selected: selectedPage }) {
+    setCurrentPage4(selectedPage);
+  }
+
+  const offset4 = currentPage4 * PER_PAGE4;
+  const pageCount4 = Math.ceil(burnTransact.length / PER_PAGE4);
+
+  const currentTransactions4 = burnTransact.slice(offset4, offset4 + PER_PAGE4);
 
   const tokenAddress = "0x58f66D0183615797940360A43c333A44215830BA";
   const getTokenSymbol = async (address) => {
@@ -404,14 +438,69 @@ const DashboardHome = () => {
       });
   }, []);
 
-
   const BurnToken = async () => {
-    let res = await burnToken(
-      library.getSigner()
-    );
-
+    setIsLoading(true);
+    setDisable(true);
+    let res = await burnToken(library.getSigner());
     console.log(res);
-  }
+    if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setTxHash(res.message.hash);
+      setSuccessMessage("You've successfully burnt " + accumEgc + " egc");
+    } else {
+      console.log(res);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
+  };
+
+  useEffect(async () => {
+    setBurntEgcLoaded(true);
+    const fetchData = async () => {
+      let check = await callGetBurnableAmount(library.getSigner());
+      console.log(check);
+      console.log(check.message);
+      console.log(formatEther(check.message).toString());
+      const converted = parseInt(formatEther(check.message).toString());
+      setAccumEgc(converted * egc_usd);
+    };
+    const timer = setTimeout(async () => {
+      setBurntEgcLoaded(false);
+      fetchData();
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [egc_usd]);
+  useEffect(async () => {
+    setBurntEgcLoaded(true);
+    const fetchData = async () => {
+      let check = await callGetBurntAmount(library.getSigner());
+      console.log(check);
+      console.log(check.message);
+      console.log(formatEther(check.message).toString());
+      const converted = parseInt(formatEther(check.message).toString());
+      setBurntEgc(converted * egc_usd);
+    };
+    const timer = setTimeout(async () => {
+      setBurntEgcLoaded(false);
+      fetchData();
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [egc_usd]);
+  const CloseErrorModal = () => {
+    setErrorModal(false);
+  };
+  useEffect(() => {
+    if (accumEgc <= 0) {
+      setDisable(true);
+    } else {
+      setDisable(false);
+    }
+  }, [accumEgc]);
+
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -1062,37 +1151,64 @@ const DashboardHome = () => {
             <div className="burn_egc_div">
               <div className="burn_egc_div_1">
                 <div className="burn_egc_div_1_cont1">
-                  Accumulated Egc{" "}
-                  <div className="burn_egc_div_1_cont1_1">
-                    <HelpOutlineIcon className="help_outline" />
-                    <div className="helper_txt_div">
-                      This is the total value of EGC locked in the
-                      smart-contract.
+                  <div className="burn_egc_div_1_cont1_area1">
+                    Accumulated Egc{" "}
+                    <div className="burn_egc_div_1_cont1_1">
+                      <HelpOutlineIcon className="help_outline" />
+                      <div className="helper_txt_div">
+                        This is the total value of EGC locked in the
+                        smart-contract.
+                      </div>
                     </div>
+                    :
                   </div>
-                  :
-                  <div className="burn_egc_div_1_cont1_div1">
-                    <span className="burn_egc_div_1_cont1_div1_span">{accumEgc}</span>{" "}
-                  </div>
+
+                  {burntEgcLoaded ? (
+                    <div className="burntEgcLoading">Stats Loading...</div>
+                  ) : (
+                    <div className="burn_egc_div_1_cont1_div1">
+                      <span className="burn_egc_div_1_cont1_div1_span">
+                        $ {formatNumber(accumEgc)}
+                      </span>{" "}
+                    </div>
+                  )}
                 </div>
                 <span className="vertical_line"></span>
                 <div className="burn_egc_div_1_cont1">
-                  Burned Egc{" "}
-                  <div className="burn_egc_div_1_cont1_1">
-                    <HelpOutlineIcon className="help_outline" />
-                    <div className="helper_txt_div">
-                      This is the total value of EGC locked in the
-                      smart-contract.
+                  <div className="burn_egc_div_1_cont1_area1">
+                    Burnt Egc{" "}
+                    <div className="burn_egc_div_1_cont1_1">
+                      <HelpOutlineIcon className="help_outline" />
+                      <div className="helper_txt_div">
+                        This is the total value of EGC locked in the
+                        smart-contract.
+                      </div>
                     </div>
+                    :
                   </div>
-                  :
-                  <div className="burn_egc_div_1_cont1_div1">
-                    <span className="burn_egc_div_1_cont1_div1_span">{burntEgc}</span>{" "}
-                  </div>
+                  {burntEgcLoaded ? (
+                    <div className="burntEgcLoading">Stats Loading...</div>
+                  ) : (
+                    <div className="burn_egc_div_1_cont1_div1">
+                      <span className="burn_egc_div_1_cont1_div1_span">
+                        $ {formatNumber(burntEgc)}
+                      </span>{" "}
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="burn_egc_div__button">
-                <button className="burn_egc_div__button_burn" onClick={BurnToken}>Burn</button>
+                <button
+                  className="burn_egc_div__button_burn"
+                  onClick={BurnToken}
+                  disabled={Disable}
+                >
+                  {isLoading ? (
+                    <ScaleLoader color="#353250" size={10} height={20} />
+                  ) : (
+                    <> Burn</>
+                  )}
+                </button>
               </div>
             </div>
             {/* ========================== */}
@@ -1138,6 +1254,17 @@ const DashboardHome = () => {
                     onClick={toggleActiveBtn}
                   >
                     Products
+                  </div>
+                  <div
+                    id="burn"
+                    className={
+                      activeBtn == "burn"
+                        ? "filter_table_btn1_active"
+                        : "filter_table_btn1"
+                    }
+                    onClick={toggleActiveBtn}
+                  >
+                    Burns
                   </div>
                 </div>
               </div>
@@ -1251,10 +1378,15 @@ const DashboardHome = () => {
                                   </div>
                                 </td>
                                 <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
-                                  {`${data.tx.slice(0, 6)}...${data.tx.slice(
-                                    63,
-                                    66
-                                  )}`}
+                                  <a
+                                    href={`https://bscscan.com/tx/${data.transactionHash}`}
+                                    target={"_blank"}
+                                  >
+                                    {`${data.tx.slice(0, 6)}...${data.tx.slice(
+                                      63,
+                                      66
+                                    )}`}
+                                  </a>
                                   <OpenInNewIcon className="tx_hash_link_icon" />
                                 </td>
                               </tr>
@@ -1393,10 +1525,15 @@ const DashboardHome = () => {
                                   </div>
                                 </td>
                                 <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
-                                  {`${data.tx.slice(0, 6)}...${data.tx.slice(
-                                    63,
-                                    66
-                                  )}`}
+                                  <a
+                                    href={`https://bscscan.com/tx/${data.transactionHash}`}
+                                    target={"_blank"}
+                                  >
+                                    {`${data.tx.slice(0, 6)}...${data.tx.slice(
+                                      63,
+                                      66
+                                    )}`}
+                                  </a>
                                   <OpenInNewIcon className="tx_hash_link_icon" />
                                 </td>
                               </tr>
@@ -1437,9 +1574,17 @@ const DashboardHome = () => {
                             Amount
                           </th>
                           <th className="stakingTable_heading_titles">
-                            Address
+                            Quantity
                           </th>
-
+                          <th className="stakingTable_heading_titles">
+                            Order Type
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Payment Type
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Seller
+                          </th>
                           <th className="stakingTable_heading_titles stakingTable_heading_titles_last">
                             Txn Hash
                           </th>
@@ -1472,6 +1617,159 @@ const DashboardHome = () => {
                           {/* =============== */}
                           {/* =============== */}
                           {currentTransactions3.map((data) => {
+                            const date = new Date(data.createdAt);
+                            const day = date
+                              .getUTCDate()
+                              .toString()
+                              .padStart(2, "0");
+                            const month = (date.getUTCMonth() + 1)
+                              .toString()
+                              .padStart(2, "0");
+                            const year = date.getUTCFullYear();
+                            const formattedDate = `${day}/${month}/${year}`;
+                            console.log(formattedDate);
+                            const dateString = formattedDate;
+                            const date2 = new Date(dateString);
+                            const formattedDated = date.toLocaleDateString(
+                              "en-US",
+                              {
+                                year: "numeric",
+                                month: "short",
+                                day: "2-digit",
+                              }
+                            );
+                            return (
+                              <tr className="stakingTable_body_row ">
+                                <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
+                                  <div className="value_dolls_div">
+                                    Sold
+                                    <div className="value_dolls_div_val">
+                                      {/* {formattedDate} */}
+                                      {formattedDated}
+                                    </div>
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="value_dolls_div2">
+                                    {data.amount}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="value_dolls_div2">
+                                    {data.unit}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="value_dolls_div2">
+                                    {data.order_type === "DIRECT"
+                                      ? data.order_type
+                                      : "MartGpt"}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="value_dolls_div2">
+                                    {data.payment_method}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="stakingTable_body_row_data_blockies_">
+                                    <Blockies
+                                      seed={data.seller}
+                                      size={8}
+                                      scale={4}
+                                      className="blockies_icon"
+                                    />
+                                    {`${data.seller.slice(
+                                      0,
+                                      6
+                                    )}...${data.seller.slice(39, 42)}`}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
+                                  <a
+                                    href={`https://bscscan.com/tx/${data.transactionHash}`}
+                                    target={"_blank"}
+                                  >
+                                    {`${data.transactionHash.slice(
+                                      0,
+                                      6
+                                    )}...${data.transactionHash.slice(63, 66)}`}
+                                  </a>
+                                  <OpenInNewIcon className="tx_hash_link_icon" />
+                                </td>
+                              </tr>
+                            );
+                          })}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                        </tbody>
+                      )}
+                    </table>
+                  </div>
+                  <Paginate
+                    pageCount={pageCount3}
+                    handlePageClick={handlePageClick3}
+                  />
+                </div>
+              ) : null}
+              {activeBtn == "burn" ? (
+                <div>
+                  <div className="lock_container_transactions_body_all">
+                    <table className="stakingTable_table">
+                      <thead className="stakingTable_titles">
+                        <tr className="stakingTable_title_div">
+                          <th className="stakingTable_heading_titles stakingTable_heading_titles_first">
+                            Action
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Amount
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Tokens
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Address
+                          </th>
+
+                          <th className="stakingTable_heading_titles stakingTable_heading_titles_last">
+                            Txn Hash
+                          </th>
+                        </tr>
+                      </thead>
+
+                      {/* <div className="table-body-content">
+
+// =====================
+// =====================
+// =====================
+// =====================
+// =====================
+// =====================
+              </div> */}
+                      {currentTransactions4.length <= 0 ? (
+                        <div className="no_loans_div">
+                          <div className="no_loans_div_cont">
+                            <Nodata />
+                            No transaction yet.
+                          </div>{" "}
+                        </div>
+                      ) : (
+                        <tbody
+                          className="stakingTable_body"
+                          id="popular-categories"
+                        >
+                          {" "}
+                          {/* =============== */}
+                          {/* =============== */}
+                          {/* =============== */}
+                          {currentTransactions4.map((data) => {
                             const date = new Date(data.time);
                             const day = date
                               .getUTCDate()
@@ -1497,12 +1795,7 @@ const DashboardHome = () => {
                               <tr className="stakingTable_body_row ">
                                 <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
                                   <div className="value_dolls_div">
-                                    {data.status == "STAKE"
-                                      ? "Create Lock"
-                                      : data.status == "UNSTAKE"
-                                      ? "Unlock"
-                                      : null}
-
+                                    Burn
                                     <div className="value_dolls_div_val">
                                       {/* {formattedDate} */}
                                       {formattedDated}
@@ -1511,44 +1804,41 @@ const DashboardHome = () => {
                                 </td>
                                 <td className="stakingTable_body_row_data">
                                   <div className="value_dolls_div2">
-                                    {data.status == "STAKE" ? (
-                                      <span style={{ display: "flex" }}>
-                                        {numberWithCommas(
-                                          parseFloat(data.amount).toFixed(2)
-                                        )}{" "}
-                                        EGC
-                                      </span>
-                                    ) : data.status == "UNSTAKE" ? (
-                                      <span style={{ display: "flex" }}>
-                                        {numberWithCommas(
-                                          parseFloat(
-                                            data.unstake_amount
-                                          ).toFixed(2)
-                                        )}{" "}
-                                        EGC
-                                      </span>
-                                    ) : null}
+                                    {parseFloat(data.amount * egc_usd).toFixed(
+                                      2
+                                    )}{" "}
+                                    USD
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="value_dolls_div2">
+                                    {parseFloat(data.amount).toFixed(2)} EGC
                                   </div>
                                 </td>
                                 <td className="stakingTable_body_row_data">
                                   <div className="stakingTable_body_row_data_blockies_">
                                     <Blockies
-                                      seed={data.user}
+                                      seed={data.address}
                                       size={8}
                                       scale={4}
                                       className="blockies_icon"
                                     />
-                                    {`${data.user.slice(
+                                    {`${data.address.slice(
                                       0,
                                       6
-                                    )}...${data.user.slice(39, 42)}`}
+                                    )}...${data.address.slice(39, 42)}`}
                                   </div>
                                 </td>
                                 <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
-                                  {`${data.tx.slice(0, 6)}...${data.tx.slice(
-                                    63,
-                                    66
-                                  )}`}
+                                  <a
+                                    href={`https://bscscan.com/tx/${data.transactionHash}`}
+                                    target={"_blank"}
+                                  >
+                                    {`${data.transactionHash.slice(
+                                      0,
+                                      6
+                                    )}...${data.transactionHash.slice(63, 66)}`}
+                                  </a>
                                   <OpenInNewIcon className="tx_hash_link_icon" />
                                 </td>
                               </tr>
@@ -1568,8 +1858,8 @@ const DashboardHome = () => {
                     </table>
                   </div>
                   <Paginate
-                    pageCount={pageCount3}
-                    handlePageClick={handlePageClick3}
+                    pageCount={pageCount4}
+                    handlePageClick={handlePageClick4}
                   />
                 </div>
               ) : null}
@@ -1580,6 +1870,21 @@ const DashboardHome = () => {
           </div>
         </div>
       </section>
+      {errorModal ? (
+        <UpdatedErrorModal
+          errorMessage={errorMessage}
+          closeModal={CloseErrorModal}
+        />
+      ) : null}
+      {successModal ? (
+        <UpdatedSuccessModal
+          btnRoute={true}
+          successMessage={successMessage}
+          route=""
+          txnHashDiv={true}
+          TxnHash={txHash}
+        />
+      ) : null}
     </div>
   );
 };

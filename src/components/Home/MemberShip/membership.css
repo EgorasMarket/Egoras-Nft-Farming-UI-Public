@@ -501,7 +501,7 @@ input[type="radio"]:checked+.selectPlanDiv2_area1_cont1_label:before {
 
 .selectPlanDiv2_area1_cont2_head_price_div_span {
   font-size: 14px;
-  color: #a8c3b2;
+  color: #9f97b5;
 }
 
 .selectPlanDiv2_area1_cont2_body {
@@ -609,6 +609,14 @@ input[type="checkbox"]:checked+.checkBox_agree_div_body_label:before {
   margin-top: 0em;
   width: 100%;
   transition: all .3s linear;
+}
+
+.selectPlanDiv2_area1_checkout_btn_outline span {
+  color: #7a5fc0;
+}
+
+.dark .selectPlanDiv2_area1_checkout_btn_outline span {
+  color: #ffffff;
 }
 
 .fort_left {
@@ -1987,7 +1995,7 @@ x .benefits_section1_area2_body1_cont2 {
   backdrop-filter: blur(10px);
   height: 100vh;
   width: 100vw;
-  z-index: 100;
+  z-index: 100000;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2009,16 +2017,23 @@ x .benefits_section1_area2_body1_cont2 {
 .payViaFortDiv_area {
   width: 100%;
   max-width: 416px;
-  background: #212033;
+  background: #e9e9e9;
   padding: 20px;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  box-shadow: 0px 0px 20px #000;
+  box-shadow: 0px 0px 20px #595959;
   position: relative;
   z-index: 1;
   text-align: left;
+  border: solid 1px #9594b1;
+  color: #454456;
+}
+
+.dark .payViaFortDiv_area {
+  background: #212033;
+  box-shadow: 0px 0px 20px #000;
   border: solid 1px #35344f;
   color: #9d9bb8;
 }

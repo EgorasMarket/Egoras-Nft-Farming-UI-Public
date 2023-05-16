@@ -906,13 +906,13 @@ const UpdatedSwap = () => {
     console.log(SwapAmount);
     console.log(eusdSmartContractBal);
   }, [eusdSmartContractBal, SwapAmount]);
-useEffect(() => {
-  if (SwapAmount > coinBalance) {
-    setInsufficientBalance(true);
-  } else {
-    setInsufficientBalance(false);
-  }
-}, [SwapAmount, coinBalance]);
+  useEffect(() => {
+    if (SwapAmount > coinBalance) {
+      setInsufficientBalance(true);
+    } else {
+      setInsufficientBalance(false);
+    }
+  }, [SwapAmount, coinBalance]);
 
   return (
     <div className="other2">
@@ -1423,7 +1423,7 @@ useEffect(() => {
                                       <>
                                         {data.id == id ? (
                                           <>
-                                            {insufficientBalance? (
+                                            {insufficientBalance ? (
                                               <button
                                                 id="generate"
                                                 disabled={true}
@@ -2372,7 +2372,7 @@ useEffect(() => {
                 </div>
                 <div className="shareSwapDiv_cont2_cont1_body">
                   <div className="shareSwapDiv_cont2_cont1_body_div1">
-                    Visit DODO through the link generated on this page
+                    Visit MartGpt through the link generated on this page
                   </div>
                   <div className="shareSwapDiv_cont2_cont1_body_div1">
                     The user must connect to the wallet
