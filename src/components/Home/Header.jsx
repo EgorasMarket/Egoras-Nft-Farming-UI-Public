@@ -577,8 +577,7 @@ const Header = ({ togglemakeDark, check }) => {
     <>
       {betaDiv === true ? (
         <div className="we_on_beta_div">
-          Welcome to MARTGPT Testnet v1. We will be releasing more versions
-          until the testnet is over.
+          We are delighted to welcome you to MartaGPT Beta. Kindly report any bugs you encounter to cs@egoras.com.
         </div>
       ) : null}
 

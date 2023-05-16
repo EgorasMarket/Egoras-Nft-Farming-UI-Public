@@ -98,7 +98,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
       setSuccessRoute(route);
       setSuccessMessage(
         "You have successfully ordered " +
-          numDivsToDuplicate +
+          numDivsToDuplicate +" "+
           productName +
           " from " +
           productDetail.user_wallet.slice(0, 6) +
