@@ -448,7 +448,7 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
   width: 100vw;
   height: 100vh;
   background: #0d0c1496;
-  z-index: 10000;
+  z-index: 1000000;
   overflow: scroll;
   display: flex;
   align-items: center;
@@ -460,7 +460,7 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
 .shareSwapDiv_cont {
   display: flex;
   width: 100%;
-  max-width: 700px;
+  max-width: 500px;
   margin: auto;
   padding: 1em;
   background: #151422;
@@ -475,6 +475,7 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
   border-radius: 15px;
   overflow: hidden;
   margin-right: 20px;
+  display: none;
 }
 
 .shareSwapDiv_cont1_img {
@@ -519,18 +520,19 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
 
 .shareSwapDiv_cont2_cont1_body_div1 {
   margin-bottom: 11px;
-  color: #a1bdac;
+  color: #7b7899;
   display: list-item;
 }
 
 .shareSwapDiv_cont2_cont2 {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: flex-start;
+  margin-top: 10px;
 }
 
 .shareSwapDiv_cont2_cont2_icon {
-  background: #405c4b;
+  background: #686597;
   padding: 10px;
   border-radius: 50%;
   width: 50px !important;
