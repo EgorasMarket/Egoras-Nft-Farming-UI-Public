@@ -2065,21 +2065,21 @@ const DashBoardP2PUserSales = () => {
                           <>
                             {data.id === receiptId ? (
                               <div className="recipt_details_cont" id="print-content">
-                                <div className="recipt_details_cont1">
+                                {/* <div className="recipt_details_cont1">
                                   <img
                                     src="/img/martgpt_logo.svg"
                                     alt=""
                                     className="recipt_details_cont1_img"
                                   />
                                 </div>
-                                <hr />
+                                <hr /> */}
                                 <div className="recipt_details_cont22">
                                   <div className="recipt_details_cont2_title">
                                     Successful Purchase
                                   </div>
-                                  <div className="recipt_details_cont2_amount2">
+                                  {/* <div className="recipt_details_cont2_amount2">
                                   {numberWithCommas(parseInt(data.amount).toFixed(0))} eusd
-                                  </div>
+                                  </div> */}
                                 </div>
                                 <hr />
                                 <div className="recipt_details_cont3">
@@ -2088,7 +2088,7 @@ const DashBoardP2PUserSales = () => {
                                       Ref Number
                                     </div>
                                     <div className="recipt_details_cont3_div1_value2">
-                                      000085752257
+                                      {data.id}
                                     </div>
                                   </div>
                                   <div className="recipt_details_cont3_div12">
@@ -2096,7 +2096,7 @@ const DashBoardP2PUserSales = () => {
                                       Date
                                     </div>
                                     <div className="recipt_details_cont3_div1_value2">
-                                      April 25, 2023 10:18 am
+                                      {data.updatedAt.split("T")[0]}
                                     </div>
                                   </div>
                                   {/* <div className="recipt_details_cont3_div12">
@@ -2107,36 +2107,18 @@ const DashBoardP2PUserSales = () => {
                                       Fort
                                     </div>
                                   </div> */}
-                                  <div className="recipt_details_cont3_div12">
+                                  {/* <div className="recipt_details_cont3_div12">
                                     <div className="recipt_details_cont3_div1_title">
                                       Seller
                                     </div>
                                     <div className="recipt_details_cont3_div1_value2">
                                       Samuel Ifeanyi
                                     </div>
-                                  </div>
+                                  </div> */}
                                 </div>
                                 <hr />
-                                <div className="recipt_details_cont4">
-                                  <div className="recipt_details_cont3_div12">
-                                    <div className="recipt_details_cont3_div1_title">
-                                      Amount
-                                    </div>
-                                    <div className="recipt_details_cont3_div1_value2">
-                                      3,600 eusd
-                                    </div>
-                                  </div>
-                                  <div className="recipt_details_cont3_div12">
-                                    <div className="recipt_details_cont3_div1_title">
-                                      MartGpt Fee
-                                    </div>
-                                    <div className="recipt_details_cont3_div1_value2">
-                                      0 eusd
-                                    </div>
-                                  </div>
-                                </div>
       
-                                {/* <div>
+                                <div>
                                   <table className="receipt-table">
                                     <tr className="receipt-table-head">
                                       <th>QTY</th>
@@ -2160,7 +2142,7 @@ const DashBoardP2PUserSales = () => {
                                         Eusd
                                       </td>
                                     </tr>
-                                    <tr>
+                                    <tr className="sub_total x34e">
                                       <td></td>
                                       <td>Charges/Vat</td>
                                       <td></td>
@@ -2168,7 +2150,15 @@ const DashBoardP2PUserSales = () => {
                                         00
                                       </td>
                                     </tr>
-                                    <tr>
+                                    <tr className="sub_total">
+                                      <td></td>
+                                      <td>MartGpt Fee</td>
+                                      <td></td>
+                                      <td>
+                                        00
+                                      </td>
+                                    </tr>
+                                    <tr className="sub_total x35e">
                                       <td></td>
                                       <td>Total</td>
                                       <td></td>
@@ -2181,7 +2171,7 @@ const DashBoardP2PUserSales = () => {
                                     </tr>
                                     
                                   </table>
-                                </div> */}
+                                </div>
       
                                 <hr />
                                 <div className="recipt_details_cont5">

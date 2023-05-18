@@ -747,6 +747,18 @@
   padding: 10px;
 }
 
+.x34e {
+  border-top: 1px solid #fff;
+}
+
+.x35e {
+  border-bottom: 1px solid #fff;
+}
+
+.sub_total td {
+  padding: 1px
+}
+
 .viewReceiptDiv_area {
   width: 100%;
   /* max-width: 300px; */
