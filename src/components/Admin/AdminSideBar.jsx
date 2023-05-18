@@ -402,8 +402,8 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
     [egcUsdVal, egrUsdVal]
   );
 
-  // const chainIdBsc = "56";
-  const chainIdBsc = "97";
+  const chainIdBsc = "56";
+  // const chainIdBsc = "97";
 
   useEffect(() => {
     if (account) {

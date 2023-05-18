@@ -505,8 +505,8 @@ const Header = ({ togglemakeDark, check }) => {
     setDisconnectDiv(!disconnetDiv);
   };
 
-  // const chainIdBsc = "56";
-  const chainIdBsc = "97";
+  const chainIdBsc = "56";
+  // const chainIdBsc = "97";
 
   useEffect(() => {
     if (account) {
