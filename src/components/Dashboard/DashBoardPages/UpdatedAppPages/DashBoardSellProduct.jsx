@@ -131,6 +131,7 @@ const DashBoardSellProduct = () => {
   const sendProductToBlockchain = async (prodId, productType, prodCount) => {
     const conCatProdName = ` ${prodName}_${prodId}`;
     console.log(productType);
+    console.log(conCatProdName);
 
     // let res;
 
