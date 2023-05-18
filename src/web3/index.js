@@ -1175,6 +1175,84 @@ const getConfiguration = async (signer) => {
   }
 };
 
+const getReferralBonus = async (account, signer) => {
+  // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
+  try {
+    const instance = contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.takeReferralReward(account);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
+const callGetBurnableAmount = async (signer) => {
+  // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
+  try {
+    const instance = contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.getBurnableAmount();
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error.response);
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const callGetBurntAmount = async (signer) => {
+  // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
+  try {
+    const instance = contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.totalBurn();
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error.response);
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
+const burnToken = async (signer) => {
+  // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
+  try {
+    const instance = contractMembershipFacetInstance(signer);
+    let result;
+    result = await instance.burn();
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error.response);
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
 const AcceptBid = async (_productID, signer) => {
   // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
   try {
@@ -1194,13 +1272,13 @@ const AcceptBid = async (_productID, signer) => {
   }
 };
 
-const BuyIndirectProduct = async (_productID, _quantity, signer) => {
+const BuyIndirectProduct = async (account, _productID, _quantity, signer) => {
   console.log(_productID, _quantity);
   // _productID, qty
   try {
     const instance = contractProductFacetInstance(signer);
     let result;
-    result = await instance.buyProduct(_productID, _quantity);
+    result = await instance.buyProduct(account, _productID, _quantity);
     console.log(result, "result from newnation");
     return {
       message: result,
@@ -1214,13 +1292,13 @@ const BuyIndirectProduct = async (_productID, _quantity, signer) => {
   }
 };
 
-const BuyDirectProduct = async (_productID, _quantity, signer) => {
-  console.log(_productID, _quantity);
+const BuyDirectProduct = async (account, _productID, _quantity, signer) => {
+  console.log(account, _productID, _quantity);
   // _productID, qty
   try {
     const instance = contractProductFacetInstance(signer);
     let result;
-    result = await instance.buyDirectProduct(_productID, _quantity);
+    result = await instance.buyDirectProduct(account, _productID, _quantity);
     console.log(result, "result from newnation");
     return {
       message: result,
@@ -1492,6 +1570,9 @@ export {
   takeRoyalty,
   configurePlan,
   getConfiguration,
+  getReferralBonus,
+  callGetBurnableAmount,
+  burnToken,
   // monthlyPlan,
   // semiAnnuallyPlan,
   placeBid,
@@ -1505,4 +1586,5 @@ export {
   releaseFundsToSeller,
   checkAllowanceV3,
   unlockTokenV3,
+  callGetBurntAmount,
 };

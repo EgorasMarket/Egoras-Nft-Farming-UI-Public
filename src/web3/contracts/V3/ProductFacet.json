@@ -827,45 +827,10 @@
     {
       "inputs": [
         {
-          "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        }
-      ],
-      "name": "getSelling",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "_sellingAmount",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        }
-      ],
-      "name": "isSelling",
-      "outputs": [
-        {
-          "internalType": "bool",
-          "name": "_isSelling",
-          "type": "bool"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
         {
           "internalType": "uint256",
           "name": "_productID",
@@ -884,6 +849,11 @@
     },
     {
       "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
         {
           "internalType": "uint256",
           "name": "_productID",

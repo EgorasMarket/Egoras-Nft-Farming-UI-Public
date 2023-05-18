@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { QRCode } from "react-qrcode-logo";
+import { numberWithCommas } from "../../../static";
 import { GENERATE_QR_CODE_LINK } from "../../../services/generalServices";
 import { socket } from "../../../socket";
+import UpdatedErrorModal from "../../Dashboard/DashBoardPages/UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedErrorModal";
+import UpdatedSuccessModal from "../../Dashboard/DashBoardPages/UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedSuccessModal";
 
 const PayViaFortModal = ({
   togglePayViaFortDiv,
@@ -9,12 +12,19 @@ const PayViaFortModal = ({
   code,
   data,
   account,
+  prodType,
 }) => {
   const [loading, setLoading] = useState(true);
   const [qr_link, setQrLink] = useState("");
   const [status, setStatus] = useState("");
-
+  const [successModal, setSuccessModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successRoute, setSuccessRoute] = useState("");
+  const [qr_dataObj, setQr_dataObj] = useState("");
   const fetchShortCode = async () => {
+    console.log(data);
     // if (!data.account) {
     //   alert("Please connect wallet first");
     //   //handle uninitialized account
@@ -33,25 +43,49 @@ const PayViaFortModal = ({
   };
 
   useEffect(() => {
-    socket.on("0x6ED527b0a92f117f4a4E05a6dF9313CDd4a6aB41", (data) => {
+    socket.on(account, (data) => {
       console.log(data);
       alert(data);
     });
   }, [account]);
+  useEffect(() => {
+    console.log(prodType);
+    if (prodType === "DIRECT") {
+      setSuccessRoute("/app/user/p2p_sales");
+      return;
+    }
+    if (prodType === "INDIRECT") {
+      setSuccessRoute("/app/user/sales");
+      return;
+    }
+    if (data.type === "membership") {
+      setSuccessRoute("/app");
+      return;
+    }
+  }, [data]);
 
   useEffect(() => {
-
     socket.on(`${account}/${data.type}`, (data) => {
-      alert(data);
-      if (data === 1) {
-        alert("Payment made");
+      // alert(data);
+      console.log(data);
+      if (data.response === 1) {
+        console.log("Payment made");
+        console.log(data);
+        // alert("Payment made");
         setStatus("Payment made");
+        setSuccessModal(true);
+        setSuccessMessage("Payment Successful");
+        // setSuccessRoute("/app/user/p2p_sales");
       } else {
-        alert("Payment incompletee");
+        console.log(data);
+
+        console.log("Payment incompletee");
+        // alert("Payment incompletee");
         setStatus("Payment failed couldn't complete payment");
+        setErrorModal(true);
+        setErrorMessage("Payment failed couldn't complete payment");
       }
     });
-
 
     // if (data.type === "product") {
     //   socket.on("purchase-status", (data) => {
@@ -70,6 +104,9 @@ const PayViaFortModal = ({
     //  call the api and generate a qr data
     fetchShortCode();
   }, []);
+  const CloseErrorModal = () => {
+    setErrorModal(false);
+  };
   const copyText = () => {
     var copyText = document.getElementById("myInput");
     copyText.select();
@@ -85,44 +122,78 @@ const PayViaFortModal = ({
     tooltip.innerHTML = "Copy to clipboard";
     tooltip.style.display = "none";
   }
+  // console.log(data, "data,data,data");
   return (
-    <div className="payViaFortDiv">
-      <div
-        className="payViaFortDiv_close_div"
-        onClick={togglePayViaFortDiv}
-      ></div>
-      <div className="payViaFortDiv_area">
-        <div className="payViaFortDiv_area_1">
-          <QRCode quietZone={10} value={qr_link} />
-          {/* <QRCode quietZone={10} value={`${JSON.stringify(data)}`} /> */}
-          {/* <img
-            src="/img/dummy_qrcode.png"
-            alt=""
-            className="payViaFortDiv_area_1_img"
-          /> */}
-        </div>
-        <div className="payViaFortDiv_area_2">{message}</div>
-        <div className="payViaFortDiv_area_3_input_div">
-          <div className="payViaFortDiv_area_3">Or copy this code.</div>
-          <div className="payViaFortDiv_area_3_input_cont">
-            <input
-              type="text"
+    <>
+      <div className="payViaFortDiv">
+        <div
+          className="payViaFortDiv_close_div"
+          onClick={togglePayViaFortDiv}
+        ></div>
+        <div className="payViaFortDiv_area">
+          <div className="qr_amount_area">
+            {numberWithCommas(parseFloat(data.data.amount).toFixed(2))}{" "}
+            {data.data.symbol}
+          </div>
+          <div className="payViaFortDiv_area_1">
+            <QRCode
+              quietZone={5}
               value={qr_link}
-              className="payViaFortDiv_area_3_input_div_input"
-              id="myInput"
+              // bgColor="#151422"
+              eyeColor="#140f22"
+              // fgColor="#c3c1da"
+              bgColor="#c3c1da"
+              fgColor="#231a3b"
+              logoImage="/img/martgpt_logo_icon.svg"
+              eyeRadius={[
+                [5, 5, 0, 5],
+                [5, 5, 5, 0],
+                [5, 0, 5, 5],
+              ]}
+              removeQrCodeBehindLogo={true}
+              logoPadding={5}
+              logoWidth={15}
+              logoPaddingStyle="circle"
+              // qrStyle="dots"
             />
-            <button
-              className="payViaFortDiv_area_3_input_cont_btn"
-              onClick={copyText}
-              onMouseOut={outFunc}
-            >
-              Copy
-              <span className="tooltiptext2" id="myTooltip"></span>
-            </button>
+            {/* <QRCode quietZone={10} value={`${JSON.stringify(data)}`} /> */}
+          </div>
+          <div className="payViaFortDiv_area_2">{message}</div>
+          <div className="payViaFortDiv_area_3_input_div">
+            <div className="payViaFortDiv_area_3">Or copy this code.</div>
+            <div className="payViaFortDiv_area_3_input_cont">
+              <input
+                type="text"
+                value={qr_link}
+                className="payViaFortDiv_area_3_input_div_input"
+                id="myInput"
+              />
+              <button
+                className="payViaFortDiv_area_3_input_cont_btn"
+                onClick={copyText}
+                onMouseOut={outFunc}
+              >
+                Copy
+                <span className="tooltiptext2" id="myTooltip"></span>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      {errorModal ? (
+        <UpdatedErrorModal
+          errorMessage={errorMessage}
+          closeModal={CloseErrorModal}
+        />
+      ) : null}
+      {successModal ? (
+        <UpdatedSuccessModal
+          btnRoute={true}
+          successMessage={successMessage}
+          route={successRoute}
+        />
+      ) : null}
+    </>
   );
 };
 

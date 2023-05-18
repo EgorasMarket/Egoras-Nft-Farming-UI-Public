@@ -13,6 +13,7 @@
   overflow: scroll;
   backdrop-filter: blur(10px);
 }
+
 .updatedTokenModal_closeDiv {
   position: absolute;
   left: 0;
@@ -22,6 +23,7 @@
   background: none;
   overflow: scroll;
 }
+
 .updatedTokenModal_area {
   width: 100%;
   max-width: 420px;
@@ -29,17 +31,26 @@
   /* height: 100%; */
   max-height: 48em;
   border-radius: 20px;
-  box-shadow: 3px 5px 20px 10px #000;
+  box-shadow: 3px 5px 20px 10px #8a8a8a;
   /* padding: 1em; */
-  border: solid 1px #1f1e2e;
-  background: #151422;
+  border: solid 1px #9e9daf;
+  background: #ffffff;
   overflow: scroll;
-  color: #fff;
+  color: #7a5fc0;
   display: flex;
   flex-direction: column;
   position: relative;
   z-index: 1;
 }
+
+.dark .updatedTokenModal_area {
+  background: grey;
+  box-shadow: 3px 5px 20px 10px #000;
+  border: solid 1px #1f1e2e;
+  background: #151422;
+  color: #fff;
+}
+
 .updatedTokenModal_area1 {
   display: flex;
   flex-direction: column;
@@ -47,35 +58,51 @@
   top: 0;
   background: inherit;
   padding: 1em;
-  border-bottom: solid 1px #2d2c41;
+  border-bottom: solid 1px #e6e5ed;
   z-index: 1;
 }
+
+.dark .updatedTokenModal_area1 {
+  border-bottom: solid 1px #2d2c41;
+}
+
 .updatedTokenModal_area1_head {
   font-size: 21px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .updatedTokenModal_area1_head_close_icon {
-  color: #9db6a6;
+  color: #9e9cbc;
   cursor: pointer;
 }
+
 .updatedTokenModal_area1_para {
   font-size: 12px;
   color: #787690;
 }
+
 .updatedTokenModal_area1_search {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
 .updatedTokenModal_area1_search_input {
   padding: 10px;
   width: 100%;
   border-radius: 10px;
+  border: solid 1px #cfcede;
+  background: #e6e5f3;
+  color: #4b3b75;
+}
+
+.dark .updatedTokenModal_area1_search_input {
   border: solid 1px #2d2c41;
   background: #0d0c14;
   color: #fff;
 }
+
 .updatedTokenModal_area1_favorites {
   display: grid;
   gap: 10px;
@@ -83,36 +110,48 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   justify-content: flex-start;
 }
+
 .updatedFavoriteToken_cont {
   display: flex;
   width: 100%;
   align-items: center;
-  border: solid 1px #2d2c41;
+  border: solid 1px #979797;
   margin-right: 10px;
   padding: 6px;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  background: #e1e1e1;
+  color: #000;
+}
+
+.dark .updatedFavoriteToken_cont {
+  border: solid 1px #2d2c41;
   background: #0d0c14;
   color: #fff;
 }
+
 .updatedFavoriteToken_cont_img {
   width: 23px;
 }
+
 .updatedFavoriteToken_cont_title {
   font-size: 14px;
   margin-left: 6px;
 }
+
 .updatedTokenModal_area_body {
   /* margin-top: 2em; */
   display: flex;
   flex-direction: column;
   padding: 0;
 }
+
 .updatedTokenModal_area_body_area {
   display: flex;
   flex-direction: column;
 }
+
 .updatedTokenModal_area_body_area1 {
   border: none;
   display: flex;
@@ -120,46 +159,65 @@
   justify-content: space-between;
   margin-bottom: 0em;
   background: none;
-  color: #fff;
+  color: #000;
   padding: 15px;
   transition: 0.1s linear;
 }
+
+.dark .updatedTokenModal_area_body_area1 {
+  color: #fff;
+}
+
 .updatedTokenModal_area_body_area1:hover {
+  background: #e6e5f3;
+  transition: 0.1s linear;
+}
+
+.dark .updatedTokenModal_area_body_area1:hover {
   background: #2d2c41;
   transition: 0.1s linear;
 }
+
 .updatedTokenModal_area_body_area1_cont1 {
   display: flex;
   align-items: center;
 }
+
 .updatedTokenModal_area_body_area1_cont1_div1 {
   width: 35px;
 }
+
 .updatedTokenModal_area_body_area1_cont1_div1_img {
   width: 100%;
   border-radius: 50%;
 }
+
 .updatedTokenModal_area_body_area1_cont1_div2 {
   display: flex;
   flex-direction: column;
   margin-left: 6px;
   align-items: flex-start;
 }
+
 .updatedTokenModal_area_body_area1_cont1_div2_cont1 {
   font-size: 14px;
 }
+
 .updatedTokenModal_area_body_area1_cont1_div2_cont2 {
   font-size: 12px;
   color: #787690;
 }
+
 .updatedTokenModal_area_body_area1_cont2 {
   font-size: 12px;
 }
+
 .updatedTokenModal_area_body_area1:disabled {
   cursor: not-allowed;
   opacity: 0.2;
   filter: grayscale(1);
 }
+
 .updatedFavoriteToken_cont:disabled {
   cursor: not-allowed;
   opacity: 0.2;

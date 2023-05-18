@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import DashBoard_lend_details_page from "./DashBoard_lend_details_page";
 import DashBoardBranchAsset from "./DashBoardPages/DashBoardBranchAsset";
 import DashBoardLendingTransactions from "./DashBoardPages/DashBoardLendingTransactions";
+import ProductsCategoryPage from "./DashBoardPages/UpdatedAppPages/DashboardMarket/ProductsCategoryPage";
 import CloseIcon from "@mui/icons-material/Close";
 import DashBoardUserSales from "./DashBoardPages/DashBoardUserSales";
 import Cookies from "universal-cookie";
@@ -30,7 +31,7 @@ import DashBoardTransaction from "./DashBoardPages/DashBoardTransaction";
 import DashboardGovernance from "./DashBoardPages/DashboardGovernance";
 import StakingUpdate from "./DashBoardPages/UpdatedAppPages/StakingUpdate";
 import DashboardMarketHome from "./DashBoardPages/UpdatedAppPages/DashboardMarket/DashboardMarketHome";
-import { MarketHeader } from "./DashBoardPages/UpdatedAppPages/DashboardMarket/DashboardMarketHome";
+
 // import OpenVaultPage from "./OpenVaultPage.js";
 // import OpenVaultPage from "./DashBoardPages/OpenVaultPage";
 import OpenVaultPage from "./DashBoardPages/OpenVaultPage";
@@ -116,36 +117,37 @@ const Dashboard = ({ check, togglemakeDark }) => {
     });
   };
 
-  const FirstCheckKyc = async () => {
-    // check if cookie get data for the variable
-    if (cookies.get("myCookie")) {
-      console.log("nothing to do yet");
-      return;
-    }
-    let response = await getAuthUserStats(account);
-    const payload = response.message.data.payload;
-    console.log(payload, "pay=========");
-    console.log(payload.kyc_status, "pay=========");
-    //  if (payload == null) {
-    //    setPropmtDiv(() => true);
-    //  } else {
-    //    if (payload.kyc_staus === "COMPLETED") {
-    //      setPropmtDiv(() => false);
-    //    } else {
-    //      setPropmtDiv(() => true);
-    //    }
-    //  }
-    if (payload == null || payload.kyc_status !== KycStatusTypes.COMPLETED) {
-      setPropmtDiv(() => true);
-      return;
-    }
-    setPropmtDiv(() => false);
-  };
-  useEffect(() => {
-    if (account) {
-      FirstCheckKyc();
-    }
-  }, [account]);
+  // const FirstCheckKyc = async () => {
+  //   // check if cookie get data for the variable
+  //   if (cookies.get("myCookie")) {
+  //     console.log("nothing to do yet");
+  //     return;
+  //   }
+  //   let response = await getAuthUserStats(account);
+  //   console.log(response);
+  //   const payload = response.message.data.payload;
+  //   console.log(payload, "pay=========");
+  //   console.log(payload.kyc_status, "pay=========");
+  //   //  if (payload == null) {
+  //   //    setPropmtDiv(() => true);
+  //   //  } else {
+  //   //    if (payload.kyc_staus === "COMPLETED") {
+  //   //      setPropmtDiv(() => false);
+  //   //    } else {
+  //   //      setPropmtDiv(() => true);
+  //   //    }
+  //   //  }
+  //   if (payload == null || payload.kyc_status !== KycStatusTypes.COMPLETED) {
+  //     setPropmtDiv(() => true);
+  //     return;
+  //   }
+  //   setPropmtDiv(() => false);
+  // };
+  // useEffect(() => {
+  //   if (account) {
+  //     FirstCheckKyc();
+  //   }
+  // }, [account]);
   const relocateToOnborad = () => {
     window.location.href = "/app";
     setPropmtDiv(() => false);
@@ -181,7 +183,6 @@ const Dashboard = ({ check, togglemakeDark }) => {
                 check={check}
                 togglemakeDark={togglemakeDark}
               />
-              {urlArr[2] === "market" ? <MarketHeader /> : null}
               <Switch>
                 <Route exact path="/app/stake" component={DashBoardAnalytics} />
 
@@ -225,6 +226,11 @@ const Dashboard = ({ check, togglemakeDark }) => {
                   exact
                   path="/app/market/product/details/:address/:name"
                   component={ProductDetailPage}
+                />
+                <Route
+                  exact
+                  path="/app/market/product/category/:category"
+                  component={ProductsCategoryPage}
                 />
                 <Route
                   exact

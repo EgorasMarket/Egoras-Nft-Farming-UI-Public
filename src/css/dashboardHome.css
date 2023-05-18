@@ -2,55 +2,197 @@
   display: flex;
   flex-direction: column;
 }
+
 .analytics_container_head {
+  color: rgb(0, 0, 0);
+}
+
+.dark .analytics_container_head {
   color: #fff;
 }
+
 .analytics_container_body {
   display: flex;
   align-items: center;
   gap: 20px;
 }
+
 .analytics_container_1 {
   width: 100%;
   padding: 1em;
-  background: #151422;
+  background: #ffffff;
   margin: 1em;
   margin-right: 0em;
   margin-left: 0em;
   border-radius: 10px;
-  border: solid 1px #1f1e2e;
-  color: #fff;
+  border: solid 1px #e5e5e5;
+  color: #13121f;
   display: flex;
   flex-direction: column;
 }
+
+.burn_egc_div {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  padding: 1em;
+  border-radius: 6px;
+  margin-top: 10px;
+  color: #000;
+  border: solid 1px #e3e3e3;
+  justify-content: space-between;
+}
+
+.dark .burn_egc_div {
+  background: #151422;
+  color: #fff;
+  border: solid 1px #1f1e2e;
+}
+
+.burn_egc_div_1 {
+  display: flex;
+  align-items: center;
+}
+
+.burn_egc_div_1_cont1 {
+  font-size: 15px;
+  color: #6c6c6c;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.dark .burn_egc_div_1_cont1 {
+  color: #787690;
+}
+
+.burn_egc_div_1_cont1_div1 {
+  display: flex;
+  align-items: center;
+  margin-left: 6px;
+  color: #7a5fc0;
+}
+
+.dark .burn_egc_div_1_cont1_div1 {
+  color: #9e94b8;
+}
+
+.vertical_line {
+  margin: 0px 16px;
+  width: 1px;
+  height: 50px;
+  background: #cbcbcb;
+}
+
+.dark .vertical_line {
+  background: #3c3a51;
+}
+
+.burn_egc_div_1_cont1_1 {
+  position: relative;
+}
+
+.burn_egc_div_1_cont1_area1 {
+  display: flex;
+  align-items: center;
+}
+
+.burn_egc_div_1_cont1_1 {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
+  gap: 10px;
+  position: relative;
+  margin: 0px 2px;
+}
+
+.burn_egc_div_1_cont1_1:hover .helper_txt_div {
+  display: block;
+  /* animation: fadeIn 2s linear; */
+}
+
+.burn_egc_div_1_cont1_div1_span {
+  font-size: 16px;
+  border: solid 2px;
+  border-radius: 50%;
+  width: 85px;
+  height: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: scroll;
+  padding: 5px;
+  overflow-wrap: anywhere;
+  text-align: center;
+  line-height: 1;
+  background: #7a5fc01c;
+}
+
+.dark .burn_egc_div_1_cont1_div1_span {
+  background: #9e94b81a;
+}
+
+.burn_egc_div__button_burn {
+  width: 150px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background: #7a5fc0;
+  color: #fff;
+}
+
+.burn_egc_div__button_burn:disabled {
+  background: #cccccc;
+  color: #f6f6f6;
+  cursor: not-allowed;
+}
+
+.dark .burn_egc_div__button_burn:disabled {
+  background: #3b3959;
+  color: #676588;
+}
+
+.dark .analytics_container_1 {
+  background: #151422;
+  border: solid 1px #1f1e2e;
+  color: #fff;
+}
+
 .analytics_container_1_head {
   color: #787690;
 }
+
 .analytics_container_1_Amount {
   font-size: 34px;
   margin-bottom: 0em;
 }
+
 .analytics_container_1_chart {
   padding: 0em 1em;
   height: 100%;
 }
+
 .analytics_container_1_Amount_span {
   font-size: 16px;
   color: #787690;
 }
+
 .assets_chart_area2 tspan {
   fill: #787690;
   font-size: 14px;
   font-weight: 400;
 }
+
 .assets_chart_area1a tspan {
   fill: #707070;
   font-size: 14px;
   font-weight: 400;
 }
+
 .analytics_container_body_mobile {
   display: none;
 }
+
 /* .assets_chart_area1a path.recharts-rectangle {
   /* fill: #fff;
 } */
@@ -62,17 +204,59 @@
     gap: 0px;
     flex-direction: column;
   }
+
   .analytics_container_body {
     display: none;
   }
+
   .analytics_container_1 {
     margin-bottom: 1px;
   }
+
   .analytics_container_1_chart {
     padding: 0em 0em;
     height: 100%;
   }
+
   .lending_area1 {
     margin-top: 10px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .burn_egc_div {
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+  .burn_egc_div_1 {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .burn_egc_div_1_cont1 {
+    margin-right: 0px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .vertical_line {
+    margin: 16px 0px;
+    width: 100%;
+    height: 1px;
+  }
+
+  .burn_egc_div__button {
+    width: 100%;
+    margin-top: 13px;
+  }
+
+  .burn_egc_div__button_burn {
+    width: 100%;
+
   }
 }

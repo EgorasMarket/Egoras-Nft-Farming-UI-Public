@@ -332,7 +332,9 @@ const DashBoardP2PUserSales = () => {
       myArray.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       console.log(myArray);
       setBuyOrders(res.data);
+      console.log(res.data);
     };
+
     const fetchUserSellOrder = async () => {
       const res = await FETCH_USER_SELL_ORDER(account);
       console.log(res);
@@ -356,6 +358,7 @@ const DashBoardP2PUserSales = () => {
       myArray.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
       console.log(myArray);
       setSellOrders(res.data);
+      console.log(res.data);
     };
 
     const fetchStat = async () => {
@@ -393,6 +396,7 @@ const DashBoardP2PUserSales = () => {
       }
     }
   }, [account]);
+
   const toggleMarkAsReceivedDiv = (e) => {
     let Divid = e.currentTarget.id;
     setToggleAproveDiv(Divid);
@@ -415,13 +419,160 @@ const DashBoardP2PUserSales = () => {
     // console.log(id);
   };
 
-  function handlePrint() {
-    const printContents = document.getElementById("print-content").innerHTML;
-    const originalContents = document.body.innerHTML;
-    document.body.innerHTML = printContents;
-    window.print();
-    document.body.innerHTML = originalContents;
-  }
+  // const handlePrint = () => {
+  //   console.log('okkkkkk');
+  //   const printContents = document.getElementById("print-xcontent").innerHTML;
+  //   console.log(printContents);
+  //   const originalContents = document.body.innerHTML;
+  //   document.body.innerHTML = printContents;
+  //   window.print();
+  //   document.body.innerHTML = originalContents;
+  // }
+
+  const handlePrint = () => {
+    const printContents = document.getElementById("print-xcontent").innerHTML;
+    const printWindow = window.open("", "_blank");
+    printWindow.document.write(`
+      <html>
+      <head>
+        <title>Print</title>
+        <link rel="stylesheet" type="text/css" href="../../../../src/css/dashboard_user_details.css">
+        <style>
+        .recipt_details_cont {
+          display: flex;
+          flex-direction: column;
+          /* background: #25282e; */
+          padding: 2em;
+          /* margin: 1em; */
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+        
+        .hide-section {
+          display: none
+        }
+        
+        .recipt_details_cont1 {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        .recipt_details_cont1_img {
+          width: 100px;
+        }
+        
+        .recipt_details_cont2 {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          color: #000;
+          /* color: #797d84; */
+          font-size: 17px;
+          /* font-size: 10px; */
+        }
+        
+        .recipt_details_cont22 {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+          /* color: #000; */
+          color: #797d84;
+          font-size: 17px;
+          /* font-size: 10px; */
+        }
+        
+        .recipt_details_cont2_amount {
+          font-weight: 600;
+          font-size: 20px;
+          /* font-size: 12px; */
+          color: #000;
+          /* color: #fff; */
+        }
+        
+        .recipt_details_cont2_amount2 {
+          font-weight: 600;
+          font-size: 20px;
+          /* font-size: 12px; */
+          /* color: #000; */
+          color: #fff;
+        }
+        
+        .recipt_details_cont3 {
+          display: flex;
+          flex-direction: column;
+        }
+        
+        .recipt_details_cont3_div1 {
+          display: flex;
+          justify-content: space-between;
+          /* color: #797d84; */
+          color: #000;
+          margin-bottom: 10px;
+        
+          /* font-size: 10px; */
+          font-size: 12px;
+        }
+        
+        .recipt_details_cont3_div12 {
+          display: flex;
+          justify-content: space-between;
+          color: #797d84;
+          /* color: #000; */
+          margin-bottom: 10px;
+        
+          /* font-size: 10px; */
+          font-size: 18px;
+        }
+        
+        .recipt_details_cont3_div1_value {
+          /* color: #fff; */
+          color: #000;
+        }
+        
+        .recipt_details_cont3_div1_value2 {
+          color: #fff;
+          /* color: #000; */
+        }
+        
+        .recipt_details_cont5 {
+          color: #fff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        .recipt_details_cont55 {
+          color: #000;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        
+        .recipt_details_cont5_img {
+          width: 80px;
+          margin-left: 5px;
+        }
+        
+        .receiptBg {
+          width: 100%;
+          filter: drop-shadow(2px 4px 20px black);
+        }
+        </style>
+      </head>
+      <body>
+        ${printContents}
+      </body>
+      </html>
+    `);
+    printWindow.document.close();
+    printWindow.print();
+  };
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -1920,6 +2071,90 @@ const DashBoardP2PUserSales = () => {
                             />
                           </div>
                           <hr />
+                          <div className="recipt_details_cont22">
+                            <div className="recipt_details_cont2_title">
+                              Successful Purchase
+                            </div>
+                            <div className="recipt_details_cont2_amount2">
+                              3,600 eusd
+                            </div>
+                          </div>
+                          <hr />
+                          <div className="recipt_details_cont3">
+                            <div className="recipt_details_cont3_div12">
+                              <div className="recipt_details_cont3_div1_title">
+                                Ref Number
+                              </div>
+                              <div className="recipt_details_cont3_div1_value2">
+                                000085752257
+                              </div>
+                            </div>
+                            <div className="recipt_details_cont3_div12">
+                              <div className="recipt_details_cont3_div1_title">
+                                Date
+                              </div>
+                              <div className="recipt_details_cont3_div1_value2">
+                                April 25, 2023 10:18 am
+                              </div>
+                            </div>
+                            {/* <div className="recipt_details_cont3_div12">
+                              <div className="recipt_details_cont3_div1_title">
+                                Payment Method
+                              </div>
+                              <div className="recipt_details_cont3_div1_value2">
+                                Fort
+                              </div>
+                            </div> */}
+                            <div className="recipt_details_cont3_div12">
+                              <div className="recipt_details_cont3_div1_title">
+                                Seller
+                              </div>
+                              <div className="recipt_details_cont3_div1_value2">
+                                Samuel Ifeanyi
+                              </div>
+                            </div>
+                          </div>
+                          <hr />
+                          <div className="recipt_details_cont4">
+                            <div className="recipt_details_cont3_div12">
+                              <div className="recipt_details_cont3_div1_title">
+                                Amount
+                              </div>
+                              <div className="recipt_details_cont3_div1_value2">
+                                3,600 eusd
+                              </div>
+                            </div>
+                            <div className="recipt_details_cont3_div12">
+                              <div className="recipt_details_cont3_div1_title">
+                                MartGpt Fee
+                              </div>
+                              <div className="recipt_details_cont3_div1_value2">
+                                0 eusd
+                              </div>
+                            </div>
+                          </div>
+                          <hr />
+                          <div className="recipt_details_cont5">
+                            powered by{" "}
+                            <img
+                              src="/img/egoras-logo.svg"
+                              alt=""
+                              className="recipt_details_cont5_img"
+                            />
+                          </div>
+                        </div>
+                        <div
+                          className="recipt_details_cont hide-section"
+                          id="print-xcontent"
+                        >
+                          <div className="recipt_details_cont1">
+                            <img
+                              src="/img/martgpt_logo.svg"
+                              alt=""
+                              className="recipt_details_cont1_img"
+                            />
+                          </div>
+                          <hr />
                           <div className="recipt_details_cont2">
                             <div className="recipt_details_cont2_title">
                               Successful Purchase
@@ -1946,14 +2181,14 @@ const DashBoardP2PUserSales = () => {
                                 April 25, 2023 10:18 am
                               </div>
                             </div>
-                            <div className="recipt_details_cont3_div1">
+                            {/* <div className="recipt_details_cont3_div1">
                               <div className="recipt_details_cont3_div1_title">
                                 Payment Method
                               </div>
                               <div className="recipt_details_cont3_div1_value">
                                 Fort
                               </div>
-                            </div>
+                            </div> */}
                             <div className="recipt_details_cont3_div1">
                               <div className="recipt_details_cont3_div1_title">
                                 Seller
@@ -1983,7 +2218,7 @@ const DashBoardP2PUserSales = () => {
                             </div>
                           </div>
                           <hr />
-                          <div className="recipt_details_cont5">
+                          <div className="recipt_details_cont55">
                             powered by{" "}
                             <img
                               src="/img/egoras-logo.svg"

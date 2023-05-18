@@ -28,7 +28,7 @@ const PriceOracle = () => {
     error,
   } = context;
   const [tickerArray, setTickerArray] = useState(["egceusd"]);
-  const [priceArray, setPriceArray] = useState(["6090000000000000000"]);
+  const [priceArray, setPriceArray] = useState(["8200000000000000000"]);
   const [newWallet, setNewWallet] = useState([""]);
   const [newWallet2, setNewWallet2] = useState([""]);
 

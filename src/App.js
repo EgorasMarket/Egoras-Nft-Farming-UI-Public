@@ -190,9 +190,9 @@ function App() {
       return;
     }
   });
-  useEffect(() => {
-    store.dispatch(loadUser());
-  });
+  // useEffect(() => {
+  //   store.dispatch(loadUser());
+  // });
 
   const [cClass, setCClass] = useState(false);
 
@@ -226,11 +226,10 @@ function App() {
       <Provider store={store}>
         {/* <Provider> */}
         <Router>
-          <div
-            className={cClass === true ? "dark " : "App-header"}
-            // className="dark"
-          >
-            <Header togglemakeDark={togglemakeDark} check={cClass} />
+          <div className={cClass === true ? "dark " : "App-header"}>
+            {urlArr[1] === "app" ? null : (
+              <Header togglemakeDark={togglemakeDark} check={cClass} />
+            )}
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/referal/:ref" component={Referal} />
@@ -243,10 +242,8 @@ function App() {
               {dashboard == true ? (
                 <Dashboard check={cClass} togglemakeDark={togglemakeDark} />
               ) : null}
-
-              {/* <Route component={Dashboard} /> */}
             </Switch>
-            <Footer />
+            {urlArr[1] === "app" ? null : <Footer />}
           </div>
         </Router>
       </Provider>

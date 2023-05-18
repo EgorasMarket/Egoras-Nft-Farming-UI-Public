@@ -577,8 +577,7 @@ const Header = ({ togglemakeDark, check }) => {
     <>
       {betaDiv === true ? (
         <div className="we_on_beta_div">
-          Welcome to MARTGPT Testnet v1. We will be releasing more versions
-          until the testnet is over.
+          We are delighted to welcome you to MartaGPT Beta. Kindly report any bugs you encounter to cs@egoras.com.
         </div>
       ) : null}
 
@@ -589,7 +588,7 @@ const Header = ({ togglemakeDark, check }) => {
               <div className="dashboard-area">
                 <a href="/" className="egr_logo2_mobil">
                   <img
-                    src="/img/egoras-logo.svg"
+                    src="/img/martgpt_logo_dark.svg"
                     alt="..."
                     className="egr-logo2"
                   />
@@ -609,7 +608,7 @@ const Header = ({ togglemakeDark, check }) => {
                   <a href="/">
                     {" "}
                     <img
-                      src="/img/egoras-logo.svg"
+                      src="/img/martgpt_logo_dark.svg"
                       alt="..."
                       className="egr-logo"
                     />
@@ -730,7 +729,7 @@ const Header = ({ togglemakeDark, check }) => {
                 Oops, your wallet is not on the right network.
                 <span className="right_network_id_modal_cont_para">
                   It seems your wallet is running on a different network from
-                  Egoras.app. Please click the button below to change your
+                  MartGpt.app. Please click the button below to change your
                   network or add the network if it's not added in your wallet.
                 </span>
                 <div className="change_network_btn_div">

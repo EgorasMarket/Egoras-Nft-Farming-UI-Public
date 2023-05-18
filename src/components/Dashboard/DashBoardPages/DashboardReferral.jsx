@@ -7,7 +7,9 @@ import Web3 from "web3";
 import { getAuthUserStats } from "../../../actions/token";
 import CryptoJS from "crypto-js";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
-
+import UpdatedErrorModal from "./UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedErrorModal";
+import UpdatedSuccessModal from "./UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedSuccessModal";
+import ScaleLoader from "react-spinners/ScaleLoader";
 import Sparkline2 from "../../static/Sparkline2";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import MilitaryTechIcon from "@mui/icons-material/MilitaryTech";
@@ -33,6 +35,7 @@ import {
   getUserStats,
   getReferrals,
   getMyReferralsCount,
+  getReferralBonus,
 } from "../../../web3/index";
 const DashboardReferral = ({ auth }) => {
   const [activeLink, setActiveLink] = useState("");
@@ -49,6 +52,13 @@ const DashboardReferral = ({ auth }) => {
   const [leaderBoard1, setLeaderBoard] = useState([]);
   const [myReferrals, setMyReferrals] = useState([]);
   const [refLink, setRefLink] = useState("........");
+  const [successModal, setSuccessModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [Disable, setDisable] = useState(false);
+  const [txHash, setTxHash] = useState("");
   const context = useWeb3React();
 
   const {
@@ -210,6 +220,37 @@ const DashboardReferral = ({ auth }) => {
     }
   }, [account]);
 
+  const withdrawRefBonus = async () => {
+    setIsLoading(true);
+    setDisable(true);
+    let res = await getReferralBonus(account, library.getSigner());
+    console.log(res);
+    if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setTxHash(res.message.hash);
+      setSuccessMessage(
+        "You've successfully withdrawn " + refEarnings + " egc"
+      );
+    } else {
+      console.log(res);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
+  };
+  const CloseErrorModal = () => {
+    setErrorModal(false);
+  };
+  useEffect(() => {
+    if (refEarnings <= 0) {
+      setDisable(true);
+    } else {
+      setDisable(false);
+    }
+  }, [refEarnings]);
   return (
     <>
       <div className="other2 asset_other2">
@@ -257,8 +298,16 @@ const DashboardReferral = ({ auth }) => {
                           <span className="engn_symbol_sign">EGC</span>
                         </div>
                       </div>
-                      <button className="dashBoard_ref_area1_cont1_div1_cont1_withdraw_btn">
-                        Withdraw
+                      <button
+                        className="dashBoard_ref_area1_cont1_div1_cont1_withdraw_btn"
+                        onClick={withdrawRefBonus}
+                        disabled={Disable}
+                      >
+                        {isLoading ? (
+                          <ScaleLoader color="#353250" size={10} height={20} />
+                        ) : (
+                          <> Withdraw</>
+                        )}
                       </button>
                     </div>
                     <div className="dashBoard_ref_area1_cont2">
@@ -412,6 +461,21 @@ const DashboardReferral = ({ auth }) => {
             </div>
           </div>
         </section>
+        {errorModal ? (
+          <UpdatedErrorModal
+            errorMessage={errorMessage}
+            closeModal={CloseErrorModal}
+          />
+        ) : null}
+        {successModal ? (
+          <UpdatedSuccessModal
+            btnRoute={true}
+            successMessage={successMessage}
+            route=""
+            txnHashDiv={true}
+            TxnHash={txHash}
+          />
+        ) : null}
       </div>
     </>
   );

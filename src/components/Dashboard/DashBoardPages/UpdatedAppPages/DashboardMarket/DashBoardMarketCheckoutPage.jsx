@@ -40,6 +40,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
   const [numDivsToDuplicate, setNumDivsToDuplicate] = useState(0);
   const [checkedMetamask, setCheckedMetamask] = useState(false);
   const [checkedFort, setCheckedFort] = useState(false);
+  const [checkedFortModal, setCheckedFortModal] = useState(false);
   const [userDetails, setUserDetails] = useState({});
   //   const [txnHash, setTxnHash] = useState("");
   const [updateProfile, setUpdateProfile] = useState(false);
@@ -97,7 +98,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
       setSuccessRoute(route);
       setSuccessMessage(
         "You have successfully ordered " +
-          numDivsToDuplicate +
+          numDivsToDuplicate +" "+
           productName +
           " from " +
           productDetail.user_wallet.slice(0, 6) +
@@ -119,6 +120,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
     // / BUY WITH BLOCKCHAIN
     if (productDetail.productType == "INDIRECT") {
       const res = await BuyIndirectProduct(
+        account,
         productDetail.index_id,
         numDivsToDuplicate,
         library.getSigner()
@@ -135,6 +137,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
       }
     } else {
       const res = await BuyDirectProduct(
+        account,
         productDetail.index_id,
         numDivsToDuplicate,
         library.getSigner()
@@ -380,6 +383,9 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
 
     [account, unLockCheckStatus, productDetail]
   );
+  const toggleCheckedFortModal = () => {
+    setCheckedFortModal(!checkedFortModal);
+  };
   return (
     <div className="other2 asset_other2">
       <section className="product_detail_section ">
@@ -539,7 +545,10 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                       ) : (
                         <>
                           {checkedFort === true ? (
-                            <button className="proceedToPayDiv_btn">
+                            <button
+                              className="proceedToPayDiv_btn"
+                              onClick={toggleCheckedFortModal}
+                            >
                               Checkout Fort
                             </button>
                           ) : checkedMetamask === true ? (
@@ -742,13 +751,14 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
         />
       ) : null}
 
-      {checkedFort && (
+      {checkedFortModal && (
         <PayViaFortModal
-          togglePayViaFortDiv={() => setCheckedFort(!checkedFort)}
+          togglePayViaFortDiv={toggleCheckedFortModal}
           message="Scan this qrcode to subscribe for your membership via FORT app."
           code="Qretyhgjhe6"
           account={account}
           data={qr_data}
+          prodType={productDetail.productType}
         />
       )}
     </div>

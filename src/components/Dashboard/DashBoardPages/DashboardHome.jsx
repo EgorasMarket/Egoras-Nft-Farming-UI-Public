@@ -9,6 +9,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { API_URL } from "../../../actions/types";
 import Paginate from "./Paginate";
 import abi from "../../../web3/contracts/erc20.json";
+import UpdatedErrorModal from "./UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedErrorModal";
+import UpdatedSuccessModal from "./UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedSuccessModal";
+import ScaleLoader from "react-spinners/ScaleLoader";
 // import TableWithPagination
 import TableWithPagination from "../../SmallerComponents/Tables/TableWithPagination/TableWithPagination";
 import { config } from "../../../actions/Config";
@@ -22,7 +25,6 @@ import "../../../css/dashboardHome.css";
 import { tokenBalance } from "../../../web3";
 import axios from "axios";
 import Web3 from "web3";
-
 import {
   AreaChart,
   Area,
@@ -52,6 +54,12 @@ import {
   GET_COIN_GEKO_PRICE_IN_USD,
   GET_COIN_GEKO_PRICGET_TVLE_IN_USD,
 } from "../../../services/generalServices";
+
+import {
+  callGetBurnableAmount,
+  burnToken,
+  callGetBurntAmount,
+} from "../../../web3/index";
 import { format } from "date-fns";
 import { parseEther, formatEther } from "@ethersproject/units";
 const DashboardHome = () => {
@@ -66,7 +74,7 @@ const DashboardHome = () => {
     active,
     error,
   } = context;
-  const [egcUsd, setEgcUsd] = useState(0);
+  const [egc_usd, setEgc_usd] = useState(0.0);
   const [graphData2, setGraphData2] = useState([]);
   const [graphData, setGraphData] = useState([]);
   const [ChartValue, setChartValue] = useState(0);
@@ -83,125 +91,151 @@ const DashboardHome = () => {
   const [swapData, setSwapData] = useState([]);
   const [productData, setProductsData] = useState([]);
   const [TradeVolume, setTradeVolume] = useState(0);
+  const [chartloaded, setChartLoaded] = useState(false);
+  const [burntEgcLoaded, setBurntEgcLoaded] = useState(false);
+  const [accumEgc, setAccumEgc] = useState(0);
+  const [burntEgc, setBurntEgc] = useState(0);
+  const [burnTransact, setBurnTransact] = useState([]);
   const [homeData, setHomeData] = useState({
     tvl: "0",
     volume: "0",
     users: 0,
   });
+  const [successModal, setSuccessModal] = useState(false);
+  const [errorModal, setErrorModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [Disable, setDisable] = useState(false);
+  const [txHash, setTxHash] = useState("");
   useEffect(async () => {
-    const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
-    console.log("dddd");
-    await axios
-      .get(API_URL + "/staking/chart", null, config)
-      .then((data) => {
+    const egc_usd2 = await GET_COIN_GEKO_PRICE_IN_USD();
+    // if
+    console.log(parseFloat(egc_usd2));
+    setEgc_usd(parseFloat(egc_usd2));
+  }, []);
+
+  useEffect(async () => {
+    setChartLoaded(true);
+    // setBurntEgcLoaded(true);
+    const fetchData = async () => {
+      try {
+        const data = await axios.get(API_URL + "/staking/chart", null, config);
         console.log(data);
         console.log(data.data.data);
-        const temp = data.data.data;
-        console.log(temp);
-        for (const data of temp) {
-          data.value = parseInt(data.value).toFixed(2) * egc_usd;
-          const date = new Date(data.timestamp);
-          const day = date.getUTCDate().toString().padStart(2, "0");
-          const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
-          const year = date.getUTCFullYear();
-          const formattedDated = `${day}/${month}/${year}`;
-          const dateString = formattedDated;
-          const dateParts = dateString.split("/");
-          // new Date(year, monthIndex, day)
-          const dateObj = new Date(
-            dateParts[2],
-            dateParts[1] - 1,
-            dateParts[0]
-          );
-          // format the date using toLocaleDateString()
-          const formattedDate = dateObj.toLocaleDateString("en-US", {
-            month: "short",
-            day: "2-digit",
-            year: "numeric",
-          });
-          data.timestamp = formattedDate;
-          data.month = getMonthFromNumber(data.month);
+        if (data.data.data.length !== 0) {
+          const temp = data.data.data;
+          // const temp = data.data.data;
+          console.log(temp);
+          for (const data of temp) {
+            data.value = parseInt(data.value).toFixed(2) * egc_usd;
+            const date = new Date(data.timestamp);
+            const day = date.getUTCDate().toString().padStart(2, "0");
+            const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+            const year = date.getUTCFullYear();
+            const formattedDated = `${day}/${month}/${year}`;
+            const dateString = formattedDated;
+            const dateParts = dateString.split("/");
+            // new Date(year, monthIndex, day)
+            const dateObj = new Date(
+              dateParts[2],
+              dateParts[1] - 1,
+              dateParts[0]
+            );
+            // format the date using toLocaleDateString()
+            const formattedDate = dateObj.toLocaleDateString("en-US", {
+              month: "short",
+              day: "2-digit",
+              year: "numeric",
+            });
+            data.timestamp = formattedDate;
+            data.month = getMonthFromNumber(data.month);
+          }
+          console.log(temp);
+          setGraphData2(() => temp);
+          setlastIndex(temp.length - 1);
+          setLastArray(temp[temp.length - 1]);
+          setChartValue(() => temp[temp.length - 1].value);
+          setChartTime(() => temp[temp.length - 1].timestamp);
+          return;
         }
-        console.log(temp);
-        setGraphData2(() => temp);
-        setlastIndex(temp.length - 1);
-        setLastArray(temp[temp.length - 1]);
-        setChartValue(() => temp[temp.length - 1].value);
-        setChartTime(() => temp[temp.length - 1].timestamp);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log(error.response);
-      });
+      }
+    };
+    const timer = setTimeout(async () => {
+      setChartLoaded(false);
+      fetchData();
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [egc_usd]);
 
-    // socket.connect();
-    // socket.on("staking", (stakings) => {
-    //   // alert(JSON.stringify(stakings));
-    // });
-  }, []);
   useEffect(async () => {
-    const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
-    console.log("dddd");
-    await axios
-      .get(API_URL + "/swap/all", null, config)
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        const data = await axios.get(API_URL + "/swap/all", null, config);
         console.log(data, "hhhhh");
-        console.log(data.data.data);
-
-        const myArray = data.data.data;
-        myArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-        console.log(myArray);
-        const reversed = myArray
-          .slice()
-          .reverse()
-          .map((data) => {
-            return data;
-          });
-        const temp = reversed;
-        for (const data of temp) {
-          data.value = parseInt(data.value).toFixed(2) * egc_usd;
-          const date = new Date(data.timestamp);
-          const day = date.getUTCDate().toString().padStart(2, "0");
-          const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
-          const year = date.getUTCFullYear();
-          const formattedDated = `${day}/${month}/${year}`;
-          const dateString = formattedDated;
-          const dateParts = dateString.split("/");
-          // new Date(year, monthIndex, day)
-          const dateObj = new Date(
-            dateParts[2],
-            dateParts[1] - 1,
-            dateParts[0]
-          );
-          // format the date using toLocaleDateString()
-          const formattedDate = dateObj.toLocaleDateString("en-US", {
-            month: "short",
-            day: "2-digit",
-            year: "numeric",
-          });
-          data.timestamp = formattedDate;
-          data.month = getMonthFromNumber(data.month);
+        // console.log(data.data.data);
+        if (data.data.data.length !== 0) {
+          const myArray = data.data.data;
+          myArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+          console.log(myArray);
+          const reversed = myArray
+            .slice()
+            .reverse()
+            .map((data) => {
+              return data;
+            });
+          const temp = reversed;
+          for (const data of temp) {
+            data.value = parseInt(data.value).toFixed(2) * egc_usd;
+            const date = new Date(data.timestamp);
+            const day = date.getUTCDate().toString().padStart(2, "0");
+            const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+            const year = date.getUTCFullYear();
+            const formattedDated = `${day}/${month}/${year}`;
+            const dateString = formattedDated;
+            const dateParts = dateString.split("/");
+            // new Date(year, monthIndex, day)
+            const dateObj = new Date(
+              dateParts[2],
+              dateParts[1] - 1,
+              dateParts[0]
+            );
+            // format the date using toLocaleDateString()
+            const formattedDate = dateObj.toLocaleDateString("en-US", {
+              month: "short",
+              day: "2-digit",
+              year: "numeric",
+            });
+            data.timestamp = formattedDate;
+            data.month = getMonthFromNumber(data.month);
+          }
+          console.log(reversed);
+          const totalValue = reversed.reduce((accumulator, currentValue) => {
+            console.log(accumulator, currentValue);
+            return accumulator + currentValue.value;
+          }, 0);
+          console.log(totalValue);
+          setTradeVolume(parseInt(totalValue).toFixed(2));
+          console.log(temp);
+          setGraphData(() => temp);
+          setlastIndex2(temp.length - 1);
+          setLastArray2(temp[temp.length - 1]);
+          setChartValue2(() => temp[temp.length - 1].value);
+          setChartTime2(() => temp[temp.length - 1].timestamp);
+          return;
         }
-        const totalValue = reversed.reduce((accumulator, currentValue) => {
-          return accumulator + currentValue.value;
-        }, 0);
-        console.log(totalValue);
-        setTradeVolume(parseInt(totalValue).toFixed(2));
-        console.log(temp);
-        setGraphData(() => temp);
-        setlastIndex2(temp.length - 1);
-        setLastArray2(temp[temp.length - 1]);
-        setChartValue2(() => temp[temp.length - 1].value);
-        setChartTime2(() => temp[temp.length - 1].timestamp);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.log(error.response);
-      });
-
-    // socket.connect();
-    // socket.on("staking", (stakings) => {
-    //   // alert(JSON.stringify(stakings));
-    // });
-  }, []);
+      }
+    };
+    const timer = setTimeout(async () => {
+      setChartLoaded(false);
+      fetchData();
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [egc_usd]);
   const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       setChartValue(payload[0].payload.value);
@@ -226,13 +260,11 @@ const DashboardHome = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
+      // const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
       const response = await GET_TVL();
-
       console.log(response, "google");
       const tvl = egc_usd * response.tvl.tvl;
       const numberOfUsers = response.users;
-
       const main = parseFloat(tvl).toFixed(2);
       setHomeData({
         ...homeData,
@@ -241,77 +273,54 @@ const DashboardHome = () => {
       });
     };
     fetchData();
-  }, []);
-
-  useEffect(
-    async (e) => {
-      let string2 =
-        "https://api.coingecko.com/api/v3/simple/price?ids=egoras-credit&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=true&include_last_updated_at=true";
-      await fetch(string2)
-        .then((resp) => resp.json())
-        .then((data) => {
-          const egc_usd_val = data["egoras-credit"].usd;
-          setEgcUsd(() => egc_usd_val);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    },
-    [egcUsd]
-  );
-  useEffect(async (e) => {
-    const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
-    let res = await tokenBalance(
-      "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-      "0x46A20e7d4F9A0ac61DBd752A619031C0026aB78B",
-      library.getSigner()
-    );
-    console.log(res);
-    console.log(formatEther(res.message));
-    let tvl = formatEther(res.message);
-    setTotalTVL(tvl * egc_usd);
-  });
+  }, [egc_usd]);
 
   const toggleActiveBtn = (event) => {
     setActivrBtn(event.currentTarget.id);
   };
   useEffect(async () => {
-    // if (account) {
-    await axios
-      .get(API_URL + "/staking/transactions", null, config)
-      .then((data) => {
-        console.log(data);
-        console.log(data.data.data);
-        // const reversed = data.data.data.map((data) => {
-        //   return data;
-        // });
-        const myArray = data.data.data;
-        myArray.sort((a, b) => new Date(b.time) - new Date(a.time));
-        console.log(myArray);
-        setStakeData(myArray);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-    // }
+    try {
+      const response = await axios.get(
+        API_URL + "/staking/transactions",
+        null,
+        config
+      );
+      console.log(response);
+      console.log(response.data.data);
+      const myArray = response.data.data;
+      myArray.sort((a, b) => new Date(b.time) - new Date(a.time));
+      console.log(myArray);
+      setStakeData(myArray);
+    } catch (error) {
+      console.log(error.response);
+    }
   }, []);
 
   useEffect(async () => {
     // if (account) {
     await axios
-      .get(API_URL + "/product/sold", null, config)
+      .get(API_URL + "/order/all/completed/buy/orders", null, config)
       .then((data) => {
         console.log(data);
         console.log(data.data.data);
-        // const reversed = data.data.data.map((data) => {
-        //   return data;
-        // });
         setProductsData(data.data.data.slice().reverse());
       })
       .catch((error) => {
         console.log(error.response);
       });
-    // }
+  }, []);
+  useEffect(async () => {
+    // if (account) {
+    await axios
+      .get(API_URL + "/web3/get/all/burn/record", null, config)
+      .then((data) => {
+        console.log(data);
+        console.log(data.data.data.burnRecord);
+        setBurnTransact(data.data.data.burnRecord.slice().reverse());
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
   }, []);
   // const names = ["Name", "Quantity", "Amount", "OrderId", "Status"];
   // pagination state
@@ -321,6 +330,8 @@ const DashboardHome = () => {
   const PER_PAGE2 = 8;
   const [currentPage3, setCurrentPage3] = useState(0);
   const PER_PAGE3 = 8;
+  const [currentPage4, setCurrentPage4] = useState(0);
+  const PER_PAGE4 = 8;
 
   // handle page click event
   function handlePageClick({ selected: selectedPage }) {
@@ -360,6 +371,21 @@ const DashboardHome = () => {
   const pageCount3 = Math.ceil(productData.length / PER_PAGE3);
 
   const currentTransactions3 = productData.slice(offset3, offset3 + PER_PAGE3);
+
+  // ================
+  // ================
+  // ================
+  // ================
+  // ================
+  // ================
+  function handlePageClick4({ selected: selectedPage }) {
+    setCurrentPage4(selectedPage);
+  }
+
+  const offset4 = currentPage4 * PER_PAGE4;
+  const pageCount4 = Math.ceil(burnTransact.length / PER_PAGE4);
+
+  const currentTransactions4 = burnTransact.slice(offset4, offset4 + PER_PAGE4);
 
   const tokenAddress = "0x58f66D0183615797940360A43c333A44215830BA";
   const getTokenSymbol = async (address) => {
@@ -411,6 +437,70 @@ const DashboardHome = () => {
         console.log(error.response);
       });
   }, []);
+
+  const BurnToken = async () => {
+    setIsLoading(true);
+    setDisable(true);
+    let res = await burnToken(library.getSigner());
+    console.log(res);
+    if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setTxHash(res.message.hash);
+      setSuccessMessage("You've successfully burnt " + accumEgc + " egc");
+    } else {
+      console.log(res);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
+  };
+
+  useEffect(async () => {
+    setBurntEgcLoaded(true);
+    const fetchData = async () => {
+      let check = await callGetBurnableAmount(library.getSigner());
+      console.log(check);
+      console.log(check.message);
+      console.log(formatEther(check.message).toString());
+      const converted = parseInt(formatEther(check.message).toString());
+      setAccumEgc(converted * egc_usd);
+    };
+    const timer = setTimeout(async () => {
+      setBurntEgcLoaded(false);
+      fetchData();
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [egc_usd]);
+  useEffect(async () => {
+    setBurntEgcLoaded(true);
+    const fetchData = async () => {
+      let check = await callGetBurntAmount(library.getSigner());
+      console.log(check);
+      console.log(check.message);
+      console.log(formatEther(check.message).toString());
+      const converted = parseInt(formatEther(check.message).toString());
+      setBurntEgc(converted * egc_usd);
+    };
+    const timer = setTimeout(async () => {
+      setBurntEgcLoaded(false);
+      fetchData();
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [egc_usd]);
+  const CloseErrorModal = () => {
+    setErrorModal(false);
+  };
+  useEffect(() => {
+    if (accumEgc <= 0) {
+      setDisable(true);
+    } else {
+      setDisable(false);
+    }
+  }, [accumEgc]);
+
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -427,126 +517,132 @@ const DashboardHome = () => {
               <div className="analytics_container_body_mobile">
                 <div className="analytics_container_1">
                   <div className="analytics_container_1_head">TVL</div>
-                  <div
-                    className="analytics_container_1_Amount"
-                    onChange={CustomTooltip}
-                  >
-                    ${formatNumber(ChartValue)}
-                  </div>
-                  <span className="analytics_container_1_Amount_span">
-                    {ChartTime}
-                  </span>
+                  {chartloaded ? (
+                    <div>Chart is loading...</div>
+                  ) : (
+                    <>
+                      <div
+                        className="analytics_container_1_Amount"
+                        onChange={CustomTooltip}
+                      >
+                        ${formatNumber(ChartValue)}
+                      </div>
+                      <span className="analytics_container_1_Amount_span">
+                        {ChartTime}
+                      </span>
 
-                  <div className="analytics_container_1_chart">
-                    <div
-                      className="assets_chart_area1a "
-                      style={{ width: "100%", height: 120 }}
-                    >
-                      <ResponsiveContainer>
-                        <AreaChart
-                          width={130}
-                          height={10}
-                          data={graphData2}
-                          margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                          }}
+                      <div className="analytics_container_1_chart">
+                        <div
+                          className="assets_chart_area1a "
+                          style={{ width: "100%", height: 120 }}
                         >
-                          <defs>
-                            <linearGradient
-                              id="colorUv"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
+                          <ResponsiveContainer>
+                            <AreaChart
+                              width={130}
+                              height={10}
+                              data={graphData2}
+                              margin={{
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                              }}
                             >
-                              <stop
-                                offset="5%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.3}
-                              />
-                              <stop
-                                offset="100%"
-                                stopColor="#827dc3"
-                                stopOpacity={0}
-                              />
-                            </linearGradient>
-                          </defs>
-                          {/* <CartesianGrid
+                              <defs>
+                                <linearGradient
+                                  id="colorUv"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.3}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid
                             strokeDasharray="1 1"
                             stroke="#d7d7d7"
                           /> */}
-                          <XAxis dataKey="month" stroke="0" />
-                          {/* <YAxis stroke="#000" /> */}
-                          {/* <Tooltip content={<CustomTooltip />} /> */}
-                          <Area
-                            type="monotone"
-                            dataKey="value"
-                            stroke="#7a5fc0"
-                            fillOpacity={1}
-                            fill="url(#colorUv)"
-                            strokeWidth={2}
-                          />
-                        </AreaChart>
-                      </ResponsiveContainer>
-                    </div>
-                    <div
-                      className="assets_chart_area2 "
-                      style={{ width: "100%", height: 120 }}
-                    >
-                      <ResponsiveContainer>
-                        <AreaChart
-                          width={130}
-                          height={10}
-                          data={graphData2}
-                          margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                          }}
+                              <XAxis dataKey="month" stroke="0" />
+                              {/* <YAxis stroke="#000" /> */}
+                              <Tooltip content={<CustomTooltip />} />
+                              <Area
+                                type="monotone"
+                                dataKey="value"
+                                stroke="#7a5fc0"
+                                fillOpacity={1}
+                                fill="url(#colorUv)"
+                                strokeWidth={2}
+                              />
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                        <div
+                          className="assets_chart_area2 "
+                          style={{ width: "100%", height: 120 }}
                         >
-                          <defs>
-                            <linearGradient
-                              id="colorUv"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
+                          <ResponsiveContainer>
+                            <AreaChart
+                              width={130}
+                              height={10}
+                              data={graphData2}
+                              margin={{
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                              }}
                             >
-                              <stop
-                                offset="5%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.3}
-                              />
-                              <stop
-                                offset="100%"
-                                stopColor="#827dc3"
-                                stopOpacity={0}
-                              />
-                            </linearGradient>
-                          </defs>
-                          {/* <CartesianGrid
+                              <defs>
+                                <linearGradient
+                                  id="colorUv"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.3}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid
                             strokeDasharray="1 1"
                             stroke="#d7d7d7"
                           /> */}
-                          <XAxis dataKey="month" stroke="0" />
-                          {/* <YAxis stroke="#000" /> */}
-                          {/* <Tooltip content={<CustomTooltip />} /> */}
-                          <Area
-                            type="monotone"
-                            dataKey="value"
-                            stroke="#7a5fc0"
-                            fillOpacity={1}
-                            fill="url(#colorUv)"
-                            strokeWidth={2}
-                          />
-                        </AreaChart>
-                      </ResponsiveContainer>
-                    </div>
-                  </div>
+                              <XAxis dataKey="month" stroke="0" />
+                              {/* <YAxis stroke="#000" /> */}
+                              <Tooltip content={<CustomTooltip />} />
+                              <Area
+                                type="monotone"
+                                dataKey="value"
+                                stroke="#7a5fc0"
+                                fillOpacity={1}
+                                fill="url(#colorUv)"
+                                strokeWidth={2}
+                              />
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
                 {/* ====== */}
                 {/* ====== */}
@@ -554,128 +650,134 @@ const DashboardHome = () => {
                 {/* ====== */}
                 <div className="analytics_container_1">
                   <div className="analytics_container_1_head">Volume 24H</div>
-                  <div
-                    className="analytics_container_1_Amount"
-                    onChange={CustomTooltip2}
-                  >
-                    ${formatNumber(ChartValue2)}
-                  </div>
-                  <span className="analytics_container_1_Amount_span">
-                    {ChartTime2}
-                  </span>
-                  <div className="analytics_container_1_chart">
-                    <div
-                      className="assets_chart_area1a"
-                      style={{ width: "100%", height: 120 }}
-                    >
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart
-                          width={130}
-                          height={10}
-                          data={graphData}
-                          margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                          }}
+                  {chartloaded ? (
+                    <div>Chart is Loading...</div>
+                  ) : (
+                    <>
+                      <div
+                        className="analytics_container_1_Amount"
+                        onChange={CustomTooltip2}
+                      >
+                        ${formatNumber(ChartValue2)}
+                      </div>
+                      <span className="analytics_container_1_Amount_span">
+                        {ChartTime2}
+                      </span>
+                      <div className="analytics_container_1_chart">
+                        <div
+                          className="assets_chart_area1a"
+                          style={{ width: "100%", height: 120 }}
                         >
-                          <defs>
-                            <linearGradient
-                              id="colorUvBar1"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart
+                              width={130}
+                              height={10}
+                              data={graphData}
+                              margin={{
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                              }}
                             >
-                              <stop
-                                offset="5%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.7}
+                              <defs>
+                                <linearGradient
+                                  id="colorUvBar1"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.7}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.3}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                              <XAxis dataKey="month" stroke="0" color="#fff" />
+                              {/* <YAxis /> */}
+                              <Tooltip content={<CustomTooltip2 />} />
+                              {/* <Legend /> */}
+                              <Bar
+                                // type="monotone"
+                                dataKey="value"
+                                // stroke="#827dc3"
+                                // fillOpacity={1}
+                                fill="url(#colorUvBar1)"
+                                // strokeWidth={2}
                               />
-                              <stop
-                                offset="100%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.3}
-                              />
-                            </linearGradient>
-                          </defs>
-                          {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                          <XAxis dataKey="month" stroke="0" color="#fff" />
-                          {/* <YAxis /> */}
-                          {/* <Tooltip content={<CustomTooltip2 />} /> */}
-                          {/* <Legend /> */}
-                          <Bar
-                            // type="monotone"
-                            dataKey="value"
-                            // stroke="#827dc3"
-                            // fillOpacity={1}
-                            fill="url(#colorUvBar1)"
-                            // strokeWidth={2}
-                          />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </div>
-                    {/* ===== */}
-                    {/* ===== */}
-                    {/* ===== */}
-                    <div
-                      className="assets_chart_area2"
-                      style={{ width: "100%", height: 120 }}
-                    >
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart
-                          width={130}
-                          height={10}
-                          data={graphData}
-                          margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                          }}
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                        {/* ===== */}
+                        {/* ===== */}
+                        {/* ===== */}
+                        <div
+                          className="assets_chart_area2"
+                          style={{ width: "100%", height: 120 }}
                         >
-                          <defs>
-                            <linearGradient
-                              id="colorUvBar2"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart
+                              width={130}
+                              height={10}
+                              data={graphData}
+                              margin={{
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                              }}
                             >
-                              <stop
-                                offset="5%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.7}
+                              <defs>
+                                <linearGradient
+                                  id="colorUvBar2"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.7}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.3}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                              <XAxis
+                                dataKey="month"
+                                stroke="0"
+                                fill="#fff"
+                                color="#fff"
                               />
-                              <stop
-                                offset="100%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.3}
+                              {/* <YAxis /> */}
+                              <Tooltip content={<CustomTooltip2 />} />
+                              <Bar
+                                // type="monotone"
+                                dataKey="value"
+                                // stroke="#fff"
+                                // fillOpacity={1}
+                                fill="url(#colorUvBar2)"
+                                // strokeWidth={2}
                               />
-                            </linearGradient>
-                          </defs>
-                          {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                          <XAxis
-                            dataKey="month"
-                            stroke="0"
-                            fill="#fff"
-                            color="#fff"
-                          />
-                          {/* <YAxis /> */}
-                          {/* <Tooltip content={<CustomTooltip2 />} /> */}
-                          <Bar
-                            // type="monotone"
-                            dataKey="value"
-                            // stroke="#fff"
-                            // fillOpacity={1}
-                            fill="url(#colorUvBar2)"
-                            // strokeWidth={2}
-                          />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </div>
-                  </div>
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
               {/* =============================================== */}
@@ -691,126 +793,131 @@ const DashboardHome = () => {
               <div className="analytics_container_body">
                 <div className="analytics_container_1">
                   <div className="analytics_container_1_head">TVL</div>
-                  <div
-                    className="analytics_container_1_Amount"
-                    onChange={CustomTooltip}
-                  >
-                    ${formatNumber(ChartValue)}
-                  </div>
-                  <span className="analytics_container_1_Amount_span">
-                    {ChartTime}
-                  </span>
-
-                  <div className="analytics_container_1_chart">
-                    <div
-                      className="assets_chart_area1a "
-                      style={{ width: "100%", height: 220 }}
-                    >
-                      <ResponsiveContainer>
-                        <AreaChart
-                          width={130}
-                          height={10}
-                          data={graphData2}
-                          margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                          }}
+                  {chartloaded ? (
+                    <div>Chart is Loading...</div>
+                  ) : (
+                    <>
+                      <div
+                        className="analytics_container_1_Amount"
+                        onChange={CustomTooltip}
+                      >
+                        ${formatNumber(ChartValue)}
+                      </div>
+                      <span className="analytics_container_1_Amount_span">
+                        {ChartTime}
+                      </span>
+                      <div className="analytics_container_1_chart">
+                        <div
+                          className="assets_chart_area1a "
+                          style={{ width: "100%", height: 220 }}
                         >
-                          <defs>
-                            <linearGradient
-                              id="colorUv"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
+                          <ResponsiveContainer>
+                            <AreaChart
+                              width={130}
+                              height={10}
+                              data={graphData2}
+                              margin={{
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                              }}
                             >
-                              <stop
-                                offset="5%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.3}
+                              <defs>
+                                <linearGradient
+                                  id="colorUv"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.3}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid
+                              strokeDasharray="1 1"
+                              stroke="#d7d7d7"
+                            /> */}
+                              <XAxis dataKey="month" stroke="0" />
+                              {/* <YAxis stroke="#000" /> */}
+                              <Tooltip content={<CustomTooltip />} />
+                              <Area
+                                type="monotone"
+                                dataKey="value"
+                                stroke="#7a5fc0"
+                                fillOpacity={1}
+                                fill="url(#colorUv)"
+                                strokeWidth={2}
                               />
-                              <stop
-                                offset="100%"
-                                stopColor="#827dc3"
-                                stopOpacity={0}
-                              />
-                            </linearGradient>
-                          </defs>
-                          {/* <CartesianGrid
-                            strokeDasharray="1 1"
-                            stroke="#d7d7d7"
-                          /> */}
-                          <XAxis dataKey="month" stroke="0" />
-                          {/* <YAxis stroke="#000" /> */}
-                          {/* <Tooltip content={<CustomTooltip />} /> */}
-                          <Area
-                            type="monotone"
-                            dataKey="value"
-                            stroke="#7a5fc0"
-                            fillOpacity={1}
-                            fill="url(#colorUv)"
-                            strokeWidth={2}
-                          />
-                        </AreaChart>
-                      </ResponsiveContainer>
-                    </div>
-                    <div
-                      className="assets_chart_area2 "
-                      style={{ width: "100%", height: 220 }}
-                    >
-                      <ResponsiveContainer>
-                        <AreaChart
-                          width={130}
-                          height={10}
-                          data={graphData2}
-                          margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                          }}
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                        <div
+                          className="assets_chart_area2 "
+                          style={{ width: "100%", height: 220 }}
                         >
-                          <defs>
-                            <linearGradient
-                              id="colorUv"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
+                          <ResponsiveContainer>
+                            <AreaChart
+                              width={130}
+                              height={10}
+                              data={graphData2}
+                              margin={{
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                              }}
                             >
-                              <stop
-                                offset="5%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.3}
+                              <defs>
+                                <linearGradient
+                                  id="colorUv"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.3}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid
+                              strokeDasharray="1 1"
+                              stroke="#d7d7d7"
+                            /> */}
+                              <XAxis dataKey="month" stroke="0" />
+                              {/* <YAxis stroke="#000" /> */}
+                              <Tooltip content={<CustomTooltip />} />
+                              <Area
+                                type="monotone"
+                                dataKey="value"
+                                stroke="#7a5fc0"
+                                fillOpacity={1}
+                                fill="url(#colorUv)"
+                                strokeWidth={2}
                               />
-                              <stop
-                                offset="100%"
-                                stopColor="#827dc3"
-                                stopOpacity={0}
-                              />
-                            </linearGradient>
-                          </defs>
-                          {/* <CartesianGrid
-                            strokeDasharray="1 1"
-                            stroke="#d7d7d7"
-                          /> */}
-                          <XAxis dataKey="month" stroke="0" />
-                          {/* <YAxis stroke="#000" /> */}
-                          {/* <Tooltip content={<CustomTooltip />} /> */}
-                          <Area
-                            type="monotone"
-                            dataKey="value"
-                            stroke="#7a5fc0"
-                            fillOpacity={1}
-                            fill="url(#colorUv)"
-                            strokeWidth={2}
-                          />
-                        </AreaChart>
-                      </ResponsiveContainer>
-                    </div>
-                  </div>
+                            </AreaChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
                 {/* ====== */}
                 {/* ====== */}
@@ -818,128 +925,135 @@ const DashboardHome = () => {
                 {/* ====== */}
                 <div className="analytics_container_1">
                   <div className="analytics_container_1_head">Volume 24H</div>
-                  <div
-                    className="analytics_container_1_Amount"
-                    onChange={CustomTooltip2}
-                  >
-                    ${formatNumber(ChartValue2)}
-                  </div>
-                  <span className="analytics_container_1_Amount_span">
-                    {ChartTime2}
-                  </span>
-                  <div className="analytics_container_1_chart">
-                    <div
-                      className="assets_chart_area1a"
-                      style={{ width: "100%", height: 220 }}
-                    >
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart
-                          width={130}
-                          height={10}
-                          data={graphData}
-                          margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                          }}
+
+                  {chartloaded ? (
+                    <div>Chart is Loading...</div>
+                  ) : (
+                    <>
+                      <div
+                        className="analytics_container_1_Amount"
+                        onChange={CustomTooltip2}
+                      >
+                        ${formatNumber(ChartValue2)}
+                      </div>
+                      <span className="analytics_container_1_Amount_span">
+                        {ChartTime2}
+                      </span>
+                      <div className="analytics_container_1_chart">
+                        <div
+                          className="assets_chart_area1a"
+                          style={{ width: "100%", height: 220 }}
                         >
-                          <defs>
-                            <linearGradient
-                              id="colorUvBar1"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart
+                              width={130}
+                              height={10}
+                              data={graphData}
+                              margin={{
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                              }}
                             >
-                              <stop
-                                offset="5%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.7}
+                              <defs>
+                                <linearGradient
+                                  id="colorUvBar1"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.7}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.3}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                              <XAxis dataKey="month" stroke="0" color="#fff" />
+                              {/* <YAxis /> */}
+                              <Tooltip content={<CustomTooltip2 />} />
+                              {/* <Legend /> */}
+                              <Bar
+                                // type="monotone"
+                                dataKey="value"
+                                // stroke="#827dc3"
+                                // fillOpacity={1}
+                                fill="url(#colorUvBar1)"
+                                // strokeWidth={2}
                               />
-                              <stop
-                                offset="100%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.3}
-                              />
-                            </linearGradient>
-                          </defs>
-                          {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                          <XAxis dataKey="month" stroke="0" color="#fff" />
-                          {/* <YAxis /> */}
-                          {/* <Tooltip content={<CustomTooltip2 />} /> */}
-                          {/* <Legend /> */}
-                          <Bar
-                            // type="monotone"
-                            dataKey="value"
-                            // stroke="#827dc3"
-                            // fillOpacity={1}
-                            fill="url(#colorUvBar1)"
-                            // strokeWidth={2}
-                          />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </div>
-                    {/* ===== */}
-                    {/* ===== */}
-                    {/* ===== */}
-                    <div
-                      className="assets_chart_area2"
-                      style={{ width: "100%", height: 220 }}
-                    >
-                      <ResponsiveContainer width="100%" height="100%">
-                        <BarChart
-                          width={130}
-                          height={10}
-                          data={graphData}
-                          margin={{
-                            top: 0,
-                            right: 0,
-                            left: 0,
-                            bottom: 0,
-                          }}
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                        {/* ===== */}
+                        {/* ===== */}
+                        {/* ===== */}
+                        <div
+                          className="assets_chart_area2"
+                          style={{ width: "100%", height: 220 }}
                         >
-                          <defs>
-                            <linearGradient
-                              id="colorUvBar2"
-                              x1="0"
-                              y1="0"
-                              x2="0"
-                              y2="1"
+                          <ResponsiveContainer width="100%" height="100%">
+                            <BarChart
+                              width={130}
+                              height={10}
+                              data={graphData}
+                              margin={{
+                                top: 0,
+                                right: 0,
+                                left: 0,
+                                bottom: 0,
+                              }}
                             >
-                              <stop
-                                offset="5%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.7}
+                              <defs>
+                                <linearGradient
+                                  id="colorUvBar2"
+                                  x1="0"
+                                  y1="0"
+                                  x2="0"
+                                  y2="1"
+                                >
+                                  <stop
+                                    offset="5%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.7}
+                                  />
+                                  <stop
+                                    offset="100%"
+                                    stopColor="#827dc3"
+                                    stopOpacity={0.3}
+                                  />
+                                </linearGradient>
+                              </defs>
+                              {/* <CartesianGrid strokeDasharray="3 3" /> */}
+                              <XAxis
+                                dataKey="month"
+                                stroke="0"
+                                fill="#fff"
+                                color="#fff"
                               />
-                              <stop
-                                offset="100%"
-                                stopColor="#827dc3"
-                                stopOpacity={0.3}
+                              {/* <YAxis /> */}
+                              <Tooltip content={<CustomTooltip2 />} />
+                              <Bar
+                                // type="monotone"
+                                dataKey="value"
+                                // stroke="#fff"
+                                // fillOpacity={1}
+                                fill="url(#colorUvBar2)"
+                                // strokeWidth={2}
                               />
-                            </linearGradient>
-                          </defs>
-                          {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                          <XAxis
-                            dataKey="month"
-                            stroke="0"
-                            fill="#fff"
-                            color="#fff"
-                          />
-                          {/* <YAxis /> */}
-                          {/* <Tooltip content={<CustomTooltip2 />} /> */}
-                          <Bar
-                            // type="monotone"
-                            dataKey="value"
-                            // stroke="#fff"
-                            // fillOpacity={1}
-                            fill="url(#colorUvBar2)"
-                            // strokeWidth={2}
-                          />
-                        </BarChart>
-                      </ResponsiveContainer>
-                    </div>
-                  </div>
+                            </BarChart>
+                          </ResponsiveContainer>
+                        </div>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
@@ -1034,6 +1148,75 @@ const DashboardHome = () => {
             {/* ========================== */}
             {/* ========================== */}
 
+            <div className="burn_egc_div">
+              <div className="burn_egc_div_1">
+                <div className="burn_egc_div_1_cont1">
+                  <div className="burn_egc_div_1_cont1_area1">
+                    Accumulated Egc{" "}
+                    <div className="burn_egc_div_1_cont1_1">
+                      <HelpOutlineIcon className="help_outline" />
+                      <div className="helper_txt_div">
+                        This is the total value of EGC locked in the
+                        smart-contract.
+                      </div>
+                    </div>
+                    :
+                  </div>
+
+                  {burntEgcLoaded ? (
+                    <div className="burntEgcLoading">Stats Loading...</div>
+                  ) : (
+                    <div className="burn_egc_div_1_cont1_div1">
+                      <span className="burn_egc_div_1_cont1_div1_span">
+                        $ {formatNumber(accumEgc)}
+                      </span>{" "}
+                    </div>
+                  )}
+                </div>
+                <span className="vertical_line"></span>
+                <div className="burn_egc_div_1_cont1">
+                  <div className="burn_egc_div_1_cont1_area1">
+                    Burnt Egc{" "}
+                    <div className="burn_egc_div_1_cont1_1">
+                      <HelpOutlineIcon className="help_outline" />
+                      <div className="helper_txt_div">
+                        This is the total value of EGC locked in the
+                        smart-contract.
+                      </div>
+                    </div>
+                    :
+                  </div>
+                  {burntEgcLoaded ? (
+                    <div className="burntEgcLoading">Stats Loading...</div>
+                  ) : (
+                    <div className="burn_egc_div_1_cont1_div1">
+                      <span className="burn_egc_div_1_cont1_div1_span">
+                        $ {formatNumber(burntEgc)}
+                      </span>{" "}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div className="burn_egc_div__button">
+                <button
+                  className="burn_egc_div__button_burn"
+                  onClick={BurnToken}
+                  disabled={Disable}
+                >
+                  {isLoading ? (
+                    <ScaleLoader color="#353250" size={10} height={20} />
+                  ) : (
+                    <> Burn</>
+                  )}
+                </button>
+              </div>
+            </div>
+            {/* ========================== */}
+            {/* ========================== */}
+            {/* ========================== */}
+            {/* ========================== */}
+            {/* ========================== */}
+
             <div className="lock_container_transactions">
               <div className="BuyerSellerDiv_body_div2_tab_area">
                 <div className="filter_table_area_1">Latest Transactions</div>
@@ -1071,6 +1254,17 @@ const DashboardHome = () => {
                     onClick={toggleActiveBtn}
                   >
                     Products
+                  </div>
+                  <div
+                    id="burn"
+                    className={
+                      activeBtn == "burn"
+                        ? "filter_table_btn1_active"
+                        : "filter_table_btn1"
+                    }
+                    onClick={toggleActiveBtn}
+                  >
+                    Burns
                   </div>
                 </div>
               </div>
@@ -1184,10 +1378,15 @@ const DashboardHome = () => {
                                   </div>
                                 </td>
                                 <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
-                                  {`${data.tx.slice(0, 6)}...${data.tx.slice(
-                                    63,
-                                    66
-                                  )}`}
+                                  <a
+                                    href={`https://bscscan.com/tx/${data.transactionHash}`}
+                                    target={"_blank"}
+                                  >
+                                    {`${data.tx.slice(0, 6)}...${data.tx.slice(
+                                      63,
+                                      66
+                                    )}`}
+                                  </a>
                                   <OpenInNewIcon className="tx_hash_link_icon" />
                                 </td>
                               </tr>
@@ -1326,10 +1525,15 @@ const DashboardHome = () => {
                                   </div>
                                 </td>
                                 <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
-                                  {`${data.tx.slice(0, 6)}...${data.tx.slice(
-                                    63,
-                                    66
-                                  )}`}
+                                  <a
+                                    href={`https://bscscan.com/tx/${data.transactionHash}`}
+                                    target={"_blank"}
+                                  >
+                                    {`${data.tx.slice(0, 6)}...${data.tx.slice(
+                                      63,
+                                      66
+                                    )}`}
+                                  </a>
                                   <OpenInNewIcon className="tx_hash_link_icon" />
                                 </td>
                               </tr>
@@ -1370,9 +1574,17 @@ const DashboardHome = () => {
                             Amount
                           </th>
                           <th className="stakingTable_heading_titles">
-                            Address
+                            Quantity
                           </th>
-
+                          <th className="stakingTable_heading_titles">
+                            Order Type
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Payment Type
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Seller
+                          </th>
                           <th className="stakingTable_heading_titles stakingTable_heading_titles_last">
                             Txn Hash
                           </th>
@@ -1405,6 +1617,159 @@ const DashboardHome = () => {
                           {/* =============== */}
                           {/* =============== */}
                           {currentTransactions3.map((data) => {
+                            const date = new Date(data.createdAt);
+                            const day = date
+                              .getUTCDate()
+                              .toString()
+                              .padStart(2, "0");
+                            const month = (date.getUTCMonth() + 1)
+                              .toString()
+                              .padStart(2, "0");
+                            const year = date.getUTCFullYear();
+                            const formattedDate = `${day}/${month}/${year}`;
+                            console.log(formattedDate);
+                            const dateString = formattedDate;
+                            const date2 = new Date(dateString);
+                            const formattedDated = date.toLocaleDateString(
+                              "en-US",
+                              {
+                                year: "numeric",
+                                month: "short",
+                                day: "2-digit",
+                              }
+                            );
+                            return (
+                              <tr className="stakingTable_body_row ">
+                                <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
+                                  <div className="value_dolls_div">
+                                    Sold
+                                    <div className="value_dolls_div_val">
+                                      {/* {formattedDate} */}
+                                      {formattedDated}
+                                    </div>
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="value_dolls_div2">
+                                    {data.amount}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="value_dolls_div2">
+                                    {data.unit}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="value_dolls_div2">
+                                    {data.order_type === "DIRECT"
+                                      ? data.order_type
+                                      : "MartGpt"}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="value_dolls_div2">
+                                    {data.payment_method}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="stakingTable_body_row_data_blockies_">
+                                    <Blockies
+                                      seed={data.seller}
+                                      size={8}
+                                      scale={4}
+                                      className="blockies_icon"
+                                    />
+                                    {`${data.seller.slice(
+                                      0,
+                                      6
+                                    )}...${data.seller.slice(39, 42)}`}
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
+                                  <a
+                                    href={`https://bscscan.com/tx/${data.transactionHash}`}
+                                    target={"_blank"}
+                                  >
+                                    {`${data.transactionHash.slice(
+                                      0,
+                                      6
+                                    )}...${data.transactionHash.slice(63, 66)}`}
+                                  </a>
+                                  <OpenInNewIcon className="tx_hash_link_icon" />
+                                </td>
+                              </tr>
+                            );
+                          })}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                          {/* =================== */}
+                        </tbody>
+                      )}
+                    </table>
+                  </div>
+                  <Paginate
+                    pageCount={pageCount3}
+                    handlePageClick={handlePageClick3}
+                  />
+                </div>
+              ) : null}
+              {activeBtn == "burn" ? (
+                <div>
+                  <div className="lock_container_transactions_body_all">
+                    <table className="stakingTable_table">
+                      <thead className="stakingTable_titles">
+                        <tr className="stakingTable_title_div">
+                          <th className="stakingTable_heading_titles stakingTable_heading_titles_first">
+                            Action
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Amount
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Tokens
+                          </th>
+                          <th className="stakingTable_heading_titles">
+                            Address
+                          </th>
+
+                          <th className="stakingTable_heading_titles stakingTable_heading_titles_last">
+                            Txn Hash
+                          </th>
+                        </tr>
+                      </thead>
+
+                      {/* <div className="table-body-content">
+
+// =====================
+// =====================
+// =====================
+// =====================
+// =====================
+// =====================
+              </div> */}
+                      {currentTransactions4.length <= 0 ? (
+                        <div className="no_loans_div">
+                          <div className="no_loans_div_cont">
+                            <Nodata />
+                            No transaction yet.
+                          </div>{" "}
+                        </div>
+                      ) : (
+                        <tbody
+                          className="stakingTable_body"
+                          id="popular-categories"
+                        >
+                          {" "}
+                          {/* =============== */}
+                          {/* =============== */}
+                          {/* =============== */}
+                          {currentTransactions4.map((data) => {
                             const date = new Date(data.time);
                             const day = date
                               .getUTCDate()
@@ -1430,12 +1795,7 @@ const DashboardHome = () => {
                               <tr className="stakingTable_body_row ">
                                 <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
                                   <div className="value_dolls_div">
-                                    {data.status == "STAKE"
-                                      ? "Create Lock"
-                                      : data.status == "UNSTAKE"
-                                      ? "Unlock"
-                                      : null}
-
+                                    Burn
                                     <div className="value_dolls_div_val">
                                       {/* {formattedDate} */}
                                       {formattedDated}
@@ -1444,44 +1804,41 @@ const DashboardHome = () => {
                                 </td>
                                 <td className="stakingTable_body_row_data">
                                   <div className="value_dolls_div2">
-                                    {data.status == "STAKE" ? (
-                                      <span style={{ display: "flex" }}>
-                                        {numberWithCommas(
-                                          parseFloat(data.amount).toFixed(2)
-                                        )}{" "}
-                                        EGC
-                                      </span>
-                                    ) : data.status == "UNSTAKE" ? (
-                                      <span style={{ display: "flex" }}>
-                                        {numberWithCommas(
-                                          parseFloat(
-                                            data.unstake_amount
-                                          ).toFixed(2)
-                                        )}{" "}
-                                        EGC
-                                      </span>
-                                    ) : null}
+                                    {parseFloat(data.amount * egc_usd).toFixed(
+                                      2
+                                    )}{" "}
+                                    USD
+                                  </div>
+                                </td>
+                                <td className="stakingTable_body_row_data">
+                                  <div className="value_dolls_div2">
+                                    {parseFloat(data.amount).toFixed(2)} EGC
                                   </div>
                                 </td>
                                 <td className="stakingTable_body_row_data">
                                   <div className="stakingTable_body_row_data_blockies_">
                                     <Blockies
-                                      seed={data.user}
+                                      seed={data.address}
                                       size={8}
                                       scale={4}
                                       className="blockies_icon"
                                     />
-                                    {`${data.user.slice(
+                                    {`${data.address.slice(
                                       0,
                                       6
-                                    )}...${data.user.slice(39, 42)}`}
+                                    )}...${data.address.slice(39, 42)}`}
                                   </div>
                                 </td>
                                 <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
-                                  {`${data.tx.slice(0, 6)}...${data.tx.slice(
-                                    63,
-                                    66
-                                  )}`}
+                                  <a
+                                    href={`https://bscscan.com/tx/${data.transactionHash}`}
+                                    target={"_blank"}
+                                  >
+                                    {`${data.transactionHash.slice(
+                                      0,
+                                      6
+                                    )}...${data.transactionHash.slice(63, 66)}`}
+                                  </a>
                                   <OpenInNewIcon className="tx_hash_link_icon" />
                                 </td>
                               </tr>
@@ -1501,8 +1858,8 @@ const DashboardHome = () => {
                     </table>
                   </div>
                   <Paginate
-                    pageCount={pageCount3}
-                    handlePageClick={handlePageClick3}
+                    pageCount={pageCount4}
+                    handlePageClick={handlePageClick4}
                   />
                 </div>
               ) : null}
@@ -1513,6 +1870,21 @@ const DashboardHome = () => {
           </div>
         </div>
       </section>
+      {errorModal ? (
+        <UpdatedErrorModal
+          errorMessage={errorMessage}
+          closeModal={CloseErrorModal}
+        />
+      ) : null}
+      {successModal ? (
+        <UpdatedSuccessModal
+          btnRoute={true}
+          successMessage={successMessage}
+          route=""
+          txnHashDiv={true}
+          TxnHash={txHash}
+        />
+      ) : null}
     </div>
   );
 };

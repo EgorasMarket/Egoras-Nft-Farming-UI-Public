@@ -44,3 +44,13 @@ export const CALL_UPDATE_MY_PROFILE = async (payload) => {
     return err.response;
   }
 };
+
+export const CALL_GET_USER_BY_ADDRESS = async (payload) => {
+  console.log(payload);
+  try {
+    const response = await axios.get(`${UPDATE_MY_PROFILE}`, payload, config);
+    return response.data;
+  } catch (err) {
+    return err.response;
+  }
+};
