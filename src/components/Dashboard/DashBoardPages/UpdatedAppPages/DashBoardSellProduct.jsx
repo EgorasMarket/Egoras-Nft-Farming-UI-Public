@@ -26,6 +26,7 @@ import {
   CALL_AI_IMAGES,
   GET_CATEGORIES,
   CALL_INITIALIZE_DIRECT_PRODUCT,
+  CALL_IMG_CMS,
 } from "../../../../services/productServices";
 import { listProduct } from "../../../../web3/index";
 
@@ -194,9 +195,7 @@ const DashBoardSellProduct = () => {
     // console.log(res.status, "somto8uhhhg");
   };
 
-  const UploadProduct = async () => {
-    setIsLoading(true);
-    setDisable(true);
+  const handleImgCms = async () => {
     const formData = new FormData();
     console.log(activeSaleTab, account, "______UUUUUU");
 
@@ -209,6 +208,31 @@ const DashBoardSellProduct = () => {
     formData.append("product_image", file);
     formData.append("product_image2", file2);
     formData.append("product_image3", file3);
+
+    const res = await CALL_IMG_CMS(formData);
+    // console.log(res);
+
+    if (res.success == true) {
+      console.log("okkk");
+      return res.data;
+    } else {
+      console.log("Not Ok");
+    }
+  }
+
+  const UploadProduct = async () => {
+
+    setIsLoading(true);
+    setDisable(true);
+    let img_cms = await handleImgCms();
+
+    console.log(img_cms);
+    const formData = new FormData();
+    console.log(activeSaleTab, account, "______UUUUUU");
+
+    formData.append("product_image", img_cms.image_1);
+    formData.append("product_image2", img_cms.image_2);
+    formData.append("product_image3", img_cms.image_3);
     formData.append("product_name", prodName);
     formData.append("product_brand", brandName);
     formData.append("userAddress", account);

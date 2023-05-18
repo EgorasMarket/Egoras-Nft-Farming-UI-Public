@@ -21,6 +21,7 @@ import {
   NEW_QR_LINK_ROUTE,
   USER_DIRECT_PRODUCTS,
   FETCH_USER_NEW_DIRECT_PRODUCT,
+  IMG_CMS,
   // DIRECT_BUY_ORDER_STATS,
 } from "../core/ApiRoutes";
 export const config = {
@@ -307,5 +308,25 @@ export const CALL_AI_IMAGES = async (content) => {
     return response.data;
   } catch (err) {
     return err.response;
+  }
+};
+
+
+export const CALL_IMG_CMS = async (formData) => {
+  // console.log(account, saleDetails, action);
+  // console.log(`${ACCEPT_OR_DECLINE_BID}/${account}/${saleDetails}/${action}`);
+  try {
+    console.log("ffffssss");
+    const response = await axios.post(
+      IMG_CMS,
+      formData,
+      config
+    );
+    console.log(response);
+
+    return response.data;
+  } catch (err) {
+    console.log(err.repsonse);
+    return err.repsonse;
   }
 };

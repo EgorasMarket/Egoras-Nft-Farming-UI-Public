@@ -2136,7 +2136,7 @@ const DashBoardP2PUserSales = () => {
                                   </div>
                                 </div>
       
-                                <div>
+                                {/* <div>
                                   <table className="receipt-table">
                                     <tr className="receipt-table-head">
                                       <th>QTY</th>
@@ -2181,7 +2181,7 @@ const DashBoardP2PUserSales = () => {
                                     </tr>
                                     
                                   </table>
-                                </div>
+                                </div> */}
       
                                 <hr />
                                 <div className="recipt_details_cont5">
