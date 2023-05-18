@@ -191,6 +191,7 @@ const DashBoardSellProduct = () => {
 
     // console.log(res, "somto8uhhhg");
     // console.log(res.status, "somto8uhhhg");
+    // console.log(res.status, "somto8uhhhg");
   };
 
   const UploadProduct = async () => {
