@@ -727,6 +727,26 @@
   border: none;
 }
 
+
+
+.receipt-table {
+  width: 100%;
+  color: #fff;
+}
+
+.receipt-table-head {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+}
+
+.receipt-table-head th {
+  padding: 10px;
+}
+
+.receipt-table td {
+  padding: 10px;
+}
+
 .viewReceiptDiv_area {
   width: 100%;
   /* max-width: 300px; */

@@ -83,6 +83,7 @@ const DashBoardP2PUserSales = () => {
   const [indexId, setIndexId] = useState(null);
   const [saleDetails, setSaleDetails] = useState("");
   const [buyDetails, setBuyDetails] = useState("");
+  const [receiptId, setReceiptId] = useState("");
   const [viewReceipt, setViewReceipt] = useState(false);
   const [activeLink, setActiveLink] = useState("abstract-link");
   const [activeMenu, setActiveMenu] = useState("details-accord  ");
@@ -411,6 +412,8 @@ const DashBoardP2PUserSales = () => {
   const ToggleBuyDetails = (e) => {
     let id = e.currentTarget.id;
     setBuyDetails(id);
+    setReceiptId(id);
+    console.log("Pop receipt", saleDetails);
     console.log(id);
   };
   const ToggleViewReceipt = () => {
@@ -666,7 +669,7 @@ const DashBoardP2PUserSales = () => {
                   </div>
                   <div className="BuyerSellerDiv_body_div2a">
                     <div className="BuyerSellerDiv_body_div2_tab_area">
-                      <div className="filter_table_area_1">Buy Orders</div>
+                      <div className="filter_table_area_1">Buy Omrders</div>
                     </div>
                     <div className="BuyerSellerDiv_body_div2_body">
                       <table className="assets-table">
@@ -2062,87 +2065,153 @@ const DashBoardP2PUserSales = () => {
                           alt=""
                           className="receiptBg"
                         />
-                        <div className="recipt_details_cont" id="print-content">
-                          <div className="recipt_details_cont1">
-                            <img
-                              src="/img/martgpt_logo.svg"
-                              alt=""
-                              className="recipt_details_cont1_img"
-                            />
-                          </div>
-                          <hr />
-                          <div className="recipt_details_cont22">
-                            <div className="recipt_details_cont2_title">
-                              Successful Purchase
-                            </div>
-                            <div className="recipt_details_cont2_amount2">
-                              3,600 eusd
-                            </div>
-                          </div>
-                          <hr />
-                          <div className="recipt_details_cont3">
-                            <div className="recipt_details_cont3_div12">
-                              <div className="recipt_details_cont3_div1_title">
-                                Ref Number
-                              </div>
-                              <div className="recipt_details_cont3_div1_value2">
-                                000085752257
-                              </div>
-                            </div>
-                            <div className="recipt_details_cont3_div12">
-                              <div className="recipt_details_cont3_div1_title">
-                                Date
-                              </div>
-                              <div className="recipt_details_cont3_div1_value2">
-                                April 25, 2023 10:18 am
-                              </div>
-                            </div>
-                            {/* <div className="recipt_details_cont3_div12">
-                              <div className="recipt_details_cont3_div1_title">
-                                Payment Method
-                              </div>
-                              <div className="recipt_details_cont3_div1_value2">
-                                Fort
-                              </div>
-                            </div> */}
-                            <div className="recipt_details_cont3_div12">
-                              <div className="recipt_details_cont3_div1_title">
-                                Seller
-                              </div>
-                              <div className="recipt_details_cont3_div1_value2">
-                                Samuel Ifeanyi
-                              </div>
-                            </div>
-                          </div>
-                          <hr />
-                          <div className="recipt_details_cont4">
-                            <div className="recipt_details_cont3_div12">
-                              <div className="recipt_details_cont3_div1_title">
-                                Amount
-                              </div>
-                              <div className="recipt_details_cont3_div1_value2">
-                                3,600 eusd
-                              </div>
-                            </div>
-                            <div className="recipt_details_cont3_div12">
-                              <div className="recipt_details_cont3_div1_title">
-                                MartGpt Fee
-                              </div>
-                              <div className="recipt_details_cont3_div1_value2">
-                                0 eusd
-                              </div>
-                            </div>
-                          </div>
-                          <hr />
-                          <div className="recipt_details_cont5">
-                            powered by{" "}
-                            <img
-                              src="/img/egoras-logo.svg"
-                              alt=""
-                              className="recipt_details_cont5_img"
-                            />
-                          </div>
-                        </div>
+                        {receiptId == ""
+                          ? null
+                          : sellOrders.map((data) => (
+                              <>
+                                {data.id === receiptId ? (
+                                  <div
+                                    className="recipt_details_cont"
+                                    id="print-content"
+                                  >
+                                    <div className="recipt_details_cont1">
+                                      <img
+                                        src="/img/martgpt_logo.svg"
+                                        alt=""
+                                        className="recipt_details_cont1_img"
+                                      />
+                                    </div>
+                                    <hr />
+                                    <div className="recipt_details_cont22">
+                                      <div className="recipt_details_cont2_title">
+                                        Successful Purchase
+                                      </div>
+                                      <div className="recipt_details_cont2_amount2">
+                                        {numberWithCommas(
+                                          parseInt(data.amount).toFixed(0)
+                                        )}{" "}
+                                        eusd
+                                      </div>
+                                    </div>
+                                    <hr />
+                                    <div className="recipt_details_cont3">
+                                      <div className="recipt_details_cont3_div12">
+                                        <div className="recipt_details_cont3_div1_title">
+                                          Ref Number
+                                        </div>
+                                        <div className="recipt_details_cont3_div1_value2">
+                                          000085752257
+                                        </div>
+                                      </div>
+                                      <div className="recipt_details_cont3_div12">
+                                        <div className="recipt_details_cont3_div1_title">
+                                          Date
+                                        </div>
+                                        <div className="recipt_details_cont3_div1_value2">
+                                          April 25, 2023 10:18 am
+                                        </div>
+                                      </div>
+                                      {/* <div className="recipt_details_cont3_div12">
+                                    <div className="recipt_details_cont3_div1_title">
+                                      Payment Method
+                                    </div>
+                                    <div className="recipt_details_cont3_div1_value2">
+                                      Fort
+                                    </div>
+                                  </div> */}
+                                      <div className="recipt_details_cont3_div12">
+                                        <div className="recipt_details_cont3_div1_title">
+                                          Seller
+                                        </div>
+                                        <div className="recipt_details_cont3_div1_value2">
+                                          Samuel Ifeanyi
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <hr />
+                                    <div className="recipt_details_cont4">
+                                      <div className="recipt_details_cont3_div12">
+                                        <div className="recipt_details_cont3_div1_title">
+                                          Amount
+                                        </div>
+                                        <div className="recipt_details_cont3_div1_value2">
+                                          3,600 eusd
+                                        </div>
+                                      </div>
+                                      <div className="recipt_details_cont3_div12">
+                                        <div className="recipt_details_cont3_div1_title">
+                                          MartGpt Fee
+                                        </div>
+                                        <div className="recipt_details_cont3_div1_value2">
+                                          0 eusd
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div>
+                                      <table className="receipt-table">
+                                        <tr className="receipt-table-head">
+                                          <th>QTY</th>
+                                          <th>DESCRIPTION</th>
+                                          <th>PRICE</th>
+                                          <th>AMOUNT</th>
+                                        </tr>
+                                        <tr>
+                                          <td>{data.quantity}</td>
+                                          <td>{data.item_name}</td>
+                                          <td>
+                                            {numberWithCommas(
+                                              parseInt(data.sub_total).toFixed(
+                                                0
+                                              )
+                                            )}{" "}
+                                            Eusd
+                                          </td>
+                                          <td>
+                                            {numberWithCommas(
+                                              parseInt(
+                                                data.sub_total / data.quantity
+                                              ).toFixed(0)
+                                            )}{" "}
+                                            Eusd
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td></td>
+                                          <td>Charges/Vat</td>
+                                          <td></td>
+                                          <td>00</td>
+                                        </tr>
+                                        <tr>
+                                          <td></td>
+                                          <td>Total</td>
+                                          <td></td>
+                                          <td>
+                                            {numberWithCommas(
+                                              parseInt(data.sub_total).toFixed(
+                                                0
+                                              )
+                                            )}{" "}
+                                            Eusd
+                                          </td>
+                                        </tr>
+                                      </table>
+                                    </div>
+
+                                    <hr />
+                                    <div className="recipt_details_cont5">
+                                      powered by{" "}
+                                      <img
+                                        src="/img/egoras-logo.svg"
+                                        alt=""
+                                        className="recipt_details_cont5_img"
+                                      />
+                                    </div>
+                                  </div>
+                                ) : null}
+                              </>
+                            ))}
+
                         <div
                           className="recipt_details_cont hide-section"
                           id="print-xcontent"

@@ -131,6 +131,7 @@ const DashBoardSellProduct = () => {
   const sendProductToBlockchain = async (prodId, productType, prodCount) => {
     const conCatProdName = ` ${prodName}_${prodId}`;
     console.log(productType);
+    console.log(conCatProdName);
 
     // let res;
 
@@ -196,6 +197,8 @@ const DashBoardSellProduct = () => {
     setIsLoading(true);
     setDisable(true);
     const formData = new FormData();
+    const imageFormData = new FormData();
+
     console.log(activeSaleTab, account, "______UUUUUU");
 
     const element = document.getElementById("product_image");
