@@ -24,7 +24,7 @@ const UpdatedSuccessModal = ({
         <div className="UpdatedSuccessModalDiv_Cont_body">{successMessage}</div>
         {txnHashDiv == true ? (
           <a
-            href={`https://testnet.bscscan.com/tx/${TxnHash}`}
+            href={`https://bscscan.com/tx/${TxnHash}`}
             className="UpdatedSuccessModalDiv_Cont_body_txnHash"
             target={"_blank"}
           >

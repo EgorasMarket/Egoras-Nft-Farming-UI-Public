@@ -917,9 +917,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: #13121f;
+  background: #d3d3d3;
   padding: 15px;
   border-radius: 10px;
+  border: solid 1px #c6c6c6;
+}
+
+.dark .BuyerSellerDiv_body_div2_tab_area {
+  background: #13121f;
   border: solid 1px #1f1e2e;
 }
 
