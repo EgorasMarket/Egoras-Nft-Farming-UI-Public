@@ -431,9 +431,14 @@ const Home = () => {
               <div className="nft_area2_stat_div_area_cont1">
                 <div className="nft_area2_stat_div_area_cont1_icon_cont">
                   <img
-                    src="/img/stat_img_icon.svg"
+                    src="/img/some_icons/tvl_icon_dark.svg"
                     alt=""
-                    className="nft_area2_stat_div_area_cont1_icon"
+                    className="nft_area2_stat_div_area_cont1_icon_dark"
+                  />
+                  <img
+                    src="/img/some_icons/tvl_icon_light.svg"
+                    alt=""
+                    className="nft_area2_stat_div_area_cont1_icon_light"
                   />
                 </div>
                 <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers">
@@ -448,14 +453,19 @@ const Home = () => {
               <div className="nft_area2_stat_div_area_cont1">
                 <div className="nft_area2_stat_div_area_cont1_icon_cont">
                   <img
-                    src="/img/stat_img_icon.svg"
+                    src="/img/some_icons/volume_icon_dark.svg"
                     alt=""
-                    className="nft_area2_stat_div_area_cont1_icon"
+                    className="nft_area2_stat_div_area_cont1_icon_dark"
+                  />
+                  <img
+                    src="/img/some_icons/volume_icon_light.svg"
+                    alt=""
+                    className="nft_area2_stat_div_area_cont1_icon_light"
                   />
                 </div>
                 <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers">
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head">
-                    Volume
+                    Total Volume
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
                     ${formatNumber(TradeVolume.toString())}
@@ -465,9 +475,14 @@ const Home = () => {
               <div className="nft_area2_stat_div_area_cont1">
                 <div className="nft_area2_stat_div_area_cont1_icon_cont">
                   <img
-                    src="/img/stat_img_icon.svg"
+                    src="/img/some_icons/users_icon_dark.svg"
                     alt=""
-                    className="nft_area2_stat_div_area_cont1_icon"
+                    className="nft_area2_stat_div_area_cont1_icon_dark"
+                  />
+                  <img
+                    src="/img/some_icons/users_icon_light.svg"
+                    alt=""
+                    className="nft_area2_stat_div_area_cont1_icon_light"
                   />
                 </div>
                 <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers">
@@ -482,9 +497,14 @@ const Home = () => {
               <div className="nft_area2_stat_div_area_cont1">
                 <div className="nft_area2_stat_div_area_cont1_icon_cont">
                   <img
-                    src="/img/stat_img_icon.svg"
+                    src="/img/some_icons/apy_icon_dark.svg"
                     alt=""
-                    className="nft_area2_stat_div_area_cont1_icon"
+                    className="nft_area2_stat_div_area_cont1_icon_dark"
+                  />
+                  <img
+                    src="/img/some_icons/apy_icon_light.svg"
+                    alt=""
+                    className="nft_area2_stat_div_area_cont1_icon_light"
                   />
                 </div>
                 <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers">

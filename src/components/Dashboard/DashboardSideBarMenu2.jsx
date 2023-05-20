@@ -1118,23 +1118,32 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
         <div className="dash_board_links">
           <div className="container">
             <div className="dash_board_links_area">
-              <a href="" className="dash_board_links_tab">
+              <a
+                href="https://facebook.com/martgpt/"
+                className="dash_board_links_tab"
+              >
                 {" "}
                 <FacebookRoundedIcon className="socail_links_icon2" />
               </a>
-              <a href="" className="dash_board_links_tab">
+              {/* <a href="" className="dash_board_links_tab">
                 {" "}
                 <TelegramIcon className="socail_links_icon2" />
-              </a>
-              <a href="" className="dash_board_links_tab">
+              </a> */}
+              <a
+                href="https://twitter.com/martgpt"
+                className="dash_board_links_tab"
+              >
                 {" "}
                 <TwitterIcon className="socail_links_icon2" />
               </a>
-              <a href="" className="dash_board_links_tab">
+              {/* <a href="" className="dash_board_links_tab">
                 {" "}
                 <span className="medium_icon2">M</span>
-              </a>
-              <a href="" className="dash_board_links_tab">
+              </a> */}
+              <a
+                href="https://www.linkedin.com/company/martgpt/"
+                className="dash_board_links_tab"
+              >
                 {" "}
                 <LinkedInIcon className="socail_links_icon2" />
               </a>

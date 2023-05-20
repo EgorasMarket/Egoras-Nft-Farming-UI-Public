@@ -7,6 +7,19 @@
   color: rgb(0, 0, 0);
 }
 
+.chart_loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 17em;
+  flex-direction: column;
+  color: #877ea4;
+}
+
+.chart_loader_span {
+  margin-top: 15px;
+}
+
 .dark .analytics_container_head {
   color: #fff;
 }

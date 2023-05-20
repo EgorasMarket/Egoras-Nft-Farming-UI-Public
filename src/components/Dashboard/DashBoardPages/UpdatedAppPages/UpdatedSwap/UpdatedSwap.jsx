@@ -82,6 +82,7 @@ const UpdatedSwap = () => {
   const [activeDuration, setActiveDuration] = useState("hr1");
   const [shareSwap, setShareSwap] = useState(false);
   const [isAmountLoading, setIsAmountLoading] = useState(false);
+  const [inputDisabled, setInputDisabled] = useState(false);
   const [baseFromAddress, setBaseFromAddress] = useState("");
   const [baseToAddress, setBaseToAddress] = useState("");
   const [SwapFromAddress, setSwapFromAddress] = useState("");
@@ -98,8 +99,8 @@ const UpdatedSwap = () => {
   const [Disable, setDisable] = useState(false);
   const [unlockBtn, setUnlockBtn] = useState(true);
   const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
-  const [coinBalance, setCoinBalance] = useState("");
-  const [baseBalance, setBaseBalance] = useState("");
+  const [coinBalance, setCoinBalance] = useState("0");
+  const [baseBalance, setBaseBalance] = useState("0");
   const [txHash, setTxHash] = useState("");
   const [eusdSmartContractBal, setEusdSmartContractBal] = useState("");
   const [insufficientLiquidityBtn, setInsufficientLiquidityBtn] =
@@ -317,8 +318,8 @@ const UpdatedSwap = () => {
       id: "0",
       img: "/img/tokens-folder/busd_icon.png",
       symbol: "EUSD",
-      PriceAddress: "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A",
-      address: "0x58f66d0183615797940360a43c333a44215830ba",
+      PriceAddress: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+      address: "0xeeec111dca00461ec4da49c09464953931aa7233",
       name: "EGC USD",
       favorite: "true",
     },
@@ -328,7 +329,7 @@ const UpdatedSwap = () => {
       id: "1",
       img: "/img/tokens-folder/bnb_icon.png",
       name: "Binance Smart Chain",
-      address: "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd",
+      address: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
       symbol: "BNB",
       favorite: "true",
     },
@@ -830,6 +831,7 @@ const UpdatedSwap = () => {
 
   const onChangeSwapAmount = async (e) => {
     setIsAmountLoading(true);
+    // setInputDisabled(true);
     setSwapAmount(e.target.value);
     console.log(baseFromAddress, baseToAddress);
     const response = await getAmountsOut(
@@ -848,11 +850,13 @@ const UpdatedSwap = () => {
     console.log(response);
     if (response.status == true) {
       setIsAmountLoading(false);
+      // setInputDisabled(false);
       setAmountsOut(formatEther(response.message[1]._hex));
       setMinAmountsOut(formatEther(response.message[1]._hex) * (1 - 0.005));
       console.log(formatEther(response.message[1]._hex));
     } else {
       setIsAmountLoading(false);
+      // setInputDisabled(false);
       // setErrorMessage(response.message);
       console.log(response);
     }
@@ -879,6 +883,10 @@ const UpdatedSwap = () => {
   const CloseErrorModal = () => {
     setErrorModal(false);
   };
+  // useEffect(() => {
+  //   setInputDisabled(isAmountLoading);
+  // }, [isAmountLoading]);
+
   useEffect(
     async (e) => {
       // if (account) {
@@ -973,8 +981,10 @@ const UpdatedSwap = () => {
                                   placeholder="0.00"
                                   className="amnt_input_field"
                                   autocomplete="off"
+                                  // aria-autocomplete="off"
                                   onChange={onChangeSwapAmount}
                                   value={SwapAmount}
+                                  // disabled={inputDisabled ? "disabled" : ""}
                                 />
                                 {/* <div className="amnt_input_layer1_input_div_dollar_value">
                                   ~${SwapAmount * 750}

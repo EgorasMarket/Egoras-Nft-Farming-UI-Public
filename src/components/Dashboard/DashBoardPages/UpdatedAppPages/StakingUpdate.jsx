@@ -447,7 +447,7 @@ const StakingUpdate = () => {
     async (e) => {
       if (account) {
         let res = await tokenBalance(
-          "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+          REACT_APP_EGC_ADDRESS,
           account,
           library.getSigner()
         );

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import "../../../css/dashboardLend.css";
+import PulseLoader from "react-spinners/PulseLoader";
 import { loadUser } from "../../../actions/auth";
 import { connect } from "react-redux";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +13,7 @@ import abi from "../../../web3/contracts/erc20.json";
 import UpdatedErrorModal from "./UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedErrorModal";
 import UpdatedSuccessModal from "./UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import ClipLoader from "react-spinners/ClipLoader";
 // import TableWithPagination
 import TableWithPagination from "../../SmallerComponents/Tables/TableWithPagination/TableWithPagination";
 import { config } from "../../../actions/Config";
@@ -411,13 +413,13 @@ const DashboardHome = () => {
   }, [account]);
 
   const ListedCoins = {
-    "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd": {
+    "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c": {
       symbol: "BNB",
     },
-    "0x58f66D0183615797940360A43c333A44215830BA": {
+    "0xeeec111dca00461ec4da49c09464953931aa7233": {
       symbol: "EUSD",
     },
-    "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A": {
+    "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56": {
       symbol: "EUSD",
     },
   };
@@ -518,7 +520,12 @@ const DashboardHome = () => {
                 <div className="analytics_container_1">
                   <div className="analytics_container_1_head">TVL</div>
                   {chartloaded ? (
-                    <div>Chart is loading...</div>
+                    <div className="chart_loader">
+                      <ClipLoader color="#9e94b8" size={60} />
+                      <span className="chart_loader_span">
+                        Loading Please Wait...
+                      </span>
+                    </div>
                   ) : (
                     <>
                       <div
@@ -651,7 +658,12 @@ const DashboardHome = () => {
                 <div className="analytics_container_1">
                   <div className="analytics_container_1_head">Volume 24H</div>
                   {chartloaded ? (
-                    <div>Chart is Loading...</div>
+                    <div className="chart_loader">
+                      <ClipLoader color="#9e94b8" size={60} />
+                      <span className="chart_loader_span">
+                        Loading Please Wait...
+                      </span>
+                    </div>
                   ) : (
                     <>
                       <div
@@ -794,7 +806,12 @@ const DashboardHome = () => {
                 <div className="analytics_container_1">
                   <div className="analytics_container_1_head">TVL</div>
                   {chartloaded ? (
-                    <div>Chart is Loading...</div>
+                    <div className="chart_loader">
+                      <ClipLoader color="#9e94b8" size={60} />
+                      <span className="chart_loader_span">
+                        Loading Please Wait...
+                      </span>
+                    </div>
                   ) : (
                     <>
                       <div
@@ -927,7 +944,12 @@ const DashboardHome = () => {
                   <div className="analytics_container_1_head">Volume 24H</div>
 
                   {chartloaded ? (
-                    <div>Chart is Loading...</div>
+                    <div className="chart_loader">
+                      <ClipLoader color="#9e94b8" size={60} />
+                      <span className="chart_loader_span">
+                        Loading Please Wait...
+                      </span>
+                    </div>
                   ) : (
                     <>
                       <div
@@ -1164,7 +1186,9 @@ const DashboardHome = () => {
                   </div>
 
                   {burntEgcLoaded ? (
-                    <div className="burntEgcLoading">Stats Loading...</div>
+                    <div className="burntEgcLoading">
+                      <PulseLoader color="#9e94b8" size={20} height={20} />
+                    </div>
                   ) : (
                     <div className="burn_egc_div_1_cont1_div1">
                       <span className="burn_egc_div_1_cont1_div1_span">
@@ -1187,7 +1211,10 @@ const DashboardHome = () => {
                     :
                   </div>
                   {burntEgcLoaded ? (
-                    <div className="burntEgcLoading">Stats Loading...</div>
+                    <div className="burntEgcLoading">
+                      {" "}
+                      <PulseLoader color="#9e94b8" size={20} height={20} />
+                    </div>
                   ) : (
                     <div className="burn_egc_div_1_cont1_div1">
                       <span className="burn_egc_div_1_cont1_div1_span">
@@ -1379,7 +1406,7 @@ const DashboardHome = () => {
                                 </td>
                                 <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
                                   <a
-                                    href={`https://bscscan.com/tx/${data.transactionHash}`}
+                                    href={`https://bscscan.com/tx/${data.tx}`}
                                     target={"_blank"}
                                   >
                                     {`${data.tx.slice(0, 6)}...${data.tx.slice(
@@ -1526,7 +1553,7 @@ const DashboardHome = () => {
                                 </td>
                                 <td className="stakingTable_body_row_data stakingTable_body_row_data_last">
                                   <a
-                                    href={`https://bscscan.com/tx/${data.transactionHash}`}
+                                    href={`https://bscscan.com/tx/${data.tx}`}
                                     target={"_blank"}
                                   >
                                     {`${data.tx.slice(0, 6)}...${data.tx.slice(
