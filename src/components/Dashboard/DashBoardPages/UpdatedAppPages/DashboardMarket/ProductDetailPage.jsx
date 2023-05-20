@@ -85,8 +85,8 @@ const ProductDetailPage = ({ match }) => {
         console.log(splitMyArray);
         for (const data of img) {
           const payload = {
-            original: data,
-            thumbnail: data,
+            original: "https://ellaa.org/"+data,
+            thumbnail: "https://ellaa.org/"+data,
           };
           image.push(payload);
           console.log(payload);

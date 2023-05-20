@@ -183,7 +183,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
     <div className="checkoutPage_body2_area_body_cont1">
       <div className="checkoutPage_body2_area_body_cont1_image_div">
         <img
-          src={productImage}
+          src={"https://ellaa.org/"+productImage}
           alt=""
           className="checkoutPage_body2_area_body_cont1_image"
         />
