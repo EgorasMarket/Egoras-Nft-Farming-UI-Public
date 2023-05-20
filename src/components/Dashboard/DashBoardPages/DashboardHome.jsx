@@ -413,13 +413,13 @@ const DashboardHome = () => {
   }, [account]);
 
   const ListedCoins = {
-    "0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd": {
+    "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c": {
       symbol: "BNB",
     },
-    "0x58f66D0183615797940360A43c333A44215830BA": {
+    "0xeeec111dca00461ec4da49c09464953931aa7233": {
       symbol: "EUSD",
     },
-    "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A": {
+    "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56": {
       symbol: "EUSD",
     },
   };
@@ -1187,7 +1187,7 @@ const DashboardHome = () => {
 
                   {burntEgcLoaded ? (
                     <div className="burntEgcLoading">
-                      <PulseLoader color="#353250" size={20} height={20} />
+                      <PulseLoader color="#9e94b8" size={20} height={20} />
                     </div>
                   ) : (
                     <div className="burn_egc_div_1_cont1_div1">
@@ -1213,7 +1213,7 @@ const DashboardHome = () => {
                   {burntEgcLoaded ? (
                     <div className="burntEgcLoading">
                       {" "}
-                      <PulseLoader color="#353250" size={20} height={20} />
+                      <PulseLoader color="#9e94b8" size={20} height={20} />
                     </div>
                   ) : (
                     <div className="burn_egc_div_1_cont1_div1">
