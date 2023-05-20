@@ -203,7 +203,8 @@ const ProductModel = ({
           <div className="prodState_div">{prodState}</div>
 
           <img
-            src={fff[0]}
+            src={`https://ellaa.org/${fff[0]}`}
+            // src={fff[0]}
             alt=""
             className="dashboardMarketPlaceBody2_div1_body_card_img"
           />
