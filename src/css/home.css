@@ -17,6 +17,22 @@
   padding: 10px;
 }
 
+.nft_area2_stat_div_area_cont1_icon_light {
+  display: block;
+}
+
+.nft_area2_stat_div_area_cont1_icon_dark {
+  display: none;
+}
+
+.dark .nft_area2_stat_div_area_cont1_icon_light {
+  display: none;
+}
+
+.dark .nft_area2_stat_div_area_cont1_icon_dark {
+  display: block;
+}
+
 .PowerSwiper {
   height: 100vh;
   cursor: grab;
@@ -2969,9 +2985,22 @@ a.visit_app_link_2 {
     width: 70%;
   }
 
-  .nft_area2_stat_div_area_cont1_icon {
+  /* .nft_area2_stat_div_area_cont1_icon {
     width: 30px;
+  } */
+
+  .nft_area2_stat_div_area_cont1_icon_light {
+    width: 30px;
+
   }
+
+  .nft_area2_stat_div_area_cont1_icon_dark {
+    width: 30px;
+
+  }
+
+
+
 
   .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head {
     color: #c8c6dd;

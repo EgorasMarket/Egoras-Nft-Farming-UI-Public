@@ -507,7 +507,14 @@ export const Step2Div = ({
                     }}
                     // disabled={fundDisable}
                   >
-                    <span>Pay Via Fort Monthly </span>
+                    <span>
+                      Pay Via Fort{" "}
+                      <img
+                        src="/img/fortIcon.svg"
+                        alt=""
+                        className="payViaFortIconImg"
+                      />{" "}
+                    </span>
                   </button>
                 ) : checkedYear === true && checkAgree === true ? (
                   <button
@@ -530,7 +537,14 @@ export const Step2Div = ({
                     }}
                     // disabled={fundDisable}
                   >
-                    <span>Pay Via Fort Yearly </span>
+                    <span>
+                      Pay Via Fort{" "}
+                      <img
+                        src="/img/fortIcon.svg"
+                        alt=""
+                        className="payViaFortIconImg"
+                      />{" "}
+                    </span>
                   </button>
                 ) : checkedSemiAnnual === true && checkAgree === true ? (
                   <button
@@ -552,7 +566,14 @@ export const Step2Div = ({
                     }}
                     // disabled={fundDisable}
                   >
-                    <span>Pay Via Fort Semi-Annual </span>
+                    <span>
+                      Pay Via Fort{" "}
+                      <img
+                        src="/img/fortIcon.svg"
+                        alt=""
+                        className="payViaFortIconImg"
+                      />{" "}
+                    </span>
                   </button>
                 ) : null}
               </>
@@ -663,7 +684,14 @@ export const Step2Div = ({
                     }}
                     // disabled={fundDisable}
                   >
-                    <span>Pay Via Fort Monthly Ref</span>
+                    <span>
+                      Pay Via Fort{" "}
+                      <img
+                        src="/img/fortIcon.svg"
+                        alt=""
+                        className="payViaFortIconImg"
+                      />
+                    </span>
                   </button>
                 ) : checkedYear === true && checkAgree === true ? (
                   <button
@@ -686,7 +714,14 @@ export const Step2Div = ({
                     }}
                     // disabled={fundDisable}
                   >
-                    <span>Pay Via Fort Yearly Ref</span>
+                    <span>
+                      Pay Via Fort{" "}
+                      <img
+                        src="/img/fortIcon.svg"
+                        alt=""
+                        className="payViaFortIconImg"
+                      />
+                    </span>
                   </button>
                 ) : checkedSemiAnnual === true && checkAgree === true ? (
                   <button
@@ -708,7 +743,14 @@ export const Step2Div = ({
                     }}
                     // disabled={fundDisable}
                   >
-                    <span>Pay Via Fort Semi-Annual Ref </span>
+                    <span>
+                      Pay Via Fort{" "}
+                      <img
+                        src="/img/fortIcon.svg"
+                        alt=""
+                        className="payViaFortIconImg"
+                      />
+                    </span>
                   </button>
                 ) : null}
               </>

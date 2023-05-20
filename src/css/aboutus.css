@@ -4,10 +4,12 @@
   /* background: #fafafa; */
   background-image: radial-gradient(white, #ececec);
 }
+
 .dark .about_us_section_hero {
   background-image: radial-gradient(#274b35, #0f0e1c);
   color: #fff;
 }
+
 .about_us_section_hero_area_1 {
   display: flex;
   flex-direction: column;
@@ -16,15 +18,18 @@
   font-size: 24px;
   gap: 20px;
 }
+
 .marquee-container {
   width: 60% !important;
   margin: auto !important;
 }
+
 .about_us_section_hero_area_1_title {
   font-size: 50px;
   font-weight: 600;
   line-height: 1.3;
 }
+
 .about_us_section_hero_area {
   position: relative;
   z-index: 2;
@@ -33,6 +38,7 @@
   grid-gap: 30px;
   gap: 85px;
 }
+
 .about_hero_bg_logo {
   position: absolute;
   top: 0;
@@ -48,11 +54,13 @@
   opacity: 0.2;
   filter: brightness(0.5);
 }
+
 .egoras_logos_cont {
   display: flex;
   align-items: center;
   gap: 10px;
 }
+
 .egoras_logos_cont_1 {
   display: flex;
   align-items: center;
@@ -63,48 +71,60 @@
   border: solid 1px #cdcdcd;
   backdrop-filter: blur(4px);
 }
+
 .egoras_logos_cont_1_img {
   width: 45px;
 }
+
 .egoras_logos_cont_1_txt {
   font-size: 18px;
 }
+
 .about_us_section_hero_area_2 {
   display: flex;
   align-items: center;
   gap: 8%;
   justify-content: space-between;
 }
+
 .about_us_section_hero_area_2_img_container_img {
   width: 100%;
 }
+
 .dark .about_us_section_hero_area_2_img_container_img {
   display: none;
 }
+
 .dark .about_us_section_hero_area_2_img_container_img_dark {
   display: block;
 }
+
 .about_us_section_hero_area_2_img_container_img_dark {
   display: none;
   width: 100%;
 }
+
 .about_us_section_hero_area_2_img_container {
   width: 80%;
 }
+
 .about_us_section_hero_area_2_txt_container {
   width: 100%;
   font-size: 20px;
 }
+
 .about_us_section_hero_area_2_txt_container_head {
   font-size: 38px;
   font-weight: 600;
 }
+
 section.advantages_section {
   padding: 4em 0em;
   background: #f0f0f0;
   position: relative;
   overflow: hidden;
 }
+
 .advantages_section_area {
   display: flex;
   justify-content: space-between;
@@ -144,32 +164,39 @@ section.advantages_section {
   /* justify-content: space-between; */
   gap: 10px;
 }
+
 img.about_step_icon {
   width: 20px;
 }
+
 .dark .advantages_section {
   background: #213328;
   color: #fff;
 }
+
 .about_simple_section_lines {
   position: absolute;
   bottom: 0;
   /* width: 100%; */
 }
+
 .about_hero_section_lines {
   position: absolute;
   bottom: 0;
   width: 100%;
 }
+
 section.help_u_section {
   padding: 4em 0em;
   position: relative;
   background: #f0f0f0;
 }
+
 .dark .help_u_section {
   background: #213328;
   color: #fff;
 }
+
 .help_u_section_area {
   display: flex;
   flex-direction: column;
@@ -179,6 +206,7 @@ section.help_u_section {
   position: relative;
   z-index: 1;
 }
+
 .help_u_section_area_head {
   display: flex;
   flex-direction: column;
@@ -188,11 +216,13 @@ section.help_u_section {
   align-items: center;
   text-align: center;
 }
+
 .help_u_section_area_head_para {
   font-size: 16px;
   width: 80%;
   font-weight: 400;
 }
+
 .help_u_section_area_cont {
   display: flex;
   /* align-items: center; */
@@ -200,6 +230,7 @@ section.help_u_section {
   justify-content: space-between;
   gap: 20px;
 }
+
 .help_u_section_area_cont1 {
   background: #fff;
   -webkit-backdrop-filter: blur(4px);
@@ -214,35 +245,40 @@ section.help_u_section {
   gap: 10px;
   box-shadow: 0px 0px 15px #e1e1e1;
 }
+
 .dark .help_u_section_area_cont1 {
-  background: linear-gradient(
-    244.66deg,
-    #2b603f80 1.9%,
-    #21332800 33.08%,
-    #161a1891 97.23%
-  );
+  background: linear-gradient(244.66deg,
+      #2b603f80 1.9%,
+      #21332800 33.08%,
+      #161a1891 97.23%);
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0px 0px 15px #0d1611;
 }
+
 .we_help_icon {
   /* border-radius: 50%; */
   width: 50px;
 }
+
 .help_u_section_area_cont1_head {
   font-size: 22px;
   font-weight: 600;
 }
+
 .to_help_section_lines {
   width: 100%;
   bottom: 0;
   position: absolute;
 }
+
 .road_map_container {
   position: relative;
 }
+
 .road_map_street_bg {
   position: absolute;
 }
+
 /* .road_map_area {
   background-image: url(/public/img/road_map_street_bg.png);
 } */
@@ -250,6 +286,7 @@ section.help_u_section {
   background-color: #213328;
   background-blend-mode: color-burn;
 }
+
 .roadmap_section {
   height: 100%;
 
@@ -263,6 +300,7 @@ section.help_u_section {
   grid-gap: 40px;
   gap: 40px;
 }
+
 .road_map_head {
   color: rgb(0, 0, 0);
   padding: 0.5em;
@@ -270,9 +308,11 @@ section.help_u_section {
   font-weight: 600;
   backdrop-filter: blur(23px);
 }
+
 .dark .road_map_head {
   color: #fff;
 }
+
 .road_map_area {
   position: relative;
   display: flex;
@@ -284,9 +324,11 @@ section.help_u_section {
   margin: auto;
   padding: 1em;
 }
+
 .road_map_area_mobile {
   display: none;
 }
+
 .road_route {
   width: 100%;
 }
@@ -298,6 +340,7 @@ section.help_u_section {
   top: 84%;
   margin: auto;
 }
+
 .road_map_area_div2 {
   position: absolute;
   left: 17%;
@@ -305,6 +348,7 @@ section.help_u_section {
   top: 85%;
   margin: auto;
 }
+
 .road_map_area_div3 {
   position: absolute;
   left: 30%;
@@ -312,6 +356,7 @@ section.help_u_section {
   top: 64%;
   margin: auto;
 }
+
 .road_map_area_div4 {
   position: absolute;
   right: 53%;
@@ -319,6 +364,7 @@ section.help_u_section {
   top: 30%;
   margin: auto;
 }
+
 .road_map_area_div5 {
   position: absolute;
   right: 35%;
@@ -326,6 +372,7 @@ section.help_u_section {
   top: 16%;
   margin: auto;
 }
+
 .road_map_area_div6 {
   position: absolute;
   right: 5%;
@@ -333,12 +380,14 @@ section.help_u_section {
   top: 10%;
   margin: auto;
 }
+
 .road_map_area_div_circle_bg {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .road_map_area_div_circle {
   background: #ffffff;
   width: 20px;
@@ -347,6 +396,7 @@ section.help_u_section {
   position: relative;
   z-index: 4;
 }
+
 .road_map_area_div_circle_blur {
   width: 30px;
   height: 30px;
@@ -360,6 +410,7 @@ section.help_u_section {
   margin: auto;
   filter: blur(8px);
 }
+
 .road_map_area_div3_txt_cont {
   color: rgb(0, 0, 0);
   font-size: 38px;
@@ -377,10 +428,12 @@ section.help_u_section {
   display: flex;
   flex-direction: column;
 }
+
 .road_map_area_div3_txt_cont_para {
   font-size: 13px;
   font-weight: 400;
 }
+
 .road_map_area_div1_txt_cont {
   color: rgb(0, 0, 0);
   font-size: 38px;
@@ -395,6 +448,7 @@ section.help_u_section {
   min-width: 280px;
   /* text-align: center; */
 }
+
 .dark .road_map_area_div1_txt_cont {
   color: #fff;
 }
@@ -402,6 +456,7 @@ section.help_u_section {
 .dark .road_map_area_div3_txt_cont {
   color: #fff;
 }
+
 .dark .road_map_area_div6_txt_cont {
   color: #fff;
 }
@@ -421,25 +476,30 @@ section.help_u_section {
   width: 100%;
   min-width: 280px;
 }
+
 li.roadMap_list_conts {
   list-style: disc !important;
 }
+
 ul.roadMap_list_area {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
 }
+
 ul.roadMap_list_area_last {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
+
 section.featuredIn_section {
   padding: 4em 0em;
   background: #213328;
   position: relative;
   overflow: hidden;
 }
+
 .feauturedIn_area_body {
   display: flex;
   align-items: center;
@@ -456,9 +516,11 @@ section.featuredIn_section {
   position: relative;
   z-index: 2;
 }
+
 .featuredIn_logo_img {
   width: 210px;
 }
+
 .feauturedIn_area_head {
   background: #15142287;
   padding: 0.5em;
@@ -467,18 +529,18 @@ section.featuredIn_section {
   backdrop-filter: blur(7px);
   border-radius: 5px;
 }
+
 .join_community_section {
   padding: 4em 0em;
   position: relative;
   background: #213328;
 }
+
 .join_community_area {
-  background: linear-gradient(
-    244.66deg,
-    #2b603f80 1.9%,
-    #21332800 33.08%,
-    #161a1891 97.23%
-  );
+  background: linear-gradient(244.66deg,
+      #2b603f80 1.9%,
+      #21332800 33.08%,
+      #161a1891 97.23%);
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0px 0px 15px #0d1611;
   padding: 4em;
@@ -501,20 +563,24 @@ section.featuredIn_section {
   gap: 15px;
   width: 80%;
 }
+
 .join_community_area1_head {
   font-size: 42px;
   font-weight: 600;
 }
+
 .join_community_area1_para {
   font-size: 18px;
   font-weight: 200;
   color: #87a090;
 }
+
 .join_community_area1_btn {
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
+
 button.join_community_area1_btn_btn {
   padding: 15px;
   width: 190px;
@@ -523,6 +589,7 @@ button.join_community_area1_btn_btn {
   color: #fff;
   border: none;
 }
+
 .join_community_area2 {
   width: 100%;
   display: flex;
@@ -544,32 +611,39 @@ button.join_community_area1_btn_btn {
   .road_map_area {
     display: none;
   }
+
   .road_map_area_mobile {
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
   }
+
   .mobile_road_map_line {
     width: 10px;
     margin: auto;
     margin-left: 1em;
   }
+
   .about_us_section_hero_area_2 {
     flex-direction: column;
   }
+
   .advantages_section_area {
     flex-direction: column;
     gap: 20px;
   }
+
   .help_u_section_area_cont {
     flex-direction: column;
   }
+
   .join_community_area {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
+
   .join_community_area2 {
     width: 100%;
     display: flex;
@@ -578,9 +652,11 @@ button.join_community_area1_btn_btn {
     padding: 0em;
     padding-right: 0em;
   }
+
   .join_community_area1_btn {
     justify-content: center;
   }
+
   .mobile_road_map_line_div {
     width: 15px;
     height: 78em;
@@ -588,6 +664,7 @@ button.join_community_area1_btn_btn {
     margin: auto;
     margin-left: 1em;
   }
+
   .road_map_area_div1 {
     position: absolute;
     left: 39px;
@@ -595,9 +672,11 @@ button.join_community_area1_btn_btn {
     top: 23px;
     margin: auto;
   }
+
   .road_map_area_div1_txt_cont {
     bottom: -26px;
   }
+
   .road_map_area_div2 {
     position: absolute;
     left: 39px;
@@ -605,6 +684,7 @@ button.join_community_area1_btn_btn {
     top: 75px;
     margin: auto;
   }
+
   .road_map_area_div3 {
     position: absolute;
     left: 39px;
@@ -612,6 +692,7 @@ button.join_community_area1_btn_btn {
     top: 15em;
     margin: auto;
   }
+
   .road_map_area_div4 {
     position: absolute;
     left: 39px;
@@ -620,6 +701,7 @@ button.join_community_area1_btn_btn {
     margin: auto;
     right: inherit;
   }
+
   .road_map_area_div5 {
     position: absolute;
     left: 39px;
@@ -628,6 +710,7 @@ button.join_community_area1_btn_btn {
     margin: auto;
     right: inherit;
   }
+
   .road_map_area_div6 {
     position: absolute;
     right: inherit;
@@ -636,6 +719,7 @@ button.join_community_area1_btn_btn {
     margin: auto;
     left: 39px;
   }
+
   .road_map_area_div6_txt_cont {
     color: rgb(0, 0, 0);
     font-size: 38px;
@@ -650,6 +734,7 @@ button.join_community_area1_btn_btn {
     flex-direction: column;
     text-align: left;
   }
+
   .roadmap_section {
     padding: 2em 0em;
     padding-top: 0;
@@ -659,39 +744,49 @@ button.join_community_area1_btn_btn {
     background-attachment: fixed;
   }
 }
+
 @media screen and (max-width: 650px) {
   .about_us_section_hero_area_1_title {
     font-size: 32px;
     font-weight: 600;
     line-height: 1.3;
   }
+
   .egoras_logos_cont {
     width: 100%;
     justify-content: center;
   }
+
   .egoras_logos_cont_1 {
     width: 25%;
   }
+
   .egoras_logos_cont_1_img {
     width: 25px;
   }
+
   .egoras_logos_cont_1_txt {
     font-size: 14px;
   }
+
   .about_us_section_hero_area_2_img_container_img_dark {
     width: 80%;
     margin: auto;
   }
+
   .about_us_section_hero_area_2_txt_container {
     font-size: 18px;
   }
+
   .advantages_section_area_1 {
     width: 100%;
     font-size: 32px;
   }
+
   .advantages_section_area_2 {
     width: 100%;
   }
+
   .join_community_area {
     flex-direction: column;
     align-items: center;
@@ -699,37 +794,47 @@ button.join_community_area1_btn_btn {
     padding: 1em;
   }
 }
+
 @media screen and (max-width: 500px) {
   .egoras_logos_cont_1 {
     gap: 5px;
     width: 30%;
   }
+
   .egoras_logos_cont_1_img {
     width: 25px;
   }
+
   .egoras_logos_cont_1_txt {
     font-size: 10px;
   }
+
   .about_us_section_hero {
     padding: 2em 0em;
   }
+
   .egoras_logos_cont {
     gap: 5px;
     width: 100%;
   }
+
   .about_us_section_hero_area_2_txt_container_head {
     font-size: 32px;
     font-weight: 600;
   }
+
   .about_us_section_hero_area {
     gap: 20px;
   }
+
   section.help_u_section {
     padding: 2em 0em;
   }
+
   .join_community_section {
     padding: 2em 0em;
   }
+
   .join_community_area1_head {
     font-size: 36px;
     font-weight: 600;
@@ -738,27 +843,34 @@ button.join_community_area1_btn_btn {
   .egoras_logos_cont_1 {
     padding: 5px;
   }
+
   .join_community_area1 {
     width: 100%;
   }
+
   .road_map_head {
     padding: 0.2em;
     font-size: 36px;
   }
+
   .road_map_area_div3_txt_cont {
     font-size: 28px;
   }
+
   .road_map_area_div_circle_blur {
     width: 20px;
     height: 20px;
   }
+
   .road_map_area_div_circle {
     width: 12px;
     height: 12px;
   }
+
   .road_map_area_div6_txt_cont {
     font-size: 28px;
   }
+
   .road_map_area_div1_txt_cont {
     font-size: 28px;
   }
@@ -767,6 +879,7 @@ button.join_community_area1_btn_btn {
     height: 75em;
   }
 }
+
 @media screen and (max-width: 400px) {
   .egoras_logos_cont_1_txt {
     font-size: 9px;

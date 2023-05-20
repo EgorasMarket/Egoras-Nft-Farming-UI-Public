@@ -98,7 +98,8 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
       setSuccessRoute(route);
       setSuccessMessage(
         "You have successfully ordered " +
-          numDivsToDuplicate +" "+
+          numDivsToDuplicate +
+          " " +
           productName +
           " from " +
           productDetail.user_wallet.slice(0, 6) +
@@ -502,7 +503,12 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                       </div>
                       <div className="payment_method_div_cont1_div2">
                         {" "}
-                        Pay Via Fort
+                        Pay Via Fort{" "}
+                        <img
+                          src="/img/fortIcon.svg"
+                          alt=""
+                          className="payViaFortIconImg"
+                        />
                       </div>
                     </div>
                   </div>

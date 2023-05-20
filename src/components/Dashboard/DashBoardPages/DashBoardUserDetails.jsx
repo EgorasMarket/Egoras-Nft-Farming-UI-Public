@@ -47,6 +47,8 @@ import Nodata from "./nodataComponent/Nodata";
 import { CALL_UPDATE_MY_PROFILE } from "../../../services/userServices";
 import { tokenBalance } from "../../../web3/index";
 import { parseEther, formatEther } from "@ethersproject/units";
+const { REACT_APP_EGC_ADDRESS, REACT_APP_EUSD_ADDRESS } = process.env;
+
 const DashBoardUserDetails = ({ auth }) => {
   const [walletAddr, setWalletAddr] = useState(
     "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
@@ -152,7 +154,7 @@ const DashBoardUserDetails = ({ auth }) => {
     async (e) => {
       if (account) {
         let res = await tokenBalance(
-          "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
+          REACT_APP_EGC_ADDRESS,
           account,
           library.getSigner()
         );
@@ -160,7 +162,7 @@ const DashBoardUserDetails = ({ auth }) => {
         console.log(formatEther(res.message._hex));
         setEGCBalance(parseFloat(formatEther(res.message._hex)).toFixed(2));
         let res2 = await tokenBalance(
-          "0x58f66d0183615797940360a43c333a44215830ba",
+          REACT_APP_EUSD_ADDRESS,
           account,
           library.getSigner()
         );
@@ -287,16 +289,16 @@ const DashBoardUserDetails = ({ auth }) => {
           zipCode: response.data.users.zipCode,
         });
       } else {
-             setFormData({
-               firstName: "",
-               lastName: "",
-               phoneNumber: "",
-               address: "",
-               address2: "",
-               country: "",
-               state: "",
-               zipCode: "",
-             });
+        setFormData({
+          firstName: "",
+          lastName: "",
+          phoneNumber: "",
+          address: "",
+          address2: "",
+          country: "",
+          state: "",
+          zipCode: "",
+        });
       }
     }
   }, [account]);

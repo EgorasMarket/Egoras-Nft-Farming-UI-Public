@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import "../../../css/dashboardLend.css";
+import PulseLoader from "react-spinners/PulseLoader";
 import { loadUser } from "../../../actions/auth";
 import { connect } from "react-redux";
 import { faSpinner } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +13,7 @@ import abi from "../../../web3/contracts/erc20.json";
 import UpdatedErrorModal from "./UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedErrorModal";
 import UpdatedSuccessModal from "./UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import ClipLoader from "react-spinners/ClipLoader";
 // import TableWithPagination
 import TableWithPagination from "../../SmallerComponents/Tables/TableWithPagination/TableWithPagination";
 import { config } from "../../../actions/Config";
@@ -518,7 +520,12 @@ const DashboardHome = () => {
                 <div className="analytics_container_1">
                   <div className="analytics_container_1_head">TVL</div>
                   {chartloaded ? (
-                    <div>Chart is loading...</div>
+                    <div className="chart_loader">
+                      <ClipLoader color="#9e94b8" size={60} />
+                      <span className="chart_loader_span">
+                        Loading Please Wait...
+                      </span>
+                    </div>
                   ) : (
                     <>
                       <div
@@ -651,7 +658,12 @@ const DashboardHome = () => {
                 <div className="analytics_container_1">
                   <div className="analytics_container_1_head">Volume 24H</div>
                   {chartloaded ? (
-                    <div>Chart is Loading...</div>
+                    <div className="chart_loader">
+                      <ClipLoader color="#9e94b8" size={60} />
+                      <span className="chart_loader_span">
+                        Loading Please Wait...
+                      </span>
+                    </div>
                   ) : (
                     <>
                       <div
@@ -794,7 +806,12 @@ const DashboardHome = () => {
                 <div className="analytics_container_1">
                   <div className="analytics_container_1_head">TVL</div>
                   {chartloaded ? (
-                    <div>Chart is Loading...</div>
+                    <div className="chart_loader">
+                      <ClipLoader color="#9e94b8" size={60} />
+                      <span className="chart_loader_span">
+                        Loading Please Wait...
+                      </span>
+                    </div>
                   ) : (
                     <>
                       <div
@@ -927,7 +944,12 @@ const DashboardHome = () => {
                   <div className="analytics_container_1_head">Volume 24H</div>
 
                   {chartloaded ? (
-                    <div>Chart is Loading...</div>
+                    <div className="chart_loader">
+                      <ClipLoader color="#9e94b8" size={60} />
+                      <span className="chart_loader_span">
+                        Loading Please Wait...
+                      </span>
+                    </div>
                   ) : (
                     <>
                       <div
@@ -1164,7 +1186,9 @@ const DashboardHome = () => {
                   </div>
 
                   {burntEgcLoaded ? (
-                    <div className="burntEgcLoading">Stats Loading...</div>
+                    <div className="burntEgcLoading">
+                      <PulseLoader color="#353250" size={20} height={20} />
+                    </div>
                   ) : (
                     <div className="burn_egc_div_1_cont1_div1">
                       <span className="burn_egc_div_1_cont1_div1_span">
@@ -1187,7 +1211,10 @@ const DashboardHome = () => {
                     :
                   </div>
                   {burntEgcLoaded ? (
-                    <div className="burntEgcLoading">Stats Loading...</div>
+                    <div className="burntEgcLoading">
+                      {" "}
+                      <PulseLoader color="#353250" size={20} height={20} />
+                    </div>
                   ) : (
                     <div className="burn_egc_div_1_cont1_div1">
                       <span className="burn_egc_div_1_cont1_div1_span">
