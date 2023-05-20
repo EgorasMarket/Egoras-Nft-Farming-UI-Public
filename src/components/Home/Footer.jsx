@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Twitter, Facebook, YouTube, Instagram } from "@material-ui/icons";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import WaveAnimation from "./WaveAnimation/WaveAnimation";
@@ -153,32 +154,25 @@ const Footer = () => {
 
                   <div className="footerIcons">
                     <a
-                      href="https://twitter.com/egorasmarket"
+                      href="https://twitter.com/martgpt"
                       className="twitter"
                       target="_blank"
                     >
                       <Twitter className="twitter_icon" />
                     </a>
                     <a
-                      href="https://web.facebook.com/egorasmarket/"
+                      href="https://www.linkedin.com/company/martgpt/"
+                      className="twitter"
+                      target="_blank"
+                    >
+                      <LinkedInIcon className="twitter_icon" />
+                    </a>
+                    <a
+                      href="https://facebook.com/martgpt/"
                       className="twitter"
                       target="_blank"
                     >
                       <Facebook className="twitter_icon" />
-                    </a>
-                    <a
-                      href="https://instagram.com/egorasofficial"
-                      className="twitter"
-                      target="_blank"
-                    >
-                      <Instagram className="twitter_icon" />
-                    </a>
-                    <a
-                      href="https://www.youtube.com/channel/UCHfi5EwXig46xp5Dx8hVBHQ"
-                      className="twitter"
-                      target="_blank"
-                    >
-                      <YouTube className="twitter_icon" />
                     </a>
                   </div>
                 </div>
