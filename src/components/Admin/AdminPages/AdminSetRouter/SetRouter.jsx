@@ -43,6 +43,13 @@ const SetRouter = () => {
     );
     console.log(response);
   };
+  // const addMinter = async () => {
+  //   const response = await adminAddMinter(
+  //     v3Contract.address,
+  //     library.getSigner()
+  //   );
+  //   console.log(response);
+  // };
   return (
     <div className="other2 asset_other2">
       <section className="collateral-assets-section no-bg no_pad">
