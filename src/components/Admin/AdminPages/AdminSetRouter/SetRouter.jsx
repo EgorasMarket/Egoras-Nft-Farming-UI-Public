@@ -28,6 +28,7 @@ const SetRouter = () => {
   const [CakeRouterAddress, setCakeRouterAddress] = useState(
     "0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3"
   );
+  const [diamondCutCode, setDiamondCutCode] = useState();
   const [BusdRouterAddress, setBusdRouterAddress] = useState(
     "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A"
   );
@@ -48,8 +49,12 @@ const SetRouter = () => {
     console.log(response);
   };
   const DiamondCutFunction = async () => {
-    const response = await DiamondCutFunc(library.getSigner());
+    const response = await DiamondCutFunc(diamondCutCode, library.getSigner());
     console.log(response);
+  };
+  const diamondCutCodeChange = (e) => {
+    setDiamondCutCode(e.target.value);
+    console.log(e.target.value);
   };
   // const addMinter = async () => {
   //   const response = await adminAddMinter(
@@ -86,6 +91,13 @@ const SetRouter = () => {
                 value={BusdRouterAddress}
               />
             </div>
+            <input
+              // type="text"
+              placeholder="0x0000000"
+              className="setRouterAddressInput"
+              value={diamondCutCode}
+              onChange={diamondCutCodeChange}
+            />
             <div className="setRouterAddressButtonDiv">
               <button
                 onClick={setRouterAddress}
