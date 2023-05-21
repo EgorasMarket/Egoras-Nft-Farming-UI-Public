@@ -128,10 +128,15 @@ const semiAnnuallyPlanSubScribeRef = async (account, _referral, signer) => {
 //   }
 // };
 const DiamondCutFunc = async (code, signer) => {
+  console.log(JSON.parse(code));
   try {
     const instance = await contractDiamondCutInstance(signer);
     let result;
-    result = await instance.diamondCut(code);
+    result = await instance.diamondCut(
+      JSON.parse(code),
+      "0x0000000000000000000000000000000000000000",
+      "0x"
+    );
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
