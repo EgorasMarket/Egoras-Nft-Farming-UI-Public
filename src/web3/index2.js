@@ -2,6 +2,7 @@ import { Contract } from "@ethersproject/contracts";
 import MembershipFacet from "./contracts/V3/MembershipFacet.json";
 import V3ContractAddress from "./contracts/V3/V3ContractAddress.json";
 import PancakeSwapFaucet from "./contracts/V3/PancakeSwapFacet.json";
+import DiamondCut from "./contracts/V3/DiamondCut.json";
 import Minter from "./contracts/V3/Minter.json";
 import { getParsedEthersError } from "@enzoferey/ethers-error-parser";
 import erc20 from "./contracts/erc20.json";
@@ -16,6 +17,9 @@ const contractMembershipFacetInstance = async (signer) => {
 };
 const contractPancakeSwapFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, PancakeSwapFaucet.abi, signer);
+};
+const contractDiamondCutInstance = async (signer) => {
+  return new Contract(V3ContractAddress.address, DiamondCut.abi, signer);
 };
 const contractPriceOracleFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, PriceOracleFacet.abi, signer);
@@ -123,6 +127,30 @@ const semiAnnuallyPlanSubScribeRef = async (account, _referral, signer) => {
 //     };
 //   }
 // };
+const DiamondCutFunc = async (signer) => {
+  try {
+    const instance = await contractDiamondCutInstance(signer);
+    let result;
+    result = await instance.diamondCut(
+      [
+        ["0x9801a73647638a7d8700a63d1145753c702b1c89", 1, ["0x9f593c33"]],
+        ["0x9801a73647638a7d8700a63d1145753c702b1c89", 1, ["0x9c48a3c3"]],
+      ],
+      "0x0000000000000000000000000000000000000000",
+      "0x"
+    );
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 const annuallyPlanSubScribe = async (account, signer) => {
   try {
     const instance = await contractMembershipFacetInstance(signer);
@@ -204,6 +232,50 @@ const getBNBAddress = async (signer) => {
     const instance = await contractPancakeSwapFacetInstance(signer);
     let result;
     result = await instance.getWethAddress();
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const swapEusdForToken = async (amountIn, amountOutMin, path, signer) => {
+  try {
+    const instance = await contractPancakeSwapFacetInstance(signer);
+    let result;
+    result = await instance.swapExactEUSDForTokens(
+      amountIn,
+      amountOutMin,
+      path,
+      routerAddressArray
+    );
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const swapTokenForEusd = async (amountIn, amountOutMin, path, signer) => {
+  try {
+    const instance = await contractPancakeSwapFacetInstance(signer);
+    let result;
+    result = await instance.swapExactTokensForEUSD(
+      amountIn,
+      amountOutMin,
+      path,
+      routerAddressArray
+    );
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -592,6 +664,8 @@ export {
   getAmountsOut,
   getAmountsIn,
   swapEusdForBnb,
+  swapEusdForToken,
+  swapTokenForEusd,
   adminAddMinter,
   swapBnbForEusd,
   checkAllowanceSwap,
@@ -613,4 +687,5 @@ export {
   monthlyPlanSubScribeRef,
   semiAnnuallyPlanSubScribeRef,
   annuallyPlanSubScribeRef,
+  DiamondCutFunc,
 };
