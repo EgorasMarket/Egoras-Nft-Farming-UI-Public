@@ -105,6 +105,7 @@ const UpdatedSwap = () => {
   const [baseBalance, setBaseBalance] = useState("0");
   const [txHash, setTxHash] = useState("");
   const [eusdSmartContractBal, setEusdSmartContractBal] = useState("");
+  const [slippage, setSlippage] = useState(0.005);
   const [insufficientLiquidityBtn, setInsufficientLiquidityBtn] =
     useState(false);
   const [insufficientBalance, setInsufficientBalance] = useState(false);
@@ -511,6 +512,7 @@ const UpdatedSwap = () => {
   };
   console.log(id2, "id2 id2 id2 id2");
   console.log(id, "id id id id");
+  console.log(SwapFromAddress, SwapToAddress);
   const ToggleSwapInputs = (e) => {
     setId(id2);
     setId2(id);
@@ -526,6 +528,7 @@ const UpdatedSwap = () => {
     setCoinBalance(baseBalance);
     setBaseBalance(coinBalance);
   };
+
   const ToggleSwapPrices = () => {
     setIda(id2b);
     setId2b(ida);
@@ -817,7 +820,15 @@ const UpdatedSwap = () => {
   const SwapEusdForTokens = async () => {
     // setIsLoading(true);
     // setDisable(true);
-    console.log(SwapAmount, MinamountsOut, SwapFromAddress, SwapToAddress);
+    console.log(
+      SwapAmount,
+      MinamountsOut,
+      SwapFromAddress,
+      SwapToAddress,
+      "swap exact eusd for tokens"
+    );
+    const response = await swapEusdForToken(library.getSigner());
+    console.log(response, "SwapEusdForTokens");
     // const response = await swapEusdForToken(
     //   parseEther(SwapAmount.toString(), "wei").toString(),
     //   parseEther(MinamountsOut.toString(), "wei").toString(),
@@ -844,7 +855,15 @@ const UpdatedSwap = () => {
   const SwapTokensForEusd = async () => {
     // setIsLoading(true);
     // setDisable(true);
-    console.log(SwapAmount, MinamountsOut, SwapFromAddress, SwapToAddress);
+    console.log(
+      SwapAmount,
+      MinamountsOut,
+      SwapFromAddress,
+      SwapToAddress,
+      "swap exact tokens for eusd"
+    );
+    const response = await swapTokenForEusd(library.getSigner());
+    console.log(response, "SwapTokensForEusd");
     // const response = await swapTokenForEusd(
     //   parseEther(SwapAmount.toString(), "wei").toString(),
     //   parseEther(MinamountsOut.toString(), "wei").toString(),
@@ -925,7 +944,7 @@ const UpdatedSwap = () => {
       setIsAmountLoading(false);
       // setInputDisabled(false);
       setAmountsOut(formatEther(response.message[1]._hex));
-      setMinAmountsOut(formatEther(response.message[1]._hex) * (1 - 0.005));
+      setMinAmountsOut(formatEther(response.message[1]._hex) * (1 - slippage));
       console.log(formatEther(response.message[1]._hex));
     } else {
       setIsAmountLoading(false);
@@ -1482,7 +1501,7 @@ const UpdatedSwap = () => {
                           :
                         </div>
                         <div className="swap_price_slippage_div2">
-                          0.5%{" "}
+                          {slippage * 100}%{" "}
                           <ArrowDropDownIcon className="swap_price_slippage_div2_icon" />
                         </div>
                       </div>

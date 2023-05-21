@@ -132,10 +132,7 @@ const DiamondCutFunc = async (signer) => {
     const instance = await contractDiamondCutInstance(signer);
     let result;
     result = await instance.diamondCut(
-      [
-        ["0x9801a73647638a7d8700a63d1145753c702b1c89", 1, ["0x9f593c33"]],
-        ["0x9801a73647638a7d8700a63d1145753c702b1c89", 1, ["0x9c48a3c3"]],
-      ],
+      [["0xe6180e87c9dcf37aaaeeceb78a74834a2d21a539", 1, ["0x9f593c33"]]],
       "0x0000000000000000000000000000000000000000",
       "0x"
     );
@@ -244,14 +241,17 @@ const getBNBAddress = async (signer) => {
     };
   }
 };
-const swapEusdForToken = async (amountIn, amountOutMin, path, signer) => {
+const swapEusdForToken = async (signer) => {
   try {
     const instance = await contractPancakeSwapFacetInstance(signer);
-    let result;
-    result = await instance.swapExactEUSDForTokens(
-      amountIn,
-      amountOutMin,
-      path,
+
+    const result = await instance.swapExactEUSDForTokens(
+      "1825000000000000000",
+      "1815511549054162000",
+      [
+        "0xeeec111dca00461ec4da49c09464953931aa7233",
+        "0x55d398326f99059fF775485246999027B3197955",
+      ],
       routerAddressArray
     );
     console.log(result, "result, result,result,result,result");
@@ -260,20 +260,46 @@ const swapEusdForToken = async (amountIn, amountOutMin, path, signer) => {
       status: true,
     };
   } catch (error) {
+    console.log(error);
     return {
       message: formattedError(error).message,
       status: formattedError(error).status,
     };
   }
 };
-const swapTokenForEusd = async (amountIn, amountOutMin, path, signer) => {
+// const swapEusdForToken = async (amountIn, amountOutMin, path, signer) => {
+//   try {
+//     const instance = await contractPancakeSwapFacetInstance(signer);
+//     let result;
+//     result = await instance.swapExactEUSDForTokens(
+//       amountIn,
+//       amountOutMin,
+//       path,
+//       routerAddressArray
+//     );
+//     console.log(result, "result, result,result,result,result");
+//     return {
+//       message: result,
+//       status: true,
+//     };
+//   } catch (error) {
+//     return {
+//       message: formattedError(error).message,
+//       status: formattedError(error).status,
+//     };
+//   }
+// };
+const swapTokenForEusd = async (signer) => {
   try {
     const instance = await contractPancakeSwapFacetInstance(signer);
     let result;
     result = await instance.swapExactTokensForEUSD(
-      amountIn,
-      amountOutMin,
-      path,
+      "342922356416837100",
+      "2737500000000000000",
+      [
+        "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
+        "0xeeec111dca00461ec4da49c09464953931aa7233",
+      ],
       routerAddressArray
     );
     console.log(result, "result, result,result,result,result");
@@ -288,6 +314,28 @@ const swapTokenForEusd = async (amountIn, amountOutMin, path, signer) => {
     };
   }
 };
+// const swapTokenForEusd = async (amountIn, amountOutMin, path, signer) => {
+//   try {
+//     const instance = await contractPancakeSwapFacetInstance(signer);
+//     let result;
+//     result = await instance.swapExactTokensForEUSD(
+//       amountIn,
+//       amountOutMin,
+//       path,
+//       routerAddressArray
+//     );
+//     console.log(result, "result, result,result,result,result");
+//     return {
+//       message: result,
+//       status: true,
+//     };
+//   } catch (error) {
+//     return {
+//       message: formattedError(error).message,
+//       status: formattedError(error).status,
+//     };
+//   }
+// };
 const swapEusdForBnb = async (token, amountIn, amountOutMin, signer) => {
   try {
     const instance = await contractPancakeSwapFacetInstance(signer);
