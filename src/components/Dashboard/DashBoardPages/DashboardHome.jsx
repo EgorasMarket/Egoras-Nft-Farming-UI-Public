@@ -416,7 +416,7 @@ const DashboardHome = () => {
     "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c": {
       symbol: "BNB",
     },
-    "0xeeec111dca00461ec4da49c09464953931aa7233": {
+    "0xEEec111dCa00461EC4Da49c09464953931aA7233": {
       symbol: "EUSD",
     },
     "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56": {
