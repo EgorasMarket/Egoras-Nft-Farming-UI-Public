@@ -53,8 +53,12 @@ const SetRouter = () => {
     console.log(response);
   };
   const diamondCutCodeChange = (e) => {
+    // setDiamondCutCode(e.target.value);
     setDiamondCutCode(e.target.value);
-    console.log(e.target.value);
+    console.log(JSON.parse(e.target.value));
+    // console.log(e.target.value.split(","));
+    // const code2 = e.target.value.split(",");
+    // console.log(code2[0], code2[1], code2[2]);
   };
   // const addMinter = async () => {
   //   const response = await adminAddMinter(
@@ -91,13 +95,6 @@ const SetRouter = () => {
                 value={BusdRouterAddress}
               />
             </div>
-            <input
-              // type="text"
-              placeholder="0x0000000"
-              className="setRouterAddressInput"
-              value={diamondCutCode}
-              onChange={diamondCutCodeChange}
-            />
             <div className="setRouterAddressButtonDiv">
               <button
                 onClick={setRouterAddress}
@@ -111,13 +108,17 @@ const SetRouter = () => {
             <button onClick={addMinter} className="setRouterAddressBtn">
               Add Minter
             </button>
-            <button
-              onClick={DiamondCutFunction}
-              className="setRouterAddressBtn"
-            >
-              Call Diamond Cut
-            </button>
           </div>
+          <input
+            // type="text"
+            placeholder="0x0000000"
+            className="setRouterAddressInput"
+            value={diamondCutCode}
+            onChange={diamondCutCodeChange}
+          />
+          <button onClick={DiamondCutFunction} className="setRouterAddressBtn">
+            Call Diamond Cut
+          </button>
         </div>
       </section>
     </div>
