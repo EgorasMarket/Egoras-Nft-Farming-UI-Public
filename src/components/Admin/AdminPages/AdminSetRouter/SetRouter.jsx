@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { SwapRouterAddress, adminAddMinter } from "../../../../web3/index2";
+import {
+  SwapRouterAddress,
+  adminAddMinter,
+  DiamondCutFunc,
+} from "../../../../web3/index2";
 import "./AdminRouter.css";
 import Web3 from "web3";
 import v3Contract from "../../../../web3/contracts/V3/V3ContractAddress.json";
@@ -41,6 +45,10 @@ const SetRouter = () => {
       v3Contract.address,
       library.getSigner()
     );
+    console.log(response);
+  };
+  const DiamondCutFunction = async () => {
+    const response = await DiamondCutFunc(library.getSigner());
     console.log(response);
   };
   // const addMinter = async () => {
@@ -90,6 +98,12 @@ const SetRouter = () => {
           <div className="setRouterAddressButtonDiv">
             <button onClick={addMinter} className="setRouterAddressBtn">
               Add Minter
+            </button>
+            <button
+              onClick={DiamondCutFunction}
+              className="setRouterAddressBtn"
+            >
+              Call Diamond Cut
             </button>
           </div>
         </div>

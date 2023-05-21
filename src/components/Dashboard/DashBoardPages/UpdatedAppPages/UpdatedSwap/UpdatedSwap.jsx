@@ -31,6 +31,8 @@ import {
   getBNBAddress,
   swapEusdForBnb,
   swapBnbForEusd,
+  swapEusdForToken,
+  swapTokenForEusd,
   getAmountsIn,
   getAmountsOut,
 } from "../../../../../web3/index2";
@@ -333,14 +335,30 @@ const UpdatedSwap = () => {
       symbol: "BNB",
       favorite: "true",
     },
-    // {
-    //   id: "2",
-    //   img: "/img/egc_icon2.svg",
-    //   name: "Martgpt",
-    //   address: "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-    //   symbol: "EGC",
-    //   favorite: "false",
-    // },
+    {
+      id: "2",
+      img: "/img/egc_icon2.svg",
+      name: "Martgpt",
+      address: "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
+      symbol: "EGC",
+      favorite: "true",
+    },
+    {
+      id: "3",
+      img: "/img/tokens-folder/usdt_icon.png",
+      name: "Tether",
+      address: "0x55d398326f99059fF775485246999027B3197955",
+      symbol: "USDT",
+      favorite: "true",
+    },
+    {
+      id: "4",
+      img: "/img/tokens-folder/btcb_icon.png",
+      name: "BTCB Token",
+      address: "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c",
+      symbol: "BTCB",
+      favorite: "false",
+    },
     // {
     //   id: "3",
     //   img: "/img/vertiverse-token-logo-icon.svg",
@@ -491,7 +509,8 @@ const UpdatedSwap = () => {
       return;
     }
   };
-
+  console.log(id2, "id2 id2 id2 id2");
+  console.log(id, "id id id id");
   const ToggleSwapInputs = (e) => {
     setId(id2);
     setId2(id);
@@ -794,6 +813,60 @@ const UpdatedSwap = () => {
       setErrorModal(true);
       setErrorMessage(response.message);
     }
+  };
+  const SwapEusdForTokens = async () => {
+    // setIsLoading(true);
+    // setDisable(true);
+    console.log(SwapAmount, MinamountsOut, SwapFromAddress, SwapToAddress);
+    // const response = await swapEusdForToken(
+    //   parseEther(SwapAmount.toString(), "wei").toString(),
+    //   parseEther(MinamountsOut.toString(), "wei").toString(),
+    //   [SwapFromAddress, SwapToAddress],
+    //   library.getSigner()
+    // );
+    // console.log(response);
+    // if (response.status == true) {
+    //   setIsLoading(false);
+    //   setDisable(false);
+    //   setSuccessModal(true);
+    //   setTxHash(response.message.hash);
+    //   setSuccessMessage(
+    //     "You've successfully swapped " + SwapAmount + "Eusd for " + amountsOut
+    //   );
+    // } else {
+    //   console.log(response);
+    //   setIsLoading(false);
+    //   setDisable(false);
+    //   setErrorModal(true);
+    //   setErrorMessage(response.message);
+    // }
+  };
+  const SwapTokensForEusd = async () => {
+    // setIsLoading(true);
+    // setDisable(true);
+    console.log(SwapAmount, MinamountsOut, SwapFromAddress, SwapToAddress);
+    // const response = await swapTokenForEusd(
+    //   parseEther(SwapAmount.toString(), "wei").toString(),
+    //   parseEther(MinamountsOut.toString(), "wei").toString(),
+    //   [SwapFromAddress, SwapToAddress],
+    //   library.getSigner()
+    // );
+    // console.log(response);
+    // if (response.status == true) {
+    //   setIsLoading(false);
+    //   setDisable(false);
+    //   setSuccessModal(true);
+    //   setTxHash(response.message.hash);
+    //   setSuccessMessage(
+    //     "You've successfully swapped " + SwapAmount + "Eusd for " + amountsOut
+    //   );
+    // } else {
+    //   console.log(response);
+    //   setIsLoading(false);
+    //   setDisable(false);
+    //   setErrorModal(true);
+    //   setErrorMessage(response.message);
+    // }
   };
 
   const SwapbnbForEusd = async () => {
@@ -1426,7 +1499,7 @@ const UpdatedSwap = () => {
                             </button>
                           ) : (
                             <>
-                              {id == "0" ? (
+                              {id === "0" && id2 === "1" ? (
                                 <>
                                   {assetsBase.map((data) => {
                                     return (
@@ -1506,7 +1579,8 @@ const UpdatedSwap = () => {
                                     );
                                   })}
                                 </>
-                              ) : id == "1" ? (
+                              ) : null}{" "}
+                              {id === "1" && id2 === "0" ? (
                                 <>
                                   {assets.map((data) => {
                                     return (
@@ -1545,7 +1619,57 @@ const UpdatedSwap = () => {
                                     );
                                   })}
                                 </>
-                              ) : (
+                              ) : null}{" "}
+                              {id === "0" && id2 !== "1" ? (
+                                <>
+                                  {assetsBase.map((data) => {
+                                    return (
+                                      <>
+                                        {data.id == id ? (
+                                          <>
+                                            {unlockBtn === false ? (
+                                              <button
+                                                id="generate"
+                                                disabled={Disable}
+                                                onClick={UnlockToken}
+                                                class="updatedSwapSwapBtn"
+                                              >
+                                                {isLoading ? (
+                                                  <ScaleLoader
+                                                    color="#353250"
+                                                    size={10}
+                                                    height={20}
+                                                  />
+                                                ) : (
+                                                  <> Approve {data.symbol}</>
+                                                )}
+                                              </button>
+                                            ) : (
+                                              <button
+                                                id="generate"
+                                                disabled={Disable}
+                                                onClick={SwapEusdForTokens}
+                                                class="updatedSwapSwapBtn"
+                                              >
+                                                {isLoading ? (
+                                                  <ScaleLoader
+                                                    color="#353250"
+                                                    size={10}
+                                                    height={20}
+                                                  />
+                                                ) : (
+                                                  <> Swap {data.symbol}</>
+                                                )}
+                                              </button>
+                                            )}
+                                          </>
+                                        ) : null}
+                                      </>
+                                    );
+                                  })}
+                                </>
+                              ) : null}
+                              {id !== "1" && id2 === "0" ? (
                                 <>
                                   {assets.map((data) => {
                                     return (
@@ -1573,7 +1697,7 @@ const UpdatedSwap = () => {
                                               <button
                                                 id="generate"
                                                 disabled={Disable}
-                                                onClick={SwapEusdForBnb}
+                                                onClick={SwapTokensForEusd}
                                                 class="updatedSwapSwapBtn"
                                               >
                                                 {isLoading ? (
@@ -1593,7 +1717,7 @@ const UpdatedSwap = () => {
                                     );
                                   })}
                                 </>
-                              )}
+                              ) : null}
                             </>
                           )}
                         </>
