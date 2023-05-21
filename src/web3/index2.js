@@ -127,15 +127,11 @@ const semiAnnuallyPlanSubScribeRef = async (account, _referral, signer) => {
 //     };
 //   }
 // };
-const DiamondCutFunc = async (signer) => {
+const DiamondCutFunc = async (code, signer) => {
   try {
     const instance = await contractDiamondCutInstance(signer);
     let result;
-    result = await instance.diamondCut(
-      [["0xe6180e87c9dcf37aaaeeceb78a74834a2d21a539", 1, ["0x9f593c33"]]],
-      "0x0000000000000000000000000000000000000000",
-      "0x"
-    );
+    result = await instance.diamondCut(code);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -247,10 +243,10 @@ const swapEusdForToken = async (signer) => {
 
     const result = await instance.swapExactEUSDForTokens(
       "1825000000000000000",
-      "1815511549054162000",
+      "229784542853142607",
       [
         "0xeeec111dca00461ec4da49c09464953931aa7233",
-        "0x55d398326f99059fF775485246999027B3197955",
+        "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
       ],
       routerAddressArray
     );
