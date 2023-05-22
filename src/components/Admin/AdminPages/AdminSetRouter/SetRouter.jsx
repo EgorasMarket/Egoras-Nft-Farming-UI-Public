@@ -3,6 +3,7 @@ import {
   SwapRouterAddress,
   adminAddMinter,
   DiamondCutFunc,
+  approveBusd,
 } from "../../../../web3/index2";
 import "./AdminRouter.css";
 import Web3 from "web3";
@@ -50,6 +51,10 @@ const SetRouter = () => {
   };
   const DiamondCutFunction = async () => {
     const response = await DiamondCutFunc(diamondCutCode, library.getSigner());
+    console.log(response);
+  };
+  const ApproveToken = async () => {
+    const response = await approveBusd(library.getSigner());
     console.log(response);
   };
   const diamondCutCodeChange = (e) => {
@@ -118,6 +123,9 @@ const SetRouter = () => {
           />
           <button onClick={DiamondCutFunction} className="setRouterAddressBtn">
             Call Diamond Cut
+          </button>
+          <button onClick={ApproveToken} className="setRouterAddressBtn">
+            Approve Token
           </button>
         </div>
       </section>

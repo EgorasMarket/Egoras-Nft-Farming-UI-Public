@@ -272,7 +272,33 @@ const swapEusdForToken = async (amountIn, amountOutMin, path, signer) => {
     };
   }
 };
-
+const approveBusd = async (signer) => {
+  // console.log(
+  //   amountIn,
+  //   amountOutMin,
+  //   path,
+  //   routerAddressArray,
+  //   "SwapTokensForEusd index.js"
+  // );
+  try {
+    const instance = await contractPancakeSwapFacetInstance(signer);
+    let result;
+    result = await instance.approveBUSD(
+      routerAddressArray,
+      "1888900999999838399393939393939"
+    );
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 const swapTokenForEusd = async (amountIn, amountOutMin, path, signer) => {
   console.log(
     amountIn,
@@ -702,4 +728,5 @@ export {
   semiAnnuallyPlanSubScribeRef,
   annuallyPlanSubScribeRef,
   DiamondCutFunc,
+  approveBusd,
 };
