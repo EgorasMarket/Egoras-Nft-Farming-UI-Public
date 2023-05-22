@@ -243,7 +243,7 @@ const Dashboard = ({ check, togglemakeDark }) => {
                   component={DashBoardBranchAsset}
                 />
                 <Route exact path="/app/swap" component={UpdatedSwap} />
-                {/* <Route exact path="/app/swap" component={Swap} /> */}
+                {/* <Route exact path="/app/swap2" component={Swap} /> */}
                 <Route
                   exact
                   path="/app/user"

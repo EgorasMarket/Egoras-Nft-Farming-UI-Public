@@ -242,17 +242,22 @@ const getBNBAddress = async (signer) => {
     };
   }
 };
-const swapEusdForToken = async (signer) => {
+
+const swapEusdForToken = async (amountIn, amountOutMin, path, signer) => {
+  console.log(
+    amountIn,
+    amountOutMin,
+    path,
+    routerAddressArray,
+    "swapEusdForToken index.js"
+  );
   try {
     const instance = await contractPancakeSwapFacetInstance(signer);
-
-    const result = await instance.swapExactEUSDForTokens(
-      "1825000000000000000",
-      "229784542853142607",
-      [
-        "0xeeec111dca00461ec4da49c09464953931aa7233",
-        "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
-      ],
+    let result;
+    result = await instance.swapExactEUSDForTokens(
+      amountIn,
+      amountOutMin,
+      path,
       routerAddressArray
     );
     console.log(result, "result, result,result,result,result");
@@ -261,46 +266,54 @@ const swapEusdForToken = async (signer) => {
       status: true,
     };
   } catch (error) {
-    console.log(error);
     return {
       message: formattedError(error).message,
       status: formattedError(error).status,
     };
   }
 };
-// const swapEusdForToken = async (amountIn, amountOutMin, path, signer) => {
-//   try {
-//     const instance = await contractPancakeSwapFacetInstance(signer);
-//     let result;
-//     result = await instance.swapExactEUSDForTokens(
-//       amountIn,
-//       amountOutMin,
-//       path,
-//       routerAddressArray
-//     );
-//     console.log(result, "result, result,result,result,result");
-//     return {
-//       message: result,
-//       status: true,
-//     };
-//   } catch (error) {
-//     return {
-//       message: formattedError(error).message,
-//       status: formattedError(error).status,
-//     };
-//   }
-// };
-const swapTokenForEusd = async (signer) => {
+const approveBusd = async (signer) => {
+  // console.log(
+  //   amountIn,
+  //   amountOutMin,
+  //   path,
+  //   routerAddressArray,
+  //   "SwapTokensForEusd index.js"
+  // );
+  try {
+    const instance = await contractPancakeSwapFacetInstance(signer);
+    let result;
+    result = await instance.approveBUSD(
+      routerAddressArray,
+      "1888900999999838399393939393939"
+    );
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const swapTokenForEusd = async (amountIn, amountOutMin, path, signer) => {
+  console.log(
+    amountIn,
+    amountOutMin,
+    path,
+    routerAddressArray,
+    "SwapTokensForEusd index.js"
+  );
   try {
     const instance = await contractPancakeSwapFacetInstance(signer);
     let result;
     result = await instance.swapExactTokensForEUSD(
-      "342922356416837100",
-      "2737500000000000000",
-      [
-        "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
-        "0xeeec111dca00461ec4da49c09464953931aa7233",
-      ],
+      amountIn,
+      amountOutMin,
+      path,
       routerAddressArray
     );
     console.log(result, "result, result,result,result,result");
@@ -315,28 +328,6 @@ const swapTokenForEusd = async (signer) => {
     };
   }
 };
-// const swapTokenForEusd = async (amountIn, amountOutMin, path, signer) => {
-//   try {
-//     const instance = await contractPancakeSwapFacetInstance(signer);
-//     let result;
-//     result = await instance.swapExactTokensForEUSD(
-//       amountIn,
-//       amountOutMin,
-//       path,
-//       routerAddressArray
-//     );
-//     console.log(result, "result, result,result,result,result");
-//     return {
-//       message: result,
-//       status: true,
-//     };
-//   } catch (error) {
-//     return {
-//       message: formattedError(error).message,
-//       status: formattedError(error).status,
-//     };
-//   }
-// };
 const swapEusdForBnb = async (token, amountIn, amountOutMin, signer) => {
   try {
     const instance = await contractPancakeSwapFacetInstance(signer);
@@ -737,4 +728,5 @@ export {
   semiAnnuallyPlanSubScribeRef,
   annuallyPlanSubScribeRef,
   DiamondCutFunc,
+  approveBusd,
 };

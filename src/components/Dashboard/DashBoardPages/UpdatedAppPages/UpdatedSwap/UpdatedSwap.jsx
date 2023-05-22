@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 import SwapVerticalCircleIcon from "@mui/icons-material/SwapVerticalCircle";
+import TradingViewWidget from "./TradeViewWidget";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import v3ContractAdress from "../../../../../web3/contracts/V3/V3ContractAddress.json";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -323,7 +325,7 @@ const UpdatedSwap = () => {
       symbol: "EUSD",
       PriceAddress: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
       address: "0xeeec111dca00461ec4da49c09464953931aa7233",
-      name: "EGC USD",
+      name: "EUSD Token",
       favorite: "true",
     },
   ];
@@ -331,7 +333,7 @@ const UpdatedSwap = () => {
     {
       id: "1",
       img: "/img/tokens-folder/bnb_icon.png",
-      name: "Binance Smart Chain",
+      name: "Binance Chain Token",
       address: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
       symbol: "BNB",
       favorite: "true",
@@ -347,7 +349,7 @@ const UpdatedSwap = () => {
     {
       id: "3",
       img: "/img/tokens-folder/usdt_icon.png",
-      name: "Tether",
+      name: "Tether USD",
       address: "0x55d398326f99059fF775485246999027B3197955",
       symbol: "USDT",
       favorite: "true",
@@ -359,6 +361,14 @@ const UpdatedSwap = () => {
       address: "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c",
       symbol: "BTCB",
       favorite: "false",
+    },
+    {
+      id: "5",
+      img: "/img/tokens-folder/usdsc_icon.png",
+      name: "Binance Pegged USDC Coin",
+      address: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
+      symbol: "USDC",
+      favorite: "true",
     },
     // {
     //   id: "3",
@@ -818,74 +828,57 @@ const UpdatedSwap = () => {
     }
   };
   const SwapEusdForTokens = async () => {
-    // setIsLoading(true);
-    // setDisable(true);
-    console.log(
-      SwapAmount,
-      MinamountsOut,
-      SwapFromAddress,
-      SwapToAddress,
-      "swap exact eusd for tokens"
+    setIsLoading(true);
+    setDisable(true);
+
+    const response = await swapEusdForToken(
+      parseEther(SwapAmount.toString(), "wei").toString(),
+      parseEther(MinamountsOut.toString(), "wei").toString(),
+      [SwapFromAddress, SwapToAddress],
+      library.getSigner()
     );
-    const response = await swapEusdForToken(library.getSigner());
     console.log(response, "SwapEusdForTokens");
-    // const response = await swapEusdForToken(
-    //   parseEther(SwapAmount.toString(), "wei").toString(),
-    //   parseEther(MinamountsOut.toString(), "wei").toString(),
-    //   [SwapFromAddress, SwapToAddress],
-    //   library.getSigner()
-    // );
-    // console.log(response);
-    // if (response.status == true) {
-    //   setIsLoading(false);
-    //   setDisable(false);
-    //   setSuccessModal(true);
-    //   setTxHash(response.message.hash);
-    //   setSuccessMessage(
-    //     "You've successfully swapped " + SwapAmount + "Eusd for " + amountsOut
-    //   );
-    // } else {
-    //   console.log(response);
-    //   setIsLoading(false);
-    //   setDisable(false);
-    //   setErrorModal(true);
-    //   setErrorMessage(response.message);
-    // }
+    if (response.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setTxHash(response.message.hash);
+      setSuccessMessage(
+        "You've successfully swapped " + SwapAmount + "Eusd for " + amountsOut
+      );
+    } else {
+      console.log(response);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(response.message);
+    }
   };
   const SwapTokensForEusd = async () => {
-    // setIsLoading(true);
-    // setDisable(true);
-    console.log(
-      SwapAmount,
-      MinamountsOut,
-      SwapFromAddress,
-      SwapToAddress,
-      "swap exact tokens for eusd"
+    setIsLoading(true);
+    setDisable(true);
+    const response = await swapTokenForEusd(
+      parseEther(SwapAmount.toString(), "wei").toString(),
+      parseEther(MinamountsOut.toString(), "wei").toString(),
+      [SwapFromAddress, SwapToAddress],
+      library.getSigner()
     );
-    const response = await swapTokenForEusd(library.getSigner());
     console.log(response, "SwapTokensForEusd");
-    // const response = await swapTokenForEusd(
-    //   parseEther(SwapAmount.toString(), "wei").toString(),
-    //   parseEther(MinamountsOut.toString(), "wei").toString(),
-    //   [SwapFromAddress, SwapToAddress],
-    //   library.getSigner()
-    // );
-    // console.log(response);
-    // if (response.status == true) {
-    //   setIsLoading(false);
-    //   setDisable(false);
-    //   setSuccessModal(true);
-    //   setTxHash(response.message.hash);
-    //   setSuccessMessage(
-    //     "You've successfully swapped " + SwapAmount + "Eusd for " + amountsOut
-    //   );
-    // } else {
-    //   console.log(response);
-    //   setIsLoading(false);
-    //   setDisable(false);
-    //   setErrorModal(true);
-    //   setErrorMessage(response.message);
-    // }
+    if (response.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setTxHash(response.message.hash);
+      setSuccessMessage(
+        "You've successfully swapped " + SwapAmount + "Eusd for " + amountsOut
+      );
+    } else {
+      console.log(response);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(response.message);
+    }
   };
 
   const SwapbnbForEusd = async () => {
@@ -1014,6 +1007,29 @@ const UpdatedSwap = () => {
     }
   }, [SwapAmount, coinBalance]);
 
+  // =================
+  // =================
+  // =================
+  // =================
+  useEffect(() => {
+    const fetchPairInfo = async () => {
+      try {
+        const response = await axios.get(
+          `https://api.coingecko.com/api/v3/simple/price?ids=${"egoras-credit"}&vs_currencies=usd`
+        );
+        // setPairInfo(response.data);
+        console.log(response);
+      } catch (error) {
+        console.error("Error fetching pair info:", error);
+      }
+    };
+
+    fetchPairInfo();
+  }, []);
+  // =================
+  // =================
+  // =================
+  // =================
   return (
     <div className="other2">
       <section className=" no-bg no_paddd">
@@ -1677,7 +1693,10 @@ const UpdatedSwap = () => {
                                                     height={20}
                                                   />
                                                 ) : (
-                                                  <> Swap {data.symbol}</>
+                                                  <>
+                                                    {" "}
+                                                    Swap {data.symbol} For Token
+                                                  </>
                                                 )}
                                               </button>
                                             )}
@@ -1726,7 +1745,10 @@ const UpdatedSwap = () => {
                                                     height={20}
                                                   />
                                                 ) : (
-                                                  <> Swap {data.symbol}</>
+                                                  <>
+                                                    {" "}
+                                                    Swap {data.symbol} for EUSD
+                                                  </>
                                                 )}
                                               </button>
                                             )}
@@ -1749,7 +1771,6 @@ const UpdatedSwap = () => {
                           Connect wallet
                         </button>
                       )}
-
                       <div className="moreSwapInfoDiv">
                         <div className="moreSwapInfoDiv_div1">
                           More Information
@@ -1919,560 +1940,562 @@ const UpdatedSwap = () => {
               {/* =============== */}
               {/* =============== */}
               {displayChart === true ? (
-                <div className="tradeViewArea">
-                  <div className="tradeViewAreaCont">
-                    <div className="tradeViewAreaCont_pairs_cont">
-                      <div className="tradeViewAreaCont_pairs_cont_div">
-                        {idTicker == "" ? (
-                          <div className="tradeViewAreaCont_pairs_cont_div1">
-                            Nil
-                          </div>
-                        ) : (
-                          <>
-                            {idTicker == "0" ? (
-                              <>
-                                {assetsBase.map((data) => {
-                                  // setSwapBalance(data.balance);
-                                  return (
-                                    <>
-                                      {data.id == idTicker ? (
-                                        <div className="tradeViewAreaCont_pairs_cont_div1 moveCloser">
-                                          <img
-                                            src={data.img}
-                                            alt=""
-                                            className="tradeViewAreaCont_pairs_cont_div1_img"
-                                          />
-                                        </div>
-                                      ) : null}
-                                    </>
-                                  );
-                                })}
-                              </>
-                            ) : (
-                              <>
-                                {assets.map((data) => {
-                                  // setSwapBalance(data.balance);
-                                  return (
-                                    <>
-                                      {data.id == idTicker ? (
-                                        <div className="tradeViewAreaCont_pairs_cont_div1 moveCloser">
-                                          <img
-                                            src={data.img}
-                                            alt=""
-                                            className="tradeViewAreaCont_pairs_cont_div1_img"
-                                          />
-                                        </div>
-                                      ) : null}
-                                    </>
-                                  );
-                                })}
-                              </>
-                            )}
-                          </>
-                        )}
+                // <div className="tradeViewArea">
+                //   <div className="tradeViewAreaCont">
+                //     <div className="tradeViewAreaCont_pairs_cont">
+                //       <div className="tradeViewAreaCont_pairs_cont_div">
+                //         {idTicker == "" ? (
+                //           <div className="tradeViewAreaCont_pairs_cont_div1">
+                //             Nil
+                //           </div>
+                //         ) : (
+                //           <>
+                //             {idTicker == "0" ? (
+                //               <>
+                //                 {assetsBase.map((data) => {
+                //                   // setSwapBalance(data.balance);
+                //                   return (
+                //                     <>
+                //                       {data.id == idTicker ? (
+                //                         <div className="tradeViewAreaCont_pairs_cont_div1 moveCloser">
+                //                           <img
+                //                             src={data.img}
+                //                             alt=""
+                //                             className="tradeViewAreaCont_pairs_cont_div1_img"
+                //                           />
+                //                         </div>
+                //                       ) : null}
+                //                     </>
+                //                   );
+                //                 })}
+                //               </>
+                //             ) : (
+                //               <>
+                //                 {assets.map((data) => {
+                //                   // setSwapBalance(data.balance);
+                //                   return (
+                //                     <>
+                //                       {data.id == idTicker ? (
+                //                         <div className="tradeViewAreaCont_pairs_cont_div1 moveCloser">
+                //                           <img
+                //                             src={data.img}
+                //                             alt=""
+                //                             className="tradeViewAreaCont_pairs_cont_div1_img"
+                //                           />
+                //                         </div>
+                //                       ) : null}
+                //                     </>
+                //                   );
+                //                 })}
+                //               </>
+                //             )}
+                //           </>
+                //         )}
 
-                        {idBase == "" ? (
-                          <div className="tradeViewAreaCont_pairs_cont_div1">
-                            Nil
-                          </div>
-                        ) : (
-                          <>
-                            {idBase == "0" ? (
-                              <>
-                                {assetsBase.map((data) => {
-                                  // setSwapBalance(data.balance);
-                                  return (
-                                    <>
-                                      {data.id == idBase ? (
-                                        <div className="tradeViewAreaCont_pairs_cont_div1">
-                                          <img
-                                            src={data.img}
-                                            alt=""
-                                            className="tradeViewAreaCont_pairs_cont_div1_img"
-                                          />
-                                        </div>
-                                      ) : null}
-                                    </>
-                                  );
-                                })}
-                              </>
-                            ) : (
-                              <>
-                                {assets.map((data) => {
-                                  // setSwapBalance(data.balance);
-                                  return (
-                                    <>
-                                      {data.id == idBase ? (
-                                        <div className="tradeViewAreaCont_pairs_cont_div1">
-                                          <img
-                                            src={data.img}
-                                            alt=""
-                                            className="tradeViewAreaCont_pairs_cont_div1_img"
-                                          />
-                                        </div>
-                                      ) : null}
-                                    </>
-                                  );
-                                })}
-                              </>
-                            )}
-                          </>
-                        )}
+                //         {idBase == "" ? (
+                //           <div className="tradeViewAreaCont_pairs_cont_div1">
+                //             Nil
+                //           </div>
+                //         ) : (
+                //           <>
+                //             {idBase == "0" ? (
+                //               <>
+                //                 {assetsBase.map((data) => {
+                //                   // setSwapBalance(data.balance);
+                //                   return (
+                //                     <>
+                //                       {data.id == idBase ? (
+                //                         <div className="tradeViewAreaCont_pairs_cont_div1">
+                //                           <img
+                //                             src={data.img}
+                //                             alt=""
+                //                             className="tradeViewAreaCont_pairs_cont_div1_img"
+                //                           />
+                //                         </div>
+                //                       ) : null}
+                //                     </>
+                //                   );
+                //                 })}
+                //               </>
+                //             ) : (
+                //               <>
+                //                 {assets.map((data) => {
+                //                   // setSwapBalance(data.balance);
+                //                   return (
+                //                     <>
+                //                       {data.id == idBase ? (
+                //                         <div className="tradeViewAreaCont_pairs_cont_div1">
+                //                           <img
+                //                             src={data.img}
+                //                             alt=""
+                //                             className="tradeViewAreaCont_pairs_cont_div1_img"
+                //                           />
+                //                         </div>
+                //                       ) : null}
+                //                     </>
+                //                   );
+                //                 })}
+                //               </>
+                //             )}
+                //           </>
+                //         )}
 
-                        {idTicker == "" ? (
-                          <div className="tradeViewAreaCont_pairs_cont_div2">
-                            Nil
-                          </div>
-                        ) : (
-                          <>
-                            {idTicker == "0" ? (
-                              <>
-                                {assetsBase.map((data) => {
-                                  // setSwapBalance(data.balance);
-                                  return (
-                                    <>
-                                      {data.id == idTicker ? (
-                                        <div className="tradeViewAreaCont_pairs_cont_div2">
-                                          {data.symbol}
-                                        </div>
-                                      ) : null}
-                                    </>
-                                  );
-                                })}
-                              </>
-                            ) : (
-                              <>
-                                {assets.map((data) => {
-                                  // setSwapBalance(data.balance);
-                                  return (
-                                    <>
-                                      {data.id == idTicker ? (
-                                        <div className="tradeViewAreaCont_pairs_cont_div2">
-                                          {data.symbol}
-                                        </div>
-                                      ) : null}
-                                    </>
-                                  );
-                                })}
-                              </>
-                            )}
-                          </>
-                        )}
-                        <div className="tradeViewAreaCont_pairs_cont_div2_slash">
-                          /
-                        </div>
+                //         {idTicker == "" ? (
+                //           <div className="tradeViewAreaCont_pairs_cont_div2">
+                //             Nil
+                //           </div>
+                //         ) : (
+                //           <>
+                //             {idTicker == "0" ? (
+                //               <>
+                //                 {assetsBase.map((data) => {
+                //                   // setSwapBalance(data.balance);
+                //                   return (
+                //                     <>
+                //                       {data.id == idTicker ? (
+                //                         <div className="tradeViewAreaCont_pairs_cont_div2">
+                //                           {data.symbol}
+                //                         </div>
+                //                       ) : null}
+                //                     </>
+                //                   );
+                //                 })}
+                //               </>
+                //             ) : (
+                //               <>
+                //                 {assets.map((data) => {
+                //                   // setSwapBalance(data.balance);
+                //                   return (
+                //                     <>
+                //                       {data.id == idTicker ? (
+                //                         <div className="tradeViewAreaCont_pairs_cont_div2">
+                //                           {data.symbol}
+                //                         </div>
+                //                       ) : null}
+                //                     </>
+                //                   );
+                //                 })}
+                //               </>
+                //             )}
+                //           </>
+                //         )}
+                //         <div className="tradeViewAreaCont_pairs_cont_div2_slash">
+                //           /
+                //         </div>
 
-                        {idBase == "" ? (
-                          <div className="tradeViewAreaCont_pairs_cont_div2 base">
-                            Nil
-                          </div>
-                        ) : (
-                          <>
-                            {idBase == "0" ? (
-                              <>
-                                {assetsBase.map((data) => {
-                                  // setSwapBalance(data.balance);
-                                  return (
-                                    <>
-                                      {data.id == idBase ? (
-                                        <div className="tradeViewAreaCont_pairs_cont_div2 base">
-                                          {data.symbol}
-                                        </div>
-                                      ) : null}
-                                    </>
-                                  );
-                                })}
-                              </>
-                            ) : (
-                              <>
-                                {assets.map((data) => {
-                                  // setSwapBalance(data.balance);
-                                  return (
-                                    <>
-                                      {data.id == idBase ? (
-                                        <div className="tradeViewAreaCont_pairs_cont_div2 base">
-                                          {data.symbol}
-                                        </div>
-                                      ) : null}
-                                    </>
-                                  );
-                                })}
-                              </>
-                            )}
-                          </>
-                        )}
-                        <SwapHorizIcon
-                          className="swap_base_ticker_price_change_icon"
-                          onClick={ToggleSwapBase}
-                        />
-                      </div>
-                    </div>
-                    <div className="tradeViewAreaCont1">
-                      {activeDuration == "hr1" ? (
-                        <div className="tradeViewAreaCont1_area1">
-                          <div
-                            className="analytics_container_1_Amount"
-                            onChange={CustomTooltip}
-                          >
-                            <span>
-                              <AnimatedNumber
-                                value={ChartValue}
-                                // hasComma={true}
-                                formatValue={(value) => value.toFixed(0)}
-                                size={28}
-                                duration={1000}
-                              />{" "}
-                              {/* ====== */}
-                              {/* ====== */}
-                              {/* ====== */}
-                              {idBase == "" ? (
-                                <>Nil</>
-                              ) : (
-                                <>
-                                  {idBase == "0" ? (
-                                    <>
-                                      {assetsBase.map((data) => {
-                                        // setSwapBalance(data.balance);
-                                        return (
-                                          <>
-                                            {data.id == idBase
-                                              ? data.symbol
-                                              : null}
-                                          </>
-                                        );
-                                      })}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {assets.map((data) => {
-                                        // setSwapBalance(data.balance);
-                                        return (
-                                          <>
-                                            {data.id == idBase
-                                              ? data.symbol
-                                              : null}
-                                          </>
-                                        );
-                                      })}
-                                    </>
-                                  )}
-                                </>
-                              )}
-                            </span>
-                          </div>
-                          <span
-                            className="tradeViewAreaCont1_area1_priceChangeSpan"
-                            style={
-                              ChartChange == "decrease"
-                                ? { color: "#ff537b" }
-                                : ChartChange == "increase"
-                                ? { color: "#31cb9e" }
-                                : { color: "#31cb9e" }
-                            }
-                          >
-                            {ChartChange == "decrease" ? (
-                              <>
-                                {ChartPriceDifference} (
-                                {"-" +
-                                  parseFloat(ChartPercentChange).toFixed(2) +
-                                  "%"}
-                                )
-                              </>
-                            ) : (
-                              <>
-                                {"+" + ChartPriceDifference} (
-                                {"+" +
-                                  parseFloat(ChartPercentChange).toFixed(2) +
-                                  "%"}
-                                )
-                              </>
-                            )}
-                          </span>
-                        </div>
-                      ) : activeDuration == "hr4" ? (
-                        <div className="tradeViewAreaCont1_area1">
-                          <div
-                            className="analytics_container_1_Amount"
-                            onChange={CustomTooltip}
-                          >
-                            <span>
-                              <AnimatedNumber
-                                value={ChartValue2}
-                                // hasComma={true}
-                                formatValue={(value) => value.toFixed(0)}
-                                size={28}
-                                duration={1000}
-                              />{" "}
-                              {idBase == "" ? (
-                                <>Nil</>
-                              ) : (
-                                <>
-                                  {idBase == "0" ? (
-                                    <>
-                                      {assetsBase.map((data) => {
-                                        // setSwapBalance(data.balance);
-                                        return (
-                                          <>
-                                            {data.id == idBase
-                                              ? data.symbol
-                                              : null}
-                                          </>
-                                        );
-                                      })}
-                                    </>
-                                  ) : (
-                                    <>
-                                      {assets.map((data) => {
-                                        // setSwapBalance(data.balance);
-                                        return (
-                                          <>
-                                            {data.id == idBase
-                                              ? data.symbol
-                                              : null}
-                                          </>
-                                        );
-                                      })}
-                                    </>
-                                  )}
-                                </>
-                              )}
-                            </span>
-                          </div>
-                          <span
-                            className="tradeViewAreaCont1_area1_priceChangeSpan"
-                            style={
-                              ChartChange2 == "decrease"
-                                ? { color: "#ff537b" }
-                                : ChartChange2 == "increase"
-                                ? { color: "#31cb9e" }
-                                : { color: "#31cb9e" }
-                            }
-                          >
-                            {ChartChange2 == "decrease" ? (
-                              <>
-                                {ChartPriceDifference2} (
-                                {parseFloat(ChartPercentChange2).toFixed(2) +
-                                  "%"}
-                                )
-                              </>
-                            ) : (
-                              <>
-                                {"+" + ChartPriceDifference2} (
-                                {"+" +
-                                  parseFloat(ChartPercentChange2).toFixed(2) +
-                                  "%"}
-                                )
-                              </>
-                            )}
-                          </span>
-                        </div>
-                      ) : null}
+                //         {idBase == "" ? (
+                //           <div className="tradeViewAreaCont_pairs_cont_div2 base">
+                //             Nil
+                //           </div>
+                //         ) : (
+                //           <>
+                //             {idBase == "0" ? (
+                //               <>
+                //                 {assetsBase.map((data) => {
+                //                   // setSwapBalance(data.balance);
+                //                   return (
+                //                     <>
+                //                       {data.id == idBase ? (
+                //                         <div className="tradeViewAreaCont_pairs_cont_div2 base">
+                //                           {data.symbol}
+                //                         </div>
+                //                       ) : null}
+                //                     </>
+                //                   );
+                //                 })}
+                //               </>
+                //             ) : (
+                //               <>
+                //                 {assets.map((data) => {
+                //                   // setSwapBalance(data.balance);
+                //                   return (
+                //                     <>
+                //                       {data.id == idBase ? (
+                //                         <div className="tradeViewAreaCont_pairs_cont_div2 base">
+                //                           {data.symbol}
+                //                         </div>
+                //                       ) : null}
+                //                     </>
+                //                   );
+                //                 })}
+                //               </>
+                //             )}
+                //           </>
+                //         )}
+                //         <SwapHorizIcon
+                //           className="swap_base_ticker_price_change_icon"
+                //           onClick={ToggleSwapBase}
+                //         />
+                //       </div>
+                //     </div>
+                //     <div className="tradeViewAreaCont1">
+                //       {activeDuration == "hr1" ? (
+                //         <div className="tradeViewAreaCont1_area1">
+                //           <div
+                //             className="analytics_container_1_Amount"
+                //             onChange={CustomTooltip}
+                //           >
+                //             <span>
+                //               <AnimatedNumber
+                //                 value={ChartValue}
+                //                 // hasComma={true}
+                //                 formatValue={(value) => value.toFixed(0)}
+                //                 size={28}
+                //                 duration={1000}
+                //               />{" "}
+                //               {/* ====== */}
+                //               {/* ====== */}
+                //               {/* ====== */}
+                //               {idBase == "" ? (
+                //                 <>Nil</>
+                //               ) : (
+                //                 <>
+                //                   {idBase == "0" ? (
+                //                     <>
+                //                       {assetsBase.map((data) => {
+                //                         // setSwapBalance(data.balance);
+                //                         return (
+                //                           <>
+                //                             {data.id == idBase
+                //                               ? data.symbol
+                //                               : null}
+                //                           </>
+                //                         );
+                //                       })}
+                //                     </>
+                //                   ) : (
+                //                     <>
+                //                       {assets.map((data) => {
+                //                         // setSwapBalance(data.balance);
+                //                         return (
+                //                           <>
+                //                             {data.id == idBase
+                //                               ? data.symbol
+                //                               : null}
+                //                           </>
+                //                         );
+                //                       })}
+                //                     </>
+                //                   )}
+                //                 </>
+                //               )}
+                //             </span>
+                //           </div>
+                //           <span
+                //             className="tradeViewAreaCont1_area1_priceChangeSpan"
+                //             style={
+                //               ChartChange == "decrease"
+                //                 ? { color: "#ff537b" }
+                //                 : ChartChange == "increase"
+                //                 ? { color: "#31cb9e" }
+                //                 : { color: "#31cb9e" }
+                //             }
+                //           >
+                //             {ChartChange == "decrease" ? (
+                //               <>
+                //                 {ChartPriceDifference} (
+                //                 {"-" +
+                //                   parseFloat(ChartPercentChange).toFixed(2) +
+                //                   "%"}
+                //                 )
+                //               </>
+                //             ) : (
+                //               <>
+                //                 {"+" + ChartPriceDifference} (
+                //                 {"+" +
+                //                   parseFloat(ChartPercentChange).toFixed(2) +
+                //                   "%"}
+                //                 )
+                //               </>
+                //             )}
+                //           </span>
+                //         </div>
+                //       ) : activeDuration == "hr4" ? (
+                //         <div className="tradeViewAreaCont1_area1">
+                //           <div
+                //             className="analytics_container_1_Amount"
+                //             onChange={CustomTooltip}
+                //           >
+                //             <span>
+                //               <AnimatedNumber
+                //                 value={ChartValue2}
+                //                 // hasComma={true}
+                //                 formatValue={(value) => value.toFixed(0)}
+                //                 size={28}
+                //                 duration={1000}
+                //               />{" "}
+                //               {idBase == "" ? (
+                //                 <>Nil</>
+                //               ) : (
+                //                 <>
+                //                   {idBase == "0" ? (
+                //                     <>
+                //                       {assetsBase.map((data) => {
+                //                         // setSwapBalance(data.balance);
+                //                         return (
+                //                           <>
+                //                             {data.id == idBase
+                //                               ? data.symbol
+                //                               : null}
+                //                           </>
+                //                         );
+                //                       })}
+                //                     </>
+                //                   ) : (
+                //                     <>
+                //                       {assets.map((data) => {
+                //                         // setSwapBalance(data.balance);
+                //                         return (
+                //                           <>
+                //                             {data.id == idBase
+                //                               ? data.symbol
+                //                               : null}
+                //                           </>
+                //                         );
+                //                       })}
+                //                     </>
+                //                   )}
+                //                 </>
+                //               )}
+                //             </span>
+                //           </div>
+                //           <span
+                //             className="tradeViewAreaCont1_area1_priceChangeSpan"
+                //             style={
+                //               ChartChange2 == "decrease"
+                //                 ? { color: "#ff537b" }
+                //                 : ChartChange2 == "increase"
+                //                 ? { color: "#31cb9e" }
+                //                 : { color: "#31cb9e" }
+                //             }
+                //           >
+                //             {ChartChange2 == "decrease" ? (
+                //               <>
+                //                 {ChartPriceDifference2} (
+                //                 {parseFloat(ChartPercentChange2).toFixed(2) +
+                //                   "%"}
+                //                 )
+                //               </>
+                //             ) : (
+                //               <>
+                //                 {"+" + ChartPriceDifference2} (
+                //                 {"+" +
+                //                   parseFloat(ChartPercentChange2).toFixed(2) +
+                //                   "%"}
+                //                 )
+                //               </>
+                //             )}
+                //           </span>
+                //         </div>
+                //       ) : null}
 
-                      <div className="tradeViewAreaCont1_area2">
-                        <div
-                          className={
-                            activeDuration == "hr1"
-                              ? "tradeViewAreaCont1_area2_cont1_active"
-                              : "tradeViewAreaCont1_area2_cont1"
-                          }
-                          onClick={ToggleDuration}
-                          id="hr1"
-                        >
-                          1H
-                        </div>
-                        <div
-                          className={
-                            activeDuration == "hr4"
-                              ? "tradeViewAreaCont1_area2_cont1_active"
-                              : "tradeViewAreaCont1_area2_cont1"
-                          }
-                          onClick={ToggleDuration}
-                          id="hr4"
-                        >
-                          4H
-                        </div>
-                        <div
-                          className={
-                            activeDuration == "day"
-                              ? "tradeViewAreaCont1_area2_cont1_active"
-                              : "tradeViewAreaCont1_area2_cont1"
-                          }
-                          onClick={ToggleDuration}
-                          id="day"
-                        >
-                          1D
-                        </div>
-                        <div
-                          className={
-                            activeDuration == "week"
-                              ? "tradeViewAreaCont1_area2_cont1_active"
-                              : "tradeViewAreaCont1_area2_cont1"
-                          }
-                          onClick={ToggleDuration}
-                          id="week"
-                        >
-                          1W
-                        </div>
-                        <div
-                          className={
-                            activeDuration == "month1"
-                              ? "tradeViewAreaCont1_area2_cont1_active"
-                              : "tradeViewAreaCont1_area2_cont1"
-                          }
-                          onClick={ToggleDuration}
-                          id="month1"
-                        >
-                          1M
-                        </div>
-                        <div
-                          className={
-                            activeDuration == "month6"
-                              ? "tradeViewAreaCont1_area2_cont1_active"
-                              : "tradeViewAreaCont1_area2_cont1"
-                          }
-                          onClick={ToggleDuration}
-                          id="month6"
-                        >
-                          6M
-                        </div>
-                      </div>
-                    </div>
-                    <div className="tradingView_container_1_chart">
-                      {activeDuration == "hr1" ? (
-                        <div
-                          className="tradeViewAreaCont_chart_area2 "
-                          style={{ width: "100%", height: 400 }}
-                        >
-                          <ResponsiveContainer>
-                            <AreaChart
-                              width={1000}
-                              height={100}
-                              data={formattedData}
-                              margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
-                            >
-                              <defs>
-                                <linearGradient
-                                  id="colorUv"
-                                  x1="0"
-                                  y1="0"
-                                  x2="0"
-                                  y2="1"
-                                >
-                                  <stop
-                                    offset="5%"
-                                    stopColor="#31cb9e"
-                                    stopOpacity={0.3}
-                                  />
-                                  <stop
-                                    offset="100%"
-                                    stopColor="#31cb9e"
-                                    stopOpacity={0}
-                                  />
-                                </linearGradient>
-                              </defs>
-                              {/* <CartesianGrid
-                            strokeDasharray="1 1"
-                            stroke="#d7d7d7"
-                          /> */}
-                              <XAxis
-                                dataKey="time"
-                                stroke="0"
-                                interval={interval - 1}
-                                ticks={formattedData
-                                  .slice(1, -1)
-                                  .map((dataPoint) => dataPoint.time)}
-                                // tick={false}
-                                tick={{ fontSize: 12 }}
-                                allowDuplicatedCategory={false}
-                              />
-                              {/* <YAxis
-                          domain={[minPrice, "auto"]}
-                          tick={false}
-                          axisLine={false}
-                        /> */}
-                              <Tooltip content={<CustomTooltip />} />
+                //       <div className="tradeViewAreaCont1_area2">
+                //         <div
+                //           className={
+                //             activeDuration == "hr1"
+                //               ? "tradeViewAreaCont1_area2_cont1_active"
+                //               : "tradeViewAreaCont1_area2_cont1"
+                //           }
+                //           onClick={ToggleDuration}
+                //           id="hr1"
+                //         >
+                //           1H
+                //         </div>
+                //         <div
+                //           className={
+                //             activeDuration == "hr4"
+                //               ? "tradeViewAreaCont1_area2_cont1_active"
+                //               : "tradeViewAreaCont1_area2_cont1"
+                //           }
+                //           onClick={ToggleDuration}
+                //           id="hr4"
+                //         >
+                //           4H
+                //         </div>
+                //         <div
+                //           className={
+                //             activeDuration == "day"
+                //               ? "tradeViewAreaCont1_area2_cont1_active"
+                //               : "tradeViewAreaCont1_area2_cont1"
+                //           }
+                //           onClick={ToggleDuration}
+                //           id="day"
+                //         >
+                //           1D
+                //         </div>
+                //         <div
+                //           className={
+                //             activeDuration == "week"
+                //               ? "tradeViewAreaCont1_area2_cont1_active"
+                //               : "tradeViewAreaCont1_area2_cont1"
+                //           }
+                //           onClick={ToggleDuration}
+                //           id="week"
+                //         >
+                //           1W
+                //         </div>
+                //         <div
+                //           className={
+                //             activeDuration == "month1"
+                //               ? "tradeViewAreaCont1_area2_cont1_active"
+                //               : "tradeViewAreaCont1_area2_cont1"
+                //           }
+                //           onClick={ToggleDuration}
+                //           id="month1"
+                //         >
+                //           1M
+                //         </div>
+                //         <div
+                //           className={
+                //             activeDuration == "month6"
+                //               ? "tradeViewAreaCont1_area2_cont1_active"
+                //               : "tradeViewAreaCont1_area2_cont1"
+                //           }
+                //           onClick={ToggleDuration}
+                //           id="month6"
+                //         >
+                //           6M
+                //         </div>
+                //       </div>
+                //     </div>
+                //     <div className="tradingView_container_1_chart">
+                //       {activeDuration == "hr1" ? (
+                //         <div
+                //           className="tradeViewAreaCont_chart_area2 "
+                //           style={{ width: "100%", height: 400 }}
+                //         >
+                //           <ResponsiveContainer>
+                //             <AreaChart
+                //               width={1000}
+                //               height={100}
+                //               data={formattedData}
+                //               margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
+                //             >
+                //               <defs>
+                //                 <linearGradient
+                //                   id="colorUv"
+                //                   x1="0"
+                //                   y1="0"
+                //                   x2="0"
+                //                   y2="1"
+                //                 >
+                //                   <stop
+                //                     offset="5%"
+                //                     stopColor="#31cb9e"
+                //                     stopOpacity={0.3}
+                //                   />
+                //                   <stop
+                //                     offset="100%"
+                //                     stopColor="#31cb9e"
+                //                     stopOpacity={0}
+                //                   />
+                //                 </linearGradient>
+                //               </defs>
+                //               {/* <CartesianGrid
+                //             strokeDasharray="1 1"
+                //             stroke="#d7d7d7"
+                //           /> */}
+                //               <XAxis
+                //                 dataKey="time"
+                //                 stroke="0"
+                //                 interval={interval - 1}
+                //                 ticks={formattedData
+                //                   .slice(1, -1)
+                //                   .map((dataPoint) => dataPoint.time)}
+                //                 // tick={false}
+                //                 tick={{ fontSize: 12 }}
+                //                 allowDuplicatedCategory={false}
+                //               />
+                //               {/* <YAxis
+                //           domain={[minPrice, "auto"]}
+                //           tick={false}
+                //           axisLine={false}
+                //         /> */}
+                //               <Tooltip content={<CustomTooltip />} />
 
-                              <Area
-                                type="monotone"
-                                dataKey={(d) => d.price - priceOffset}
-                                stroke="#31cb9e"
-                                fillOpacity={1}
-                                fill="url(#colorUv)"
-                                strokeWidth={2}
-                              />
-                            </AreaChart>
-                          </ResponsiveContainer>
-                        </div>
-                      ) : activeDuration == "hr4" ? (
-                        <div
-                          className="tradeViewAreaCont_chart_area2 "
-                          style={{ width: "100%", height: 400 }}
-                        >
-                          <ResponsiveContainer>
-                            <AreaChart
-                              width={1000}
-                              height={100}
-                              data={formattedData2}
-                              margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
-                            >
-                              <defs>
-                                <linearGradient
-                                  id="colorUv"
-                                  x1="0"
-                                  y1="0"
-                                  x2="0"
-                                  y2="1"
-                                >
-                                  <stop
-                                    offset="5%"
-                                    stopColor="#ff537b"
-                                    stopOpacity={0.3}
-                                  />
-                                  <stop
-                                    offset="100%"
-                                    stopColor="#ff537b"
-                                    stopOpacity={0}
-                                  />
-                                </linearGradient>
-                              </defs>
-                              {/* <CartesianGrid
-                            strokeDasharray="1 1"
-                            stroke="#d7d7d7"
-                          /> */}
-                              <XAxis
-                                dataKey="time"
-                                stroke="0"
-                                interval={interval2 - 1}
-                                ticks={formattedData2
-                                  .slice(1, -1)
-                                  .map((dataPoint) => dataPoint.time)}
-                                // tick={false}
-                                tick={{ fontSize: 12 }}
-                                allowDuplicatedCategory={false}
-                              />
-                              {/* <YAxis
-                          domain={[minPrice, "auto"]}
-                          tick={false}
-                          axisLine={false}
-                        /> */}
-                              <Tooltip content={<CustomTooltip />} />
+                //               <Area
+                //                 type="monotone"
+                //                 dataKey={(d) => d.price - priceOffset}
+                //                 stroke="#31cb9e"
+                //                 fillOpacity={1}
+                //                 fill="url(#colorUv)"
+                //                 strokeWidth={2}
+                //               />
+                //             </AreaChart>
+                //           </ResponsiveContainer>
+                //         </div>
+                //       ) : activeDuration == "hr4" ? (
+                //         <div
+                //           className="tradeViewAreaCont_chart_area2 "
+                //           style={{ width: "100%", height: 400 }}
+                //         >
+                //           <ResponsiveContainer>
+                //             <AreaChart
+                //               width={1000}
+                //               height={100}
+                //               data={formattedData2}
+                //               margin={{ top: 20, right: 0, left: 0, bottom: 0 }}
+                //             >
+                //               <defs>
+                //                 <linearGradient
+                //                   id="colorUv"
+                //                   x1="0"
+                //                   y1="0"
+                //                   x2="0"
+                //                   y2="1"
+                //                 >
+                //                   <stop
+                //                     offset="5%"
+                //                     stopColor="#ff537b"
+                //                     stopOpacity={0.3}
+                //                   />
+                //                   <stop
+                //                     offset="100%"
+                //                     stopColor="#ff537b"
+                //                     stopOpacity={0}
+                //                   />
+                //                 </linearGradient>
+                //               </defs>
+                //               {/* <CartesianGrid
+                //             strokeDasharray="1 1"
+                //             stroke="#d7d7d7"
+                //           /> */}
+                //               <XAxis
+                //                 dataKey="time"
+                //                 stroke="0"
+                //                 interval={interval2 - 1}
+                //                 ticks={formattedData2
+                //                   .slice(1, -1)
+                //                   .map((dataPoint) => dataPoint.time)}
+                //                 // tick={false}
+                //                 tick={{ fontSize: 12 }}
+                //                 allowDuplicatedCategory={false}
+                //               />
+                //               {/* <YAxis
+                //           domain={[minPrice, "auto"]}
+                //           tick={false}
+                //           axisLine={false}
+                //         /> */}
+                //               <Tooltip content={<CustomTooltip />} />
 
-                              <Area
-                                type="monotone"
-                                dataKey={(d) => d.price - priceOffset2}
-                                stroke="#ff537b"
-                                fillOpacity={1}
-                                fill="url(#colorUv)"
-                                strokeWidth={2}
-                              />
-                            </AreaChart>
-                          </ResponsiveContainer>
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
-              ) : null}
+                //               <Area
+                //                 type="monotone"
+                //                 dataKey={(d) => d.price - priceOffset2}
+                //                 stroke="#ff537b"
+                //                 fillOpacity={1}
+                //                 fill="url(#colorUv)"
+                //                 strokeWidth={2}
+                //               />
+                //             </AreaChart>
+                //           </ResponsiveContainer>
+                //         </div>
+                //       ) : null}
+                //     </div>
+                //   </div>
+                // </div>
+                <></>
+              ) : // <TradingViewWidget />
+              null}
             </div>
           </div>
         </div>
