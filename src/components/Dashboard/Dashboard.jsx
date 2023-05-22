@@ -7,7 +7,7 @@ import ProductsCategoryPage from "./DashBoardPages/UpdatedAppPages/DashboardMark
 import CloseIcon from "@mui/icons-material/Close";
 import DashBoardUserSales from "./DashBoardPages/DashBoardUserSales";
 import Cookies from "universal-cookie";
-import Swap from "./DashBoardPages/Swap/Swap";
+// import Swap from "./DashBoardPages/Swap/Swap";
 import DashBoardMarketCheckoutPage from "./DashBoardPages/UpdatedAppPages/DashboardMarket/DashBoardMarketCheckoutPage";
 import ProductDetailPage from "./DashBoardPages/UpdatedAppPages/DashboardMarket/ProductDetailPage";
 import DashBoardUserDetails from "./DashBoardPages/DashBoardUserDetails";
@@ -243,7 +243,7 @@ const Dashboard = ({ check, togglemakeDark }) => {
                   component={DashBoardBranchAsset}
                 />
                 <Route exact path="/app/swap" component={UpdatedSwap} />
-                <Route exact path="/app/swap2" component={Swap} />
+                {/* <Route exact path="/app/swap2" component={Swap} /> */}
                 <Route
                   exact
                   path="/app/user"
