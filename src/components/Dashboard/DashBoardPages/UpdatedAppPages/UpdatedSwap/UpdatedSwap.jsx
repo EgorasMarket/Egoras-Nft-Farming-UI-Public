@@ -323,7 +323,7 @@ const UpdatedSwap = () => {
       symbol: "EUSD",
       PriceAddress: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
       address: "0xeeec111dca00461ec4da49c09464953931aa7233",
-      name: "EGC USD",
+      name: "EUSD Token",
       favorite: "true",
     },
   ];
@@ -331,7 +331,7 @@ const UpdatedSwap = () => {
     {
       id: "1",
       img: "/img/tokens-folder/bnb_icon.png",
-      name: "Binance Smart Chain",
+      name: "Binance Chain Token",
       address: "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c",
       symbol: "BNB",
       favorite: "true",
@@ -347,7 +347,7 @@ const UpdatedSwap = () => {
     {
       id: "3",
       img: "/img/tokens-folder/usdt_icon.png",
-      name: "Tether",
+      name: "Tether USD",
       address: "0x55d398326f99059fF775485246999027B3197955",
       symbol: "USDT",
       favorite: "true",
@@ -359,6 +359,14 @@ const UpdatedSwap = () => {
       address: "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c",
       symbol: "BTCB",
       favorite: "false",
+    },
+    {
+      id: "5",
+      img: "/img/tokens-folder/usdsc_icon.png",
+      name: "Binance Pegged USDC Coin",
+      address: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
+      symbol: "USDC",
+      favorite: "true",
     },
     // {
     //   id: "3",
@@ -818,74 +826,57 @@ const UpdatedSwap = () => {
     }
   };
   const SwapEusdForTokens = async () => {
-    // setIsLoading(true);
-    // setDisable(true);
-    console.log(
-      SwapAmount,
-      MinamountsOut,
-      SwapFromAddress,
-      SwapToAddress,
-      "swap exact eusd for tokens"
+    setIsLoading(true);
+    setDisable(true);
+
+    const response = await swapEusdForToken(
+      parseEther(SwapAmount.toString(), "wei").toString(),
+      parseEther(amountsOut.toString(), "wei").toString(),
+      [SwapFromAddress, SwapToAddress],
+      library.getSigner()
     );
-    const response = await swapEusdForToken(library.getSigner());
     console.log(response, "SwapEusdForTokens");
-    // const response = await swapEusdForToken(
-    //   parseEther(SwapAmount.toString(), "wei").toString(),
-    //   parseEther(MinamountsOut.toString(), "wei").toString(),
-    //   [SwapFromAddress, SwapToAddress],
-    //   library.getSigner()
-    // );
-    // console.log(response);
-    // if (response.status == true) {
-    //   setIsLoading(false);
-    //   setDisable(false);
-    //   setSuccessModal(true);
-    //   setTxHash(response.message.hash);
-    //   setSuccessMessage(
-    //     "You've successfully swapped " + SwapAmount + "Eusd for " + amountsOut
-    //   );
-    // } else {
-    //   console.log(response);
-    //   setIsLoading(false);
-    //   setDisable(false);
-    //   setErrorModal(true);
-    //   setErrorMessage(response.message);
-    // }
+    if (response.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setTxHash(response.message.hash);
+      setSuccessMessage(
+        "You've successfully swapped " + SwapAmount + "Eusd for " + amountsOut
+      );
+    } else {
+      console.log(response);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(response.message);
+    }
   };
   const SwapTokensForEusd = async () => {
-    // setIsLoading(true);
-    // setDisable(true);
-    console.log(
-      SwapAmount,
-      MinamountsOut,
-      SwapFromAddress,
-      SwapToAddress,
-      "swap exact tokens for eusd"
+    setIsLoading(true);
+    setDisable(true);
+    const response = await swapTokenForEusd(
+      parseEther(SwapAmount.toString(), "wei").toString(),
+      parseEther(amountsOut.toString(), "wei").toString(),
+      [SwapFromAddress, SwapToAddress],
+      library.getSigner()
     );
-    const response = await swapTokenForEusd(library.getSigner());
     console.log(response, "SwapTokensForEusd");
-    // const response = await swapTokenForEusd(
-    //   parseEther(SwapAmount.toString(), "wei").toString(),
-    //   parseEther(MinamountsOut.toString(), "wei").toString(),
-    //   [SwapFromAddress, SwapToAddress],
-    //   library.getSigner()
-    // );
-    // console.log(response);
-    // if (response.status == true) {
-    //   setIsLoading(false);
-    //   setDisable(false);
-    //   setSuccessModal(true);
-    //   setTxHash(response.message.hash);
-    //   setSuccessMessage(
-    //     "You've successfully swapped " + SwapAmount + "Eusd for " + amountsOut
-    //   );
-    // } else {
-    //   console.log(response);
-    //   setIsLoading(false);
-    //   setDisable(false);
-    //   setErrorModal(true);
-    //   setErrorMessage(response.message);
-    // }
+    if (response.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setTxHash(response.message.hash);
+      setSuccessMessage(
+        "You've successfully swapped " + SwapAmount + "Eusd for " + amountsOut
+      );
+    } else {
+      console.log(response);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(response.message);
+    }
   };
 
   const SwapbnbForEusd = async () => {
@@ -1677,7 +1668,10 @@ const UpdatedSwap = () => {
                                                     height={20}
                                                   />
                                                 ) : (
-                                                  <> Swap {data.symbol}</>
+                                                  <>
+                                                    {" "}
+                                                    Swap {data.symbol} For Token
+                                                  </>
                                                 )}
                                               </button>
                                             )}
@@ -1726,7 +1720,10 @@ const UpdatedSwap = () => {
                                                     height={20}
                                                   />
                                                 ) : (
-                                                  <> Swap {data.symbol}</>
+                                                  <>
+                                                    {" "}
+                                                    Swap {data.symbol} for EUSD
+                                                  </>
                                                 )}
                                               </button>
                                             )}
@@ -1749,7 +1746,6 @@ const UpdatedSwap = () => {
                           Connect wallet
                         </button>
                       )}
-
                       <div className="moreSwapInfoDiv">
                         <div className="moreSwapInfoDiv_div1">
                           More Information
