@@ -362,28 +362,36 @@ const UpdatedSwap = () => {
     },
     {
       id: "4",
-      img: "/img/tokens-folder/btcb_icon.png",
-      name: "BTCB Token",
-      address: "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c",
-      symbol: "BTCB",
-      favorite: "false",
-    },
-    {
-      id: "5",
       img: "/img/tokens-folder/usdsc_icon.png",
       name: "Binance Pegged USDC Coin",
       address: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
       symbol: "USDC",
       favorite: "true",
     },
-    // {
-    //   id: "3",
-    //   img: "/img/vertiverse-token-logo-icon.svg",
-    //   name: "VertiVerseToken",
-    //   address: "0xA46ebC22Df7D73575b8680434A1E0ADB9a4A14C4",
-    //   symbol: "VTT",
-    //   favorite: "false",
-    // },
+    {
+      id: "5",
+      img: "/img/tokens-folder/cake_icon.png",
+      name: "Pancakeswap Token",
+      address: "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+      symbol: "CAKE",
+      favorite: "false",
+    },
+    {
+      id: "6",
+      img: "/img/tokens-folder/file_icon.png",
+      name: "File coin",
+      address: "0x0D8Ce2A99Bb6e3B7Db580eD848240e4a0F9aE153",
+      symbol: "FIL",
+      favorite: "false",
+    },
+    {
+      id: "7",
+      img: "/img/tokens-folder/eth_icon.png",
+      name: "Binance-Peg Ethereum Token",
+      address: "0x2170Ed0880ac9A755fd29B2688956BD959F933F8",
+      symbol: "ETH",
+      favorite: "true",
+    },
   ];
   useEffect(() => {
     setBaseFromAddress(assetsBase[0].PriceAddress);
