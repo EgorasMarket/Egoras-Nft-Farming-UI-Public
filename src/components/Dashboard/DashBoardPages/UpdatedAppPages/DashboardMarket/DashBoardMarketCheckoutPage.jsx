@@ -17,9 +17,9 @@ import { BuyIndirectProduct, BuyDirectProduct } from "../../../../../web3";
 import { parseEther, formatEther } from "@ethersproject/units";
 import { unlockTokenV3, checkAllowanceV3 } from "../../../../../web3";
 import {
-  Web3ReactProvider,
+  // Web3ReactProvider,
   useWeb3React,
-  UnsupportedChainIdError,
+  // UnsupportedChainIdError,
 } from "@web3-react/core";
 import PayViaFortModal from "../../../../Home/MemberShip/PayViaFortModal";
 const DashBoardMarketCheckoutPage = ({ match }) => {

@@ -37,5 +37,6 @@ export const USER_INDIRECT_BUY_ORDER = `${API_URL}/order/indirect/buy/order`;
 export const SELLER_LOCKED_FUNDS = `${API_URL}/order/get/seller/locked/funds`;
 export const EXPRESS_BUY_ORDER_STATS = `${API_URL}/order/buy/order/stats`;
 export const UPDATE_MY_PROFILE = `${API_URL}/pub/update/profile`;
+export const VERIFY_ADMIN_WALLET = `${API_URL}/api2/admin/validate/admin`;
 export const IMG_CMS = `https://ellaa.org/v1/file-upload/add`;
 // export const DIRECT_BUY_ORDER_STATS = `${API_URL}/order/buy/order/stats/direct`;
