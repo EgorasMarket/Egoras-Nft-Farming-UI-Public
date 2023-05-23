@@ -58,7 +58,7 @@ export const UpdatedTokenModal = ({
             />
           </div>
           <div className="updatedTokenModal_area1_para">
-            You can search and select any token on EGCDAO swap
+            You can search and select any token on Martgpt swap
           </div>
           <div className="updatedTokenModal_area1_search">
             <input
