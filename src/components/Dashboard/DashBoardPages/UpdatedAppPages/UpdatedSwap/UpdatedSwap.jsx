@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import SwapVerticalCircleIcon from "@mui/icons-material/SwapVerticalCircle";
 import TradingViewWidget from "./TradeViewWidget";
+import WarningAmberRoundedIcon from "@mui/icons-material/WarningAmberRounded";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import v3ContractAdress from "../../../../../web3/contracts/V3/V3ContractAddress.json";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
@@ -107,7 +108,12 @@ const UpdatedSwap = () => {
   const [baseBalance, setBaseBalance] = useState("0");
   const [txHash, setTxHash] = useState("");
   const [eusdSmartContractBal, setEusdSmartContractBal] = useState("");
-  const [slippage, setSlippage] = useState(0.005);
+  const [slippage, setSlippage] = useState("0.5");
+  const [slippageInput, setSlippageInput] = useState("");
+  const [lowSlippageDiv, setLowSlipageDiv] = useState(false);
+  const [highSlippageDiv, setHighSlipageDiv] = useState(false);
+  const [maxSlippageDisplay, setmaxSlippageDisplay] = useState(false);
+  // const [inputDisable, setmaxSlippageDisplay] = useState(false);
   const [insufficientLiquidityBtn, setInsufficientLiquidityBtn] =
     useState(false);
   const [insufficientBalance, setInsufficientBalance] = useState(false);
@@ -560,7 +566,10 @@ const UpdatedSwap = () => {
     if (response.status == true) {
       setIsAmountLoading(false);
       setAmountsOut(formatEther(response.message[1]._hex));
-      setMinAmountsOut(formatEther(response.message[1]._hex) * (1 - 0.005));
+      const maxSlippage = parseFloat(slippage) / 100;
+      setMinAmountsOut(
+        formatEther(response.message[1]._hex) * (1 - maxSlippage)
+      );
       console.log(formatEther(response.message[1]._hex));
     } else {
       setIsAmountLoading(false);
@@ -581,7 +590,10 @@ const UpdatedSwap = () => {
     if (response.status == true) {
       setIsAmountLoading(false);
       setAmountsOut(formatEther(response.message[1]._hex));
-      setMinAmountsOut(formatEther(response.message[1]._hex) * (1 - 0.005));
+      const maxSlippage = parseFloat(slippage) / 100;
+      setMinAmountsOut(
+        formatEther(response.message[1]._hex) * (1 - maxSlippage)
+      );
       console.log(formatEther(response.message[1]._hex));
     } else {
       setIsAmountLoading(false);
@@ -600,7 +612,10 @@ const UpdatedSwap = () => {
     if (response.status == true) {
       setIsAmountLoading(false);
       setAmountsOut(formatEther(response.message[1]._hex));
-      setMinAmountsOut(formatEther(response.message[1]._hex) * (1 - 0.005));
+      const maxSlippage = parseFloat(slippage) / 100;
+      setMinAmountsOut(
+        formatEther(response.message[1]._hex) * (1 - maxSlippage)
+      );
       console.log(formatEther(response.message[1]._hex));
     } else {
       setIsAmountLoading(false);
@@ -619,7 +634,10 @@ const UpdatedSwap = () => {
     if (response.status == true) {
       setIsAmountLoading(false);
       setAmountsOut(formatEther(response.message[1]._hex));
-      setMinAmountsOut(formatEther(response.message[1]._hex) * (1 - 0.005));
+      const maxSlippage = parseFloat(slippage) / 100;
+      setMinAmountsOut(
+        formatEther(response.message[1]._hex) * (1 - maxSlippage)
+      );
       console.log(formatEther(response.message[1]._hex));
     } else {
       setIsAmountLoading(false);
@@ -937,7 +955,10 @@ const UpdatedSwap = () => {
       setIsAmountLoading(false);
       // setInputDisabled(false);
       setAmountsOut(formatEther(response.message[1]._hex));
-      setMinAmountsOut(formatEther(response.message[1]._hex) * (1 - slippage));
+      const maxSlippage = parseFloat(slippage) / 100;
+      setMinAmountsOut(
+        formatEther(response.message[1]._hex) * (1 - maxSlippage)
+      );
       console.log(formatEther(response.message[1]._hex));
     } else {
       setIsAmountLoading(false);
@@ -1026,6 +1047,70 @@ const UpdatedSwap = () => {
 
     fetchPairInfo();
   }, []);
+  // =================
+  // =================
+  // =================
+  // =================
+  // =================
+  // =================
+  // =================
+  // =================
+  const ToggleMaxSlippageDiv = () => {
+    setmaxSlippageDisplay(!maxSlippageDisplay);
+  };
+  const ToggleActiveSlippageBg = (e) => {
+    let id = e.currentTarget.id;
+    setSlippage(id);
+    const maxSlippage = parseFloat(id) / 100;
+    setMinAmountsOut(amountsOut * (1 - maxSlippage));
+    setSlippageInput("");
+  };
+  const slippageChange = (e) => {
+    setSlippage(e.target.value);
+    setSlippageInput(e.target.value);
+    const maxSlippage = parseFloat(e.target.value) / 100;
+    setMinAmountsOut(amountsOut * (1 - maxSlippage));
+    if (parseInt(e.target.value) > 20) {
+      setSlippageInput("20");
+      setSlippage("20");
+      const maxSlippage = parseFloat("20") / 100;
+      setMinAmountsOut(amountsOut * (1 - maxSlippage));
+    } else {
+      setSlippageInput(e.target.value);
+      setSlippage(e.target.value);
+      const maxSlippage = parseFloat(e.target.value) / 100;
+      setMinAmountsOut(amountsOut * (1 - maxSlippage));
+    }
+    if (e.target.value <= 0) {
+      setSlippage("0.5");
+      const maxSlippage = parseFloat("0.5") / 100;
+      setMinAmountsOut(amountsOut * (1 - maxSlippage));
+      return;
+    }
+  };
+  useEffect(() => {
+    if (parseFloat(slippage) < 0.1) {
+      setLowSlipageDiv(true);
+    } else {
+      setLowSlipageDiv(false);
+    }
+    if (parseInt(slippage) > 5) {
+      setHighSlipageDiv(true);
+    } else {
+      setHighSlipageDiv(false);
+    }
+  }, [slippage]);
+  console.log(slippage);
+  console.log(highSlippageDiv);
+  // =================
+  // =================
+  // =================
+  // =================
+  // =================
+  // =================
+  // =================
+  // =================
+
   // =================
   // =================
   // =================
@@ -1510,16 +1595,110 @@ const UpdatedSwap = () => {
                         onClick={ToggleSwapPrices}
                       />
                     </div> */}
-                      <div className="swap_price_slippage_div">
-                        <div className="swap_price_slippage_div1">
-                          Max Slippage{" "}
-                          <InfoOutlinedIcon className="swap_price_slippage_info_icon" />
-                          :
+                      <div className="max_slippage_display_details_div">
+                        <div className="swap_price_slippage_div">
+                          <div className="swap_price_slippage_div1">
+                            Max Slippage{" "}
+                            <InfoOutlinedIcon className="swap_price_slippage_info_icon" />
+                            :
+                          </div>
+                          <div
+                            className="swap_price_slippage_div2"
+                            onClick={ToggleMaxSlippageDiv}
+                          >
+                            {slippage}%{" "}
+                            <ArrowDropDownIcon className="swap_price_slippage_div2_icon" />
+                          </div>
                         </div>
-                        <div className="swap_price_slippage_div2">
-                          {slippage * 100}%{" "}
-                          <ArrowDropDownIcon className="swap_price_slippage_div2_icon" />
-                        </div>
+                        {maxSlippageDisplay ? (
+                          <div className="max_slippageDisplayDiv">
+                            <div
+                              className={
+                                slippage === "0.05"
+                                  ? "max_slippageDisplayDiv1_active_warning"
+                                  : "max_slippageDisplayDiv1"
+                              }
+                              onClick={ToggleActiveSlippageBg}
+                              id="0.05"
+                            >
+                              0.05%
+                            </div>
+                            <div
+                              className={
+                                "0.1" === slippage
+                                  ? "max_slippageDisplayDiv1_active"
+                                  : "max_slippageDisplayDiv1"
+                              }
+                              onClick={ToggleActiveSlippageBg}
+                              id="0.1"
+                            >
+                              0.1%
+                            </div>
+                            <div
+                              className={
+                                "0.5" === slippage
+                                  ? "max_slippageDisplayDiv1_active"
+                                  : "max_slippageDisplayDiv1"
+                              }
+                              onClick={ToggleActiveSlippageBg}
+                              id="0.5"
+                            >
+                              0.5%
+                            </div>
+                            <div
+                              className={
+                                "1" === slippage
+                                  ? "max_slippageDisplayDiv1_active"
+                                  : "max_slippageDisplayDiv1"
+                              }
+                              onClick={ToggleActiveSlippageBg}
+                              id="1"
+                            >
+                              1%
+                            </div>
+                            <div
+                              className={
+                                highSlippageDiv === true
+                                  ? "custom_slippage_input_div_active_warning"
+                                  : slippage > 1
+                                  ? "custom_slippage_input_div_active"
+                                  : slippage < "0.1" && slippage !== "0.05"
+                                  ? "custom_slippage_input_div_active_warning"
+                                  : "custom_slippage_input_div"
+                              }
+                            >
+                              <input
+                                type="number"
+                                className="custom_slippage_input"
+                                placeholder="Custom"
+                                value={slippageInput}
+                                onChange={slippageChange}
+                                // disabled={inputDisabled}
+                              />
+                              <span className="custom_slippage_input_div_span">
+                                %
+                              </span>
+                            </div>
+                          </div>
+                        ) : null}
+                        {highSlippageDiv ? (
+                          <div className="slippageWarningDiv">
+                            <span className="slippageWarningDiv_span">
+                              <WarningAmberRoundedIcon className="slippageWarningDiv_span_icon" />{" "}
+                              Slippage
+                            </span>{" "}
+                            is high. Your transaction may be front-run
+                          </div>
+                        ) : null}
+                        {lowSlippageDiv ? (
+                          <div className="slippageWarningDiv">
+                            <span className="slippageWarningDiv_span">
+                              <WarningAmberRoundedIcon className="slippageWarningDiv_span_icon" />{" "}
+                              Slippage
+                            </span>{" "}
+                            is low. Your transaction may fail
+                          </div>
+                        ) : null}
                       </div>
 
                       {account ? (
@@ -1794,7 +1973,9 @@ const UpdatedSwap = () => {
                                             <div className="moreSwapInfoDiv_div2_area1_cont2">
                                               {SwapAmount == ""
                                                 ? 0
-                                                : MinamountsOut}
+                                                : parseFloat(
+                                                    MinamountsOut
+                                                  ).toFixed(4)}
                                               <span>
                                                 {"  "} {data.symbol}
                                               </span>
@@ -1814,7 +1995,9 @@ const UpdatedSwap = () => {
                                             <div className="moreSwapInfoDiv_div2_area1_cont2">
                                               {SwapAmount == ""
                                                 ? 0
-                                                : MinamountsOut}
+                                                : parseFloat(
+                                                    MinamountsOut
+                                                  ).toFixed(4)}
                                               <span>
                                                 {"  "} {data.symbol}
                                               </span>
