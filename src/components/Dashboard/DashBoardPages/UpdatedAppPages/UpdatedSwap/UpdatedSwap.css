@@ -4,11 +4,54 @@
   align-items: end;
 }
 
+.swap_price_slippage_div_cont_div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+.circle {
+  margin: 20px;
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 10px solid white;
+}
+
+.circle-three-quarter {
+  background-image: linear-gradient(180deg, transparent 50%, #d1d1d1 50%), linear-gradient(90deg, #d1d1d1 50%, transparent 50%);
+}
+
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
 .token_balances_span {
   /* color: #fff; */
   font-size: 11px;
+
   color: #aaa8c1;
   margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.TokenBalanceIcon {
+  font-size: 14px !important;
+  margin-right: 0px;
 }
 
 .swapDivCont {
