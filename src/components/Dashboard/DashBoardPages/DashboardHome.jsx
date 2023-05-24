@@ -425,8 +425,58 @@ const DashboardHome = () => {
     "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e": {
       symbol: "EGC",
     },
+    "0x55d398326f99059fF775485246999027B3197955": {
+      symbol: "USDT",
+    },
+    "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d": {
+      symbol: "USDC",
+    },
+    "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82": {
+      symbol: "CAKE",
+    },
+    "0x0D8Ce2A99Bb6e3B7Db580eD848240e4a0F9aE153": {
+      symbol: "FIL",
+    },
+    "0x2170Ed0880ac9A755fd29B2688956BD959F933F8": {
+      symbol: "ETH",
+    },
+    "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3": {
+      symbol: "DAI",
+    },
+    "0x1D2F0da169ceB9fC7B3144628dB156f3F6c60dBE": {
+      symbol: "XRP",
+    },
+    "0x3EE2200Efb3400fAbB9AacF31297cBdD1d435D47": {
+      symbol: "ADA",
+    },
+    "0xCC42724C6683B7E57334c4E856f4c9965ED682bD": {
+      symbol: "MATIC",
+    },
+    "0x4B0F1812e5Df2A09796481Ff14017e6005508003": {
+      symbol: "TWT",
+    },
+    "0x7083609fCE4d1d8Dc0C979AAb8c869Ea2C873402": {
+      symbol: "DOT",
+    },
+    "0xF8A0BF9cF54Bb92F17374d9e9A321E6a111a51bD": {
+      symbol: "LINK",
+    },
+    "0x4338665CBB7B2485A8855A139b75D5e34AB0DB94": {
+      symbol: "LTC",
+    },
+    "0x1CE0c2827e2eF14D5C4f29a091d735A204794041": {
+      symbol: "AVAX",
+    },
+    "0x14016E85a25aeb13065688cAFB43044C2ef86784": {
+      symbol: "TUSD",
+    },
   };
-
+  const convertedCoins = {};
+  for (const key in ListedCoins) {
+    const lowercaseKey = key.toLowerCase();
+    convertedCoins[lowercaseKey] = ListedCoins[key];
+  }
+  console.log(convertedCoins);
   useEffect(async () => {
     await axios
       .get(API_URL + "/swap/transactions", null, config)
@@ -1366,9 +1416,14 @@ const DashboardHome = () => {
                                 <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
                                   <div className="value_dolls_div">
                                     {`   Swap ${
-                                      ListedCoins[data.tokenIn].symbol
+                                      convertedCoins[data.tokenIn.toLowerCase()]
+                                        .symbol
                                     } For
-                                    ${ListedCoins[data.tokenOut].symbol}`}
+                                    ${
+                                      convertedCoins[
+                                        data.tokenOut.toLowerCase()
+                                      ].symbol
+                                    }`}
                                     {/* Swap For Me */}
                                     <div className="value_dolls_div_val">
                                       {formattedDated}
