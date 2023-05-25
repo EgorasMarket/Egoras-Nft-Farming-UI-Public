@@ -3243,6 +3243,9 @@ a.visit_app_link_2 {
 
 .dark .assets-data-pool_name {
   color: #ffffff;
+  width: 360px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .dark .poolName_txt {
