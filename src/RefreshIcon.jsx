@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const RefreshIcon = ({ callGetAmountsOut }) => {
+export const RefreshIcon = ({ callGetAmountsOut }) => {
   const animateElementRef = useRef(null);
   let previousTime = 0;
 
@@ -10,8 +10,8 @@ const RefreshIcon = ({ callGetAmountsOut }) => {
     const checkAnimationTime = () => {
       const currentTime = animateElement.getCurrentTime();
       if (
-        currentTime >= 10 &&
-        Math.floor(currentTime / 10) > Math.floor(previousTime / 10)
+        currentTime >= 5 &&
+        Math.floor(currentTime / 5) > Math.floor(previousTime / 5)
       ) {
         // console.log(
         //   "Animation reached",
@@ -36,7 +36,7 @@ const RefreshIcon = ({ callGetAmountsOut }) => {
       id="arrow_loading"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="-6 -6 36 36"
-      class="arrow-loading"
+      className="arrow-loading"
       width="36"
       height="36"
     >
@@ -71,7 +71,7 @@ const RefreshIcon = ({ callGetAmountsOut }) => {
           stroke-width="16"
           stroke-dasharray="30"
           stroke-dashoffset="0"
-          color="#fff"
+          color="#cec3ea"
         >
           <animate
             ref={animateElementRef}
@@ -79,7 +79,7 @@ const RefreshIcon = ({ callGetAmountsOut }) => {
             values="0;-30"
             begin=" 0s"
             repeatCount="indefinite"
-            dur="10s"
+            dur="5s"
           ></animate>
         </circle>
       </g>
@@ -123,5 +123,3 @@ const RefreshIcon = ({ callGetAmountsOut }) => {
     </svg>
   );
 };
-
-export default RefreshIcon;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 // import RefreshIcon from "@mui/icons-material/Refresh";
-import RefreshIcon from "../../../../../RefreshIcon";
+import { RefreshIcon } from "../../../../../RefreshIcon";
 import SwapVerticalCircleIcon from "@mui/icons-material/SwapVerticalCircle";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import ClockLoader from "react-spinners/ClockLoader";
@@ -1752,7 +1752,7 @@ const UpdatedSwap = () => {
                               <>
                                 <RefreshIcon callGetAmountsOut={getamount} />
                                 <span className="resfresh_icon_div_span">
-                                  fetching price
+                                  Upadting...
                                 </span>
                               </>
                             )}
