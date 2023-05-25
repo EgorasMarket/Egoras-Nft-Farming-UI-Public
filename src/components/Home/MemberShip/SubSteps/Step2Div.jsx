@@ -77,13 +77,13 @@ export const Step2Div = ({
         Back
       </div>
       <div className="selectPlanDiv1">
-        <div className="selectPlanDiv1_head">Select your Coop plan</div>
+        <div className="selectPlanDiv1_head">
+          Choose the plan that's right for you.
+        </div>
         <div className="selectPlanDiv1_sub_head">
-          Goals and Objectives: Clearly define the goals and objectives of the
-          project or team, and ensure the cooperative plan aligns with these
-          objectives. Resources: Evaluate the resources available to the team,
-          including time, manpower, and budget, and ensure the cooperative plan
-          is feasible within these constraints.
+          Create Physically backed NFTs using powerful AI tools Stake your
+          tokens to get over 12% APY staking rewards Get 40% referral rewards
+          Purchase pNFTs/Products at over 10% discounted rate
         </div>
       </div>
       <div className="selectPlanDiv2">
