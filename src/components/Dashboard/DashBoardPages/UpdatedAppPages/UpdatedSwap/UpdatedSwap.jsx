@@ -1027,6 +1027,7 @@ const UpdatedSwap = () => {
 
   const onChangeSwapAmount = async (e) => {
     setIsAmountLoading(true);
+    setDisable(true);
     // setInputDisabled(true);
     setSwapAmount(e.target.value);
     console.log(baseFromAddress, baseToAddress);
@@ -1049,6 +1050,8 @@ const UpdatedSwap = () => {
     console.log(formatEther(response.message[0]._hex).toString());
     if (response.status == true) {
       setIsAmountLoading(false);
+      setDisable(false);
+
       // setInputDisabled(false);
       setAmountsOut(formatEther(response.message[1]._hex));
       const maxSlippage = parseFloat(slippage) / 100;
@@ -1059,6 +1062,7 @@ const UpdatedSwap = () => {
       console.log(formatEther(response.message[0]._hex));
     } else {
       setIsAmountLoading(false);
+      setDisable(false);
       // setInputDisabled(false);
       // setErrorMessage(response.message);
       console.log(response);
@@ -1212,11 +1216,9 @@ const UpdatedSwap = () => {
   // =================
   // =================
   // =================
-  const callGetAmountsOut = () => {
-    console.log("i have fetched the amount");
-  };
   const getamount = async () => {
     setIsAmountLoading(true);
+    setDisable(true);
     const response = await getAmountsOut(
       parseEther(SwapAmount.toString(), "wei").toString(),
       [baseFromAddress, baseToAddress],
@@ -1225,6 +1227,7 @@ const UpdatedSwap = () => {
     console.log(response);
     if (response.status == true) {
       setIsAmountLoading(false);
+      setDisable(false);
       setAmountsOut(formatEther(response.message[1]._hex));
       const maxSlippage = parseFloat(slippage) / 100;
       setMinAmountsOut(
@@ -1232,12 +1235,14 @@ const UpdatedSwap = () => {
       );
       console.log(formatEther(response.message[1]._hex));
     } else {
+      setDisable(false);
       setIsAmountLoading(false);
       console.log(response);
     }
     // console.log("i have fetched the amount sososososos");
   };
   // setInterval(callGetAmountsOut, 10000);
+
   return (
     <div className="other2">
       <section className=" no-bg no_paddd">
