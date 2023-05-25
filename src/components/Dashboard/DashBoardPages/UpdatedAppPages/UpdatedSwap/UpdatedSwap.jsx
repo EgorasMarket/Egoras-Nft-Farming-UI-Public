@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import RefreshIcon from "@mui/icons-material/Refresh";
-
+// import RefreshIcon from "@mui/icons-material/Refresh";
+import RefreshIcon from "../../../../../RefreshIcon";
 import SwapVerticalCircleIcon from "@mui/icons-material/SwapVerticalCircle";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import ClockLoader from "react-spinners/ClockLoader";
@@ -117,6 +117,7 @@ const UpdatedSwap = () => {
   const [lowSlippageDiv, setLowSlipageDiv] = useState(false);
   const [highSlippageDiv, setHighSlipageDiv] = useState(false);
   const [maxSlippageDisplay, setmaxSlippageDisplay] = useState(false);
+  const [refreshed, setRefreshed] = useState(false);
   // const [inputDisable, setmaxSlippageDisplay] = useState(false);
   const [insufficientLiquidityBtn, setInsufficientLiquidityBtn] =
     useState(false);
@@ -1034,6 +1035,7 @@ const UpdatedSwap = () => {
       [baseFromAddress, baseToAddress],
       library.getSigner()
     );
+    console.log(response);
     // const response = await getAmountsOut(
     //   parseEther("1000", "wei").toString(),
     //   [
@@ -1210,6 +1212,32 @@ const UpdatedSwap = () => {
   // =================
   // =================
   // =================
+  const callGetAmountsOut = () => {
+    console.log("i have fetched the amount");
+  };
+  const getamount = async () => {
+    setIsAmountLoading(true);
+    const response = await getAmountsOut(
+      parseEther(SwapAmount.toString(), "wei").toString(),
+      [baseFromAddress, baseToAddress],
+      library.getSigner()
+    );
+    console.log(response);
+    if (response.status == true) {
+      setIsAmountLoading(false);
+      setAmountsOut(formatEther(response.message[1]._hex));
+      const maxSlippage = parseFloat(slippage) / 100;
+      setMinAmountsOut(
+        formatEther(response.message[1]._hex) * (1 - maxSlippage)
+      );
+      console.log(formatEther(response.message[1]._hex));
+    } else {
+      setIsAmountLoading(false);
+      console.log(response);
+    }
+    // console.log("i have fetched the amount sososososos");
+  };
+  // setInterval(callGetAmountsOut, 10000);
   return (
     <div className="other2">
       <section className=" no-bg no_paddd">
@@ -1712,12 +1740,23 @@ const UpdatedSwap = () => {
                               <ArrowDropDownIcon className="swap_price_slippage_div2_icon" />
                             </div>
                           </div>
-                          {/* <div className="circle">
-                            <RefreshIcon />
-                            <div class=" circle-three-quarter">
-                              <RefreshIcon />
-                            </div>
+                          {/* <div className="resfresh_icon_div">
+                            <img
+                              src="/img/refresh_icon/refresh_icon.gif"
+                              alt=""
+                              className="resfresh_icon_div_icon"
+                            />
                           </div> */}
+                          <div className="resfresh_icon_div">
+                            {SwapAmount < "0" || id2 == "" ? null : (
+                              <>
+                                <RefreshIcon callGetAmountsOut={getamount} />
+                                <span className="resfresh_icon_div_span">
+                                  fetching price
+                                </span>
+                              </>
+                            )}
+                          </div>
                         </div>
                         {maxSlippageDisplay ? (
                           <div className="max_slippageDisplayDiv">
