@@ -50,13 +50,11 @@ export const CALL_GET_USER_LOCATION = async () => {
   let lc = localStorage.getItem("mTYx");
   console.log(lc);
   try {
-    if (lc == null || lc == "") {
-      const response = await axios.get(`${LOCATION_API}`, null, config);
-      console.log(response.data.country_name);
+    const response = await axios.get(`${LOCATION_API}`, null, config);
+    console.log(response.data.country_name);
 
-      localStorage.setItem("mTYx", response.data.country_name);
-      return response.data;
-    }
+    localStorage.setItem("mTYx", response.data.country_name);
+    return response.data;
   } catch (err) {
     return err.response;
   }
