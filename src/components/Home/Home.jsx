@@ -334,6 +334,7 @@ const Home = () => {
     { img: "/img/FeaturedInLogos/FeaturedInLogos_6.svg" },
     { img: "/img/FeaturedInLogos/FeaturedInLogos_5.svg" },
   ];
+
   useEffect(async (e) => {
     // const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
     let res = await tokenBalance(
@@ -346,6 +347,7 @@ const Home = () => {
     let tvl = formatEther(res.message);
     setTotalTVL(tvl * egcUsd);
   });
+
   // useEffect(async (e) => {
   //   const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
   //   let res = await tokenBalance(
@@ -358,6 +360,7 @@ const Home = () => {
   //   let tvl = formatEther(res.message);
   //   setTotalTVL(tvl * egc_usd);
   // }, []);
+
   useEffect(async () => {
     const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
     console.log("dddd");
@@ -387,6 +390,37 @@ const Home = () => {
         console.log(error.response);
       });
   }, []);
+
+  useEffect(() => {
+    const getLocation = async () => {
+      // Check if geolocation is supported by the browser
+      if ("geolocation" in navigator) {
+        // Prompt user for permission to access their location
+        navigator.geolocation.getCurrentPosition(
+          // Success callback function
+          (position) => {
+            // Get the user's latitude and longitude coordinates
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+
+            // Do something with the location data, e.g. display on a map
+            console.log(`Latitude: ${lat}, longitude: ${lng}`);
+          },
+          // Error callback function
+          (error) => {
+            // Handle errors, e.g. user denied location sharing permissions
+            console.error("Error getting user location:", error);
+          }
+        );
+      } else {
+        // Geolocation is not supported by the browser
+        console.error("Geolocation is not supported by this browser.");
+      }
+    };
+
+    getLocation();
+  }, []);
+
   return (
     <div>
       {/* =================================================================================================================================================================================================================================================================== */}

@@ -35,6 +35,7 @@ export const TotalAmountSold = (data = []) => {
 
   return result;
 };
+
 export const TotalItemSold = (data = []) => {
   let result = 0;
   const op = data.forEach((order) => {
@@ -45,12 +46,21 @@ export const TotalItemSold = (data = []) => {
 
   return result;
 };
+
 export const TotalAmountUploaded = (data = []) => {
   let result = 0;
   const op = data.forEach((i) => {
     // console.log(i.final_amount);
     result += parseInt(i.final_amount);
   });
+
+  return parseFloat(result).toFixed(2);
+};
+
+export const ConvertToNGN = (amount) => {
+  let result = 0;
+  result = parseInt(amount) * 768;
+  console.log(amount);
 
   return parseFloat(result).toFixed(2);
 };

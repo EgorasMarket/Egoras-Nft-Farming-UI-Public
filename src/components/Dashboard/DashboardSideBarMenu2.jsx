@@ -72,6 +72,7 @@ import {
 } from "@web3-react/core";
 import { socket } from "../../socket";
 import TimeAgoComponent from "../TimeAgoComponent";
+import { CALL_GET_USER_LOCATION } from "../../services/userServices";
 export const MarketHeader = ({
   setCategories,
   ToggleMobile_cat,
@@ -566,6 +567,15 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const ToggleMobile_cat = () => {
     setMobile_cat(!mobile_cat);
   };
+
+  useEffect(() => {
+    console.log("____");
+    const getLocation = async () => {
+      const response = await CALL_GET_USER_LOCATION();
+      // console.log(response);
+    };
+    getLocation();
+  }, []);
   return (
     <>
       <div className={smallSide == "not_small" ? "side" : "small_side"}>
