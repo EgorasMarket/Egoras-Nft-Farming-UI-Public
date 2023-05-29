@@ -39,5 +39,5 @@ export const EXPRESS_BUY_ORDER_STATS = `${API_URL}/order/buy/order/stats`;
 export const UPDATE_MY_PROFILE = `${API_URL}/pub/update/profile`;
 export const VERIFY_ADMIN_WALLET = `${API_URL}/api2/admin/validate/admin`;
 export const IMG_CMS = `https://ellaa.org/v1/file-upload/add`;
-export const LOCATION_API = `https://geolocation-db.com/json`;
+export const LOCATION_API = `https://api.ipregistry.co/?key=tryout`;
 // export const DIRECT_BUY_ORDER_STATS = `${API_URL}/order/buy/order/stats/direct`;
