@@ -51,11 +51,12 @@ export const ProductModel2 = ({
           </div>
           <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount">
             {/* {amount} eUSD */}
-            {currentCountry == "Nigeria" ? (
+            {/* {currentCountry == "Nigeria" ? (
               <span>&#8358; {ConvertToNGN(amount)}</span>
             ) : (
               <span>&#x24; {numberWithCommas(parseFloat(amount))}</span>
-            )}
+            )} */}
+            <span>&#8358; {ConvertToNGN(amount)}</span>
             <span style={{ fontSize: "12px", color: "#787690" }}>
               {" ~"}
               {numberWithCommas(parseFloat(amount))} eUSD
@@ -150,11 +151,12 @@ export const ProductModelList = ({
           </div>
           <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount">
             {/* {amount} eUSD */}
-            {currentCountry === "Nigeria" ? (
+            {/* {currentCountry === "Nigeria" ? (
               <span>&#8358; {ConvertToNGN(amount)}</span>
             ) : (
               <span>&#x24; {numberWithCommas(parseFloat(amount))}</span>
-            )}
+            )} */}
+            <span>&#8358; {ConvertToNGN(amount)}</span>
             <span style={{ fontSize: "12px", color: "#787690" }}>
               {" ~"}
               {numberWithCommas(parseFloat(amount))} eUSD
@@ -253,11 +255,12 @@ const ProductModel = ({
           </div>
           <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount">
             {/* {amount} eUSD */}
-            {currentCountry == "Nigeria" ? (
+            {/* {currentCountry == "Nigeria" ? (
               <span>&#8358; {ConvertToNGN(amount)}</span>
             ) : (
               <span>&#x24; {numberWithCommas(parseFloat(amount))}</span>
-            )}
+            )} */}
+            <span>&#8358; {ConvertToNGN(amount)}</span>
             <span style={{ fontSize: "12px", color: "#787690" }}>
               {" ~"}
               {numberWithCommas(parseFloat(amount))} eUSD

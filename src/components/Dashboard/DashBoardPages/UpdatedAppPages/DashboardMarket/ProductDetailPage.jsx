@@ -438,7 +438,7 @@ const ProductDetailPage = ({ match }) => {
                       Sub Total
                     </div>
                     <div>
-                      {currentCountry === "Nigeria" ? (
+                      {/* {currentCountry === "Nigeria" ? (
                         <span>
                           &#8358;{" "}
                           {ConvertToNGN(
@@ -454,7 +454,13 @@ const ProductDetailPage = ({ match }) => {
                             ).toFixed(0)
                           )}
                         </span>
-                      )}
+                      )} */}
+                      <span>
+                        &#8358;{" "}
+                        {ConvertToNGN(
+                          parseFloat(quantity * productDetail.final_amount)
+                        )}
+                      </span>
                       <span style={{ fontSize: "12px", color: "#787690" }}>
                         {" ~"}
                         {numberWithCommas(
