@@ -51,12 +51,13 @@ export const CALL_GET_USER_LOCATION = async () => {
   console.log(lc);
   try {
     const response = await axios.get(`${LOCATION_API}`, null, config);
-    console.log(response.location.country.name);
+    console.log(response.data.country_code);
 
     localStorage.setItem("mTYx", response.data.country_name);
     return response.data;
   } catch (err) {
     console.log(err);
+    localStorage.setItem("mTYx", "!Nigeria");
     return err.response;
   }
 };
