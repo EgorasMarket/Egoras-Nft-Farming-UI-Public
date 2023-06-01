@@ -1186,7 +1186,10 @@ const UpdatedSwap = () => {
       setSlippage("0.5");
       const maxSlippage = parseFloat("0.5") / 100;
       setMinAmountsOut(amountsOut * (1 - maxSlippage));
-      return;
+    } else {
+      setSlippage(e.target.value);
+      const maxSlippage = parseFloat(e.target.value) / 100;
+      setMinAmountsOut(amountsOut * (1 - maxSlippage));
     }
   };
   useEffect(() => {
@@ -1233,7 +1236,10 @@ const UpdatedSwap = () => {
       setMinAmountsOut(
         formatEther(response.message[1]._hex) * (1 - maxSlippage)
       );
+      console.log(maxSlippage);
+      console.log(slippage);
       console.log(formatEther(response.message[1]._hex));
+      console.log(formatEther(response.message[1]._hex) * (1 - maxSlippage));
     } else {
       setDisable(false);
       setIsAmountLoading(false);
