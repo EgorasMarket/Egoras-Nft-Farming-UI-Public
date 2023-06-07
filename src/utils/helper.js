@@ -59,7 +59,7 @@ export const TotalAmountUploaded = (data = []) => {
 
 export const ConvertToNGN = (amount) => {
   let result = 0;
-  result = parseInt(amount) * 768;
+  result = parseInt(amount) * 766;
   console.log(amount);
 
   return parseFloat(result).toFixed(2);

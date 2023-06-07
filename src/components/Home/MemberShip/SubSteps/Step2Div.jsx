@@ -7,6 +7,7 @@ import { ContentLoading } from "react-content-loading";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import PayViaFortModal from "../PayViaFortModal";
+import { ConvertToNGN } from "../../../../utils/helper";
 
 export const Step2Div = ({
   checkMonthBox,
@@ -42,6 +43,12 @@ export const Step2Div = ({
   const [refButton, setRefButton] = useState(false);
 
   const [qr_data, setQrData] = useState({});
+  const [currentCountry, setCurrentCountry] = useState("");
+  useEffect(() => {
+    let age = localStorage.getItem("mTYx");
+    console.log(age);
+    setCurrentCountry(age);
+  }, []);
   useEffect(
     async (e) => {
       let string2 =
@@ -264,10 +271,19 @@ export const Step2Div = ({
                         egc / mnth
                       </span>{" "}
                     </div>
-                    <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
-                      {" "}
-                      ${parseFloat(monthAmount * egcUsd).toFixed(2)}
-                    </span>
+                    {currentCountry === "Nigeria" ? (
+                      <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
+                        &#8358;{" "}
+                        {ConvertToNGN(
+                          parseFloat(monthAmount * egcUsd).toFixed(2)
+                        )}
+                      </span>
+                    ) : (
+                      <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
+                        {" "}
+                        ${parseFloat(monthAmount * egcUsd).toFixed(2)}
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="selectPlanDiv2_area1_cont2_body">
@@ -313,9 +329,22 @@ export const Step2Div = ({
                         egc / 6mnths
                       </span>
                     </div>
-                    <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
+                    {currentCountry === "Nigeria" ? (
+                      <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
+                        &#8358;{" "}
+                        {ConvertToNGN(
+                          parseFloat(semiAnnualAmount * egcUsd).toFixed(2)
+                        )}
+                      </span>
+                    ) : (
+                      <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
+                        {" "}
+                        ${parseFloat(semiAnnualAmount * egcUsd).toFixed(2)}
+                      </span>
+                    )}
+                    {/* <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
                       ${parseFloat(semiAnnualAmount * egcUsd).toFixed(2)}
-                    </span>
+                    </span> */}
                   </div>
                 </div>
                 <div className="selectPlanDiv2_area1_cont2_body">
@@ -361,9 +390,22 @@ export const Step2Div = ({
                         egc / yr
                       </span>
                     </div>
-                    <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
-                      ${parseFloat(AnnualAmount * egcUsd).toFixed(2)}
-                    </span>
+                    {currentCountry === "Nigeria" ? (
+                      <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
+                        &#8358;{" "}
+                        {ConvertToNGN(
+                          parseFloat(AnnualAmount * egcUsd).toFixed(2)
+                        )}
+                      </span>
+                    ) : (
+                      <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
+                        {" "}
+                        ${parseFloat(AnnualAmount * egcUsd).toFixed(2)}
+                      </span>
+                    )}
+                    {/* <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
+                        ${parseFloat(AnnualAmount * egcUsd).toFixed(2)}
+                      </span> */}
                   </div>
                 </div>
                 <div className="selectPlanDiv2_area1_cont2_body">
