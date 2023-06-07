@@ -99,7 +99,10 @@ function App() {
       setDashboard(true);
       return;
     }
-    if (linksActive === "/app/stake") {
+    if (linksActive === "/egc") {
+      window.location.href = "/";
+    }
+    if (linksActive === "/dashboard/") {
       setDashboard(true);
       return;
     }
@@ -232,6 +235,7 @@ function App() {
             )}
             <Switch>
               <Route exact path="/" component={Home} />
+
               <Route exact path="/referal/:ref" component={Referal} />
               <Route exact path="/about" component={AboutUs} />
               <Route exact path="/pay-with-fort" component={PaywithFort} />

@@ -54,26 +54,6 @@ li {
   background: #212b25;
 }
 
-iframe {
-  border: 0;
-  position: relative !important;
-  display: none;
-}
-
-.tradingview-widget-container {
-  width: 100%;
-  height: 550px;
-  margin-right: 2em;
-}
-
-div#tradingview_12345 {
-  height: 100%;
-}
-
-#tradingview_12345 div div iframe {
-  display: block !important;
-}
-
 .btn-black.i {
   padding: 1em 2em;
   border: none;
@@ -87,6 +67,10 @@ div#tradingview_12345 {
   height: 150px;
   float: left;
   margin: 10px;
+}
+
+iframe {
+  display: none;
 }
 
 .image-wrapper button {
@@ -137,7 +121,7 @@ button:focus {
 }
 
 .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
-  color: #7a5fc0 !important;
+  color: #229e54 !important;
   background: #effff5 !important;
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
@@ -199,7 +183,7 @@ button:focus {
 }
 
 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: #7a5fc0 !important;
+  border-color: #229e54 !important;
 }
 
 /* 
@@ -331,7 +315,7 @@ button:focus {
 }
 
 .css-1h9z7r5-MuiButtonBase-root-MuiTab-root.Mui-selected {
-  color: #7a5fc0 !important;
+  color: #229e54 !important;
   background: #effff5 !important;
   border-top-left-radius: 10px !important;
   border-top-right-radius: 10px !important;
@@ -392,7 +376,7 @@ button:focus {
 }
 
 .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
-  border-color: #7a5fc0 !important;
+  border-color: #229e54 !important;
 }
 
 .for-des span {
@@ -579,159 +563,5 @@ rect.sparkline--interaction-layer {
 .dark .recharts-default-tooltip {
   background: #0f0e1c !important;
   color: #fff !important;
-  border: solid 1px #787690 !important;
-}
-
-@media screen and (max-width: 767px) {
-  .custom_container {
-    padding: 0em 1em;
-  }
-}
-
-@media screen and (max-width: 550px) {
-  .custom_container {
-    max-width: 1440px;
-    margin: auto;
-    width: 100%;
-    padding: 0em 1em;
-    min-width: 0px;
-    height: 100%;
-  }
-}
-
-.Modal2_div {
-  position: fixed;
-  top: 0%;
-  width: 100vw;
-  height: 100vh;
-  background: #000000ab;
-  left: 0;
-  overflow: scroll;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* flex-direction: column; */
-  z-index: 1000;
-  padding: 1em;
-
-  backdrop-filter: blur(6px);
-}
-
-.Modal2_div_area {
-  background: #fff;
-  padding: 2em;
-  width: 100%;
-  max-width: 30em;
-  border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  box-shadow: 0px 0px 16px 0px #060606c7;
-  animation: fadeShow 0.3s linear;
-  position: relative;
-  z-index: 1;
-}
-
-.dark .Modal2_div_area {
-  background: #151422;
-}
-
-@keyframes fadeShow {
-  0% {
-    transform: scale(1.5);
-    opacity: 0;
-  }
-
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.Modal2_div1_head {
-  font-size: 24px;
-  font-weight: 500;
-  color: #000;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
-}
-
-.dark .Modal2_div1_head {
-  color: #fff;
-}
-
-.Modal2_div2 {
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-  justify-content: flex-start;
-  grid-gap: 20px;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.Modal2_div2_div1_area {
-  width: 100%;
-}
-
-.Modal2_div2_div1_area_btn {
-  width: 100%;
-  padding: 15px;
-  border-radius: 10px;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #e8e8e8;
-  border: solid 1px #d0d0d0;
-}
-
-.Modal2_div2_div1_area_btn:disabled {
-  cursor: not-allowed;
-  opacity: 0.3;
-  /* filter: grayscale(1); */
-}
-
-.dark .Modal2_div2_div1_area_btn {
-  background: #323147;
-  border: solid 1px #2d2c41;
-  color: #fff;
-}
-
-.Modal2_div2_div1_area_btn_area {
-  display: flex;
-  align-items: center;
-}
-
-.Modal2_div2_div1_area_btn_area_txt {
-  margin-right: 4px;
-}
-
-.Modal2_div_area_span {
-  margin-top: 1em;
-  font-size: 12px;
-  color: #747474;
-  font-weight: 400;
-}
-
-.dark .Modal2_div_area_span {
-  color: #787690;
-}
-
-.Modal2_div1_head_icon {
-  font-size: 33px !important;
-  cursor: pointer;
-}
-
-.Modal2_div_closeDiv {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  background: none;
+  border: solid 1px #4e7a60 !important;
 }
