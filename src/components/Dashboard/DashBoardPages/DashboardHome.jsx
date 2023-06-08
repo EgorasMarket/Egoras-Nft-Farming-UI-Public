@@ -777,6 +777,7 @@ const DashboardHome = () => {
                                 // fillOpacity={1}
                                 fill="url(#colorUvBar1)"
                                 // strokeWidth={2}
+                                outerRadius="10"
                               />
                             </BarChart>
                           </ResponsiveContainer>
@@ -799,6 +800,7 @@ const DashboardHome = () => {
                                 left: 0,
                                 bottom: 0,
                               }}
+                              // outerRadius="10"
                             >
                               <defs>
                                 <linearGradient
@@ -835,6 +837,8 @@ const DashboardHome = () => {
                                 // stroke="#fff"
                                 // fillOpacity={1}
                                 fill="url(#colorUvBar2)"
+                                outerRadius="10"
+
                                 // strokeWidth={2}
                               />
                             </BarChart>
@@ -1030,6 +1034,7 @@ const DashboardHome = () => {
                                 left: 0,
                                 bottom: 0,
                               }}
+                              // outerRadius="10"
                             >
                               <defs>
                                 <linearGradient
@@ -1063,6 +1068,7 @@ const DashboardHome = () => {
                                 // fillOpacity={1}
                                 fill="url(#colorUvBar1)"
                                 // strokeWidth={2}
+                                outerRadius="10"
                               />
                             </BarChart>
                           </ResponsiveContainer>
@@ -1085,6 +1091,7 @@ const DashboardHome = () => {
                                 left: 0,
                                 bottom: 0,
                               }}
+                              // outerRadius="10"
                             >
                               <defs>
                                 <linearGradient
@@ -1122,6 +1129,7 @@ const DashboardHome = () => {
                                 // fillOpacity={1}
                                 fill="url(#colorUvBar2)"
                                 // strokeWidth={2}
+                                outerRadius="10"
                               />
                             </BarChart>
                           </ResponsiveContainer>

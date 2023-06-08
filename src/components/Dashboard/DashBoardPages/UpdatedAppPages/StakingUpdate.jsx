@@ -992,24 +992,23 @@ const StakingUpdate = () => {
                         </span>
                       </div>
                     ) : null}
-                    {unlockBtn === false ? (
-                      <button
-                        disabled={Disable}
-                        onClick={UnlockToken}
-                        className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
-                      >
-                        {isLoading ? (
-                          <ScaleLoader color="#12111b" size={10} height={20} />
-                        ) : (
-                          <>Approve EGC</>
-                        )}
-                      </button>
+
+                    {!account ? (
+                      <>
+                        {" "}
+                        <button
+                          disabled={true}
+                          className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                        >
+                          Connect wallet
+                        </button>
+                      </>
                     ) : (
                       <>
-                        {SelectedDuration === "monthly" && lockAmount != "" ? (
+                        {unlockBtn === false ? (
                           <button
                             disabled={Disable}
-                            onClick={StakeMonthly}
+                            onClick={UnlockToken}
                             className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
                           >
                             {isLoading ? (
@@ -1019,40 +1018,61 @@ const StakingUpdate = () => {
                                 height={20}
                               />
                             ) : (
-                              <>Create Lock</>
+                              <>Approve EGC</>
                             )}
-                          </button>
-                        ) : SelectedDuration === "yearly" &&
-                          lockAmount != "" ? (
-                          <button
-                            disabled={Disable}
-                            onClick={StakeYearly}
-                            className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
-                          >
-                            {isLoading ? (
-                              <ScaleLoader
-                                color="#12111b"
-                                size={10}
-                                height={20}
-                              />
-                            ) : (
-                              <>Create Lock</>
-                            )}
-                          </button>
-                        ) : lockAmount === "" ? (
-                          <button
-                            disabled
-                            className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
-                          >
-                            Enter an amount
                           </button>
                         ) : (
-                          <button
-                            disabled
-                            className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
-                          >
-                            Choose Duration
-                          </button>
+                          <>
+                            {SelectedDuration === "monthly" &&
+                            lockAmount != "" ? (
+                              <button
+                                disabled={Disable}
+                                onClick={StakeMonthly}
+                                className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                              >
+                                {isLoading ? (
+                                  <ScaleLoader
+                                    color="#12111b"
+                                    size={10}
+                                    height={20}
+                                  />
+                                ) : (
+                                  <>Create Lock</>
+                                )}
+                              </button>
+                            ) : SelectedDuration === "yearly" &&
+                              lockAmount != "" ? (
+                              <button
+                                disabled={Disable}
+                                onClick={StakeYearly}
+                                className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                              >
+                                {isLoading ? (
+                                  <ScaleLoader
+                                    color="#12111b"
+                                    size={10}
+                                    height={20}
+                                  />
+                                ) : (
+                                  <>Create Lock</>
+                                )}
+                              </button>
+                            ) : lockAmount === "" ? (
+                              <button
+                                disabled
+                                className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                              >
+                                Enter an amount
+                              </button>
+                            ) : (
+                              <button
+                                disabled
+                                className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                              >
+                                Choose Duration
+                              </button>
+                            )}
+                          </>
                         )}
                       </>
                     )}

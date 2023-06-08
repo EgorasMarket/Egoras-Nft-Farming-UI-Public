@@ -1,5 +1,6 @@
 import { Contract } from "@ethersproject/contracts";
 import MembershipFacet from "./contracts/V3/MembershipFacet.json";
+import MartGptFacet from "./contracts/V3/martGPT.json";
 import V3ContractAddress from "./contracts/V3/V3ContractAddress.json";
 import PancakeSwapFaucet from "./contracts/V3/PancakeSwapFacet.json";
 import DiamondCut from "./contracts/V3/DiamondCut.json";
@@ -17,6 +18,13 @@ const contractMembershipFacetInstance = async (signer) => {
 };
 const contractPancakeSwapFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, PancakeSwapFaucet.abi, signer);
+};
+const contractMartgptFacetInstance = async (signer) => {
+  return new Contract(
+    "0xD62C345CE544919dFf1639fe1f63610014987dE9",
+    MartGptFacet.abi,
+    signer
+  );
 };
 const contractDiamondCutInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, DiamondCut.abi, signer);
@@ -694,6 +702,24 @@ const checkAllowanceStake = async (owner, amount, signer) => {
     };
   }
 };
+const convertEgcToMartgpt = async (account, amount, signer) => {
+  console.log(account, amount, signer);
+  try {
+    const instance = await contractMartgptFacetInstance(signer);
+    let result = await instance.convertTokenToMartGPTToken(account, amount);
+    console.log(result, "result");
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 
 export {
   monthlyPlanSubScribe,
@@ -729,4 +755,5 @@ export {
   annuallyPlanSubScribeRef,
   DiamondCutFunc,
   approveBusd,
+  convertEgcToMartgpt,
 };

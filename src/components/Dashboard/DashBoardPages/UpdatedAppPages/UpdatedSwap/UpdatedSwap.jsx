@@ -1759,9 +1759,13 @@ const UpdatedSwap = () => {
                             />
                           </div> */}
                           <div className="resfresh_icon_div">
-                            {SwapAmount < "0" || id2 == "" ? null : (
+                            {SwapAmount <= "0" || id2 == "" ? null : (
                               <>
-                                <RefreshIcon callGetAmountsOut={getamount} />
+                                <RefreshIcon
+                                  callGetAmountsOut={getamount}
+                                  SwapAmount={SwapAmount}
+                                  MinamountsOut={MinamountsOut}
+                                />
                                 <span className="resfresh_icon_div_span">
                                   Upadting...
                                 </span>

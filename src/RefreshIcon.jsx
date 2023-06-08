@@ -1,34 +1,39 @@
 import React, { useEffect, useRef, useState } from "react";
 
-export const RefreshIcon = ({ callGetAmountsOut }) => {
+export const RefreshIcon = ({
+  callGetAmountsOut,
+  SwapAmount,
+  MinamountsOut,
+}) => {
   const animateElementRef = useRef(null);
   let previousTime = 0;
 
   useEffect(() => {
-    const animateElement = animateElementRef.current;
+    if (SwapAmount > "0") {
+      const animateElement = animateElementRef.current;
+      const checkAnimationTime = () => {
+        const currentTime = animateElement.getCurrentTime();
+        if (
+          currentTime >= 5 &&
+          Math.floor(currentTime / 5) > Math.floor(previousTime / 5)
+        ) {
+          // console.log(
+          //   "Animation reached",
+          //   Math.floor(currentTime / 10) * 10,
+          //   "seconds"
+          // );
+          callGetAmountsOut();
+        }
+        previousTime = currentTime;
+      };
 
-    const checkAnimationTime = () => {
-      const currentTime = animateElement.getCurrentTime();
-      if (
-        currentTime >= 5 &&
-        Math.floor(currentTime / 5) > Math.floor(previousTime / 5)
-      ) {
-        // console.log(
-        //   "Animation reached",
-        //   Math.floor(currentTime / 10) * 10,
-        //   "seconds"
-        // );
-        callGetAmountsOut();
-      }
-      previousTime = currentTime;
-    };
+      const intervalId = setInterval(checkAnimationTime, 100);
 
-    const intervalId = setInterval(checkAnimationTime, 100);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
+      return () => {
+        clearInterval(intervalId);
+      };
+    }
+  }, [SwapAmount, MinamountsOut]);
 
   return (
     <svg

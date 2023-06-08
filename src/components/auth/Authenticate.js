@@ -190,6 +190,11 @@ export const Authenticate = (props) => {
       walletconnect.off(URI_AVAILABLE, logURI);
     };
   }, []);
+  useEffect(() => {
+    if (account) {
+      setModal2(false);
+    }
+  }, [account]);
 
   return (
     <div>
