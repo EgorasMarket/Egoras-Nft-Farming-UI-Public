@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 // import RefreshIcon from "@mui/icons-material/Refresh";
-import RefreshIcon from "../../../../../RefreshIcon";
+import { RefreshIcon } from "../../../../../RefreshIcon";
 import SwapVerticalCircleIcon from "@mui/icons-material/SwapVerticalCircle";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import ClockLoader from "react-spinners/ClockLoader";
@@ -1027,6 +1027,7 @@ const UpdatedSwap = () => {
 
   const onChangeSwapAmount = async (e) => {
     setIsAmountLoading(true);
+    setDisable(true);
     // setInputDisabled(true);
     setSwapAmount(e.target.value);
     console.log(baseFromAddress, baseToAddress);
@@ -1049,6 +1050,8 @@ const UpdatedSwap = () => {
     console.log(formatEther(response.message[0]._hex).toString());
     if (response.status == true) {
       setIsAmountLoading(false);
+      setDisable(false);
+
       // setInputDisabled(false);
       setAmountsOut(formatEther(response.message[1]._hex));
       const maxSlippage = parseFloat(slippage) / 100;
@@ -1059,6 +1062,7 @@ const UpdatedSwap = () => {
       console.log(formatEther(response.message[0]._hex));
     } else {
       setIsAmountLoading(false);
+      setDisable(false);
       // setInputDisabled(false);
       // setErrorMessage(response.message);
       console.log(response);
@@ -1182,7 +1186,10 @@ const UpdatedSwap = () => {
       setSlippage("0.5");
       const maxSlippage = parseFloat("0.5") / 100;
       setMinAmountsOut(amountsOut * (1 - maxSlippage));
-      return;
+    } else {
+      setSlippage(e.target.value);
+      const maxSlippage = parseFloat(e.target.value) / 100;
+      setMinAmountsOut(amountsOut * (1 - maxSlippage));
     }
   };
   useEffect(() => {
@@ -1212,11 +1219,9 @@ const UpdatedSwap = () => {
   // =================
   // =================
   // =================
-  const callGetAmountsOut = () => {
-    console.log("i have fetched the amount");
-  };
   const getamount = async () => {
     setIsAmountLoading(true);
+    setDisable(true);
     const response = await getAmountsOut(
       parseEther(SwapAmount.toString(), "wei").toString(),
       [baseFromAddress, baseToAddress],
@@ -1225,19 +1230,25 @@ const UpdatedSwap = () => {
     console.log(response);
     if (response.status == true) {
       setIsAmountLoading(false);
+      setDisable(false);
       setAmountsOut(formatEther(response.message[1]._hex));
       const maxSlippage = parseFloat(slippage) / 100;
       setMinAmountsOut(
         formatEther(response.message[1]._hex) * (1 - maxSlippage)
       );
+      console.log(maxSlippage);
+      console.log(slippage);
       console.log(formatEther(response.message[1]._hex));
+      console.log(formatEther(response.message[1]._hex) * (1 - maxSlippage));
     } else {
+      setDisable(false);
       setIsAmountLoading(false);
       console.log(response);
     }
     // console.log("i have fetched the amount sososososos");
   };
   // setInterval(callGetAmountsOut, 10000);
+
   return (
     <div className="other2">
       <section className=" no-bg no_paddd">
@@ -1748,11 +1759,15 @@ const UpdatedSwap = () => {
                             />
                           </div> */}
                           <div className="resfresh_icon_div">
-                            {SwapAmount < "0" || id2 == "" ? null : (
+                            {SwapAmount <= "0" || id2 == "" ? null : (
                               <>
-                                <RefreshIcon callGetAmountsOut={getamount} />
+                                <RefreshIcon
+                                  callGetAmountsOut={getamount}
+                                  SwapAmount={SwapAmount}
+                                  MinamountsOut={MinamountsOut}
+                                />
                                 <span className="resfresh_icon_div_span">
-                                  fetching price
+                                  Upadting...
                                 </span>
                               </>
                             )}

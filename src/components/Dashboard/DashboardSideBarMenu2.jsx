@@ -2,6 +2,21 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
+// ================
+// ================
+// ================
+// ================
+// ================
+// ================
+// ================
+import JoinLeftIcon from "@mui/icons-material/JoinLeft";
+// ================
+// ================
+// ================
+// ================
+// ================
+// ================
+// ================
 // import Web3 from "web3";
 import axios from "axios";
 import { API_URL } from "../../actions/types";
@@ -227,6 +242,9 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     if (linksActive === "/app") {
       setActiveMenuName("home");
     }
+    if (linksActive === "/app/convert") {
+      setActiveMenuName("convert");
+    }
     if (urlArr[2] === "market") {
       setActiveMenuName("market");
     }
@@ -319,6 +337,9 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     }
     if (linksActive === "/app/user") {
       setActiveBg("account");
+    }
+    if (linksActive === "/app/convert") {
+      setActiveBg("convert");
     }
     if (linksActive === "/app/user/referral") {
       setActiveBg("account");
@@ -692,6 +713,22 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   onClick={changeBg}
                 >
                   Swap
+                  <span class="Ping -top-1">
+                    <span class="c-flashingPart"></span>
+                    <span class="c-basePart"></span>
+                  </span>
+                </a>
+                <a
+                  id="convert"
+                  href="/app/convert"
+                  className={
+                    activeBg == "convert"
+                      ? "header_tab1_active "
+                      : "header_tab1"
+                  }
+                  onClick={changeBg}
+                >
+                  Convert
                   <span class="Ping -top-1">
                     <span class="c-flashingPart"></span>
                     <span class="c-basePart"></span>

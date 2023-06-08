@@ -1156,7 +1156,7 @@ const configurePlan = async (
     };
   }
 };
-const getConfiguration = async (signer) => {
+const getConfigurationAmount = async (signer) => {
   // console.log(_monthlyPrice, _semiAnnuallyPlan, _annuallyPlan);
   try {
     const instance = contractMembershipFacetInstance(signer);
@@ -1474,6 +1474,48 @@ const checkAllowanceV3 = async (coinAddress, owner, amount, signer) => {
     };
   }
 };
+const checkAllowanceV32 = async (coinAddress, owner, amount, signer) => {
+  try {
+    const instance = erc20Instance(coinAddress, signer);
+    let result = await instance.allowance(
+      owner,
+      "0xD62C345CE544919dFf1639fe1f63610014987dE9"
+    );
+
+    if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
+      return {
+        status: true,
+      };
+    } else {
+      return {
+        status: false,
+      };
+    }
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const unlockTokenV32 = async (coinAddress, amount, signer) => {
+  try {
+    const instance = erc20Instance(coinAddress, signer);
+    let result = await instance.approve(
+      "0xD62C345CE544919dFf1639fe1f63610014987dE9",
+      amount
+    );
+    return {
+      message: result.hash,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 const unlockTokenV3 = async (coinAddress, amount, signer) => {
   try {
     const instance = erc20Instance(coinAddress, signer);
@@ -1569,7 +1611,7 @@ export {
   annually,
   takeRoyalty,
   configurePlan,
-  getConfiguration,
+  getConfigurationAmount,
   getReferralBonus,
   callGetBurnableAmount,
   burnToken,
@@ -1586,5 +1628,7 @@ export {
   releaseFundsToSeller,
   checkAllowanceV3,
   unlockTokenV3,
+  checkAllowanceV32,
+  unlockTokenV32,
   callGetBurntAmount,
 };

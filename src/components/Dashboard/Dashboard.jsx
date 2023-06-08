@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Convert from "./DashBoardPages/UpdatedAppPages/Convert";
 import DashBoard_lend_details_page from "./DashBoard_lend_details_page";
 import DashBoardBranchAsset from "./DashBoardPages/DashBoardBranchAsset";
 import DashBoardLendingTransactions from "./DashBoardPages/DashBoardLendingTransactions";
@@ -196,6 +197,7 @@ const Dashboard = ({ check, togglemakeDark }) => {
                   path="/app/sell"
                   component={DashBoardSellProduct}
                 />
+                <Route exact path="/app/convert" component={Convert} />
                 <Route
                   exact
                   path="/app/product/checkout/:productId/:product_count/:productName"
