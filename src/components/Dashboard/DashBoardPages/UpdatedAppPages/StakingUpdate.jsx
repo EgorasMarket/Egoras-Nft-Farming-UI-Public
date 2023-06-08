@@ -281,6 +281,7 @@ const StakingUpdate = () => {
     }
     setEstimatedRewardAmnt(e.target.value * egcUsdVal * 0.000328767);
   };
+  // };
 
   const StakeMonthly = async () => {
     setIsLoading(true);
