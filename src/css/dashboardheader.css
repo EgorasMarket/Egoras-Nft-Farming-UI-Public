@@ -497,7 +497,9 @@
   border-radius: 8px;
   font-size: 14px;
   background: #ebebeb;
-  margin-left: 13em;
+  margin-left: 5em;
+  white-space: nowrap;
+  overflow-x: scroll;
 }
 
 .dark .header_tabs {

@@ -4,11 +4,58 @@
   align-items: end;
 }
 
+.swap_price_slippage_div_cont_div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+.resfresh_icon_div {
+  display: flex;
+  align-items: center;
+  /* flex-direction: row-reverse; */
+}
+
+.resfresh_icon_div_span {
+  font-size: 12px;
+  color: #5c5a73;
+}
+
+
+
+.resfresh_icon_div_icon {
+  width: 100%;
+}
+
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
+/* ==================== */
 .token_balances_span {
   /* color: #fff; */
   font-size: 11px;
+
   color: #aaa8c1;
   margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.TokenBalanceIcon {
+  font-size: 14px !important;
+  margin-right: 0px;
 }
 
 .swapDivCont {
@@ -418,7 +465,7 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
   /* max-width: 425px; */
   /* width: 100%; */
   color: #000000;
-  background: #8e8e8e8f;
+  background: #ebeaff4a;
   padding: 0.5em 1em;
   border-radius: 38px;
   border: solid 1px #ffffff;

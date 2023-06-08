@@ -7,10 +7,10 @@ export const Step1Div = ({ toggleSteps }) => {
   return (
     <>
       <div className="joinCooperativeModalDiv_area_head">
-        MartGpt Cooperative Plan
+        MartGpt Subscription Plan
       </div>
       <div className="joinCooperativeModalDiv_area_sub_head">
-        Subscribe to our cooperative and get amazing value for your money.
+        Choose a plan and get amazing value for your money.
       </div>
 
       <div className="joinCooperativeModalDiv_area_body">
@@ -19,7 +19,7 @@ export const Step1Div = ({ toggleSteps }) => {
           <div className="joinCooperativeModalDiv_area_body1_div1">
             <CheckIcon className="joinCooperativeModalDiv_area_body1_div1_icon" />
             <div className="joinCooperativeModalDiv_area_body1_div1_text">
-              Discounted Products
+              Discounted pNFTs/Products
             </div>
           </div>
           <div className="joinCooperativeModalDiv_area_body1_div1">
@@ -31,7 +31,13 @@ export const Step1Div = ({ toggleSteps }) => {
           <div className="joinCooperativeModalDiv_area_body1_div1">
             <CheckIcon className="joinCooperativeModalDiv_area_body1_div1_icon" />
             <div className="joinCooperativeModalDiv_area_body1_div1_text">
-              Profit share
+              Staking Rewards
+            </div>
+          </div>
+          <div className="joinCooperativeModalDiv_area_body1_div1">
+            <CheckIcon className="joinCooperativeModalDiv_area_body1_div1_icon" />
+            <div className="joinCooperativeModalDiv_area_body1_div1_text">
+              NFT mining
             </div>
           </div>
           <button className="SubContinueButton" onClick={toggleSteps}>

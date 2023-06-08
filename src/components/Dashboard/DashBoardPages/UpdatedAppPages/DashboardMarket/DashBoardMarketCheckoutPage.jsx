@@ -184,7 +184,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
     <div className="checkoutPage_body2_area_body_cont1">
       <div className="checkoutPage_body2_area_body_cont1_image_div">
         <img
-          src={"https://ellaa.org/"+productImage}
+          src={"https://ellaa.org/" + productImage}
           alt=""
           className="checkoutPage_body2_area_body_cont1_image"
         />
@@ -254,30 +254,29 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
     if (account) {
       const response = await CALL_CHECK_USER_AND_MEMBERSHIP(account);
       console.log(response.data);
+      console.log(response);
       console.log(response.data.users);
-
       setUserDetails(response.data.users);
       if (response.data.users.phoneNumber === null) {
         setUpdateProfile(true);
       } else {
         setUpdateProfile(false);
       }
-      if (response.data.userMembership === true) {
-        setNonMembershipFee(
-          0 * parseInt(productDetail.final_amount * numDivsToDuplicate)
-        );
-        return;
-      }
-
       if (response.data.userMembership === false) {
-        setNonMembershipFee(
-          0.03 * parseInt(productDetail.final_amount * numDivsToDuplicate)
-        );
-        return;
+        console.log("i am not a member");
+        const calculatedFee =
+          0.03 * parseInt(productDetail.final_amount * numDivsToDuplicate);
+        console.log(calculatedFee);
+        setNonMembershipFee(calculatedFee);
+      } else {
+        console.log("i am a member");
+        const calculatedFee =
+          0 * parseInt(productDetail.final_amount * numDivsToDuplicate);
+        console.log(calculatedFee);
+        setNonMembershipFee(calculatedFee);
       }
-      return;
     }
-  }, [account]);
+  }, [account, productDetail]);
   const SubTotal = productDetail.final_amount * numDivsToDuplicate;
   const Total = nonMembershipFee + SubTotal;
   const checkedMetamaskBox = () => {

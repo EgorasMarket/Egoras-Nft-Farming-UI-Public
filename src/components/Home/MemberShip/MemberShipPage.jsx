@@ -27,7 +27,7 @@ import { Step2Div } from "./SubSteps/Step2Div";
 import UpdatedErrorModal from "../../Dashboard/DashBoardPages/UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedErrorModal";
 import UpdatedSuccessModal from "../../Dashboard/DashBoardPages/UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import {
-  getConfiguration,
+  getConfigurationAmount,
   unlockMemberShipEgcToken,
   checkAllowanceMembership,
   checkAllowanceV3,
@@ -108,27 +108,30 @@ const MemberShipPage = () => {
     setStep2(!step2);
   };
   useEffect(async () => {
-    let response = await getConfiguration(library.getSigner());
-    console.log(response);
-    console.log(formatEther(response.message._annually._hex));
-    console.log(formatEther(response.message._semiAnnually._hex));
-    console.log(formatEther(response.message._monthly._hex));
-    if (response.status === true) {
-      const resMonthlyAmount = parseFloat(
-        formatEther(response.message._monthly._hex)
-      );
-      const resSemi_MonthlyAmount = parseFloat(
-        formatEther(response.message._semiAnnually._hex)
-      );
-      const resAnnualAmount = parseFloat(
-        formatEther(response.message._annually._hex)
-      );
-      setMonthAmount(resMonthlyAmount);
-      setSemiAnnualAmount(resSemi_MonthlyAmount);
-      setAnnualAmount(resAnnualAmount);
-      setPriceLoaded(true);
+    if (account) {
+      let response = await getConfigurationAmount(library.getSigner());
+      console.log(response);
+
+      console.log(formatEther(response.message._annually._hex));
+      console.log(formatEther(response.message._semiAnnually._hex));
+      console.log(formatEther(response.message._monthly._hex));
+      if (response.status === true) {
+        const resMonthlyAmount = parseFloat(
+          formatEther(response.message._monthly._hex)
+        );
+        const resSemi_MonthlyAmount = parseFloat(
+          formatEther(response.message._semiAnnually._hex)
+        );
+        const resAnnualAmount = parseFloat(
+          formatEther(response.message._annually._hex)
+        );
+        setMonthAmount(resMonthlyAmount);
+        setSemiAnnualAmount(resSemi_MonthlyAmount);
+        setAnnualAmount(resAnnualAmount);
+        setPriceLoaded(true);
+      }
     }
-  }, [step1, step2]);
+  }, [account]);
   useEffect(() => {
     if (account) {
       setUserConnected(true);

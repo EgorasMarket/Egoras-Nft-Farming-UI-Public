@@ -1,6 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+// import RefreshIcon from "@mui/icons-material/Refresh";
+import { RefreshIcon } from "../../../../../RefreshIcon";
 import SwapVerticalCircleIcon from "@mui/icons-material/SwapVerticalCircle";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import ClockLoader from "react-spinners/ClockLoader";
 import TradingViewWidget from "./TradeViewWidget";
 import WarningAmberRoundedIcon from "@mui/icons-material/WarningAmberRounded";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
@@ -113,6 +117,7 @@ const UpdatedSwap = () => {
   const [lowSlippageDiv, setLowSlipageDiv] = useState(false);
   const [highSlippageDiv, setHighSlipageDiv] = useState(false);
   const [maxSlippageDisplay, setmaxSlippageDisplay] = useState(false);
+  const [refreshed, setRefreshed] = useState(false);
   // const [inputDisable, setmaxSlippageDisplay] = useState(false);
   const [insufficientLiquidityBtn, setInsufficientLiquidityBtn] =
     useState(false);
@@ -362,28 +367,116 @@ const UpdatedSwap = () => {
     },
     {
       id: "4",
-      img: "/img/tokens-folder/btcb_icon.png",
-      name: "BTCB Token",
-      address: "0x7130d2A12B9BCbFAe4f2634d864A1Ee1Ce3Ead9c",
-      symbol: "BTCB",
-      favorite: "false",
-    },
-    {
-      id: "5",
       img: "/img/tokens-folder/usdsc_icon.png",
       name: "Binance Pegged USDC Coin",
       address: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
       symbol: "USDC",
       favorite: "true",
     },
-    // {
-    //   id: "3",
-    //   img: "/img/vertiverse-token-logo-icon.svg",
-    //   name: "VertiVerseToken",
-    //   address: "0xA46ebC22Df7D73575b8680434A1E0ADB9a4A14C4",
-    //   symbol: "VTT",
-    //   favorite: "false",
-    // },
+    {
+      id: "5",
+      img: "/img/tokens-folder/cake_icon.png",
+      name: "Pancakeswap Token",
+      address: "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
+      symbol: "CAKE",
+      favorite: "false",
+    },
+    {
+      id: "6",
+      img: "/img/tokens-folder/file_icon.png",
+      name: "Binance-Peg File coin",
+      address: "0x0D8Ce2A99Bb6e3B7Db580eD848240e4a0F9aE153",
+      symbol: "FIL",
+      favorite: "false",
+    },
+    {
+      id: "7",
+      img: "/img/tokens-folder/eth_icon.png",
+      name: "Binance-Peg Ethereum Token",
+      address: "0x2170Ed0880ac9A755fd29B2688956BD959F933F8",
+      symbol: "ETH",
+      favorite: "true",
+    },
+    {
+      id: "8",
+      img: "/img/tokens-folder/dai_icon.png",
+      name: "Binance-Peg Dai ",
+      address: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3",
+      symbol: "DAI",
+      favorite: "true",
+    },
+    {
+      id: "9",
+      img: "/img/tokens-folder/xrp_icon.png",
+      name: "Binance-Peg XRP Token ",
+      address: "0x1D2F0da169ceB9fC7B3144628dB156f3F6c60dBE",
+      symbol: "XRP",
+      favorite: "false",
+    },
+    {
+      id: "10",
+      img: "/img/tokens-folder/ada_icon.png",
+      name: "Binance-Peg Cardano Token ",
+      address: "0x3EE2200Efb3400fAbB9AacF31297cBdD1d435D47",
+      symbol: "ADA",
+      favorite: "false",
+    },
+    {
+      id: "11",
+      img: "/img/tokens-folder/matic_icon.png",
+      name: "Binance-Peg Polygon ",
+      address: "0xCC42724C6683B7E57334c4E856f4c9965ED682bD",
+      symbol: "MATIC",
+      favorite: "true",
+    },
+    {
+      id: "12",
+      img: "/img/tokens-folder/trust_token_icon.png",
+      name: "Trust Wallet Token ",
+      address: "0x4B0F1812e5Df2A09796481Ff14017e6005508003",
+      symbol: "TWT",
+      favorite: "false",
+    },
+    {
+      id: "13",
+      img: "/img/tokens-folder/dot_token.png",
+      name: "Binance-Peg Polkadot Token ",
+      address: "0x7083609fCE4d1d8Dc0C979AAb8c869Ea2C873402",
+      symbol: "DOT",
+      favorite: "true",
+    },
+    {
+      id: "14",
+      img: "/img/tokens-folder/chain_link_icon.png",
+      name: "Binance-Peg ChainLink Token ",
+      address: "0xF8A0BF9cF54Bb92F17374d9e9A321E6a111a51bD",
+      symbol: "LINK",
+      favorite: "false",
+    },
+    {
+      id: "15",
+      img: "/img/tokens-folder/lite_coin_icon.png",
+      name: " Binance-Peg Litecoin Token ",
+      address: "0x4338665CBB7B2485A8855A139b75D5e34AB0DB94",
+      symbol: "LTC",
+      favorite: "false",
+    },
+    {
+      id: "16",
+      img: "/img/tokens-folder/avax_icon.png",
+      name: " Binance-Peg Avalanche Token ",
+      address: "0x1CE0c2827e2eF14D5C4f29a091d735A204794041",
+      symbol: "AVAX",
+      favorite: "false",
+    },
+    {
+      id: "17",
+      img: "/img/tokens-folder/tusd_icon.png",
+      name: " Binance-Peg TrueUsd Token ",
+      address: "0x14016E85a25aeb13065688cAFB43044C2ef86784",
+      symbol: "TUSD",
+      favorite: "false",
+    },
   ];
   useEffect(() => {
     setBaseFromAddress(assetsBase[0].PriceAddress);
@@ -934,6 +1027,7 @@ const UpdatedSwap = () => {
 
   const onChangeSwapAmount = async (e) => {
     setIsAmountLoading(true);
+    setDisable(true);
     // setInputDisabled(true);
     setSwapAmount(e.target.value);
     console.log(baseFromAddress, baseToAddress);
@@ -942,6 +1036,7 @@ const UpdatedSwap = () => {
       [baseFromAddress, baseToAddress],
       library.getSigner()
     );
+    console.log(response);
     // const response = await getAmountsOut(
     //   parseEther("1000", "wei").toString(),
     //   [
@@ -951,8 +1046,12 @@ const UpdatedSwap = () => {
     //   library.getSigner()
     // );
     console.log(response);
+    console.log(formatEther(response.message[1]._hex).toString());
+    console.log(formatEther(response.message[0]._hex).toString());
     if (response.status == true) {
       setIsAmountLoading(false);
+      setDisable(false);
+
       // setInputDisabled(false);
       setAmountsOut(formatEther(response.message[1]._hex));
       const maxSlippage = parseFloat(slippage) / 100;
@@ -960,8 +1059,10 @@ const UpdatedSwap = () => {
         formatEther(response.message[1]._hex) * (1 - maxSlippage)
       );
       console.log(formatEther(response.message[1]._hex));
+      console.log(formatEther(response.message[0]._hex));
     } else {
       setIsAmountLoading(false);
+      setDisable(false);
       // setInputDisabled(false);
       // setErrorMessage(response.message);
       console.log(response);
@@ -1085,7 +1186,10 @@ const UpdatedSwap = () => {
       setSlippage("0.5");
       const maxSlippage = parseFloat("0.5") / 100;
       setMinAmountsOut(amountsOut * (1 - maxSlippage));
-      return;
+    } else {
+      setSlippage(e.target.value);
+      const maxSlippage = parseFloat(e.target.value) / 100;
+      setMinAmountsOut(amountsOut * (1 - maxSlippage));
     }
   };
   useEffect(() => {
@@ -1115,6 +1219,36 @@ const UpdatedSwap = () => {
   // =================
   // =================
   // =================
+  const getamount = async () => {
+    setIsAmountLoading(true);
+    setDisable(true);
+    const response = await getAmountsOut(
+      parseEther(SwapAmount.toString(), "wei").toString(),
+      [baseFromAddress, baseToAddress],
+      library.getSigner()
+    );
+    console.log(response);
+    if (response.status == true) {
+      setIsAmountLoading(false);
+      setDisable(false);
+      setAmountsOut(formatEther(response.message[1]._hex));
+      const maxSlippage = parseFloat(slippage) / 100;
+      setMinAmountsOut(
+        formatEther(response.message[1]._hex) * (1 - maxSlippage)
+      );
+      console.log(maxSlippage);
+      console.log(slippage);
+      console.log(formatEther(response.message[1]._hex));
+      console.log(formatEther(response.message[1]._hex) * (1 - maxSlippage));
+    } else {
+      setDisable(false);
+      setIsAmountLoading(false);
+      console.log(response);
+    }
+    // console.log("i have fetched the amount sososososos");
+  };
+  // setInterval(callGetAmountsOut, 10000);
+
   return (
     <div className="other2">
       <section className=" no-bg no_paddd">
@@ -1187,7 +1321,8 @@ const UpdatedSwap = () => {
                               {id == "" ? (
                                 <div className="Swap_icondropDownDiv">
                                   <span className="token_balances_span">
-                                    Balance:{coinBalance}
+                                    <AccountBalanceWalletIcon className="TokenBalanceIcon" />
+                                    :{coinBalance}
                                   </span>
 
                                   <button
@@ -1211,7 +1346,8 @@ const UpdatedSwap = () => {
                                                 // data-index={data.address}
                                               >
                                                 <span className="token_balances_span">
-                                                  Balance:{coinBalance}
+                                                  <AccountBalanceWalletIcon className="TokenBalanceIcon" />
+                                                  :{coinBalance}
                                                 </span>
 
                                                 <button className="display_tokens_drop">
@@ -1237,7 +1373,8 @@ const UpdatedSwap = () => {
                                             {data.id == id ? (
                                               <div className="Swap_icondropDownDiv">
                                                 <span className="token_balances_span">
-                                                  Balance:{coinBalance}
+                                                  <AccountBalanceWalletIcon className="TokenBalanceIcon" />
+                                                  :{coinBalance}
                                                 </span>
 
                                                 <button
@@ -1435,7 +1572,8 @@ const UpdatedSwap = () => {
                               {id2 == "" ? (
                                 <div className="Swap_icondropDownDiv">
                                   <span className="token_balances_span">
-                                    Balance:{baseBalance}
+                                    <AccountBalanceWalletIcon className="TokenBalanceIcon" />
+                                    :{baseBalance}
                                   </span>
 
                                   <button
@@ -1457,7 +1595,8 @@ const UpdatedSwap = () => {
                                             {data.id == id2 ? (
                                               <div className="Swap_icondropDownDiv">
                                                 <span className="token_balances_span">
-                                                  Balance:{baseBalance}
+                                                  <AccountBalanceWalletIcon className="TokenBalanceIcon" />
+                                                  :{baseBalance}
                                                 </span>
 
                                                 <button className="display_tokens_drop">
@@ -1484,7 +1623,8 @@ const UpdatedSwap = () => {
                                             {data.id == id2 ? (
                                               <div className="Swap_icondropDownDiv">
                                                 <span className="token_balances_span">
-                                                  Balance:{baseBalance}
+                                                  <AccountBalanceWalletIcon className="TokenBalanceIcon" />
+                                                  :{baseBalance}
                                                 </span>
 
                                                 <button
@@ -1596,18 +1736,41 @@ const UpdatedSwap = () => {
                       />
                     </div> */}
                       <div className="max_slippage_display_details_div">
-                        <div className="swap_price_slippage_div">
-                          <div className="swap_price_slippage_div1">
-                            Max Slippage{" "}
-                            <InfoOutlinedIcon className="swap_price_slippage_info_icon" />
-                            :
+                        <div className="swap_price_slippage_div_cont_div">
+                          <div className="swap_price_slippage_div">
+                            <div className="swap_price_slippage_div1">
+                              Max Slippage{" "}
+                              <InfoOutlinedIcon className="swap_price_slippage_info_icon" />
+                              :
+                            </div>
+                            <div
+                              className="swap_price_slippage_div2"
+                              onClick={ToggleMaxSlippageDiv}
+                            >
+                              {slippage}%{" "}
+                              <ArrowDropDownIcon className="swap_price_slippage_div2_icon" />
+                            </div>
                           </div>
-                          <div
-                            className="swap_price_slippage_div2"
-                            onClick={ToggleMaxSlippageDiv}
-                          >
-                            {slippage}%{" "}
-                            <ArrowDropDownIcon className="swap_price_slippage_div2_icon" />
+                          {/* <div className="resfresh_icon_div">
+                            <img
+                              src="/img/refresh_icon/refresh_icon.gif"
+                              alt=""
+                              className="resfresh_icon_div_icon"
+                            />
+                          </div> */}
+                          <div className="resfresh_icon_div">
+                            {SwapAmount <= "0" || id2 == "" ? null : (
+                              <>
+                                <RefreshIcon
+                                  callGetAmountsOut={getamount}
+                                  SwapAmount={SwapAmount}
+                                  MinamountsOut={MinamountsOut}
+                                />
+                                <span className="resfresh_icon_div_span">
+                                  Upadting...
+                                </span>
+                              </>
+                            )}
                           </div>
                         </div>
                         {maxSlippageDisplay ? (
