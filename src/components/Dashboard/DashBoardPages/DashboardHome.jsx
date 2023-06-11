@@ -503,7 +503,7 @@ const DashboardHome = () => {
       setDisable(false);
       setSuccessModal(true);
       setTxHash(res.message.hash);
-      setSuccessMessage("You've successfully burnt " + accumEgc + " egc");
+      setSuccessMessage("You've successfully burnt " + accumEgc + " MGPTT");
     } else {
       console.log(res);
       setIsLoading(false);
@@ -1157,7 +1157,8 @@ const DashboardHome = () => {
                 <div className="lending_area1_cont1_body_1">
                   <HelpOutlineIcon className="help_outline" />
                   <div className="helper_txt_div">
-                    This is the total value of EGC locked in the smart-contract.
+                    This is the total value of MGPTT locked in the
+                    smart-contract.
                   </div>
                 </div>
               </div>
@@ -1235,11 +1236,11 @@ const DashboardHome = () => {
               <div className="burn_egc_div_1">
                 <div className="burn_egc_div_1_cont1">
                   <div className="burn_egc_div_1_cont1_area1">
-                    Accumulated Egc{" "}
+                    Accumulated MGPTT{" "}
                     <div className="burn_egc_div_1_cont1_1">
                       <HelpOutlineIcon className="help_outline" />
                       <div className="helper_txt_div">
-                        This is the total value of EGC locked in the
+                        This is the total value of MGPTT locked in the
                         smart-contract.
                       </div>
                     </div>
@@ -1261,11 +1262,11 @@ const DashboardHome = () => {
                 <span className="vertical_line"></span>
                 <div className="burn_egc_div_1_cont1">
                   <div className="burn_egc_div_1_cont1_area1">
-                    Burnt Egc{" "}
+                    Burnt MGPTT{" "}
                     <div className="burn_egc_div_1_cont1_1">
                       <HelpOutlineIcon className="help_outline" />
                       <div className="helper_txt_div">
-                        This is the total value of EGC locked in the
+                        This is the total value of MGPTT locked in the
                         smart-contract.
                       </div>
                     </div>
@@ -1589,7 +1590,7 @@ const DashboardHome = () => {
                                         {numberWithCommas(
                                           parseFloat(data.amount).toFixed(2)
                                         )}{" "}
-                                        EGC
+                                        MGPTT
                                       </span>
                                     ) : data.status == "UNSTAKE" ? (
                                       <span style={{ display: "flex" }}>
@@ -1598,7 +1599,7 @@ const DashboardHome = () => {
                                             data.unstake_amount
                                           ).toFixed(2)
                                         )}{" "}
-                                        EGC
+                                        MGPTT
                                       </span>
                                     ) : null}
                                   </div>
@@ -1905,7 +1906,7 @@ const DashboardHome = () => {
                                 </td>
                                 <td className="stakingTable_body_row_data">
                                   <div className="value_dolls_div2">
-                                    {parseFloat(data.amount).toFixed(2)} EGC
+                                    {parseFloat(data.amount).toFixed(2)} MGPTT
                                   </div>
                                 </td>
                                 <td className="stakingTable_body_row_data">

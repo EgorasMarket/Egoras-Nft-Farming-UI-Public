@@ -76,57 +76,36 @@ const SetRouter = () => {
     <div className="other2 asset_other2">
       <section className="collateral-assets-section no-bg no_pad">
         <div className="container">
-          <div className="setRouterAddressDiv">
-            <div className="setRouterAddressDiv1">
-              <div className="setRouterAddressDiv1_title">
-                Pancake Router Address
-              </div>
-              <input
-                type="text"
-                placeholder="0x0000000"
-                className="setRouterAddressInput"
-                value={CakeRouterAddress}
-              />
-            </div>
-            --
-            <div className="setRouterAddressDiv1">
-              <div className="setRouterAddressDiv1_title">
-                Busd Pancake Address
-              </div>
-              <input
-                type="text"
-                placeholder="0x0000000"
-                className="setRouterAddressInput"
-                value={BusdRouterAddress}
-              />
-            </div>
+          <div
+            className="settings"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
             <div className="setRouterAddressButtonDiv">
-              <button
-                onClick={setRouterAddress}
-                className="setRouterAddressBtn"
-              >
-                Set router
+              <button onClick={addMinter} className="setRouterAddressBtn">
+                Add Minter
               </button>
             </div>
-          </div>
-          <div className="setRouterAddressButtonDiv">
-            <button onClick={addMinter} className="setRouterAddressBtn">
-              Add Minter
+            <input
+              // type="text"
+              placeholder="0x0000000"
+              className="setRouterAddressInput"
+              value={diamondCutCode}
+              onChange={diamondCutCodeChange}
+            />
+            <button
+              onClick={DiamondCutFunction}
+              className="setRouterAddressBtn"
+            >
+              Call Diamond Cut
             </button>
           </div>
-          <input
-            // type="text"
-            placeholder="0x0000000"
-            className="setRouterAddressInput"
-            value={diamondCutCode}
-            onChange={diamondCutCodeChange}
-          />
-          <button onClick={DiamondCutFunction} className="setRouterAddressBtn">
-            Call Diamond Cut
-          </button>
-          <button onClick={ApproveToken} className="setRouterAddressBtn">
+          {/* <button onClick={ApproveToken} className="setRouterAddressBtn">
             Approve Token
-          </button>
+          </button> */}
         </div>
       </section>
     </div>

@@ -150,7 +150,7 @@ const AdminModifyMembership = () => {
                   Modify Monthly Plan
                 </div>
                 <div className="modifyMembershipFeeDiv_body_monthly_SubHead">
-                  Current Plan ~ 0egc
+                  Current Plan ~ MGPTT
                 </div>
                 <div className="modifyMembershipFeeDiv_body_monthly_input_div">
                   <div className="modifyMembershipFeeDiv_body_monthly_input_div_1">
@@ -178,7 +178,7 @@ const AdminModifyMembership = () => {
                   Modify Semi-Annually Plan
                 </div>
                 <div className="modifyMembershipFeeDiv_body_monthly_SubHead">
-                  Current Plan ~ 0egc
+                  Current Plan ~ MGPTT
                 </div>
                 <div className="modifyMembershipFeeDiv_body_monthly_input_div">
                   <div className="modifyMembershipFeeDiv_body_monthly_input_div_1">
@@ -206,7 +206,7 @@ const AdminModifyMembership = () => {
                   Modify Annual Plan
                 </div>
                 <div className="modifyMembershipFeeDiv_body_monthly_SubHead">
-                  Current Plan ~ 0egc
+                  Current Plan ~ MGPTT
                 </div>
                 <div className="modifyMembershipFeeDiv_body_monthly_input_div">
                   <div className="modifyMembershipFeeDiv_body_monthly_input_div_1">
