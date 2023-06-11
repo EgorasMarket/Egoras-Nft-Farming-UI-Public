@@ -27,8 +27,8 @@ const PriceOracle = () => {
     active,
     error,
   } = context;
-  const [tickerArray, setTickerArray] = useState(["egceusd"]);
-  const [priceArray, setPriceArray] = useState(["8200000000000000000"]);
+  const [tickerArray, setTickerArray] = useState(["mgptteusd"]);
+  const [priceArray, setPriceArray] = useState(["5600000000000000000"]);
   const [newWallet, setNewWallet] = useState([""]);
   const [newWallet2, setNewWallet2] = useState([""]);
 
@@ -106,7 +106,7 @@ const PriceOracle = () => {
             </div>
             <div className="setRouterAddressDiv">
               <div className="setRouterAddressDiv1">
-                <div className="setRouterAddressDiv1_title">EGC</div>
+                <div className="setRouterAddressDiv1_title">MGPTT</div>
                 <input
                   type="text"
                   placeholder="Price"
@@ -132,7 +132,7 @@ const PriceOracle = () => {
                 <button onClick={setTicker} className="setRouterAddressBtn">
                   Set Ticker
                 </button>
-                <button
+                {/* <button
                   onClick={resetStackedTime}
                   className="setRouterAddressBtn"
                 >
@@ -143,10 +143,10 @@ const PriceOracle = () => {
                   className="setRouterAddressBtn"
                 >
                   Increase Time
-                </button>
-                <button onClick={UnlockToken} className="setRouterAddressBtn">
-                  Aprove EGC
-                </button>
+                </button> */}
+                {/* <button onClick={UnlockToken} className="setRouterAddressBtn">
+                  Aprove MGPTT
+                </button> */}
               </div>
             </div>
           </div>

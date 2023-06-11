@@ -231,7 +231,7 @@ const DashboardReferral = ({ auth }) => {
       setSuccessModal(true);
       setTxHash(res.message.hash);
       setSuccessMessage(
-        "You've successfully withdrawn " + refEarnings + " egc"
+        "You've successfully withdrawn " + refEarnings + " MGPTT"
       );
     } else {
       console.log(res);
@@ -295,7 +295,7 @@ const DashboardReferral = ({ auth }) => {
                         </div>
                         <div className="dashBoard_ref_area1_cont1_div1_cont2">
                           {numberWithCommas(parseFloat(refEarnings).toFixed(2))}{" "}
-                          <span className="engn_symbol_sign">EGC</span>
+                          <span className="engn_symbol_sign">MGPTT</span>
                         </div>
                       </div>
                       <button

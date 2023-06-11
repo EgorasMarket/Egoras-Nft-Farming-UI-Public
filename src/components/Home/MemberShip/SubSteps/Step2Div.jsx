@@ -261,7 +261,7 @@ export const Step2Div = ({
                       {monthAmount}
                       {""}
                       <span className="selectPlanDiv2_area1_cont2_head_price_span">
-                        egc / mnth
+                        mgptt / mnth
                       </span>{" "}
                     </div>
                     <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
@@ -310,7 +310,7 @@ export const Step2Div = ({
                       {semiAnnualAmount}
                       {""}
                       <span className="selectPlanDiv2_area1_cont2_head_price_span">
-                        egc / 6mnths
+                        mgptt / 6mnths
                       </span>
                     </div>
                     <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
@@ -358,7 +358,7 @@ export const Step2Div = ({
                       {AnnualAmount}
                       {""}
                       <span className="selectPlanDiv2_area1_cont2_head_price_span">
-                        egc / yr
+                        mgptt / yr
                       </span>
                     </div>
                     <span className="selectPlanDiv2_area1_cont2_head_price_div_span">
@@ -421,7 +421,7 @@ export const Step2Div = ({
                     {isLoading ? (
                       <ScaleLoader color="#12111b" size={10} height={20} />
                     ) : (
-                      <span> Approve EGC </span>
+                      <span> Approve MGPTT </span>
                     )}
                   </button>
                 ) : (
@@ -598,7 +598,7 @@ export const Step2Div = ({
                     {isLoading ? (
                       <ScaleLoader color="#12111b" size={10} height={20} />
                     ) : (
-                      <span> Approve EGC </span>
+                      <span> Approve MGPTT </span>
                     )}
                   </button>
                 ) : (
