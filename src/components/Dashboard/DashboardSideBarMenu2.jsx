@@ -1246,6 +1246,11 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             Market
           </a>
         </div>
+
+        <a href="/app/convert" className="convert_tab_mobile">
+          <JoinLeftIcon className="convert_tab_mobile_icon" />
+          <div className="convert_tab_mobile_txt">Convert</div>
+        </a>
         {/* =============''''''''' */}
         {/* =============''''''''' */}
         {/* =============''''''''' */}
