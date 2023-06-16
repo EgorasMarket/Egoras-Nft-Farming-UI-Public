@@ -102,9 +102,9 @@ export const MarketHeader = ({
     setSearchTerm(event.target.value);
     console.log(event.target.value);
 
-    // let response = await CALL_PRODUCT_SEARCH(event.target.value);
-    // console.log(response.data);
-    // setSearchResults(response.data);
+    let response = await CALL_PRODUCT_SEARCH(event.target.value);
+    console.log(response.data);
+    setSearchResults(response.data);
   };
   useEffect(async () => {
     try {
