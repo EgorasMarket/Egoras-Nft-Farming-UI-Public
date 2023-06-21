@@ -342,7 +342,7 @@ const ProductDetailPage = ({ match }) => {
                       Items Available:
                     </div>
                     <div className="quantity_div_item_avl_para">
-                      {numberWithCommas(parseInt(productDetail.quantity))}
+                      {numberWithCommas(parseInt(productDetail.quantity))}{" "}
                       item(s)
                     </div>
                   </div>
