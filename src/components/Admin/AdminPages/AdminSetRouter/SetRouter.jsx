@@ -4,6 +4,9 @@ import {
   adminAddMinter,
   DiamondCutFunc,
   approveBusd,
+  convertToken,
+  setMartgptTokenAddress,
+  approveConvertToken,
 } from "../../../../web3/index2";
 import "./AdminRouter.css";
 import Web3 from "web3";
@@ -29,7 +32,7 @@ const SetRouter = () => {
   const [CakeRouterAddress, setCakeRouterAddress] = useState(
     "0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3"
   );
-  const [diamondCutCode, setDiamondCutCode] = useState();
+  const [diamondCutCode, setDiamondCutCode] = useState("");
   const [BusdRouterAddress, setBusdRouterAddress] = useState(
     "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A"
   );
@@ -55,6 +58,18 @@ const SetRouter = () => {
   };
   const ApproveToken = async () => {
     const response = await approveBusd(library.getSigner());
+    console.log(response);
+  };
+  const convertTokenMart = async () => {
+    const response = await convertToken(library.getSigner());
+    console.log(response);
+  };
+  const setTokenAdrress = async () => {
+    const response = await setMartgptTokenAddress(library.getSigner());
+    console.log(response);
+  };
+  const approveToken = async () => {
+    const response = await approveConvertToken(library.getSigner());
     console.log(response);
   };
   const diamondCutCodeChange = (e) => {
@@ -89,6 +104,25 @@ const SetRouter = () => {
                 Add Minter
               </button>
             </div>
+            <div className="setRouterAddressButtonDiv">
+              <button onClick={setTokenAdrress} className="setRouterAddressBtn">
+                Set Token Address
+              </button>
+            </div>
+            <div className="setRouterAddressButtonDiv">
+              <button
+                onClick={convertTokenMart}
+                className="setRouterAddressBtn"
+              >
+                Convert Token
+              </button>
+            </div>
+            <div className="setRouterAddressButtonDiv">
+              <button onClick={approveToken} className="setRouterAddressBtn">
+                Approve Token
+              </button>
+            </div>
+
             <input
               // type="text"
               placeholder="0x0000000"

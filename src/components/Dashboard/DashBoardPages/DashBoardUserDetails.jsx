@@ -136,6 +136,10 @@ const DashBoardUserDetails = ({ auth }) => {
       setActiveLink("poolDetails");
       return;
     }
+    if (currentPage === "/app/user/reward") {
+      setActiveLink("reward");
+      return;
+    }
     if (currentPage === "/app/user/referral") {
       setActiveLink("referral");
       return;

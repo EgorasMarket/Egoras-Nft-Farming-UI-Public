@@ -1,0 +1,196 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "performer",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "myshare",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "rewardPeriod",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "Rewarded",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "egcTokenAddress",
+          "type": "address"
+        }
+      ],
+      "name": "setMartgptTokenAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getTokenReward",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "recordUserActivity",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "rewardStats",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "currentAllActivity",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "allActivity",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "nextRewardPeriod",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalRewardTokenRemaining",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "totalRewardDistributed",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "period",
+          "type": "uint256"
+        }
+      ],
+      "name": "userRewardStats",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "userActivity",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "allUserActivity",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "currentAllActivity",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "userTotalRewardRecieved",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "currentPeriod",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [],
+      "name": "convertToken",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_martgptToken",
+          "type": "address"
+        }
+      ],
+      "name": "approveConvertToken",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "rewardHoldersByActivity",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "resetTome",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}

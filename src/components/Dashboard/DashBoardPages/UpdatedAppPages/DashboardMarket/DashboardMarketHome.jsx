@@ -20,6 +20,7 @@ const DashboardMarketHome = () => {
   const [products2, setProduct2] = useState([]);
   const [products3, setProducts3] = useState([]);
   const [products4, setProducts4] = useState([]);
+  const [products5, setProducts5] = useState([]);
 
   const responsive1 = {
     superLargeDesktop: {
@@ -104,6 +105,18 @@ const DashboardMarketHome = () => {
       console.log(response2);
       console.log(response2.data.data);
       setProducts3(response2.data.data);
+    } catch (error) {
+      console.log(error.response);
+    }
+    try {
+      const response4 = await axios.get(
+        API_URL + "/product/product-by-category/Machineries",
+        null,
+        config
+      );
+      console.log(response4);
+      console.log(response4.data.data);
+      setProducts5(response4.data.data);
     } catch (error) {
       console.log(error.response);
     }
@@ -370,6 +383,53 @@ const DashboardMarketHome = () => {
                         className="product_carousel"
                       >
                         {products4.slice(0, 6).map((data) => (
+                          <ProductModel
+                            key={data.product_id}
+                            amount={data.final_amount}
+                            id={data.product_id}
+                            img={data.product_images}
+                            title={data.product_name}
+                            txnHash={data.transaction_hash}
+                            numberWithCommas={numberWithCommas}
+                            prodState={data.product_state}
+                            productType={data.productType}
+                            seller={data.user_wallet}
+                            productQuantity={data.quantity}
+                          />
+                        ))}
+                      </Carousel>
+                    </div>
+                  </div>
+                )}
+                {/* =============================== */}
+                {/* =============================== */}
+                {/* =============================== */}
+                {/* =============================== */}
+                {/* =============================== */}
+                {products5.length <= 0 ? null : (
+                  <div className="dashboardMarketPlaceBody2_div1">
+                    <div className="dashboardMarketPlaceBody2_div1_head">
+                      Machineries
+                      <a href={`/app/market/product/category/Electronics`}>
+                        <span className="dashboardMarketPlaceBody2_div1_head_span">
+                          View Category
+                        </span>
+                      </a>
+                    </div>
+                    <div className="dashboardMarketPlaceBody2_div1_body">
+                      <Carousel
+                        responsive={responsive1}
+                        showDots={false}
+                        //   infinite={false}
+                        autoPlay={false}
+                        autoPlaySpeed={10000}
+                        pauseOnHover={true}
+                        infinite={false}
+                        draggable={true}
+                        swipeable={true}
+                        className="product_carousel"
+                      >
+                        {products5.slice(0, 6).map((data) => (
                           <ProductModel
                             key={data.product_id}
                             amount={data.final_amount}
