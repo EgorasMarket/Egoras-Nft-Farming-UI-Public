@@ -2,6 +2,7 @@ import { Contract } from "@ethersproject/contracts";
 import MembershipFacet from "./contracts/V3/MembershipFacet.json";
 import MartGptFacet from "./contracts/V3/martGPT.json";
 import V3ContractAddress from "./contracts/V3/V3ContractAddress.json";
+import RewardFaucet from "./contracts/V3/RewardFacet.json";
 import PancakeSwapFaucet from "./contracts/V3/PancakeSwapFacet.json";
 import DiamondCut from "./contracts/V3/DiamondCut.json";
 import Minter from "./contracts/V3/Minter.json";
@@ -28,6 +29,9 @@ const contractMartgptFacetInstance = async (signer) => {
 };
 const contractDiamondCutInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, DiamondCut.abi, signer);
+};
+const contractRewardFaucetInstance = async (signer) => {
+  return new Contract(V3ContractAddress.address, RewardFaucet.abi, signer);
 };
 const contractPriceOracleFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, PriceOracleFacet.abi, signer);
@@ -720,6 +724,81 @@ const convertEgcToMartgpt = async (account, amount, signer) => {
     };
   }
 };
+const convertToken = async (signer) => {
+  try {
+    const instance = await contractRewardFaucetInstance(signer);
+    let result = await instance.convertToken();
+    console.log(result, "result");
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const approveConvertToken = async (signer) => {
+  try {
+    const instance = await contractRewardFaucetInstance(signer);
+    let result = await instance.approveConvertToken(
+      "1800000000000000000000000000000000",
+      "0xD62C345CE544919dFf1639fe1f63610014987dE9"
+    );
+    console.log(result, "result");
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
+const setMartgptTokenAddress = async (signer) => {
+  try {
+    const instance = await contractRewardFaucetInstance(signer);
+    let result = await instance.setMartgptTokenAddress(
+      "0xD62C345CE544919dFf1639fe1f63610014987dE9",
+      "0xd68e5c52f7563486cc1a15d00efa12c8644a907e"
+    );
+    console.log(result, "result");
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const CheckUserRewardStats = async (account, period, signer) => {
+  try {
+    const instance = await contractRewardFaucetInstance(signer);
+    let result = await instance.userRewardStats(account, period);
+    console.log(result, "result");
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 
 export {
   monthlyPlanSubScribe,
@@ -756,4 +835,8 @@ export {
   DiamondCutFunc,
   approveBusd,
   convertEgcToMartgpt,
+  convertToken,
+  approveConvertToken,
+  setMartgptTokenAddress,
+  CheckUserRewardStats,
 };

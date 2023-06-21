@@ -543,61 +543,72 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                       </div>
                     </div>
                     <div className="proceedToPayDiv_btn_div">
-                      {updateProfile === true ? (
-                        <button className="proceedToPayDiv_btn" disabled>
-                          Update Your Billing Info
-                        </button>
-                      ) : (
+                      {account ? (
                         <>
-                          {checkedFort === true ? (
-                            <button
-                              className="proceedToPayDiv_btn"
-                              onClick={toggleCheckedFortModal}
-                            >
-                              Checkout Fort
+                          {updateProfile === true ? (
+                            <button className="proceedToPayDiv_btn" disabled>
+                              Update Your Billing Info
                             </button>
-                          ) : checkedMetamask === true ? (
+                          ) : (
                             <>
-                              {unlockBtn === false ? (
+                              {checkedFort === true ? (
                                 <button
                                   className="proceedToPayDiv_btn"
-                                  disabled={Disabled}
-                                  onClick={UnlockToken}
+                                  onClick={toggleCheckedFortModal}
                                 >
-                                  {isLoading ? (
-                                    <ScaleLoader
-                                      color="#12111b"
-                                      size={10}
-                                      height={20}
-                                    />
-                                  ) : (
-                                    <span> Approve EUSD </span>
-                                  )}
+                                  Checkout Fort
                                 </button>
+                              ) : checkedMetamask === true ? (
+                                <>
+                                  {unlockBtn === false ? (
+                                    <button
+                                      className="proceedToPayDiv_btn"
+                                      disabled={Disabled}
+                                      onClick={UnlockToken}
+                                    >
+                                      {isLoading ? (
+                                        <ScaleLoader
+                                          color="#12111b"
+                                          size={10}
+                                          height={20}
+                                        />
+                                      ) : (
+                                        <span> Approve EUSD </span>
+                                      )}
+                                    </button>
+                                  ) : (
+                                    <button
+                                      className="proceedToPayDiv_btn"
+                                      onClick={PurchaseProduct}
+                                      disabled={Disabled}
+                                    >
+                                      {isLoading ? (
+                                        <ScaleLoader
+                                          color="#12111b"
+                                          size={10}
+                                          height={19}
+                                        />
+                                      ) : (
+                                        <> Checkout Metamask</>
+                                      )}
+                                    </button>
+                                  )}
+                                </>
                               ) : (
                                 <button
                                   className="proceedToPayDiv_btn"
-                                  onClick={PurchaseProduct}
-                                  disabled={Disabled}
+                                  disabled
                                 >
-                                  {isLoading ? (
-                                    <ScaleLoader
-                                      color="#12111b"
-                                      size={10}
-                                      height={19}
-                                    />
-                                  ) : (
-                                    <> Checkout Metamask</>
-                                  )}
+                                  Select Payment Method
                                 </button>
                               )}
                             </>
-                          ) : (
-                            <button className="proceedToPayDiv_btn" disabled>
-                              Select Payment Method
-                            </button>
                           )}
                         </>
+                      ) : (
+                        <button className="proceedToPayDiv_btn" disabled>
+                          Connect Wallet
+                        </button>
                       )}
                     </div>
                   </div>

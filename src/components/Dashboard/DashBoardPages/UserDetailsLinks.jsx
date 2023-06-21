@@ -30,6 +30,17 @@ const UserDetailsLinks = ({ activeLink }) => {
         Referral
       </Link>
       <Link
+        to="/app/user/reward"
+        className={
+          activeLink === "reward"
+            ? "pool_lend_details_link_active"
+            : "pool_lend_details_link"
+        }
+      >
+        <GroupAddIcon className="asset_overview_link_icon" />
+        Rewards Hub
+      </Link>
+      <Link
         to="/app/user/p2p_sales"
         className={
           activeLink === "p2p"

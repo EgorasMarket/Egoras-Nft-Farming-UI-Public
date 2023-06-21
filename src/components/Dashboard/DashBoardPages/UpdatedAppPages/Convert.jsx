@@ -53,7 +53,7 @@ const Convert = () => {
     async (e) => {
       if (account) {
         let res = await tokenBalance(
-          REACT_APP_EGC_ADDRESS,
+          "0xd68e5c52f7563486cc1a15d00efa12c8644a907e",
           account,
           library.getSigner()
         );
@@ -83,7 +83,7 @@ const Convert = () => {
     async (e) => {
       if (account) {
         let check = await checkAllowanceV32(
-          REACT_APP_EGC_ADDRESS,
+          "0xd68e5c52f7563486cc1a15d00efa12c8644a907e",
           account,
           parseEther(egcBalance.toString(), "wei").toString(),
           library.getSigner()
@@ -100,7 +100,7 @@ const Convert = () => {
     setIsLoading(true);
     setDisable(true);
     let ret = await unlockTokenV32(
-      REACT_APP_EGC_ADDRESS,
+      "0xd68e5c52f7563486cc1a15d00efa12c8644a907e",
       parseEther("180000000000000000000000000000000000", "wei").toString(),
       library.getSigner()
     );
