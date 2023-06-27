@@ -3,6 +3,7 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd";
 import { Link } from "react-router-dom";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 
 const UserDetailsLinks = ({ activeLink }) => {
   return (
@@ -37,7 +38,7 @@ const UserDetailsLinks = ({ activeLink }) => {
             : "pool_lend_details_link"
         }
       >
-        <GroupAddIcon className="asset_overview_link_icon" />
+        <EmojiEventsIcon className="asset_overview_link_icon" />
         Rewards Hub
       </Link>
       <Link

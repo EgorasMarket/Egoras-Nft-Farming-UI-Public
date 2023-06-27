@@ -349,16 +349,16 @@ const UpdatedSwap = () => {
       symbol: "BNB",
       favorite: "true",
     },
+    // {
+    //   id: "2",
+    //   img: "/img/egc_icon2.svg",
+    //   name: "Martgpt",
+    //   address: "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
+    //   symbol: "EGC",
+    //   favorite: "true",
+    // },
     {
       id: "2",
-      img: "/img/egc_icon2.svg",
-      name: "Martgpt",
-      address: "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
-      symbol: "EGC",
-      favorite: "true",
-    },
-    {
-      id: "3",
       img: "/img/tokens-folder/usdt_icon.png",
       name: "Tether USD",
       address: "0x55d398326f99059fF775485246999027B3197955",
@@ -366,7 +366,7 @@ const UpdatedSwap = () => {
       favorite: "true",
     },
     {
-      id: "4",
+      id: "3",
       img: "/img/tokens-folder/usdsc_icon.png",
       name: "Binance Pegged USDC Coin",
       address: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
@@ -374,7 +374,7 @@ const UpdatedSwap = () => {
       favorite: "true",
     },
     {
-      id: "5",
+      id: "4",
       img: "/img/tokens-folder/cake_icon.png",
       name: "Pancakeswap Token",
       address: "0x0E09FaBB73Bd3Ade0a17ECC321fD13a19e81cE82",
@@ -382,7 +382,7 @@ const UpdatedSwap = () => {
       favorite: "false",
     },
     {
-      id: "6",
+      id: "5",
       img: "/img/tokens-folder/file_icon.png",
       name: "Binance-Peg File coin",
       address: "0x0D8Ce2A99Bb6e3B7Db580eD848240e4a0F9aE153",
@@ -390,7 +390,7 @@ const UpdatedSwap = () => {
       favorite: "false",
     },
     {
-      id: "7",
+      id: "6",
       img: "/img/tokens-folder/eth_icon.png",
       name: "Binance-Peg Ethereum Token",
       address: "0x2170Ed0880ac9A755fd29B2688956BD959F933F8",
@@ -398,7 +398,7 @@ const UpdatedSwap = () => {
       favorite: "true",
     },
     {
-      id: "8",
+      id: "7",
       img: "/img/tokens-folder/dai_icon.png",
       name: "Binance-Peg Dai ",
       address: "0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3",
@@ -406,7 +406,7 @@ const UpdatedSwap = () => {
       favorite: "true",
     },
     {
-      id: "9",
+      id: "8",
       img: "/img/tokens-folder/xrp_icon.png",
       name: "Binance-Peg XRP Token ",
       address: "0x1D2F0da169ceB9fC7B3144628dB156f3F6c60dBE",
@@ -414,7 +414,7 @@ const UpdatedSwap = () => {
       favorite: "false",
     },
     {
-      id: "10",
+      id: "9",
       img: "/img/tokens-folder/ada_icon.png",
       name: "Binance-Peg Cardano Token ",
       address: "0x3EE2200Efb3400fAbB9AacF31297cBdD1d435D47",
@@ -422,7 +422,7 @@ const UpdatedSwap = () => {
       favorite: "false",
     },
     {
-      id: "11",
+      id: "10",
       img: "/img/tokens-folder/matic_icon.png",
       name: "Binance-Peg Polygon ",
       address: "0xCC42724C6683B7E57334c4E856f4c9965ED682bD",
@@ -430,7 +430,7 @@ const UpdatedSwap = () => {
       favorite: "true",
     },
     {
-      id: "12",
+      id: "11",
       img: "/img/tokens-folder/trust_token_icon.png",
       name: "Trust Wallet Token ",
       address: "0x4B0F1812e5Df2A09796481Ff14017e6005508003",
@@ -438,7 +438,7 @@ const UpdatedSwap = () => {
       favorite: "false",
     },
     {
-      id: "13",
+      id: "12",
       img: "/img/tokens-folder/dot_token.png",
       name: "Binance-Peg Polkadot Token ",
       address: "0x7083609fCE4d1d8Dc0C979AAb8c869Ea2C873402",
@@ -446,7 +446,7 @@ const UpdatedSwap = () => {
       favorite: "true",
     },
     {
-      id: "14",
+      id: "13",
       img: "/img/tokens-folder/chain_link_icon.png",
       name: "Binance-Peg ChainLink Token ",
       address: "0xF8A0BF9cF54Bb92F17374d9e9A321E6a111a51bD",
@@ -454,7 +454,7 @@ const UpdatedSwap = () => {
       favorite: "false",
     },
     {
-      id: "15",
+      id: "14",
       img: "/img/tokens-folder/lite_coin_icon.png",
       name: " Binance-Peg Litecoin Token ",
       address: "0x4338665CBB7B2485A8855A139b75D5e34AB0DB94",
@@ -462,7 +462,7 @@ const UpdatedSwap = () => {
       favorite: "false",
     },
     {
-      id: "16",
+      id: "15",
       img: "/img/tokens-folder/avax_icon.png",
       name: " Binance-Peg Avalanche Token ",
       address: "0x1CE0c2827e2eF14D5C4f29a091d735A204794041",
@@ -470,7 +470,7 @@ const UpdatedSwap = () => {
       favorite: "false",
     },
     {
-      id: "17",
+      id: "16",
       img: "/img/tokens-folder/tusd_icon.png",
       name: " Binance-Peg TrueUsd Token ",
       address: "0x14016E85a25aeb13065688cAFB43044C2ef86784",
