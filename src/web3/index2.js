@@ -27,6 +27,13 @@ const contractMartgptFacetInstance = async (signer) => {
     signer
   );
 };
+const contractMartgptFacetInstance2 = async (signer) => {
+  return new Contract(
+    "0xd68e5c52f7563486cc1a15d00efa12c8644a907e",
+    MartGptFacet.abi,
+    signer
+  );
+};
 const contractDiamondCutInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, DiamondCut.abi, signer);
 };
@@ -799,6 +806,23 @@ const CheckUserRewardStats = async (account, period, signer) => {
     };
   }
 };
+const BurnEgc = async (amount, signer) => {
+  try {
+    const instance = await contractMartgptFacetInstance2(signer);
+    let result = await instance.burn(amount);
+    console.log(result, "result");
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 
 export {
   monthlyPlanSubScribe,
@@ -839,4 +863,5 @@ export {
   approveConvertToken,
   setMartgptTokenAddress,
   CheckUserRewardStats,
+  BurnEgc,
 };
