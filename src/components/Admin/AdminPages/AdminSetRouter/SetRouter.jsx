@@ -7,6 +7,7 @@ import {
   convertToken,
   setMartgptTokenAddress,
   approveConvertToken,
+  BurnEgc,
 } from "../../../../web3/index2";
 import "./AdminRouter.css";
 import Web3 from "web3";
@@ -33,6 +34,7 @@ const SetRouter = () => {
     "0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3"
   );
   const [diamondCutCode, setDiamondCutCode] = useState("");
+  const [egcAmnt, setEgcAmnt] = useState("");
   const [BusdRouterAddress, setBusdRouterAddress] = useState(
     "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A"
   );
@@ -72,6 +74,13 @@ const SetRouter = () => {
     const response = await approveConvertToken(library.getSigner());
     console.log(response);
   };
+  const BurnEgcAmnt = async () => {
+    const response = await BurnEgc(
+      parseEther(egcAmnt, "wei").toString(),
+      library.getSigner()
+    );
+    console.log(response);
+  };
   const diamondCutCodeChange = (e) => {
     // setDiamondCutCode(e.target.value);
     setDiamondCutCode(e.target.value);
@@ -79,6 +88,10 @@ const SetRouter = () => {
     // console.log(e.target.value.split(","));
     // const code2 = e.target.value.split(",");
     // console.log(code2[0], code2[1], code2[2]);
+  };
+  const burnEgcChange = (e) => {
+    setEgcAmnt(e.target.value);
+    console.log(e.target.value);
   };
   // const addMinter = async () => {
   //   const response = await adminAddMinter(
@@ -104,7 +117,7 @@ const SetRouter = () => {
                 Add Minter
               </button>
             </div>
-            <div className="setRouterAddressButtonDiv">
+            {/* <div className="setRouterAddressButtonDiv">
               <button onClick={setTokenAdrress} className="setRouterAddressBtn">
                 Set Token Address
               </button>
@@ -116,12 +129,12 @@ const SetRouter = () => {
               >
                 Convert Token
               </button>
-            </div>
-            <div className="setRouterAddressButtonDiv">
+            </div> */}
+            {/* <div className="setRouterAddressButtonDiv">
               <button onClick={approveToken} className="setRouterAddressBtn">
                 Approve Token
               </button>
-            </div>
+            </div> */}
 
             <input
               // type="text"
@@ -135,6 +148,18 @@ const SetRouter = () => {
               className="setRouterAddressBtn"
             >
               Call Diamond Cut
+            </button>
+          </div>
+          <div>
+            <input
+              // type="text"
+              placeholder="0.0000"
+              className="setRouterAddressInput"
+              value={egcAmnt}
+              onChange={burnEgcChange}
+            />
+            <button onClick={BurnEgcAmnt} className="setRouterAddressBtn">
+              Burn Egc
             </button>
           </div>
           {/* <button onClick={ApproveToken} className="setRouterAddressBtn">

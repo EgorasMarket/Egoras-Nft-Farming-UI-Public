@@ -32,6 +32,49 @@
       "type": "event"
     },
     {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "plan",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "dailyRoyalty",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "totalRoyalty",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "StakedReward",
+      "type": "event"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -102,6 +145,11 @@
           "internalType": "uint256",
           "name": "totalRewardDistributed",
           "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "stakingPlanForSixMonths",
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -147,6 +195,11 @@
           "internalType": "uint256",
           "name": "currentPeriod",
           "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "lockedRewardForStaking",
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -186,8 +239,47 @@
       "type": "function"
     },
     {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "stakeYourReward",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "setSixMonthsRewardPlan",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
       "inputs": [],
-      "name": "resetTome",
+      "name": "drawAllEGC",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "depositMartGPT",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
