@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import jazzicon from "@metamask/jazzicon";
+import Blockies from "react-blockies";
+
 import { CALL_CHECK_USER_AND_MEMBERSHIP } from "../../../services/userServices";
 // import Timer from "./Timer";
 // import { addDays, format } from "date-fns";
@@ -108,21 +110,11 @@ const DashBoardUserDetails = ({ auth }) => {
 
   const avatarRef = useRef();
   useEffect(() => {
-    setWalletAddr(account);
-    const element = avatarRef.current;
-    if (element && account) {
+    if (account) {
       setWalletAddr(account);
       setConnectTxt("Connected");
-      const addr = account.slice(2, 10);
-      const seed = parseInt(addr, 16);
-      console.log(addr, seed);
-      const icon = jazzicon(60, seed); //generates a size 20 icon
-      if (element.firstChild) {
-        element.removeChild(element.firstChild);
-      }
-      element.appendChild(icon);
     }
-  }, [account, avatarRef]);
+  }, [account]);
   console.log("i am here");
 
   const toggleSeemore = () => {
@@ -321,7 +313,31 @@ const DashBoardUserDetails = ({ auth }) => {
 
             <div className="userdAshboard_head">
               <div className="userdAshboard_head_area">
-                <div className="metamask_prof_pic" ref={avatarRef}></div>
+                {memberStatus === "Active" ? (
+                  <div className="metamask_prof_pic_vip">
+                    <img
+                      src="/img/membership_icons/membership_badge.svg"
+                      alt=""
+                      className="metamask_prof_pic_vip_badge"
+                    />
+                    <Blockies
+                      seed={account}
+                      size={8}
+                      scale={4}
+                      className="blockies_icon_user_vip"
+                    />
+                  </div>
+                ) : memberStatus === "Inactive" ? (
+                  <div className="metamask_prof_pic">
+                    <Blockies
+                      seed={account}
+                      size={8}
+                      scale={4}
+                      className="blockies_icon_user"
+                    />
+                  </div>
+                ) : null}
+
                 <div className="user_walletAddress">
                   <div className="wallet_addr_cont">
                     <div className="wallet_addr_cont_txt">{walletAddr}</div>
@@ -331,16 +347,16 @@ const DashBoardUserDetails = ({ auth }) => {
                   <span className="connected_txt">{conecttxt}</span>
                 </div>
               </div>
-              <span className="hr_vertical"></span>
-              <div className="welcome_bonus_div">
-                <div className="welcome_bonus_div_head">
-                  {/* <div className="welcome_bonus_icon_div">
+              {/* <span className="hr_vertical"></span> */}
+              {/* <div className="welcome_bonus_div">
+                <div className="welcome_bonus_div_head"> */}
+              {/* <div className="welcome_bonus_icon_div">
                     <StarRateIcon className="welcome_bonus_icon_div_icon" />
                   </div> */}
-                  Membership Status
-                </div>
+              {/* Membership Status */}
+              {/* </div>
                 <div className="welcome_bonus_div_body">{memberStatus}</div>
-              </div>
+              </div> */}
             </div>
             <div className="user_details_body1">
               <div className="user_details_body1_body_cont_area1">

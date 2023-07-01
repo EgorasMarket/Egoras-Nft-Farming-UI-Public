@@ -155,7 +155,7 @@ const Header = ({ togglemakeDark, check }) => {
   const [betaDiv, setBetaDiv] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const [connectId, setConnectId] = useState(false);
-
+  const [memberStatus, setMemberStatus] = useState(false);
   // const [darkMode, setDarkMode] = useState(null);
   const [walletAddr, setWalletAddr] = useState("0xXXXXXXXXXXxxxxxxxxXXXXXXXX");
   const [conecttxt, setConnectTxt] = useState("Not Connected");
@@ -195,7 +195,18 @@ const Header = ({ togglemakeDark, check }) => {
       element.appendChild(icon);
     }
   }, [account, avatarRef, walletAddr]);
-
+  useEffect(async () => {
+    if (account) {
+      const response = await CALL_CHECK_USER_AND_MEMBERSHIP(account);
+      console.log(response.data);
+      console.log(response.data.userMembership);
+      if (response.data.userMembership === true) {
+        setMemberStatus(true);
+      } else {
+        setMemberStatus(false);
+      }
+    }
+  }, [account]);
   useEffect(() => {
     console.log(account, "pppooooo");
     // setWalletAddr(account);
@@ -645,11 +656,28 @@ const Header = ({ togglemakeDark, check }) => {
                           {coinBalance} BNB
                         </p>
                         <div
-                          className="metamask_prof_pic_icon"
+                          className={
+                            memberStatus === false
+                              ? "metamask_prof_pic_icon"
+                              : "metamask_prof_pic_icon_vip"
+                          }
                           ref={avatarRef}
                         ></div>
-                        <div className="wallet_addr_cont_txt_header">
+                        <div
+                          className={
+                            memberStatus === false
+                              ? "wallet_addr_cont_txt_header"
+                              : "wallet_addr_cont_txt_header_vip"
+                          }
+                        >
                           <div className="wall_addr">{walletAddr}</div>
+                          {memberStatus === false ? null : (
+                            <img
+                              src="/img/membership_icons/membership_icon.svg"
+                              alt=""
+                              className="wallet_addr_cont_txt_vip_icon"
+                            />
+                          )}
                         </div>
 
                         <div
@@ -693,12 +721,29 @@ const Header = ({ togglemakeDark, check }) => {
                     </div>
                     <div className="mobile_view_header_cont_head_body_cont1_para">
                       <div
-                        className="metamask_prof_pic_icon"
+                        className={
+                          memberStatus === false
+                            ? "metamask_prof_pic_icon"
+                            : "metamask_prof_pic_icon_vip"
+                        }
                         ref={avatarRef}
                       ></div>
-                      {/* <div className="wallet_addr_cont_txt_header"> */}
-                      <div className="wall_addr2">{walletAddr}</div>
-                      {/* </div> */}
+                      <div
+                        className={
+                          memberStatus === false
+                            ? "wallet_addr_cont_txt_header"
+                            : "wallet_addr_cont_txt_header_vip"
+                        }
+                      >
+                        <div className="wall_addr">{walletAddr}</div>
+                        {memberStatus === false ? null : (
+                          <img
+                            src="/img/membership_icons/membership_icon.svg"
+                            alt=""
+                            className="wallet_addr_cont_txt_vip_icon"
+                          />
+                        )}
+                      </div>
                     </div>
                   </div>
                   <span className="header_rule"></span>

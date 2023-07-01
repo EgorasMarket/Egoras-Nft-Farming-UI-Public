@@ -110,6 +110,36 @@
   color: #b8b8b8;
 }
 
+.metamask_prof_pic_vip {
+  /* filter: drop-shadow(2px 2px 5px #b8b8b8);
+  color: #b8b8b8; */
+  position: relative;
+  width: 70px;
+}
+
+canvas.blockies_icon_user {
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 50%;
+  margin-right: 0;
+}
+
+canvas.blockies_icon_user_vip {
+  width: 45px !important;
+  height: 45px !important;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -18%;
+  bottom: 0;
+  margin: auto;
+}
+
+.metamask_prof_pic_vip_badge {
+  width: 100%;
+}
+
 .user_dashboard_area {
   display: flex;
   flex-direction: column;

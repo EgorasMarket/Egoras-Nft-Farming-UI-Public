@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import { CALL_CHECK_USER_AND_MEMBERSHIP } from "../../services/userServices";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 // ================
 // ================
@@ -195,7 +196,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const [notification, setNotification] = useState([]);
   const [notificationDetails, setNotificationDetails] = useState("");
   const [activeNotifyTab, setActiveNotifyTab] = useState("unread");
-
+  const [memberStatus, setMemberStatus] = useState(false);
   const [productNamesZ, setProductNamesZ] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -602,14 +603,18 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     setMobile_cat(!mobile_cat);
   };
 
-  useEffect(() => {
-    console.log("____");
-    const getLocation = async () => {
-      const response = await CALL_GET_USER_LOCATION();
-      // console.log(response);
-    };
-    getLocation();
-  }, []);
+  useEffect(async () => {
+    if (account) {
+      const response = await CALL_CHECK_USER_AND_MEMBERSHIP(account);
+      console.log(response.data);
+      console.log(response.data.userMembership);
+      if (response.data.userMembership === true) {
+        setMemberStatus(true);
+      } else {
+        setMemberStatus(false);
+      }
+    }
+  }, [account]);
   return (
     <>
       <div className={smallSide == "not_small" ? "side" : "small_side"}>
@@ -947,11 +952,28 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                         {coinBalance} BNB
                       </p>
                       <div
-                        className="metamask_prof_pic_icon"
+                        className={
+                          memberStatus === false
+                            ? "metamask_prof_pic_icon"
+                            : "metamask_prof_pic_icon_vip"
+                        }
                         ref={avatarRef}
                       ></div>
-                      <div className="wallet_addr_cont_txt_header">
+                      <div
+                        className={
+                          memberStatus === false
+                            ? "wallet_addr_cont_txt_header"
+                            : "wallet_addr_cont_txt_header_vip"
+                        }
+                      >
                         <div className="wall_addr">{walletAddr}</div>
+                        {memberStatus === false ? null : (
+                          <img
+                            src="/img/membership_icons/membership_icon.svg"
+                            alt=""
+                            className="wallet_addr_cont_txt_vip_icon"
+                          />
+                        )}
                       </div>
                       <div
                         className="notify_icon_cont_div_cont"
@@ -1135,11 +1157,28 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   </div>
                   <div className="mobile_view_header_cont_head_body_cont1_para">
                     <div
-                      className="metamask_prof_pic_icon"
+                      className={
+                        memberStatus === false
+                          ? "metamask_prof_pic_icon"
+                          : "metamask_prof_pic_icon_vip"
+                      }
                       ref={avatarRef}
                     ></div>
-                    <div className="wallet_addr_cont_txt_header">
+                    <div
+                      className={
+                        memberStatus === false
+                          ? "wallet_addr_cont_txt_header"
+                          : "wallet_addr_cont_txt_header_vip"
+                      }
+                    >
                       <div className="wall_addr">{walletAddr}</div>
+                      {memberStatus === false ? null : (
+                        <img
+                          src="/img/membership_icons/membership_icon.svg"
+                          alt=""
+                          className="wallet_addr_cont_txt_vip_icon"
+                        />
+                      )}
                     </div>
                   </div>
                 </div>

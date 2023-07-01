@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
 import "./stars.css";
+// import Fade from "react-reveal/Fade";
 // import React from "react";
 // import { Link } from "react-router-dom";
 // import HomeIcon from "@mui/icons-material/Home";
@@ -39,6 +40,127 @@ import {
 } from "../../services/generalServices";
 import { ConstructionSharp } from "@mui/icons-material";
 
+export const HowItWorksArea1 = () => {
+  return (
+    <div className="how_it_works_update_new_area_2">
+      <div className="how_it_works_update_new_area_2_cont1_border">
+        <div className="how_it_works_update_new_area_2_cont1_border_div">
+          <div className="how_it_works_update_new_area_2_cont1_icon">
+            <img
+              src="/img/member_home_icon.svg"
+              alt=""
+              className="how_it_works_update_new_area_2_cont1_icon_img"
+            />
+          </div>
+          <div className="how_it_works_update_new_area_2_cont1_title">
+            Become a member
+          </div>
+          <div className="how_it_works_update_new_area_2_cont1_paragraph">
+            Subscribe to a membership plan and gain access to our inventory of
+            products and services.
+          </div>
+        </div>
+      </div>
+      <div className="how_it_works_update_new_area_2_cont1_border">
+        <div className="how_it_works_update_new_area_2_cont1_border_div">
+          <div className="how_it_works_update_new_area_2_cont1_icon">
+            {" "}
+            <img
+              src="/img/swap_icon.svg"
+              alt=""
+              className="how_it_works_update_new_area_2_cont1_icon_img"
+            />
+          </div>
+          <div className="how_it_works_update_new_area_2_cont1_title">Swap</div>
+          <div className="how_it_works_update_new_area_2_cont1_paragraph">
+            Exchange your funds for USDm, a stablecoin that is pegged to the US
+            dollar.
+          </div>
+        </div>
+      </div>
+      <div className="how_it_works_update_new_area_2_cont1_border">
+        <div className="how_it_works_update_new_area_2_cont1_border_div">
+          <div className="how_it_works_update_new_area_2_cont1_icon">
+            {" "}
+            <img
+              src="/img/purchase_home_icon.svg"
+              alt=""
+              className="how_it_works_update_new_area_2_cont1_icon_img"
+            />
+          </div>
+          <div className="how_it_works_update_new_area_2_cont1_title">
+            Purchase products
+          </div>
+          <div className="how_it_works_update_new_area_2_cont1_paragraph">
+            Purchase manufactured products at a discounted price using USDm and
+            generate up to a 65% profit margin.
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+export const HowItWorksArea2 = () => {
+  return (
+    <div className="how_it_works_update_new_area_2">
+      <div className="how_it_works_update_new_area_2_cont1_border">
+        <div className="how_it_works_update_new_area_2_cont1_border_div">
+          <div className="how_it_works_update_new_area_2_cont1_icon">
+            <img
+              src="/img/stake_home_icon.svg"
+              alt=""
+              className="how_it_works_update_new_area_2_cont1_icon_img"
+            />
+          </div>
+          <div className="how_it_works_update_new_area_2_cont1_title">
+            Stake
+          </div>
+          <div className="how_it_works_update_new_area_2_cont1_paragraph">
+            Become a member and provide liquidity to the protocol by locking
+            your MARTGPT tokens for a specified period of time.
+          </div>
+        </div>
+      </div>
+      <div className="how_it_works_update_new_area_2_cont1_border">
+        <div className="how_it_works_update_new_area_2_cont1_border_div">
+          <div className="how_it_works_update_new_area_2_cont1_icon">
+            {" "}
+            <img
+              src="/img/reward_icon.svg"
+              alt=""
+              className="how_it_works_update_new_area_2_cont1_icon_img"
+            />
+          </div>
+          <div className="how_it_works_update_new_area_2_cont1_title">
+            Claim your Reward
+          </div>
+          <div className="how_it_works_update_new_area_2_cont1_paragraph">
+            Earn up to 12% annual percentage yield (APY) on your staked MARTGPT
+            tokens.
+          </div>
+        </div>
+      </div>
+      <div className="how_it_works_update_new_area_2_cont1_border">
+        <div className="how_it_works_update_new_area_2_cont1_border_div">
+          <div className="how_it_works_update_new_area_2_cont1_icon">
+            {" "}
+            <img
+              src="/img/swap_icon.svg"
+              alt=""
+              className="how_it_works_update_new_area_2_cont1_icon_img"
+            />
+          </div>
+          <div className="how_it_works_update_new_area_2_cont1_title">Swap</div>
+          <div className="how_it_works_update_new_area_2_cont1_paragraph">
+            Convert your rewards to Binance Coin (BNB) or other cryptocurrencies
+            with ease.
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Home = () => {
   const context = useWeb3React();
 
@@ -72,6 +194,7 @@ const Home = () => {
   const [totu, setTotu] = useState(0);
   const [totalTVL, setTotalTVL] = useState(0);
   const [TradeVolume, setTradeVolume] = useState(0);
+  const [activeTab, setActiveTab] = useState("distribute");
   // const [uiMode, setUiMode] = useState(localStorage.getItem("uiMode"));
   // const []
   const {
@@ -98,137 +221,7 @@ const Home = () => {
   const toggleAboutVideoModal = () => {
     setAboutVideoModal(!aboutVideoModal);
   };
-  //   superLargeDesktop: {
-  //     // the naming can be any, depends on you.
-  //     breakpoint: { max: 4000, min: 3000 },
-  //     items: 5,
-  //   },
-  //   desktop: {
-  //     breakpoint: { max: 3000, min: 1024 },
-  //     items: 3,
-  //   },
-  //   tablet: {
-  //     breakpoint: { max: 1024, min: 600 },
-  //     items: 2,
-  //   },
-  //   mobile: {
-  //     breakpoint: { max: 600, min: 0 },
-  //     items: 1,
-  //   },
-  // };
-  // const FeaturedLogos = [
-  //   {
-  //     link: "https://finance.yahoo.com/news/egoras-protocol-promises-revolutionize-microfinance-145500324.html",
-  //     img: "/img/featured_logos/featured1.svg",
-  //   },
 
-  //   {
-  //     link: "https://cointelegraph.com/press-releases/egoras-raises-13m-in-private-round",
-  //     img: "/img/featured_logos/featured3.svg",
-  //   },
-  //   {
-  //     link: "https://www.newsbtc.com/press-releases/egoras-a-decentralized-finance-ecosystem-for-growing-markets/",
-  //     img: "/img/featured_logos/featured4.svg",
-  //   },
-
-  //   {
-  //     link: "https://apnews.com/press-release/accesswire/business-small-business-corporate-news-microfinance-products-and-services-ee9eb494f14ea9ce6faa51d3f53a20c9",
-  //     img: "/img/featured_logos/featured6.svg",
-  //   },
-  // ];
-  // const handleSearchChange = (event) => {
-  //   setSearchTerm(event.target.value);
-  // };
-  // useEffect(() => {
-  //   axios
-  //     .get(api_url + "/api/branch/totalpools", null, config)
-  //     .then((data) => {
-  //       console.log(data.data.payload[0].total, "powerfulpools");
-  //       setLockedValue(() => parseInt(data.data.payload[0].total) / 618);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err); // "oh, no!"
-  //     });
-  // }, [lockedValue]);
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       api_url +
-  //         "/pub/loan/vault/balance/" +
-  //         LOAN.address +
-  //         "/" +
-  //         "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
-  //       null,
-  //       config
-  //     )
-  //     .then((data) => {
-  //       console.log(data.data.data.balance, "egc balnce vault");
-  //       setEgcVal(() => parseInt(data.data.data.balance));
-  //     })
-  //     .catch((err) => {
-  //       console.log(err); // "oh, no!"
-  //     });
-  //   // ============
-  //   // ============
-  //   // ============
-  //   axios
-  //     .get(
-  //       api_url +
-  //         "/pub/loan/vault/balance/" +
-  //         SwapContract.address +
-  //         "/" +
-  //         "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e",
-  //       null,
-  //       config
-  //     )
-  //     .then((data) => {
-  //       console.log(data.data.data.balance, "egc balnce swap");
-  //       setEgcVal2(() => parseInt(data.data.data.balance));
-  //     })
-  //     .catch((err) => {
-  //       console.log(err); // "oh, no!"
-  //     });
-  //   // ============
-  //   // ============
-  //   // ============
-  //   axios
-  //     .get(
-  //       api_url +
-  //         "/pub/loan/vault/balance/" +
-  //         SwapContract.address +
-  //         "/" +
-  //         "0x8e9a916b6920136110a77E9acAf878862358A467",
-  //       null,
-  //       config
-  //     )
-  //     .then((data) => {
-  //       console.log(data.data.data.balance, "egr balnce swap");
-  //       setEgrVal(() => parseInt(data.data.data.balance));
-  //     })
-  //     .catch((err) => {
-  //       console.log(err); // "oh, no!"
-  //     });
-  //   // ============
-  //   // ============
-  //   // ============
-  //   axios
-  //     .get(
-  //       api_url +
-  //         "/pub/loan/vault/balance/" +
-  //         SwapContract.address +
-  //         "/" +
-  //         "0x8e9a916b6920136110a77E9acAf878862358A467",
-  //       null,
-  //       config
-  //     )
-  //     .then((data) => {
-  //       console.log(data.data.data.balance, "egr balnce vault");
-  //       setEgrVal2(() => parseInt(data.data.data.balance));
-  //     })
-  //     .catch((err) => {
-  //       console.log(err); // "oh, no!"
-  //     });
-  // }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -387,6 +380,10 @@ const Home = () => {
         console.log(error.response);
       });
   }, []);
+
+  const ToggleActiveTab = (e) => {
+    setActiveTab(e.currentTarget.id);
+  };
   return (
     <div>
       {/* =================================================================================================================================================================================================================================================================== */}
@@ -402,14 +399,13 @@ const Home = () => {
             <div className="nft-txt-area2 " style={{ width: "100%" }}>
               <div className="span-txts">
                 <p className="span4a-txts">
-                  AI Powered Physically-Backed NFTs
+                  Decentralized finance for
                   <br />
-                  <span className="real_life">For Web3.</span>
+                  <span className="real_life"> smart manufacturing.</span>
                 </p>
                 <p className="span4b-txts">
-                  Convert new and used items to NFTs, trade physical-backed
-                  NFTs, earn money, and contribute to environmental
-                  sustainability.
+                  A blockchain-based ecosystem for providing structured credit
+                  to smart manufacturing in emerging markets.
                 </p>
               </div>
               <div className="stake-hero-btns">
@@ -532,6 +528,308 @@ const Home = () => {
           className="hero_backdrop"
         />
       </section>
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      <section className="how_it_works_update_new_section">
+        <div className="container">
+          <div className="how_it_works_update_new_area">
+            <div className="how_it_works_update_new_area_1">
+              <div className="how_it_works_update_new_area_1_title">
+                How it <span className="real_life">works</span>
+              </div>
+              <div className="how_it_works_update_new_area_1_tab">
+                <div
+                  id="distribute"
+                  className={
+                    activeTab == "distribute"
+                      ? "how_it_works_update_new_area_1_tab_1_active"
+                      : "how_it_works_update_new_area_1_tab_1"
+                  }
+                  onClick={ToggleActiveTab}
+                >
+                  Distributors
+                </div>
+                <div
+                  id="defi"
+                  className={
+                    activeTab == "defi"
+                      ? "how_it_works_update_new_area_1_tab_1_active"
+                      : "how_it_works_update_new_area_1_tab_1"
+                  }
+                  onClick={ToggleActiveTab}
+                >
+                  Defi
+                </div>
+              </div>
+            </div>
+            {activeTab === "distribute" ? <HowItWorksArea1 /> : null}
+            {activeTab === "defi" ? <HowItWorksArea2 /> : null}
+          </div>
+        </div>
+        {/* <img
+          src="/img/right_lines_design.png"
+          alt=""
+          className="how_it_works_update_new_section_bg_right"
+        /> */}
+        <img
+          src="/img/left_lines_design.png"
+          alt=""
+          className="how_it_works_update_new_section_bg_left"
+        />
+      </section>
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      <section className="martgptfeauturesSection">
+        <div className="container">
+          <div className="martgptfeauturesSection_area">
+            <div className="martgptfeauturesSection_area1">
+              <div className="martgptfeauturesSection_area1_cont1">
+                <div className="martgptfeauturesSection_area1_cont1_title">
+                  Sructured credit to smart manufacturing in
+                  <span className="real_life"> emerging markets.</span>
+                </div>
+                <div className="martgptfeauturesSection_area1_cont1_para">
+                  Martgpt ecosystem could revolutionize structured credit
+                  provision in emerging markets, accelerate smart manufacturing
+                  adoption, and boost economic growth.
+                </div>
+              </div>
+              <div className="martgptfeauturesSection_area1_cont2">
+                <button className="martgptfeauturesSection_area1_cont2_btn">
+                  Get Started
+                </button>
+              </div>
+            </div>
+            <div className="martgptfeauturesSection_area2">
+              <div className="martgptfeauturesSection_area2_cont1">
+                <div className="martgptfeauturesSection_area2_cont1_div2_cont1_border_first">
+                  <div className="martgptfeauturesSection_area2_cont1_div1">
+                    <div className="martgptfeauturesSection_area2_cont1_div1_icon">
+                      <img
+                        src="/img/audit_icon.svg"
+                        alt=""
+                        className="martgptfeauturesSection_area2_cont1_div2_cont1_icon_img2"
+                      />
+                    </div>
+                    <div className="martgptfeauturesSection_area2_cont1_div1_title">
+                      Improved traceability.
+                    </div>
+                    <div className="martgptfeauturesSection_area2_cont1_div1_para">
+                      Martgpt’s platform provides a detailed, end-to-end audit
+                      trail of all transactions associated with the components
+                      used in manufacturing, enabling users to track the
+                      provenance of components and verify their authenticity.
+                    </div>
+                  </div>
+                </div>
+                {/* ======== */}
+                {/* ======== */}
+                {/* ======== */}
+                {/* ======== */}
+                <div className="martgptfeauturesSection_area2_cont1_div2">
+                  <div className="martgptfeauturesSection_area2_cont1_div2_cont1_border">
+                    <div className="martgptfeauturesSection_area2_cont1_div2_cont1">
+                      <div className="martgptfeauturesSection_area2_cont1_div2_cont1_div1">
+                        <div className="martgptfeauturesSection_area2_cont1_div2_cont1_title">
+                          Automated payments.
+                        </div>
+                        <div className="martgptfeauturesSection_area2_cont1_div2_cont1_para">
+                          A decentralized infrastructure that enables automation
+                          of payments, which reduces errors and increases
+                          efficiency. For example, a maintenance provider can be
+                          paid automatically from the tresury when they perform
+                          maintenance on factory equipment.
+                        </div>
+                      </div>
+                      <div className="martgptfeauturesSection_area2_cont1_div2_cont1_icon">
+                        <img
+                          src="/img/wallet_pay_icon.svg"
+                          alt=""
+                          className="martgptfeauturesSection_area2_cont1_div2_cont1_icon_img"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  {/* ======== */}
+                  {/* ======== */}
+                  {/* ======== */}
+                  {/* ======== */}
+                  <div className="martgptfeauturesSection_area2_cont1_div2_cont1_border_last">
+                    <div className="martgptfeauturesSection_area2_cont1_div2_cont1_last">
+                      <div className="martgptfeauturesSection_area2_cont1_div2_cont1_div1">
+                        <div className="martgptfeauturesSection_area2_cont1_div2_cont1_title">
+                          Improved human resources management
+                        </div>
+                        <div className="martgptfeauturesSection_area2_cont1_div2_cont1_para">
+                          A protocol that can help streamline a variety of
+                          traditionally labor-intensive HR tasks, such as
+                          tracking hours worked and paying workers accordingly.
+                          People's employment histories are recorded and
+                          authenticated.
+                        </div>
+                      </div>
+                      <div className="martgptfeauturesSection_area2_cont1_div2_cont1_icon">
+                        <img
+                          src="/img/hr_manage_icon.svg"
+                          alt=""
+                          className="martgptfeauturesSection_area2_cont1_div2_cont1_icon_img"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* ========== */}
+              {/* ========== */}
+              {/* ========== */}
+              {/* ========== */}
+              {/* ========== */}
+              <div className="martgptfeauturesSection_area2_cont2">
+                <div className="martgptfeauturesSection_area2_cont1_div2_cont1_border_first">
+                  <div className="martgptfeauturesSection_area2_cont1_div1">
+                    <div className="martgptfeauturesSection_area2_cont1_div1_icon">
+                      <img
+                        src="/img/monitor_product_icon.svg"
+                        alt=""
+                        className="martgptfeauturesSection_area2_cont1_div2_cont1_icon_img2"
+                      />
+                    </div>
+                    <div className="martgptfeauturesSection_area2_cont1_div1_title">
+                      Product life-cycle monitoring.
+                    </div>
+                    <div className="martgptfeauturesSection_area2_cont1_div1_para">
+                      Product and component traceability throughout their entire
+                      lifecycle, including post-delivery, is essential for
+                      recalling batches of products if counterfeit components
+                      are detected during manufacturing.
+                    </div>
+                  </div>
+                </div>
+                {/* ======== */}
+                {/* ======== */}
+                {/* ======== */}
+                {/* ======== */}
+                <div className="martgptfeauturesSection_area2_cont1_div2">
+                  <div className="martgptfeauturesSection_area2_cont1_div2_cont1_border">
+                    <div className="martgptfeauturesSection_area2_cont1_div2_cont1">
+                      <div className="martgptfeauturesSection_area2_cont1_div2_cont1_div1">
+                        <div className="martgptfeauturesSection_area2_cont1_div2_cont1_title">
+                          Decentralized Finance liquidity
+                        </div>
+                        <div className="martgptfeauturesSection_area2_cont1_div2_cont1_para">
+                          The protocol allows users to stake tokens in order to
+                          participate in the manufacturing process and earn
+                          rewards. The manufacturing process is funded by the
+                          staked tokens, and the manufactured products are
+                          stored in the protocol's inventory.
+                        </div>
+                      </div>
+                      <div className="martgptfeauturesSection_area2_cont1_div2_cont1_icon">
+                        <img
+                          src="/img/liquidity_home_iocn.svg"
+                          alt=""
+                          className="martgptfeauturesSection_area2_cont1_div2_cont1_icon_img"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  {/* ======== */}
+                  {/* ======== */}
+                  {/* ======== */}
+                  {/* ======== */}
+                  <div className="martgptfeauturesSection_area2_cont1_div2_cont1_border_last">
+                    <div className="martgptfeauturesSection_area2_cont1_div2_cont1_last">
+                      <div className="martgptfeauturesSection_area2_cont1_div2_cont1_div1">
+                        <div className="martgptfeauturesSection_area2_cont1_div2_cont1_title">
+                          Inventory management.
+                        </div>
+                        <div className="martgptfeauturesSection_area2_cont1_div2_cont1_para">
+                          A single-source inventory protocol provides real-time,
+                          comprehensive, and up-to-date perspicacity into
+                          product stock levels, thereby helping to forestall
+                          costly overstocking.
+                        </div>
+                      </div>
+                      <div className="martgptfeauturesSection_area2_cont1_div2_cont1_icon">
+                        <img
+                          src="/img/inventory_home_icon.svg"
+                          alt=""
+                          className="martgptfeauturesSection_area2_cont1_div2_cont1_icon_img"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <img
+          src="/img/structured_test_bg_art.png"
+          alt=""
+          className="martgptfeauturesSection_bg_img"
+        />
+      </section>
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      <section className="JoinMartGptSection">
+        <div className="container">
+          <div className="JoinMartGptArea">
+            <div className="JoinMartGptArea_1">
+              <div className="JoinMartGptArea_1_title">Join Now</div>
+              <div className="JoinMartGptArea_1_para">
+                Become a memeber and enjoy the benefits that comes with it.
+              </div>
+              <div className="JoinMartGptArea_1_btn_div">
+                <button className="JoinMartGptArea_1_btn">Use MartGpt</button>
+              </div>
+            </div>
+            <div className="JoinMartGptArea_2">
+              <img
+                src="/img/martgpt_3d_edited_icon.png"
+                alt=""
+                className="JoinMartGptArea_2_img"
+              />
+            </div>
+          </div>
+        </div>
+        {/* <img
+          src="/img/right_lines_design.png"
+          alt=""
+          className="JoinMartGptSection_bg_left"
+        /> */}
+      </section>
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* ==================== */}
+      {/* <section className="martgptfeauturesSection">
+        <div className="container">
+          <div className="faq_home_area"></div>
+        </div>
+      </section> */}
     </div>
   );
 };
