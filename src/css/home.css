@@ -2399,6 +2399,8 @@ a.visit_app_link_2 {
 .how_it_works_update_new_area {
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
 }
 
 .how_it_works_update_new_area_1 {
@@ -2537,6 +2539,8 @@ a.visit_app_link_2 {
 .martgptfeauturesSection_area {
   display: flex;
   flex-direction: column;
+  position: relative;
+  z-index: 1;
 }
 
 .martgptfeauturesSection_area1 {
