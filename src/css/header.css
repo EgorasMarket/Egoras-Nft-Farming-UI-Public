@@ -191,10 +191,11 @@ div#Header {
 }
 
 .wallet_addr_cont_txt_header {
+  position: relative;
   padding: 3px 10px;
   display: flex;
   align-items: center;
-  overflow: hidden;
+  /* overflow: hidden; */
   background: #ececec;
   color: #6b6b6b;
   font-weight: 600;
@@ -206,6 +207,33 @@ div#Header {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   margin-right: 5px;
+}
+
+.wallet_addr_cont_txt_header_vip {
+  position: relative;
+  padding: 3px 10px;
+  display: flex;
+  align-items: center;
+  /* overflow: hidden; */
+  background: #ececec;
+  color: #6b6b6b;
+  font-weight: 600;
+  /* margin-left: 5px; */
+  font-size: 13px;
+  border: solid 1px #F0B400;
+  border-radius: 10px;
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin-right: 5px;
+}
+
+.wallet_addr_cont_txt_vip_icon {
+  position: absolute;
+  top: 10px;
+  width: 20px;
+  right: -2%;
+  top: -30%;
 }
 
 .wall_addr {
@@ -275,6 +303,22 @@ div#Header {
   align-items: center;
   background: #ececec;
   border: solid 1px lightgrey;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-right: 0;
+  margin-left: 5px;
+}
+
+.metamask_prof_pic_icon_vip {
+  padding: 2px 10px;
+  padding-right: 0px;
+  /* line-height: 1; */
+  /* filter: drop-shadow(2px 2px 5px #b8b8b8); */
+  color: #b8b8b8;
+  display: flex;
+  align-items: center;
+  background: #ececec;
+  border: solid 1px #F0B400;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   border-right: 0;
