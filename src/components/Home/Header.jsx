@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 // import WalletConnector from "./WalletConnect/WalletConnector";
 // import WalletConnector from "./walletConnect/WalletConnector";
@@ -636,7 +637,6 @@ const Header = ({ togglemakeDark, check }) => {
                     />
                   </a>
                 </div>
-
                 <div className="user_profile_icon_cont2">
                   <div className="together">
                     <div className="header_menu_icon_con_dash">
@@ -698,10 +698,22 @@ const Header = ({ togglemakeDark, check }) => {
                       </div>
                     )}
                   </div>
+                  <div className="header_new_links">
+                    <a href="/app/market" className="Inventory_link">
+                      Inventory
+                    </a>
+                  </div>
                 </div>
               </div>
               {isOpen === true ? (
                 <div className="mobile_view_header_cont_head_body_dash">
+                  <div className="header_new_links_mobile">
+                    <a href="/app/market" className="header_new_links_mobile_1">
+                      Inventory
+                      <ArrowForwardIosIcon className="header_new_links_mobile_1_icon" />
+                    </a>
+                  </div>
+                  <span className="header_rule"></span>
                   <div className="mobile_view_header_cont_head_body_cont1">
                     <div className="mobile_view_header_cont_head_body_cont1_title">
                       Balance:
@@ -713,7 +725,6 @@ const Header = ({ togglemakeDark, check }) => {
                       </p>
                     </div>
                   </div>
-
                   <span className="header_rule"></span>
                   <div className="mobile_view_header_cont_head_body_cont1">
                     <div className="mobile_view_header_cont_head_body_cont1_title">

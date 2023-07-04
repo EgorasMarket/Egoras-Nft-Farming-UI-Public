@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../UpdatedAppPagesStyles/dashboardMarketHome.css";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
@@ -16,11 +16,18 @@ import ProductModel from "./ProductModel";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectFade, Mousewheel, Pagination, Keyboard } from "swiper";
+import {
+  EffectFade,
+  Mousewheel,
+  Pagination,
+  Keyboard,
+  Navigation,
+} from "swiper";
 import "swiper/swiper.min.css";
 import "swiper/swiper-bundle.css";
 import "swiper/swiper-bundle.min.css";
 // import "swiper/css/effect-fade";
+
 const DashboardMarketHome = () => {
   const [products, setProducts] = useState([]);
   const [products2, setProduct2] = useState([]);
@@ -28,33 +35,7 @@ const DashboardMarketHome = () => {
   const [products4, setProducts4] = useState([]);
   const [products5, setProducts5] = useState([]);
   const [activeSlideIndex, setActiveSlideIndex] = useState(0);
-  const responsive1 = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 6,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1320 },
-      items: 5,
-    },
-    desktop2: {
-      breakpoint: { max: 1320, min: 990 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 990, min: 600 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 600, min: 350 },
-      items: 2,
-    },
-    smallerMobile: {
-      breakpoint: { max: 350, min: 0 },
-      items: 1,
-    },
-  };
+  const swiperRef = useRef(null);
   useEffect(() => {
     const fetchData = async () => {
       const response = await GET_ALL_UPLOADED_PRODUCTS();
@@ -144,6 +125,10 @@ const DashboardMarketHome = () => {
     setActiveSlideIndex(swiper.activeIndex);
     console.log(swiper.activeIndex);
   };
+  const handleNavButtonClick = (index) => {
+    setActiveSlideIndex(index);
+    swiperRef.current.slideTo(index);
+  };
   return (
     // <div className="other2 asset_other2">
     <section className="marketHomeUpdateSection">
@@ -159,13 +144,10 @@ const DashboardMarketHome = () => {
           keyboard={true}
           speed={900}
           updateOnWindowResize={true}
-          modules={[EffectFade, Mousewheel, Keyboard]}
-          // effect={"fade"}
-          // fadeEffect={{
-          //   crossFade: true,
-          // }}
+          modules={[EffectFade, Mousewheel, Keyboard, Navigation, Pagination]}
           className="PowerSwiper"
           onSlideChange={handleSlideChange}
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
         >
           <SwiperSlide
             className="marketHomeUpdateSection_area1 "
@@ -205,47 +187,6 @@ const DashboardMarketHome = () => {
                     Fuel
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="marketHomeUpdateSection_area1_details2">
-              <div className="marketHomeUpdateSection_area1_details2_area1">
-                <div className="marketHomeUpdateSection_area1_details2_area1_cont1">
-                  <div
-                    className={
-                      activeSlideIndex == 0
-                        ? "marketHomeUpdateSection_area1_details2_area1_cont1_area1_active"
-                        : "marketHomeUpdateSection_area1_details2_area1_cont1_area1"
-                    }
-                  >
-                    EGR-3000(A)
-                  </div>
-                  <div className="marketHomeUpdateSection_area1_details2_area1_cont1_area1">
-                    EGR-3000(M)
-                  </div>
-                  <div className="marketHomeUpdateSection_area1_details2_area1_cont1_area1">
-                    EGR-8000(A)
-                  </div>
-                </div>
-                <div className="marketHomeUpdateSection_area1_details2_area1_cont2">
-                  <div
-                    className={
-                      activeSlideIndex == 0
-                        ? "marketHomeUpdateSection_area1_details2_area1_cont2_area1_active"
-                        : "marketHomeUpdateSection_area1_details2_area1_cont2_area1"
-                    }
-                  ></div>
-                  <div className="marketHomeUpdateSection_area1_details2_area1_cont2_area1"></div>
-                  <div className="marketHomeUpdateSection_area1_details2_area1_cont2_area1"></div>
-                </div>
-              </div>
-              <div className="marketHomeUpdateSection_area1_details2_area2">
-                <a
-                  href="app/market/product/details/c930ccb9-cc44-48fd-86fe-543980bf6ccf/Egoras%20Dual%20Fuel%20Generator%20EGR-3000e2%20(Automatic)"
-                  className="marketHomeUpdateSection_area1_details2_area2_link"
-                >
-                  <ShoppingCartIcon className="marketHomeUpdateSection_area1_details2_area2_link_icon" />{" "}
-                  Purchase
-                </a>
               </div>
             </div>
           </SwiperSlide>
@@ -289,47 +230,6 @@ const DashboardMarketHome = () => {
                 </div>
               </div>
             </div>
-            <div className="marketHomeUpdateSection_area1_details2">
-              <div className="marketHomeUpdateSection_area1_details2_area1">
-                <div className="marketHomeUpdateSection_area1_details2_area1_cont1">
-                  <div className="marketHomeUpdateSection_area1_details2_area1_cont1_area1">
-                    EGR-3000(A)
-                  </div>
-                  <div
-                    className={
-                      activeSlideIndex == 1
-                        ? "marketHomeUpdateSection_area1_details2_area1_cont1_area1_active"
-                        : "marketHomeUpdateSection_area1_details2_area1_cont1_area1"
-                    }
-                  >
-                    EGR-3000(M)
-                  </div>
-                  <div className="marketHomeUpdateSection_area1_details2_area1_cont1_area1">
-                    EGR-8000(A)
-                  </div>
-                </div>
-                <div className="marketHomeUpdateSection_area1_details2_area1_cont2">
-                  <div className="marketHomeUpdateSection_area1_details2_area1_cont2_area1"></div>
-                  <div
-                    className={
-                      activeSlideIndex == 1
-                        ? "marketHomeUpdateSection_area1_details2_area1_cont2_area1_active"
-                        : "marketHomeUpdateSection_area1_details2_area1_cont2_area1"
-                    }
-                  ></div>
-                  <div className="marketHomeUpdateSection_area1_details2_area1_cont2_area1"></div>
-                </div>
-              </div>
-              <div className="marketHomeUpdateSection_area1_details2_area2">
-                <a
-                  href="/app/market/product/details/07ab8443-a5a3-4931-94ee-f4ed6ea66bf9/Egoras%20Dual%20Fuel%20Generator%20EGR-3000%20(Manual)"
-                  className="marketHomeUpdateSection_area1_details2_area2_link"
-                >
-                  <ShoppingCartIcon className="marketHomeUpdateSection_area1_details2_area2_link_icon" />{" "}
-                  Purchase
-                </a>
-              </div>
-            </div>
           </SwiperSlide>
           <SwiperSlide
             className="marketHomeUpdateSection_area1 "
@@ -371,49 +271,84 @@ const DashboardMarketHome = () => {
                 </div>
               </div>
             </div>
-            <div className="marketHomeUpdateSection_area1_details2">
-              <div className="marketHomeUpdateSection_area1_details2_area1">
-                <div className="marketHomeUpdateSection_area1_details2_area1_cont1">
-                  <div className="marketHomeUpdateSection_area1_details2_area1_cont1_area1">
-                    EGR-3000(A)
-                  </div>
-                  <div className="marketHomeUpdateSection_area1_details2_area1_cont1_area1">
-                    EGR-3000(M)
-                  </div>
-                  <div
-                    className={
-                      activeSlideIndex == 2
-                        ? "marketHomeUpdateSection_area1_details2_area1_cont1_area1_active"
-                        : "marketHomeUpdateSection_area1_details2_area1_cont1_area1"
-                    }
-                  >
-                    EGR-8000(A)
-                  </div>
-                </div>
-                <div className="marketHomeUpdateSection_area1_details2_area1_cont2">
-                  <div className="marketHomeUpdateSection_area1_details2_area1_cont2_area1"></div>
-                  <div className="marketHomeUpdateSection_area1_details2_area1_cont2_area1"></div>
-                  <div
-                    className={
-                      activeSlideIndex == 2
-                        ? "marketHomeUpdateSection_area1_details2_area1_cont2_area1_active"
-                        : "marketHomeUpdateSection_area1_details2_area1_cont2_area1"
-                    }
-                  ></div>
-                </div>
-              </div>
-              <div className="marketHomeUpdateSection_area1_details2_area2">
-                <a
-                  href="/app/market/product/details/f3ecf5db-378d-4c72-b315-2bd340eca088/Egoras%208kva%20sound%20proof%20Dual%20Fuel%20Generator"
-                  className="marketHomeUpdateSection_area1_details2_area2_link"
-                >
-                  <ShoppingCartIcon className="marketHomeUpdateSection_area1_details2_area2_link_icon" />{" "}
-                  Purchase
-                </a>
-              </div>
-            </div>
           </SwiperSlide>
         </Swiper>
+        <div className="marketHomeUpdateSection_area1_details2">
+          <div className="marketHomeUpdateSection_area1_details2_area1">
+            <div className="marketHomeUpdateSection_area1_details2_area1_cont1">
+              <div
+                className={
+                  activeSlideIndex == 0
+                    ? "marketHomeUpdateSection_area1_details2_area1_cont1_area1_active"
+                    : "marketHomeUpdateSection_area1_details2_area1_cont1_area1"
+                }
+                onClick={() => handleNavButtonClick(0)}
+              >
+                EGR-3000(A)
+              </div>
+              <div
+                className={
+                  activeSlideIndex == 1
+                    ? "marketHomeUpdateSection_area1_details2_area1_cont1_area1_active"
+                    : "marketHomeUpdateSection_area1_details2_area1_cont1_area1"
+                }
+                onClick={() => handleNavButtonClick(1)}
+              >
+                EGR-3000(M)
+              </div>
+              <div
+                className={
+                  activeSlideIndex == 2
+                    ? "marketHomeUpdateSection_area1_details2_area1_cont1_area1_active"
+                    : "marketHomeUpdateSection_area1_details2_area1_cont1_area1"
+                }
+                onClick={() => handleNavButtonClick(2)}
+              >
+                EGR-8000(A)
+              </div>
+            </div>
+            <div className="marketHomeUpdateSection_area1_details2_area1_cont2">
+              <div
+                className={
+                  activeSlideIndex == 0
+                    ? "marketHomeUpdateSection_area1_details2_area1_cont2_area1_active"
+                    : "marketHomeUpdateSection_area1_details2_area1_cont2_area1"
+                }
+              ></div>
+              <div
+                className={
+                  activeSlideIndex == 1
+                    ? "marketHomeUpdateSection_area1_details2_area1_cont2_area1_active"
+                    : "marketHomeUpdateSection_area1_details2_area1_cont2_area1"
+                }
+              ></div>
+              <div
+                className={
+                  activeSlideIndex == 2
+                    ? "marketHomeUpdateSection_area1_details2_area1_cont2_area1_active"
+                    : "marketHomeUpdateSection_area1_details2_area1_cont2_area1"
+                }
+              ></div>
+            </div>
+          </div>
+          <div className="marketHomeUpdateSection_area1_details2_area2">
+            <a
+              href={
+                activeSlideIndex == 0
+                  ? "/app/market/product/details/c930ccb9-cc44-48fd-86fe-543980bf6ccf/Egoras%20Dual%20Fuel%20Generator%20EGR-3000e2%20(Automatic)"
+                  : activeSlideIndex == 1
+                  ? "/app/market/product/details/07ab8443-a5a3-4931-94ee-f4ed6ea66bf9/Egoras%20Dual%20Fuel%20Generator%20EGR-3000%20(Manual)"
+                  : activeSlideIndex == 2
+                  ? "/app/market/product/details/f3ecf5db-378d-4c72-b315-2bd340eca088/Egoras%208kva%20sound%20proof%20Dual%20Fuel%20Generator"
+                  : "#"
+              }
+              className="marketHomeUpdateSection_area1_details2_area2_link"
+            >
+              <ShoppingCartIcon className="marketHomeUpdateSection_area1_details2_area2_link_icon" />{" "}
+              Purchase
+            </a>
+          </div>
+        </div>
       </div>
     </section>
     // </div>

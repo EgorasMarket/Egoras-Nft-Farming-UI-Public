@@ -8,6 +8,23 @@ div#Header {
   z-index: 100;
 }
 
+.header_new_links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 2em;
+  color: #000;
+}
+
+.dark .header_new_links {
+
+  color: #fff;
+}
+
+.header_new_links_mobile {
+  display: none;
+}
+
 .header_wllt_bal_icon {
   color: #616161;
   font-size: 20px !important;
@@ -886,6 +903,28 @@ vl {
 @media screen and (max-width: 991px) {
   .mobile_view_notifications {
     display: block;
+  }
+
+  .header_new_links {
+    display: none;
+  }
+
+  .header_new_links_mobile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .header_new_links_mobile_1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgb(0, 0, 0);
+    padding: 10px 0em;
+  }
+
+  .dark .header_new_links_mobile_1 {
+    color: rgb(255, 255, 255);
   }
 }
 

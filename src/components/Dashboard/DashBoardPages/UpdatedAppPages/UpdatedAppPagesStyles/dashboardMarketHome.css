@@ -135,11 +135,16 @@
   height: 100%;
   width: 100%;
   top: 0;
+  padding-bottom: 13em;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .marketHomeUpdateSection_area1_details2_area1 {
   display: flex;
   align-items: center;
+
+  pointer-events: auto;
 }
 
 .marketHomeUpdateSection_area1_details2_area1_cont1 {
@@ -152,10 +157,12 @@
 .marketHomeUpdateSection_area1_details2_area1_cont1_area1_active {
   color: #fff;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .marketHomeUpdateSection_area1_details2_area1_cont1_area1 {
   color: #a798af;
+  cursor: pointer;
 }
 
 .marketHomeUpdateSection_area1_details2_area1_cont2 {
@@ -203,6 +210,8 @@
   align-items: center;
   cursor: pointer;
   padding-left: 35px;
+  pointer-events: auto;
+  color: #fff;
 }
 
 .marketHomeUpdateSection_area1_details2_area2_link_icon {
@@ -859,6 +868,7 @@ canvas.blockies_icon2 {
 
   .marketHomeUpdateSection_area1_details2 {
     padding: 2em 1em;
+    padding-bottom: 13em;
     justify-content: center;
   }
 
@@ -981,6 +991,7 @@ canvas.blockies_icon2 {
   .marketHomeUpdateSection_area1_details2_area1_cont1_area1 {
     color: #ccb7d7;
     backdrop-filter: blur(10px);
+    cursor: pointer;
   }
 
   .marketHomeUpdateSection_area1_img {
@@ -993,7 +1004,7 @@ canvas.blockies_icon2 {
 
   .marketHomeUpdateSection_area1_details2 {
     justify-content: flex-end;
-    padding-bottom: 8em;
+    padding-bottom: 17em;
   }
 
   .dashboardMarketPlaceBody1_cont2 {
