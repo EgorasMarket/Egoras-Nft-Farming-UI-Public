@@ -126,32 +126,16 @@ export const MarketHeader = ({
     <div className="dashboardMarketPlaceHeader no-bg">
       <div className="container">
         <div className="dashboardMarketPlaceHeader_area">
-          <div className="dashboardMarketPlaceHeader_div1">
-            <input
-              type="search"
-              placeholder="Search productsss"
-              name="searchTerm"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              className="dashboardMarketPlaceHeader_div1_search_input"
-            />
-            <SearchOutlinedIcon className="dashboardMarketPlaceHeader_div1_search_input_icon" />
-          </div>
-          <AppsIcon
-            className="dashboardMarketPlaceHeader_div2_categories_icon"
-            onClick={ToggleMobile_cat}
-          />
-          <div className="dashboardMarketPlaceHeader_div2_categories">
-            {categories.slice(0, 4).map((data) => (
-              <a href={`/app/market/product/category/${data.product_category}`}>
-                <div className="dashboardMarketPlaceHeader_div2_categories_cont1">
-                  {data.product_category}
-                </div>
-              </a>
-            ))}
-            <div className="more_cat_icon" onClick={ToggleOtherCategory}>
-              <MoreHorizIcon className="more_cat_icon_icon" /> Others
-            </div>
+          <div className="dashboardMarketPlaceHeader_area_gen_links">
+            <a href="#" className="dashboardMarketPlaceHeader_area_gen_links_1">
+              EGR-3000(M)
+            </a>
+            <a href="#" className="dashboardMarketPlaceHeader_area_gen_links_1">
+              EGR-3000(A)
+            </a>
+            <a href="#" className="dashboardMarketPlaceHeader_area_gen_links_1">
+              EGR-8000(A)
+            </a>
           </div>
         </div>
       </div>
@@ -761,7 +745,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   }
                   onClick={changeBg}
                 >
-                  Market{" "}
+                  Inventory{" "}
                   <span class="Ping -top-1">
                     <span class="c-flashingPart"></span>
                     <span class="c-basePart"></span>
@@ -1305,7 +1289,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             onClick={changeBg}
           >
             <StorefrontIcon className="sidebarIcon" />
-            Market
+            Inventory
           </a>
         </div>
 

@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
 import "./stars.css";
-// import Fade from "react-reveal/Fade";
 // import React from "react";
 // import { Link } from "react-router-dom";
 // import HomeIcon from "@mui/icons-material/Home";

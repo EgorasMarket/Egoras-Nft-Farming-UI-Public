@@ -33,12 +33,7 @@
   display: block;
 }
 
-.PowerSwiper {
-  height: 100vh;
-  cursor: grab;
-  /* padding-bottom: 2em; */
-  width: 100%;
-}
+
 
 .mySwiperDiv_Power {
   display: flex;
@@ -56,9 +51,9 @@
 }
 
 .PowerSwiper {
-  height: 100vh;
+  height: 100%;
   cursor: grab;
-  /* padding-bottom: 2em; */
+  padding-bottom: 8em;
   width: 100%;
 }
 
