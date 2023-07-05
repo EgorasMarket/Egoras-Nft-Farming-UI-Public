@@ -236,9 +236,9 @@ const DashboardMarketHome = () => {
             id="egr-8000A"
           >
             <img
-              src="/img/egr_gen_market_img1.png"
+              src="/img/egr_gen_market_img3.png"
               alt=""
-              className="marketHomeUpdateSection_area1_img"
+              className="marketHomeUpdateSection_area1_img2"
             />
             <div className="marketHomeUpdateSection_area1_details">
               <div className="marketHomeUpdateSection_area1_details_1">
@@ -247,26 +247,26 @@ const DashboardMarketHome = () => {
               <div className="marketHomeUpdateSection_area1_details_2">
                 <div className="marketHomeUpdateSection_area1_details_2_area1">
                   <div className="marketHomeUpdateSection_area1_details_2_area1_title">
-                    8.5kva
+                    Automatic
                   </div>
                   <div className="marketHomeUpdateSection_area1_details_2_area1_para">
-                    Horse Power
+                    Type
                   </div>
                 </div>
                 <div className="marketHomeUpdateSection_area1_details_2_area1">
                   <div className="marketHomeUpdateSection_area1_details_2_area1_title">
-                    13.5kva
+                    8.0kva
                   </div>
                   <div className="marketHomeUpdateSection_area1_details_2_area1_para">
-                    Horse Power
+                    Rating
                   </div>
                 </div>
                 <div className="marketHomeUpdateSection_area1_details_2_area1_last">
                   <div className="marketHomeUpdateSection_area1_details_2_area1_title">
-                    35.5kva
+                    Petrol & Gas
                   </div>
                   <div className="marketHomeUpdateSection_area1_details_2_area1_para">
-                    Horse Power
+                    Fuel
                   </div>
                 </div>
               </div>
