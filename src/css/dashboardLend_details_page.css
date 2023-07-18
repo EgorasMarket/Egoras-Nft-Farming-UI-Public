@@ -250,7 +250,7 @@ button.pool_detail_heading_area1_invest_btn {
   padding: 0em;
   left: 0;
   position: sticky;
-  z-index: 1;
+  z-index: 10;
   /* justify-content: center; */
   border: solid 1px #dee6eb;
   border-radius: 8px;

@@ -1436,11 +1436,59 @@ canvas.blockies_icon_user_vip {
     flex-direction: column;
     gap: 10px;
   }
+
+  .dashboardRewardArea1 {
+    padding: 2em 2em;
+    height: 100%;
+  }
+
+  .dashboardRewardArea1_div2 {
+    display: none;
+  }
+
+  .dashboardRewardArea3_area2 {
+
+    flex-direction: column;
+  }
+
+  .dashboardRewardArea3_area2_area1 {
+
+    border-bottom: solid 1px #232132;
+  }
+
+  .dashboardRewardArea3_area2_area2 {
+
+    padding: 1em 0em;
+  }
+
+  .dashboardRewardArea3_area2_area2_btn {
+
+    max-width: 100%;
+    width: 100%;
+
+  }
 }
 
 @media screen and (max-width: 767px) {
   .user_dashboard_area {
     margin-top: 0em;
+  }
+
+  .dashboardRewardArea1_div1 {
+    margin-right: 0em;
+  }
+
+  .dashboardRewardArea1_div1_title {
+    font-size: 32px;
+  }
+
+  .dashboardRewardArea1_div1_para {
+    font-size: 18px;
+  }
+
+  .dashboardRewardArea1_div1_icon {
+    font-size: 24px !important;
+
   }
 
   .userdAshboard_head {
@@ -1451,6 +1499,21 @@ canvas.blockies_icon_user_vip {
 
   .welcome_bonus_div {
     align-items: flex-start;
+  }
+
+  .dashboardRewardArea3_area2 {
+    padding: 0em 1em;
+  }
+
+  .customedhr {
+
+    margin-top: 0em;
+  }
+
+  .dashboardRewardArea3_area1 {
+
+    padding: 1em;
+    padding-bottom: 2em;
   }
 
   .userdAshboard_head_username {

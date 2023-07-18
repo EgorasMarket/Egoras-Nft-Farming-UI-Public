@@ -8,6 +8,7 @@ import {
   setMartgptTokenAddress,
   approveConvertToken,
   BurnEgc,
+  withdrawAllEgc,
 } from "../../../../web3/index2";
 import "./AdminRouter.css";
 import Web3 from "web3";
@@ -35,6 +36,7 @@ const SetRouter = () => {
   );
   const [diamondCutCode, setDiamondCutCode] = useState("");
   const [egcAmnt, setEgcAmnt] = useState("");
+  const [egcWithdrawAmnt, setEgcWithdrawAmnt] = useState("");
   const [BusdRouterAddress, setBusdRouterAddress] = useState(
     "0xb16ba303c1Fa64Dc8a91dCaF87D0299F85792B6A"
   );
@@ -74,6 +76,13 @@ const SetRouter = () => {
     const response = await approveConvertToken(library.getSigner());
     console.log(response);
   };
+  const WithDrawEgc = async () => {
+    const response = await withdrawAllEgc(
+      parseEther(egcWithdrawAmnt, "wei").toString(),
+      library.getSigner()
+    );
+    console.log(response);
+  };
   const BurnEgcAmnt = async () => {
     const response = await BurnEgc(
       parseEther(egcAmnt, "wei").toString(),
@@ -88,6 +97,10 @@ const SetRouter = () => {
     // console.log(e.target.value.split(","));
     // const code2 = e.target.value.split(",");
     // console.log(code2[0], code2[1], code2[2]);
+  };
+  const WithdrawEgcChange = (e) => {
+    setEgcWithdrawAmnt(e.target.value);
+    console.log(e.target.value);
   };
   const burnEgcChange = (e) => {
     setEgcAmnt(e.target.value);
@@ -160,6 +173,24 @@ const SetRouter = () => {
             />
             <button onClick={BurnEgcAmnt} className="setRouterAddressBtn">
               Burn Egc
+            </button>
+          </div>
+          <div>
+            <input
+              // type="text"
+              placeholder="0.0000"
+              className="setRouterAddressInput"
+              value={egcWithdrawAmnt}
+              onChange={WithdrawEgcChange}
+            />
+            <button onClick={WithDrawEgc} className="setRouterAddressBtn">
+              Withdraw Egc
+            </button>
+          </div>
+
+          <div>
+            <button onClick={setTokenAdrress} className="setRouterAddressBtn">
+              set token address
             </button>
           </div>
           {/* <button onClick={ApproveToken} className="setRouterAddressBtn">

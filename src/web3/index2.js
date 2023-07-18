@@ -806,6 +806,26 @@ const CheckUserRewardStats = async (account, period, signer) => {
     };
   }
 };
+const withdrawAllEgc = async (amount, signer) => {
+  console.log(amount);
+  try {
+    const instance = await contractRewardFaucetInstance(signer);
+    let result = await instance.drawEGC(
+      amount,
+      "0xd68e5c52f7563486cc1a15d00efa12c8644a907e"
+    );
+    console.log(result, "result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 const BurnEgc = async (amount, signer) => {
   try {
     const instance = await contractMartgptFacetInstance2(signer);
@@ -864,4 +884,5 @@ export {
   setMartgptTokenAddress,
   CheckUserRewardStats,
   BurnEgc,
+  withdrawAllEgc,
 };
