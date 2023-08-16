@@ -10,6 +10,7 @@ import {
 } from "@web3-react/core";
 import Web3 from "web3";
 import { configurePlan } from "../../../web3";
+import { configureDealerPlan } from "../../../web3/index2";
 const { REACT_APP_EGC_ADDRESS, REACT_APP_EUSD_ADDRESS } = process.env;
 const AdminModifyMembership = () => {
   const context = useWeb3React();
@@ -52,6 +53,18 @@ const AdminModifyMembership = () => {
       parseEther(AnnuallyPlan.toString(), "wei").toString(),
       REACT_APP_EGC_ADDRESS,
       REACT_APP_EUSD_ADDRESS,
+      library.getSigner()
+    );
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+  };
+  const ConfigureMembershipDealerPlan = async () => {
+    const res = await configureDealerPlan(
+      parseEther(monthlyPlan.toString(), "wei").toString(),
+      parseEther(semiAnnuallyPlan.toString(), "wei").toString(),
+      parseEther(AnnuallyPlan.toString(), "wei").toString(),
+      REACT_APP_EGC_ADDRESS,
+      account,
       library.getSigner()
     );
     console.log(res, "somto8uhhhg");
@@ -150,7 +163,7 @@ const AdminModifyMembership = () => {
                   Modify Monthly Plan
                 </div>
                 <div className="modifyMembershipFeeDiv_body_monthly_SubHead">
-                  Current Plan ~ MGPTT
+                  Current Plan ~ egc
                 </div>
                 <div className="modifyMembershipFeeDiv_body_monthly_input_div">
                   <div className="modifyMembershipFeeDiv_body_monthly_input_div_1">
@@ -178,7 +191,7 @@ const AdminModifyMembership = () => {
                   Modify Semi-Annually Plan
                 </div>
                 <div className="modifyMembershipFeeDiv_body_monthly_SubHead">
-                  Current Plan ~ MGPTT
+                  Current Plan ~ egc
                 </div>
                 <div className="modifyMembershipFeeDiv_body_monthly_input_div">
                   <div className="modifyMembershipFeeDiv_body_monthly_input_div_1">
@@ -206,7 +219,7 @@ const AdminModifyMembership = () => {
                   Modify Annual Plan
                 </div>
                 <div className="modifyMembershipFeeDiv_body_monthly_SubHead">
-                  Current Plan ~ MGPTT
+                  Current Plan ~ egc
                 </div>
                 <div className="modifyMembershipFeeDiv_body_monthly_input_div">
                   <div className="modifyMembershipFeeDiv_body_monthly_input_div_1">
@@ -226,7 +239,8 @@ const AdminModifyMembership = () => {
             <div className="modifyMembershipFeeDiv_body_monthly_btn_div">
               <button
                 className="modifyMembershipFeeDiv_body_monthly_btn_btn"
-                onClick={ConfigureMembershipPlan}
+                // onClick={ConfigureMembershipPlan}
+                onClick={ConfigureMembershipDealerPlan}
               >
                 Modify Plans
               </button>

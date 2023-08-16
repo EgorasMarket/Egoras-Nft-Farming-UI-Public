@@ -395,7 +395,7 @@ const DashBoardUserDetails = ({ auth }) => {
                       className="user_details_body1_body_cont1_span1
                       _img"
                     />{" "}
-                    MGPTT:
+                    egc:
                   </span>
                   <span className="user_details_body1_body_cont1_span2">
                     {numberWithCommas(egcBalance)}

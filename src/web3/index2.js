@@ -2,6 +2,7 @@ import { Contract } from "@ethersproject/contracts";
 import MembershipFacet from "./contracts/V3/MembershipFacet.json";
 import MartGptFacet from "./contracts/V3/martGPT.json";
 import V3ContractAddress from "./contracts/V3/V3ContractAddress.json";
+import DealersFacet from "./contracts/V3/DealersFacet.json";
 import RewardFaucet from "./contracts/V3/RewardFacet.json";
 import PancakeSwapFaucet from "./contracts/V3/PancakeSwapFacet.json";
 import DiamondCut from "./contracts/V3/DiamondCut.json";
@@ -16,6 +17,9 @@ const { REACT_APP_PANCAKE_ROUTER_ADDRESS, REACT_APP_BUSD_ROUTER_ADDRESS } =
   process.env;
 const contractMembershipFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, MembershipFacet.abi, signer);
+};
+const contractDealersFacetInstance = async (signer) => {
+  return new Contract(V3ContractAddress.address, DealersFacet.abi, signer);
 };
 const contractPancakeSwapFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, PancakeSwapFaucet.abi, signer);
@@ -843,7 +847,42 @@ const BurnEgc = async (amount, signer) => {
     };
   }
 };
-
+const configureDealerPlan = async (
+  _plan_a,
+  _plan_b,
+  _plan_c,
+  _token_addres,
+  _dealerSubcriptionCollector,
+  signer
+) => {
+  console.log(
+    _plan_a,
+    _plan_b,
+    _plan_c,
+    _token_addres,
+    _dealerSubcriptionCollector
+  );
+  try {
+    const instance = await contractDealersFacetInstance(signer);
+    let result = await instance.configureDealersPlan(
+      _plan_a,
+      _plan_b,
+      _plan_c,
+      _token_addres,
+      _dealerSubcriptionCollector
+    );
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 export {
   monthlyPlanSubScribe,
   semiAnnuallyPlanSubScribe,
@@ -885,4 +924,5 @@ export {
   CheckUserRewardStats,
   BurnEgc,
   withdrawAllEgc,
+  configureDealerPlan,
 };

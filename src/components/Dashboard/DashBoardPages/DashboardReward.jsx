@@ -159,7 +159,7 @@ const DashboardReward = () => {
                   MartGpt Rewards
                 </div>
                 <div className="dashboardRewardArea3_area1_para ">
-                  Stake your mgptt rewards to earn eusd in 6months.
+                  Stake your egc rewards to earn eusd in 6months.
                 </div>
               </div>
               <div className="dashboardRewardArea3_area2">
