@@ -268,7 +268,7 @@ export const Step2Div = ({
                       {monthAmount}
                       {""}
                       <span className="selectPlanDiv2_area1_cont2_head_price_span">
-                        mgptt / mnth
+                        egc / mnth
                       </span>{" "}
                     </div>
                     {currentCountry === "Nigeria" ? (
@@ -326,7 +326,7 @@ export const Step2Div = ({
                       {semiAnnualAmount}
                       {""}
                       <span className="selectPlanDiv2_area1_cont2_head_price_span">
-                        mgptt / 6mnths
+                        egc / 6mnths
                       </span>
                     </div>
                     {currentCountry === "Nigeria" ? (
@@ -387,7 +387,7 @@ export const Step2Div = ({
                       {AnnualAmount}
                       {""}
                       <span className="selectPlanDiv2_area1_cont2_head_price_span">
-                        mgptt / yr
+                        egc / yr
                       </span>
                     </div>
                     {currentCountry === "Nigeria" ? (
@@ -419,8 +419,7 @@ export const Step2Div = ({
             <div className="checkBox_agree_div">
               <div className="checkBox_agree_div_txt">
                 By checking the checkbox below, you agree to our{" "}
-                <a href="#">Terms of Use, Privacy Statement</a> and that you are
-                over 18.
+                <a href="#">Terms of Use, Privacy Statement.</a>
               </div>
               <div className="checkBox_agree_div_body">
                 <input
@@ -463,7 +462,7 @@ export const Step2Div = ({
                     {isLoading ? (
                       <ScaleLoader color="#12111b" size={10} height={20} />
                     ) : (
-                      <span> Approve MGPTT </span>
+                      <span> Approve egc </span>
                     )}
                   </button>
                 ) : (
@@ -643,7 +642,7 @@ export const Step2Div = ({
                     {isLoading ? (
                       <ScaleLoader color="#12111b" size={10} height={20} />
                     ) : (
-                      <span> Approve MGPTT </span>
+                      <span> Approve egc </span>
                     )}
                   </button>
                 ) : (

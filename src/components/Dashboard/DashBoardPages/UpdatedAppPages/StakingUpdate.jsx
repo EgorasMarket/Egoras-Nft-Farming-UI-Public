@@ -297,7 +297,7 @@ const StakingUpdate = () => {
       setDisable(false);
       setSuccessModal(true);
       setSuccessMessage(
-        "You've successfully Locked" + lockAmount + " MGPTT for 1 month"
+        "You've successfully Locked" + lockAmount + " egc for 1 month"
       );
       setTxHash(res.message.hash);
     } else {
@@ -324,7 +324,7 @@ const StakingUpdate = () => {
       setSuccessModal(true);
       setTxHash(res.message.hash);
       setSuccessMessage(
-        "You've successfully Locked" + lockAmount + " MGPTT for 1 year"
+        "You've successfully Locked" + lockAmount + " egc for 1 year"
       );
     } else {
       console.log(res);
@@ -350,7 +350,7 @@ const StakingUpdate = () => {
       setSuccessMessage(
         "You've successfully unlocked " +
           parseFloat(myTotalStaked).toFixed(2) +
-          " MGPTT"
+          " egc"
       );
     } else {
       console.log(res);
@@ -659,7 +659,7 @@ const StakingUpdate = () => {
                 <div className="lock_container_cont1_div_contract_overview_body">
                   <div className="lock_container_cont1_div_contract_overview_body_div1">
                     <div className="lock_container_cont1_div_contract_overview_body_div1_cont1">
-                      MGPTT
+                      egc
                     </div>
                     <div className="lock_container_cont1_div_contract_overview_body_div1_cont1_link">
                       {`${"0x0C30476f66034E11782938DF8e4384970B6c9e8a".slice(
@@ -790,7 +790,7 @@ const StakingUpdate = () => {
                                         {numberWithCommas(
                                           parseFloat(data.amount).toFixed(2)
                                         )}{" "}
-                                        MGPTT
+                                        egc
                                       </span>
                                     ) : data.status == "UNSTAKE" ? (
                                       <span style={{ display: "flex" }}>
@@ -799,7 +799,7 @@ const StakingUpdate = () => {
                                             data.unstake_amount
                                           ).toFixed(2)
                                         )}{" "}
-                                        MGPTT
+                                        egc
                                       </span>
                                     ) : null}
                                   </div>
@@ -836,13 +836,13 @@ const StakingUpdate = () => {
               <div className="lock_container_cont1_div_locks_overview">
                 <div className="lock_container_cont1_div_locks_overview_cont1">
                   <div className="lock_container_cont1_div_locks_overview_cont1_head">
-                    My Locked MGPTT
+                    My Locked egc
                   </div>
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
                     {/* populate with real data */}
                     <span>
                       {numberWithCommas(parseFloat(myTotalStaked).toFixed(2))}{" "}
-                      mgptt{" "}
+                      egc{" "}
                     </span>
                     {/* <span style={{ fontSize: "10px" }}></span> */}
                   </div>
@@ -944,7 +944,7 @@ const StakingUpdate = () => {
                             MAX
                           </button>
                           <div className="lock_container_cont1_div1_lock_div_lock_body_input_body_cont_amount_div2">
-                            MGPTT
+                            egc
                           </div>
                         </div>
                       </div>
@@ -1019,7 +1019,7 @@ const StakingUpdate = () => {
                                 height={20}
                               />
                             ) : (
-                              <>Approve MGPTT</>
+                              <>Approve egc</>
                             )}
                           </button>
                         ) : (
@@ -1110,7 +1110,7 @@ const StakingUpdate = () => {
                   <div className="lock_container_cont1_div1_lock_div_lock_body">
                     <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1">
                       <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_head">
-                        My Locked MGPTT
+                        My Locked egc
                       </div>
                       <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount">
                         <span className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_span">
@@ -1118,7 +1118,7 @@ const StakingUpdate = () => {
                             {numberWithCommas(
                               parseFloat(myTotalStaked).toFixed(2)
                             )}{" "}
-                            MGPTT
+                            egc
                           </span>
                           <span className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_span_span2">
                             Max Duration:
@@ -1179,13 +1179,13 @@ const StakingUpdate = () => {
                 <div className="lending_area1_cont1">
                   <div className="lending_area1_cont1_body_1">
                     <div className="lending_area1_cont1_heading">
-                      Total MGPTT Locked
+                      Total egc Locked
                     </div>
                     <div className="lending_area1_cont1_body_txt">
-                      {parseFloat(totalAssetInfo.amount).toFixed(2)} MGPTT
+                      {parseFloat(totalAssetInfo.amount).toFixed(2)} egc
                     </div>
                     <div className="lending_area1_cont1_heading">
-                      (32.84% Of MGPTT Supply)
+                      (32.84% Of egc Supply)
                     </div>
                   </div>
                   <div className="lending_area1_cont1_body_1">
@@ -1237,7 +1237,7 @@ const StakingUpdate = () => {
 
               <div className="lock_container_cont2_div2_chart_div">
                 <div className="lock_container_cont2_div2_chart_div_text_area">
-                  Total Locked MGPTT
+                  Total Locked egc
                 </div>
                 <div className="lock_container_cont2_div2_chart_div_text_body">
                   <div
@@ -1429,7 +1429,7 @@ const StakingUpdate = () => {
                                         {numberWithCommas(
                                           parseFloat(data.amount).toFixed(2)
                                         )}{" "}
-                                        MGPTT
+                                        egc
                                       </span>
                                     ) : data.status == "UNSTAKE" ? (
                                       <span style={{ display: "flex" }}>
@@ -1438,7 +1438,7 @@ const StakingUpdate = () => {
                                             data.unstake_amount
                                           ).toFixed(2)
                                         )}{" "}
-                                        MGPTT
+                                        egc
                                       </span>
                                     ) : null}
                                   </div>
@@ -1500,7 +1500,7 @@ const StakingUpdate = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <div className="faq_container_body_details">
-                    Upon staking, the smart contract utilizes the staked MGPTT
+                    Upon staking, the smart contract utilizes the staked egc
                     tokens as collateral to generate EUSD, which can be utilized
                     for purchasing items instantly on the protocol.
                   </div>
@@ -1520,7 +1520,7 @@ const StakingUpdate = () => {
                   <div className="faq_container_body_details">
                     The protocol offers a fixed annual percentage yield of 12%
                     (APY), which is computed based on the USD equivalent of the
-                    staked MGPTT.
+                    staked egc.
                   </div>
                 </AccordionDetails>
               </Accordion>
@@ -1536,7 +1536,7 @@ const StakingUpdate = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <div className="faq_container_body_details">
-                    Yes, users are allowed to unstake their MGPTT tokens before
+                    Yes, users are allowed to unstake their egc tokens before
                     the maturity date, but it incurs a penalty fee of 10% of the
                     total staked amount.
                   </div>

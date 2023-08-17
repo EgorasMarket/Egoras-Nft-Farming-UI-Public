@@ -611,11 +611,11 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             >
               <div className="header_token_prices_div_area">
                 <div className="header_token_prices_div_area1">
-                  1 MGPTT ~ {numberWithCommas(egcUsdVal.toFixed(2))} USD
+                  1 egc ~ {numberWithCommas(egcUsdVal.toFixed(2))} USD
                 </div>
                 <span class="vertical_rule2"></span>
                 <div className="header_token_prices_div_area1">
-                  1 MGPTT ~ {numberWithCommas(egcUsdVal.toFixed(2))} eUSD
+                  1 egc ~ {numberWithCommas(egcUsdVal.toFixed(2))} eUSD
                 </div>
                 <span class="vertical_rule2"></span>
                 <div className="header_token_prices_div_area1">
