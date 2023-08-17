@@ -155,7 +155,7 @@ const AdminModifyMembership = () => {
           {/* =============== */}
           <div className="modifyMembershipFeeDiv">
             <div className="modifyMembershipFeeDiv_head">
-              Modify Membership Fees
+              Modify Dealership Fees
             </div>
             <div className="modifyMembershipFeeDiv_body">
               <div className="modifyMembershipFeeDiv_body_monthly">

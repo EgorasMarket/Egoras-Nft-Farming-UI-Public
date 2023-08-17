@@ -8,48 +8,56 @@
 }
 
 .dark .kuZfvr {
-  background: linear-gradient(to right,
-      rgba(56, 98, 73, 0.1) 5%,
-      rgb(44 98 66 / 80%) 15%,
-      rgb(47 127 79 / 90%) 50%,
-      rgb(38 113 68 / 80%) 85%,
-      rgba(56, 98, 73, 0.1) 95%) !important;
+  background: linear-gradient(
+    to right,
+    rgba(56, 98, 73, 0.1) 5%,
+    rgb(44 98 66 / 80%) 15%,
+    rgb(47 127 79 / 90%) 50%,
+    rgb(38 113 68 / 80%) 85%,
+    rgba(56, 98, 73, 0.1) 95%
+  ) !important;
   -moz-animation: 0.5s ease-in-out 0.5s infinite loading !important;
   -webkit-animation: 0.5s ease-in-out 0.5s infinite loading !important;
   animation: 0.5s ease-in-out 0.5s infinite loading !important;
 }
 
 .dark .kScEZj {
-  background: linear-gradient(to right,
-      rgba(56, 98, 73, 0.1) 5%,
-      rgb(44 98 66 / 80%) 15%,
-      rgb(47 127 79 / 90%) 50%,
-      rgb(38 113 68 / 80%) 85%,
-      rgba(56, 98, 73, 0.1) 95%) !important;
+  background: linear-gradient(
+    to right,
+    rgba(56, 98, 73, 0.1) 5%,
+    rgb(44 98 66 / 80%) 15%,
+    rgb(47 127 79 / 90%) 50%,
+    rgb(38 113 68 / 80%) 85%,
+    rgba(56, 98, 73, 0.1) 95%
+  ) !important;
   -moz-animation: 0.5s ease-in-out 0.5s infinite loading !important;
   -webkit-animation: 0.5s ease-in-out 0.5s infinite loading !important;
   animation: 0.5s ease-in-out 0.5s infinite loading !important;
 }
 
 .dark .ijJtva {
-  background: linear-gradient(to right,
-      rgba(56, 98, 73, 0.1) 5%,
-      rgb(44 98 66 / 80%) 15%,
-      rgb(47 127 79 / 90%) 50%,
-      rgb(38 113 68 / 80%) 85%,
-      rgba(56, 98, 73, 0.1) 95%) !important;
+  background: linear-gradient(
+    to right,
+    rgba(56, 98, 73, 0.1) 5%,
+    rgb(44 98 66 / 80%) 15%,
+    rgb(47 127 79 / 90%) 50%,
+    rgb(38 113 68 / 80%) 85%,
+    rgba(56, 98, 73, 0.1) 95%
+  ) !important;
   -moz-animation: 0.5s ease-in-out 0.5s infinite loading !important;
   -webkit-animation: 0.5s ease-in-out 0.5s infinite loading !important;
   animation: 0.5s ease-in-out 0.5s infinite loading !important;
 }
 
 .dark .bpoGkz {
-  background: linear-gradient(to right,
-      rgba(56, 98, 73, 0.1) 5%,
-      rgb(44 98 66 / 80%) 15%,
-      rgb(47 127 79 / 90%) 50%,
-      rgb(38 113 68 / 80%) 85%,
-      rgba(56, 98, 73, 0.1) 95%) !important;
+  background: linear-gradient(
+    to right,
+    rgba(56, 98, 73, 0.1) 5%,
+    rgb(44 98 66 / 80%) 15%,
+    rgb(47 127 79 / 90%) 50%,
+    rgb(38 113 68 / 80%) 85%,
+    rgba(56, 98, 73, 0.1) 95%
+  ) !important;
   -moz-animation: 0.5s ease-in-out 0.5s infinite loading !important;
   -webkit-animation: 0.5s ease-in-out 0.5s infinite loading !important;
   animation: 0.5s ease-in-out 0.5s infinite loading !important;
@@ -351,6 +359,8 @@ section.popularProductsSection {
   margin-top: 0em;
   align-items: center;
   position: relative;
+  flex-direction: column;
+  align-items: center;
 }
 
 .selectPlanDiv1 {
@@ -359,7 +369,9 @@ section.popularProductsSection {
   align-items: flex-start;
   text-align: left;
   width: 55%;
-  margin-right: 3em;
+  margin-right: 0em;
+  text-align: center;
+  margin-bottom: 2em;
 }
 
 .selectPlanDiv_backButton_icon {
@@ -397,7 +409,7 @@ input[type="radio"] {
   top: 0;
 }
 
-input[type="radio"]:checked+.selectPlanDiv2_area1_cont1_label:before {
+input[type="radio"]:checked + .selectPlanDiv2_area1_cont1_label:before {
   background-color: #7a5fc0;
   border-color: #997fda;
   padding: 2px;
@@ -409,14 +421,18 @@ input[type="radio"]:checked+.selectPlanDiv2_area1_cont1_label:before {
   display: flex;
   align-items: center;
   cursor: pointer;
-  position: absolute;
-  top: 0;
+  margin-bottom: 1em;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .selectPlanDiv1_head {
   font-size: 48px;
   font-weight: 700;
   color: #7a5fc0;
+  line-height: 1;
+  margin-bottom: 10px;
 }
 
 .selectPlanDiv1_sub_head {
@@ -571,7 +587,7 @@ input[type="checkbox"] {
   border-radius: 7px;
 }
 
-input[type="checkbox"]:checked+.checkBox_agree_div_body_label:before {
+input[type="checkbox"]:checked + .checkBox_agree_div_body_label:before {
   content: "\2713";
   font-weight: 600;
   color: #ffffff;
@@ -608,7 +624,7 @@ input[type="checkbox"]:checked+.checkBox_agree_div_body_label:before {
   color: #fff;
   margin-top: 0em;
   width: 100%;
-  transition: all .3s linear;
+  transition: all 0.3s linear;
 }
 
 .selectPlanDiv2_area1_checkout_btn_outline span {
@@ -643,7 +659,7 @@ input[type="checkbox"]:checked+.checkBox_agree_div_body_label:before {
 .selectPlanDiv2_area1_checkout_btn_outline:hover {
   background: #3b2f5b;
   color: #d3d3d3;
-  transition: all .3s linear;
+  transition: all 0.3s linear;
 }
 
 .dark .selectPlanDiv2_area1_checkout_btn:disabled {
@@ -1713,7 +1729,7 @@ x .benefits_section1_area2_body1_cont2 {
 .joinCooperativeDiv_lines {
   position: absolute;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   top: 0;
   /* bottom: auto; */
   object-fit: cover;
@@ -1750,7 +1766,8 @@ x .benefits_section1_area2_body1_cont2 {
   background: #f2f2f2;
   color: #000;
   padding-bottom: 13em;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .dark .joinCooperativeDiv {
@@ -2301,11 +2318,7 @@ x .benefits_section1_area2_body1_cont2 {
     display: flex;
     align-items: center;
     cursor: pointer;
-    position: absolute;
-    top: 0;
-    left: auto;
-    right: auto;
-    margin: auto;
+    margin-bottom: 1em;
   }
 
   .selectPlanDiv1 {
@@ -2671,7 +2684,6 @@ x .benefits_section1_area2_body1_cont2 {
 }
 
 @media screen and (max-width: 415px) {
-
   /* .updatedCooperativeSection1_area1_para {
     color: #848484;
     margin-top: 1em;

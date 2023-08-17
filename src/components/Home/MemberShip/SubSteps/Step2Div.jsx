@@ -377,8 +377,7 @@ export const Step2Div = ({
             <div className="checkBox_agree_div">
               <div className="checkBox_agree_div_txt">
                 By checking the checkbox below, you agree to our{" "}
-                <a href="#">Terms of Use, Privacy Statement</a> and that you are
-                over 18.
+                <a href="#">Terms of Use, Privacy Statement.</a>
               </div>
               <div className="checkBox_agree_div_body">
                 <input
