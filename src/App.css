@@ -15,8 +15,6 @@ hr {
   width: 100%;
 }
 
-
-
 html {
   scroll-behavior: smooth;
   transition: 2s ease-in;
@@ -38,6 +36,12 @@ hr {
 }
 
 div::-webkit-scrollbar {
+  display: none;
+}
+span::-webkit-scrollbar {
+  display: none;
+}
+section::-webkit-scrollbar {
   display: none;
 }
 
@@ -198,7 +202,8 @@ button:focus {
   color: #7a5fc0 !important;
 }
 
-.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
   border-color: #7a5fc0 !important;
 }
 
@@ -377,7 +382,8 @@ button:focus {
   width: 60% !important;
 }
 
-@media screen and (max-width: 991px) {}
+@media screen and (max-width: 991px) {
+}
 
 @media (min-width: 768px) {
   .col-md-6 {
@@ -391,7 +397,8 @@ button:focus {
   color: #7a5fc0 !important;
 }
 
-.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline {
   border-color: #7a5fc0 !important;
 }
 

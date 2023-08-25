@@ -218,10 +218,9 @@ const DashBoardSellProduct = () => {
     } else {
       console.log("Not Ok");
     }
-  }
+  };
 
   const UploadProduct = async () => {
-
     setIsLoading(true);
     setDisable(true);
     let img_cms = await handleImgCms();
@@ -610,105 +609,46 @@ const DashBoardSellProduct = () => {
       <section className="collateral-assets-section no-bg no_pad">
         <div className="container">
           <div className="sell_container">
-            <div className="sell_container_tabs">
-              <div
-                className={
-                  activeSaleTab == "direct"
-                    ? "sell_container_tabs_1_active"
-                    : "sell_container_tabs_1"
-                }
-                id="direct"
-                onClick={toggleActiveTab}
-              >
-                Direct Upload
-              </div>
-              <div
-                className={
-                  activeSaleTab == "Indirect"
-                    ? "sell_container_tabs_1_active"
-                    : "sell_container_tabs_1"
-                }
-                id="Indirect"
-                onClick={toggleActiveTab}
-              >
-                Express Upload
-              </div>
-            </div>
-            {activeSaleTab === "direct" ? (
-              <DirectUpload
-                Disable={Disable}
-                UploadProduct={UploadProduct}
-                isLoading={isLoading}
-                onEditorStateChange={onEditorStateChange}
-                // handleProdSpecChange={handleProdSpecChange}
-                account={account}
-                prodSpec={prodSpec}
-                toggleAddCategory={toggleAddCategory}
-                handleProdStateChange={handleProdStateChange}
-                prodCount={prodCount}
-                handleCenter2={handleCenter2}
-                allCategories={allCategories}
-                editorState={editorState}
-                brandName={brandName}
-                handleSaleAmountChange={handleSaleAmountChange}
-                handleProdCountChange={handleProdCountChange}
-                prodAmount={prodAmount}
-                imageSrc3={imageSrc3}
-                handleRemoveClick3={handleRemoveClick3}
-                handleBrandNameChange={handleBrandNameChange}
-                fileInputRef3={fileInputRef3}
-                handleImageSelect3={handleImageSelect3}
-                handleClick3={handleClick3}
-                imageSrc2={imageSrc2}
-                handleRemoveClick2={handleRemoveClick2}
-                handleRemoveClick={handleRemoveClick}
-                fileInputRef2={fileInputRef2}
-                handleImageSelect2={handleImageSelect2}
-                handleClick2={handleClick2}
-                handleClick={handleClick}
-                imageSrc={imageSrc}
-                generateAI={generateAI}
-                isLoading2={isLoading2}
-                fileInputRef={fileInputRef}
-                handleImageSelect={handleImageSelect}
-                handleNameChange={handleNameChange}
-                prodName={prodName}
-                inputDivs={inputDivs}
-                AddInputCount={AddInputCount}
-              />
-            ) : (
-              <IndirectUpload
-                Disable={Disable}
-                UploadProduct={UploadProduct}
-                isLoading={isLoading}
-                saleAmount={saleAmount}
-                handleProdConditionChange={handleProdConditionChange}
-                prodCondition={prodCondition}
-                account={account}
-                brandName={brandName}
-                handleProdCountChange={handleProdCountChange}
-                prodCount={prodCount}
-                handleSaleAmountChange={handleSaleAmountChange}
-                handleRemoveClick3={handleRemoveClick3}
-                handleNameChange={handleNameChange}
-                prodName={prodName}
-                handleBrandNameChange={handleBrandNameChange}
-                handleClick3={handleClick3}
-                imageSrc3={imageSrc3}
-                imageSrc2={imageSrc2}
-                handleRemoveClick2={handleRemoveClick2}
-                fileInputRef3={fileInputRef3}
-                handleImageSelect3={handleImageSelect3}
-                fileInputRef={fileInputRef}
-                handleImageSelect={handleImageSelect}
-                imageSrc={imageSrc}
-                handleClick={handleClick}
-                handleRemoveClick={handleRemoveClick}
-                fileInputRef2={fileInputRef2}
-                handleImageSelect2={handleImageSelect2}
-                handleClick2={handleClick2}
-              />
-            )}
+            <DirectUpload
+              Disable={Disable}
+              UploadProduct={UploadProduct}
+              isLoading={isLoading}
+              onEditorStateChange={onEditorStateChange}
+              account={account}
+              prodSpec={prodSpec}
+              toggleAddCategory={toggleAddCategory}
+              handleProdStateChange={handleProdStateChange}
+              prodCount={prodCount}
+              handleCenter2={handleCenter2}
+              allCategories={allCategories}
+              editorState={editorState}
+              brandName={brandName}
+              handleSaleAmountChange={handleSaleAmountChange}
+              handleProdCountChange={handleProdCountChange}
+              prodAmount={prodAmount}
+              imageSrc3={imageSrc3}
+              handleRemoveClick3={handleRemoveClick3}
+              handleBrandNameChange={handleBrandNameChange}
+              fileInputRef3={fileInputRef3}
+              handleImageSelect3={handleImageSelect3}
+              handleClick3={handleClick3}
+              imageSrc2={imageSrc2}
+              handleRemoveClick2={handleRemoveClick2}
+              handleRemoveClick={handleRemoveClick}
+              fileInputRef2={fileInputRef2}
+              handleImageSelect2={handleImageSelect2}
+              handleClick2={handleClick2}
+              handleClick={handleClick}
+              imageSrc={imageSrc}
+              generateAI={generateAI}
+              isLoading2={isLoading2}
+              fileInputRef={fileInputRef}
+              handleImageSelect={handleImageSelect}
+              handleNameChange={handleNameChange}
+              prodName={prodName}
+              inputDivs={inputDivs}
+              AddInputCount={AddInputCount}
+            />
           </div>
         </div>
       </section>

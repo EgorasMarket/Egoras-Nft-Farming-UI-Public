@@ -24,6 +24,7 @@ import CheckIcon from "@mui/icons-material/Check";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import { Step1Div } from "./SubSteps/Step1Div";
 import { Step2Div } from "./SubSteps/Step2Div";
+import Step2Div2 from "./SubSteps/Step2Div2";
 import UpdatedErrorModal from "../../Dashboard/DashBoardPages/UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedErrorModal";
 import UpdatedSuccessModal from "../../Dashboard/DashBoardPages/UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import {
@@ -365,7 +366,12 @@ const MemberShipPage = () => {
           <div
             className={`joinCooperativeModalDiv_area1 ${step2 ? "show2" : ""}`}
           >
-            <Step2Div
+            <Step2Div2
+              toggleSteps={toggleSteps}
+              checkAgree={checkAgree}
+              toggleCheckAgree={toggleCheckAgree}
+            />
+            {/* <Step2Div
               checkMonthBox={checkMonthBox}
               checkSemiAnnualBox={checkSemiAnnualBox}
               toggleSteps={toggleSteps}
@@ -395,7 +401,7 @@ const MemberShipPage = () => {
               togglePayViaFortDiv={togglePayViaFortDiv}
               isLoading={isLoading}
               account={account}
-            />
+            /> */}
           </div>
         </div>
       </div>
