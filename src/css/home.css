@@ -33,8 +33,6 @@
   display: block;
 }
 
-
-
 .mySwiperDiv_Power {
   display: flex;
   flex-direction: column;
@@ -1573,7 +1571,7 @@ a.visit_app_link_2 {
   /* gap: 20px; */
 }
 
-.whyEgoras_body>* {
+.whyEgoras_body > * {
   margin: 20px;
   margin-left: 0;
 }
@@ -1861,7 +1859,7 @@ a.visit_app_link_2 {
   /* gap: 40px; */
 }
 
-.benefit_section_area1>* {
+.benefit_section_area1 > * {
   margin: 20px 0px;
 }
 
@@ -2388,7 +2386,17 @@ a.visit_app_link_2 {
   position: relative;
   background: #0d0c14;
   overflow: hidden;
-  background-image: radial-gradient(at 83% 67%, rgb(22 21 33) 0, transparent 58%), radial-gradient(at 67% 20%, hsl(262.32deg 30.08% 13.49%) 0, transparent 59%), radial-gradient(at 88% 35%, hsl(0deg 0% 0%) 0, transparent 50%), radial-gradient(at 31% 91%, hsl(255deg 30% 7.84%) 0, #0b0b12 52%), radial-gradient(at 27% 71%, hsl(247.5deg 21.3% 6.19%) 0, transparent 49%), radial-gradient(at 74% 89%, hsl(249.47deg 23.01% 52.7%) 0, transparent 51%), radial-gradient(at 53% 75%, hsl(258.95deg 18.78% 4.72%) 0, transparent 45%);
+  background-image: radial-gradient(
+      at 83% 67%,
+      rgb(22 21 33) 0,
+      transparent 58%
+    ),
+    radial-gradient(at 67% 20%, hsl(262.32deg 30.08% 13.49%) 0, transparent 59%),
+    radial-gradient(at 88% 35%, hsl(0deg 0% 0%) 0, transparent 50%),
+    radial-gradient(at 31% 91%, hsl(255deg 30% 7.84%) 0, #0b0b12 52%),
+    radial-gradient(at 27% 71%, hsl(247.5deg 21.3% 6.19%) 0, transparent 49%),
+    radial-gradient(at 74% 89%, hsl(249.47deg 23.01% 52.7%) 0, transparent 51%),
+    radial-gradient(at 53% 75%, hsl(258.95deg 18.78% 4.72%) 0, transparent 45%);
 }
 
 .how_it_works_update_new_area {
@@ -2451,7 +2459,7 @@ a.visit_app_link_2 {
 .how_it_works_update_new_area_2 {
   display: flex;
   justify-content: space-between;
-  animation: revealTab .5s ease-in-out;
+  animation: revealTab 0.5s ease-in-out;
 }
 
 @keyframes revealTab {
@@ -2464,7 +2472,6 @@ a.visit_app_link_2 {
     transform: translateY(0%);
     opacity: 1;
   }
-
 }
 
 .how_it_works_update_new_area_2_cont1_border {
@@ -2501,7 +2508,17 @@ a.visit_app_link_2 {
   z-index: 1;
   text-align: center;
   border-radius: 24px;
-  background-image: radial-gradient(at 83% 67%, rgb(22 21 33) 0, transparent 58%), radial-gradient(at 67% 20%, hsl(262.32deg 30.08% 13.49%) 0, transparent 59%), radial-gradient(at 88% 35%, hsl(0deg 0% 0%) 0, transparent 50%), radial-gradient(at 31% 91%, hsl(255deg 30% 7.84%) 0, #0b0b12 52%), radial-gradient(at 27% 71%, hsl(247.5deg 21.3% 6.19%) 0, transparent 49%), radial-gradient(at 74% 89%, hsl(249.47deg 23.01% 52.7%) 0, transparent 51%), radial-gradient(at 53% 75%, hsl(258.95deg 18.78% 4.72%) 0, transparent 45%);
+  background-image: radial-gradient(
+      at 83% 67%,
+      rgb(22 21 33) 0,
+      transparent 58%
+    ),
+    radial-gradient(at 67% 20%, hsl(262.32deg 30.08% 13.49%) 0, transparent 59%),
+    radial-gradient(at 88% 35%, hsl(0deg 0% 0%) 0, transparent 50%),
+    radial-gradient(at 31% 91%, hsl(255deg 30% 7.84%) 0, #0b0b12 52%),
+    radial-gradient(at 27% 71%, hsl(247.5deg 21.3% 6.19%) 0, transparent 49%),
+    radial-gradient(at 74% 89%, hsl(249.47deg 23.01% 52.7%) 0, transparent 51%),
+    radial-gradient(at 53% 75%, hsl(258.95deg 18.78% 4.72%) 0, transparent 45%);
 }
 
 .how_it_works_update_new_area_2_cont1_icon {
@@ -2526,10 +2543,18 @@ a.visit_app_link_2 {
   position: relative;
   background: #0d0c14;
   overflow: hidden;
-  background-image: radial-gradient(at 83% 67%, rgb(12 10 22) 0, transparent 58%), radial-gradient(at 67% 20%, hsl(262.32deg 35.01% 12.62%) 0, transparent 59%), radial-gradient(at 88% 35%, hsl(0deg 0% 0%) 0, transparent 50%), radial-gradient(at 31% 91%, hsl(270deg 53% 9%) 0, #0d0c14d4 52%), radial-gradient(at 27% 71%, hsl(264.77deg 34.46% 16.43%) 0, transparent 49%), radial-gradient(at 74% 89%, hsl(250deg 23.1% 2.15%) 0, transparent 51%), radial-gradient(at 53% 75%, hsl(256.7deg 43.5% 56.27%) 0, transparent 45%);
+  background-image: radial-gradient(
+      at 83% 67%,
+      rgb(12 10 22) 0,
+      transparent 58%
+    ),
+    radial-gradient(at 67% 20%, hsl(262.32deg 35.01% 12.62%) 0, transparent 59%),
+    radial-gradient(at 88% 35%, hsl(0deg 0% 0%) 0, transparent 50%),
+    radial-gradient(at 31% 91%, hsl(270deg 53% 9%) 0, #0d0c14d4 52%),
+    radial-gradient(at 27% 71%, hsl(264.77deg 34.46% 16.43%) 0, transparent 49%),
+    radial-gradient(at 74% 89%, hsl(250deg 23.1% 2.15%) 0, transparent 51%),
+    radial-gradient(at 53% 75%, hsl(256.7deg 43.5% 56.27%) 0, transparent 45%);
 }
-
-
 
 .martgptfeauturesSection_area {
   display: flex;
@@ -2612,7 +2637,17 @@ a.visit_app_link_2 {
   flex-direction: column;
   z-index: 1;
   height: 100%;
-  background-image: radial-gradient(at 83% 67%, rgb(22 21 33) 0, transparent 58%), radial-gradient(at 67% 20%, hsl(262.32deg 30.08% 13.49%) 0, transparent 59%), radial-gradient(at 88% 35%, hsl(0deg 0% 0%) 0, transparent 50%), radial-gradient(at 31% 91%, hsl(255deg 30% 7.84%) 0, #0b0b12 52%), radial-gradient(at 27% 71%, hsl(247.5deg 21.3% 6.19%) 0, transparent 49%), radial-gradient(at 74% 89%, hsl(249.47deg 23.01% 52.7%) 0, transparent 51%), radial-gradient(at 53% 75%, hsl(258.95deg 18.78% 4.72%) 0, transparent 45%);
+  background-image: radial-gradient(
+      at 83% 67%,
+      rgb(22 21 33) 0,
+      transparent 58%
+    ),
+    radial-gradient(at 67% 20%, hsl(262.32deg 30.08% 13.49%) 0, transparent 59%),
+    radial-gradient(at 88% 35%, hsl(0deg 0% 0%) 0, transparent 50%),
+    radial-gradient(at 31% 91%, hsl(255deg 30% 7.84%) 0, #0b0b12 52%),
+    radial-gradient(at 27% 71%, hsl(247.5deg 21.3% 6.19%) 0, transparent 49%),
+    radial-gradient(at 74% 89%, hsl(249.47deg 23.01% 52.7%) 0, transparent 51%),
+    radial-gradient(at 53% 75%, hsl(258.95deg 18.78% 4.72%) 0, transparent 45%);
 }
 
 .martgptfeauturesSection_area2_cont1_div1_icon {
@@ -2655,7 +2690,17 @@ a.visit_app_link_2 {
   display: flex;
   align-items: center;
   z-index: 1;
-  background-image: radial-gradient(at 83% 67%, rgb(22 21 33) 0, transparent 58%), radial-gradient(at 67% 20%, hsl(262.32deg 30.08% 13.49%) 0, transparent 59%), radial-gradient(at 88% 35%, hsl(0deg 0% 0%) 0, transparent 50%), radial-gradient(at 31% 91%, hsl(255deg 30% 7.84%) 0, #0b0b12 52%), radial-gradient(at 27% 71%, hsl(247.5deg 21.3% 6.19%) 0, transparent 49%), radial-gradient(at 74% 89%, hsl(249.47deg 23.01% 52.7%) 0, transparent 51%), radial-gradient(at 53% 75%, hsl(258.95deg 18.78% 4.72%) 0, transparent 45%);
+  background-image: radial-gradient(
+      at 83% 67%,
+      rgb(22 21 33) 0,
+      transparent 58%
+    ),
+    radial-gradient(at 67% 20%, hsl(262.32deg 30.08% 13.49%) 0, transparent 59%),
+    radial-gradient(at 88% 35%, hsl(0deg 0% 0%) 0, transparent 50%),
+    radial-gradient(at 31% 91%, hsl(255deg 30% 7.84%) 0, #0b0b12 52%),
+    radial-gradient(at 27% 71%, hsl(247.5deg 21.3% 6.19%) 0, transparent 49%),
+    radial-gradient(at 74% 89%, hsl(249.47deg 23.01% 52.7%) 0, transparent 51%),
+    radial-gradient(at 53% 75%, hsl(258.95deg 18.78% 4.72%) 0, transparent 45%);
 }
 
 .martgptfeauturesSection_area2_cont1_div2_cont1_last {
@@ -2666,7 +2711,17 @@ a.visit_app_link_2 {
   display: flex;
   align-items: center;
   z-index: 1;
-  background-image: radial-gradient(at 83% 67%, rgb(22 21 33) 0, transparent 58%), radial-gradient(at 67% 20%, hsl(262.32deg 30.08% 13.49%) 0, transparent 59%), radial-gradient(at 88% 35%, hsl(0deg 0% 0%) 0, transparent 50%), radial-gradient(at 31% 91%, hsl(255deg 30% 7.84%) 0, #0b0b12 52%), radial-gradient(at 27% 71%, hsl(247.5deg 21.3% 6.19%) 0, transparent 49%), radial-gradient(at 74% 89%, hsl(249.47deg 23.01% 52.7%) 0, transparent 51%), radial-gradient(at 53% 75%, hsl(258.95deg 18.78% 4.72%) 0, transparent 45%);
+  background-image: radial-gradient(
+      at 83% 67%,
+      rgb(22 21 33) 0,
+      transparent 58%
+    ),
+    radial-gradient(at 67% 20%, hsl(262.32deg 30.08% 13.49%) 0, transparent 59%),
+    radial-gradient(at 88% 35%, hsl(0deg 0% 0%) 0, transparent 50%),
+    radial-gradient(at 31% 91%, hsl(255deg 30% 7.84%) 0, #0b0b12 52%),
+    radial-gradient(at 27% 71%, hsl(247.5deg 21.3% 6.19%) 0, transparent 49%),
+    radial-gradient(at 74% 89%, hsl(249.47deg 23.01% 52.7%) 0, transparent 51%),
+    radial-gradient(at 53% 75%, hsl(258.95deg 18.78% 4.72%) 0, transparent 45%);
 }
 
 .martgptfeauturesSection_area2_cont1_div2_cont1_div1 {
@@ -2709,7 +2764,6 @@ a.visit_app_link_2 {
   border-radius: 25px;
   padding: 3px;
   margin-bottom: 20px;
-
 }
 
 .martgptfeauturesSection_area2_cont1_div2_cont1_border::before {
@@ -2730,7 +2784,6 @@ a.visit_app_link_2 {
   overflow: hidden;
   border-radius: 25px;
   padding: 3px;
-
 }
 
 .martgptfeauturesSection_area2_cont1_div2_cont1_border_last::before {
@@ -2752,7 +2805,6 @@ a.visit_app_link_2 {
   border-radius: 25px;
   padding: 3px;
   width: 40%;
-
 }
 
 .martgptfeauturesSection_area2_cont1_div2_cont1_border_first::before {
@@ -2773,7 +2825,6 @@ a.visit_app_link_2 {
   position: relative;
   background: #0d0c14;
   overflow: hidden;
-
 }
 
 .JoinMartGptArea {
@@ -2781,7 +2832,17 @@ a.visit_app_link_2 {
   padding: 0em;
   border-radius: 25px;
   border: solid 1px #322845;
-  background-image: radial-gradient(at 83% 67%, rgb(39 25 47) 0, transparent 58%), radial-gradient(at 67% 20%, hsl(262.32deg 46.67% 17.22%) 0, transparent 59%), radial-gradient(at 88% 35%, hsl(0deg 0% 0%) 0, transparent 50%), radial-gradient(at 31% 91%, hsl(270deg 26.52% 3.14%) 0, #1c1326d4 52%), radial-gradient(at 27% 71%, hsl(264.77deg 35.35% 23.62%) 0, transparent 49%), radial-gradient(at 74% 89%, hsl(250deg 100% 60.01%) 0, transparent 51%), radial-gradient(at 53% 75%, hsl(256.7deg 100% 68.59%) 0, transparent 45%);
+  background-image: radial-gradient(
+      at 83% 67%,
+      rgb(39 25 47) 0,
+      transparent 58%
+    ),
+    radial-gradient(at 67% 20%, hsl(262.32deg 46.67% 17.22%) 0, transparent 59%),
+    radial-gradient(at 88% 35%, hsl(0deg 0% 0%) 0, transparent 50%),
+    radial-gradient(at 31% 91%, hsl(270deg 26.52% 3.14%) 0, #1c1326d4 52%),
+    radial-gradient(at 27% 71%, hsl(264.77deg 35.35% 23.62%) 0, transparent 49%),
+    radial-gradient(at 74% 89%, hsl(250deg 100% 60.01%) 0, transparent 51%),
+    radial-gradient(at 53% 75%, hsl(256.7deg 100% 68.59%) 0, transparent 45%);
   align-items: center;
 }
 
@@ -2883,7 +2944,7 @@ a.visit_app_link_2 {
     grid-row-gap: 20px;
   }
 
-  .benefit_section_area1>* {
+  .benefit_section_area1 > * {
     margin: 10px 0px;
   }
 
@@ -2934,12 +2995,10 @@ a.visit_app_link_2 {
   }
 
   .martgptfeauturesSection_area2_cont1_div2_cont1_border_first {
-
     width: 100%;
   }
 
   .martgptfeauturesSection_area2_cont1_div1_icon {
-
     margin-bottom: 20px;
     width: 25%;
   }
@@ -3656,16 +3715,11 @@ a.visit_app_link_2 {
 
   .nft_area2_stat_div_area_cont1_icon_light {
     width: 30px;
-
   }
 
   .nft_area2_stat_div_area_cont1_icon_dark {
     width: 30px;
-
   }
-
-
-
 
   .nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_head {
     color: #c8c6dd;
@@ -4099,7 +4153,7 @@ a.visit_app_link_2 {
 .dark .wallet_addr_cont_txt_header_vip {
   background: #0d0c14;
   color: #ffffff;
-  border: solid 1px #F0B400;
+  border: solid 1px #f0b400;
   border-left: 0;
 }
 
@@ -4137,7 +4191,7 @@ a.visit_app_link_2 {
 
 .dark .metamask_prof_pic_icon_vip {
   background: #0d0c14;
-  border: solid 1px #F0B400;
+  border: solid 1px #f0b400;
   border-right: 0;
 }
 
@@ -4395,7 +4449,7 @@ a.visit_app_link_2 {
 }
 
 .dark .nav-pills .nav-link.active,
-.nav-pills .show>.nav-link {
+.nav-pills .show > .nav-link {
   background-color: #0d0c14 !important;
   color: #ffffff !important;
   border-bottom: solid 2px #ffffff !important;

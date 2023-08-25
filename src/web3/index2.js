@@ -9,7 +9,7 @@ import DiamondCut from "./contracts/V3/DiamondCut.json";
 import Minter from "./contracts/V3/Minter.json";
 import { getParsedEthersError } from "@enzoferey/ethers-error-parser";
 import erc20 from "./contracts/erc20.json";
-
+import ProductFacet2 from "./contracts/V3/ProductFacet2.json";
 import { formattedError } from "./FormattedError";
 import StakingFacet from "./contracts/V3/StakingFacet.json";
 import PriceOracleFacet from "./contracts/V3/PriceOracleFacet.json";
@@ -23,6 +23,9 @@ const contractDealersFacetInstance = async (signer) => {
 };
 const contractPancakeSwapFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, PancakeSwapFaucet.abi, signer);
+};
+const contractProductFacetInstance = (signer) => {
+  return new Contract(V3ContractAddress.address, ProductFacet2.abi, signer);
 };
 const contractMartgptFacetInstance = async (signer) => {
   return new Contract(

@@ -6,7 +6,7 @@
   z-index: 100000;
   box-shadow: 0px 5px 9px #e5e5e5;
   /* position: fixed; */
-  width: 100vw;
+  width: 100%;
 }
 
 .notify_icon_cont_div_cont {
@@ -585,7 +585,6 @@
 }
 
 @-webkit-keyframes ping {
-
   75%,
   to {
     -webkit-transform: scale(2);
@@ -595,7 +594,6 @@
 }
 
 @keyframes ping {
-
   75%,
   to {
     -webkit-transform: scale(2);
@@ -725,7 +723,6 @@ dark button.logout-btn {
 }
 
 @media screen and (max-width: 991px) {
-
   /* .drop-open-icon {
     display: inline-block;
     width: 20px;

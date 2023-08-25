@@ -372,6 +372,8 @@ section.popularProductsSection {
   margin-right: 0em;
   text-align: center;
   margin-bottom: 2em;
+  width: 100%;
+  justify-content: center;
 }
 
 .selectPlanDiv_backButton_icon {
@@ -433,10 +435,13 @@ input[type="radio"]:checked + .selectPlanDiv2_area1_cont1_label:before {
   color: #7a5fc0;
   line-height: 1;
   margin-bottom: 10px;
+  width: 100%;
 }
 
 .selectPlanDiv1_sub_head {
   color: #151422;
+  width: 60%;
+  margin: auto;
 }
 
 .dark .selectPlanDiv1_sub_head {
@@ -1765,7 +1770,7 @@ x .benefits_section1_area2_body1_cont2 {
   /* justify-content: center; */
   background: #f2f2f2;
   color: #000;
-  padding-bottom: 13em;
+  /* padding-bottom: 13em; */
   overflow-y: scroll;
   overflow-x: hidden;
 }
@@ -1931,8 +1936,30 @@ x .benefits_section1_area2_body1_cont2 {
   margin-right: 6px;
   color: #7a5fc0;
 }
+.joinCooperativeModalDiv_area_body1_div1_icon2 {
+  background: #e2e2e2;
+  border-radius: 30px;
+  padding: 2px;
+  font-size: 18px !important;
+  margin-right: 6px;
+  color: #7a5fc0;
+}
+.joinCooperativeModalDiv_area_body1_div1_icon2_close {
+  background: #e2e2e2;
+  border-radius: 30px;
+  padding: 2px;
+  font-size: 18px !important;
+  margin-right: 6px;
+  color: #ec3030;
+}
 
 .dark .joinCooperativeModalDiv_area_body1_div1_icon {
+  background: #000000;
+}
+.dark .joinCooperativeModalDiv_area_body1_div1_icon2 {
+  background: #000000;
+}
+.dark .joinCooperativeModalDiv_area_body1_div1_icon2_close {
   background: #000000;
 }
 
@@ -2134,7 +2161,312 @@ x .benefits_section1_area2_body1_cont2 {
   font-weight: 500;
   position: relative;
 }
+/* ===================================step2div2 ===================================*/
+/* ===================================step2div2 ===================================*/
+/* ===================================step2div2 ===================================*/
+/* ===================================step2div2 ===================================*/
+.Step2Div2_member_div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Step2Div2_member_div1 {
+  display: flex;
+  flex-direction: column;
+}
+.Step2Div2_member_div2 {
+  width: 100%;
+  display: flex;
+  margin-top: 0em;
+  flex-direction: column;
+  align-items: center;
+}
+.Step2Div2_member_div2_head {
+  font-size: 14px;
+}
+.Step2Div2_member_div2_body {
+  width: 100%;
+  margin-top: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.Step2Div2_member_div2_body_1 {
+  padding: 1.5em;
+  border: solid 1px #dedede;
+  background: #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-right: 20px;
+  max-width: 300px;
+  box-shadow: 0px 11px 17px #8080804a;
+  cursor: pointer;
+}
+.dark .Step2Div2_member_div2_body_1 {
+  background: #151422;
+  box-shadow: -5px 10px 18px #000000;
+  border: solid 1px #3b3959;
+}
+.Step2Div2_member_div2_body_1_active {
+  padding: 1.5em;
+  border: solid 1px #dedede;
+  background: #fff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-right: 20px;
+  max-width: 300px;
+  box-shadow: 0px 11px 17px #bdb5d0;
+  cursor: pointer;
+  border: solid #7a5fc0 2px;
+}
+.dark .Step2Div2_member_div2_body_1_active {
+  background: #151422;
+  box-shadow: -5px 10px 18px #000000;
+  border: solid #7a5fc0 2px;
+}
+.Step2Div2_member_div2_body_1_txts {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+.Step2Div2_member_div2_body_1_title {
+  font-size: 24px;
+  font-weight: 600;
+}
+.Step2Div2_member_div2_body_1_para {
+  font-size: 14px;
+  color: grey;
+}
+.Step2Div2_member_div2_body_1_amount {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+.Step2Div2_member_div2_body_1_amount_title {
+  font-size: 48px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.Step2Div2_member_div2_body_1_amount_title_naira {
+  font-size: 24px;
+  color: #bdbae0;
+}
+.Step2Div2_member_div2_body_1_amount_title2_naira {
+  font-size: 24px;
+  color: #bdbae0;
+  display: flex;
+}
+.Step2Div2_member_div2_body_1_amount_title2 {
+  font-size: 48px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  line-height: 1;
+}
+span.Step2Div2_member_div2_body_1_amount_title_span {
+  font-weight: 400;
+  font-size: 18px;
+  margin-left: 5px;
+  color: grey;
+}
+.Step2Div2_member_div2_body_1_amount_title_slashed {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.Step2Div2_member_div2_body_1_amount_title_slashed_amount {
+  text-decoration: none !important;
+}
+.Step2Div2_member_div2_body_1_amount_title_slashed2 {
+  font-size: 12px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
 
+.Step2Div2_member_div2_body_1_sub_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 2em;
+}
+.Step2Div2_member_div2_body_1_sub_button_btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: solid 1px #cbcbcb;
+  background: none;
+  font-size: 14px;
+}
+.dark .Step2Div2_member_div2_body_1_sub_button_btn {
+  color: #fff;
+}
+.Step2Div2_member_div2_body_1_sub_button_btn_active {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: solid 1px #7a5fc0;
+  background: #7a5fc0;
+  font-size: 14px;
+  color: #fff;
+}
+.Step2Div2_member_div2_body_1_features_div {
+  display: flex;
+  flex-direction: column;
+}
+.Step2Div2_member_div2_body_1_features_div_1 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+.Step2Div2_member_div2_body_1_features_div_1_feature {
+  font-size: 13px;
+}
+
+.Step2Div2_member_div2_body_1_features_div_1_rate {
+  display: flex;
+  align-items: center;
+}
+.Step2Div2_member_div2_body_1_amount_title_slashed_amount_save {
+  text-decoration: none !important;
+  color: #7a5fc0;
+  font-weight: 500;
+}
+
+.Step2Div2_member_div2_body_1_amount_title_slashed_amount {
+  text-decoration: line-through !important;
+}
+.planSubDiv {
+  position: fixed;
+  z-index: 100;
+  background: #00000065;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: flex-end;
+  backdrop-filter: blur(5px);
+}
+.planSubDiv_area {
+  background: #fff;
+  padding: 2em;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* justify-content: center; */
+  position: relative;
+  box-shadow: -9px 1px 20px #0000004d;
+}
+.dark .planSubDiv_area {
+  background: #151422;
+  box-shadow: -5px 10px 18px #000000;
+}
+.planSubDiv_area_1 {
+  display: flex;
+  position: absolute;
+  top: 2%;
+  left: 5%;
+  cursor: pointer;
+  align-items: center;
+  /* border: solid 1px grey; */
+  padding: 6px;
+  border-radius: 8px;
+  background: #f2f2f2;
+}
+.planSubDiv_area_body {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4em;
+}
+.planSubDiv_area_body_head {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  align-items: baseline;
+  line-height: 1.2;
+  border-bottom: solid 1px #dadada;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+}
+.dark .planSubDiv_area_body_head {
+  border-bottom: solid 1px #282641;
+}
+.planSubDiv_area_body_head_1_plan {
+  font-size: 42px;
+  font-weight: 600;
+  color: #7a5fc0;
+}
+.planSubDiv_area_body_area {
+  display: flex;
+  flex-direction: column;
+}
+.subscribe_btn {
+  width: 100%;
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+}
+.subscribe_btn_btn {
+  background: #7a5fc0;
+  border: none;
+  padding: 15px;
+  width: 100%;
+  border-radius: 13px;
+  color: #fff;
+  margin-bottom: 1em;
+}
+.subscribe_btn_btn:disabled {
+  background: #3b3058;
+  color: #76699a;
+  cursor: not-allowed;
+}
+.subscribe_btn_btn2 {
+  background: none;
+  border: solid #7a5fc0;
+  padding: 15px;
+  width: 100%;
+  border-radius: 13px;
+  color: #fff;
+}
+.planSubDiv_area_1_icon {
+  font-size: 18px !important;
+}
+.dark .planSubDiv_area_1 {
+  background: #201a2f;
+  color: #c8baea;
+}
+.Step2Div2_member_div2_body_1_amount_title_slashed_amount {
+  text-decoration: none !important;
+}
+.planSubDiv_area_body_area_amount {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+  border-bottom: solid 1px #e4e4e4;
+  padding-bottom: 1em;
+}
+.dark .planSubDiv_area_body_area_amount {
+  border-bottom: solid 1px #282641;
+}
+/* ===================================step2div2 ===================================*/
+/* ===================================step2div2 ===================================*/
+/* ===================================step2div2 ===================================*/
+/* ===================================step2div2 ===================================*/
 @media screen and (max-width: 1024px) {
   .egorasCooperativeHeroArea1_cont1 {
     font-size: 70px;
@@ -2328,6 +2660,8 @@ x .benefits_section1_area2_body1_cont2 {
     text-align: center;
     width: 100%;
     margin-right: 0;
+    width: 100%;
+    justify-content: center;
   }
 
   .selectPlanDiv1_head {

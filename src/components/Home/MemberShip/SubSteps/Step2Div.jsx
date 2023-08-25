@@ -261,14 +261,14 @@ export const Step2Div = ({
               <div className="selectPlanDiv2_area1_cont2">
                 <div className="selectPlanDiv2_area1_cont2_head">
                   <div className="selectPlanDiv2_area1_cont2_head_txt">
-                    Monthly
+                    Annually
                   </div>
                   <div className="selectPlanDiv2_area1_cont2_head_price_div">
                     <div className="selectPlanDiv2_area1_cont2_head_price">
                       {monthAmount}
                       {""}
                       <span className="selectPlanDiv2_area1_cont2_head_price_span">
-                        egc / mnth
+                        egc / yr
                       </span>{" "}
                     </div>
                     {currentCountry === "Nigeria" ? (
@@ -319,14 +319,14 @@ export const Step2Div = ({
               <div className="selectPlanDiv2_area1_cont2">
                 <div className="selectPlanDiv2_area1_cont2_head">
                   <div className="selectPlanDiv2_area1_cont2_head_txt">
-                    Semi-Annually
+                    Annually
                   </div>
                   <div className="selectPlanDiv2_area1_cont2_head_price_div">
                     <div className="selectPlanDiv2_area1_cont2_head_price">
                       {semiAnnualAmount}
                       {""}
                       <span className="selectPlanDiv2_area1_cont2_head_price_span">
-                        egc / 6mnths
+                        egc / yr
                       </span>
                     </div>
                     {currentCountry === "Nigeria" ? (
