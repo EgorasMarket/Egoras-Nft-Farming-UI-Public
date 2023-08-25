@@ -218,21 +218,30 @@ const DashBoardSellProduct = () => {
     } else {
       console.log("Not Ok");
     }
-  }
+  };
 
   const UploadProduct = async () => {
-
     setIsLoading(true);
     setDisable(true);
-    let img_cms = await handleImgCms();
+    // let img_cms = await handleImgCms();
 
-    console.log(img_cms);
+    // console.log(img_cms);
     const formData = new FormData();
     console.log(activeSaleTab, account, "______UUUUUU");
 
-    formData.append("product_image", img_cms.image_1);
-    formData.append("product_image2", img_cms.image_2);
-    formData.append("product_image3", img_cms.image_3);
+    const element = document.getElementById("product_image");
+    const element2 = document.getElementById("product_image2");
+    const element3 = document.getElementById("product_image3");
+    const file = element.files[0];
+    const file2 = element2.files[0];
+    const file3 = element3.files[0];
+    formData.append("product_image", file);
+    formData.append("product_image2", file2);
+    formData.append("product_image3", file3);
+
+    // formData.append("product_image", img_cms.image_1);
+    // formData.append("product_image2", img_cms.image_2);
+    // formData.append("product_image3", img_cms.image_3);
     formData.append("product_name", prodName);
     formData.append("product_brand", brandName);
     formData.append("userAddress", account);
