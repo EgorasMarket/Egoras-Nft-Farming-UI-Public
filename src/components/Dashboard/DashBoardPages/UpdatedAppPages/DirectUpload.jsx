@@ -47,7 +47,7 @@ const DirectUpload = ({
 }) => {
   return (
     <div className="uploadDiv">
-      <div className="sell_container_header">Procurrement Upload</div>
+      <div className="sell_container_header">Procurement Upload</div>
       <div className="sell_container_body">
         <div className="sell_container_body_cont1">
           <div className="sell_container_body_cont1_txt">

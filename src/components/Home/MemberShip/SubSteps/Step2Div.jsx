@@ -532,6 +532,7 @@ export const Step2Div = ({
                     className="selectPlanDiv2_area1_checkout_btn_outline fort_left"
                     onClick={() => {
                       togglePayViaFortDiv();
+                      console.log("1111");
 
                       setQrData({
                         type: "membership",
@@ -562,6 +563,7 @@ export const Step2Div = ({
                     className="selectPlanDiv2_area1_checkout_btn_outline fort_left"
                     onClick={() => {
                       togglePayViaFortDiv();
+                      console.log("2222");
 
                       setQrData({
                         type: "membership",
@@ -592,6 +594,7 @@ export const Step2Div = ({
                     className="selectPlanDiv2_area1_checkout_btn_outline fort_left"
                     onClick={() => {
                       togglePayViaFortDiv();
+                      console.log("3333");
 
                       setQrData({
                         type: "membership",
