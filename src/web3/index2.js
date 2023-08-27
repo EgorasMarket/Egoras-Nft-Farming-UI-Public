@@ -886,6 +886,35 @@ const configureDealerPlan = async (
     };
   }
 };
+const listProcurementProduct = async (
+  _title,
+  _amount,
+  _sellingPrice,
+  _qty,
+  signer
+) => {
+  console.log(_title, _amount, _sellingPrice, _qty);
+  try {
+    const instance = contractProductFacetInstance(signer);
+    let result = await instance.Procurement(
+      _title,
+      _amount,
+      _sellingPrice,
+      _qty
+    );
+    console.log("second");
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 export {
   monthlyPlanSubScribe,
   semiAnnuallyPlanSubScribe,
@@ -928,4 +957,5 @@ export {
   BurnEgc,
   withdrawAllEgc,
   configureDealerPlan,
+  listProcurementProduct,
 };
