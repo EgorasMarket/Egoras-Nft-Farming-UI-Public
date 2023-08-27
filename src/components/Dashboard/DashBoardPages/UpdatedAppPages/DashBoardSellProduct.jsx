@@ -229,19 +229,20 @@ const DashBoardSellProduct = () => {
       setDisable(false);
     }
 
-    // console.log(
-    //   prodName,
-    //   file,
-    //   file2,
-    //   file3,
-    //   brandName,
-    //   prodAmount,
-    //   prodCount,
-    //   new_category,
-    //   product_details,
-    //   prodSpec,
-    //   prodState + "sa"
-    // );
+    console.log(
+      prodName,
+      // file,
+      // file2,
+      // file3,
+      brandName,
+      prodAmount,
+      sellAmount,
+      prodCount,
+      new_category,
+      product_details,
+      prodSpec,
+      prodState
+    );
   };
 
   const generateAI = async () => {
