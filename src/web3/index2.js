@@ -24,7 +24,7 @@ const contractDealersFacetInstance = async (signer) => {
 const contractPancakeSwapFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, PancakeSwapFaucet.abi, signer);
 };
-const contractProductFacetInstance = (signer) => {
+const contractProduct2FacetInstance = (signer) => {
   return new Contract(V3ContractAddress.address, ProductFacet2.abi, signer);
 };
 const contractMartgptFacetInstance = async (signer) => {
@@ -895,7 +895,7 @@ const listProcurementProduct = async (
 ) => {
   console.log(_title, _amount, _sellingPrice, _qty);
   try {
-    const instance = contractProductFacetInstance(signer);
+    const instance = contractProduct2FacetInstance(signer);
     let result = await instance.Procurement(
       _title,
       _amount,

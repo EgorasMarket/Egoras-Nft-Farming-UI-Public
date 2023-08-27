@@ -55,6 +55,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import UpdatedErrorModal from "./UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedErrorModal";
 import UpdatedSuccessModal from "./UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedSuccessModal";
+import { CALL_CHECK_USER_AND_MEMBERSHIP } from "../../../services/userServices";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -84,6 +85,8 @@ const DashBoardP2PUserSales = () => {
   const [saleDetails, setSaleDetails] = useState("");
   const [buyDetails, setBuyDetails] = useState("");
   const [receiptId, setReceiptId] = useState("");
+  const [uniqueSeller, setUniqueSeller] = useState("");
+  const [sellerDetails, setSellerDetails] = useState({});
   const [viewReceipt, setViewReceipt] = useState(false);
   const [activeLink, setActiveLink] = useState("abstract-link");
   const [activeMenu, setActiveMenu] = useState("details-accord  ");
@@ -308,6 +311,20 @@ const DashBoardP2PUserSales = () => {
     }
   });
 
+useEffect(() => {
+  
+  const callsellerInfo = async () => {
+    const response = await CALL_CHECK_USER_AND_MEMBERSHIP(uniqueSeller);
+    console.log(response.data.users);
+    setSellerDetails(response.data.users);
+
+  }
+  callsellerInfo()
+  
+}, [uniqueSeller])
+
+
+
   useEffect(() => {
     const fetchUserBuyOrder = async () => {
       const res = await FETCH_USER_BUY_ORDER(account);
@@ -406,16 +423,20 @@ const DashBoardP2PUserSales = () => {
     setCheckAgree(!checkAgree);
   };
   const ToggleBuyDetails = (e) => {
-    let id = e.currentTarget.id;
-    setBuyDetails(id);
-    setReceiptId(id);
-    console.log("Pop receipt", saleDetails);
-    console.log(id);
+    let res = e.currentTarget.id;
+    let splitedRes = res.split("_")
+    setBuyDetails(splitedRes[0]);
+    setReceiptId(splitedRes[0]);
+    // const [uniqueSeller, setUniqueSeller] = useState("");
+    setUniqueSeller(splitedRes[1])
+    console.log("Pop receipt", receiptId);
+    // console.log(id);
   };
   const ToggleViewReceipt = () => {
     // let id = e.currentTarget.id;
+    console.log("Pop receipt", receiptId);
     setViewReceipt(!viewReceipt);
-    // console.log(id);
+    console.log(sellOrders);
   };
 
   // const handlePrint = () => {
@@ -506,6 +527,46 @@ const DashBoardP2PUserSales = () => {
           display: flex;
           flex-direction: column;
         }
+
+        .receipt-table {
+          width: 100%;
+        }
+
+        .ffont {
+          font-family: sans-serif;
+        }
+
+        .uii9 {
+          font-size: 10px;
+          font-family: sans-serif;
+        }
+
+        .receipt-table-head {
+          border-top: 1px solid;
+          border-bottom: 1px solid;
+          font-family: sans-serif;
+        }
+
+        .receipt-table-head th {
+          border-top: 1px solid;
+          border-bottom: 1px solid;
+          font-size: 8px
+        }
+
+        .vv45 {
+          font-size: 11px;
+        }
+
+        .receipt-table td {
+          // font-weight: 600 !important;
+          font-family: sans-serif;
+          font-size: 12px;
+        }
+
+        .hh90 {
+          font-size: 24px;
+          color: #000;
+        }
         
         .recipt_details_cont3_div1 {
           display: flex;
@@ -521,9 +582,8 @@ const DashBoardP2PUserSales = () => {
         .recipt_details_cont3_div12 {
           display: flex;
           justify-content: space-between;
-          color: #797d84;
-          /* color: #000; */
-          margin-bottom: 10px;
+          color: #000;
+          margin-bottom: 3px;
         
           /* font-size: 10px; */
           font-size: 18px;
@@ -533,14 +593,17 @@ const DashBoardP2PUserSales = () => {
           /* color: #fff; */
           color: #000;
         }
+
+        .recipt_details_cont3_div1_title {
+          font-size: 12px;
+        }
         
         .recipt_details_cont3_div1_value2 {
-          color: #fff;
-          /* color: #000; */
+          color: #000;
         }
         
         .recipt_details_cont5 {
-          color: #fff;
+          color: #000;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -710,7 +773,7 @@ const DashBoardP2PUserSales = () => {
                               return (
                                 <tr
                                   className="assets-category-row  transitionMe"
-                                  id={asset.id}
+                                  id={asset.id+"_"+asset.seller}
                                   onClick={ToggleBuyDetails}
                                 >
                                   <td className="assets-category-data branch_name_title">
@@ -733,10 +796,10 @@ const DashBoardP2PUserSales = () => {
                                     {asset.quantity}
                                   </td>
                                   <td className="assets-category-data1b branch_apy">
-                                    {`${asset.seller.slice(
+                                    {asset.seller != null ? `${asset.seller.slice(
                                       0,
                                       6
-                                    )}...${asset.seller.slice(39, 42)}`}
+                                    )}...${asset.seller.slice(39, 42)}` : null}
                                   </td>
 
                                   <td className="assets-category-data1b branch_apy">
@@ -2061,7 +2124,7 @@ const DashBoardP2PUserSales = () => {
                           alt=""
                           className="receiptBg"
                         />
-                        {receiptId == "" ? null : sellOrders.map((data) => (
+                        {receiptId == "" ? null : buyOrders.map((data) => (
                           <>
                             {data.id === receiptId ? (
                               <div className="recipt_details_cont" id="print-content">
@@ -2099,22 +2162,19 @@ const DashBoardP2PUserSales = () => {
                                       {data.updatedAt.split("T")[0]}
                                     </div>
                                   </div>
-                                  {/* <div className="recipt_details_cont3_div12">
-                                    <div className="recipt_details_cont3_div1_title">
-                                      Payment Method
-                                    </div>
-                                    <div className="recipt_details_cont3_div1_value2">
-                                      Fort
-                                    </div>
-                                  </div> */}
-                                  {/* <div className="recipt_details_cont3_div12">
+                                  <div className="recipt_details_cont3_div12">
                                     <div className="recipt_details_cont3_div1_title">
                                       Seller
                                     </div>
                                     <div className="recipt_details_cont3_div1_value2">
-                                      Samuel Ifeanyi
+                                      {sellerDetails.fullName}
                                     </div>
-                                  </div> */}
+                                  </div>
+                                  <div className="">
+                                    <div className="recipt_details_cont3_div1_value2" style={{textAlign: "center"}}>
+                                      {sellerDetails.userAddress}
+                                    </div>
+                                  </div>
                                 </div>
                                 <hr />
       
@@ -2137,7 +2197,7 @@ const DashBoardP2PUserSales = () => {
                                       </td>
                                       <td>
                                         {numberWithCommas(
-                                          parseInt(data.sub_total / data.quantity).toFixed(0)
+                                          parseInt(data.sub_total * data.quantity).toFixed(0)
                                         )}{" "}
                                         Eusd
                                       </td>
@@ -2164,7 +2224,7 @@ const DashBoardP2PUserSales = () => {
                                       <td></td>
                                       <td>
                                       {numberWithCommas(
-                                          parseInt(data.sub_total).toFixed(0)
+                                          parseInt(data.sub_total * data.quantity).toFixed(0)
                                         )}{" "}
                                         Eusd
                                       </td>
@@ -2187,86 +2247,121 @@ const DashBoardP2PUserSales = () => {
                           </>
                         ))}
                         
-                        <div className="recipt_details_cont hide-section" id="print-xcontent">
-                          <div className="recipt_details_cont1">
-                            <img
-                              src="/img/martgpt_logo.svg"
-                              alt=""
-                              className="recipt_details_cont1_img"
-                            />
-                          </div>
-                          <hr />
-                          <div className="recipt_details_cont2">
-                            <div className="recipt_details_cont2_title">
-                              Successful Purchase
-                            </div>
-                            <div className="recipt_details_cont2_amount">
-                              3,600 eusd
-                            </div>
-                          </div>
-                          <hr />
-                          <div className="recipt_details_cont3">
-                            <div className="recipt_details_cont3_div1">
-                              <div className="recipt_details_cont3_div1_title">
-                                Ref Number
-                              </div>
-                              <div className="recipt_details_cont3_div1_value">
-                                000085752257
-                              </div>
-                            </div>
-                            <div className="recipt_details_cont3_div1">
-                              <div className="recipt_details_cont3_div1_title">
-                                Date
-                              </div>
-                              <div className="recipt_details_cont3_div1_value">
-                                April 25, 2023 10:18 am
-                              </div>
-                            </div>
-                            {/* <div className="recipt_details_cont3_div1">
-                              <div className="recipt_details_cont3_div1_title">
-                                Payment Method
-                              </div>
-                              <div className="recipt_details_cont3_div1_value">
-                                Fort
-                              </div>
-                            </div> */}
-                            <div className="recipt_details_cont3_div1">
-                              <div className="recipt_details_cont3_div1_title">
-                                Seller
-                              </div>
-                              <div className="recipt_details_cont3_div1_value">
-                                Samuel Ifeanyi
-                              </div>
-                            </div>
-                          </div>
-                          <hr />
-                          <div className="recipt_details_cont4">
-                            <div className="recipt_details_cont3_div1">
-                              <div className="recipt_details_cont3_div1_title">
-                                Amount
-                              </div>
-                              <div className="recipt_details_cont3_div1_value">
-                                3,600 eusd
-                              </div>
-                            </div>
-                            <div className="recipt_details_cont3_div1">
-                              <div className="recipt_details_cont3_div1_title">
-                                MartGpt Fee
-                              </div>
-                              <div className="recipt_details_cont3_div1_value">
-                                0 eusd
-                              </div>
-                            </div>
-                          </div>
-                          <hr />
-                          <div className="recipt_details_cont55">
-                            powered by{" "}
-                            <img
-                              src="/img/egoras-logo.svg"
-                              alt=""
-                              className="recipt_details_cont5_img"
-                            />
-                          </div>
+                        <div className="recipt_details_cont hide-section ffont" id="print-xcontent">
+                          {/* <div className="recipt_details_cont1">
+                                  <img
+                                    src="/img/martgpt_logo.svg"
+                                    alt=""
+                                    className="recipt_details_cont1_img"
+                                  />
+                                </div>
+                                <hr /> */}
+                                <div className="recipt_details_cont22 ffont">
+                                  <div className="recipt_details_cont2_title hh90">
+                                    Successful Purchase
+                                  </div>
+                                  {/* <div className="recipt_details_cont2_amount2">
+                                  {numberWithCommas(parseInt(data.amount).toFixed(0))} eusd
+                                  </div> */}
+                                </div>
+                                <hr />
+                                <div className="recipt_details_cont3 ffont">
+                                  <div className="recipt_details_cont3_div12">
+                                    <div className="recipt_details_cont3_div1_title">
+                                      Ref Number
+                                    </div>
+                                    <div className="recipt_details_cont3_div1_value2 uii9">
+                                      {data.id}
+                                    </div>
+                                  </div>
+                                  <div className="recipt_details_cont3_div12">
+                                    <div className="recipt_details_cont3_div1_title">
+                                      Date
+                                    </div>
+                                    <div className="recipt_details_cont3_div1_value2 uii9">
+                                      {data.updatedAt.split("T")[0]}
+                                    </div>
+                                  </div>
+                                  <div className="recipt_details_cont3_div12">
+                                    <div className="recipt_details_cont3_div1_title">
+                                      Seller
+                                    </div>
+                                    <div className="recipt_details_cont3_div1_value2 uii9">
+                                      {sellerDetails.fullName}
+                                    </div>
+                                  </div>
+                                  <div className="">
+                                    <div className="recipt_details_cont3_div1_value2 vv45" style={{textAlign: "center", marginBottom: "13px"}}>
+                                      {sellerDetails.userAddress}
+                                    </div>
+                                  </div>
+                                </div>
+                                {/* <hr /> */}
+      
+                                <div>
+                                  <table className="receipt-table">
+                                    <tr className="receipt-table-head">
+                                      <th>QTY</th>
+                                      <th>DESCRIPTION</th>
+                                      <th>PRICE</th>
+                                      <th>AMOUNT</th>
+                                    </tr>
+                                    <tr>
+                                      <td>{data.quantity}</td>
+                                      <td>{data.item_name}</td>
+                                      <td>
+                                        {numberWithCommas(
+                                          parseInt(data.sub_total).toFixed(0)
+                                        )}{" "}
+                                        Eusd
+                                      </td>
+                                      <td>
+                                        {numberWithCommas(
+                                          parseInt(data.sub_total * data.quantity).toFixed(0)
+                                        )}{" "}
+                                        Eusd
+                                      </td>
+                                    </tr>
+                                    <tr className="sub_total x34e">
+                                      <td></td>
+                                      <td>Charges/Vat</td>
+                                      <td></td>
+                                      <td>
+                                        00
+                                      </td>
+                                    </tr>
+                                    <tr className="sub_total">
+                                      <td></td>
+                                      <td>MartGpt Fee</td>
+                                      <td></td>
+                                      <td>
+                                        00
+                                      </td>
+                                    </tr>
+                                    <tr className="sub_total x35e">
+                                      <td></td>
+                                      <td>Total</td>
+                                      <td></td>
+                                      <td>
+                                      {numberWithCommas(
+                                          parseInt(data.sub_total * data.quantity).toFixed(0)
+                                        )}{" "}
+                                        Eusd
+                                      </td>
+                                    </tr>
+                                    
+                                  </table>
+                                </div>
+      
+                                <hr />
+                                <div className="recipt_details_cont5 ffont">
+                                  powered by{" "}
+                                  <img
+                                    src="/img/egoras-logo.svg"
+                                    alt=""
+                                    className="recipt_details_cont5_img"
+                                  />
+                                </div>
                         </div>
                         <cont></cont>
                       </div>

@@ -7,6 +7,20 @@
   gap: 10px;
 }
 
+.unauthorized {
+  width: 55%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 150px;
+  text-align: center;
+}
+
+.warning-icon {
+  color: #ec1111;
+  font-size: 95px !important;
+  margin: auto;
+}
+
 .table_body {
   display: flex;
   flex-direction: column;
@@ -178,6 +192,9 @@
   display: flex;
   flex-direction: column;
   font-size: 15px;
+  width: 360px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .investmentcapacity_box {

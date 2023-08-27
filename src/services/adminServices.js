@@ -5,6 +5,7 @@ import {
   POPULATE_ADMIN_PRODUCT_DASHBOARD_ROUTE,
   UPDATE_EXISTING_PRODUCT,
   ADMIN_PLACE_BID,
+  VERIFY_ADMIN_WALLET
 } from "../core/ApiRoutes";
 export const config = {
   headers: {
@@ -75,6 +76,23 @@ export const CALL_ADMIN_PLACE_BID = async (
   // console.log(body);
   try {
     const response = await axios.post(ADMIN_PLACE_BID, body, config);
+    console.log(response);
+    return response;
+  } catch (err) {
+    console.log(err);
+    return err.repsonse;
+  }
+};
+
+export const CALL_VERIFY_ADMIN_WALLET = async (
+  account
+) => {
+  const body = JSON.stringify({
+    account,
+  });
+  // console.log(body);
+  try {
+    const response = await axios.get(VERIFY_ADMIN_WALLET+"/"+account, null, config);
     console.log(response);
     return response;
   } catch (err) {

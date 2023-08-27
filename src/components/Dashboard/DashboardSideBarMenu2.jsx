@@ -88,12 +88,25 @@ import {
 } from "@web3-react/core";
 import { socket } from "../../socket";
 import TimeAgoComponent from "../TimeAgoComponent";
+import { CALL_GET_USER_LOCATION } from "../../services/userServices";
+import { CALL_PRODUCT_SEARCH } from "../../services/productServices";
 export const MarketHeader = ({
   setCategories,
   ToggleMobile_cat,
   categories,
   ToggleOtherCategory,
 }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+  // const [brandCheck, setBrandCheck] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const handleSearchChange = async (event) => {
+    setSearchTerm(event.target.value);
+    console.log(event.target.value);
+
+    let response = await CALL_PRODUCT_SEARCH(event.target.value);
+    console.log(response.data);
+    setSearchResults(response.data);
+  };
   useEffect(async () => {
     try {
       const response = await axios.get(

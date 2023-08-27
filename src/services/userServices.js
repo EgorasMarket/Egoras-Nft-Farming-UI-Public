@@ -3,6 +3,7 @@ import {
   CHECK_USER_AND_MEMBERSHIP,
   ADD_USER_ADDRESS,
   UPDATE_MY_PROFILE,
+  LOCATION_API,
 } from "../core/ApiRoutes";
 export const config = {
   headers: {
@@ -41,6 +42,22 @@ export const CALL_UPDATE_MY_PROFILE = async (payload) => {
     const response = await axios.post(`${UPDATE_MY_PROFILE}`, payload, config);
     return response.data;
   } catch (err) {
+    return err.response;
+  }
+};
+
+export const CALL_GET_USER_LOCATION = async () => {
+  let lc = localStorage.getItem("mTYx");
+  console.log(lc);
+  try {
+    const response = await axios.get(`${LOCATION_API}`, null, config);
+    console.log(response.data.country_code);
+
+    localStorage.setItem("mTYx", response.data.country_name);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    localStorage.setItem("mTYx", "!Nigeria");
     return err.response;
   }
 };

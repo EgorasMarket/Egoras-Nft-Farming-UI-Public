@@ -131,12 +131,9 @@ const DashBoardSellProduct = () => {
   const handleRemoveClick3 = () => {
     setImageSrc3("");
   };
-  const sendProductToBlockchain = async (prodId, productType) => {
+  const sendProductToBlockchain = async (prodId) => {
     const conCatProdName = ` ${prodName}_${prodId}`;
-    console.log(productType);
     console.log(conCatProdName);
-
-    // let res;
     const res = await listProcurementProduct(
       conCatProdName,
       parseEther(prodAmount.toString(), "wei").toString(),
@@ -187,8 +184,8 @@ const DashBoardSellProduct = () => {
   };
 
   const UploadProduct = async () => {
-    setIsLoading(true);
-    setDisable(true);
+    // setIsLoading(true);
+    // setDisable(true);
     let img_cms = await handleImgCms();
 
     console.log(img_cms);
@@ -219,7 +216,7 @@ const DashBoardSellProduct = () => {
       );
       console.log(res, "somto");
       if (res.status === 200) {
-        sendProductToBlockchain(res.data.data.product_id, "DIRECT", prodCount);
+        sendProductToBlockchain(res.data.data.product_id);
       } else {
         setIsLoading(false);
         setDisable(false);

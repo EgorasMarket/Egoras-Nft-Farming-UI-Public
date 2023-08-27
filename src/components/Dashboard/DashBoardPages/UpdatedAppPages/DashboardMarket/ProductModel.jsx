@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import Blockies from "react-blockies";
+import { ConvertToNGN } from "../../../../../utils/helper";
 
 export const ProductModel2 = ({
   id,
@@ -13,6 +14,12 @@ export const ProductModel2 = ({
   productType,
   productQuantity,
 }) => {
+  const [currentCountry, setCurrentCountry] = useState("");
+  useEffect(() => {
+    let age = localStorage.getItem("mTYx");
+    console.log(age);
+    setCurrentCountry(age);
+  }, []);
   // let fff = JSON.parse(img);
   // console.log(fff);
   // console.log(id);
@@ -44,7 +51,15 @@ export const ProductModel2 = ({
           </div>
           <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount">
             {/* {amount} eUSD */}
-            {numberWithCommas(parseFloat(amount).toFixed(2))} eUSD
+            {currentCountry == "Nigeria" ? (
+              <span>&#8358; {ConvertToNGN(amount)}</span>
+            ) : (
+              <span>&#x24; {numberWithCommas(parseFloat(amount))}</span>
+            )}
+            <span style={{ fontSize: "12px", color: "#787690" }}>
+              {" ~"}
+              {numberWithCommas(parseFloat(amount))} eUSD
+            </span>
           </div>
           <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash">
             {productType === "DIRECT" ? (
@@ -102,12 +117,18 @@ export const ProductModelList = ({
   productType,
   productQuantity,
 }) => {
+  const [currentCountry, setCurrentCountry] = useState("");
+  useEffect(() => {
+    let age = localStorage.getItem("mTYx");
+    console.log(age);
+    setCurrentCountry(age);
+  }, []);
   let fff = JSON.parse(img);
-  console.log(fff);
-  console.log(id);
-  console.log(fff[1]);
-  console.log(fff[1]);
-  console.log(fff[1]);
+  // console.log(fff);
+  // console.log(id);
+  // console.log(fff[1]);
+  // console.log(fff[1]);
+  // console.log(fff[1]);
   return (
     <>
       <div className="dashboardMarketPlaceBody2_div1_body_card_list" key={id}>
@@ -129,7 +150,15 @@ export const ProductModelList = ({
           </div>
           <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount">
             {/* {amount} eUSD */}
-            {numberWithCommas(parseFloat(amount).toFixed(2))} eUSD
+            {currentCountry === "Nigeria" ? (
+              <span>&#8358; {ConvertToNGN(amount)}</span>
+            ) : (
+              <span>&#x24; {numberWithCommas(parseFloat(amount))}</span>
+            )}
+            <span style={{ fontSize: "12px", color: "#787690" }}>
+              {" ~"}
+              {numberWithCommas(parseFloat(amount))} eUSD
+            </span>
           </div>
           <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash">
             {productType === "DIRECT" ? (
@@ -187,12 +216,21 @@ const ProductModel = ({
   productType,
   productQuantity,
 }) => {
+  const [currentCountry, setCurrentCountry] = useState(
+    localStorage.getItem("mTYx")
+  );
+  // useEffect(() => {
+  //   let age = localStorage.getItem("mTYx");
+  //   console.log(age);
+  //   setCurrentCountry(age);
+  // }, []);
+  console.log(currentCountry);
   let fff = JSON.parse(img);
-  console.log(fff);
-  console.log(id);
-  console.log(fff[1]);
-  console.log(fff[1]);
-  console.log(fff[1]);
+  // console.log(fff);
+  // console.log(id);
+  // console.log(fff[1]);
+  // console.log(fff[1]);
+  // console.log(fff[1]);
   return (
     <>
       <div className="dashboardMarketPlaceBody2_div1_body_card" key={id}>
@@ -215,7 +253,15 @@ const ProductModel = ({
           </div>
           <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_amount">
             {/* {amount} eUSD */}
-            {numberWithCommas(parseFloat(amount).toFixed(2))} eUSD
+            {currentCountry == "Nigeria" ? (
+              <span>&#8358; {ConvertToNGN(amount)}</span>
+            ) : (
+              <span>&#x24; {numberWithCommas(parseFloat(amount))}</span>
+            )}
+            <span style={{ fontSize: "12px", color: "#787690" }}>
+              {" ~"}
+              {numberWithCommas(parseFloat(amount))} eUSD
+            </span>
           </div>
           <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_txHash">
             {productType === "DIRECT" ? (

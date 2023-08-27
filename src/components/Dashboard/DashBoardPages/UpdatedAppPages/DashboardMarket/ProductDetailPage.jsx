@@ -27,10 +27,8 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
-import {
-  checkAllowanceV3,
-  unlockTokenV3,
-} from "../../../../../web3/index";
+import { checkAllowanceV3, unlockTokenV3 } from "../../../../../web3/index";
+import { ConvertToNGN } from "../../../../../utils/helper";
 // import {
 //   checkAllowanceSwap,
 //   unlockSwapToken,
@@ -57,6 +55,12 @@ const ProductDetailPage = ({ match }) => {
   const [newSpec, setSpecification] = useState([]);
   const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [currentCountry, setCurrentCountry] = useState("");
+  useEffect(() => {
+    let age = localStorage.getItem("mTYx");
+    console.log(age);
+    setCurrentCountry(age);
+  }, []);
   const IncreaseQuantity = () => {
     setQuantity(quantity + 1);
   };
@@ -85,8 +89,8 @@ const ProductDetailPage = ({ match }) => {
         console.log(splitMyArray);
         for (const data of img) {
           const payload = {
-            original: "https://ellaa.org/"+data,
-            thumbnail: "https://ellaa.org/"+data,
+            original: "https://ellaa.org/" + data,
+            thumbnail: "https://ellaa.org/" + data,
           };
           image.push(payload);
           console.log(payload);
@@ -126,7 +130,6 @@ const ProductDetailPage = ({ match }) => {
   //   //   alert("successful purchase");
   //   // }
   //   /// BUY WITH BLOCKCHAIN
-
 
   //   // console.log(res);
   //   // if (res.status == true) {
@@ -242,10 +245,10 @@ const ProductDetailPage = ({ match }) => {
                       style={{ marginBottom: "0px !important" }}
                     />
                   </div>
-                  <div className="updated_itemdisplay_area2_cont1_rating_div">
+                  {/* <div className="updated_itemdisplay_area2_cont1_rating_div">
                     <span className="estimated_delivery">Est. Delivery:</span>
                     <span className="estimated_delivery">Within 14days</span>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="Updated_itemdisplay_payment_proceed_div_2">
                   <div className="power_details_series">
@@ -412,7 +415,7 @@ const ProductDetailPage = ({ match }) => {
                   <div className="Updated_itemdisplay_payment_proceed_div_2_area1">
                     {productDetail.product_name}
                   </div>
-                  <div className="Updated_itemdisplay_payment_proceed_div_2_area4">
+                  {/* <div className="Updated_itemdisplay_payment_proceed_div_2_area4">
                     <Lottie
                       animationData={deliveryIcon}
                       loop={true}
@@ -424,7 +427,7 @@ const ProductDetailPage = ({ match }) => {
                     <span className="Updated_itemdisplay_payment_proceed_div_2_area4_txt">
                       Payment on devilery: Available
                     </span>
-                  </div>
+                  </div> */}
                   <hr />
                   <div className="proceedToPayDiv1">
                     <div className="proceedToPayDiv1_title">Item(s)</div>
@@ -434,14 +437,34 @@ const ProductDetailPage = ({ match }) => {
                     <div className="Updated_itemdisplay_payment_proceed_div_2_area5_area1">
                       Sub Total
                     </div>
-                    <span>
-                      {numberWithCommas(
-                        parseFloat(
-                          quantity * productDetail.final_amount
-                        ).toFixed(0)
-                      )}{" "}
-                      eusd
-                    </span>
+                    <div>
+                      {currentCountry === "Nigeria" ? (
+                        <span>
+                          &#8358;{" "}
+                          {ConvertToNGN(
+                            parseFloat(quantity * productDetail.final_amount)
+                          )}
+                        </span>
+                      ) : (
+                        <span>
+                          &#x24;{" "}
+                          {numberWithCommas(
+                            parseFloat(
+                              quantity * productDetail.final_amount
+                            ).toFixed(0)
+                          )}
+                        </span>
+                      )}
+                      <span style={{ fontSize: "12px", color: "#787690" }}>
+                        {" ~"}
+                        {numberWithCommas(
+                          parseFloat(
+                            quantity * productDetail.final_amount
+                          ).toFixed(0)
+                        )}{" "}
+                        eusd
+                      </span>
+                    </div>
                   </div>
                   <div className="Updated_itemdisplay_payment_proceed_div_payment_way_div">
                     <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn_div">

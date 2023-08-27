@@ -22,6 +22,7 @@ import {
   USER_DIRECT_PRODUCTS,
   FETCH_USER_NEW_DIRECT_PRODUCT,
   IMG_CMS,
+  SEARCH_FOR_PRODUCTS,
   // DIRECT_BUY_ORDER_STATS,
 } from "../core/ApiRoutes";
 export const config = {
@@ -311,18 +312,32 @@ export const CALL_AI_IMAGES = async (content) => {
   }
 };
 
-
 export const CALL_IMG_CMS = async (formData) => {
   // console.log(account, saleDetails, action);
   // console.log(`${ACCEPT_OR_DECLINE_BID}/${account}/${saleDetails}/${action}`);
   try {
     console.log("ffffssss");
-    const response = await axios.post(
-      IMG_CMS,
-      formData,
+    const response = await axios.post(IMG_CMS, formData, config);
+    console.log(response);
+
+    return response.data;
+  } catch (err) {
+    console.log(err.repsonse);
+    return err.repsonse;
+  }
+};
+
+export const CALL_PRODUCT_SEARCH = async (keyphrase) => {
+  // console.log(account, saleDetails, action);
+  // console.log(`${ACCEPT_OR_DECLINE_BID}/${account}/${saleDetails}/${action}`);
+  try {
+    console.log("ffffssss");
+    const response = await axios.get(
+      SEARCH_FOR_PRODUCTS + "/" + keyphrase,
+      null,
       config
     );
-    console.log(response);
+    // console.log(response);
 
     return response.data;
   } catch (err) {
