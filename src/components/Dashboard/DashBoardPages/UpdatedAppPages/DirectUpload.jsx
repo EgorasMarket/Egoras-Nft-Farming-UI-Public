@@ -20,6 +20,8 @@ const DirectUpload = ({
   handleSaleAmountChange,
   handleProdCountChange,
   prodAmount,
+  handleSellAmountChange,
+  sellAmount,
   imageSrc3,
   handleRemoveClick3,
   handleBrandNameChange,
@@ -45,7 +47,7 @@ const DirectUpload = ({
 }) => {
   return (
     <div className="uploadDiv">
-      <div className="sell_container_header">Procurrement Upload</div>
+      <div className="sell_container_header">Procurement Upload</div>
       <div className="sell_container_body">
         <div className="sell_container_body_cont1">
           <div className="sell_container_body_cont1_txt">
@@ -254,6 +256,36 @@ const DirectUpload = ({
               className="sell_container_body_cont1_title_div_input"
               onChange={handleSaleAmountChange}
               value={prodAmount}
+            />
+          </div>
+        </div>
+        {/* ========================= */}
+        {/* ========================= */}
+        {/* ========================= */}
+        {/* ========================= */}
+        {/* ========================= */}
+        {/* ========================= */}
+        {/* ========================= */}
+        {/* ========================= */}
+        {/* ========================= */}
+        {/* ========================= */}
+        {/* ========================= */}
+        <div className="sell_container_body_cont1">
+          <div className="sell_container_body_cont1_txt">
+            <div className="sell_container_body_cont1_txt_heading">
+              Selling Amount*
+            </div>{" "}
+            The amount of the item should be sold for.
+          </div>
+          <div className="sell_container_body_cont1_title_div">
+            <input
+              id="sellAmount"
+              name="sellAmount"
+              type="text"
+              placeholder="0.00 NGN"
+              className="sell_container_body_cont1_title_div_input"
+              onChange={handleSellAmountChange}
+              value={sellAmount}
             />
           </div>
         </div>

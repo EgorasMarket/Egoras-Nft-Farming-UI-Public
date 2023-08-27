@@ -24,7 +24,7 @@ const contractDealersFacetInstance = async (signer) => {
 const contractPancakeSwapFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, PancakeSwapFaucet.abi, signer);
 };
-const contractProductFacetInstance = (signer) => {
+const contractProduct2FacetInstance = (signer) => {
   return new Contract(V3ContractAddress.address, ProductFacet2.abi, signer);
 };
 const contractMartgptFacetInstance = async (signer) => {
@@ -886,6 +886,35 @@ const configureDealerPlan = async (
     };
   }
 };
+const listProcurementProduct = async (
+  _title,
+  _amount,
+  _sellingPrice,
+  _qty,
+  signer
+) => {
+  console.log(_title, _amount, _sellingPrice, _qty);
+  try {
+    const instance = contractProduct2FacetInstance(signer);
+    let result = await instance.Procurement(
+      _title,
+      _amount,
+      _sellingPrice,
+      _qty
+    );
+    console.log("second");
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 export {
   monthlyPlanSubScribe,
   semiAnnuallyPlanSubScribe,
@@ -928,4 +957,5 @@ export {
   BurnEgc,
   withdrawAllEgc,
   configureDealerPlan,
+  listProcurementProduct,
 };

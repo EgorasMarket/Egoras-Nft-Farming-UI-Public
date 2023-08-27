@@ -29,6 +29,7 @@ import {
   CALL_IMG_CMS,
 } from "../../../../services/productServices";
 import { listProduct } from "../../../../web3/index";
+import { listProcurementProduct } from "../../../../web3/index2";
 
 const DashBoardSellProduct = () => {
   const context = useWeb3React();
@@ -46,6 +47,7 @@ const DashBoardSellProduct = () => {
   const [brandName, setBrandName] = useState("");
   const [saleAmount, setSaleAmount] = useState();
   const [prodAmount, setProdAmount] = useState("");
+  const [sellAmount, setSellAmount] = useState("");
   const [prodCondition, setProdCondition] = useState("");
   const [prodSpec, setProdSpec] = useState("");
   const [prodCount, setProdCount] = useState(1);
@@ -129,70 +131,31 @@ const DashBoardSellProduct = () => {
   const handleRemoveClick3 = () => {
     setImageSrc3("");
   };
-  const sendProductToBlockchain = async (prodId, productType, prodCount) => {
+  const sendProductToBlockchain = async (prodId) => {
     const conCatProdName = ` ${prodName}_${prodId}`;
-    console.log(productType);
     console.log(conCatProdName);
+    const res = await listProcurementProduct(
+      conCatProdName,
+      parseEther(prodAmount.toString(), "wei").toString(),
+      parseEther(sellAmount.toString(), "wei").toString(),
+      prodCount,
+      library.getSigner()
+    );
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
 
-    // let res;
-
-    if (activeSaleTab == "direct") {
-      let setPass = true;
-      const res = await listProduct(
-        conCatProdName,
-        parseEther(prodAmount.toString(), "wei").toString(),
-        setPass,
-        prodCount,
-        library.getSigner()
-      );
-      console.log(res, "somto8uhhhg");
-      console.log(res.status, "somto8uhhhg");
-
-      if (res.status == true) {
-        setIsLoading(false);
-        setDisable(false);
-        setSuccessModal(true);
-        setRoute("/app/user/p2p_sales");
-        setSuccessMessage(
-          "You've successfully placed " + prodName + " for sale"
-        );
-      } else {
-        setErrorModal(true);
-        setErrorMessage(res.message);
-        setIsLoading(false);
-        setDisable(false);
-      }
+    if (res.status == true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setRoute("/app/user/p2p_sales");
+      setSuccessMessage("You've successfully placed " + prodName + " for sale");
     } else {
-      let setPass = false;
-      const res = await listProduct(
-        conCatProdName,
-        parseEther(saleAmount.toString(), "wei").toString(),
-        setPass,
-        prodCount,
-        library.getSigner()
-      );
-      console.log(res, "somto8uhhhg");
-      console.log(res.status, "somto8uhhhg");
-
-      if (res.status == true) {
-        setIsLoading(false);
-        setDisable(false);
-        setSuccessModal(true);
-        setRoute("/app/user/sales");
-        setSuccessMessage(
-          "You've successfully placed " + prodName + " for sale"
-        );
-      } else {
-        setErrorModal(true);
-        setErrorMessage(res.message);
-        setIsLoading(false);
-        setDisable(false);
-      }
+      setErrorModal(true);
+      setErrorMessage(res.message);
+      setIsLoading(false);
+      setDisable(false);
     }
-
-    // console.log(res, "somto8uhhhg");
-    // console.log(res.status, "somto8uhhhg");
-    // console.log(res.status, "somto8uhhhg");
   };
 
   const handleImgCms = async () => {
@@ -221,9 +184,9 @@ const DashBoardSellProduct = () => {
   };
 
   const UploadProduct = async () => {
-    setIsLoading(true);
-    setDisable(true);
-    // let img_cms = await handleImgCms();
+    // setIsLoading(true);
+    // setDisable(true);
+    let img_cms = await handleImgCms();
 
     // console.log(img_cms);
     const formData = new FormData();
@@ -247,76 +210,33 @@ const DashBoardSellProduct = () => {
     formData.append("userAddress", account);
     formData.append("productQuantity", prodCount);
 
-    if (activeSaleTab == "direct") {
-      formData.append("product_category", new_category);
-      formData.append("product_details", product_details);
-      formData.append("prod_spec", prodSpec);
-      formData.append("product_state", prodState);
-      formData.append("product_amount", prodAmount);
-      formData.append("productType", "DIRECT");
+    formData.append("product_category", new_category);
+    formData.append("product_details", product_details);
+    formData.append("prod_spec", prodSpec);
+    formData.append("product_state", prodState);
+    formData.append("product_amount", prodAmount);
+    formData.append("product_amount", sellAmount);
+    formData.append("productType", "DIRECT");
 
-      try {
-        const res = await axios.post(
-          API_URL + "/product/initialize/add/product/direct",
-          formData,
-          config
-        );
-        console.log(res, "somto");
-        if (res.status === 200) {
-          sendProductToBlockchain(
-            res.data.data.product_id,
-            "DIRECT",
-            prodCount
-          );
-        } else {
-          setIsLoading(false);
-          setDisable(false);
-        }
-      } catch (err) {
-        console.log(err.response);
-        setErrorModal(true);
-        setErrorMessage(err.response.data.errorMessage);
+    try {
+      const res = await axios.post(
+        API_URL + "/product/initialize/add/product/direct",
+        formData,
+        config
+      );
+      console.log(res, "somto");
+      if (res.status === 200) {
+        sendProductToBlockchain(res.data.data.product_id);
+      } else {
         setIsLoading(false);
         setDisable(false);
       }
-    } else {
-      formData.append("product_condition", prodCondition);
-      formData.append("amount", saleAmount);
-      formData.append("productType", "INDIRECT");
-
-      try {
-        const res = await axios.post(
-          API_URL + "/product/initialize/add/product",
-          formData,
-          config
-        );
-        console.log(res, "somto");
-        if (res.status === 200) {
-          sendProductToBlockchain(
-            res.data.data.product_id,
-            "INDIRECT",
-            prodCount
-          );
-        } else {
-          setIsLoading(false);
-          setDisable(false);
-        }
-      } catch (err) {
-        console.log(err.response);
-        console.log(err);
-        console.log(err.message);
-        if (err.message == "Network Error") {
-          setErrorModal(true);
-          setErrorMessage(err.message);
-          setIsLoading(false);
-          setDisable(false);
-        } else {
-          setErrorModal(true);
-          setErrorMessage(err.response.data.errorMessage);
-          setIsLoading(false);
-          setDisable(false);
-        }
-      }
+    } catch (err) {
+      console.log(err.response);
+      setErrorModal(true);
+      setErrorMessage(err.response.data.errorMessage);
+      setIsLoading(false);
+      setDisable(false);
     }
 
     // console.log(
@@ -432,11 +352,12 @@ const DashBoardSellProduct = () => {
     //console.log(event.target.value);
   };
   const handleSaleAmountChange = (event) => {
-    if (activeSaleTab == "direct") {
-      setProdAmount(event.target.value);
-    } else {
-      setSaleAmount(event.target.value);
-    }
+    setProdAmount(event.target.value);
+    console.log(event.target.value);
+    //console.log(event.target.value);
+  };
+  const handleSellAmountChange = (event) => {
+    setSellAmount(event.target.value);
     console.log(event.target.value);
     //console.log(event.target.value);
   };
@@ -473,6 +394,7 @@ const DashBoardSellProduct = () => {
       prodName,
       brandName,
       prodAmount,
+      sellAmount,
       prodCount,
       new_category,
       product_details,
@@ -487,6 +409,7 @@ const DashBoardSellProduct = () => {
         prodName == "" ||
         brandName == "" ||
         prodAmount == null ||
+        sellAmount == null ||
         // prodCount == 0 ||
         new_category == "" ||
         product_details == "" ||
@@ -524,6 +447,7 @@ const DashBoardSellProduct = () => {
     brandName,
     saleAmount,
     prodAmount,
+    sellAmount,
     prodCondition,
     imageSrc,
     imageSrc2,
@@ -634,8 +558,10 @@ const DashBoardSellProduct = () => {
               editorState={editorState}
               brandName={brandName}
               handleSaleAmountChange={handleSaleAmountChange}
+              handleSellAmountChange={handleSellAmountChange}
               handleProdCountChange={handleProdCountChange}
               prodAmount={prodAmount}
+              sellAmount={sellAmount}
               imageSrc3={imageSrc3}
               handleRemoveClick3={handleRemoveClick3}
               handleBrandNameChange={handleBrandNameChange}
