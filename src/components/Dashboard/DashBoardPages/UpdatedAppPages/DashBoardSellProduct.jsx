@@ -138,12 +138,11 @@ const DashBoardSellProduct = () => {
       conCatProdName,
       parseEther(prodAmount.toString(), "wei").toString(),
       parseEther(sellAmount.toString(), "wei").toString(),
-      prodCount,
+      parseEther(prodCount.toString(), "wei").toString(),
       library.getSigner()
     );
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
-
     if (res.status == true) {
       setIsLoading(false);
       setDisable(false);
@@ -186,7 +185,7 @@ const DashBoardSellProduct = () => {
   const UploadProduct = async () => {
     // setIsLoading(true);
     // setDisable(true);
-    let img_cms = await handleImgCms();
+    // let img_cms = await handleImgCms();
 
     // console.log(img_cms);
     const formData = new FormData();
@@ -225,7 +224,9 @@ const DashBoardSellProduct = () => {
         config
       );
       console.log(res, "somto");
+      console.log(res.data.data.product_id, "somto");
       if (res.status === 200) {
+        console.log("Returned status code 200000000");
         sendProductToBlockchain(res.data.data.product_id);
       } else {
         setIsLoading(false);

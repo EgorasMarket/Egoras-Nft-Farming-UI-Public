@@ -895,7 +895,7 @@ const listProcurementProduct = async (
 ) => {
   console.log(_title, _amount, _sellingPrice, _qty);
   try {
-    const instance = contractProduct2FacetInstance(signer);
+    const instance = await contractProduct2FacetInstance(signer);
     let result = await instance.Procurement(
       _title,
       _amount,

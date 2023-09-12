@@ -243,7 +243,7 @@ const DirectUpload = ({
         <div className="sell_container_body_cont1">
           <div className="sell_container_body_cont1_txt">
             <div className="sell_container_body_cont1_txt_heading">
-              Product Amount*
+              Procurement Amount*
             </div>{" "}
             The amount of items that can be minted. No gas cost to you!
           </div>
