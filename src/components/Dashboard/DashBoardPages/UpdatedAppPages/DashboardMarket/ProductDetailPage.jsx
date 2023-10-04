@@ -105,39 +105,6 @@ const ProductDetailPage = ({ match }) => {
     //use the adress and make the API call
   }, []);
 
-  // const PurchaseProduct = async () => {
-  //   console.log(productDetail.productType, account, "PurchaseProduct");
-
-  //   let quantity = 1;
-  //   let transactionHash = "0x6ED527b0a92f117f4a4E05a6dF9313CDd4a6aB412";
-  //   let product_id = productDetail.index_id;
-  //   console.log(
-  //     quantity,
-  //     transactionHash,
-  //     product_id,
-  //     account,
-  //     productDetail.productType
-  //   );
-  //   const res = await PROCESS_PRODUCT_PURCHASE({
-  //     quantity,
-  //     transactionHash,
-  //     product_id,
-  //     user: account,
-  //     order_type: productDetail.productType,
-  //   });
-  //   console.log(res);
-  //   // if (res.success) {
-  //   //   alert("successful purchase");
-  //   // }
-  //   /// BUY WITH BLOCKCHAIN
-
-  //   // console.log(res);
-  //   // if (res.status == true) {
-  //   //   console.log("Success message");
-  //   // } else {
-  //   //   console.log("Error occured from Blockchain");
-  //   // }
-  // };
   const UnlockToken = async (e) => {
     setIsLoading(true);
     setDisable(true);
@@ -415,19 +382,7 @@ const ProductDetailPage = ({ match }) => {
                   <div className="Updated_itemdisplay_payment_proceed_div_2_area1">
                     {productDetail.product_name}
                   </div>
-                  {/* <div className="Updated_itemdisplay_payment_proceed_div_2_area4">
-                    <Lottie
-                      animationData={deliveryIcon}
-                      loop={true}
-                      autoPlay={true}
-                      className="Updated_itemdisplay_payment_proceed_div_2_area4_icon"
-                      preserveAspectRatio="xMidYMid slice"
-                    />
 
-                    <span className="Updated_itemdisplay_payment_proceed_div_2_area4_txt">
-                      Payment on devilery: Available
-                    </span>
-                  </div> */}
                   <hr />
                   <div className="proceedToPayDiv1">
                     <div className="proceedToPayDiv1_title">Item(s)</div>
@@ -468,31 +423,6 @@ const ProductDetailPage = ({ match }) => {
                   </div>
                   <div className="Updated_itemdisplay_payment_proceed_div_payment_way_div">
                     <div className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn_div">
-                      {/* {unlockBtn === false ? (
-                        <button
-                          disabled={disable}
-                          className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn"
-                          onClick={UnlockToken}
-                        >
-                          {isLoading ? (
-                            <ScaleLoader
-                              color="#24382b"
-                              size={10}
-                              height={20}
-                            />
-                          ) : (
-                            <span> Approve EUSD </span>
-                          )}
-                        </button>
-                      ) : (
-                        <button
-                          className="dashboardMarketPlaceBody2_div1_body_card_body_cont1_btn"
-                          onClick={PurchaseProduct}
-                          // disabled={true}
-                        >
-                          Proceed to checkout
-                        </button>
-                      )} */}
                       <a
                         href={`/app/product/checkout/${productDetail.product_id}/${quantity}/${productDetail.product_name}`}
                       >
@@ -534,10 +464,4 @@ const ProductDetailPage = ({ match }) => {
     );
 };
 
-// const mapStateToProps1 = (state) => ({
-//   auth: state.auth,
-//   isAuthenticated: state.auth.isAuthenticated,
-// });
-
-// export default PowerDetailPage;
 export default ProductDetailPage;
