@@ -1393,24 +1393,6 @@ const placeBid = async (_productID, _amount, signer) => {
     };
   }
 };
-const unlockMemberShipEgcToken = async (amount, signer) => {
-  try {
-    const instance = erc20Instance(
-      "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-      signer
-    );
-    let result = await instance.approve(V3ContractAddress.address, amount);
-    return {
-      message: result.hash,
-      status: true,
-    };
-  } catch (error) {
-    return {
-      message: formattedError(error).message,
-      status: formattedError(error).status,
-    };
-  }
-};
 
 // Approve Product
 const approveProduct1 = async (_productID, signer) => {
@@ -1531,30 +1513,6 @@ const unlockTokenV3 = async (coinAddress, amount, signer) => {
     };
   }
 };
-const checkAllowanceMembership = async (owner, amount, signer) => {
-  try {
-    const instance = erc20Instance(
-      "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-      signer
-    );
-    let result = await instance.allowance(owner, V3ContractAddress.address);
-
-    if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
-      return {
-        status: true,
-      };
-    } else {
-      return {
-        status: false,
-      };
-    }
-  } catch (error) {
-    return {
-      message: formattedError(error).message,
-      status: formattedError(error).status,
-    };
-  }
-};
 
 // =========new V3 Functions==================================
 // ===========================================
@@ -1621,8 +1579,6 @@ export {
   approveProduct1,
   approveProductDirect,
   AcceptBid,
-  unlockMemberShipEgcToken,
-  checkAllowanceMembership,
   BuyIndirectProduct,
   BuyDirectProduct,
   releaseFundsToSeller,

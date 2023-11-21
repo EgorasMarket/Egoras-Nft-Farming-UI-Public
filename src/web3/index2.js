@@ -58,7 +58,7 @@ const contractStakingFacetInstance = (signer) => {
 };
 const contractAddMinterFacetInstance = async (signer) => {
   return new Contract(
-    "0xeeec111dca00461ec4da49c09464953931aa7233",
+    "0xBDeb3C052bD949B6E38Cb0BC9593793a78c46968",
     Minter.abi,
     signer
   );
@@ -136,23 +136,6 @@ const semiAnnuallyPlanSubScribeRef = async (account, _referral, signer) => {
     };
   }
 };
-// const semiAnnuallyPlanSubScribe = async (signer) => {
-//   try {
-//     const instance = await contractMembershipFacetInstance(signer);
-//     let result;
-//     result = await instance.membershipSemiAnnuallyPlan();
-//     console.log(result, "result, result,result,result,result");
-//     return {
-//       message: result,
-//       status: true,
-//     };
-//   } catch (error) {
-//     return {
-//       message: formattedError(error).message,
-//       status: formattedError(error).status,
-//     };
-//   }
-// };
 const DiamondCutFunc = async (code, signer) => {
   console.log(JSON.parse(code));
   try {
@@ -476,24 +459,7 @@ const checkAllowanceSwap = async (coinAddress, owner, amount, signer) => {
     };
   }
 };
-const unlockSwapToken = async (amount, signer) => {
-  try {
-    const instance = erc20Instance(
-      "0x58f66d0183615797940360a43c333a44215830ba",
-      signer
-    );
-    let result = await instance.approve(V3ContractAddress.address, amount);
-    return {
-      message: result.hash,
-      status: true,
-    };
-  } catch (error) {
-    return {
-      message: formattedError(error).message,
-      status: formattedError(error).status,
-    };
-  }
-};
+
 const setPriceOracle = async (_prices, _tickers, signer) => {
   try {
     const instance = await contractPriceOracleFacetInstance(signer);
@@ -677,49 +643,7 @@ const UnlockLockedStake = async (signer) => {
     };
   }
 };
-const unlockStakeEgcToken = async (amount, signer) => {
-  try {
-    const instance = erc20Instance(
-      "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-      signer
-    );
-    let result = await instance.approve(V3ContractAddress.address, amount);
-    return {
-      message: result.hash,
-      status: true,
-    };
-  } catch (error) {
-    return {
-      message: formattedError(error).message,
-      status: formattedError(error).status,
-    };
-  }
-};
 
-const checkAllowanceStake = async (owner, amount, signer) => {
-  try {
-    const instance = erc20Instance(
-      "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-      signer
-    );
-    let result = await instance.allowance(owner, V3ContractAddress.address);
-
-    if (parseFloat(result.toString()) >= parseFloat(amount.toString())) {
-      return {
-        status: true,
-      };
-    } else {
-      return {
-        status: false,
-      };
-    }
-  } catch (error) {
-    return {
-      message: formattedError(error).message,
-      status: formattedError(error).status,
-    };
-  }
-};
 const convertEgcToMartgpt = async (account, amount, signer) => {
   console.log(account, amount, signer);
   try {
@@ -781,7 +705,7 @@ const setMartgptTokenAddress = async (signer) => {
     const instance = await contractRewardFaucetInstance(signer);
     let result = await instance.setMartgptTokenAddress(
       "0xD62C345CE544919dFf1639fe1f63610014987dE9",
-      "0xd68e5c52f7563486cc1a15d00efa12c8644a907e"
+      "0x4AC4fC5317F95849A1F17e2f4Daf03c32196f0cb"
     );
     console.log(result, "result");
 
@@ -819,7 +743,7 @@ const withdrawAllEgc = async (amount, signer) => {
     const instance = await contractRewardFaucetInstance(signer);
     let result = await instance.drawEGC(
       amount,
-      "0xd68e5c52f7563486cc1a15d00efa12c8644a907e"
+      "0x4AC4fC5317F95849A1F17e2f4Daf03c32196f0cb"
     );
     console.log(result, "result");
     return {
@@ -915,6 +839,25 @@ const listProcurementProduct = async (
     };
   }
 };
+
+const approveNewProducts = async (_productID, signer) => {
+  console.log(_productID);
+  try {
+    const instance = await contractProduct2FacetInstance(signer);
+    let result = await instance.procurementAuthorized(_productID);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
 export {
   monthlyPlanSubScribe,
   semiAnnuallyPlanSubScribe,
@@ -929,7 +872,6 @@ export {
   adminAddMinter,
   swapBnbForEusd,
   checkAllowanceSwap,
-  unlockSwapToken,
   setPythia,
   suspendPythia,
   setPriceOracle,
@@ -941,8 +883,6 @@ export {
   getCalculatedRoyalty,
   IncreaseRoyaltyTime,
   UnlockLockedStake,
-  unlockStakeEgcToken,
-  checkAllowanceStake,
   getRefStats,
   monthlyPlanSubScribeRef,
   semiAnnuallyPlanSubScribeRef,
@@ -958,4 +898,5 @@ export {
   withdrawAllEgc,
   configureDealerPlan,
   listProcurementProduct,
+  approveNewProducts,
 };

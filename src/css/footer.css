@@ -22,7 +22,7 @@ div#FooterId {
 }
 
 .add_color {
-  color: #7a5fc0;
+  color: #22ad62;
   font-weight: 600;
 }
 
@@ -75,17 +75,17 @@ div#FooterId {
 
 .twitter_icon {
   /* font-size: 14px; */
-  background: #d6cdeb;
+  background: #c0e6d2;
   border-radius: 50%;
   padding: 5px;
   font-size: 40px !important;
   /* width: 28px; */
-  color: #7a5fc0;
+  color: #22ad62;
 }
 
 .dark .twitter_icon {
   /* font-size: 14px; */
-  background: #222037;
+  background: #34453c;
 }
 
 .footerIcons {
@@ -198,7 +198,7 @@ div#FooterId {
 /* ========================== */
 
 .dark .footerSection {
-  background-color: #0f0e1c;
+  background-color: #121213;
 }
 
 .dark .footerCardTitle {

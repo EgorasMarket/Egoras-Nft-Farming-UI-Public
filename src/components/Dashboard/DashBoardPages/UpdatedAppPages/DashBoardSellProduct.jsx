@@ -183,11 +183,6 @@ const DashBoardSellProduct = () => {
   };
 
   const UploadProduct = async () => {
-    // setIsLoading(true);
-    // setDisable(true);
-    // let img_cms = await handleImgCms();
-
-    // console.log(img_cms);
     const formData = new FormData();
     console.log(activeSaleTab, account, "______UUUUUU");
 

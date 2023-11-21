@@ -82,7 +82,7 @@
 .Enable {
   text-align: center;
   margin-bottom: 10px;
-  color: #7a5fc0;
+  color: #22ad62;
   font-weight: 500;
 }
 .Enable1 {
@@ -91,8 +91,8 @@
   border-radius: 10px;
   /* background: linear-gradient(
 90deg
-, #39d97a 0%, #ebb396 50%, #7a5fc0 100%); */
-  background-color: #7a5fc0;
+, #39d97a 0%, #ebb396 50%, #22ad62 100%); */
+  background-color: #22ad62;
   text-align: center;
   font-size: 24px;
   color: #fff;
@@ -142,11 +142,11 @@
 }
 
 .ada:hover {
-  background-color: #7a5fc0;
+  background-color: #22ad62;
   color: #fff;
 }
 .ada1 {
-  background-color: #7a5fc0;
+  background-color: #22ad62;
   color: #fff;
 }
 .Enable5 {
@@ -174,12 +174,12 @@
 }
 
 .Gas2:hover {
-  background-color: #7a5fc0;
+  background-color: #22ad62;
   color: #fff;
 }
 
 .Gas3 {
-  background-color: #7a5fc0;
+  background-color: #22ad62;
   color: #fff;
 }
 .rece {
@@ -352,7 +352,7 @@
   position: sticky;
   bottom: 0;
   /* height:60px; */
-  color: #7a5fc0;
+  color: #22ad62;
 }
 .saw2 {
   position: relative;
@@ -394,7 +394,7 @@ input[type="number"] {
   background-color: rgb(237, 238, 242);
 }
 .sidebarIcon45 {
-  color: #7a5fc0 !important;
+  color: #22ad62 !important;
   transform: rotate(90deg);
   font-size: 28px !important;
   cursor: pointer;

@@ -29,10 +29,6 @@ import {
 } from "@web3-react/core";
 import { checkAllowanceV3, unlockTokenV3 } from "../../../../../web3/index";
 import { ConvertToNGN } from "../../../../../utils/helper";
-// import {
-//   checkAllowanceSwap,
-//   unlockSwapToken,
-// } from "../../../../../web3/index2";
 
 const ProductDetailPage = ({ match }) => {
   const context = useWeb3React();
@@ -410,7 +406,7 @@ const ProductDetailPage = ({ match }) => {
                           )}
                         </span>
                       )}
-                      <span style={{ fontSize: "12px", color: "#787690" }}>
+                      <span style={{ fontSize: "12px", color: "#80808e" }}>
                         {" ~"}
                         {numberWithCommas(
                           parseFloat(

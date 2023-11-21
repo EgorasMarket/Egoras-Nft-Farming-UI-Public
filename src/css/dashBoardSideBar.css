@@ -48,12 +48,12 @@ hr.hrr {
   background: #ddfbe9;
   padding: 5px;
   border-radius: 50%;
-  color: #7a5fc0;
+  color: #22ad62;
   transition: 0.3s ease-in-out;
 }
 
 .medium_icon:hover {
-  background: #7a5fc0;
+  background: #22ad62;
   transition: 0.3s ease-in-out;
   color: #fff;
 }
@@ -72,12 +72,12 @@ hr.hrr {
   padding: 5px !important;
   font-size: 32px !important;
   border-radius: 50% !important;
-  color: #7a5fc0 !important;
+  color: #22ad62 !important;
   transition: 0.3s ease-in-out;
 }
 
 .socail_links_icon:hover {
-  background: #7a5fc0 !important;
+  background: #22ad62 !important;
   color: #fff !important;
   transition: 0.3s ease-in-out;
 }
@@ -324,7 +324,7 @@ hr.hrr {
 
 .list-item-active {
   position: relative;
-  color: #7a5fc0;
+  color: #22ad62;
   background: #f3fef7;
   border-radius: 10px;
   box-shadow: none;
@@ -617,7 +617,7 @@ hr.hrr {
 
   .list-item-active {
     position: relative;
-    color: #7a5fc0;
+    color: #22ad62;
     background: #f3fef7;
     border-radius: 10px;
     box-shadow: none;

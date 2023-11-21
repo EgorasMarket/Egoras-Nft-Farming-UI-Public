@@ -55,7 +55,7 @@
 }
 
 .dark .power_details_details_div {
-  background: #151422;
+  background: #232326;
   color: #fff;
   border: solid #2e2c47;
 }
@@ -96,7 +96,7 @@
 }
 
 .dark .add_quantity_div {
-  background: #151422;
+  background: #232326;
   color: #fff;
 }
 
@@ -132,11 +132,11 @@
   border-top-left-radius: 3px;
   border-bottom-left-radius: 3px;
   padding: 5px;
-  color: #0d0c14;
+  color: #000;
 }
 
 .dark .quantity_div_body_btn_substract {
-  background: #0d0c14;
+  background: #000;
   border: solid 1px #3f3d58;
   color: #fff;
 }
@@ -159,7 +159,7 @@
 }
 
 .dark .quantity_div_body_btn_Amount {
-  background: #0d0c14;
+  background: #000;
   border: solid 1px #3f3d58;
   color: #fff;
 }
@@ -176,35 +176,35 @@
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
   padding: 5px;
-  color: #0d0c14;
+  color: #000;
 }
 
 .dark .quantity_div_body_btn_Add {
-  background: #0d0c14;
+  background: #000;
   border: solid 1px #3f3d58;
   color: #ffffff;
 }
 
 .quantity_div_body_btn_substract:hover {
-  background: #7a5fc0;
+  background: #22ad62;
   box-shadow: 0px 3px 10px #b3b3b3;
   color: #fff;
 }
 
 .dark .quantity_div_body_btn_substract:hover {
-  background: #7a5fc0;
+  background: #22ad62;
   box-shadow: 0px 3px 10px #000000;
   color: #fff;
 }
 
 .quantity_div_body_btn_Add:hover {
-  background: #7a5fc0;
+  background: #22ad62;
   box-shadow: 0px 3px 10px #b3b3b3;
   color: #fff;
 }
 
 .dark .quantity_div_body_btn_Add:hover {
-  background: #7a5fc0;
+  background: #22ad62;
   box-shadow: 0px 3px 10px #000000;
   color: #fff;
 }

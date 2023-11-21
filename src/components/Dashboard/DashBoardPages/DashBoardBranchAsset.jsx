@@ -461,7 +461,7 @@ const DashBoardBranchAsset = ({ match }) => {
                       <Area
                         type="monotone"
                         dataKey="value"
-                        stroke="#7a5fc0"
+                        stroke="#22ad62"
                         fillOpacity={1}
                         fill="url(#colorUv)"
                         strokeWidth={2}

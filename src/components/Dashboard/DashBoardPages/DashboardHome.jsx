@@ -31,13 +31,9 @@ import {
   AreaChart,
   Area,
   XAxis,
-  YAxis,
-  CartesianGrid,
   Tooltip,
-  Line,
   Bar,
   BarChart,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 import { UserContext } from "../../context/Context";
@@ -471,6 +467,7 @@ const DashboardHome = () => {
       symbol: "TUSD",
     },
   };
+
   const convertedCoins = {};
   for (const key in ListedCoins) {
     const lowercaseKey = key.toLowerCase();
@@ -574,7 +571,7 @@ const DashboardHome = () => {
                   <div className="analytics_container_1_head">TVL</div>
                   {chartloaded ? (
                     <div className="chart_loader">
-                      <ClipLoader color="#9e94b8" size={60} />
+                      <ClipLoader color="#9cc4ae" size={60} />
                       <span className="chart_loader_span">
                         Loading Please Wait...
                       </span>
@@ -638,7 +635,7 @@ const DashboardHome = () => {
                               <Area
                                 type="monotone"
                                 dataKey="value"
-                                stroke="#7a5fc0"
+                                stroke="#22ad62"
                                 fillOpacity={1}
                                 fill="url(#colorUv)"
                                 strokeWidth={2}
@@ -692,7 +689,7 @@ const DashboardHome = () => {
                               <Area
                                 type="monotone"
                                 dataKey="value"
-                                stroke="#7a5fc0"
+                                stroke="#22ad62"
                                 fillOpacity={1}
                                 fill="url(#colorUv)"
                                 strokeWidth={2}
@@ -712,7 +709,7 @@ const DashboardHome = () => {
                   <div className="analytics_container_1_head">Volume 24H</div>
                   {chartloaded ? (
                     <div className="chart_loader">
-                      <ClipLoader color="#9e94b8" size={60} />
+                      <ClipLoader color="#9cc4ae" size={60} />
                       <span className="chart_loader_span">
                         Loading Please Wait...
                       </span>
@@ -864,7 +861,7 @@ const DashboardHome = () => {
                   <div className="analytics_container_1_head">TVL</div>
                   {chartloaded ? (
                     <div className="chart_loader">
-                      <ClipLoader color="#9e94b8" size={60} />
+                      <ClipLoader color="#9cc4ae" size={60} />
                       <span className="chart_loader_span">
                         Loading Please Wait...
                       </span>
@@ -927,7 +924,7 @@ const DashboardHome = () => {
                               <Area
                                 type="monotone"
                                 dataKey="value"
-                                stroke="#7a5fc0"
+                                stroke="#22ad62"
                                 fillOpacity={1}
                                 fill="url(#colorUv)"
                                 strokeWidth={2}
@@ -981,7 +978,7 @@ const DashboardHome = () => {
                               <Area
                                 type="monotone"
                                 dataKey="value"
-                                stroke="#7a5fc0"
+                                stroke="#22ad62"
                                 fillOpacity={1}
                                 fill="url(#colorUv)"
                                 strokeWidth={2}
@@ -1002,7 +999,7 @@ const DashboardHome = () => {
 
                   {chartloaded ? (
                     <div className="chart_loader">
-                      <ClipLoader color="#9e94b8" size={60} />
+                      <ClipLoader color="#9cc4ae" size={60} />
                       <span className="chart_loader_span">
                         Loading Please Wait...
                       </span>
@@ -1248,7 +1245,7 @@ const DashboardHome = () => {
 
                   {burntEgcLoaded ? (
                     <div className="burntEgcLoading">
-                      <PulseLoader color="#9e94b8" size={20} height={20} />
+                      <PulseLoader color="#9cc4ae" size={20} height={20} />
                     </div>
                   ) : (
                     <div className="burn_egc_div_1_cont1_div1">
@@ -1274,7 +1271,7 @@ const DashboardHome = () => {
                   {burntEgcLoaded ? (
                     <div className="burntEgcLoading">
                       {" "}
-                      <PulseLoader color="#9e94b8" size={20} height={20} />
+                      <PulseLoader color="#9cc4ae" size={20} height={20} />
                     </div>
                   ) : (
                     <div className="burn_egc_div_1_cont1_div1">

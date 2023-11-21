@@ -78,7 +78,7 @@
   padding: 15px 0px;
   width: 200px;
   border-radius: 8px;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   border: none;
   box-shadow: 0px 10px 10px #bfbfbf;
@@ -161,8 +161,8 @@
 } */
 .assets-btn {
   font-size: 14px;
-  border: solid 1px #7a5fc0;
-  color: #7a5fc0;
+  border: solid 1px #22ad62;
+  color: #22ad62;
   padding: 0.5em 0em;
   border-radius: 5px;
   transition: 0.5s linear;
@@ -177,7 +177,7 @@
 }
 
 .assets-btn:hover {
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   transform: translateY(-5px);
   transition: 0.5s linear;
@@ -361,7 +361,7 @@
   width: 100%;
   border-radius: 6px;
   border: none;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   font-weight: 600;
 }
@@ -474,8 +474,8 @@
 }
 
 .dark .filter_table_area_2_admin {
-  border: solid 1px #262538;
-  background: #151422;
+  border: solid 1px #38383d;
+  background: #232326;
   box-shadow: 0px 2px 6px #000000;
 }
 
@@ -487,7 +487,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative
+  position: relative;
 }
 
 .asset_amount_progress_div {
@@ -527,7 +527,7 @@
   box-sizing: border-box;
   -webkit-user-modify: read-only !important;
   border-radius: 50px;
-  border: solid 1px #7a5fc0;
+  border: solid 1px #22ad62;
   overflow: hidden;
 }
 
@@ -576,11 +576,11 @@
 }
 
 .enabled_bg {
-  background: #7a5fc0;
+  background: #22ad62;
 }
 
 .dark .enabled_bg {
-  background: #7a5fc0;
+  background: #22ad62;
 }
 
 /* .progress_bar::-webkit-progress-inner-element {
@@ -616,7 +616,8 @@
   font-family: "Mulish" !important;
 }
 
-.filter_table_area_1 .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+.filter_table_area_1
+  .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
   padding: 16px 5px !important;
 }
 
@@ -624,7 +625,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #7a5fc0;
+  background: #22ad62;
   padding: 0.5em 1em;
   color: #fff;
   border-radius: 33px;
@@ -734,7 +735,6 @@
 }
 
 @media screen and (max-width: 1095px) {
-
   /* footer  section start */
   .stable-content {
     display: none !important;
@@ -755,7 +755,6 @@
   }
 
   .assets-data {
-
     width: 89px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -766,7 +765,6 @@
   }
 
   .assets-category-data1b {
-
     font-size: 14px;
     padding: 2px;
   }

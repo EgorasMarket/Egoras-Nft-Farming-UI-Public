@@ -240,6 +240,9 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
     if (linksActive === "/app/user/referral") {
       setActiveBg("account");
     }
+    if (linksActive === "/admin/settings") {
+      setActiveBg("settings");
+    }
     if (
       linksActive ===
       "/app/earn/pool/detail/branch/" + urlArr[6] + "/asset"
@@ -476,30 +479,11 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
         <div className="container-fluid">
           <div className="header_token_prices_div_area">
             <div className="header_token_prices_div_area1">
-              {nairaValue} NGN ~ 1 USD
-            </div>
-            <span class="vertical_rule2"></span>
-            <div className="header_token_prices_div_area1">
-              {nairaValue} ENGN ~ 1 USD
-            </div>
-            <span class="vertical_rule2"></span>
-            <div className="header_token_prices_div_area1">
               1 EGC ~ {numberWithCommas(egcUsdVal.toFixed(2))} USD
             </div>
             <span class="vertical_rule2"></span>
             <div className="header_token_prices_div_area1">
-              1 EGR ~ {egrUsdVal.toFixed(3)} USD
-            </div>
-            <span class="vertical_rule2"></span>
-            <div className="header_token_prices_div_area1">1 ENGN ~ 1 NGN</div>
-            <span class="vertical_rule2"></span>
-            <div className="header_token_prices_div_area1">
-              1 EGC ~ {numberWithCommas((egcUsdVal * nairaValue).toFixed(2))}{" "}
-              NGN
-            </div>
-            <span class="vertical_rule2"></span>
-            <div className="header_token_prices_div_area1">
-              1 EGR ~ {(egrUsdVal * nairaValue).toFixed(2)} NGN
+              1 EGC ~ {numberWithCommas(egcUsdVal.toFixed(2))} eUSD
             </div>
           </div>
         </div>
@@ -542,7 +526,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
               >
                 Home
               </a>
-              <a
+              {/* <a
                 id="sellers"
                 href="/admin/sellers"
                 className={
@@ -550,7 +534,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 }
                 onClick={changeBg}
               >
-                Sellers
+                Products
               </a>
               <a
                 id="transactions"
@@ -563,8 +547,8 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 onClick={changeBg}
               >
                 Staff
-              </a>
-              <a
+              </a> */}
+              {/* <a
                 id="products"
                 href="/admin/all/products"
                 className={
@@ -573,7 +557,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 onClick={changeBg}
               >
                 Products
-              </a>
+              </a> */}
               <a
                 id="membership"
                 href="/admin/modify/membership_plan"
@@ -587,58 +571,15 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 Membership
               </a>
               <a
-                id="router"
-                href="/admin/setRouter"
+                id="settings"
+                href="/admin/settings"
                 className={
-                  activeBg == "router" ? "header_tab1_active " : "header_tab1"
+                  activeBg == "settings" ? "header_tab1_active " : "header_tab1"
                 }
                 onClick={changeBg}
               >
-                Set Router
+                Settings
               </a>
-              <a
-                id="priceOracle"
-                href="/admin/priceOracle"
-                className={
-                  activeBg == "priceOracle"
-                    ? "header_tab1_active "
-                    : "header_tab1"
-                }
-                onClick={changeBg}
-              >
-                Price Oracle
-              </a>
-
-              {/* <a
-                id="market"
-                href="/app/stake"
-                className={
-                  activeBg == "market" ? "header_tab1_active " : "header_tab1"
-                }
-                onClick={changeBg}
-              >
-                Stake
-              </a>
-              <a
-                id="swap"
-                href="/app/swap"
-                className={
-                  activeBg == "swap" ? "header_tab1_active " : "header_tab1"
-                }
-                onClick={changeBg}
-              >
-                Swap
-              </a>
-              <a
-                id="account"
-                href="/app/user"
-                className={
-                  activeBg == "account" ? "header_tab1_active " : "header_tab1"
-                }
-                onClick={changeBg}
-              >
-                Account
-              </a> */}
             </div>
             <div className="user_profile_icon_cont2">
               <div className="together">

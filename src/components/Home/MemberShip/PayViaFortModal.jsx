@@ -139,7 +139,7 @@ const PayViaFortModal = ({
             <QRCode
               quietZone={5}
               value={qr_link}
-              // bgColor="#151422"
+              // bgColor="#232326"
               eyeColor="#140f22"
               // fgColor="#c3c1da"
               bgColor="#c3c1da"

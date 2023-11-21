@@ -17,7 +17,6 @@ div#Header {
 }
 
 .dark .header_new_links {
-
   color: #fff;
 }
 
@@ -52,7 +51,7 @@ div#Header {
 .notifications_headerTab1_active {
   width: 100%;
   padding: 8px;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #ffffff;
   /* border-radius: 10px; */
   font-size: 14px;
@@ -163,7 +162,7 @@ div#Header {
   padding: 1em 1em;
   border-radius: 8px;
   border: none;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
 }
 
@@ -237,7 +236,7 @@ div#Header {
   font-weight: 600;
   /* margin-left: 5px; */
   font-size: 13px;
-  border: solid 1px #F0B400;
+  border: solid 1px #f0b400;
   border-radius: 10px;
   border-left: 0;
   border-top-left-radius: 0;
@@ -275,7 +274,7 @@ div#Header {
 }
 
 .dark .wallet_settings_icon_cont:hover {
-  background: #151422;
+  background: #232326;
   transition: all 0.1s linear;
 }
 
@@ -301,7 +300,7 @@ div#Header {
 }
 
 .dark .header_wllt_bal {
-  background: #0d0c14;
+  background: #000;
   border: solid 1px #312e52;
   color: #fff;
 }
@@ -335,7 +334,7 @@ div#Header {
   display: flex;
   align-items: center;
   background: #ececec;
-  border: solid 1px #F0B400;
+  border: solid 1px #f0b400;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   border-right: 0;
@@ -399,7 +398,7 @@ div#Header {
   padding-left: 15px;
   margin: 0;
   box-shadow: 0px 6px 3px #f4f4f4;
-  color: #7a5fc0;
+  color: #22ad62;
 }
 
 .wallet-id {
@@ -415,7 +414,7 @@ div#Header {
   padding-left: 15px;
   margin: 0;
   box-shadow: 0px 6px 3px #f4f4f4;
-  color: #7a5fc0;
+  color: #22ad62;
 }
 
 .borr {
@@ -534,21 +533,21 @@ div#Header {
 }
 
 .drop-borrow-link:hover {
-  color: #7a5fc0;
+  color: #22ad62;
 }
 
 .docs:hover,
 .about:hover {
-  color: #7a5fc0;
+  color: #22ad62;
 }
 
 .product:hover,
 .company:hover {
-  color: #7a5fc0;
+  color: #22ad62;
 }
 
 .activeLink {
-  color: #7a5fc0;
+  color: #22ad62;
   font-size: 15px;
   font-weight: 600;
   position: relative;
@@ -562,7 +561,7 @@ div#Header {
   position: absolute;
   width: 65px;
   height: 2.5px;
-  background: #7a5fc0;
+  background: #22ad62;
   bottom: -9px;
   left: -10px;
   border-radius: 100px;
@@ -593,8 +592,8 @@ vl {
   margin-right: 15px;
   padding: 1em 2em;
   border: solid;
-  border-color: #7a5fc0;
-  color: #7a5fc0;
+  border-color: #22ad62;
+  color: #22ad62;
   border-width: 0.5px;
   border-radius: 10px;
   cursor: pointer;
@@ -619,7 +618,8 @@ vl {
   z-index: 200;
 }
 
-.companyLinks.css-1yhn5ap-MuiModal-root-MuiPopover-root-MuiMenu-root .MuiPaper-root {
+.companyLinks.css-1yhn5ap-MuiModal-root-MuiPopover-root-MuiMenu-root
+  .MuiPaper-root {
   margin-top: 31px !important;
   top: 32px !important;
   left: 680px !important;
@@ -639,7 +639,7 @@ vl {
 
 .connect {
   padding: 1em 2em;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #ffff;
   border-radius: 10px;
   cursor: pointer;
@@ -678,7 +678,7 @@ vl {
 
 .loanCatTitle,
 .loanStatusTitle {
-  color: #7a5fc0;
+  color: #22ad62;
   font-weight: 500;
   margin-bottom: 20px;
   font-size: 14px;
@@ -692,7 +692,7 @@ vl {
 
 .loanStatli1:hover,
 .loanCatli1:hover {
-  color: #7a5fc0;
+  color: #22ad62;
   text-decoration: underline;
 }
 
@@ -715,7 +715,7 @@ vl {
 .validator {
   background: #ffff !important;
   /* box-shadow: 0px 6px 3px #f1f1f1; */
-  color: #7a5fc0 !important;
+  color: #22ad62 !important;
   text-decoration: unset !important;
 }
 
@@ -726,7 +726,7 @@ vl {
 }
 
 .DropLink:hover {
-  color: #7a5fc0 !important;
+  color: #22ad62 !important;
 }
 
 .BorrowClass,
@@ -835,14 +835,14 @@ vl {
 /* ========== */
 
 .dark .headerSection {
-  background-color: #0f0e1cab;
+  background-color: #121213ab;
   -webkit-backdrop-filter: blur(6px);
   backdrop-filter: blur(15px);
   border-bottom: solid 1px #1e2922;
 }
 
 .dark .we_on_beta_div {
-  background: #1f1d36;
+  background: #102c1d;
   color: #ffffff;
 }
 

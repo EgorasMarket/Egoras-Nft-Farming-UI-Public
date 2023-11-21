@@ -21,6 +21,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { placeBid, approveProduct1, approveProductDirect } from "../../../web3";
 import { parseEther, formatEther, parseUnits } from "@ethersproject/units";
 import AdminDashboardCard from "../../cards/AdminDashboardCard";
+import { approveNewProducts } from "../../../web3/index2";
 import {
   POPULATE_ADMIN_PRODUCT_DASHBOARD,
   CALL_ADMIN_PLACE_BID,
@@ -43,19 +44,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const AdminSeeSellers = () => {
   const context = useWeb3React();
-  const {
-    // connector,
-    library,
-    // chainId,
-    account,
-    // activate,
-    // deactivate,
-    // active,
-    // error,
-  } = context;
-  // const [lockedValue, setLockedValue] = useState(0);
-  // const [totalLendingCapacity, setTotalLendingCapacity] = useState(0);
-  // const [totalLendingCount, setTotalLendingCount] = useState(0);
+  const { library, account } = context;
   const [adminStatus, setAdminStatus] = useState(null);
   const [bidAmount, setBidAmount] = useState("");
   const [newProducts, setNewProducts] = useState([]);
@@ -367,11 +356,6 @@ const AdminSeeSellers = () => {
         const adminStatus = response.message.data.data.adminStatus;
         console.log(adminStatus, "acct acct acct acct ");
         setAdminStatus(adminStatus);
-        // if (payload == null) {
-        //   setStatus("");
-        // } else {
-        //   setStatus(() => payload.kyc_status);
-        // }
       }
     },
     [account]
@@ -415,14 +399,9 @@ const AdminSeeSellers = () => {
     }
   };
 
-  const ApproveProductDirect = async (id) => {
+  const ApproveNewProd = async (id) => {
     console.log(id, "ApproveProductDirect");
-
-    // const res = await approveProductDirect(id, library.getSigner());
-    const res = await approveProductDirect(id, library.getSigner());
-    console.log(res, "somto8uhhhg");
-    // console.log(res.status, "somto8uhhhg");
-    setSaleDetails("");
+    const res = await approveNewProducts(id, library.getSigner());
     console.log(res);
     if (res.status == true) {
       console.log("Success message");
@@ -431,20 +410,20 @@ const AdminSeeSellers = () => {
     }
   };
 
-  const ApproveProduct = async (id) => {
-    console.log(id, "ApproveProduct");
+  // const ApproveProduct = async (id) => {
+  //   console.log(id, "ApproveProduct");
 
-    const res = await approveProduct1(id, library.getSigner());
-    console.log(res, "somto8uhhhg");
-    // console.log(res.status, "somto8uhhhg");
-    setSaleDetails("");
-    console.log(res);
-    if (res.status == true) {
-      console.log("Success message");
-    } else {
-      console.log("Error occured from Blockchain");
-    }
-  };
+  //   const res = await approveProduct1(id, library.getSigner());
+  //   console.log(res, "somto8uhhhg");
+  //   // console.log(res.status, "somto8uhhhg");
+  //   setSaleDetails("");
+  //   console.log(res);
+  //   if (res.status == true) {
+  //     console.log("Success message");
+  //   } else {
+  //     console.log("Error occured from Blockchain");
+  //   }
+  // };
 
   const classes = useStyles();
   return (
@@ -494,19 +473,9 @@ const AdminSeeSellers = () => {
                     }
                     onClick={toggleActiveBtn}
                   >
-                    Pending
+                    New
                   </div>
-                  <div
-                    id="All"
-                    className={
-                      activeBtn == "All"
-                        ? "filter_table_btn1_active"
-                        : "filter_table_btn1"
-                    }
-                    onClick={toggleActiveBtn}
-                  >
-                    All
-                  </div>
+
                   <div
                     id="Closed"
                     className={
@@ -530,15 +499,6 @@ const AdminSeeSellers = () => {
                       Sales Amount
                     </th>
                     <th className="assets-category-titles-heading1 ">Seller</th>
-                    <th className="assets-category-titles-heading1 ">
-                      Bidding Status
-                    </th>
-                    <th className="assets-category-titles-heading1 ">
-                      Bidding Amount
-                    </th>
-                    <th className="assets-category-titles-heading1  ">
-                      Product Type
-                    </th>
                     <th className="assets-category-titles-heading1  ">
                       Product Status
                     </th>
@@ -586,6 +546,133 @@ const AdminSeeSellers = () => {
                                 <tr className="assets-category-row  transitionMe">
                                   <td
                                     className="assets-category-data branch_name_title"
+                                    // id={asset.product_id}
+                                    // // onClick={ToggleSaleDetails}
+                                    // onClick={() => {
+                                    //   ToggleSaleDetails(
+                                    //     asset.product_id,
+                                    //     asset.index_id
+                                    //   );
+                                    // }}
+                                  >
+                                    <div className="assets-data">
+                                      <div className="assets-data-pool_name">
+                                        {asset.product_name}
+                                        <span className="poolName_txt">
+                                          {asset.createdAt}
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td
+                                    className="assets-category-data1b branch_apy"
+                                    // id={asset.product_id}
+                                    // // onClick={ToggleSaleDetails}
+                                    // onClick={() => {
+                                    //   ToggleSaleDetails(
+                                    //     asset.product_id,
+                                    //     asset.index_id
+                                    //   );
+                                    // }}
+                                  >
+                                    ₦
+                                    {numberWithCommas(
+                                      parseInt(asset.user_amount).toFixed(0)
+                                    )}{" "}
+                                  </td>
+                                  <td
+                                    className="assets-category-data1b branch_apy"
+                                    // id={asset.product_id}
+                                    // // onClick={ToggleSaleDetails}
+                                    // onClick={() => {
+                                    //   ToggleSaleDetails(
+                                    //     asset.product_id,
+                                    //     asset.index_id
+                                    //   );
+                                    // }}
+                                  >
+                                    {`${asset.user_wallet.slice(
+                                      0,
+                                      6
+                                    )}...${asset.user_wallet.slice(39, 42)}`}
+                                  </td>
+
+                                  <td
+                                    className="assets-category-data1b branch_apy"
+                                    // id={asset.product_id}
+                                    // // onClick={ToggleSaleDetails}
+                                    // onClick={() => {
+                                    //   ToggleSaleDetails(
+                                    //     asset.product_id,
+                                    //     asset.index_id
+                                    //   );
+                                    // }}
+                                  >
+                                    {asset.status}
+                                  </td>
+                                  <td
+                                    className="assets-category-data1b branch_apy"
+                                    // id={asset.product_id}
+                                    // // onClick={ToggleSaleDetails}
+                                    // onClick={() => {
+                                    //   ToggleSaleDetails(
+                                    //     asset.product_id,
+                                    //     asset.index_id
+                                    //   );
+                                    // }}
+                                  >
+                                    {asset.transaction_hash != null
+                                      ? `${asset.transaction_hash.slice(
+                                          0,
+                                          6
+                                        )}...${asset.transaction_hash.slice(
+                                          63,
+                                          66
+                                        )}`
+                                      : "N/A"}
+                                    {/* {"Coming soon"} */}
+                                  </td>
+                                  <td className="assets-category-data1b branch_apy">
+                                    <div className="approveProdButton">
+                                      <button
+                                        className="approveProdButton_btn"
+                                        disabled={false}
+                                        onClick={() =>
+                                          ApproveNewProd(asset.index_id)
+                                        }
+                                      >
+                                        Approve
+                                      </button>
+                                    </div>
+                                  </td>
+                                  <td
+                                    className="assets-category-data-last branch_loan_action"
+                                    // id={asset.product_id}
+                                    // onClick={ToggleSaleDetails}
+                                    // onClick={() => {
+                                    //   ToggleSaleDetails(
+                                    //     asset.product_id,
+                                    //     asset.index_id
+                                    //   );
+                                    // }}
+                                  >
+                                    <ArrowForwardIosIcon />
+                                  </td>
+                                </tr>
+                              </>
+                            );
+                          })
+                      : activeBtn === "Closed"
+                      ? newProducts
+                          .filter((person) => person.status == "UPLOADED")
+                          .map((asset) => {
+                            //   var percentage = (asset.funded / asset.amount) * 100;
+                            console.log(asset);
+                            return (
+                              <>
+                                <tr className="assets-category-row  transitionMe">
+                                  <td
+                                    className="assets-category-data branch_name_title"
                                     id={asset.product_id}
                                     // onClick={ToggleSaleDetails}
                                     onClick={() => {
@@ -615,10 +702,10 @@ const AdminSeeSellers = () => {
                                       );
                                     }}
                                   >
+                                    ₦
                                     {numberWithCommas(
                                       parseInt(asset.user_amount).toFixed(0)
                                     )}{" "}
-                                    Eusd
                                   </td>
                                   <td
                                     className="assets-category-data1b branch_apy"
@@ -636,45 +723,7 @@ const AdminSeeSellers = () => {
                                       6
                                     )}...${asset.user_wallet.slice(39, 42)}`}
                                   </td>
-                                  <td
-                                    className="assets-category-data1b branch_apy"
-                                    id={asset.product_id}
-                                    // onClick={ToggleSaleDetails}
-                                    onClick={() => {
-                                      ToggleSaleDetails(
-                                        asset.product_id,
-                                        asset.index_id
-                                      );
-                                    }}
-                                  >
-                                    {asset.bidStatus}
-                                  </td>
-                                  <td
-                                    className="assets-category-data1b branch_apy"
-                                    id={asset.product_id}
-                                    // onClick={ToggleSaleDetails}
-                                    onClick={() => {
-                                      ToggleSaleDetails(
-                                        asset.product_id,
-                                        asset.index_id
-                                      );
-                                    }}
-                                  >
-                                    {asset.bidAmount} Eusd
-                                  </td>
-                                  <td
-                                    className="assets-category-data1b branch_apy"
-                                    id={asset.product_id}
-                                    // onClick={ToggleSaleDetails}
-                                    onClick={() => {
-                                      ToggleSaleDetails(
-                                        asset.product_id,
-                                        asset.index_id
-                                      );
-                                    }}
-                                  >
-                                    {asset.productType}
-                                  </td>
+
                                   <td
                                     className="assets-category-data1b branch_apy"
                                     id={asset.product_id}
@@ -712,40 +761,12 @@ const AdminSeeSellers = () => {
                                   </td>
                                   <td className="assets-category-data1b branch_apy">
                                     <div className="approveProdButton">
-                                      {asset.productType === "INDIRECT" &&
-                                      asset.bidAmount == null ? (
-                                        <button
-                                          className="approveProdButton_btn"
-                                          disabled={true}
-                                          onClick={() =>
-                                            ApproveProduct(asset.index_id)
-                                          }
-                                        >
-                                          Approve
-                                        </button>
-                                      ) : asset.productType === "INDIRECT" &&
-                                        asset.bidAmount !== null ? (
-                                        <button
-                                          className="approveProdButton_btn"
-                                          disabled={false}
-                                          onClick={() =>
-                                            ApproveProduct(asset.index_id)
-                                          }
-                                        >
-                                          Approve
-                                        </button>
-                                      ) : null}
-                                      {asset.productType === "DIRECT" ? (
-                                        <button
-                                          className="approveProdButton_btn"
-                                          disabled={false}
-                                          onClick={() =>
-                                            ApproveProductDirect(asset.index_id)
-                                          }
-                                        >
-                                          Approve
-                                        </button>
-                                      ) : null}
+                                      <button
+                                        className="approveProdButton_btn"
+                                        disabled={true}
+                                      >
+                                        Approved
+                                      </button>
                                     </div>
                                   </td>
                                   <td
@@ -765,110 +786,6 @@ const AdminSeeSellers = () => {
                               </>
                             );
                           })
-                      : activeBtn === "All"
-                      ? SalableProduct.map((asset) => {
-                          return (
-                            <tr
-                              className="assets-category-row  transitionMe"
-                              id={asset.id}
-                              onClick={ToggleSaleDetails}
-                            >
-                              <td className="assets-category-data branch_name_title">
-                                <div className="assets-data">
-                                  <div className="assets-data-pool_name">
-                                    {asset.ProductName}
-                                    <span className="poolName_txt">
-                                      {asset.Date}
-                                    </span>
-                                  </div>
-                                </div>
-                              </td>
-                              <td className="assets-category-data1b branch_apy">
-                                {numberWithCommas(
-                                  parseInt(asset.Amount).toFixed(0)
-                                )}{" "}
-                                Eusd
-                              </td>
-                              <td className="assets-category-data1b branch_apy">
-                                {`${asset.Seller.slice(
-                                  0,
-                                  6
-                                )}...${asset.Seller.slice(39, 42)}`}
-                              </td>
-                              <td className="assets-category-data1b branch_apy">
-                                {asset.BiddingStatus}
-                              </td>
-                              <td className="assets-category-data1b branch_apy">
-                                {asset.BiddingAmount} Eusd
-                              </td>
-                              <td className="assets-category-data1b branch_apy">
-                                {asset.ProductStatus}
-                              </td>
-                              <td className="assets-category-data1b branch_apy">
-                                {`${asset.txnHash.slice(
-                                  0,
-                                  6
-                                )}...${asset.txnHash.slice(63, 66)}`}
-                              </td>
-                              <td className="assets-category-data-last branch_loan_action">
-                                <ArrowForwardIosIcon />
-                              </td>
-                            </tr>
-                          );
-                        })
-                      : activeBtn === "Closed"
-                      ? SalableProduct.filter(
-                          (person) => person.ProductStatus == "Approved"
-                        ).map((asset) => {
-                          return (
-                            <tr
-                              className="assets-category-row  transitionMe"
-                              id={asset.id}
-                              onClick={ToggleSaleDetails}
-                            >
-                              <td className="assets-category-data branch_name_title">
-                                <div className="assets-data">
-                                  <div className="assets-data-pool_name">
-                                    {asset.ProductName}
-                                    <span className="poolName_txt">
-                                      {asset.Date}
-                                    </span>
-                                  </div>
-                                </div>
-                              </td>
-                              <td className="assets-category-data1b branch_apy">
-                                {numberWithCommas(
-                                  parseInt(asset.Amount).toFixed(0)
-                                )}{" "}
-                                Eusd
-                              </td>
-                              <td className="assets-category-data1b branch_apy">
-                                {`${asset.Seller.slice(
-                                  0,
-                                  6
-                                )}...${asset.Seller.slice(39, 42)}`}
-                              </td>
-                              <td className="assets-category-data1b branch_apy">
-                                {asset.BiddingStatus}
-                              </td>
-                              <td className="assets-category-data1b branch_apy">
-                                {asset.BiddingAmount} Eusd
-                              </td>
-                              <td className="assets-category-data1b branch_apy">
-                                {asset.ProductStatus}
-                              </td>
-                              <td className="assets-category-data1b branch_apy">
-                                {`${asset.txnHash.slice(
-                                  0,
-                                  6
-                                )}...${asset.txnHash.slice(63, 66)}`}
-                              </td>
-                              <td className="assets-category-data-last branch_loan_action">
-                                <ArrowForwardIosIcon />
-                              </td>
-                            </tr>
-                          );
-                        })
                       : null}
                     {/* =================== */}
                     {/* =================== */}

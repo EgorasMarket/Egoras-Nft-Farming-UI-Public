@@ -9,7 +9,7 @@ import {
   UnsupportedChainIdError,
 } from "@web3-react/core";
 import Web3 from "web3";
-import { configurePlan } from "../../../web3";
+// import { configurePlan } from "../../../web3";
 import { configureDealerPlan } from "../../../web3/index2";
 const { REACT_APP_EGC_ADDRESS, REACT_APP_EUSD_ADDRESS } = process.env;
 const AdminModifyMembership = () => {
@@ -31,8 +31,6 @@ const AdminModifyMembership = () => {
   const [semiAnnuallyPlan, setSemiAnnuallyPlan] = useState("");
   const [AnnuallyPlan, setAnnuallyPlan] = useState("");
 
-  // const egcAddress = "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19";
-  // const eusdAddress = "0x58f66d0183615797940360a43c333a44215830ba";
   console.log(REACT_APP_EGC_ADDRESS, REACT_APP_EUSD_ADDRESS);
   const monthlyPlanChange = (e) => {
     setMonthlyPlan(e.target.value);
@@ -45,18 +43,6 @@ const AdminModifyMembership = () => {
   const AnnuallyPlanChange = (e) => {
     setAnnuallyPlan(e.target.value);
     console.log(e.target.value);
-  };
-  const ConfigureMembershipPlan = async () => {
-    const res = await configurePlan(
-      parseEther(monthlyPlan.toString(), "wei").toString(),
-      parseEther(semiAnnuallyPlan.toString(), "wei").toString(),
-      parseEther(AnnuallyPlan.toString(), "wei").toString(),
-      REACT_APP_EGC_ADDRESS,
-      REACT_APP_EUSD_ADDRESS,
-      library.getSigner()
-    );
-    console.log(res, "somto8uhhhg");
-    console.log(res.status, "somto8uhhhg");
   };
   const ConfigureMembershipDealerPlan = async () => {
     const res = await configureDealerPlan(

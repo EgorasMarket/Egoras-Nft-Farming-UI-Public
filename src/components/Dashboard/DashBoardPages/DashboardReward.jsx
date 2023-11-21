@@ -121,34 +121,7 @@ const DashboardReward = () => {
         <div className="container relative">
           <div className="pool_deatail_area">
             <UserDetailsLinks activeLink={activeLink} />
-            <div className="dashboardRewardArea1">
-              <div className="dashboardRewardArea1_div1">
-                <div className="dashboardRewardArea1_div1_title">
-                  Join activities and earn.
-                </div>
-                <div className="dashboardRewardArea1_div1_para">
-                  <span className="dashboardRewardArea1_div1_para_span">
-                    Grab
-                  </span>{" "}
-                  the rewards before they run out!
-                </div>
-                <div className="dashboardRewardArea1_div1_icon_div">
-                  <QuizOutlinedIcon className="dashboardRewardArea1_div1_icon" />
-                </div>
-              </div>
-              <div className="dashboardRewardArea1_div2">
-                <img
-                  src="/img/rewardHeroImg.png"
-                  alt=""
-                  className="dashboardRewardArea1_div2_img"
-                />
-              </div>
-              <img
-                src="/img/rewardDashboardBg.svg"
-                alt=""
-                className="dashboardRewardArea1_bg"
-              />
-            </div>
+
             <div className="customedhr">
               <hr /> <span className="customedhr_span">User Stats</span>
               <hr />

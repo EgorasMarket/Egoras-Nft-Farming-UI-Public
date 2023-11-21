@@ -6,7 +6,7 @@
 }
 
 .dark .about_us_section_hero {
-  background-image: radial-gradient(#274b35, #0f0e1c);
+  background-image: radial-gradient(#274b35, #121213);
   color: #fff;
 }
 
@@ -158,7 +158,7 @@ section.advantages_section {
 .advantages_section_area_2_cont1_head {
   font-size: 24px;
   font-weight: 600;
-  color: #7a5fc0;
+  color: #22ad62;
   display: flex;
   align-items: center;
   /* justify-content: space-between; */
@@ -247,10 +247,12 @@ section.help_u_section {
 }
 
 .dark .help_u_section_area_cont1 {
-  background: linear-gradient(244.66deg,
-      #2b603f80 1.9%,
-      #21332800 33.08%,
-      #161a1891 97.23%);
+  background: linear-gradient(
+    244.66deg,
+    #2b603f80 1.9%,
+    #21332800 33.08%,
+    #161a1891 97.23%
+  );
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0px 0px 15px #0d1611;
 }
@@ -522,7 +524,7 @@ section.featuredIn_section {
 }
 
 .feauturedIn_area_head {
-  background: #15142287;
+  background: #23232687;
   padding: 0.5em;
   width: 165px;
   text-align: center;
@@ -537,10 +539,12 @@ section.featuredIn_section {
 }
 
 .join_community_area {
-  background: linear-gradient(244.66deg,
-      #2b603f80 1.9%,
-      #21332800 33.08%,
-      #161a1891 97.23%);
+  background: linear-gradient(
+    244.66deg,
+    #2b603f80 1.9%,
+    #21332800 33.08%,
+    #161a1891 97.23%
+  );
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0px 0px 15px #0d1611;
   padding: 4em;
@@ -660,7 +664,7 @@ button.join_community_area1_btn_btn {
   .mobile_road_map_line_div {
     width: 15px;
     height: 78em;
-    background: #7a5fc0;
+    background: #22ad62;
     margin: auto;
     margin-left: 1em;
   }

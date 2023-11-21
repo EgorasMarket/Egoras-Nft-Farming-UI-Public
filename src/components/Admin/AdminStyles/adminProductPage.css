@@ -14,7 +14,7 @@
 
 .editProductDiv_area {
   width: 41em;
-  background: #151422;
+  background: #232326;
   padding: 2em;
   overflow: scroll;
   position: relative;
@@ -81,12 +81,12 @@
   align-items: center;
   width: 100%;
   padding: 1em 2em;
-  background: #151422;
+  background: #232326;
   /* margin: 1em; */
   /* margin-right: 0em; */
   /* margin-left: 0em; */
   border-radius: 10px;
-  border: solid 1px #1f1e2e;
+  border: solid 1px #313135;
   color: #fff;
   padding-top: 2em;
   position: relative;
@@ -109,7 +109,7 @@
   padding: 10px;
   width: 100%;
   border-radius: 10px;
-  border: solid 1px #1f1e2e;
+  border: solid 1px #313135;
   background: #0e1611;
   color: #fff;
 }

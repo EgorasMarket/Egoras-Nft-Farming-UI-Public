@@ -130,7 +130,7 @@
   white-space: nowrap;
 }
 .display_tokens_drop_not_select {
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
 }
 .asset_icon {
@@ -155,7 +155,7 @@
   width: 100% !important;
   font-size: 24px !important;
   cursor: pointer;
-  color: #7a5fc0;
+  color: #22ad62;
 }
 .connect_btn_div {
   display: flex;
@@ -225,7 +225,7 @@
 /* ============ */
 .Jelly-module_container__LB5dG:after,
 .Jelly-module_container__LB5dG:before {
-  background: #7a5fc0 !important;
+  background: #22ad62 !important;
 }
 .Jelly-module_container__LB5dG {
   margin: auto !important;

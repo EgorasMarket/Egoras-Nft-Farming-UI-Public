@@ -39,7 +39,7 @@
   margin-left: 0em;
   border-radius: 10px;
   border: solid 1px #e5e5e5;
-  color: #13121f;
+  color: #000;
   display: flex;
   flex-direction: column;
 }
@@ -57,9 +57,9 @@
 }
 
 .dark .burn_egc_div {
-  background: #151422;
+  background: #232326;
   color: #fff;
-  border: solid 1px #1f1e2e;
+  border: solid 1px #313135;
 }
 
 .burn_egc_div_1 {
@@ -76,18 +76,18 @@
 }
 
 .dark .burn_egc_div_1_cont1 {
-  color: #787690;
+  color: #80808e;
 }
 
 .burn_egc_div_1_cont1_div1 {
   display: flex;
   align-items: center;
   margin-left: 6px;
-  color: #7a5fc0;
+  color: #22ad62;
 }
 
 .dark .burn_egc_div_1_cont1_div1 {
-  color: #9e94b8;
+  color: #9cc4ae;
 }
 
 .vertical_line {
@@ -138,11 +138,11 @@
   overflow-wrap: anywhere;
   text-align: center;
   line-height: 1;
-  background: #7a5fc01c;
+  background: #22ad621c;
 }
 
 .dark .burn_egc_div_1_cont1_div1_span {
-  background: #9e94b81a;
+  background: #2d634626;
 }
 
 .burn_egc_div__button_burn {
@@ -150,7 +150,7 @@
   padding: 10px;
   border-radius: 8px;
   border: none;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
 }
 
@@ -161,18 +161,18 @@
 }
 
 .dark .burn_egc_div__button_burn:disabled {
-  background: #3b3959;
-  color: #676588;
+  background: #1b3326;
+  color: #436050;
 }
 
 .dark .analytics_container_1 {
-  background: #151422;
-  border: solid 1px #1f1e2e;
+  background: #232326;
+  border: solid 1px #313135;
   color: #fff;
 }
 
 .analytics_container_1_head {
-  color: #787690;
+  color: #80808e;
 }
 
 .analytics_container_1_Amount {
@@ -187,11 +187,11 @@
 
 .analytics_container_1_Amount_span {
   font-size: 16px;
-  color: #787690;
+  color: #80808e;
 }
 
 .assets_chart_area2 tspan {
-  fill: #787690;
+  fill: #80808e;
   font-size: 14px;
   font-weight: 400;
 }
@@ -270,6 +270,5 @@
 
   .burn_egc_div__button_burn {
     width: 100%;
-
   }
 }

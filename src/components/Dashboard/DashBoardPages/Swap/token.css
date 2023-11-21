@@ -97,7 +97,7 @@
   padding: 20px;
   background: #f8fffb;
   box-shadow: 0px 0px 10px #a2c5b075;
-  border-left: 1px solid #7a5fc0;
+  border-left: 1px solid #22ad62;
   border-radius: 10px;
 }
 .schedule-section {
@@ -111,7 +111,7 @@
   height: 24px;
   width: 24px;
   margin-bottom: 16px;
-  color: #7a5fc0;
+  color: #22ad62;
 }
 .desc {
   font-size: 12px;
@@ -122,7 +122,7 @@
 .chartTitile {
   font-size: 16px;
   font-weight: 600;
-  color: #7a5fc0;
+  color: #22ad62;
   margin-bottom: 8px;
   text-align: left;
 }
@@ -135,7 +135,7 @@
 .stats-value {
   font-size: 18px;
   font-weight: 600;
-  color: #7a5fc0;
+  color: #22ad62;
   display: flex;
   align-items: flex-end;
   width: 100%;
@@ -165,7 +165,7 @@ tspan {
 .staked-title {
   font-size: 16px;
   font-weight: 600;
-  color: #7a5fc0;
+  color: #22ad62;
   margin-bottom: 8px;
   text-align: left;
 }
@@ -177,11 +177,11 @@ tspan {
 .locked-token-widget .title {
   font-size: 14px;
   font-weight: 600;
-  color: #7a5fc0;
+  color: #22ad62;
 }
 .locked-token-widget .value {
   font-size: 30px;
-  color: #7a5fc0;
+  color: #22ad62;
   display: flex;
   align-items: flex-end;
   font-weight: 600;
@@ -277,7 +277,7 @@ svg.recharts-surface {
   border: none;
   font-size: 18px;
   font-weight: bold;
-  background-color: #7a5fc0;
+  background-color: #22ad62;
   border-radius: 30px;
   font-weight: 600;
   white-space: normal;
@@ -395,7 +395,7 @@ span.recharts-legend-item-text {
   font-weight: bold;
   width: -moz-fit-content;
   width: fit-content;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   border: none;
   border-radius: 10px;
@@ -576,7 +576,7 @@ h1.eusd-token-page {
 .span2-txts {
   font-size: 38px;
   font-weight: 600;
-  color: #7a5fc0;
+  color: #22ad62;
   margin: 0;
 }
 .span3-txts {

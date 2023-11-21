@@ -11,32 +11,72 @@
   align-items: flex-end;
   color: #fff;
   width: 100%;
-  justify-content: center;
-  margin-top: 1.5em;
+  /* justify-content: flex-start; */
+  margin-top: 0em;
   height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
 }
 .setRouterAddressDiv1 {
   display: flex;
   flex-direction: column;
   color: #89a98e;
-  margin-right: 10px;
-  margin-left: 10px;
+  width: 100%;
 }
 .setRouterAddressInput {
   padding: 15px;
-  width: 376px;
+  width: 100%;
   border-radius: 13px;
   background: none;
   border: solid 2px #526555;
   color: silver;
 }
 .setRouterAddressBtn {
-  height: 100%;
+  /* height: 100%; */
   padding: 10px;
-  width: 119px;
   border-radius: 10px;
   border: none;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   margin-right: 10px;
+  width: 200px;
+}
+.setRouterAddressDiv1_title {
+  margin-bottom: 10px;
+}
+.settings_sections {
+  padding: 2em;
+  background: #202020;
+  margin-top: 1em;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.settings_section1 {
+  margin-bottom: 2em;
+  border-bottom: solid 1px #2f2f2f;
+  padding-bottom: 2em;
+  display: grid;
+  gap: 3em;
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-content: flex-start;
+}
+.settings_section1_div1 {
+  display: flex;
+  flex-direction: column;
+  /* margin-bottom: 2em; */
+}
+.settings_section1_div2 {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2em;
+  justify-content: center;
+}
+.setRouterAddressDiv_address_divs {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 1em;
+  width: 100%;
 }

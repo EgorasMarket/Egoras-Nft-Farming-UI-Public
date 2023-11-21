@@ -141,12 +141,12 @@ const Footer = () => {
                   <a href="#">
                     {" "}
                     <img
-                      src="/img/martgpt_logo_dark.svg"
+                      src="/img/egoras-logo.svg"
                       alt="..."
                       className="egr2-logo"
                     />
                     <img
-                      src="/img/martgpt_logo.svg"
+                      src="/img/logoVideoThumbnail.svg"
                       alt="..."
                       className="egr2-logo2"
                     />

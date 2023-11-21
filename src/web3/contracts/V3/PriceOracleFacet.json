@@ -97,31 +97,25 @@
     {
       "inputs": [
         {
-          "internalType": "uint256[]",
-          "name": "_prices",
-          "type": "uint256[]"
-        },
-        {
-          "internalType": "string[]",
-          "name": "_tickers",
-          "type": "string[]"
-        }
-      ],
-      "name": "updateTickerPrices",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
           "internalType": "string",
           "name": "_ticker",
           "type": "string"
         }
       ],
-      "name": "price",
+      "name": "setNairaUSDTicker",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getStakingAndBuyingTokenPrices",
       "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
         {
           "internalType": "uint256",
           "name": "",
@@ -129,46 +123,6 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function",
-      "constant": true
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "_ticker",
-          "type": "string"
-        }
-      ],
-      "name": "setEGCUSDTicker",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_pythia",
-          "type": "address"
-        }
-      ],
-      "name": "setPythia",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_pythia",
-          "type": "address"
-        }
-      ],
-      "name": "suspendPythia",
-      "outputs": [],
-      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -188,8 +142,7 @@
         }
       ],
       "stateMutability": "pure",
-      "type": "function",
-      "constant": true
+      "type": "function"
     }
   ]
 }

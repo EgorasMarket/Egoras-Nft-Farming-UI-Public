@@ -82,7 +82,7 @@ button.pool_detail_heading_area1_invest_btn {
   padding: 10px 0px;
   border-radius: 10px;
   border: none;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
 }
 
@@ -305,7 +305,7 @@ button.pool_detail_heading_area1_invest_btn {
 } */
 .pool_lend_details_link_active .asset_overview_link_icon {
   background: #c6c5dc;
-  color: #7a5fc0;
+  color: #22ad62;
   padding: 3px;
   font-size: 23px !important;
   border-radius: 50%;
@@ -383,8 +383,8 @@ button.pool_detail_heading_area1_invest_btn {
 .back_btn {
   padding: 5px 20px;
   border-radius: 6px;
-  border: solid 1px #7a5fc0;
-  background: #7a5fc0;
+  border: solid 1px #22ad62;
+  background: #22ad62;
   color: #ffffff;
 }
 
@@ -404,7 +404,7 @@ button.pool_detail_heading_area1_invest_btn {
 }
 
 .dark .back_modal_cont_loading {
-  background: #151422;
+  background: #232326;
   border: solid 1px #4f695b;
   color: #fff;
 }
@@ -495,7 +495,7 @@ button.pool_detail_heading_area1_invest_btn {
   padding: 15px 0px;
   width: 100%;
   border-radius: 10px;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   font-weight: 600;
   border: none;
@@ -608,8 +608,8 @@ button.pool_detail_heading_area1_invest_btn {
 }
 
 .dark .viaEarnings_modal_cont_div {
-  background: #151422;
-  border: solid 1px #262538;
+  background: #232326;
+  border: solid 1px #38383d;
   color: #fff;
 }
 
@@ -653,7 +653,7 @@ button.pool_detail_heading_area1_invest_btn {
   padding: 1em 0em;
   border-radius: 8px;
   border: none;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   font-weight: 600;
   box-shadow: 0px 4px 5px #b6b6b6;
@@ -664,7 +664,7 @@ button.pool_detail_heading_area1_invest_btn {
   padding: 1em 0em;
   border-radius: 8px;
   border: none;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   font-weight: 600;
   box-shadow: 0px 4px 5px #b6b6b6;
@@ -930,8 +930,8 @@ button.pool_detail_heading_area1_invest_btn {
 }
 
 .dark .goDoKycDiv_container {
-  background: #151422;
-  border: solid 1px #262538;
+  background: #232326;
+  border: solid 1px #38383d;
   color: #fff;
 }
 
@@ -951,7 +951,7 @@ button.pool_detail_heading_area1_invest_btn {
   border-radius: 10px;
   border: none;
   color: #fff;
-  background: #7a5fc0;
+  background: #22ad62;
 }
 
 .goDoKycDiv_container_para {

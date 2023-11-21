@@ -260,7 +260,6 @@ const DashboardReferral = ({ auth }) => {
         {/* ============================================================ */}
         {/* ============================================================ */}
         {/* Tokens Section Start */}
-
         <section className=" no-bg no_paddd">
           <div className="container relative">
             <div className="pool_deatail_area">
@@ -274,9 +273,6 @@ const DashboardReferral = ({ auth }) => {
                 </div>
               ) : (
                 <>
-                  {/* <button onClick={() => library.provider._handleDisconnect()}>
-                    Disconnect
-                  </button> */}
                   <div className="referral_banner_bg_div">
                     <img
                       src="/img/referralBanner.png"

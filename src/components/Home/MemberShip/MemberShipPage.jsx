@@ -29,8 +29,6 @@ import UpdatedErrorModal from "../../Dashboard/DashBoardPages/UpdatedAppPages/Up
 import UpdatedSuccessModal from "../../Dashboard/DashBoardPages/UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import {
   getConfigurationAmount,
-  unlockMemberShipEgcToken,
-  checkAllowanceMembership,
   checkAllowanceV3,
   unlockTokenV3,
 } from "../../../web3/index";

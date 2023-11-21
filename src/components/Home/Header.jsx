@@ -601,17 +601,12 @@ const Header = ({ togglemakeDark, check }) => {
               <div className="dashboard-area">
                 <a href="/" className="egr_logo2_mobil">
                   <img
-                    src="/img/martgpt_logo_dark.svg"
+                    src="/img/egoras-logo.svg"
                     alt="..."
                     className="egr-logo2"
                   />
-                  {/* <img
-                    src="/img/logoVideoThumbnail.svg"
-                    alt="..."
-                    className="egr-logo2dark"
-                  /> */}
                   <img
-                    src="/img/martgpt_logo.svg"
+                    src="/img/logoVideoThumbnail.svg"
                     alt="..."
                     className="egr-logo2dark"
                   />
@@ -621,17 +616,12 @@ const Header = ({ togglemakeDark, check }) => {
                   <a href="/">
                     {" "}
                     <img
-                      src="/img/martgpt_logo_dark.svg"
+                      src="/img/egoras-logo.svg"
                       alt="..."
                       className="egr-logo"
                     />
-                    {/* <img
-                      src="/img/logoVideoThumbnail.svg"
-                      alt="..."
-                      className="egr-logodark"
-                    /> */}
                     <img
-                      src="/img/martgpt_logo.svg"
+                      src="/img/logoVideoThumbnail.svg"
                       alt="..."
                       className="egr-logodark"
                     />
@@ -697,11 +687,6 @@ const Header = ({ togglemakeDark, check }) => {
                         <Authenticate isHome="false" />
                       </div>
                     )}
-                  </div>
-                  <div className="header_new_links">
-                    <a href="/app/market" className="Inventory_link">
-                      Inventory
-                    </a>
                   </div>
                 </div>
               </div>

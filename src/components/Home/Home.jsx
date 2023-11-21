@@ -191,7 +191,6 @@ const Home = () => {
   const [lockedValue, setLockedValue] = useState(0);
   const [totalAmountFrom, setTotalAmountFrom] = useState(0);
   const [totu, setTotu] = useState(0);
-  const [totalTVL, setTotalTVL] = useState(0);
   const [TradeVolume, setTradeVolume] = useState(0);
   const [activeTab, setActiveTab] = useState("distribute");
   // const [uiMode, setUiMode] = useState(localStorage.getItem("uiMode"));
@@ -326,30 +325,7 @@ const Home = () => {
     { img: "/img/FeaturedInLogos/FeaturedInLogos_6.svg" },
     { img: "/img/FeaturedInLogos/FeaturedInLogos_5.svg" },
   ];
-  useEffect(async (e) => {
-    // const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
-    let res = await tokenBalance(
-      "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-      "0xdA337c23F71b1FFc7b7ED345890B5eBA9eb5b599",
-      library.getSigner()
-    );
-    console.log(res);
-    console.log(formatEther(res.message));
-    let tvl = formatEther(res.message);
-    setTotalTVL(tvl * egcUsd);
-  });
-  // useEffect(async (e) => {
-  //   const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
-  //   let res = await tokenBalance(
-  //     "0x133e87c6fe93301c3c4285727a6f2c73f50b9c19",
-  //     "0xdA337c23F71b1FFc7b7ED345890B5eBA9eb5b599",
-  //     library.getSigner()
-  //   );
-  //   console.log(res);
-  //   console.log(formatEther(res.message));
-  //   let tvl = formatEther(res.message);
-  //   setTotalTVL(tvl * egc_usd);
-  // }, []);
+
   useEffect(async () => {
     const egc_usd = await GET_COIN_GEKO_PRICE_IN_USD();
     console.log("dddd");
@@ -411,14 +387,14 @@ const Home = () => {
                 <a href="/app" className="stake-hero-btn2">
                   Launch App <ExitToAppIcon className="exit-to-app" />
                 </a>
-                {!subscriptionStatus ? (
+                {/* {!subscriptionStatus ? (
                   <a href="/membership/sub" className="stake-hero-btn1">
                     Become a member
                   </a>
                 ) : null}
                 {/* <a href="/app/whitepaper" className="stake-hero-btn1">
                   Read Docs
-                </a> */}
+                </a> */}{" "}
               </div>
             </div>
 
@@ -521,11 +497,7 @@ const Home = () => {
         </div>
         {/* <img src="/img/hero_bg_bg.png" alt="" className="blurDrop-token2" /> */}
         {/* <img src="/img/hero_backdrop.png" alt="" className="hero_backdrop" /> */}
-        <img
-          src="/img/martgpt_logoand_hero_bg.png"
-          alt=""
-          className="hero_backdrop"
-        />
+        <img src="/img/hero_backdrop.png" alt="" className="hero_backdrop" />
       </section>
       {/* ==================== */}
       {/* ==================== */}
@@ -542,45 +514,10 @@ const Home = () => {
               <div className="how_it_works_update_new_area_1_title">
                 How it <span className="real_life">works</span>
               </div>
-              <div className="how_it_works_update_new_area_1_tab">
-                <div
-                  id="distribute"
-                  className={
-                    activeTab == "distribute"
-                      ? "how_it_works_update_new_area_1_tab_1_active"
-                      : "how_it_works_update_new_area_1_tab_1"
-                  }
-                  onClick={ToggleActiveTab}
-                >
-                  Distributors
-                </div>
-                <div
-                  id="defi"
-                  className={
-                    activeTab == "defi"
-                      ? "how_it_works_update_new_area_1_tab_1_active"
-                      : "how_it_works_update_new_area_1_tab_1"
-                  }
-                  onClick={ToggleActiveTab}
-                >
-                  Defi
-                </div>
-              </div>
             </div>
-            {activeTab === "distribute" ? <HowItWorksArea1 /> : null}
-            {activeTab === "defi" ? <HowItWorksArea2 /> : null}
+            <HowItWorksArea2 />
           </div>
         </div>
-        {/* <img
-          src="/img/right_lines_design.png"
-          alt=""
-          className="how_it_works_update_new_section_bg_right"
-        /> */}
-        <img
-          src="/img/left_lines_design.png"
-          alt=""
-          className="how_it_works_update_new_section_bg_left"
-        />
       </section>
       {/* ==================== */}
       {/* ==================== */}
@@ -590,184 +527,98 @@ const Home = () => {
       {/* ==================== */}
       {/* ==================== */}
       {/* ==================== */}
-      <section className="martgptfeauturesSection">
+      <section className="how_it_works_update_new_section">
         <div className="container">
-          <div className="martgptfeauturesSection_area">
-            <div className="martgptfeauturesSection_area1">
-              <div className="martgptfeauturesSection_area1_cont1">
-                <div className="martgptfeauturesSection_area1_cont1_title">
-                  Sructured credit to smart manufacturing in
-                  <span className="real_life"> emerging markets.</span>
-                </div>
-                <div className="martgptfeauturesSection_area1_cont1_para">
-                  Martgpt ecosystem could revolutionize structured credit
-                  provision in emerging markets, accelerate smart manufacturing
-                  adoption, and boost economic growth.
-                </div>
-              </div>
-              <div className="martgptfeauturesSection_area1_cont2">
-                <button className="martgptfeauturesSection_area1_cont2_btn">
-                  Get Started
-                </button>
-              </div>
+          {/* section2_img */}
+          <div className="how_it_works2_area">
+            <div className="how_it_works2_area_head">
+              Structured credit
+              <br /> to smart <span className="real_life"> manufacturing.</span>
             </div>
-            <div className="martgptfeauturesSection_area2">
-              <div className="martgptfeauturesSection_area2_cont1">
-                <div className="martgptfeauturesSection_area2_cont1_div2_cont1_border_first">
-                  <div className="martgptfeauturesSection_area2_cont1_div1">
-                    <div className="martgptfeauturesSection_area2_cont1_div1_icon">
-                      <img
-                        src="/img/audit_icon.svg"
-                        alt=""
-                        className="martgptfeauturesSection_area2_cont1_div2_cont1_icon_img2"
-                      />
+            <div className="how_it_works2_area_body">
+              <div className="how_it_works2_area_body_area1">
+                <div className="how_it_works2_area_body_area1_cont1">
+                  <div className="how_it_works2_area_body_area1_cont1_title">
+                    <img
+                      src="/img/section2_1_symbol.png"
+                      alt=""
+                      className="how_it_works2_area_body_area1_cont1_title_img"
+                    />
+                  </div>
+                  <div className="how_it_works2_area_body_area1_cont1_txts">
+                    <div className="how_it_works2_area_body_area1_cont1_txts_head">
+                      Liquidity Provider 50%
                     </div>
-                    <div className="martgptfeauturesSection_area2_cont1_div1_title">
-                      Improved traceability.
-                    </div>
-                    <div className="martgptfeauturesSection_area2_cont1_div1_para">
-                      Martgpt’s platform provides a detailed, end-to-end audit
-                      trail of all transactions associated with the components
-                      used in manufacturing, enabling users to track the
-                      provenance of components and verify their authenticity.
+                    <div className="how_it_works2_area_body_area1_cont1_txts_para">
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Aliquid eveniet fugiat ratione culpa modi quae iure eaque
+                      unde.
                     </div>
                   </div>
                 </div>
-                {/* ======== */}
-                {/* ======== */}
-                {/* ======== */}
-                {/* ======== */}
-                <div className="martgptfeauturesSection_area2_cont1_div2">
-                  <div className="martgptfeauturesSection_area2_cont1_div2_cont1_border">
-                    <div className="martgptfeauturesSection_area2_cont1_div2_cont1">
-                      <div className="martgptfeauturesSection_area2_cont1_div2_cont1_div1">
-                        <div className="martgptfeauturesSection_area2_cont1_div2_cont1_title">
-                          Automated payments.
-                        </div>
-                        <div className="martgptfeauturesSection_area2_cont1_div2_cont1_para">
-                          A decentralized infrastructure that enables automation
-                          of payments, which reduces errors and increases
-                          efficiency. For example, a maintenance provider can be
-                          paid automatically from the tresury when they perform
-                          maintenance on factory equipment.
-                        </div>
-                      </div>
-                      <div className="martgptfeauturesSection_area2_cont1_div2_cont1_icon">
-                        <img
-                          src="/img/wallet_pay_icon.svg"
-                          alt=""
-                          className="martgptfeauturesSection_area2_cont1_div2_cont1_icon_img"
-                        />
-                      </div>
-                    </div>
+                <div className="how_it_works2_area_body_area1_cont1">
+                  <div className="how_it_works2_area_body_area1_cont1_title">
+                    <img
+                      src="/img/section2_2_symbol.png"
+                      alt=""
+                      className="how_it_works2_area_body_area1_cont1_title_img"
+                    />
                   </div>
-                  {/* ======== */}
-                  {/* ======== */}
-                  {/* ======== */}
-                  {/* ======== */}
-                  <div className="martgptfeauturesSection_area2_cont1_div2_cont1_border_last">
-                    <div className="martgptfeauturesSection_area2_cont1_div2_cont1_last">
-                      <div className="martgptfeauturesSection_area2_cont1_div2_cont1_div1">
-                        <div className="martgptfeauturesSection_area2_cont1_div2_cont1_title">
-                          Improved human resources management
-                        </div>
-                        <div className="martgptfeauturesSection_area2_cont1_div2_cont1_para">
-                          A protocol that can help streamline a variety of
-                          traditionally labor-intensive HR tasks, such as
-                          tracking hours worked and paying workers accordingly.
-                          People's employment histories are recorded and
-                          authenticated.
-                        </div>
-                      </div>
-                      <div className="martgptfeauturesSection_area2_cont1_div2_cont1_icon">
-                        <img
-                          src="/img/hr_manage_icon.svg"
-                          alt=""
-                          className="martgptfeauturesSection_area2_cont1_div2_cont1_icon_img"
-                        />
-                      </div>
+                  <div className="how_it_works2_area_body_area1_cont1_txts">
+                    <div className="how_it_works2_area_body_area1_cont1_txts_head">
+                      Liquidity Provider 50%
+                    </div>
+                    <div className="how_it_works2_area_body_area1_cont1_txts_para">
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Aliquid eveniet fugiat ratione culpa modi quae iure eaque
+                      unde.
                     </div>
                   </div>
                 </div>
               </div>
-              {/* ========== */}
-              {/* ========== */}
-              {/* ========== */}
-              {/* ========== */}
-              {/* ========== */}
-              <div className="martgptfeauturesSection_area2_cont2">
-                <div className="martgptfeauturesSection_area2_cont1_div2_cont1_border_first">
-                  <div className="martgptfeauturesSection_area2_cont1_div1">
-                    <div className="martgptfeauturesSection_area2_cont1_div1_icon">
-                      <img
-                        src="/img/monitor_product_icon.svg"
-                        alt=""
-                        className="martgptfeauturesSection_area2_cont1_div2_cont1_icon_img2"
-                      />
+              <div className="how_it_works2_area_body_area2">
+                <img
+                  src="/img/section2_img.png"
+                  alt=""
+                  className="how_it_works2_area_body_area2_img"
+                />
+              </div>
+              <div className="how_it_works2_area_body_area3">
+                <div className="how_it_works2_area_body_area1_cont1">
+                  <div className="how_it_works2_area_body_area1_cont1_title">
+                    <img
+                      src="/img/section2_3_symbol.png"
+                      alt=""
+                      className="how_it_works2_area_body_area1_cont1_title_img"
+                    />
+                  </div>
+                  <div className="how_it_works2_area_body_area1_cont1_txts">
+                    <div className="how_it_works2_area_body_area1_cont1_txts_head">
+                      Liquidity Provider 50%
                     </div>
-                    <div className="martgptfeauturesSection_area2_cont1_div1_title">
-                      Product life-cycle monitoring.
-                    </div>
-                    <div className="martgptfeauturesSection_area2_cont1_div1_para">
-                      Product and component traceability throughout their entire
-                      lifecycle, including post-delivery, is essential for
-                      recalling batches of products if counterfeit components
-                      are detected during manufacturing.
+                    <div className="how_it_works2_area_body_area1_cont1_txts_para">
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Aliquid eveniet fugiat ratione culpa modi quae iure eaque
+                      unde.
                     </div>
                   </div>
                 </div>
-                {/* ======== */}
-                {/* ======== */}
-                {/* ======== */}
-                {/* ======== */}
-                <div className="martgptfeauturesSection_area2_cont1_div2">
-                  <div className="martgptfeauturesSection_area2_cont1_div2_cont1_border">
-                    <div className="martgptfeauturesSection_area2_cont1_div2_cont1">
-                      <div className="martgptfeauturesSection_area2_cont1_div2_cont1_div1">
-                        <div className="martgptfeauturesSection_area2_cont1_div2_cont1_title">
-                          Decentralized Finance liquidity
-                        </div>
-                        <div className="martgptfeauturesSection_area2_cont1_div2_cont1_para">
-                          The protocol allows users to stake tokens in order to
-                          participate in the manufacturing process and earn
-                          rewards. The manufacturing process is funded by the
-                          staked tokens, and the manufactured products are
-                          stored in the protocol's inventory.
-                        </div>
-                      </div>
-                      <div className="martgptfeauturesSection_area2_cont1_div2_cont1_icon">
-                        <img
-                          src="/img/liquidity_home_iocn.svg"
-                          alt=""
-                          className="martgptfeauturesSection_area2_cont1_div2_cont1_icon_img"
-                        />
-                      </div>
-                    </div>
+                <div className="how_it_works2_area_body_area1_cont1">
+                  <div className="how_it_works2_area_body_area1_cont1_title">
+                    <img
+                      src="/img/section2_4_symbol.png"
+                      alt=""
+                      className="how_it_works2_area_body_area1_cont1_title_img"
+                    />
                   </div>
-                  {/* ======== */}
-                  {/* ======== */}
-                  {/* ======== */}
-                  {/* ======== */}
-                  <div className="martgptfeauturesSection_area2_cont1_div2_cont1_border_last">
-                    <div className="martgptfeauturesSection_area2_cont1_div2_cont1_last">
-                      <div className="martgptfeauturesSection_area2_cont1_div2_cont1_div1">
-                        <div className="martgptfeauturesSection_area2_cont1_div2_cont1_title">
-                          Inventory management.
-                        </div>
-                        <div className="martgptfeauturesSection_area2_cont1_div2_cont1_para">
-                          A single-source inventory protocol provides real-time,
-                          comprehensive, and up-to-date perspicacity into
-                          product stock levels, thereby helping to forestall
-                          costly overstocking.
-                        </div>
-                      </div>
-                      <div className="martgptfeauturesSection_area2_cont1_div2_cont1_icon">
-                        <img
-                          src="/img/inventory_home_icon.svg"
-                          alt=""
-                          className="martgptfeauturesSection_area2_cont1_div2_cont1_icon_img"
-                        />
-                      </div>
+                  <div className="how_it_works2_area_body_area1_cont1_txts">
+                    <div className="how_it_works2_area_body_area1_cont1_txts_head">
+                      Liquidity Provider 50%
+                    </div>
+                    <div className="how_it_works2_area_body_area1_cont1_txts_para">
+                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                      Aliquid eveniet fugiat ratione culpa modi quae iure eaque
+                      unde.
                     </div>
                   </div>
                 </div>
@@ -775,11 +626,6 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <img
-          src="/img/structured_test_bg_art.png"
-          alt=""
-          className="martgptfeauturesSection_bg_img"
-        />
       </section>
       {/* ==================== */}
       {/* ==================== */}
@@ -789,46 +635,22 @@ const Home = () => {
       {/* ==================== */}
       {/* ==================== */}
       {/* ==================== */}
-      <section className="JoinMartGptSection">
+      <section className="community_section">
         <div className="container">
-          <div className="JoinMartGptArea">
-            <div className="JoinMartGptArea_1">
-              <div className="JoinMartGptArea_1_title">Join Now</div>
-              <div className="JoinMartGptArea_1_para">
-                Become a memeber and enjoy the benefits that comes with it.
+          <div className="community_section_area">
+            <div className="community_section_area1">
+              <div className="community_section_area1_title">
+                <span className="real_life"> Join </span> The Community
               </div>
-              <div className="JoinMartGptArea_1_btn_div">
-                <button className="JoinMartGptArea_1_btn">Use MartGpt</button>
+              <div className="community_section_area1_para">
+                Become A Part Of EGODAO Community And Have A Say <br />
+                In Continuous Protocol Development.
               </div>
             </div>
-            <div className="JoinMartGptArea_2">
-              <img
-                src="/img/martgpt_3d_edited_icon.png"
-                alt=""
-                className="JoinMartGptArea_2_img"
-              />
-            </div>
+            <div className="community_section_area2"></div>
           </div>
         </div>
-        {/* <img
-          src="/img/right_lines_design.png"
-          alt=""
-          className="JoinMartGptSection_bg_left"
-        /> */}
       </section>
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* ==================== */}
-      {/* <section className="martgptfeauturesSection">
-        <div className="container">
-          <div className="faq_home_area"></div>
-        </div>
-      </section> */}
     </div>
   );
 };

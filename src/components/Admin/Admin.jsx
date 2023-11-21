@@ -16,11 +16,10 @@ import AdminModifyMembership from "./AdminPages/AdminModifyMembership";
 import AdminProductsPage from "./AdminPages/AdminProductsPage";
 // import AdminMinorPage from "./AdminMinorPage";
 // import DashBoardUserDetails from "../Dashboard/DashBoardPages/DashBoardUserDetails";
-import PriceOracle from "./AdminPages/AdminSetRouter/PriceOracle";
-import SetRouter from "./AdminPages/AdminSetRouter/SetRouter";
 import { CALL_VERIFY_ADMIN_WALLET } from "../../services/adminServices";
 import { useWeb3React } from "@web3-react/core";
 import { Warning } from "@mui/icons-material";
+import AdminSettings from "./AdminPages/AdminSetRouter/AdminSettings";
 const Admin = ({ check, togglemakeDark }) => {
   const context = useWeb3React();
   const { account } = context;
@@ -72,12 +71,6 @@ const Admin = ({ check, togglemakeDark }) => {
                 <Route exact path="/admin/staff" component={AdminStaffPage} />
                 <Route
                   exact
-                  path="/admin/priceOracle"
-                  component={PriceOracle}
-                />
-                <Route exact path="/admin/setRouter" component={SetRouter} />
-                <Route
-                  exact
                   path="/admin/all/products"
                   component={AdminProductsPage}
                 />
@@ -91,6 +84,7 @@ const Admin = ({ check, togglemakeDark }) => {
                   path="/admin/modify/membership_plan"
                   component={AdminModifyMembership}
                 />
+                <Route exact path="/admin/settings" component={AdminSettings} />
               </Switch>
             </div>
           ) : (

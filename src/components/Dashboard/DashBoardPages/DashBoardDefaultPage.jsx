@@ -336,7 +336,7 @@ const DashBoardDefaultPage = () => {
                     <Line
                       type="monotone"
                       dataKey="APY"
-                      stroke="#7a5fc0"
+                      stroke="#22ad62"
                       activeDot={{ r: 7 }}
                     />
                   </LineChart>

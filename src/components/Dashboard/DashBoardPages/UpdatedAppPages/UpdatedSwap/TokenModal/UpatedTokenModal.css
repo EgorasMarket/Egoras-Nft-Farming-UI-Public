@@ -36,7 +36,7 @@
   border: solid 1px #9e9daf;
   background: #ffffff;
   overflow: scroll;
-  color: #7a5fc0;
+  color: #22ad62;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -46,8 +46,8 @@
 .dark .updatedTokenModal_area {
   background: grey;
   box-shadow: 3px 5px 20px 10px #000;
-  border: solid 1px #1f1e2e;
-  background: #151422;
+  border: solid 1px #313135;
+  background: #232326;
   color: #fff;
 }
 
@@ -63,7 +63,7 @@
 }
 
 .dark .updatedTokenModal_area1 {
-  border-bottom: solid 1px #2d2c41;
+  border-bottom: solid 1px #313135;
 }
 
 .updatedTokenModal_area1_head {
@@ -80,7 +80,7 @@
 
 .updatedTokenModal_area1_para {
   font-size: 12px;
-  color: #787690;
+  color: #80808e;
 }
 
 .updatedTokenModal_area1_search {
@@ -98,8 +98,8 @@
 }
 
 .dark .updatedTokenModal_area1_search_input {
-  border: solid 1px #2d2c41;
-  background: #0d0c14;
+  border: solid 1px #313135;
+  background: #000;
   color: #fff;
 }
 
@@ -126,8 +126,8 @@
 }
 
 .dark .updatedFavoriteToken_cont {
-  border: solid 1px #2d2c41;
-  background: #0d0c14;
+  border: solid 1px #313135;
+  background: #000;
   color: #fff;
 }
 
@@ -175,7 +175,7 @@
 }
 
 .dark .updatedTokenModal_area_body_area1:hover {
-  background: #2d2c41;
+  background: #313135;
   transition: 0.1s linear;
 }
 
@@ -206,7 +206,7 @@
 
 .updatedTokenModal_area_body_area1_cont1_div2_cont2 {
   font-size: 12px;
-  color: #787690;
+  color: #80808e;
 }
 
 .updatedTokenModal_area_body_area1_cont2 {

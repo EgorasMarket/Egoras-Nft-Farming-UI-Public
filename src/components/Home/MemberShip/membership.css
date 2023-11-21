@@ -141,8 +141,8 @@
 }
 
 .dark .updatedCooperativeSection1 {
-  background: #0d0c14;
-  background-image: radial-gradient(#1c1c1c, #0d0c14, #0d0c14);
+  background: #000;
+  background-image: radial-gradient(#1c1c1c, #000, #000);
 }
 
 .updatedCooperativeSection1_area {
@@ -182,7 +182,7 @@
 
 .updatedCooperativeSection1_area1_btn {
   margin-top: 2em;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   padding: 15px 0px;
   width: 200px;
@@ -246,7 +246,7 @@ section.popularProductsSection {
   /* height: 100vh; */
   padding: 6em 0em;
   /* display: flex; */
-  background: #0d0c14;
+  background: #000;
   /* overflow: scroll; */
 }
 
@@ -327,7 +327,7 @@ section.popularProductsSection {
 }
 
 .popularProductsSection_area_head_1_span {
-  color: #7a5fc0;
+  color: #22ad62;
 }
 
 .popularProductsSection_area_head_2 {
@@ -412,7 +412,7 @@ input[type="radio"] {
 }
 
 input[type="radio"]:checked + .selectPlanDiv2_area1_cont1_label:before {
-  background-color: #7a5fc0;
+  background-color: #22ad62;
   border-color: #997fda;
   padding: 2px;
 }
@@ -432,14 +432,14 @@ input[type="radio"]:checked + .selectPlanDiv2_area1_cont1_label:before {
 .selectPlanDiv1_head {
   font-size: 48px;
   font-weight: 700;
-  color: #7a5fc0;
+  color: #22ad62;
   line-height: 1;
   margin-bottom: 10px;
   width: 100%;
 }
 
 .selectPlanDiv1_sub_head {
-  color: #151422;
+  color: #232326;
   width: 60%;
   margin: auto;
 }
@@ -467,13 +467,13 @@ input[type="radio"]:checked + .selectPlanDiv2_area1_cont1_label:before {
 }
 
 .dark .selectPlanDiv2_area1 {
-  background: #151422;
-  border: solid 1px #1f1e2e;
+  background: #232326;
+  border: solid 1px #313135;
   box-shadow: 0px 4px 10px black;
 }
 
 .selectPlanDiv2_area1_active {
-  border: solid 1px #7a5fc0;
+  border: solid 1px #22ad62;
   text-align: left;
   display: flex;
   background: #ffffff;
@@ -485,7 +485,7 @@ input[type="radio"]:checked + .selectPlanDiv2_area1_cont1_label:before {
 }
 
 .dark .selectPlanDiv2_area1_active {
-  background: #151422;
+  background: #232326;
   box-shadow: 0px 4px 10px black;
 }
 
@@ -597,7 +597,7 @@ input[type="checkbox"]:checked + .checkBox_agree_div_body_label:before {
   font-weight: 600;
   color: #ffffff;
   text-align: center;
-  background: #7a5fc0;
+  background: #22ad62;
   /* height: 24px; */
   /* line-height: 1.1; */
 }
@@ -614,7 +614,7 @@ input[type="checkbox"]:checked + .checkBox_agree_div_body_label:before {
   border-radius: 10px;
   border: none;
   font-weight: 600;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   margin-top: 0em;
   width: 100%;
@@ -624,7 +624,7 @@ input[type="checkbox"]:checked + .checkBox_agree_div_body_label:before {
   padding: 15px;
   border-radius: 10px;
   font-weight: 600;
-  border: solid 1px #7a5fc0;
+  border: solid 1px #22ad62;
   background: no-repeat;
   color: #fff;
   margin-top: 0em;
@@ -633,7 +633,7 @@ input[type="checkbox"]:checked + .checkBox_agree_div_body_label:before {
 }
 
 .selectPlanDiv2_area1_checkout_btn_outline span {
-  color: #7a5fc0;
+  color: #22ad62;
 }
 
 .dark .selectPlanDiv2_area1_checkout_btn_outline span {
@@ -820,7 +820,7 @@ video.video-poster {
 }
 
 .coop_color {
-  color: #7a5fc0;
+  color: #22ad62;
   font-weight: 700;
 }
 
@@ -837,7 +837,7 @@ video.video-poster {
   border-radius: 13px;
   border: none;
   color: #fff;
-  background: #7a5fc0;
+  background: #22ad62;
   font-weight: 600;
   box-shadow: 0px 10px 15px #23392d;
 }
@@ -858,7 +858,7 @@ video.video-poster {
 }
 
 .dark .multipleGoalsSection {
-  background: #0d0c14;
+  background: #000;
   /* background-image: linear-gradient(221deg, black, #080c0a, #21382a); */
 }
 
@@ -934,7 +934,7 @@ video.video-poster {
   background: #030303;
   border-radius: 100px;
   z-index: 1;
-  box-shadow: 0px 10px 10px #0d0c14;
+  box-shadow: 0px 10px 10px #000;
   padding: 10px;
 }
 
@@ -987,7 +987,7 @@ video.video-poster {
   width: 195px;
   border-radius: 12px;
   border: none;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   margin-top: 2em;
 }
@@ -1006,7 +1006,7 @@ video.video-poster {
 
 .egorasVideoArea_body {
   padding: 8em;
-  background: #0d0c14;
+  background: #000;
   border-radius: 50%;
   box-shadow: 0px 0px 85px black;
   border: solid 1px #232323;
@@ -1144,7 +1144,7 @@ px
 .dark .benefits_section1 {
   position: relative;
   padding: 6em 0em;
-  background: #0d0c14;
+  background: #000;
   /* background-image: linear-gradient(309deg, black, #080c0a, #21382a); */
 }
 
@@ -1274,7 +1274,7 @@ x .benefits_section1_area2_body1_cont2 {
 }
 
 .dark .coop_blog_section {
-  background: #0d0c14;
+  background: #000;
   /* background-image: linear-gradient(171deg, black, #080c0a, #21382a); */
 }
 
@@ -1442,7 +1442,7 @@ x .benefits_section1_area2_body1_cont2 {
 }
 
 .dark .subscribeNow_section {
-  background: #0d0c14;
+  background: #000;
 }
 
 .subscribeNow_area {
@@ -1496,7 +1496,7 @@ x .benefits_section1_area2_body1_cont2 {
   padding: 15px 0px;
   border-radius: 10px;
   border: none;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   font-weight: 600;
 }
@@ -1644,7 +1644,7 @@ x .benefits_section1_area2_body1_cont2 {
   margin: 15px 0px;
   font-size: 18px;
   font-weight: 600;
-  color: #7a5fc0;
+  color: #22ad62;
 }
 
 .withdraw_btn {
@@ -1652,7 +1652,7 @@ x .benefits_section1_area2_body1_cont2 {
   width: 100%;
   border-radius: 13px;
   border: none;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   font-weight: 600;
   font-size: 18px;
@@ -1776,7 +1776,7 @@ x .benefits_section1_area2_body1_cont2 {
 }
 
 .dark .joinCooperativeDiv {
-  background: #0d0c14;
+  background: #000;
   color: #fff;
 }
 
@@ -1797,7 +1797,7 @@ x .benefits_section1_area2_body1_cont2 {
 
 .joinCooperativeModalDiv_area_tab1 {
   padding: 9px;
-  background: #7a5fc0;
+  background: #22ad62;
   height: 100%;
   /* width: 120px; */
   width: 100%;
@@ -1825,7 +1825,7 @@ x .benefits_section1_area2_body1_cont2 {
 }
 
 .dark .joinCooperativeModalDiv_area_body {
-  background: #151422;
+  background: #232326;
   box-shadow: -5px 10px 18px #000000;
 }
 
@@ -1834,7 +1834,7 @@ x .benefits_section1_area2_body1_cont2 {
   width: 100%;
   border-radius: 10px;
   border: none;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   font-weight: 600;
   display: flex;
@@ -1914,7 +1914,7 @@ x .benefits_section1_area2_body1_cont2 {
   padding: 15px;
   border-radius: 13px;
   border: none;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   font-weight: 600;
 }
@@ -1934,7 +1934,7 @@ x .benefits_section1_area2_body1_cont2 {
   padding: 2px;
   font-size: 18px;
   margin-right: 6px;
-  color: #7a5fc0;
+  color: #22ad62;
 }
 .joinCooperativeModalDiv_area_body1_div1_icon2 {
   background: #e2e2e2;
@@ -1942,7 +1942,7 @@ x .benefits_section1_area2_body1_cont2 {
   padding: 2px;
   font-size: 18px !important;
   margin-right: 6px;
-  color: #7a5fc0;
+  color: #22ad62;
 }
 .joinCooperativeModalDiv_area_body1_div1_icon2_close {
   background: #e2e2e2;
@@ -1968,7 +1968,7 @@ x .benefits_section1_area2_body1_cont2 {
   height: 100%;
   padding: 2em;
   border-radius: 20px;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -2102,7 +2102,7 @@ x .benefits_section1_area2_body1_cont2 {
 .payViaFortDiv_area_1 {
   width: 100%;
   overflow: hidden;
-  border: solid 1px #7a5fc0;
+  border: solid 1px #22ad62;
   border-radius: 11px;
   padding: 1em;
   background: #140f22;
@@ -2143,8 +2143,8 @@ x .benefits_section1_area2_body1_cont2 {
   width: 100%;
   padding: 10px;
   border-radius: 10px;
-  border: solid 1px #7a5fc0;
-  background: #151422;
+  border: solid 1px #22ad62;
+  background: #232326;
   color: #adabc5;
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
@@ -2155,7 +2155,7 @@ x .benefits_section1_area2_body1_cont2 {
   border: none;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #ffffff;
   font-size: 14px;
   font-weight: 500;
@@ -2205,9 +2205,9 @@ x .benefits_section1_area2_body1_cont2 {
   cursor: pointer;
 }
 .dark .Step2Div2_member_div2_body_1 {
-  background: #151422;
+  background: #232326;
   box-shadow: -5px 10px 18px #000000;
-  border: solid 1px #3b3959;
+  border: solid 1px #1b3326;
 }
 .Step2Div2_member_div2_body_1_active {
   padding: 1.5em;
@@ -2221,12 +2221,12 @@ x .benefits_section1_area2_body1_cont2 {
   max-width: 300px;
   box-shadow: 0px 11px 17px #bdb5d0;
   cursor: pointer;
-  border: solid #7a5fc0 2px;
+  border: solid #22ad62 2px;
 }
 .dark .Step2Div2_member_div2_body_1_active {
-  background: #151422;
+  background: #232326;
   box-shadow: -5px 10px 18px #000000;
-  border: solid #7a5fc0 2px;
+  border: solid #22ad62 2px;
 }
 .Step2Div2_member_div2_body_1_txts {
   display: flex;
@@ -2317,8 +2317,8 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
   width: 100%;
   padding: 12px;
   border-radius: 8px;
-  border: solid 1px #7a5fc0;
-  background: #7a5fc0;
+  border: solid 1px #22ad62;
+  background: #22ad62;
   font-size: 14px;
   color: #fff;
 }
@@ -2341,7 +2341,7 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
 }
 .Step2Div2_member_div2_body_1_amount_title_slashed_amount_save {
   text-decoration: none !important;
-  color: #7a5fc0;
+  color: #22ad62;
   font-weight: 500;
 }
 
@@ -2373,7 +2373,7 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
   box-shadow: -9px 1px 20px #0000004d;
 }
 .dark .planSubDiv_area {
-  background: #151422;
+  background: #232326;
   box-shadow: -5px 10px 18px #000000;
 }
 .planSubDiv_area_1 {
@@ -2409,7 +2409,7 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
 .planSubDiv_area_body_head_1_plan {
   font-size: 42px;
   font-weight: 600;
-  color: #7a5fc0;
+  color: #22ad62;
 }
 .planSubDiv_area_body_area {
   display: flex;
@@ -2422,7 +2422,7 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
   flex-direction: column;
 }
 .subscribe_btn_btn {
-  background: #7a5fc0;
+  background: #22ad62;
   border: none;
   padding: 15px;
   width: 100%;
@@ -2437,7 +2437,7 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
 }
 .subscribe_btn_btn2 {
   background: none;
-  border: solid #7a5fc0;
+  border: solid #22ad62;
   padding: 15px;
   width: 100%;
   border-radius: 13px;
@@ -2602,7 +2602,7 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
 
   .egorasVideoArea_body {
     padding: 3em;
-    background: #0d0c14;
+    background: #000;
     border-radius: 50%;
     box-shadow: 0px 0px 85px black;
     border: solid 1px #232323;
@@ -2689,7 +2689,7 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
     align-items: center;
     width: 100%;
     justify-content: space-between;
-    background: #151422;
+    background: #232326;
     box-shadow: -5px 10px 18px #000000;
     padding: 3em;
     border-radius: 20px;
@@ -2761,7 +2761,7 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
     align-items: center;
     width: 100%;
     justify-content: space-between;
-    background: #151422;
+    background: #232326;
     box-shadow: -5px 10px 18px #000000;
     padding: 3em;
     border-radius: 20px;
@@ -2977,8 +2977,8 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
     height: 80vh;
     padding: 4em 0em;
     /* display: flex; */
-    /* background: #0d0c14 ; */
-    /* background-image: radial-gradient(#1c1c1c, #0d0c14 , #0d0c14 ); */
+    /* background: #000 ; */
+    /* background-image: radial-gradient(#1c1c1c, #000 , #000 ); */
     overflow: hidden;
   }
 
@@ -3011,8 +3011,8 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
     height: 80vh;
     padding: 3em 0em;
     /* display: flex; */
-    /* background: #0d0c14 ; */
-    /* background-image: radial-gradient(#1c1c1c, #0d0c14 , #0d0c14 ); */
+    /* background: #000 ; */
+    /* background-image: radial-gradient(#1c1c1c, #000 , #000 ); */
     overflow: hidden;
   }
 }
@@ -3035,14 +3035,14 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
     height: 80vh;
     padding: 2em 0em;
     /* display: flex; */
-    /* background: #0d0c14 ; */
-    /* background-image: radial-gradient(#1c1c1c, #0d0c14 , #0d0c14 ); */
+    /* background: #000 ; */
+    /* background-image: radial-gradient(#1c1c1c, #000 , #000 ); */
     overflow: hidden;
   }
 
   .updatedCooperativeSection1_area1_btn {
     margin-top: 1em;
-    background: #7a5fc0;
+    background: #22ad62;
     color: #fff;
     padding: 10px 0px;
     width: 130px;

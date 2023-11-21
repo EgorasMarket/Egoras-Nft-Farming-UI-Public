@@ -166,7 +166,7 @@
 }
 
 .display_tokens_drop_not_select {
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
 }
 
@@ -297,7 +297,6 @@
 }
 
 @-webkit-keyframes sk-foldCubeAngle {
-
   0%,
   10% {
     -webkit-transform: perspective(140px) rotateX(-180deg);
@@ -321,7 +320,6 @@
 }
 
 @keyframes sk-foldCubeAngle {
-
   0%,
   10% {
     -webkit-transform: perspective(140px) rotateX(-180deg);

@@ -25,8 +25,6 @@
   color: #5c5a73;
 }
 
-
-
 .resfresh_icon_div_icon {
   width: 100%;
 }
@@ -69,7 +67,7 @@
   width: 100%;
   border-radius: 15px;
   font-size: 15px;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #ffff;
   border: none;
   font-weight: 500;
@@ -179,9 +177,9 @@
 }
 
 .dark .toggle_swap_inputs {
-  background: #0f0e1c;
+  background: #121213;
   color: #a8b9aa !important;
-  border: solid 5px #151422;
+  border: solid 5px #232326;
 }
 
 .liquidity_cont_body_conts_cont1 {
@@ -195,7 +193,7 @@
   align-items: center;
   margin-bottom: 5px;
   background: #152016;
-  color: #787690;
+  color: #80808e;
   font-size: 12px;
   padding: 5px 10px;
   border-radius: 9px;
@@ -231,7 +229,7 @@
 
 .dark .moreSwapInfoDiv {
   color: #fff;
-  border: solid 1.3px #2d2c41;
+  border: solid 1.3px #313135;
 }
 
 .moreSwapInfoDiv_div1 {
@@ -241,7 +239,7 @@
 }
 
 .dark .moreSwapInfoDiv_div1 {
-  border-bottom: solid 1px #2d2c41;
+  border-bottom: solid 1px #313135;
 }
 
 .moreSwapInfoDiv_div2 {
@@ -249,7 +247,7 @@
   flex-direction: column;
   font-size: 12px;
   margin-top: 10px;
-  color: #787690;
+  color: #80808e;
 }
 
 .moreSwapInfoDiv_div2_area1 {
@@ -278,13 +276,13 @@
   width: 100%;
   height: 100%;
   margin-right: 3em;
-  background: #0d0c149e;
+  background: #0009e;
   padding: 0;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   backdrop-filter: blur(3px);
-  border: solid 1px #2d2c41;
+  border: solid 1px #313135;
 }
 
 .tradeViewAreaCont .analytics_container_1_Amount {
@@ -319,7 +317,7 @@
   font-size: 12px;
   font-weight: 500;
   transition: all 0.2s ease 0s;
-  background-color: #7a5fc0;
+  background-color: #22ad62;
   color: #ffffff;
 }
 
@@ -404,7 +402,7 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
-  color: #787690;
+  color: #80808e;
 }
 
 .swap_container_settings_cont_area1 {
@@ -474,9 +472,9 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
 }
 
 .dark .swap_container_settings_cont {
-  color: #787690;
-  background: #0d0c148f;
-  border: solid 1px #2d2c41;
+  color: #80808e;
+  background: #0008f;
+  border: solid 1px #313135;
 }
 
 .tradingView_container_1_chart {
@@ -495,7 +493,7 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #0d0c1496;
+  background: #00096;
   z-index: 1000000;
   overflow: scroll;
   display: flex;
@@ -511,9 +509,9 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
   max-width: 500px;
   margin: auto;
   padding: 1em;
-  background: #151422;
+  background: #232326;
   border-radius: 15px;
-  border: solid 1px #2d2c41;
+  border: solid 1px #313135;
   position: relative;
   z-index: 1;
 }
@@ -642,7 +640,7 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #3b3959;
+  background-color: #1b3326;
   transition: 0.4s;
   border-radius: 34px;
   padding: 0px 7px;
@@ -659,13 +657,13 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
   width: 29px;
   left: -7px;
   bottom: 4px;
-  background-color: #151422;
+  background-color: #232326;
   transition: 0.4s;
   border-radius: 50%;
   top: 0;
   bottom: 0;
   margin: auto;
-  border: solid 1px #2d2c41;
+  border: solid 1px #313135;
   box-shadow: 0px 0px 10px #000;
   background-image: url("./candleStickIcon.png");
   background-position: center;
@@ -674,13 +672,13 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
   background-blend-mode: soft-light;
 }
 
-input:checked+.ToggleChartDiv_checkBox_slider {
+input:checked + .ToggleChartDiv_checkBox_slider {
   background-color: #776d95;
   color: #000;
   font-weight: 600;
 }
 
-input:checked+.ToggleChartDiv_checkBox_slider::before {
+input:checked + .ToggleChartDiv_checkBox_slider::before {
   transform: translateX(28px);
 
   left: -1px;
@@ -710,7 +708,7 @@ input:checked+.ToggleChartDiv_checkBox_slider::before {
   align-items: center;
   margin-bottom: 0px;
   /* background: #152016; */
-  color: #787690;
+  color: #80808e;
   font-size: 12px;
   padding: 5px 0px;
   border-radius: 9px;
@@ -718,8 +716,8 @@ input:checked+.ToggleChartDiv_checkBox_slider::before {
 }
 
 .dark .swap_price_slippage_div {
-  color: #787690;
-  /* border: solid 2px #2d2c41; */
+  color: #80808e;
+  /* border: solid 2px #313135; */
 }
 
 .swap_price_slippage_div1 {
@@ -827,7 +825,7 @@ input:checked+.ToggleChartDiv_checkBox_slider::before {
   border-radius: 50px;
   cursor: pointer;
   color: #ffffff;
-  border: solid #7a5fc0;
+  border: solid #22ad62;
   background: #211f27;
 }
 
@@ -863,7 +861,7 @@ input:checked+.ToggleChartDiv_checkBox_slider::before {
   width: 100%;
   min-width: 100px;
   justify-content: center;
-  border: solid #7a5fc0;
+  border: solid #22ad62;
   border-radius: 50px;
   height: 100%;
   color: #ffffff;

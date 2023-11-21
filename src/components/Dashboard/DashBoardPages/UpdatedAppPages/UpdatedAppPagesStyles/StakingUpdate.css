@@ -24,15 +24,15 @@
   background: #ffffff;
   border: solid 1px #dadae4;
   /* box-shadow: 0px 10px 20px #a9a8b9; */
-  color: #151422;
+  color: #232326;
   border-radius: 10px;
   padding-bottom: 1em;
   margin-bottom: 1.5em;
 }
 
 .dark .lock_container_cont1_div1_lock_div {
-  background: #151422;
-  border: solid 1px #1f1e2e;
+  background: #232326;
+  border: solid 1px #313135;
   /* box-shadow: 0px 10px 20px #000000; */
   color: #fff;
 }
@@ -49,8 +49,8 @@
 }
 
 .dark .faq_container {
-  background: #151422;
-  border: solid 1px #2d2c41;
+  background: #232326;
+  border: solid 1px #313135;
 }
 
 .faq_container_title {
@@ -64,7 +64,7 @@
 
 .dark .faq_container_title {
   color: #fff;
-  border-bottom: solid 1px #2d2c41;
+  border-bottom: solid 1px #313135;
 }
 
 /* .faq_container_body.makeStyles-heading-23 {
@@ -84,13 +84,13 @@
 }
 
 .dark .lock_container_cont1_div1_lock_div_tabs {
-  border-bottom: solid 1px #2d2c41;
+  border-bottom: solid 1px #313135;
 }
 
 .lock_container_cont1_div1_lock_div_tab1 {
   margin-right: 2em;
   cursor: pointer;
-  color: #787690;
+  color: #80808e;
 }
 
 .lock_container_cont1_div1_lock_div_tab1_active {
@@ -104,7 +104,7 @@
   content: "";
   width: 100%;
   height: 2px;
-  background: #7a5fc0;
+  background: #22ad62;
   position: absolute;
   bottom: -40%;
   left: 0;
@@ -132,7 +132,7 @@
 }
 
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_head {
-  color: #787690;
+  color: #80808e;
   font-size: 18px;
 }
 
@@ -152,13 +152,13 @@
 }
 
 .dark .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_span {
-  border-bottom: solid 1px #2d2c41;
+  border-bottom: solid 1px #313135;
 }
 
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_span_span2 {
   font-size: 14px;
   font-weight: 300;
-  color: #787690;
+  color: #80808e;
 }
 
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div_button {
@@ -173,17 +173,22 @@
 
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv {
   font-size: 12px;
-  color: #787690;
+  color: #80808e;
   display: flex;
   flex-direction: column;
   margin-top: 0.5em;
 }
 
-.lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv div span {
+.lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv
+  div
+  span {
   color: rgb(0, 0, 0) !important;
 }
 
-.dark .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv div span {
+.dark
+  .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv
+  div
+  span {
   color: #fff !important;
 }
 
@@ -209,7 +214,7 @@
   padding: 15px 0px;
   width: 100%;
   border: none;
-  background: #7a5fc0;
+  background: #22ad62;
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
@@ -218,7 +223,7 @@
 
 .dark .lock_container_cont1_div1_lock_div_lock_body_input_body_btn {
   background: white;
-  color: #323147;
+  color: #1b3326;
 }
 
 .lock_container_cont1_div1_lock_div_lock_body_input_body_btn:disabled {
@@ -228,8 +233,8 @@
 }
 
 .dark .lock_container_cont1_div1_lock_div_lock_body_input_body_btn:disabled {
-  background: #323147;
-  color: #696781;
+  background: #1b3326;
+  color: #436050;
   cursor: not-allowed;
 }
 
@@ -238,13 +243,13 @@
   border: solid 1px #c4c3d1;
   border-radius: 10px;
   background: #dfdee9;
-  color: #323147;
+  color: #1b3326;
   width: 100%;
 }
 
 .dark .lock_container_cont1_div1_lock_div_lock_body_input_body_input {
-  border: solid 1px #262538;
-  background: #1c1b2a;
+  border: solid 1px #38383d;
+  background: #000000;
   color: #fff;
 }
 
@@ -269,12 +274,12 @@ canvas.blockies_icon {
 }
 
 .dark .lock_container_cont2_div2_chart_div {
-  background: #151422;
-  border: solid 1px #2d2c41;
+  background: #232326;
+  border: solid 1px #313135;
 }
 
 .lock_container_cont2_div2_chart_div_text_area {
-  color: #787690;
+  color: #80808e;
   margin-bottom: 2em;
 }
 
@@ -308,8 +313,8 @@ svg.recharts-surface {
 }
 
 .dark .lock_container_cont1_div1_lock_div_lock_body_input_body_cont_icon {
-  color: #85849a;
-  background: #323147;
+  color: #93b5a3;
+  background: #1b3326;
 }
 
 .duration_dropDown_div {
@@ -329,9 +334,9 @@ svg.recharts-surface {
 }
 
 .dark .duration_dropDown_div {
-  background: #1c1b2a;
+  background: #000000;
   box-shadow: 0px 10px 20px #000000;
-  border: solid 1px #2d2c41;
+  border: solid 1px #313135;
 }
 
 @keyframes dropDown {
@@ -358,7 +363,7 @@ svg.recharts-surface {
 }
 
 .dark .duration_dropDown_div_cont1 {
-  background: #323147;
+  background: #1b3326;
 }
 
 .duration_dropDown_div_cont1_selected {
@@ -368,12 +373,12 @@ svg.recharts-surface {
   border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
-  border: solid 2px #7a5fc0;
+  border: solid 2px #22ad62;
   color: #fff;
 }
 
 .dark .duration_dropDown_div_cont1_selected {
-  background: #151422;
+  background: #232326;
 }
 
 .lock_container_cont1_div1_lock_div_lock_body_input_body_cont_amount_div {
@@ -408,9 +413,10 @@ svg.recharts-surface {
   height: 44px;
 }
 
-.dark .lock_container_cont1_div1_lock_div_lock_body_input_body_cont_amount_div2 {
-  background: #323147;
-  border-left: solid 1px #262538;
+.dark
+  .lock_container_cont1_div1_lock_div_lock_body_input_body_cont_amount_div2 {
+  background: #1b3326;
+  border-left: solid 1px #38383d;
 }
 
 .estRewardDiv {
@@ -440,9 +446,9 @@ svg.recharts-surface {
 }
 
 .dark .lock_container_cont1_div_locks_overview {
-  background: #151422;
-  color: #787690;
-  border: solid 1px #2d2c41;
+  background: #232326;
+  color: #80808e;
+  border: solid 1px #313135;
 }
 
 .lock_container_cont1_div_contract_overview_div {
@@ -457,9 +463,9 @@ svg.recharts-surface {
 
 .lock_container_cont1_div_contract_overview_body {
   padding: 1em;
-  background: #151422;
-  color: #787690;
-  border: solid 1px #2d2c41;
+  background: #232326;
+  color: #80808e;
+  border: solid 1px #313135;
   margin-top: 0.5em;
   border-radius: 10px;
   display: flex;
@@ -471,7 +477,7 @@ svg.recharts-surface {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5em;
-  border-bottom: solid 1px #2d2c41;
+  border-bottom: solid 1px #313135;
   padding-bottom: 1.5em;
 }
 
@@ -493,7 +499,7 @@ svg.recharts-surface {
 }
 
 .dark .lock_container_cont1_div_locks_overview_cont1 {
-  border-bottom: solid 1px #2d2c41;
+  border-bottom: solid 1px #313135;
 }
 
 .lock_container_cont1_div_locks_overview_cont1_head {
@@ -531,7 +537,7 @@ svg.recharts-surface {
 }
 
 .dark .lock_container_transactions_body {
-  border: solid 1px #262534;
+  border: solid 1px #232326;
 }
 
 .lock_container_transactions_body_all {
@@ -543,7 +549,7 @@ svg.recharts-surface {
 }
 
 .dark .lock_container_transactions_body_all {
-  border: solid 1px #262534;
+  border: solid 1px #232326;
 }
 
 /* ========================== */
@@ -678,7 +684,7 @@ svg.recharts-surface {
 
 .value_dolls_div_val {
   font-size: 11px;
-  color: #787690;
+  color: #80808e;
 }
 
 .value_dolls_div2 {
@@ -709,7 +715,7 @@ svg.recharts-surface {
 }
 
 .dark .stakingTable_title_div {
-  background: #151422;
+  background: #232326;
   /* color: #fff; */
   /* border: solid 1px #fff; */
 }
@@ -720,9 +726,9 @@ svg.recharts-surface {
 
 .dark .stakingTable_body_row {
   /* box-shadow: rgb(0 0 0) 0px 0px 6px; */
-  background: #1c1b2a;
+  background: #000000;
   color: #fff;
-  border-bottom: solid 1px #262534;
+  border-bottom: solid 1px #232326;
 }
 
 .lock_container_cont1_div_contract_overview_div {

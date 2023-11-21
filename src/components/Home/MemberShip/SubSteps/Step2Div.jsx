@@ -100,7 +100,7 @@ export const Step2Div = ({
               <div className="selectPlanDiv2_area1_cont1 contentLoad">
                 <ContentLoading
                   placeholderColor="#715caf"
-                  loadingColor="#7a5fc0"
+                  loadingColor="#22ad62"
                   height="20px"
                   width="20px"
                   borderRadius="10px"
@@ -112,7 +112,7 @@ export const Step2Div = ({
                   <div className="selectPlanDiv2_area1_cont2_head_txt contentLoad">
                     <ContentLoading
                       placeholderColor="#715caf"
-                      loadingColor="#7a5fc0"
+                      loadingColor="#22ad62"
                       height="40px"
                       width="100%"
                       borderRadius="10px"
@@ -121,7 +121,7 @@ export const Step2Div = ({
                   <div className="selectPlanDiv2_area1_cont2_head_price contentLoad">
                     <ContentLoading
                       placeholderColor="#715caf"
-                      loadingColor="#7a5fc0"
+                      loadingColor="#22ad62"
                       height="20px"
                       width="100%"
                       borderRadius="10px"
@@ -131,7 +131,7 @@ export const Step2Div = ({
                 <div className="selectPlanDiv2_area1_cont2_body contentLoad">
                   <ContentLoading
                     placeholderColor="#715caf"
-                    loadingColor="#7a5fc0"
+                    loadingColor="#22ad62"
                     height="20px"
                     width="100%"
                     borderRadius="10px"
@@ -147,7 +147,7 @@ export const Step2Div = ({
               <div className="selectPlanDiv2_area1_cont1 contentLoad">
                 <ContentLoading
                   placeholderColor="#715caf"
-                  loadingColor="#7a5fc0"
+                  loadingColor="#22ad62"
                   height="20px"
                   width="20px"
                   borderRadius="10px"
@@ -159,7 +159,7 @@ export const Step2Div = ({
                   <div className="selectPlanDiv2_area1_cont2_head_txt contentLoad">
                     <ContentLoading
                       placeholderColor="#715caf"
-                      loadingColor="#7a5fc0"
+                      loadingColor="#22ad62"
                       height="40px"
                       width="100%"
                       borderRadius="10px"
@@ -168,7 +168,7 @@ export const Step2Div = ({
                   <div className="selectPlanDiv2_area1_cont2_head_price contentLoad">
                     <ContentLoading
                       placeholderColor="#715caf"
-                      loadingColor="#7a5fc0"
+                      loadingColor="#22ad62"
                       height="20px"
                       width="100%"
                       borderRadius="10px"
@@ -178,7 +178,7 @@ export const Step2Div = ({
                 <div className="selectPlanDiv2_area1_cont2_body contentLoad">
                   <ContentLoading
                     placeholderColor="#715caf"
-                    loadingColor="#7a5fc0"
+                    loadingColor="#22ad62"
                     height="20px"
                     width="100%"
                     borderRadius="10px"
@@ -194,7 +194,7 @@ export const Step2Div = ({
               <div className="selectPlanDiv2_area1_cont1 contentLoad">
                 <ContentLoading
                   placeholderColor="#715caf"
-                  loadingColor="#7a5fc0"
+                  loadingColor="#22ad62"
                   height="20px"
                   width="20px"
                   borderRadius="10px"
@@ -206,7 +206,7 @@ export const Step2Div = ({
                   <div className="selectPlanDiv2_area1_cont2_head_txt contentLoad">
                     <ContentLoading
                       placeholderColor="#715caf"
-                      loadingColor="#7a5fc0"
+                      loadingColor="#22ad62"
                       height="40px"
                       width="100%"
                       borderRadius="10px"
@@ -215,7 +215,7 @@ export const Step2Div = ({
                   <div className="selectPlanDiv2_area1_cont2_head_price contentLoad">
                     <ContentLoading
                       placeholderColor="#715caf"
-                      loadingColor="#7a5fc0"
+                      loadingColor="#22ad62"
                       height="20px"
                       width="100%"
                       borderRadius="10px"
@@ -225,7 +225,7 @@ export const Step2Div = ({
                 <div className="selectPlanDiv2_area1_cont2_body contentLoad">
                   <ContentLoading
                     placeholderColor="#715caf"
-                    loadingColor="#7a5fc0"
+                    loadingColor="#22ad62"
                     height="20px"
                     width="100%"
                     borderRadius="10px"

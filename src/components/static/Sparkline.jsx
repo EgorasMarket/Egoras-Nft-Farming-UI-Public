@@ -69,7 +69,7 @@ const Sparkline = (props) => {
         strokeWidth="0.5"
         fill="#ecfff4"
         cursorWidth="0.5"
-        stroke="#7a5fc0"
+        stroke="#22ad62"
         // stroke={props.darkView == true ? "#000" : "229e54"}
         className="chart_svg"
         strokeLinecap="round"

@@ -100,7 +100,7 @@
   width: 100%;
   max-width: 86px;
   border-radius: 9px;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
   font-weight: 500;
   border: none;
@@ -144,8 +144,8 @@
   margin: auto;
 }
 
-input[type="radio"]:checked+.payment_method_area1_cont1_label:before {
-  background-color: #7a5fc0;
+input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
+  background-color: #22ad62;
   border-color: #997fda;
   padding: 2px;
 }
@@ -182,7 +182,7 @@ input[type="radio"]:checked+.payment_method_area1_cont1_label:before {
   display: flex;
   align-items: center;
   padding: 1em;
-  border: solid 2px #7a5fc0;
+  border: solid 2px #22ad62;
   cursor: pointer;
   margin: 0px 5px;
   border-radius: 10px;
@@ -256,7 +256,7 @@ input[type="radio"]:checked+.payment_method_area1_cont1_label:before {
   padding: 15px;
   border-radius: 10px;
   border: none;
-  background: #7a5fc0;
+  background: #22ad62;
   color: #fff;
 }
 
@@ -460,7 +460,7 @@ input[type="radio"]:checked+.payment_method_area1_cont1_label:before {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #0d0c1487;
+  background: #00087;
   backdrop-filter: blur(5px);
   z-index: 100000;
   overflow: scroll;
@@ -509,7 +509,7 @@ input[type="radio"]:checked+.payment_method_area1_cont1_label:before {
 .updateProfileDivModal_container_body_cont1_input {
   padding: 15px;
   border-radius: 13px;
-  border: solid 1px #7a5fc0a6;
+  border: solid 1px #22ad62a6;
   background: no-repeat;
   color: #9e9cb6;
 }
@@ -527,7 +527,7 @@ input[type="radio"]:checked+.payment_method_area1_cont1_label:before {
   border: none;
   border-radius: 11px;
   color: #fff;
-  background: #7a5fc0;
+  background: #22ad62;
 }
 
 .updateProfileDivModal_container_body_cont1_button2 {

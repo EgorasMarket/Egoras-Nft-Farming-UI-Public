@@ -7,8 +7,8 @@ export const SplashScreen = () => {
       <div className="hold_On_div">
         <div className="hold_On_div_div_txt">
           <LoadingIcons.Puff
-            fill="#7a5fc0"
-            stroke="#7a5fc0"
+            fill="#22ad62"
+            stroke="#22ad62"
             height="100"
             width="100"
           />

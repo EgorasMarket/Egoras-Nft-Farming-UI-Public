@@ -64,7 +64,7 @@
 }
 .coin-display-amount {
   font-weight: 600;
-  color: #7a5fc0;
+  color: #22ad62;
 }
 .eth-icon {
   width: 35px;
@@ -91,13 +91,13 @@
   border: none;
   background: none;
   border-radius: 8px;
-  color: #7a5fc0;
+  color: #22ad62;
   font-weight: 600;
   position: relative;
 }
 .supply-btn-active::after {
   content: "";
-  background: #7a5fc0;
+  background: #22ad62;
   /* width: 50%; */
   height: 4px;
   position: absolute;
@@ -147,7 +147,7 @@ input.withdraw-input-box:focus {
 }
 input.withdraw-input-box:hover {
   border-width: 1.5px;
-  border-color: #7a5fc0;
+  border-color: #22ad62;
 }
 
 .not-safe-to-withdraw {
@@ -190,7 +190,7 @@ input.withdraw-input-box:hover {
 .withdraw-btn {
   width: 100%;
   padding: 1em 2em;
-  background: #7a5fc0;
+  background: #22ad62;
   border-radius: 10px;
   border: none;
   color: #fff;
@@ -282,7 +282,7 @@ input.withdraw-input-box:hover {
 .dash-area1-cont2-header1 {
   font-size: 20px;
   font-weight: 600;
-  color: #7a5fc0;
+  color: #22ad62;
 }
 .title1 {
   display: flex;

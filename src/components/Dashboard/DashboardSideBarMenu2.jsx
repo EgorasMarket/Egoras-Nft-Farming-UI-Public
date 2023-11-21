@@ -66,20 +66,6 @@ import "../../css/dashboardheader.css";
 import "../../css/dashBoardSideBar.css";
 import { numberWithCommas } from "../../static";
 import SwitchToggle2 from "./DashBoardPages/SwitchToggle/SwitchToggle2";
-import {
-  checkAllowance,
-  unluckToken,
-  transactReceipt,
-  getPrice,
-  getPriceImpl,
-  getTickerInfo,
-  tokenBalance,
-  open,
-  getLatestLoan,
-  repay,
-  topup,
-  draw,
-} from "../../web3/index";
 import { parseEther, formatEther } from "@ethersproject/units";
 import {
   Web3ReactProvider,
@@ -188,16 +174,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const urlArr = linksActive.split("/");
   const wrapperRef = useRef(null);
   const context = useWeb3React();
-  const {
-    connector,
-    library,
-    chainId,
-    account,
-    activate,
-    deactivate,
-    active,
-    error,
-  } = context;
+  const { connector, account } = context;
   const avatarRef = useRef();
   const toggleAccountNav = () => {
     if (acctNav == true) {
@@ -631,17 +608,12 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             <div className="dashboard-area">
               <a href="/" className="egr_logo2_mobil">
                 <img
-                  src="/img/martgpt_logo_dark.svg"
+                  src="/img/egoras-logo.svg"
                   alt="..."
                   className="egr-logo2"
                 />
-                {/* <img
-                  src="/img/logoVideoThumbnail.svg"
-                  alt="..."
-                  className="egr-logo2dark"
-                /> */}
                 <img
-                  src="/img/martgpt_logo.svg"
+                  src="/img/logoVideoThumbnail.svg"
                   alt="..."
                   className="egr-logo2dark"
                 />
@@ -650,19 +622,13 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
               </a>
               <div className="egrLogo2Cont3">
                 <a href="/">
-                  {" "}
                   <img
-                    src="/img/martgpt_logo_dark.svg"
+                    src="/img/egoras-logo.svg"
                     alt="..."
                     className="egr-logo"
                   />
-                  {/* <img
-                    src="/img/logoVideoThumbnail.svg"
-                    alt="..."
-                    className="egr-logodark"
-                  /> */}
                   <img
-                    src="/img/martgpt_logo.svg"
+                    src="/img/logoVideoThumbnail.svg"
                     alt="..."
                     className="egr-logodark"
                   />
@@ -707,51 +673,6 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                     <span class="c-basePart"></span>
                   </span>
                 </a>
-                <a
-                  id="convert"
-                  href="/app/convert"
-                  className={
-                    activeBg == "convert"
-                      ? "header_tab1_active "
-                      : "header_tab1"
-                  }
-                  onClick={changeBg}
-                >
-                  Convert
-                  <span class="Ping -top-1">
-                    <span class="c-flashingPart"></span>
-                    <span class="c-basePart"></span>
-                  </span>
-                </a>
-                <a
-                  id="sell"
-                  href="/app/sell"
-                  className={
-                    activeBg == "sell" ? "header_tab1_active " : "header_tab1"
-                  }
-                  onClick={changeBg}
-                >
-                  Sell
-                  <span class="Ping -top-1">
-                    <span class="c-flashingPart"></span>
-                    <span class="c-basePart"></span>
-                  </span>
-                </a>
-                <a
-                  id="market"
-                  href="/app/market"
-                  className={
-                    activeBg == "market" ? "header_tab1_active " : "header_tab1"
-                  }
-                  onClick={changeBg}
-                >
-                  Inventory{" "}
-                  <span class="Ping -top-1">
-                    <span class="c-flashingPart"></span>
-                    <span class="c-basePart"></span>
-                  </span>
-                </a>
-
                 <a
                   id="account"
                   href="/app/user"
