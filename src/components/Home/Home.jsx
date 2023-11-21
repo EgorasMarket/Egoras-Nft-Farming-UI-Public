@@ -627,6 +627,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+
       {/* ==================== */}
       {/* ==================== */}
       {/* ==================== */}
@@ -635,6 +636,7 @@ const Home = () => {
       {/* ==================== */}
       {/* ==================== */}
       {/* ==================== */}
+
       <section className="community_section">
         <div className="container">
           <div className="community_section_area">
