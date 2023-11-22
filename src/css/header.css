@@ -51,7 +51,7 @@ div#Header {
 .notifications_headerTab1_active {
   width: 100%;
   padding: 8px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #ffffff;
   /* border-radius: 10px; */
   font-size: 14px;
@@ -162,7 +162,7 @@ div#Header {
   padding: 1em 1em;
   border-radius: 8px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 
@@ -301,7 +301,7 @@ div#Header {
 
 .dark .header_wllt_bal {
   background: #000;
-  border: solid 1px #312e52;
+  border: solid 1px #213129;
   color: #fff;
 }
 
@@ -561,7 +561,7 @@ div#Header {
   position: absolute;
   width: 65px;
   height: 2.5px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   bottom: -9px;
   left: -10px;
   border-radius: 100px;
@@ -639,7 +639,7 @@ vl {
 
 .connect {
   padding: 1em 2em;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #ffff;
   border-radius: 10px;
   cursor: pointer;
@@ -797,7 +797,7 @@ vl {
 
 .darkMode_icon {
   position: absolute;
-  color: #312e52 !important;
+  color: #213129 !important;
   font-size: 16px !important;
   right: 2%;
   top: 0;

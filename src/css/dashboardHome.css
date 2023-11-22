@@ -76,7 +76,7 @@
 }
 
 .dark .burn_egc_div_1_cont1 {
-  color: #80808e;
+  color: #85a393;
 }
 
 .burn_egc_div_1_cont1_div1 {
@@ -138,7 +138,7 @@
   overflow-wrap: anywhere;
   text-align: center;
   line-height: 1;
-  background: #22ad621c;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6) 1c;
 }
 
 .dark .burn_egc_div_1_cont1_div1_span {
@@ -150,7 +150,7 @@
   padding: 10px;
   border-radius: 8px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 
@@ -172,7 +172,7 @@
 }
 
 .analytics_container_1_head {
-  color: #80808e;
+  color: #85a393;
 }
 
 .analytics_container_1_Amount {
@@ -187,11 +187,11 @@
 
 .analytics_container_1_Amount_span {
   font-size: 16px;
-  color: #80808e;
+  color: #85a393;
 }
 
 .assets_chart_area2 tspan {
-  fill: #80808e;
+  fill: #85a393;
   font-size: 14px;
   font-weight: 400;
 }

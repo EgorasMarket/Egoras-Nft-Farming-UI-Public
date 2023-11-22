@@ -182,7 +182,7 @@
 
 .updatedCooperativeSection1_area1_btn {
   margin-top: 2em;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   padding: 15px 0px;
   width: 200px;
@@ -412,7 +412,7 @@ input[type="radio"] {
 }
 
 input[type="radio"]:checked + .selectPlanDiv2_area1_cont1_label:before {
-  background-color: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   border-color: #997fda;
   padding: 2px;
 }
@@ -597,7 +597,7 @@ input[type="checkbox"]:checked + .checkBox_agree_div_body_label:before {
   font-weight: 600;
   color: #ffffff;
   text-align: center;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   /* height: 24px; */
   /* line-height: 1.1; */
 }
@@ -614,7 +614,7 @@ input[type="checkbox"]:checked + .checkBox_agree_div_body_label:before {
   border-radius: 10px;
   border: none;
   font-weight: 600;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   margin-top: 0em;
   width: 100%;
@@ -837,7 +837,7 @@ video.video-poster {
   border-radius: 13px;
   border: none;
   color: #fff;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   font-weight: 600;
   box-shadow: 0px 10px 15px #23392d;
 }
@@ -987,7 +987,7 @@ video.video-poster {
   width: 195px;
   border-radius: 12px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   margin-top: 2em;
 }
@@ -1496,7 +1496,7 @@ x .benefits_section1_area2_body1_cont2 {
   padding: 15px 0px;
   border-radius: 10px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 600;
 }
@@ -1652,7 +1652,7 @@ x .benefits_section1_area2_body1_cont2 {
   width: 100%;
   border-radius: 13px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 600;
   font-size: 18px;
@@ -1797,7 +1797,7 @@ x .benefits_section1_area2_body1_cont2 {
 
 .joinCooperativeModalDiv_area_tab1 {
   padding: 9px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   height: 100%;
   /* width: 120px; */
   width: 100%;
@@ -1834,7 +1834,7 @@ x .benefits_section1_area2_body1_cont2 {
   width: 100%;
   border-radius: 10px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 600;
   display: flex;
@@ -1914,7 +1914,7 @@ x .benefits_section1_area2_body1_cont2 {
   padding: 15px;
   border-radius: 13px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 600;
 }
@@ -1968,7 +1968,7 @@ x .benefits_section1_area2_body1_cont2 {
   height: 100%;
   padding: 2em;
   border-radius: 20px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -2155,7 +2155,7 @@ x .benefits_section1_area2_body1_cont2 {
   border: none;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #ffffff;
   font-size: 14px;
   font-weight: 500;
@@ -2318,7 +2318,7 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
   padding: 12px;
   border-radius: 8px;
   border: solid 1px #22ad62;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   font-size: 14px;
   color: #fff;
 }
@@ -2422,7 +2422,7 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
   flex-direction: column;
 }
 .subscribe_btn_btn {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   border: none;
   padding: 15px;
   width: 100%;
@@ -3042,7 +3042,7 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
 
   .updatedCooperativeSection1_area1_btn {
     margin-top: 1em;
-    background: #22ad62;
+    background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
     color: #fff;
     padding: 10px 0px;
     width: 130px;

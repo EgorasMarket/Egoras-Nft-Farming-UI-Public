@@ -39,7 +39,7 @@
   .flip-countdown-card-sec
   .card__back::after {
   color: #ffffff !important;
-  background: #22ad62 !important;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6) !important;
 }
 
 .flip-countdown {
@@ -56,7 +56,7 @@
 .count-down-btn1 {
   border: none;
   padding: 1em 2.5em;
-  background: #22ad62 !important;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6) !important;
   color: #ffff !important;
   font-weight: 600;
   font-size: 16px;

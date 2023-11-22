@@ -82,7 +82,7 @@ button.pool_detail_heading_area1_invest_btn {
   padding: 10px 0px;
   border-radius: 10px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 
@@ -304,7 +304,7 @@ button.pool_detail_heading_area1_invest_btn {
   border-left: 1px solid rgb(214 223 229);
 } */
 .pool_lend_details_link_active .asset_overview_link_icon {
-  background: #c6c5dc;
+  background: #c1decf;
   color: #22ad62;
   padding: 3px;
   font-size: 23px !important;
@@ -384,7 +384,7 @@ button.pool_detail_heading_area1_invest_btn {
   padding: 5px 20px;
   border-radius: 6px;
   border: solid 1px #22ad62;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #ffffff;
 }
 
@@ -495,7 +495,7 @@ button.pool_detail_heading_area1_invest_btn {
   padding: 15px 0px;
   width: 100%;
   border-radius: 10px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 600;
   border: none;
@@ -653,7 +653,7 @@ button.pool_detail_heading_area1_invest_btn {
   padding: 1em 0em;
   border-radius: 8px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 600;
   box-shadow: 0px 4px 5px #b6b6b6;
@@ -664,7 +664,7 @@ button.pool_detail_heading_area1_invest_btn {
   padding: 1em 0em;
   border-radius: 8px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 600;
   box-shadow: 0px 4px 5px #b6b6b6;
@@ -951,7 +951,7 @@ button.pool_detail_heading_area1_invest_btn {
   border-radius: 10px;
   border: none;
   color: #fff;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
 }
 
 .goDoKycDiv_container_para {

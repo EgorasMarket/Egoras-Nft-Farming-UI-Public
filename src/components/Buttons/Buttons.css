@@ -5,7 +5,7 @@
 /* login button start */
 
 .LoginBtn {
-  background-color: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   padding: 0.6em 3em;
   border-radius: 5px;

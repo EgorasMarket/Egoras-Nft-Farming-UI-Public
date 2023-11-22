@@ -27,7 +27,7 @@
 }
 
 .witdraw_funds_div_btn {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   box-shadow: 0px 0px 5px #000000;
   color: #fff;
   padding: 20px 0px;
@@ -71,7 +71,7 @@
 
 .welcome_bonus_icon_div {
   padding: 3px;
-  background: #c6c5dc;
+  background: #c1decf;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -219,7 +219,7 @@ canvas.blockies_icon_user_vip {
 
 .user_details_body1_body_cont1_span2_span {
   font-size: 11px;
-  color: #80808e;
+  color: #85a393;
 }
 
 .user_details_body1_body_cont1_last_layer {
@@ -294,7 +294,7 @@ canvas.blockies_icon_user_vip {
   font-size: 15px;
   border-radius: 8px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 600;
   box-shadow: 0px 5px 10px #88c7a1;
@@ -304,7 +304,7 @@ canvas.blockies_icon_user_vip {
   padding: 15px 0px;
   border-radius: 10px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 600;
   box-shadow: 0px 5px 15px #7cb994;
@@ -337,16 +337,16 @@ canvas.blockies_icon_user_vip {
 }
 
 .user_details_area_div1_head {
-  color: #80808e;
+  color: #85a393;
   margin-bottom: 5px;
 }
 
 .user_details_area_div1_input {
   padding: 15px;
   border-radius: 10px;
-  background: #ece8f4;
-  border: solid 1px #c0bee0;
-  color: #655b78;
+  background: #edfff5;
+  border: solid 1px #22ad62;
+  color: #213f2e;
 }
 
 .dark .user_details_area_div1_input {
@@ -367,7 +367,7 @@ canvas.blockies_icon_user_vip {
   width: 100%;
   max-width: 200px;
   border-radius: 13px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 500;
   border: none;
@@ -425,13 +425,15 @@ canvas.blockies_icon_user_vip {
 .reward_btn_div {
   width: 200px;
 }
-
+.dashboardRewardArea3_area2_area1_cont2_span {
+  font-size: 24px;
+}
 .reward_btn {
   width: 100%;
   padding: 0.5em 0em;
   border-radius: 6px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 600;
   box-shadow: 0px 10px 10px #cdeeda;
@@ -486,7 +488,7 @@ canvas.blockies_icon_user_vip {
   align-items: center;
   justify-content: center;
   border-radius: 9px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
 }
 
 .BuyerSellerDiv_body {
@@ -506,7 +508,7 @@ canvas.blockies_icon_user_vip {
 .BuyerSellerDiv_body_header {
   font-size: 28px;
   font-weight: 500;
-  color: #80808e;
+  color: #85a393;
 }
 
 .BuyerSellerDiv_body_Balance {
@@ -531,7 +533,7 @@ canvas.blockies_icon_user_vip {
 }
 
 .BuyerSellerDiv_body_Balance_body2 {
-  color: #80808e;
+  color: #85a393;
 }
 
 .BuyerSellerDiv_body_Balance_body {
@@ -557,7 +559,7 @@ canvas.blockies_icon_user_vip {
 
 .dark .BuyerSellerDiv_tab1 {
   color: #65637a;
-  background: #28263e;
+  background: #2e2e31;
 }
 
 .BuyerSellerDiv_body_div1_text {
@@ -575,7 +577,7 @@ canvas.blockies_icon_user_vip {
 
 .BuyerSellerDiv_body_div2_tabs_active {
   padding: 1em 0em;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   border: none;
@@ -590,7 +592,7 @@ canvas.blockies_icon_user_vip {
 }
 
 .dark .BuyerSellerDiv_body_div2_tabs_active {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   border-bottom: solid 1px #ffffff;
   color: #fff;
 }
@@ -689,7 +691,7 @@ canvas.blockies_icon_user_vip {
   border: none;
   font-size: 14px;
   /* margin-right: 10px; */
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 
@@ -722,7 +724,7 @@ canvas.blockies_icon_user_vip {
 }
 
 .view_receipt_btn {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   width: 100%;
   padding: 15px;
   border-radius: 13px;
@@ -945,7 +947,7 @@ canvas.blockies_icon_user_vip {
   border-radius: 6px;
   border: 0;
   font-size: 12px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 
@@ -1083,7 +1085,7 @@ canvas.blockies_icon_user_vip {
 
 .rewardTable_body_row_data_last_div {
   display: flex;
-  background: #403858;
+  background: #2e2e33;
   padding: 6px 10px;
   max-width: 85px;
   width: 100%;
@@ -1145,15 +1147,15 @@ canvas.blockies_icon_user_vip {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #332c46;
-  color: #dcd3f3;
+  background: #2f4938;
+  color: #adceb9;
   font-size: 14px;
   cursor: pointer;
   transition: all 0.1s linear;
 }
 
 .transactions_buttons_div_1:hover {
-  background: #201b2e;
+  background: #17241b;
   transition: all 0.1s linear;
 }
 
@@ -1163,21 +1165,21 @@ canvas.blockies_icon_user_vip {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #332c46;
-  color: #dcd3f3;
+  background: #2f4938;
+  color: #adceb9;
   font-size: 14px;
   cursor: pointer;
-  border-left: 1px solid #3e3d57;
+  border-left: 1px solid #6b8976;
   transition: all 0.1s linear;
 }
 
 .transactions_buttons_div_1b:hover {
-  background: #201b2e;
+  background: #17241b;
   transition: all 0.1s linear;
 }
 
 .dashboardRewardArea3_area1_para {
-  color: #6d6b83;
+  color: #91ab9e;
   font-size: 20px;
   font-weight: 400;
 }
@@ -1222,7 +1224,7 @@ canvas.blockies_icon_user_vip {
   width: 100%;
   border-radius: 12px;
   border: none;
-  background: #795ebf;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 
@@ -1352,7 +1354,7 @@ canvas.blockies_icon_user_vip {
 
 .value_dolls_div_val {
   font-size: 11px;
-  color: #80808e;
+  color: #85a393;
 }
 
 .value_dolls_div2 {

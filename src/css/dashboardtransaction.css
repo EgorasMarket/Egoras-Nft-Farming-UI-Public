@@ -345,7 +345,7 @@
   .withdraw-btn {
     width: 100%;
     padding: 1em 2em;
-    background: #22ad62;
+    background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
     border-radius: 10px;
     border: none;
     color: #fff;

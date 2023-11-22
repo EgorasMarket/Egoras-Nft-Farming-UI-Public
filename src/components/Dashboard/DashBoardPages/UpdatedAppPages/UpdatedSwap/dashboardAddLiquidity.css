@@ -129,7 +129,7 @@
   font-weight: 600;
 }
 .amnt_input_field::placeholder {
-  color: #3e3c59;
+  color: #2e4d3d;
 }
 .display_tokens_drop {
   font-size: 16px;
@@ -146,7 +146,7 @@
   white-space: nowrap;
 }
 .display_tokens_drop_not_select {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 .asset_icon {

@@ -166,7 +166,7 @@
   padding: 14px 0px;
   width: 160px;
   border-radius: 10px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   border: none;
   display: flex;
@@ -552,7 +552,7 @@
   justify-content: center;
   font-size: 15px;
   font-weight: 600;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 
@@ -811,7 +811,7 @@
   padding: 14px;
   border-radius: 10px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 
@@ -2019,7 +2019,7 @@ a.visit_app_link_2 {
 }
 
 .key-features-cards-area1:hover {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   box-shadow: 0px 11px 15px #9ec7af;
   transform: translate3d(0, -5px, 0);
@@ -2167,7 +2167,7 @@ a.visit_app_link_2 {
   top: 0;
   font-size: 39px !important;
   bottom: auto;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   width: 43px !important;
   padding: 10px;
@@ -2375,7 +2375,7 @@ a.visit_app_link_2 {
   color: #fff;
   white-space: nowrap;
   cursor: pointer;
-  background-color: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   border-radius: 5px;
   padding: 8px 32px;
   display: inline-block;
@@ -2431,7 +2431,7 @@ a.visit_app_link_2 {
   padding: 1em 3.5em;
   border-radius: 6px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-size: 14px;
   font-weight: 400;
@@ -2512,7 +2512,7 @@ a.visit_app_link_2 {
   align-items: center;
   justify-content: center;
   padding: 15px;
-  /* background: #22ad62; */
+  /* background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6); */
   border-radius: 50px;
   width: 100%;
   color: #8a889e;
@@ -2555,9 +2555,9 @@ a.visit_app_link_2 {
   width: 100%;
   height: 100%;
   border: 5px solid transparent;
-  border-image: linear-gradient(128deg, #22ad62, #1d0a2d) 1;
+  border-image: linear-gradient(128deg, #22ad62, #5374d4) 1;
   border-radius: 10px;
-  background-image: linear-gradient(128deg, #22ad62, #1d0a2d);
+  background-image: linear-gradient(128deg, #22ad62, #5374d4);
 }
 
 .how_it_works_update_new_area_2_cont1_border_div {
@@ -2642,7 +2642,7 @@ a.visit_app_link_2 {
   padding: 13px;
   border-radius: 15px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 500;
   font-size: 14px;
@@ -2826,9 +2826,9 @@ a.visit_app_link_2 {
   width: 100%;
   height: 100%;
   border: 5px solid transparent;
-  border-image: linear-gradient(128deg, #22ad62, #1d0a2d) 1;
+  border-image: linear-gradient(128deg, #22ad62, #5374d4) 1;
   border-radius: 10px;
-  background-image: linear-gradient(128deg, #22ad62, #1d0a2d);
+  background-image: linear-gradient(128deg, #22ad62, #5374d4);
 }
 
 .martgptfeauturesSection_area2_cont1_div2_cont1_border_last {
@@ -2846,9 +2846,9 @@ a.visit_app_link_2 {
   width: 100%;
   height: 100%;
   border: 5px solid transparent;
-  border-image: linear-gradient(128deg, #22ad62, #1d0a2d) 1;
+  border-image: linear-gradient(128deg, #22ad62, #5374d4) 1;
   border-radius: 10px;
-  background-image: linear-gradient(128deg, #22ad62, #1d0a2d);
+  background-image: linear-gradient(128deg, #22ad62, #5374d4);
 }
 
 .martgptfeauturesSection_area2_cont1_div2_cont1_border_first {
@@ -2867,9 +2867,9 @@ a.visit_app_link_2 {
   width: 100%;
   height: 100%;
   border: 5px solid transparent;
-  border-image: linear-gradient(128deg, #22ad62, #1d0a2d) 1;
+  border-image: linear-gradient(128deg, #22ad62, #5374d4) 1;
   border-radius: 10px;
-  background-image: linear-gradient(128deg, #22ad62, #1d0a2d);
+  background-image: linear-gradient(128deg, #22ad62, #5374d4);
 }
 
 .JoinMartGptSection {
@@ -2928,7 +2928,7 @@ a.visit_app_link_2 {
   padding: 15px;
   border-radius: 15px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 500;
   box-shadow: 0px 10px 20px #29233c;
@@ -2981,7 +2981,13 @@ a.visit_app_link_2 {
   font-weight: 400;
   color: #888e8b;
 }
-
+.community_section_area2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 2em;
+}
 /* collateral assets section end */
 /* ============================================ */
 /* ============================================ */
@@ -3598,7 +3604,7 @@ a.visit_app_link_2 {
     padding: 1em 3.5em;
     border-radius: 6px;
     border: none;
-    background: #22ad62;
+    background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
     color: #fff;
     font-size: 13px;
     font-weight: 400;
@@ -3986,7 +3992,7 @@ a.visit_app_link_2 {
 
 .dark .lending_area1_cont1_heading {
   font-size: 13px;
-  color: #80808e;
+  color: #85a393;
 }
 
 .dark .help_outline {
@@ -4182,7 +4188,7 @@ a.visit_app_link_2 {
 }
 
 .dark .amnt_input_field {
-  color: #b1b0c4;
+  color: #8fb5a0;
 }
 
 .dark .connect_btn {
@@ -4191,7 +4197,7 @@ a.visit_app_link_2 {
 }
 
 .dark .display_tokens_drop {
-  background: #28263e;
+  background: #2e2e31;
   box-shadow: 0px 5px 15px #000;
   color: #fff;
 }
@@ -4212,7 +4218,7 @@ a.visit_app_link_2 {
 
 .dark .toggle_dark_mode_div {
   background: #000;
-  border: solid 1px #312e52;
+  border: solid 1px #213129;
 }
 
 /* .dark .connected_header_address {
@@ -4224,7 +4230,7 @@ a.visit_app_link_2 {
 .dark .wallet_addr_cont_txt_header {
   background: #000;
   color: #ffffff;
-  border: solid 1px #312e52;
+  border: solid 1px #213129;
   border-left: 0;
 }
 
@@ -4238,7 +4244,7 @@ a.visit_app_link_2 {
 .dark .wallet_settings_icon_cont {
   background: #000;
   color: #ffffff;
-  border: solid 1px #312e52;
+  border: solid 1px #213129;
 }
 
 .dark .thumbnail_img2 {
@@ -4263,7 +4269,7 @@ a.visit_app_link_2 {
 
 .dark .metamask_prof_pic_icon {
   background: #000;
-  border: solid 1px #312e52;
+  border: solid 1px #213129;
   border-right: 0;
 }
 
@@ -4278,7 +4284,7 @@ a.visit_app_link_2 {
 
   box-shadow: 0px 0px 10px #000000;
 
-  border: solid 1px #34334b;
+  border: solid 1px #313136;
 }
 
 .dark .logout-btn {

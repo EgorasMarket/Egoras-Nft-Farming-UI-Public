@@ -406,7 +406,7 @@ const ProductDetailPage = ({ match }) => {
                           )}
                         </span>
                       )}
-                      <span style={{ fontSize: "12px", color: "#80808e" }}>
+                      <span style={{ fontSize: "12px", color: "#85a393" }}>
                         {" ~"}
                         {numberWithCommas(
                           parseFloat(

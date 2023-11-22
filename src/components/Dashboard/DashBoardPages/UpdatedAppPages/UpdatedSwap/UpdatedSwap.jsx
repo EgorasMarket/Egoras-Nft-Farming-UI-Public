@@ -817,26 +817,26 @@ const UpdatedSwap = () => {
       <section className=" no-bg no_paddd">
         <div className="container relative">
           <div className="swapDivCont">
-            <div className="ToggleChartDiv">
-              <div className="ToggleChartDiv_txt">Live Chart</div>
-              {/* <div className="ToggleChartDiv_checkBox"> */}
-              <label class="ToggleChartDiv_checkBox_toggle">
+            {/* <div className="ToggleChartDiv"> */}
+            {/* <div className="ToggleChartDiv_txt">Live Chart</div> */}
+            {/* <div className="ToggleChartDiv_checkBox"> */}
+            {/* <label class="ToggleChartDiv_checkBox_toggle">
                 <input
                   type="checkbox"
                   checked={displayChart}
                   onClick={ToggleDisplayChart}
                   // onChange={ToggleDisplayChart}
-                />
-                {displayChart == true ? (
+                /> */}
+            {/* {displayChart == true ? (
                   <span class="ToggleChartDiv_checkBox_slider">On</span>
                 ) : (
                   <span class="ToggleChartDiv_checkBox_slider adjustFlex">
                     Off
                   </span>
                 )}
-              </label>
-              {/* </div> */}
-            </div>
+              </label> */}
+            {/* </div> */}
+            {/* </div> */}
             <div className="liquidity_area">
               {/* =============== */}
               {/* =============== */}

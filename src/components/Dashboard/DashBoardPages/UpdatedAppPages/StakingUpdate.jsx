@@ -1014,7 +1014,7 @@ const StakingUpdate = () => {
                           >
                             {isLoading ? (
                               <ScaleLoader
-                                color="#12111b"
+                                color="#375746"
                                 size={10}
                                 height={20}
                               />
@@ -1033,7 +1033,7 @@ const StakingUpdate = () => {
                               >
                                 {isLoading ? (
                                   <ScaleLoader
-                                    color="#12111b"
+                                    color="#375746"
                                     size={10}
                                     height={20}
                                   />
@@ -1050,7 +1050,7 @@ const StakingUpdate = () => {
                               >
                                 {isLoading ? (
                                   <ScaleLoader
-                                    color="#12111b"
+                                    color="#375746"
                                     size={10}
                                     height={20}
                                   />
@@ -1100,7 +1100,7 @@ const StakingUpdate = () => {
                       disabled={ClaimDisable}
                     >
                       {isLoading2 ? (
-                        <ScaleLoader color="#12111b" size={10} height={20} />
+                        <ScaleLoader color="#375746" size={10} height={20} />
                       ) : (
                         <>Claim Reward</>
                       )}
@@ -1142,7 +1142,7 @@ const StakingUpdate = () => {
                         disabled={lockDisable}
                       >
                         {isLoading2 ? (
-                          <ScaleLoader color="#12111b" size={10} height={20} />
+                          <ScaleLoader color="#375746" size={10} height={20} />
                         ) : (
                           <>Remove Lock </>
                         )}
@@ -1154,7 +1154,7 @@ const StakingUpdate = () => {
                         disabled={lockDisable}
                       >
                         {isLoading2 ? (
-                          <ScaleLoader color="#12111b" size={10} height={20} />
+                          <ScaleLoader color="#375746" size={10} height={20} />
                         ) : (
                           <>Remove Lock </>
                         )}
@@ -1266,12 +1266,12 @@ const StakingUpdate = () => {
                           >
                             <stop
                               offset="5%"
-                              stopColor="#827dc3"
+                              stopColor="#51cb89"
                               stopOpacity={0.3}
                             />
                             <stop
                               offset="100%"
-                              stopColor="#827dc3"
+                              stopColor="#51cb89"
                               stopOpacity={0}
                             />
                           </linearGradient>

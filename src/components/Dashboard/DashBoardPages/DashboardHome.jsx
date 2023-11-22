@@ -159,6 +159,11 @@ const DashboardHome = () => {
         }
       } catch (error) {
         console.log(error.response);
+        setChartValue(0);
+        setGraphData2([]);
+        setLastArray(0);
+        setlastIndex(0);
+        setChartTime(0);
       }
     };
     const timer = setTimeout(async () => {
@@ -226,6 +231,11 @@ const DashboardHome = () => {
         }
       } catch (error) {
         console.log(error.response);
+        setGraphData([]);
+        setlastIndex2(0);
+        setLastArray2(0);
+        setChartValue2(0);
+        setChartTime2(0);
       }
     };
     const timer = setTimeout(async () => {
@@ -235,12 +245,21 @@ const DashboardHome = () => {
     return () => clearTimeout(timer);
   }, [egc_usd]);
   const CustomTooltip = ({ active, payload, label }) => {
+    console.log("====================================");
+    console.log(active, payload);
+    console.log(LastArray, LastArray.value);
+    console.log("====================================");
     if (active && payload && payload.length) {
       setChartValue(payload[0].payload.value);
       setChartTime(payload[0].payload.timestamp);
     } else {
-      setChartValue(LastArray.value);
-      setChartTime(LastArray.timestamp);
+      if (LastArray === 0) {
+        setChartValue(0);
+        setChartTime(0);
+      } else {
+        setChartValue(LastArray.value);
+        setChartTime(LastArray.timestamp);
+      }
     }
     return null;
   };
@@ -250,8 +269,13 @@ const DashboardHome = () => {
       setChartValue2(payload[0].payload.value);
       setChartTime2(payload[0].payload.timestamp);
     } else {
-      setChartValue2(LastArray2.value);
-      setChartTime2(LastArray2.timestamp);
+      if (LastArray2 === 0) {
+        setChartValue2(0);
+        setChartTime2(0);
+      } else {
+        setChartValue2(LastArray2.value);
+        setChartTime2(LastArray2.timestamp);
+      }
     }
     return null;
   };
@@ -385,28 +409,28 @@ const DashboardHome = () => {
 
   const currentTransactions4 = burnTransact.slice(offset4, offset4 + PER_PAGE4);
 
-  const tokenAddress = "0x58f66D0183615797940360A43c333A44215830BA";
-  const getTokenSymbol = async (address) => {
-    try {
-      const web3 = new Web3(window.ethereum);
-      const tokenContract = new web3.eth.Contract(abi.abi, address);
-      const symbol = await tokenContract.methods.symbol().call();
-      const name = await tokenContract.methods.name().call();
-      const totalSupply = await tokenContract.methods.totalSupply().call();
-      console.log("Symbol:", symbol);
-      console.log("Name:", name);
-      console.log("Total supply:", totalSupply);
-      return symbol;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(async () => {
-    if (account) {
-      const res = await getTokenSymbol(tokenAddress);
-      console.log(res);
-    }
-  }, [account]);
+  // const tokenAddress = "0x58f66D0183615797940360A43c333A44215830BA";
+  // const getTokenSymbol = async (address) => {
+  //   try {
+  //     const web3 = new Web3(window.ethereum);
+  //     const tokenContract = new web3.eth.Contract(abi.abi, address);
+  //     const symbol = await tokenContract.methods.symbol().call();
+  //     const name = await tokenContract.methods.name().call();
+  //     const totalSupply = await tokenContract.methods.totalSupply().call();
+  //     console.log("Symbol:", symbol);
+  //     console.log("Name:", name);
+  //     console.log("Total supply:", totalSupply);
+  //     return symbol;
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+  // useEffect(async () => {
+  //   if (account) {
+  //     const res = await getTokenSymbol(tokenAddress);
+  //     console.log(res);
+  //   }
+  // }, [account]);
 
   const ListedCoins = {
     "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c": {
@@ -615,22 +639,17 @@ const DashboardHome = () => {
                                 >
                                   <stop
                                     offset="5%"
-                                    stopColor="#827dc3"
+                                    stopColor="#51cb89"
                                     stopOpacity={0.3}
                                   />
                                   <stop
                                     offset="100%"
-                                    stopColor="#827dc3"
+                                    stopColor="#51cb89"
                                     stopOpacity={0}
                                   />
                                 </linearGradient>
                               </defs>
-                              {/* <CartesianGrid
-                            strokeDasharray="1 1"
-                            stroke="#d7d7d7"
-                          /> */}
                               <XAxis dataKey="month" stroke="0" />
-                              {/* <YAxis stroke="#000" /> */}
                               <Tooltip content={<CustomTooltip />} />
                               <Area
                                 type="monotone"
@@ -669,12 +688,12 @@ const DashboardHome = () => {
                                 >
                                   <stop
                                     offset="5%"
-                                    stopColor="#827dc3"
+                                    stopColor="#51cb89"
                                     stopOpacity={0.3}
                                   />
                                   <stop
                                     offset="100%"
-                                    stopColor="#827dc3"
+                                    stopColor="#51cb89"
                                     stopOpacity={0}
                                   />
                                 </linearGradient>
@@ -752,12 +771,12 @@ const DashboardHome = () => {
                                 >
                                   <stop
                                     offset="5%"
-                                    stopColor="#827dc3"
+                                    stopColor="#51cb89"
                                     stopOpacity={0.7}
                                   />
                                   <stop
                                     offset="100%"
-                                    stopColor="#827dc3"
+                                    stopColor="#51cb89"
                                     stopOpacity={0.3}
                                   />
                                 </linearGradient>
@@ -770,7 +789,7 @@ const DashboardHome = () => {
                               <Bar
                                 // type="monotone"
                                 dataKey="value"
-                                // stroke="#827dc3"
+                                // stroke="#51cb89"
                                 // fillOpacity={1}
                                 fill="url(#colorUvBar1)"
                                 // strokeWidth={2}
@@ -809,12 +828,12 @@ const DashboardHome = () => {
                                 >
                                   <stop
                                     offset="5%"
-                                    stopColor="#827dc3"
+                                    stopColor="#51cb89"
                                     stopOpacity={0.7}
                                   />
                                   <stop
                                     offset="100%"
-                                    stopColor="#827dc3"
+                                    stopColor="#51cb89"
                                     stopOpacity={0.3}
                                   />
                                 </linearGradient>
@@ -904,12 +923,12 @@ const DashboardHome = () => {
                                 >
                                   <stop
                                     offset="5%"
-                                    stopColor="#827dc3"
+                                    stopColor="#51cb89"
                                     stopOpacity={0.3}
                                   />
                                   <stop
                                     offset="100%"
-                                    stopColor="#827dc3"
+                                    stopColor="#51cb89"
                                     stopOpacity={0}
                                   />
                                 </linearGradient>
@@ -958,12 +977,12 @@ const DashboardHome = () => {
                                 >
                                   <stop
                                     offset="5%"
-                                    stopColor="#827dc3"
+                                    stopColor="#51cb89"
                                     stopOpacity={0.3}
                                   />
                                   <stop
                                     offset="100%"
-                                    stopColor="#827dc3"
+                                    stopColor="#51cb89"
                                     stopOpacity={0}
                                   />
                                 </linearGradient>
@@ -1043,12 +1062,12 @@ const DashboardHome = () => {
                                 >
                                   <stop
                                     offset="5%"
-                                    stopColor="#827dc3"
+                                    stopColor="#51cb89"
                                     stopOpacity={0.7}
                                   />
                                   <stop
                                     offset="100%"
-                                    stopColor="#827dc3"
+                                    stopColor="#51cb89"
                                     stopOpacity={0.3}
                                   />
                                 </linearGradient>
@@ -1061,7 +1080,7 @@ const DashboardHome = () => {
                               <Bar
                                 // type="monotone"
                                 dataKey="value"
-                                // stroke="#827dc3"
+                                // stroke="#51cb89"
                                 // fillOpacity={1}
                                 fill="url(#colorUvBar1)"
                                 // strokeWidth={2}
@@ -1100,12 +1119,12 @@ const DashboardHome = () => {
                                 >
                                   <stop
                                     offset="5%"
-                                    stopColor="#827dc3"
+                                    stopColor="#51cb89"
                                     stopOpacity={0.7}
                                   />
                                   <stop
                                     offset="100%"
-                                    stopColor="#827dc3"
+                                    stopColor="#51cb89"
                                     stopOpacity={0.3}
                                   />
                                 </linearGradient>

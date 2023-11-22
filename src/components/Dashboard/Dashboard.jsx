@@ -30,7 +30,8 @@ import DashboardReferral from "./DashBoardPages/DashboardReferral";
 // import DashBoardDefaultPage from "./DashBoardPages/DashBoardDefaultPage";
 import DashBoardAnalytics from "./DashBoardPages/DashBoardAnalytics";
 import DashBoardTransaction from "./DashBoardPages/DashBoardTransaction";
-import DashboardGovernance from "./DashBoardPages/DashboardGovernance";
+// import DashboardGovernance from "./DashBoardPages/DashboardGovernance";
+import DashboardGovernance from "./DashBoardPages/Governance/DashboardGovernance";
 import StakingUpdate from "./DashBoardPages/UpdatedAppPages/StakingUpdate";
 import DashboardMarketHome from "./DashBoardPages/UpdatedAppPages/DashboardMarket/DashboardMarketHome";
 

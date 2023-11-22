@@ -186,25 +186,25 @@
 }
 
 .quantity_div_body_btn_substract:hover {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   box-shadow: 0px 3px 10px #b3b3b3;
   color: #fff;
 }
 
 .dark .quantity_div_body_btn_substract:hover {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   box-shadow: 0px 3px 10px #000000;
   color: #fff;
 }
 
 .quantity_div_body_btn_Add:hover {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   box-shadow: 0px 3px 10px #b3b3b3;
   color: #fff;
 }
 
 .dark .quantity_div_body_btn_Add:hover {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   box-shadow: 0px 3px 10px #000000;
   color: #fff;
 }

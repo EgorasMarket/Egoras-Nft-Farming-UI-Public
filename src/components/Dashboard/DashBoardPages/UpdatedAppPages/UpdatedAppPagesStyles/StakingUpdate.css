@@ -90,7 +90,7 @@
 .lock_container_cont1_div1_lock_div_tab1 {
   margin-right: 2em;
   cursor: pointer;
-  color: #80808e;
+  color: #85a393;
 }
 
 .lock_container_cont1_div1_lock_div_tab1_active {
@@ -104,7 +104,7 @@
   content: "";
   width: 100%;
   height: 2px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   position: absolute;
   bottom: -40%;
   left: 0;
@@ -132,7 +132,7 @@
 }
 
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_head {
-  color: #80808e;
+  color: #85a393;
   font-size: 18px;
 }
 
@@ -158,7 +158,7 @@
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_span_span2 {
   font-size: 14px;
   font-weight: 300;
-  color: #80808e;
+  color: #85a393;
 }
 
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div_button {
@@ -173,7 +173,7 @@
 
 .lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv {
   font-size: 12px;
-  color: #80808e;
+  color: #85a393;
   display: flex;
   flex-direction: column;
   margin-top: 0.5em;
@@ -214,7 +214,7 @@
   padding: 15px 0px;
   width: 100%;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   border-radius: 10px;
   font-size: 14px;
   font-weight: 600;
@@ -227,8 +227,8 @@
 }
 
 .lock_container_cont1_div1_lock_div_lock_body_input_body_btn:disabled {
-  background: #bebdcd;
-  color: #e3e2ea;
+  background: #97b7a5;
+  color: #e6f3ec;
   cursor: not-allowed;
 }
 
@@ -240,9 +240,9 @@
 
 .lock_container_cont1_div1_lock_div_lock_body_input_body_input {
   padding: 10px 15px;
-  border: solid 1px #c4c3d1;
+  border: solid 1px #98caba;
   border-radius: 10px;
-  background: #dfdee9;
+  background: #ebf6f0;
   color: #1b3326;
   width: 100%;
 }
@@ -279,7 +279,7 @@ canvas.blockies_icon {
 }
 
 .lock_container_cont2_div2_chart_div_text_area {
-  color: #80808e;
+  color: #85a393;
   margin-bottom: 2em;
 }
 
@@ -306,7 +306,7 @@ svg.recharts-surface {
   right: 2%;
   font-size: 32px !important;
   color: #ffffff;
-  background: #8280ab;
+  background: #558069;
   padding: 4px;
   border-radius: 6px;
   cursor: pointer;
@@ -325,7 +325,7 @@ svg.recharts-surface {
   padding: 1em;
   border-radius: 10px;
   box-shadow: 0px 10px 20px #838383;
-  border: solid 1px #dfdee9;
+  border: solid 1px #ebf6f0;
   display: flex;
   flex-direction: column;
   padding-bottom: 10px;
@@ -355,7 +355,7 @@ svg.recharts-surface {
 
 .duration_dropDown_div_cont1 {
   padding: 15px;
-  background: #dfdee9;
+  background: #ebf6f0;
   margin-bottom: 10px;
   border-radius: 8px;
   cursor: pointer;
@@ -368,7 +368,7 @@ svg.recharts-surface {
 
 .duration_dropDown_div_cont1_selected {
   padding: 15px;
-  background: #8280ab;
+  background: #558069;
   margin-bottom: 10px;
   border-radius: 8px;
   cursor: pointer;
@@ -401,7 +401,7 @@ svg.recharts-surface {
 .lock_container_cont1_div1_lock_div_lock_body_input_body_cont_amount_div2 {
   width: 4em;
   /* padding: 15px; */
-  background: #8280ab;
+  background: #558069;
   display: flex;
   align-items: center;
   color: #fff;
@@ -447,7 +447,7 @@ svg.recharts-surface {
 
 .dark .lock_container_cont1_div_locks_overview {
   background: #232326;
-  color: #80808e;
+  color: #85a393;
   border: solid 1px #313135;
 }
 
@@ -464,7 +464,7 @@ svg.recharts-surface {
 .lock_container_cont1_div_contract_overview_body {
   padding: 1em;
   background: #232326;
-  color: #80808e;
+  color: #85a393;
   border: solid 1px #313135;
   margin-top: 0.5em;
   border-radius: 10px;
@@ -684,7 +684,7 @@ svg.recharts-surface {
 
 .value_dolls_div_val {
   font-size: 11px;
-  color: #80808e;
+  color: #85a393;
 }
 
 .value_dolls_div2 {

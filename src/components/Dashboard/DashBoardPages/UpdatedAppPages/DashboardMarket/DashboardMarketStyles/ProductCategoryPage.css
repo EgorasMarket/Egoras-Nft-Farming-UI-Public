@@ -130,7 +130,7 @@
   flex-direction: column;
   padding: 0px;
   font-size: 16px;
-  color: #80808e;
+  color: #85a393;
   margin-bottom: 10px;
 }
 
@@ -239,7 +239,7 @@
 }
 
 .radio-button input[type="radio"]:checked + label:before {
-  background-color: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   /* Custom color for the selected radio button */
   border-color: #22ad62;
 }
@@ -304,7 +304,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #22ad62;
+    background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
     color: #fff;
   }
 
@@ -361,7 +361,7 @@
     border: none;
     /* margin-top: 2em; */
     color: #fff;
-    background: #22ad62;
+    background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   }
 
   .mobileDisplayFilterDiv_container_head {

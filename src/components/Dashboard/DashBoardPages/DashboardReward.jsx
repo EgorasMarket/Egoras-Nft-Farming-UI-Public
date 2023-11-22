@@ -129,10 +129,10 @@ const DashboardReward = () => {
             <div className="dashboardRewardArea3">
               <div className="dashboardRewardArea3_area1">
                 <div className="dashboardRewardArea3_area1_title ">
-                  MartGpt Rewards
+                  Voting Rewards
                 </div>
                 <div className="dashboardRewardArea3_area1_para ">
-                  Stake your egc rewards to earn eusd in 6months.
+                  Stake your rewards to earn eusd in 6months.
                 </div>
               </div>
               <div className="dashboardRewardArea3_area2">
@@ -147,7 +147,10 @@ const DashboardReward = () => {
                     />
                   </div>
                   <div className="dashboardRewardArea3_area2_area1_cont2">
-                    200
+                    200{" "}
+                    <span className="dashboardRewardArea3_area2_area1_cont2_span">
+                      EGC
+                    </span>
                   </div>
                 </div>
                 <div className="dashboardRewardArea3_area2_area2">

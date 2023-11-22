@@ -80,7 +80,7 @@
 
 .updatedTokenModal_area1_para {
   font-size: 12px;
-  color: #80808e;
+  color: #85a393;
 }
 
 .updatedTokenModal_area1_search {
@@ -92,13 +92,13 @@
   padding: 10px;
   width: 100%;
   border-radius: 10px;
-  border: solid 1px #cfcede;
-  background: #e6e5f3;
-  color: #4b3b75;
+  border: solid 1px #76ad90;
+  background: #e1f3e9;
+  color: #000;
 }
 
 .dark .updatedTokenModal_area1_search_input {
-  border: solid 1px #313135;
+  border: solid 1px #76ad90;
   background: #000;
   color: #fff;
 }
@@ -170,7 +170,7 @@
 }
 
 .updatedTokenModal_area_body_area1:hover {
-  background: #e6e5f3;
+  background: #e2f3e9;
   transition: 0.1s linear;
 }
 
@@ -206,7 +206,7 @@
 
 .updatedTokenModal_area_body_area1_cont1_div2_cont2 {
   font-size: 12px;
-  color: #80808e;
+  color: #85a393;
 }
 
 .updatedTokenModal_area_body_area1_cont2 {

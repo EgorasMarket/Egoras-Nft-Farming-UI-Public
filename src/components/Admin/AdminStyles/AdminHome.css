@@ -7,7 +7,7 @@
   width: 100% !important;
 }
 .withdraw_funds_btn {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   padding: 15px 0px;
   width: 200px;

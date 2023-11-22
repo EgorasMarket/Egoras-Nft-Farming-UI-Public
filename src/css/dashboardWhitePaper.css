@@ -156,7 +156,7 @@
   content: "";
   width: 5px;
   height: 5px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   top: 10px;
   position: absolute;
   left: -8px;

@@ -56,7 +56,7 @@ export const ProductModel2 = ({
             ) : (
               <span>&#x24; {numberWithCommas(parseFloat(amount))}</span>
             )}
-            <span style={{ fontSize: "12px", color: "#80808e" }}>
+            <span style={{ fontSize: "12px", color: "#85a393" }}>
               {" ~"}
               {numberWithCommas(parseFloat(amount))} eUSD
             </span>
@@ -155,7 +155,7 @@ export const ProductModelList = ({
             ) : (
               <span>&#x24; {numberWithCommas(parseFloat(amount))}</span>
             )}
-            <span style={{ fontSize: "12px", color: "#80808e" }}>
+            <span style={{ fontSize: "12px", color: "#85a393" }}>
               {" ~"}
               {numberWithCommas(parseFloat(amount))} eUSD
             </span>
@@ -258,7 +258,7 @@ const ProductModel = ({
             ) : (
               <span>&#x24; {numberWithCommas(parseFloat(amount))}</span>
             )}
-            <span style={{ fontSize: "12px", color: "#80808e" }}>
+            <span style={{ fontSize: "12px", color: "#85a393" }}>
               {" ~"}
               {numberWithCommas(parseFloat(amount))} eUSD
             </span>

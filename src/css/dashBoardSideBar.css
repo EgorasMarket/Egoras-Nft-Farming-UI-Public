@@ -53,7 +53,7 @@ hr.hrr {
 }
 
 .medium_icon:hover {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   transition: 0.3s ease-in-out;
   color: #fff;
 }
@@ -77,7 +77,7 @@ hr.hrr {
 }
 
 .socail_links_icon:hover {
-  background: #22ad62 !important;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6) !important;
   color: #fff !important;
   transition: 0.3s ease-in-out;
 }

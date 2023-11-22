@@ -460,7 +460,7 @@ export const Step2Div = ({
                     onClick={UnlockToken}
                   >
                     {isLoading ? (
-                      <ScaleLoader color="#12111b" size={10} height={20} />
+                      <ScaleLoader color="#375746" size={10} height={20} />
                     ) : (
                       <span> Approve egc </span>
                     )}
@@ -477,7 +477,7 @@ export const Step2Div = ({
                         >
                           {isLoading ? (
                             <ScaleLoader
-                              color="#12111b"
+                              color="#375746"
                               size={10}
                               height={20}
                             />
@@ -496,7 +496,7 @@ export const Step2Div = ({
                         >
                           {isLoading ? (
                             <ScaleLoader
-                              color="#12111b"
+                              color="#375746"
                               size={10}
                               height={20}
                             />
@@ -515,7 +515,7 @@ export const Step2Div = ({
                         >
                           {isLoading ? (
                             <ScaleLoader
-                              color="#12111b"
+                              color="#375746"
                               size={10}
                               height={20}
                             />
@@ -640,7 +640,7 @@ export const Step2Div = ({
                     onClick={UnlockToken}
                   >
                     {isLoading ? (
-                      <ScaleLoader color="#12111b" size={10} height={20} />
+                      <ScaleLoader color="#375746" size={10} height={20} />
                     ) : (
                       <span> Approve egc </span>
                     )}
@@ -657,7 +657,7 @@ export const Step2Div = ({
                         >
                           {isLoading ? (
                             <ScaleLoader
-                              color="#12111b"
+                              color="#375746"
                               size={10}
                               height={20}
                             />
@@ -676,7 +676,7 @@ export const Step2Div = ({
                         >
                           {isLoading ? (
                             <ScaleLoader
-                              color="#12111b"
+                              color="#375746"
                               size={10}
                               height={20}
                             />
@@ -695,7 +695,7 @@ export const Step2Div = ({
                         >
                           {isLoading ? (
                             <ScaleLoader
-                              color="#12111b"
+                              color="#375746"
                               size={10}
                               height={20}
                             />

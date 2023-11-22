@@ -85,7 +85,7 @@
   padding: 15px;
   border-radius: 15px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 500;
 }

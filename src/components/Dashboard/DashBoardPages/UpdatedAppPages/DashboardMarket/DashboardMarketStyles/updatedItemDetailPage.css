@@ -46,7 +46,7 @@
 }
 
 .buy_button {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   border: none;
   padding: 10px;
@@ -121,7 +121,7 @@
 }
 
 .updated_itemdisplay_area2_cont1_condition_tag {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   width: 100px;
   padding: 5px;
@@ -501,7 +501,7 @@
   padding: 15px 0px;
   border-radius: 50px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   margin-top: 20px;
   font-size: 14px;
@@ -512,7 +512,7 @@
   padding: 15px 0px;
   border-radius: 50px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-size: 14px;
 }
@@ -585,7 +585,7 @@
   justify-content: center;
   cursor: pointer;
   width: 100%;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: white;
 }
 
@@ -646,7 +646,7 @@
   width: 50px;
   border: none;
   border-radius: 25px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 
@@ -872,7 +872,7 @@ a.More_details_link {
   font-size: 14px;
   border-radius: 50px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 
@@ -919,7 +919,7 @@ a.More_details_link {
 
 .tagconditionDiv {
   font-size: 10px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   padding: 3px 7px;
   border-radius: 40px;
@@ -1125,7 +1125,7 @@ a.More_details_link {
     justify-content: center;
     cursor: pointer;
     width: 100%;
-    background: #22ad62;
+    background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
     color: white;
   }
 
@@ -1155,7 +1155,7 @@ a.More_details_link {
 
   .Updated_itemdisplay_payment_proceed_div_payment_way_cont1_active {
     width: 100%;
-    background: #22ad62;
+    background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
     color: #fff;
     padding: 1em 0em;
     display: flex;

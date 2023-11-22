@@ -110,7 +110,7 @@ div#tradingview_12345 {
 }
 
 ::selection {
-  background-color: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 
@@ -148,7 +148,7 @@ button:focus {
 }
 
 .css-1aquho2-MuiTabs-indicator {
-  background-color: #22ad62 !important;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6) !important;
 }
 
 .custom_container {
@@ -165,7 +165,7 @@ button:focus {
 }
 
 .uploadButton::-webkit-file-upload-button {
-  background-color: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   border: none;
   padding: 0.5em 1em;
@@ -343,7 +343,7 @@ button:focus {
 }
 
 .css-1aquho2-MuiTabs-indicator {
-  background-color: #22ad62 !important;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6) !important;
 }
 
 .col-md-8 {
@@ -351,7 +351,7 @@ button:focus {
 }
 
 .uploadButton::-webkit-file-upload-button {
-  background-color: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   border: none;
   padding: 0.5em 1em;
@@ -586,7 +586,7 @@ rect.sparkline--interaction-layer {
 .dark .recharts-default-tooltip {
   background: #121213 !important;
   color: #fff !important;
-  border: solid 1px #80808e !important;
+  border: solid 1px #85a393 !important;
 }
 
 @media screen and (max-width: 767px) {
@@ -725,7 +725,7 @@ rect.sparkline--interaction-layer {
 }
 
 .dark .Modal2_div_area_span {
-  color: #80808e;
+  color: #85a393;
 }
 
 .Modal2_div1_head_icon {

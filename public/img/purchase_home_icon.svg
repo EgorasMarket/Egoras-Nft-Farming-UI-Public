@@ -9,15 +9,15 @@ viewBox="0 0 4.32 4.32"
   <style type="text/css">
    <![CDATA[
     .fil4 {fill:none}
-    .fil1 {fill:#201D30}
+    .fil1 {fill:#72bf91}
     .fil3 {fill:url(#id0)}
     .fil0 {fill:url(#id1)}
     .fil2 {fill:url(#id2)}
    ]]>
   </style>
   <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="1.5" y1="3.5" x2="2.04" y2="3.98">
-   <stop offset="0" style="stop-opacity:1; stop-color:#7A5FC0"/>
-   <stop offset="1" style="stop-opacity:1; stop-color:#1D0A2D"/>
+   <stop offset="0" style="stop-opacity:1; stop-color:#239e54"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#0a2f18"/>
   </linearGradient>
   <linearGradient id="id1" gradientUnits="userSpaceOnUse" xlink:href="#id0" x1="1.07" y1="0.72" x2="2.81" y2="3.08">
   </linearGradient>

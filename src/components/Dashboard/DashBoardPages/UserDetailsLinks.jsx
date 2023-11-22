@@ -41,28 +41,6 @@ const UserDetailsLinks = ({ activeLink }) => {
         <EmojiEventsIcon className="asset_overview_link_icon" />
         Rewards Hub
       </Link>
-      <Link
-        to="/app/user/p2p_sales"
-        className={
-          activeLink === "p2p"
-            ? "pool_lend_details_link_active"
-            : "pool_lend_details_link"
-        }
-      >
-        <TrendingDownIcon className="asset_overview_link_icon" />
-        Direct Sales
-      </Link>
-      <Link
-        to="/app/user/sales"
-        className={
-          activeLink === "sales"
-            ? "pool_lend_details_link_active"
-            : "pool_lend_details_link"
-        }
-      >
-        <TrendingDownIcon className="asset_overview_link_icon" />
-        Express Sales
-      </Link>
     </div>
   );
 };

@@ -660,6 +660,20 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   Stake
                 </a>
                 <a
+                  id="govern"
+                  href="/app/governance"
+                  className={
+                    activeBg == "govern" ? "header_tab1_active " : "header_tab1"
+                  }
+                  onClick={changeBg}
+                >
+                  <span class="Ping -top-1">
+                    <span class="c-flashingPart"></span>
+                    <span class="c-basePart"></span>
+                  </span>
+                  Governance
+                </a>
+                <a
                   id="swap"
                   href="/app/swap"
                   className={

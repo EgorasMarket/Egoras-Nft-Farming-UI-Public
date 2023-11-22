@@ -213,7 +213,7 @@
   padding: 1em 0em;
   border-radius: 5px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 .quality_standards_dots {
@@ -1070,7 +1070,7 @@ section.productsDisplaySection {
   padding: 1em 0em;
   border-radius: 5px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-size: 14px;
 }
@@ -1156,7 +1156,7 @@ section.productsDisplaySection {
 }
 .category_switch_tab1_active::after {
   content: "";
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   height: 2px;
   width: 100%;
   position: absolute;
@@ -1364,7 +1364,7 @@ section.productsDisplaySection {
   border-radius: 15px;
 }
 .featured_logos_area .react-multiple-carousel__arrow:hover {
-  background: #22ad62 !important;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6) !important;
   border: solid 1px #22ad62;
 }
 .featured_logos_area .react-multiple-carousel__arrow {
@@ -1409,7 +1409,7 @@ section.productsDisplaySection {
   height: 2px;
   left: 0;
   /* margin-bottom: 21px; */
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
 }
 @media (max-width: 1100px) {
   .card_compliment_style {
@@ -2285,7 +2285,7 @@ section.productsDisplaySection {
     padding: 1em 0em;
     border-radius: 5px;
     border: none;
-    background: #22ad62;
+    background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
     color: #fff;
     font-size: 13px;
   }
@@ -2378,7 +2378,7 @@ section.productsDisplaySection {
     height: 2px;
     left: 0;
     /* margin-bottom: 21px; */
-    background: #22ad62;
+    background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   }
   .featured_logos {
     display: none;

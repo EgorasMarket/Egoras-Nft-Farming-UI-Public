@@ -664,7 +664,7 @@ button.join_community_area1_btn_btn {
   .mobile_road_map_line_div {
     width: 15px;
     height: 78em;
-    background: #22ad62;
+    background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
     margin: auto;
     margin-left: 1em;
   }

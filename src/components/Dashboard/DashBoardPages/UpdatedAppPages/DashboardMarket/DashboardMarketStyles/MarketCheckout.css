@@ -100,7 +100,7 @@
   width: 100%;
   max-width: 86px;
   border-radius: 9px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 500;
   border: none;
@@ -145,7 +145,7 @@
 }
 
 input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
-  background-color: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   border-color: #997fda;
   padding: 2px;
 }
@@ -256,7 +256,7 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   padding: 15px;
   border-radius: 10px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 
@@ -527,7 +527,7 @@ input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
   border: none;
   border-radius: 11px;
   color: #fff;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
 }
 
 .updateProfileDivModal_container_body_cont1_button2 {

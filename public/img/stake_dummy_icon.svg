@@ -8,13 +8,13 @@ viewBox="0 0 4.48 5.46"
  <defs>
   <style type="text/css">
    <![CDATA[
-    .fil0 {fill:#201D30}
+    .fil0 {fill:#72bf91}
     .fil1 {fill:url(#id0)}
    ]]>
   </style>
   <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="0.13" y1="1.27" x2="4.02" y2="4.1">
-   <stop offset="0" style="stop-opacity:1; stop-color:#7A5FC0"/>
-   <stop offset="1" style="stop-opacity:1; stop-color:#1D0A2D"/>
+   <stop offset="0" style="stop-opacity:1; stop-color:#239e54"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#0a2f18"/>
   </linearGradient>
  </defs>
  <g id="Layer_x0020_1">

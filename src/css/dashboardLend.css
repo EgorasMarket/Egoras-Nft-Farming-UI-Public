@@ -78,7 +78,7 @@
   padding: 15px 0px;
   width: 200px;
   border-radius: 8px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   border: none;
   box-shadow: 0px 10px 10px #bfbfbf;
@@ -177,7 +177,7 @@
 }
 
 .assets-btn:hover {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   transform: translateY(-5px);
   transition: 0.5s linear;
@@ -361,7 +361,7 @@
   width: 100%;
   border-radius: 6px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 600;
 }
@@ -576,11 +576,11 @@
 }
 
 .enabled_bg {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
 }
 
 .dark .enabled_bg {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
 }
 
 /* .progress_bar::-webkit-progress-inner-element {
@@ -625,7 +625,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   padding: 0.5em 1em;
   color: #fff;
   border-radius: 33px;

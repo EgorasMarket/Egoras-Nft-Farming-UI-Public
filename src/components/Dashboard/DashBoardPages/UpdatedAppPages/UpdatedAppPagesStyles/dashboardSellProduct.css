@@ -20,7 +20,7 @@
 }
 
 .sell_container_tabs_1_active {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   padding: 15px;
   border-radius: 9px;
@@ -38,7 +38,7 @@
   margin-left: 10px;
   border-radius: 9px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 
@@ -114,7 +114,7 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  color: #80808e;
+  color: #85a393;
   margin-bottom: 10px;
 }
 
@@ -160,8 +160,8 @@
 }
 
 .dark .sell_container_tabs_1 {
-  background: #28263e;
-  color: #80808e;
+  background: #2e2e31;
+  color: #85a393;
 }
 
 .sell_container_header {
@@ -182,7 +182,7 @@
 
 .dark .sell_container_body_cont1_submit_btn:disabled {
   background: #313135;
-  color: #80808e;
+  color: #85a393;
 }
 
 .sell_container_body {
@@ -225,7 +225,7 @@
 }
 
 .dark .sell_container_body_cont1_txt {
-  color: #80808e;
+  color: #85a393;
 }
 
 .sell_container_body_cont1_txt_heading {
@@ -330,7 +330,7 @@ img.sell_container_body_cont1_img_display_cont_div2_img {
   padding: 15px 0px;
   border-radius: 11px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   font-weight: 600;
 }
@@ -349,7 +349,7 @@ img.sell_container_body_cont1_img_display_cont_div2_img {
   border-radius: 10px;
   margin-right: 10px;
   color: #fff;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
 }
 
 .acceptDeclineBidButtons_decline {

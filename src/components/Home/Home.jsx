@@ -1,11 +1,9 @@
 import React, { useRef, useEffect, useState, useContext } from "react";
 import "./stars.css";
-// import React from "react";
-// import { Link } from "react-router-dom";
-// import HomeIcon from "@mui/icons-material/Home";
-// import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-// import HowToVoteIcon from "@mui/icons-material/HowToVote";
-// import CasinoIcon from "@mui/icons-material/Casino";
+import { Twitter, Facebook, YouTube, Instagram } from "@material-ui/icons";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import TelegramIcon from "@mui/icons-material/Telegram";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import formatNumber from "../Dashboard/DashBoardPages/FormatNumber";
 import axios from "axios";
@@ -649,7 +647,43 @@ const Home = () => {
                 In Continuous Protocol Development.
               </div>
             </div>
-            <div className="community_section_area2"></div>
+            <div className="community_section_area2">
+              <a
+                href="https://twitter.com/martgpt"
+                className="twitter"
+                target="_blank"
+              >
+                <Twitter className="twitter_icon" />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/martgpt/"
+                className="twitter"
+                target="_blank"
+              >
+                <LinkedInIcon className="twitter_icon" />
+              </a>
+              <a
+                href="https://facebook.com/martgpt/"
+                className="twitter"
+                target="_blank"
+              >
+                <Facebook className="twitter_icon" />
+              </a>
+              <a
+                href="https://facebook.com/martgpt/"
+                className="twitter"
+                target="_blank"
+              >
+                <GitHubIcon className="twitter_icon" />
+              </a>
+              <a
+                href="https://facebook.com/martgpt/"
+                className="twitter"
+                target="_blank"
+              >
+                <TelegramIcon className="twitter_icon" />
+              </a>
+            </div>
           </div>
         </div>
       </section>

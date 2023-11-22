@@ -97,7 +97,7 @@
 }
 .supply-btn-active::after {
   content: "";
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   /* width: 50%; */
   height: 4px;
   position: absolute;
@@ -190,7 +190,7 @@ input.withdraw-input-box:hover {
 .withdraw-btn {
   width: 100%;
   padding: 1em 2em;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   border-radius: 10px;
   border: none;
   color: #fff;

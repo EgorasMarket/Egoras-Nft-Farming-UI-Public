@@ -98,7 +98,7 @@
 
 .saleDetailsDiv_area_1_title {
   font-size: 18px;
-  color: #80808e;
+  color: #85a393;
   margin-bottom: 0.5em;
 }
 
@@ -118,7 +118,7 @@
 }
 
 .saleDetailsDiv_area_1_div1_title {
-  color: #80808e;
+  color: #85a393;
 }
 
 .PlaceBidDiv {
@@ -164,7 +164,7 @@ button.PlaceBidDiv_Button {
   width: 100%;
   padding: 1em;
   border-radius: 10px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   background: #fff;
   color: #000;
   border: none;
@@ -195,7 +195,7 @@ button.PlaceBidDiv_Button {
   width: 89px;
   border-radius: 10px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
   margin: auto;
   font-size: 14px;
@@ -244,7 +244,7 @@ button.PlaceBidDiv_Button {
   width: 100%;
   padding: 15px;
   color: #fff;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   border: none;
   border-radius: 11px;
 }

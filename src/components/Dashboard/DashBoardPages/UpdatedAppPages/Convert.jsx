@@ -236,7 +236,7 @@ const Convert = () => {
                         onClick={UnlockToken}
                       >
                         {isLoading ? (
-                          <ScaleLoader color="#12111b" size={10} height={20} />
+                          <ScaleLoader color="#375746" size={10} height={20} />
                         ) : (
                           <> Approve EGC</>
                         )}
@@ -248,7 +248,7 @@ const Convert = () => {
                         onClick={convertToken}
                       >
                         {isLoading ? (
-                          <ScaleLoader color="#12111b" size={10} height={20} />
+                          <ScaleLoader color="#375746" size={10} height={20} />
                         ) : (
                           <> Convert EGC</>
                         )}

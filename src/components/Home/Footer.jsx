@@ -152,7 +152,7 @@ const Footer = () => {
                     />
                   </a>
 
-                  <div className="footerIcons">
+                  {/* <div className="footerIcons">
                     <a
                       href="https://twitter.com/martgpt"
                       className="twitter"
@@ -174,7 +174,7 @@ const Footer = () => {
                     >
                       <Facebook className="twitter_icon" />
                     </a>
-                  </div>
+                  </div> */}
                 </div>
                 {/* =================================
             ==================== */}
@@ -205,7 +205,7 @@ const Footer = () => {
 
               <hr className="footer_hr_rule"></hr>
               <h5 className="footerBottomPara">
-                ©️ 2023 Martgpt. All rights reserved .
+                ©️ 2023 EGODAO. All rights reserved .
               </h5>
             </div>
           </section>

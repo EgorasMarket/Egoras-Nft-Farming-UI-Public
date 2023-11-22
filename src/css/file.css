@@ -92,7 +92,7 @@
   /* background: linear-gradient(
 90deg
 , #39d97a 0%, #ebb396 50%, #22ad62 100%); */
-  background-color: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   text-align: center;
   font-size: 24px;
   color: #fff;
@@ -142,11 +142,11 @@
 }
 
 .ada:hover {
-  background-color: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 .ada1 {
-  background-color: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 .Enable5 {
@@ -174,12 +174,12 @@
 }
 
 .Gas2:hover {
-  background-color: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 
 .Gas3 {
-  background-color: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 .rece {

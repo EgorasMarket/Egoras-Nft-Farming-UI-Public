@@ -273,13 +273,13 @@ const DashboardReferral = ({ auth }) => {
                 </div>
               ) : (
                 <>
-                  <div className="referral_banner_bg_div">
+                  {/* <div className="referral_banner_bg_div">
                     <img
                       src="/img/referralBanner.png"
                       alt=""
                       className="referral_banner_bg_img"
                     />
-                  </div>
+                  </div> */}
                   <div className="dashBoard_ref_area1">
                     <div className="dashBoard_ref_area1_cont1">
                       <div className="dashBoard_ref_area1_cont1_icon_div">

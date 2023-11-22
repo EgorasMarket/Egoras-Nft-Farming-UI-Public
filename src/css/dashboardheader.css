@@ -225,20 +225,20 @@
 .notifySeeMoreDiv_container_head {
   font-size: 25px;
   font-weight: 600;
-  border-bottom: solid 1px #80808e;
+  border-bottom: solid 1px #85a393;
 }
 
 .notifySeeMoreDiv_container_para {
   font-size: 20px;
   font-weight: 400;
-  color: #80808e;
+  color: #85a393;
   margin-top: 0.5em;
 }
 
 .notifySeeMoreDiv_container_time {
   font-size: 12px;
   margin-top: 0px;
-  color: #80808e;
+  color: #85a393;
 }
 
 .notifySeeMoreDiv_close_div {
@@ -253,7 +253,7 @@
 .notifyDropDownDiv_div1_para {
   font-size: 15px;
   font-weight: 400;
-  color: #80808e;
+  color: #85a393;
 }
 
 .notifySeeMoreDiv_container_btn {
@@ -261,7 +261,7 @@
   padding: 15px 0px;
   border-radius: 10px;
   border: none;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 
@@ -316,7 +316,7 @@
 }
 
 .socail_links_icon2:hover {
-  background: #22ad62 !important;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6) !important;
   color: #ffffff !important;
   transition: 0.3s ease-in-out;
 }
@@ -357,7 +357,7 @@
 }
 
 .medium_icon2:hover {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
 
   color: #ffffff;
   transition: 0.3s ease-in-out;
@@ -454,11 +454,11 @@
 .header_rule {
   width: 100%;
   height: 1px;
-  background: #e2dcf0;
+  background: #cfe3d9;
 }
 
 .dark .header_rule {
-  background: #111c16;
+  background: #262827;
 }
 
 .search_button {
@@ -547,7 +547,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #80808e !important;
+  color: #85a393 !important;
   position: relative;
 }
 
@@ -564,7 +564,7 @@
 .Ping .c-basePart,
 .Ping .c-flashingPart {
   border-radius: 9999px;
-  background-color: #22ad62;
+  background: #fff;
 }
 
 .Ping .c-flashingPart {
@@ -573,14 +573,14 @@
   display: inline-flex;
   height: 100%;
   width: 100%;
-  left: 74%;
-  top: 8%;
+  left: 67%;
+  top: 12%;
   opacity: 0.75;
 }
 
 .dark .c-basePart,
 .dark .c-flashingPart {
-  background-color: #dad1f0;
+  background-color: #ffffff;
 }
 
 .animate-ping {
@@ -591,8 +591,8 @@
 @-webkit-keyframes ping {
   75%,
   to {
-    -webkit-transform: scale(2);
-    transform: scale(2);
+    -webkit-transform: scale(5);
+    transform: scale(5);
     opacity: 0;
   }
 }
@@ -600,8 +600,8 @@
 @keyframes ping {
   75%,
   to {
-    -webkit-transform: scale(2);
-    transform: scale(2);
+    -webkit-transform: scale(5);
+    transform: scale(5);
     opacity: 0;
   }
 }
@@ -621,7 +621,7 @@
 }
 
 .dark .header_tab1_active {
-  background: #22ad6252;
+  background: #22ad624f;
   box-shadow: 0px 0px 5px #000000;
   color: #fff !important;
 }
@@ -764,7 +764,7 @@ dark button.logout-btn {
   }
 
   .dark .header_tab1 {
-    color: #595772 !important;
+    color: #4d5350 !important;
   }
 
   .connect_div_dash_head {

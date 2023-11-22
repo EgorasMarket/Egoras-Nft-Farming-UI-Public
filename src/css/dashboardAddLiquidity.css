@@ -143,11 +143,11 @@
 }
 
 .amnt_input_field::placeholder {
-  color: #b5b4bf;
+  color: #b2c7b8;
 }
 
 .dark .amnt_input_field::placeholder {
-  color: #3e3c59;
+  color: #2e4d3d;
 }
 
 .display_tokens_drop {
@@ -166,7 +166,7 @@
 }
 
 .display_tokens_drop_not_select {
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #fff;
 }
 

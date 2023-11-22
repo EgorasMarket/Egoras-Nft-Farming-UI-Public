@@ -568,7 +568,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                                     >
                                       {isLoading ? (
                                         <ScaleLoader
-                                          color="#12111b"
+                                          color="#375746"
                                           size={10}
                                           height={20}
                                         />
@@ -584,7 +584,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                                     >
                                       {isLoading ? (
                                         <ScaleLoader
-                                          color="#12111b"
+                                          color="#375746"
                                           size={10}
                                           height={19}
                                         />
@@ -737,7 +737,7 @@ const DashBoardMarketCheckoutPage = ({ match }) => {
                   onClick={updateProfileFunc}
                 >
                   {profileLoading ? (
-                    <ScaleLoader color="#12111b" size={10} height={19} />
+                    <ScaleLoader color="#375746" size={10} height={19} />
                   ) : (
                     <>Submit</>
                   )}

@@ -45,10 +45,13 @@
   /* color: #fff; */
   font-size: 11px;
 
-  color: #aaa8c1;
+  color: #000;
   margin-bottom: 6px;
   display: flex;
   align-items: center;
+}
+.dark .token_balances_span {
+  color: #fff;
 }
 
 .TokenBalanceIcon {
@@ -67,26 +70,26 @@
   width: 100%;
   border-radius: 15px;
   font-size: 15px;
-  background: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #ffff;
   border: none;
   font-weight: 500;
 }
 
 .updatedSwapSwapBtn:disabled {
-  background: #aaa8c1;
-  color: #d4d3e3;
+  background: #a9c9b3;
+  color: #ddf6e5;
   cursor: not-allowed;
 }
 
 .dark .updatedSwapSwapBtn:disabled {
-  background: #28263e;
-  color: #65637a;
+  background: #1e3f2d;
+  color: #42725a;
 }
 
 .amnt_input_layer1_input_div_dollar_value {
   font-size: 14px;
-  color: #3e3c59;
+  color: #2e4d3d;
 }
 
 .amnt_input_layer1_input_div {
@@ -121,13 +124,13 @@
   border: none;
   padding: 6px;
   margin-right: 15px;
-  background: #aaa8c1;
+  background: #a9c9b3;
   color: #fff;
   transition: 0.2s linear;
 }
 
 .dark .amnt_input_layer2_cont1 {
-  background: #28263e;
+  background: #2e2e31;
   color: #fff;
 }
 
@@ -138,23 +141,23 @@
   border: none;
   padding: 6px;
   margin-right: 0px;
-  background: #aaa8c1;
+  background: #a9c9b3;
   color: #fff;
   transition: 0.2s linear;
 }
 
 .dark .amnt_input_layer2_cont1_last {
-  background: #28263e;
+  background: #2e2e31;
   color: #fff;
 }
 
 .amnt_input_layer2_cont1:hover {
-  background: #28263e;
+  background: #2e2e31;
   transition: 0.2s linear;
 }
 
 .amnt_input_layer2_cont1_last:hover {
-  background: #28263e;
+  background: #2e2e31;
   transition: 0.2s linear;
 }
 
@@ -168,7 +171,7 @@
   left: 0;
   margin: auto;
   /* border: solid 1px #293d32; */
-  color: #9e9cb8 !important;
+  color: #7c9d86 !important;
   cursor: pointer;
   top: 15%;
   bottom: 0;
@@ -193,7 +196,7 @@
   align-items: center;
   margin-bottom: 5px;
   background: #152016;
-  color: #80808e;
+  color: #85a393;
   font-size: 12px;
   padding: 5px 10px;
   border-radius: 9px;
@@ -210,7 +213,7 @@
 .swap_price_rate_div_swap_icon {
   margin-left: 5px;
   font-size: 17px !important;
-  background: #28263e;
+  background: #2e2e31;
   border-radius: 50%;
   padding: 1px;
   cursor: pointer;
@@ -247,7 +250,7 @@
   flex-direction: column;
   font-size: 12px;
   margin-top: 10px;
-  color: #80808e;
+  color: #85a393;
 }
 
 .moreSwapInfoDiv_div2_area1 {
@@ -272,7 +275,7 @@
   flex-direction: column;
 }
 
-.tradeViewArea {
+/* .tradeViewArea {
   width: 100%;
   height: 100%;
   margin-right: 3em;
@@ -283,7 +286,7 @@
   flex-direction: column;
   backdrop-filter: blur(3px);
   border: solid 1px #313135;
-}
+} */
 
 .tradeViewAreaCont .analytics_container_1_Amount {
   font-size: 28px;
@@ -317,7 +320,7 @@
   font-size: 12px;
   font-weight: 500;
   transition: all 0.2s ease 0s;
-  background-color: #22ad62;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
   color: #ffffff;
 }
 
@@ -402,7 +405,7 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 10px;
-  color: #80808e;
+  color: #85a393;
 }
 
 .swap_container_settings_cont_area1 {
@@ -429,7 +432,7 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
 }
 
 .swap_container_settings_cont_area2_icon:hover {
-  background: #28263e80;
+  background: #2e2e3180;
   border-radius: 50%;
   padding: 5px;
   /* font-size: 63px; */
@@ -439,7 +442,7 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
 }
 
 .swap_container_settings_cont_area2_icon2:hover {
-  background: #28263e80;
+  background: #2e2e3180;
   border-radius: 50%;
   padding: 5px;
   /* font-size: 63px; */
@@ -463,17 +466,16 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
   /* max-width: 425px; */
   /* width: 100%; */
   color: #000000;
-  background: #ebeaff4a;
+  background: #a9c9b32e;
   padding: 0.5em 1em;
   border-radius: 38px;
   border: solid 1px #ffffff;
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
 }
-
 .dark .swap_container_settings_cont {
-  color: #80808e;
-  background: #0008f;
+  color: #85a393;
+  background: #0c1510;
   border: solid 1px #313135;
 }
 
@@ -493,7 +495,7 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #00096;
+  background: #0000007a;
   z-index: 1000000;
   overflow: scroll;
   display: flex;
@@ -566,7 +568,7 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
 
 .shareSwapDiv_cont2_cont1_body_div1 {
   margin-bottom: 11px;
-  color: #7b7899;
+  color: #89a697;
   display: list-item;
 }
 
@@ -578,7 +580,7 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
 }
 
 .shareSwapDiv_cont2_cont2_icon {
-  background: #686597;
+  background: #89a69729;
   padding: 10px;
   border-radius: 50%;
   width: 50px !important;
@@ -708,7 +710,7 @@ input:checked + .ToggleChartDiv_checkBox_slider::before {
   align-items: center;
   margin-bottom: 0px;
   /* background: #152016; */
-  color: #80808e;
+  color: #85a393;
   font-size: 12px;
   padding: 5px 0px;
   border-radius: 9px;
@@ -716,7 +718,7 @@ input:checked + .ToggleChartDiv_checkBox_slider::before {
 }
 
 .dark .swap_price_slippage_div {
-  color: #80808e;
+  color: #85a393;
   /* border: solid 2px #313135; */
 }
 
@@ -736,7 +738,7 @@ input:checked + .ToggleChartDiv_checkBox_slider::before {
   display: flex;
   align-items: center;
   font-size: 14px;
-  color: #28263e;
+  color: #2e2e31;
   cursor: pointer;
 }
 
@@ -807,8 +809,8 @@ input:checked + .ToggleChartDiv_checkBox_slider::before {
   border: 0px;
   border-radius: 50px;
   cursor: pointer;
-  color: #847f92;
-  border: solid #0a0912;
+  color: #86a696;
+  border: solid #000000;
 }
 
 .max_slippageDisplayDiv1:hover {
@@ -826,7 +828,7 @@ input:checked + .ToggleChartDiv_checkBox_slider::before {
   cursor: pointer;
   color: #ffffff;
   border: solid #22ad62;
-  background: #211f27;
+  background: #22ad6230;
 }
 
 .max_slippageDisplayDiv1_active_warning {
@@ -852,7 +854,7 @@ input:checked + .ToggleChartDiv_checkBox_slider::before {
   border: solid #0a0912;
   border-radius: 50px;
   height: 100%;
-  color: #6c6989;
+  color: #86a696;
 }
 
 .custom_slippage_input_div_active {
@@ -865,7 +867,7 @@ input:checked + .ToggleChartDiv_checkBox_slider::before {
   border-radius: 50px;
   height: 100%;
   color: #ffffff;
-  background: #21202c;
+  background: #22ad6230;
 }
 
 .custom_slippage_input_div_active_warning {
@@ -878,12 +880,12 @@ input:checked + .ToggleChartDiv_checkBox_slider::before {
   border-radius: 50px;
   height: 100%;
   color: #ffffff;
-  background: #21202c;
+  background: #22ad6230;
 }
 
 .custom_slippage_input_div:hover {
-  border: solid #6c6989;
-  color: #6c6989;
+  border: solid #47765c;
+  color: #83a294;
 }
 
 .custom_slippage_input:focus-visible {
