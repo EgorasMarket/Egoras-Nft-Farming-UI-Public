@@ -517,14 +517,14 @@
   border-radius: 10px;
   /* cursor: pointer; */
 }
-.egrLogo2Cont3 {
+/* .egrLogo2Cont3 {
   width: 100%;
-}
+} */
 .header_tabs {
   display: flex;
   gap: 10px;
   padding: 5px 5px;
-  border: solid 1px #d3d3d3;
+  /* border: solid 1px #d3d3d3; */
   border-radius: 8px;
   font-size: 14px;
   background: #ebebeb;
@@ -536,13 +536,13 @@
 }
 
 .dark .header_tabs {
-  border: solid 1px #232326;
+  /* border: solid 1px #232326; */
   background: #000;
 }
 
 .header_tab1 {
   cursor: pointer;
-  width: 100px;
+  width: 125px;
   padding: 6px 0px;
   display: flex;
   align-items: center;
@@ -557,7 +557,7 @@
   height: 0.35rem;
   width: 0.35rem;
   right: 23%;
-  left: 67%;
+  left: 85%;
   top: 12%;
 }
 
@@ -573,7 +573,7 @@
   display: inline-flex;
   height: 100%;
   width: 100%;
-  left: 67%;
+  left: 85%;
   top: 12%;
   opacity: 0.75;
 }
@@ -608,8 +608,8 @@
 
 .header_tab1_active {
   background: #fff;
-  padding: 6px 0px;
-  width: 100px;
+  padding: 6px 3px;
+  width: 125px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -619,7 +619,10 @@
   font-weight: 600;
   position: relative;
 }
-
+.header_tab1_icon_icon {
+  font-size: 20px !important;
+  margin-right: 4px;
+}
 .dark .header_tab1_active {
   background: #22ad624f;
   box-shadow: 0px 0px 5px #000000;

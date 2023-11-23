@@ -194,11 +194,7 @@ const Dashboard = ({ check, togglemakeDark }) => {
                   path="/app/staking/egc"
                   component={StakingUpdate}
                 />
-                <Route
-                  exact
-                  path="/app/sell"
-                  component={DashBoardSellProduct}
-                />
+
                 <Route exact path="/app/convert" component={Convert} />
                 <Route
                   exact

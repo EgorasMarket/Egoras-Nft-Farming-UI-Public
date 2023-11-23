@@ -9,7 +9,7 @@ import DiamondCut from "./contracts/V3/DiamondCut.json";
 import Minter from "./contracts/V3/Minter.json";
 import { getParsedEthersError } from "@enzoferey/ethers-error-parser";
 import erc20 from "./contracts/erc20.json";
-import ProductFacet2 from "./contracts/V3/ProductFacet2.json";
+import ProductFacet from "./contracts/V3/ProductFacet.json";
 import { formattedError } from "./FormattedError";
 import StakingFacet from "./contracts/V3/StakingFacet.json";
 import PriceOracleFacet from "./contracts/V3/PriceOracleFacet.json";
@@ -24,8 +24,8 @@ const contractDealersFacetInstance = async (signer) => {
 const contractPancakeSwapFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, PancakeSwapFaucet.abi, signer);
 };
-const contractProduct2FacetInstance = (signer) => {
-  return new Contract(V3ContractAddress.address, ProductFacet2.abi, signer);
+const contractProductFacetInstance = (signer) => {
+  return new Contract(V3ContractAddress.address, ProductFacet.abi, signer);
 };
 const contractMartgptFacetInstance = async (signer) => {
   return new Contract(
@@ -720,6 +720,22 @@ const setMartgptTokenAddress = async (signer) => {
     };
   }
 };
+const setTokenAddress = async (_eusd, _egc, signer) => {
+  try {
+    const instance = await contractProductFacetInstance(signer);
+    let result = await instance.setTokenAddresses(_eusd, _egc);
+    console.log(result, "result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 const CheckUserRewardStats = async (account, period, signer) => {
   try {
     const instance = await contractRewardFaucetInstance(signer);
@@ -819,7 +835,7 @@ const listProcurementProduct = async (
 ) => {
   console.log(_title, _amount, _sellingPrice, _qty);
   try {
-    const instance = await contractProduct2FacetInstance(signer);
+    const instance = await contractProductFacetInstance(signer);
     let result = await instance.Procurement(
       _title,
       _amount,
@@ -827,24 +843,6 @@ const listProcurementProduct = async (
       _qty
     );
     console.log("second");
-    console.log(result, "result, result,result,result,result");
-    return {
-      message: result,
-      status: true,
-    };
-  } catch (error) {
-    return {
-      message: formattedError(error).message,
-      status: formattedError(error).status,
-    };
-  }
-};
-
-const approveNewProducts = async (_productID, signer) => {
-  console.log(_productID);
-  try {
-    const instance = await contractProduct2FacetInstance(signer);
-    let result = await instance.procurementAuthorized(_productID);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -898,5 +896,5 @@ export {
   withdrawAllEgc,
   configureDealerPlan,
   listProcurementProduct,
-  approveNewProducts,
+  setTokenAddress,
 };

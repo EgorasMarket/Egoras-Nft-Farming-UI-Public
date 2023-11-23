@@ -114,7 +114,171 @@
   width: 100vh;
   background: #f6fff9;
 }
+/* ================================================= */
+/* ================================================= */
+/* ================================================= */
+/* ================================================= */
+/* ================================================= */
+/* ================================================= */
 
+.proposals_area {
+  display: flex;
+  flex-direction: column;
+}
+.proposals_area_2 {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2em;
+}
+.proposals_area_2_head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #232326;
+  padding: 1em;
+  border-radius: 10px;
+  color: #fff;
+}
+.proposals_area_2_head_txt {
+  font-size: 32px;
+  font-weight: 500;
+}
+.proposals_area_2_head_stats_div {
+  display: flex;
+  align-items: center;
+}
+.proposals_area_2_head_stats_div1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 2em;
+  border-right: solid 1px #333338;
+  padding-right: 2em;
+}
+.proposals_area_2_head_stats_div1_title {
+  font-size: 16px;
+  color: #8e8e95;
+}
+.proposals_area_2_head_stats_div1_txt {
+  font-size: 20px;
+}
+.proposals_area_2_body {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+}
+.proposals_area_2_body_head_tabs {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  width: 100%;
+  background: #232326;
+  color: #74747a;
+  font-size: 15px;
+  padding: 10px 15px;
+  border-radius: 7px;
+}
+.proposals_area_2_body_head_tabs_1_active {
+  background: linear-gradient(to right, #58ad74, #4c8f62, #5fa7d6);
+  border-radius: 5px;
+  color: #fff;
+  min-width: 32px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 2px 16px;
+  margin-right: 20px;
+}
+.proposals_area_2_body_head_tabs_1 {
+  border-radius: 5px;
+  min-width: 32px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 2px 16px;
+  margin-right: 20px;
+}
+.proposals_area_2_body_area {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+.proposals_area_2_body_area_cont1 {
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  background: #232326;
+  margin-bottom: 1em;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+.proposals_area_2_body_area_cont1_area1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: solid 1px #38383c;
+  padding-bottom: 1em;
+}
+.proposals_area_2_body_area_cont1_area1_title {
+  font-size: 24px;
+  font-weight: 400;
+}
+.proposals_area_2_body_area_cont1_area1_status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* padding: 10px; */
+}
+.proposals_area_2_body_area_cont1_area1_status_btn {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 0;
+  background: #55555d;
+  color: #fff;
+}
+.proposals_area_2_body_area_cont1_area2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1em;
+}
+canvas.blockies_icon2 {
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.proposals_area_2_body_area_cont1_area2_div1 {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+.proposals_area_2_body_area_cont1_area2_div1_span {
+  font-size: 12px;
+  margin-right: 5px;
+  color: #94949f;
+}
+.proposals_area_2_body_area_cont1_area2_div2 {
+  font-size: 14px;
+  color: #94949f;
+}
+/* ============================
+===================== */
+/* ================================================= */
+/* ================================================= */
+/* ================================================= */
+/* ================================================= */
+/* ================================================= */
+/* ================================================= */
+/* ================================================= */
+/* ================================================= */
+/* ================================================= */
 @media screen and (max-width: 1455px) {
   .coins_list_area {
     grid-template-columns: auto auto auto;

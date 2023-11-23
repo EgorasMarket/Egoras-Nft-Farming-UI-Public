@@ -261,6 +261,12 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
     if (linksActive === "/app/earn/pool/detail/transactions") {
       setActiveBg("lend");
     }
+    if (linksActive === "/admin/upload/procurrement") {
+      setActiveBg("procurre");
+    }
+    if (linksActive === "/admin/product/upload") {
+      setActiveBg("upload");
+    }
 
     if (linksActive === "/app/swap") {
       setActiveBg("swap");
@@ -571,6 +577,26 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 Membership
               </a>
               <a
+                id="procurre"
+                href="/admin/upload/procurrement"
+                className={
+                  activeBg == "procurre" ? "header_tab1_active " : "header_tab1"
+                }
+                onClick={changeBg}
+              >
+                Procurement
+              </a>
+              <a
+                id="upload"
+                href="/admin/product/upload"
+                className={
+                  activeBg == "upload" ? "header_tab1_active " : "header_tab1"
+                }
+                onClick={changeBg}
+              >
+                Product Upload
+              </a>
+              <a
                 id="settings"
                 href="/admin/settings"
                 className={
@@ -738,7 +764,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
             Oops, your wallet is not on the right network.
             <span className="right_network_id_modal_cont_para">
               It seems your wallet is running on a different network from
-              Egoras.app. Please click the button below to change your network
+              EGODAO.app. Please click the button below to change your network
               or add the network if it's not added in your wallet.
             </span>
             <div className="change_network_btn_div">

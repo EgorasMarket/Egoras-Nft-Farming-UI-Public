@@ -167,6 +167,31 @@
       "inputs": [
         {
           "indexed": false,
+          "internalType": "uint256",
+          "name": "_productID",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "payer",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "DebtRepaid",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
           "internalType": "string",
           "name": "_title",
           "type": "string"
@@ -259,6 +284,62 @@
           "type": "uint256"
         }
       ],
+      "name": "ProcurementDeclined",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "productID",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "selling",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "procurementPrice",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "initiator",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "ProcurementPriceUpdate",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_productID",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
       "name": "ProductApproved",
       "type": "event"
     },
@@ -310,6 +391,31 @@
       "inputs": [
         {
           "indexed": false,
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_time",
+          "type": "uint256"
+        }
+      ],
+      "name": "RecordEvent",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
           "internalType": "uint256",
           "name": "_productID",
           "type": "uint256"
@@ -328,6 +434,49 @@
         }
       ],
       "name": "ReleaseProductFundToSeller",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "productID",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "qty",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "soldProductCounter",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "buyer",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "discount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "Sales",
       "type": "event"
     },
     {
@@ -415,6 +564,37 @@
         }
       ],
       "name": "Transfer",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "productID",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "typeOfVote",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "Votted",
       "type": "event"
     },
     {
@@ -708,16 +888,39 @@
         },
         {
           "internalType": "uint256",
-          "name": "_qty",
+          "name": "_sellingPrice",
           "type": "uint256"
         },
         {
-          "internalType": "bool",
-          "name": "_isdirect",
-          "type": "bool"
+          "internalType": "uint256",
+          "name": "_qty",
+          "type": "uint256"
         }
       ],
-      "name": "listProduct",
+      "name": "Procurement",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_productID",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_sellingPrice",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_procurementPrice",
+          "type": "uint256"
+        }
+      ],
+      "name": "updateProcurementPrice",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -730,37 +933,127 @@
           "type": "uint256"
         }
       ],
-      "name": "productState",
+      "name": "voteStats",
       "outputs": [
         {
-          "internalType": "bool",
-          "name": "isBidding",
-          "type": "bool"
-        },
-        {
           "internalType": "uint256",
-          "name": "latestBid",
+          "name": "_noVotes",
           "type": "uint256"
         },
         {
+          "internalType": "uint256",
+          "name": "_yesVotes",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_vottingPeriod",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
           "internalType": "address",
-          "name": "_creator",
+          "name": "_eusd",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_egc",
+          "type": "address"
+        }
+      ],
+      "name": "setTokenAddresses",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_productID",
+          "type": "uint256"
+        }
+      ],
+      "name": "yes",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_productID",
+          "type": "uint256"
+        }
+      ],
+      "name": "no",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_productID",
+          "type": "uint256"
+        }
+      ],
+      "name": "procurementAuthorized",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "user",
           "type": "address"
         },
         {
           "internalType": "uint256",
-          "name": "_amount",
+          "name": "_productID",
           "type": "uint256"
         },
         {
           "internalType": "uint256",
-          "name": "_selling",
+          "name": "qty",
+          "type": "uint256"
+        }
+      ],
+      "name": "purchase",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_productID",
+          "type": "uint256"
+        }
+      ],
+      "name": "getDebtStats",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_productDebts",
           "type": "uint256"
         },
         {
-          "internalType": "address",
-          "name": "eusd",
-          "type": "address"
+          "internalType": "uint256",
+          "name": "_totalDebts",
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -780,46 +1073,7 @@
           "type": "uint256"
         }
       ],
-      "name": "bid",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        }
-      ],
-      "name": "approveDirectProduct",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        }
-      ],
-      "name": "acceptBid",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        }
-      ],
-      "name": "approveProduct",
+      "name": "payDebt",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -828,80 +1082,16 @@
       "inputs": [
         {
           "internalType": "address",
-          "name": "user",
+          "name": "_user",
           "type": "address"
         },
         {
           "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "qty",
+          "name": "_amount",
           "type": "uint256"
         }
       ],
-      "name": "buyProduct",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "user",
-          "type": "address"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "qty",
-          "type": "uint256"
-        }
-      ],
-      "name": "buyDirectProduct",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "tradeID",
-          "type": "uint256"
-        }
-      ],
-      "name": "cancelTrade",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_productID",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint256",
-          "name": "tradeID",
-          "type": "uint256"
-        }
-      ],
-      "name": "releaseProductFundToSeller",
+      "name": "recordUserActivity",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

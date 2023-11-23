@@ -9,7 +9,7 @@ import {
   adminAddMinter,
   DiamondCutFunc,
   approveBusd,
-  setMartgptTokenAddress,
+  setTokenAddress,
   BurnEgc,
   withdrawAllEgc,
 } from "../../../../web3/index2";
@@ -39,6 +39,8 @@ const AdminSettings = () => {
   const [diamondCutCode, setDiamondCutCode] = useState("");
   const [egcAmnt, setEgcAmnt] = useState("");
   const [egcWithdrawAmnt, setEgcWithdrawAmnt] = useState("");
+  const [egcAddress, setEgcAddress] = useState("");
+  const [eusdAddress, setEusdAddress] = useState("");
 
   const addMinter = async () => {
     const response = await adminAddMinter(
@@ -55,8 +57,15 @@ const AdminSettings = () => {
   //   const response = await approveBusd(library.getSigner());
   //   console.log(response);
   // };
-  const setTokenAdrress = async () => {
-    const response = await setMartgptTokenAddress(library.getSigner());
+  const setTokenAdrres = async () => {
+    console.log("====================================");
+    console.log(eusdAddress, egcAddress);
+    console.log("====================================");
+    const response = await setTokenAddress(
+      eusdAddress,
+      egcAddress,
+      library.getSigner()
+    );
     console.log(response);
   };
 
@@ -91,6 +100,14 @@ const AdminSettings = () => {
     setNewWallet(event.target.value);
     console.log(event.target.value);
   };
+  const ChangeEusdAddress = (event) => {
+    setEusdAddress(event.target.value);
+    console.log(event.target.value);
+  };
+  const ChangeEgcAddress = (event) => {
+    setEgcAddress(event.target.value);
+    console.log(event.target.value);
+  };
 
   const handleNewWallet2 = (event) => {
     setNewWallet2(event.target.value);
@@ -118,14 +135,17 @@ const AdminSettings = () => {
     );
     console.log(response);
   };
+
   const setTicker = async () => {
     const response = await setEGCUSDTicker(tickerArray[0], library.getSigner());
     console.log(response);
   };
+
   const resetStackedTime = async () => {
     const response = await resetStakeTime(account, library.getSigner());
     console.log(response);
   };
+
   const IncreaseStakeTime = async () => {
     const response = await IncreaseRoyaltyTime(account, library.getSigner());
     console.log(response);
@@ -137,43 +157,6 @@ const AdminSettings = () => {
         <div className="container">
           <div className="settings_sections">
             <div className="settings_section1">
-              <div className="settings_section1_div1">
-                <h4 className="routerHeader">Set Price</h4>
-                <div className="setRouterAddressDiv">
-                  <div className="setRouterAddressDiv_address_divs">
-                    <div className="setRouterAddressDiv1">
-                      <div className="setRouterAddressDiv1_title">Egc</div>
-                      <input
-                        type="text"
-                        placeholder="Price"
-                        className="setRouterAddressInput"
-                      />
-                    </div>
-                    --
-                    <div className="setRouterAddressDiv1">
-                      <div className="setRouterAddressDiv1_title">USD</div>
-                      <input
-                        type="Ticker"
-                        placeholder="amount"
-                        className="setRouterAddressInput"
-                      />
-                    </div>
-                  </div>
-                  <div className="setRouterAddressButtonDiv">
-                    <button onClick={setPrice} className="setRouterAddressBtn">
-                      Set Price
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="settings_section1_div2">
-                <h4 className="routerHeader">Set Ticker</h4>
-                <button onClick={setTicker} className="setRouterAddressBtn">
-                  Set Ticker
-                </button>
-              </div>
-
               <div className="settings_section1_div1">
                 <h4 className="routerHeader">Set Pythia</h4>
                 <div className="setRouterAddressDiv">
@@ -203,6 +186,35 @@ const AdminSettings = () => {
                   </div>
                 </div>
               </div>
+
+              <div className="settings_section1_div1">
+                <h4 className="routerHeader">Set Price</h4>
+                <div className="setRouterAddressDiv">
+                  <div className="setRouterAddressDiv_address_divs">
+                    <div className="setRouterAddressDiv1">
+                      <div className="setRouterAddressDiv1_title">Egc/Eusd</div>
+                      <input
+                        type="text"
+                        placeholder="Price"
+                        className="setRouterAddressInput"
+                      />
+                    </div>
+                  </div>
+                  <div className="setRouterAddressButtonDiv">
+                    <button onClick={setPrice} className="setRouterAddressBtn">
+                      Set Price
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="settings_section1_div2">
+                <h4 className="routerHeader">Set Ticker</h4>
+                <button onClick={setTicker} className="setRouterAddressBtn">
+                  Set Ticker
+                </button>
+              </div>
+
               <div className="settings_section1_div1">
                 <h4 className="routerHeader">Suspend Pythia</h4>
                 <div className="setRouterAddressDiv">
@@ -321,14 +333,45 @@ const AdminSettings = () => {
                   </div>
                 </div>
               </div>
-              <div className="settings_section1_div2">
-                <h4 className="routerHeader"> Set Token Address</h4>
-                <button
-                  onClick={setTokenAdrress}
-                  className="setRouterAddressBtn"
-                >
-                  set address
-                </button>
+              <div className="settings_section1_div1">
+                <h4 className="routerHeader">Set Address</h4>
+                <div className="setRouterAddressDiv">
+                  <div className="setRouterAddressDiv_address_divs">
+                    <div className="setRouterAddressDiv1">
+                      <div className="setRouterAddressDiv1_title">
+                        {" "}
+                        Eusd Address:
+                      </div>
+                      <input
+                        placeholder="0x000"
+                        className="setRouterAddressInput"
+                        value={eusdAddress}
+                        onChange={ChangeEusdAddress}
+                      />
+                    </div>
+                    --
+                    <div className="setRouterAddressDiv1">
+                      <div className="setRouterAddressDiv1_title">
+                        {" "}
+                        Egc Address:
+                      </div>
+                      <input
+                        placeholder="0x000"
+                        className="setRouterAddressInput"
+                        value={egcAddress}
+                        onChange={ChangeEgcAddress}
+                      />
+                    </div>
+                  </div>
+                  <div className="setRouterAddressButtonDiv">
+                    <button
+                      onClick={setTokenAdrres}
+                      className="setRouterAddressBtn"
+                    >
+                      Set address
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

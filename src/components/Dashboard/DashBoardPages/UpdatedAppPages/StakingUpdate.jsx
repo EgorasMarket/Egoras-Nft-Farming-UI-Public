@@ -598,6 +598,9 @@ const StakingUpdate = () => {
   const UnlockToken = async (e) => {
     setIsLoading(true);
     setDisable(true);
+    console.log("====================================");
+    console.log(REACT_APP_EGC_ADDRESS);
+    console.log("====================================");
     let ret = await unlockTokenV3(
       REACT_APP_EGC_ADDRESS,
       parseEther("180000000000000000000000000000000000", "wei").toString(),
