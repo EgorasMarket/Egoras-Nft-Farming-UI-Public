@@ -14,6 +14,8 @@ import AdminSeeSellers from "./AdminPages/AdminSeeSellers";
 import AdminStaffPage from "./AdminPages/AdminStaffPage";
 import AdminModifyMembership from "./AdminPages/AdminModifyMembership";
 import AdminProductsPage from "./AdminPages/AdminProductsPage";
+import DashBoardSellProduct from "../Dashboard/DashBoardPages/UpdatedAppPages/DashBoardSellProduct";
+import AdminProcurreProduct from "./AdminPages/AdminProcurreProduct";
 // import AdminMinorPage from "./AdminMinorPage";
 // import DashBoardUserDetails from "../Dashboard/DashBoardPages/DashBoardUserDetails";
 import { CALL_VERIFY_ADMIN_WALLET } from "../../services/adminServices";
@@ -62,6 +64,16 @@ const Admin = ({ check, togglemakeDark }) => {
               {/* <AdminHome /> */}
               <Switch>
                 <Route exact path="/admin" component={DashboardHome} />
+                <Route
+                  exact
+                  path="/admin/upload/procurrement"
+                  component={AdminProcurreProduct}
+                />
+                <Route
+                  exact
+                  path="/admin/product/upload"
+                  component={DashBoardSellProduct}
+                />
                 {/* <Route exact path="/admin/assets" component={AdminAssets} /> */}
                 <Route
                   exact

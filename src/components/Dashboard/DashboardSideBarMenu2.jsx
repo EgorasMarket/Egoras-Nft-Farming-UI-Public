@@ -3,6 +3,8 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { CALL_CHECK_USER_AND_MEMBERSHIP } from "../../services/userServices";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import HowToVoteIcon from "@mui/icons-material/HowToVote";
 // ================
 // ================
 // ================
@@ -324,6 +326,9 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     if (linksActive === "/app/earn/pool/detail/transactions") {
       setActiveBg("lend");
     }
+    if (linksActive === "/app/governance") {
+      setActiveBg("govern");
+    }
 
     if (linksActive === "/app/swap") {
       setActiveBg("swap");
@@ -643,7 +648,8 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   }
                   onClick={changeBg}
                 >
-                  Home
+                  <DashboardIcon className="header_tab1_icon_icon" />
+                  Dashboard
                 </a>
                 <a
                   id="stake"
@@ -653,10 +659,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   }
                   onClick={changeBg}
                 >
-                  <span class="Ping -top-1">
-                    <span class="c-flashingPart"></span>
-                    <span class="c-basePart"></span>
-                  </span>
+                  <LockClockIcon className="header_tab1_icon_icon" />
                   Stake
                 </a>
                 <a
@@ -667,11 +670,12 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   }
                   onClick={changeBg}
                 >
+                  <HowToVoteIcon className="header_tab1_icon_icon" />
+                  Governance
                   <span class="Ping -top-1">
                     <span class="c-flashingPart"></span>
                     <span class="c-basePart"></span>
                   </span>
-                  Governance
                 </a>
                 <a
                   id="swap"
@@ -681,11 +685,8 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   }
                   onClick={changeBg}
                 >
+                  <SwapHorizontalCircleIcon className="header_tab1_icon_icon" />
                   Swap
-                  <span class="Ping -top-1">
-                    <span class="c-flashingPart"></span>
-                    <span class="c-basePart"></span>
-                  </span>
                 </a>
                 <a
                   id="account"
@@ -697,6 +698,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   }
                   onClick={changeBg}
                 >
+                  <AccountCircleIcon className="header_tab1_icon_icon" />
                   Account
                 </a>
               </div>
@@ -1260,8 +1262,8 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
               Oops, your wallet is not on the right network.
               <span className="right_network_id_modal_cont_para">
                 It seems your wallet is running on a different network from
-                MartGpt.app. Please click the button below to change your
-                network or add the network if it's not added in your wallet.
+                EGODAO.app. Please click the button below to change your network
+                or add the network if it's not added in your wallet.
               </span>
               <div className="change_network_btn_div">
                 <button className="changeNetworkBtn" onClick={switchNetwork}>

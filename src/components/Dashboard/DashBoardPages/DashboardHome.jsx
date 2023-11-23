@@ -445,6 +445,9 @@ const DashboardHome = () => {
     "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e": {
       symbol: "EGC",
     },
+    "0x4AC4fC5317F95849A1F17e2f4Daf03c32196f0cb": {
+      symbol: "EGC",
+    },
     "0x55d398326f99059fF775485246999027B3197955": {
       symbol: "USDT",
     },

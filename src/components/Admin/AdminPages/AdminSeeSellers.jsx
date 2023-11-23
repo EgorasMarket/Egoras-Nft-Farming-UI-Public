@@ -21,7 +21,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { placeBid, approveProduct1, approveProductDirect } from "../../../web3";
 import { parseEther, formatEther, parseUnits } from "@ethersproject/units";
 import AdminDashboardCard from "../../cards/AdminDashboardCard";
-import { approveNewProducts } from "../../../web3/index2";
+
 import {
   POPULATE_ADMIN_PRODUCT_DASHBOARD,
   CALL_ADMIN_PLACE_BID,
@@ -399,16 +399,16 @@ const AdminSeeSellers = () => {
     }
   };
 
-  const ApproveNewProd = async (id) => {
-    console.log(id, "ApproveProductDirect");
-    const res = await approveNewProducts(id, library.getSigner());
-    console.log(res);
-    if (res.status == true) {
-      console.log("Success message");
-    } else {
-      console.log("Error occured from Blockchain");
-    }
-  };
+  // const ApproveNewProd = async (id) => {
+  //   console.log(id, "ApproveProductDirect");
+  //   const res = await approveNewProducts(id, library.getSigner());
+  //   console.log(res);
+  //   if (res.status == true) {
+  //     console.log("Success message");
+  //   } else {
+  //     console.log("Error occured from Blockchain");
+  //   }
+  // };
 
   // const ApproveProduct = async (id) => {
   //   console.log(id, "ApproveProduct");
@@ -637,9 +637,9 @@ const AdminSeeSellers = () => {
                                       <button
                                         className="approveProdButton_btn"
                                         disabled={false}
-                                        onClick={() =>
-                                          ApproveNewProd(asset.index_id)
-                                        }
+                                        // onClick={() =>
+                                        //   ApproveNewProd(asset.index_id)
+                                        // }
                                       >
                                         Approve
                                       </button>
