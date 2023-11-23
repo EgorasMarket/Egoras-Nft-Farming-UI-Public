@@ -1,1 +1,0 @@
-(self.webpackChunknft_app=self.webpackChunknft_app||[]).push([[563],{36563:function(){}}]);

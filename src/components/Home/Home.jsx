@@ -545,12 +545,14 @@ const Home = () => {
                   </div>
                   <div className="how_it_works2_area_body_area1_cont1_txts">
                     <div className="how_it_works2_area_body_area1_cont1_txts_head">
-                      Liquidity Provider 50%
+                      Automated payments.
                     </div>
                     <div className="how_it_works2_area_body_area1_cont1_txts_para">
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Aliquid eveniet fugiat ratione culpa modi quae iure eaque
-                      unde.
+                      A decentralized infrastructure that enables automation of
+                      payments, which reduces errors and increases efficiency.
+                      For example, a maintenance provider can be paid
+                      automatically from the tresury when they perform
+                      maintenance on factory equipment.
                     </div>
                   </div>
                 </div>
@@ -564,12 +566,13 @@ const Home = () => {
                   </div>
                   <div className="how_it_works2_area_body_area1_cont1_txts">
                     <div className="how_it_works2_area_body_area1_cont1_txts_head">
-                      Liquidity Provider 50%
+                      Improved human resources management
                     </div>
                     <div className="how_it_works2_area_body_area1_cont1_txts_para">
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Aliquid eveniet fugiat ratione culpa modi quae iure eaque
-                      unde.
+                      A protocol that can help streamline a variety of
+                      traditionally labor-intensive HR tasks, such as tracking
+                      hours worked and paying workers accordingly. People's
+                      employment histories are recorded and authenticated.
                     </div>
                   </div>
                 </div>
@@ -592,12 +595,14 @@ const Home = () => {
                   </div>
                   <div className="how_it_works2_area_body_area1_cont1_txts">
                     <div className="how_it_works2_area_body_area1_cont1_txts_head">
-                      Liquidity Provider 50%
+                      Decentralized Finance liquidity
                     </div>
                     <div className="how_it_works2_area_body_area1_cont1_txts_para">
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Aliquid eveniet fugiat ratione culpa modi quae iure eaque
-                      unde.
+                      The protocol allows users to stake tokens in order to
+                      participate in the manufacturing process and earn rewards.
+                      The manufacturing process is funded by the staked tokens,
+                      and the manufactured products are stored in the protocol's
+                      inventory.
                     </div>
                   </div>
                 </div>
@@ -611,12 +616,13 @@ const Home = () => {
                   </div>
                   <div className="how_it_works2_area_body_area1_cont1_txts">
                     <div className="how_it_works2_area_body_area1_cont1_txts_head">
-                      Liquidity Provider 50%
+                      Inventory management.
                     </div>
                     <div className="how_it_works2_area_body_area1_cont1_txts_para">
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Aliquid eveniet fugiat ratione culpa modi quae iure eaque
-                      unde.
+                      A single-source inventory protocol provides real-time,
+                      comprehensive, and up-to-date perspicacity into product
+                      stock levels, thereby helping to forestall costly
+                      overstocking.
                     </div>
                   </div>
                 </div>
@@ -649,38 +655,34 @@ const Home = () => {
             </div>
             <div className="community_section_area2">
               <a
-                href="https://twitter.com/martgpt"
+                href="https://twitter.com/search?src=tren&q=%23Egoras"
                 className="twitter"
                 target="_blank"
               >
                 <Twitter className="twitter_icon" />
               </a>
               <a
-                href="https://www.linkedin.com/company/martgpt/"
+                href="https://ng.linkedin.com/company/egorashq"
                 className="twitter"
                 target="_blank"
               >
                 <LinkedInIcon className="twitter_icon" />
               </a>
               <a
-                href="https://facebook.com/martgpt/"
+                href="https://www.facebook.com/egorasmarket/"
                 className="twitter"
                 target="_blank"
               >
                 <Facebook className="twitter_icon" />
               </a>
               <a
-                href="https://facebook.com/martgpt/"
+                href="https://github.com/EgorasMarket"
                 className="twitter"
                 target="_blank"
               >
                 <GitHubIcon className="twitter_icon" />
               </a>
-              <a
-                href="https://facebook.com/martgpt/"
-                className="twitter"
-                target="_blank"
-              >
+              <a href="https://egoras.com/" className="twitter" target="_blank">
                 <TelegramIcon className="twitter_icon" />
               </a>
             </div>
