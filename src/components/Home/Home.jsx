@@ -682,7 +682,11 @@ const Home = () => {
               >
                 <GitHubIcon className="twitter_icon" />
               </a>
-              <a href="https://egoras.com/" className="twitter" target="_blank">
+              <a
+                href="https://t.me/s/egorasmarket?before=480"
+                className="twitter"
+                target="_blank"
+              >
                 <TelegramIcon className="twitter_icon" />
               </a>
             </div>
