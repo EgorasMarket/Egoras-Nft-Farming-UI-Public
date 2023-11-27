@@ -242,6 +242,9 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     if (linksActive === "/app/earn/pool/" + urlArr[4] + "/detail") {
       setActiveMenuName("Earn");
     }
+    if (linksActive === "/app/" + urlArr[2]) {
+      setActiveMenuName("govern");
+    }
     if (linksActive === "/app/earn/pool/detail/transactions") {
       setActiveMenuName("Earn");
     }
@@ -329,7 +332,20 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     if (linksActive === "/app/governance") {
       setActiveBg("govern");
     }
-
+    if (
+      linksActive ===
+      "/app/governance/proposal/details/" +
+        urlArr[5] +
+        "/" +
+        urlArr[6] +
+        "/" +
+        urlArr[7]
+    ) {
+      setActiveBg("govern");
+    }
+    if (linksActive === "/app/" + urlArr[1]) {
+      setActiveBg("govern");
+    }
     if (linksActive === "/app/swap") {
       setActiveBg("swap");
     }

@@ -239,7 +239,7 @@
 }
 
 .radio-button input[type="radio"]:checked + label:before {
-  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
+  background: #239e54;
   /* Custom color for the selected radio button */
   border-color: #22ad62;
 }

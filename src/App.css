@@ -32,7 +32,7 @@ hr {
 }
 
 .dark hr {
-  color: #605d6e;
+  color: #7c7b81;
 }
 
 div::-webkit-scrollbar {
@@ -110,7 +110,7 @@ div#tradingview_12345 {
 }
 
 ::selection {
-  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
+  background: #238c4e;
   color: #fff;
 }
 
@@ -415,14 +415,14 @@ html {
 input:focus-visible {
   outline: none;
   border: solid;
-  border-color: #8563cd;
+  border-color: #239e54;
   border-width: 1px;
   box-shadow: 0px 0px 1px 4px #222035a8;
   transition: 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
 input:-internal-autofill-selected {
-  background-color: #8563cd !important;
+  background-color: #239e54 !important;
 }
 
 .featured_logos .react-multi-carousel-track {
@@ -691,9 +691,10 @@ rect.sparkline--interaction-layer {
   border: none;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   background: #e8e8e8;
   border: solid 1px #d0d0d0;
+  flex-direction: row-reverse;
 }
 
 .Modal2_div2_div1_area_btn:disabled {
@@ -703,8 +704,8 @@ rect.sparkline--interaction-layer {
 }
 
 .dark .Modal2_div2_div1_area_btn {
-  background: #1b3326;
-  border: solid 1px #313135;
+  background: #39393c;
+  border: solid 1px #4f4f55;
   color: #fff;
 }
 
@@ -714,7 +715,7 @@ rect.sparkline--interaction-layer {
 }
 
 .Modal2_div2_div1_area_btn_area_txt {
-  margin-right: 4px;
+  margin-left: 4px;
 }
 
 .Modal2_div_area_span {

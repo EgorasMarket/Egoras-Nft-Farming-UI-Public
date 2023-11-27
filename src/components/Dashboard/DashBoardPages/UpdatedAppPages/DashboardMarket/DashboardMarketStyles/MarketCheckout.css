@@ -136,7 +136,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  border: 2px solid #ccc;
+  border: 2px solid #ffffff;
   position: absolute;
   left: 0;
   top: 0;
@@ -145,8 +145,8 @@
 }
 
 input[type="radio"]:checked + .payment_method_area1_cont1_label:before {
-  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
-  border-color: #997fda;
+  background: #22ad62;
+  border-color: #ade1c5;
   padding: 2px;
 }
 

@@ -175,12 +175,13 @@
   background: #232326;
   color: #74747a;
   font-size: 15px;
-  padding: 10px 15px;
+  padding: 5px 5px;
   border-radius: 7px;
+  width: fit-content;
 }
 .proposals_area_2_body_head_tabs_1_active {
   background: linear-gradient(to right, #58ad74, #4c8f62, #5fa7d6);
-  border-radius: 5px;
+  border-radius: 7px;
   color: #fff;
   min-width: 32px;
   font-size: 14px;
@@ -188,8 +189,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 2px 16px;
-  margin-right: 20px;
+  padding: 5px 20px;
 }
 .proposals_area_2_body_head_tabs_1 {
   border-radius: 5px;
@@ -199,8 +199,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  padding: 2px 16px;
-  margin-right: 20px;
+  padding: 5px 20px;
 }
 .proposals_area_2_body_area {
   display: flex;

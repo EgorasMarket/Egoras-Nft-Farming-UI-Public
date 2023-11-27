@@ -7,10 +7,24 @@ import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import Blockies from "react-blockies";
 
 const DashboardGovernance = () => {
-  const [activeTab, setActiveTab] = useState("all");
+  const [activeTab, setActiveTab] = useState("");
+  // const [proposals, setProposals] = useState([]);
   const ToggleActiveTab = (e) => {
     setActiveTab(e.currentTarget.id);
   };
+
+  // useEffect(() => {
+  //   const filteredArray = StaticData.Proposals.filter(
+  //     (data) => data.status === activeTab
+  //   );
+
+  //   if (activeTab === "all") {
+  //     setProposals(StaticData.Proposals);
+  //   } else {
+  //     setProposals(filteredArray);
+  //   }
+  // }, [activeTab]);
+
   return (
     <div className="other2 asset_other2">
       <section className="collateral-assets-section no-bg no_pad">
@@ -41,7 +55,7 @@ const DashboardGovernance = () => {
                     Total Voters
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    5000
+                    5,000
                     <span className="usd_sign">voters</span>
                   </div>
                 </div>
@@ -50,6 +64,24 @@ const DashboardGovernance = () => {
                   <div className="helper_txt_div">
                     This is the total number of all the users that have voted on
                     any proposal.
+                  </div>
+                </div>
+              </div>
+              <div className="lending_area1_cont1">
+                <div className="lending_area1_cont1_body_1">
+                  <div className="lending_area1_cont1_heading">
+                    Total Eusd Minted
+                  </div>
+                  <div className="lending_area1_cont1_body_txt">
+                    10,000,000
+                    <span className="usd_sign">eusd</span>
+                  </div>
+                </div>
+                <div className="lending_area1_cont1_body_1">
+                  <HelpOutlineIcon className="help_outline" />
+                  <div className="helper_txt_div">
+                    This is the total number of eusd minted from the smart
+                    contract and given to approved proposals.
                   </div>
                 </div>
               </div>
@@ -100,9 +132,9 @@ const DashboardGovernance = () => {
               <div className="proposals_area_2_body">
                 <div className="proposals_area_2_body_head_tabs">
                   <div
-                    id="all"
+                    id=""
                     className={
-                      activeTab === "all"
+                      activeTab === ""
                         ? "proposals_area_2_body_head_tabs_1_active"
                         : "proposals_area_2_body_head_tabs_1"
                     }
@@ -111,9 +143,9 @@ const DashboardGovernance = () => {
                     All
                   </div>
                   <div
-                    id="active"
+                    id="Active"
                     className={
-                      activeTab === "active"
+                      activeTab === "Active"
                         ? "proposals_area_2_body_head_tabs_1_active"
                         : "proposals_area_2_body_head_tabs_1"
                     }
@@ -122,9 +154,9 @@ const DashboardGovernance = () => {
                     Active
                   </div>
                   <div
-                    id="approve"
+                    id="Approved"
                     className={
-                      activeTab === "approve"
+                      activeTab === "Approved"
                         ? "proposals_area_2_body_head_tabs_1_active"
                         : "proposals_area_2_body_head_tabs_1"
                     }
@@ -133,9 +165,9 @@ const DashboardGovernance = () => {
                     Approved
                   </div>
                   <div
-                    id="terminate"
+                    id="Terminated"
                     className={
-                      activeTab === "terminate"
+                      activeTab === "Terminated"
                         ? "proposals_area_2_body_head_tabs_1_active"
                         : "proposals_area_2_body_head_tabs_1"
                     }
@@ -144,9 +176,9 @@ const DashboardGovernance = () => {
                     Terminated
                   </div>
                   <div
-                    id="withdraw"
+                    id="Withdrawn"
                     className={
-                      activeTab === "withdraw"
+                      activeTab === "Withdrawn"
                         ? "proposals_area_2_body_head_tabs_1_active"
                         : "proposals_area_2_body_head_tabs_1"
                     }
@@ -156,8 +188,13 @@ const DashboardGovernance = () => {
                   </div>
                 </div>
                 <div className="proposals_area_2_body_area">
-                  {StaticData.Proposals.map((data) => (
-                    <div className="proposals_area_2_body_area_cont1">
+                  {StaticData.Proposals.filter((data) =>
+                    data.status.includes(activeTab)
+                  ).map((data) => (
+                    <Link
+                      to={`/app/governance/proposal/details/${data.id}/${data.creator}/${data.title}`}
+                      className="proposals_area_2_body_area_cont1"
+                    >
                       <div className="proposals_area_2_body_area_cont1_area1">
                         <div className="proposals_area_2_body_area_cont1_area1_title">
                           {data.title}
@@ -195,13 +232,13 @@ const DashboardGovernance = () => {
                         </div>
                         <div className="proposals_area_2_body_area_cont1_area2_div2">
                           {data.status === "Active" ? (
-                            <> Started On {data.startDate}</>
+                            <> Ends On {data.endDate}</>
                           ) : (
                             <> Ended On {data.endDate}</>
                           )}
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>

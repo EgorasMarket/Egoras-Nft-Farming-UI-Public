@@ -855,6 +855,42 @@ const listProcurementProduct = async (
     };
   }
 };
+const voteYes = async (_productID, signer) => {
+  console.log(_productID);
+  try {
+    const instance = await contractProductFacetInstance(signer);
+    let result = await instance.yes(_productID);
+    console.log("second");
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const voteNo = async (_productID, signer) => {
+  console.log(_productID);
+  try {
+    const instance = await contractProductFacetInstance(signer);
+    let result = await instance.no(_productID);
+    console.log("second");
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 
 export {
   monthlyPlanSubScribe,
@@ -897,4 +933,6 @@ export {
   configureDealerPlan,
   listProcurementProduct,
   setTokenAddress,
+  voteYes,
+  voteNo,
 };

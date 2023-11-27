@@ -19,6 +19,7 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+import DashBoardGovernanceDetails from "./DashBoardPages/Governance/DashBoardGovernanceDetails";
 import { getAuthUserStats } from "../../actions/token";
 import DashboardHome from "./DashBoardPages/DashboardHome";
 // dashboard components
@@ -261,8 +262,8 @@ const Dashboard = ({ check, togglemakeDark }) => {
                 />
                 <Route
                   exact
-                  path="/app/governance/details"
-                  component={DashboardEgrBalancePage}
+                  path="/app/governance/proposal/details/:id/:address/:name"
+                  component={DashBoardGovernanceDetails}
                 />
                 <Route
                   exact

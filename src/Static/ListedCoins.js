@@ -144,6 +144,7 @@ const StaticData = {
   Proposals: [
     {
       id: "1",
+      qty: "10",
       title: "Production of 10 E.V sedans",
       amount: 50000,
       creator: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -193,6 +194,7 @@ const StaticData = {
     },
     {
       id: "2",
+      qty: "10",
       title: "Production of 5 lithium batteries",
       amount: 1000,
       creator: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -242,6 +244,7 @@ const StaticData = {
     },
     {
       id: "3",
+      qty: "10",
       title: "Production of 8 E.V sedans",
       amount: 40000,
       creator: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -291,6 +294,7 @@ const StaticData = {
     },
     {
       id: "4",
+      qty: "10",
       title: "Production of 100 lithium batteries",
       amount: 10000,
       creator: "0x3dE79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -303,6 +307,7 @@ const StaticData = {
     },
     {
       id: "5",
+      qty: "10",
       title: "Renovation of 20 Smart Homes",
       amount: 75000,
       creator: "0x8aF79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -352,6 +357,7 @@ const StaticData = {
     },
     {
       id: "6",
+      qty: "10",
       title: "Installation of Solar Panels in 50 Schools",
       amount: 120000,
       creator: "0x4bD79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -401,6 +407,7 @@ const StaticData = {
     },
     {
       id: "7",
+      qty: "10",
       title: "Planting 5000 Trees in Urban Areas",
       amount: 30000,
       creator: "0x7cE79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -450,6 +457,7 @@ const StaticData = {
     },
     {
       id: "8",
+      qty: "10",
       title: "Development of a Community Sports Complex",
       amount: 200000,
       creator: "0x8bE79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -499,6 +507,7 @@ const StaticData = {
     },
     {
       id: "9",
+      qty: "10",
       title: "Community Health and Wellness Program",
       amount: 50000,
       creator: "0x9cE79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -548,6 +557,7 @@ const StaticData = {
     },
     {
       id: "10",
+      qty: "10",
       title: "Digital Literacy Program for Seniors",
       amount: 30000,
       creator: "0xAbE79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -597,6 +607,7 @@ const StaticData = {
     },
     {
       id: "11",
+      qty: "10",
       title: "Art and Cultural Festival",
       amount: 80000,
       creator: "0xBbE79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -646,6 +657,7 @@ const StaticData = {
     },
     {
       id: "12",
+      qty: "10",
       title: "Clean Energy Initiative",
       amount: 150000,
       creator: "0xCcE79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -695,6 +707,7 @@ const StaticData = {
     },
     {
       id: "13",
+      qty: "10",
       title: "Youth Empowerment Program",
       amount: 40000,
       creator: "0xDdE79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -744,6 +757,7 @@ const StaticData = {
     },
     {
       id: "14",
+      qty: "10",
       title: "Renewable Energy Research",
       amount: 120000,
       creator: "0xEeE79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -793,6 +807,7 @@ const StaticData = {
     },
     {
       id: "15",
+      qty: "10",
       title: "Community Garden Expansion",
       amount: 35000,
       creator: "0xFfE79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -842,6 +857,7 @@ const StaticData = {
     },
     {
       id: "16",
+      qty: "10",
       title: "STEM Education Initiative",
       amount: 90000,
       creator: "0x0hE79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -891,6 +907,7 @@ const StaticData = {
     },
     {
       id: "17",
+      qty: "10",
       title: "Microfinance Support for Entrepreneurs",
       amount: 60000,
       creator: "0x1iE79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -940,16 +957,19 @@ const StaticData = {
     },
     {
       id: "18",
+      qty: "10",
       title: "Community Library Renovation",
       amount: 45000,
       creator: "0x2jE79168402278C0DA2Bf9A209C3A91d755790FC",
       description:
         "This proposal aims to renovate the community library, providing an improved and welcoming space for residents to access educational resources and engage in learning activities.",
       votes: [
-        "1",
-        "0x1aB79168402278C0DA2Bf9A209C3A91d755790FC",
-        "Yes",
-        "3-07-24",
+        {
+          id: "1",
+          voter: "0x1aB79168402278C0DA2Bf9A209C3A91d755790FC",
+          type: "Yes",
+          date: "3-07-24",
+        },
       ],
       startDate: "5-07-24",
       endDate: "20-08-24",
@@ -957,6 +977,7 @@ const StaticData = {
     },
     {
       id: "19",
+      qty: "10",
       title: "Urban Green Spaces Project",
       amount: 75000,
       creator: "0x3kE79168402278C0DA2Bf9A209C3A91d755790FC",
@@ -1006,6 +1027,7 @@ const StaticData = {
     },
     {
       id: "20",
+      qty: "10",
       title: "Senior Citizen Support Program",
       amount: 50000,
       creator: "0x4lE79168402278C0DA2Bf9A209C3A91d755790FC",
