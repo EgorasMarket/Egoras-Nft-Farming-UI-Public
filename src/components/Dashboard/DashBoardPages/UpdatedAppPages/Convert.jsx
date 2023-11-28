@@ -1,6 +1,9 @@
 import Reac, { useEffect, useState, useRef } from "react";
 import "./convert.css";
 import { parseEther, formatEther } from "@ethersproject/units";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import SwapVertIcon from "@mui/icons-material/SwapVert";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Web3 from "web3";
 import {
   Web3ReactProvider,
@@ -25,8 +28,8 @@ const {
 } = process.env;
 const Convert = () => {
   const [ConvertAmount, setConvertAmount] = useState("");
-  const [egcBalance, setEgcBalance] = useState("0");
-  const [MGPTTBalance, setMGPTTBalance] = useState("0");
+  const [token1Balance, setToken1Balance] = useState("0");
+  const [token2Balance, setToken2Balance] = useState("0");
   const [isLoading, setIsLoading] = useState(false);
   const [isLoading2, setIsLoading2] = useState(false);
   const [Disable, setDisable] = useState(false);
@@ -37,70 +40,62 @@ const Convert = () => {
   const [errorModal, setErrorModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [token1, setToken1] = useState({
+    id: "1",
+    symbol: "EUSD",
+    name: "Egoras Dollar",
+    img: "/img/tokens-folder/busd_icon.png",
+    PriceAddress: "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56",
+    address: "0xBDeb3C052bD949B6E38Cb0BC9593793a78c46968",
+  });
+  const [token2, setToken2] = useState({
+    id: "2",
+    symbol: "EGC",
+    name: "Egoras Credit",
+    img: "/img/egc_icon2.svg",
+    PriceAddress: "0x4AC4fC5317F95849A1F17e2f4Daf03c32196f0cb",
+    address: "0x4AC4fC5317F95849A1F17e2f4Daf03c32196f0cb",
+  });
   const context = useWeb3React();
-  const {
-    connector,
-    library,
-    chainId,
-    account,
-    activate,
-    deactivate,
-    active,
-    error,
-  } = context;
+  const { library, account } = context;
 
   useEffect(
     async (e) => {
       if (account) {
         let res = await tokenBalance(
-          "0xd68e5c52f7563486cc1a15d00efa12c8644a907e",
+          token1.address,
           account,
           library.getSigner()
         );
         console.log(res);
         console.log(formatEther(res.message._hex));
-        setEgcBalance(parseFloat(formatEther(res.message._hex)).toFixed(2));
+        setToken1Balance(parseFloat(formatEther(res.message._hex)).toFixed(2));
       }
     },
-    [account]
+    [account, token1, token2]
   );
+
   useEffect(
     async (e) => {
       if (account) {
         let res = await tokenBalance(
-          REACT_APP_MartgptToken_ADDRESS,
+          token2.address,
           account,
           library.getSigner()
         );
         console.log(res);
         console.log(formatEther(res.message._hex));
-        setMGPTTBalance(parseFloat(formatEther(res.message._hex)).toFixed(2));
+        setToken2Balance(parseFloat(formatEther(res.message._hex)).toFixed(2));
       }
     },
-    [account]
+    [account, token2, token1]
   );
-  useEffect(
-    async (e) => {
-      if (account) {
-        let check = await checkAllowanceV32(
-          "0xd68e5c52f7563486cc1a15d00efa12c8644a907e",
-          account,
-          parseEther(egcBalance.toString(), "wei").toString(),
-          library.getSigner()
-        );
-        console.log(check);
-        setUnLockCheckStatus(check.status);
-        setUnlockBtn(check.status);
-      }
-    },
-
-    [account, unLockCheckStatus, unlockBtn, egcBalance]
-  );
-  const UnlockToken = async (e) => {
+  const UnlockToken = async () => {
     setIsLoading(true);
     setDisable(true);
-    let ret = await unlockTokenV32(
-      "0xd68e5c52f7563486cc1a15d00efa12c8644a907e",
+
+    let ret = await unlockTokenV3(
+      token1.address,
       parseEther("180000000000000000000000000000000000", "wei").toString(),
       library.getSigner()
     );
@@ -122,6 +117,29 @@ const Convert = () => {
       setDisable(false);
     }
   };
+  useEffect(
+    async (e) => {
+      if (account) {
+        let check = await checkAllowanceV3(
+          token1.address,
+          account,
+          parseEther(ConvertAmount.toString(), "wei").toString(),
+          library.getSigner()
+        );
+        console.log(check);
+        setUnLockCheckStatus(check.status);
+        setUnlockBtn(check.status);
+      }
+    },
+
+    [account, unLockCheckStatus, ConvertAmount, token1]
+  );
+
+  const ToggleSwapInputs = (e) => {
+    setToken1(token2);
+    setToken2(token1);
+  };
+
   const convertToken = async () => {
     setIsLoading(true);
     setDisable(true);
@@ -153,12 +171,15 @@ const Convert = () => {
       setErrorMessage(res.message);
     }
   };
+
   const CloseErrorModal = () => {
     setErrorModal(false);
   };
+
   const AmountChange = (e) => {
     setConvertAmount(e.target.value);
   };
+
   useEffect(() => {
     if (ConvertAmount <= "0") {
       setDisable(true);
@@ -175,33 +196,88 @@ const Convert = () => {
             <div className="convertDivCont_title">Convert</div>
             <div className="convertDivCont_body">
               <div className="convertDivCont_body_container">
-                <div className="convertDivCont_body_container_1">
-                  <div className="convertDivCont_body_container_1_title">
-                    <span className="convertDivCont_body_container_1_title_span1">
-                      Token In
-                    </span>
-                    <span className="convertDivCont_body_container_1_title_span1">
-                      Balance: {egcBalance}
-                    </span>
-                  </div>
-                  <div className="convertDivCont_body_container_1_body">
-                    <input
-                      type="number"
-                      value={ConvertAmount}
-                      onChange={AmountChange}
-                      placeholder="amount"
-                      className="convertDivCont_body_container_1_body_input"
-                    />
-                    <div className="convertDivCont_body_container_1_body_img_div">
-                      <img
-                        src="/img/egc_icon2.svg"
-                        alt=""
-                        className="convertDivCont_body_container_1_body_img"
-                      />
+                <div className="input_amnt_layer">
+                  <div className="amnt_input">
+                    <div className="amnt_input_layer1">
+                      <div className="amnt_input_layer1_input_div">
+                        <input
+                          type="number"
+                          name="number"
+                          id="number"
+                          placeholder="0.00"
+                          className="amnt_input_field"
+                          autocomplete="off"
+                          onChange={AmountChange}
+                          value={ConvertAmount}
+                        />
+                      </div>
+                      <div className="Swap_icondropDownDiv">
+                        <span className="token_balances_span">
+                          <AccountBalanceWalletIcon className="TokenBalanceIcon" />
+                          :{token1Balance}
+                        </span>
+                        <button className="display_tokens_drop">
+                          <img
+                            src={token1.img}
+                            alt=""
+                            className="display_tokens_drop_img"
+                          />
+                          {token1.symbol}
+                        </button>
+                      </div>
+                    </div>
+                    <div className="amnt_input_layer2">
+                      <button className="amnt_input_layer2_cont1">25%</button>
+                      <button className="amnt_input_layer2_cont1">50%</button>
+                      <button className="amnt_input_layer2_cont1">75%</button>
+                      <button className="amnt_input_layer2_cont1_last">
+                        100%
+                      </button>
                     </div>
                   </div>
                 </div>
-                <div className="convertDivCont_body_container_1">
+                {/* ================= */}
+                {/* ================= */}
+                <SwapVertIcon
+                  className="toggle_swap_inputs"
+                  onClick={ToggleSwapInputs}
+                  style={{ top: "-4%" }}
+                />
+                {/* ================= */}
+                {/* ================= */}
+                <div className="input_amnt_layer">
+                  <div className="amnt_input">
+                    <div className="amnt_input_layer1">
+                      <div className="amnt_input_layer1_input_div">
+                        <input
+                          type="number"
+                          name="number"
+                          id="number"
+                          placeholder="0.00"
+                          className="amnt_input_field"
+                          autocomplete="off"
+                          onChange={AmountChange}
+                          value={ConvertAmount}
+                        />
+                      </div>
+                      <div className="Swap_icondropDownDiv">
+                        <span className="token_balances_span">
+                          <AccountBalanceWalletIcon className="TokenBalanceIcon" />
+                          :{token2Balance}
+                        </span>
+                        <button className="display_tokens_drop">
+                          <img
+                            src={token2.img}
+                            alt=""
+                            className="display_tokens_drop_img"
+                          />
+                          {token2.symbol}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* <div className="convertDivCont_body_container_1">
                   <div className="convertDivCont_body_container_1_title">
                     <span className="convertDivCont_body_container_1_title_span1">
                       Token Out
@@ -225,7 +301,7 @@ const Convert = () => {
                       />
                     </div>
                   </div>
-                </div>
+                </div> */}
                 {account ? (
                   <>
                     {" "}

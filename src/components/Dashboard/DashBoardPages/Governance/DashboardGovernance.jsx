@@ -5,25 +5,32 @@ import StaticData from "../../../../Static/ListedCoins";
 import "../../../../css/dashboardgovernance.css";
 import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import Blockies from "react-blockies";
-
+import axios from "axios";
+import { config } from "../../../../actions/Config";
+import { API_URL } from "../../../../actions/types";
 const DashboardGovernance = () => {
   const [activeTab, setActiveTab] = useState("");
-  // const [proposals, setProposals] = useState([]);
+  const [proposals, setProposals] = useState([]);
   const ToggleActiveTab = (e) => {
     setActiveTab(e.currentTarget.id);
   };
+  const fetchData = async () => {
+    try {
+      const data = await axios.get(
+        API_URL + "/web3/votes/1/10000000000000",
+        null,
+        config
+      );
 
-  // useEffect(() => {
-  //   const filteredArray = StaticData.Proposals.filter(
-  //     (data) => data.status === activeTab
-  //   );
-
-  //   if (activeTab === "all") {
-  //     setProposals(StaticData.Proposals);
-  //   } else {
-  //     setProposals(filteredArray);
-  //   }
-  // }, [activeTab]);
+      console.log(data.data.data.products);
+      setProposals(data.data.data.products);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+  useEffect(async () => {
+    fetchData();
+  }, []);
 
   return (
     <div className="other2 asset_other2">
@@ -143,9 +150,9 @@ const DashboardGovernance = () => {
                     All
                   </div>
                   <div
-                    id="Active"
+                    id="PENDING"
                     className={
-                      activeTab === "Active"
+                      activeTab === "PENDING"
                         ? "proposals_area_2_body_head_tabs_1_active"
                         : "proposals_area_2_body_head_tabs_1"
                     }
@@ -188,58 +195,57 @@ const DashboardGovernance = () => {
                   </div>
                 </div>
                 <div className="proposals_area_2_body_area">
-                  {StaticData.Proposals.filter((data) =>
-                    data.status.includes(activeTab)
-                  ).map((data) => (
-                    <Link
-                      to={`/app/governance/proposal/details/${data.id}/${data.creator}/${data.title}`}
-                      className="proposals_area_2_body_area_cont1"
-                    >
-                      <div className="proposals_area_2_body_area_cont1_area1">
-                        <div className="proposals_area_2_body_area_cont1_area1_title">
-                          {data.title}
-                        </div>
-                        <div className="proposals_area_2_body_area_cont1_area1_status">
-                          <button
-                            className="proposals_area_2_body_area_cont1_area1_status_btn"
-                            style={{
-                              background:
-                                data.status === "Active"
+                  {proposals
+                    .filter((data) => data.status.includes(activeTab))
+                    .map((data) => (
+                      <Link
+                        to={`/app/governance/proposal/details/${data.index_id}/${data.creator}/${data.product_name}`}
+                        className="proposals_area_2_body_area_cont1"
+                      >
+                        <div className="proposals_area_2_body_area_cont1_area1">
+                          <div className="proposals_area_2_body_area_cont1_area1_title">
+                            {data.product_name}
+                          </div>
+                          <div className="proposals_area_2_body_area_cont1_area1_status">
+                            <button
+                              className="proposals_area_2_body_area_cont1_area1_status_btn"
+                              style={{
+                                background: "PENDING"
                                   ? "#d69d16"
                                   : data.status === "Approved"
                                   ? "#3e9a3e"
                                   : data.status === "Terminated"
                                   ? "#eb3d3d"
                                   : "#55555d",
-                            }}
-                          >
-                            {data.status}
-                          </button>
+                              }}
+                            >
+                              {data.status}
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                      <div className="proposals_area_2_body_area_cont1_area2">
-                        <div className="proposals_area_2_body_area_cont1_area2_div1">
-                          <span className="proposals_area_2_body_area_cont1_area2_div1_span">
-                            Published By
-                          </span>
-                          <Blockies
-                            seed={data.creator}
-                            size={8}
-                            scale={4}
-                            className="blockies_icon2"
-                          />{" "}
-                          {`${data.creator.slice(0, 16)}...`}
+                        <div className="proposals_area_2_body_area_cont1_area2">
+                          <div className="proposals_area_2_body_area_cont1_area2_div1">
+                            <span className="proposals_area_2_body_area_cont1_area2_div1_span">
+                              Published By
+                            </span>
+                            <Blockies
+                              seed={data.creator}
+                              size={8}
+                              scale={4}
+                              className="blockies_icon2"
+                            />{" "}
+                            {`${data.creator.slice(0, 16)}...`}
+                          </div>
+                          <div className="proposals_area_2_body_area_cont1_area2_div2">
+                            {data.status === "Active" ? (
+                              <> Ends On {data.createdAt}</>
+                            ) : (
+                              <> Ended On {data.createdAt}</>
+                            )}
+                          </div>
                         </div>
-                        <div className="proposals_area_2_body_area_cont1_area2_div2">
-                          {data.status === "Active" ? (
-                            <> Ends On {data.endDate}</>
-                          ) : (
-                            <> Ended On {data.endDate}</>
-                          )}
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
+                      </Link>
+                    ))}
                 </div>
               </div>
             </div>

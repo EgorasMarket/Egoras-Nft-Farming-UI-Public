@@ -705,6 +705,19 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   Swap
                 </a>
                 <a
+                  id="convert"
+                  href="/app/convert"
+                  className={
+                    activeBg == "convert"
+                      ? "header_tab1_active "
+                      : "header_tab1"
+                  }
+                  onClick={changeBg}
+                >
+                  <SwapHorizontalCircleIcon className="header_tab1_icon_icon" />
+                  Convert
+                </a>
+                <a
                   id="account"
                   href="/app/user"
                   className={

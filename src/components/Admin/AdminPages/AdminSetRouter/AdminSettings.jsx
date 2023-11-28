@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  setPythia,
+  setPythiaAddr,
   suspendPythia,
   setPriceOracle,
   setEGCUSDTicker,
@@ -17,7 +17,7 @@ import "./AdminRouter.css";
 import { unlockTokenV3 } from "../../../../web3";
 import Web3 from "web3";
 import { parseEther, formatEther } from "@ethersproject/units";
-import v3Contract from "../../../../web3/contracts/V3/V3ContractAddress.json";
+import v3ContractAddress from "../../../../web3/contracts/V3/V3ContractAddress.json";
 import { useWeb3React } from "@web3-react/core";
 
 const AdminSettings = () => {
@@ -33,7 +33,7 @@ const AdminSettings = () => {
     error,
   } = context;
   const [tickerArray, setTickerArray] = useState(["egceusd"]);
-  const [priceArray, setPriceArray] = useState(["5600000000000000000"]);
+  const [priceArray, setPriceArray] = useState(["1300000000000000000"]);
   const [newWallet, setNewWallet] = useState([""]);
   const [newWallet2, setNewWallet2] = useState([""]);
   const [diamondCutCode, setDiamondCutCode] = useState("");
@@ -44,7 +44,7 @@ const AdminSettings = () => {
 
   const addMinter = async () => {
     const response = await adminAddMinter(
-      v3Contract.address,
+      v3ContractAddress.address,
       library.getSigner()
     );
     console.log(response);
@@ -114,10 +114,10 @@ const AdminSettings = () => {
     console.log(event.target.value);
   };
   const setPythiaAddress = async () => {
-    if (newWallet != "") {
-      const response = await setPythia(newWallet, library.getSigner());
-      console.log(response);
-    }
+    // if (newWallet != "") {
+    const response = await setPythiaAddr(newWallet, library.getSigner());
+    console.log(response);
+    // }
   };
 
   const suspendPythiaAddress = async () => {

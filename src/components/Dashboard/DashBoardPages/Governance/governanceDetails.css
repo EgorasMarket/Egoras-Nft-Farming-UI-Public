@@ -227,6 +227,12 @@
   color: #fff;
   font-weight: 500;
 }
+.governance_details_area_2_cont1_div1_cont1_body_1_cont2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .governance_details_area_2_cont2_body_2_nodata_div_txt {
   margin-top: 10px;
 }

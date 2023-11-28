@@ -282,13 +282,6 @@ const swapEusdForToken = async (amountIn, amountOutMin, path, signer) => {
   }
 };
 const approveBusd = async (signer) => {
-  // console.log(
-  //   amountIn,
-  //   amountOutMin,
-  //   path,
-  //   routerAddressArray,
-  //   "SwapTokensForEusd index.js"
-  // );
   try {
     const instance = await contractPancakeSwapFacetInstance(signer);
     let result;
@@ -476,7 +469,7 @@ const setPriceOracle = async (_prices, _tickers, signer) => {
   }
 };
 
-const setPythia = async (_pythia, signer) => {
+const setPythiaAddr = async (_pythia, signer) => {
   try {
     const instance = await contractPriceOracleFacetInstance(signer);
     let result = await instance.setPythia(_pythia);
@@ -906,7 +899,7 @@ export {
   adminAddMinter,
   swapBnbForEusd,
   checkAllowanceSwap,
-  setPythia,
+  setPythiaAddr,
   suspendPythia,
   setPriceOracle,
   setEGCUSDTicker,

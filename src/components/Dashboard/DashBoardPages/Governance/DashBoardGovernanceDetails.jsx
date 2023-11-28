@@ -12,7 +12,9 @@ import UpdatedSuccessModal from "../UpdatedAppPages/UpdatedSuccessErrorModals/Up
 import { parseEther, formatEther } from "@ethersproject/units";
 import Blockies from "react-blockies";
 import { voteYes, voteNo } from "../../../../web3/index2";
-
+import axios from "axios";
+import { config } from "../../../../actions/Config";
+import { API_URL } from "../../../../actions/types";
 import Nodata from "../nodataComponent/Nodata";
 import {
   Web3ReactProvider,
@@ -40,40 +42,52 @@ const DashBoardGovernanceDetails = ({ match }) => {
   console.log(match.params.id);
   console.log("====================================");
 
-  useEffect(() => {
-    // Loop through the array
-    StaticData.Proposals.forEach((obj) => {
-      // Check if the object's id matches the value of match
-      if (obj.id === match.params.id) {
-        // Set the payload state to the matching object
-        setPayload(obj);
-        console.log(obj.votes);
-        console.log(account);
-
-        obj.votes.forEach((data) => {
-          console.log(data);
-          console.log(data.voter);
-          if (data.voter.includes(account)) {
+  const fetchData = async () => {
+    try {
+      const data = await axios.get(
+        API_URL + "/web3/Votes/1/10000000000000",
+        null,
+        config
+      );
+      console.log(data.data.data.products);
+      // Loop through the array
+      data.data.data.products.forEach((obj) => {
+        // Check if the object's id matches the value of match
+        if (obj.index_id === match.params.id) {
+          setPayload(obj);
+          console.log(obj.Votes);
+          console.log(account);
+          obj.Votes.forEach((data) => {
             console.log(data);
-            console.log("ok");
-            setAlreadyVoted(true);
-            if (data.type === "Yes") {
-              setCheckedYes(true);
-              setCheckedNo(false);
-              return;
-            }
-            if (data.type === "No") {
-              setCheckedYes(false);
-              setCheckedNo(true);
-              return;
-            }
+            console.log(data.voter);
+            if (data.voter.includes(account)) {
+              console.log(data);
+              console.log("ok");
+              setAlreadyVoted(true);
+              if (data.type === "Yes") {
+                setCheckedYes(true);
+                setCheckedNo(false);
+                return;
+              }
+              if (data.type === "No") {
+                setCheckedYes(false);
+                setCheckedNo(true);
+                return;
+              }
 
-            return;
-          }
-        });
-      }
-    });
-  });
+              return;
+            }
+          });
+        }
+      });
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+  useEffect(async () => {
+    fetchData();
+  }, []);
+
   console.log(payload);
   const checkedYesBox = () => {
     setCheckedYes(true);
@@ -96,11 +110,10 @@ const DashBoardGovernanceDetails = ({ match }) => {
       setSubmitDisabled(false);
     }
   }, [checkedNo, checkedYes]);
-
-  console.log(payload.votes);
+  console.log(payload.Votes);
 
   const voteYesFunc = async () => {
-    const res = await voteYes(payload.id, library.getSigner());
+    const res = await voteYes(payload.index_id, library.getSigner());
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
     if (res.status == true) {
@@ -117,7 +130,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
     }
   };
   const voteNoFunc = async () => {
-    const res = await voteNo(payload.id, library.getSigner());
+    const res = await voteNo(payload.index_id, library.getSigner());
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
     if (res.status == true) {
@@ -153,7 +166,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
                 <div className="governance_details_area_1_cont1">
                   <div className="governance_details_area_1_title_area">
                     <div className="governance_details_area_1_title_area_title">
-                      {payload.title}
+                      {payload.product_name}
                     </div>
                     <div className="governance_details_area_1_title_area_div">
                       <span className="governance_details_area_1_title_area_div_span">
@@ -181,7 +194,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
                           className="governance_details_area_1_status_area_1_cont2_btn"
                           style={{
                             background:
-                              payload.status === "Active"
+                              payload.status === "PENDING"
                                 ? "#d69d16"
                                 : payload.status === "Approved"
                                 ? "#3e9a3e"
@@ -195,16 +208,8 @@ const DashBoardGovernanceDetails = ({ match }) => {
                       </div>
                     </div>
                     <div className="governance_details_area_1_status_area_2">
-                      Ends On {payload.endDate}
+                      Ends On {payload.createdAt}
                     </div>
-                  </div>
-                </div>
-                <div className="governance_details_area_1_cont2">
-                  <div className="governance_details_area_1_cont1_title">
-                    Description
-                  </div>
-                  <div className="governance_details_area_1_cont1_body">
-                    {payload.description}
                   </div>
                 </div>
               </div>
@@ -218,7 +223,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
               <div className="governance_details_area_2">
                 <div className="governance_details_area_2_cont1">
                   <div className="governance_details_area_2_cont1_div1">
-                    {payload.status === "Active" ? (
+                    {payload.status === "PENDING" ? (
                       <div className="governance_details_area_2_cont1_div1_cont1a">
                         <div className="governance_details_area_2_cont1_div1_cont1_title">
                           Cast your vote
@@ -363,7 +368,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
                     {/* ========== */}
                     <div
                       className={
-                        payload.status === "Active"
+                        payload.status === "PENDING"
                           ? "governance_details_area_2_cont1_div1_cont1"
                           : "governance_details_area_2_cont1_div1_cont1a"
                       }
@@ -438,7 +443,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
                           Start date
                         </div>
                         <div className="governance_details_area_2_cont1_div2_body_1_content">
-                          {payload.startDate}
+                          {payload.createdAt}
                         </div>
                       </div>
                       <div className="governance_details_area_2_cont1_div2_body_1">
@@ -446,7 +451,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
                           End date
                         </div>
                         <div className="governance_details_area_2_cont1_div2_body_1_content">
-                          {payload.endDate}
+                          {payload.createdAt}
                         </div>
                       </div>
                     </div>
@@ -473,27 +478,27 @@ const DashBoardGovernanceDetails = ({ match }) => {
                         className="governance_details_area_2_cont2_body_1_Input"
                       />
                     </div>
-                    <div className="governance_details_area_2_cont2_body_2">
-                      {payload.votes.filter((data) =>
-                        data.voter
-                          .toLowerCase()
-                          .includes(searchTerm.toLocaleLowerCase())
-                      ).length <= 0 ? (
-                        <div className="governance_details_area_2_cont2_body_2_nodata_div">
-                          <Nodata />
-                          <div className="governance_details_area_2_cont2_body_2_nodata_div_txt">
-                            No address found
+
+                    {payload.Votes.length <= 0 ? null : (
+                      <div className="governance_details_area_2_cont2_body_2">
+                        {payload.Votes.filter((data) =>
+                          data.voter
+                            .toLowerCase()
+                            .includes(searchTerm.toLocaleLowerCase())
+                        ).length <= 0 ? (
+                          <div className="governance_details_area_2_cont2_body_2_nodata_div">
+                            <Nodata />
+                            <div className="governance_details_area_2_cont2_body_2_nodata_div_txt">
+                              No address found
+                            </div>
                           </div>
-                        </div>
-                      ) : (
-                        <>
-                          {payload.votes
-                            .filter((data) =>
+                        ) : (
+                          <>
+                            {payload.Votes.filter((data) =>
                               data.voter
                                 .toLowerCase()
                                 .includes(searchTerm.toLocaleLowerCase())
-                            )
-                            .map((data) => {
+                            ).map((data) => {
                               return (
                                 <div
                                   className="governance_details_area_2_cont2_body_2_cont1"
@@ -530,9 +535,10 @@ const DashBoardGovernanceDetails = ({ match }) => {
                                 </div>
                               );
                             })}
-                        </>
-                      )}
-                    </div>
+                          </>
+                        )}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -543,7 +549,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
               {/* ============================ */}
               {/* ============================ */}
               {/* ============================ */}
-              <div className="governance_details_area_3">
+              {/* <div className="governance_details_area_3">
                 <div
                   className="governance_details_area_3_title_div
               "
@@ -774,7 +780,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>

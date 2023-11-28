@@ -16,11 +16,15 @@
   width: 100%;
 }
 
+.display_tokens_drop_img {
+  width: 20px;
+  margin-right: 4px;
+}
+
 .convertDivCont_body_container {
   width: 100%;
   max-width: 450px;
   margin: auto;
-  /* background: #30274c; */
   padding: 1em;
   border-radius: 15px;
   border: solid 1px grey;
@@ -29,6 +33,7 @@
   border: solid 1px #313135;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .convertDivCont_body_container_1 {

@@ -151,7 +151,10 @@ const StakingUpdate = () => {
   const [notDueDiv, setNotDueDiv] = useState(false);
 
   const [myAssetInfo, setMyAssetInfo] = useState({});
-  const [totalAssetInfo, setTotalAssetInfo] = useState({});
+  const [totalAssetInfo, setTotalAssetInfo] = useState({
+    amount: 0,
+    dailyRoyalty: 0,
+  });
   const [txHash, setTxHash] = useState("");
   const [unlockBtn, setUnlockBtn] = useState(true);
   const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
@@ -577,8 +580,15 @@ const StakingUpdate = () => {
       // console.log(response, "oyibo");
       if (response.success === true) {
         console.log(response.data.user, "oyibo");
-        setTotalAssetInfo(response.data);
-        // setMyAssetInfo(response.data.user);
+        console.log(response.data);
+        if (response.data.amount == null) {
+          return;
+        }
+        setTotalAssetInfo({
+          amount: response.data.amount,
+          dailyRoyalty: response.data.dailyRoyalty,
+        });
+        return;
       }
     };
     fetchData();

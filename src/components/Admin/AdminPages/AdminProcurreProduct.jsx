@@ -26,7 +26,7 @@ const AdminProcurreProduct = () => {
   const [prodName, setProdName] = useState("");
   const [prodAmount, setProdAmount] = useState("");
   const [sellAmount, setSellAmount] = useState("");
-  const [prodCount, setProdCount] = useState(1);
+  const [prodCount, setProdCount] = useState("");
   const [successModal, setSuccessModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -36,7 +36,7 @@ const AdminProcurreProduct = () => {
   const [route, setRoute] = useState("");
 
   const sendProductToBlockchain = async (prodId) => {
-    const conCatProdName = ` ${prodName}_${prodId}`;
+    const conCatProdName = ` ${prodName}_${sellAmount}_${prodCount}`;
     console.log(conCatProdName);
     const res = await listProcurementProduct(
       conCatProdName,
