@@ -442,6 +442,9 @@ const DashboardHome = () => {
     "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56": {
       symbol: "EUSD",
     },
+    "0xBDeb3C052bD949B6E38Cb0BC9593793a78c46968": {
+      symbol: "EUSD",
+    },
     "0xd68e5C52F7563486CC1A15D00eFA12C8644a907e": {
       symbol: "EGC",
     },

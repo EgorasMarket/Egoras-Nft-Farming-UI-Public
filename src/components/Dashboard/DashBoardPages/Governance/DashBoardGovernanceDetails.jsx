@@ -11,7 +11,7 @@ import UpdatedErrorModal from "../UpdatedAppPages/UpdatedSuccessErrorModals/Upda
 import UpdatedSuccessModal from "../UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import { parseEther, formatEther } from "@ethersproject/units";
 import Blockies from "react-blockies";
-import { voteYes, voteNo } from "../../../../web3/index2";
+import { voteYes, voteNo, getProcuureStats } from "../../../../web3/index2";
 import axios from "axios";
 import { config } from "../../../../actions/Config";
 import { API_URL } from "../../../../actions/types";
@@ -148,6 +148,13 @@ const DashBoardGovernanceDetails = ({ match }) => {
   useEffect(async () => {
     fetchData();
   }, []);
+
+
+useEffect(async() => {
+  const res = await getProcuureStats()
+  console.log(res);
+}, [])
+
 
   console.log(payload);
   const checkedYesBox = () => {

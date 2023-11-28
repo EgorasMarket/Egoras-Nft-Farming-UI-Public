@@ -885,7 +885,7 @@ const voteYes = async (_productID, signer) => {
   console.log(_productID);
   try {
     const instance = await contractProductFacetInstance(signer);
-    let result = await instance.yes(_productID);
+    let result = await instance.YesVote(parseInt(_productID));
     console.log("second");
     console.log(result, "result, result,result,result,result");
     return {
@@ -903,7 +903,25 @@ const voteNo = async (_productID, signer) => {
   console.log(_productID);
   try {
     const instance = await contractProductFacetInstance(signer);
-    let result = await instance.no(_productID);
+    let result = await instance.NoVote(parseInt(_productID));
+    console.log("second");
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const getProcuureStats = async (_productID, signer) => {
+  console.log(_productID);
+  try {
+    const instance = await contractProductFacetInstance(signer);
+    let result = await instance.getProductStats(parseInt(_productID));
     console.log("second");
     console.log(result, "result, result,result,result,result");
     return {
@@ -963,4 +981,5 @@ export {
   voteNo,
   getPriceOracle,
   setStakeConfigure,
+  getProcuureStats,
 };
