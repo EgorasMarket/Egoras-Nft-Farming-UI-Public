@@ -68,6 +68,7 @@
   color: #fff;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 .governance_details_area_1_status_area_1_cont1 {
   color: #8e8e8e;
@@ -240,7 +241,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10px;
+  margin-top: 5em;
+  color: #fff;
 }
 .governance_details_area_2_cont1_div1_cont1_body_btn:disabled {
   background: #314c3b;

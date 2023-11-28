@@ -413,12 +413,11 @@ const getAmountsIn = async (amountOut, path, signer) => {
     };
   }
 };
-const adminAddMinter = async (account, signer) => {
-  console.log(account);
+const adminAddMinter = async (signer) => {
   try {
     const instance = await contractAddMinterFacetInstance(signer);
     let result;
-    result = await instance.addMinter(account);
+    result = await instance.addMinter(V3ContractAddress.address);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -454,6 +453,7 @@ const checkAllowanceSwap = async (coinAddress, owner, amount, signer) => {
 };
 
 const setPriceOracle = async (_prices, _tickers, signer) => {
+  console.log(_prices, _tickers);
   try {
     const instance = await contractPriceOracleFacetInstance(signer);
     let result = await instance.updateTickerPrices(_prices, _tickers);
@@ -462,6 +462,22 @@ const setPriceOracle = async (_prices, _tickers, signer) => {
       status: true,
     };
   } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const getPriceOracle = async (_ticker, signer) => {
+  try {
+    const instance = await contractPriceOracleFacetInstance(signer);
+    let result = await instance.price(_ticker);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    console.log(error);
     return {
       message: formattedError(error).message,
       status: formattedError(error).status,
@@ -538,6 +554,23 @@ const getRoyaltyStats = async (user, signer) => {
     const instance = await contractStakingFacetInstance(signer);
     let result = await instance.royaltyStats(user);
     console.log(result.toString(), "result");
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const setStakeConfigure = async (_egcAddr, _yearlyInterest, signer) => {
+  try {
+    const instance = await contractStakingFacetInstance(signer);
+    let result = await instance.setStakeConfig(_egcAddr, _yearlyInterest);
+    console.log(result, "result");
 
     return {
       message: result,
@@ -928,4 +961,6 @@ export {
   setTokenAddress,
   voteYes,
   voteNo,
+  getPriceOracle,
+  setStakeConfigure,
 };

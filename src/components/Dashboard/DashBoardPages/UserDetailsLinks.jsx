@@ -30,7 +30,7 @@ const UserDetailsLinks = ({ activeLink }) => {
         <GroupAddIcon className="asset_overview_link_icon" />
         Referral
       </Link>
-      <Link
+      {/* <Link
         to="/app/user/reward"
         className={
           activeLink === "reward"
@@ -40,7 +40,7 @@ const UserDetailsLinks = ({ activeLink }) => {
       >
         <EmojiEventsIcon className="asset_overview_link_icon" />
         Rewards Hub
-      </Link>
+      </Link> */}
     </div>
   );
 };

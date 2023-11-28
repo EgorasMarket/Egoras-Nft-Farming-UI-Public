@@ -35,20 +35,19 @@ const Admin = ({ check, togglemakeDark }) => {
     }, 3000);
   }, []);
 
+  const fetchData = async () => {
+    const response = await CALL_VERIFY_ADMIN_WALLET(account);
+
+    console.log(response.data.data.adminStatus);
+    if (response.data.data.adminStatus) {
+      setAdminStatus(true);
+    } else {
+      console.log("sss_____sss");
+      return <Redirect to="/admin/unauthorized-admin" />;
+    }
+  };
   // CALL_VERIFY_ADMIN_WALLET
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await CALL_VERIFY_ADMIN_WALLET(account);
-
-      console.log(response.data.data.adminStatus);
-      if (response.data.data.adminStatus) {
-        setAdminStatus(true);
-      } else {
-        console.log("sss_____sss");
-        return <Redirect to="/admin/unauthorized-admin" />;
-      }
-    };
-
     fetchData();
   }, [account]);
 

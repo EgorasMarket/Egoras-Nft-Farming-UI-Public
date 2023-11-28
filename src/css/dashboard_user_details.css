@@ -154,7 +154,7 @@ canvas.blockies_icon_user_vip {
 } */
 .user_details_body1 {
   display: flex;
-  /* flex-direction: column; */
+  flex-direction: column;
   gap: 10px;
   justify-content: space-between;
 }

@@ -1074,7 +1074,7 @@ const listProduct = async (
 const monthly = async (amount, signer) => {
   console.log(amount);
   try {
-    const instance = contractStakingFacetInstance(signer);
+    const instance = await contractStakingFacetInstance(signer);
     let result;
     result = await instance.monthly(amount);
     console.log(result, "result, result,result,result,result");
@@ -1089,10 +1089,11 @@ const monthly = async (amount, signer) => {
     };
   }
 };
+
 const annually = async (amount, signer) => {
   console.log(amount);
   try {
-    const instance = contractStakingFacetInstance(signer);
+    const instance = await contractStakingFacetInstance(signer);
     let result;
     result = await instance.annually(amount);
     console.log(result, "result, result,result,result,result");

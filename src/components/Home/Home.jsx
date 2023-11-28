@@ -114,7 +114,7 @@ export const HowItWorksArea2 = () => {
           </div>
           <div className="how_it_works_update_new_area_2_cont1_paragraph">
             Become a member and provide liquidity to the protocol by locking
-            your MARTGPT tokens for a specified period of time.
+            your EGC tokens for a specified period of time.
           </div>
         </div>
       </div>
@@ -132,7 +132,7 @@ export const HowItWorksArea2 = () => {
             Claim your Reward
           </div>
           <div className="how_it_works_update_new_area_2_cont1_paragraph">
-            Earn up to 12% annual percentage yield (APY) on your staked MARTGPT
+            Earn up to 50% annual percentage yield (APY) on your staked EGC
             tokens.
           </div>
         </div>
@@ -481,7 +481,7 @@ const Home = () => {
                     Est APY
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
-                    12%
+                    50%
                   </div>
                 </div>
               </div>

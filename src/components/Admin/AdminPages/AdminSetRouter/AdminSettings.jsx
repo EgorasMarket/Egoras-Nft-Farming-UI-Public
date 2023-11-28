@@ -12,6 +12,8 @@ import {
   setTokenAddress,
   BurnEgc,
   withdrawAllEgc,
+  getPriceOracle,
+  setStakeConfigure,
 } from "../../../../web3/index2";
 import "./AdminRouter.css";
 import { unlockTokenV3 } from "../../../../web3";
@@ -43,10 +45,7 @@ const AdminSettings = () => {
   const [eusdAddress, setEusdAddress] = useState("");
 
   const addMinter = async () => {
-    const response = await adminAddMinter(
-      v3ContractAddress.address,
-      library.getSigner()
-    );
+    const response = await adminAddMinter(library.getSigner());
     console.log(response);
   };
   const DiamondCutFunction = async () => {
@@ -135,9 +134,17 @@ const AdminSettings = () => {
     );
     console.log(response);
   };
-
+  console.log(priceArray[0], tickerArray[0]);
   const setTicker = async () => {
     const response = await setEGCUSDTicker(tickerArray[0], library.getSigner());
+    console.log(response);
+  };
+  const configureStake = async () => {
+    const response = await setStakeConfigure(
+      "0x4AC4fC5317F95849A1F17e2f4Daf03c32196f0cb",
+      "500000000000000000",
+      library.getSigner()
+    );
     console.log(response);
   };
 
@@ -150,6 +157,10 @@ const AdminSettings = () => {
     const response = await IncreaseRoyaltyTime(account, library.getSigner());
     console.log(response);
   };
+  useEffect(async () => {
+    const res = await getPriceOracle();
+    console.log(res);
+  }, [account]);
 
   return (
     <div className="other2 asset_other2">
@@ -372,6 +383,15 @@ const AdminSettings = () => {
                     </button>
                   </div>
                 </div>
+              </div>
+              <div className="settings_section1_div2">
+                <h4 className="routerHeader">Configure Stake</h4>
+                <button
+                  onClick={configureStake}
+                  className="setRouterAddressBtn"
+                >
+                  Configure
+                </button>
               </div>
             </div>
           </div>

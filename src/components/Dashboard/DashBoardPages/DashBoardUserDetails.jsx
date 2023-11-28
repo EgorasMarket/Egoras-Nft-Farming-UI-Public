@@ -10,10 +10,6 @@ import { CALL_CHECK_USER_AND_MEMBERSHIP } from "../../../services/userServices";
 // import GroupAddIcon from "@mui/icons-material/GroupAdd";
 // import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import { connect } from "react-redux";
-// import { SuccessModal, ErrorModal } from "./Modal/Success_Error_Component";
-// import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-// import StarRateIcon from "@mui/icons-material/StarRate";
-// import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import UserDetailsLinks from "./UserDetailsLinks";
 import Web3 from "web3";
 import {
@@ -395,7 +391,7 @@ const DashBoardUserDetails = ({ auth }) => {
                       className="user_details_body1_body_cont1_span1
                       _img"
                     />{" "}
-                    egc:
+                    EGC:
                   </span>
                   <span className="user_details_body1_body_cont1_span2">
                     {numberWithCommas(egcBalance)}
@@ -467,7 +463,7 @@ const DashBoardUserDetails = ({ auth }) => {
             {/* ================== */}
             {/* ================== */}
             {/* ================== */}
-            <div className="userDetails_div">
+            {/* <div className="userDetails_div">
               <div className="user_details_div_head">User Information</div>
               <div className="user_details_area">
                 <div className="user_details_area_div1">
@@ -563,7 +559,7 @@ const DashBoardUserDetails = ({ auth }) => {
                   Submit
                 </button>
               </div>
-            </div>
+            </div> */}
             {/* ================== */}
             {/* ================== */}
             {/* ================== */}

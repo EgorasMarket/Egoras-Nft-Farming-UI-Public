@@ -161,6 +161,7 @@ const StakingUpdate = () => {
   const toggleDurationDrop = () => {
     setDurationDrop(!durationDrop);
   };
+
   const addMonthly = () => {
     const currentDate = new Date();
     // get current date
@@ -194,6 +195,7 @@ const StakingUpdate = () => {
     setDurationDrop(!durationDrop);
     setSelectedDuration("monthly");
   };
+
   const addSemiMonthly = () => {
     const currentDate = new Date();
     // get current date
@@ -225,6 +227,7 @@ const StakingUpdate = () => {
     setDurationDrop(!durationDrop);
     setSelectedDuration("semi_monthly");
   };
+
   const addYearly = () => {
     const currentDate = new Date(); // get current date
     currentDate.setFullYear(currentDate.getFullYear() + 1); // add one year
@@ -257,6 +260,7 @@ const StakingUpdate = () => {
     setDurationDrop(!durationDrop);
     setSelectedDuration("yearly");
   };
+
   useEffect(
     async (e) => {
       let string2 =
@@ -274,6 +278,7 @@ const StakingUpdate = () => {
     },
     [egcUsdVal]
   );
+
   const AmountChange = (e) => {
     setLockAmount(e.target.value);
     console.log(e.target.value);
@@ -282,9 +287,8 @@ const StakingUpdate = () => {
     } else {
       setEstimatedRewardDiv(true);
     }
-    setEstimatedRewardAmnt(e.target.value * egcUsdVal * 0.000328767);
+    setEstimatedRewardAmnt(e.target.value * egcUsdVal * 0.001388);
   };
-  // };
 
   const StakeMonthly = async () => {
     setIsLoading(true);
@@ -312,6 +316,7 @@ const StakingUpdate = () => {
       setErrorMessage(res.message);
     }
   };
+
   const StakeYearly = async () => {
     setIsLoading(true);
     setDisable(true);
@@ -338,6 +343,7 @@ const StakingUpdate = () => {
       setErrorMessage(res.message);
     }
   };
+
   const UnlockStake = async () => {
     setIsLoading2(true);
     setLockDisable(true);
@@ -364,6 +370,7 @@ const StakingUpdate = () => {
       setErrorMessage(res.message);
     }
   };
+
   const TakeReward = async () => {
     setIsLoading2(true);
     setClaimDisable(true);
@@ -389,6 +396,7 @@ const StakingUpdate = () => {
       setErrorMessage(res.message);
     }
   };
+
   const toggleLockTabs = (e) => {
     let target = e.currentTarget.id;
     setActiveTab(target);
@@ -397,9 +405,11 @@ const StakingUpdate = () => {
   const CloseSuccessModal = () => {
     setSuccessModal(false);
   };
+
   const CloseErrorModal = () => {
     setErrorModal(false);
   };
+
   useEffect(async () => {
     await axios
       .get(API_URL + "/staking/all", null, config)
@@ -433,6 +443,7 @@ const StakingUpdate = () => {
       // alert(JSON.stringify(stakings));
     });
   }, []);
+
   useEffect(async () => {
     if (account) {
       await axios
@@ -447,6 +458,7 @@ const StakingUpdate = () => {
         });
     }
   }, [account]);
+
   useEffect(
     async (e) => {
       if (account) {
@@ -462,9 +474,10 @@ const StakingUpdate = () => {
     },
     [account]
   );
+
   const maxAmount = () => {
     setLockAmount(coinBalance2);
-    setEstimatedRewardAmnt(coinBalance2 * egcUsdVal * 0.000328767);
+    setEstimatedRewardAmnt(coinBalance2 * egcUsdVal * 0.001388);
     setEstimatedRewardDiv(true);
   };
 
@@ -476,6 +489,7 @@ const StakingUpdate = () => {
       setMyAssetInfo(response.data.user);
     }
   };
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await POPULATE_STAKE_INFO(account);
@@ -491,12 +505,14 @@ const StakingUpdate = () => {
       fetchData2();
     }
   }, [account]);
+
   useEffect(async () => {
     if (account) {
       const res = await getEGCEUSDTICKERPRICE("egceusd", library.getSigner());
       console.log(res);
     }
   }, [account]);
+
   useEffect(async () => {
     if (account) {
       const res = await getRoyaltyStats(account, library.getSigner());
@@ -542,20 +558,18 @@ const StakingUpdate = () => {
         // setClaimDisable(false);
         setLockDisable(false);
       }
-      // if (myTotalStaked !== "0.0") {
-      //   setClaimDisable(false);
-      //   setLockDisable(false);
-      //   return;
-      // }
     }
     console.log(myTotalStaked);
   }, [account, myTotalStaked]);
+
   useEffect(async () => {
     if (account) {
       const res = await stakeConfig(library.getSigner());
       console.log(res);
+      console.log(res.message._egcusd.toString());
     }
   }, [account]);
+
   useEffect(async () => {
     if (account) {
       const res = await getCalculatedRoyalty(account, library.getSigner());
@@ -563,6 +577,7 @@ const StakingUpdate = () => {
       setAvailableClaimReward(formatEther(res.message).toString());
     }
   }, [account]);
+
   useEffect(() => {
     if (account) {
       console.log(availableClaimReward);
@@ -1531,7 +1546,7 @@ const StakingUpdate = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <div className="faq_container_body_details">
-                    The protocol offers a fixed annual percentage yield of 12%
+                    The protocol offers a fixed annual percentage yield of 50%
                     (APY), which is computed based on the USD equivalent of the
                     staked egc.
                   </div>

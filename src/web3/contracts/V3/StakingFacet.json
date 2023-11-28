@@ -144,7 +144,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -164,10 +165,21 @@
           "internalType": "uint256",
           "name": "_egcusd",
           "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_yearlyInterest",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_egcAddr",
+          "type": "address"
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -190,7 +202,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -239,7 +252,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -258,6 +272,25 @@
         }
       ],
       "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_egcAddr",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_yearlyInterest",
+          "type": "uint256"
+        }
+      ],
+      "name": "setStakeConfig",
+      "outputs": [],
+      "stateMutability": "nonpayable",
       "type": "function"
     }
   ]

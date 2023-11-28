@@ -37,6 +37,8 @@ const DashBoardGovernanceDetails = ({ match }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [alreadyVoted, setAlreadyVoted] = useState(false);
+  const [yesVotesPercent, setYesVotesPercent] = useState(0);
+  const [noVotesPercent, setNoVotesPercent] = useState(0);
   const [route, setRoute] = useState("");
   console.log("====================================");
   console.log(match.params.id);
@@ -57,27 +59,45 @@ const DashBoardGovernanceDetails = ({ match }) => {
           setPayload(obj);
           console.log(obj.Votes);
           console.log(account);
-          obj.Votes.forEach((data) => {
-            console.log(data);
-            console.log(data.voter);
-            if (data.voter.includes(account)) {
-              console.log(data);
-              console.log("ok");
-              setAlreadyVoted(true);
-              if (data.type === "Yes") {
-                setCheckedYes(true);
-                setCheckedNo(false);
-                return;
-              }
-              if (data.type === "No") {
-                setCheckedYes(false);
-                setCheckedNo(true);
-                return;
-              }
 
-              return;
-            }
-          });
+          if (obj.Votes.length > 0) {
+            const yesVotes = obj.Votes.filter(
+              (vote) => vote.typeOfVote === "Yes"
+            ).length;
+            const noVotes = obj.Votes.filter(
+              (vote) => vote.typeOfVote === "No"
+            ).length;
+            // Calculate percentages
+            const totalVotes = obj.Votes.length;
+            const yesPercentage = (yesVotes / totalVotes) * 100;
+            const noPercentage = (noVotes / totalVotes) * 100;
+            console.log(yesPercentage);
+            console.log(noPercentage);
+            // setYesVotesPercent(yesPercentage);
+            // setNoVotesPercent(noPercentage);
+            obj.Votes.forEach((data) => {
+              console.log(data);
+              console.log(data.voter);
+              if (data.voter.includes(account)) {
+                console.log(data);
+                console.log("ok");
+                setAlreadyVoted(true);
+                if (data.type === "Yes") {
+                  setCheckedYes(true);
+                  setCheckedNo(false);
+                  return;
+                }
+                if (data.type === "No") {
+                  setCheckedYes(false);
+                  setCheckedNo(true);
+                  return;
+                }
+
+                return;
+              }
+            });
+            return;
+          }
         }
       });
     } catch (error) {
@@ -203,7 +223,9 @@ const DashBoardGovernanceDetails = ({ match }) => {
                                 : "#55555d",
                           }}
                         >
-                          {payload.status}
+                          {payload.status === "PENDING"
+                            ? "Active"
+                            : payload.status}
                         </button>
                       </div>
                     </div>
@@ -383,13 +405,13 @@ const DashBoardGovernanceDetails = ({ match }) => {
                               Yes
                             </div>
                             <div className="governance_details_area_2_cont1_div1_body1_progrees1_cont1_txt">
-                              70%
+                              {yesVotesPercent.toFixed(2)}%
                             </div>
                           </div>
                           <div className="governance_details_area_2_cont1_div1_body1_progrees1_cont2">
                             <Line
                               strokeWidth={2}
-                              percent={70}
+                              percent={yesVotesPercent}
                               strokeColor="#239e54"
                               trailWidth={2}
                             />
@@ -401,13 +423,13 @@ const DashBoardGovernanceDetails = ({ match }) => {
                               No
                             </div>
                             <div className="governance_details_area_2_cont1_div1_body1_progrees1_cont1_txt">
-                              30%
+                              {noVotesPercent.toFixed(2)}%
                             </div>
                           </div>
                           <div className="governance_details_area_2_cont1_div1_body1_progrees1_cont2">
                             <Line
                               strokeWidth={2}
-                              percent={30}
+                              percent={noVotesPercent}
                               strokeColor="#239e54"
                               trailWidth={2}
                             />
@@ -478,67 +500,70 @@ const DashBoardGovernanceDetails = ({ match }) => {
                         className="governance_details_area_2_cont2_body_1_Input"
                       />
                     </div>
-
-                    {payload.Votes.length <= 0 ? null : (
+                    {/* {payload.Votes.length <= 0 ? (
                       <div className="governance_details_area_2_cont2_body_2">
-                        {payload.Votes.filter((data) =>
-                          data.voter
-                            .toLowerCase()
-                            .includes(searchTerm.toLocaleLowerCase())
-                        ).length <= 0 ? (
-                          <div className="governance_details_area_2_cont2_body_2_nodata_div">
-                            <Nodata />
-                            <div className="governance_details_area_2_cont2_body_2_nodata_div_txt">
-                              No address found
-                            </div>
-                          </div>
-                        ) : (
-                          <>
-                            {payload.Votes.filter((data) =>
-                              data.voter
-                                .toLowerCase()
-                                .includes(searchTerm.toLocaleLowerCase())
-                            ).map((data) => {
-                              return (
-                                <div
-                                  className="governance_details_area_2_cont2_body_2_cont1"
-                                  id={data.id}
-                                >
-                                  <div className="governance_details_area_2_cont2_body_2_cont1_div1">
-                                    <Blockies
-                                      seed={data.voter}
-                                      size={8}
-                                      scale={4}
-                                      className="blockies_icon2"
-                                    />{" "}
-                                    {`${data.voter.slice(
-                                      0,
-                                      6
-                                    )}...${data.voter.slice(37, 42)}`}
-                                  </div>
-                                  <div className="governance_details_area_2_cont2_body_2_cont1_div2">
-                                    <button
-                                      className="governance_details_area_2_cont2_body_2_cont1_div2_btn"
-                                      style={{
-                                        background:
-                                          data.type === "Yes"
-                                            ? "#3e9a3e"
-                                            : data.type === "No"
-                                            ? "#eb3d3d"
-                                            : "#55555d",
-                                      }}
-                                    >
-                                      {data.type}
-                                    </button>
-                                    <ArrowOutwardIcon className="governance_details_area_2_cont2_body_2_cont1_div2_icon" />
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </>
-                        )}
+                        No data
                       </div>
-                    )}
+                    ) : ( */}
+                    <div className="governance_details_area_2_cont2_body_2">
+                      {payload.Votes.filter((data) =>
+                        data.voter
+                          .toLowerCase()
+                          .includes(searchTerm.toLocaleLowerCase())
+                      ).length <= 0 || payload.Votes.length <= 0 ? (
+                        <div className="governance_details_area_2_cont2_body_2_nodata_div">
+                          <Nodata />
+                          <div className="governance_details_area_2_cont2_body_2_nodata_div_txt">
+                            No vote found
+                          </div>
+                        </div>
+                      ) : (
+                        <>
+                          {payload.Votes.filter((data) =>
+                            data.voter
+                              .toLowerCase()
+                              .includes(searchTerm.toLocaleLowerCase())
+                          ).map((data) => {
+                            return (
+                              <div
+                                className="governance_details_area_2_cont2_body_2_cont1"
+                                id={data.id}
+                              >
+                                <div className="governance_details_area_2_cont2_body_2_cont1_div1">
+                                  <Blockies
+                                    seed={data.voter}
+                                    size={8}
+                                    scale={4}
+                                    className="blockies_icon2"
+                                  />{" "}
+                                  {`${data.voter.slice(
+                                    0,
+                                    6
+                                  )}...${data.voter.slice(37, 42)}`}
+                                </div>
+                                <div className="governance_details_area_2_cont2_body_2_cont1_div2">
+                                  <button
+                                    className="governance_details_area_2_cont2_body_2_cont1_div2_btn"
+                                    style={{
+                                      background:
+                                        data.type === "Yes"
+                                          ? "#3e9a3e"
+                                          : data.type === "No"
+                                          ? "#eb3d3d"
+                                          : "#55555d",
+                                    }}
+                                  >
+                                    {data.type}
+                                  </button>
+                                  <ArrowOutwardIcon className="governance_details_area_2_cont2_body_2_cont1_div2_icon" />
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </>
+                      )}
+                    </div>
+                    {/* // )} */}
                   </div>
                 </div>
               </div>
