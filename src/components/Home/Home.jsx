@@ -132,8 +132,7 @@ export const HowItWorksArea2 = () => {
             Claim your Reward
           </div>
           <div className="how_it_works_update_new_area_2_cont1_paragraph">
-            Earn up to 50% annual percentage yield (APY) on your staked EGC
-            tokens.
+            Earn 50% annual percentage yield (APY) on your staked EGC tokens.
           </div>
         </div>
       </div>

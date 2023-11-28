@@ -3129,6 +3129,37 @@ a.visit_app_link_2 {
   .JoinMartGptArea_2 {
     width: 55%;
   }
+
+  .how_it_works2_area_body {
+    display: flex;
+    flex-direction: column;
+  }
+  .how_it_works2_area_body_area2 {
+    width: 100%;
+    margin: 0px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .community_section_area1_title {
+    font-size: 48px;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .community_section_area1_para {
+    font-size: 20px;
+  }
+  .community_section {
+    padding: 2em 0em;
+  }
+  .how_it_works2_area_head {
+    font-size: 42px;
+    width: 100%;
+    margin-bottom: 1em;
+  }
+  .how_it_works2_area_body_area2_img {
+    width: 60%;
+  }
 }
 
 @media screen and (max-width: 900px) {

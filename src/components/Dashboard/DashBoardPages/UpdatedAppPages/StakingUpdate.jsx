@@ -287,7 +287,7 @@ const StakingUpdate = () => {
     } else {
       setEstimatedRewardDiv(true);
     }
-    setEstimatedRewardAmnt(e.target.value * egcUsdVal * 0.001388);
+    setEstimatedRewardAmnt(e.target.value * egcUsdVal * 0.00136986);
   };
 
   const StakeMonthly = async () => {
@@ -477,7 +477,7 @@ const StakingUpdate = () => {
 
   const maxAmount = () => {
     setLockAmount(coinBalance2);
-    setEstimatedRewardAmnt(coinBalance2 * egcUsdVal * 0.001388);
+    setEstimatedRewardAmnt(coinBalance2 * egcUsdVal * 0.00136986);
     setEstimatedRewardDiv(true);
   };
 
@@ -1212,9 +1212,9 @@ const StakingUpdate = () => {
                     <div className="lending_area1_cont1_body_txt">
                       {parseFloat(totalAssetInfo.amount).toFixed(2)} egc
                     </div>
-                    <div className="lending_area1_cont1_heading">
+                    {/* <div className="lending_area1_cont1_heading">
                       (32.84% Of egc Supply)
-                    </div>
+                    </div> */}
                   </div>
                   <div className="lending_area1_cont1_body_1">
                     <HelpOutlineIcon className="help_outline" />
@@ -1250,7 +1250,7 @@ const StakingUpdate = () => {
                       Staking APY
                     </div>
                     <div className="lending_area1_cont1_body_txt">
-                      12<span className="usd_sign">%</span>
+                      50<span className="usd_sign">%</span>
                     </div>
                   </div>
                   <div className="lending_area1_cont1_body_1">

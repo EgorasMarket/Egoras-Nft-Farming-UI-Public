@@ -21,6 +21,7 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
+import TimeAgoComponent from "../../../TimeAgoComponent";
 
 const DashBoardGovernanceDetails = ({ match }) => {
   const context = useWeb3React();
@@ -39,6 +40,9 @@ const DashBoardGovernanceDetails = ({ match }) => {
   const [alreadyVoted, setAlreadyVoted] = useState(false);
   const [yesVotesPercent, setYesVotesPercent] = useState(0);
   const [noVotesPercent, setNoVotesPercent] = useState(0);
+  const [formattedNewDate, setFormattedNewDate] = useState(0);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   const [route, setRoute] = useState("");
   console.log("====================================");
   console.log(match.params.id);
@@ -57,6 +61,43 @@ const DashBoardGovernanceDetails = ({ match }) => {
         // Check if the object's id matches the value of match
         if (obj.index_id === match.params.id) {
           setPayload(obj);
+          const originalDate = new Date(obj.createdAt);
+          const newDate = new Date(
+            originalDate.getTime() + 2 * 24 * 60 * 60 * 1000
+          );
+          const editedNewDate = newDate.toISOString();
+          setFormattedNewDate(editedNewDate);
+          // format date
+          const createdAtDate = new Date(obj.createdAt);
+          const createdAtDate2 = new Date(editedNewDate);
+          const formattedDate = `${createdAtDate.getDate()}/${
+            createdAtDate.getMonth() + 1
+          }/${createdAtDate.getFullYear()}`;
+
+          const formattedDate2 = `${createdAtDate2.getDate()}/${
+            createdAtDate2.getMonth() + 1
+          }/${createdAtDate2.getFullYear()}`;
+
+          const timestamp = obj.createdAt;
+          const timestamp2 = editedNewDate;
+          const date = new Date(timestamp);
+          const date2 = new Date(timestamp2);
+          const hours = date.getHours();
+          const hours2 = date2.getHours();
+          const minutes = date.getMinutes();
+          const minutes2 = date2.getMinutes();
+          // Format the time
+          const formattedTime = `${hours % 12}:${minutes
+            .toString()
+            .padStart(2, "0")}${hours < 12 ? "am" : "pm"}`;
+          const formattedTime2 = `${hours2 % 12}:${minutes2
+            .toString()
+            .padStart(2, "0")}${hours2 < 12 ? "am" : "pm"}`;
+
+          setStartDate(formattedDate + " -- " + formattedTime);
+          setEndDate(formattedDate2 + " -- " + formattedTime2);
+
+          console.log(formattedNewDate);
           console.log(obj.Votes);
           console.log(account);
 
@@ -73,8 +114,8 @@ const DashBoardGovernanceDetails = ({ match }) => {
             const noPercentage = (noVotes / totalVotes) * 100;
             console.log(yesPercentage);
             console.log(noPercentage);
-            // setYesVotesPercent(yesPercentage);
-            // setNoVotesPercent(noPercentage);
+            setYesVotesPercent(yesPercentage);
+            setNoVotesPercent(noPercentage);
             obj.Votes.forEach((data) => {
               console.log(data);
               console.log(data.voter);
@@ -133,6 +174,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
   console.log(payload.Votes);
 
   const voteYesFunc = async () => {
+    setIsLoading(true);
     const res = await voteYes(payload.index_id, library.getSigner());
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
@@ -150,6 +192,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
     }
   };
   const voteNoFunc = async () => {
+    setIsLoading(true);
     const res = await voteNo(payload.index_id, library.getSigner());
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
@@ -169,6 +212,11 @@ const DashBoardGovernanceDetails = ({ match }) => {
   const CloseErrorModal = () => {
     setErrorModal(false);
   };
+  // if (payload.length >= 0) {
+
+  //   return;
+  // }
+
   return (
     <div className="other2 asset_other2">
       {payload.length <= 0 ? null : (
@@ -230,7 +278,18 @@ const DashBoardGovernanceDetails = ({ match }) => {
                       </div>
                     </div>
                     <div className="governance_details_area_1_status_area_2">
-                      Ends On {payload.createdAt}
+                      {payload.status === "PENDING" ? (
+                        <>
+                          {" "}
+                          Ends <TimeAgoComponent date={formattedNewDate} />
+                        </>
+                      ) : (
+                        <>
+                          {" "}
+                          Ended
+                          <TimeAgoComponent date={formattedNewDate} />
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -465,7 +524,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
                           Start date
                         </div>
                         <div className="governance_details_area_2_cont1_div2_body_1_content">
-                          {payload.createdAt}
+                          {startDate}
                         </div>
                       </div>
                       <div className="governance_details_area_2_cont1_div2_body_1">
@@ -473,7 +532,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
                           End date
                         </div>
                         <div className="governance_details_area_2_cont1_div2_body_1_content">
-                          {payload.createdAt}
+                          {endDate}
                         </div>
                       </div>
                     </div>

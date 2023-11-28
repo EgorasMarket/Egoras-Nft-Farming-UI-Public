@@ -9,6 +9,7 @@ import axios from "axios";
 import { config } from "../../../../actions/Config";
 import { API_URL } from "../../../../actions/types";
 import Nodata from "../nodataComponent/Nodata";
+import TimeAgoComponent from "../../../TimeAgoComponent";
 
 const DashboardGovernance = () => {
   const [activeTab, setActiveTab] = useState("");
@@ -46,8 +47,8 @@ const DashboardGovernance = () => {
                     Total Proposals
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    230
-                    <span className="usd_sign">proposals</span>
+                    {proposals.length}
+                    <span className="usd_sign"> proposals</span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
@@ -60,19 +61,16 @@ const DashboardGovernance = () => {
               </div>
               <div className="lending_area1_cont1">
                 <div className="lending_area1_cont1_body_1">
-                  <div className="lending_area1_cont1_heading">
-                    Total Voters
-                  </div>
+                  <div className="lending_area1_cont1_heading">Total Votes</div>
                   <div className="lending_area1_cont1_body_txt">
                     5,000
-                    <span className="usd_sign">voters</span>
+                    <span className="usd_sign"> votes</span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
                   <HelpOutlineIcon className="help_outline" />
                   <div className="helper_txt_div">
-                    This is the total number of all the users that have voted on
-                    any proposal.
+                    This is the total number of votes in the smart contract.
                   </div>
                 </div>
               </div>
@@ -82,8 +80,8 @@ const DashboardGovernance = () => {
                     Total Eusd Minted
                   </div>
                   <div className="lending_area1_cont1_body_txt">
-                    10,000,000
-                    <span className="usd_sign">eusd</span>
+                    0.00
+                    <span className="usd_sign"> eusd</span>
                   </div>
                 </div>
                 <div className="lending_area1_cont1_body_1">
@@ -91,6 +89,24 @@ const DashboardGovernance = () => {
                   <div className="helper_txt_div">
                     This is the total number of eusd minted from the smart
                     contract and given to approved proposals.
+                  </div>
+                </div>
+              </div>
+              <div className="lending_area1_cont1">
+                <div className="lending_area1_cont1_body_1">
+                  <div className="lending_area1_cont1_heading">
+                    Total Eusd Paid Back
+                  </div>
+                  <div className="lending_area1_cont1_body_txt">
+                    0.00
+                    <span className="usd_sign"> eusd</span>
+                  </div>
+                </div>
+                <div className="lending_area1_cont1_body_1">
+                  <HelpOutlineIcon className="help_outline" />
+                  <div className="helper_txt_div">
+                    This is the total number of eusd paid back into the smart
+                    contract.
                   </div>
                 </div>
               </div>
@@ -109,7 +125,7 @@ const DashboardGovernance = () => {
                       Active
                     </div>
                     <div className="proposals_area_2_head_stats_div1_txt">
-                      100
+                      {proposals.status === "PENDING"}
                     </div>
                   </div>
                   <div className="proposals_area_2_head_stats_div1">
@@ -210,55 +226,78 @@ const DashboardGovernance = () => {
                       {" "}
                       {proposals
                         .filter((data) => data.status.includes(activeTab))
-                        .map((data) => (
-                          <Link
-                            to={`/app/governance/proposal/details/${data.index_id}/${data.creator}/${data.product_name}`}
-                            className="proposals_area_2_body_area_cont1"
-                          >
-                            <div className="proposals_area_2_body_area_cont1_area1">
-                              <div className="proposals_area_2_body_area_cont1_area1_title">
-                                {data.product_name}
+                        .map((data) => {
+                          const originalDate = new Date(data.createdAt);
+                          const newDate = new Date(
+                            originalDate.getTime() + 2 * 24 * 60 * 60 * 1000
+                          );
+                          // Formatting the date to the same format
+                          const formattedNewDate = newDate.toISOString();
+                          console.log(formattedNewDate);
+                          return (
+                            <Link
+                              to={`/app/governance/proposal/details/${data.index_id}/${data.creator}/${data.product_name}`}
+                              className="proposals_area_2_body_area_cont1"
+                            >
+                              <div className="proposals_area_2_body_area_cont1_area1">
+                                <div className="proposals_area_2_body_area_cont1_area1_title">
+                                  {data.product_name}
+                                </div>
+                                <div className="proposals_area_2_body_area_cont1_area1_status">
+                                  <button
+                                    className="proposals_area_2_body_area_cont1_area1_status_btn"
+                                    style={{
+                                      background: "PENDING"
+                                        ? "#d69d16"
+                                        : data.status === "Approved"
+                                        ? "#3e9a3e"
+                                        : data.status === "Terminated"
+                                        ? "#eb3d3d"
+                                        : "#55555d",
+                                    }}
+                                  >
+                                    {data.status === "PENDING"
+                                      ? "Active"
+                                      : data.status}
+                                  </button>
+                                </div>
                               </div>
-                              <div className="proposals_area_2_body_area_cont1_area1_status">
-                                <button
-                                  className="proposals_area_2_body_area_cont1_area1_status_btn"
-                                  style={{
-                                    background: "PENDING"
-                                      ? "#d69d16"
-                                      : data.status === "Approved"
-                                      ? "#3e9a3e"
-                                      : data.status === "Terminated"
-                                      ? "#eb3d3d"
-                                      : "#55555d",
-                                  }}
-                                >
-                                  {data.status}
-                                </button>
+                              <div className="proposals_area_2_body_area_cont1_area2">
+                                <div className="proposals_area_2_body_area_cont1_area2_div1">
+                                  <span className="proposals_area_2_body_area_cont1_area2_div1_span">
+                                    Published By
+                                  </span>
+                                  <Blockies
+                                    seed={data.creator}
+                                    size={8}
+                                    scale={4}
+                                    className="blockies_icon2"
+                                  />{" "}
+                                  {`${data.creator.slice(0, 16)}...`}
+                                </div>
+                                <div className="proposals_area_2_body_area_cont1_area2_div2">
+                                  {data.status === "PENDING" ? (
+                                    <>
+                                      {" "}
+                                      Ends{" "}
+                                      <TimeAgoComponent
+                                        date={formattedNewDate}
+                                      />
+                                    </>
+                                  ) : (
+                                    <>
+                                      {" "}
+                                      Ended
+                                      <TimeAgoComponent
+                                        date={formattedNewDate}
+                                      />
+                                    </>
+                                  )}
+                                </div>
                               </div>
-                            </div>
-                            <div className="proposals_area_2_body_area_cont1_area2">
-                              <div className="proposals_area_2_body_area_cont1_area2_div1">
-                                <span className="proposals_area_2_body_area_cont1_area2_div1_span">
-                                  Published By
-                                </span>
-                                <Blockies
-                                  seed={data.creator}
-                                  size={8}
-                                  scale={4}
-                                  className="blockies_icon2"
-                                />{" "}
-                                {`${data.creator.slice(0, 16)}...`}
-                              </div>
-                              <div className="proposals_area_2_body_area_cont1_area2_div2">
-                                {data.status === "Active" ? (
-                                  <> Ends On {data.createdAt}</>
-                                ) : (
-                                  <> Ended On {data.createdAt}</>
-                                )}
-                              </div>
-                            </div>
-                          </Link>
-                        ))}
+                            </Link>
+                          );
+                        })}
                     </>
                   )}
                 </div>

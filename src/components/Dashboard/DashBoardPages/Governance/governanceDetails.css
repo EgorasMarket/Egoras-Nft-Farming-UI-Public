@@ -87,19 +87,17 @@
   border-radius: 7px;
   color: #fff;
   min-width: 32px;
-  font-size: 14px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 10px;
+  padding: 4px 8px;
 }
 .governance_details_area_1_status_area_2 {
   color: #fff;
   font-size: 14px;
   margin-top: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  text-align: end;
 }
 .governance_details_area_1_cont2 {
   display: flex;
