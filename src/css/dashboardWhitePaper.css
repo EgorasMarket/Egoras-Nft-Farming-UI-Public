@@ -14,7 +14,7 @@
   position: relative;
   overflow: hidden;
   transition: 1s ease-in-out;
-  height: 100vh;
+  height: 100svh;
   overflow: scroll;
 }
 .whitepaper-area {
@@ -42,7 +42,7 @@
   /* width: 100%; */
 }
 .details-accord {
-  height: 100vh;
+  height: 100svh;
   overflow-y: scroll;
   padding-bottom: 200px;
 }
@@ -114,7 +114,7 @@
   overflow-y: scroll;
   background: white;
   bottom: 0px;
-  height: calc((100vh - 40px) - 0px);
+  height: calc((100svh - 40px) - 0px);
   max-width: 405px;
   padding-top: 4em;
 }
@@ -284,7 +284,7 @@ a.sidebar-link1 {
     display: block;
   }
   .details-accord {
-    height: 100vh;
+    height: 100svh;
     overflow-y: scroll;
   }
 

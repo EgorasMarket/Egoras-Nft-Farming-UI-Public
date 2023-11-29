@@ -188,8 +188,8 @@
   position: fixed;
   top: 0;
   background: #0006;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   left: 0;
   z-index: 100000;
   backdrop-filter: blur(10px);
@@ -268,7 +268,7 @@
 .header_token_prices_div {
   background: #ebebeb;
   position: sticky;
-  width: 100vw;
+  width: 100svw;
   color: #474747;
   padding: 10px 0px;
   font-size: 13px;
@@ -371,7 +371,7 @@
   position: absolute;
   bottom: 0;
   z-index: 10;
-  width: 100vw;
+  width: 100svw;
 }
 
 .dash_board_links_area {
@@ -550,7 +550,9 @@
   color: #85a393 !important;
   position: relative;
 }
-
+.header_token_prices_div_area1_img {
+  width: 12px;
+}
 .Ping,
 .Ping .c-basePart {
   position: absolute;

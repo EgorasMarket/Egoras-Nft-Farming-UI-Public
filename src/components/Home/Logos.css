@@ -976,8 +976,8 @@ button.compliment_btn {
   top: 0;
   left: 0;
   z-index: 100;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   padding: 4em;
   overflow: scroll;
   background: #000000ed;

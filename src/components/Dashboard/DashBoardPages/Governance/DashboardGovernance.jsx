@@ -14,6 +14,7 @@ import TimeAgoComponent from "../../../TimeAgoComponent";
 const DashboardGovernance = () => {
   const [activeTab, setActiveTab] = useState("");
   const [proposals, setProposals] = useState([]);
+  const [totalVotes, setTotalVotes] = useState([]);
   const ToggleActiveTab = (e) => {
     setActiveTab(e.currentTarget.id);
   };
@@ -31,8 +32,24 @@ const DashboardGovernance = () => {
       console.log(error.response);
     }
   };
+  const fetchData2 = async () => {
+    try {
+      const data = await axios.get(
+        API_URL + "/web3/get/all/votes",
+        null,
+        config
+      );
+
+      console.log(data);
+      // console.log(data.data.data.products);
+      setTotalVotes(data.data.data);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
   useEffect(async () => {
     fetchData();
+    fetchData2();
   }, []);
 
   return (
@@ -63,7 +80,7 @@ const DashboardGovernance = () => {
                 <div className="lending_area1_cont1_body_1">
                   <div className="lending_area1_cont1_heading">Total Votes</div>
                   <div className="lending_area1_cont1_body_txt">
-                    5,000
+                    {totalVotes.length}
                     <span className="usd_sign"> votes</span>
                   </div>
                 </div>
@@ -125,7 +142,11 @@ const DashboardGovernance = () => {
                       Active
                     </div>
                     <div className="proposals_area_2_head_stats_div1_txt">
-                      {proposals.status === "PENDING"}
+                      {
+                        proposals.filter((data) =>
+                          data.status.includes("PENDING")
+                        ).length
+                      }
                     </div>
                   </div>
                   <div className="proposals_area_2_head_stats_div1">
@@ -133,7 +154,11 @@ const DashboardGovernance = () => {
                       Approved
                     </div>
                     <div className="proposals_area_2_head_stats_div1_txt">
-                      100
+                      {
+                        proposals.filter((data) =>
+                          data.status.includes("APPROVED")
+                        ).length
+                      }
                     </div>
                   </div>
                   <div className="proposals_area_2_head_stats_div1">
@@ -141,7 +166,11 @@ const DashboardGovernance = () => {
                       Terminated
                     </div>
                     <div className="proposals_area_2_head_stats_div1_txt">
-                      10
+                      {
+                        proposals.filter((data) =>
+                          data.status.includes("TERMINATED")
+                        ).length
+                      }
                     </div>
                   </div>
                   <div className="proposals_area_2_head_stats_div1">
@@ -149,7 +178,11 @@ const DashboardGovernance = () => {
                       Withdrawn
                     </div>
                     <div className="proposals_area_2_head_stats_div1_txt">
-                      20
+                      {
+                        proposals.filter((data) =>
+                          data.status.includes("WITHDRAWN")
+                        ).length
+                      }
                     </div>
                   </div>
                 </div>

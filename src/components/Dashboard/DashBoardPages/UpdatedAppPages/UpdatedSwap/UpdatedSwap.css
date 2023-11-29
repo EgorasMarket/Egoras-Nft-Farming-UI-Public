@@ -493,8 +493,8 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   background: #0000007a;
   z-index: 1000000;
   overflow: scroll;

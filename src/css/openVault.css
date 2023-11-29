@@ -1,8 +1,8 @@
 .vault_page {
   flex: 4 1;
-  width: 100vw;
+  width: 100svw;
   background: #f9f9f9;
-  /* height: 100vh; */
+  /* height: 100svh; */
   overflow: scroll;
 }
 

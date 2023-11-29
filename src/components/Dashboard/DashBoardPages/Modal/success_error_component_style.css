@@ -1,8 +1,8 @@
 .success_error_component {
   position: fixed;
   top: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   background: #ffffff;
   left: 0;
   z-index: 1110;

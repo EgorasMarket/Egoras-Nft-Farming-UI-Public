@@ -323,10 +323,10 @@ button.pool_detail_heading_area1_invest_btn {
 
 .asset_list_modal {
   background: #00000087;
-  width: 100vw;
+  width: 100svw;
   position: fixed;
   top: 0;
-  height: 100vh;
+  height: 100svh;
   z-index: 10000000;
   left: 0;
   -webkit-backdrop-filter: blur(10px);
@@ -392,8 +392,8 @@ button.pool_detail_heading_area1_invest_btn {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   display: flex;
   justify-content: center;
   padding: 4em 1em;
@@ -572,8 +572,8 @@ button.pool_detail_heading_area1_invest_btn {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -904,8 +904,8 @@ button.pool_detail_heading_area1_invest_btn {
   left: 0;
   padding: 1em;
   background: #00000085;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   overflow: scroll;
   z-index: 10000;
   display: flex;

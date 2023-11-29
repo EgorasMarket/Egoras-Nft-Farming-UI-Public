@@ -1,7 +1,7 @@
 .token_modal_bg {
   position: fixed;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   background: #00000033;
   z-index: 100000;
   top: 0;
@@ -45,8 +45,8 @@
   justify-content: space-between;
 }
 .remove_token_modal_bg {
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   top: 0;
   position: absolute;
   background: #ffffff00;

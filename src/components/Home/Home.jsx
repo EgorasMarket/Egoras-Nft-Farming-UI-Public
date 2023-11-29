@@ -657,14 +657,14 @@ const Home = () => {
             </div>
             <div className="community_section_area2">
               <a
-                href="https://twitter.com/search?src=tren&q=%23Egoras"
+                href="https://twitter.com/egodaohq"
                 className="twitter"
                 target="_blank"
               >
                 <Twitter className="twitter_icon" />
               </a>
               <a
-                href="https://ng.linkedin.com/company/egorashq"
+                href="https://www.linkedin.com/company/egodao/"
                 className="twitter"
                 target="_blank"
               >
@@ -685,7 +685,7 @@ const Home = () => {
                 <GitHubIcon className="twitter_icon" />
               </a>
               <a
-                href="https://t.me/s/egorasmarket?before=480"
+                href="https://t.me/egodaoHQ"
                 className="twitter"
                 target="_blank"
               >

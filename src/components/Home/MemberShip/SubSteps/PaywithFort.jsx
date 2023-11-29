@@ -67,7 +67,7 @@ const PaywithFort = () => {
         display: "flex",
         flexDirection: "column",
         color: "white",
-        height: "100vh",
+        height: "100svh",
         width: "100%",
         justifyContent: "center",
       }}

@@ -609,15 +609,15 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             >
               <div className="header_token_prices_div_area">
                 <div className="header_token_prices_div_area1">
-                  1 egc ~ {numberWithCommas(egcUsdVal.toFixed(2))} USD
+                  1 egc ≈ {numberWithCommas(egcUsdVal.toFixed(2))} USD
                 </div>
                 <span class="vertical_rule2"></span>
                 <div className="header_token_prices_div_area1">
-                  1 egc ~ {numberWithCommas(egcUsdVal.toFixed(2))} eUSD
+                  1 egc ≈ {numberWithCommas(egcUsdVal.toFixed(2))} eUSD
                 </div>
                 <span class="vertical_rule2"></span>
                 <div className="header_token_prices_div_area1">
-                  1 eUSD ~ 1 USD
+                  1 eUSD ≈ 1 USD
                 </div>
                 <span class="vertical_rule2"></span>
               </div>
@@ -1132,7 +1132,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                     </div>
                   </div>
                 </div>
-                <span className="header_rule"></span>
+                {/* <span className="header_rule"></span>
                 <div className="mobile_view_header_cont_head_body_cont1">
                   <div className="mobile_view_header_cont_head_body_cont1_title">
                     User
@@ -1147,7 +1147,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                       </div>
                     </a>
                   </div>
-                </div>
+                </div> */}
                 <span className="header_rule"></span>
                 <div className="mobile_view_header_cont_head_body_cont1_btn">
                   <Authenticate isHome="false" />
@@ -1224,6 +1224,21 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             Stake
           </a>
           <a
+            id="govern"
+            href="/app/governance"
+            className={
+              activeBg == "govern" ? "header_tab1_active " : "header_tab1"
+            }
+            onClick={changeBg}
+          >
+            <HowToVoteIcon className="header_tab1_icon_icon" />
+            Governance
+            <span class="Ping -top-1">
+              <span class="c-flashingPart"></span>
+              <span class="c-basePart"></span>
+            </span>
+          </a>
+          <a
             id="swap"
             href="/app/swap"
             className={
@@ -1235,18 +1250,18 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             Swap
           </a>
           <a
-            id="sell"
-            href="/app/sell"
+            id="account"
+            href="/app/user"
             className={
-              activeBg == "sell" ? "header_tab1_active " : "header_tab1"
+              activeBg == "account" ? "header_tab1_active " : "header_tab1"
             }
             onClick={changeBg}
           >
-            <SellIcon className="sidebarIcon" />
-            Sell
+            <AccountCircleIcon className="header_tab1_icon_icon" />
+            Account
           </a>
 
-          <a
+          {/* <a
             id="market"
             href="/app/market"
             className={
@@ -1256,7 +1271,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           >
             <StorefrontIcon className="sidebarIcon" />
             Inventory
-          </a>
+          </a> */}
         </div>
 
         {/* <a href="/app/convert" className="convert_tab_mobile">

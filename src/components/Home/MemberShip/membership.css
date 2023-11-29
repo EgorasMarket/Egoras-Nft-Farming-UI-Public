@@ -132,7 +132,7 @@
 
 .updatedCooperativeSection1 {
   position: relative;
-  height: 100vh;
+  height: 100svh;
   padding: 6em;
   /* display: flex; */
   background: #f1f1f1;
@@ -243,7 +243,7 @@
 
 section.popularProductsSection {
   position: relative;
-  /* height: 100vh; */
+  /* height: 100svh; */
   padding: 6em 0em;
   /* display: flex; */
   background: #000;
@@ -725,8 +725,8 @@ video.video-poster {
 .Login_Modal {
   position: fixed;
   top: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   left: 0;
   display: flex;
   align-items: center;
@@ -942,8 +942,8 @@ video.video-poster {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   z-index: 100000;
   background: #000000c2;
   display: flex;
@@ -1711,8 +1711,8 @@ x .benefits_section1_area2_body1_cont2 {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   background: #00000075;
   z-index: 10000;
   padding: 4em;
@@ -1764,7 +1764,7 @@ x .benefits_section1_area2_body1_cont2 {
 .joinCooperativeDiv {
   padding: 2em 0em;
   position: relative;
-  height: 100vh;
+  height: 100svh;
   /* display: flex; */
   /* align-items: flex-start; */
   /* justify-content: center; */
@@ -2037,8 +2037,8 @@ x .benefits_section1_area2_body1_cont2 {
   right: 0;
   background: #0b0b0bb5;
   backdrop-filter: blur(10px);
-  height: 100vh;
-  width: 100vw;
+  height: 100svh;
+  width: 100svw;
   z-index: 100000;
   display: flex;
   align-items: center;
@@ -2352,8 +2352,8 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
   position: fixed;
   z-index: 100;
   background: #00000065;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   top: 0;
   left: 0;
   display: flex;
@@ -2618,8 +2618,8 @@ span.Step2Div2_member_div2_body_1_amount_title_span {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100svw;
+    height: 100svh;
     background: #00000075;
     z-index: 10000;
     padding: 1em;

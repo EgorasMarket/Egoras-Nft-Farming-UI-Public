@@ -4,7 +4,7 @@
   overflow: hidden;
   background: #e6e6e6;
   z-index: 1;
-  height: 100vh;
+  height: 100svh;
   flex-direction: column;
 }
 
@@ -14,9 +14,9 @@
 
 .dash_boardBg {
   position: absolute;
-  width: 100vw;
+  width: 100svw;
   opacity: 0.016;
-  height: 100vh;
+  height: 100svh;
   object-fit: cover;
   z-index: -1;
 }
@@ -33,8 +33,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   background: #ffffff80;
   z-index: 1000000;
   backdrop-filter: blur(10px);
@@ -58,7 +58,7 @@
 }
 
 .add_waiting_img {
-  width: 100vw;
-  /* height: 100vh; */
+  width: 100svw;
+  /* height: 100svh; */
   overflow: hidden;
 }

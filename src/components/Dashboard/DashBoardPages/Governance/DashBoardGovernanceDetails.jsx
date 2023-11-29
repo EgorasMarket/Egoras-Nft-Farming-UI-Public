@@ -188,7 +188,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
       setIsLoading(false);
       setSubmitDisabled(false);
       setSuccessModal(true);
-      setRoute("#");
+      setRoute("");
       setSuccessMessage("You've successfully voted yes for " + payload.title);
     } else {
       setErrorModal(true);
@@ -206,7 +206,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
       setIsLoading(false);
       setSubmitDisabled(false);
       setSuccessModal(true);
-      setRoute("#");
+      setRoute("");
       setSuccessMessage("You've successfully voted no for " + payload.title);
     } else {
       setErrorModal(true);

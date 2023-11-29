@@ -4,8 +4,8 @@
   background: #0000004d;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   padding: 1em;
   display: flex;
   /* align-items: center; */

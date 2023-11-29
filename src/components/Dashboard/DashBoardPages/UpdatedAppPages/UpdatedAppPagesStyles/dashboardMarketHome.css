@@ -44,7 +44,7 @@
     radial-gradient(at 74% 89%, hsl(250deg 100% 60.01%) 0, transparent 51%),
     radial-gradient(at 53% 75%, hsl(256.7deg 100% 68.59%) 0, transparent 45%);
   z-index: 1;
-  height: 100vh;
+  height: 100svh;
 }
 
 .marketHomeUpdateSection_area {
@@ -277,7 +277,7 @@
 .dashboardMarketPlaceContainer {
   display: flex;
   flex-direction: column;
-  /* height: 100vh; */
+  /* height: 100svh; */
   /* position: relative; */
 }
 
@@ -375,8 +375,8 @@
 .otherCategoryDiv {
   position: fixed;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   background: #0000009e;
   top: 0;
   z-index: 100000;
@@ -389,8 +389,8 @@
 .otherCategoryDiv2 {
   position: fixed;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   background: #0000009e;
   top: 0;
   z-index: 100000;

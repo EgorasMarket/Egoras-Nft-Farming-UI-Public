@@ -735,8 +735,8 @@ canvas.blockies_icon_user_vip {
 .viewReceiptDiv {
   top: 0;
   position: fixed;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   left: 0;
   background: #0000008c;
   z-index: 1;
