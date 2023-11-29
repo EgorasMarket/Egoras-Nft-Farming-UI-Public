@@ -981,7 +981,7 @@
           "type": "uint256"
         }
       ],
-      "name": "yes",
+      "name": "YesVote",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -994,10 +994,35 @@
           "type": "uint256"
         }
       ],
-      "name": "no",
+      "name": "NoVote",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_productID",
+          "type": "uint256"
+        }
+      ],
+      "name": "getProductStats",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_sellingAmount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "_hasVoted",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [

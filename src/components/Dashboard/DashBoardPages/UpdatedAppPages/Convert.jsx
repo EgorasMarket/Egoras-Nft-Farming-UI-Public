@@ -17,7 +17,12 @@ import {
   checkAllowanceV32,
   unlockTokenV32,
 } from "../../../../web3/index";
-import { convertEgcToMartgpt } from "../../../../web3/index2";
+import { getPriceOracle } from "../../../../web3/index2";
+import {
+  convertEgcToMartgpt,
+  convertEusdEgc,
+  convertEgcEusd,
+} from "../../../../web3/index2";
 import UpdatedErrorModal from "./UpdatedSuccessErrorModals/UpdatedErrorModal";
 import UpdatedSuccessModal from "./UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import { ScaleLoader } from "react-spinners";
@@ -28,6 +33,7 @@ const {
 } = process.env;
 const Convert = () => {
   const [ConvertAmount, setConvertAmount] = useState("");
+  const [ConvertAmountOut, setConvertAmountOut] = useState("");
   const [token1Balance, setToken1Balance] = useState("0");
   const [token2Balance, setToken2Balance] = useState("0");
   const [isLoading, setIsLoading] = useState(false);
@@ -74,6 +80,24 @@ const Convert = () => {
     },
     [account, token1, token2]
   );
+
+  useEffect(async () => {
+    if (account) {
+      const res = await getPriceOracle("egceusd", library.getSigner());
+      console.log(res);
+      console.log(formatEther(res.message));
+      console.log(formatEther(res.message));
+      const formattedAmount = parseFloat(formatEther(res.message));
+      if (token1.symbol === "EUSD") {
+        setConvertAmountOut(parseFloat(ConvertAmount) / formattedAmount);
+        return;
+      }
+      if (token1.symbol === "EGC") {
+        setConvertAmountOut(parseFloat(ConvertAmount) * formattedAmount);
+        return;
+      }
+    }
+  }, [account, token1, ConvertAmount]);
 
   useEffect(
     async (e) => {
@@ -141,34 +165,74 @@ const Convert = () => {
   };
 
   const convertToken = async () => {
-    setIsLoading(true);
-    setDisable(true);
-    const res = await convertEgcToMartgpt(
-      account,
-      parseEther(ConvertAmount.toString(), "wei").toString(),
-      library.getSigner()
-    );
-    console.log(res, "somto8uhhhg");
-    //   console.log(res.status, "somto8uhhhg");
-    if (res.status == true) {
-      setIsLoading(false);
-      setDisable(false);
-      setSuccessModal(true);
-      setSuccessMessage(
-        "You've successfully converted " +
-          ConvertAmount +
-          " egc for " +
-          ConvertAmount +
-          " martgpt token"
+    if (token1.symbol === "EUSD") {
+      setIsLoading(true);
+      setDisable(true);
+      const res = await convertEusdEgc(
+        account,
+        parseEther(ConvertAmount.toString(), "wei").toString(),
+        library.getSigner()
       );
-      setTxHash(res.message.hash);
-    } else {
-      console.log(res);
-      console.log(res.message);
-      setIsLoading(false);
-      setDisable(false);
-      setErrorModal(true);
-      setErrorMessage(res.message);
+      console.log(res, "somto8uhhhg");
+      //   console.log(res.status, "somto8uhhhg");
+      if (res.status == true) {
+        setIsLoading(false);
+        setDisable(false);
+        setSuccessModal(true);
+        setSuccessMessage(
+          "You've successfully converted " +
+            ConvertAmount +
+            token1.symbol +
+            " for " +
+            ConvertAmountOut +
+            token2.symbol +
+            " token"
+        );
+        setTxHash(res.message.hash);
+      } else {
+        console.log(res);
+        console.log(res.message);
+        setIsLoading(false);
+        setDisable(false);
+        setErrorModal(true);
+        setErrorMessage(res.message);
+      }
+      return;
+    }
+
+    if (token1.symbol === "EGC") {
+      setIsLoading(true);
+      setDisable(true);
+      const res = await convertEgcEusd(
+        account,
+        parseEther(ConvertAmount.toString(), "wei").toString(),
+        library.getSigner()
+      );
+      console.log(res, "somto8uhhhg");
+      //   console.log(res.status, "somto8uhhhg");
+      if (res.status == true) {
+        setIsLoading(false);
+        setDisable(false);
+        setSuccessModal(true);
+        setSuccessMessage(
+          "You've successfully converted " +
+            ConvertAmount +
+            token1.symbol +
+            " for " +
+            ConvertAmountOut +
+            token2.symbol +
+            " token"
+        );
+        setTxHash(res.message.hash);
+      } else {
+        console.log(res);
+        console.log(res.message);
+        setIsLoading(false);
+        setDisable(false);
+        setErrorModal(true);
+        setErrorMessage(res.message);
+      }
+      return;
     }
   };
 
@@ -256,8 +320,7 @@ const Convert = () => {
                           placeholder="0.00"
                           className="amnt_input_field"
                           autocomplete="off"
-                          onChange={AmountChange}
-                          value={ConvertAmount}
+                          value={ConvertAmountOut}
                         />
                       </div>
                       <div className="Swap_icondropDownDiv">
@@ -277,31 +340,6 @@ const Convert = () => {
                     </div>
                   </div>
                 </div>
-                {/* <div className="convertDivCont_body_container_1">
-                  <div className="convertDivCont_body_container_1_title">
-                    <span className="convertDivCont_body_container_1_title_span1">
-                      Token Out
-                    </span>
-                    <span className="convertDivCont_body_container_1_title_span1">
-                      Balance: {MGPTTBalance}
-                    </span>
-                  </div>
-                  <div className="convertDivCont_body_container_1_body">
-                    <input
-                      type="number"
-                      placeholder="amount"
-                      value={ConvertAmount}
-                      className="convertDivCont_body_container_1_body_input"
-                    />
-                    <div className="convertDivCont_body_container_1_body_img_div">
-                      <img
-                        src="/img/martgpt_logo_icon.svg"
-                        alt=""
-                        className="convertDivCont_body_container_1_body_img"
-                      />
-                    </div>
-                  </div>
-                </div> */}
                 {account ? (
                   <>
                     {" "}
@@ -314,7 +352,7 @@ const Convert = () => {
                         {isLoading ? (
                           <ScaleLoader color="#375746" size={10} height={20} />
                         ) : (
-                          <> Approve EGC</>
+                          <> Approve {token1.symbol}</>
                         )}
                       </button>
                     ) : (
@@ -326,7 +364,7 @@ const Convert = () => {
                         {isLoading ? (
                           <ScaleLoader color="#375746" size={10} height={20} />
                         ) : (
-                          <> Convert EGC</>
+                          <> Convert {token1.symbol}</>
                         )}
                       </button>
                     )}

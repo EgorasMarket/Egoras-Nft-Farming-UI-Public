@@ -149,12 +149,12 @@ const DashBoardGovernanceDetails = ({ match }) => {
     fetchData();
   }, []);
 
-
-useEffect(async() => {
-  const res = await getProcuureStats()
-  console.log(res);
-}, [])
-
+  useEffect(async () => {
+    if (account) {
+      const res = await getProcuureStats(1, library.getSigner());
+      console.log(res);
+    }
+  }, [account]);
 
   console.log(payload);
   const checkedYesBox = () => {

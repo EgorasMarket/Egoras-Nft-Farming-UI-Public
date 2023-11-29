@@ -3,6 +3,7 @@ import MembershipFacet from "./contracts/V3/MembershipFacet.json";
 import MartGptFacet from "./contracts/V3/martGPT.json";
 import V3ContractAddress from "./contracts/V3/V3ContractAddress.json";
 import DealersFacet from "./contracts/V3/DealersFacet.json";
+import ConvertFacet from "./contracts/V3/ConvertFacet.json";
 import RewardFaucet from "./contracts/V3/RewardFacet.json";
 import PancakeSwapFaucet from "./contracts/V3/PancakeSwapFacet.json";
 import DiamondCut from "./contracts/V3/DiamondCut.json";
@@ -26,6 +27,9 @@ const contractPancakeSwapFacetInstance = async (signer) => {
 };
 const contractProductFacetInstance = (signer) => {
   return new Contract(V3ContractAddress.address, ProductFacet.abi, signer);
+};
+const contractConvertFacetInstance = (signer) => {
+  return new Contract(V3ContractAddress.address, ConvertFacet.abi, signer);
 };
 const contractMartgptFacetInstance = async (signer) => {
   return new Contract(
@@ -688,6 +692,44 @@ const convertEgcToMartgpt = async (account, amount, signer) => {
     };
   }
 };
+
+const convertEusdEgc = async (account, amount, signer) => {
+  console.log(account, amount, signer);
+  try {
+    const instance = await contractConvertFacetInstance(signer);
+    let result = await instance.convertEUSDToEGC(account, amount);
+    console.log(result, "result");
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
+const convertEgcEusd = async (account, amount, signer) => {
+  console.log(account, amount, signer);
+  try {
+    const instance = await contractConvertFacetInstance(signer);
+    let result = await instance.convertEGCToEUSD(account, amount);
+    console.log(result, "result");
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 const convertToken = async (signer) => {
   try {
     const instance = await contractRewardFaucetInstance(signer);
@@ -885,7 +927,7 @@ const voteYes = async (_productID, signer) => {
   console.log(_productID);
   try {
     const instance = await contractProductFacetInstance(signer);
-    let result = await instance.YesVote(parseInt(_productID));
+    let result = await instance.YesVote(_productID);
     console.log("second");
     console.log(result, "result, result,result,result,result");
     return {
@@ -903,7 +945,7 @@ const voteNo = async (_productID, signer) => {
   console.log(_productID);
   try {
     const instance = await contractProductFacetInstance(signer);
-    let result = await instance.NoVote(parseInt(_productID));
+    let result = await instance.NoVote(_productID);
     console.log("second");
     console.log(result, "result, result,result,result,result");
     return {
@@ -921,7 +963,7 @@ const getProcuureStats = async (_productID, signer) => {
   console.log(_productID);
   try {
     const instance = await contractProductFacetInstance(signer);
-    let result = await instance.getProductStats(parseInt(_productID));
+    let result = await instance.getProductStats(_productID);
     console.log("second");
     console.log(result, "result, result,result,result,result");
     return {
@@ -929,6 +971,7 @@ const getProcuureStats = async (_productID, signer) => {
       status: true,
     };
   } catch (error) {
+    console.log(error);
     return {
       message: formattedError(error).message,
       status: formattedError(error).status,
@@ -982,4 +1025,6 @@ export {
   getPriceOracle,
   setStakeConfigure,
   getProcuureStats,
+  convertEusdEgc,
+  convertEgcEusd,
 };
