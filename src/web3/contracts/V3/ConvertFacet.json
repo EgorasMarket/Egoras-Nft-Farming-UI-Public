@@ -84,6 +84,24 @@
       ],
       "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_eusd",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_egc",
+          "type": "address"
+        }
+      ],
+      "name": "setTokenAddressesForConvert",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
     }
   ]
 }
