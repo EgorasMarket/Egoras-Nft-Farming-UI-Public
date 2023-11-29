@@ -118,22 +118,21 @@ const DashBoardGovernanceDetails = ({ match }) => {
             setNoVotesPercent(noPercentage);
             obj.Votes.forEach((data) => {
               console.log(data);
-              console.log(data.voter);
-              if (data.voter.includes(account)) {
+              console.log(data.user);
+              if (data.user.includes(account)) {
                 console.log(data);
                 console.log("ok");
                 setAlreadyVoted(true);
-                if (data.type === "Yes") {
+                if (data.typeOfVote === "Yes") {
                   setCheckedYes(true);
                   setCheckedNo(false);
                   return;
                 }
-                if (data.type === "No") {
+                if (data.typeOfVote === "No") {
                   setCheckedYes(false);
                   setCheckedNo(true);
                   return;
                 }
-
                 return;
               }
             });
@@ -147,7 +146,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
   };
   useEffect(async () => {
     fetchData();
-  }, []);
+  }, [account]);
 
   useEffect(async () => {
     if (account) {
@@ -573,7 +572,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
                     ) : ( */}
                     <div className="governance_details_area_2_cont2_body_2">
                       {payload.Votes.filter((data) =>
-                        data.voter
+                        data.user
                           .toLowerCase()
                           .includes(searchTerm.toLocaleLowerCase())
                       ).length <= 0 || payload.Votes.length <= 0 ? (
@@ -586,7 +585,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
                       ) : (
                         <>
                           {payload.Votes.filter((data) =>
-                            data.voter
+                            data.user
                               .toLowerCase()
                               .includes(searchTerm.toLocaleLowerCase())
                           ).map((data) => {
@@ -597,29 +596,29 @@ const DashBoardGovernanceDetails = ({ match }) => {
                               >
                                 <div className="governance_details_area_2_cont2_body_2_cont1_div1">
                                   <Blockies
-                                    seed={data.voter}
+                                    seed={data.user}
                                     size={8}
                                     scale={4}
                                     className="blockies_icon2"
                                   />{" "}
-                                  {`${data.voter.slice(
+                                  {`${data.user.slice(
                                     0,
                                     6
-                                  )}...${data.voter.slice(37, 42)}`}
+                                  )}...${data.user.slice(37, 42)}`}
                                 </div>
                                 <div className="governance_details_area_2_cont2_body_2_cont1_div2">
                                   <button
                                     className="governance_details_area_2_cont2_body_2_cont1_div2_btn"
                                     style={{
                                       background:
-                                        data.type === "Yes"
+                                        data.typeOfVote === "Yes"
                                           ? "#3e9a3e"
-                                          : data.type === "No"
+                                          : data.typeOfVote === "No"
                                           ? "#eb3d3d"
                                           : "#55555d",
                                     }}
                                   >
-                                    {data.type}
+                                    {data.typeOfVote}
                                   </button>
                                   <ArrowOutwardIcon className="governance_details_area_2_cont2_body_2_cont1_div2_icon" />
                                 </div>

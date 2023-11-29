@@ -429,3 +429,61 @@
   cursor: pointer;
   padding: 10px 10px;
 }
+
+@media screen and (max-width: 991px) {
+  .governance_details_area_2 {
+    display: flex;
+    flex-direction: column;
+  }
+  .governance_details_area_2_cont1 {
+    margin-right: 0em;
+  }
+  .governance_details_area_2_cont2 {
+    margin-top: 1em;
+  }
+}
+@media screen and (max-width: 767px) {
+  .governance_details_area_2_cont1_div1 {
+    padding: 1em;
+  }
+  .governance_details_area_2_cont1_div2 {
+    padding: 1em;
+  }
+  .governance_details_area_2_cont2 {
+    padding: 1em;
+  }
+  .governance_details_area_1_title_area_title {
+    font-size: 42px;
+    line-height: 1.2;
+  }
+  .governance_details_area_1_cont1 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  .governance_details_area_1_title_area {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 1em;
+  }
+  .governance_details_area_1_status_area {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+  }
+  .governance_details_area_2_cont1_div1_cont1_title {
+    font-size: 28px;
+  }
+  .governance_details_area_2_cont1_div1_title {
+    font-size: 28px;
+  }
+  .governance_details_area_2_cont1_div2_title {
+    font-size: 28px;
+  }
+  .governance_details_area_2_cont2_title {
+    font-size: 28px;
+  }
+}

@@ -62,7 +62,7 @@ const contractStakingFacetInstance = (signer) => {
 };
 const contractAddMinterFacetInstance = async (signer) => {
   return new Contract(
-    "0x4AC4fC5317F95849A1F17e2f4Daf03c32196f0cb",
+    "0xBDeb3C052bD949B6E38Cb0BC9593793a78c46968",
     Minter.abi,
     signer
   );
@@ -421,7 +421,10 @@ const adminAddMinter = async (signer) => {
   try {
     const instance = await contractAddMinterFacetInstance(signer);
     let result;
-    result = await instance.addMinter(V3ContractAddress.address);
+    result = await instance.addMinter(
+      "0xF158d25D7D6F4a560E10eAfB1B4f477D8303B69F"
+    );
+    // result = await instance.addMinter(V3ContractAddress.address);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
