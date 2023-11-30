@@ -94,7 +94,7 @@ export const Step2Div = ({
         </div>
       </div>
       <div className="selectPlanDiv2">
-        {priceLoaded == false ? (
+        {priceLoaded === false ? (
           <div className="contentLoaders">
             <div className="selectPlanDiv2_area1 contentLoad">
               <div className="selectPlanDiv2_area1_cont1 contentLoad">
@@ -238,7 +238,7 @@ export const Step2Div = ({
           <>
             <div
               className={
-                checkedMonth == true
+                checkedMonth === true
                   ? "selectPlanDiv2_area1_active"
                   : "selectPlanDiv2_area1"
               }
@@ -296,7 +296,7 @@ export const Step2Div = ({
             {/* ======= */}
             <div
               className={
-                checkedSemiAnnual == true
+                checkedSemiAnnual === true
                   ? "selectPlanDiv2_area1_active"
                   : "selectPlanDiv2_area1"
               }
@@ -357,7 +357,7 @@ export const Step2Div = ({
             {/* ======= */}
             <div
               className={
-                checkedYear == true
+                checkedYear === true
                   ? "selectPlanDiv2_area1_active"
                   : "selectPlanDiv2_area1"
               }
@@ -467,7 +467,7 @@ export const Step2Div = ({
                   </button>
                 ) : (
                   <>
-                    {checkedMonth == true && checkAgree === true ? (
+                    {checkedMonth === true && checkAgree === true ? (
                       <div className="subcribeMonthlyBtnsDiv">
                         <button
                           disabled={disable}
@@ -527,7 +527,7 @@ export const Step2Div = ({
                     ) : null}
                   </>
                 )}
-                {checkedMonth == true && checkAgree === true ? (
+                {checkedMonth === true && checkAgree === true ? (
                   <button
                     className="selectPlanDiv2_area1_checkout_btn_outline fort_left"
                     onClick={() => {
@@ -647,7 +647,7 @@ export const Step2Div = ({
                   </button>
                 ) : (
                   <>
-                    {checkedMonth == true && checkAgree === true ? (
+                    {checkedMonth === true && checkAgree === true ? (
                       <div className="subcribeMonthlyBtnsDiv">
                         <button
                           disabled={disable}
@@ -707,7 +707,7 @@ export const Step2Div = ({
                     ) : null}
                   </>
                 )}
-                {checkedMonth == true && checkAgree === true ? (
+                {checkedMonth === true && checkAgree === true ? (
                   <button
                     className="selectPlanDiv2_area1_checkout_btn_outline fort_left"
                     onClick={() => {

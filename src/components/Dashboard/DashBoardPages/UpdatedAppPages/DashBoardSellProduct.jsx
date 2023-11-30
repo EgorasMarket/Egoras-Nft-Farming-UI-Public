@@ -143,7 +143,7 @@ const DashBoardSellProduct = () => {
     );
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
-    if (res.status == true) {
+    if (res.status === true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
@@ -174,7 +174,7 @@ const DashBoardSellProduct = () => {
     const res = await CALL_IMG_CMS(formData);
     // console.log(res);
 
-    if (res.success == true) {
+    if (res.success === true) {
       console.log("okkk");
       return res.data;
     } else {
@@ -401,20 +401,20 @@ const DashBoardSellProduct = () => {
       // imageSrc2,
       // imageSrc3
     );
-    if (activeSaleTab == "direct") {
+    if (activeSaleTab === "direct") {
       if (
-        prodName == "" ||
-        brandName == "" ||
-        prodAmount == null ||
-        sellAmount == null ||
-        // prodCount == 0 ||
-        new_category == "" ||
-        product_details == "" ||
-        prodSpec == "" ||
-        prodState == "" ||
-        imageSrc == "" ||
-        imageSrc2 == "" ||
-        imageSrc3 == ""
+        prodName === "" ||
+        brandName === "" ||
+        prodAmount === null ||
+        sellAmount === null ||
+        // prodCount===0 ||
+        new_category === "" ||
+        product_details === "" ||
+        prodSpec === "" ||
+        prodState === "" ||
+        imageSrc === "" ||
+        imageSrc2 === "" ||
+        imageSrc3 === ""
       ) {
         console.log("okkkkk<<<<<<<<<<<<<");
         setDisable(true);
@@ -424,14 +424,14 @@ const DashBoardSellProduct = () => {
       }
     } else {
       if (
-        prodName == "" ||
-        brandName == "" ||
-        saleAmount == "" ||
-        prodCondition == "" ||
-        prodCount == 0 ||
-        imageSrc == "" ||
-        imageSrc2 == "" ||
-        imageSrc3 == ""
+        prodName === "" ||
+        brandName === "" ||
+        saleAmount === "" ||
+        prodCondition === "" ||
+        prodCount === 0 ||
+        imageSrc === "" ||
+        imageSrc2 === "" ||
+        imageSrc3 === ""
       ) {
         setDisable(true);
       } else {

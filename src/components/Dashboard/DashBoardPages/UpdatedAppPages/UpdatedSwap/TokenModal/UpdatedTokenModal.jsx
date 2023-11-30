@@ -71,9 +71,9 @@ export const UpdatedTokenModal = ({
       <div
         className="updatedTokenModal_closeDiv"
         onClick={
-          tokenModal == true
+          tokenModal === true
             ? toggleTokenModal
-            : tokenModal2 == true
+            : tokenModal2 === true
             ? toggleTokenModal2
             : toggleTokenModal
         }
@@ -106,17 +106,17 @@ export const UpdatedTokenModal = ({
           </div>
           <div className="updatedTokenModal_area1_favorites">
             {asset
-              .filter((data) => data.favorite == "true")
+              .filter((data) => data.favorite === "true")
               .map((data) => (
                 <button
                   id={data.id}
                   className="updatedFavoriteToken_cont"
                   name={data.address}
-                  disabled={data.id == assetId ? true : false}
+                  disabled={data.id === assetId ? true : false}
                   onClick={
-                    tokenModal2 == true
+                    tokenModal2 === true
                       ? setAsset2
-                      : tokenModal == true
+                      : tokenModal === true
                       ? setAsset
                       : setAsset
                   }
@@ -155,14 +155,14 @@ export const UpdatedTokenModal = ({
               );
               return (
                 <button
-                  disabled={data.id == assetId ? true : false}
+                  disabled={data.id === assetId ? true : false}
                   id={data.id}
                   name={data.address}
                   className="updatedTokenModal_area_body_area1"
                   onClick={
-                    tokenModal2 == true
+                    tokenModal2 === true
                       ? setAsset2
-                      : tokenModal == true
+                      : tokenModal === true
                       ? setAsset
                       : setAsset
                   }

@@ -68,7 +68,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_1"
                       className={
-                        activeLink == "abstract-link"
+                        activeLink === "abstract-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }
@@ -85,7 +85,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_2"
                       className={
-                        activeLink == "intro-link"
+                        activeLink === "intro-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }
@@ -102,7 +102,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_3"
                       className={
-                        activeLink == "dcentralized-link"
+                        activeLink === "dcentralized-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }
@@ -119,7 +119,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_4"
                       className={
-                        activeLink == "lending-link"
+                        activeLink === "lending-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }
@@ -136,7 +136,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_5"
                       className={
-                        activeLink == "collat-approve-link"
+                        activeLink === "collat-approve-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }
@@ -153,7 +153,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_6"
                       className={
-                        activeLink == "non-fungible-link"
+                        activeLink === "non-fungible-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }
@@ -170,7 +170,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_7"
                       className={
-                        activeLink == "nft-link"
+                        activeLink === "nft-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }
@@ -187,7 +187,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_8"
                       className={
-                        activeLink == "micro-collat-link"
+                        activeLink === "micro-collat-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }
@@ -204,7 +204,7 @@ const DashBoardWhitePaper = () => {
                       <a
                         href="#white_layer_9"
                         className={
-                          activeLink == "stable-link"
+                          activeLink==="stable-link"
                             ? "sidebar-link1 sidebar-link1-active"
                             : "sidebar-link1"
                         }
@@ -221,7 +221,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_10"
                       className={
-                        activeLink == "token-economy-link"
+                        activeLink === "token-economy-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }
@@ -238,7 +238,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_11"
                       className={
-                        activeLink == "egr-eusd-link"
+                        activeLink === "egr-eusd-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }
@@ -255,7 +255,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_12"
                       className={
-                        activeLink == "eusd-func-link"
+                        activeLink === "eusd-func-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }
@@ -272,7 +272,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_13"
                       className={
-                        activeLink == "gen-eusd-link"
+                        activeLink === "gen-eusd-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }
@@ -289,7 +289,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_14"
                       className={
-                        activeLink == "gov-eusd-link"
+                        activeLink === "gov-eusd-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }
@@ -306,7 +306,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_15"
                       className={
-                        activeLink == "egr-gov-link"
+                        activeLink === "egr-gov-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }
@@ -323,7 +323,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_16"
                       className={
-                        activeLink == "egr-credit-link"
+                        activeLink === "egr-credit-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }
@@ -340,7 +340,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_17"
                       className={
-                        activeLink == "facilitate-link"
+                        activeLink === "facilitate-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }
@@ -357,7 +357,7 @@ const DashBoardWhitePaper = () => {
                     <a
                       href="#white_layer_18"
                       className={
-                        activeLink == "conclusion-link"
+                        activeLink === "conclusion-link"
                           ? "sidebar-link1 sidebar-link1-active"
                           : "sidebar-link1"
                       }

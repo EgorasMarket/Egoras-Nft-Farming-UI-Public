@@ -299,7 +299,7 @@ const StakingUpdate = () => {
     );
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
-    if (res.status == true) {
+    if (res.status === true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
@@ -326,7 +326,7 @@ const StakingUpdate = () => {
     );
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
-    if (res.status == true) {
+    if (res.status === true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
@@ -351,7 +351,7 @@ const StakingUpdate = () => {
     const res = await UnlockLockedStake(library.getSigner());
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
-    if (res.status == true) {
+    if (res.status === true) {
       setIsLoading2(false);
       setLockDisable(false);
       setSuccessModal(true);
@@ -377,7 +377,7 @@ const StakingUpdate = () => {
     const res = await takeRoyalty(library.getSigner());
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
-    if (res.status == true) {
+    if (res.status === true) {
       setIsLoading2(false);
       setClaimDisable(false);
       setSuccessModal(true);
@@ -517,10 +517,9 @@ const StakingUpdate = () => {
     if (account) {
       const res = await getRoyaltyStats(account, library.getSigner());
       console.log(res);
-      console.log(res.message._dailyRoyalty);
+      console.log(res.message._dailyRoyalty.toString());
       console.log(formatEther(res.message._dailyRoyalty).toString());
       console.log(formatEther(res.message._totalRoyaltyTaken).toString());
-
       setDailyReward(formatEther(res.message._dailyRoyalty).toString());
       setTotalClaimedReward(
         formatEther(res.message._totalRoyaltyTaken).toString()
@@ -551,7 +550,7 @@ const StakingUpdate = () => {
         setClaimDisable(true);
         setRewardCountDown(true);
       }
-      if (myTotalStaked == "0.0") {
+      if (myTotalStaked === "0.0") {
         // setClaimDisable(true);
         setLockDisable(true);
       } else {
@@ -582,7 +581,7 @@ const StakingUpdate = () => {
     if (account) {
       console.log(availableClaimReward);
       console.log(nextRewardTakeTime);
-      if (availableClaimReward == "0.0" || nextRewardTakeTime == "") {
+      if (availableClaimReward === "0.00" || nextRewardTakeTime === "") {
         setClaimDisable(true);
         console.log(availableClaimReward);
       }
@@ -596,7 +595,7 @@ const StakingUpdate = () => {
       if (response.success === true) {
         console.log(response.data.user, "oyibo");
         console.log(response.data);
-        if (response.data.amount == null) {
+        if (response.data.amount === null) {
           return;
         }
         setTotalAssetInfo({
@@ -632,14 +631,14 @@ const StakingUpdate = () => {
       library.getSigner()
     );
     console.log(ret);
-    if (ret.status == true) {
+    if (ret.status === true) {
       setIsLoading(false);
       setDisable(false);
       localStorage.setItem("unlocking", true);
       localStorage.setItem("unlockingHash", ret.message);
       setUnlockBtn(true);
     } else {
-      if (ret.message.code == 4001) {
+      if (ret.message.code === 4001) {
         console.log(ret);
       }
       console.log(ret);
@@ -800,9 +799,9 @@ const StakingUpdate = () => {
                               <tr className="stakingTable_body_row ">
                                 <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
                                   <div className="value_dolls_div">
-                                    {data.status == "STAKE"
+                                    {data.status === "STAKE"
                                       ? "Create Lock"
-                                      : data.status == "UNSTAKE"
+                                      : data.status === "UNSTAKE"
                                       ? "Unlock"
                                       : null}
                                     <div className="value_dolls_div_val">
@@ -813,14 +812,14 @@ const StakingUpdate = () => {
                                 </td>
                                 <td className="stakingTable_body_row_data">
                                   <div className="value_dolls_div2">
-                                    {data.status == "STAKE" ? (
+                                    {data.status === "STAKE" ? (
                                       <span style={{ display: "flex" }}>
                                         {numberWithCommas(
                                           parseFloat(data.amount).toFixed(2)
                                         )}{" "}
                                         egc
                                       </span>
-                                    ) : data.status == "UNSTAKE" ? (
+                                    ) : data.status === "UNSTAKE" ? (
                                       <span style={{ display: "flex" }}>
                                         {numberWithCommas(
                                           parseFloat(
@@ -896,7 +895,7 @@ const StakingUpdate = () => {
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
                     <span>
                       {numberWithCommas(
-                        parseFloat(TotalClaimedReward).toFixed(2)
+                        parseFloat(TotalClaimedReward).toFixed(4)
                       )}{" "}
                       eusd
                     </span>
@@ -1113,7 +1112,7 @@ const StakingUpdate = () => {
                         Available Reward
                       </div>
                       <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount">
-                        {parseFloat(availableClaimReward).toFixed(2)} eUsd
+                        {parseFloat(availableClaimReward).toFixed(4)} eUsd
                         {rewardCountDown === true ? (
                           <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv">
                             Claim In the next:
@@ -1438,9 +1437,9 @@ const StakingUpdate = () => {
                               <tr className="stakingTable_body_row ">
                                 <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
                                   <div className="value_dolls_div">
-                                    {data.status == "STAKE"
+                                    {data.status === "STAKE"
                                       ? "Create Lock"
-                                      : data.status == "UNSTAKE"
+                                      : data.status === "UNSTAKE"
                                       ? "Unlock"
                                       : null}
 
@@ -1452,14 +1451,14 @@ const StakingUpdate = () => {
                                 </td>
                                 <td className="stakingTable_body_row_data">
                                   <div className="value_dolls_div2">
-                                    {data.status == "STAKE" ? (
+                                    {data.status === "STAKE" ? (
                                       <span style={{ display: "flex" }}>
                                         {numberWithCommas(
                                           parseFloat(data.amount).toFixed(2)
                                         )}{" "}
                                         egc
                                       </span>
-                                    ) : data.status == "UNSTAKE" ? (
+                                    ) : data.status === "UNSTAKE" ? (
                                       <span style={{ display: "flex" }}>
                                         {numberWithCommas(
                                           parseFloat(

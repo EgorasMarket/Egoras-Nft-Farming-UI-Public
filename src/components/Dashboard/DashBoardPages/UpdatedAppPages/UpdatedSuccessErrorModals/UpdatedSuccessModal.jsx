@@ -22,7 +22,7 @@ const UpdatedSuccessModal = ({
         </div>
         <div className="UpdatedSuccessModalDiv_Cont_title">Successful</div>
         <div className="UpdatedSuccessModalDiv_Cont_body">{successMessage}</div>
-        {txnHashDiv == true ? (
+        {txnHashDiv === true ? (
           <a
             href={`https://bscscan.com/tx/${TxnHash}`}
             className="UpdatedSuccessModalDiv_Cont_body_txnHash"
@@ -33,14 +33,14 @@ const UpdatedSuccessModal = ({
           </a>
         ) : null}
         <div className="UpdatedSuccessModalDiv_Cont_buttons">
-          {btnRoute == true ? (
+          {btnRoute === true ? (
             <a href={route} style={{ width: "100%" }}>
               <button className="UpdatedSuccessModalDiv_Cont_btn">
                 Continue
               </button>
             </a>
           ) : null}
-          {btnClose == true ? (
+          {btnClose === true ? (
             <button
               className="UpdatedSuccessModalDiv_Cont_btn"
               onClick={closeModal}

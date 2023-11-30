@@ -47,7 +47,7 @@ const AdminProcurreProduct = () => {
     );
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
-    if (res.status == true) {
+    if (res.status === true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);

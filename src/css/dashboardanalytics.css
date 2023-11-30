@@ -17,11 +17,4 @@
 }
 .no-bg .container {
   max-width: 1450px;
-  /* overflow: hidden; */
 }
-
-/* @media screen and (max-width: 500px) {
-  .no_pad {
-    padding: 2em 0em !important;
-  }
-} */

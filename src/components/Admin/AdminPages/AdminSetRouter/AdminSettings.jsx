@@ -13,6 +13,7 @@ import {
   // withdrawAllEgc,
   getPriceOracle,
   setStakeConfigure,
+  setRoyaltyAddress,
 } from "../../../../web3/index2";
 import "./AdminRouter.css";
 import { useWeb3React } from "@web3-react/core";
@@ -128,6 +129,13 @@ const AdminSettings = () => {
     const response = await setStakeConfigure(
       "0x4AC4fC5317F95849A1F17e2f4Daf03c32196f0cb",
       "500000000000000000",
+      library.getSigner()
+    );
+    console.log(response);
+  };
+  const setRoyaltyAddr = async () => {
+    const response = await setRoyaltyAddress(
+      "0xBDeb3C052bD949B6E38Cb0BC9593793a78c46968",
       library.getSigner()
     );
     console.log(response);
@@ -369,6 +377,15 @@ const AdminSettings = () => {
                     </button>
                   </div>
                 </div>
+              </div>
+              <div className="settings_section1_div2">
+                <h4 className="routerHeader">Set Royalty Address</h4>
+                <button
+                  onClick={setRoyaltyAddr}
+                  className="setRouterAddressBtn"
+                >
+                  Set Addrress
+                </button>
               </div>
               <div className="settings_section1_div2">
                 <h4 className="routerHeader">Configure Stake</h4>

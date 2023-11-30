@@ -8,11 +8,11 @@ const SwitchToggle2 = ({ checkBox, darkMode }) => {
       <label class="switch2">
         <input
           type="checkbox"
-          checked={checkBox == true ? true : false}
+          checked={checkBox === true ? true : false}
           // onClick={darkMode}
         />
         <span class="slider2 round" onClick={darkMode}>
-          {checkBox == false ? (
+          {checkBox === false ? (
             <LightModeIcon className="lightMode_icon" />
           ) : (
             <DarkModeIcon className="darkMode_icon" />

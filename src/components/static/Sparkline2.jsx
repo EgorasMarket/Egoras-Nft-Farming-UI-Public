@@ -34,15 +34,15 @@ const Sparkline2 = (props) => {
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  });
 
-  const getText = (datapoint) => {
-    const dateString = new Date(datapoint.timestamp).toLocaleString("en-US", {
-      month: "short",
-      day: "numeric",
-    });
-    return `${dateString}: ${datapoint.value}`;
-  };
+  // const getText = (datapoint) => {
+  //   const dateString = new Date(datapoint.timestamp).toLocaleString("en-US", {
+  //     month: "short",
+  //     day: "numeric",
+  //   });
+  //   return `${dateString}: ${datapoint.value}`;
+  // };
 
   return (
     <div
@@ -63,7 +63,7 @@ const Sparkline2 = (props) => {
         fill="#ecfff4"
         cursorWidth="2"
         stroke="#22ad62"
-        // stroke={props.darkView == true ? "#000" : "229e54"}
+        // stroke={props.darkView===true ? "#000" : "229e54"}
         className="chart_svg"
         strokeLinecap="round"
       ></svg>

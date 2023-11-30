@@ -43,7 +43,7 @@ export const TokenModal = ({
             <div
               className=" bases_div_token_body_layer "
               // className={
-              //   token.disabled == true
+              //   token.disabled===true
               //     ? "bases_div_token_body_layer disabled"
               //     : "bases_div_token_body_layer"
               // }

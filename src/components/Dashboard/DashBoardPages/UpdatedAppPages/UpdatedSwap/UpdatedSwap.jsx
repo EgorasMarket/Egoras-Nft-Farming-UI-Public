@@ -203,7 +203,7 @@ const UpdatedSwap = () => {
     setBaseBalance(parseFloat(ethBalance).toFixed(4));
   };
   const setAssetsId = (e) => {
-    if (e.currentTarget.id == "1") {
+    if (e.currentTarget.id==="1") {
       BnbBalance1();
       console.log("BNB");
     } else {
@@ -225,7 +225,7 @@ const UpdatedSwap = () => {
     console.log(e.currentTarget.name);
     // setBaseToAddress(e.currentTarget.name);
     // setInitialBaseFromAddress(e.currentTarget.name);
-    if (e.currentTarget.id == id2) {
+    if (e.currentTarget.id===id2) {
       // setBaseFromAddress(e.currentTarget.name);
       // setSwapFromAddress(e.currentTarget.name);
       console.log("id is equal id2");
@@ -242,7 +242,7 @@ const UpdatedSwap = () => {
   };
 
   const setAssetsId2 = (e) => {
-    if (e.currentTarget.id == "1") {
+    if (e.currentTarget.id==="1") {
       BnbBalance2();
       console.log("BNB");
     } else {
@@ -259,7 +259,7 @@ const UpdatedSwap = () => {
     setIda(id);
     ToggleTokenModal2();
     console.log(e.currentTarget.id);
-    if (e.currentTarget.id == id) {
+    if (e.currentTarget.id===id) {
       console.log("id is equal id2");
       setId(initialId2);
       setBaseFromAddress(initialBaseToAddress);
@@ -308,7 +308,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response);
-    if (response.status == true) {
+    if (response.status===true) {
       setIsAmountLoading(false);
       setAmountsOut(formatEther(response.message[1]._hex));
       const maxSlippage = parseFloat(slippage) / 100;
@@ -332,7 +332,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response);
-    if (response.status == true) {
+    if (response.status===true) {
       setIsAmountLoading(false);
       setAmountsOut(formatEther(response.message[1]._hex));
       const maxSlippage = parseFloat(slippage) / 100;
@@ -354,7 +354,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response);
-    if (response.status == true) {
+    if (response.status===true) {
       setIsAmountLoading(false);
       setAmountsOut(formatEther(response.message[1]._hex));
       const maxSlippage = parseFloat(slippage) / 100;
@@ -376,7 +376,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response);
-    if (response.status == true) {
+    if (response.status===true) {
       setIsAmountLoading(false);
       setAmountsOut(formatEther(response.message[1]._hex));
       const maxSlippage = parseFloat(slippage) / 100;
@@ -435,14 +435,14 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(ret);
-    if (ret.status == true) {
+    if (ret.status===true) {
       setIsLoading(false);
       setDisable(false);
       localStorage.setItem("unlocking", true);
       localStorage.setItem("unlockingHash", ret.message);
       setUnlockBtn(true);
     } else {
-      if (ret.message.code == 4001) {
+      if (ret.message.code===4001) {
         console.log(ret);
       }
       console.log(ret);
@@ -481,7 +481,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response);
-    if (response.status == true) {
+    if (response.status===true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
@@ -512,7 +512,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response, "SwapEusdForTokens");
-    if (response.status == true) {
+    if (response.status===true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
@@ -538,7 +538,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response, "SwapTokensForEusd");
-    if (response.status == true) {
+    if (response.status===true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
@@ -565,7 +565,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response);
-    if (response.status == true) {
+    if (response.status===true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
@@ -611,7 +611,7 @@ const UpdatedSwap = () => {
     console.log(response);
     console.log(formatEther(response.message[1]._hex).toString());
     console.log(formatEther(response.message[0]._hex).toString());
-    if (response.status == true) {
+    if (response.status===true) {
       setIsAmountLoading(false);
       setDisable(false);
 
@@ -636,12 +636,12 @@ const UpdatedSwap = () => {
   // console.log(e.target.value);
   //   };
   useEffect(() => {
-    if (SwapAmount == "") {
+    if (SwapAmount==="") {
       console.log("it is gone");
       setAmountsOut("");
       setIsAmountLoading(false);
     }
-    if (SwapAmount == "" || id2 == "" || id == "" || amountsOut == "") {
+    if (SwapAmount==="" || id2==="" || id==="" || amountsOut==="") {
       setDisable(true);
     } else {
       setDisable(false);
@@ -791,7 +791,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response);
-    if (response.status == true) {
+    if (response.status===true) {
       setIsAmountLoading(false);
       setDisable(false);
       setAmountsOut(formatEther(response.message[1]._hex));
@@ -861,7 +861,7 @@ const UpdatedSwap = () => {
                                 </div> */}
                               </div>
 
-                              {id == "" ? (
+                              {id==="" ? (
                                 <div className="Swap_icondropDownDiv">
                                   <span className="token_balances_span">
                                     <AccountBalanceWalletIcon className="TokenBalanceIcon" />
@@ -878,12 +878,12 @@ const UpdatedSwap = () => {
                                 </div>
                               ) : (
                                 <>
-                                  {id == "0" ? (
+                                  {id==="0" ? (
                                     <>
                                       {assetsBase.map((data) => {
                                         return (
                                           <>
-                                            {data.id == id ? (
+                                            {data.id===id ? (
                                               <div
                                                 className="Swap_icondropDownDiv"
                                                 // data-index={data.address}
@@ -913,7 +913,7 @@ const UpdatedSwap = () => {
                                       {assets.map((data) => {
                                         return (
                                           <>
-                                            {data.id == id ? (
+                                            {data.id===id ? (
                                               <div className="Swap_icondropDownDiv">
                                                 <span className="token_balances_span">
                                                   <AccountBalanceWalletIcon className="TokenBalanceIcon" />
@@ -942,7 +942,7 @@ const UpdatedSwap = () => {
                                 </>
                               )}
                             </div>
-                            {id == "" ? (
+                            {id==="" ? (
                               <div className="amnt_input_layer2">
                                 <button className="amnt_input_layer2_cont1">
                                   25%
@@ -959,13 +959,13 @@ const UpdatedSwap = () => {
                               </div>
                             ) : (
                               <>
-                                {id == "0" ? (
+                                {id==="0" ? (
                                   <>
                                     {assetsBase.map((data) => {
                                       // setSwapBalance(data.balance);
                                       return (
                                         <>
-                                          {data.id == id ? (
+                                          {data.id===id ? (
                                             <div className="amnt_input_layer2">
                                               <button
                                                 className="amnt_input_layer2_cont1"
@@ -1011,7 +1011,7 @@ const UpdatedSwap = () => {
                                       // setSwapBalance(data.balance);
                                       return (
                                         <>
-                                          {data.id == id ? (
+                                          {data.id===id ? (
                                             <div className="amnt_input_layer2">
                                               <button
                                                 className="amnt_input_layer2_cont1"
@@ -1058,7 +1058,7 @@ const UpdatedSwap = () => {
                         </div>
 
                         {/* <div className="plus_icon_layer"> */}
-                        {coinBalance == "" || baseBalance == "" ? (
+                        {coinBalance==="" || baseBalance==="" ? (
                           <SwapVertIcon className="toggle_swap_inputs" />
                         ) : (
                           <SwapVertIcon
@@ -1071,7 +1071,7 @@ const UpdatedSwap = () => {
                           <div className="amnt_input">
                             <div className="amnt_input_layer1">
                               <div className="amnt_input_layer1_input_div">
-                                {id2 == "" ? (
+                                {id2==="" ? (
                                   <input
                                     type="number"
                                     name="number"
@@ -1107,12 +1107,12 @@ const UpdatedSwap = () => {
 
                                 {/* <div className="amnt_input_layer1_input_div_dollar_value">
                                   ~$
-                                  {SwapAmount == "" || id2 == ""
+                                  {SwapAmount==="" || id2===""
                                     ? " "
                                     : SwapAmount * 750}
                                 </div> */}
                               </div>
-                              {id2 == "" ? (
+                              {id2==="" ? (
                                 <div className="Swap_icondropDownDiv">
                                   <span className="token_balances_span">
                                     <AccountBalanceWalletIcon className="TokenBalanceIcon" />
@@ -1129,13 +1129,13 @@ const UpdatedSwap = () => {
                                 </div>
                               ) : (
                                 <>
-                                  {id2 == "0" ? (
+                                  {id2==="0" ? (
                                     <>
                                       {assetsBase.map((data) => {
                                         // setSwapBalance(data.balance);
                                         return (
                                           <>
-                                            {data.id == id2 ? (
+                                            {data.id===id2 ? (
                                               <div className="Swap_icondropDownDiv">
                                                 <span className="token_balances_span">
                                                   <AccountBalanceWalletIcon className="TokenBalanceIcon" />
@@ -1163,7 +1163,7 @@ const UpdatedSwap = () => {
                                         // setSwapBalance(data.balance);
                                         return (
                                           <>
-                                            {data.id == id2 ? (
+                                            {data.id===id2 ? (
                                               <div className="Swap_icondropDownDiv">
                                                 <span className="token_balances_span">
                                                   <AccountBalanceWalletIcon className="TokenBalanceIcon" />
@@ -1198,17 +1198,17 @@ const UpdatedSwap = () => {
                         {/* </div> */}
                       </div>
                       {/* <div className="swap_price_rate_div">
-                      {ida == "" ? (
+                      {ida==="" ? (
                         <div className="swap_price_rate_div1">Nil</div>
                       ) : (
                         <>
-                          {ida == "0" ? (
+                          {ida==="0" ? (
                             <>
                               {assetsBase.map((data) => {
                                 // setSwapBalance(data.balance);
                                 return (
                                   <>
-                                    {data.id == ida ? (
+                                    {data.id===ida ? (
                                       <div className="swap_price_rate_div1">
                                         1 {data.symbol}
                                       </div>
@@ -1223,7 +1223,7 @@ const UpdatedSwap = () => {
                                 // setSwapBalance(data.balance);
                                 return (
                                   <>
-                                    {data.id == ida ? (
+                                    {data.id===ida ? (
                                       <div className="swap_price_rate_div1">
                                         1 {data.symbol}
                                       </div>
@@ -1236,17 +1236,17 @@ const UpdatedSwap = () => {
                         </>
                       )}
                       =
-                      {id2b == "" ? (
+                      {id2b==="" ? (
                         <div className="swap_price_rate_div1">Nil</div>
                       ) : (
                         <>
-                          {id2b == "0" ? (
+                          {id2b==="0" ? (
                             <>
                               {assetsBase.map((data) => {
                                 // setSwapBalance(data.balance);
                                 return (
                                   <>
-                                    {data.id == id2b ? (
+                                    {data.id===id2b ? (
                                       <div className="swap_price_rate_div2">
                                         20 {data.symbol}
                                       </div>
@@ -1261,7 +1261,7 @@ const UpdatedSwap = () => {
                                 // setSwapBalance(data.balance);
                                 return (
                                   <>
-                                    {data.id == id2b ? (
+                                    {data.id===id2b ? (
                                       <div className="swap_price_rate_div2">
                                         20 {data.symbol}
                                       </div>
@@ -1302,7 +1302,7 @@ const UpdatedSwap = () => {
                             />
                           </div> */}
                           <div className="resfresh_icon_div">
-                            {SwapAmount <= "0" || id2 == "" ? null : (
+                            {SwapAmount <= "0" || id2==="" ? null : (
                               <>
                                 <RefreshIcon
                                   callGetAmountsOut={getamount}
@@ -1409,7 +1409,7 @@ const UpdatedSwap = () => {
 
                       {account ? (
                         <>
-                          {id == "" ? (
+                          {id==="" ? (
                             <button
                               id="generate"
                               class="updatedSwapSwapBtn"
@@ -1424,7 +1424,7 @@ const UpdatedSwap = () => {
                                   {assetsBase.map((data) => {
                                     return (
                                       <>
-                                        {data.id == id ? (
+                                        {data.id===id ? (
                                           <>
                                             {insufficientBalance ? (
                                               <button
@@ -1505,7 +1505,7 @@ const UpdatedSwap = () => {
                                   {assets.map((data) => {
                                     return (
                                       <>
-                                        {data.id == id ? (
+                                        {data.id===id ? (
                                           <>
                                             {insufficientBalance ? (
                                               <button
@@ -1545,7 +1545,7 @@ const UpdatedSwap = () => {
                                   {assetsBase.map((data) => {
                                     return (
                                       <>
-                                        {data.id == id ? (
+                                        {data.id===id ? (
                                           <>
                                             {unlockBtn === false ? (
                                               <button
@@ -1597,7 +1597,7 @@ const UpdatedSwap = () => {
                                   {assets.map((data) => {
                                     return (
                                       <>
-                                        {data.id == id ? (
+                                        {data.id===id ? (
                                           <>
                                             {unlockBtn === false ? (
                                               <button
@@ -1665,19 +1665,19 @@ const UpdatedSwap = () => {
                             <div className="moreSwapInfoDiv_div2_area1_cont1">
                               Minimum Received
                             </div>
-                            {id2 == "" ? (
+                            {id2==="" ? (
                               <div className="swap_price_rate_div1">0</div>
                             ) : (
                               <>
-                                {id2 == "0" ? (
+                                {id2==="0" ? (
                                   <>
                                     {assetsBase.map((data) => {
                                       // setSwapBalance(data.balance);
                                       return (
                                         <>
-                                          {data.id == id2 ? (
+                                          {data.id===id2 ? (
                                             <div className="moreSwapInfoDiv_div2_area1_cont2">
-                                              {SwapAmount == ""
+                                              {SwapAmount===""
                                                 ? 0
                                                 : parseFloat(
                                                     MinamountsOut
@@ -1697,9 +1697,9 @@ const UpdatedSwap = () => {
                                       // setSwapBalance(data.balance);
                                       return (
                                         <>
-                                          {data.id == id2 ? (
+                                          {data.id===id2 ? (
                                             <div className="moreSwapInfoDiv_div2_area1_cont2">
-                                              {SwapAmount == ""
+                                              {SwapAmount===""
                                                 ? 0
                                                 : parseFloat(
                                                     MinamountsOut
@@ -1730,17 +1730,17 @@ const UpdatedSwap = () => {
                               Route
                             </div>
                             <div className="moreSwapInfoDiv_div2_area1_cont2">
-                              {id == "" ? (
+                              {id==="" ? (
                                 <div className="swap_price_rate_div1">Nil</div>
                               ) : (
                                 <>
-                                  {id == "0" ? (
+                                  {id==="0" ? (
                                     <>
                                       {assetsBase.map((data) => {
                                         // setSwapBalance(data.balance);
                                         return (
                                           <>
-                                            {data.id == id ? (
+                                            {data.id===id ? (
                                               <div className="swap_price_rate_div1">
                                                 {data.symbol}
                                               </div>
@@ -1755,7 +1755,7 @@ const UpdatedSwap = () => {
                                         // setSwapBalance(data.balance);
                                         return (
                                           <>
-                                            {data.id == id ? (
+                                            {data.id===id ? (
                                               <div className="swap_price_rate_div1">
                                                 {data.symbol}
                                               </div>
@@ -1768,17 +1768,17 @@ const UpdatedSwap = () => {
                                 </>
                               )}
                               {">"}
-                              {id2 == "" ? (
+                              {id2==="" ? (
                                 <div className="swap_price_rate_div1">Nil</div>
                               ) : (
                                 <>
-                                  {id2 == "0" ? (
+                                  {id2==="0" ? (
                                     <>
                                       {assetsBase.map((data) => {
                                         // setSwapBalance(data.balance);
                                         return (
                                           <>
-                                            {data.id == id2 ? (
+                                            {data.id===id2 ? (
                                               <div className="swap_price_rate_div2">
                                                 {data.symbol}
                                               </div>
@@ -1793,7 +1793,7 @@ const UpdatedSwap = () => {
                                         // setSwapBalance(data.balance);
                                         return (
                                           <>
-                                            {data.id == id2 ? (
+                                            {data.id===id2 ? (
                                               <div className="swap_price_rate_div2">
                                                 {data.symbol}
                                               </div>
@@ -1833,19 +1833,19 @@ const UpdatedSwap = () => {
                 //   <div className="tradeViewAreaCont">
                 //     <div className="tradeViewAreaCont_pairs_cont">
                 //       <div className="tradeViewAreaCont_pairs_cont_div">
-                //         {idTicker == "" ? (
+                //         {idTicker==="" ? (
                 //           <div className="tradeViewAreaCont_pairs_cont_div1">
                 //             Nil
                 //           </div>
                 //         ) : (
                 //           <>
-                //             {idTicker == "0" ? (
+                //             {idTicker==="0" ? (
                 //               <>
                 //                 {assetsBase.map((data) => {
                 //                   // setSwapBalance(data.balance);
                 //                   return (
                 //                     <>
-                //                       {data.id == idTicker ? (
+                //                       {data.id===idTicker ? (
                 //                         <div className="tradeViewAreaCont_pairs_cont_div1 moveCloser">
                 //                           <img
                 //                             src={data.img}
@@ -1864,7 +1864,7 @@ const UpdatedSwap = () => {
                 //                   // setSwapBalance(data.balance);
                 //                   return (
                 //                     <>
-                //                       {data.id == idTicker ? (
+                //                       {data.id===idTicker ? (
                 //                         <div className="tradeViewAreaCont_pairs_cont_div1 moveCloser">
                 //                           <img
                 //                             src={data.img}
@@ -1881,19 +1881,19 @@ const UpdatedSwap = () => {
                 //           </>
                 //         )}
 
-                //         {idBase == "" ? (
+                //         {idBase==="" ? (
                 //           <div className="tradeViewAreaCont_pairs_cont_div1">
                 //             Nil
                 //           </div>
                 //         ) : (
                 //           <>
-                //             {idBase == "0" ? (
+                //             {idBase==="0" ? (
                 //               <>
                 //                 {assetsBase.map((data) => {
                 //                   // setSwapBalance(data.balance);
                 //                   return (
                 //                     <>
-                //                       {data.id == idBase ? (
+                //                       {data.id===idBase ? (
                 //                         <div className="tradeViewAreaCont_pairs_cont_div1">
                 //                           <img
                 //                             src={data.img}
@@ -1912,7 +1912,7 @@ const UpdatedSwap = () => {
                 //                   // setSwapBalance(data.balance);
                 //                   return (
                 //                     <>
-                //                       {data.id == idBase ? (
+                //                       {data.id===idBase ? (
                 //                         <div className="tradeViewAreaCont_pairs_cont_div1">
                 //                           <img
                 //                             src={data.img}
@@ -1929,19 +1929,19 @@ const UpdatedSwap = () => {
                 //           </>
                 //         )}
 
-                //         {idTicker == "" ? (
+                //         {idTicker==="" ? (
                 //           <div className="tradeViewAreaCont_pairs_cont_div2">
                 //             Nil
                 //           </div>
                 //         ) : (
                 //           <>
-                //             {idTicker == "0" ? (
+                //             {idTicker==="0" ? (
                 //               <>
                 //                 {assetsBase.map((data) => {
                 //                   // setSwapBalance(data.balance);
                 //                   return (
                 //                     <>
-                //                       {data.id == idTicker ? (
+                //                       {data.id===idTicker ? (
                 //                         <div className="tradeViewAreaCont_pairs_cont_div2">
                 //                           {data.symbol}
                 //                         </div>
@@ -1956,7 +1956,7 @@ const UpdatedSwap = () => {
                 //                   // setSwapBalance(data.balance);
                 //                   return (
                 //                     <>
-                //                       {data.id == idTicker ? (
+                //                       {data.id===idTicker ? (
                 //                         <div className="tradeViewAreaCont_pairs_cont_div2">
                 //                           {data.symbol}
                 //                         </div>
@@ -1972,19 +1972,19 @@ const UpdatedSwap = () => {
                 //           /
                 //         </div>
 
-                //         {idBase == "" ? (
+                //         {idBase==="" ? (
                 //           <div className="tradeViewAreaCont_pairs_cont_div2 base">
                 //             Nil
                 //           </div>
                 //         ) : (
                 //           <>
-                //             {idBase == "0" ? (
+                //             {idBase==="0" ? (
                 //               <>
                 //                 {assetsBase.map((data) => {
                 //                   // setSwapBalance(data.balance);
                 //                   return (
                 //                     <>
-                //                       {data.id == idBase ? (
+                //                       {data.id===idBase ? (
                 //                         <div className="tradeViewAreaCont_pairs_cont_div2 base">
                 //                           {data.symbol}
                 //                         </div>
@@ -1999,7 +1999,7 @@ const UpdatedSwap = () => {
                 //                   // setSwapBalance(data.balance);
                 //                   return (
                 //                     <>
-                //                       {data.id == idBase ? (
+                //                       {data.id===idBase ? (
                 //                         <div className="tradeViewAreaCont_pairs_cont_div2 base">
                 //                           {data.symbol}
                 //                         </div>
@@ -2018,7 +2018,7 @@ const UpdatedSwap = () => {
                 //       </div>
                 //     </div>
                 //     <div className="tradeViewAreaCont1">
-                //       {activeDuration == "hr1" ? (
+                //       {activeDuration==="hr1" ? (
                 //         <div className="tradeViewAreaCont1_area1">
                 //           <div
                 //             className="analytics_container_1_Amount"
@@ -2035,17 +2035,17 @@ const UpdatedSwap = () => {
                 //               {/* ====== */}
                 //               {/* ====== */}
                 //               {/* ====== */}
-                //               {idBase == "" ? (
+                //               {idBase==="" ? (
                 //                 <>Nil</>
                 //               ) : (
                 //                 <>
-                //                   {idBase == "0" ? (
+                //                   {idBase==="0" ? (
                 //                     <>
                 //                       {assetsBase.map((data) => {
                 //                         // setSwapBalance(data.balance);
                 //                         return (
                 //                           <>
-                //                             {data.id == idBase
+                //                             {data.id===idBase
                 //                               ? data.symbol
                 //                               : null}
                 //                           </>
@@ -2058,7 +2058,7 @@ const UpdatedSwap = () => {
                 //                         // setSwapBalance(data.balance);
                 //                         return (
                 //                           <>
-                //                             {data.id == idBase
+                //                             {data.id===idBase
                 //                               ? data.symbol
                 //                               : null}
                 //                           </>
@@ -2073,14 +2073,14 @@ const UpdatedSwap = () => {
                 //           <span
                 //             className="tradeViewAreaCont1_area1_priceChangeSpan"
                 //             style={
-                //               ChartChange == "decrease"
+                //               ChartChange==="decrease"
                 //                 ? { color: "#ff537b" }
-                //                 : ChartChange == "increase"
+                //                 : ChartChange==="increase"
                 //                 ? { color: "#31cb9e" }
                 //                 : { color: "#31cb9e" }
                 //             }
                 //           >
-                //             {ChartChange == "decrease" ? (
+                //             {ChartChange==="decrease" ? (
                 //               <>
                 //                 {ChartPriceDifference} (
                 //                 {"-" +
@@ -2099,7 +2099,7 @@ const UpdatedSwap = () => {
                 //             )}
                 //           </span>
                 //         </div>
-                //       ) : activeDuration == "hr4" ? (
+                //       ) : activeDuration==="hr4" ? (
                 //         <div className="tradeViewAreaCont1_area1">
                 //           <div
                 //             className="analytics_container_1_Amount"
@@ -2113,17 +2113,17 @@ const UpdatedSwap = () => {
                 //                 size={28}
                 //                 duration={1000}
                 //               />{" "}
-                //               {idBase == "" ? (
+                //               {idBase==="" ? (
                 //                 <>Nil</>
                 //               ) : (
                 //                 <>
-                //                   {idBase == "0" ? (
+                //                   {idBase==="0" ? (
                 //                     <>
                 //                       {assetsBase.map((data) => {
                 //                         // setSwapBalance(data.balance);
                 //                         return (
                 //                           <>
-                //                             {data.id == idBase
+                //                             {data.id===idBase
                 //                               ? data.symbol
                 //                               : null}
                 //                           </>
@@ -2136,7 +2136,7 @@ const UpdatedSwap = () => {
                 //                         // setSwapBalance(data.balance);
                 //                         return (
                 //                           <>
-                //                             {data.id == idBase
+                //                             {data.id===idBase
                 //                               ? data.symbol
                 //                               : null}
                 //                           </>
@@ -2151,14 +2151,14 @@ const UpdatedSwap = () => {
                 //           <span
                 //             className="tradeViewAreaCont1_area1_priceChangeSpan"
                 //             style={
-                //               ChartChange2 == "decrease"
+                //               ChartChange2==="decrease"
                 //                 ? { color: "#ff537b" }
-                //                 : ChartChange2 == "increase"
+                //                 : ChartChange2==="increase"
                 //                 ? { color: "#31cb9e" }
                 //                 : { color: "#31cb9e" }
                 //             }
                 //           >
-                //             {ChartChange2 == "decrease" ? (
+                //             {ChartChange2==="decrease" ? (
                 //               <>
                 //                 {ChartPriceDifference2} (
                 //                 {parseFloat(ChartPercentChange2).toFixed(2) +
@@ -2181,7 +2181,7 @@ const UpdatedSwap = () => {
                 //       <div className="tradeViewAreaCont1_area2">
                 //         <div
                 //           className={
-                //             activeDuration == "hr1"
+                //             activeDuration==="hr1"
                 //               ? "tradeViewAreaCont1_area2_cont1_active"
                 //               : "tradeViewAreaCont1_area2_cont1"
                 //           }
@@ -2192,7 +2192,7 @@ const UpdatedSwap = () => {
                 //         </div>
                 //         <div
                 //           className={
-                //             activeDuration == "hr4"
+                //             activeDuration==="hr4"
                 //               ? "tradeViewAreaCont1_area2_cont1_active"
                 //               : "tradeViewAreaCont1_area2_cont1"
                 //           }
@@ -2203,7 +2203,7 @@ const UpdatedSwap = () => {
                 //         </div>
                 //         <div
                 //           className={
-                //             activeDuration == "day"
+                //             activeDuration==="day"
                 //               ? "tradeViewAreaCont1_area2_cont1_active"
                 //               : "tradeViewAreaCont1_area2_cont1"
                 //           }
@@ -2214,7 +2214,7 @@ const UpdatedSwap = () => {
                 //         </div>
                 //         <div
                 //           className={
-                //             activeDuration == "week"
+                //             activeDuration==="week"
                 //               ? "tradeViewAreaCont1_area2_cont1_active"
                 //               : "tradeViewAreaCont1_area2_cont1"
                 //           }
@@ -2225,7 +2225,7 @@ const UpdatedSwap = () => {
                 //         </div>
                 //         <div
                 //           className={
-                //             activeDuration == "month1"
+                //             activeDuration==="month1"
                 //               ? "tradeViewAreaCont1_area2_cont1_active"
                 //               : "tradeViewAreaCont1_area2_cont1"
                 //           }
@@ -2236,7 +2236,7 @@ const UpdatedSwap = () => {
                 //         </div>
                 //         <div
                 //           className={
-                //             activeDuration == "month6"
+                //             activeDuration==="month6"
                 //               ? "tradeViewAreaCont1_area2_cont1_active"
                 //               : "tradeViewAreaCont1_area2_cont1"
                 //           }
@@ -2248,7 +2248,7 @@ const UpdatedSwap = () => {
                 //       </div>
                 //     </div>
                 //     <div className="tradingView_container_1_chart">
-                //       {activeDuration == "hr1" ? (
+                //       {activeDuration==="hr1" ? (
                 //         <div
                 //           className="tradeViewAreaCont_chart_area2 "
                 //           style={{ width: "100%", height: 400 }}
@@ -2313,7 +2313,7 @@ const UpdatedSwap = () => {
                 //             </AreaChart>
                 //           </ResponsiveContainer>
                 //         </div>
-                //       ) : activeDuration == "hr4" ? (
+                //       ) : activeDuration==="hr4" ? (
                 //         <div
                 //           className="tradeViewAreaCont_chart_area2 "
                 //           style={{ width: "100%", height: 400 }}

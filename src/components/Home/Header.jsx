@@ -216,10 +216,10 @@ const Header = ({ togglemakeDark, check }) => {
       const fetchData = async () => {
         const response = await CALL_CHECK_USER_AND_MEMBERSHIP(account);
         console.log(response.data);
-        if (response.data.userExists == false) {
+        if (response.data.userExists === false) {
           const response2 = await CALL_ADD_USER_ADDRESS(account);
           console.log(response2.data);
-          // if (response2.data.userExists == false) {
+          // if (response2.data.userExists===false) {
           //   console.log("okkkk");
           // }
         }
@@ -750,7 +750,7 @@ const Header = ({ togglemakeDark, check }) => {
               ) : null}
             </div>
           </section>
-          {connectId == true ? (
+          {connectId === true ? (
             <div className="right_network_id_modal_div">
               <div className="right_network_id_modal_cont">
                 {/* <div className="close_chain_icon_cont">

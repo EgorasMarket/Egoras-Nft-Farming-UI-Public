@@ -782,6 +782,7 @@ vl {
   align-items: center;
   justify-content: center;
   /* line-height: 1.1; */
+  height: 35px;
 }
 
 .lightMode_icon {

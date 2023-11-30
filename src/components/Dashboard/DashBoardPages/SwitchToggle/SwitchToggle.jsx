@@ -4,13 +4,13 @@ const SwitchToggle = ({ checkBox, doUnluck }) => {
   return (
     <div>
       <label class="switch">
-        {checkBox == true ? (
+        {checkBox === true ? (
           <>
             {" "}
             <input
               type="checkbox"
               // id={id}
-              checked={checkBox == true ? true : false}
+              checked={checkBox === true ? true : false}
             />
             <span class="slider round"></span>
           </>
@@ -20,7 +20,7 @@ const SwitchToggle = ({ checkBox, doUnluck }) => {
             <input
               // id={id}
               type="checkbox"
-              checked={checkBox == true ? true : false}
+              checked={checkBox === true ? true : false}
               onClick={doUnluck}
             />
             <span class="slider round" onClick={doUnluck}></span>

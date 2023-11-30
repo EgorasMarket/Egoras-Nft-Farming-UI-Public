@@ -225,7 +225,7 @@ const DashboardReferral = ({ auth }) => {
     setDisable(true);
     let res = await getReferralBonus(account, library.getSigner());
     console.log(res);
-    if (res.status == true) {
+    if (res.status === true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
@@ -264,7 +264,7 @@ const DashboardReferral = ({ auth }) => {
           <div className="container relative">
             <div className="pool_deatail_area">
               <UserDetailsLinks activeLink={activeLink} />
-              {comingSoon == true ? (
+              {comingSoon === true ? (
                 <div className="comingSoon_div">
                   <div className="comingSoon_div_area">
                     <div className="comingSoon-header">Coming Soon...</div>

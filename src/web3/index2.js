@@ -538,10 +538,47 @@ const getEGCEUSDTICKERPRICE = async (_ticker, signer) => {
     };
   }
 };
+
 const getRoyaltyStats = async (user, signer) => {
   try {
     const instance = await contractStakingFacetInstance(signer);
     let result = await instance.royaltyStats(user);
+    console.log(result.toString(), "result");
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const setRoyaltyAddress = async (_eusdAddr, signer) => {
+  console.log(_eusdAddr);
+  try {
+    const instance = await contractStakingFacetInstance(signer);
+    let result = await instance.setStakeRoyaltyAddress(_eusdAddr);
+    console.log(result.toString(), "result");
+
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
+const getStakeStats = async (signer) => {
+  try {
+    const instance = await contractStakingFacetInstance(signer);
+    let result = await instance.stakeState();
     console.log(result.toString(), "result");
 
     return {
@@ -734,6 +771,7 @@ const setTokenAddress = async (_eusd, _egc, signer) => {
 //     };
 //   }
 // };
+
 // const BurnEgc = async (amount, signer) => {
 //   try {
 //     const instance = await contractMartgptFacetInstance2(signer);
@@ -751,6 +789,7 @@ const setTokenAddress = async (_eusd, _egc, signer) => {
 //     };
 //   }
 // };
+
 const configureDealerPlan = async (
   _plan_a,
   _plan_b,
@@ -913,4 +952,5 @@ export {
   getProcuureStats,
   convertEusdEgc,
   convertEgcEusd,
+  setRoyaltyAddress,
 };

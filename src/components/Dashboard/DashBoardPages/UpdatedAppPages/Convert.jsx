@@ -124,14 +124,14 @@ const Convert = () => {
       library.getSigner()
     );
     console.log(ret);
-    if (ret.status == true) {
+    if (ret.status === true) {
       setIsLoading(false);
       setDisable(false);
       localStorage.setItem("unlocking", true);
       localStorage.setItem("unlockingHash", ret.message);
       setUnlockBtn(true);
     } else {
-      if (ret.message.code == 4001) {
+      if (ret.message.code === 4001) {
         console.log(ret);
       }
       console.log(ret);
@@ -175,7 +175,7 @@ const Convert = () => {
       );
       console.log(res, "somto8uhhhg");
       //   console.log(res.status, "somto8uhhhg");
-      if (res.status == true) {
+      if (res.status === true) {
         setIsLoading(false);
         setDisable(false);
         setSuccessModal(true);
@@ -210,7 +210,7 @@ const Convert = () => {
       );
       console.log(res, "somto8uhhhg");
       //   console.log(res.status, "somto8uhhhg");
-      if (res.status == true) {
+      if (res.status === true) {
         setIsLoading(false);
         setDisable(false);
         setSuccessModal(true);

@@ -148,14 +148,14 @@ const MemberShipPage = () => {
       library.getSigner()
     );
     console.log(ret);
-    if (ret.status == true) {
+    if (ret.status === true) {
       setIsLoading(false);
       setDisable(false);
       localStorage.setItem("unlocking", true);
       localStorage.setItem("unlockingHash", ret.message);
       setUnlockBtn(true);
     } else {
-      if (ret.message.code == 4001) {
+      if (ret.message.code === 4001) {
         console.log(ret);
       }
       console.log(ret);
@@ -206,7 +206,7 @@ const MemberShipPage = () => {
       setSuccessModal(true);
       setSuccessMessage("You've successfully Subscribed for 1 month");
     } else {
-      if (res.message.code == 4001) {
+      if (res.message.code === 4001) {
         console.log(res);
       }
       console.log(res);
@@ -232,7 +232,7 @@ const MemberShipPage = () => {
       setSuccessMessage("You've successfully Subscribed for 1 month");
       localStorage.removeItem("tank");
     } else {
-      if (res.message.code == 4001) {
+      if (res.message.code === 4001) {
         console.log(res);
       }
       console.log(res);
@@ -247,13 +247,13 @@ const MemberShipPage = () => {
     setDisable(true);
     let res = await semiAnnuallyPlanSubScribe(account, library.getSigner());
     console.log(res);
-    if (res.status == true) {
+    if (res.status === true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Subscribed for 6 months");
     } else {
-      if (res.message.code == 4001) {
+      if (res.message.code === 4001) {
         console.log(res);
       }
       console.log(res);
@@ -272,14 +272,14 @@ const MemberShipPage = () => {
       library.getSigner()
     );
     console.log(res);
-    if (res.status == true) {
+    if (res.status === true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Subscribed for 6 months");
       localStorage.removeItem("tank");
     } else {
-      if (res.message.code == 4001) {
+      if (res.message.code === 4001) {
         console.log(res);
       }
       console.log(res);
@@ -294,13 +294,13 @@ const MemberShipPage = () => {
     setDisable(true);
     let res = await annuallyPlanSubScribe(account, library.getSigner());
     console.log(res);
-    if (res.status == true) {
+    if (res.status === true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Subscribed for 1 year");
     } else {
-      if (res.message.code == 4001) {
+      if (res.message.code === 4001) {
         console.log(res);
       }
       console.log(res);
@@ -319,14 +319,14 @@ const MemberShipPage = () => {
       library.getSigner()
     );
     console.log(res);
-    if (res.status == true) {
+    if (res.status === true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
       setSuccessMessage("You've successfully Subscribed for 1 year");
       localStorage.removeItem("tank");
     } else {
-      if (res.message.code == 4001) {
+      if (res.message.code === 4001) {
         console.log(res);
       }
       console.log(res);
@@ -360,7 +360,7 @@ const MemberShipPage = () => {
           >
             <Step1Div toggleSteps={toggleSteps} />
           </div>
-          {/* {step2 == true ? ( */}
+          {/* {step2===true ? ( */}
           <div
             className={`joinCooperativeModalDiv_area1 ${step2 ? "show2" : ""}`}
           >

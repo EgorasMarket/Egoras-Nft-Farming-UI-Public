@@ -542,8 +542,9 @@
 
 .header_tab1 {
   cursor: pointer;
+  padding: 6px 6px;
   width: 125px;
-  padding: 6px 0px;
+  min-width: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -610,8 +611,9 @@
 
 .header_tab1_active {
   background: #fff;
-  padding: 6px 3px;
+  padding: 6px 6px;
   width: 125px;
+  min-width: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -620,6 +622,19 @@
   color: rgb(0, 0, 0) !important;
   font-weight: 600;
   position: relative;
+}
+.new_span {
+  color: #fff;
+  background: linear-gradient(to right, #49c271, #529869, #5f7ad6);
+  font-size: 11px;
+  padding: 2px 4px;
+  border-radius: 30px;
+  font-weight: 500;
+  width: 35px;
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .header_tab1_icon_icon {
   font-size: 20px !important;

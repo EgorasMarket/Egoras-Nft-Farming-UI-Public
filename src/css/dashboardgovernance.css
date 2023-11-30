@@ -166,6 +166,29 @@
   margin-top: 2em;
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+}
+.proposals_area_2_body_drop_div {
+  position: relative;
+  display: flex;
+  /* flex-direction: column; */
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.proposals_area_2_body_drop_div_button {
+  display: flex;
+  align-items: center;
+  width: 70px;
+  min-width: fit-content;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: solid 1px grey;
+  background: none;
+  color: #fff;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 18px;
 }
 .proposals_area_2_body_head_tabs {
   display: flex;
@@ -177,34 +200,41 @@
   font-size: 15px;
   padding: 5px 5px;
   border-radius: 7px;
-  width: fit-content;
+  width: -moz-fit-content;
+  width: 100%;
+  max-width: 220px;
+  position: absolute;
+  top: 110%;
+  flex-direction: column;
+  box-shadow: 0px 7px 20px 9px #00000061;
+  border: solid 1px #2e2e31;
 }
 .proposals_area_2_body_head_tabs_1_active {
   background: linear-gradient(to right, #58ad74, #4c8f62, #5fa7d6);
   border-radius: 7px;
   color: #fff;
-  min-width: 32px;
+  width: 100%;
   font-size: 14px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
   cursor: pointer;
-  padding: 5px 20px;
+  padding: 10px 10px;
 }
 .proposals_area_2_body_head_tabs_1 {
   border-radius: 5px;
-  min-width: 32px;
+  width: 100%;
   font-size: 14px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   cursor: pointer;
-  padding: 5px 20px;
+  padding: 10px 10px;
 }
 .proposals_area_2_body_area {
   display: flex;
   flex-direction: column;
   margin-top: 1em;
+  width: 100%;
 }
 .proposals_area_2_body_area_cont1 {
   display: flex;
@@ -380,9 +410,9 @@ canvas.blockies_icon2 {
   .proposals_area_2_body_head_tabs_1 {
     font-size: 12px;
   }
-  .proposals_area_2_body_head_tabs_1_active {
+  /* .proposals_area_2_body_head_tabs_1_active {
     font-size: 12px;
-  }
+  } */
   .proposals_area_2_head_stats_div1_title {
     font-size: 12px;
     color: #8e8e95;

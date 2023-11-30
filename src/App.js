@@ -186,7 +186,7 @@ function App() {
     }
   });
   const togglemakeDark = () => {
-    if (localStorage.getItem("uiMode") == "light") {
+    if (localStorage.getItem("uiMode") === "light") {
       localStorage.setItem("uiMode", "dark");
       setCClass(true);
     } else {
@@ -217,10 +217,10 @@ function App() {
               {/* <Route exact path="/pay-with-fort" component={PaywithFort} /> */}
               {/* <Route exact path="/membership/sub" component={MemberShipPage} />CYNTAX
                */}
-              {admin == true ? (
+              {admin === true ? (
                 <Admin check={cClass} togglemakeDark={togglemakeDark} />
               ) : null}
-              {dashboard == true ? (
+              {dashboard === true ? (
                 <Dashboard check={cClass} togglemakeDark={togglemakeDark} />
               ) : null}
             </Switch>

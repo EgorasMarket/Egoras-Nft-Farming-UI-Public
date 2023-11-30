@@ -231,10 +231,10 @@ export const Authenticate = (props) => {
                     >
                       <div className="d-flex justify-content-between">
                         <span className="mt-1 font-weight-bold">
-                          {name == "Injected"
+                          {name === "Injected"
                             ? "MetaMask"
                             : [
-                                name == "WalletConnect"
+                                name === "WalletConnect"
                                   ? "WalletConnect"
                                   : name,
                               ]}
@@ -260,7 +260,7 @@ export const Authenticate = (props) => {
             deactivate();
           }}
           className={
-            props.isHome == "false"
+            props.isHome === "false"
               ? "logout-btn disconnect_btn"
               : "logout-btn disconnect_btn"
           }
@@ -271,7 +271,7 @@ export const Authenticate = (props) => {
       ) : (
         <button
           onClick={toggle}
-          className={props.isHome == "false" ? "logout-btn" : "logout-btn"}
+          className={props.isHome === "false" ? "logout-btn" : "logout-btn"}
         >
           {" "}
           Connect Wallet{" "}
@@ -309,25 +309,25 @@ export const Authenticate = (props) => {
                         activate(connectorsByName[name]);
                       }}
                       disabled={
-                        name == "Injected"
+                        name === "Injected"
                           ? false
-                          : name == "WalletConnect"
+                          : name === "WalletConnect"
                           ? false
-                          : name == "binanceWallet"
+                          : name === "binanceWallet"
                           ? true
-                          : name == "coinbaseWallet"
+                          : name === "coinbaseWallet"
                           ? true
                           : true
                       }
                     >
                       <span className="Modal2_div2_div1_area_btn_area_txt">
-                        {name == "Injected"
+                        {name === "Injected"
                           ? "MetaMask"
-                          : name == "WalletConnect"
+                          : name === "WalletConnect"
                           ? "WalletConnect"
-                          : name == "binanceWallet"
+                          : name === "binanceWallet"
                           ? "BinanceWallet"
-                          : name == "coinbaseWallet"
+                          : name === "coinbaseWallet"
                           ? "CoinbaseWallet"
                           : name}
                       </span>

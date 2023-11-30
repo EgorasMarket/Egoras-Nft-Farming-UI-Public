@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import StaticData from "../../../../Static/ListedCoins";
 import "../../../../css/dashboardgovernance.css";
-import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+// import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import Blockies from "react-blockies";
 import axios from "axios";
 import { config } from "../../../../actions/Config";
@@ -15,8 +16,10 @@ const DashboardGovernance = () => {
   const [activeTab, setActiveTab] = useState("");
   const [proposals, setProposals] = useState([]);
   const [totalVotes, setTotalVotes] = useState([]);
+  const [dropDown, setDropDown] = useState(false);
   const ToggleActiveTab = (e) => {
     setActiveTab(e.currentTarget.id);
+    setDropDown(false);
   };
   const fetchData = async () => {
     try {
@@ -32,6 +35,11 @@ const DashboardGovernance = () => {
       console.log(error.response);
     }
   };
+
+  const toggleDropDown = () => {
+    setDropDown(!dropDown);
+  };
+
   const fetchData2 = async () => {
     try {
       const data = await axios.get(
@@ -188,63 +196,79 @@ const DashboardGovernance = () => {
                 </div>
               </div>
               <div className="proposals_area_2_body">
-                <div className="proposals_area_2_body_head_tabs">
-                  <div
-                    id=""
-                    className={
-                      activeTab === ""
-                        ? "proposals_area_2_body_head_tabs_1_active"
-                        : "proposals_area_2_body_head_tabs_1"
-                    }
-                    onClick={ToggleActiveTab}
+                <div className="proposals_area_2_body_drop_div">
+                  <button
+                    className="proposals_area_2_body_drop_div_button"
+                    onClick={toggleDropDown}
                   >
-                    All
-                  </div>
-                  <div
-                    id="PENDING"
-                    className={
-                      activeTab === "PENDING"
-                        ? "proposals_area_2_body_head_tabs_1_active"
-                        : "proposals_area_2_body_head_tabs_1"
-                    }
-                    onClick={ToggleActiveTab}
-                  >
-                    Active
-                  </div>
-                  <div
-                    id="Approved"
-                    className={
-                      activeTab === "Approved"
-                        ? "proposals_area_2_body_head_tabs_1_active"
-                        : "proposals_area_2_body_head_tabs_1"
-                    }
-                    onClick={ToggleActiveTab}
-                  >
-                    Approved
-                  </div>
-                  <div
-                    id="Terminated"
-                    className={
-                      activeTab === "Terminated"
-                        ? "proposals_area_2_body_head_tabs_1_active"
-                        : "proposals_area_2_body_head_tabs_1"
-                    }
-                    onClick={ToggleActiveTab}
-                  >
-                    Terminated
-                  </div>
-                  <div
-                    id="Withdrawn"
-                    className={
-                      activeTab === "Withdrawn"
-                        ? "proposals_area_2_body_head_tabs_1_active"
-                        : "proposals_area_2_body_head_tabs_1"
-                    }
-                    onClick={ToggleActiveTab}
-                  >
-                    Withdrawn
-                  </div>
+                    {activeTab === ""
+                      ? "All"
+                      : activeTab === "PENDING"
+                      ? "Active"
+                      : activeTab}
+                    <ArrowDropDownIcon className="proposals_area_2_body_drop_div_button_icon" />
+                  </button>
+                  {dropDown ? (
+                    <div className="proposals_area_2_body_head_tabs">
+                      <div
+                        id=""
+                        className={
+                          activeTab === ""
+                            ? "proposals_area_2_body_head_tabs_1_active"
+                            : "proposals_area_2_body_head_tabs_1"
+                        }
+                        onClick={ToggleActiveTab}
+                      >
+                        All
+                      </div>
+                      <div
+                        id="PENDING"
+                        className={
+                          activeTab === "PENDING"
+                            ? "proposals_area_2_body_head_tabs_1_active"
+                            : "proposals_area_2_body_head_tabs_1"
+                        }
+                        onClick={ToggleActiveTab}
+                      >
+                        Active
+                      </div>
+                      <div
+                        id="Approved"
+                        className={
+                          activeTab === "Approved"
+                            ? "proposals_area_2_body_head_tabs_1_active"
+                            : "proposals_area_2_body_head_tabs_1"
+                        }
+                        onClick={ToggleActiveTab}
+                      >
+                        Approved
+                      </div>
+                      <div
+                        id="Terminated"
+                        className={
+                          activeTab === "Terminated"
+                            ? "proposals_area_2_body_head_tabs_1_active"
+                            : "proposals_area_2_body_head_tabs_1"
+                        }
+                        onClick={ToggleActiveTab}
+                      >
+                        Terminated
+                      </div>
+                      <div
+                        id="Withdrawn"
+                        className={
+                          activeTab === "Withdrawn"
+                            ? "proposals_area_2_body_head_tabs_1_active"
+                            : "proposals_area_2_body_head_tabs_1"
+                        }
+                        onClick={ToggleActiveTab}
+                      >
+                        Withdrawn
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
+
                 <div className="proposals_area_2_body_area">
                   {proposals.filter((data) => data.status.includes(activeTab))
                     .length <= 0 || proposals.length <= 0 ? (

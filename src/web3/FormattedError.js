@@ -4,7 +4,7 @@ const formattedError = (error) => {
   console.log(error);
   const parsedEthersError = getParsedEthersError(error);
   console.log(parsedEthersError);
-  if (parsedEthersError.errorCode == "REJECTED_TRANSACTION") {
+  if (parsedEthersError.errorCode === "REJECTED_TRANSACTION") {
     return {
       message: parsedEthersError.errorCode,
       status: false,

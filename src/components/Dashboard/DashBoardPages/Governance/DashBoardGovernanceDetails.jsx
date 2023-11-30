@@ -171,7 +171,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
   };
 
   useEffect(() => {
-    if (checkedNo == false && checkedYes == false) {
+    if (checkedNo === false && checkedYes === false) {
       setSubmitDisabled(true);
     } else {
       setSubmitDisabled(false);
@@ -184,7 +184,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
     const res = await voteYes(payload.index_id, library.getSigner());
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
-    if (res.status == true) {
+    if (res.status === true) {
       setIsLoading(false);
       setSubmitDisabled(false);
       setSuccessModal(true);
@@ -202,7 +202,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
     const res = await voteNo(payload.index_id, library.getSigner());
     console.log(res, "somto8uhhhg");
     console.log(res.status, "somto8uhhhg");
-    if (res.status == true) {
+    if (res.status === true) {
       setIsLoading(false);
       setSubmitDisabled(false);
       setSuccessModal(true);
@@ -318,7 +318,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
                         <div className="governance_details_area_2_cont1_div1_cont1_body">
                           <div
                             className={
-                              checkedYes == true
+                              checkedYes === true
                                 ? "governance_details_area_2_cont1_div1_cont1_body_1_active"
                                 : "governance_details_area_2_cont1_div1_cont1_body_1"
                             }
@@ -348,7 +348,7 @@ const DashBoardGovernanceDetails = ({ match }) => {
                           </div>
                           <div
                             className={
-                              checkedNo == true
+                              checkedNo === true
                                 ? "governance_details_area_2_cont1_div1_cont1_body_1_active"
                                 : "governance_details_area_2_cont1_div1_cont1_body_1"
                             }

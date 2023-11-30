@@ -13,7 +13,33 @@ import DashboardReferral from "./DashBoardPages/DashboardReferral";
 import DashboardGovernance from "./DashBoardPages/Governance/DashboardGovernance";
 import StakingUpdate from "./DashBoardPages/UpdatedAppPages/StakingUpdate";
 import { SplashScreen } from "./SplashScreen/SplashScreen";
+// ==========================================================================
+// ==========================================================================
+// ===========================dashboard css files start======================
+// ==========================================================================
+// ==========================================================================
 import "../../css/dashboard.css";
+import "../../css/dashBoardReferral.css";
+import "../../css/dashBoardSideBar.css";
+import "../../css/dashBoarddefaultpage.css";
+import "../../css/dashboardAddLiquidity.css";
+import "../../css/dashboardHome.css";
+import "../../css/dashboardLend.css";
+import "../../css/dashboardLend_details_page.css";
+import "../../css/dashboardVote.css";
+import "../../css/dashboardWhitePaper.css";
+import "../../css/dashboard_branch_assets.css";
+import "../../css/dashboard_user_details.css";
+import "../../css/dashboardanalytics.css";
+import "../../css/dashboardegrbalance.css";
+import "../../css/dashboardgovernance.css";
+import "../../css/dashboardheader.css";
+import "../../css/dashboardtransaction.css";
+// ==========================================================================
+// ==========================================================================
+// ===========================dashboard css files end========================
+// ==========================================================================
+// ==========================================================================
 const Dashboard = ({ check, togglemakeDark }) => {
   const context = useWeb3React();
   const { account } = context;

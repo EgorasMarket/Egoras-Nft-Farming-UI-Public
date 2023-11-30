@@ -211,10 +211,10 @@ export const ConnectWallet = (props) => {
                     >
                       <div className="d-flex justify-content-between">
                         <span className="mt-1 font-weight-bold">
-                          {name == "Injected"
+                          {name === "Injected"
                             ? "MetaMask"
                             : [
-                                name == "WalletConnect"
+                                name === "WalletConnect"
                                   ? "WalletConnect"
                                   : name,
                               ]}
@@ -243,7 +243,7 @@ export const ConnectWallet = (props) => {
         <button
           onClick={toggle}
           className={
-            props.isHome == "false" ? props.connect_btn : props.connect_btn
+            props.isHome === "false" ? props.connect_btn : props.connect_btn
           }
         >
           {" "}

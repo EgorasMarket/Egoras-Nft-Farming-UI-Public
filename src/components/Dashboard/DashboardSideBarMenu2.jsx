@@ -179,9 +179,9 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const { connector, account } = context;
   const avatarRef = useRef();
   const toggleAccountNav = () => {
-    if (acctNav == true) {
+    if (acctNav === true) {
       setAcctNav(false);
-    } else if (acctNav == false) {
+    } else if (acctNav === false) {
       setAcctNav(true);
     }
   };
@@ -265,7 +265,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     }
   });
   useEffect(() => {
-    if (linksActive == "/app/products") {
+    if (linksActive === "/app/products") {
       setSearchBar(true);
     }
   });
@@ -357,7 +357,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
       setActiveBg("whitepaper");
     }
 
-    if (smallSide == "not_small") {
+    if (smallSide === "not_small") {
       localStorage.setItem("smallSidetoken", "not_small");
     } else {
       localStorage.setItem("smallSidetoken", "smallSide");
@@ -365,7 +365,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   }, []);
 
   const shrinkAction = () => {
-    if (smallSide == "not_small") {
+    if (smallSide === "not_small") {
       setSmallSide("smallSide");
       localStorage.setItem("smallSidetoken", "smallSide");
     } else {
@@ -599,7 +599,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   }, [account]);
   return (
     <>
-      <div className={smallSide == "not_small" ? "side" : "small_side"}>
+      <div className={smallSide === "not_small" ? "side" : "small_side"}>
         <div className="header_token_prices_div">
           <div className="container-fluid">
             <Marquee
@@ -660,7 +660,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   id="home"
                   href="/app"
                   className={
-                    activeBg == "home" ? "header_tab1_active " : "header_tab1"
+                    activeBg === "home" ? "header_tab1_active " : "header_tab1"
                   }
                   onClick={changeBg}
                 >
@@ -671,7 +671,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   id="stake"
                   href="/app/staking/egc"
                   className={
-                    activeBg == "stake" ? "header_tab1_active " : "header_tab1"
+                    activeBg === "stake" ? "header_tab1_active " : "header_tab1"
                   }
                   onClick={changeBg}
                 >
@@ -682,22 +682,25 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   id="govern"
                   href="/app/governance"
                   className={
-                    activeBg == "govern" ? "header_tab1_active " : "header_tab1"
+                    activeBg === "govern"
+                      ? "header_tab1_active "
+                      : "header_tab1"
                   }
                   onClick={changeBg}
                 >
                   <HowToVoteIcon className="header_tab1_icon_icon" />
                   Governance
-                  <span class="Ping -top-1">
+                  <span className="new_span">New</span>
+                  {/* <span class="Ping -top-1">
                     <span class="c-flashingPart"></span>
                     <span class="c-basePart"></span>
-                  </span>
+                  </span> */}
                 </a>
                 <a
                   id="swap"
                   href="/app/swap"
                   className={
-                    activeBg == "swap" ? "header_tab1_active " : "header_tab1"
+                    activeBg === "swap" ? "header_tab1_active " : "header_tab1"
                   }
                   onClick={changeBg}
                 >
@@ -708,7 +711,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   id="convert"
                   href="/app/convert"
                   className={
-                    activeBg == "convert"
+                    activeBg==="convert"
                       ? "header_tab1_active "
                       : "header_tab1"
                   }
@@ -721,7 +724,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   id="account"
                   href="/app/user"
                   className={
-                    activeBg == "account"
+                    activeBg === "account"
                       ? "header_tab1_active "
                       : "header_tab1"
                   }
@@ -1204,7 +1207,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             id="home"
             href="/app"
             className={
-              activeBg == "home" ? "header_tab1_active " : "header_tab1"
+              activeBg === "home" ? "header_tab1_active " : "header_tab1"
             }
             onClick={changeBg}
           >
@@ -1216,7 +1219,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             id="stake"
             href="/app/staking/egc"
             className={
-              activeBg == "stake" ? "header_tab1_active " : "header_tab1"
+              activeBg === "stake" ? "header_tab1_active " : "header_tab1"
             }
             onClick={changeBg}
           >
@@ -1227,7 +1230,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             id="govern"
             href="/app/governance"
             className={
-              activeBg == "govern" ? "header_tab1_active " : "header_tab1"
+              activeBg === "govern" ? "header_tab1_active " : "header_tab1"
             }
             onClick={changeBg}
           >
@@ -1242,7 +1245,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             id="swap"
             href="/app/swap"
             className={
-              activeBg == "swap" ? "header_tab1_active " : "header_tab1"
+              activeBg === "swap" ? "header_tab1_active " : "header_tab1"
             }
             onClick={changeBg}
           >
@@ -1253,7 +1256,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             id="account"
             href="/app/user"
             className={
-              activeBg == "account" ? "header_tab1_active " : "header_tab1"
+              activeBg === "account" ? "header_tab1_active " : "header_tab1"
             }
             onClick={changeBg}
           >
@@ -1265,7 +1268,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             id="market"
             href="/app/market"
             className={
-              activeBg == "market" ? "header_tab1_active " : "header_tab1"
+              activeBg==="market" ? "header_tab1_active " : "header_tab1"
             }
             onClick={changeBg}
           >
@@ -1285,7 +1288,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
         {/* ========== */}
         {/* ========== */}
         {/* ========== */}
-        {connectId == true ? (
+        {connectId === true ? (
           <div className="right_network_id_modal_div">
             <div className="right_network_id_modal_cont">
               {/* <div className="close_chain_icon_cont">
@@ -1321,7 +1324,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
         {/* ========== */}
         {/* ========== */}
       </div>
-      {notificationDetails == ""
+      {notificationDetails === ""
         ? null
         : UnreadNotifications.map((data) => (
             <>
