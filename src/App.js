@@ -1,37 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { connect } from "react-redux";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Header from "./components/Home/Header";
 import "bootstrap/dist/css/bootstrap.css";
 import Home from "./components/Home/Home";
-import { loadUser } from "./actions/auth";
 import Admin from "./components/Admin/Admin";
-import AboutUs from "./components/Home/AboutUs";
-import MemberShipPage from "./components/Home/MemberShip/MemberShipPage";
-import {
-  Web3ReactProvider,
-  useWeb3React,
-  UnsupportedChainIdError,
-} from "@web3-react/core";
-import {
-  NoEthereumProviderError,
-  UserRejectedRequestError as UserRejectedRequestErrorInjected,
-} from "@web3-react/injected-connector";
+// import MemberShipPage from "./components/Home/MemberShip/MemberShipPage";
+import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 import { Provider } from "react-redux";
 
 import { Web3Provider } from "@ethersproject/providers";
-import { formatEther } from "@ethersproject/units";
-import { useEagerConnect, useInactiveListener } from "./hooks";
-import { injected, walletconnect } from "./connectors";
-// import { class, walletconnect } from "./connectors";
-// import OpenVaultPage from "./components/Dashboard/DashBoardPages/OpenVaultPage";
 import Footer from "./components/Home/Footer.jsx";
 import "../src/App.css";
 import store from "./store";
 import Referal from "./components/Referral/Referal";
-
-import PaywithFort from "./components/Home/MemberShip/SubSteps/PaywithFort";
+// import PaywithFort from "./components/Home/MemberShip/SubSteps/PaywithFort";
 import { socket } from "./socket";
 
 function App() {
@@ -193,13 +176,8 @@ function App() {
       return;
     }
   });
-  // useEffect(() => {
-  //   store.dispatch(loadUser());
-  // });
 
   const [cClass, setCClass] = useState(false);
-
-  // localStorage.setItem("uiMode", "dark");
   useEffect(() => {
     if (localStorage.getItem("uiMode") === "light") {
       setCClass(false);
@@ -235,11 +213,10 @@ function App() {
             )}
             <Switch>
               <Route exact path="/" component={Home} />
-
               <Route exact path="/referal/:ref" component={Referal} />
-              <Route exact path="/about" component={AboutUs} />
-              <Route exact path="/pay-with-fort" component={PaywithFort} />
-              <Route exact path="/membership/sub" component={MemberShipPage} />
+              {/* <Route exact path="/pay-with-fort" component={PaywithFort} /> */}
+              {/* <Route exact path="/membership/sub" component={MemberShipPage} />CYNTAX
+               */}
               {admin == true ? (
                 <Admin check={cClass} togglemakeDark={togglemakeDark} />
               ) : null}

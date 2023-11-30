@@ -667,7 +667,7 @@ span.tradeViewAreaCont1_area1_priceChangeSpan {
   margin: auto;
   border: solid 1px #313135;
   box-shadow: 0px 0px 10px #000;
-  background-image: url("./candleStickIcon.png");
+  /* background-image: url("./candleStickIcon.png"); */
   background-position: center;
   background-size: 12px;
   background-repeat: no-repeat;

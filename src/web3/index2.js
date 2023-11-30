@@ -1,14 +1,11 @@
 import { Contract } from "@ethersproject/contracts";
 import MembershipFacet from "./contracts/V3/MembershipFacet.json";
-import MartGptFacet from "./contracts/V3/martGPT.json";
 import V3ContractAddress from "./contracts/V3/V3ContractAddress.json";
 import DealersFacet from "./contracts/V3/DealersFacet.json";
 import ConvertFacet from "./contracts/V3/ConvertFacet.json";
-import RewardFaucet from "./contracts/V3/RewardFacet.json";
 import PancakeSwapFaucet from "./contracts/V3/PancakeSwapFacet.json";
 import DiamondCut from "./contracts/V3/DiamondCut.json";
 import Minter from "./contracts/V3/Minter.json";
-import { getParsedEthersError } from "@enzoferey/ethers-error-parser";
 import erc20 from "./contracts/erc20.json";
 import ProductFacet from "./contracts/V3/ProductFacet.json";
 import { formattedError } from "./FormattedError";
@@ -31,26 +28,11 @@ const contractProductFacetInstance = (signer) => {
 const contractConvertFacetInstance = (signer) => {
   return new Contract(V3ContractAddress.address, ConvertFacet.abi, signer);
 };
-const contractMartgptFacetInstance = async (signer) => {
-  return new Contract(
-    "0xD62C345CE544919dFf1639fe1f63610014987dE9",
-    MartGptFacet.abi,
-    signer
-  );
-};
-const contractMartgptFacetInstance2 = async (signer) => {
-  return new Contract(
-    "0xd68e5c52f7563486cc1a15d00efa12c8644a907e",
-    MartGptFacet.abi,
-    signer
-  );
-};
+
 const contractDiamondCutInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, DiamondCut.abi, signer);
 };
-const contractRewardFaucetInstance = async (signer) => {
-  return new Contract(V3ContractAddress.address, RewardFaucet.abi, signer);
-};
+
 const contractPriceOracleFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, PriceOracleFacet.abi, signer);
 };
@@ -677,25 +659,6 @@ const UnlockLockedStake = async (signer) => {
   }
 };
 
-const convertEgcToMartgpt = async (account, amount, signer) => {
-  console.log(account, amount, signer);
-  try {
-    const instance = await contractMartgptFacetInstance(signer);
-    let result = await instance.convertTokenToMartGPTToken(account, amount);
-    console.log(result, "result");
-
-    return {
-      message: result,
-      status: true,
-    };
-  } catch (error) {
-    return {
-      message: formattedError(error).message,
-      status: formattedError(error).status,
-    };
-  }
-};
-
 const convertEusdEgc = async (account, amount, signer) => {
   console.log(account, amount, signer);
   try {
@@ -733,64 +696,7 @@ const convertEgcEusd = async (account, amount, signer) => {
     };
   }
 };
-const convertToken = async (signer) => {
-  try {
-    const instance = await contractRewardFaucetInstance(signer);
-    let result = await instance.convertToken();
-    console.log(result, "result");
 
-    return {
-      message: result,
-      status: true,
-    };
-  } catch (error) {
-    return {
-      message: formattedError(error).message,
-      status: formattedError(error).status,
-    };
-  }
-};
-const approveConvertToken = async (signer) => {
-  try {
-    const instance = await contractRewardFaucetInstance(signer);
-    let result = await instance.approveConvertToken(
-      "1800000000000000000000000000000000",
-      "0xD62C345CE544919dFf1639fe1f63610014987dE9"
-    );
-    console.log(result, "result");
-
-    return {
-      message: result,
-      status: true,
-    };
-  } catch (error) {
-    return {
-      message: formattedError(error).message,
-      status: formattedError(error).status,
-    };
-  }
-};
-
-const setMartgptTokenAddress = async (signer) => {
-  try {
-    const instance = await contractRewardFaucetInstance(signer);
-    let result = await instance.setMartgptTokenAddress(
-      "0xD62C345CE544919dFf1639fe1f63610014987dE9",
-      "0x4AC4fC5317F95849A1F17e2f4Daf03c32196f0cb"
-    );
-    console.log(result, "result");
-
-    return {
-      message: result,
-      status: true,
-    };
-  } catch (error) {
-    return {
-      message: formattedError(error).message,
-      status: formattedError(error).status,
-    };
-  }
-};
 const setTokenAddress = async (_eusd, _egc, signer) => {
   try {
     const instance = await contractProductFacetInstance(signer);
@@ -807,60 +713,44 @@ const setTokenAddress = async (_eusd, _egc, signer) => {
     };
   }
 };
-const CheckUserRewardStats = async (account, period, signer) => {
-  try {
-    const instance = await contractRewardFaucetInstance(signer);
-    let result = await instance.userRewardStats(account, period);
-    console.log(result, "result");
 
-    return {
-      message: result,
-      status: true,
-    };
-  } catch (error) {
-    return {
-      message: formattedError(error).message,
-      status: formattedError(error).status,
-    };
-  }
-};
-const withdrawAllEgc = async (amount, signer) => {
-  console.log(amount);
-  try {
-    const instance = await contractRewardFaucetInstance(signer);
-    let result = await instance.drawEGC(
-      amount,
-      "0x4AC4fC5317F95849A1F17e2f4Daf03c32196f0cb"
-    );
-    console.log(result, "result");
-    return {
-      message: result,
-      status: true,
-    };
-  } catch (error) {
-    return {
-      message: formattedError(error).message,
-      status: formattedError(error).status,
-    };
-  }
-};
-const BurnEgc = async (amount, signer) => {
-  try {
-    const instance = await contractMartgptFacetInstance2(signer);
-    let result = await instance.burn(amount);
-    console.log(result, "result");
+// const withdrawAllEgc = async (amount, signer) => {
+//   console.log(amount);
+//   try {
+//     const instance = await contractRewardFaucetInstance(signer);
+//     let result = await instance.drawEGC(
+//       amount,
+//       "0x4AC4fC5317F95849A1F17e2f4Daf03c32196f0cb"
+//     );
+//     console.log(result, "result");
+//     return {
+//       message: result,
+//       status: true,
+//     };
+//   } catch (error) {
+//     return {
+//       message: formattedError(error).message,
+//       status: formattedError(error).status,
+//     };
+//   }
+// };
+// const BurnEgc = async (amount, signer) => {
+//   try {
+//     const instance = await contractMartgptFacetInstance2(signer);
+//     let result = await instance.burn(amount);
+//     console.log(result, "result");
 
-    return {
-      message: result,
-      status: true,
-    };
-  } catch (error) {
-    return {
-      message: formattedError(error).message,
-      status: formattedError(error).status,
-    };
-  }
-};
+//     return {
+//       message: result,
+//       status: true,
+//     };
+//   } catch (error) {
+//     return {
+//       message: formattedError(error).message,
+//       status: formattedError(error).status,
+//     };
+//   }
+// };
 const configureDealerPlan = async (
   _plan_a,
   _plan_b,
@@ -1013,13 +903,6 @@ export {
   annuallyPlanSubScribeRef,
   DiamondCutFunc,
   approveBusd,
-  convertEgcToMartgpt,
-  convertToken,
-  approveConvertToken,
-  setMartgptTokenAddress,
-  CheckUserRewardStats,
-  BurnEgc,
-  withdrawAllEgc,
   configureDealerPlan,
   listProcurementProduct,
   setTokenAddress,

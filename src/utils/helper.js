@@ -1,5 +1,3 @@
-import { GET_USER_UPLOADED_PRODUCT } from "../services/productServices";
-
 export const TOTAL_NUMBER_OF_ITEMS_BOUGHT = (data = []) => {
   // console.log(data);
   let result = {};

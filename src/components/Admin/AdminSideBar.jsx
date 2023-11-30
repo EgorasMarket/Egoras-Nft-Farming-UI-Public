@@ -1,119 +1,39 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
-// import Web3 from "web3";
+import React, { useState, useEffect, useRef } from "react";
 import Web3 from "web3";
-// import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
-import CloseIcon from "@material-ui/icons/Close";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TelegramIcon from "@mui/icons-material/Telegram";
 import { Sling as Hamburger } from "hamburger-react";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import TwitterIcon from "@mui/icons-material/Twitter";
 import HomeIcon from "@mui/icons-material/Home";
 import StorageIcon from "@mui/icons-material/Storage";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import jazzicon from "@metamask/jazzicon";
-import StarsIcon from "@mui/icons-material/Stars";
-import ApprovalIcon from "@mui/icons-material/Approval";
-import CreditScoreTwoToneIcon from "@mui/icons-material/CreditScoreTwoTone";
-// import { AccountNavigation } from "./DashboardPages/AccountNavigation";
-import SearchIcon from "@mui/icons-material/Search";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import MenuIcon from "@mui/icons-material/Menu";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import { Authenticate } from "../auth/Authenticate";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import { Link } from "react-router-dom";
-import DescriptionIcon from "@mui/icons-material/Description";
-import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
-import OpacityIcon from "@mui/icons-material/Opacity";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import BarChartIcon from "@mui/icons-material/BarChart";
 import "../../css/dashboardheader.css";
 import "../../css/dashBoardSideBar.css";
 import { numberWithCommas } from "../../static";
 import SwitchToggle2 from "../Dashboard/DashBoardPages/SwitchToggle/SwitchToggle2";
-import {
-  checkAllowance,
-  unluckToken,
-  transactReceipt,
-  getPrice,
-  getPriceImpl,
-  getTickerInfo,
-  tokenBalance,
-  open,
-  getLatestLoan,
-  repay,
-  topup,
-  draw,
-} from "../../web3/index";
-import { parseEther, formatEther } from "@ethersproject/units";
-import {
-  Web3ReactProvider,
-  useWeb3React,
-  UnsupportedChainIdError,
-} from "@web3-react/core";
+import { useWeb3React } from "@web3-react/core";
 const AdminSideBar = ({ check, togglemakeDark }) => {
   const dddd = localStorage.getItem("smallSidetoken");
   const [connectId, setConnectId] = useState(false);
   const [activeBg, setActiveBg] = useState("market");
-  const [catDiv, setCatDiv] = useState("not_home");
   const [smallSide, setSmallSide] = useState(dddd);
   const [isOpen, setIsOpen] = useState(false);
-  const [cartNum, setCartNum] = useState("");
-  const [image, setImage] = useState("");
-  const [asset, setAsset] = useState("");
-  const [base, setBase] = useState("");
-  const [searchBar, setSearchBar] = useState(false);
-  const [acctNav, setAcctNav] = useState(false);
-  const [activeMenuName, setActiveMenuName] = useState("Markets");
-  const [showHeader, setshowHeader] = useState(true);
-  const [betaDiv, setBetaDiv] = useState(true);
   const [conecttxt, setConnectTxt] = useState("Not Connected");
-  const [nairaValue, setNairaValue] = useState(750);
-  // const [darkMode, setDarkMode] = useState(null);
   const [walletAddr, setWalletAddr] = useState(
     "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
   );
-  const [connectNewAccountBtn, setConnectNewAccountBtn] = useState(false);
   const [disconnetDiv, setDisconnectDiv] = useState(false);
   const [egcUsdVal, setEgcUsdVal] = useState(0);
   const [egrUsdVal, setEgrUsdVal] = useState(0);
   const [coinBalance, setCoinBalance] = React.useState("0.00");
-  const [coinBalance2, setCoinBalance2] = React.useState(0.0);
-  const [baseBalance, setBaseBalance] = useState(0.0);
-
-  const [productNamesZ, setProductNamesZ] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-
   const linksActive = window.location.pathname;
   const urlArr = linksActive.split("/");
   const context = useWeb3React();
-  const {
-    connector,
-    library,
-    chainId,
-    account,
-    activate,
-    deactivate,
-    active,
-    error,
-  } = context;
+  const { account } = context;
   const avatarRef = useRef();
-  const toggleAccountNav = () => {
-    if (acctNav == true) {
-      setAcctNav(false);
-    } else if (acctNav == false) {
-      setAcctNav(true);
-    }
-  };
+
   useEffect(() => {
-    // setWalletAddr(account);
-    // console.log(walletAddr.slice(0, 10));
     const element = avatarRef.current;
     if (element && account) {
       setWalletAddr(account);
@@ -128,79 +48,11 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
       element.appendChild(icon);
     }
   }, [account, avatarRef]);
-  useEffect(() => {
-    if (linksActive === "/dashboard") {
-      setActiveMenuName("Earn");
-    }
-    if (linksActive === "/app/stake") {
-      setActiveMenuName("Stake");
-    }
-    if (linksActive === "/app/user") {
-      setActiveMenuName("Account Details");
-    }
-    if (linksActive === "/app/swap") {
-      setActiveMenuName("Swap");
-    }
-    if (linksActive === "/app/earn/pool/detail") {
-      setActiveMenuName("Earn");
-    }
-    if (linksActive === "/admin/setRouter") {
-      setActiveMenuName("router");
-    }
-    if (linksActive === "/admin/priceOracle") {
-      setActiveMenuName("priceOracle");
-    }
-    if (
-      linksActive ===
-      "/app/earn/pool/detail/branch/" + urlArr[6] + "/asset"
-    ) {
-      setActiveMenuName("Earn");
-    }
-    if (
-      linksActive ===
-      "/app/earn/pool/detail/" + urlArr[5] + "/transactions"
-    ) {
-      setActiveMenuName("Earn");
-    }
-    if (linksActive === "/app/earn/pool/" + urlArr[4] + "/detail") {
-      setActiveMenuName("Earn");
-    }
-    if (linksActive === "/app/earn/pool/detail/transactions") {
-      setActiveMenuName("Earn");
-    }
-    // if (linksActive === "/app/add") {
-    //   setActiveMenuName("Liquidity");
-    // }
-    if (linksActive === "/app/whitepaper") {
-      setActiveMenuName("Whitepaper");
-    }
-    if (linksActive === "/app/earn") {
-      setActiveMenuName("Earn");
-    }
-    if (linksActive === "/app/stake/vault/" + urlArr[4] + "/ENGN") {
-      setActiveMenuName("Vault");
-    }
-    if (linksActive === "/app/stake/deposit_vault/" + urlArr[4] + "/ENGN") {
-      setActiveMenuName("Vault");
-    }
-  });
-  useEffect(() => {
-    if (linksActive == "/app/products") {
-      setSearchBar(true);
-    }
-  });
 
   // //console.log(dddd);
   const changeBg = (e) => {
     let currentId = e.currentTarget.id;
     setActiveBg(currentId);
-    if (linksActive === "/app/products") {
-      setCatDiv("home");
-    }
-    if (linksActive === "/app/products/categories/id-phone") {
-      setActiveBg("products");
-      setCatDiv("home");
-    }
   };
 
   useEffect(() => {
@@ -279,7 +131,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
       setActiveBg("whitepaper");
     }
 
-    if (smallSide == "not_small") {
+    if (smallSide === "not_small") {
       localStorage.setItem("smallSidetoken", "not_small");
     } else {
       localStorage.setItem("smallSidetoken", "smallSide");
@@ -287,7 +139,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
   }, []);
 
   const shrinkAction = () => {
-    if (smallSide == "not_small") {
+    if (smallSide === "not_small") {
       setSmallSide("smallSide");
       localStorage.setItem("smallSidetoken", "smallSide");
     } else {
@@ -299,86 +151,14 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
   useEffect(async () => {
     if (account) {
       const getBalance = await web3.eth.getBalance(account);
-      // const getBalance2 = await web3.eth.getBalance(
-      //   "0xe03f527a64128e8Edb64bf67256416302c56c4b7"
-      // );
       const ethBalance = web3.utils.fromWei(getBalance, "ether");
-      // const ethBalance2 = web3.utils.fromWei(getBalance2, "ether");
       console.log(ethBalance);
-      // console.log(getBalance2);
       setCoinBalance(parseFloat(ethBalance).toFixed(3));
     }
   }, [coinBalance, account]);
   const toggleDisconnectDiv = () => {
     setDisconnectDiv(!disconnetDiv);
   };
-  useEffect(() => {
-    let assetVal = "EGC";
-    let baseVal = "ENGN";
-    setAsset(assetVal);
-    setBase(baseVal);
-    let ticker = assetVal + "-" + baseVal;
-    if (account) {
-      // getPrice(ticker, library.getSigner()).then((data) => {
-      //   if (data.status) {
-      //     setTickerPrice(parseFloat(formatEther(data.message)));
-      //   }
-      // });
-      getTickerInfo(ticker, library.getSigner()).then((data) => {
-        console.log(data.status);
-        if (data.status) {
-          tokenBalance(data.message.base, account, library.getSigner()).then(
-            (balance) => {
-              setBaseBalance(formatEther(balance.message));
-            }
-          );
-
-          if (asset == "BNB" || asset == "bnb") {
-            library
-              .getBalance(account)
-              .then((balance) => {
-                setCoinBalance2(formatEther(balance));
-              })
-              .catch(() => {
-                setCoinBalance2(null);
-              });
-          } else {
-            tokenBalance(data.message.asset, account, library.getSigner()).then(
-              (balance) => {
-                setCoinBalance2(formatEther(balance.message));
-              }
-            );
-          }
-          // const checkUnlock = async () => {
-          //   let engn = await checkAllowance(
-          //     data.base,
-          //     account,
-          //     parseEther("5000000", "wei").toString(),
-          //     library.getSigner()
-          //   );
-
-          //   let egc = await checkAllowance(
-          //     data.asset,
-          //     account,
-          //     parseEther("5000000", "wei").toString(),
-          //     library.getSigner()
-          //   );
-          // };
-
-          // setLoanMetaData({
-          //   ...loanMetaData,
-          //   base: data.message.base,
-          //   asset: data.message.asset,
-          //   maxLoan: formatEther(data.message.maxLoan),
-          //   // maxLoan: formatEther(data.message.maxLoan),
-          // });
-        }
-      });
-    }
-  }, [chainId, account, connector, baseBalance, coinBalance2]);
-
-  // console.log(baseBalance);
-  // console.log(coinBalance2);
 
   useEffect(
     async (e) => {
@@ -440,16 +220,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
     }
   });
 
-  useEffect(() => {
-    if (window.ethereum) {
-      setConnectNewAccountBtn(false);
-    } else {
-      setConnectNewAccountBtn(true);
-    }
-  });
-
   const switchNetwork = async () => {
-    // if (window.ethereum) {
     try {
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
@@ -475,12 +246,9 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
         });
       }
     }
-    // } else {
-    //   setConnectNewAccountBtn(true);
-    // }
   };
   return (
-    <div className={smallSide == "not_small" ? "side" : "small_side"}>
+    <div className={smallSide === "not_small" ? "side" : "small_side"}>
       <div className="header_token_prices_div">
         <div className="container-fluid">
           <div className="header_token_prices_div_area">
@@ -526,49 +294,17 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 id="lend"
                 href="/admin"
                 className={
-                  activeBg == "lend" ? "header_tab1_active " : "header_tab1"
+                  activeBg === "lend" ? "header_tab1_active " : "header_tab1"
                 }
                 onClick={changeBg}
               >
                 Home
               </a>
-              {/* <a
-                id="sellers"
-                href="/admin/sellers"
-                className={
-                  activeBg == "sellers" ? "header_tab1_active " : "header_tab1"
-                }
-                onClick={changeBg}
-              >
-                Products
-              </a>
-              <a
-                id="transactions"
-                href="/admin/staff"
-                className={
-                  activeBg == "transactions"
-                    ? "header_tab1_active "
-                    : "header_tab1"
-                }
-                onClick={changeBg}
-              >
-                Staff
-              </a> */}
-              {/* <a
-                id="products"
-                href="/admin/all/products"
-                className={
-                  activeBg == "products" ? "header_tab1_active " : "header_tab1"
-                }
-                onClick={changeBg}
-              >
-                Products
-              </a> */}
               <a
                 id="membership"
                 href="/admin/modify/membership_plan"
                 className={
-                  activeBg == "membership"
+                  activeBg === "membership"
                     ? "header_tab1_active "
                     : "header_tab1"
                 }
@@ -580,7 +316,9 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 id="procurre"
                 href="/admin/upload/procurrement"
                 className={
-                  activeBg == "procurre" ? "header_tab1_active " : "header_tab1"
+                  activeBg === "procurre"
+                    ? "header_tab1_active "
+                    : "header_tab1"
                 }
                 onClick={changeBg}
               >
@@ -590,7 +328,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 id="upload"
                 href="/admin/product/upload"
                 className={
-                  activeBg == "upload" ? "header_tab1_active " : "header_tab1"
+                  activeBg === "upload" ? "header_tab1_active " : "header_tab1"
                 }
                 onClick={changeBg}
               >
@@ -600,7 +338,9 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 id="settings"
                 href="/admin/settings"
                 className={
-                  activeBg == "settings" ? "header_tab1_active " : "header_tab1"
+                  activeBg === "settings"
+                    ? "header_tab1_active "
+                    : "header_tab1"
                 }
                 onClick={changeBg}
               >
@@ -695,7 +435,9 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
         <a
           id="lend"
           href="/app"
-          className={activeBg == "lend" ? "header_tab1_active " : "header_tab1"}
+          className={
+            activeBg === "lend" ? "header_tab1_active " : "header_tab1"
+          }
           onClick={changeBg}
         >
           <HomeIcon className="sidebarIcon" />
@@ -706,7 +448,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
           id="sellers"
           href="/admin/sellers"
           className={
-            activeBg == "sellers" ? "header_tab1_active " : "header_tab1"
+            activeBg === "sellers" ? "header_tab1_active " : "header_tab1"
           }
           onClick={changeBg}
         >
@@ -717,7 +459,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
           id="transactions"
           href="/admin/staff"
           className={
-            activeBg == "transactions" ? "header_tab1_active " : "header_tab1"
+            activeBg === "transactions" ? "header_tab1_active " : "header_tab1"
           }
           onClick={changeBg}
         >
@@ -728,7 +470,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
           id="membership"
           href="/admin/modify/membership_plan"
           className={
-            activeBg == "membership" ? "header_tab1_active " : "header_tab1"
+            activeBg === "membership" ? "header_tab1_active " : "header_tab1"
           }
           onClick={changeBg}
         >
@@ -743,7 +485,7 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
       {/* ========== */}
       {/* ========== */}
       {/* ========== */}
-      {connectId == true ? (
+      {connectId === true ? (
         <div className="right_network_id_modal_div">
           <div className="right_network_id_modal_cont">
             {/* <div className="close_chain_icon_cont">

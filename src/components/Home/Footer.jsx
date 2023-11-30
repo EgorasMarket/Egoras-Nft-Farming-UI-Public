@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Twitter, Facebook, YouTube, Instagram } from "@material-ui/icons";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import WaveAnimation from "./WaveAnimation/WaveAnimation";
 import Accordion from "@material-ui/core/Accordion";
-// import OpenVaultPage from "./DashBoardPages/OpenVaultPage"im
-import OpenVaultPage from "../Dashboard/DashBoardPages/OpenVaultPage";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Typography from "@material-ui/core/Typography";
@@ -151,30 +146,6 @@ const Footer = () => {
                       className="egr2-logo2"
                     />
                   </a>
-
-                  {/* <div className="footerIcons">
-                    <a
-                      href="https://twitter.com/martgpt"
-                      className="twitter"
-                      target="_blank"
-                    >
-                      <Twitter className="twitter_icon" />
-                    </a>
-                    <a
-                      href="https://www.linkedin.com/company/martgpt/"
-                      className="twitter"
-                      target="_blank"
-                    >
-                      <LinkedInIcon className="twitter_icon" />
-                    </a>
-                    <a
-                      href="https://facebook.com/martgpt/"
-                      className="twitter"
-                      target="_blank"
-                    >
-                      <Facebook className="twitter_icon" />
-                    </a>
-                  </div> */}
                 </div>
                 {/* =================================
             ==================== */}

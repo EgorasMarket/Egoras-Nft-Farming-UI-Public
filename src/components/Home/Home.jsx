@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./stars.css";
-import { Twitter, Facebook, YouTube, Instagram } from "@material-ui/icons";
+import { Twitter, Facebook } from "@material-ui/icons";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import TelegramIcon from "@mui/icons-material/Telegram";
@@ -10,93 +10,15 @@ import axios from "axios";
 import { config } from "../../actions/Config";
 import { API_URL } from "../../actions/types";
 import { CALL_CHECK_USER_AND_MEMBERSHIP } from "../../services/userServices";
-import { tokenBalance } from "../../web3";
-import Web3 from "web3";
-
-import "react-multi-carousel/lib/styles.css";
-
-import "./countdown.css";
 import "../../css/home.css";
-
 import "swiper/swiper.min.css";
 import "swiper/swiper-bundle.css";
 import "swiper/swiper-bundle.min.css";
-import { parseEther, formatEther } from "@ethersproject/units";
-
-import {
-  Web3ReactProvider,
-  useWeb3React,
-  UnsupportedChainIdError,
-} from "@web3-react/core";
+import { useWeb3React } from "@web3-react/core";
 import "./Logos.css";
 import { GET_TVL } from "../../services/stakeServices";
-import {
-  GET_COIN_GEKO_PRICE,
-  GET_COIN_GEKO_PRICE_IN_USD,
-  GET_COIN_GEKO_PRICGET_TVLE_IN_USD,
-} from "../../services/generalServices";
-import { ConstructionSharp } from "@mui/icons-material";
+import { GET_COIN_GEKO_PRICE_IN_USD } from "../../services/generalServices";
 
-export const HowItWorksArea1 = () => {
-  return (
-    <div className="how_it_works_update_new_area_2">
-      <div className="how_it_works_update_new_area_2_cont1_border">
-        <div className="how_it_works_update_new_area_2_cont1_border_div">
-          <div className="how_it_works_update_new_area_2_cont1_icon">
-            <img
-              src="/img/member_home_icon.svg"
-              alt=""
-              className="how_it_works_update_new_area_2_cont1_icon_img"
-            />
-          </div>
-          <div className="how_it_works_update_new_area_2_cont1_title">
-            Become a member
-          </div>
-          <div className="how_it_works_update_new_area_2_cont1_paragraph">
-            Subscribe to a membership plan and gain access to our inventory of
-            products and services.
-          </div>
-        </div>
-      </div>
-      <div className="how_it_works_update_new_area_2_cont1_border">
-        <div className="how_it_works_update_new_area_2_cont1_border_div">
-          <div className="how_it_works_update_new_area_2_cont1_icon">
-            {" "}
-            <img
-              src="/img/swap_icon.svg"
-              alt=""
-              className="how_it_works_update_new_area_2_cont1_icon_img"
-            />
-          </div>
-          <div className="how_it_works_update_new_area_2_cont1_title">Swap</div>
-          <div className="how_it_works_update_new_area_2_cont1_paragraph">
-            Exchange your funds for USDm, a stablecoin that is pegged to the US
-            dollar.
-          </div>
-        </div>
-      </div>
-      <div className="how_it_works_update_new_area_2_cont1_border">
-        <div className="how_it_works_update_new_area_2_cont1_border_div">
-          <div className="how_it_works_update_new_area_2_cont1_icon">
-            {" "}
-            <img
-              src="/img/purchase_home_icon.svg"
-              alt=""
-              className="how_it_works_update_new_area_2_cont1_icon_img"
-            />
-          </div>
-          <div className="how_it_works_update_new_area_2_cont1_title">
-            Purchase products
-          </div>
-          <div className="how_it_works_update_new_area_2_cont1_paragraph">
-            Purchase manufactured products at a discounted price using USDm and
-            generate up to a 65% profit margin.
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 export const HowItWorksArea2 = () => {
   return (
     <div className="how_it_works_update_new_area_2">
@@ -159,7 +81,6 @@ export const HowItWorksArea2 = () => {
 
 const Home = () => {
   const context = useWeb3React();
-
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [homeData, setHomeData] = useState({
@@ -169,11 +90,8 @@ const Home = () => {
   });
 
   const [aboutVideoModal, setAboutVideoModal] = useState(false);
-  const [animate1, setAnimate1] = useState(true);
-  const [animate2, setAnimate2] = useState(false);
-  const [animate3, setAnimate3] = useState(false);
-  const [animate4, setAnimate4] = useState(false);
   const [egcUsd, setEgcUsd] = useState(0);
+  const [subscriptionStatus, setSubscriptionStatus] = useState(0);
   const [egcVal, setEgcVal] = useState(0);
   const [egcVal2, setEgcVal2] = useState(0);
   const [egrVal, setEgrVal] = useState(0);
@@ -183,25 +101,11 @@ const Home = () => {
   const [sumVals2, setSumVals2] = useState(0);
   const [valDisplay, setValDisplay] = useState(0);
   const [valDisplay2, setValDisplay2] = useState(0);
-  const [subscriptionStatus, setSubscriptionStatus] = useState(null);
   const [TotalSum, setTotalSum] = useState(0);
-  const [lockedValue, setLockedValue] = useState(0);
   const [totalAmountFrom, setTotalAmountFrom] = useState(0);
   const [totu, setTotu] = useState(0);
   const [TradeVolume, setTradeVolume] = useState(0);
-  const [activeTab, setActiveTab] = useState("distribute");
-  // const [uiMode, setUiMode] = useState(localStorage.getItem("uiMode"));
-  // const []
-  const {
-    connector,
-    library,
-    chainId,
-    account,
-    activate,
-    deactivate,
-    active,
-    error,
-  } = context;
+  const { account } = context;
   const assets = [
     {
       img: "/img/egc-icon.svg",
@@ -228,7 +132,7 @@ const Home = () => {
   }, [searchTerm]);
   // const fetchData = async () => {
 
-  //   // if (response.data.userMembership == false) {subscriptionStatus
+  //   // if (response.data.userMembership===false) {subscriptionStatus
 
   //   // }
   // };
@@ -353,9 +257,6 @@ const Home = () => {
       });
   }, []);
 
-  const ToggleActiveTab = (e) => {
-    setActiveTab(e.currentTarget.id);
-  };
   return (
     <div>
       {/* =================================================================================================================================================================================================================================================================== */}

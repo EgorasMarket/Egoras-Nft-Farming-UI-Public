@@ -223,6 +223,8 @@ export const Authenticate = (props) => {
                       className="btn btn-block btn-light wallet-btn py-2 px-3"
                       key={name}
                       onClick={() => {
+                        console.log(currentConnector);
+                        console.log(connectorsByName[name]);
                         setActivatingConnector(currentConnector);
                         activate(connectorsByName[name]);
                       }}

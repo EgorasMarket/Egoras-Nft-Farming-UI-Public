@@ -1,11 +1,11 @@
 import { InjectedConnector } from "@web3-react/injected-connector";
-// import { NetworkConnector } from "@web3-react/network-connector";
+
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
-// import { InjectedConnector } from "@web3-react/injected-connector";
+
 const POLLING_INTERVAL = 12000;
 const RPC_URLS = {
-  1: "https://bsc-dataseed.binance.org/",
-  97: "https://data-seed-prebsc-2-s1.binance.org:8545",
+  1: "https://bsc-dataseed.bnbchain.org",
+  97: "https://bsc-testnet-dataseed.bnbchain.org",
 };
 
 export const injected = new InjectedConnector({

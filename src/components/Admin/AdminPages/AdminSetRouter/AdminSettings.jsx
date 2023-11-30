@@ -4,46 +4,31 @@ import {
   suspendPythia,
   setPriceOracle,
   setEGCUSDTicker,
-  resetStakeTime,
-  IncreaseRoyaltyTime,
+  // resetStakeTime,
+  // IncreaseRoyaltyTime,
   adminAddMinter,
   DiamondCutFunc,
-  approveBusd,
   setTokenAddress,
-  BurnEgc,
-  withdrawAllEgc,
+  // BurnEgc,
+  // withdrawAllEgc,
   getPriceOracle,
   setStakeConfigure,
 } from "../../../../web3/index2";
 import "./AdminRouter.css";
-import { unlockTokenV3 } from "../../../../web3";
-import Web3 from "web3";
-import { parseEther, formatEther } from "@ethersproject/units";
-import v3ContractAddress from "../../../../web3/contracts/V3/V3ContractAddress.json";
 import { useWeb3React } from "@web3-react/core";
 
 const AdminSettings = () => {
   const context = useWeb3React();
-  const {
-    connector,
-    library,
-    chainId,
-    account,
-    activate,
-    deactivate,
-    active,
-    error,
-  } = context;
+  const { library, account } = context;
   const [tickerArray, setTickerArray] = useState(["egceusd"]);
   const [priceArray, setPriceArray] = useState(["1300000000000000000"]);
   const [newWallet, setNewWallet] = useState([""]);
   const [newWallet2, setNewWallet2] = useState([""]);
   const [diamondCutCode, setDiamondCutCode] = useState("");
-  const [egcAmnt, setEgcAmnt] = useState("");
-  const [egcWithdrawAmnt, setEgcWithdrawAmnt] = useState("");
+  // const [egcAmnt, setEgcAmnt] = useState("");
+  // const [egcWithdrawAmnt, setEgcWithdrawAmnt] = useState("");
   const [egcAddress, setEgcAddress] = useState("");
   const [eusdAddress, setEusdAddress] = useState("");
-
   const addMinter = async () => {
     const response = await adminAddMinter(library.getSigner());
     console.log(response);
@@ -68,32 +53,32 @@ const AdminSettings = () => {
     console.log(response);
   };
 
-  const WithDrawEgc = async () => {
-    const response = await withdrawAllEgc(
-      parseEther(egcWithdrawAmnt, "wei").toString(),
-      library.getSigner()
-    );
-    console.log(response);
-  };
-  const BurnEgcAmnt = async () => {
-    const response = await BurnEgc(
-      parseEther(egcAmnt, "wei").toString(),
-      library.getSigner()
-    );
-    console.log(response);
-  };
+  // const WithDrawEgc = async () => {
+  //   const response = await withdrawAllEgc(
+  //     parseEther(egcWithdrawAmnt, "wei").toString(),
+  //     library.getSigner()
+  //   );
+  //   console.log(response);
+  // };
+  // const BurnEgcAmnt = async () => {
+  //   const response = await BurnEgc(
+  //     parseEther(egcAmnt, "wei").toString(),
+  //     library.getSigner()
+  //   );
+  //   console.log(response);
+  // };
   const diamondCutCodeChange = (e) => {
     setDiamondCutCode(e.target.value);
     console.log(JSON.parse(e.target.value));
   };
-  const WithdrawEgcChange = (e) => {
-    setEgcWithdrawAmnt(e.target.value);
-    console.log(e.target.value);
-  };
-  const burnEgcChange = (e) => {
-    setEgcAmnt(e.target.value);
-    console.log(e.target.value);
-  };
+  // const WithdrawEgcChange = (e) => {
+  //   setEgcWithdrawAmnt(e.target.value);
+  //   console.log(e.target.value);
+  // };
+  // const burnEgcChange = (e) => {
+  //   setEgcAmnt(e.target.value);
+  //   console.log(e.target.value);
+  // };
 
   const handleNewWallet = (event) => {
     setNewWallet(event.target.value);
@@ -148,15 +133,16 @@ const AdminSettings = () => {
     console.log(response);
   };
 
-  const resetStackedTime = async () => {
-    const response = await resetStakeTime(account, library.getSigner());
-    console.log(response);
-  };
+  // const resetStackedTime = async () => {
+  //   const response = await resetStakeTime(account, library.getSigner());
+  //   console.log(response);
+  // };
 
-  const IncreaseStakeTime = async () => {
-    const response = await IncreaseRoyaltyTime(account, library.getSigner());
-    console.log(response);
-  };
+  // const IncreaseStakeTime = async () => {
+  //   const response = await IncreaseRoyaltyTime(account, library.getSigner());
+  //   console.log(response);
+  // };
+
   useEffect(async () => {
     const res = await getPriceOracle();
     console.log(res);
@@ -295,7 +281,7 @@ const AdminSettings = () => {
                 </button>
               </div>
 
-              <div className="settings_section1_div1">
+              {/* <div className="settings_section1_div1">
                 <h4 className="routerHeader">Burn Egc</h4>
                 <div className="setRouterAddressDiv">
                   <div className="setRouterAddressDiv_address_divs">
@@ -318,9 +304,9 @@ const AdminSettings = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
-              <div className="settings_section1_div1">
+              {/* <div className="settings_section1_div1">
                 <h4 className="routerHeader">Withdraw Egc</h4>
                 <div className="setRouterAddressDiv">
                   <div className="setRouterAddressDiv_address_divs">
@@ -343,7 +329,7 @@ const AdminSettings = () => {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="settings_section1_div1">
                 <h4 className="routerHeader">Set Address</h4>
                 <div className="setRouterAddressDiv">

@@ -1,25 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
-import SearchIcon from "@mui/icons-material/Search";
+import React, { useState, useEffect } from "react";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import "../../../css/dashboardLend.css";
 import PulseLoader from "react-spinners/PulseLoader";
-import { loadUser } from "../../../actions/auth";
-import { connect } from "react-redux";
-import { faSpinner } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { API_URL } from "../../../actions/types";
 import Paginate from "./Paginate";
-import abi from "../../../web3/contracts/erc20.json";
 import UpdatedErrorModal from "./UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedErrorModal";
 import UpdatedSuccessModal from "./UpdatedAppPages/UpdatedSuccessErrorModals/UpdatedSuccessModal";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import ClipLoader from "react-spinners/ClipLoader";
-// import TableWithPagination
-import TableWithPagination from "../../SmallerComponents/Tables/TableWithPagination/TableWithPagination";
 import { config } from "../../../actions/Config";
-import { Authenticate } from "../../auth/Authenticate";
 import formatNumber from "./FormatNumber";
-// import { numberWithCommas } from "../../static/static";
 import Blockies from "react-blockies";
 import getMonthFromNumber from "./MonthFromNumber";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -108,14 +98,12 @@ const DashboardHome = () => {
   const [txHash, setTxHash] = useState("");
   useEffect(async () => {
     const egc_usd2 = await GET_COIN_GEKO_PRICE_IN_USD();
-    // if
     console.log(parseFloat(egc_usd2));
     setEgc_usd(parseFloat(egc_usd2));
   }, []);
 
   useEffect(async () => {
     setChartLoaded(true);
-    // setBurntEgcLoaded(true);
     const fetchData = async () => {
       try {
         const data = await axios.get(API_URL + "/staking/chart", null, config);
@@ -123,7 +111,6 @@ const DashboardHome = () => {
         console.log(data.data.data);
         if (data.data.data.length !== 0) {
           const temp = data.data.data;
-          // const temp = data.data.data;
           console.log(temp);
           for (const data of temp) {
             data.value = parseInt(data.value).toFixed(2) * egc_usd;
@@ -525,7 +512,7 @@ const DashboardHome = () => {
     setDisable(true);
     let res = await burnToken(library.getSigner());
     console.log(res);
-    if (res.status == true) {
+    if (res.status === true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
@@ -1334,7 +1321,7 @@ const DashboardHome = () => {
                   <div
                     id="swap"
                     className={
-                      activeBtn == "swap"
+                      activeBtn === "swap"
                         ? "filter_table_btn1_active"
                         : "filter_table_btn1"
                     }
@@ -1345,7 +1332,7 @@ const DashboardHome = () => {
                   <div
                     id="stake"
                     className={
-                      activeBtn == "stake"
+                      activeBtn === "stake"
                         ? "filter_table_btn1_active"
                         : "filter_table_btn1"
                     }
@@ -1357,7 +1344,7 @@ const DashboardHome = () => {
                   <div
                     id="product"
                     className={
-                      activeBtn == "product"
+                      activeBtn === "product"
                         ? "filter_table_btn1_active"
                         : "filter_table_btn1"
                     }
@@ -1368,7 +1355,7 @@ const DashboardHome = () => {
                   <div
                     id="burn"
                     className={
-                      activeBtn == "burn"
+                      activeBtn === "burn"
                         ? "filter_table_btn1_active"
                         : "filter_table_btn1"
                     }
@@ -1378,7 +1365,7 @@ const DashboardHome = () => {
                   </div>
                 </div>
               </div>
-              {activeBtn == "swap" ? (
+              {activeBtn === "swap" ? (
                 <div>
                   <div className="lock_container_transactions_body_all">
                     <table className="stakingTable_table">
@@ -1529,7 +1516,7 @@ const DashboardHome = () => {
               {/* ======== */}
               {/* ======== */}
               {/* ======== */}
-              {activeBtn == "stake" ? (
+              {activeBtn === "stake" ? (
                 <div>
                   <div className="lock_container_transactions_body_all">
                     <table className="stakingTable_table">
@@ -1592,9 +1579,9 @@ const DashboardHome = () => {
                               <tr className="stakingTable_body_row ">
                                 <td className="stakingTable_body_row_data stakingTable_body_row_data_first  ">
                                   <div className="value_dolls_div">
-                                    {data.status == "STAKE"
+                                    {data.status === "STAKE"
                                       ? "Create Lock"
-                                      : data.status == "UNSTAKE"
+                                      : data.status === "UNSTAKE"
                                       ? "Unlock"
                                       : null}
 
@@ -1606,14 +1593,14 @@ const DashboardHome = () => {
                                 </td>
                                 <td className="stakingTable_body_row_data">
                                   <div className="value_dolls_div2">
-                                    {data.status == "STAKE" ? (
+                                    {data.status === "STAKE" ? (
                                       <span style={{ display: "flex" }}>
                                         {numberWithCommas(
                                           parseFloat(data.amount).toFixed(2)
                                         )}{" "}
                                         egc
                                       </span>
-                                    ) : data.status == "UNSTAKE" ? (
+                                    ) : data.status === "UNSTAKE" ? (
                                       <span style={{ display: "flex" }}>
                                         {numberWithCommas(
                                           parseFloat(
@@ -1676,7 +1663,7 @@ const DashboardHome = () => {
               {/* ======== */}
               {/* ======== */}
               {/* ======== */}
-              {activeBtn == "product" ? (
+              {activeBtn === "product" ? (
                 <div>
                   <div className="lock_container_transactions_body_all">
                     <table className="stakingTable_table">
@@ -1834,7 +1821,7 @@ const DashboardHome = () => {
                   />
                 </div>
               ) : null}
-              {activeBtn == "burn" ? (
+              {activeBtn === "burn" ? (
                 <div>
                   <div className="lock_container_transactions_body_all">
                     <table className="stakingTable_table">
@@ -1858,16 +1845,6 @@ const DashboardHome = () => {
                           </th>
                         </tr>
                       </thead>
-
-                      {/* <div className="table-body-content">
-
-// =====================
-// =====================
-// =====================
-// =====================
-// =====================
-// =====================
-              </div> */}
                       {currentTransactions4.length <= 0 ? (
                         <div className="no_loans_div">
                           <div className="no_loans_div_cont">
@@ -2003,11 +1980,5 @@ const DashboardHome = () => {
     </div>
   );
 };
-
-// export default DashBoardLendPage;
-
-// const mapStateToProps = (state) => ({
-//   auth: state.auth,
-// });
 
 export default DashboardHome;
