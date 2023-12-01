@@ -95,18 +95,27 @@
   padding: 10px;
 }
 
+.notifyDropDownDiv_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background: #00000096;
+  width: 100vw;
+  display: flex;
+  backdrop-filter: blur(5px);
+  justify-content: flex-end;
+  z-index: 1;
+}
 .notifyDropDownDiv {
-  position: absolute;
-  top: 124%;
   background: #ffffff;
   border: solid 1px #c0bee4;
-  width: 19em;
-  right: 0px;
-  border-radius: 11px;
+  width: 100%;
+  max-width: 350px;
   display: flex;
   flex-direction: column;
   overflow: scroll;
-  height: 20em;
+  height: 100%;
   box-shadow: -1px 9px 25px #0000008a;
   color: #000;
 }

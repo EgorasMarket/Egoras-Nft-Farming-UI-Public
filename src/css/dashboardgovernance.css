@@ -183,12 +183,15 @@
   min-width: fit-content;
   padding: 5px 10px;
   border-radius: 10px;
-  border: solid 1px grey;
-  background: none;
+  border: solid 1px #2d2d31;
   color: #fff;
   justify-content: space-between;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
+  background: #232326;
+}
+.proposals_area_2_body_drop_div_button:hover {
+  background: #3d3d41;
 }
 .proposals_area_2_body_head_tabs {
   display: flex;

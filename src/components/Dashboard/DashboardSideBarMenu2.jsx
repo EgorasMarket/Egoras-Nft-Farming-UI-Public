@@ -766,189 +766,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                         </div>
                       </div>
                       {notifyDiv && (
-                        <div className="notifyDropDownDiv">
-                          {UnreadNotifications.length <= 0 ? (
-                            <div className="notifyDropDownDiv_emptyDiv">
-                              No notifications!
-                            </div>
-                          ) : (
-                            <>
-                              <div className="notifications_headerTab">
-                                <div
-                                  className={
-                                    activeNotifyTab === "unread"
-                                      ? "notifications_headerTab1_active"
-                                      : "notifications_headerTab1"
-                                  }
-                                  id="unread"
-                                  onClick={ToggleActiveNotifyTab}
-                                >
-                                  Unread
-                                </div>
-                                <div
-                                  className={
-                                    activeNotifyTab === "read"
-                                      ? "notifications_headerTab1_active"
-                                      : "notifications_headerTab1"
-                                  }
-                                  onClick={ToggleActiveNotifyTab}
-                                  id="read"
-                                >
-                                  Read
-                                </div>
-                              </div>
-                              {activeNotifyTab === "read" ? (
-                                <>
-                                  {UnreadNotifications.filter(
-                                    (data) => data.status === "read"
-                                  ).length > 0 ? (
-                                    <>
-                                      {UnreadNotifications.filter(
-                                        (data) => data.status === "read"
-                                      )
-                                        .sort(
-                                          (a, b) =>
-                                            new Date(b.createdAt).getTime() -
-                                            new Date(a.createdAt).getTime()
-                                        )
-                                        .map((data, key) => (
-                                          <div
-                                            className="notifyDropDownDiv_div1"
-                                            key={data.id}
-                                          >
-                                            <div className="notifyDropDownDiv_div1_title">
-                                              {data.title}
-                                            </div>
-                                            <div className="notifyDropDownDiv_div1_para">
-                                              {data.message}
-                                            </div>
-                                          </div>
-                                        ))}
-                                    </>
-                                  ) : (
-                                    <div className="notifyDropDownDiv_emptyDiv">
-                                      No notifications!
-                                    </div>
-                                  )}
-                                </>
-                              ) : null}
-
-                              {activeNotifyTab === "unread" ? (
-                                <>
-                                  {UnreadNotifications.filter(
-                                    (data) => data.status === "unread"
-                                  ).length > 0 ? (
-                                    <>
-                                      {UnreadNotifications.filter(
-                                        (data) => data.status === "unread"
-                                      )
-                                        .sort(
-                                          (a, b) =>
-                                            new Date(b.createdAt).getTime() -
-                                            new Date(a.createdAt).getTime()
-                                        )
-                                        .map((data, key) => (
-                                          <div
-                                            className="notifyDropDownDiv_div1 active"
-                                            key={data.id}
-                                            id={data.id}
-                                            onClick={ToggleNotifyDetails}
-                                          >
-                                            <div className="notifyDropDownDiv_div1_title active">
-                                              {data.title}
-                                              <span
-                                                style={{
-                                                  fontSize: "10px",
-                                                }}
-                                              >
-                                                - (
-                                                <TimeAgoComponent
-                                                  date={data.createdAt}
-                                                />
-                                                )
-                                              </span>
-                                            </div>
-                                            <div className="notifyDropDownDiv_div1_para">
-                                              {data.message}
-                                            </div>
-                                          </div>
-                                        ))}
-                                    </>
-                                  ) : (
-                                    <div className="notifyDropDownDiv_emptyDiv">
-                                      No notifications!
-                                    </div>
-                                  )}
-                                </>
-                              ) : null}
-                            </>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                  {/* ============ */}
-                  {/* ============ */}
-                  {/* ====== MOBILE VIEW NOTIFICATION ====== */}
-                  {/* ============ */}
-                  <div className="toggle_dark_mode_div">
-                    <SwitchToggle2
-                      className="toggle_dark_mode"
-                      darkMode={togglemakeDark}
-                      checkBox={check}
-                    />
-                  </div>
-                  {account ? (
-                    <div className="connected_header_address dash_connected_header_address">
-                      <p className="header_wllt_bal">
-                        <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
-                        {coinBalance} BNB
-                      </p>
-                      <div
-                        className={
-                          memberStatus === false
-                            ? "metamask_prof_pic_icon"
-                            : "metamask_prof_pic_icon_vip"
-                        }
-                        ref={avatarRef}
-                      ></div>
-                      <div
-                        className={
-                          memberStatus === false
-                            ? "wallet_addr_cont_txt_header"
-                            : "wallet_addr_cont_txt_header_vip"
-                        }
-                      >
-                        <div className="wall_addr">{walletAddr}</div>
-                        {memberStatus === false ? null : (
-                          <img
-                            src="/img/membership_icons/membership_icon.svg"
-                            alt=""
-                            className="wallet_addr_cont_txt_vip_icon"
-                          />
-                        )}
-                      </div>
-                      <div
-                        className="notify_icon_cont_div_cont"
-                        ref={wrapperRef}
-                      >
-                        <div
-                          className="wallet_settings_icon_cont notify_icon_cont"
-                          onClick={ToggleNotifyDiv}
-                        >
-                          <div className="notify_icon_cont_div">
-                            {UnreadNotifications.filter(
-                              (data) => data.status === "unread"
-                            ).length > 0 ? (
-                              <div className="notify_icon_cont_div_notifyCount">
-                                {noTifyCount}
-                              </div>
-                            ) : null}
-                            <NotificationsNoneOutlinedIcon className="wallet_settings_icon" />
-                          </div>
-                        </div>
-
-                        {notifyDiv && (
+                        <div className="notifyDropDownDiv_modal">
                           <div className="notifyDropDownDiv">
                             {UnreadNotifications.length <= 0 ? (
                               <div className="notifyDropDownDiv_emptyDiv">
@@ -1066,6 +884,199 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                                 ) : null}
                               </>
                             )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  {/* ============ */}
+                  {/* ============ */}
+                  {/* ====== MOBILE VIEW NOTIFICATION ====== */}
+                  {/* ============ */}
+                  <div className="toggle_dark_mode_div">
+                    <SwitchToggle2
+                      className="toggle_dark_mode"
+                      darkMode={togglemakeDark}
+                      checkBox={check}
+                    />
+                  </div>
+                  {account ? (
+                    <div className="connected_header_address dash_connected_header_address">
+                      <p className="header_wllt_bal">
+                        <AccountBalanceWalletIcon className="header_wllt_bal_icon" />
+                        {coinBalance} BNB
+                      </p>
+                      <div
+                        className={
+                          memberStatus === false
+                            ? "metamask_prof_pic_icon"
+                            : "metamask_prof_pic_icon_vip"
+                        }
+                        ref={avatarRef}
+                      ></div>
+                      <div
+                        className={
+                          memberStatus === false
+                            ? "wallet_addr_cont_txt_header"
+                            : "wallet_addr_cont_txt_header_vip"
+                        }
+                      >
+                        <div className="wall_addr">{walletAddr}</div>
+                        {memberStatus === false ? null : (
+                          <img
+                            src="/img/membership_icons/membership_icon.svg"
+                            alt=""
+                            className="wallet_addr_cont_txt_vip_icon"
+                          />
+                        )}
+                      </div>
+                      <div
+                        className="notify_icon_cont_div_cont"
+                        ref={wrapperRef}
+                      >
+                        <div
+                          className="wallet_settings_icon_cont notify_icon_cont"
+                          onClick={ToggleNotifyDiv}
+                        >
+                          <div className="notify_icon_cont_div">
+                            {UnreadNotifications.filter(
+                              (data) => data.status === "unread"
+                            ).length > 0 ? (
+                              <div className="notify_icon_cont_div_notifyCount">
+                                {noTifyCount}
+                              </div>
+                            ) : null}
+                            <NotificationsNoneOutlinedIcon className="wallet_settings_icon" />
+                          </div>
+                        </div>
+
+                        {notifyDiv && (
+                          <div
+                            className="notifyDropDownDiv_modal"
+                            ref={wrapperRef}
+                          >
+                            <div className="notifyDropDownDiv" ref={wrapperRef}>
+                              {UnreadNotifications.length <= 0 ? (
+                                <div className="notifyDropDownDiv_emptyDiv">
+                                  No notifications!
+                                </div>
+                              ) : (
+                                <>
+                                  <div className="notifications_headerTab">
+                                    <div
+                                      className={
+                                        activeNotifyTab === "unread"
+                                          ? "notifications_headerTab1_active"
+                                          : "notifications_headerTab1"
+                                      }
+                                      id="unread"
+                                      onClick={ToggleActiveNotifyTab}
+                                    >
+                                      Unread
+                                    </div>
+                                    <div
+                                      className={
+                                        activeNotifyTab === "read"
+                                          ? "notifications_headerTab1_active"
+                                          : "notifications_headerTab1"
+                                      }
+                                      onClick={ToggleActiveNotifyTab}
+                                      id="read"
+                                    >
+                                      Read
+                                    </div>
+                                  </div>
+                                  {activeNotifyTab === "read" ? (
+                                    <>
+                                      {UnreadNotifications.filter(
+                                        (data) => data.status === "read"
+                                      ).length > 0 ? (
+                                        <>
+                                          {UnreadNotifications.filter(
+                                            (data) => data.status === "read"
+                                          )
+                                            .sort(
+                                              (a, b) =>
+                                                new Date(
+                                                  b.createdAt
+                                                ).getTime() -
+                                                new Date(a.createdAt).getTime()
+                                            )
+                                            .map((data, key) => (
+                                              <div
+                                                className="notifyDropDownDiv_div1"
+                                                key={data.id}
+                                              >
+                                                <div className="notifyDropDownDiv_div1_title">
+                                                  {data.title}
+                                                </div>
+                                                <div className="notifyDropDownDiv_div1_para">
+                                                  {data.message}
+                                                </div>
+                                              </div>
+                                            ))}
+                                        </>
+                                      ) : (
+                                        <div className="notifyDropDownDiv_emptyDiv">
+                                          No notifications!
+                                        </div>
+                                      )}
+                                    </>
+                                  ) : null}
+
+                                  {activeNotifyTab === "unread" ? (
+                                    <>
+                                      {UnreadNotifications.filter(
+                                        (data) => data.status === "unread"
+                                      ).length > 0 ? (
+                                        <>
+                                          {UnreadNotifications.filter(
+                                            (data) => data.status === "unread"
+                                          )
+                                            .sort(
+                                              (a, b) =>
+                                                new Date(
+                                                  b.createdAt
+                                                ).getTime() -
+                                                new Date(a.createdAt).getTime()
+                                            )
+                                            .map((data, key) => (
+                                              <div
+                                                className="notifyDropDownDiv_div1 active"
+                                                key={data.id}
+                                                id={data.id}
+                                                onClick={ToggleNotifyDetails}
+                                              >
+                                                <div className="notifyDropDownDiv_div1_title active">
+                                                  {data.title}
+                                                  <span
+                                                    style={{
+                                                      fontSize: "10px",
+                                                    }}
+                                                  >
+                                                    - (
+                                                    <TimeAgoComponent
+                                                      date={data.createdAt}
+                                                    />
+                                                    )
+                                                  </span>
+                                                </div>
+                                                <div className="notifyDropDownDiv_div1_para">
+                                                  {data.message}
+                                                </div>
+                                              </div>
+                                            ))}
+                                        </>
+                                      ) : (
+                                        <div className="notifyDropDownDiv_emptyDiv">
+                                          No notifications!
+                                        </div>
+                                      )}
+                                    </>
+                                  ) : null}
+                                </>
+                              )}
+                            </div>
                           </div>
                         )}
                       </div>
