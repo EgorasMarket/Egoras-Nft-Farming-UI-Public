@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import YouTubeIcon from "@mui/icons-material/YouTube";
+import React, { useState, useEffect, useRef } from "react";
 import { CALL_CHECK_USER_AND_MEMBERSHIP } from "../../services/userServices";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import HowToVoteIcon from "@mui/icons-material/HowToVote";
+import CloseIcon from "@mui/icons-material/Close";
 // ================
 // ================
 // ================
@@ -12,7 +11,6 @@ import HowToVoteIcon from "@mui/icons-material/HowToVote";
 // ================
 // ================
 // ================
-import JoinLeftIcon from "@mui/icons-material/JoinLeft";
 // ================
 // ================
 // ================
@@ -27,109 +25,30 @@ import { config } from "../../actions/Config";
 import Marquee from "react-fast-marquee";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import AppsIcon from "@mui/icons-material/Apps";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 // import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 // import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 // import NotificationsIcon from "@mui/icons-material/Notifications";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import HomeIcon from "@mui/icons-material/Home";
 import Web3 from "web3";
-import CloseIcon from "@material-ui/icons/Close";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import TelegramIcon from "@mui/icons-material/Telegram";
 import { Sling as Hamburger } from "hamburger-react";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import SellIcon from "@mui/icons-material/Sell";
-import StorefrontIcon from "@mui/icons-material/Storefront";
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import LockClockIcon from "@mui/icons-material/LockClock";
 import jazzicon from "@metamask/jazzicon";
-import StarsIcon from "@mui/icons-material/Stars";
-import ApprovalIcon from "@mui/icons-material/Approval";
-import CreditScoreTwoToneIcon from "@mui/icons-material/CreditScoreTwoTone";
-// import { AccountNavigation } from "./DashboardPages/AccountNavigation";
-import SearchIcon from "@mui/icons-material/Search";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import MenuIcon from "@mui/icons-material/Menu";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import { Authenticate } from "../auth/Authenticate";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import { Link } from "react-router-dom";
-import DescriptionIcon from "@mui/icons-material/Description";
 import SwapHorizontalCircleIcon from "@mui/icons-material/SwapHorizontalCircle";
-import OpacityIcon from "@mui/icons-material/Opacity";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import BarChartIcon from "@mui/icons-material/BarChart";
 import "../../css/dashboardheader.css";
 import "../../css/dashBoardSideBar.css";
 import { numberWithCommas } from "../../static";
 import SwitchToggle2 from "./DashBoardPages/SwitchToggle/SwitchToggle2";
-import { parseEther, formatEther } from "@ethersproject/units";
-import {
-  Web3ReactProvider,
-  useWeb3React,
-  UnsupportedChainIdError,
-} from "@web3-react/core";
+import { useWeb3React } from "@web3-react/core";
 import { socket } from "../../socket";
 import TimeAgoComponent from "../TimeAgoComponent";
-import { CALL_GET_USER_LOCATION } from "../../services/userServices";
-import { CALL_PRODUCT_SEARCH } from "../../services/productServices";
-export const MarketHeader = ({
-  setCategories,
-  ToggleMobile_cat,
-  categories,
-  ToggleOtherCategory,
-}) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  // const [brandCheck, setBrandCheck] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const handleSearchChange = async (event) => {
-    setSearchTerm(event.target.value);
-    console.log(event.target.value);
 
-    let response = await CALL_PRODUCT_SEARCH(event.target.value);
-    console.log(response.data);
-    setSearchResults(response.data);
-  };
-  useEffect(async () => {
-    try {
-      const response = await axios.get(
-        API_URL + "/product/all-categories",
-        null,
-        config
-      );
-      console.log(response);
-      console.log(response.data.data.allCategories);
-      setCategories(response.data.data.allCategories);
-    } catch (error) {
-      console.log(error.response);
-    }
-  }, []);
-
-  return (
-    <div className="dashboardMarketPlaceHeader no-bg">
-      <div className="container">
-        <div className="dashboardMarketPlaceHeader_area">
-          <div className="dashboardMarketPlaceHeader_area_gen_links">
-            <a href="#" className="dashboardMarketPlaceHeader_area_gen_links_1">
-              EGR-3000(M)
-            </a>
-            <a href="#" className="dashboardMarketPlaceHeader_area_gen_links_1">
-              EGR-3000(A)
-            </a>
-            <a href="#" className="dashboardMarketPlaceHeader_area_gen_links_1">
-              EGR-8000(A)
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const dddd = localStorage.getItem("smallSidetoken");
   const [connectId, setConnectId] = useState(false);
@@ -137,40 +56,26 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const [catDiv, setCatDiv] = useState("not_home");
   const [smallSide, setSmallSide] = useState(dddd);
   const [isOpen, setIsOpen] = useState(false);
-  const [cartNum, setCartNum] = useState("");
-  const [image, setImage] = useState("");
-  const [asset, setAsset] = useState("");
-  const [base, setBase] = useState("");
   const [searchBar, setSearchBar] = useState(false);
   const [acctNav, setAcctNav] = useState(false);
   const [activeMenuName, setActiveMenuName] = useState("Markets");
-  const [showHeader, setshowHeader] = useState(true);
-  const [betaDiv, setBetaDiv] = useState(true);
   const [conecttxt, setConnectTxt] = useState("Not Connected");
-  const [nairaValue, setNairaValue] = useState(750);
   const [UnreadNotifications, setUnreadNotifications] = useState([]);
   const [categories, setCategories] = useState([]);
   const [otherCategory, setOtherCategory] = useState(false);
   const [mobile_cat, setMobile_cat] = useState(false);
   const [noTifyCount, setNotifyCount] = useState(0);
-  // const [darkMode, setDarkMode] = useState(null);
   const [walletAddr, setWalletAddr] = useState(
     "0xXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
   );
   const [connectNewAccountBtn, setConnectNewAccountBtn] = useState(false);
   const [disconnetDiv, setDisconnectDiv] = useState(false);
   const [egcUsdVal, setEgcUsdVal] = useState(0);
-  const [egrUsdVal, setEgrUsdVal] = useState(0);
   const [coinBalance, setCoinBalance] = React.useState("0.00");
-  const [coinBalance2, setCoinBalance2] = React.useState(0.0);
-  const [baseBalance, setBaseBalance] = useState(0.0);
   const [notifyDiv, setNotifyDiv] = useState(false);
-  const [notification, setNotification] = useState([]);
   const [notificationDetails, setNotificationDetails] = useState("");
   const [activeNotifyTab, setActiveNotifyTab] = useState("unread");
   const [memberStatus, setMemberStatus] = useState(false);
-  const [productNamesZ, setProductNamesZ] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
 
   const linksActive = window.location.pathname;
   const urlArr = linksActive.split("/");
@@ -748,7 +653,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   {/* ============ */}
                   {/* ===== MOBILE VIEW NOTIFICATION ======= */}
                   {/* ============ */}
-                  <div className="mobile_view_notifications" ref={wrapperRef}>
+                  <div className="mobile_view_notifications">
                     <div className="notify_icon_cont_div_cont">
                       <div
                         className="wallet_settings_icon_cont notify_icon_cont"
@@ -767,6 +672,17 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                       </div>
                       {notifyDiv && (
                         <div className="notifyDropDownDiv_modal">
+                          <div
+                            className="closeNotifyModal_div_bg"
+                            onClick={ToggleNotifyDiv}
+                          ></div>
+                          <div className="closeNotifyModal_div">
+                            {" "}
+                            <CloseIcon
+                              className="closeNotifyModal_div_icon"
+                              onClick={ToggleNotifyDiv}
+                            />
+                          </div>
                           <div className="notifyDropDownDiv">
                             {UnreadNotifications.length <= 0 ? (
                               <div className="notifyDropDownDiv_emptyDiv">
@@ -930,10 +846,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                           />
                         )}
                       </div>
-                      <div
-                        className="notify_icon_cont_div_cont"
-                        ref={wrapperRef}
-                      >
+                      <div className="notify_icon_cont_div_cont">
                         <div
                           className="wallet_settings_icon_cont notify_icon_cont"
                           onClick={ToggleNotifyDiv}
@@ -949,136 +862,6 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                             <NotificationsNoneOutlinedIcon className="wallet_settings_icon" />
                           </div>
                         </div>
-
-                        {notifyDiv && (
-                          <div
-                            className="notifyDropDownDiv_modal"
-                            ref={wrapperRef}
-                          >
-                            <div className="notifyDropDownDiv" ref={wrapperRef}>
-                              {UnreadNotifications.length <= 0 ? (
-                                <div className="notifyDropDownDiv_emptyDiv">
-                                  No notifications!
-                                </div>
-                              ) : (
-                                <>
-                                  <div className="notifications_headerTab">
-                                    <div
-                                      className={
-                                        activeNotifyTab === "unread"
-                                          ? "notifications_headerTab1_active"
-                                          : "notifications_headerTab1"
-                                      }
-                                      id="unread"
-                                      onClick={ToggleActiveNotifyTab}
-                                    >
-                                      Unread
-                                    </div>
-                                    <div
-                                      className={
-                                        activeNotifyTab === "read"
-                                          ? "notifications_headerTab1_active"
-                                          : "notifications_headerTab1"
-                                      }
-                                      onClick={ToggleActiveNotifyTab}
-                                      id="read"
-                                    >
-                                      Read
-                                    </div>
-                                  </div>
-                                  {activeNotifyTab === "read" ? (
-                                    <>
-                                      {UnreadNotifications.filter(
-                                        (data) => data.status === "read"
-                                      ).length > 0 ? (
-                                        <>
-                                          {UnreadNotifications.filter(
-                                            (data) => data.status === "read"
-                                          )
-                                            .sort(
-                                              (a, b) =>
-                                                new Date(
-                                                  b.createdAt
-                                                ).getTime() -
-                                                new Date(a.createdAt).getTime()
-                                            )
-                                            .map((data, key) => (
-                                              <div
-                                                className="notifyDropDownDiv_div1"
-                                                key={data.id}
-                                              >
-                                                <div className="notifyDropDownDiv_div1_title">
-                                                  {data.title}
-                                                </div>
-                                                <div className="notifyDropDownDiv_div1_para">
-                                                  {data.message}
-                                                </div>
-                                              </div>
-                                            ))}
-                                        </>
-                                      ) : (
-                                        <div className="notifyDropDownDiv_emptyDiv">
-                                          No notifications!
-                                        </div>
-                                      )}
-                                    </>
-                                  ) : null}
-
-                                  {activeNotifyTab === "unread" ? (
-                                    <>
-                                      {UnreadNotifications.filter(
-                                        (data) => data.status === "unread"
-                                      ).length > 0 ? (
-                                        <>
-                                          {UnreadNotifications.filter(
-                                            (data) => data.status === "unread"
-                                          )
-                                            .sort(
-                                              (a, b) =>
-                                                new Date(
-                                                  b.createdAt
-                                                ).getTime() -
-                                                new Date(a.createdAt).getTime()
-                                            )
-                                            .map((data, key) => (
-                                              <div
-                                                className="notifyDropDownDiv_div1 active"
-                                                key={data.id}
-                                                id={data.id}
-                                                onClick={ToggleNotifyDetails}
-                                              >
-                                                <div className="notifyDropDownDiv_div1_title active">
-                                                  {data.title}
-                                                  <span
-                                                    style={{
-                                                      fontSize: "10px",
-                                                    }}
-                                                  >
-                                                    - (
-                                                    <TimeAgoComponent
-                                                      date={data.createdAt}
-                                                    />
-                                                    )
-                                                  </span>
-                                                </div>
-                                                <div className="notifyDropDownDiv_div1_para">
-                                                  {data.message}
-                                                </div>
-                                              </div>
-                                            ))}
-                                        </>
-                                      ) : (
-                                        <div className="notifyDropDownDiv_emptyDiv">
-                                          No notifications!
-                                        </div>
-                                      )}
-                                    </>
-                                  ) : null}
-                                </>
-                              )}
-                            </div>
-                          </div>
-                        )}
                       </div>
                       <div
                         className="wallet_settings_icon_cont"
@@ -1170,14 +953,6 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
             ) : null}
           </div>
         </section>
-        {urlArr[2] === "market" ? (
-          <MarketHeader
-            setCategories={setCategories}
-            ToggleMobile_cat={ToggleMobile_cat}
-            categories={categories}
-            ToggleOtherCategory={ToggleOtherCategory}
-          />
-        ) : null}
         <div className="dash_board_links">
           <div className="container">
             <div className="dash_board_links_area">
@@ -1370,6 +1145,136 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
               ) : null}
             </>
           ))}
+      {notifyDiv && (
+        <div className="notifyDropDownDiv_modal">
+          <div
+            className="closeNotifyModal_div_bg"
+            onClick={ToggleNotifyDiv}
+          ></div>
+          <div className="closeNotifyModal_div">
+            {" "}
+            <CloseIcon
+              className="closeNotifyModal_div_icon"
+              onClick={ToggleNotifyDiv}
+            />
+          </div>
+          <div className="notifyDropDownDiv">
+            {UnreadNotifications.length <= 0 ? (
+              <div className="notifyDropDownDiv_emptyDiv">
+                No notifications!
+              </div>
+            ) : (
+              <>
+                <div className="notifications_headerTab">
+                  <div
+                    className={
+                      activeNotifyTab === "unread"
+                        ? "notifications_headerTab1_active"
+                        : "notifications_headerTab1"
+                    }
+                    id="unread"
+                    onClick={ToggleActiveNotifyTab}
+                  >
+                    Unread
+                  </div>
+                  <div
+                    className={
+                      activeNotifyTab === "read"
+                        ? "notifications_headerTab1_active"
+                        : "notifications_headerTab1"
+                    }
+                    onClick={ToggleActiveNotifyTab}
+                    id="read"
+                  >
+                    Read
+                  </div>
+                </div>
+                {activeNotifyTab === "read" ? (
+                  <>
+                    {UnreadNotifications.filter(
+                      (data) => data.status === "read"
+                    ).length > 0 ? (
+                      <>
+                        {UnreadNotifications.filter(
+                          (data) => data.status === "read"
+                        )
+                          .sort(
+                            (a, b) =>
+                              new Date(b.createdAt).getTime() -
+                              new Date(a.createdAt).getTime()
+                          )
+                          .map((data, key) => (
+                            <div
+                              className="notifyDropDownDiv_div1"
+                              key={data.id}
+                            >
+                              <div className="notifyDropDownDiv_div1_title">
+                                {data.title}
+                              </div>
+                              <div className="notifyDropDownDiv_div1_para">
+                                {data.message}
+                              </div>
+                            </div>
+                          ))}
+                      </>
+                    ) : (
+                      <div className="notifyDropDownDiv_emptyDiv">
+                        No notifications!
+                      </div>
+                    )}
+                  </>
+                ) : null}
+
+                {activeNotifyTab === "unread" ? (
+                  <>
+                    {UnreadNotifications.filter(
+                      (data) => data.status === "unread"
+                    ).length > 0 ? (
+                      <>
+                        {UnreadNotifications.filter(
+                          (data) => data.status === "unread"
+                        )
+                          .sort(
+                            (a, b) =>
+                              new Date(b.createdAt).getTime() -
+                              new Date(a.createdAt).getTime()
+                          )
+                          .map((data, key) => (
+                            <div
+                              className="notifyDropDownDiv_div1 active"
+                              key={data.id}
+                              id={data.id}
+                              onClick={ToggleNotifyDetails}
+                            >
+                              <div className="notifyDropDownDiv_div1_title active">
+                                {data.title}
+                                <span
+                                  style={{
+                                    fontSize: "10px",
+                                  }}
+                                >
+                                  - (
+                                  <TimeAgoComponent date={data.createdAt} />)
+                                </span>
+                              </div>
+                              <div className="notifyDropDownDiv_div1_para">
+                                {data.message}
+                              </div>
+                            </div>
+                          ))}
+                      </>
+                    ) : (
+                      <div className="notifyDropDownDiv_emptyDiv">
+                        No notifications!
+                      </div>
+                    )}
+                  </>
+                ) : null}
+              </>
+            )}
+          </div>
+        </div>
+      )}
       {otherCategory ? (
         <div className="otherCategoryDiv">
           <div className="otherCategoryDiv_cont">

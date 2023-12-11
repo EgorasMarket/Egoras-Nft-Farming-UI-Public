@@ -285,9 +285,9 @@ const Home = () => {
                 <a href="/app" className="stake-hero-btn2">
                   Launch App <ExitToAppIcon className="exit-to-app" />
                 </a>
-                {/* <a href="/membership/sub" className="stake-hero-btn1">
-                  Join Us
-                </a> */}
+                <a href="/membership/sub" className="stake-hero-btn1">
+                  Lite Paper
+                </a>
                 {/* {!subscriptionStatus ? (
                   <a href="/membership/sub" className="stake-hero-btn1">
                     Become a member

@@ -35,6 +35,7 @@ import "../../css/dashboardegrbalance.css";
 import "../../css/dashboardgovernance.css";
 import "../../css/dashboardheader.css";
 import "../../css/dashboardtransaction.css";
+import "../../css/tables.css";
 // ==========================================================================
 // ==========================================================================
 // ===========================dashboard css files end========================

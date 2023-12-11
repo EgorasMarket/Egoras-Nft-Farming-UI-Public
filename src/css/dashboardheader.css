@@ -63,7 +63,7 @@
 }
 
 .dark .notifyDropDownDiv_div1.active:hover {
-  background: #222043;
+  background: #424248;
   transition: 0.1s linear;
 }
 
@@ -105,7 +105,7 @@
   display: flex;
   backdrop-filter: blur(5px);
   justify-content: flex-end;
-  z-index: 1;
+  z-index: 100000;
 }
 .notifyDropDownDiv {
   background: #ffffff;
@@ -118,8 +118,33 @@
   height: 100%;
   box-shadow: -1px 9px 25px #0000008a;
   color: #000;
+  z-index: 1;
 }
-
+.closeNotifyModal_div {
+  color: #fff;
+  display: flex;
+  margin-right: -5px;
+  position: relative;
+  z-index: 10;
+  padding-top: 5em;
+}
+.closeNotifyModal_div_icon {
+  background: #232326;
+  padding: 10px;
+  font-size: 42px !important;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.closeNotifyModal_div_icon:hover {
+  background: #3d3d42;
+}
+.closeNotifyModal_div_bg {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: none;
+}
 .dark .notifyDropDownDiv {
   background: #000;
   border: solid 1px #252529;
@@ -189,7 +214,7 @@
 }
 
 .dark .notifyDropDownDiv_div1:hover {
-  background: #222043;
+  background: #424248;
   transition: 0.1s linear;
 }
 

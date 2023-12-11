@@ -22,7 +22,7 @@ const AdminSettings = () => {
   const context = useWeb3React();
   const { library, account } = context;
   const [tickerArray, setTickerArray] = useState(["egceusd"]);
-  const [priceArray, setPriceArray] = useState(["1300000000000000000"]);
+  const [priceArray, setPriceArray] = useState(["2600000000000000000"]);
   const [newWallet, setNewWallet] = useState([""]);
   const [newWallet2, setNewWallet2] = useState([""]);
   const [diamondCutCode, setDiamondCutCode] = useState("");

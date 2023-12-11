@@ -44,7 +44,7 @@ div#Header {
 }
 
 .dark .notifications_headerTab {
-  background: #252337;
+  background: #202023;
   box-shadow: 0px 6px 13px #0f0e18;
 }
 
@@ -342,10 +342,10 @@ div#Header {
 }
 
 .we_on_beta_div {
-  background: #d6cdeb;
+  background: #c1ebd5;
   text-align: center;
   padding: 1em;
-  color: #171147;
+  color: #46725c;
   font-size: 14px;
   position: relative;
   z-index: 5;

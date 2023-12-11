@@ -510,6 +510,8 @@ const StakingUpdate = () => {
     if (account) {
       const res = await getEGCEUSDTICKERPRICE("egceusd", library.getSigner());
       console.log(res);
+
+      console.log(formatEther(res.message.toString()));
     }
   }, [account]);
 
@@ -880,7 +882,7 @@ const StakingUpdate = () => {
                   </div>
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
                     <span>
-                      {numberWithCommas(parseFloat(dailyReward).toFixed(2))}{" "}
+                      {numberWithCommas(parseFloat(dailyReward).toFixed(4))}{" "}
                       eusd / per day
                     </span>
                   </div>

@@ -5,6 +5,7 @@ import Header from "./components/Home/Header";
 import "bootstrap/dist/css/bootstrap.css";
 import Home from "./components/Home/Home";
 import Admin from "./components/Admin/Admin";
+import DashBoardWhitePaper from "./components/Dashboard/DashBoardPages/DashBoardWhitePaper";
 // import MemberShipPage from "./components/Home/MemberShip/MemberShipPage";
 import { Web3ReactProvider, useWeb3React } from "@web3-react/core";
 import { Provider } from "react-redux";
@@ -214,6 +215,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={Home} />
               <Route exact path="/referal/:ref" component={Referal} />
+              <Route exact path="/litepaper" component={DashBoardWhitePaper} />
               {/* <Route exact path="/pay-with-fort" component={PaywithFort} /> */}
               {/* <Route exact path="/membership/sub" component={MemberShipPage} />CYNTAX
                */}

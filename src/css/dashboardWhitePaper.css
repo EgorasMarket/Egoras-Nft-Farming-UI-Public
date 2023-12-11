@@ -9,13 +9,14 @@
 }
 
 .whitepaper-section {
-  padding: 9em 0em;
+  padding: 2em 0em;
   padding-bottom: 3em;
   position: relative;
-  overflow: hidden;
   transition: 1s ease-in-out;
   height: 100svh;
   overflow: scroll;
+  background: #000;
+  display: flex;
 }
 .whitepaper-area {
   display: flex;
@@ -169,7 +170,7 @@
 }
 .whitepaperHeading {
   color: #22ad62;
-  font-size: 32px;
+  font-size: 42px;
   font-weight: 600;
   line-height: 36px;
 }
@@ -186,14 +187,32 @@
   margin: auto;
 }
 .layer-header {
-  color: black;
+  color: rgb(255, 255, 255);
   font-weight: 600;
   font-size: 24px;
 }
-
+.whitepaper_layer {
+  opacity: 1 !important;
+  color: #959595;
+}
 a.sidebar-link1 {
   display: block;
   position: relative;
+}
+.whitepaper_sideBar {
+  width: 200px;
+  color: #fff;
+  padding: 10px 0px;
+  position: sticky;
+  left: 0;
+  top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.whitepaper_sideBar_cont1 {
+  padding: 10px 20px;
+  margin-bottom: 10px;
 }
 
 .sub-texts-para {
