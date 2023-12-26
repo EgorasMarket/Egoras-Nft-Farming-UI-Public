@@ -2,6 +2,7 @@ import { Contract } from "@ethersproject/contracts";
 import MembershipFacet from "./contracts/V3/MembershipFacet.json";
 import V3ContractAddress from "./contracts/V3/V3ContractAddress.json";
 import DealersFacet from "./contracts/V3/DealersFacet.json";
+import DrawFundsFacet from "./contracts/V3/DrawFundsFacet.json";
 import ConvertFacet from "./contracts/V3/ConvertFacet.json";
 import PancakeSwapFaucet from "./contracts/V3/PancakeSwapFacet.json";
 import DiamondCut from "./contracts/V3/DiamondCut.json";
@@ -18,6 +19,9 @@ const contractMembershipFacetInstance = async (signer) => {
 };
 const contractDealersFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, DealersFacet.abi, signer);
+};
+const contracDrawFundsFacetInstance = async (signer) => {
+  return new Contract(V3ContractAddress.address, DrawFundsFacet.abi, signer);
 };
 const contractPancakeSwapFacetInstance = async (signer) => {
   return new Contract(V3ContractAddress.address, PancakeSwapFaucet.abi, signer);
@@ -751,6 +755,41 @@ const setTokenAddress = async (_eusd, _egc, signer) => {
   }
 };
 
+const withdrawFunds = async (tokenAddress, recipient, amount, signer) => {
+  console.log(tokenAddress, recipient, amount);
+  try {
+    const instance = await contracDrawFundsFacetInstance(signer);
+    let result = await instance.takeFund(tokenAddress, recipient, amount);
+    console.log(result, "result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const withdrawBase = async (recipient, signer) => {
+  console.log(recipient);
+  try {
+    const instance = await contracDrawFundsFacetInstance(signer);
+    let result = await instance.takeBase(recipient);
+    console.log(result, "result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+
 // const withdrawAllEgc = async (amount, signer) => {
 //   console.log(amount);
 //   try {
@@ -953,4 +992,6 @@ export {
   convertEusdEgc,
   convertEgcEusd,
   setRoyaltyAddress,
+  withdrawFunds,
+  withdrawBase,
 };

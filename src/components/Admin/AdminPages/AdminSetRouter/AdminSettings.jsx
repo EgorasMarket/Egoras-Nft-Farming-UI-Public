@@ -10,13 +10,15 @@ import {
   DiamondCutFunc,
   setTokenAddress,
   // BurnEgc,
-  // withdrawAllEgc,
+  withdrawFunds,
+  withdrawBase,
   getPriceOracle,
   setStakeConfigure,
   setRoyaltyAddress,
 } from "../../../../web3/index2";
 import "./AdminRouter.css";
 import { useWeb3React } from "@web3-react/core";
+import { parseEther, formatEther } from "@ethersproject/units";
 
 const AdminSettings = () => {
   const context = useWeb3React();
@@ -26,8 +28,8 @@ const AdminSettings = () => {
   const [newWallet, setNewWallet] = useState([""]);
   const [newWallet2, setNewWallet2] = useState([""]);
   const [diamondCutCode, setDiamondCutCode] = useState("");
-  // const [egcAmnt, setEgcAmnt] = useState("");
-  // const [egcWithdrawAmnt, setEgcWithdrawAmnt] = useState("");
+  const [withdrawTokenAddress, setWithdrawTokenAddress] = useState("");
+  const [withdrawTokenAmount, setWithdrawTokenAmount] = useState("");
   const [egcAddress, setEgcAddress] = useState("");
   const [eusdAddress, setEusdAddress] = useState("");
   const addMinter = async () => {
@@ -54,13 +56,19 @@ const AdminSettings = () => {
     console.log(response);
   };
 
-  // const WithDrawEgc = async () => {
-  //   const response = await withdrawAllEgc(
-  //     parseEther(egcWithdrawAmnt, "wei").toString(),
-  //     library.getSigner()
-  //   );
-  //   console.log(response);
-  // };
+  const withdrawEgoDaoFunds = async () => {
+    const response = await withdrawFunds(
+      withdrawTokenAddress,
+      account,
+      parseEther(withdrawTokenAmount, "wei").toString(),
+      library.getSigner()
+    );
+    console.log(response);
+  };
+  const withdrawEgoDaoBase = async () => {
+    const response = await withdrawBase(account, library.getSigner());
+    console.log(response);
+  };
   // const BurnEgcAmnt = async () => {
   //   const response = await BurnEgc(
   //     parseEther(egcAmnt, "wei").toString(),
@@ -68,6 +76,7 @@ const AdminSettings = () => {
   //   );
   //   console.log(response);
   // };
+
   const diamondCutCodeChange = (e) => {
     setDiamondCutCode(e.target.value);
     console.log(JSON.parse(e.target.value));
@@ -91,6 +100,14 @@ const AdminSettings = () => {
   };
   const ChangeEgcAddress = (event) => {
     setEgcAddress(event.target.value);
+    console.log(event.target.value);
+  };
+  const ChangeTokenAddress = (event) => {
+    setWithdrawTokenAddress(event.target.value);
+    console.log(event.target.value);
+  };
+  const ChangeTokenAmount = (event) => {
+    setWithdrawTokenAmount(event.target.value);
     console.log(event.target.value);
   };
 
@@ -395,6 +412,46 @@ const AdminSettings = () => {
                 >
                   Configure
                 </button>
+              </div>
+              <div className="settings_section1_div1">
+                <h4 className="routerHeader">Withdraw Funds</h4>
+                <div className="setRouterAddressDiv">
+                  <div className="setRouterAddressDiv_address_divs">
+                    <div className="setRouterAddressDiv1">
+                      <div className="setRouterAddressDiv1_title">
+                        {" "}
+                        Token Address:
+                      </div>
+                      <input
+                        placeholder="0x000"
+                        className="setRouterAddressInput"
+                        value={withdrawTokenAddress}
+                        onChange={ChangeTokenAddress}
+                      />
+                    </div>
+                    --
+                    <div className="setRouterAddressDiv1">
+                      <div className="setRouterAddressDiv1_title">
+                        {" "}
+                        Token Amount:
+                      </div>
+                      <input
+                        placeholder="000"
+                        className="setRouterAddressInput"
+                        value={withdrawTokenAmount}
+                        onChange={ChangeTokenAmount}
+                      />
+                    </div>
+                  </div>
+                  <div className="setRouterAddressButtonDiv">
+                    <button
+                      onClick={withdrawEgoDaoFunds}
+                      className="setRouterAddressBtn"
+                    >
+                      Withdraw
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
