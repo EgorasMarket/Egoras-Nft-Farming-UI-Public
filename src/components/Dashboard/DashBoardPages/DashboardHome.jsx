@@ -165,7 +165,7 @@ const DashboardHome = () => {
       try {
         const data = await axios.get(API_URL + "/swap/all", null, config);
         console.log(data, "hhhhh");
-        // console.log(data.data.data);
+        console.log(data.data.data);
         if (data.data.data.length !== 0) {
           const myArray = data.data.data;
           myArray.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
@@ -426,6 +426,9 @@ const DashboardHome = () => {
     "0xEEec111dCa00461EC4Da49c09464953931aA7233": {
       symbol: "EUSD",
     },
+    "0xFC6832B25e135A9E7dD24cDf8eEA0Ab78c20C86F": {
+      symbol: "EUSD",
+    },
     "0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56": {
       symbol: "EUSD",
     },
@@ -528,37 +531,41 @@ const DashboardHome = () => {
   };
 
   useEffect(async () => {
-    setBurntEgcLoaded(true);
-    const fetchData = async () => {
-      let check = await callGetBurnableAmount(library.getSigner());
-      console.log(check);
-      console.log(check.message);
-      console.log(formatEther(check.message).toString());
-      const converted = parseInt(formatEther(check.message).toString());
-      setAccumEgc(converted * egc_usd);
-    };
-    const timer = setTimeout(async () => {
-      setBurntEgcLoaded(false);
-      fetchData();
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, [egc_usd]);
+    if (account) {
+      setBurntEgcLoaded(true);
+      const fetchData = async () => {
+        let check = await callGetBurnableAmount(library.getSigner());
+        console.log(check);
+        console.log(check.message);
+        console.log(formatEther(check.message).toString());
+        const converted = parseInt(formatEther(check.message).toString());
+        setAccumEgc(converted * egc_usd);
+      };
+      const timer = setTimeout(async () => {
+        setBurntEgcLoaded(false);
+        fetchData();
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [egc_usd, account]);
   useEffect(async () => {
-    setBurntEgcLoaded(true);
-    const fetchData = async () => {
-      let check = await callGetBurntAmount(library.getSigner());
-      console.log(check);
-      console.log(check.message);
-      console.log(formatEther(check.message).toString());
-      const converted = parseInt(formatEther(check.message).toString());
-      setBurntEgc(converted * egc_usd);
-    };
-    const timer = setTimeout(async () => {
-      setBurntEgcLoaded(false);
-      fetchData();
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, [egc_usd]);
+    if (account) {
+      setBurntEgcLoaded(true);
+      const fetchData = async () => {
+        let check = await callGetBurntAmount(library.getSigner());
+        console.log(check);
+        console.log(check.message);
+        console.log(formatEther(check.message).toString());
+        const converted = parseInt(formatEther(check.message).toString());
+        setBurntEgc(converted * egc_usd);
+      };
+      const timer = setTimeout(async () => {
+        setBurntEgcLoaded(false);
+        fetchData();
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [egc_usd, account]);
   const CloseErrorModal = () => {
     setErrorModal(false);
   };
