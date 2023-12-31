@@ -611,9 +611,14 @@ const StakingUpdate = () => {
   }, []);
 
   useEffect(() => {
-    if (unlockStakeTime !== new Date() || unlockStakeTime > new Date()) {
+    console.log("====================================");
+    console.log(unlockStakeTime);
+    console.log("====================================");
+    if (unlockStakeTime > new Date()) {
       console.log("its not yet due");
       setNotDueButton(true);
+    } else {
+      setNotDueButton(false);
     }
   }, [unlockStakeTime]);
 
