@@ -287,7 +287,7 @@ const StakingUpdate = () => {
     } else {
       setEstimatedRewardDiv(true);
     }
-    setEstimatedRewardAmnt(e.target.value * egcUsdVal * 0.00136986);
+    setEstimatedRewardAmnt(e.target.value * egcUsdVal * 0.00082192);
   };
 
   const StakeMonthly = async () => {
@@ -477,7 +477,7 @@ const StakingUpdate = () => {
 
   const maxAmount = () => {
     setLockAmount(coinBalance2);
-    setEstimatedRewardAmnt(coinBalance2 * egcUsdVal * 0.00136986);
+    setEstimatedRewardAmnt(coinBalance2 * egcUsdVal * 0.00082192);
     setEstimatedRewardDiv(true);
   };
 
@@ -1023,7 +1023,7 @@ const StakingUpdate = () => {
                       <div className="estRewardDiv">
                         Estimated Daily Reward:{" "}
                         <span className="estRewardDiv_span">
-                          {estimatedRewardAmnt} EGAX
+                          {estimatedRewardAmnt / 0.33} EGAX
                         </span>
                       </div>
                     ) : null}
