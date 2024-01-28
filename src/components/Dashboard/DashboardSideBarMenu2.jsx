@@ -601,7 +601,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                     <span class="c-basePart"></span>
                   </span> */}
                 </a>
-                <a
+                {/* <a
                   id="swap"
                   href="/app/swap"
                   className={
@@ -611,7 +611,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                 >
                   <SwapHorizontalCircleIcon className="header_tab1_icon_icon" />
                   Swap
-                </a>
+                </a> */}
                 {/* <a
                   id="convert"
                   href="/app/convert"
@@ -1027,7 +1027,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
               <span class="c-basePart"></span>
             </span>
           </a>
-          <a
+          {/* <a
             id="swap"
             href="/app/swap"
             className={
@@ -1037,7 +1037,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           >
             <SwapHorizontalCircleIcon className="sidebarIcon" />
             Swap
-          </a>
+          </a> */}
           <a
             id="account"
             href="/app/user"

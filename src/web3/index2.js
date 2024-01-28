@@ -48,15 +48,17 @@ const contractStakingFacetInstance = (signer) => {
 };
 const contractAddMinterFacetInstance = async (signer) => {
   return new Contract(
-    "0xBDeb3C052bD949B6E38Cb0BC9593793a78c46968",
+    "0x1F467B61Da084784AfB0f5BdA14554A30Bb5A5b7",
     Minter.abi,
     signer
   );
 };
 const routerAddressArray = [
-  REACT_APP_PANCAKE_ROUTER_ADDRESS,
-  REACT_APP_BUSD_ROUTER_ADDRESS,
+  "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+  // "0x55d398326f99059fF775485246999027B3197955",
 ];
+// REACT_APP_PANCAKE_ROUTER_ADDRESS,
+// REACT_APP_BUSD_ROUTER_ADDRESS,
 const monthlyPlanSubScribe = async (account, signer) => {
   console.log(account);
   try {
@@ -250,6 +252,7 @@ const swapEusdForToken = async (amountIn, amountOutMin, path, signer) => {
     routerAddressArray,
     "swapEusdForToken index.js"
   );
+
   try {
     const instance = await contractPancakeSwapFacetInstance(signer);
     let result;
@@ -408,7 +411,7 @@ const adminAddMinter = async (signer) => {
     const instance = await contractAddMinterFacetInstance(signer);
     let result;
     result = await instance.addMinter(
-      "0xF158d25D7D6F4a560E10eAfB1B4f477D8303B69F"
+      "0xc9eb83ad8cc5b7df608d8f70e20eb09c3a391b1a"
     );
     // result = await instance.addMinter(V3ContractAddress.address);
     console.log(result, "result, result,result,result,result");
