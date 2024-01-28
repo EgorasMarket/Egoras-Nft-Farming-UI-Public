@@ -22,7 +22,7 @@
           "type": "uint256"
         }
       ],
-      "name": "Royalty",
+      "name": "RoyaltyNew",
       "type": "event"
     },
     {
@@ -65,7 +65,7 @@
           "type": "uint256"
         }
       ],
-      "name": "Stake",
+      "name": "StakeNew",
       "type": "event"
     },
     {
@@ -90,12 +90,12 @@
           "type": "uint256"
         }
       ],
-      "name": "Unstaked",
+      "name": "UnstakedNew",
       "type": "event"
     },
     {
       "inputs": [],
-      "name": "unstake",
+      "name": "unstakeNew",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -108,7 +108,7 @@
           "type": "uint256"
         }
       ],
-      "name": "monthly",
+      "name": "monthlyNew",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -121,21 +121,21 @@
           "type": "uint256"
         }
       ],
-      "name": "annually",
+      "name": "annuallyNew",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "inputs": [],
-      "name": "takeRoyalty",
+      "name": "takeRoyaltyNew",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
       "inputs": [],
-      "name": "totalStake",
+      "name": "totalStakeNew",
       "outputs": [
         {
           "internalType": "uint256",
@@ -149,7 +149,7 @@
     },
     {
       "inputs": [],
-      "name": "stakeConfig",
+      "name": "stakeConfigNew",
       "outputs": [
         {
           "internalType": "uint256",
@@ -163,7 +163,7 @@
         },
         {
           "internalType": "uint256",
-          "name": "_egcusd",
+          "name": "_stakeTokenPrice",
           "type": "uint256"
         },
         {
@@ -183,7 +183,7 @@
     },
     {
       "inputs": [],
-      "name": "stakeState",
+      "name": "stakeStateNew",
       "outputs": [
         {
           "internalType": "uint256",
@@ -213,7 +213,7 @@
           "type": "address"
         }
       ],
-      "name": "royaltyStats",
+      "name": "royaltyStatsNew",
       "outputs": [
         {
           "internalType": "uint256",
@@ -227,7 +227,7 @@
         },
         {
           "internalType": "uint256",
-          "name": "_totalStakeUSD",
+          "name": "_totalStakeInEgax",
           "type": "uint256"
         },
         {
@@ -263,7 +263,7 @@
           "type": "address"
         }
       ],
-      "name": "calculateRoyalty",
+      "name": "calculateRoyaltyNew",
       "outputs": [
         {
           "internalType": "uint256",
@@ -283,25 +283,17 @@
           "type": "address"
         },
         {
+          "internalType": "address",
+          "name": "_royaltyAddr",
+          "type": "address"
+        },
+        {
           "internalType": "uint256",
           "name": "_yearlyInterest",
           "type": "uint256"
         }
       ],
-      "name": "setStakeConfig",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_eusdAddr",
-          "type": "address"
-        }
-      ],
-      "name": "setStakeRoyaltyAddress",
+      "name": "setStakeConfigNew",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"

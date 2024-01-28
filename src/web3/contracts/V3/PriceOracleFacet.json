@@ -173,6 +173,19 @@
           "type": "string"
         }
       ],
+      "name": "setStakingTokenTicker",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        }
+      ],
       "name": "setNairaUSDTicker",
       "outputs": [],
       "stateMutability": "nonpayable",

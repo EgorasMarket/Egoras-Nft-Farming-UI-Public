@@ -385,7 +385,7 @@ const StakingUpdate = () => {
       setSuccessMessage(
         "You've successfully claimed " +
           parseFloat(availableClaimReward).toFixed(2) +
-          " eusd"
+          " EGAX"
       );
     } else {
       console.log(res);
@@ -708,7 +708,7 @@ const StakingUpdate = () => {
                   </div>
                   <div className="lock_container_cont1_div_contract_overview_body_div1">
                     <div className="lock_container_cont1_div_contract_overview_body_div1_cont1">
-                      EUSD
+                      EGAX
                     </div>
                     <div className="lock_container_cont1_div_contract_overview_body_div1_cont1_link">
                       {`${"0x0C30476f66034E11782938DF8e4384970B6c9e8a".slice(
@@ -888,7 +888,7 @@ const StakingUpdate = () => {
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
                     <span>
                       {numberWithCommas(parseFloat(dailyReward).toFixed(4))}{" "}
-                      eusd / per day
+                      EGAX / per day
                     </span>
                   </div>
                 </div>
@@ -904,7 +904,7 @@ const StakingUpdate = () => {
                       {numberWithCommas(
                         parseFloat(TotalClaimedReward).toFixed(4)
                       )}{" "}
-                      eusd
+                      EGAX
                     </span>
                   </div>
                 </div>
@@ -1023,7 +1023,7 @@ const StakingUpdate = () => {
                       <div className="estRewardDiv">
                         Estimated Daily Reward:{" "}
                         <span className="estRewardDiv_span">
-                          {estimatedRewardAmnt} eUSD
+                          {estimatedRewardAmnt} EGAX
                         </span>
                       </div>
                     ) : null}
@@ -1119,7 +1119,7 @@ const StakingUpdate = () => {
                         Available Reward
                       </div>
                       <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount">
-                        {parseFloat(availableClaimReward).toFixed(4)} eUsd
+                        {parseFloat(availableClaimReward).toFixed(4)} EGAX
                         {rewardCountDown === true ? (
                           <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv">
                             Claim In the next:
@@ -1238,7 +1238,7 @@ const StakingUpdate = () => {
                     </div>
                     <div className="lending_area1_cont1_body_txt">
                       {parseFloat(totalAssetInfo.dailyRoyalty).toFixed(2)}{" "}
-                      <span className="usd_sign">eUSD</span>
+                      <span className="usd_sign">EGAX</span>
                     </div>
                   </div>
                   <div className="lending_area1_cont1_body_1">
@@ -1535,7 +1535,7 @@ const StakingUpdate = () => {
                 <AccordionDetails>
                   <div className="faq_container_body_details">
                     Upon staking, the smart contract utilizes the staked egc
-                    tokens as collateral to generate EUSD, which can be utilized
+                    tokens as collateral to generate EGAX, which can be utilized
                     for purchasing items instantly on the protocol.
                   </div>
                 </AccordionDetails>

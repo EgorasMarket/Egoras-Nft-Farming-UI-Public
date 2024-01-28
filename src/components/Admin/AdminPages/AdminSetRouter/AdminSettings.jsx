@@ -4,6 +4,7 @@ import {
   suspendPythia,
   setPriceOracle,
   setEGCUSDTicker,
+  setTickerNew,
   // resetStakeTime,
   // IncreaseRoyaltyTime,
   adminAddMinter,
@@ -23,7 +24,7 @@ import { parseEther, formatEther } from "@ethersproject/units";
 const AdminSettings = () => {
   const context = useWeb3React();
   const { library, account } = context;
-  const [tickerArray, setTickerArray] = useState(["egceusd"]);
+  const [tickerArray, setTickerArray] = useState(["egcegax"]);
   const [priceArray, setPriceArray] = useState(["2600000000000000000"]);
   const [newWallet, setNewWallet] = useState([""]);
   const [newWallet2, setNewWallet2] = useState([""]);
@@ -32,10 +33,12 @@ const AdminSettings = () => {
   const [withdrawTokenAmount, setWithdrawTokenAmount] = useState("");
   const [egcAddress, setEgcAddress] = useState("");
   const [eusdAddress, setEusdAddress] = useState("");
+
   const addMinter = async () => {
     const response = await adminAddMinter(library.getSigner());
     console.log(response);
   };
+
   const DiamondCutFunction = async () => {
     const response = await DiamondCutFunc(diamondCutCode, library.getSigner());
     console.log(response);
@@ -138,25 +141,32 @@ const AdminSettings = () => {
     console.log(response);
   };
   console.log(priceArray[0], tickerArray[0]);
-  const setTicker = async () => {
-    const response = await setEGCUSDTicker(tickerArray[0], library.getSigner());
+
+  // const setTicker = async () => {
+  //   const response = await setEGCUSDTicker(tickerArray[0], library.getSigner());
+  //   console.log(response);
+  // };
+  const setTicker2 = async () => {
+    const response = await setTickerNew(tickerArray[0], library.getSigner());
     console.log(response);
   };
   const configureStake = async () => {
     const response = await setStakeConfigure(
       "0x4AC4fC5317F95849A1F17e2f4Daf03c32196f0cb",
-      "500000000000000000",
+      "0x1F467B61Da084784AfB0f5BdA14554A30Bb5A5b7",
+      "300000000000000000",
       library.getSigner()
     );
     console.log(response);
   };
-  const setRoyaltyAddr = async () => {
-    const response = await setRoyaltyAddress(
-      "0xBDeb3C052bD949B6E38Cb0BC9593793a78c46968",
-      library.getSigner()
-    );
-    console.log(response);
-  };
+
+  // const setRoyaltyAddr = async () => {
+  //   const response = await setRoyaltyAddress(
+  //     "0xBDeb3C052bD949B6E38Cb0BC9593793a78c46968",
+  //     library.getSigner()
+  //   );
+  //   console.log(response);
+  // };
 
   // const resetStackedTime = async () => {
   //   const response = await resetStakeTime(account, library.getSigner());
@@ -232,7 +242,7 @@ const AdminSettings = () => {
 
               <div className="settings_section1_div2">
                 <h4 className="routerHeader">Set Ticker</h4>
-                <button onClick={setTicker} className="setRouterAddressBtn">
+                <button onClick={setTicker2} className="setRouterAddressBtn">
                   Set Ticker
                 </button>
               </div>
@@ -395,7 +405,7 @@ const AdminSettings = () => {
                   </div>
                 </div>
               </div>
-              <div className="settings_section1_div2">
+              {/* <div className="settings_section1_div2">
                 <h4 className="routerHeader">Set Royalty Address</h4>
                 <button
                   onClick={setRoyaltyAddr}
@@ -403,7 +413,7 @@ const AdminSettings = () => {
                 >
                   Set Addrress
                 </button>
-              </div>
+              </div> */}
               <div className="settings_section1_div2">
                 <h4 className="routerHeader">Configure Stake</h4>
                 <button

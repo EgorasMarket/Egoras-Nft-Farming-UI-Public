@@ -131,7 +131,7 @@ const monthly = async (amount, signer) => {
   try {
     const instance = await contractStakingFacetInstance(signer);
     let result;
-    result = await instance.monthly(amount);
+    result = await instance.monthlyNew(amount);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -150,7 +150,7 @@ const annually = async (amount, signer) => {
   try {
     const instance = await contractStakingFacetInstance(signer);
     let result;
-    result = await instance.annually(amount);
+    result = await instance.annuallyNew(amount);
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
@@ -168,7 +168,7 @@ const takeRoyalty = async (signer) => {
   try {
     const instance = await contractStakingFacetInstance(signer);
     let result;
-    result = await instance.takeRoyalty();
+    result = await instance.takeRoyaltyNew();
     console.log(result, "result, result,result,result,result");
     return {
       message: result,
