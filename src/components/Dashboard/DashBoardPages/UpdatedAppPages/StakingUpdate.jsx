@@ -1256,7 +1256,7 @@ const StakingUpdate = () => {
                       Staking APY
                     </div>
                     <div className="lending_area1_cont1_body_txt">
-                      50<span className="usd_sign">%</span>
+                      30<span className="usd_sign">%</span>
                     </div>
                   </div>
                   <div className="lending_area1_cont1_body_1">
@@ -1552,7 +1552,7 @@ const StakingUpdate = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <div className="faq_container_body_details">
-                    The protocol offers a fixed annual percentage yield of 50%
+                    The protocol offers a fixed annual percentage yield of 30%
                     (APY), which is computed based on the USD equivalent of the
                     staked egc.
                   </div>

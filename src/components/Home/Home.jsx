@@ -54,7 +54,7 @@ export const HowItWorksArea2 = () => {
             Claim your Reward
           </div>
           <div className="how_it_works_update_new_area_2_cont1_paragraph">
-            Earn 50% annual percentage yield (APY) on your staked EGC tokens.
+            Earn 30% annual percentage yield (APY) on your staked EGC tokens.
           </div>
         </div>
       </div>
@@ -384,7 +384,7 @@ const Home = () => {
                     Est APY
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
-                    50%
+                    30%
                   </div>
                 </div>
               </div>

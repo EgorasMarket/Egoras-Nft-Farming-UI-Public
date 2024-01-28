@@ -224,7 +224,7 @@ const AdminSettings = () => {
                 <div className="setRouterAddressDiv">
                   <div className="setRouterAddressDiv_address_divs">
                     <div className="setRouterAddressDiv1">
-                      <div className="setRouterAddressDiv1_title">Egc/Eusd</div>
+                      <div className="setRouterAddressDiv1_title">Egc/Egax</div>
                       <input
                         type="text"
                         placeholder="Price"
