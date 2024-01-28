@@ -385,6 +385,7 @@ const Home = () => {
                   </div>
                   <div className="nft_area2_stat_div_area_cont1_icon_cont_stat_numbers_para">
                     30%
+                    {/* 30% */}
                   </div>
                 </div>
               </div>
