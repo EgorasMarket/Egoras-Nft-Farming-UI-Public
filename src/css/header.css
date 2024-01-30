@@ -931,6 +931,9 @@ vl {
   .dark .header_new_links_mobile_1 {
     color: rgb(255, 255, 255);
   }
+  .together_lnk {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 767px) {

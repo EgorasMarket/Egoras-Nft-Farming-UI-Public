@@ -902,6 +902,9 @@ vl {
 /* ========== */
 /* ========== */
 @media screen and (max-width: 991px) {
+  .together_lnk {
+    display: none;
+  }
   .mobile_view_notifications {
     display: block;
   }
