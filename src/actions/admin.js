@@ -11,6 +11,7 @@ const validateAdmin = async (account) => {
       config
     );
     // console.log(result);
+    // console.log(result);
     return {
       message: result,
       status: true,

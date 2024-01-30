@@ -45,7 +45,11 @@ import Nodata from "./nodataComponent/Nodata";
 import { CALL_UPDATE_MY_PROFILE } from "../../../services/userServices";
 import { tokenBalance } from "../../../web3/index";
 import { parseEther, formatEther } from "@ethersproject/units";
-const { REACT_APP_EGC_ADDRESS, REACT_APP_EUSD_ADDRESS } = process.env;
+const {
+  REACT_APP_EGC_ADDRESS,
+  REACT_APP_EUSD_ADDRESS,
+  REACT_APP_EGAX_ADDRESS,
+} = process.env;
 
 const DashBoardUserDetails = ({ auth }) => {
   const [walletAddr, setWalletAddr] = useState(
@@ -154,7 +158,7 @@ const DashBoardUserDetails = ({ auth }) => {
         console.log(formatEther(res.message._hex));
         setEGCBalance(parseFloat(formatEther(res.message._hex)).toFixed(2));
         let res2 = await tokenBalance(
-          REACT_APP_EUSD_ADDRESS,
+          REACT_APP_EGAX_ADDRESS,
           account,
           library.getSigner()
         );
@@ -409,7 +413,7 @@ const DashBoardUserDetails = ({ auth }) => {
                       className="user_details_body1_body_cont1_span1
                       _img"
                     />{" "}
-                    EUSD:{" "}
+                    EGAX:{" "}
                   </span>
                   <span className="user_details_body1_body_cont1_span2">
                     {numberWithCommas(eusdBalance)}

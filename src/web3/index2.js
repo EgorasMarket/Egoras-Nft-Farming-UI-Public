@@ -48,15 +48,17 @@ const contractStakingFacetInstance = (signer) => {
 };
 const contractAddMinterFacetInstance = async (signer) => {
   return new Contract(
-    "0xBDeb3C052bD949B6E38Cb0BC9593793a78c46968",
+    "0x1F467B61Da084784AfB0f5BdA14554A30Bb5A5b7",
     Minter.abi,
     signer
   );
 };
 const routerAddressArray = [
-  REACT_APP_PANCAKE_ROUTER_ADDRESS,
-  REACT_APP_BUSD_ROUTER_ADDRESS,
+  "0x10ED43C718714eb63d5aA57B78B54704E256024E",
+  // "0x55d398326f99059fF775485246999027B3197955",
 ];
+// REACT_APP_PANCAKE_ROUTER_ADDRESS,
+// REACT_APP_BUSD_ROUTER_ADDRESS,
 const monthlyPlanSubScribe = async (account, signer) => {
   console.log(account);
   try {
@@ -250,6 +252,7 @@ const swapEusdForToken = async (amountIn, amountOutMin, path, signer) => {
     routerAddressArray,
     "swapEusdForToken index.js"
   );
+
   try {
     const instance = await contractPancakeSwapFacetInstance(signer);
     let result;
@@ -408,7 +411,7 @@ const adminAddMinter = async (signer) => {
     const instance = await contractAddMinterFacetInstance(signer);
     let result;
     result = await instance.addMinter(
-      "0xF158d25D7D6F4a560E10eAfB1B4f477D8303B69F"
+      "0xc9eb83ad8cc5b7df608d8f70e20eb09c3a391b1a"
     );
     // result = await instance.addMinter(V3ContractAddress.address);
     console.log(result, "result, result,result,result,result");
@@ -525,6 +528,21 @@ const setEGCUSDTicker = async (_ticker, signer) => {
     };
   }
 };
+const setTickerNew = async (_ticker, signer) => {
+  try {
+    const instance = await contractPriceOracleFacetInstance(signer);
+    let result = await instance.setStakingTokenTicker(_ticker);
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 const getEGCEUSDTICKERPRICE = async (_ticker, signer) => {
   try {
     const instance = await contractPriceOracleFacetInstance(signer);
@@ -546,7 +564,7 @@ const getEGCEUSDTICKERPRICE = async (_ticker, signer) => {
 const getRoyaltyStats = async (user, signer) => {
   try {
     const instance = await contractStakingFacetInstance(signer);
-    let result = await instance.royaltyStats(user);
+    let result = await instance.royaltyStatsNew(user);
     console.log(result.toString(), "result");
 
     return {
@@ -564,7 +582,7 @@ const setRoyaltyAddress = async (_eusdAddr, signer) => {
   console.log(_eusdAddr);
   try {
     const instance = await contractStakingFacetInstance(signer);
-    let result = await instance.setStakeRoyaltyAddress(_eusdAddr);
+    let result = await instance.setStakeRoyaltyAddressNew(_eusdAddr);
     console.log(result.toString(), "result");
 
     return {
@@ -582,7 +600,7 @@ const setRoyaltyAddress = async (_eusdAddr, signer) => {
 const getStakeStats = async (signer) => {
   try {
     const instance = await contractStakingFacetInstance(signer);
-    let result = await instance.stakeState();
+    let result = await instance.stakeStateNew();
     console.log(result.toString(), "result");
 
     return {
@@ -596,10 +614,19 @@ const getStakeStats = async (signer) => {
     };
   }
 };
-const setStakeConfigure = async (_egcAddr, _yearlyInterest, signer) => {
+const setStakeConfigure = async (
+  _egcAddr,
+  _royaltyAddr,
+  _yearlyInterest,
+  signer
+) => {
   try {
     const instance = await contractStakingFacetInstance(signer);
-    let result = await instance.setStakeConfig(_egcAddr, _yearlyInterest);
+    let result = await instance.setStakeConfigNew(
+      _egcAddr,
+      _royaltyAddr,
+      _yearlyInterest
+    );
     console.log(result, "result");
 
     return {
@@ -616,7 +643,7 @@ const setStakeConfigure = async (_egcAddr, _yearlyInterest, signer) => {
 const stakeConfig = async (signer) => {
   try {
     const instance = await contractStakingFacetInstance(signer);
-    let result = await instance.stakeConfig();
+    let result = await instance.stakeConfigNew();
     console.log(result, "result");
 
     return {
@@ -633,7 +660,7 @@ const stakeConfig = async (signer) => {
 const resetStakeTime = async (user, signer) => {
   try {
     const instance = await contractStakingFacetInstance(signer);
-    let result = await instance.resetTakeRoyaltyTime(user);
+    let result = await instance.resetTakeRoyaltyTimeNew(user);
     console.log(result, "result");
 
     return {
@@ -651,7 +678,7 @@ const getCalculatedRoyalty = async (user, signer) => {
   console.log(user, signer, "getcalculatedRoyalty");
   try {
     const instance = contractStakingFacetInstance(signer);
-    let result = await instance.calculateRoyalty(user);
+    let result = await instance.calculateRoyaltyNew(user);
     console.log(result, "result");
 
     return {
@@ -668,7 +695,7 @@ const getCalculatedRoyalty = async (user, signer) => {
 const IncreaseRoyaltyTime = async (user, signer) => {
   try {
     const instance = await contractStakingFacetInstance(signer);
-    let result = await instance.increaseTakeRoyaltyTime(user);
+    let result = await instance.increaseTakeRoyaltyTimeNew(user);
     console.log(result, "result");
 
     return {
@@ -685,7 +712,7 @@ const IncreaseRoyaltyTime = async (user, signer) => {
 const UnlockLockedStake = async (signer) => {
   try {
     const instance = await contractStakingFacetInstance(signer);
-    let result = await instance.unstake();
+    let result = await instance.unstakeNew();
     console.log(result, "result");
 
     return {
@@ -994,4 +1021,5 @@ export {
   setRoyaltyAddress,
   withdrawFunds,
   withdrawBase,
+  setTickerNew,
 };

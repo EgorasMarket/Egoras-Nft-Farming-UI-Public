@@ -1,0 +1,13 @@
+              {`   Swap ${
+                                      convertedCoins[data.tokenIn.toLowerCase()]
+                                        .symbol
+                                    } For
+                                    ${
+                                      convertedCoins[
+                                        data.tokenOut.toLowerCase()
+                                      ].symbol
+                                    }`}
+                                    {/* Swap For Me */}
+                                    <div className="value_dolls_div_val">
+                                      {formattedDated}
+                                    </div>

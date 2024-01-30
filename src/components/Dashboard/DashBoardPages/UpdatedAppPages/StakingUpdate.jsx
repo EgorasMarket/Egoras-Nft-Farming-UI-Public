@@ -287,7 +287,7 @@ const StakingUpdate = () => {
     } else {
       setEstimatedRewardDiv(true);
     }
-    setEstimatedRewardAmnt(e.target.value * egcUsdVal * 0.00136986);
+    setEstimatedRewardAmnt(e.target.value * egcUsdVal * 0.00082192);
   };
 
   const StakeMonthly = async () => {
@@ -385,7 +385,7 @@ const StakingUpdate = () => {
       setSuccessMessage(
         "You've successfully claimed " +
           parseFloat(availableClaimReward).toFixed(2) +
-          " eusd"
+          " EGAX"
       );
     } else {
       console.log(res);
@@ -477,7 +477,7 @@ const StakingUpdate = () => {
 
   const maxAmount = () => {
     setLockAmount(coinBalance2);
-    setEstimatedRewardAmnt(coinBalance2 * egcUsdVal * 0.00136986);
+    setEstimatedRewardAmnt(coinBalance2 * egcUsdVal * 0.00082192);
     setEstimatedRewardDiv(true);
   };
 
@@ -611,9 +611,14 @@ const StakingUpdate = () => {
   }, []);
 
   useEffect(() => {
-    if (unlockStakeTime !== new Date() || unlockStakeTime > new Date()) {
+    console.log("====================================");
+    console.log(unlockStakeTime);
+    console.log("====================================");
+    if (unlockStakeTime > new Date()) {
       console.log("its not yet due");
       setNotDueButton(true);
+    } else {
+      setNotDueButton(false);
     }
   }, [unlockStakeTime]);
 
@@ -703,7 +708,7 @@ const StakingUpdate = () => {
                   </div>
                   <div className="lock_container_cont1_div_contract_overview_body_div1">
                     <div className="lock_container_cont1_div_contract_overview_body_div1_cont1">
-                      EUSD
+                      EGAX
                     </div>
                     <div className="lock_container_cont1_div_contract_overview_body_div1_cont1_link">
                       {`${"0x0C30476f66034E11782938DF8e4384970B6c9e8a".slice(
@@ -883,7 +888,7 @@ const StakingUpdate = () => {
                   <div className="lock_container_cont1_div_locks_overview_cont1_body">
                     <span>
                       {numberWithCommas(parseFloat(dailyReward).toFixed(4))}{" "}
-                      eusd / per day
+                      EGAX / per day
                     </span>
                   </div>
                 </div>
@@ -899,7 +904,7 @@ const StakingUpdate = () => {
                       {numberWithCommas(
                         parseFloat(TotalClaimedReward).toFixed(4)
                       )}{" "}
-                      eusd
+                      EGAX
                     </span>
                   </div>
                 </div>
@@ -1018,7 +1023,7 @@ const StakingUpdate = () => {
                       <div className="estRewardDiv">
                         Estimated Daily Reward:{" "}
                         <span className="estRewardDiv_span">
-                          {estimatedRewardAmnt} eUSD
+                          {estimatedRewardAmnt / 0.33} EGAX
                         </span>
                       </div>
                     ) : null}
@@ -1114,7 +1119,7 @@ const StakingUpdate = () => {
                         Available Reward
                       </div>
                       <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount">
-                        {parseFloat(availableClaimReward).toFixed(4)} eUsd
+                        {parseFloat(availableClaimReward).toFixed(4)} EGAX
                         {rewardCountDown === true ? (
                           <div className="lock_container_cont1_div1_lock_div_lock_body_claim_Div1_amount_dollar_equiv">
                             Claim In the next:
@@ -1233,7 +1238,7 @@ const StakingUpdate = () => {
                     </div>
                     <div className="lending_area1_cont1_body_txt">
                       {parseFloat(totalAssetInfo.dailyRoyalty).toFixed(2)}{" "}
-                      <span className="usd_sign">eUSD</span>
+                      <span className="usd_sign">EGAX</span>
                     </div>
                   </div>
                   <div className="lending_area1_cont1_body_1">
@@ -1251,7 +1256,7 @@ const StakingUpdate = () => {
                       Staking APY
                     </div>
                     <div className="lending_area1_cont1_body_txt">
-                      50<span className="usd_sign">%</span>
+                      30<span className="usd_sign">%</span>
                     </div>
                   </div>
                   <div className="lending_area1_cont1_body_1">
@@ -1530,7 +1535,7 @@ const StakingUpdate = () => {
                 <AccordionDetails>
                   <div className="faq_container_body_details">
                     Upon staking, the smart contract utilizes the staked egc
-                    tokens as collateral to generate EUSD, which can be utilized
+                    tokens as collateral to generate EGAX, which can be utilized
                     for purchasing items instantly on the protocol.
                   </div>
                 </AccordionDetails>
@@ -1547,7 +1552,7 @@ const StakingUpdate = () => {
                 </AccordionSummary>
                 <AccordionDetails>
                   <div className="faq_container_body_details">
-                    The protocol offers a fixed annual percentage yield of 50%
+                    The protocol offers a fixed annual percentage yield of 30%
                     (APY), which is computed based on the USD equivalent of the
                     staked egc.
                   </div>
