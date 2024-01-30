@@ -1,0 +1,210 @@
+/* ============Table styles -=============== */
+/* ============Table styles -=============== */
+
+.tableStyle_table {
+  box-sizing: border-box;
+  margin: 0px auto;
+  min-width: 0px;
+  width: 100%;
+  /* max-width: 1232px; */
+  display: table;
+  padding: 0px;
+  border-collapse: collapse;
+  border-spacing: 0px 5px;
+  /* margin-top: 20px; */
+}
+
+/* pagination styles */
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+  justify-content: flex-end;
+  gap: 5px;
+  justify-content: center;
+  margin-top: 1.5em;
+}
+.page-link {
+  position: relative;
+  display: block;
+  /* padding: 0.5rem 0.75rem; */
+  margin-left: -1px;
+  line-height: 1.25;
+  color: #000000 !important;
+  background-color: #000000 !important;
+  border: 1px solid #232326 !important;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #fff !important;
+}
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff !important;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6) !important;
+  border-color: #22ad62 !important;
+}
+.pagination_header_body_cont1 {
+  font-size: 22px;
+}
+
+/* pagination styles */
+.tablePaginationDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tableStyle_titles {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  display: table-header-group;
+}
+.tableStyle_title_div {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  background: #000000;
+}
+.tableStyle_heading_titles {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  padding: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  color: #a7abba;
+  font-size: 14px;
+  text-align: right;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.tableStyle_heading_titles_first {
+  position: sticky;
+  left: 0;
+  /* z-index: 100; */
+  background: inherit;
+  text-align: left;
+}
+.tableStyle_body {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  width: 100%;
+}
+.tableStyle_body_row {
+  box-sizing: border-box;
+  /* margin: 0px 0px 16px; */
+  min-width: 0px;
+  display: table-row;
+  flex-direction: column;
+  /* box-shadow: rgb(227 227 227) 0px 0px 6px; */
+  /* background: white; */
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out 0s, box-shadow 0.2s ease-in-out 0s;
+  cursor: pointer;
+  border-bottom: solid 1px #23262e;
+  margin: 10px 0px;
+}
+.tableStyle_body_row_data {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  padding: 10px;
+  display: table-cell;
+  justify-content: space-between;
+  white-space: nowrap;
+  text-align: right;
+  font-size: 14px;
+  color: #a6aab7;
+}
+.tableStyle_body_row_data_first {
+  position: sticky;
+  left: 0;
+  /* z-index: 100; */
+  background: inherit;
+  text-align: left;
+}
+
+.tableStyle_body_row:hover {
+  box-shadow: rgb(0 0 0 / 15%) 0px 0px 10px;
+  transform: scaleX(0.99);
+  background: #272a36;
+}
+
+.tableStyle_body_row_data_first:first-child {
+  border-radius: 8px 0px 0px 8px;
+}
+.tableStyle_body_row_data_last {
+  text-align: right;
+}
+.tableStyle_body_row_data_last:last-child {
+  border-radius: 10px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.tableStyle_heading_titles_first:first-child {
+  border-radius: 7px 0px 0px 7px;
+  /* border: solid; */
+}
+.tableStyle_heading_titles_last:last-child {
+  border-radius: 0px 7px 7px 0px;
+  /* border: solid; */
+}
+
+.dark .tableStyle_title_div {
+  background: #365543;
+  /* color: #fff; */
+  /* border: solid 1px #fff; */
+}
+
+.dark .tableStyle_heading_titles {
+  color: #ffffff;
+}
+.dark .tableStyle_body_row {
+  box-shadow: rgb(0 0 0) 0px 0px 6px;
+  background: #365543;
+  color: #fff;
+}
+
+.assets-list-icon_pool_icon {
+  box-sizing: border-box;
+  margin: 0px 8px 0px 0px;
+  min-width: 0px;
+  vertical-align: sub;
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: contain;
+}
+.assets-data-name_pool {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  color: #373737;
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: flex-end;
+}
+.assets-data334 {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+.asset_list_desktop_view2 {
+  overflow-x: scroll;
+}
+@media screen and (max-width: 767px) {
+  .tableStyle_body_row_data {
+    padding: 8px;
+  }
+}
+/* ============Table styles -=============== */
+/* ============Table styles -=============== */

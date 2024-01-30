@@ -1,0 +1,182 @@
+.editProductDiv {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100svw;
+  height: 100svh;
+  z-index: 100000;
+  background: #00000069;
+  backdrop-filter: blur(10px);
+  display: flex;
+  /* align-items: center; */
+  justify-content: flex-end;
+}
+
+.editProductDiv_area {
+  width: 41em;
+  background: #232326;
+  padding: 2em;
+  overflow: scroll;
+  position: relative;
+  z-index: 1;
+}
+
+.editProductDiv_area .sell_container_body_cont1_img_display_cont_divs {
+  height: 11em;
+}
+
+.editProductDiv_area .sell_container_body_cont1_img_display_cont_div1_icon {
+  font-size: 70px !important;
+}
+
+.sell_container_body_cont1_img_display_cont_1_last {
+  margin: 0;
+}
+
+.add_category_btn {
+  margin-left: 7px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: #445d4d;
+  border-radius: 7px;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* line-height: 0.07; */
+  font-weight: 600;
+  padding: au;
+  color: #bbd7c6;
+  padding-bottom: 5px;
+}
+
+.add_category_btn:hover {
+  background: #2c3c32;
+}
+
+.addCategoryDiv {
+  position: absolute;
+  top: 0;
+  width: 100svw;
+  height: 100svh;
+  background: #0000006b;
+  left: 0;
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addCategoryArea {
+  width: 100%;
+  max-width: 430px;
+  margin: auto;
+  background: grey;
+  padding: 1em;
+  border-radius: 10px;
+  border: solid 1px grey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 1em 2em;
+  background: #232326;
+  /* margin: 1em; */
+  /* margin-right: 0em; */
+  /* margin-left: 0em; */
+  border-radius: 10px;
+  border: solid 1px #313135;
+  color: #fff;
+  padding-top: 2em;
+  position: relative;
+}
+
+.addCategoryArea1 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 0.5em;
+  width: 100%;
+  text-align: center;
+}
+
+.addCategoryArea2 {
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.addCategoryArea2_input {
+  padding: 10px;
+  width: 100%;
+  border-radius: 10px;
+  border: solid 1px #313135;
+  background: #0e1611;
+  color: #fff;
+}
+
+.addCategoryAreaButtonDiv {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addCategoryAreaButton_btn {
+  padding: 13px 0px;
+  width: 157px;
+  border-radius: 10px;
+  border: none;
+  background: #2d7e4b;
+  color: #fff;
+  font-size: 14px;
+}
+
+.addCategoryArea_closeIcon {
+  position: absolute;
+  right: 3%;
+  top: 3%;
+  background: #0e1611;
+  border-radius: 4px;
+  padding: 3px;
+  font-size: 24px !important;
+  cursor: pointer;
+}
+
+.dark .demo-wrapper {
+  color: #fff;
+}
+
+.dark .demo-wrapper span {
+  background: none !important;
+  color: #fff;
+}
+
+.dark .rdw-editor-toolbar {
+  border: 1px solid #4b4968 !important;
+  background: #33314e !important;
+}
+
+.dark .rdw-option-wrapper {
+  border: 1px solid #111018 !important;
+  background: #8f8bbc !important;
+}
+
+.dark .rdw-dropdown-selectedtext span {
+  color: #000000 !important;
+}
+
+.dark .rdw-dropdownoption-default {
+  color: #000000 !important;
+}
+
+.editProductDiv_area_closeIcon {
+  position: absolute;
+  right: 2%;
+  color: #fff;
+  background: black;
+  padding: 4px;
+  font-size: 31px !important;
+  top: 2%;
+  border-radius: 7px;
+  cursor: pointer;
+}

@@ -1220,7 +1220,7 @@ const DashboardHome = () => {
                     Est.APY:{" "}
                     <span className="lending_area1_last_cont1_divs_cont_value">
                       {" "}
-                      50.0%
+                      30.0%
                     </span>
                   </span>
                   {/* <span className="lending_area1_last_cont1_divs_cont2">

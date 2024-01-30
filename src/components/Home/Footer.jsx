@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import WaveAnimation from "./WaveAnimation/WaveAnimation";
+import TwitterIcon from "@mui/icons-material/Twitter";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import TelegramIcon from "@mui/icons-material/Telegram";
+import YouTubeIcon from "@mui/icons-material/YouTube";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
@@ -22,6 +26,17 @@ const useStyles = makeStyles((theme) => ({
 const Footer = () => {
   // assets.forEach(asset);
   const [showFooter, setShowFooter] = useState(true);
+  const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+
+  useEffect(() => {
+    // Update the current year when the component mounts
+    const intervalId = setInterval(() => {
+      setCurrentYear(new Date().getFullYear());
+    }, 1000); // Update the year every second (you can adjust the interval as needed)
+
+    // Clear the interval when the component unmounts    sss
+    return () => clearInterval(intervalId);
+  }, []);
   const currentPage = window.location.pathname;
   useEffect(() => {
     // console.log(urlArr[1]);
@@ -123,18 +138,9 @@ const Footer = () => {
         <div id="FooterId">
           <section className="footerSection">
             <div className="container">
-              <div className="footerArea">
-                <div className="footerCard1">
-                  <div className="FooterPageLinks">
-                    <a href="#" className="FooterPageLinks_1" target="_blank">
-                      About Us
-                    </a>
-                    <a href="#" className="FooterPageLinks_1" target="_blank">
-                      White Paper
-                    </a>
-                  </div>
-                  <a href="#">
-                    {" "}
+              <div className="footerDiv1">
+                <div className="footerDiv1_area1">
+                  <div className="footerDiv1_area1_cont1">
                     <img
                       src="/img/egoras-logo.svg"
                       alt="..."
@@ -145,39 +151,53 @@ const Footer = () => {
                       alt="..."
                       className="egr2-logo2"
                     />
-                  </a>
+                  </div>
                 </div>
-                {/* =================================
-            ==================== */}
-                <div className="footerCard3">
-                  <Accordion>
-                    <AccordionSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel2a-content"
-                      id="panel2a-header"
-                    >
-                      <Typography className={classes.heading}>
+                <div className="footerDiv1_area2">
+                  <div className="footerDiv1_area2_cont1">
+                    <div className="footerDiv1_area2_title">Protocol</div>
+                    <div className="footerDiv1_area2_title_subLinks_div">
+                      <a
+                        href="#"
+                        className="footerDiv1_area2_title_subLinks_div_link1"
+                      >
                         About Us
-                      </Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <div className="footerLinks">
-                        <a href="#" className="c1link1" target="_blank">
-                          About
-                        </a>
-                        <a href="/app#" className="c1link1" target="_blank">
-                          White Paper
-                        </a>
-                      </div>
-                    </AccordionDetails>
-                  </Accordion>
+                      </a>
+                      <a
+                        href="#"
+                        className="footerDiv1_area2_title_subLinks_div_link1"
+                      >
+                        Lite Paper
+                      </a>
+                      <a
+                        href={
+                          window.location.protocol === "http:"
+                            ? `http://v1.localhost:${window.location.port}/`
+                            : `https://v1.egodao.org/`
+                        }
+                        className="footerDiv1_area2_title_subLinks_div_link1"
+                      >
+                        Egodao V1
+                      </a>
+                    </div>
+                  </div>
+                  <div className="footerDiv1_area2_cont1">
+                    <div className="footerDiv1_area2_title">Need Help?</div>
+                    <div className="footerDiv1_area2_title_subLinks_div">
+                      <a
+                        href="mailto:support@egoras.com"
+                        className="footerDiv1_area2_title_subLinks_div_link1"
+                        target="_blank"
+                      >
+                        support@egodao.org
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <hr className="footer_hr_rule"></hr>
-              <h5 className="footerBottomPara">
-                ©️ 2023 EGODAO. All rights reserved .
-              </h5>
+              <hr className="footer_hr" />
+              <div className="footer_lastDiv">© {currentYear} Egodao.org</div>
             </div>
           </section>
           <WaveAnimation />

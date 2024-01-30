@@ -1,0 +1,92 @@
+.modifyMembershipFeeDiv {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4em;
+  border: solid 1px #202e26;
+  padding: 3em;
+  border-radius: 10px;
+}
+
+.modifyMembershipFeeDiv_head {
+  font-size: 24px;
+  text-align: center;
+  color: #fff;
+}
+
+.modifyMembershipFeeDiv_body {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1em;
+  /* border: solid 1px #202e26; */
+  /* padding: 3em; */
+  /* border-radius: 10px; */
+}
+
+.modifyMembershipFeeDiv_body_monthly {
+  width: 100%;
+  margin-right: 1em;
+  background: #232326;
+  padding: 2em;
+  border-radius: 10px;
+  border: solid 1px #313135;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+.modifyMembershipFeeDiv_body_monthly_head {
+  font-size: 14px;
+  color: #83998c;
+}
+
+.modifyMembershipFeeDiv_body_monthly_SubHead {
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.modifyMembershipFeeDiv_body_monthly_input_div {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  border-top: solid 1px #313135;
+  padding-top: 10px;
+}
+
+.modifyMembershipFeeDiv_body_monthly_input_div_1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.modifyMembershipFeeDiv_body_monthly_input_div_1_head {
+  font-size: 12px;
+  margin-bottom: 3px;
+  color: #83998c;
+}
+
+.modifyMembershipFeeDiv_body_monthly_input_div_1_input {
+  padding: 10px;
+  border-radius: 10px;
+  border: solid 1px #313135;
+  background: #000;
+  color: #fff;
+}
+
+.modifyMembershipFeeDiv_body_monthly_btn_div {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.modifyMembershipFeeDiv_body_monthly_btn_btn {
+  padding: 15px 0px;
+  width: 100%;
+  max-width: 200px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}

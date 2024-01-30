@@ -1,0 +1,53 @@
+.earning-section {
+    padding: 5em 0em;
+    padding-top: 8em;
+    height: 100svh;
+}
+
+.nft-area2{
+
+    height: 80vh;
+}
+
+
+/* nft-txt-area */
+element.style {
+    width: 100%;
+    height: 200%;
+}
+
+/* nft-img-area */
+
+element.style {
+    display: inline-flex;
+    width: 85%;
+    height: 50%;
+}
+
+
+/* nft-img */
+element.style {
+    width: 100%;
+    margin: auto;
+    height: 100%;
+}
+
+.span4a-txts {
+    font-size: 185%;
+    width: 100%;
+    font-weight: 900;
+    margin: 0;
+    line-height: 65px;
+    /* height: 20%; */
+}
+
+
+.flip-countdown.size-medium .flip-countdown-piece .flip-countdown-title {
+    font-size: 14px;
+}
+
+
+.flip-countdown.size-medium .flip-countdown-piece .flip-countdown-card .flip-countdown-card-sec {
+    margin: 0 0.025em!important;
+    font-size: 35px !important;
+}

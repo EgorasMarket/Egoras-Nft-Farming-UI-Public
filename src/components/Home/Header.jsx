@@ -629,6 +629,16 @@ const Header = ({ togglemakeDark, check }) => {
                 </div>
                 <div className="user_profile_icon_cont2">
                   <div className="together">
+                    <a
+                      href={
+                        window.location.protocol === "http:"
+                          ? `http://v1.localhost:${window.location.port}/`
+                          : `https://v1.egodao.org/`
+                      }
+                      className="together_lnk"
+                    >
+                      Egodao V1
+                    </a>
                     <div className="header_menu_icon_con_dash">
                       <Hamburger toggled={isOpen} toggle={setIsOpen} />
                     </div>
@@ -693,8 +703,15 @@ const Header = ({ togglemakeDark, check }) => {
               {isOpen === true ? (
                 <div className="mobile_view_header_cont_head_body_dash">
                   <div className="header_new_links_mobile">
-                    <a href="/app/market" className="header_new_links_mobile_1">
-                      Inventory
+                    <a
+                      href={
+                        window.location.protocol === "http:"
+                          ? `http://v1.localhost:${window.location.port}/`
+                          : `https://v1.egodao.org/`
+                      }
+                      className="header_new_links_mobile_1"
+                    >
+                      Egodao V1
                       <ArrowForwardIosIcon className="header_new_links_mobile_1_icon" />
                     </a>
                   </div>

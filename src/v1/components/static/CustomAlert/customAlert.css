@@ -1,0 +1,106 @@
+.alert_cont {
+  position: fixed;
+  top: 1%;
+  left: 37.5%;
+  right: 62%;
+  width: 25%;
+  z-index: 10000;
+  animation: opacity 0.3s linear;
+}
+.setAlertErr {
+  position: relative;
+  color: #f15555;
+  background: #ffffff;
+  width: 100%;
+  /* padding-left: 5em; */
+  padding: 0.5em 1em;
+  padding-left: 6em;
+  border-radius: 15px;
+  height: 4.5em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0px 3px 15px #ffb7b7;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border: solid;
+  border-width: 1px;
+  font-size: 14px;
+  font-weight: 600;
+  border-color: #f15555;
+  overflow: hidden;
+}
+.setAlertErr::before {
+  content: url("/src/images/error_icon.svg");
+  position: absolute;
+  height: 100%;
+  width: 65px;
+  /* font-size: 45px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f15555;
+  color: #fff;
+  left: 0;
+}
+.setAlertSuccess {
+  position: relative;
+  color: #41ba71;
+  background: #ffffff;
+  width: 100%;
+  /* padding-left: 5em; */
+  padding: 0.5em 1em;
+  padding-left: 6em;
+  border-radius: 15px;
+  height: 4.5em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-shadow: 0px 3px 15px #b4ffbd;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border: solid;
+  border-width: 1px;
+  font-size: 14px;
+  font-weight: 600;
+  border-color: #41ba71;
+  overflow: hidden;
+}
+.setAlertSuccess::before {
+  content: url("/src/images/success_icon.svg");
+  position: absolute;
+  height: 100%;
+  width: 65px;
+  /* font-size: 45px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #41ba71;
+  left: 0;
+}
+@keyframes opacity {
+  0% {
+    opacity: 0;
+    top: -5%;
+  }
+  100% {
+    opacity: 1;
+    top: 1%;
+  }
+}
+.dark .setAlertErr {
+  color: #4d705c;
+  background: #ffffff;
+  box-shadow: 0px 3px 15px #0f0f0f;
+  border-color: #4d705c;
+}
+.dark .setAlertSuccess {
+  color: #4d705c;
+  background: #ffffff;
+  box-shadow: 0px 3px 15px #0f0f0f;
+  border-color: #4d705c;
+}
+.dark .setAlertErr::before {
+  background: #000000;
+  color: #fff;
+}

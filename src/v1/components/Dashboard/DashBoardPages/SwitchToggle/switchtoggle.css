@@ -1,0 +1,143 @@
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  /* display: none; */
+}
+.switch2 input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  /* display: none; */
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0px;
+  left: 8px;
+  right: 0;
+  bottom: 0;
+  background-color: #dddddd;
+  transition: 0.4s;
+  height: 85%;
+  width: 85%;
+  box-shadow: 0px 0px 8px #d9d9d9;
+  border: solid 1px #d0d0d0;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 3px;
+  bottom: 2.5px;
+  background-color: white;
+  transition: 0.4s;
+  box-shadow: 0px 0px 5px #9e9e9e;
+}
+
+input:checked + .slider {
+  background-color: #edfff4;
+  border: solid 1px #56bc7e;
+  box-shadow: 0px 0px 5px #8ed7ab;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #96c8ab;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(21px);
+  -ms-transform: translateX(21px);
+  transform: translateX(21px);
+  top: 2.5px;
+  left: 3px;
+  background: #56bc7e;
+  box-shadow: 0px 0px 5px #55a172;
+}
+input:checked + .slider2 {
+  background-color: #38614c;
+  border: solid 1px #38614c;
+  box-shadow: none;
+}
+
+input:focus + .slider2 {
+  box-shadow: 0 0 1px #96c8ab;
+}
+
+input:checked + .slider2:before {
+  transform: translateX(24px);
+  top: -1.5px;
+  left: -19%;
+  /* right: -24px; */
+  background: #ffffff;
+  box-shadow: none;
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+.slider2.round {
+  border-radius: 34px;
+}
+
+.slider2.round:before {
+  border-radius: 50%;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.switch2 input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider2 {
+  position: relative;
+  cursor: pointer;
+  top: 0px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #444444;
+  transition: 0.4s;
+  height: 100%;
+  width: 100%;
+  box-shadow: none;
+  border: solid 1px #313131;
+  /* width: 20em; */
+  display: block;
+}
+.slider2:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: -2%;
+  background-color: white;
+  transition: 0.5s;
+  box-shadow: none;
+  top: -1.5px;
+}
+.switch2 {
+  position: relative;
+  display: flex;
+  width: 2.5em;
+  height: 21px;
+}

@@ -17,7 +17,7 @@ import store from "./store";
 import Referal from "./components/Referral/Referal";
 // import PaywithFort from "./components/Home/MemberShip/SubSteps/PaywithFort";
 import { socket } from "./socket";
-
+import Index from "./v1/Index";
 function App() {
   const [dashboard, setDashboard] = useState(false);
   const [admin, setAdmin] = useState(false);
@@ -202,6 +202,10 @@ function App() {
     const library = new Web3Provider(provider);
     library.pollingInterval = 8000;
     return library;
+  }
+
+  if (window.location.host.split(".")[0] === "v1") {
+    return <Index />;
   }
   return (
     <Web3ReactProvider getLibrary={getLibrary}>

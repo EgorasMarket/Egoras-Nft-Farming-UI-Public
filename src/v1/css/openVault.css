@@ -1,0 +1,584 @@
+.vault_page {
+  flex: 4 1;
+  width: 100svw;
+  background: #f9f9f9;
+  /* height: 100svh; */
+  overflow: scroll;
+}
+
+.open_vault_section {
+  padding: 3em 0em;
+  padding-top: 3em;
+  padding-left: 0em;
+}
+
+.open_vault_header {
+  display: flex;
+  flex-direction: column;
+}
+.vault_input0 {
+  color: #000;
+}
+.vault_captions {
+  display: flex;
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 30px;
+}
+.to_connect_div {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 2em;
+  background: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-gap: 10px;
+  gap: 10px;
+  box-shadow: 0px 0px 10px black;
+}
+.dark .to_connect_div {
+  background: #36503f;
+}
+.open_vault_area {
+  display: grid;
+  justify-content: space-between;
+  margin-top: 30px;
+  gap: 48px;
+  grid-template-columns: 2fr minmax(465px, 1fr);
+}
+
+.open_vault_area1 {
+  /* width: 100%; */
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.open_vault_area2ss {
+  /* width: 70%; */
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  box-shadow: 0px 0px 15px #d5e2da;
+  border-radius: 20px;
+  max-height: 100%;
+  /* min-height: 80%; */
+  /* overflow-x: hidden; */
+  padding: 2em;
+  grid-gap: 32px;
+  gap: 32px;
+  margin-bottom: 0em;
+}
+.vault_amount_withdraw {
+  /* width: 70%; */
+  display: flex;
+  /* flex-direction: column; */
+  background: #fff;
+  box-shadow: 0px 0px 15px #d5e2da;
+  border-radius: 20px;
+  min-height: 120px;
+  padding: 24px;
+  justify-content: space-between;
+  align-items: center;
+}
+.card-header {
+  /* padding: 0.5rem 1rem; */
+  /* margin-bottom: 0; */
+  background-color: #ffffff !important;
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.125); */
+}
+.card-body {
+  padding: 0 !important;
+}
+.card {
+  border: none !important;
+  gap: 25px !important;
+}
+.nav-tabs {
+  border-bottom: 1px solid #ededed !important;
+  cursor: pointer !important;
+}
+.not_generate_eusd_cont1 {
+  display: none;
+}
+.not_generate_eusd_cont {
+  display: none;
+}
+/* .nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: #239e54 !important;
+} */
+.nav-link {
+  color: #acacac !important;
+}
+.vault_pay_back_btn {
+  padding: 0.8em 2em;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(to right, #84e4a3, #6cbb86, #5f7ad6);
+  color: #ffff;
+  font-weight: 400;
+  box-shadow: 0px 5px 13px #cbcbcb;
+  font-size: 15px;
+  width: 100%;
+}
+.vault_pay_back_btn:disabled {
+  background: #dbdbdb;
+  color: #b5b5b5;
+  cursor: not-allowed;
+  box-shadow: -1px 5px 10px #e9e9e9;
+}
+/* .nav-link.active {
+  color: white !important;
+} */
+.payback_vault_input {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  gap: 23px;
+}
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: #e1f7ea !important;
+  color: #22ad62 !important;
+  font-weight: 600;
+  border-bottom: solid 2px #22ad62 !important;
+  /* margin-bottom: 2em; */
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.amount_withdraw_cont1_txt1 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #56bc7e;
+}
+.price_value_change.danger {
+  color: #f75524 !important;
+  background: #fdede8 !important;
+}
+
+.price_value_change.warning {
+  color: #d8762d !important;
+  background: #fff1cf !important;
+}
+.custom_modal .modal-content {
+  padding: 2em !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: blur(10px) !important;
+  align-items: center;
+}
+.custom_modal {
+  color: rgb(0, 0, 0) !important;
+}
+.dark .custom_modal {
+  color: rgb(255, 255, 255) !important;
+}
+
+.price_value_change {
+  box-sizing: border-box;
+  margin: 8px 0px 0px;
+  border-radius: 20px;
+  background-color: #ddffeb;
+  color: #56bc7e;
+  font-weight: 600;
+  border: none;
+  padding: 0px 8px;
+  display: inline-block;
+  /* line-height: 2; */
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.price_value_change_value {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.not_price_value_change {
+  display: none;
+}
+.amount_withdraw_cont1_txt2 {
+  font-size: 14px;
+  color: #707070;
+  font-weight: 600;
+}
+
+.openVault_heading {
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.vault_prices {
+  box-sizing: border-box;
+  margin: 0px 0px 16px;
+  min-width: 0px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+  /* align-self: flex-start; */
+}
+.vault_prices1 {
+  box-sizing: border-box;
+  margin: 0px;
+  min-width: 0px;
+  padding: 16px;
+  border-radius: 20px;
+  background-color: var(--theme-ui-colors-surface, #fff);
+  border: 1px solid rgb(240, 240, 240);
+  overflow: hidden;
+  min-height: 194px;
+  display: flex;
+  cursor: pointer;
+  box-shadow: 0px 0px 15px #d5e2da;
+  flex-flow: column;
+  justify-content: space-between;
+}
+
+.vault_tbd {
+  font-size: 14px;
+  color: #8c8c8c;
+  margin: 0;
+  border-left: solid;
+  border-width: 1px;
+  /* height: 20
+px
+; */
+  padding-left: 9px;
+}
+
+.vault_percent {
+  margin-left: 15px;
+  color: #56bc7e;
+  font-weight: 600;
+}
+.vault_prices1_cont1 {
+  display: flex;
+  flex-direction: column;
+}
+
+.vault_prices1txt1 {
+  color: #56bc7e;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+.vault_prices1txt1aa {
+  color: #56bc7e;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.vault_prices1amount {
+  font-weight: 600;
+  font-size: 32px;
+  display: flex;
+  flex-direction: column;
+}
+.dollar_val {
+  font-size: 18px;
+  font-weight: 500;
+}
+.next {
+  color: grey;
+}
+
+input.vault_input_vault {
+  width: 100%;
+  height: 76px;
+  border-radius: 8px;
+  border: solid;
+  border-width: 1px;
+  padding: 0.5em 1em;
+  border-color: #d4d4d4;
+  margin-top: 10px;
+}
+input.vault_input_vault:focus-visible {
+  outline: none;
+  border: solid;
+  border-width: 2px;
+  border-color: #56bc7e;
+  box-shadow: 0px 0px 10px #c3c3c3;
+}
+.open_vault_input_titles {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+span.vault_input1 {
+  color: #949494;
+}
+p.configure {
+  font-weight: 600;
+  color: #000;
+  font-size: 16px;
+}
+
+.open_vault_area2a {
+  font-size: 14px;
+  color: grey;
+}
+.open_vault_input_btn {
+  border: none;
+  padding: 1em;
+  border-radius: 9px;
+  background: #56bc7e;
+  color: #ffff;
+  font-weight: 400;
+  font-size: 18px;
+  box-shadow: -1px 5px 10px #87c8a0;
+}
+.open_vault_input_btn:disabled {
+  background: #dbdbdb;
+  color: #b5b5b5;
+  cursor: not-allowed;
+  box-shadow: -1px 5px 10px #e9e9e9;
+}
+button.open_vault_input_btn_a {
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 9px;
+  background: #ebebeb;
+  color: #444;
+  font-weight: 400;
+  width: 100%;
+  font-size: 12px;
+}
+button.open_vault_input_btn_a.bbb {
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 9px;
+  background: #ebebeb;
+  color: #444;
+  font-weight: 400;
+  width: 100%;
+  font-size: 12px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+button.open_vault_input_btn_a:hover {
+  border: none;
+  padding: 0.5em 1em;
+  background: #dfdfdf;
+  color: #444;
+  font-weight: 400;
+  width: 100%;
+  font-size: 12px;
+}
+.ifValidDiv {
+  /* min-height: 95%; */
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.valid_div_inner_div {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.valid_div_inner_div_cont {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  color: #7a7a7a;
+}
+.horizontal {
+  color: #a1a1a1;
+}
+h3.valid_div_inner_div_heading {
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  margin: 0;
+}
+
+.valid_div_inner_div_cont2 {
+  color: #56bc7e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.red {
+  color: red;
+}
+
+.not_ifValidDiv {
+  display: none;
+}
+
+.add_icon {
+  margin-right: 5px;
+  font-size: 18px !important;
+}
+
+.generate_eusd_cont {
+  border: solid;
+  border-width: 1px;
+  border-color: #efefef;
+  border-radius: 20px;
+  padding: 1em 0em;
+  padding-top: 0em;
+  /* height: 81%; */
+  border-top: none;
+}
+.open_vault_input_titlesb {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  padding-bottom: 0;
+  margin-top: 15px;
+}
+input.vault_input_vaulta {
+  width: 100%;
+  height: 76px;
+  border-radius: 8px;
+  border: solid;
+  border-width: 1px;
+  padding: 0.5em 1em;
+  border-color: #d4d4d4;
+  /* margin: auto; */
+  /* margin-top: 5px;
+  margin-right: 10px;
+  margin-left: 10px; */
+  margin: 0;
+  margin-top: 1em;
+}
+input.vault_input_vaulta:focus-visible {
+  outline: none;
+  border: solid;
+  border-width: 2px;
+  border-color: #56bc7e;
+  box-shadow: 0px 0px 10px #c3c3c3;
+}
+
+@media screen and (max-width: 1220px) {
+  .open_vault_section {
+    padding: 3em 0em;
+    padding-top: 3em;
+    padding-left: 0em;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .open_vault_section {
+    padding: 3em 0em;
+    padding-top: 3em;
+    padding-left: 0em;
+  }
+}
+@media screen and (max-width: 950px) {
+  .vault_prices1amount {
+    font-weight: 600;
+    font-size: 24px;
+  }
+
+  .amount_withdraw_cont1_txt1 {
+    font-size: 11px;
+    font-weight: 600;
+    color: #56bc7e;
+  }
+}
+@media screen and (max-width: 900px) {
+  .open_vault_area {
+    display: grid;
+    justify-content: space-between;
+    margin-top: 30px;
+    grid-gap: 20px;
+    gap: 20px;
+    grid-template-columns: 1fr;
+  }
+  .open_vault_section {
+    padding-top: 3em;
+  }
+  .open_vault_area2ss {
+    padding: 1em;
+  }
+}
+@media screen and (max-width: 685px) {
+  .vault_captions {
+    display: grid;
+    align-items: center;
+    grid-gap: 30px;
+    gap: 30px;
+    grid-template-columns: auto auto;
+  }
+}
+@media screen and (max-width: 525px) {
+  .vault_tbd {
+    font-size: 14px;
+    color: #8c8c8c;
+    margin: 0;
+    border-left: solid;
+    border-width: 1px;
+    padding-left: 9px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0px;
+  }
+  .vault_percent {
+    margin-left: 0;
+    color: #56bc7e;
+    font-weight: 600;
+  }
+  .vault_captions {
+    display: grid;
+    align-items: center;
+    gap: 8px;
+    grid-template-columns: auto auto;
+  }
+  .open_vault_area1 {
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+  }
+  .open_vault_section {
+    padding-top: 1em;
+  }
+  .openVault_heading {
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+}
+@media screen and (max-width: 425px) {
+  .vault_amount_withdraw {
+    /* width: 70%; */
+    display: flex;
+    /* flex-direction: column; */
+    background: #fff;
+    box-shadow: 0px 0px 15px #d5e2da;
+    border-radius: 20px;
+    min-height: 120px;
+    padding: 24px;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .vault_prices1amount {
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  .vault_prices1txt1 {
+    color: #56bc7e;
+    font-size: 11px;
+    font-weight: 600;
+    margin: 0;
+  }
+}

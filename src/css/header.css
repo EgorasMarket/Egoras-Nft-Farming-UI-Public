@@ -7,7 +7,11 @@ div#Header {
   top: 0;
   z-index: 100;
 }
-
+.together_lnk {
+  display: flex;
+  align-items: center;
+  margin-right: 2em;
+}
 .header_new_links {
   display: flex;
   align-items: center;
@@ -782,7 +786,7 @@ vl {
   align-items: center;
   justify-content: center;
   /* line-height: 1.1; */
-  height: 35px;
+  /* height: 35px; */
 }
 
 .lightMode_icon {
