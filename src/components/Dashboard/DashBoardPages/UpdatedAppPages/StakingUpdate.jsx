@@ -510,6 +510,7 @@ const StakingUpdate = () => {
     if (account) {
       const res = await getEGCEUSDTICKERPRICE("egceusd", library.getSigner());
       console.log(res);
+      // console.log(res);
 
       console.log(formatEther(res.message.toString()));
     }
