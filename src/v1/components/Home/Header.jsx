@@ -632,8 +632,8 @@ const Header = ({ togglemakeDark, check }) => {
                     <a
                       href={
                         window.location.protocol === "http:"
-                          ? `http://v2.localhost:${window.location.port}/`
-                          : `https://v2.egodao.org/`
+                          ? `http://localhost:${window.location.port}/`
+                          : `https://egodao.org/`
                       }
                       className="together_lnk"
                     >
@@ -706,8 +706,8 @@ const Header = ({ togglemakeDark, check }) => {
                     <a
                       href={
                         window.location.protocol === "http:"
-                          ? `http://v2.localhost:${window.location.port}/`
-                          : `https://v2.egodao.org/`
+                          ? `http://localhost:${window.location.port}/`
+                          : `https://egodao.org/`
                       }
                       className="header_new_links_mobile_1"
                     >

@@ -5,8 +5,6 @@ import {
   setPriceOracle,
   setEGCUSDTicker,
   setTickerNew,
-  // resetStakeTime,
-  // IncreaseRoyaltyTime,
   adminAddMinter,
   DiamondCutFunc,
   setTokenAddress,
@@ -68,6 +66,7 @@ const AdminSettings = () => {
     );
     console.log(response);
   };
+
   const withdrawEgoDaoBase = async () => {
     const response = await withdrawBase(account, library.getSigner());
     console.log(response);
