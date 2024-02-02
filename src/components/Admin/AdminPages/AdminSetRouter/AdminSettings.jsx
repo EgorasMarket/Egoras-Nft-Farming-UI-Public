@@ -145,14 +145,16 @@ const AdminSettings = () => {
   //   const response = await setEGCUSDTicker(tickerArray[0], library.getSigner());
   //   console.log(response);
   // };
+
   const setTicker2 = async () => {
     const response = await setTickerNew(tickerArray[0], library.getSigner());
     console.log(response);
   };
+
   const configureStake = async () => {
     const response = await setStakeConfigure(
       "0x4AC4fC5317F95849A1F17e2f4Daf03c32196f0cb",
-      "0x1F467B61Da084784AfB0f5BdA14554A30Bb5A5b7",
+      "0xF5A29e120999776cE351B3576EeDE64B4805019B",
       "300000000000000000",
       library.getSigner()
     );

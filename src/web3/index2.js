@@ -48,7 +48,7 @@ const contractStakingFacetInstance = (signer) => {
 };
 const contractAddMinterFacetInstance = async (signer) => {
   return new Contract(
-    "0x1F467B61Da084784AfB0f5BdA14554A30Bb5A5b7",
+    "0xF5A29e120999776cE351B3576EeDE64B4805019B",
     Minter.abi,
     signer
   );
