@@ -1,0 +1,82 @@
+.admin_dex_div {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: auto;
+  color: #fff;
+  padding-top: 2em;
+}
+.admin_dex_div_title {
+  font-size: 38px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.admin_dex_div_ticker_div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  flex-direction: column;
+}
+.admin_dex_div_ticker_div_cont1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: silver;
+}
+.admin_dex_div_ticker_div_cont1 .setRouterAddressInput {
+  margin-top: 10px;
+}
+.admin_dex_div_cont {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1em;
+}
+.admin_dex_div_cont_1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: silver;
+  margin-top: 10px;
+}
+.admin_dex_div_cont_1 .setRouterAddressInput {
+  margin-top: 10px;
+}
+.admin_dex_div_btn {
+  width: 100%;
+  margin-top: 2em;
+  padding: 15px;
+  border-radius: 15px;
+  border: none;
+  background: #fff;
+  font-weight: 500;
+}
+
+.admin_dex_div_ticker_div span {
+  margin: 0px 5px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2em;
+}
+.admin_dex_div_ticker_div_output_div {
+  /* position: absolute; */
+  /* bottom: -47%; */
+  background: #0c351e;
+  color: #c9c9c9;
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 500;
+}
+.admin_dex_div_ticker_div_area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 5px;
+}

@@ -10,6 +10,7 @@ import { CALL_VERIFY_ADMIN_WALLET } from "../../services/adminServices";
 import { useWeb3React } from "@web3-react/core";
 import { Warning } from "@mui/icons-material";
 import AdminSettings from "./AdminPages/AdminSetRouter/AdminSettings";
+import AdminSwapSettings from "./AdminPages/AdminExchange/AdminSwapSettings";
 const Admin = ({ check, togglemakeDark }) => {
   const context = useWeb3React();
   const { account } = context;
@@ -58,6 +59,11 @@ const Admin = ({ check, togglemakeDark }) => {
                   exact
                   path="/admin/modify/membership_plan"
                   component={AdminModifyMembership}
+                />
+                <Route
+                  exact
+                  path="/admin/dex/settings"
+                  component={AdminSwapSettings}
                 />
                 <Route exact path="/admin/settings" component={AdminSettings} />
               </Switch>

@@ -1,0 +1,467 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_token_address",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_base_address",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_creator",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_time",
+          "type": "uint256"
+        }
+      ],
+      "name": "NewAsset",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amountGive",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_amountGet",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "isBase",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "fee",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "ticker",
+          "type": "string"
+        }
+      ],
+      "name": "Swaped",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_baseAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_tokenAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "liquidityAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "user",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_baseAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "_tokenAmount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "time",
+          "type": "uint256"
+        }
+      ],
+      "name": "liquidityRemoved",
+      "type": "event"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "fallback",
+      "payable": true
+    },
+    {
+      "stateMutability": "payable",
+      "type": "receive",
+      "payable": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        }
+      ],
+      "name": "getBaseEx",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        }
+      ],
+      "name": "getNativeCurrencyWitthToken",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        }
+      ],
+      "name": "getTokenExWithNativeToken",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function",
+      "payable": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        }
+      ],
+      "name": "getTokenEx",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "_token_address",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_base_address",
+          "type": "address"
+        }
+      ],
+      "name": "listAssetEx",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        },
+        {
+          "internalType": "address",
+          "name": "_token_address",
+          "type": "address"
+        }
+      ],
+      "name": "listAssetExForNativeCurrency",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_tokenInamount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        }
+      ],
+      "name": "addLiquidityForNativeCurrency",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function",
+      "payable": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_baseInamount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_tokenInamount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        }
+      ],
+      "name": "addLiquidity",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        }
+      ],
+      "name": "removeLiquidity",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        }
+      ],
+      "name": "removeLiquidityForNativeCurrency",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_user",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        }
+      ],
+      "name": "getUserTotalSwap",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_base",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_token",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_baseLp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_tokenLp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_userBaseLp",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_userTokenLp",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        }
+      ],
+      "name": "getSystemTotalSwap",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_base",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_token",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_base_fee",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_token_fee",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_currentFee",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function",
+      "constant": true
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "_ticker",
+          "type": "string"
+        }
+      ],
+      "name": "delistAsset",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_fee",
+          "type": "uint256"
+        }
+      ],
+      "name": "setFee",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
+}

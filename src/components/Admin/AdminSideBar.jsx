@@ -126,6 +126,9 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
     if (linksActive === "/app/add") {
       setActiveBg("pool");
     }
+    if (linksActive === "/admin/dex/settings") {
+      setActiveBg("dex");
+    }
 
     if (linksActive === "/app/whitepaper") {
       setActiveBg("whitepaper");
@@ -311,6 +314,16 @@ const AdminSideBar = ({ check, togglemakeDark }) => {
                 onClick={changeBg}
               >
                 Membership
+              </a>
+              <a
+                id="dex"
+                href="/admin/dex/settings"
+                className={
+                  activeBg === "dex" ? "header_tab1_active " : "header_tab1"
+                }
+                onClick={changeBg}
+              >
+                Dex
               </a>
               <a
                 id="procurre"
