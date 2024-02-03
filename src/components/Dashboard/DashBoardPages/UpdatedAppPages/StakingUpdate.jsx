@@ -128,7 +128,7 @@ const StakingUpdate = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [lockDate, setLockDate] = useState(null);
   const [activeTab, setActiveTab] = useState("lock");
-  const [estimatedRewardAmnt, setEstimatedRewardAmnt] = useState(0);
+  const [estimatedRewardAmnt, setEstimatedRewardAmnt] = useState(0.0);
   const [tokenBal, setTokenBal] = useState(0.0);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoading2, setIsLoading2] = useState(false);
@@ -282,12 +282,13 @@ const StakingUpdate = () => {
   const AmountChange = (e) => {
     setLockAmount(e.target.value);
     console.log(e.target.value);
-    if (e.target.value < 1) {
+    if (e.target.value < 0) {
       setEstimatedRewardDiv(false);
     } else {
       setEstimatedRewardDiv(true);
     }
-    setEstimatedRewardAmnt(e.target.value * egcUsdVal * 0.00082192);
+    setEstimatedRewardAmnt(parseFloat(e.target.value) * egcUsdVal * 0.00082192);
+    console.log(parseFloat(e.target.value) * egcUsdVal * 0.00082192);
   };
 
   const StakeMonthly = async () => {
@@ -477,7 +478,10 @@ const StakingUpdate = () => {
 
   const maxAmount = () => {
     setLockAmount(coinBalance2);
-    setEstimatedRewardAmnt(coinBalance2 * egcUsdVal * 0.00082192);
+    setEstimatedRewardAmnt(parseFloat(coinBalance2) * egcUsdVal * 0.00082192);
+    console.log("====================================");
+    console.log(parseFloat(coinBalance2) * egcUsdVal * 0.00082192);
+    console.log("====================================");
     setEstimatedRewardDiv(true);
   };
 
@@ -1024,7 +1028,8 @@ const StakingUpdate = () => {
                       <div className="estRewardDiv">
                         Estimated Daily Reward:{" "}
                         <span className="estRewardDiv_span">
-                          {estimatedRewardAmnt / 0.33} EGAX
+                          {parseFloat(estimatedRewardAmnt)} EGAX
+                          {/* {parseFloat(estimatedRewardAmnt) / 0.33} EGAX */}
                         </span>
                       </div>
                     ) : null}
