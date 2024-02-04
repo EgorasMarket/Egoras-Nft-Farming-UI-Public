@@ -44,6 +44,7 @@ import {
   getAmountsOut,
   getPriceOracle,
 } from "../../../../../web3/index2";
+import { swapBase, swapToken } from "../../../../../web3/index3";
 import {
   tokenBalance,
   checkAllowanceV3,
@@ -117,9 +118,9 @@ const UpdatedSwap = () => {
   const [MinamountsOut, setMinAmountsOut] = useState("");
   const [assetsBase, setAssetBase] = useState({
     id: "0",
-    img: "/img/tokens-folder/busd_icon.png",
+    img: "/img/egax_logo.png",
     symbol: "EGAX",
-    address: "0x1F467B61Da084784AfB0f5BdA14554A30Bb5A5b7",
+    address: "0xF5A29e120999776cE351B3576EeDE64B4805019B",
     name: "Egochain Gas Coin",
     favorite: "true",
   });
@@ -181,95 +182,167 @@ const UpdatedSwap = () => {
     setAssetBase(assets);
     setBaseBalance(coinBalance);
     setCoinBalance(baseBalance);
+    setSwapAmount("");
   };
 
   const add25Per = async (balance) => {
     setIsAmountLoading(true);
     setSwapAmount(balance * 0.25);
-    const response = await getAmountsOut(
-      parseEther((balance * 0.25).toString(), "wei").toString(),
-      [assetsBase.address, assets.address],
-      library.getSigner()
-    );
+    let response = await getPriceOracle("EGAX_USDT", library.getSigner());
     console.log(response);
     if (response.status === true) {
       setIsAmountLoading(false);
-      setAmountsOut(formatEther(response.message[1]._hex));
-      const maxSlippage = parseFloat(slippage) / 100;
-      setMinAmountsOut(
-        formatEther(response.message[1]._hex) * (1 - maxSlippage)
-      );
-      console.log(formatEther(response.message[1]._hex));
+      setDisable(false);
+      if (assetsBase.symbol === "USDT") {
+        setAmountsOut(
+          (balance * 0.25) /
+            parseFloat(formatEther(response.message._hex)).toFixed(2)
+        );
+        const maxSlippage = parseFloat(slippage) / 100;
+        setMinAmountsOut(
+          ((balance * 0.25) /
+            parseFloat(formatEther(response.message._hex)).toFixed(2)) *
+            (1 - maxSlippage)
+        );
+      } else {
+        setAmountsOut(
+          balance *
+            0.25 *
+            parseFloat(formatEther(response.message._hex)).toFixed(2)
+        );
+        const maxSlippage = parseFloat(slippage) / 100;
+        setMinAmountsOut(
+          balance *
+            0.25 *
+            parseFloat(formatEther(response.message._hex)).toFixed(2) *
+            (1 - maxSlippage)
+        );
+      }
     } else {
       setIsAmountLoading(false);
+      setDisable(false);
       console.log(response);
     }
     // setSwapBaseAmount(SwapAmount * 4);
   };
+
   const add50Per = async (balance) => {
     // setSwapAmount(balance * 0.5);
     setIsAmountLoading(true);
     setSwapAmount(balance * 0.5);
-    const response = await getAmountsOut(
-      parseEther((balance * 0.5).toString(), "wei").toString(),
-      [assetsBase.address, assets.address],
-      library.getSigner()
-    );
+    let response = await getPriceOracle("EGAX_USDT", library.getSigner());
     console.log(response);
     if (response.status === true) {
       setIsAmountLoading(false);
-      setAmountsOut(formatEther(response.message[1]._hex));
-      const maxSlippage = parseFloat(slippage) / 100;
-      setMinAmountsOut(
-        formatEther(response.message[1]._hex) * (1 - maxSlippage)
-      );
-      console.log(formatEther(response.message[1]._hex));
+      setDisable(false);
+      if (assetsBase.symbol === "USDT") {
+        setAmountsOut(
+          (balance * 0.5) /
+            parseFloat(formatEther(response.message._hex)).toFixed(2)
+        );
+        const maxSlippage = parseFloat(slippage) / 100;
+        setMinAmountsOut(
+          ((balance * 0.5) /
+            parseFloat(formatEther(response.message._hex)).toFixed(2)) *
+            (1 - maxSlippage)
+        );
+      } else {
+        setAmountsOut(
+          balance *
+            0.5 *
+            parseFloat(formatEther(response.message._hex)).toFixed(2)
+        );
+        const maxSlippage = parseFloat(slippage) / 100;
+        setMinAmountsOut(
+          balance *
+            0.5 *
+            parseFloat(formatEther(response.message._hex)).toFixed(2) *
+            (1 - maxSlippage)
+        );
+      }
     } else {
       setIsAmountLoading(false);
+      setDisable(false);
       console.log(response);
     }
   };
+
   const add75Per = async (balance) => {
     setIsAmountLoading(true);
     setSwapAmount(balance * 0.75);
-    const response = await getAmountsOut(
-      parseEther((balance * 0.75).toString(), "wei").toString(),
-      [assetsBase.address, assets.address],
-      library.getSigner()
-    );
+    let response = await getPriceOracle("EGAX_USDT", library.getSigner());
     console.log(response);
     if (response.status === true) {
       setIsAmountLoading(false);
-      setAmountsOut(formatEther(response.message[1]._hex));
-      const maxSlippage = parseFloat(slippage) / 100;
-      setMinAmountsOut(
-        formatEther(response.message[1]._hex) * (1 - maxSlippage)
-      );
-      console.log(formatEther(response.message[1]._hex));
+      setDisable(false);
+      if (assetsBase.symbol === "USDT") {
+        setAmountsOut(
+          (balance * 0.75) /
+            parseFloat(formatEther(response.message._hex)).toFixed(2)
+        );
+        const maxSlippage = parseFloat(slippage) / 100;
+        setMinAmountsOut(
+          ((balance * 0.75) /
+            parseFloat(formatEther(response.message._hex)).toFixed(2)) *
+            (1 - maxSlippage)
+        );
+      } else {
+        setAmountsOut(
+          balance *
+            0.75 *
+            parseFloat(formatEther(response.message._hex)).toFixed(2)
+        );
+        const maxSlippage = parseFloat(slippage) / 100;
+        setMinAmountsOut(
+          balance *
+            0.75 *
+            parseFloat(formatEther(response.message._hex)).toFixed(2) *
+            (1 - maxSlippage)
+        );
+      }
     } else {
       setIsAmountLoading(false);
+      setDisable(false);
       console.log(response);
     }
   };
+
   const add100Per = async (balance) => {
     setIsAmountLoading(true);
     setSwapAmount(balance * 1);
-    const response = await getAmountsOut(
-      parseEther((balance * 1).toString(), "wei").toString(),
-      [assetsBase.address, assets.address],
-      library.getSigner()
-    );
+    let response = await getPriceOracle("EGAX_USDT", library.getSigner());
     console.log(response);
     if (response.status === true) {
       setIsAmountLoading(false);
-      setAmountsOut(formatEther(response.message[1]._hex));
-      const maxSlippage = parseFloat(slippage) / 100;
-      setMinAmountsOut(
-        formatEther(response.message[1]._hex) * (1 - maxSlippage)
-      );
-      console.log(formatEther(response.message[1]._hex));
+      setDisable(false);
+      if (assetsBase.symbol === "USDT") {
+        setAmountsOut(
+          (balance * 0.1) /
+            parseFloat(formatEther(response.message._hex)).toFixed(2)
+        );
+        const maxSlippage = parseFloat(slippage) / 100;
+        setMinAmountsOut(
+          ((balance * 0.1) /
+            parseFloat(formatEther(response.message._hex)).toFixed(2)) *
+            (1 - maxSlippage)
+        );
+      } else {
+        setAmountsOut(
+          balance *
+            0.1 *
+            parseFloat(formatEther(response.message._hex)).toFixed(2)
+        );
+        const maxSlippage = parseFloat(slippage) / 100;
+        setMinAmountsOut(
+          balance *
+            0.1 *
+            parseFloat(formatEther(response.message._hex)).toFixed(2) *
+            (1 - maxSlippage)
+        );
+      }
     } else {
       setIsAmountLoading(false);
+      setDisable(false);
       console.log(response);
     }
   };
@@ -298,10 +371,6 @@ const UpdatedSwap = () => {
 
   const ToggleShareSwap = () => {
     setShareSwap(!shareSwap);
-  };
-
-  const ToggleDisplayChart = () => {
-    setDisplayChart(!displayChart);
   };
 
   const UnlockToken = async () => {
@@ -350,132 +419,78 @@ const UpdatedSwap = () => {
     [account, unLockCheckStatus, SwapAmount, SwapFromAddress]
   );
 
-  const SwapEusdForBnb = async () => {
-    setIsLoading(true);
-    setDisable(true);
-    console.log(SwapFromAddress, SwapAmount, MinamountsOut);
-    const response = await swapEusdForBnb(
-      SwapFromAddress,
-      parseEther(SwapAmount.toString(), "wei").toString(),
-      parseEther(MinamountsOut.toString(), "wei").toString(),
-      library.getSigner()
-    );
-    console.log(response);
-    if (response.status === true) {
-      setIsLoading(false);
-      setDisable(false);
-      setSuccessModal(true);
-      setTxHash(response.message.hash);
-      setSuccessMessage(
-        "You've successfully swapped " +
-          SwapAmount +
-          "Eusd for " +
-          amountsOut +
-          "Bnb"
+  // ============
+  // ============
+  // ============
+  const swap = async () => {
+    if (assetsBase.symbol === "EGAX") {
+      console.log("====================================");
+      console.log("====================================");
+      setIsLoading(true);
+      setDisable(true);
+      const response = await swapBase(
+        parseEther(SwapAmount.toString(), "wei").toString(),
+        "EGAX_USDT",
+        library.getSigner()
       );
-    } else {
-      console.log(response);
-      setIsLoading(false);
-      setDisable(false);
-      setErrorModal(true);
-      setErrorMessage(response.message);
-    }
-  };
 
-  // ============
-  // ============
-  // ============
-  const SwapEusdForTokens = async () => {
-    console.log("====================================");
-    console.log(SwapFromAddress, SwapToAddress);
-    console.log("====================================");
-    setIsLoading(true);
-    setDisable(true);
-    const response = await swapEusdForToken(
-      parseEther(SwapAmount.toString(), "wei").toString(),
-      parseEther(MinamountsOut.toString(), "wei").toString(),
-      [SwapFromAddress, SwapToAddress],
-      library.getSigner()
-    );
+      console.log(response, "SwapEusdForTokens");
+      if (response.status === true) {
+        setIsLoading(false);
+        setDisable(false);
+        setSuccessModal(true);
+        setTxHash(response.message.hash);
+        setSuccessMessage(
+          "You've successfully swapped " +
+            SwapAmount +
+            assetsBase.symbol +
+            " for " +
+            amountsOut +
+            assets.symbol
+        );
+      } else {
+        console.log(response);
+        setIsLoading(false);
+        setDisable(false);
+        setErrorModal(true);
+        setErrorMessage(response.message);
+      }
+    } else {
+      // swapToken;
 
-    console.log(response, "SwapEusdForTokens");
-    if (response.status === true) {
-      setIsLoading(false);
-      setDisable(false);
-      setSuccessModal(true);
-      setTxHash(response.message.hash);
-      setSuccessMessage(
-        "You've successfully swapped " + SwapAmount + "Eusd for " + amountsOut
+      console.log("====================================");
+      console.log("====================================");
+      setIsLoading(true);
+      setDisable(true);
+      const response = await swapToken(
+        parseEther(SwapAmount.toString(), "wei").toString(),
+        "EGAX_USDT",
+        library.getSigner()
       );
-    } else {
-      console.log(response);
-      setIsLoading(false);
-      setDisable(false);
-      setErrorModal(true);
-      setErrorMessage(response.message);
+
+      console.log(response, "SwapEusdForTokens");
+      if (response.status === true) {
+        setIsLoading(false);
+        setDisable(false);
+        setSuccessModal(true);
+        setTxHash(response.message.hash);
+        setSuccessMessage(
+          "You've successfully swapped " +
+            SwapAmount +
+            assetsBase.symbol +
+            " for " +
+            amountsOut +
+            assets.symbol
+        );
+      } else {
+        console.log(response);
+        setIsLoading(false);
+        setDisable(false);
+        setErrorModal(true);
+        setErrorMessage(response.message);
+      }
     }
   };
-  const SwapTokensForEusd = async () => {
-    setIsLoading(true);
-    setDisable(true);
-    const response = await swapTokenForEusd(
-      parseEther(SwapAmount.toString(), "wei").toString(),
-      parseEther(MinamountsOut.toString(), "wei").toString(),
-      [SwapFromAddress, SwapToAddress],
-      library.getSigner()
-    );
-    console.log(response, "SwapTokensForEusd");
-    if (response.status === true) {
-      setIsLoading(false);
-      setDisable(false);
-      setSuccessModal(true);
-      setTxHash(response.message.hash);
-      setSuccessMessage(
-        "You've successfully swapped " + SwapAmount + "Eusd for " + amountsOut
-      );
-    } else {
-      console.log(response);
-      setIsLoading(false);
-      setDisable(false);
-      setErrorModal(true);
-      setErrorMessage(response.message);
-    }
-  };
-  // ============
-  // ============
-  // ============
-  const SwapbnbForEusd = async () => {
-    setIsLoading(true);
-    setDisable(true);
-    const response = await swapBnbForEusd(
-      parseEther(SwapAmount.toString(), "wei").toString(),
-      parseEther(MinamountsOut.toString(), "wei").toString(),
-      SwapToAddress,
-      library.getSigner()
-    );
-    console.log(response);
-    if (response.status === true) {
-      setIsLoading(false);
-      setDisable(false);
-      setSuccessModal(true);
-      setTxHash(response.message.hash);
-      setSuccessMessage(
-        "You've successfully swapped " +
-          SwapAmount +
-          "Bnb for " +
-          amountsOut +
-          "Eusd"
-      );
-    } else {
-      setErrorMessage(response.message);
-      console.log(response);
-      setIsLoading(false);
-      setDisable(false);
-      setErrorModal(true);
-    }
-  };
-  // when swapping use the egoras eusd address
-  // when getting price use the binance busd address
 
   const onChangeSwapAmount = async (e) => {
     setIsAmountLoading(true);
@@ -483,25 +498,35 @@ const UpdatedSwap = () => {
     // setInputDisabled(true);
     setSwapAmount(e.target.value);
     // console.log(baseFromAddress, baseToAddress);
-    const response = await getAmountsOut(
-      parseEther(e.target.value.toString(), "wei").toString(),
-      [assetsBase.address, assets.address],
-      library.getSigner()
-    );
+    let response = await getPriceOracle("EGAX_USDT", library.getSigner());
     console.log(response);
-    console.log(response);
-    console.log(formatEther(response.message[1]._hex).toString());
-    console.log(formatEther(response.message[0]._hex).toString());
+
     if (response.status === true) {
       setIsAmountLoading(false);
       setDisable(false);
-      setAmountsOut(formatEther(response.message[1]._hex));
-      const maxSlippage = parseFloat(slippage) / 100;
-      setMinAmountsOut(
-        formatEther(response.message[1]._hex) * (1 - maxSlippage)
-      );
-      console.log(formatEther(response.message[1]._hex));
-      console.log(formatEther(response.message[0]._hex));
+      if (assetsBase.symbol === "USDT") {
+        setAmountsOut(
+          e.target.value /
+            parseFloat(formatEther(response.message._hex)).toFixed(2)
+        );
+        const maxSlippage = parseFloat(slippage) / 100;
+        setMinAmountsOut(
+          (e.target.value /
+            parseFloat(formatEther(response.message._hex)).toFixed(2)) *
+            (1 - maxSlippage)
+        );
+      } else {
+        setAmountsOut(
+          e.target.value *
+            parseFloat(formatEther(response.message._hex)).toFixed(2)
+        );
+        const maxSlippage = parseFloat(slippage) / 100;
+        setMinAmountsOut(
+          e.target.value *
+            parseFloat(formatEther(response.message._hex)).toFixed(2) *
+            (1 - maxSlippage)
+        );
+      }
     } else {
       setIsAmountLoading(false);
       setDisable(false);
@@ -521,10 +546,6 @@ const UpdatedSwap = () => {
       setDisable(false);
     }
   }, [SwapAmount, amountsOut]);
-
-  const CloseSuccessModal = () => {
-    setSuccessModal(false);
-  };
 
   const CloseErrorModal = () => {
     setErrorModal(false);
@@ -554,6 +575,7 @@ const UpdatedSwap = () => {
   const ToggleMaxSlippageDiv = () => {
     setmaxSlippageDisplay(!maxSlippageDisplay);
   };
+
   const ToggleActiveSlippageBg = (e) => {
     let id = e.currentTarget.id;
     setSlippage(id);
@@ -561,6 +583,7 @@ const UpdatedSwap = () => {
     setMinAmountsOut(amountsOut * (1 - maxSlippage));
     setSlippageInput("");
   };
+
   const slippageChange = (e) => {
     setSlippage(e.target.value);
     setSlippageInput(e.target.value);
@@ -617,27 +640,35 @@ const UpdatedSwap = () => {
   const getamount = async () => {
     setIsAmountLoading(true);
     setDisable(true);
-    const response = await getAmountsOut(
-      parseEther(SwapAmount.toString(), "wei").toString(),
-      [assetsBase.address, assets.address],
-      library.getSigner()
-    );
+    let response = await getPriceOracle("EGAX_USDT", library.getSigner());
     console.log(response);
     if (response.status === true) {
       setIsAmountLoading(false);
       setDisable(false);
-      setAmountsOut(formatEther(response.message[1]._hex));
-      const maxSlippage = parseFloat(slippage) / 100;
-      setMinAmountsOut(
-        formatEther(response.message[1]._hex) * (1 - maxSlippage)
-      );
-      console.log(maxSlippage);
-      console.log(slippage);
-      console.log(formatEther(response.message[1]._hex));
-      console.log(formatEther(response.message[1]._hex) * (1 - maxSlippage));
+      if (assetsBase.symbol === "USDT") {
+        setAmountsOut(
+          SwapAmount / parseFloat(formatEther(response.message._hex)).toFixed(2)
+        );
+        const maxSlippage = parseFloat(slippage) / 100;
+        setMinAmountsOut(
+          (SwapAmount /
+            parseFloat(formatEther(response.message._hex)).toFixed(2)) *
+            (1 - maxSlippage)
+        );
+      } else {
+        setAmountsOut(
+          SwapAmount * parseFloat(formatEther(response.message._hex)).toFixed(2)
+        );
+        const maxSlippage = parseFloat(slippage) / 100;
+        setMinAmountsOut(
+          SwapAmount *
+            parseFloat(formatEther(response.message._hex)).toFixed(2) *
+            (1 - maxSlippage)
+        );
+      }
     } else {
-      setDisable(false);
       setIsAmountLoading(false);
+      setDisable(false);
       console.log(response);
     }
   };
@@ -944,7 +975,7 @@ const UpdatedSwap = () => {
                                 <button
                                   id="generate"
                                   disabled={Disable}
-                                  onClick={SwapEusdForTokens}
+                                  onClick={swap}
                                   class="updatedSwapSwapBtn"
                                 >
                                   {isLoading ? (

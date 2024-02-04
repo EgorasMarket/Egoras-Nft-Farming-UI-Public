@@ -67,5 +67,41 @@ const addLiquidity = async (_baseInamount, _tokenInamount, _ticker, signer) => {
     };
   }
 };
+const swapBase = async (_amount, _ticker, signer) => {
+  console.log(_amount, _ticker);
+  try {
+    const instance = await contractSwapFacetInstance(signer);
+    let result;
+    result = await instance.getBaseEx(_amount, _ticker);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
+const swapToken = async (_amount, _ticker, signer) => {
+  console.log(_amount, _ticker);
+  try {
+    const instance = await contractSwapFacetInstance(signer);
+    let result;
+    result = await instance.getTokenEx(_amount, _ticker);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 
-export { ListAsset, setSwapFee, addLiquidity };
+export { ListAsset, setSwapFee, addLiquidity, swapBase, swapToken };
