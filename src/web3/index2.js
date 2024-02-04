@@ -464,6 +464,7 @@ const setPriceOracle = async (_prices, _tickers, signer) => {
     };
   }
 };
+
 const getPriceOracle = async (_ticker, signer) => {
   try {
     const instance = await contractPriceOracleFacetInstance(signer);

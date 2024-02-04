@@ -48,6 +48,7 @@ import SwitchToggle2 from "./DashBoardPages/SwitchToggle/SwitchToggle2";
 import { useWeb3React } from "@web3-react/core";
 import { socket } from "../../socket";
 import TimeAgoComponent from "../TimeAgoComponent";
+import InvertColorsIcon from "@mui/icons-material/InvertColors";
 
 const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
   const dddd = localStorage.getItem("smallSidetoken");
@@ -206,6 +207,9 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
     }
     if (linksActive === "/app/earn") {
       setActiveBg("lend");
+    }
+    if (linksActive === "/app/addLiquidity") {
+      setActiveBg("liquidity");
     }
     if (linksActive === "/app/user") {
       setActiveBg("account");
@@ -583,6 +587,32 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   <LockClockIcon className="header_tab1_icon_icon" />
                   Stake
                 </a>
+
+                <a
+                  id="swap"
+                  href="/app/swap"
+                  className={
+                    activeBg === "swap" ? "header_tab1_active " : "header_tab1"
+                  }
+                  onClick={changeBg}
+                >
+                  <SwapHorizontalCircleIcon className="header_tab1_icon_icon" />
+                  Swap
+                </a>
+
+                <a
+                  id="liquidity"
+                  href="/app/addLiquidity"
+                  className={
+                    activeBg === "liquidity"
+                      ? "header_tab1_active "
+                      : "header_tab1"
+                  }
+                  onClick={changeBg}
+                >
+                  <InvertColorsIcon className="header_tab1_icon_icon" />
+                  Add Liquidity
+                </a>
                 <a
                   id="govern"
                   href="/app/governance"
@@ -601,17 +631,6 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                     <span class="c-basePart"></span>
                   </span> */}
                 </a>
-                {/* <a
-                  id="swap"
-                  href="/app/swap"
-                  className={
-                    activeBg === "swap" ? "header_tab1_active " : "header_tab1"
-                  }
-                  onClick={changeBg}
-                >
-                  <SwapHorizontalCircleIcon className="header_tab1_icon_icon" />
-                  Swap
-                </a> */}
                 {/* <a
                   id="convert"
                   href="/app/convert"
@@ -1027,7 +1046,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
               <span class="c-basePart"></span>
             </span>
           </a>
-          {/* <a
+          <a
             id="swap"
             href="/app/swap"
             className={
@@ -1037,17 +1056,17 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
           >
             <SwapHorizontalCircleIcon className="sidebarIcon" />
             Swap
-          </a> */}
+          </a>
           <a
-            id="account"
-            href="/app/user"
+            id="liquidity"
+            href="/app/addLiquidity"
             className={
-              activeBg === "account" ? "header_tab1_active " : "header_tab1"
+              activeBg === "liquidity" ? "header_tab1_active " : "header_tab1"
             }
             onClick={changeBg}
           >
-            <AccountCircleIcon className="header_tab1_icon_icon" />
-            Account
+            <InvertColorsIcon className="sidebarIcon" />
+            Liquidty
           </a>
 
           {/* <a
