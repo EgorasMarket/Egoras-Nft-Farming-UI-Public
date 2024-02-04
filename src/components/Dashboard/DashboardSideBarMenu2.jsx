@@ -611,7 +611,7 @@ const DashboardSideBarMenu2 = ({ check, togglemakeDark }) => {
                   onClick={changeBg}
                 >
                   <InvertColorsIcon className="header_tab1_icon_icon" />
-                  Add Liquidity
+                  Liquidity
                 </a>
                 <a
                   id="govern"

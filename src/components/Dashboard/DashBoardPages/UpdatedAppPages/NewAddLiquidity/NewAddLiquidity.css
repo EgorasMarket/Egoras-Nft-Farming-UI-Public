@@ -135,3 +135,9 @@
   position: relative;
   margin-right: 3px;
 }
+.newAddLiquidityDiv_cont_div2_cont1_span2 {
+  cursor: pointer;
+}
+.newAddLiquidityDiv_cont_div2_cont1_span2:hover {
+  color: #70c28b;
+}

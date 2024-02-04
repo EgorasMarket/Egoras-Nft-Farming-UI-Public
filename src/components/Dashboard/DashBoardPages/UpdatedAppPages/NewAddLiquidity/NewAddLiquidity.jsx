@@ -43,8 +43,8 @@ const NewAddLiquidity = () => {
   });
   const [selectedToken1, setSelectedToken1] = useState("");
   const [selectedToken2, setSelectedToken2] = useState("");
-  const [tokenBal, setTokenBal] = useState("0");
-  const [baseBal, setBaseBal] = useState("0");
+  const [tokenBal, setTokenBal] = useState(0);
+  const [baseBal, setBaseBal] = useState(0);
   const [tokenAmount, setTokenAmount] = useState("");
   const [baseAmount, setBaseAmount] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -81,6 +81,8 @@ const NewAddLiquidity = () => {
     const [tokenPart1, tokenPart2] = ticker.split("_");
     setSelectedToken1(tokenPart1);
     setSelectedToken2(tokenPart2);
+    setTokenAmount("");
+    setBaseAmount("");
   };
 
   useEffect(
@@ -93,7 +95,7 @@ const NewAddLiquidity = () => {
         );
         console.log(res);
         console.log(formatEther(res.message._hex));
-        setTokenBal(parseFloat(formatEther(res.message._hex)).toFixed(2));
+        setTokenBal(parseFloat(formatEther(res.message._hex)).toFixed(6));
       }
     },
     [account, selectedToken]
@@ -108,7 +110,7 @@ const NewAddLiquidity = () => {
         );
         console.log(res);
         console.log(formatEther(res.message._hex));
-        setBaseBal(parseFloat(formatEther(res.message._hex)).toFixed(2));
+        setBaseBal(parseFloat(formatEther(res.message._hex)).toFixed(4));
       }
     },
     [account, selectedToken]
@@ -150,6 +152,7 @@ const NewAddLiquidity = () => {
   const CloseErrorModal = () => {
     setErrorModal(false);
   };
+  console.log(tokenBal, parseInt(baseBal));
   return (
     <div className="other2">
       <section className=" no-bg no_paddd">
@@ -278,7 +281,12 @@ const NewAddLiquidity = () => {
                                 />{" "}
                                 {selectedToken1}
                               </span>{" "}
-                              <span className="newAddLiquidityDiv_cont_div2_cont1_span2">
+                              <span
+                                className="newAddLiquidityDiv_cont_div2_cont1_span2"
+                                onClick={() => {
+                                  setTokenAmount(tokenBal);
+                                }}
+                              >
                                 <AccountBalanceWalletIcon className="newAddLiquidityDiv_cont_div2_cont1_span2_icon" />{" "}
                                 {tokenBal}
                               </span>{" "}
@@ -310,7 +318,12 @@ const NewAddLiquidity = () => {
                                 )}
                                 {selectedToken2}{" "}
                               </span>{" "}
-                              <span className="newAddLiquidityDiv_cont_div2_cont1_span2">
+                              <span
+                                className="newAddLiquidityDiv_cont_div2_cont1_span2"
+                                onClick={() => {
+                                  setBaseAmount(baseBal);
+                                }}
+                              >
                                 <AccountBalanceWalletIcon className="newAddLiquidityDiv_cont_div2_cont1_span2_icon" />{" "}
                                 {baseBal}
                               </span>{" "}
@@ -325,7 +338,8 @@ const NewAddLiquidity = () => {
                           </div>
                           {account ? (
                             <>
-                              {tokenBal <= 0 || baseBal <= 0 ? (
+                              {parseFloat(tokenBal) <= 0 ||
+                              parseFloat(baseBal) <= 0 ? (
                                 <button className="updatedSwapSwapBtn" disabled>
                                   Insufficient Balance
                                 </button>
