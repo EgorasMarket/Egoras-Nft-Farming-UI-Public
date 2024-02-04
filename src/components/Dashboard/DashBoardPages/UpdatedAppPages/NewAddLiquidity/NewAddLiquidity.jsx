@@ -9,8 +9,13 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { API_URL } from "../../../../../actions/types";
 import { config } from "../../../../../actions/Config";
 import axios from "axios";
-import { tokenBalance } from "../../../../../web3/index";
+import {
+  tokenBalance,
+  checkAllowanceV3,
+  unlockTokenV3,
+} from "../../../../../web3/index";
 import { addLiquidity } from "../../../../../web3/index3";
+import { getPriceOracle } from "../../../../../web3/index2";
 import { parseEther, formatEther } from "@ethersproject/units";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import UpdatedSuccessModal from "../UpdatedSuccessErrorModals/UpdatedSuccessModal";
@@ -48,12 +53,20 @@ const NewAddLiquidity = () => {
   const [tokenAmount, setTokenAmount] = useState("");
   const [baseAmount, setBaseAmount] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingUnlckTkn, setIsLoadingUnlckTkn] = useState(false);
+  const [isLoadingUnlckBase, setIsLoadingUnlckBase] = useState(false);
   const [Disable, setDisable] = useState(false);
+  const [DisableToken, setDisableToken] = useState(false);
+  const [DisableBase, setDisableBase] = useState(false);
   const [successModal, setSuccessModal] = useState(false);
   const [errorModal, setErrorModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [txHash, setTxHash] = useState("");
+  const [unlockBtn, setUnlockBtn] = useState(true);
+  const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
+  const [unlockBtn2, setUnlockBtn2] = useState(true);
+  const [unLockCheckStatus2, setUnLockCheckStatus2] = useState(false);
 
   useEffect(async () => {
     await axios
@@ -77,6 +90,7 @@ const NewAddLiquidity = () => {
       token_address: token_address,
       base_address: base_address,
     });
+
     console.log(ticker);
     const [tokenPart1, tokenPart2] = ticker.split("_");
     setSelectedToken1(tokenPart1);
@@ -115,14 +129,24 @@ const NewAddLiquidity = () => {
     },
     [account, selectedToken]
   );
-  const changeTokenAmount = (event) => {
+  const changeTokenAmount = async (event) => {
     setTokenAmount(event.target.value);
     console.log(event.target.value);
+    if (account) {
+      let res = await getPriceOracle("EGAX_USDT", library.getSigner());
+      console.log(res);
+      console.log(parseFloat(formatEther(res.message._hex)).toFixed(2));
+      setBaseAmount(
+        event.target.value *
+          parseFloat(formatEther(res.message._hex)).toFixed(2)
+      );
+      return;
+    }
   };
-  const changeBaseAmount = (event) => {
-    setBaseAmount(event.target.value);
-    console.log(event.target.value);
-  };
+  //   const changeBaseAmount = (event) => {
+  //     setBaseAmount(event.target.value);
+  //     console.log(event.target.value);
+  //   };
 
   const addTokenLiquidity = async () => {
     setIsLoading(true);
@@ -149,10 +173,108 @@ const NewAddLiquidity = () => {
       setErrorMessage(res.message);
     }
   };
+
   const CloseErrorModal = () => {
     setErrorModal(false);
   };
   console.log(tokenBal, parseInt(baseBal));
+
+  const UnlockToken = async () => {
+    setIsLoadingUnlckTkn(true);
+    setDisableToken(true);
+    let ret = await unlockTokenV3(
+      selectedToken.token_address,
+      parseEther("180000000000000000000000000000000000", "wei").toString(),
+      library.getSigner()
+    );
+    console.log(ret);
+    if (ret.status === true) {
+      setIsLoadingUnlckTkn(false);
+      setDisableToken(false);
+      localStorage.setItem("unlocking", true);
+      localStorage.setItem("unlockingHash", ret.message);
+      setUnlockBtn(true);
+    } else {
+      if (ret.message.code === 4001) {
+        console.log(ret);
+      }
+      console.log(ret);
+      setErrorModal(true);
+      setErrorMessage(ret.message);
+      setIsLoadingUnlckTkn(false);
+      setDisableToken(false);
+    }
+  };
+
+  useEffect(
+    async (e) => {
+      if (account) {
+        let check = await checkAllowanceV3(
+          selectedToken.token_address,
+          account,
+          parseEther(
+            tokenAmount == "" ? "0" : tokenAmount.toString(),
+            "wei"
+          ).toString(),
+          library.getSigner()
+        );
+        console.log(check);
+        setUnLockCheckStatus(check.status);
+        setUnlockBtn(check.status);
+      }
+    },
+
+    [account, unLockCheckStatus, tokenAmount, selectedToken.token_address]
+  );
+
+  const UnlockToken2 = async () => {
+    setIsLoadingUnlckBase(true);
+    setDisableBase(true);
+    let ret = await unlockTokenV3(
+      selectedToken.base_address,
+      parseEther("180000000000000000000000000000000000", "wei").toString(),
+      library.getSigner()
+    );
+    console.log(ret);
+    if (ret.status === true) {
+      setIsLoadingUnlckBase(false);
+      setDisableBase(false);
+      localStorage.setItem("unlocking", true);
+      localStorage.setItem("unlockingHash", ret.message);
+      setUnlockBtn(true);
+    } else {
+      if (ret.message.code === 4001) {
+        console.log(ret);
+      }
+      console.log(ret);
+      setErrorModal(true);
+      setErrorMessage(ret.message);
+      setIsLoadingUnlckBase(false);
+      setDisableBase(false);
+    }
+  };
+
+  useEffect(
+    async (e) => {
+      if (account) {
+        let check = await checkAllowanceV3(
+          selectedToken.base_address,
+          account,
+          parseEther(
+            baseAmount == "" ? "0" : baseAmount.toString(),
+            "wei"
+          ).toString(),
+          library.getSigner()
+        );
+        console.log(check);
+        setUnLockCheckStatus2(check.status);
+        setUnlockBtn2(check.status);
+      }
+    },
+
+    [account, unLockCheckStatus2, baseAmount, selectedToken.base_address]
+  );
+
   return (
     <div className="other2">
       <section className=" no-bg no_paddd">
@@ -320,9 +442,9 @@ const NewAddLiquidity = () => {
                               </span>{" "}
                               <span
                                 className="newAddLiquidityDiv_cont_div2_cont1_span2"
-                                onClick={() => {
-                                  setBaseAmount(baseBal);
-                                }}
+                                // onClick={() => {
+                                //   setBaseAmount(baseBal);
+                                // }}
                               >
                                 <AccountBalanceWalletIcon className="newAddLiquidityDiv_cont_div2_cont1_span2_icon" />{" "}
                                 {baseBal}
@@ -333,33 +455,89 @@ const NewAddLiquidity = () => {
                               placeholder="0.00"
                               className="newAddLiquidityDiv_cont_div2_cont1_input"
                               value={baseAmount}
-                              onChange={changeBaseAmount}
+                              //   onChange={changeBaseAmount}
                             />
                           </div>
                           {account ? (
                             <>
-                              {parseFloat(tokenBal) <= 0 ||
-                              parseFloat(baseBal) <= 0 ? (
-                                <button className="updatedSwapSwapBtn" disabled>
-                                  Insufficient Balance
-                                </button>
-                              ) : (
+                              {unlockBtn === false ? (
                                 <button
-                                  className="updatedSwapSwapBtn"
-                                  onClick={addTokenLiquidity}
-                                  disabled={Disable}
+                                  id="generate"
+                                  disabled={DisableToken}
+                                  onClick={UnlockToken}
+                                  class="updatedSwapSwapBtn"
                                 >
-                                  {isLoading ? (
+                                  {isLoadingUnlckTkn ? (
                                     <ScaleLoader
                                       color="#353250"
                                       size={10}
                                       height={20}
                                     />
                                   ) : (
-                                    <> Add liquidity</>
+                                    <> Approve {selectedToken1}</>
                                   )}
                                 </button>
-                              )}
+                              ) : null}
+
+                              {unlockBtn2 === false ? (
+                                <button
+                                  id="generate"
+                                  disabled={DisableBase}
+                                  onClick={UnlockToken2}
+                                  class="updatedSwapSwapBtn"
+                                >
+                                  {isLoadingUnlckBase ? (
+                                    <ScaleLoader
+                                      color="#353250"
+                                      size={10}
+                                      height={20}
+                                    />
+                                  ) : (
+                                    <> Approve {selectedToken2}</>
+                                  )}
+                                </button>
+                              ) : null}
+
+                              {unlockBtn === true && unlockBtn2 === true ? (
+                                <>
+                                  {tokenAmount <= 0 ? (
+                                    <button
+                                      className="updatedSwapSwapBtn"
+                                      disabled
+                                    >
+                                      Enter Amount
+                                    </button>
+                                  ) : (
+                                    <>
+                                      {parseFloat(tokenBal) <= 0 ||
+                                      parseFloat(baseBal) <= 0 ? (
+                                        <button
+                                          className="updatedSwapSwapBtn"
+                                          disabled
+                                        >
+                                          Insufficient Balance
+                                        </button>
+                                      ) : (
+                                        <button
+                                          className="updatedSwapSwapBtn"
+                                          onClick={addTokenLiquidity}
+                                          disabled={Disable}
+                                        >
+                                          {isLoading ? (
+                                            <ScaleLoader
+                                              color="#353250"
+                                              size={10}
+                                              height={20}
+                                            />
+                                          ) : (
+                                            <> Add liquidity</>
+                                          )}
+                                        </button>
+                                      )}
+                                    </>
+                                  )}
+                                </>
+                              ) : null}
                             </>
                           ) : (
                             <button className="updatedSwapSwapBtn" disabled>

@@ -176,15 +176,6 @@ const UpdatedSwap = () => {
     [account]
   );
 
-  useEffect(
-    async (e) => {
-      if (account) {
-        let res = await getPriceOracle("EGAX_USDT", library.getSigner());
-        console.log(res);
-      }
-    },
-    [account]
-  );
   const ToggleSwapInputs = (e) => {
     setAssets(assetsBase);
     setAssetBase(assets);

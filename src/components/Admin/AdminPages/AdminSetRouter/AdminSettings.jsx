@@ -22,8 +22,9 @@ import { parseEther, formatEther } from "@ethersproject/units";
 const AdminSettings = () => {
   const context = useWeb3React();
   const { library, account } = context;
-  const [tickerArray, setTickerArray] = useState(["egcegax"]);
-  const [priceArray, setPriceArray] = useState(["15000000000000000000"]);
+  const [tickerArray, setTickerArray] = useState(["egaxeusd"]);
+  const [priceArray, setPriceArray] = useState(["1500000000000000000"]);
+  // const [priceArray, setPriceArray] = useState(["15000000000000000000"]);
   const [newWallet, setNewWallet] = useState([""]);
   const [newWallet2, setNewWallet2] = useState([""]);
   const [diamondCutCode, setDiamondCutCode] = useState("");
