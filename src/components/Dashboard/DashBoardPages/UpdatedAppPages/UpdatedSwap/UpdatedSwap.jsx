@@ -219,16 +219,13 @@ const UpdatedSwap = () => {
       });
     }
 
-    // console.log(ticker);
-    // const [tokenPart1, tokenPart2] = ticker.split("_");
-    // setSelectedToken1(tokenPart1);
-    // setSelectedToken2(tokenPart2);
-    // setTokenAmount("");
-    // setBaseAmount("");
+    setSwapAmount("");
   };
+
   const toggleTokenDrop = () => {
     setTokenDrop(!tokenDrop);
   };
+
   const ToggleSwapInputs = (e) => {
     setAssets(assetsBase);
     setAssetBase(assets);
@@ -583,7 +580,7 @@ const UpdatedSwap = () => {
     if (response.status === true) {
       setIsAmountLoading(false);
       setDisable(false);
-      if (assetsBase.symbol === "USDT") {
+      if (assetsBase.symbol !== "EGAX") {
         setAmountsOut(
           e.target.value /
             parseFloat(formatEther(response.message._hex)).toFixed(2)
@@ -724,7 +721,7 @@ const UpdatedSwap = () => {
     if (response.status === true) {
       setIsAmountLoading(false);
       setDisable(false);
-      if (assetsBase.symbol === "USDT") {
+      if (assetsBase.symbol !== "EGAX") {
         setAmountsOut(
           SwapAmount / parseFloat(formatEther(response.message._hex)).toFixed(2)
         );
