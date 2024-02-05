@@ -163,6 +163,7 @@
   box-shadow: 0px 5px 15px #cdcdcd;
   /* width: 65%; */
   white-space: nowrap;
+  position: relative;
 }
 
 .display_tokens_drop_not_select {

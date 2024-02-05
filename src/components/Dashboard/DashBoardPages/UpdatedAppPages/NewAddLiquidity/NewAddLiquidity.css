@@ -64,6 +64,7 @@
   border-radius: 10px;
   color: #fff;
 }
+
 .newAddLiquidityDiv_cont_div2_btn {
   padding: 15px;
   border-radius: 13px;
@@ -72,6 +73,12 @@
 .newAddLiquidityDiv_cont_icon {
   display: none !important;
 }
+.display_tokens_drop .tokenDrop_drop_div {
+  width: 200px;
+  top: 36px;
+  left: -86%;
+}
+
 .tokenDrop_drop_div {
   position: absolute;
   top: 60px;
@@ -90,6 +97,7 @@
   padding: 20px 15px;
   border-bottom: solid 1px #282828;
   cursor: pointer;
+  display: flex;
 }
 .newAddLiquidityDiv_cont_div2_select_pair_div {
   background: #121213;

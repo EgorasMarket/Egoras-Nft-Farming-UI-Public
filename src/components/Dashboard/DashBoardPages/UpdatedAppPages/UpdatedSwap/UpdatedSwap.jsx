@@ -6,6 +6,7 @@ import SwapVerticalCircleIcon from "@mui/icons-material/SwapVerticalCircle";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 import ClockLoader from "react-spinners/ClockLoader";
 import TradingViewWidget from "./TradeViewWidget";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import WarningAmberRoundedIcon from "@mui/icons-material/WarningAmberRounded";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import v3ContractAdress from "../../../../../web3/contracts/V3/V3ContractAddress.json";
@@ -116,6 +117,7 @@ const UpdatedSwap = () => {
   const [displayChart, setDisplayChart] = useState(false);
   const [amountsOut, setAmountsOut] = useState("");
   const [MinamountsOut, setMinAmountsOut] = useState("");
+  const [tokenDrop, setTokenDrop] = useState(false);
   const [assetsBase, setAssetBase] = useState({
     id: "0",
     img: "/img/egax_logo.png",
@@ -125,13 +127,14 @@ const UpdatedSwap = () => {
     favorite: "true",
   });
   const [assets, setAssets] = useState({
-    id: "2",
+    id: "1",
     img: "/img/tokens-folder/usdt_icon.png",
     name: "Tether USD",
     address: "0x55d398326f99059fF775485246999027B3197955",
     symbol: "USDT",
     favorite: "true",
   });
+
   // const [inputDisable, setmaxSlippageDisplay] = useState(false);
   const [insufficientLiquidityBtn, setInsufficientLiquidityBtn] =
     useState(false);
@@ -158,7 +161,7 @@ const UpdatedSwap = () => {
         setCoinBalance(parseFloat(formatEther(res.message._hex)).toFixed(2));
       }
     },
-    [account]
+    [account, assetsBase, assets]
   );
 
   useEffect(
@@ -174,9 +177,58 @@ const UpdatedSwap = () => {
         setBaseBalance(parseFloat(formatEther(res.message._hex)).toFixed(2));
       }
     },
-    [account]
+    [account, assets, assetsBase]
   );
 
+  const ListedCoinsAsset = [
+    {
+      id: "1",
+      img: "/img/tokens-folder/usdt_icon.png",
+      name: "Tether USD",
+      address: "0x55d398326f99059fF775485246999027B3197955",
+      symbol: "USDT",
+      favorite: "true",
+    },
+    {
+      id: "2",
+      img: "/img/tokens-folder/busd_icon.png",
+      name: " EUSD",
+      address: "0xBDeb3C052bD949B6E38Cb0BC9593793a78c46968",
+      symbol: "EUSD",
+      favorite: "true",
+    },
+  ];
+  const handleTokenClick = (id, img, name, address, symbol, favorite) => {
+    if (assetsBase.symbol === "EGAX") {
+      setAssets({
+        id: id,
+        img: img,
+        name: name,
+        address: address,
+        symbol: symbol,
+        favorite: favorite,
+      });
+    } else {
+      setAssetBase({
+        id: id,
+        img: img,
+        name: name,
+        address: address,
+        symbol: symbol,
+        favorite: favorite,
+      });
+    }
+
+    // console.log(ticker);
+    // const [tokenPart1, tokenPart2] = ticker.split("_");
+    // setSelectedToken1(tokenPart1);
+    // setSelectedToken2(tokenPart2);
+    // setTokenAmount("");
+    // setBaseAmount("");
+  };
+  const toggleTokenDrop = () => {
+    setTokenDrop(!tokenDrop);
+  };
   const ToggleSwapInputs = (e) => {
     setAssets(assetsBase);
     setAssetBase(assets);
@@ -188,6 +240,7 @@ const UpdatedSwap = () => {
   const add25Per = async (balance) => {
     setIsAmountLoading(true);
     setSwapAmount(balance * 0.25);
+    const AddedBal = balance * 0.25;
     let response = await getPriceOracle("EGAX_USDT", library.getSigner());
     console.log(response);
     if (response.status === true) {
@@ -195,25 +248,21 @@ const UpdatedSwap = () => {
       setDisable(false);
       if (assetsBase.symbol === "USDT") {
         setAmountsOut(
-          (balance * 0.25) /
-            parseFloat(formatEther(response.message._hex)).toFixed(2)
+          AddedBal / parseFloat(formatEther(response.message._hex)).toFixed(2)
         );
         const maxSlippage = parseFloat(slippage) / 100;
         setMinAmountsOut(
-          ((balance * 0.25) /
+          (AddedBal /
             parseFloat(formatEther(response.message._hex)).toFixed(2)) *
             (1 - maxSlippage)
         );
       } else {
         setAmountsOut(
-          balance *
-            0.25 *
-            parseFloat(formatEther(response.message._hex)).toFixed(2)
+          AddedBal * parseFloat(formatEther(response.message._hex)).toFixed(2)
         );
         const maxSlippage = parseFloat(slippage) / 100;
         setMinAmountsOut(
-          balance *
-            0.25 *
+          AddedBal *
             parseFloat(formatEther(response.message._hex)).toFixed(2) *
             (1 - maxSlippage)
         );
@@ -230,6 +279,7 @@ const UpdatedSwap = () => {
     // setSwapAmount(balance * 0.5);
     setIsAmountLoading(true);
     setSwapAmount(balance * 0.5);
+    const AddedBal = balance * 0.5;
     let response = await getPriceOracle("EGAX_USDT", library.getSigner());
     console.log(response);
     if (response.status === true) {
@@ -237,25 +287,21 @@ const UpdatedSwap = () => {
       setDisable(false);
       if (assetsBase.symbol === "USDT") {
         setAmountsOut(
-          (balance * 0.5) /
-            parseFloat(formatEther(response.message._hex)).toFixed(2)
+          AddedBal / parseFloat(formatEther(response.message._hex)).toFixed(2)
         );
         const maxSlippage = parseFloat(slippage) / 100;
         setMinAmountsOut(
-          ((balance * 0.5) /
+          (AddedBal /
             parseFloat(formatEther(response.message._hex)).toFixed(2)) *
             (1 - maxSlippage)
         );
       } else {
         setAmountsOut(
-          balance *
-            0.5 *
-            parseFloat(formatEther(response.message._hex)).toFixed(2)
+          AddedBal * parseFloat(formatEther(response.message._hex)).toFixed(2)
         );
         const maxSlippage = parseFloat(slippage) / 100;
         setMinAmountsOut(
-          balance *
-            0.5 *
+          AddedBal *
             parseFloat(formatEther(response.message._hex)).toFixed(2) *
             (1 - maxSlippage)
         );
@@ -270,6 +316,7 @@ const UpdatedSwap = () => {
   const add75Per = async (balance) => {
     setIsAmountLoading(true);
     setSwapAmount(balance * 0.75);
+    const AddedBal = balance * 0.75;
     let response = await getPriceOracle("EGAX_USDT", library.getSigner());
     console.log(response);
     if (response.status === true) {
@@ -277,25 +324,21 @@ const UpdatedSwap = () => {
       setDisable(false);
       if (assetsBase.symbol === "USDT") {
         setAmountsOut(
-          (balance * 0.75) /
-            parseFloat(formatEther(response.message._hex)).toFixed(2)
+          AddedBal / parseFloat(formatEther(response.message._hex)).toFixed(2)
         );
         const maxSlippage = parseFloat(slippage) / 100;
         setMinAmountsOut(
-          ((balance * 0.75) /
+          (AddedBal /
             parseFloat(formatEther(response.message._hex)).toFixed(2)) *
             (1 - maxSlippage)
         );
       } else {
         setAmountsOut(
-          balance *
-            0.75 *
-            parseFloat(formatEther(response.message._hex)).toFixed(2)
+          AddedBal * parseFloat(formatEther(response.message._hex)).toFixed(2)
         );
         const maxSlippage = parseFloat(slippage) / 100;
         setMinAmountsOut(
-          balance *
-            0.75 *
+          AddedBal *
             parseFloat(formatEther(response.message._hex)).toFixed(2) *
             (1 - maxSlippage)
         );
@@ -310,6 +353,7 @@ const UpdatedSwap = () => {
   const add100Per = async (balance) => {
     setIsAmountLoading(true);
     setSwapAmount(balance * 1);
+    const AddedBal = balance * 1;
     let response = await getPriceOracle("EGAX_USDT", library.getSigner());
     console.log(response);
     if (response.status === true) {
@@ -317,25 +361,21 @@ const UpdatedSwap = () => {
       setDisable(false);
       if (assetsBase.symbol === "USDT") {
         setAmountsOut(
-          (balance * 0.1) /
-            parseFloat(formatEther(response.message._hex)).toFixed(2)
+          AddedBal / parseFloat(formatEther(response.message._hex)).toFixed(2)
         );
         const maxSlippage = parseFloat(slippage) / 100;
         setMinAmountsOut(
-          ((balance * 0.1) /
+          (AddedBal /
             parseFloat(formatEther(response.message._hex)).toFixed(2)) *
             (1 - maxSlippage)
         );
       } else {
         setAmountsOut(
-          balance *
-            0.1 *
-            parseFloat(formatEther(response.message._hex)).toFixed(2)
+          AddedBal * parseFloat(formatEther(response.message._hex)).toFixed(2)
         );
         const maxSlippage = parseFloat(slippage) / 100;
         setMinAmountsOut(
-          balance *
-            0.1 *
+          AddedBal *
             parseFloat(formatEther(response.message._hex)).toFixed(2) *
             (1 - maxSlippage)
         );
@@ -455,7 +495,9 @@ const UpdatedSwap = () => {
         setErrorModal(true);
         setErrorMessage(response.message);
       }
-    } else {
+      return;
+    }
+    if (assetsBase.symbol === "USDT") {
       // swapToken;
 
       console.log("====================================");
@@ -489,6 +531,43 @@ const UpdatedSwap = () => {
         setErrorModal(true);
         setErrorMessage(response.message);
       }
+      return;
+    }
+    if (assetsBase.symbol === "EUSD") {
+      // swapToken;
+
+      console.log("====================================");
+      console.log("====================================");
+      setIsLoading(true);
+      setDisable(true);
+      const response = await swapToken(
+        parseEther(SwapAmount.toString(), "wei").toString(),
+        "EGAX_EUSD",
+        library.getSigner()
+      );
+
+      console.log(response, "SwapEusdForTokens");
+      if (response.status === true) {
+        setIsLoading(false);
+        setDisable(false);
+        setSuccessModal(true);
+        setTxHash(response.message.hash);
+        setSuccessMessage(
+          "You've successfully swapped " +
+            SwapAmount +
+            assetsBase.symbol +
+            " for " +
+            amountsOut +
+            assets.symbol
+        );
+      } else {
+        console.log(response);
+        setIsLoading(false);
+        setDisable(false);
+        setErrorModal(true);
+        setErrorMessage(response.message);
+      }
+      return;
     }
   };
 
@@ -728,14 +807,56 @@ const UpdatedSwap = () => {
                                   :{coinBalance}
                                 </span>
 
-                                <button className="display_tokens_drop">
-                                  <img
-                                    src={assetsBase.img}
-                                    alt=""
-                                    className="asset_icon"
-                                  />
-                                  {assetsBase.symbol}
-                                </button>
+                                {assetsBase.symbol === "EGAX" ? (
+                                  <button className="display_tokens_drop">
+                                    <img
+                                      src={assetsBase.img}
+                                      alt=""
+                                      className="asset_icon"
+                                    />
+                                    {assetsBase.symbol}
+                                  </button>
+                                ) : (
+                                  <button
+                                    className="display_tokens_drop"
+                                    onClick={toggleTokenDrop}
+                                  >
+                                    <img
+                                      src={assetsBase.img}
+                                      alt=""
+                                      className="asset_icon"
+                                    />
+                                    {assetsBase.symbol}
+
+                                    <ExpandMoreIcon className="newAddLiquidityDiv_cont_div1_div_icon" />
+                                    {tokenDrop ? (
+                                      <div className="tokenDrop_drop_div">
+                                        {ListedCoinsAsset.map((data) => (
+                                          <div
+                                            className="tokenDrop_drop_div_cont"
+                                            onClick={() =>
+                                              handleTokenClick(
+                                                data.id,
+                                                data.img,
+                                                data.name,
+                                                data.address,
+                                                data.symbol,
+                                                data.favorite
+                                              )
+                                            }
+                                          >
+                                            <img
+                                              src={data.img}
+                                              alt=""
+                                              className="tokenDrop_drop_div_cont_img"
+                                            />{" "}
+                                            {data.symbol}
+                                          </div>
+                                        ))}
+                                      </div>
+                                    ) : null}
+                                  </button>
+                                )}
                               </div>
                             </div>
                             <div className="amnt_input_layer2">
@@ -799,17 +920,59 @@ const UpdatedSwap = () => {
                               <div className="Swap_icondropDownDiv">
                                 <span className="token_balances_span">
                                   <AccountBalanceWalletIcon className="TokenBalanceIcon" />
-                                  :{baseBalance}
+                                  : {baseBalance}
                                 </span>
 
-                                <button className="display_tokens_drop">
-                                  <img
-                                    src={assets.img}
-                                    alt=""
-                                    className="asset_icon"
-                                  />
-                                  {assets.symbol}
-                                </button>
+                                {assets.symbol === "EGAX" ? (
+                                  <button className="display_tokens_drop">
+                                    <img
+                                      src={assets.img}
+                                      alt=""
+                                      className="asset_icon"
+                                    />
+                                    {assets.symbol}
+                                  </button>
+                                ) : (
+                                  <button
+                                    className="display_tokens_drop"
+                                    onClick={toggleTokenDrop}
+                                  >
+                                    <img
+                                      src={assets.img}
+                                      alt=""
+                                      className="asset_icon"
+                                    />
+                                    {assets.symbol}
+
+                                    <ExpandMoreIcon className="newAddLiquidityDiv_cont_div1_div_icon" />
+                                    {tokenDrop ? (
+                                      <div className="tokenDrop_drop_div">
+                                        {ListedCoinsAsset.map((data) => (
+                                          <div
+                                            className="tokenDrop_drop_div_cont"
+                                            onClick={() =>
+                                              handleTokenClick(
+                                                data.id,
+                                                data.img,
+                                                data.name,
+                                                data.address,
+                                                data.symbol,
+                                                data.favorite
+                                              )
+                                            }
+                                          >
+                                            <img
+                                              src={data.img}
+                                              alt=""
+                                              className="tokenDrop_drop_div_cont_img"
+                                            />{" "}
+                                            {data.symbol}
+                                          </div>
+                                        ))}
+                                      </div>
+                                    ) : null}
+                                  </button>
+                                )}
                               </div>
                             </div>
                           </div>
