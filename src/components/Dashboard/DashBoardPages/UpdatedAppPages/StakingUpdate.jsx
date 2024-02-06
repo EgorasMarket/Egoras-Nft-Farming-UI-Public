@@ -579,6 +579,7 @@ const StakingUpdate = () => {
   useEffect(async () => {
     if (account) {
       const res = await getCalculatedRoyalty(account, library.getSigner());
+      console.log(res);
       console.log(formatEther(res.message).toString());
       setAvailableClaimReward(formatEther(res.message).toString());
     }

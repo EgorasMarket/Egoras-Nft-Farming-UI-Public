@@ -57,12 +57,14 @@
   margin-right: 5px;
 }
 .newAddLiquidityDiv_cont_div2_cont1_input {
-  padding: 20px 15px;
+  padding: 15px 15px;
   background: #121213;
   width: 100%;
   border: none;
   border-radius: 10px;
   color: #fff;
+  font-size: 38px;
+  font-weight: 600;
 }
 
 .newAddLiquidityDiv_cont_div2_btn {

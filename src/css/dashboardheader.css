@@ -675,11 +675,15 @@
   margin-right: 4px;
 }
 .dark .header_tab1_active {
-  background: #22ad624f;
+  background: #22ad62cc;
   box-shadow: 0px 0px 5px #000000;
   color: #fff !important;
 }
-
+.dark .header_tab1:hover {
+  background: #22ad633c;
+  box-shadow: none;
+  border-radius: 10px;
+}
 .welcome_user {
   display: flex;
   margin: 0;

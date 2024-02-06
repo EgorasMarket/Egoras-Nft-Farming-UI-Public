@@ -628,11 +628,14 @@ const UpdatedSwap = () => {
   };
 
   useEffect(() => {
-    if (SwapAmount > coinBalance) {
+    const formattedSwapAmount = parseFloat(SwapAmount);
+    const formattedCoinBalance = parseFloat(coinBalance);
+    if (formattedSwapAmount > formattedCoinBalance) {
       setInsufficientBalance(true);
     } else {
       setInsufficientBalance(false);
     }
+    console.log(formattedSwapAmount, formattedCoinBalance);
   }, [SwapAmount, coinBalance]);
 
   // =================
