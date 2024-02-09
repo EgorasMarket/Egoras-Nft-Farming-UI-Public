@@ -672,12 +672,14 @@ const NewRemoveLiquidity = () => {
           </div>
         </div>
       )}
+
       {errorModal ? (
         <UpdatedErrorModal
           errorMessage={errorMessage}
           closeModal={CloseErrorModal}
         />
       ) : null}
+
       {successModal ? (
         <UpdatedSuccessModal
           btnRoute={true}
