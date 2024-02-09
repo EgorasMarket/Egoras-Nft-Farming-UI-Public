@@ -142,6 +142,7 @@ const UpdatedSwap = () => {
     symbol: "USDT",
     favorite: "true",
   });
+  console.log("lll");
 
   // const [inputDisable, setmaxSlippageDisplay] = useState(false);
   const [insufficientLiquidityBtn, setInsufficientLiquidityBtn] =
