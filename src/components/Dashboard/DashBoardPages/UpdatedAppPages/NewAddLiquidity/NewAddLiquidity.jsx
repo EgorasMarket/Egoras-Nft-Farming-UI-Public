@@ -458,7 +458,7 @@ const NewAddLiquidity = () => {
                         class="updatedSwapSwapBtn"
                       >
                         {isLoadingUnlckTkn ? (
-                          <ScaleLoader color="#353250" size={10} height={20} />
+                          <ScaleLoader color="#2c734e" size={10} height={20} />
                         ) : (
                           <> Approve {selectedToken1}</>
                         )}
@@ -473,7 +473,7 @@ const NewAddLiquidity = () => {
                         class="updatedSwapSwapBtn"
                       >
                         {isLoadingUnlckBase ? (
-                          <ScaleLoader color="#353250" size={10} height={20} />
+                          <ScaleLoader color="#2c734e" size={10} height={20} />
                         ) : (
                           <> Approve {selectedToken2}</>
                         )}
@@ -501,7 +501,7 @@ const NewAddLiquidity = () => {
                               >
                                 {isLoading ? (
                                   <ScaleLoader
-                                    color="#353250"
+                                    color="#2c734e"
                                     size={10}
                                     height={20}
                                   />

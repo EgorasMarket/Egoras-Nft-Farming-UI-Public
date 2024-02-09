@@ -139,6 +139,24 @@ const getUserSwapStats = async (_user, _ticker, signer) => {
     };
   }
 };
+const getSystemTotalSwap = async (_ticker, signer) => {
+  console.log(_ticker);
+  try {
+    const instance = await contractSwapFacetInstance(signer);
+    let result;
+    result = await instance.getSystemTotalSwap(_ticker);
+    console.log(result, "result, result,result,result,result");
+    return {
+      message: result,
+      status: true,
+    };
+  } catch (error) {
+    return {
+      message: formattedError(error).message,
+      status: formattedError(error).status,
+    };
+  }
+};
 
 export {
   ListAsset,
@@ -148,4 +166,5 @@ export {
   swapToken,
   getUserSwapStats,
   removeLiquidity,
+  getSystemTotalSwap,
 };

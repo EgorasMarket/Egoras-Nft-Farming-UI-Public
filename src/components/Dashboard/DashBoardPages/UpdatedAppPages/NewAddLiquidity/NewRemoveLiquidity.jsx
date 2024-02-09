@@ -284,6 +284,7 @@ const NewRemoveLiquidity = () => {
         );
         console.log(res);
         console.log(formatEther(res.message._baseLp).toString());
+        console.log(formatEther(res.message._base).toString());
         console.log(formatEther(res.message._tokenLp).toString());
         console.log(formatEther(res.message._userBaseLp).toString());
         console.log(formatEther(res.message._userTokenLp).toString());
@@ -627,7 +628,7 @@ const NewRemoveLiquidity = () => {
                         class="updatedSwapSwapBtn"
                       >
                         {isLoadingUnlckTkn ? (
-                          <ScaleLoader color="#353250" size={10} height={20} />
+                          <ScaleLoader color="#2c734e" size={10} height={20} />
                         ) : (
                           <> Approve {selectedToken1}</>
                         )}
@@ -642,7 +643,7 @@ const NewRemoveLiquidity = () => {
                         class="updatedSwapSwapBtn"
                       >
                         {isLoadingUnlckBase ? (
-                          <ScaleLoader color="#353250" size={10} height={20} />
+                          <ScaleLoader color="#2c734e" size={10} height={20} />
                         ) : (
                           <> Approve {selectedToken2}</>
                         )}
@@ -663,7 +664,7 @@ const NewRemoveLiquidity = () => {
                           >
                             {isLoading ? (
                               <ScaleLoader
-                                color="#353250"
+                                color="#2c734e"
                                 size={10}
                                 height={20}
                               />

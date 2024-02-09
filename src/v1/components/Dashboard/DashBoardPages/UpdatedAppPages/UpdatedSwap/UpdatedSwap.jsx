@@ -203,7 +203,7 @@ const UpdatedSwap = () => {
     setBaseBalance(parseFloat(ethBalance).toFixed(4));
   };
   const setAssetsId = (e) => {
-    if (e.currentTarget.id==="1") {
+    if (e.currentTarget.id === "1") {
       BnbBalance1();
       console.log("BNB");
     } else {
@@ -225,7 +225,7 @@ const UpdatedSwap = () => {
     console.log(e.currentTarget.name);
     // setBaseToAddress(e.currentTarget.name);
     // setInitialBaseFromAddress(e.currentTarget.name);
-    if (e.currentTarget.id===id2) {
+    if (e.currentTarget.id === id2) {
       // setBaseFromAddress(e.currentTarget.name);
       // setSwapFromAddress(e.currentTarget.name);
       console.log("id is equal id2");
@@ -242,7 +242,7 @@ const UpdatedSwap = () => {
   };
 
   const setAssetsId2 = (e) => {
-    if (e.currentTarget.id==="1") {
+    if (e.currentTarget.id === "1") {
       BnbBalance2();
       console.log("BNB");
     } else {
@@ -259,7 +259,7 @@ const UpdatedSwap = () => {
     setIda(id);
     ToggleTokenModal2();
     console.log(e.currentTarget.id);
-    if (e.currentTarget.id===id) {
+    if (e.currentTarget.id === id) {
       console.log("id is equal id2");
       setId(initialId2);
       setBaseFromAddress(initialBaseToAddress);
@@ -308,7 +308,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response);
-    if (response.status===true) {
+    if (response.status === true) {
       setIsAmountLoading(false);
       setAmountsOut(formatEther(response.message[1]._hex));
       const maxSlippage = parseFloat(slippage) / 100;
@@ -332,7 +332,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response);
-    if (response.status===true) {
+    if (response.status === true) {
       setIsAmountLoading(false);
       setAmountsOut(formatEther(response.message[1]._hex));
       const maxSlippage = parseFloat(slippage) / 100;
@@ -354,7 +354,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response);
-    if (response.status===true) {
+    if (response.status === true) {
       setIsAmountLoading(false);
       setAmountsOut(formatEther(response.message[1]._hex));
       const maxSlippage = parseFloat(slippage) / 100;
@@ -376,7 +376,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response);
-    if (response.status===true) {
+    if (response.status === true) {
       setIsAmountLoading(false);
       setAmountsOut(formatEther(response.message[1]._hex));
       const maxSlippage = parseFloat(slippage) / 100;
@@ -435,14 +435,14 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(ret);
-    if (ret.status===true) {
+    if (ret.status === true) {
       setIsLoading(false);
       setDisable(false);
       localStorage.setItem("unlocking", true);
       localStorage.setItem("unlockingHash", ret.message);
       setUnlockBtn(true);
     } else {
-      if (ret.message.code===4001) {
+      if (ret.message.code === 4001) {
         console.log(ret);
       }
       console.log(ret);
@@ -481,7 +481,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response);
-    if (response.status===true) {
+    if (response.status === true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
@@ -512,7 +512,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response, "SwapEusdForTokens");
-    if (response.status===true) {
+    if (response.status === true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
@@ -538,7 +538,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response, "SwapTokensForEusd");
-    if (response.status===true) {
+    if (response.status === true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
@@ -565,7 +565,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response);
-    if (response.status===true) {
+    if (response.status === true) {
       setIsLoading(false);
       setDisable(false);
       setSuccessModal(true);
@@ -611,7 +611,7 @@ const UpdatedSwap = () => {
     console.log(response);
     console.log(formatEther(response.message[1]._hex).toString());
     console.log(formatEther(response.message[0]._hex).toString());
-    if (response.status===true) {
+    if (response.status === true) {
       setIsAmountLoading(false);
       setDisable(false);
 
@@ -636,12 +636,12 @@ const UpdatedSwap = () => {
   // console.log(e.target.value);
   //   };
   useEffect(() => {
-    if (SwapAmount==="") {
+    if (SwapAmount === "") {
       console.log("it is gone");
       setAmountsOut("");
       setIsAmountLoading(false);
     }
-    if (SwapAmount==="" || id2==="" || id==="" || amountsOut==="") {
+    if (SwapAmount === "" || id2 === "" || id === "" || amountsOut === "") {
       setDisable(true);
     } else {
       setDisable(false);
@@ -791,7 +791,7 @@ const UpdatedSwap = () => {
       library.getSigner()
     );
     console.log(response);
-    if (response.status===true) {
+    if (response.status === true) {
       setIsAmountLoading(false);
       setDisable(false);
       setAmountsOut(formatEther(response.message[1]._hex));
@@ -861,7 +861,7 @@ const UpdatedSwap = () => {
                                 </div> */}
                               </div>
 
-                              {id==="" ? (
+                              {id === "" ? (
                                 <div className="Swap_icondropDownDiv">
                                   <span className="token_balances_span">
                                     <AccountBalanceWalletIcon className="TokenBalanceIcon" />
@@ -878,12 +878,12 @@ const UpdatedSwap = () => {
                                 </div>
                               ) : (
                                 <>
-                                  {id==="0" ? (
+                                  {id === "0" ? (
                                     <>
                                       {assetsBase.map((data) => {
                                         return (
                                           <>
-                                            {data.id===id ? (
+                                            {data.id === id ? (
                                               <div
                                                 className="Swap_icondropDownDiv"
                                                 // data-index={data.address}
@@ -913,7 +913,7 @@ const UpdatedSwap = () => {
                                       {assets.map((data) => {
                                         return (
                                           <>
-                                            {data.id===id ? (
+                                            {data.id === id ? (
                                               <div className="Swap_icondropDownDiv">
                                                 <span className="token_balances_span">
                                                   <AccountBalanceWalletIcon className="TokenBalanceIcon" />
@@ -942,7 +942,7 @@ const UpdatedSwap = () => {
                                 </>
                               )}
                             </div>
-                            {id==="" ? (
+                            {id === "" ? (
                               <div className="amnt_input_layer2">
                                 <button className="amnt_input_layer2_cont1">
                                   25%
@@ -959,13 +959,13 @@ const UpdatedSwap = () => {
                               </div>
                             ) : (
                               <>
-                                {id==="0" ? (
+                                {id === "0" ? (
                                   <>
                                     {assetsBase.map((data) => {
                                       // setSwapBalance(data.balance);
                                       return (
                                         <>
-                                          {data.id===id ? (
+                                          {data.id === id ? (
                                             <div className="amnt_input_layer2">
                                               <button
                                                 className="amnt_input_layer2_cont1"
@@ -1011,7 +1011,7 @@ const UpdatedSwap = () => {
                                       // setSwapBalance(data.balance);
                                       return (
                                         <>
-                                          {data.id===id ? (
+                                          {data.id === id ? (
                                             <div className="amnt_input_layer2">
                                               <button
                                                 className="amnt_input_layer2_cont1"
@@ -1058,7 +1058,7 @@ const UpdatedSwap = () => {
                         </div>
 
                         {/* <div className="plus_icon_layer"> */}
-                        {coinBalance==="" || baseBalance==="" ? (
+                        {coinBalance === "" || baseBalance === "" ? (
                           <SwapVertIcon className="toggle_swap_inputs" />
                         ) : (
                           <SwapVertIcon
@@ -1071,7 +1071,7 @@ const UpdatedSwap = () => {
                           <div className="amnt_input">
                             <div className="amnt_input_layer1">
                               <div className="amnt_input_layer1_input_div">
-                                {id2==="" ? (
+                                {id2 === "" ? (
                                   <input
                                     type="number"
                                     name="number"
@@ -1086,7 +1086,7 @@ const UpdatedSwap = () => {
                                     {isAmountLoading ? (
                                       <div className="amount_loading_div">
                                         <PulseLoader
-                                          color="#353250"
+                                          color="#2c734e"
                                           size={20}
                                           height={20}
                                         />
@@ -1112,7 +1112,7 @@ const UpdatedSwap = () => {
                                     : SwapAmount * 750}
                                 </div> */}
                               </div>
-                              {id2==="" ? (
+                              {id2 === "" ? (
                                 <div className="Swap_icondropDownDiv">
                                   <span className="token_balances_span">
                                     <AccountBalanceWalletIcon className="TokenBalanceIcon" />
@@ -1129,13 +1129,13 @@ const UpdatedSwap = () => {
                                 </div>
                               ) : (
                                 <>
-                                  {id2==="0" ? (
+                                  {id2 === "0" ? (
                                     <>
                                       {assetsBase.map((data) => {
                                         // setSwapBalance(data.balance);
                                         return (
                                           <>
-                                            {data.id===id2 ? (
+                                            {data.id === id2 ? (
                                               <div className="Swap_icondropDownDiv">
                                                 <span className="token_balances_span">
                                                   <AccountBalanceWalletIcon className="TokenBalanceIcon" />
@@ -1163,7 +1163,7 @@ const UpdatedSwap = () => {
                                         // setSwapBalance(data.balance);
                                         return (
                                           <>
-                                            {data.id===id2 ? (
+                                            {data.id === id2 ? (
                                               <div className="Swap_icondropDownDiv">
                                                 <span className="token_balances_span">
                                                   <AccountBalanceWalletIcon className="TokenBalanceIcon" />
@@ -1302,7 +1302,7 @@ const UpdatedSwap = () => {
                             />
                           </div> */}
                           <div className="resfresh_icon_div">
-                            {SwapAmount <= "0" || id2==="" ? null : (
+                            {SwapAmount <= "0" || id2 === "" ? null : (
                               <>
                                 <RefreshIcon
                                   callGetAmountsOut={getamount}
@@ -1409,7 +1409,7 @@ const UpdatedSwap = () => {
 
                       {account ? (
                         <>
-                          {id==="" ? (
+                          {id === "" ? (
                             <button
                               id="generate"
                               class="updatedSwapSwapBtn"
@@ -1424,7 +1424,7 @@ const UpdatedSwap = () => {
                                   {assetsBase.map((data) => {
                                     return (
                                       <>
-                                        {data.id===id ? (
+                                        {data.id === id ? (
                                           <>
                                             {insufficientBalance ? (
                                               <button
@@ -1445,7 +1445,7 @@ const UpdatedSwap = () => {
                                                   >
                                                     {isLoading ? (
                                                       <ScaleLoader
-                                                        color="#353250"
+                                                        color="#2c734e"
                                                         size={10}
                                                         height={20}
                                                       />
@@ -1477,7 +1477,7 @@ const UpdatedSwap = () => {
                                                       >
                                                         {isLoading ? (
                                                           <ScaleLoader
-                                                            color="#353250"
+                                                            color="#2c734e"
                                                             size={10}
                                                             height={20}
                                                           />
@@ -1505,7 +1505,7 @@ const UpdatedSwap = () => {
                                   {assets.map((data) => {
                                     return (
                                       <>
-                                        {data.id===id ? (
+                                        {data.id === id ? (
                                           <>
                                             {insufficientBalance ? (
                                               <button
@@ -1524,7 +1524,7 @@ const UpdatedSwap = () => {
                                               >
                                                 {isLoading ? (
                                                   <ScaleLoader
-                                                    color="#353250"
+                                                    color="#2c734e"
                                                     size={10}
                                                     height={20}
                                                   />
@@ -1545,7 +1545,7 @@ const UpdatedSwap = () => {
                                   {assetsBase.map((data) => {
                                     return (
                                       <>
-                                        {data.id===id ? (
+                                        {data.id === id ? (
                                           <>
                                             {unlockBtn === false ? (
                                               <button
@@ -1556,7 +1556,7 @@ const UpdatedSwap = () => {
                                               >
                                                 {isLoading ? (
                                                   <ScaleLoader
-                                                    color="#353250"
+                                                    color="#2c734e"
                                                     size={10}
                                                     height={20}
                                                   />
@@ -1573,7 +1573,7 @@ const UpdatedSwap = () => {
                                               >
                                                 {isLoading ? (
                                                   <ScaleLoader
-                                                    color="#353250"
+                                                    color="#2c734e"
                                                     size={10}
                                                     height={20}
                                                   />
@@ -1597,7 +1597,7 @@ const UpdatedSwap = () => {
                                   {assets.map((data) => {
                                     return (
                                       <>
-                                        {data.id===id ? (
+                                        {data.id === id ? (
                                           <>
                                             {unlockBtn === false ? (
                                               <button
@@ -1608,7 +1608,7 @@ const UpdatedSwap = () => {
                                               >
                                                 {isLoading ? (
                                                   <ScaleLoader
-                                                    color="#353250"
+                                                    color="#2c734e"
                                                     size={10}
                                                     height={20}
                                                   />
@@ -1625,7 +1625,7 @@ const UpdatedSwap = () => {
                                               >
                                                 {isLoading ? (
                                                   <ScaleLoader
-                                                    color="#353250"
+                                                    color="#2c734e"
                                                     size={10}
                                                     height={20}
                                                   />
@@ -1665,19 +1665,19 @@ const UpdatedSwap = () => {
                             <div className="moreSwapInfoDiv_div2_area1_cont1">
                               Minimum Received
                             </div>
-                            {id2==="" ? (
+                            {id2 === "" ? (
                               <div className="swap_price_rate_div1">0</div>
                             ) : (
                               <>
-                                {id2==="0" ? (
+                                {id2 === "0" ? (
                                   <>
                                     {assetsBase.map((data) => {
                                       // setSwapBalance(data.balance);
                                       return (
                                         <>
-                                          {data.id===id2 ? (
+                                          {data.id === id2 ? (
                                             <div className="moreSwapInfoDiv_div2_area1_cont2">
-                                              {SwapAmount===""
+                                              {SwapAmount === ""
                                                 ? 0
                                                 : parseFloat(
                                                     MinamountsOut
@@ -1697,9 +1697,9 @@ const UpdatedSwap = () => {
                                       // setSwapBalance(data.balance);
                                       return (
                                         <>
-                                          {data.id===id2 ? (
+                                          {data.id === id2 ? (
                                             <div className="moreSwapInfoDiv_div2_area1_cont2">
-                                              {SwapAmount===""
+                                              {SwapAmount === ""
                                                 ? 0
                                                 : parseFloat(
                                                     MinamountsOut
@@ -1730,17 +1730,17 @@ const UpdatedSwap = () => {
                               Route
                             </div>
                             <div className="moreSwapInfoDiv_div2_area1_cont2">
-                              {id==="" ? (
+                              {id === "" ? (
                                 <div className="swap_price_rate_div1">Nil</div>
                               ) : (
                                 <>
-                                  {id==="0" ? (
+                                  {id === "0" ? (
                                     <>
                                       {assetsBase.map((data) => {
                                         // setSwapBalance(data.balance);
                                         return (
                                           <>
-                                            {data.id===id ? (
+                                            {data.id === id ? (
                                               <div className="swap_price_rate_div1">
                                                 {data.symbol}
                                               </div>
@@ -1755,7 +1755,7 @@ const UpdatedSwap = () => {
                                         // setSwapBalance(data.balance);
                                         return (
                                           <>
-                                            {data.id===id ? (
+                                            {data.id === id ? (
                                               <div className="swap_price_rate_div1">
                                                 {data.symbol}
                                               </div>
@@ -1768,17 +1768,17 @@ const UpdatedSwap = () => {
                                 </>
                               )}
                               {">"}
-                              {id2==="" ? (
+                              {id2 === "" ? (
                                 <div className="swap_price_rate_div1">Nil</div>
                               ) : (
                                 <>
-                                  {id2==="0" ? (
+                                  {id2 === "0" ? (
                                     <>
                                       {assetsBase.map((data) => {
                                         // setSwapBalance(data.balance);
                                         return (
                                           <>
-                                            {data.id===id2 ? (
+                                            {data.id === id2 ? (
                                               <div className="swap_price_rate_div2">
                                                 {data.symbol}
                                               </div>
@@ -1793,7 +1793,7 @@ const UpdatedSwap = () => {
                                         // setSwapBalance(data.balance);
                                         return (
                                           <>
-                                            {data.id===id2 ? (
+                                            {data.id === id2 ? (
                                               <div className="swap_price_rate_div2">
                                                 {data.symbol}
                                               </div>

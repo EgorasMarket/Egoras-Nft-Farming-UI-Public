@@ -45,7 +45,12 @@ import {
   getAmountsOut,
   getPriceOracle,
 } from "../../../../../web3/index2";
-import { swapBase, swapToken } from "../../../../../web3/index3";
+import {
+  swapBase,
+  swapToken,
+  getSystemTotalSwap,
+  getUserSwapStats,
+} from "../../../../../web3/index3";
 import {
   tokenBalance,
   checkAllowanceV3,
@@ -66,6 +71,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import StaticData from "../../../../../Static/ListedCoins";
+import { numberWithCommas } from "../../../../../static";
 // import axios from "axios";
 // import { API_URL } from "../../../../../actions/types";
 // import { config } from "../../../../../actions/Config";
@@ -118,6 +124,8 @@ const UpdatedSwap = () => {
   const [amountsOut, setAmountsOut] = useState("");
   const [MinamountsOut, setMinAmountsOut] = useState("");
   const [tokenDrop, setTokenDrop] = useState(false);
+  const [availLiquidity, setAvailLiquidity] = useState(0);
+  const [fee, setFee] = useState(0);
   const [assetsBase, setAssetBase] = useState({
     id: "0",
     img: "/img/egax_logo.png",
@@ -751,6 +759,70 @@ const UpdatedSwap = () => {
       console.log(response);
     }
   };
+  useEffect(async () => {
+    if (account) {
+      const res = await getSystemTotalSwap("EGAX_USDT", library.getSigner());
+      console.log(res);
+      console.log(formatEther(res.message._base).toString());
+      console.log(formatEther(res.message._base_fee).toString());
+      console.log(formatEther(res.message._token).toString());
+      console.log(formatEther(res.message._currentFee).toString());
+      setFee(formatEther(res.message._currentFee).toString());
+    }
+  }, [account, assets, assetsBase]);
+
+  useEffect(async () => {
+    if (account) {
+      if (assets.symbol === "EGAX" && assetsBase.symbol === "USDT") {
+        const res = await getUserSwapStats(
+          account,
+          "EGAX_USDT",
+          library.getSigner()
+        );
+        console.log(res);
+        console.log(formatEther(res.message._baseLp).toString());
+        console.log(formatEther(res.message._tokenLp).toString());
+        setAvailLiquidity(formatEther(res.message._baseLp).toString());
+        return;
+      }
+      if (assets.symbol === "EGAX" && assetsBase.symbol === "EUSD") {
+        const res = await getUserSwapStats(
+          account,
+          "EGAX_EUSD",
+          library.getSigner()
+        );
+        console.log(res);
+        console.log(formatEther(res.message._baseLp).toString());
+        console.log(formatEther(res.message._tokenLp).toString());
+        setAvailLiquidity(formatEther(res.message._baseLp).toString());
+        return;
+      }
+      if (assets.symbol === "USDT" && assetsBase.symbol === "EGAX") {
+        const res = await getUserSwapStats(
+          account,
+          "EGAX_USDT",
+          library.getSigner()
+        );
+        console.log(res);
+        console.log(formatEther(res.message._baseLp).toString());
+        console.log(formatEther(res.message._tokenLp).toString());
+        setAvailLiquidity(formatEther(res.message._tokenLp).toString());
+        return;
+      }
+      if (assets.symbol === "EUSD" && assetsBase.symbol === "EGAX") {
+        const res = await getUserSwapStats(
+          account,
+          "EGAX_EUSD",
+          library.getSigner()
+        );
+        console.log(res);
+        console.log(formatEther(res.message._baseLp).toString());
+        console.log(formatEther(res.message._tokenLp).toString());
+        setAvailLiquidity(formatEther(res.message._tokenLp).toString());
+        return;
+      }
+    }
+  }, [account, assets, assetsBase]);
 
   return (
     <div className="other2">
@@ -900,7 +972,7 @@ const UpdatedSwap = () => {
                                 {isAmountLoading ? (
                                   <div className="amount_loading_div">
                                     <PulseLoader
-                                      color="#353250"
+                                      color="#2c734e"
                                       size={20}
                                       height={20}
                                     />
@@ -1107,50 +1179,75 @@ const UpdatedSwap = () => {
 
                       {account ? (
                         <>
-                          {insufficientBalance ? (
+                          {parseFloat(SwapAmount) <= 0 || SwapAmount === "" ? (
                             <button
                               id="generate"
-                              disabled={true}
                               class="updatedSwapSwapBtn"
+                              disabled
                             >
-                              Insufficient Balance
+                              Enter Amount
                             </button>
                           ) : (
                             <>
-                              {unlockBtn === false ? (
+                              {insufficientBalance ? (
                                 <button
                                   id="generate"
-                                  disabled={Disable}
-                                  onClick={UnlockToken}
+                                  disabled={true}
                                   class="updatedSwapSwapBtn"
                                 >
-                                  {isLoading ? (
-                                    <ScaleLoader
-                                      color="#353250"
-                                      size={10}
-                                      height={20}
-                                    />
-                                  ) : (
-                                    <> Approve {assetsBase.symbol}</>
-                                  )}
+                                  Insufficient {assetsBase.symbol} Bal
                                 </button>
                               ) : (
-                                <button
-                                  id="generate"
-                                  disabled={Disable}
-                                  onClick={swap}
-                                  class="updatedSwapSwapBtn"
-                                >
-                                  {isLoading ? (
-                                    <ScaleLoader
-                                      color="#353250"
-                                      size={10}
-                                      height={20}
-                                    />
+                                <>
+                                  {parseFloat(SwapAmount) > availLiquidity ? (
+                                    <button
+                                      id="generate"
+                                      disabled={true}
+                                      class="updatedSwapSwapBtn"
+                                    >
+                                      Insufficient Liquidity
+                                    </button>
                                   ) : (
-                                    <> Swap {assetsBase.symbol}</>
+                                    <>
+                                      {" "}
+                                      {unlockBtn === false ? (
+                                        <button
+                                          id="generate"
+                                          disabled={Disable}
+                                          onClick={UnlockToken}
+                                          class="updatedSwapSwapBtn"
+                                        >
+                                          {isLoading ? (
+                                            <ScaleLoader
+                                              color="#2c734e"
+                                              size={10}
+                                              height={20}
+                                            />
+                                          ) : (
+                                            <> Approve {assetsBase.symbol}</>
+                                          )}
+                                        </button>
+                                      ) : (
+                                        <button
+                                          id="generate"
+                                          disabled={Disable}
+                                          onClick={swap}
+                                          class="updatedSwapSwapBtn"
+                                        >
+                                          {isLoading ? (
+                                            <ScaleLoader
+                                              color="#2c734e"
+                                              size={10}
+                                              height={20}
+                                            />
+                                          ) : (
+                                            <> Swap {assetsBase.symbol}</>
+                                          )}
+                                        </button>
+                                      )}
+                                    </>
                                   )}
-                                </button>
+                                </>
                               )}
                             </>
                           )}
@@ -1176,7 +1273,9 @@ const UpdatedSwap = () => {
                             <div className="moreSwapInfoDiv_div2_area1_cont2">
                               {SwapAmount === ""
                                 ? 0
-                                : parseFloat(MinamountsOut).toFixed(4)}
+                                : numberWithCommas(
+                                    parseFloat(MinamountsOut).toFixed(4)
+                                  )}
                               <span>
                                 {"  "} {assets.symbol}
                               </span>
@@ -1184,10 +1283,25 @@ const UpdatedSwap = () => {
                           </div>
                           <div className="moreSwapInfoDiv_div2_area1">
                             <div className="moreSwapInfoDiv_div2_area1_cont1">
-                              Est Gas Fee
+                              Available Liquidity
                             </div>
                             <div className="moreSwapInfoDiv_div2_area1_cont2">
-                              $0.005
+                              {numberWithCommas(
+                                parseFloat(availLiquidity).toFixed(4)
+                              )}
+                              {assetsBase.symbol === "USDT"
+                                ? "USDT"
+                                : assetsBase.symbol === "EUSD"
+                                ? "EUSD"
+                                : "EGAX"}
+                            </div>
+                          </div>
+                          <div className="moreSwapInfoDiv_div2_area1">
+                            <div className="moreSwapInfoDiv_div2_area1_cont1">
+                              Fee
+                            </div>
+                            <div className="moreSwapInfoDiv_div2_area1_cont2">
+                              {fee}%
                             </div>
                           </div>
                           <div className="moreSwapInfoDiv_div2_area1">

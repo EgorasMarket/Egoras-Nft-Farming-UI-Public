@@ -1308,7 +1308,7 @@ const DashboardHome = () => {
                   disabled={Disable}
                 >
                   {isLoading ? (
-                    <ScaleLoader color="#353250" size={10} height={20} />
+                    <ScaleLoader color="#2c734e" size={10} height={20} />
                   ) : (
                     <> Burn</>
                   )}
