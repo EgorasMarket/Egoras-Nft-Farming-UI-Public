@@ -276,299 +276,270 @@ const NewAddLiquidity = () => {
   );
 
   return (
-    <div className="other2">
-      <section className=" no-bg no_paddd">
-        <div className="container relative">
-          <div className="swapDivCont">
-            <div className="liquidity_area">
-              <div className="liquidity_area1">
-                <div className="swap_container_settings_cont">
-                  <div className="swap_container_settings_cont_area1">
-                    Add Liquidity
+    <div className="liquidity_area1">
+      <div className="liquidity_cont">
+        <div className="newAddLiquidityDiv">
+          <div className="newAddLiquidityDiv_cont">
+            <div className="newAddLiquidityDiv_cont_div1">
+              <div className="newAddLiquidityDiv_cont_div1_title">
+                Select Pair
+              </div>
+              <div
+                className="newAddLiquidityDiv_cont_div1_div"
+                onClick={toggleTokenDrop}
+              >
+                {selectedToken.ticker === "" ? (
+                  "Select"
+                ) : (
+                  <div className="selectedToken_txt">
+                    {selectedToken.ticker === "EGAX_USDT" ? (
+                      <>
+                        {" "}
+                        <img
+                          src="/img/egax_logo.png"
+                          alt=""
+                          className="tokenDrop_drop_div_cont_img"
+                        />{" "}
+                        <img
+                          src="/img//tokens-folder/usdt_icon.png"
+                          alt=""
+                          className="tokenDrop_drop_div_cont_img2"
+                        />
+                      </>
+                    ) : selectedToken.ticker === "EGAX_EUSD" ? (
+                      <>
+                        {" "}
+                        <img
+                          src="/img/egax_logo.png"
+                          alt=""
+                          className="tokenDrop_drop_div_cont_img"
+                        />{" "}
+                        <img
+                          src="/img//tokens-folder/busd_icon.png"
+                          alt=""
+                          className="tokenDrop_drop_div_cont_img2"
+                        />
+                      </>
+                    ) : null}
+                    {selectedToken.ticker}
                   </div>
-                </div>
-                <div className="liquidity_cont">
-                  <div className="newAddLiquidityDiv">
-                    <div className="newAddLiquidityDiv_cont">
-                      <div className="newAddLiquidityDiv_cont_div1">
-                        <div className="newAddLiquidityDiv_cont_div1_title">
-                          Select Pair
-                        </div>
-                        <div
-                          className="newAddLiquidityDiv_cont_div1_div"
-                          onClick={toggleTokenDrop}
-                        >
-                          {selectedToken.ticker === "" ? (
-                            "Select"
-                          ) : (
-                            <div className="selectedToken_txt">
-                              {selectedToken.ticker === "EGAX_USDT" ? (
-                                <>
-                                  {" "}
-                                  <img
-                                    src="/img/egax_logo.png"
-                                    alt=""
-                                    className="tokenDrop_drop_div_cont_img"
-                                  />{" "}
-                                  <img
-                                    src="/img//tokens-folder/usdt_icon.png"
-                                    alt=""
-                                    className="tokenDrop_drop_div_cont_img2"
-                                  />
-                                </>
-                              ) : selectedToken.ticker === "EGAX_EUSD" ? (
-                                <>
-                                  {" "}
-                                  <img
-                                    src="/img/egax_logo.png"
-                                    alt=""
-                                    className="tokenDrop_drop_div_cont_img"
-                                  />{" "}
-                                  <img
-                                    src="/img//tokens-folder/busd_icon.png"
-                                    alt=""
-                                    className="tokenDrop_drop_div_cont_img2"
-                                  />
-                                </>
-                              ) : null}
-                              {selectedToken.ticker}
-                            </div>
-                          )}
+                )}
 
-                          <ExpandMoreIcon className="newAddLiquidityDiv_cont_div1_div_icon" />
-                          {tokenDrop ? (
-                            <div className="tokenDrop_drop_div">
-                              {ListedTokens.map((data) => (
-                                <div
-                                  className="tokenDrop_drop_div_cont"
-                                  onClick={() =>
-                                    handleTokenClick(
-                                      data.id,
-                                      data.ticker,
-                                      data.token_address,
-                                      data.base_address
-                                    )
-                                  }
-                                >
-                                  {data.ticker === "EGAX_USDT" ? (
-                                    <>
-                                      {" "}
-                                      <img
-                                        src="/img/egax_logo.png"
-                                        alt=""
-                                        className="tokenDrop_drop_div_cont_img"
-                                      />{" "}
-                                      <img
-                                        src="/img//tokens-folder/usdt_icon.png"
-                                        alt=""
-                                        className="tokenDrop_drop_div_cont_img2"
-                                      />
-                                    </>
-                                  ) : data.ticker === "EGAX_EUSD" ? (
-                                    <>
-                                      {" "}
-                                      <img
-                                        src="/img/egax_logo.png"
-                                        alt=""
-                                        className="tokenDrop_drop_div_cont_img"
-                                      />{" "}
-                                      <img
-                                        src="/img//tokens-folder/busd_icon.png"
-                                        alt=""
-                                        className="tokenDrop_drop_div_cont_img2"
-                                      />
-                                    </>
-                                  ) : null}
-                                  {data.ticker}
-                                </div>
-                              ))}
-                            </div>
-                          ) : null}
-                        </div>
+                <ExpandMoreIcon className="newAddLiquidityDiv_cont_div1_div_icon" />
+                {tokenDrop ? (
+                  <div className="tokenDrop_drop_div">
+                    {ListedTokens.map((data) => (
+                      <div
+                        className="tokenDrop_drop_div_cont"
+                        onClick={() =>
+                          handleTokenClick(
+                            data.id,
+                            data.ticker,
+                            data.token_address,
+                            data.base_address
+                          )
+                        }
+                      >
+                        {data.ticker === "EGAX_USDT" ? (
+                          <>
+                            {" "}
+                            <img
+                              src="/img/egax_logo.png"
+                              alt=""
+                              className="tokenDrop_drop_div_cont_img"
+                            />{" "}
+                            <img
+                              src="/img//tokens-folder/usdt_icon.png"
+                              alt=""
+                              className="tokenDrop_drop_div_cont_img2"
+                            />
+                          </>
+                        ) : data.ticker === "EGAX_EUSD" ? (
+                          <>
+                            {" "}
+                            <img
+                              src="/img/egax_logo.png"
+                              alt=""
+                              className="tokenDrop_drop_div_cont_img"
+                            />{" "}
+                            <img
+                              src="/img//tokens-folder/busd_icon.png"
+                              alt=""
+                              className="tokenDrop_drop_div_cont_img2"
+                            />
+                          </>
+                        ) : null}
+                        {data.ticker}
                       </div>
-                      <SouthIcon className="newAddLiquidityDiv_cont_icon" />
-                      {selectedToken.ticker === "" ? (
-                        <div className="newAddLiquidityDiv_cont_div2_select_pair_div">
-                          Select Pair
-                        </div>
-                      ) : (
-                        <div className="newAddLiquidityDiv_cont_div2">
-                          <div className="newAddLiquidityDiv_cont_div2_cont1">
-                            <div className="newAddLiquidityDiv_cont_div2_cont1_spans">
-                              <span className="newAddLiquidityDiv_cont_div2_cont1_span1">
-                                <img
-                                  src="/img/egax_logo.png"
-                                  alt=""
-                                  className="newAddLiquidityDiv_cont_div2_cont1_span1_img"
-                                />{" "}
-                                {selectedToken1}
-                              </span>{" "}
-                              <span
-                                className="newAddLiquidityDiv_cont_div2_cont1_span2"
-                                onClick={() => {
-                                  setTokenAmount(tokenBal);
-                                }}
-                              >
-                                <AccountBalanceWalletIcon className="newAddLiquidityDiv_cont_div2_cont1_span2_icon" />{" "}
-                                {tokenBal}
-                              </span>{" "}
-                            </div>
-                            <input
-                              type="text"
-                              placeholder="0.00"
-                              className="newAddLiquidityDiv_cont_div2_cont1_input"
-                              value={tokenAmount}
-                              onChange={changeTokenAmount}
-                            />
-                          </div>
-                          <div className="newAddLiquidityDiv_cont_div2_cont1">
-                            <div className="newAddLiquidityDiv_cont_div2_cont1_spans">
-                              <span className="newAddLiquidityDiv_cont_div2_cont1_span1">
-                                {" "}
-                                {selectedToken2 === "USDT" ? (
-                                  <img
-                                    src="/img//tokens-folder/usdt_icon.png"
-                                    alt=""
-                                    className="newAddLiquidityDiv_cont_div2_cont1_span1_img"
-                                  />
-                                ) : (
-                                  <img
-                                    src="/img//tokens-folder/busd_icon.png"
-                                    alt=""
-                                    className="newAddLiquidityDiv_cont_div2_cont1_span1_img"
-                                  />
-                                )}
-                                {selectedToken2}{" "}
-                              </span>{" "}
-                              <span
-                                className="newAddLiquidityDiv_cont_div2_cont1_span2"
-                                // onClick={() => {
-                                //   setBaseAmount(baseBal);
-                                // }}
-                              >
-                                <AccountBalanceWalletIcon className="newAddLiquidityDiv_cont_div2_cont1_span2_icon" />{" "}
-                                {baseBal}
-                              </span>{" "}
-                            </div>
-                            <input
-                              type="text"
-                              placeholder="0.00"
-                              className="newAddLiquidityDiv_cont_div2_cont1_input"
-                              value={baseAmount}
-                              //   onChange={changeBaseAmount}
-                            />
-                          </div>
-                          {account ? (
-                            <>
-                              {unlockBtn === false ? (
-                                <button
-                                  id="generate"
-                                  disabled={DisableToken}
-                                  onClick={UnlockToken}
-                                  class="updatedSwapSwapBtn"
-                                >
-                                  {isLoadingUnlckTkn ? (
-                                    <ScaleLoader
-                                      color="#353250"
-                                      size={10}
-                                      height={20}
-                                    />
-                                  ) : (
-                                    <> Approve {selectedToken1}</>
-                                  )}
-                                </button>
-                              ) : null}
-
-                              {unlockBtn2 === false ? (
-                                <button
-                                  id="generate"
-                                  disabled={DisableBase}
-                                  onClick={UnlockToken2}
-                                  class="updatedSwapSwapBtn"
-                                >
-                                  {isLoadingUnlckBase ? (
-                                    <ScaleLoader
-                                      color="#353250"
-                                      size={10}
-                                      height={20}
-                                    />
-                                  ) : (
-                                    <> Approve {selectedToken2}</>
-                                  )}
-                                </button>
-                              ) : null}
-
-                              {unlockBtn === true && unlockBtn2 === true ? (
-                                <>
-                                  {tokenAmount <= 0 ? (
-                                    <button
-                                      className="updatedSwapSwapBtn"
-                                      disabled
-                                    >
-                                      Enter Amount
-                                    </button>
-                                  ) : (
-                                    <>
-                                      {parseFloat(tokenBal) <= 0 ||
-                                      parseFloat(baseBal) <= 0 ? (
-                                        <button
-                                          className="updatedSwapSwapBtn"
-                                          disabled
-                                        >
-                                          Insufficient Balance
-                                        </button>
-                                      ) : (
-                                        <button
-                                          className="updatedSwapSwapBtn"
-                                          onClick={addTokenLiquidity}
-                                          disabled={Disable}
-                                        >
-                                          {isLoading ? (
-                                            <ScaleLoader
-                                              color="#353250"
-                                              size={10}
-                                              height={20}
-                                            />
-                                          ) : (
-                                            <> Add liquidity</>
-                                          )}
-                                        </button>
-                                      )}
-                                    </>
-                                  )}
-                                </>
-                              ) : null}
-                            </>
-                          ) : (
-                            <button className="updatedSwapSwapBtn" disabled>
-                              Connect wallet
-                            </button>
-                          )}
-                        </div>
-                      )}
-                    </div>
+                    ))}
                   </div>
-                </div>
-                {errorModal ? (
-                  <UpdatedErrorModal
-                    errorMessage={errorMessage}
-                    closeModal={CloseErrorModal}
-                  />
-                ) : null}
-                {successModal ? (
-                  <UpdatedSuccessModal
-                    btnRoute={true}
-                    successMessage={successMessage}
-                    route="/app/addLiquidity"
-                    txnHashDiv={true}
-                    TxnHash={txHash}
-                  />
                 ) : null}
               </div>
             </div>
+            <SouthIcon className="newAddLiquidityDiv_cont_icon" />
+            {selectedToken.ticker === "" ? (
+              <div className="newAddLiquidityDiv_cont_div2_select_pair_div">
+                Select Pair
+              </div>
+            ) : (
+              <div className="newAddLiquidityDiv_cont_div2">
+                <div className="newAddLiquidityDiv_cont_div2_cont1">
+                  <div className="newAddLiquidityDiv_cont_div2_cont1_spans">
+                    <span className="newAddLiquidityDiv_cont_div2_cont1_span1">
+                      <img
+                        src="/img/egax_logo.png"
+                        alt=""
+                        className="newAddLiquidityDiv_cont_div2_cont1_span1_img"
+                      />{" "}
+                      {selectedToken1}
+                    </span>{" "}
+                    <span
+                      className="newAddLiquidityDiv_cont_div2_cont1_span2"
+                      onClick={() => {
+                        setTokenAmount(tokenBal);
+                      }}
+                    >
+                      <AccountBalanceWalletIcon className="newAddLiquidityDiv_cont_div2_cont1_span2_icon" />{" "}
+                      {tokenBal}
+                    </span>{" "}
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="0.00"
+                    className="newAddLiquidityDiv_cont_div2_cont1_input"
+                    value={tokenAmount}
+                    onChange={changeTokenAmount}
+                  />
+                </div>
+                <div className="newAddLiquidityDiv_cont_div2_cont1">
+                  <div className="newAddLiquidityDiv_cont_div2_cont1_spans">
+                    <span className="newAddLiquidityDiv_cont_div2_cont1_span1">
+                      {" "}
+                      {selectedToken2 === "USDT" ? (
+                        <img
+                          src="/img//tokens-folder/usdt_icon.png"
+                          alt=""
+                          className="newAddLiquidityDiv_cont_div2_cont1_span1_img"
+                        />
+                      ) : (
+                        <img
+                          src="/img//tokens-folder/busd_icon.png"
+                          alt=""
+                          className="newAddLiquidityDiv_cont_div2_cont1_span1_img"
+                        />
+                      )}
+                      {selectedToken2}{" "}
+                    </span>{" "}
+                    <span
+                      className="newAddLiquidityDiv_cont_div2_cont1_span2"
+                      // onClick={() => {
+                      //   setBaseAmount(baseBal);
+                      // }}
+                    >
+                      <AccountBalanceWalletIcon className="newAddLiquidityDiv_cont_div2_cont1_span2_icon" />{" "}
+                      {baseBal}
+                    </span>{" "}
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="0.00"
+                    className="newAddLiquidityDiv_cont_div2_cont1_input"
+                    value={baseAmount}
+                    //   onChange={changeBaseAmount}
+                  />
+                </div>
+                {account ? (
+                  <>
+                    {unlockBtn === false ? (
+                      <button
+                        id="generate"
+                        disabled={DisableToken}
+                        onClick={UnlockToken}
+                        class="updatedSwapSwapBtn"
+                      >
+                        {isLoadingUnlckTkn ? (
+                          <ScaleLoader color="#353250" size={10} height={20} />
+                        ) : (
+                          <> Approve {selectedToken1}</>
+                        )}
+                      </button>
+                    ) : null}
+
+                    {unlockBtn2 === false ? (
+                      <button
+                        id="generate"
+                        disabled={DisableBase}
+                        onClick={UnlockToken2}
+                        class="updatedSwapSwapBtn"
+                      >
+                        {isLoadingUnlckBase ? (
+                          <ScaleLoader color="#353250" size={10} height={20} />
+                        ) : (
+                          <> Approve {selectedToken2}</>
+                        )}
+                      </button>
+                    ) : null}
+
+                    {unlockBtn === true && unlockBtn2 === true ? (
+                      <>
+                        {tokenAmount <= 0 ? (
+                          <button className="updatedSwapSwapBtn" disabled>
+                            Enter Amount
+                          </button>
+                        ) : (
+                          <>
+                            {parseFloat(tokenBal) <= 0 ||
+                            parseFloat(baseBal) <= 0 ? (
+                              <button className="updatedSwapSwapBtn" disabled>
+                                Insufficient Balance
+                              </button>
+                            ) : (
+                              <button
+                                className="updatedSwapSwapBtn"
+                                onClick={addTokenLiquidity}
+                                disabled={Disable}
+                              >
+                                {isLoading ? (
+                                  <ScaleLoader
+                                    color="#353250"
+                                    size={10}
+                                    height={20}
+                                  />
+                                ) : (
+                                  <> Add liquidity</>
+                                )}
+                              </button>
+                            )}
+                          </>
+                        )}
+                      </>
+                    ) : null}
+                  </>
+                ) : (
+                  <button className="updatedSwapSwapBtn" disabled>
+                    Connect wallet
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
-      </section>
+      </div>
+      {errorModal ? (
+        <UpdatedErrorModal
+          errorMessage={errorMessage}
+          closeModal={CloseErrorModal}
+        />
+      ) : null}
+      {successModal ? (
+        <UpdatedSuccessModal
+          btnRoute={true}
+          successMessage={successMessage}
+          route="/app/addLiquidity"
+          txnHashDiv={true}
+          TxnHash={txHash}
+        />
+      ) : null}
     </div>
   );
 };

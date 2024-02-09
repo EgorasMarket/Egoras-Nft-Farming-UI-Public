@@ -13,7 +13,8 @@ import DashboardReferral from "./DashBoardPages/DashboardReferral";
 import DashboardGovernance from "./DashBoardPages/Governance/DashboardGovernance";
 import StakingUpdate from "./DashBoardPages/UpdatedAppPages/StakingUpdate";
 import { SplashScreen } from "./SplashScreen/SplashScreen";
-import NewAddLiquidity from "./DashBoardPages/UpdatedAppPages/NewAddLiquidity/NewAddLiquidity";
+
+import AddLiquidity2 from "./DashBoardPages/UpdatedAppPages/NewAddLiquidity/AddLiquidity2";
 // ==========================================================================
 // ==========================================================================
 // ===========================dashboard css files start======================
@@ -127,7 +128,7 @@ const Dashboard = ({ check, togglemakeDark }) => {
                 <Route
                   exact
                   path="/app/addLiquidity"
-                  component={NewAddLiquidity}
+                  component={AddLiquidity2}
                 />
                 <Route
                   exact
