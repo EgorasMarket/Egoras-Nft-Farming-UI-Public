@@ -132,6 +132,7 @@ const NewRemoveLiquidity = () => {
     },
     [account, selectedToken]
   );
+
   const changeTokenAmount = async (event) => {
     setTokenAmount(event.target.value);
     console.log(event.target.value);
@@ -612,57 +613,69 @@ const NewRemoveLiquidity = () => {
             </div>
             {account ? (
               <>
-                {unlockBtn === false ? (
-                  <button
-                    id="generate"
-                    disabled={DisableToken}
-                    onClick={UnlockToken}
-                    class="updatedSwapSwapBtn"
-                  >
-                    {isLoadingUnlckTkn ? (
-                      <ScaleLoader color="#353250" size={10} height={20} />
-                    ) : (
-                      <> Approve {selectedToken1}</>
-                    )}
+                {tokenLp <= 0 ? (
+                  <button className="updatedSwapSwapBtn" disabled>
+                    No Lp Provided
                   </button>
-                ) : null}
-
-                {unlockBtn2 === false ? (
-                  <button
-                    id="generate"
-                    disabled={DisableBase}
-                    onClick={UnlockToken2}
-                    class="updatedSwapSwapBtn"
-                  >
-                    {isLoadingUnlckBase ? (
-                      <ScaleLoader color="#353250" size={10} height={20} />
-                    ) : (
-                      <> Approve {selectedToken2}</>
-                    )}
-                  </button>
-                ) : null}
-
-                {unlockBtn === true && unlockBtn2 === true ? (
+                ) : (
                   <>
-                    {percent <= 0 ? (
-                      <button className="updatedSwapSwapBtn" disabled>
-                        Enter Amount
-                      </button>
-                    ) : (
+                    {unlockBtn === false ? (
                       <button
-                        className="updatedSwapSwapBtn"
-                        onClick={removeTokenLiquidity}
-                        disabled={Disable}
+                        id="generate"
+                        disabled={DisableToken}
+                        onClick={UnlockToken}
+                        class="updatedSwapSwapBtn"
                       >
-                        {isLoading ? (
+                        {isLoadingUnlckTkn ? (
                           <ScaleLoader color="#353250" size={10} height={20} />
                         ) : (
-                          <> Remove liquidity</>
+                          <> Approve {selectedToken1}</>
                         )}
                       </button>
-                    )}
+                    ) : null}
+
+                    {unlockBtn2 === false ? (
+                      <button
+                        id="generate"
+                        disabled={DisableBase}
+                        onClick={UnlockToken2}
+                        class="updatedSwapSwapBtn"
+                      >
+                        {isLoadingUnlckBase ? (
+                          <ScaleLoader color="#353250" size={10} height={20} />
+                        ) : (
+                          <> Approve {selectedToken2}</>
+                        )}
+                      </button>
+                    ) : null}
+
+                    {unlockBtn === true && unlockBtn2 === true ? (
+                      <>
+                        {parseFloat(formatPercent * tokenLp).toFixed(8) <= 0 ? (
+                          <button className="updatedSwapSwapBtn" disabled>
+                            Enter Amount
+                          </button>
+                        ) : (
+                          <button
+                            className="updatedSwapSwapBtn"
+                            onClick={removeTokenLiquidity}
+                            disabled={Disable}
+                          >
+                            {isLoading ? (
+                              <ScaleLoader
+                                color="#353250"
+                                size={10}
+                                height={20}
+                              />
+                            ) : (
+                              <> Remove liquidity</>
+                            )}
+                          </button>
+                        )}
+                      </>
+                    ) : null}
                   </>
-                ) : null}
+                )}
               </>
             ) : (
               <button className="updatedSwapSwapBtn" disabled>
