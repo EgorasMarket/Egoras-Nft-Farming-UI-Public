@@ -429,7 +429,7 @@ const UpdatedSwap = () => {
       // Transaction hash
       const txHash = ret.message;
       setApproveTxt("Awaiting confirmation...");
-
+      // console.log("ytyt");
       // Wait for transaction confirmation
       const confirmedTx = await waitForTransactionConfirmation(txHash);
 
