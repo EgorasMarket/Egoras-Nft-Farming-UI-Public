@@ -35,16 +35,7 @@ import {
   useWeb3React,
   UnsupportedChainIdError,
 } from "@web3-react/core";
-import {
-  getBNBAddress,
-  swapEusdForBnb,
-  swapBnbForEusd,
-  swapEusdForToken,
-  swapTokenForEusd,
-  getAmountsIn,
-  getAmountsOut,
-  getPriceOracle,
-} from "../../../../../web3/index2";
+import { getPriceOracle } from "../../../../../web3/index2";
 import {
   swapBase,
   swapToken,
@@ -108,6 +99,8 @@ const UpdatedSwap = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [Disable, setDisable] = useState(false);
+  const [unlockIsLoading, setUnlockIsLoading] = useState(false);
+  const [unlockDisable, setUnlockDisable] = useState(false);
   const [unlockBtn, setUnlockBtn] = useState(true);
   const [unLockCheckStatus, setUnLockCheckStatus] = useState(false);
   const [coinBalance, setCoinBalance] = useState("0");
@@ -120,6 +113,7 @@ const UpdatedSwap = () => {
   const [highSlippageDiv, setHighSlipageDiv] = useState(false);
   const [maxSlippageDisplay, setmaxSlippageDisplay] = useState(false);
   const [refreshed, setRefreshed] = useState(false);
+  const [approveTxt, setApproveTxt] = useState("");
   const [displayChart, setDisplayChart] = useState(false);
   const [amountsOut, setAmountsOut] = useState("");
   const [MinamountsOut, setMinAmountsOut] = useState("");
@@ -420,21 +414,38 @@ const UpdatedSwap = () => {
   };
 
   const UnlockToken = async () => {
-    setIsLoading(true);
-    setDisable(true);
+    setUnlockIsLoading(true);
+    setUnlockDisable(true);
+    setApproveTxt("Approving...");
 
     let ret = await unlockTokenV3(
-      SwapFromAddress,
+      assetsBase.address,
       parseEther("180000000000000000000000000000000000", "wei").toString(),
       library.getSigner()
     );
     console.log(ret);
+
     if (ret.status === true) {
-      setIsLoading(false);
-      setDisable(false);
-      localStorage.setItem("unlocking", true);
-      localStorage.setItem("unlockingHash", ret.message);
-      setUnlockBtn(true);
+      // Transaction hash
+      const txHash = ret.message;
+      setApproveTxt("Awaiting confirmation...");
+
+      // Wait for transaction confirmation
+      const confirmedTx = await waitForTransactionConfirmation(txHash);
+
+      if (confirmedTx) {
+        setUnlockIsLoading(false);
+        setUnlockDisable(false);
+        localStorage.setItem("unlocking", true);
+        localStorage.setItem("unlockingHash", txHash);
+        setUnlockBtn(true);
+        setApproveTxt("Approved");
+      } else {
+        setErrorModal(true);
+        setErrorMessage("Transaction failed or was not confirmed.");
+        setUnlockIsLoading(false);
+        setUnlockDisable(false);
+      }
     } else {
       if (ret.message.code === 4001) {
         console.log(ret);
@@ -442,8 +453,35 @@ const UpdatedSwap = () => {
       console.log(ret);
       setErrorModal(true);
       setErrorMessage(ret.message);
-      setIsLoading(false);
-      setDisable(false);
+      setUnlockIsLoading(false);
+      setUnlockDisable(false);
+    }
+  };
+
+  // Function to wait for transaction confirmation
+  const waitForTransactionConfirmation = async (txHash) => {
+    try {
+      const provider = library.getSigner().provider;
+      const pollingInterval = 3000; // 3 seconds polling interval
+      const maxAttempts = 10; // Maximum number of polling attempts
+
+      let attempt = 0;
+      while (attempt < maxAttempts) {
+        const txReceipt = await provider.getTransactionReceipt(txHash);
+        if (txReceipt && txReceipt.status === 1) {
+          // Transaction confirmed
+          return true;
+        }
+        // Wait for the next polling interval
+        await new Promise((resolve) => setTimeout(resolve, pollingInterval));
+        attempt++;
+      }
+
+      // Transaction not confirmed within the maximum attempts
+      return false;
+    } catch (error) {
+      console.error("Error waiting for transaction confirmation:", error);
+      return false;
     }
   };
 
@@ -451,7 +489,7 @@ const UpdatedSwap = () => {
     async (e) => {
       if (account) {
         let check = await checkAllowanceV3(
-          SwapFromAddress,
+          assetsBase.address,
           account,
           parseEther(SwapAmount.toString(), "wei").toString(),
           library.getSigner()
@@ -462,14 +500,14 @@ const UpdatedSwap = () => {
       }
     },
 
-    [account, unLockCheckStatus, SwapAmount, SwapFromAddress]
+    [account, unLockCheckStatus, SwapAmount, assetsBase]
   );
 
   // ============
   // ============
   // ============
   const swap = async () => {
-    if (assetsBase.symbol === "EGAX") {
+    if (assetsBase.symbol === "EGAX" && assets.symbol === "USDT") {
       console.log("====================================");
       console.log("====================================");
       setIsLoading(true);
@@ -503,10 +541,45 @@ const UpdatedSwap = () => {
       }
       return;
     }
+    if (assetsBase.symbol === "EGAX" && assets.symbol === "EUSD") {
+      console.log("====================================");
+      console.log("====================================");
+      setIsLoading(true);
+      setDisable(true);
+      const response = await swapBase(
+        parseEther(SwapAmount.toString(), "wei").toString(),
+        "EGAX_EUSD",
+        library.getSigner()
+      );
+
+      console.log(response, "SwapEusdForTokens");
+      if (response.status === true) {
+        setIsLoading(false);
+        setDisable(false);
+        setSuccessModal(true);
+        setTxHash(response.message.hash);
+        setSuccessMessage(
+          "You've successfully swapped " +
+            SwapAmount +
+            assetsBase.symbol +
+            " for " +
+            amountsOut +
+            assets.symbol
+        );
+      } else {
+        console.log(response);
+        setIsLoading(false);
+        setDisable(false);
+        setErrorModal(true);
+        setErrorMessage(response.message);
+      }
+      return;
+    }
     if (assetsBase.symbol === "USDT") {
       // swapToken;
 
       console.log("====================================");
+      console.log(assetsBase);
       console.log("====================================");
       setIsLoading(true);
       setDisable(true);
@@ -783,7 +856,7 @@ const UpdatedSwap = () => {
         console.log(res);
         console.log(formatEther(res.message._baseLp).toString());
         console.log(formatEther(res.message._tokenLp).toString());
-        setAvailLiquidity(formatEther(res.message._baseLp).toString());
+        setAvailLiquidity(formatEther(res.message._tokenLp).toString());
         return;
       }
       if (assets.symbol === "EGAX" && assetsBase.symbol === "EUSD") {
@@ -795,7 +868,7 @@ const UpdatedSwap = () => {
         console.log(res);
         console.log(formatEther(res.message._baseLp).toString());
         console.log(formatEther(res.message._tokenLp).toString());
-        setAvailLiquidity(formatEther(res.message._baseLp).toString());
+        setAvailLiquidity(formatEther(res.message._tokenLp).toString());
         return;
       }
       if (assets.symbol === "USDT" && assetsBase.symbol === "EGAX") {
@@ -807,7 +880,7 @@ const UpdatedSwap = () => {
         console.log(res);
         console.log(formatEther(res.message._baseLp).toString());
         console.log(formatEther(res.message._tokenLp).toString());
-        setAvailLiquidity(formatEther(res.message._tokenLp).toString());
+        setAvailLiquidity(formatEther(res.message._baseLp).toString());
         return;
       }
       if (assets.symbol === "EUSD" && assetsBase.symbol === "EGAX") {
@@ -819,7 +892,7 @@ const UpdatedSwap = () => {
         console.log(res);
         console.log(formatEther(res.message._baseLp).toString());
         console.log(formatEther(res.message._tokenLp).toString());
-        setAvailLiquidity(formatEther(res.message._tokenLp).toString());
+        setAvailLiquidity(formatEther(res.message._baseLp).toString());
         return;
       }
     }
@@ -1214,16 +1287,20 @@ const UpdatedSwap = () => {
                                       {unlockBtn === false ? (
                                         <button
                                           id="generate"
-                                          disabled={Disable}
+                                          disabled={unlockDisable}
                                           onClick={UnlockToken}
                                           class="updatedSwapSwapBtn"
                                         >
-                                          {isLoading ? (
-                                            <ScaleLoader
-                                              color="#2c734e"
-                                              size={10}
-                                              height={20}
-                                            />
+                                          {unlockIsLoading ? (
+                                            <>
+                                              {" "}
+                                              {approveTxt}{" "}
+                                              <ScaleLoader
+                                                color="#2c734e"
+                                                size={10}
+                                                height={20}
+                                              />
+                                            </>
                                           ) : (
                                             <> Approve {assetsBase.symbol}</>
                                           )}
@@ -1289,10 +1366,10 @@ const UpdatedSwap = () => {
                             <div className="moreSwapInfoDiv_div2_area1_cont2">
                               {numberWithCommas(
                                 parseFloat(availLiquidity).toFixed(4)
-                              )}
-                              {assetsBase.symbol === "USDT"
+                              )}{" "}
+                              {assets.symbol === "USDT"
                                 ? "USDT"
-                                : assetsBase.symbol === "EUSD"
+                                : assets.symbol === "EUSD"
                                 ? "EUSD"
                                 : "EGAX"}
                             </div>

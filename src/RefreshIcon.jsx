@@ -14,8 +14,8 @@ export const RefreshIcon = ({
       const checkAnimationTime = () => {
         const currentTime = animateElement.getCurrentTime();
         if (
-          currentTime >= 5 &&
-          Math.floor(currentTime / 5) > Math.floor(previousTime / 5)
+          currentTime >= 10 &&
+          Math.floor(currentTime / 10) > Math.floor(previousTime / 10)
         ) {
           // console.log(
           //   "Animation reached",
@@ -27,7 +27,7 @@ export const RefreshIcon = ({
         previousTime = currentTime;
       };
 
-      const intervalId = setInterval(checkAnimationTime, 100);
+      const intervalId = setInterval(checkAnimationTime, 500);
 
       return () => {
         clearInterval(intervalId);
@@ -84,7 +84,7 @@ export const RefreshIcon = ({
             values="0;-30"
             begin=" 0s"
             repeatCount="indefinite"
-            dur="5s"
+            dur="10s"
           ></animate>
         </circle>
       </g>
