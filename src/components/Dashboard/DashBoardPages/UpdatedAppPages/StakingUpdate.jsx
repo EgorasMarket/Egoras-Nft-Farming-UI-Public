@@ -573,6 +573,32 @@ const StakingUpdate = () => {
   );
   const classes = useStyles();
 
+  const TakeReward = async () => {
+    setIsLoading2(true);
+    setClaimDisable(true);
+    const res = await takeRoyalty(library.getSigner());
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+    if (res.status === true) {
+      setIsLoading2(false);
+      setClaimDisable(false);
+      setSuccessModal(true);
+      setTxHash(res.message.hash);
+      setSuccessMessage(
+        "You've successfully claimed " +
+          parseFloat(availableClaimReward).toFixed(2) +
+          " EGAX"
+      );
+    } else {
+      console.log(res);
+      console.log(res.message);
+      setIsLoading2(false);
+      setClaimDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
+  };
+
   return (
     <div className="other2 asset_other2">
       {/* get started section start */}
@@ -1035,7 +1061,7 @@ const StakingUpdate = () => {
                         ) : null}
                       </div>
                     </div>
-                    {/* <button
+                    <button
                       className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
                       onClick={TakeReward}
                       disabled={ClaimDisable}
@@ -1045,12 +1071,6 @@ const StakingUpdate = () => {
                       ) : (
                         <>Claim Reward</>
                       )}
-                    </button> */}
-                    <button
-                      className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
-                      disabled
-                    >
-                      Claim Reward
                     </button>
                   </div>
                 ) : activeTab === "unlock" ? (
