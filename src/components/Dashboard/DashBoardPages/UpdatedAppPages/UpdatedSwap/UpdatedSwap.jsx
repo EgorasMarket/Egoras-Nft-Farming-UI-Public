@@ -506,149 +506,6 @@ const UpdatedSwap = () => {
   // ============
   // ============
   // ============
-  const swap = async () => {
-    if (assetsBase.symbol === "EGAX" && assets.symbol === "USDT") {
-      console.log("====================================");
-      console.log("====================================");
-      setIsLoading(true);
-      setDisable(true);
-      const response = await swapBase(
-        parseEther(SwapAmount.toString(), "wei").toString(),
-        "EGAX_USDT",
-        library.getSigner()
-      );
-
-      console.log(response, "SwapEusdForTokens");
-      if (response.status === true) {
-        setIsLoading(false);
-        setDisable(false);
-        setSuccessModal(true);
-        setTxHash(response.message.hash);
-        setSuccessMessage(
-          "You've successfully swapped " +
-            SwapAmount +
-            assetsBase.symbol +
-            " for " +
-            amountsOut +
-            assets.symbol
-        );
-      } else {
-        console.log(response);
-        setIsLoading(false);
-        setDisable(false);
-        setErrorModal(true);
-        setErrorMessage(response.message);
-      }
-      return;
-    }
-    if (assetsBase.symbol === "EGAX" && assets.symbol === "EUSD") {
-      console.log("====================================");
-      console.log("====================================");
-      setIsLoading(true);
-      setDisable(true);
-      const response = await swapBase(
-        parseEther(SwapAmount.toString(), "wei").toString(),
-        "EGAX_EUSD",
-        library.getSigner()
-      );
-
-      console.log(response, "SwapEusdForTokens");
-      if (response.status === true) {
-        setIsLoading(false);
-        setDisable(false);
-        setSuccessModal(true);
-        setTxHash(response.message.hash);
-        setSuccessMessage(
-          "You've successfully swapped " +
-            SwapAmount +
-            assetsBase.symbol +
-            " for " +
-            amountsOut +
-            assets.symbol
-        );
-      } else {
-        console.log(response);
-        setIsLoading(false);
-        setDisable(false);
-        setErrorModal(true);
-        setErrorMessage(response.message);
-      }
-      return;
-    }
-    if (assetsBase.symbol === "USDT") {
-      // swapToken;
-
-      console.log("====================================");
-      console.log(assetsBase);
-      console.log("====================================");
-      setIsLoading(true);
-      setDisable(true);
-      const response = await swapToken(
-        parseEther(SwapAmount.toString(), "wei").toString(),
-        "EGAX_USDT",
-        library.getSigner()
-      );
-
-      console.log(response, "SwapEusdForTokens");
-      if (response.status === true) {
-        setIsLoading(false);
-        setDisable(false);
-        setSuccessModal(true);
-        setTxHash(response.message.hash);
-        setSuccessMessage(
-          "You've successfully swapped " +
-            SwapAmount +
-            assetsBase.symbol +
-            " for " +
-            amountsOut +
-            assets.symbol
-        );
-      } else {
-        console.log(response);
-        setIsLoading(false);
-        setDisable(false);
-        setErrorModal(true);
-        setErrorMessage(response.message);
-      }
-      return;
-    }
-    if (assetsBase.symbol === "EUSD") {
-      // swapToken;
-
-      console.log("====================================");
-      console.log("====================================");
-      setIsLoading(true);
-      setDisable(true);
-      const response = await swapToken(
-        parseEther(SwapAmount.toString(), "wei").toString(),
-        "EGAX_EUSD",
-        library.getSigner()
-      );
-
-      console.log(response, "SwapEusdForTokens");
-      if (response.status === true) {
-        setIsLoading(false);
-        setDisable(false);
-        setSuccessModal(true);
-        setTxHash(response.message.hash);
-        setSuccessMessage(
-          "You've successfully swapped " +
-            SwapAmount +
-            assetsBase.symbol +
-            " for " +
-            amountsOut +
-            assets.symbol
-        );
-      } else {
-        console.log(response);
-        setIsLoading(false);
-        setDisable(false);
-        setErrorModal(true);
-        setErrorMessage(response.message);
-      }
-      return;
-    }
-  };
 
   const onChangeSwapAmount = async (e) => {
     setIsAmountLoading(true);
@@ -1251,7 +1108,7 @@ const UpdatedSwap = () => {
                         ) : null}
                       </div>
 
-                      {account ? (
+                      {/* {account ? (
                         <>
                           {parseFloat(SwapAmount) <= 0 || SwapAmount === "" ? (
                             <button
@@ -1338,7 +1195,10 @@ const UpdatedSwap = () => {
                         >
                           Connect wallet
                         </button>
-                      )}
+                      )} */}
+                      <button id="generate" class="updatedSwapSwapBtn" disabled>
+                        Swap
+                      </button>
                       <div className="moreSwapInfoDiv">
                         <div className="moreSwapInfoDiv_div1">
                           More Information

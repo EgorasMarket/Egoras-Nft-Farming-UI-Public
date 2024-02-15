@@ -290,113 +290,6 @@ const StakingUpdate = () => {
     setEstimatedRewardAmnt(e.target.value * egcUsdVal * 0.00136986);
   };
 
-  const StakeMonthly = async () => {
-    setIsLoading(true);
-    setDisable(true);
-    const res = await monthly(
-      parseEther(lockAmount.toString(), "wei").toString(),
-      library.getSigner()
-    );
-    console.log(res, "somto8uhhhg");
-    console.log(res.status, "somto8uhhhg");
-    if (res.status === true) {
-      setIsLoading(false);
-      setDisable(false);
-      setSuccessModal(true);
-      setSuccessMessage(
-        "You've successfully Locked" + lockAmount + " egc for 1 month"
-      );
-      setTxHash(res.message.hash);
-    } else {
-      console.log(res);
-      console.log(res.message);
-      setIsLoading(false);
-      setDisable(false);
-      setErrorModal(true);
-      setErrorMessage(res.message);
-    }
-  };
-
-  const StakeYearly = async () => {
-    setIsLoading(true);
-    setDisable(true);
-    const res = await annually(
-      parseEther(lockAmount.toString(), "wei").toString(),
-      library.getSigner()
-    );
-    console.log(res, "somto8uhhhg");
-    console.log(res.status, "somto8uhhhg");
-    if (res.status === true) {
-      setIsLoading(false);
-      setDisable(false);
-      setSuccessModal(true);
-      setTxHash(res.message.hash);
-      setSuccessMessage(
-        "You've successfully Locked" + lockAmount + " egc for 1 year"
-      );
-    } else {
-      console.log(res);
-      console.log(res.message);
-      setIsLoading(false);
-      setDisable(false);
-      setErrorModal(true);
-      setErrorMessage(res.message);
-    }
-  };
-
-  const UnlockStake = async () => {
-    setIsLoading2(true);
-    setLockDisable(true);
-    setNotDueDiv(!notDueDiv);
-    const res = await UnlockLockedStake(library.getSigner());
-    console.log(res, "somto8uhhhg");
-    console.log(res.status, "somto8uhhhg");
-    if (res.status === true) {
-      setIsLoading2(false);
-      setLockDisable(false);
-      setSuccessModal(true);
-      setTxHash(res.message.hash);
-      setSuccessMessage(
-        "You've successfully unlocked " +
-          parseFloat(myTotalStaked).toFixed(2) +
-          " egc"
-      );
-    } else {
-      console.log(res);
-      console.log(res.message);
-      setIsLoading2(false);
-      setLockDisable(false);
-      setErrorModal(true);
-      setErrorMessage(res.message);
-    }
-  };
-
-  const TakeReward = async () => {
-    setIsLoading2(true);
-    setClaimDisable(true);
-    const res = await takeRoyalty(library.getSigner());
-    console.log(res, "somto8uhhhg");
-    console.log(res.status, "somto8uhhhg");
-    if (res.status === true) {
-      setIsLoading2(false);
-      setClaimDisable(false);
-      setSuccessModal(true);
-      setTxHash(res.message.hash);
-      setSuccessMessage(
-        "You've successfully claimed " +
-          parseFloat(availableClaimReward).toFixed(2) +
-          " eusd"
-      );
-    } else {
-      console.log(res);
-      console.log(res.message);
-      setIsLoading2(false);
-      setClaimDisable(false);
-      setErrorModal(true);
-      setErrorMessage(res.message);
-    }
-  };
-
   const toggleLockTabs = (e) => {
     let target = e.currentTarget.id;
     setActiveTab(target);
@@ -1023,7 +916,7 @@ const StakingUpdate = () => {
                       </div>
                     ) : null}
 
-                    {!account ? (
+                    {/* {!account ? (
                       <>
                         {" "}
                         <button
@@ -1105,7 +998,13 @@ const StakingUpdate = () => {
                           </>
                         )}
                       </>
-                    )}
+                    )} */}
+                    <button
+                      disabled
+                      className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                    >
+                      Stake
+                    </button>
                   </div>
                 ) : activeTab === "claim" ? (
                   <div className="lock_container_cont1_div1_lock_div_lock_body">
@@ -1125,6 +1024,12 @@ const StakingUpdate = () => {
                     </div>
                     <button
                       className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                      disabled
+                    >
+                      Claim Reward
+                    </button>
+                    {/* <button
+                      className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
                       onClick={TakeReward}
                       disabled={ClaimDisable}
                     >
@@ -1133,7 +1038,7 @@ const StakingUpdate = () => {
                       ) : (
                         <>Claim Reward</>
                       )}
-                    </button>
+                    </button> */}
                   </div>
                 ) : activeTab === "unlock" ? (
                   <div className="lock_container_cont1_div1_lock_div_lock_body">
@@ -1164,7 +1069,7 @@ const StakingUpdate = () => {
                         ) : null}
                       </div>
                     </div>
-                    {notDueButton ? (
+                    {/* {notDueButton ? (
                       <button
                         className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
                         onClick={toggleNotDueDiv}
@@ -1188,7 +1093,13 @@ const StakingUpdate = () => {
                           <>Remove Lock </>
                         )}
                       </button>
-                    )}
+                    )} */}
+                    <button
+                      className="lock_container_cont1_div1_lock_div_lock_body_input_body_btn"
+                      disabled
+                    >
+                      Remove lock
+                    </button>
                   </div>
                 ) : null}
               </div>
@@ -1590,7 +1501,7 @@ const StakingUpdate = () => {
               <span style={{ color: "#fff", fontWeight: "700" }}> 10%.</span>
             </div>
           }
-          continueFunc={UnlockStake}
+          // continueFunc={UnlockStake}
           closeModal={toggleNotDueDiv}
         />
       ) : null}

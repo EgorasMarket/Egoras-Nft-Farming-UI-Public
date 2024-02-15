@@ -1,0 +1,377 @@
+============================SWAP FUNCTIONS V2===========================
+==========================================================================
+==========================================================================
+
+  const swap = async () => {
+    if (assetsBase.symbol === "EGAX" && assets.symbol === "USDT") {
+      console.log("====================================");
+      console.log("====================================");
+      setIsLoading(true);
+      setDisable(true);
+      const response = await swapBase(
+        parseEther(SwapAmount.toString(), "wei").toString(),
+        "EGAX_USDT",
+        library.getSigner()
+      );
+
+      console.log(response, "SwapEusdForTokens");
+      if (response.status === true) {
+        setIsLoading(false);
+        setDisable(false);
+        setSuccessModal(true);
+        setTxHash(response.message.hash);
+        setSuccessMessage(
+          "You've successfully swapped " +
+            SwapAmount +
+            assetsBase.symbol +
+            " for " +
+            amountsOut +
+            assets.symbol
+        );
+      } else {
+        console.log(response);
+        setIsLoading(false);
+        setDisable(false);
+        setErrorModal(true);
+        setErrorMessage(response.message);
+      }
+      return;
+    }
+    if (assetsBase.symbol === "EGAX" && assets.symbol === "EUSD") {
+      console.log("====================================");
+      console.log("====================================");
+      setIsLoading(true);
+      setDisable(true);
+      const response = await swapBase(
+        parseEther(SwapAmount.toString(), "wei").toString(),
+        "EGAX_EUSD",
+        library.getSigner()
+      );
+
+      console.log(response, "SwapEusdForTokens");
+      if (response.status === true) {
+        setIsLoading(false);
+        setDisable(false);
+        setSuccessModal(true);
+        setTxHash(response.message.hash);
+        setSuccessMessage(
+          "You've successfully swapped " +
+            SwapAmount +
+            assetsBase.symbol +
+            " for " +
+            amountsOut +
+            assets.symbol
+        );
+      } else {
+        console.log(response);
+        setIsLoading(false);
+        setDisable(false);
+        setErrorModal(true);
+        setErrorMessage(response.message);
+      }
+      return;
+    }
+    if (assetsBase.symbol === "USDT") {
+      // swapToken;
+
+      console.log("====================================");
+      console.log(assetsBase);
+      console.log("====================================");
+      setIsLoading(true);
+      setDisable(true);
+      const response = await swapToken(
+        parseEther(SwapAmount.toString(), "wei").toString(),
+        "EGAX_USDT",
+        library.getSigner()
+      );
+
+      console.log(response, "SwapEusdForTokens");
+      if (response.status === true) {
+        setIsLoading(false);
+        setDisable(false);
+        setSuccessModal(true);
+        setTxHash(response.message.hash);
+        setSuccessMessage(
+          "You've successfully swapped " +
+            SwapAmount +
+            assetsBase.symbol +
+            " for " +
+            amountsOut +
+            assets.symbol
+        );
+      } else {
+        console.log(response);
+        setIsLoading(false);
+        setDisable(false);
+        setErrorModal(true);
+        setErrorMessage(response.message);
+      }
+      return;
+    }
+    if (assetsBase.symbol === "EUSD") {
+      // swapToken;
+
+      console.log("====================================");
+      console.log("====================================");
+      setIsLoading(true);
+      setDisable(true);
+      const response = await swapToken(
+        parseEther(SwapAmount.toString(), "wei").toString(),
+        "EGAX_EUSD",
+        library.getSigner()
+      );
+
+      console.log(response, "SwapEusdForTokens");
+      if (response.status === true) {
+        setIsLoading(false);
+        setDisable(false);
+        setSuccessModal(true);
+        setTxHash(response.message.hash);
+        setSuccessMessage(
+          "You've successfully swapped " +
+            SwapAmount +
+            assetsBase.symbol +
+            " for " +
+            amountsOut +
+            assets.symbol
+        );
+      } else {
+        console.log(response);
+        setIsLoading(false);
+        setDisable(false);
+        setErrorModal(true);
+        setErrorMessage(response.message);
+      }
+      return;
+    }
+  };
+==========================================================================
+==========================================================================
+==========================================================================
+
+============================STAKE FUNCTIONS V2===========================
+==========================================================================
+==========================================================================
+
+  const StakeMonthly = async () => {
+    setIsLoading(true);
+    setDisable(true);
+    const res = await monthly(
+      parseEther(lockAmount.toString(), "wei").toString(),
+      library.getSigner()
+    );
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+    if (res.status === true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage(
+        "You've successfully Locked" + lockAmount + " egc for 1 month"
+      );
+      setTxHash(res.message.hash);
+    } else {
+      console.log(res);
+      console.log(res.message);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
+  };
+
+  const StakeYearly = async () => {
+    setIsLoading(true);
+    setDisable(true);
+    const res = await annually(
+      parseEther(lockAmount.toString(), "wei").toString(),
+      library.getSigner()
+    );
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+    if (res.status === true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setTxHash(res.message.hash);
+      setSuccessMessage(
+        "You've successfully Locked" + lockAmount + " egc for 1 year"
+      );
+    } else {
+      console.log(res);
+      console.log(res.message);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
+  };
+
+  const UnlockStake = async () => {
+    setIsLoading2(true);
+    setLockDisable(true);
+    setNotDueDiv(!notDueDiv);
+    const res = await UnlockLockedStake(library.getSigner());
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+    if (res.status === true) {
+      setIsLoading2(false);
+      setLockDisable(false);
+      setSuccessModal(true);
+      setTxHash(res.message.hash);
+      setSuccessMessage(
+        "You've successfully unlocked " +
+          parseFloat(myTotalStaked).toFixed(2) +
+          " egc"
+      );
+    } else {
+      console.log(res);
+      console.log(res.message);
+      setIsLoading2(false);
+      setLockDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
+  };
+
+  const TakeReward = async () => {
+    setIsLoading2(true);
+    setClaimDisable(true);
+    const res = await takeRoyalty(library.getSigner());
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+    if (res.status === true) {
+      setIsLoading2(false);
+      setClaimDisable(false);
+      setSuccessModal(true);
+      setTxHash(res.message.hash);
+      setSuccessMessage(
+        "You've successfully claimed " +
+          parseFloat(availableClaimReward).toFixed(2) +
+          " EGAX"
+      );
+    } else {
+      console.log(res);
+      console.log(res.message);
+      setIsLoading2(false);
+      setClaimDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
+  };
+==========================================================================
+==========================================================================
+==========================================================================
+
+
+
+============================STAKE FUNCTIONS V1===========================
+==========================================================================
+==========================================================================
+
+  const StakeMonthly = async () => {
+    setIsLoading(true);
+    setDisable(true);
+    const res = await monthly(
+      parseEther(lockAmount.toString(), "wei").toString(),
+      library.getSigner()
+    );
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+    if (res.status === true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setSuccessMessage(
+        "You've successfully Locked" + lockAmount + " egc for 1 month"
+      );
+      setTxHash(res.message.hash);
+    } else {
+      console.log(res);
+      console.log(res.message);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
+  };
+
+  const StakeYearly = async () => {
+    setIsLoading(true);
+    setDisable(true);
+    const res = await annually(
+      parseEther(lockAmount.toString(), "wei").toString(),
+      library.getSigner()
+    );
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+    if (res.status === true) {
+      setIsLoading(false);
+      setDisable(false);
+      setSuccessModal(true);
+      setTxHash(res.message.hash);
+      setSuccessMessage(
+        "You've successfully Locked" + lockAmount + " egc for 1 year"
+      );
+    } else {
+      console.log(res);
+      console.log(res.message);
+      setIsLoading(false);
+      setDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
+  };
+
+  const UnlockStake = async () => {
+    setIsLoading2(true);
+    setLockDisable(true);
+    setNotDueDiv(!notDueDiv);
+    const res = await UnlockLockedStake(library.getSigner());
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+    if (res.status === true) {
+      setIsLoading2(false);
+      setLockDisable(false);
+      setSuccessModal(true);
+      setTxHash(res.message.hash);
+      setSuccessMessage(
+        "You've successfully unlocked " +
+          parseFloat(myTotalStaked).toFixed(2) +
+          " egc"
+      );
+    } else {
+      console.log(res);
+      console.log(res.message);
+      setIsLoading2(false);
+      setLockDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
+  };
+
+  const TakeReward = async () => {
+    setIsLoading2(true);
+    setClaimDisable(true);
+    const res = await takeRoyalty(library.getSigner());
+    console.log(res, "somto8uhhhg");
+    console.log(res.status, "somto8uhhhg");
+    if (res.status === true) {
+      setIsLoading2(false);
+      setClaimDisable(false);
+      setSuccessModal(true);
+      setTxHash(res.message.hash);
+      setSuccessMessage(
+        "You've successfully claimed " +
+          parseFloat(availableClaimReward).toFixed(2) +
+          " eusd"
+      );
+    } else {
+      console.log(res);
+      console.log(res.message);
+      setIsLoading2(false);
+      setClaimDisable(false);
+      setErrorModal(true);
+      setErrorMessage(res.message);
+    }
+  };

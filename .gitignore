@@ -13,8 +13,9 @@
 # production
 # /build
 /.env
-
+/StakeSwapFuncDisable
 .env
+StakeSwapFuncDisable
 # misc
 .DS_Store
 .env
